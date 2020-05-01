@@ -1,16 +1,44 @@
-# foodgallery
+## code format in Android stuiod (ubuntu is) :
 
-A new Flutter application.
+####  Ctrl + ALT + I
 
-## Getting Started
+# Toggle case Ctrl + shift + U in ubuntu 18.10 (Linux).
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+# fluttercrud
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+A new Flutter application wtih firebase backend.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### credentials:
+
+Account1:
+
+mhmdarefin@gmail.com
+password: '12345123'
+
+Account 2:
+
+amjed-ali@gmail.com
+password: '1234512345'
+
+
+```json
+
+
+
+```
+## Backend stored in here:
+
+https://console.firebase.google.com/project/link-up-b0a24/overview
+
+
+
+
+## code format in Android stuiod (ubuntu is) :
+
+####  Ctrl + ALT + I
+
+## Ctro + shift + u ==> upper case text's
+
+
+
