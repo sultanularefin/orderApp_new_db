@@ -1,0 +1,203 @@
+{
+  "project_info": {
+    "project_number": "503811551636",
+    "firebase_url": "https://link-up-b0a24.firebaseio.com",
+    "project_id": "link-up-b0a24",
+    "storage_bucket": "link-up-b0a24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503811551636:android:cec80a67d2ba4b03661f81",
+        "android_client_info": {
+          "package_name": "com.linkup.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503811551636-hipobk5i12gro4kf659r3aco7piee4c4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linkup.admin",
+            "certificate_hash": "fb353ad81cc785b27e14e15dc7d606591f3e73f5"
+          }
+        },
+        {
+          "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzQfoS-lce8qAN4eHQJjaphYg_WUPFq8c"
+        },
+        {
+          "current_key": "AIzaSyBh0N4OMoEJ5gSFKOv2Bjmq6YOZro7J3no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503811551636:android:5f50a7ec14fdb900661f81",
+        "android_client_info": {
+          "package_name": "com.linkup.flutter_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503811551636-5d3ojedk7fu3l020b6sg1octnqsl6i7d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linkup.flutter_admin",
+            "certificate_hash": "fb353ad81cc785b27e14e15dc7d606591f3e73f5"
+          }
+        },
+        {
+          "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzQfoS-lce8qAN4eHQJjaphYg_WUPFq8c"
+        },
+        {
+          "current_key": "AIzaSyBh0N4OMoEJ5gSFKOv2Bjmq6YOZro7J3no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503811551636:android:511022e1d9d29800661f81",
+        "android_client_info": {
+          "package_name": "com.linkup.foodgallery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzQfoS-lce8qAN4eHQJjaphYg_WUPFq8c"
+        },
+        {
+          "current_key": "AIzaSyBh0N4OMoEJ5gSFKOv2Bjmq6YOZro7J3no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503811551636:android:772990457e21254a661f81",
+        "android_client_info": {
+          "package_name": "com.linkup.kitchen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503811551636-1cdqss8ude8dbi0lo56ru83p56tslaiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linkup.kitchen",
+            "certificate_hash": "fb353ad81cc785b27e14e15dc7d606591f3e73f5"
+          }
+        },
+        {
+          "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzQfoS-lce8qAN4eHQJjaphYg_WUPFq8c"
+        },
+        {
+          "current_key": "AIzaSyBh0N4OMoEJ5gSFKOv2Bjmq6YOZro7J3no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503811551636:android:a23e09471b1aa0ad661f81",
+        "android_client_info": {
+          "package_name": "com.linkup.waiter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503811551636-0uo0abdu5djs8n7cq1ns0fgf788tohse.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linkup.waiter",
+            "certificate_hash": "fb353ad81cc785b27e14e15dc7d606591f3e73f5"
+          }
+        },
+        {
+          "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzQfoS-lce8qAN4eHQJjaphYg_WUPFq8c"
+        },
+        {
+          "current_key": "AIzaSyBh0N4OMoEJ5gSFKOv2Bjmq6YOZro7J3no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503811551636-dnrrjq7ipfm99uoefth60jmgciiu44kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,41 @@
+
+
+import 'package:flutter/material.dart';
+
+Size screenSize(BuildContext context) {
+  return MediaQuery.of(context).size;
+}
+double allscreenHeight(BuildContext context,
+    {double dividedBy = 1, double reducedBy = 0.0}) {
+  return (screenSize(context).height - reducedBy) / dividedBy;
+}
+double screenWidth(BuildContext context,
+    {double dividedBy = 1, double reducedBy = 0.0}) {
+  return (screenSize(context).width - reducedBy) / dividedBy;
+}
+double screenHeightExcludingToolbar(BuildContext context,
+    {double dividedBy = 1}) {
+  return allscreenHeight(context, dividedBy: dividedBy, reducedBy: kToolbarHeight);
+}
+
+
+// from another medium resource.
+// https://medium.com/tagmalogic/widgets-sizes-relative-to-screen-size-in-flutter-using-mediaquery-3f283afc64d6
+
+
+
+Size displaySize(BuildContext context) {
+  debugPrint('Size = ' + MediaQuery.of(context).size.toString());
+  return MediaQuery.of(context).size;
+}
+
+double displayHeight(BuildContext context) {
+  debugPrint('Height = ' + displaySize(context).height.toString());
+  return displaySize(context).height;
+}
+
+double displayWidth(BuildContext context) {
+  debugPrint('Width = ' + displaySize(context).width.toString());
+  return displaySize(context).width;
+}
+
