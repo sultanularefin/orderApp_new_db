@@ -8,7 +8,11 @@ class FoodItem {
 //  Timestamp uploadDate;
   DateTime uploadDate;
   String imageURL;
-  String ingredients;
+//  String ingredients;
+
+  List<dynamic> ingredients;
+
+
   String content;
   String itemId;
   double indicatorValue;

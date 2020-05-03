@@ -15,6 +15,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 // local packages
@@ -53,6 +54,7 @@ class FoodGallery extends StatefulWidget {
   final Firestore firestore = Firestore.instance;
 
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   FoodGallery({Key key, this.child}) : super(key: key);
 
@@ -113,9 +115,9 @@ class _FoodGalleryState extends State<FoodGallery> {
 
           final dynamic foodItemName = doc['itemName'];
           final dynamic foodImageURL = doc['imageURL'];
-          final String euroPrice = double.parse(doc['priceinEuro'])
-              .toStringAsFixed(2);
-          final String foodItemIngredients = doc['ingredients'];
+//          final String euroPrice = double.parse(doc['priceinEuro'])
+//              .toStringAsFixed(2);
+//          final String foodItemIngredients = doc['ingredients'];
           final String foodItemId = doc['itemId'];
           final bool foodIsHot = doc['isHot'];
           final bool foodIsAvailable = doc['isAvailable'];
@@ -130,8 +132,8 @@ class _FoodGalleryState extends State<FoodGallery> {
             categoryName: foodCategoryName,
             imageURL: foodImageURL,
 
-            priceinEuro: euroPrice,
-            ingredients: foodItemIngredients,
+//            priceinEuro: euroPrice,
+//            ingredients: foodItemIngredients,
 
             itemId: foodItemId,
             isHot: foodIsHot,
@@ -164,7 +166,7 @@ class _FoodGalleryState extends State<FoodGallery> {
   // empty MEANS PIZZA
 
 
-  Widget _buildRow(String categoryName, int index) {
+  Widget _buildCategoryRow(String categoryName, int index) {
 
     if (_currentCategory==categoryName){
       return ListTile(
@@ -175,10 +177,11 @@ class _FoodGalleryState extends State<FoodGallery> {
 //        contentPadding: EdgeInsets.symmetric(
 //            horizontal: 4.0, vertical: 6.0),
 
-        contentPadding: EdgeInsets.fromLTRB(20, 6, 10, 6),
+        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
+//    FittedBox(fit:BoxFit.fitWidth,
         title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(categoryName
                 ,
@@ -187,7 +190,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                   color:Color.fromRGBO(255,255,255,1),
 //                  color:Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 21,
+                  fontSize: 17,
                 ),
 
               ),CustomPaint(size: Size(0,19),
@@ -207,15 +210,15 @@ class _FoodGalleryState extends State<FoodGallery> {
     }
     else {
       return ListTile(
-        contentPadding: EdgeInsets.fromLTRB(20, 6, 10, 6),
+        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
 
-        title: Text(categoryName,
+        title:  Text(categoryName,
 //    Text(categoryName.substring(0, 2),
           style: TextStyle(
 //            color:Color.fromRGBO(84,70,62,1),
             color:Color.fromRGBO(255,255,255,1),
             fontWeight: FontWeight.normal,
-            fontSize: 18,
+            fontSize: 17,
           ),
 
         ),
@@ -282,7 +285,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
                       //     color: Color.fromARGB(255, 255,255,255),
                       child:Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
 
 
@@ -302,7 +305,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                             height: displayHeight(context)/40,
 
                             padding: EdgeInsets.only(
-                                left: 20, top: 3, bottom: 3, right: 4.5),
+                                left: 4, top: 3, bottom: 3, right: 3),
                             child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -457,7 +460,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                           itemCount: categoryItems.length,
                           //    itemBuilder: (BuildContext ctxt, int index) {
                           itemBuilder: (_, int index) {
-                            return _buildRow(categoryItems[index], index);
+                            return _buildCategoryRow(categoryItems[index], index);
                           }
                       ),
                     ),
@@ -522,7 +525,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
                         //     color: Color.fromARGB(255, 255,255,255),
                         child:Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
 
 
@@ -542,10 +545,10 @@ class _FoodGalleryState extends State<FoodGallery> {
                               height: displayHeight(context)/40,
 
                               padding: EdgeInsets.only(
-                                  left: 20, top: 3, bottom: 3, right: 4.5),
+                                  left: 4, top: 3, bottom: 3, right: 3),
                               child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
@@ -694,7 +697,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                             itemCount: categoryItems.length,
                             //    itemBuilder: (BuildContext ctxt, int index) {
                             itemBuilder: (_, int index) {
-                              return _buildRow(categoryItems[index], index);
+                              return _buildCategoryRow(categoryItems[index], index);
                             }
                         ),
                       ),
@@ -758,7 +761,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
                         //     color: Color.fromARGB(255, 255,255,255),
                         child:Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
 
 
@@ -778,10 +781,10 @@ class _FoodGalleryState extends State<FoodGallery> {
                               height: displayHeight(context)/40,
 
                               padding: EdgeInsets.only(
-                                  left: 20, top: 3, bottom: 3, right: 4.5),
+                                  left: 4, top: 3, bottom: 3, right: 3),
                               child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
@@ -929,7 +932,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                             itemCount: categoryItems.length,
                             //    itemBuilder: (BuildContext ctxt, int index) {
                             itemBuilder: (_, int index) {
-                              return _buildRow(categoryItems[index], index);
+                              return _buildCategoryRow(categoryItems[index], index);
                             }
                         ),
                       ),
@@ -986,7 +989,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //                      color: Color.fromARGB(255, 255,255,255),
                         child:Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
 
                             // CONTAINER FOR TOTAL PRICE CART BELOW.
@@ -1004,12 +1007,12 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   ],
                                   color: Colors.black54),
                               width: displayWidth(context)/3,
-                              height: displayHeight(context)/30,
+                              height: displayHeight(context)/27,
                               padding: EdgeInsets.only(
-                                  left: 20, top: 3, bottom: 3, right: 4.5),
+                                  left: 4, top: 3, bottom: 3, right: 3),
                               child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
@@ -1169,7 +1172,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                             itemCount: categoryItems.length,
                             //    itemBuilder: (BuildContext ctxt, int index) {
                             itemBuilder: (_, int index) {
-                              return _buildRow(categoryItems[index], index);
+                              return _buildCategoryRow(categoryItems[index], index);
                             }
                         ),
                       ),
@@ -1221,6 +1224,26 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 
   // @override
 //  bool updateShouldNotify(InheritedDataProvider oldWidget) => data != oldWidget.data;
+
+
+  String listTitleCase(List<String> text) {
+    // print("text: $text");
+    if (text.length==0) {
+      return " ";
+    } else if (text == null) {
+      return ' ';
+    }
+//    else if (text.length <= 1) {
+//      return text.toUpperCase();
+//    }
+    else {
+      return text
+          .map((word) => word.split(' ')
+          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+          .join(', ');
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1302,8 +1325,11 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //            final document = allFoods[index];
             final dynamic foodItemName =          filteredItems[index].itemName;
             final dynamic foodImageURL =          filteredItems[index].imageURL;
-            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
-            final String foodItemIngredients =    filteredItems[index].ingredients;
+//            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
+
+            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
+
+//            final String foodItemIngredients =    filteredItems[index].ingredients;
             final String foodItemId =             filteredItems[index].itemId;
             final bool foodIsHot =                filteredItems[index].isHot;
             final bool foodIsAvailable =          filteredItems[index].isAvailable;
@@ -1317,14 +1343,20 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
               categoryName: foodCategoryName,
               imageURL: foodImageURL,
 
-              priceinEuro: euroPrice,
-              ingredients: foodItemIngredients,
+//              priceinEuro: euroPrice,
+
+
+//              ingredients: foodItemIngredients,
+              ingredients: foodItemIngredientsList,
 
               itemId:foodItemId,
               isHot: foodIsHot,
               isAvailable: foodIsAvailable,
 
             );
+
+            String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
+//            oneFoodItem
 
 
 //            print('document__________________________: ${document.data}');
@@ -1375,7 +1407,7 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           ),
 //                              SizedBox(height: 10),
-
+/*
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -1397,6 +1429,8 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
                                   color: Colors.red,
                                 ),
                               ]),
+
+*/
 
 //                              SizedBox(height: 10),
 
@@ -1437,7 +1471,7 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //                              height: displayWidth(context)/50,
                               child:Text(
 
-                                foodItemIngredients.substring(0,10)+'..',
+                                stringifiedFoodItemIngredients.substring(0,10)+'..',
                                 style: TextStyle(
                                   color: Colors.blueGrey[800],
                                   fontWeight: FontWeight.normal,
@@ -1487,6 +1521,24 @@ class FoodListWithCategoryString extends StatelessWidget {
   FoodListWithCategoryString({this.allFoods,this.categoryString});
 
 
+  String listTitleCase(List<String> text) {
+    // print("text: $text");
+    if (text.length==0) {
+      return " ";
+    } else if (text == null) {
+      return ' ';
+    }
+//    else if (text.length <= 1) {
+//      return text.toUpperCase();
+//    }
+    else {
+      return text
+          .map((word) => word.split(' ')
+          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+          .join(', ');
+
+    }
+  }
 
 //  const ChildScreen({Key key, this.func}) : super(key: key);
 
@@ -1558,8 +1610,12 @@ class FoodListWithCategoryString extends StatelessWidget {
 //            final document = allFoods[index];
             final dynamic foodItemName =          filteredItems[index].itemName;
             final dynamic foodImageURL =          filteredItems[index].imageURL;
-            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
-            final String foodItemIngredients =    filteredItems[index].ingredients;
+//            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
+            final Map<String,String> foodSize_Value = filteredItems[index].size;
+
+            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
+
+//            final String foodItemIngredients =    filteredItems[index].ingredients;
             final String foodItemId =             filteredItems[index].itemId;
             final bool foodIsHot =                filteredItems[index].isHot;
             final bool foodIsAvailable =          filteredItems[index].isAvailable;
@@ -1573,14 +1629,17 @@ class FoodListWithCategoryString extends StatelessWidget {
               categoryName: foodCategoryName,
               imageURL: foodImageURL,
 
-              priceinEuro: euroPrice,
-              ingredients: foodItemIngredients,
+//              priceinEuro: euroPrice,
+              ingredients: foodItemIngredientsList,
 
               itemId:foodItemId,
               isHot: foodIsHot,
               isAvailable: foodIsAvailable,
 
             );
+
+            String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
+
 
 
 //            print('document__________________________: ${document.data}');
@@ -1632,6 +1691,7 @@ class FoodListWithCategoryString extends StatelessWidget {
                           ),
 //                              SizedBox(height: 10),
 
+            /*
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -1653,6 +1713,8 @@ class FoodListWithCategoryString extends StatelessWidget {
                                   color: Colors.red,
                                 ),
                               ]),
+
+*/
 
 //                              SizedBox(height: 10),
 
@@ -1692,8 +1754,8 @@ class FoodListWithCategoryString extends StatelessWidget {
                               height: displayHeight(context)/61,
 //                              height: displayWidth(context)/50,
                               child:Text(
-
-                                foodItemIngredients.substring(0,10)+'..',
+                                stringifiedFoodItemIngredients.substring(0,10)+'..',
+//                                foodItemIngredients.substring(0,10)+'..',
                                 style: TextStyle(
                                   color: Colors.blueGrey[800],
                                   fontWeight: FontWeight.normal,
@@ -1737,7 +1799,8 @@ class FoodList extends StatelessWidget {
 
 
   final Firestore firestore;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+//  final FirebaseAuth _auth = FirebaseAuth.instance;
+
 
 //  final FirebaseAuth _auth = FirebaseAuth.instance;
 //  final String storageBucketURLPredicate;
@@ -1762,17 +1825,44 @@ class FoodList extends StatelessWidget {
 
   Future<String> _getUserInfo1() async {
 
+    FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
+//    Future<FirebaseUser> currentUser = await FirebaseAuth.instance.currentUser();
 
-    return await getUserInfo2();
+    return currentUser.uid;
+//    return await getUserInfo2();
   }
+  Map<String, String> headersMap = {
+//    'Cookie' : 'jwt-cookie=eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI0IiwiaXNzIjoiMSIsInN1YiI6InRtYSIsImlhdCI6MTU1NjExNTY2MCwiZXhwIjoxNTU2NzIwNDYwfQ.DQMV59lTlGSgVN_viwlUaJIxZNO_Sru0gQT31EnKZEdD533OR9VUCRYaj5pY8ist48zRUmn6HXs4M_oWkkzm7A'
+    'token':'BaArDBcLm8OodxaIMZKpiA7Vql72'
+  };
 
+
+  String listTitleCase(List<dynamic> text) {
+    // print("text: $text");
+    if (text.length==0) {
+      return " ";
+    } else if (text == null) {
+      return ' ';
+    }
+//    else if (text.length <= 1) {
+//      return text.toUpperCase();
+//    }
+    else {
+      return text
+          .map((word) => word.split(' ')
+          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+          .join(', ');
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-//    Future<FirebaseUser> currentUser = _auth.currentUser();
 
 
 
+
+    print('_getUserInfo1() ${_getUserInfo1()}');
 
     print('storageBucketURLPredicat: $storageBucketURLPredicate}');
 
@@ -1836,15 +1926,17 @@ class FoodList extends StatelessWidget {
 //            final dynamic message = document['itemName'];
 //            final dynamic imageURL = document['imageURL'];
                 final DocumentSnapshot document = snapshot.data.documents[index];
-                final dynamic foodItemName = document['name'];
-                final dynamic foodImageURL  = storageBucketURLPredicate + document['image'] +'?alt=media&token='
-                    +'BaArDBcLm8OodxaIMZKpiA7Vql72';
+                final String foodItemName = document['name'];
+                final String foodImageURL  = storageBucketURLPredicate + Uri.encodeComponent(document['image'])
+                    +'?alt=media';
 
                 print('foodImageURL: $foodImageURL');
 
-                // final String euroPrice = double.parse(document['priceinEuro']).toStringAsFixed(2);
+//                final String euroPrice = double.parse(document['size']).toStringAsFixed(2);
 
-                // final String foodItemIngredients =  document['ingredients'];
+//                final Map<String,String> foodSize_Value = document['size'];
+
+                final List<dynamic> foodItemIngredientsList =  document['ingredient'];
 
 //                final String foodItemId =  document['itemId'];
 
@@ -1859,10 +1951,10 @@ class FoodList extends StatelessWidget {
 
                   itemName: foodItemName,
 //                  categoryName: foodCategoryName,
-                  imageURL: storageBucketURLPredicate + foodImageURL,
+                  imageURL: foodImageURL,
 
 //                  priceinEuro: euroPrice,
-//                  ingredients: foodItemIngredients,
+                  ingredients: foodItemIngredientsList,
 
 //                  itemId:foodItemId,
 //                  isHot: foodIsHot,
@@ -1870,6 +1962,8 @@ class FoodList extends StatelessWidget {
                   documentId: document.documentID,
 
                 );
+
+                String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
 
 //                FoodItem oneFoodItem =new FoodItem(
 //
@@ -1924,14 +2018,22 @@ class FoodList extends StatelessWidget {
                                     ],
                                   ),
                                   child: ClipOval(
+                                    /*
+                                    child:Image.network(
+                                      oneFoodItem.imageURL,
+                                      width: 100,
+                                      headers: headersMap,
+                                    ),
+*/
+//                                    'Cookie' : 'jwt-cookie=eyJ
                                     child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                      httpHeaders: {"header": '3fe221b9-a340-40bb-9caa-cebc1face1fe'},
+//                                      httpHeaders: headersMap,
 
 //                                      alt=media&token=3fe221b9-a340-40bb-9caa-cebc1face1fe
 
                                       imageUrl:
-                                      foodImageURL,
+                                      oneFoodItem.imageURL,
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) => new CircularProgressIndicator(),
                                     ),
@@ -1941,7 +2043,7 @@ class FoodList extends StatelessWidget {
                               ),
 //                              SizedBox(height: 10),
 
-                              /*
+/*
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
@@ -2001,12 +2103,13 @@ class FoodList extends StatelessWidget {
                                 ),
                               )
                               ,
-                              /*
+
                               Container(
                                   height: displayHeight(context)/61,
                                   child:Text(
-
-                                    foodItemIngredients.substring(0,10)+'..',
+                                    stringifiedFoodItemIngredients,
+//                stringifiedFoodItemIngredients.substring(0,10)+'..',
+//                                    foodItemIngredients.substring(0,10)+'..',
                                     style: TextStyle(
                                       color: Colors.blueGrey[800],
                                       fontWeight: FontWeight.normal,
@@ -2015,7 +2118,7 @@ class FoodList extends StatelessWidget {
                                   )
                               ),
 
-*/
+
 
 //
 //

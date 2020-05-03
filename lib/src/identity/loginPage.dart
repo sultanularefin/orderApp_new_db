@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-  _saveUser(IdTokenResult uid) async {
+  _saveUser(String uid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
 //    ??=
@@ -93,8 +93,8 @@ class _LoginPageState extends State<LoginPage> {
 
     print('Howdy, ${user['email']}');
 
-
     print('password ${user['password']}');
+    print('uid from storage: ${user['uid']}');
 
     print('result_in_prefs: ' + resultString);
 
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
     AuthResult result = await _auth.signInWithEmailAndPassword(email:
     emailState,password: passwordState);
 
-//  print('result: '  + result);
+    print('result: ' + result.user.uid);
 
     print('result: ' + result.user.email);
 
@@ -132,9 +132,12 @@ class _LoginPageState extends State<LoginPage> {
     assert(user.email != null);
     //  assert(user.displayName != null);
     assert(!user.isAnonymous);
-    final IdTokenResult uid = await user.getIdToken();
+//    final IdTokenResult uid = await user.getIdToken();
 
     print("email: "+ user.email);
+    print('uid: ${user.uid} ');
+
+    String uid =user.uid;
 
 
     _saveUser(uid);
@@ -542,12 +545,21 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             ).then((onValue){
 
-                              return Navigator.push(context,
-                                  //        MaterialPageRoute(builder: (context) => HomeScreen())
-                                  //
-                                  //        MaterialPageRoute(builder: (context) => MyHomePage())
-                                  MaterialPageRoute(builder: (context) => drawerScreen())
-                              );
+                              /* return Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => drawerScreen())
+
+                              */
+                              //        MaterialPageRoute(builder: (context) => HomeScreen())
+                              //
+                              //        MaterialPageRoute(builder: (context) => MyHomePage())
+
+
+                              return  Navigator.of(context).
+                              pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                  drawerScreen()), (Route<dynamic> route) => false);
+
+
+
 
                             }).catchError((onError){
                               _scaffoldKey.currentState.showSnackBar(

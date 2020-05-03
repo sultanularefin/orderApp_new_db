@@ -10,7 +10,7 @@ import 'package:foodgallery/src/screens/homeScreen/food_gallery.dart';
 // above are local file.
 
 
- // 3rd party packages:
+// 3rd party packages:
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
@@ -47,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
         //                    duration: Duration(seconds: 4),
         //                  )
         //              );
-       return Navigator.push(
+        return Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
       },
       child: Container(
@@ -164,43 +164,44 @@ class _WelcomePageState extends State<WelcomePage> {
 
     print('resultString in Welcome Page $resultString');
 
-    Map<String,  dynamic> user = jsonDecode(
-        resultString
-    );
+    if(resultString!=null) {
+      Map<String, dynamic> user = jsonDecode(
+          resultString
+      );
 
-    print('Howdy, ${user['email']}!');
+      print('Howdy, ${user['email']}!');
 
 
-    print('password ${user['password']}.');
+      print('password ${user['password']}.');
 
-    print('result_in_prefs: WelCome Page ' + resultString);
+      print('result_in_prefs: WelCome Page ' + resultString);
 
-    String email = user['email'];
+      String email = user['email'];
 
-    String passWord = user['password'];
+      String passWord = user['password'];
+      String uid = user['uid'];
 
-    print('email $email');
-    print('password $passWord');
+      print('email $email');
+      print('password $passWord');
+      print('uid $passWord');
 
-    if((email!= null) && (passWord!=null)){
-
-      print("email && password found");
+      if ((email != null) && (passWord != null)) {
+        print("email && password found");
         return Navigator.push(context,
             MaterialPageRoute(builder: (context) => drawerScreen())
 
 
         );
-
-
       }
+    }
     print("not found");
 
-      //1 means SharedPreference not empty.
+    //1 means SharedPreference not empty.
 
-    }
+  }
 
 
-    //  assert(user.displayName != null);
+  //  assert(user.displayName != null);
 
 
   @override
@@ -224,42 +225,42 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       body:SingleChildScrollView(
         child:Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      color: Colors.grey.shade200,
-                      offset: Offset(2, 4),
-                      blurRadius: 5,
-                      spreadRadius: 2)
-                ],
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Color(0xfffbb448), Color(0xffe46b10)])),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _title(),
-                SizedBox(
-                  height: 80,
-                ),
-                _submitButton(),
-                SizedBox(
-                  height: 20,
-                ),
-                _signUpButton(),
-                SizedBox(
-                  height: 20,
-                ),
-                _label()
-                // Touch
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                    color: Colors.grey.shade200,
+                    offset: Offset(2, 4),
+                    blurRadius: 5,
+                    spreadRadius: 2)
               ],
-            ),
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xfffbb448), Color(0xffe46b10)])),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _title(),
+              SizedBox(
+                height: 80,
+              ),
+              _submitButton(),
+              SizedBox(
+                height: 20,
+              ),
+              _signUpButton(),
+              SizedBox(
+                height: 20,
+              ),
+              _label()
+              // Touch
+            ],
           ),
+        ),
       ),
     );
   }
