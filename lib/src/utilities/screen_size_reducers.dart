@@ -1,6 +1,15 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:google_sign_in/google_sign_in.dart';
+
+
+
+final GoogleSignIn _googleSignIn = GoogleSignIn();
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
 
 Size screenSize(BuildContext context) {
   return MediaQuery.of(context).size;
@@ -39,3 +48,51 @@ double displayWidth(BuildContext context) {
   return displaySize(context).width;
 }
 
+final String storageBucketURLPredicate =
+    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
+
+
+//Future<FirebaseUser> getUserInfo() async {
+Future<String> getUserInfo2() async {
+//    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+//    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+//    final AuthCredential credential = GoogleAuthProvider.getCredential(
+//      accessToken: googleAuth.accessToken,
+//      idToken: googleAuth.idToken,
+//    );
+
+
+
+
+
+
+ final String who_am_i = await _auth.currentUser().then((onValue)=>
+
+       onValue.uid
+
+  );
+
+ print('who Am I: $who_am_i');
+
+//  print('result: '  + result);
+
+//  print('result: ${me.then((onValue)=>
+//      {
+//        onValue.uid
+//      }
+//  )}');
+
+//  FirebaseUser user = result.user;
+
+
+
+
+
+
+
+  return who_am_i;
+
+  //    print("signed in " + user.displayName);
+
+}

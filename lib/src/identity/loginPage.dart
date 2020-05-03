@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-  _saveUser(/*String uid*/) async {
+  _saveUser(IdTokenResult uid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
 //    ??=
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
     Map<String, dynamic> toJson() => {
       'name': emailState,
       'password': passwordState,
-//      'uid': uid,
+      'uid': uid,
     };
 
 
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
     prefs.setString('userInfo', jsonEncode({
       'email': emailState,
       'password': passwordState,
-//      'uid': uid,
+      'uid': uid,
     })).then((onValue) =>{
 
     });
@@ -132,12 +132,12 @@ class _LoginPageState extends State<LoginPage> {
     assert(user.email != null);
     //  assert(user.displayName != null);
     assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
+    final IdTokenResult uid = await user.getIdToken();
 
     print("email: "+ user.email);
 
 
-    _saveUser();
+    _saveUser(uid);
 
 
     return user;

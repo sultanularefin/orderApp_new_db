@@ -13,6 +13,8 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 // local packages
@@ -53,6 +55,9 @@ class FoodGallery extends StatefulWidget {
 
 
   FoodGallery({Key key, this.child}) : super(key: key);
+
+
+
   _FoodGalleryState createState() => _FoodGalleryState();
 
 }
@@ -60,11 +65,13 @@ class FoodGallery extends StatefulWidget {
 
 class _FoodGalleryState extends State<FoodGallery> {
 
+
   _FoodGalleryState({firestore});
 
   File _image;
 
   final _allFoodsList = [];
+
 
   @override
   void initState() {
@@ -75,27 +82,35 @@ class _FoodGalleryState extends State<FoodGallery> {
 //      begin:Colors.yellow,
 //      end:Colors.blue));
 //  _animationController.repeat();
-    getDataFromFirestore();
+    //getDataFromFirestore();
     super.initState();
 
   }
 
+//  restaurants
+  // USWc8IgrHKdjeDe9Ft4j
   getDataFromFirestore() async {
+//    firestore
+//        .collection("restaurants/USWc8IgrHKdjeDe9Ft4j/foodItems").where('category', isEqualTo: 'pizza')
+//
+//        .snapshots()
     Firestore.instance
-        .collection('foodItems').orderBy("uploadDate", descending: true)
+        .collection('restaurants/USWc8IgrHKdjeDe9Ft4j/foodItems').where('category', isEqualTo: 'pizza')
         .snapshots()
         .listen((data) =>
         data.documents.forEach((doc) {
 //      document['itemName'];
 
-          print('doc: ***************************** ${doc['uploadDate']
-              .toDate()}');
+//          print('doc: ***************************** ${doc['uploadDate']
+//              .toDate()}');
 //      doc: ***************************** Instance of 'DocumentSnapshot'
 
 //      final DocumentSnapshot document = snapshot.data.documents[index];
 
 
 //      final DocumentSnapshot document = snapshot.data.documents[index];
+
+
           final dynamic foodItemName = doc['itemName'];
           final dynamic foodImageURL = doc['imageURL'];
           final String euroPrice = double.parse(doc['priceinEuro'])
@@ -296,7 +311,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 Container(
 
                                   height: 25,
-                                  width: 25,
+                                  width: 5,
                                   margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
@@ -536,7 +551,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   Container(
 
                                     height: 25,
-                                    width: 25,
+                                    width: 5,
                                     margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
@@ -772,7 +787,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   Container(
 
                                     height: 25,
-                                    width: 25,
+                                    width: 5,
                                     margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
@@ -977,8 +992,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                             // CONTAINER FOR TOTAL PRICE CART BELOW.
                             Container(
                               margin:EdgeInsets.symmetric(
-                                  horizontal: displayWidth(context)
-                                      /20,
+                                  horizontal: 0,
                                   vertical: 0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
@@ -989,8 +1003,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                                         offset: Offset(0.0, 2.0))
                                   ],
                                   color: Colors.black54),
-                              width: displayWidth(context)/5,
-                              height: displayHeight(context)/40,
+                              width: displayWidth(context)/3,
+                              height: displayHeight(context)/30,
                               padding: EdgeInsets.only(
                                   left: 20, top: 3, bottom: 3, right: 4.5),
                               child: Row(
@@ -1001,7 +1015,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   Container(
 
                                     height: 25,
-                                    width: 25,
+                                    width: 5,
                                     margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
@@ -1013,11 +1027,11 @@ class _FoodGalleryState extends State<FoodGallery> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  Spacer(),
+//                                  Spacer(),
                                   Text(_total_cart_price.toStringAsFixed(2) +' kpl',
                                       style: TextStyle(
                                           fontSize: 20, color: Colors.white)),
-                                  Spacer(),
+//                                  Spacer(),
 
                                 ],
                               ),
@@ -1027,6 +1041,8 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                             // PROBLEM CODES BELOW.....
+
+                            // SEARCH CODES ARE BELOW:
                             Container(
                               padding: EdgeInsets.symmetric(
                                 vertical: 0,  horizontal: displayWidth(context) /50,
@@ -1157,6 +1173,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                             }
                         ),
                       ),
+
+
                     ],
                   ),
                 ),
@@ -1719,6 +1737,11 @@ class FoodList extends StatelessWidget {
 
 
   final Firestore firestore;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+//  final FirebaseAuth _auth = FirebaseAuth.instance;
+//  final String storageBucketURLPredicate;
+
   final FoodItem foodItemTest = new FoodItem();
 
 // THERE WILL BE 4 CLASSES.
@@ -1731,13 +1754,33 @@ class FoodList extends StatelessWidget {
 //  List serverDataStateTemp=[];
 //  int i =33;
 
+
+  // a1.
+
+  //  restaurants
+  // USWc8IgrHKdjeDe9Ft4j
+
+  Future<String> _getUserInfo1() async {
+
+
+    return await getUserInfo2();
+  }
+
+
   @override
   Widget build(BuildContext context) {
+//    Future<FirebaseUser> currentUser = _auth.currentUser();
+
+
+
+
+    print('storageBucketURLPredicat: $storageBucketURLPredicate}');
+
     double textWidth = MediaQuery.of(context).size.width * 0.4;
     return StreamBuilder<QuerySnapshot>(
       stream: firestore
-          .collection("foodItems").where('categoryName', isEqualTo: 'PIZZA')
-          .orderBy("uploadDate", descending: true)
+          .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+          .where('category', isEqualTo: 'Pizza')
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData)
@@ -1752,6 +1795,7 @@ class FoodList extends StatelessWidget {
 //        int messageCount = filteredItems.length;
 
         final int messageCount = snapshot.data.documents.length;
+        print('message count in condition 04: $messageCount');
         return(
             GridView.builder(
               itemCount:  messageCount,
@@ -1792,27 +1836,36 @@ class FoodList extends StatelessWidget {
 //            final dynamic message = document['itemName'];
 //            final dynamic imageURL = document['imageURL'];
                 final DocumentSnapshot document = snapshot.data.documents[index];
-                final dynamic foodItemName = document['itemName'];
-                final dynamic foodImageURL = document['imageURL'];
-                final String euroPrice = double.parse(document['priceinEuro']).toStringAsFixed(2);
-                final String foodItemIngredients =  document['ingredients'];
-                final String foodItemId =  document['itemId'];
-                final bool foodIsHot =  document['isHot'];
-                final bool foodIsAvailable =  document['isAvailable'];
-                final String foodCategoryName = document['categoryName'];
+                final dynamic foodItemName = document['name'];
+                final dynamic foodImageURL  = storageBucketURLPredicate + document['image'] +'?alt=media&token='
+                    +'BaArDBcLm8OodxaIMZKpiA7Vql72';
+
+                print('foodImageURL: $foodImageURL');
+
+                // final String euroPrice = double.parse(document['priceinEuro']).toStringAsFixed(2);
+
+                // final String foodItemIngredients =  document['ingredients'];
+
+//                final String foodItemId =  document['itemId'];
+
+//                final bool foodIsHot =  document['isHot'];
+
+                final bool foodIsAvailable =  document['available'];
+
+//                final String foodCategoryName = document['categoryName'];
 
 
                 FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
                   itemName: foodItemName,
-                  categoryName: foodCategoryName,
-                  imageURL: foodImageURL,
+//                  categoryName: foodCategoryName,
+                  imageURL: storageBucketURLPredicate + foodImageURL,
 
-                  priceinEuro: euroPrice,
-                  ingredients: foodItemIngredients,
+//                  priceinEuro: euroPrice,
+//                  ingredients: foodItemIngredients,
 
-                  itemId:foodItemId,
-                  isHot: foodIsHot,
+//                  itemId:foodItemId,
+//                  isHot: foodIsHot,
                   isAvailable: foodIsAvailable,
                   documentId: document.documentID,
 
@@ -1873,7 +1926,12 @@ class FoodList extends StatelessWidget {
                                   child: ClipOval(
                                     child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                      imageUrl: foodImageURL,
+                                      httpHeaders: {"header": '3fe221b9-a340-40bb-9caa-cebc1face1fe'},
+
+//                                      alt=media&token=3fe221b9-a340-40bb-9caa-cebc1face1fe
+
+                                      imageUrl:
+                                      foodImageURL,
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) => new CircularProgressIndicator(),
                                     ),
@@ -1883,6 +1941,7 @@ class FoodList extends StatelessWidget {
                               ),
 //                              SizedBox(height: 10),
 
+                              /*
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
@@ -1904,6 +1963,8 @@ class FoodList extends StatelessWidget {
                                       color: Colors.red,
                                     ),
                                   ]),
+
+*/
 
 //                              SizedBox(height: 10),
 
@@ -1940,6 +2001,7 @@ class FoodList extends StatelessWidget {
                                 ),
                               )
                               ,
+                              /*
                               Container(
                                   height: displayHeight(context)/61,
                                   child:Text(
@@ -1952,6 +2014,8 @@ class FoodList extends StatelessWidget {
                                     ),
                                   )
                               ),
+
+*/
 
 //
 //
