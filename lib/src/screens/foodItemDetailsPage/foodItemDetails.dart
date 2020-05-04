@@ -67,10 +67,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
   final _formKey = GlobalKey<FormState>();
 
-  int _radioValue = 0;
-  int _sizeValue = 0;
 
 
+
+
+  String _currentSize = "normal";
   double euroPrice2= 11;
 
 
@@ -112,7 +113,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
     setState(() {
 
       euroPrice2=euroPrice1;
-     }
+    }
     );
 
 
@@ -194,7 +195,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 //                height:100,/
 //              FROM 100 TO DYNAMIC HEIGHT: april 04
-                height:displayHeight(context)/8,
+//              later on the same day changed to 13 and it is good in a 10 inch emulator
+                height:displayHeight(context)/13,
                 width: displayWidth(context),
 
                 child: Row(
@@ -450,7 +452,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                                         child: GridView.builder(
 
-                                          itemCount: sizeConstantsList.length,
+//                                          itemCount: sizeConstantsList.length,
+                                          itemCount: foodSizePrice.length,
 
                                           gridDelegate:
                                           new SliverGridDelegateWithFixedCrossAxisCount(
@@ -466,7 +469,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                               crossAxisCount: 3),
 
                                           itemBuilder: (_, int index) {
-                                            return _buildOneSize(sizeConstantsList[index], index);
+
+                                            String key = foodSizePrice.keys.elementAt(index);
+                                            dynamic value = foodSizePrice.values.elementAt(index);
+//                                            return new Row(
+//                                              children: <Widget>[
+//                                                new Text('${key} : '),
+//                                                new Text(_countries[key])
+//                                              ],
+//                                            );
+
+//                                            return _buildOneSize(/*sizeConstantsList[index]*/${key}, index);
+                                            double valuePrice = tryCast<double>(value, fallback: 0.00);
+                                            return _buildOneSize(key,valuePrice, index);
                                           },
 
 //                                new SliverGridDelegateWithMaxCrossAxisExtent(
@@ -1133,6 +1148,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
   }
 
+  /*
 
   void _handleRadioValueChange(int value) {
     // print('at _handleRadioValueChange() method ???????????');
@@ -1168,8 +1184,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
     });
   }
 
+  */
 
 
+
+
+  /*
   Widget categoryItem(Color color, String name,int index) {
     return GestureDetector(
 
@@ -1217,15 +1237,22 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
   }
 
+  */
 
-  Widget _buildOneSize(String oneSize, int index) {
 
-    print('oneSize: $oneSize');
-    return GestureDetector(
+  Widget _buildOneSize(String oneSize,double onePriceForSize, int index) {
 
+
+
+    logger.i('oneSize: $oneSize');
+    logger.i('onePriceForSize: $onePriceForSize');
+
+    return InkWell(
       onTap: () {
+
         setState(() {
-euroPrice2=3;
+          euroPrice2 = onePriceForSize;
+          _currentSize= oneSize;
         });
 //        print('_handleRadioValueChange called from Widget categoryItem ');
 
@@ -1233,7 +1260,7 @@ euroPrice2=3;
       },
       child:Container(
 
-        child: _radioValue == index ?
+        child:  oneSize.toLowerCase() == _currentSize  ?
         (
             Card(
 

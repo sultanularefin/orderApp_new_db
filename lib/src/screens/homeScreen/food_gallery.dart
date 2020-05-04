@@ -127,8 +127,15 @@ class _FoodGalleryState extends State<FoodGallery> {
 //          storageBucketURLPredicate + Uri.encodeComponent(document['image'])
 
 
-          final String foodImageURL  = doc['image']==''?'':storageBucketURLPredicate +
-              Uri.encodeComponent(doc['image'])
+//          final String foodImageURL  = doc['image']==''?'':storageBucketURLPredicate +
+//              Uri.encodeComponent(doc['image'])
+//              +'?alt=media';
+
+
+          final String foodImageURL  = doc['image']==''?
+          'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+              :
+          storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
               +'?alt=media';
 
 
@@ -208,8 +215,14 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
           final String categoryItemName = doc['name'];
-          final String categoryImageURL  = storageBucketURLPredicate +
-              Uri.encodeComponent(doc['image'])
+//          final String categoryImageURL  = storageBucketURLPredicate +
+//              Uri.encodeComponent(doc['image'])
+//              +'?alt=media';
+
+          final String categoryImageURL  = doc['image']==''?
+          'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+              :
+          storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
               +'?alt=media';
 
           print('categoryImageURL: $categoryImageURL');
@@ -2379,7 +2392,9 @@ class FoodList extends StatelessWidget {
                 final DocumentSnapshot document = snapshot.data.documents[index];
                 final String foodItemName = document['name'];
 
-                final String foodImageURL  =document['image']==''?'':
+                final String foodImageURL  =document['image']==''?
+                'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+                    :
                 storageBucketURLPredicate + Uri.encodeComponent(document['image'])
 
                     +'?alt=media';
