@@ -146,13 +146,13 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //                final String foodCategoryName = document['categoryName'];
 
-          final Map<String,dynamic> allFoodSizePriceMap = doc['size'];
+          final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
 
           final List<dynamic> foodItemIngredientsList =  doc['ingredient'];
-          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
+//          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
 
 
-          print('foodSizePrice __________________________${allFoodSizePriceMap['normal']}');
+          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
 
           final String foodCategoryName = doc['category'];
           final String foodItemDocumentID = doc.documentID;
@@ -164,7 +164,7 @@ class _FoodGalleryState extends State<FoodGallery> {
             itemName: foodItemName,
             categoryName: foodCategoryName,
             imageURL: foodImageURL,
-            sizedFoodPrices: allFoodSizePriceMap,
+            sizedFoodPrices: oneFoodSizePriceMap,
 
 
 //            priceinEuro: euroPrice,
@@ -1988,7 +1988,7 @@ class FoodListWithCategoryString extends StatelessWidget {
             final String foodItemName =          filteredItems[index].itemName;
             final String foodImageURL =          filteredItems[index].imageURL;
 
-            logger.i("foodImageURL in CAtegory tap: $foodImageURL");
+//            logger.i("foodImageURL in CAtegory tap: $foodImageURL");
 
 
 
@@ -2035,7 +2035,7 @@ class FoodListWithCategoryString extends StatelessWidget {
             );
 
 
-            logger.i('ingredients:',foodItemIngredientsList);
+//            logger.i('ingredients:',foodItemIngredientsList);
 
             String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
 

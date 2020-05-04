@@ -30,6 +30,12 @@ final Firestore firestore = Firestore();
 
 
 
+
+
+
+
+
+
 class FoodItemDetails extends StatefulWidget {
 //  AdminFirebase({this.firestore});
 
@@ -46,6 +52,12 @@ class FoodItemDetails extends StatefulWidget {
   @override
   _FoodItemDetailsState createState() => new _FoodItemDetailsState(oneFoodItemData);
 
+
+
+//  _FoodItemDetailsState createState() => _FoodItemDetailsState();
+
+
+
 }
 
 
@@ -57,32 +69,82 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
   int _radioValue = 0;
   int _sizeValue = 0;
+  double euroPrice2= 00;
 
 
   int _itemCount=1;
-  final _itemData = ItemData();
-  String _searchString = '';
-  String _currentCategory = "PIZZA";
-  String _firstTimeCategoryString = "";
+
 //  oneFoodItemData
+
   FoodItemWithDocID oneFoodItemandId;
+
   _FoodItemDetailsState(this.oneFoodItemandId);
 
-  double _total_cart_price =00;
+
+  @override
+  void initState() {
+
+
+    setDetailForFood();
+    super.initState();
+
+  }
+
+  Future<void> setDetailForFood() async {
+    debugPrint("Entering in retrieveIngredients1");
+//    logger.i('ss',oneFoodItemandId);
+//
+//
+//    logger.i('ss','sss');
+
+
+
+//      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
+    setState(() {
+
+    }
+    );
+
+
+
+  }
+
+
+
+//    final FoodItemWithDocID oneFoodItemandId;
+//  _FoodItemDetailsState({this.oneFoodItemandId});
+
+
+
+//  final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
 
   var logger = Logger(
     printer: PrettyPrinter(),
   );
 
+  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
+
   @override
   Widget build(BuildContext context) {
 
+//    final Map<String,dynamic> displayPrice = oneFoodItemandId.sizedFoodPrices;
+//    double euroPrice2 = tryCast<double>(displayPrice['normal'], fallback: 0.00);
+//
+//
+//    print('foodSizePrice __________________________${displayPrice['normal']}');
 
-    logger.i('oneFoodItemandId: ',oneFoodItemandId);
+    logger.i('oneFoodItemandId: ',oneFoodItemandId.itemName);
+
+//    logger.i('oneFoodItemData: ',widget.oneFoodItemData);
+
+
+
+
+
     print('at build _____________________________________________________________________');
 
 //    print('widget.oneFoodItemData.itemName:__________________________________________ ${widget.oneFoodItemData.imageURL}');
-//    print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId.imageURL}');
+    print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId.imageURL}');
 
 //    String a = Constants.SUCCESS_MESSAGE;
 
@@ -201,7 +263,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                   ),
                                 ),
                                 Spacer(),
-                                Text(_total_cart_price.toStringAsFixed(2) +' kpl',
+                                Text(euroPrice2.toStringAsFixed(2) +' kpl',
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.white)),
                                 Spacer(),
@@ -755,7 +817,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                                               height:45, // same as the heidth of increment decrement button.
                                               child:
-                                              Text(_total_cart_price.toStringAsFixed(2) +'\u20AC',
+                                              Text(euroPrice2.toStringAsFixed(2) +'\u20AC',
                                                   style: TextStyle(
                                                     fontSize: 26,
 //                                                    color: Colors.white
@@ -844,8 +906,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                               ),
 
                                             ),
-
-
 
 
                                           ],
