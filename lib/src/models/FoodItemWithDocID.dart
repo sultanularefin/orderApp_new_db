@@ -8,7 +8,7 @@ class FoodItemWithDocID {
 //  Timestamp uploadDate;
   DateTime uploadDate;
   String imageURL;
-  List<String> ingredients;
+  List<dynamic> ingredients;
   String content;
   String itemId;
   double indicatorValue;

@@ -16,7 +16,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:logger/logger.dart';
 
 // local packages
 
@@ -178,7 +178,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //            horizontal: 4.0, vertical: 6.0),
 
         contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
-//    FittedBox(fit:BoxFit.fitWidth,
+//    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
         title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -308,7 +308,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 left: 4, top: 3, bottom: 3, right: 3),
                             child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Container(
@@ -326,11 +326,11 @@ class _FoodGalleryState extends State<FoodGallery> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                Spacer(),
+//                                Spacer(),
                                 Text(_total_cart_price.toStringAsFixed(2) +' kpl',
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.white)),
-                                Spacer(),
+//                                Spacer(),
 
                               ],
                             ),
@@ -548,7 +548,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   left: 4, top: 3, bottom: 3, right: 3),
                               child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
@@ -566,11 +566,11 @@ class _FoodGalleryState extends State<FoodGallery> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  Spacer(),
+//                                  Spacer(),
                                   Text(_total_cart_price.toStringAsFixed(2) +' kpl',
                                       style: TextStyle(
                                           fontSize: 20, color: Colors.white)),
-                                  Spacer(),
+//                                  Spacer(),
 
                                 ],
                               ),
@@ -784,7 +784,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   left: 4, top: 3, bottom: 3, right: 3),
                               child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
@@ -802,11 +803,11 @@ class _FoodGalleryState extends State<FoodGallery> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  Spacer(),
+//                                  Spacer(),
                                   Text(_total_cart_price.toStringAsFixed(2) +' kpl',
                                       style: TextStyle(
                                           fontSize: 20, color: Colors.white)),
-                                  Spacer(),
+//                                  Spacer(),
 
                                 ],
                               ),
@@ -1012,7 +1013,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   left: 4, top: 3, bottom: 3, right: 3),
                               child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
@@ -1226,7 +1228,7 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //  bool updateShouldNotify(InheritedDataProvider oldWidget) => data != oldWidget.data;
 
 
-  String listTitleCase(List<String> text) {
+  String listTitleCase(List<dynamic> text) {
     // print("text: $text");
     if (text.length==0) {
       return " ";
@@ -1521,7 +1523,7 @@ class FoodListWithCategoryString extends StatelessWidget {
   FoodListWithCategoryString({this.allFoods,this.categoryString});
 
 
-  String listTitleCase(List<String> text) {
+  String listTitleCase(List<dynamic> text) {
     // print("text: $text");
     if (text.length==0) {
       return " ";
@@ -1613,7 +1615,8 @@ class FoodListWithCategoryString extends StatelessWidget {
 //            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
             final Map<String,String> foodSize_Value = filteredItems[index].size;
 
-            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
+//            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
+            final List<dynamic> foodItemIngredientsList =  filteredItems[index].ingredient;
 
 //            final String foodItemIngredients =    filteredItems[index].ingredients;
             final String foodItemId =             filteredItems[index].itemId;
@@ -1691,7 +1694,7 @@ class FoodListWithCategoryString extends StatelessWidget {
                           ),
 //                              SizedBox(height: 10),
 
-            /*
+                          /*
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -1836,25 +1839,76 @@ class FoodList extends StatelessWidget {
     'token':'BaArDBcLm8OodxaIMZKpiA7Vql72'
   };
 
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
-  String listTitleCase(List<dynamic> text) {
+  String titleCase(var text) {
     // print("text: $text");
-    if (text.length==0) {
-      return " ";
+    if (text is num) {
+      return text.toString();
     } else if (text == null) {
+      return '';
+    } else if (text.length <= 1) {
+      return text.toUpperCase();
+    } else {
+      return text
+          .split(' ')
+          .map((word) => word[0].toUpperCase() + word.substring(1))
+          .join(' ');
+
+
+    }
+  }
+
+
+  String listTitleCase(List<dynamic> dlist) {
+//    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
+    print('dlist ---------------------------------------------> $dlist');
+
+    List<String> stringList = List<String>.from(dlist);
+
+
+//    var strings = text.OfType<String>().ToList();
+
+//    var strings = dlist.map((item) => item.price).toList();
+
+    print ('stringList --> : $stringList');
+
+
+    // print("text: $text");
+    if (stringList.length==0) {
+      return " ";
+    } else if (stringList == null) {
       return ' ';
     }
 //    else if (text.length <= 1) {
 //      return text.toUpperCase();
 //    }
+
+//    else {
+//      return stringList
+//          .map((word) => word.toString().split(' ')
+//          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+//          .join(', ');
+//
+//    }
+
     else {
-      return text
-          .map((word) => word.split(' ')
-          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+      return stringList
+          .map((word) => word.toString().split(' ')
+          .map((word2) => titleCase(word2)).join(' '))
           .join(', ');
 
     }
+//    word2[0].toUpperCase() + word2.substring(1)
+
+//    return "bash";
   }
+
+
+  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -1867,6 +1921,7 @@ class FoodList extends StatelessWidget {
     print('storageBucketURLPredicat: $storageBucketURLPredicate}');
 
     double textWidth = MediaQuery.of(context).size.width * 0.4;
+    //      limit(1)
     return StreamBuilder<QuerySnapshot>(
       stream: firestore
           .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
@@ -1932,9 +1987,9 @@ class FoodList extends StatelessWidget {
 
                 print('foodImageURL: $foodImageURL');
 
-//                final String euroPrice = double.parse(document['size']).toStringAsFixed(2);
 
-//                final Map<String,String> foodSize_Value = document['size'];
+
+                final Map<String,dynamic> foodSize_price = document['size'];
 
                 final List<dynamic> foodItemIngredientsList =  document['ingredient'];
 
@@ -1944,7 +1999,32 @@ class FoodList extends StatelessWidget {
 
                 final bool foodIsAvailable =  document['available'];
 
+
 //                final String foodCategoryName = document['categoryName'];
+
+
+                print('foodSize_price __________________________${foodSize_price['normal']}');
+                final dynamic euroPrice = foodSize_price['normal'];
+
+//                num euroPrice2 = tryCast(euroPrice);
+                double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.00);
+//                String euroPrice3= num.toString();
+                print('euroPrice2 :$euroPrice2');
+
+               String euroPrice3 = euroPrice2.toStringAsFixed(2);
+
+//                print('euroPrice2: $euroPrice2');
+
+
+
+
+//                print('type (((((((((((((: ${foodSize_price['normla'].runtimeType}');
+
+//                final String euroPrice2 = (doubl)euroPrice.toStringAsFixed(2);
+
+
+//                double.parse(foodSize_price['normal']).toStringAsFixed(2);
+
 
 
                 FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
@@ -1953,7 +2033,7 @@ class FoodList extends StatelessWidget {
 //                  categoryName: foodCategoryName,
                   imageURL: foodImageURL,
 
-//                  priceinEuro: euroPrice,
+//                  priceinEuro: foodSize_price['normal'].toStringAsFixed(2),
                   ingredients: foodItemIngredientsList,
 
 //                  itemId:foodItemId,
@@ -1963,7 +2043,9 @@ class FoodList extends StatelessWidget {
 
                 );
 
+//                String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
                 String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
+                logger.i("stringifiedFoodItemIngredients: $stringifiedFoodItemIngredients");
 
 //                FoodItem oneFoodItem =new FoodItem(
 //
@@ -2043,13 +2125,14 @@ class FoodList extends StatelessWidget {
                               ),
 //                              SizedBox(height: 10),
 
-/*
+
+
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                                      euroPrice+'\u20AC',
+                                      euroPrice3 +'\u20AC',
                                       style: TextStyle(
                                           fontWeight: FontWeight.normal,
 //                                          color: Colors.blue,
@@ -2066,7 +2149,8 @@ class FoodList extends StatelessWidget {
                                     ),
                                   ]),
 
-*/
+
+
 
 //                              SizedBox(height: 10),
 
@@ -2090,6 +2174,7 @@ class FoodList extends StatelessWidget {
 //                              Text('D'),
 
 
+                              FittedBox(fit:BoxFit.fitWidth,child:
                               Text(
 //                '${dummy.counter}',
                                 foodItemName,
@@ -2101,14 +2186,20 @@ class FoodList extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                 ),
-                              )
+                              ),)
                               ,
-
+//                              FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
                               Container(
                                   height: displayHeight(context)/61,
+
                                   child:Text(
+//                                    stringifiedFoodItemIngredients,
+
+
+                                    stringifiedFoodItemIngredients.length==0?
+                                    'EMPTY':  stringifiedFoodItemIngredients.length>12?
+                                    stringifiedFoodItemIngredients.substring(0,12)+'...':
                                     stringifiedFoodItemIngredients,
-//                stringifiedFoodItemIngredients.substring(0,10)+'..',
 //                                    foodItemIngredients.substring(0,10)+'..',
                                     style: TextStyle(
                                       color: Colors.blueGrey[800],
