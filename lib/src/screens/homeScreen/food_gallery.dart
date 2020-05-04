@@ -307,6 +307,7 @@ class _FoodGalleryState extends State<FoodGallery> {
           setState(() {
             _currentCategory = categoryName;
             _firstTimeCategoryString =categoryName;
+            _searchString = '';
           });
         }, // ... to here.
       );
@@ -331,6 +332,7 @@ class _FoodGalleryState extends State<FoodGallery> {
           setState(() {
             _currentCategory = categoryName;
             _firstTimeCategoryString =categoryName;
+            _searchString = '';
           });
         }, // ... to here.
       );
@@ -455,7 +457,8 @@ class _FoodGalleryState extends State<FoodGallery> {
               Container(
 
                 //      color: Colors.yellowAccent,
-                height:100,
+                // height:100 changed on MAY 5 2020
+                height:displayHeight(context)/13,
                 width: displayWidth(context),
 
                 child: Row(
@@ -471,8 +474,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                           Container(
-                            margin:EdgeInsets.symmetric(horizontal: displayWidth(context)
-                                /20,vertical: 0),
+                            margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
@@ -704,7 +706,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                 Container(
 
                   //      color: Colors.yellowAccent,
-                  height:100,
+                  // height:100 changed on MAY 5 2020
+                  height:displayHeight(context)/13,
                   width: displayWidth(context),
 
                   child: Row(
@@ -720,8 +723,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                             Container(
-                              margin:EdgeInsets.symmetric(horizontal: displayWidth(context)
-                                  /20,vertical: 0),
+                              margin:EdgeInsets.symmetric(horizontal:0,vertical: 0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   boxShadow: [
@@ -950,7 +952,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                 Container(
 
                   //      color: Colors.yellowAccent,
-                  height:100,
+                  // height:100 changed on MAY 5 2020
+                  height:displayHeight(context)/13,
                   width: displayWidth(context),
 
                   child: Row(
@@ -966,8 +969,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                             Container(
-                              margin:EdgeInsets.symmetric(horizontal: displayWidth(context)
-                                  /20,vertical: 0),
+                              margin:EdgeInsets.symmetric(horizontal:0,vertical: 0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   boxShadow: [
@@ -1191,7 +1193,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                 Container(
 
 //                  color: Colors.yellowAccent,
-                  height:100,
+                  // height:100 changed on MAY 5 2020
+                  height:displayHeight(context)/13,
                   width: displayWidth(context),
 
                   child: Row(
