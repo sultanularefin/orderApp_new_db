@@ -7,17 +7,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+
+
+//sizeConstantsList
+
+
+// SCREEN FILES AND MODLE FILES AND UTILITY FILES.
+import 'package:foodgallery/src/screens/ingredients_more/more_ingredients.dart';
 import 'package:foodgallery/src/models/IngredientItem.dart';
 import 'package:foodgallery/src/models/SizeConstants.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 import './../../models/FoodItemWithDocID.dart';
 import './../../models/itemData.dart';
-
-
-//sizeConstantsList
-
-import 'package:foodgallery/src/screens/ingredients_more/more_ingredients.dart';
 
 //import './../../shared/category_Constants.dart' as Constants;
 
@@ -55,7 +58,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   int _radioValue = 0;
   int _sizeValue = 0;
 
-  double _total_cart_price = 1.00;
+
   int _itemCount=1;
   final _itemData = ItemData();
   String _searchString = '';
@@ -65,10 +68,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   FoodItemWithDocID oneFoodItemandId;
   _FoodItemDetailsState(this.oneFoodItemandId);
 
+  double _total_cart_price =00;
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
   @override
   Widget build(BuildContext context) {
 
+
+    logger.i('oneFoodItemandId: ',oneFoodItemandId);
     print('at build _____________________________________________________________________');
 
 //    print('widget.oneFoodItemData.itemName:__________________________________________ ${widget.oneFoodItemData.imageURL}');

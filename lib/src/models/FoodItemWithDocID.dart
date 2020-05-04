@@ -4,11 +4,15 @@ class FoodItemWithDocID {
 
   String itemName;
   String categoryName;
-  String priceinEuro;
+
+  Map<String,dynamic> sizedFoodPrices;
+  List<dynamic> ingredients;
+//  String priceinEuro;
+
 //  Timestamp uploadDate;
   DateTime uploadDate;
   String imageURL;
-  List<dynamic> ingredients;
+
   String content;
   String itemId;
   double indicatorValue;
@@ -22,7 +26,7 @@ class FoodItemWithDocID {
 
         this.itemName,
         this.categoryName,
-        this.priceinEuro,
+        this.sizedFoodPrices,
         this.uploadDate,
         this.imageURL,
         this.content,

@@ -4,14 +4,15 @@ class FoodItem {
 
   String itemName;
   String categoryName;
-  String priceinEuro;
+//  String priceinEuro;
 //  Timestamp uploadDate;
   DateTime uploadDate;
   String imageURL;
 //  String ingredients;
 
   List<dynamic> ingredients;
-
+  Map<String,dynamic> sizedFoodPrices;
+//  List<dynamic> ingredients;
 
   String content;
   String itemId;
@@ -25,7 +26,7 @@ class FoodItem {
 
         this.itemName,
         this.categoryName,
-        this.priceinEuro,
+        this.sizedFoodPrices,
         this.uploadDate,
         this.imageURL,
         this.content,

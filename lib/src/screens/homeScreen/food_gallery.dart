@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodgallery/src/models/newCategory.dart';
 //import 'package:foodgallery/src/screens/drawerScreen/drawerScreen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -72,12 +73,15 @@ class _FoodGalleryState extends State<FoodGallery> {
 
   File _image;
 
-  final _allFoodsList = [];
+  List<FoodItemWithDocID> _allFoodsList = [];
+
+  List<NewCategoryItem>_allCategoryList=[];
 
 
   @override
   void initState() {
-//    getDataFromFirestore();
+    getAllFoodDataFromFirestore();
+    getAllCategoriesDataFromFirestore();
 //  _animationController = AnimationController(...);
 //  _colorTween = _animationController.drive(
 //    ColorTween(
@@ -89,15 +93,19 @@ class _FoodGalleryState extends State<FoodGallery> {
 
   }
 
+
+//  stream: firestore
+//      .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+//      .where('category', isEqualTo: 'Pizza')
+//      .snapshots()
+
+
 //  restaurants
   // USWc8IgrHKdjeDe9Ft4j
-  getDataFromFirestore() async {
-//    firestore
-//        .collection("restaurants/USWc8IgrHKdjeDe9Ft4j/foodItems").where('category', isEqualTo: 'pizza')
-//
-//        .snapshots()
+  getAllFoodDataFromFirestore() async {
+
     Firestore.instance
-        .collection('restaurants/USWc8IgrHKdjeDe9Ft4j/foodItems').where('category', isEqualTo: 'pizza')
+        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
         .snapshots()
         .listen((data) =>
         data.documents.forEach((doc) {
@@ -113,15 +121,40 @@ class _FoodGalleryState extends State<FoodGallery> {
 //      final DocumentSnapshot document = snapshot.data.documents[index];
 
 
-          final dynamic foodItemName = doc['itemName'];
-          final dynamic foodImageURL = doc['imageURL'];
+          final String foodItemName = doc['name'];
+
+//          final String foodImageURL  =document['image']==''?'':
+//          storageBucketURLPredicate + Uri.encodeComponent(document['image'])
+
+
+          final String foodImageURL  = doc['image']==''?'':storageBucketURLPredicate +
+              Uri.encodeComponent(doc['image'])
+              +'?alt=media';
+
+
+//          final String foodImageURL = doc['imageURL'];
 //          final String euroPrice = double.parse(doc['priceinEuro'])
 //              .toStringAsFixed(2);
 //          final String foodItemIngredients = doc['ingredients'];
-          final String foodItemId = doc['itemId'];
-          final bool foodIsHot = doc['isHot'];
-          final bool foodIsAvailable = doc['isAvailable'];
-          final String foodCategoryName = doc['categoryName'];
+
+
+//          final String foodItemId = doc['itemId'];
+//          final bool foodIsHot = doc['isHot'];
+
+          final bool foodIsAvailable =  doc['available'];
+
+
+//                final String foodCategoryName = document['categoryName'];
+
+          final Map<String,dynamic> allFoodSizePriceMap = doc['size'];
+
+          final List<dynamic> foodItemIngredientsList =  doc['ingredient'];
+          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
+
+
+          print('foodSizePrice __________________________${allFoodSizePriceMap['normal']}');
+
+          final String foodCategoryName = doc['category'];
           final String foodItemDocumentID = doc.documentID;
 
 
@@ -131,19 +164,71 @@ class _FoodGalleryState extends State<FoodGallery> {
             itemName: foodItemName,
             categoryName: foodCategoryName,
             imageURL: foodImageURL,
+            sizedFoodPrices: allFoodSizePriceMap,
+
 
 //            priceinEuro: euroPrice,
-//            ingredients: foodItemIngredients,
+            ingredients: foodItemIngredientsList,
 
-            itemId: foodItemId,
-            isHot: foodIsHot,
+//            itemId: foodItemId,
+//            isHot: foodIsHot,
             isAvailable: foodIsAvailable,
             documentId: foodItemDocumentID,
-
 
           );
 
           _allFoodsList.add(oneFoodItemWithDocID);
+        }
+        ), onDone: () {
+      print("Task Done zzzzz zzzzzz zzzzzzz zzzzzzz zzzzzz zzzzzzzz zzzzzzzzz zzzzzzz zzzzzzz");
+    }, onError: (error, StackTrace stackTrace) {
+      print("Some Error $stackTrace");
+    });
+  }
+
+
+  getAllCategoriesDataFromFirestore() async {
+
+
+    Firestore.instance
+        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
+        .snapshots()
+        .listen((data) =>
+        data.documents.forEach((doc) {
+//      document['itemName'];
+
+//          print('doc: ***************************** ${doc['uploadDate']
+//              .toDate()}');
+//      doc: ***************************** Instance of 'DocumentSnapshot'
+
+//      final DocumentSnapshot document = snapshot.data.documents[index];
+
+
+//      final DocumentSnapshot document = snapshot.data.documents[index];
+
+
+          final String categoryItemName = doc['name'];
+          final String categoryImageURL  = storageBucketURLPredicate +
+              Uri.encodeComponent(doc['image'])
+              +'?alt=media';
+
+          print('categoryImageURL: $categoryImageURL');
+
+          final num categoryRating = doc['rating'];
+          final num totalCategoryRating = doc['total_rating'];
+
+
+          NewCategoryItem oneCategoryItem = new NewCategoryItem(
+
+
+            categoryName: categoryItemName,
+            imageURL: categoryImageURL,
+            rating: categoryRating.toDouble(),
+            totalRating: totalCategoryRating.toDouble(),
+
+          );
+
+          _allCategoryList.add(oneCategoryItem);
         }
         ), onDone: () {
       print("Task Done zzzzz zzzzzz zzzzzzz zzzzzzz zzzzzz zzzzzzzz zzzzzzzzz zzzzzzz zzzzzzz");
@@ -166,8 +251,13 @@ class _FoodGalleryState extends State<FoodGallery> {
   // empty MEANS PIZZA
 
 
-  Widget _buildCategoryRow(String categoryName, int index) {
 
+  Widget _buildCategoryRow(/*DocumentSnapshot document*/
+      String oneCategory, int index) {
+
+//    final DocumentSnapshot document = snapshot.data.documents[index];
+    final String categoryName = oneCategory;
+//    final String categoryName = document['name'];
     if (_currentCategory==categoryName){
       return ListTile(
 //        trailing: CustomPaint(size: Size(0,19),
@@ -233,6 +323,84 @@ class _FoodGalleryState extends State<FoodGallery> {
       );
     }
   }
+
+
+  Widget _buildCategoryRowWithSnapshot(DocumentSnapshot document, int index) {
+
+//    final DocumentSnapshot document = snapshot.data.documents[index];
+    final String categoryName = document['name'];
+    if (_currentCategory==categoryName){
+      return ListTile(
+//        trailing: CustomPaint(size: Size(0,19),
+//          painter: MyPainter(),
+//        ),
+
+//        contentPadding: EdgeInsets.symmetric(
+//            horizontal: 4.0, vertical: 6.0),
+
+        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
+//    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(categoryName
+                ,
+//    Text(categoryName.substring(0, 2),
+                style: TextStyle(
+                  color:Color.fromRGBO(255,255,255,1),
+//                  color:Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+
+              ),CustomPaint(size: Size(0,19),
+                painter: MyPainter(),
+              )
+            ]
+        ),
+        onTap: () { // Add 9 lines from here...
+          print('onTap pressed');
+          print('index: $index');
+          setState(() {
+            _currentCategory = categoryName;
+            _firstTimeCategoryString =categoryName;
+          });
+        }, // ... to here.
+      );
+    }
+    else {
+      return ListTile(
+        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
+
+        title:  Text(categoryName,
+//    Text(categoryName.substring(0, 2),
+          style: TextStyle(
+//            color:Color.fromRGBO(84,70,62,1),
+            color:Color.fromRGBO(255,255,255,1),
+            fontWeight: FontWeight.normal,
+            fontSize: 17,
+          ),
+
+        ),
+        onTap: () { // Add 9 lines from here...
+          print('onTap pressed');
+          print('index: $index');
+          setState(() {
+            _currentCategory = categoryName;
+            _firstTimeCategoryString =categoryName;
+          });
+        }, // ... to here.
+      );
+    }
+  }
+
+  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
+
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
 
   @override
@@ -301,6 +469,12 @@ class _FoodGalleryState extends State<FoodGallery> {
                                       offset: Offset(0.0, 2.0))
                                 ],
                                 color: Colors.black54),
+
+//                            width: displayWidth(context)/3,
+//                            height: displayHeight(context)/27,
+
+
+//IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
                             width: displayWidth(context)/5,
                             height: displayHeight(context)/40,
 
@@ -372,7 +546,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'Enter a meal term',
-                                labelText: 'Search for your meal.',
+                                labelText: 'Search about meal.',
 
                               ),
                               onSubmitted: (String value) async {
@@ -399,7 +573,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                            decoration: InputDecoration(
 //                                border: InputBorder.none,
 //                                hintText: 'Enter a meal term',
-//                                labelText: 'Search for your meal.'
+//                                labelText: 'Search about meal.'
 //                            ),
 //                          )
 
@@ -457,10 +631,13 @@ class _FoodGalleryState extends State<FoodGallery> {
 //              child:Text('ss'),
                       child: new ListView.builder
                         (
-                          itemCount: categoryItems.length,
+
+//                          itemCount: categoryItems.length,
+                          itemCount: _allCategoryList.length,
                           //    itemBuilder: (BuildContext ctxt, int index) {
                           itemBuilder: (_, int index) {
-                            return _buildCategoryRow(categoryItems[index], index);
+                            return _buildCategoryRow(
+                                _allCategoryList[index].categoryName, index);
                           }
                       ),
                     ),
@@ -541,8 +718,15 @@ class _FoodGalleryState extends State<FoodGallery> {
                                         offset: Offset(0.0, 2.0))
                                   ],
                                   color: Colors.black54),
-                              width: displayWidth(context)/5,
-                              height: displayHeight(context)/40,
+
+
+
+                              width: displayWidth(context)/3,
+                              height: displayHeight(context)/27,
+//IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
+//                            width: displayWidth(context)/5,
+//                            height: displayHeight(context)/40,
+
 
                               padding: EdgeInsets.only(
                                   left: 4, top: 3, bottom: 3, right: 3),
@@ -601,7 +785,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Enter a meal term',
-                                  labelText: 'Search for your meal.',
+                                  labelText: 'Search about meal.',
 
                                 ),
                                 onSubmitted: (String value) async {
@@ -628,7 +812,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                            decoration: InputDecoration(
 //                                border: InputBorder.none,
 //                                hintText: 'Enter a meal term',
-//                                labelText: 'Search for your meal.'
+//                                labelText: 'Search about meal.'
 //                            ),
 //                          )
 
@@ -694,10 +878,13 @@ class _FoodGalleryState extends State<FoodGallery> {
 //              child:Text('ss'),
                         child: new ListView.builder
                           (
-                            itemCount: categoryItems.length,
+
+//                          itemCount: categoryItems.length,
+                            itemCount: _allCategoryList.length,
                             //    itemBuilder: (BuildContext ctxt, int index) {
                             itemBuilder: (_, int index) {
-                              return _buildCategoryRow(categoryItems[index], index);
+                              return _buildCategoryRow(
+                                  _allCategoryList[index].categoryName, index);
                             }
                         ),
                       ),
@@ -777,8 +964,16 @@ class _FoodGalleryState extends State<FoodGallery> {
                                         offset: Offset(0.0, 2.0))
                                   ],
                                   color: Colors.black54),
-                              width: displayWidth(context)/5,
-                              height: displayHeight(context)/40,
+
+
+
+                              width: displayWidth(context)/3,
+                              height: displayHeight(context)/27,
+                              //IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
+//                            width: displayWidth(context)/5,
+//                            height: displayHeight(context)/40,
+
+
 
                               padding: EdgeInsets.only(
                                   left: 4, top: 3, bottom: 3, right: 3),
@@ -838,7 +1033,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Enter a meal term',
-                                  labelText: 'Search for your meal.',
+                                  labelText: 'Search about meal.',
 
                                 ),
                                 onSubmitted: (String value) async {
@@ -865,7 +1060,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                            decoration: InputDecoration(
 //                                border: InputBorder.none,
 //                                hintText: 'Enter a meal term',
-//                                labelText: 'Search for your meal.'
+//                                labelText: 'Search about meal.'
 //                            ),
 //                          )
 
@@ -930,10 +1125,14 @@ class _FoodGalleryState extends State<FoodGallery> {
 //              child:Text('ss'),
                         child: new ListView.builder
                           (
-                            itemCount: categoryItems.length,
+
+//                          itemCount: categoryItems.length,
+                            itemCount: _allCategoryList.length,
                             //    itemBuilder: (BuildContext ctxt, int index) {
                             itemBuilder: (_, int index) {
-                              return _buildCategoryRow(categoryItems[index], index);
+                              return _buildCategoryRow(
+                                  _allCategoryList[index].categoryName, index);
+
                             }
                         ),
                       ),
@@ -1068,7 +1267,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Enter a meal term',
-                                    labelText: 'Search for your meal.'
+                                    labelText: 'Search about meal.'
                                 ),
                                 onChanged: (text) {
                                   setState(() => _searchString = text);
@@ -1111,7 +1310,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                            decoration: InputDecoration(
 //                                border: InputBorder.none,
 //                                hintText: 'Enter a meal term',
-//                                labelText: 'Search for your meal.'
+//                                labelText: 'Search about meal.'
 //                            ),
 //                          )
 
@@ -1169,15 +1368,49 @@ class _FoodGalleryState extends State<FoodGallery> {
 //              color: Colors.yellowAccent,
                         color: Color.fromARGB(255, 84, 70, 62),
 //              child:Text('ss'),
-                        child: new ListView.builder
-                          (
-                            itemCount: categoryItems.length,
-                            //    itemBuilder: (BuildContext ctxt, int index) {
-                            itemBuilder: (_, int index) {
-                              return _buildCategoryRow(categoryItems[index], index);
+                        child:StreamBuilder<QuerySnapshot>(
+                            stream: firestore
+                                .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
+//        .where('category', isEqualTo: 'Pizza')
+                                .snapshots(),
+                            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (!snapshot.hasData)
+                                return Center(child: new LinearProgressIndicator());
+
+//          const Text('Loading...');
+
+
+//        final List filteredItems = allFoods.where((oneItem ) => oneItem.categoryName.toLowerCase() ==
+//            categoryString.toLowerCase()).toList();
+
+//        int messageCount = filteredItems.length;
+
+                              else{
+                                final int categoryCount = snapshot.data.documents.length;
+//                              print('categoryCount in condition 04: ');
+
+
+//                                logger.i("categoryCount in condition 04: $categoryCount");
+
+                                return(
+                                    new ListView.builder
+                                      (
+                                        itemCount: categoryCount,
+
+
+                                        //    itemBuilder: (BuildContext ctxt, int index) {
+                                        itemBuilder: (_, int index) {
+                                          return _buildCategoryRowWithSnapshot(snapshot.data.documents[index]
+                                              /*categoryItems[index]*/, index);
+                                        }
+                                    )
+                                )
+                                ;
+                              }
                             }
                         ),
-                      ),
+                      )
+
 
 
                     ],
@@ -1228,24 +1461,72 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //  bool updateShouldNotify(InheritedDataProvider oldWidget) => data != oldWidget.data;
 
 
-  String listTitleCase(List<dynamic> text) {
+  String titleCase(var text) {
     // print("text: $text");
-    if (text.length==0) {
-      return " ";
+    if (text is num) {
+      return text.toString();
     } else if (text == null) {
+      return '';
+    } else if (text.length <= 1) {
+      return text.toUpperCase();
+    } else {
+      return text
+          .split(' ')
+          .map((word) => word[0].toUpperCase() + word.substring(1))
+          .join(' ');
+
+
+    }
+  }
+
+
+  String listTitleCase(List<dynamic> dlist) {
+//    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
+//    print('dlist ---------------------------------------------> $dlist');
+
+    List<String> stringList = List<String>.from(dlist);
+
+
+//    var strings = text.OfType<String>().ToList();
+
+//    var strings = dlist.map((item) => item.price).toList();
+
+//    print ('stringList --> : $stringList');
+
+
+    // print("text: $text");
+    if (stringList.length==0) {
+      return " ";
+    } else if (stringList == null) {
       return ' ';
     }
 //    else if (text.length <= 1) {
 //      return text.toUpperCase();
 //    }
+
+//    else {
+//      return stringList
+//          .map((word) => word.toString().split(' ')
+//          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+//          .join(', ');
+//
+//    }
+
     else {
-      return text
-          .map((word) => word.split(' ')
-          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+      return stringList
+          .map((word) => word.toString().split(' ')
+          .map((word2) => titleCase(word2)).join(' '))
           .join(', ');
 
     }
+//    word2[0].toUpperCase() + word2.substring(1)
+
+//    return "bash";
   }
+
+
+  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -1281,7 +1562,7 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //      messageCount = allFoods.length;
 //    }
 
-    print('filteredItemCountWithSearchSring: $messageCount');
+//    print('filteredItemCountWithSearchSring: $messageCount');
 
     return(
         GridView.builder(
@@ -1326,16 +1607,33 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //          print(allFoods[index].itemName);
 //            final document = allFoods[index];
             final dynamic foodItemName =          filteredItems[index].itemName;
+
             final dynamic foodImageURL =          filteredItems[index].imageURL;
+
+
 //            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
 
-            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
+            final List<dynamic> foodItemIngredientsList =  filteredItems[index].ingredients;
+
+//            final Map<String,dynamic> foodSizePrice = filteredItems[index].size;
+            final Map<String,dynamic> foodSizePrice = filteredItems[index].sizedFoodPrices;
+
+//            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
+//            final List<dynamic> foodItemIngredientsList =  filteredItems[index].ingredients;
 
 //            final String foodItemIngredients =    filteredItems[index].ingredients;
-            final String foodItemId =             filteredItems[index].itemId;
-            final bool foodIsHot =                filteredItems[index].isHot;
+//            final String foodItemId =             filteredItems[index].itemId;
+//            final bool foodIsHot =                filteredItems[index].isHot;
             final bool foodIsAvailable =          filteredItems[index].isAvailable;
             final String foodCategoryName =       filteredItems[index].categoryName;
+
+//            final List<dynamic> foodItemIngredientsList =  document['ingredient'];
+
+//            final String foodItemIngredients =    filteredItems[index].ingredients;
+//            final String foodItemId =             filteredItems[index].itemId;
+//            final bool foodIsHot =                filteredItems[index].isHot;
+//            final bool foodIsAvailable =          filteredItems[index].available;
+//            final String foodCategoryName =       filteredItems[index].category;
 
 
             FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
@@ -1351,8 +1649,8 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //              ingredients: foodItemIngredients,
               ingredients: foodItemIngredientsList,
 
-              itemId:foodItemId,
-              isHot: foodIsHot,
+//              itemId:foodItemId,
+//              isHot: foodIsHot,
               isAvailable: foodIsAvailable,
 
             );
@@ -1360,6 +1658,16 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
             String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
 //            oneFoodItem
 
+
+//            print('foodSizePrice __________________________${foodSizePrice['normal']}');
+            final dynamic euroPrice = foodSizePrice['normal'];
+
+//                num euroPrice2 = tryCast(euroPrice);
+            double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.00);
+//                String euroPrice3= num.toString();
+//            print('euroPrice2 :$euroPrice2');
+
+            String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
 //            print('document__________________________: ${document.data}');
 //            Map<String, dynamic> oneFoodItemData = Map<String, dynamic>.from (document.data);
@@ -1409,20 +1717,20 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           ),
 //                              SizedBox(height: 10),
-/*
+
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-//                                  euroPrice,
-                                  euroPrice+'\u20AC',
+                                  euroPrice3 +'\u20AC',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-//                                      color: Colors.blue,
+                                      fontWeight: FontWeight.normal,
+//                                          color: Colors.blue,
                                       color:Color.fromRGBO(112,112,112,1),
                                       fontSize: 20),
                                 ),
+//                                    SizedBox(width: 10),
                                 SizedBox(width: displayWidth(context)/100),
 
                                 Icon(
@@ -1432,7 +1740,6 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
                                 ),
                               ]),
 
-*/
 
 //                              SizedBox(height: 10),
 
@@ -1456,26 +1763,34 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //                              Text('D'),
 
 
+                          FittedBox(fit:BoxFit.fitWidth,child:
                           Text(
 //                '${dummy.counter}',
                             foodItemName,
 
                             style: TextStyle(
-                              color: Colors.blueGrey[800],
+                              color: Color(0xff707070),
+//                                color:Color.fromRGBO(112,112,112,1),
+
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
-                          )
+                          ),)
                           ,
                           Container(
-//                              height: 20,
                               height: displayHeight(context)/61,
-//                              height: displayWidth(context)/50,
-                              child:Text(
 
-                                stringifiedFoodItemIngredients.substring(0,10)+'..',
+                              child:Text(
+//                                    stringifiedFoodItemIngredients,
+
+
+                                stringifiedFoodItemIngredients.length==0?
+                                'EMPTY':  stringifiedFoodItemIngredients.length>12?
+                                stringifiedFoodItemIngredients.substring(0,12)+'...':
+                                stringifiedFoodItemIngredients,
+//                                    foodItemIngredients.substring(0,10)+'..',
                                 style: TextStyle(
-                                  color: Colors.blueGrey[800],
+                                  color: Color(0xff707070),
                                   fontWeight: FontWeight.normal,
                                   fontSize: 15,
                                 ),
@@ -1516,30 +1831,76 @@ class FoodListWithCategoryString extends StatelessWidget {
 //    3. CATEGOY FILTERING -------------------------THIS ONE IS 3.
 //4. CATEGORY FILTERING AND SEARCH FILTERING.
 
-  final List allFoods;
-
+  final List<FoodItemWithDocID> allFoods;
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
   final String categoryString;
   FoodListWithCategoryString({this.allFoods,this.categoryString});
 
 
-  String listTitleCase(List<dynamic> text) {
+  String titleCase(var text) {
     // print("text: $text");
-    if (text.length==0) {
-      return " ";
+    if (text is num) {
+      return text.toString();
     } else if (text == null) {
+      return '';
+    } else if (text.length <= 1) {
+      return text.toUpperCase();
+    } else {
+      return text
+          .split(' ')
+          .map((word) => word[0].toUpperCase() + word.substring(1))
+          .join(' ');
+
+
+    }
+  }
+
+
+  String listTitleCase(List<dynamic> dlist) {
+//    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
+//    print('dlist ---------------------------------------------> $dlist');
+
+    List<String> stringList = List<String>.from(dlist);
+
+
+//    var strings = text.OfType<String>().ToList();
+
+//    var strings = dlist.map((item) => item.price).toList();
+
+//    print ('stringList --> : $stringList');
+
+
+    // print("text: $text");
+    if (stringList.length==0) {
+      return " ";
+    } else if (stringList == null) {
       return ' ';
     }
 //    else if (text.length <= 1) {
 //      return text.toUpperCase();
 //    }
+
+//    else {
+//      return stringList
+//          .map((word) => word.toString().split(' ')
+//          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+//          .join(', ');
+//
+//    }
+
     else {
-      return text
-          .map((word) => word.split(' ')
-          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
+      return stringList
+          .map((word) => word.toString().split(' ')
+          .map((word2) => titleCase(word2)).join(' '))
           .join(', ');
 
     }
+//    word2[0].toUpperCase() + word2.substring(1)
+
+//    return "bash";
   }
 
 //  const ChildScreen({Key key, this.func}) : super(key: key);
@@ -1547,12 +1908,20 @@ class FoodListWithCategoryString extends StatelessWidget {
   // @override
 //  bool updateShouldNotify(InheritedDataProvider oldWidget) => data != oldWidget.data;
 
+  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
+
+
   @override
   Widget build(BuildContext context) {
 
     print('categoryString  ##################################: $categoryString');
 
+//    logger.i("allFoods: $allFoods");
 
+
+
+
+//    logger.i
 //    if(categoryString!=null){
     final List filteredItems = allFoods.where((oneItem ) => oneItem.categoryName.toLowerCase() ==
         categoryString.toLowerCase()).toList();
@@ -1610,20 +1979,44 @@ class FoodListWithCategoryString extends StatelessWidget {
 //            categoryItems
 //          print(allFoods[index].itemName);
 //            final document = allFoods[index];
-            final dynamic foodItemName =          filteredItems[index].itemName;
-            final dynamic foodImageURL =          filteredItems[index].imageURL;
+
+
+
+//            logger.i("allFoods Category STring testing line # 1862: ${filteredItems[index]}");
+
+//
+            final String foodItemName =          filteredItems[index].itemName;
+            final String foodImageURL =          filteredItems[index].imageURL;
+
+            logger.i("foodImageURL in CAtegory tap: $foodImageURL");
+
+
+
+
 //            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
-            final Map<String,String> foodSize_Value = filteredItems[index].size;
+            final Map<String,dynamic> foodSizePrice = filteredItems[index].sizedFoodPrices;
 
 //            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
-            final List<dynamic> foodItemIngredientsList =  filteredItems[index].ingredient;
+            final List<dynamic> foodItemIngredientsList =  filteredItems[index].ingredients;
 
 //            final String foodItemIngredients =    filteredItems[index].ingredients;
-            final String foodItemId =             filteredItems[index].itemId;
-            final bool foodIsHot =                filteredItems[index].isHot;
+//            final String foodItemId =             filteredItems[index].itemId;
+//            final bool foodIsHot =                filteredItems[index].isHot;
             final bool foodIsAvailable =          filteredItems[index].isAvailable;
             final String foodCategoryName =       filteredItems[index].categoryName;
 
+//            final Map<String,dynamic> foodSizePrice = document['size'];
+
+//            final List<dynamic> foodItemIngredientsList =  document['ingredient'];
+            print('foodSizePrice __________________________${foodSizePrice['normal']}');
+            final dynamic euroPrice = foodSizePrice['normal'];
+
+//                num euroPrice2 = tryCast(euroPrice);
+            double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.00);
+//                String euroPrice3= num.toString();
+            print('euroPrice2 :$euroPrice2');
+
+            String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
             FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
 
@@ -1635,11 +2028,14 @@ class FoodListWithCategoryString extends StatelessWidget {
 //              priceinEuro: euroPrice,
               ingredients: foodItemIngredientsList,
 
-              itemId:foodItemId,
-              isHot: foodIsHot,
+//              itemId:foodItemId,
+//              isHot: foodIsHot,
               isAvailable: foodIsAvailable,
 
             );
+
+
+            logger.i('ingredients:',foodItemIngredientsList);
 
             String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
 
@@ -1694,20 +2090,20 @@ class FoodListWithCategoryString extends StatelessWidget {
                           ),
 //                              SizedBox(height: 10),
 
-                          /*
+
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-//                                  euroPrice,
-                                  euroPrice+'\u20AC',
+                                  euroPrice3 +'\u20AC',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-//                                      color: Colors.blue,
+                                      fontWeight: FontWeight.normal,
+//                                          color: Colors.blue,
                                       color:Color.fromRGBO(112,112,112,1),
                                       fontSize: 20),
                                 ),
+//                                    SizedBox(width: 10),
                                 SizedBox(width: displayWidth(context)/100),
 
                                 Icon(
@@ -1717,7 +2113,7 @@ class FoodListWithCategoryString extends StatelessWidget {
                                 ),
                               ]),
 
-*/
+
 
 //                              SizedBox(height: 10),
 
@@ -1741,26 +2137,35 @@ class FoodListWithCategoryString extends StatelessWidget {
 //                              Text('D'),
 
 
+                          FittedBox(fit:BoxFit.fitWidth,child:
                           Text(
 //                '${dummy.counter}',
                             foodItemName,
 
                             style: TextStyle(
-                              color: Colors.blueGrey[800],
+                              color: Color(0xff707070),
+//                                color:Color.fromRGBO(112,112,112,1),
+
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
-                          )
+                          ),)
                           ,
                           Container(
-//                              height: 20,
                               height: displayHeight(context)/61,
-//                              height: displayWidth(context)/50,
+
                               child:Text(
-                                stringifiedFoodItemIngredients.substring(0,10)+'..',
-//                                foodItemIngredients.substring(0,10)+'..',
+//                                'stringifiedFoodItemIngredients',
+
+
+                                stringifiedFoodItemIngredients.length==0?
+                                'EMPTY':  stringifiedFoodItemIngredients.length>12?
+                                stringifiedFoodItemIngredients.substring(0,12)+'...':
+                                stringifiedFoodItemIngredients,
+
+//                                    foodItemIngredients.substring(0,10)+'..',
                                 style: TextStyle(
-                                  color: Colors.blueGrey[800],
+                                  color: Color(0xff707070),
                                   fontWeight: FontWeight.normal,
                                   fontSize: 15,
                                 ),
@@ -1834,6 +2239,7 @@ class FoodList extends StatelessWidget {
     return currentUser.uid;
 //    return await getUserInfo2();
   }
+  // THIS IS NOT REQUIRED below:
   Map<String, String> headersMap = {
 //    'Cookie' : 'jwt-cookie=eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI0IiwiaXNzIjoiMSIsInN1YiI6InRtYSIsImlhdCI6MTU1NjExNTY2MCwiZXhwIjoxNTU2NzIwNDYwfQ.DQMV59lTlGSgVN_viwlUaJIxZNO_Sru0gQT31EnKZEdD533OR9VUCRYaj5pY8ist48zRUmn6HXs4M_oWkkzm7A'
     'token':'BaArDBcLm8OodxaIMZKpiA7Vql72'
@@ -1864,7 +2270,7 @@ class FoodList extends StatelessWidget {
 
   String listTitleCase(List<dynamic> dlist) {
 //    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
-    print('dlist ---------------------------------------------> $dlist');
+//    print('dlist ---------------------------------------------> $dlist');
 
     List<String> stringList = List<String>.from(dlist);
 
@@ -1873,7 +2279,7 @@ class FoodList extends StatelessWidget {
 
 //    var strings = dlist.map((item) => item.price).toList();
 
-    print ('stringList --> : $stringList');
+//    print ('stringList --> : $stringList');
 
 
     // print("text: $text");
@@ -1982,16 +2388,17 @@ class FoodList extends StatelessWidget {
 //            final dynamic imageURL = document['imageURL'];
                 final DocumentSnapshot document = snapshot.data.documents[index];
                 final String foodItemName = document['name'];
-                final String foodImageURL  = storageBucketURLPredicate + Uri.encodeComponent(document['image'])
+
+                final String foodImageURL  =document['image']==''?'':
+                storageBucketURLPredicate + Uri.encodeComponent(document['image'])
+
                     +'?alt=media';
 
-                print('foodImageURL: $foodImageURL');
+//                print('foodImageURL: $foodImageURL');
+//                logger.i("foodImageUR: $foodImageURL");
 
 
 
-                final Map<String,dynamic> foodSize_price = document['size'];
-
-                final List<dynamic> foodItemIngredientsList =  document['ingredient'];
 
 //                final String foodItemId =  document['itemId'];
 
@@ -2002,28 +2409,28 @@ class FoodList extends StatelessWidget {
 
 //                final String foodCategoryName = document['categoryName'];
 
+                final Map<String,dynamic> foodSizePrice = document['size'];
 
-                print('foodSize_price __________________________${foodSize_price['normal']}');
-                final dynamic euroPrice = foodSize_price['normal'];
+                final List<dynamic> foodItemIngredientsList =  document['ingredient'];
+                print('foodSizePrice __________________________${foodSizePrice['normal']}');
+                final dynamic euroPrice = foodSizePrice['normal'];
 
 //                num euroPrice2 = tryCast(euroPrice);
                 double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.00);
 //                String euroPrice3= num.toString();
-                print('euroPrice2 :$euroPrice2');
+//                print('euroPrice2 :$euroPrice2');
 
-               String euroPrice3 = euroPrice2.toStringAsFixed(2);
+                String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
 //                print('euroPrice2: $euroPrice2');
 
 
-
-
-//                print('type (((((((((((((: ${foodSize_price['normla'].runtimeType}');
+//                print('type (((((((((((((: ${foodSizePrice['normla'].runtimeType}');
 
 //                final String euroPrice2 = (doubl)euroPrice.toStringAsFixed(2);
 
 
-//                double.parse(foodSize_price['normal']).toStringAsFixed(2);
+//                double.parse(foodSizePrice['normal']).toStringAsFixed(2);
 
 
 
@@ -2033,7 +2440,7 @@ class FoodList extends StatelessWidget {
 //                  categoryName: foodCategoryName,
                   imageURL: foodImageURL,
 
-//                  priceinEuro: foodSize_price['normal'].toStringAsFixed(2),
+//                  priceinEuro: foodSizePrice['normal'].toStringAsFixed(2),
                   ingredients: foodItemIngredientsList,
 
 //                  itemId:foodItemId,
@@ -2045,7 +2452,7 @@ class FoodList extends StatelessWidget {
 
 //                String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
                 String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
-                logger.i("stringifiedFoodItemIngredients: $stringifiedFoodItemIngredients");
+//                logger.i("stringifiedFoodItemIngredients: $stringifiedFoodItemIngredients");
 
 //                FoodItem oneFoodItem =new FoodItem(
 //
@@ -2180,7 +2587,7 @@ class FoodList extends StatelessWidget {
                                 foodItemName,
 
                                 style: TextStyle(
-                                  color: Colors.blueGrey[800],
+                                  color: Color(0xff707070),
 //                                color:Color.fromRGBO(112,112,112,1),
 
                                   fontWeight: FontWeight.bold,
@@ -2202,7 +2609,7 @@ class FoodList extends StatelessWidget {
                                     stringifiedFoodItemIngredients,
 //                                    foodItemIngredients.substring(0,10)+'..',
                                     style: TextStyle(
-                                      color: Colors.blueGrey[800],
+                                      color: Color(0xff707070),
                                       fontWeight: FontWeight.normal,
                                       fontSize: 15,
                                     ),
