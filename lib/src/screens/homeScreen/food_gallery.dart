@@ -1645,6 +1645,7 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 
 //              priceinEuro: euroPrice,
 
+              sizedFoodPrices: foodSizePrice,
 
 //              ingredients: foodItemIngredients,
               ingredients: foodItemIngredientsList,
@@ -1879,17 +1880,7 @@ class FoodListWithCategoryString extends StatelessWidget {
     } else if (stringList == null) {
       return ' ';
     }
-//    else if (text.length <= 1) {
-//      return text.toUpperCase();
-//    }
 
-//    else {
-//      return stringList
-//          .map((word) => word.toString().split(' ')
-//          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
-//          .join(', ');
-//
-//    }
 
     else {
       return stringList
@@ -1898,9 +1889,7 @@ class FoodListWithCategoryString extends StatelessWidget {
           .join(', ');
 
     }
-//    word2[0].toUpperCase() + word2.substring(1)
 
-//    return "bash";
   }
 
 //  const ChildScreen({Key key, this.func}) : super(key: key);
@@ -2024,6 +2013,7 @@ class FoodListWithCategoryString extends StatelessWidget {
               itemName: foodItemName,
               categoryName: foodCategoryName,
               imageURL: foodImageURL,
+              sizedFoodPrices: foodSizePrice,
 
 //              priceinEuro: euroPrice,
               ingredients: foodItemIngredientsList,
@@ -2439,6 +2429,7 @@ class FoodList extends StatelessWidget {
                   itemName: foodItemName,
 //                  categoryName: foodCategoryName,
                   imageURL: foodImageURL,
+                  sizedFoodPrices: foodSizePrice,
 
 //                  priceinEuro: foodSizePrice['normal'].toStringAsFixed(2),
                   ingredients: foodItemIngredientsList,

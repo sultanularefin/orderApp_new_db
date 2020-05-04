@@ -69,7 +69,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
   int _radioValue = 0;
   int _sizeValue = 0;
-  double euroPrice2= 00;
+
+
+  double euroPrice2= 11;
 
 
   int _itemCount=1;
@@ -79,6 +81,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   FoodItemWithDocID oneFoodItemandId;
 
   _FoodItemDetailsState(this.oneFoodItemandId);
+
+
 
 
   @override
@@ -95,14 +99,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //    logger.i('ss',oneFoodItemandId);
 //
 //
-//    logger.i('ss','sss');
+    logger.i('ss','sss');
 
+    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
+    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
+
+    logger.i('euroPrice1 :',euroPrice1);
+//    tryCast(normalPrice);
 
 
 //      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
     setState(() {
 
-    }
+      euroPrice2=euroPrice1;
+     }
     );
 
 
@@ -133,7 +143,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //
 //    print('foodSizePrice __________________________${displayPrice['normal']}');
 
-    logger.i('oneFoodItemandId: ',oneFoodItemandId.itemName);
+//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
+    final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
+    logger.i('foodSizePrice: ',foodSizePrice);
+
+//
+//    print('foodSizePrice __________________________${foodSizePrice['normal']}');
+//    final dynamic euroPrice = foodSizePrice['normal'];
+//
+//    double euroPrice1 = tryCast<double>(euroPrice, fallback: 0.00);
+//    euroPrice2=euroPrice1;
+
+//    logger.i('oneFoodItemandId: ',oneFoodItemandId.itemName);
 
 //    logger.i('oneFoodItemData: ',widget.oneFoodItemData);
 
@@ -171,15 +192,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //                color: Color.fromRGBO(239, 239, 239, 1.0),
                 color: Color(0xffF7F0EC),
 
-                height:100,
+//                height:100,/
+//              FROM 100 TO DYNAMIC HEIGHT: april 04
+                height:displayHeight(context)/8,
                 width: displayWidth(context),
 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
 
+//                    from 30 to 22 -- april 04 2020, settled to 18.
                     Container(
-                      height: displayHeight(context)/30,
+                      height: displayHeight(context)/18,
                       child:
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -215,7 +239,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 
                     Container(
-
+//                      height: displayHeight(context)/18,
 //                      color: Color.fromARGB(255, 255,255,255),
                       child:Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -225,7 +249,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                           Container(
                             margin:EdgeInsets.symmetric(
                                 horizontal: displayWidth(context)
-                                    /20,
+                                    /10,
                                 vertical: 0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
@@ -241,7 +265,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //                            height: displayHeight(context)/40,
                             height: displayHeight(context)/30,
                             padding: EdgeInsets.only(
-                                left: 20, top: 3, bottom: 3, right: 4.5),
+                                left: displayWidth(context)/80, top: 3, bottom: 3, right: 4.5),
                             child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -262,11 +286,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                Spacer(),
+//                                Spacer(),
                                 Text(euroPrice2.toStringAsFixed(2) +' kpl',
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.white)),
-                                Spacer(),
+//                                Spacer(),
 
                               ],
                             ),
@@ -1200,9 +1224,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
     return GestureDetector(
 
       onTap: () {
+        setState(() {
+euroPrice2=3;
+        });
 //        print('_handleRadioValueChange called from Widget categoryItem ');
 
-        _handleRadioValueChange(index);
+//        _handleRadioValueChange(index);
       },
       child:Container(
 
