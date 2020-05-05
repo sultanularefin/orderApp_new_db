@@ -127,8 +127,15 @@ class _FoodGalleryState extends State<FoodGallery> {
 //          storageBucketURLPredicate + Uri.encodeComponent(document['image'])
 
 
-          final String foodImageURL  = doc['image']==''?'':storageBucketURLPredicate +
-              Uri.encodeComponent(doc['image'])
+//          final String foodImageURL  = doc['image']==''?'':storageBucketURLPredicate +
+//              Uri.encodeComponent(doc['image'])
+//              +'?alt=media';
+
+
+          final String foodImageURL  = doc['image']==''?
+          'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+              :
+          storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
               +'?alt=media';
 
 
@@ -146,13 +153,13 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //                final String foodCategoryName = document['categoryName'];
 
-          final Map<String,dynamic> allFoodSizePriceMap = doc['size'];
+          final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
 
           final List<dynamic> foodItemIngredientsList =  doc['ingredient'];
-          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
+//          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
 
 
-          print('foodSizePrice __________________________${allFoodSizePriceMap['normal']}');
+          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
 
           final String foodCategoryName = doc['category'];
           final String foodItemDocumentID = doc.documentID;
@@ -164,7 +171,7 @@ class _FoodGalleryState extends State<FoodGallery> {
             itemName: foodItemName,
             categoryName: foodCategoryName,
             imageURL: foodImageURL,
-            sizedFoodPrices: allFoodSizePriceMap,
+            sizedFoodPrices: oneFoodSizePriceMap,
 
 
 //            priceinEuro: euroPrice,
@@ -208,8 +215,14 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
           final String categoryItemName = doc['name'];
-          final String categoryImageURL  = storageBucketURLPredicate +
-              Uri.encodeComponent(doc['image'])
+//          final String categoryImageURL  = storageBucketURLPredicate +
+//              Uri.encodeComponent(doc['image'])
+//              +'?alt=media';
+
+          final String categoryImageURL  = doc['image']==''?
+          'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+              :
+          storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
               +'?alt=media';
 
           print('categoryImageURL: $categoryImageURL');
@@ -294,6 +307,7 @@ class _FoodGalleryState extends State<FoodGallery> {
           setState(() {
             _currentCategory = categoryName;
             _firstTimeCategoryString =categoryName;
+            _searchString = '';
           });
         }, // ... to here.
       );
@@ -318,6 +332,7 @@ class _FoodGalleryState extends State<FoodGallery> {
           setState(() {
             _currentCategory = categoryName;
             _firstTimeCategoryString =categoryName;
+            _searchString = '';
           });
         }, // ... to here.
       );
@@ -417,7 +432,18 @@ class _FoodGalleryState extends State<FoodGallery> {
       print('CONDITOIN 01');
 //      CONDITION 01.
 
-      return Scaffold(
+      return  GestureDetector(
+          onTap: () {
+
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+
+//            FocusScope.of(context).unfocus();
+          },
+          child:Scaffold(
         //      resizeToAvoidBottomPadding: false ,
         //          appBar: AppBar(
         //              title: Text('Food Gallery')
@@ -426,7 +452,9 @@ class _FoodGalleryState extends State<FoodGallery> {
         //         ),
         body:
         SafeArea(
-          child:SingleChildScrollView(child:
+          child:
+          SingleChildScrollView(
+            child:
           Column(
             //    mainAxisAlignment: MainAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -442,7 +470,8 @@ class _FoodGalleryState extends State<FoodGallery> {
               Container(
 
                 //      color: Colors.yellowAccent,
-                height:100,
+                // height:100 changed on MAY 5 2020
+                height:displayHeight(context)/13,
                 width: displayWidth(context),
 
                 child: Row(
@@ -458,8 +487,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                           Container(
-                            margin:EdgeInsets.symmetric(horizontal: displayWidth(context)
-                                /20,vertical: 0),
+                            margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
@@ -470,13 +498,13 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 ],
                                 color: Colors.black54),
 
-//                            width: displayWidth(context)/3,
-//                            height: displayHeight(context)/27,
+                            width: displayWidth(context)/3,
+                            height: displayHeight(context)/27,
 
 
 //IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
-                            width: displayWidth(context)/5,
-                            height: displayHeight(context)/40,
+//                            width: displayWidth(context)/5,
+//                            height: displayHeight(context)/40,
 
                             padding: EdgeInsets.only(
                                 left: 4, top: 3, bottom: 3, right: 3),
@@ -607,7 +635,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
               Container(
                 height: displayHeight(context) -
-                    MediaQuery.of(context).padding.top -100,
+                    MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
                 child:
@@ -652,6 +680,7 @@ class _FoodGalleryState extends State<FoodGallery> {
           ),
           )
           ,),
+      ),
       );
     }
 
@@ -665,7 +694,16 @@ class _FoodGalleryState extends State<FoodGallery> {
       print('CONDITON 02 || ');
 
 
-      return Scaffold(
+      return  GestureDetector(
+          onTap: () {
+
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child:Scaffold(
         //      resizeToAvoidBottomPadding: false ,
         //          appBar: AppBar(
         //              title: Text('Food Gallery')
@@ -691,7 +729,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                 Container(
 
                   //      color: Colors.yellowAccent,
-                  height:100,
+                  // height:100 changed on MAY 5 2020
+                  height:displayHeight(context)/13,
                   width: displayWidth(context),
 
                   child: Row(
@@ -707,8 +746,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                             Container(
-                              margin:EdgeInsets.symmetric(horizontal: displayWidth(context)
-                                  /20,vertical: 0),
+                              margin:EdgeInsets.symmetric(horizontal:0,vertical: 0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   boxShadow: [
@@ -846,7 +884,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                 Container(
                   height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top -100,
+                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
                   child:
@@ -899,7 +937,10 @@ class _FoodGalleryState extends State<FoodGallery> {
             ),
           ),
         ),
-      );
+      ),
+      )
+
+      ;
 
     }
 
@@ -911,7 +952,16 @@ class _FoodGalleryState extends State<FoodGallery> {
       {
 
 
-        return Scaffold(
+        return  GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+
+            },
+    child:Scaffold(
           //      resizeToAvoidBottomPadding: false ,
           //          appBar: AppBar(
           //              title: Text('Food Gallery')
@@ -937,7 +987,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                 Container(
 
                   //      color: Colors.yellowAccent,
-                  height:100,
+                  // height:100 changed on MAY 5 2020
+                  height:displayHeight(context)/13,
                   width: displayWidth(context),
 
                   child: Row(
@@ -953,8 +1004,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                             Container(
-                              margin:EdgeInsets.symmetric(horizontal: displayWidth(context)
-                                  /20,vertical: 0),
+                              margin:EdgeInsets.symmetric(horizontal:0,vertical: 0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   boxShadow: [
@@ -1094,7 +1144,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                 Container(
                   height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top -100,
+                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
                   child:
@@ -1147,6 +1197,7 @@ class _FoodGalleryState extends State<FoodGallery> {
             ),
             ),
           ),
+        ),
         );
 
       }
@@ -1158,7 +1209,16 @@ class _FoodGalleryState extends State<FoodGallery> {
 //      CONDITION 4
 
 // FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
-      return Scaffold(
+      return  GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+    child:
+    Scaffold(
 
 //      resizeToAvoidBottomPadding: false ,
         // appBar: AppBar(title: Text('Food Gallery')),
@@ -1178,7 +1238,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                 Container(
 
 //                  color: Colors.yellowAccent,
-                  height:100,
+                  // height:100 changed on MAY 5 2020
+                  height:displayHeight(context)/13,
                   width: displayWidth(context),
 
                   child: Row(
@@ -1344,7 +1405,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                 Container(
                   height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top -100,
+                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
 
@@ -1378,7 +1439,6 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 return Center(child: new LinearProgressIndicator());
 
 //          const Text('Loading...');
-
 
 //        final List filteredItems = allFoods.where((oneItem ) => oneItem.categoryName.toLowerCase() ==
 //            categoryString.toLowerCase()).toList();
@@ -1424,6 +1484,7 @@ class _FoodGalleryState extends State<FoodGallery> {
             )
             ,)
 
+      ),
       );
 
     }
@@ -1452,6 +1513,11 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
   final String categoryString;
   final String searchString2;
   FoodListWithCategoryStringAndSearchString({this.allFoods,this.categoryString,this.searchString2});
+
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
 
 
@@ -1486,31 +1552,11 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 
     List<String> stringList = List<String>.from(dlist);
 
-
-//    var strings = text.OfType<String>().ToList();
-
-//    var strings = dlist.map((item) => item.price).toList();
-
-//    print ('stringList --> : $stringList');
-
-
-    // print("text: $text");
     if (stringList.length==0) {
       return " ";
     } else if (stringList == null) {
       return ' ';
     }
-//    else if (text.length <= 1) {
-//      return text.toUpperCase();
-//    }
-
-//    else {
-//      return stringList
-//          .map((word) => word.toString().split(' ')
-//          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
-//          .join(', ');
-//
-//    }
 
     else {
       return stringList
@@ -1519,9 +1565,6 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
           .join(', ');
 
     }
-//    word2[0].toUpperCase() + word2.substring(1)
-
-//    return "bash";
   }
 
 
@@ -1645,6 +1688,7 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 
 //              priceinEuro: euroPrice,
 
+              sizedFoodPrices: foodSizePrice,
 
 //              ingredients: foodItemIngredients,
               ingredients: foodItemIngredientsList,
@@ -1808,6 +1852,11 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //              child: SpoiledDetails(dummy: dummy),
 //            );
 
+//                        Type focusedType = Focus.of(context).context.widget.runtimeType;
+//                        logger.i('focusedType: $focusedType');
+
+//                        FocusScope.of(context).unfocus();
+
                         return Navigator.push(context,
 
                             MaterialPageRoute(builder: (context)
@@ -1879,17 +1928,7 @@ class FoodListWithCategoryString extends StatelessWidget {
     } else if (stringList == null) {
       return ' ';
     }
-//    else if (text.length <= 1) {
-//      return text.toUpperCase();
-//    }
 
-//    else {
-//      return stringList
-//          .map((word) => word.toString().split(' ')
-//          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
-//          .join(', ');
-//
-//    }
 
     else {
       return stringList
@@ -1898,9 +1937,7 @@ class FoodListWithCategoryString extends StatelessWidget {
           .join(', ');
 
     }
-//    word2[0].toUpperCase() + word2.substring(1)
 
-//    return "bash";
   }
 
 //  const ChildScreen({Key key, this.func}) : super(key: key);
@@ -1988,7 +2025,7 @@ class FoodListWithCategoryString extends StatelessWidget {
             final String foodItemName =          filteredItems[index].itemName;
             final String foodImageURL =          filteredItems[index].imageURL;
 
-            logger.i("foodImageURL in CAtegory tap: $foodImageURL");
+//            logger.i("foodImageURL in CAtegory tap: $foodImageURL");
 
 
 
@@ -2024,6 +2061,7 @@ class FoodListWithCategoryString extends StatelessWidget {
               itemName: foodItemName,
               categoryName: foodCategoryName,
               imageURL: foodImageURL,
+              sizedFoodPrices: foodSizePrice,
 
 //              priceinEuro: euroPrice,
               ingredients: foodItemIngredientsList,
@@ -2035,7 +2073,7 @@ class FoodListWithCategoryString extends StatelessWidget {
             );
 
 
-            logger.i('ingredients:',foodItemIngredientsList);
+//            logger.i('ingredients:',foodItemIngredientsList);
 
             String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
 
@@ -2182,6 +2220,12 @@ class FoodListWithCategoryString extends StatelessWidget {
 //              bloc: InventoryBloc(),
 //              child: SpoiledDetails(dummy: dummy),
 //            );
+
+
+//                        Type focusedType = Focus.of(context).context.widget.runtimeType;
+//                        logger.i('focusedType: $focusedType');
+//                        FocusScope.of(context).unfocus();
+
 
                         return Navigator.push(context,
 
@@ -2389,7 +2433,9 @@ class FoodList extends StatelessWidget {
                 final DocumentSnapshot document = snapshot.data.documents[index];
                 final String foodItemName = document['name'];
 
-                final String foodImageURL  =document['image']==''?'':
+                final String foodImageURL  =document['image']==''?
+                'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+                    :
                 storageBucketURLPredicate + Uri.encodeComponent(document['image'])
 
                     +'?alt=media';
@@ -2439,6 +2485,7 @@ class FoodList extends StatelessWidget {
                   itemName: foodItemName,
 //                  categoryName: foodCategoryName,
                   imageURL: foodImageURL,
+                  sizedFoodPrices: foodSizePrice,
 
 //                  priceinEuro: foodSizePrice['normal'].toStringAsFixed(2),
                   ingredients: foodItemIngredientsList,
@@ -2630,6 +2677,12 @@ class FoodList extends StatelessWidget {
 //              bloc: InventoryBloc(),
 //              child: SpoiledDetails(dummy: dummy),
 //            );
+
+
+//                            Type focusedType = Focus.of(context).context.widget.runtimeType;
+//                            logger.i('focusedType: $focusedType');
+//                            FocusScope.of(context).unfocus();
+
 
                             print('for future use');
                             return Navigator.push(context,

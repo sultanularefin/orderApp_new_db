@@ -30,6 +30,12 @@ final Firestore firestore = Firestore();
 
 
 
+
+
+
+
+
+
 class FoodItemDetails extends StatefulWidget {
 //  AdminFirebase({this.firestore});
 
@@ -46,6 +52,12 @@ class FoodItemDetails extends StatefulWidget {
   @override
   _FoodItemDetailsState createState() => new _FoodItemDetailsState(oneFoodItemData);
 
+
+
+//  _FoodItemDetailsState createState() => _FoodItemDetailsState();
+
+
+
 }
 
 
@@ -55,41 +67,131 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
   final _formKey = GlobalKey<FormState>();
 
-  int _radioValue = 0;
-  int _sizeValue = 0;
+
+
+
+
+  double totalCartPrice = 0;
+  String _currentSize = "normal";
+  double euroPrice2= 11;
 
 
   int _itemCount=1;
-  final _itemData = ItemData();
-  String _searchString = '';
-  String _currentCategory = "PIZZA";
-  String _firstTimeCategoryString = "";
+
 //  oneFoodItemData
+
   FoodItemWithDocID oneFoodItemandId;
+
   _FoodItemDetailsState(this.oneFoodItemandId);
 
-  double _total_cart_price =00;
+
+
+
+  @override
+  void initState() {
+
+
+    setDetailForFood();
+    super.initState();
+
+  }
+
+  Future<void> setDetailForFood() async {
+    debugPrint("Entering in retrieveIngredients1");
+//    logger.i('ss',oneFoodItemandId);
+//
+//
+//    logger.i('ss','sss');
+
+    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
+    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
+
+//    logger.i('euroPrice1 :',euroPrice1);
+//    tryCast(normalPrice);
+
+
+//      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
+    setState(() {
+
+      euroPrice2=euroPrice1;
+    }
+    );
+
+
+
+  }
+
+
+
+//    final FoodItemWithDocID oneFoodItemandId;
+//  _FoodItemDetailsState({this.oneFoodItemandId});
+
+
+
+//  final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
 
   var logger = Logger(
     printer: PrettyPrinter(),
   );
 
+  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
+
   @override
   Widget build(BuildContext context) {
 
+//    final Map<String,dynamic> displayPrice = oneFoodItemandId.sizedFoodPrices;
+//    double euroPrice2 = tryCast<double>(displayPrice['normal'], fallback: 0.00);
+//
+//
+//    print('foodSizePrice __________________________${displayPrice['normal']}');
 
-    logger.i('oneFoodItemandId: ',oneFoodItemandId);
+//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
+    final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
+//    logger.i('foodSizePrice: ',foodSizePrice);
+
+//
+//    print('foodSizePrice __________________________${foodSizePrice['normal']}');
+//    final dynamic euroPrice = foodSizePrice['normal'];
+//
+//    double euroPrice1 = tryCast<double>(euroPrice, fallback: 0.00);
+//    euroPrice2=euroPrice1;
+
+//    logger.i('oneFoodItemandId: ',oneFoodItemandId.itemName);
+
+//    logger.i('oneFoodItemData: ',widget.oneFoodItemData);
+
+
+
+
+
     print('at build _____________________________________________________________________');
 
 //    print('widget.oneFoodItemData.itemName:__________________________________________ ${widget.oneFoodItemData.imageURL}');
-//    print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId.imageURL}');
+    print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId.imageURL}');
 
 //    String a = Constants.SUCCESS_MESSAGE;
 
 
-    return Scaffold(
+
+
+
+    return  GestureDetector(
+      onTap: () {
+
+//        FocusScopeNode currentFocus = FocusScope.of(context);
+//
+//        if (!currentFocus.hasPrimaryFocus) {
+//          currentFocus.unfocus();
+//        }
+
+        FocusScope.of(context).unfocus();
+      },
+      child:
+      Scaffold(
         body:
-        SafeArea(
+        SafeArea(child:
+        SingleChildScrollView(
+
           child:
           // MAIN COLUMN FOR THIS PAGE.
           Column(
@@ -109,15 +211,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //                color: Color.fromRGBO(239, 239, 239, 1.0),
                 color: Color(0xffF7F0EC),
 
-                height:100,
+//                height:100,/
+//              FROM 100 TO DYNAMIC HEIGHT: april 04
+//              later on the same day changed to 13 and it is good in a 10 inch emulator
+                height:displayHeight(context)/13,
                 width: displayWidth(context),
 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
 
+                    // 1ST CONTAINER AND NAVIGATION TO PREVIOUS PAGE. BEGINS HERE.
+//                    from 30 to 22 -- april 04 2020, settled to 18.
                     Container(
-                      height: displayHeight(context)/30,
+                      height: displayHeight(context)/18,
                       child:
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -126,15 +233,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                           IconButton(
                             onPressed: () => Navigator.pop(context),
                             icon: const Icon(Icons.chevron_left, size: 32.0),
-                            color: Colors.grey,
+//                            color: Colors.grey,
+                            color:Color(0xff707070),
 
                             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
                           ),
                           FlatButton(
 //                color: Colors.blue,
+
                             textColor: Colors.white,
+
                             disabledColor: Colors.grey,
+
                             disabledTextColor: Colors.black,
+
                             padding: EdgeInsets.all(8.0),
 //                splashColor: Colors.blueAccent,
 
@@ -142,7 +254,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                             child: Text('Go back to menu',style:TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey,
+//                                color: Colors.grey,
+                                color:Color(0xff707070),
                                 fontSize: 22),
                             ),
                           )
@@ -151,9 +264,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                       ),
                     ),
 
+                    // 1ST CONTAINER AND NAVIGATION TO PREVIOUS PAGE. ENDS HERE.
 
+
+
+                    // 2ND CONTAINER AND TOTAL PRICE CART AT THE TOP OF DETAILS PAGE BEGINS HERE.
                     Container(
-
+//                      height: displayHeight(context)/18,
 //                      color: Color.fromARGB(255, 255,255,255),
                       child:Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -161,25 +278,38 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                           // CONTAINER FOR TOTAL PRICE CART BELOW.
                           Container(
-                            margin:EdgeInsets.symmetric(
-                                horizontal: displayWidth(context)
-                                    /20,
-                                vertical: 0),
+                            margin:EdgeInsets.only(
+                                left:0,
+                                top:0,
+                                right:displayWidth(context)/40,
+                                bottom:0
+                            ),
+//                                horizontal:0,
+//                                vertical: 0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color.fromRGBO(250, 200, 200, 1.0),
+//                                      color: Color.fromRGBO(250, 200, 200, 1.0),
+                                      color:Color(0xff54463E),
                                       blurRadius: 10.0,
                                       offset: Offset(0.0, 2.0))
                                 ],
 //                                color: Colors.black54),
-                                color:Color.fromRGBO(112,112,112,1)),
+//                                color:Color.fromRGBO(112,112,112,1)),
+                                color:Color(0xff54463E)
+                            ),
+
                             width: displayWidth(context)/5,
 //                            height: displayHeight(context)/40,
                             height: displayHeight(context)/30,
                             padding: EdgeInsets.only(
-                                left: 20, top: 3, bottom: 3, right: 4.5),
+                              left: displayWidth(context)/80,
+                              top: 3,
+                              bottom: 3,
+//                                right: 4.5
+                              right:displayWidth(context)/40,
+                            ),
                             child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -200,11 +330,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                Spacer(),
-                                Text(_total_cart_price.toStringAsFixed(2) +' kpl',
+//                                Spacer(),
+                                Text(totalCartPrice.toStringAsFixed(2) +' kpl',
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.white)),
-                                Spacer(),
+//                                Spacer(),
 
                               ],
                             ),
@@ -217,6 +347,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                       ),
                     ),
+
+
+                    // 2ND CONTAINER AND TOTAL PRICE CART AT THE TOP OF DETAILS PAGE ENDS HERE.
 
 
                   ],
@@ -364,7 +497,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                                         child: GridView.builder(
 
-                                          itemCount: sizeConstantsList.length,
+//                                          itemCount: sizeConstantsList.length,
+                                          itemCount: foodSizePrice.length,
 
                                           gridDelegate:
                                           new SliverGridDelegateWithFixedCrossAxisCount(
@@ -380,7 +514,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                               crossAxisCount: 3),
 
                                           itemBuilder: (_, int index) {
-                                            return _buildOneSize(sizeConstantsList[index], index);
+
+                                            String key = foodSizePrice.keys.elementAt(index);
+                                            dynamic value = foodSizePrice.values.elementAt(index);
+//                                            return new Row(
+//                                              children: <Widget>[
+//                                                new Text('${key} : '),
+//                                                new Text(_countries[key])
+//                                              ],
+//                                            );
+
+//                                            return _buildOneSize(/*sizeConstantsList[index]*/${key}, index);
+                                            double valuePrice = tryCast<double>(value, fallback: 0.00);
+                                            return _buildOneSize(key,valuePrice, index);
                                           },
 
 //                                new SliverGridDelegateWithMaxCrossAxisExtent(
@@ -553,7 +699,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                     Container(
                                         color: Color(0xffF7F0EC),
                                         height:100,
-                                        child:LoadFourIngredients(firestore: firestore)
+                                        child:LoadFourIngredients(firestore: firestore,
+                                            foodItemIngredientsList:oneFoodItemandId.ingredients)
+
+//                                        foodItemIngredientsList;
+
+//  =  filteredItems[index].ingredients;
+
                                     ),
                                     // Grid VIEW FOR INGREDIENT IMAGES ENDS HERE.
 
@@ -562,7 +714,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                     Container(
 
                                       //      color: Colors.yellowAccent,
-                                      height:40,
+                                      height:displayHeight(context)/30,
                                       width: displayWidth(context)*0.57,
 
                                       child: Row(
@@ -617,10 +769,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                         color:Color.fromRGBO(112,112,112,1),
                                                         //        color: Color(0xffFFFFFF),
                                                       ),
-                                                      Text('More Ingredients',style:TextStyle(
-                                                          fontWeight: FontWeight.bold,
-                                                          color:Color.fromRGBO(112,112,112,1),
-                                                          fontSize: 22),
+                                                      Text(
+                                                        'More Ingredients',
+                                                        style:TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                            color:Color.fromRGBO(112,112,112,1),
+                                                            fontSize: 22),
                                                       ),
                                                     ],
                                                   ),
@@ -755,7 +909,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                                               height:45, // same as the heidth of increment decrement button.
                                               child:
-                                              Text(_total_cart_price.toStringAsFixed(2) +'\u20AC',
+                                              Text(euroPrice2.toStringAsFixed(2) +'\u20AC',
                                                   style: TextStyle(
                                                     fontSize: 26,
 //                                                    color: Colors.white
@@ -844,8 +998,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                               ),
 
                                             ),
-
-
 
 
                                           ],
@@ -1043,12 +1195,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
           )
           ,)
 
+        ),
+      ),
     );
 
 
 
   }
 
+  /*
 
   void _handleRadioValueChange(int value) {
     // print('at _handleRadioValueChange() method ???????????');
@@ -1084,8 +1239,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
     });
   }
 
+  */
 
 
+
+
+  /*
   Widget categoryItem(Color color, String name,int index) {
     return GestureDetector(
 
@@ -1133,20 +1292,30 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
   }
 
+  */
 
-  Widget _buildOneSize(String oneSize, int index) {
 
-    print('oneSize: $oneSize');
-    return GestureDetector(
+  Widget _buildOneSize(String oneSize,double onePriceForSize, int index) {
 
+
+
+//    logger.i('oneSize: $oneSize');
+//    logger.i('onePriceForSize: $onePriceForSize');
+
+    return InkWell(
       onTap: () {
+
+        setState(() {
+          euroPrice2 = onePriceForSize;
+          _currentSize= oneSize;
+        });
 //        print('_handleRadioValueChange called from Widget categoryItem ');
 
-        _handleRadioValueChange(index);
+//        _handleRadioValueChange(index);
       },
       child:Container(
 
-        child: _radioValue == index ?
+        child:  oneSize.toLowerCase() == _currentSize  ?
         (
             Card(
 
@@ -1213,6 +1382,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 
 class FoodDetailImage extends StatelessWidget {
+
 
   final String imageURLBig;
   FoodDetailImage(this.imageURLBig);
@@ -1301,26 +1471,85 @@ class TriangleClipper extends CustomClipper<Path> {
 
 
 class LoadFourIngredients extends StatelessWidget {
+
+
   final Firestore firestore;
 
-  LoadFourIngredients({this.firestore});
+  final List<dynamic> foodItemIngredientsList;
+
+//  =  filteredItems[index].ingredients;
+  LoadFourIngredients({this.firestore,this.foodItemIngredientsList});
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
+
+  String titleCase(var text) {
+    // print("text: $text");
+    if (text is num) {
+      return text.toString();
+    } else if (text == null) {
+      return '';
+    } else if (text.length <= 1) {
+      return text.toUpperCase();
+    } else {
+      return text
+          .split(' ')
+          .map((word) => word[0].toUpperCase() + word.substring(1))
+          .join(' ');
 
 
+    }
+  }
 
 
+  String listTitleCase(List<dynamic> dlist) {
+//    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
+//    print('dlist ---------------------------------------------> $dlist');
+
+    List<String> stringList = List<String>.from(dlist);
+
+    if (stringList.length==0) {
+      return " ";
+    } else if (stringList == null) {
+      return ' ';
+    }
+
+    else {
+      return stringList
+          .map((word) => word.toString().split(' ')
+          .map((word2) => titleCase(word2)).join(' '))
+          .join(', ');
+
+    }
+  }
+//  firestore
+//      .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
+//        .where('category', isEqualTo: 'Pizza')
+//      .snapshots(),
 
   @override
   Widget build(BuildContext context) {
 
+    List<String> stringList = List<String>.from(foodItemIngredientsList);
+
+    logger.i('stringList: $stringList');
+
+//    String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
+
     return StreamBuilder<QuerySnapshot>(
       stream: firestore
-          .collection("ingredientitems")
-          .orderBy("uploadDate", descending: true).limit(4)
+          .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+          .collection('ingredients').where('name', whereIn: ['Kinkku', 'Jauheliha', 'Salami', 'Sipuli'])
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData)
 
-          return Center(child: new LinearProgressIndicator());
+          return Center(child: new LinearProgressIndicator(
+
+//            valueColor: Colors.deepOrangeAccent,
+              backgroundColor:Colors.purpleAccent,
+          ));
 
         else {
           final int ingredientCount = snapshot.data.documents.length;
