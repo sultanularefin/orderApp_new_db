@@ -433,7 +433,16 @@ class _FoodGalleryState extends State<FoodGallery> {
 //      CONDITION 01.
 
       return  GestureDetector(
-          onTap: () {},
+          onTap: () {
+
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+
+//            FocusScope.of(context).unfocus();
+          },
           child:Scaffold(
         //      resizeToAvoidBottomPadding: false ,
         //          appBar: AppBar(
@@ -686,7 +695,14 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
       return  GestureDetector(
-          onTap: () {},
+          onTap: () {
+
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
           child:Scaffold(
         //      resizeToAvoidBottomPadding: false ,
         //          appBar: AppBar(
@@ -936,7 +952,16 @@ class _FoodGalleryState extends State<FoodGallery> {
       {
 
 
-        return Scaffold(
+        return  GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+
+            },
+    child:Scaffold(
           //      resizeToAvoidBottomPadding: false ,
           //          appBar: AppBar(
           //              title: Text('Food Gallery')
@@ -1172,6 +1197,7 @@ class _FoodGalleryState extends State<FoodGallery> {
             ),
             ),
           ),
+        ),
         );
 
       }
@@ -1183,7 +1209,16 @@ class _FoodGalleryState extends State<FoodGallery> {
 //      CONDITION 4
 
 // FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
-      return Scaffold(
+      return  GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+    child:
+    Scaffold(
 
 //      resizeToAvoidBottomPadding: false ,
         // appBar: AppBar(title: Text('Food Gallery')),
@@ -1405,7 +1440,6 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //          const Text('Loading...');
 
-
 //        final List filteredItems = allFoods.where((oneItem ) => oneItem.categoryName.toLowerCase() ==
 //            categoryString.toLowerCase()).toList();
 
@@ -1450,6 +1484,7 @@ class _FoodGalleryState extends State<FoodGallery> {
             )
             ,)
 
+      ),
       );
 
     }
@@ -1517,31 +1552,11 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 
     List<String> stringList = List<String>.from(dlist);
 
-
-//    var strings = text.OfType<String>().ToList();
-
-//    var strings = dlist.map((item) => item.price).toList();
-
-//    print ('stringList --> : $stringList');
-
-
-    // print("text: $text");
     if (stringList.length==0) {
       return " ";
     } else if (stringList == null) {
       return ' ';
     }
-//    else if (text.length <= 1) {
-//      return text.toUpperCase();
-//    }
-
-//    else {
-//      return stringList
-//          .map((word) => word.toString().split(' ')
-//          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
-//          .join(', ');
-//
-//    }
 
     else {
       return stringList
@@ -1550,9 +1565,6 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
           .join(', ');
 
     }
-//    word2[0].toUpperCase() + word2.substring(1)
-
-//    return "bash";
   }
 
 
@@ -1840,9 +1852,10 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //              child: SpoiledDetails(dummy: dummy),
 //            );
 
-                        Type focusedType = Focus.of(context).context.widget.runtimeType;
-                        logger.i('focusedType: $focusedType');
-                        FocusScope.of(context).unfocus();
+//                        Type focusedType = Focus.of(context).context.widget.runtimeType;
+//                        logger.i('focusedType: $focusedType');
+
+//                        FocusScope.of(context).unfocus();
 
                         return Navigator.push(context,
 
@@ -2209,9 +2222,9 @@ class FoodListWithCategoryString extends StatelessWidget {
 //            );
 
 
-                        Type focusedType = Focus.of(context).context.widget.runtimeType;
-                        logger.i('focusedType: $focusedType');
-                        FocusScope.of(context).unfocus();
+//                        Type focusedType = Focus.of(context).context.widget.runtimeType;
+//                        logger.i('focusedType: $focusedType');
+//                        FocusScope.of(context).unfocus();
 
 
                         return Navigator.push(context,
@@ -2666,9 +2679,9 @@ class FoodList extends StatelessWidget {
 //            );
 
 
-                            Type focusedType = Focus.of(context).context.widget.runtimeType;
-                            logger.i('focusedType: $focusedType');
-                            FocusScope.of(context).unfocus();
+//                            Type focusedType = Focus.of(context).context.widget.runtimeType;
+//                            logger.i('focusedType: $focusedType');
+//                            FocusScope.of(context).unfocus();
 
 
                             print('for future use');

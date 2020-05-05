@@ -101,12 +101,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //    logger.i('ss',oneFoodItemandId);
 //
 //
-    logger.i('ss','sss');
+//    logger.i('ss','sss');
 
     dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
     double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
 
-    logger.i('euroPrice1 :',euroPrice1);
+//    logger.i('euroPrice1 :',euroPrice1);
 //    tryCast(normalPrice);
 
 
@@ -147,7 +147,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 //    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
     final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
-    logger.i('foodSizePrice: ',foodSizePrice);
+//    logger.i('foodSizePrice: ',foodSizePrice);
 
 //
 //    print('foodSizePrice __________________________${foodSizePrice['normal']}');
@@ -172,9 +172,26 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //    String a = Constants.SUCCESS_MESSAGE;
 
 
-    return Scaffold(
+
+
+
+    return  GestureDetector(
+      onTap: () {
+
+//        FocusScopeNode currentFocus = FocusScope.of(context);
+//
+//        if (!currentFocus.hasPrimaryFocus) {
+//          currentFocus.unfocus();
+//        }
+
+        FocusScope.of(context).unfocus();
+      },
+      child:
+      Scaffold(
         body:
-        SafeArea(
+        SafeArea(child:
+        SingleChildScrollView(
+
           child:
           // MAIN COLUMN FOR THIS PAGE.
           Column(
@@ -682,7 +699,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                     Container(
                                         color: Color(0xffF7F0EC),
                                         height:100,
-                                        child:LoadFourIngredients(firestore: firestore)
+                                        child:LoadFourIngredients(firestore: firestore,
+                                            foodItemIngredientsList:oneFoodItemandId.ingredients)
+
+//                                        foodItemIngredientsList;
+
+//  =  filteredItems[index].ingredients;
+
                                     ),
                                     // Grid VIEW FOR INGREDIENT IMAGES ENDS HERE.
 
@@ -749,9 +772,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                       Text(
                                                         'More Ingredients',
                                                         style:TextStyle(
-                                                          fontWeight: FontWeight.bold,
-                                                          color:Color.fromRGBO(112,112,112,1),
-                                                          fontSize: 22),
+                                                            fontWeight: FontWeight.bold,
+                                                            color:Color.fromRGBO(112,112,112,1),
+                                                            fontSize: 22),
                                                       ),
                                                     ],
                                                   ),
@@ -1172,6 +1195,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
           )
           ,)
 
+        ),
+      ),
     );
 
 
@@ -1274,8 +1299,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 
 
-    logger.i('oneSize: $oneSize');
-    logger.i('onePriceForSize: $onePriceForSize');
+//    logger.i('oneSize: $oneSize');
+//    logger.i('onePriceForSize: $onePriceForSize');
 
     return InkWell(
       onTap: () {
@@ -1357,6 +1382,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 
 class FoodDetailImage extends StatelessWidget {
+
 
   final String imageURLBig;
   FoodDetailImage(this.imageURLBig);
@@ -1445,23 +1471,85 @@ class TriangleClipper extends CustomClipper<Path> {
 
 
 class LoadFourIngredients extends StatelessWidget {
+
+
   final Firestore firestore;
 
-  LoadFourIngredients({this.firestore});
+  final List<dynamic> foodItemIngredientsList;
 
+//  =  filteredItems[index].ingredients;
+  LoadFourIngredients({this.firestore,this.foodItemIngredientsList});
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
+
+  String titleCase(var text) {
+    // print("text: $text");
+    if (text is num) {
+      return text.toString();
+    } else if (text == null) {
+      return '';
+    } else if (text.length <= 1) {
+      return text.toUpperCase();
+    } else {
+      return text
+          .split(' ')
+          .map((word) => word[0].toUpperCase() + word.substring(1))
+          .join(' ');
+
+
+    }
+  }
+
+
+  String listTitleCase(List<dynamic> dlist) {
+//    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
+//    print('dlist ---------------------------------------------> $dlist');
+
+    List<String> stringList = List<String>.from(dlist);
+
+    if (stringList.length==0) {
+      return " ";
+    } else if (stringList == null) {
+      return ' ';
+    }
+
+    else {
+      return stringList
+          .map((word) => word.toString().split(' ')
+          .map((word2) => titleCase(word2)).join(' '))
+          .join(', ');
+
+    }
+  }
+//  firestore
+//      .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
+//        .where('category', isEqualTo: 'Pizza')
+//      .snapshots(),
 
   @override
   Widget build(BuildContext context) {
 
+    List<String> stringList = List<String>.from(foodItemIngredientsList);
+
+    logger.i('stringList: $stringList');
+
+//    String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
+
     return StreamBuilder<QuerySnapshot>(
       stream: firestore
-          .collection("ingredientitems")
-          .orderBy("uploadDate", descending: true).limit(4)
+          .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+          .collection('ingredients').where('name', whereIn: ['Kinkku', 'Jauheliha', 'Salami', 'Sipuli'])
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData)
 
-          return Center(child: new LinearProgressIndicator());
+          return Center(child: new LinearProgressIndicator(
+
+//            valueColor: Colors.deepOrangeAccent,
+              backgroundColor:Colors.purpleAccent,
+          ));
 
         else {
           final int ingredientCount = snapshot.data.documents.length;
