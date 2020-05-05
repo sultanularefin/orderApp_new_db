@@ -432,7 +432,9 @@ class _FoodGalleryState extends State<FoodGallery> {
       print('CONDITOIN 01');
 //      CONDITION 01.
 
-      return Scaffold(
+      return  GestureDetector(
+          onTap: () {},
+          child:Scaffold(
         //      resizeToAvoidBottomPadding: false ,
         //          appBar: AppBar(
         //              title: Text('Food Gallery')
@@ -441,7 +443,9 @@ class _FoodGalleryState extends State<FoodGallery> {
         //         ),
         body:
         SafeArea(
-          child:SingleChildScrollView(child:
+          child:
+          SingleChildScrollView(
+            child:
           Column(
             //    mainAxisAlignment: MainAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -485,13 +489,13 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 ],
                                 color: Colors.black54),
 
-//                            width: displayWidth(context)/3,
-//                            height: displayHeight(context)/27,
+                            width: displayWidth(context)/3,
+                            height: displayHeight(context)/27,
 
 
 //IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
-                            width: displayWidth(context)/5,
-                            height: displayHeight(context)/40,
+//                            width: displayWidth(context)/5,
+//                            height: displayHeight(context)/40,
 
                             padding: EdgeInsets.only(
                                 left: 4, top: 3, bottom: 3, right: 3),
@@ -622,7 +626,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
               Container(
                 height: displayHeight(context) -
-                    MediaQuery.of(context).padding.top -100,
+                    MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
                 child:
@@ -667,6 +671,7 @@ class _FoodGalleryState extends State<FoodGallery> {
           ),
           )
           ,),
+      ),
       );
     }
 
@@ -680,7 +685,9 @@ class _FoodGalleryState extends State<FoodGallery> {
       print('CONDITON 02 || ');
 
 
-      return Scaffold(
+      return  GestureDetector(
+          onTap: () {},
+          child:Scaffold(
         //      resizeToAvoidBottomPadding: false ,
         //          appBar: AppBar(
         //              title: Text('Food Gallery')
@@ -861,7 +868,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                 Container(
                   height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top -100,
+                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
                   child:
@@ -914,7 +921,10 @@ class _FoodGalleryState extends State<FoodGallery> {
             ),
           ),
         ),
-      );
+      ),
+      )
+
+      ;
 
     }
 
@@ -1109,7 +1119,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                 Container(
                   height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top -100,
+                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
                   child:
@@ -1360,7 +1370,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                 Container(
                   height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top -100,
+                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
 
@@ -1468,6 +1478,11 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
   final String categoryString;
   final String searchString2;
   FoodListWithCategoryStringAndSearchString({this.allFoods,this.categoryString,this.searchString2});
+
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
 
 
@@ -1824,6 +1839,10 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //              bloc: InventoryBloc(),
 //              child: SpoiledDetails(dummy: dummy),
 //            );
+
+                        Type focusedType = Focus.of(context).context.widget.runtimeType;
+                        logger.i('focusedType: $focusedType');
+                        FocusScope.of(context).unfocus();
 
                         return Navigator.push(context,
 
@@ -2188,6 +2207,12 @@ class FoodListWithCategoryString extends StatelessWidget {
 //              bloc: InventoryBloc(),
 //              child: SpoiledDetails(dummy: dummy),
 //            );
+
+
+                        Type focusedType = Focus.of(context).context.widget.runtimeType;
+                        logger.i('focusedType: $focusedType');
+                        FocusScope.of(context).unfocus();
+
 
                         return Navigator.push(context,
 
@@ -2639,6 +2664,12 @@ class FoodList extends StatelessWidget {
 //              bloc: InventoryBloc(),
 //              child: SpoiledDetails(dummy: dummy),
 //            );
+
+
+                            Type focusedType = Focus.of(context).context.widget.runtimeType;
+                            logger.i('focusedType: $focusedType');
+                            FocusScope.of(context).unfocus();
+
 
                             print('for future use');
                             return Navigator.push(context,

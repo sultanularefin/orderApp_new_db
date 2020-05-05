@@ -71,6 +71,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 
 
+  double totalCartPrice = 0;
   String _currentSize = "normal";
   double euroPrice2= 11;
 
@@ -203,6 +204,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
 
+                    // 1ST CONTAINER AND NAVIGATION TO PREVIOUS PAGE. BEGINS HERE.
 //                    from 30 to 22 -- april 04 2020, settled to 18.
                     Container(
                       height: displayHeight(context)/18,
@@ -214,15 +216,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                           IconButton(
                             onPressed: () => Navigator.pop(context),
                             icon: const Icon(Icons.chevron_left, size: 32.0),
-                            color: Colors.grey,
+//                            color: Colors.grey,
+                            color:Color(0xff707070),
 
                             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
                           ),
                           FlatButton(
 //                color: Colors.blue,
+
                             textColor: Colors.white,
+
                             disabledColor: Colors.grey,
+
                             disabledTextColor: Colors.black,
+
                             padding: EdgeInsets.all(8.0),
 //                splashColor: Colors.blueAccent,
 
@@ -230,7 +237,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                             child: Text('Go back to menu',style:TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey,
+//                                color: Colors.grey,
+                                color:Color(0xff707070),
                                 fontSize: 22),
                             ),
                           )
@@ -239,7 +247,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                       ),
                     ),
 
+                    // 1ST CONTAINER AND NAVIGATION TO PREVIOUS PAGE. ENDS HERE.
 
+
+
+                    // 2ND CONTAINER AND TOTAL PRICE CART AT THE TOP OF DETAILS PAGE BEGINS HERE.
                     Container(
 //                      height: displayHeight(context)/18,
 //                      color: Color.fromARGB(255, 255,255,255),
@@ -249,25 +261,38 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                           // CONTAINER FOR TOTAL PRICE CART BELOW.
                           Container(
-                            margin:EdgeInsets.symmetric(
-                                horizontal: displayWidth(context)
-                                    /10,
-                                vertical: 0),
+                            margin:EdgeInsets.only(
+                                left:0,
+                                top:0,
+                                right:displayWidth(context)/40,
+                                bottom:0
+                            ),
+//                                horizontal:0,
+//                                vertical: 0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color.fromRGBO(250, 200, 200, 1.0),
+//                                      color: Color.fromRGBO(250, 200, 200, 1.0),
+                                      color:Color(0xff54463E),
                                       blurRadius: 10.0,
                                       offset: Offset(0.0, 2.0))
                                 ],
 //                                color: Colors.black54),
-                                color:Color.fromRGBO(112,112,112,1)),
+//                                color:Color.fromRGBO(112,112,112,1)),
+                                color:Color(0xff54463E)
+                            ),
+
                             width: displayWidth(context)/5,
 //                            height: displayHeight(context)/40,
                             height: displayHeight(context)/30,
                             padding: EdgeInsets.only(
-                                left: displayWidth(context)/80, top: 3, bottom: 3, right: 4.5),
+                              left: displayWidth(context)/80,
+                              top: 3,
+                              bottom: 3,
+//                                right: 4.5
+                              right:displayWidth(context)/40,
+                            ),
                             child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -289,7 +314,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                   ),
                                 ),
 //                                Spacer(),
-                                Text(euroPrice2.toStringAsFixed(2) +' kpl',
+                                Text(totalCartPrice.toStringAsFixed(2) +' kpl',
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.white)),
 //                                Spacer(),
@@ -305,6 +330,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                       ),
                     ),
+
+
+                    // 2ND CONTAINER AND TOTAL PRICE CART AT THE TOP OF DETAILS PAGE ENDS HERE.
 
 
                   ],
@@ -663,7 +691,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                     Container(
 
                                       //      color: Colors.yellowAccent,
-                                      height:40,
+                                      height:displayHeight(context)/30,
                                       width: displayWidth(context)*0.57,
 
                                       child: Row(
@@ -718,7 +746,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                         color:Color.fromRGBO(112,112,112,1),
                                                         //        color: Color(0xffFFFFFF),
                                                       ),
-                                                      Text('More Ingredients',style:TextStyle(
+                                                      Text(
+                                                        'More Ingredients',
+                                                        style:TextStyle(
                                                           fontWeight: FontWeight.bold,
                                                           color:Color.fromRGBO(112,112,112,1),
                                                           fontSize: 22),
@@ -1418,9 +1448,6 @@ class LoadFourIngredients extends StatelessWidget {
   final Firestore firestore;
 
   LoadFourIngredients({this.firestore});
-
-
-
 
 
   @override
