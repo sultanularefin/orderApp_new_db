@@ -2,6 +2,10 @@
 
 ####  Ctrl + ALT + I
 
+### bash commit how? ":wq"
+
+
+
 # Toggle case Ctrl + shift + U in ubuntu 18.10 (Linux).
 
 

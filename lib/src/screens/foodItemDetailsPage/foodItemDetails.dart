@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/models/newIngredient.dart';
 import 'package:logger/logger.dart';
 
 
@@ -27,9 +28,6 @@ import './../../models/itemData.dart';
 
 
 final Firestore firestore = Firestore();
-
-
-
 
 
 
@@ -83,7 +81,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   FoodItemWithDocID oneFoodItemandId;
 
   _FoodItemDetailsState(this.oneFoodItemandId);
-
+  List<IngredientItem> defaultIngredientListForFood;
 
 
 
@@ -91,10 +89,77 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   void initState() {
 
 
-    setDetailForFood();
+//    setDetailForFood();
+    retrieveIngredientsDefault();
     super.initState();
 
   }
+
+  Future<void> retrieveIngredientsDefault() async {
+    debugPrint("Entering in retrieveIngredients1");
+
+/*
+    await retrieveIngredients2().then((onValue){
+
+//      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
+      setState(() {
+        defaultIngredientListForFood = onValue;
+//        ingredientlistUnSelected = onValue.sublist(4);
+      }
+      );
+
+    }
+
+    );
+    */
+
+
+  }
+
+
+//  firestore
+//      .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+//      .collection('ingredients').where(
+//  'name', whereIn: foodItemIngredientsList
+//  )
+//      .snapshots(),
+
+
+  List<String> convertDList2(List<dynamic> dlist) {
+
+    return dlist.map((name) =>
+
+    "\'"+name.trim().toString()+"\'"
+    ).toList();
+
+  }
+
+  /*
+
+  static Future <List> retrieveIngredients2() async {
+    final List<dynamic> foodItemIngredientsList =
+
+    List<NewIngredient> ingItems = new List<NewIngredient>();
+    var snapshot = await Firestore.instance.collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+        .collection('ingredients').
+    where('name', whereIn: foodItemIngredientsList)
+
+        .getDocuments();
+
+//    firestore
+//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+//        .collection('ingredients').
+
+    List docList = snapshot.documents;
+//    print('doc List :  ******************* <================ : $docList');
+
+    ingItems = snapshot.documents.map((documentSnapshot) =>
+        IngredientItem.fromMap(documentSnapshot.data)).toList();
+
+    return ingItems;
+  }
+*/
+
 
   Future<void> setDetailForFood() async {
     debugPrint("Entering in retrieveIngredients1");
@@ -569,243 +634,249 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                             // INGREDIENT CARD STARTS HERE.
                             Card(
 
+
                               margin:EdgeInsets.fromLTRB(0,15,9,9),
 //                              borderOnForeground: true,
 
                               child:
                               Container(
+
 //                                  color:Color(0xffDAD7C3),
                                   color: Color(0xffF7F0EC),
                                   width: displayWidth(context)*0.57,
-                                  child:Column( children: <Widget>[
+                                  child:Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
 // 1st container outsource below:
 
-                                    Container(
+                                      Container(
 
-                                      //      color: Colors.yellowAccent,
-                                      height:40,
-                                      width: displayWidth(context)*0.57,
+                                        //      color: Colors.yellowAccent,
+                                        height:40,
+                                        width: displayWidth(context)*0.57,
 
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                                        children: <Widget>[
+                                          children: <Widget>[
 
-                                          // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-
-                                          Container(
-                                            child:
+                                            // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
 
                                             Container(
+                                              child:
 
-                                              alignment: Alignment.topLeft,
+                                              Container(
+
+                                                alignment: Alignment.topLeft,
 
 
-                                              decoration: BoxDecoration(
+                                                decoration: BoxDecoration(
 //                                              color: Colors.black54,
-                                                color:Color.fromRGBO(112,112,112,1),
+                                                  color:Color.fromRGBO(112,112,112,1),
 //                                              borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
 ////                                              )
-                                              ),
-
-
-                                              width: displayWidth(context)/4.8,
-//                                          height: displayHeight(context)/40,
-                                              child:Container(
-                                                alignment: Alignment.center,
-                                                child:
-
-                                                Text('INGREDIENTS',
-                                                    style: TextStyle(
-                                                        fontSize: 22,
-                                                        color: Colors.white
-                                                    )
                                                 ),
+
+
+                                                width: displayWidth(context)/4.8,
+//                                          height: displayHeight(context)/40,
+                                                child:Container(
+                                                  alignment: Alignment.center,
+                                                  child:
+
+                                                  Text('INGREDIENTS',
+                                                      style: TextStyle(
+                                                          fontSize: 22,
+                                                          color: Colors.white
+                                                      )
+                                                  ),
+                                                ),
+
                                               ),
+
+
+
 
                                             ),
 
+                                            // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
 
+                                            Container(
+                                                child:GestureDetector(
+                                                  onLongPress: (){
+                                                    print('at on Loong Press: ');
+                                                  },
+                                                  onLongPressUp: (){
 
+                                                  },
+                                                  child:Container(
 
-                                          ),
-
-                                          // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
-
-                                          Container(
-                                              child:GestureDetector(
-                                                onLongPress: (){
-                                                  print('at on Loong Press: ');
-                                                },
-                                                onLongPressUp: (){
-
-                                                },
-                                                child:Container(
-
-                                                  decoration: BoxDecoration(
+                                                    decoration: BoxDecoration(
 //                                              color: Colors.black54,
-                                                    color:Color(0xffC27FFF),
-                                                    borderRadius: BorderRadius.circular(5),
-                                                  ),
+                                                      color:Color(0xffC27FFF),
+                                                      borderRadius: BorderRadius.circular(5),
+                                                    ),
 
 
 //                                            color:Color(0xffC27FFF),
-                                                  child:  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: <Widget>[
-                                                      Icon(
-                                                        Icons.lightbulb_outline,
-                                                        size: 32.0,color: Color(0xffFFFFFF),),
+                                                    child:  Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          Icons.lightbulb_outline,
+                                                          size: 32.0,color: Color(0xffFFFFFF),),
 
 
 
-                                                      Text('Long press to remove ingredient',style:TextStyle(
-                                                          fontWeight: FontWeight.normal,
-                                                          color: Colors.white,
-                                                          fontSize: 15),
-                                                      ),
+                                                        Text('Long press to remove ingredient',style:TextStyle(
+                                                            fontWeight: FontWeight.normal,
+                                                            color: Colors.white,
+                                                            fontSize: 15),
+                                                        ),
 
 
-                                                    ],
+                                                      ],
+                                                    ),
+
                                                   ),
+                                                )
+                                            )
 
-                                                ),
-                                              )
-                                          )
+                                            // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                                            // ENDED HERE.
 
-                                          // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-                                          // ENDED HERE.
-
-                                          // BLACK CONTAINER WILL BE DELETED LATER.
-                                          // BLACK CONTAINER.
+                                            // BLACK CONTAINER WILL BE DELETED LATER.
+                                            // BLACK CONTAINER.
 
 
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
 
 
 //1st container.
 
 
-                                    // GRID VIEW FROM INGREDIENT IMAGES. STARTS FROM BELOW.
+                                      // GRID VIEW FROM INGREDIENT IMAGES. STARTS FROM BELOW.
 
 
 
 
 
 // GRID VIEW FROM INGREDIENT IMAGES. STARTS FROM BELOW.
-                                    Container(
-                                        color: Color(0xffF7F0EC),
-                                        height:100,
-                                        child:LoadFourIngredients(firestore: firestore,
-                                            foodItemIngredientsList:oneFoodItemandId.ingredients)
+                                      Container(
+                                          color: Color(0xffF7F0EC),
+                                          height:displayHeight(context)/9,
+                                          child:LoadFourIngredients(firestore: firestore,
+                                              )
 
 //                                        foodItemIngredientsList;
 
 //  =  filteredItems[index].ingredients;
 
-                                    ),
-                                    // Grid VIEW FOR INGREDIENT IMAGES ENDS HERE.
+                                      ),
+                                      // Grid VIEW FOR INGREDIENT IMAGES ENDS HERE.
 
-                                    // ADD MORE INGREDIENTS STARTS HERE.
+                                      // ADD MORE INGREDIENTS STARTS HERE.
 
-                                    Container(
+                                      SizedBox(height:20),
 
-                                      //      color: Colors.yellowAccent,
-                                      height:displayHeight(context)/30,
-                                      width: displayWidth(context)*0.57,
+                                      Container(
 
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: <Widget>[
+                                        //      color: Colors.yellowAccent,
+                                        height:displayHeight(context)/30,
+                                        width: displayWidth(context)*0.57,
 
-                                          // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: <Widget>[
 
-                                          // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
+                                            // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
 
-                                          Container(
-                                              child:GestureDetector(
+                                            // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
+
+                                            Container(
+                                                child:GestureDetector(
 //                                                onLongPress: (){
 //                                                  print('at on Loong Press: ');
 //                                                },
 //                                                onLongPressUp: (){
 //
 //                                                },
-                                                onTap: () {
+                                                  onTap: () {
 //        print('_handleRadioValueChange called from Widget categoryItem ');
 
 //                                                  _handleRadioValueChange(index);
 
-                                                  return Navigator.push(context,
+                                                    return Navigator.push(context,
 
-                                                      MaterialPageRoute(builder: (context)
-                                                      => MoreIngredients(
-                                                          oneFoodItemData:oneFoodItemandId
-                                                      )
-                                                        //oneFoodItem
+                                                        MaterialPageRoute(builder: (context)
+                                                        => MoreIngredients(
+                                                            oneFoodItemData:oneFoodItemandId
+                                                        )
+                                                          //oneFoodItem
 //                                                          oneFoodItemandId
-                                                      )
-                                                  );
-                                                },
-                                                child:Container(
-                                                  width: displayWidth(context)*0.33,
-                                                  decoration: BoxDecoration(
+                                                        )
+                                                    );
+                                                  },
+                                                  child:Container(
+                                                    width: displayWidth(context)*0.33,
+                                                    decoration: BoxDecoration(
 //                                              color: Colors.black54,
-                                                    color:Color(0xffFFFFFF),
-                                                    borderRadius: BorderRadius.circular(15),
-                                                  ),
+                                                      color:Color(0xffFFFFFF),
+                                                      borderRadius: BorderRadius.circular(15),
+                                                    ),
 
 
 //                                            color:Color(0xffC27FFF),
-                                                  child:  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: <Widget>[
-                                                      Icon(
-                                                        Icons.add,
-                                                        size: 32.0,
-                                                        color:Color.fromRGBO(112,112,112,1),
-                                                        //        color: Color(0xffFFFFFF),
-                                                      ),
-                                                      Text(
-                                                        'More Ingredients',
-                                                        style:TextStyle(
-                                                            fontWeight: FontWeight.bold,
-                                                            color:Color.fromRGBO(112,112,112,1),
-                                                            fontSize: 22),
-                                                      ),
-                                                    ],
+                                                    child:  Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          Icons.add,
+                                                          size: 32.0,
+                                                          color:Color.fromRGBO(112,112,112,1),
+                                                          //        color: Color(0xffFFFFFF),
+                                                        ),
+                                                        Text(
+                                                          'More Ingredients',
+                                                          style:TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              color:Color.fromRGBO(112,112,112,1),
+                                                              fontSize: 22),
+                                                        ),
+                                                      ],
+                                                    ),
+
                                                   ),
-
-                                                ),
-                                              )
-                                          )
+                                                )
+                                            )
 
 
 
-                                          // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-                                          // ENDED HERE.
+                                            // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                                            // ENDED HERE.
 
-                                          // BLACK CONTAINER WILL BE DELETED LATER.
-                                          // BLACK CONTAINER.
+                                            // BLACK CONTAINER WILL BE DELETED LATER.
+                                            // BLACK CONTAINER.
 
 
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    // ADD MORE INGREDIENTS STARTS HERE.
+                                      // ADD MORE INGREDIENTS STARTS HERE.
 
-                                    SizedBox(height:40),
-                                  ],)
+//                                    SizedBox(height:40),
+                                    ],)
 
                               ),
                             ),
 
                             // INGREDIENT CARD ENDS HERE.
 
-                            SizedBox(height:40),
+                            SizedBox(height:100),
 
                             // CHECKOUT CARD STARTS HERE.
 
@@ -1475,54 +1546,53 @@ class LoadFourIngredients extends StatelessWidget {
 
   final Firestore firestore;
 
-  final List<dynamic> foodItemIngredientsList;
+//  final List<dynamic> foodItemIngredientsList;
 
 //  =  filteredItems[index].ingredients;
-  LoadFourIngredients({this.firestore,this.foodItemIngredientsList});
+  LoadFourIngredients({this.firestore});
 
   var logger = Logger(
     printer: PrettyPrinter(),
   );
 
-  String titleCase(var text) {
-    // print("text: $text");
-    if (text is num) {
-      return text.toString();
-    } else if (text == null) {
-      return '';
-    } else if (text.length <= 1) {
-      return text.toUpperCase();
-    } else {
-      return text
-          .split(' ')
-          .map((word) => word[0].toUpperCase() + word.substring(1))
-          .join(' ');
+
+//
+//  String titleCase(var text) {
+//    // print("text: $text");
+//    if (text is num) {
+//      return text.toString();
+//    } else if (text == null) {
+//      return '';
+//    } else if (text.length <= 1) {
+//      return text.toUpperCase();
+//    } else {
+//      return text
+//          .split(' ')
+//          .map((word) => word[0].toUpperCase() + word.substring(1))
+//          .join(' ');
+//    }
+//  }
 
 
-    }
+  String convertDList(List<dynamic> dlist) {
+
+    return dlist.map((name) =>
+
+    "\'"+name.trim().toString()+"\'"
+    ).join(', ');
+
+  }
+
+  List<String> convertDList2(List<dynamic> dlist) {
+
+    return dlist.map((name) =>
+
+    "\'"+name.trim().toString()+"\'"
+    ).toList();
+
   }
 
 
-  String listTitleCase(List<dynamic> dlist) {
-//    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
-//    print('dlist ---------------------------------------------> $dlist');
-
-    List<String> stringList = List<String>.from(dlist);
-
-    if (stringList.length==0) {
-      return " ";
-    } else if (stringList == null) {
-      return ' ';
-    }
-
-    else {
-      return stringList
-          .map((word) => word.toString().split(' ')
-          .map((word2) => titleCase(word2)).join(' '))
-          .join(', ');
-
-    }
-  }
 //  firestore
 //      .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
 //        .where('category', isEqualTo: 'Pizza')
@@ -1531,46 +1601,65 @@ class LoadFourIngredients extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<String> stringList = List<String>.from(foodItemIngredientsList);
+//    List<String> stringList = List<String>.from(foodItemIngredientsList);
+//
+//
+//    List<String> stringList2 = foodItemIngredientsList.map((name) => name as String).toList();
+//
+//
+//    logger.i('foodItemIngredientsList',foodItemIngredientsList);
+//
+//    logger.i('stringList: $stringList');
+//
+//    logger.i('stringList2: $stringList2');
 
-    logger.i('stringList: $stringList');
 
-//    String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
+//    logger.i("foodItemIngredientsList is List<dynamic>:",foodItemIngredientsList is List<dynamic>);
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: firestore
-          .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
-          .collection('ingredients').where('name', whereIn: ['Kinkku', 'Jauheliha', 'Salami', 'Sipuli'])
-          .snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (!snapshot.hasData)
+    //['Kinkku', 'Jauheliha', 'Salami', 'Sipuli']
+    // [Kinkku ,  Tonnikala,  Ananas,  Aurajuusto]
+    // whereIn: ['Kinkku', 'Tonnikala', 'Ananas', 'Aurajuusto']
 
-          return Center(child: new LinearProgressIndicator(
+
+//    part 'src/document_snapshot.dart';
+//    document_snapshot
+//    part 'src/query_snapshot.dart';
+
+      return StreamBuilder<QuerySnapshot>(
+        stream: firestore
+            .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+            .collection('ingredients').where(
+            'name', whereIn: ['Kinkku', 'Tonnikala', 'Ananas', 'Aurajuusto']
+
+        ).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData)
+            return Center(child: new LinearProgressIndicator(
 
 //            valueColor: Colors.deepOrangeAccent,
-              backgroundColor:Colors.purpleAccent,
-          ));
+              backgroundColor: Colors.purpleAccent,
+            ));
 
-        else {
-          final int ingredientCount = snapshot.data.documents.length;
-          print('ingredientCount: $ingredientCount');
-          return(
-              GridView.builder(
-                itemCount:  ingredientCount,
+          else {
+            final int ingredientCount = snapshot.data.documents.length;
+            print('ingredientCount: $ingredientCount');
+            return (
+                GridView.builder(
+                  itemCount: ingredientCount,
 
-                gridDelegate:
-                new SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 5, // H  direction
+                  gridDelegate:
+                  new SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 5,
+                      // H  direction
 //
-                    crossAxisSpacing: 10,
+                      crossAxisSpacing: 10,
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
 //                                  /// H/V
-                    // horizontal / vertical
-                    childAspectRatio: 220/450,
-                    crossAxisCount: 4
-                ),
-
+                      // horizontal / vertical
+                      childAspectRatio: 220 / 450,
+                      crossAxisCount: 4
+                  ),
 
 
 //              new SliverGridDelegateWithMaxCrossAxisExtent(
@@ -1584,20 +1673,33 @@ class LoadFourIngredients extends StatelessWidget {
 //                childAspectRatio: 160/220,
 //
 //              ),
-                shrinkWrap:false,
+                  shrinkWrap: false,
 
-                itemBuilder: (_, int index) {
+                  itemBuilder: (_, int index) {
+                    final DocumentSnapshot document = snapshot.data
+                        .documents[index];
+                    final dynamic ingredientName = document['name'];
+//                  final dynamic ingredientImageURL = document['image'];
+                    final num ingredientPrice = document['price'];
 
-                  final DocumentSnapshot document = snapshot.data.documents[index];
-                  final dynamic ingredientName = document['ingredientName'];
-                  final dynamic ingredientImageURL = document['imageURL'];
+                    final dynamic ingredientImageURL = document['image'] == '' ?
+                    'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+                        :
+                    storageBucketURLPredicate +
+                        Uri.encodeComponent(document['image'])
 
-                  final String ingredientItemId =  document['ingredientId'];
+                        + '?alt=media';
 
-                  final bool ingredientIsAvailable =  document['isAvailable'];
+//                  final String ingredientItemId =  document['ingredientId'];
+//                  final bool ingredientIsAvailable =  document['isAvailable'];
 
+//                  LOADING ERROR FOR THE IMAGE: ingredientName: Salaatti;
+                    // DATABASE || SERVER ERROR.
 
-                  print('ingredientName: $ingredientName');
+//                  logger.i('ingredientName: $ingredientName');
+//                  logger.i('price: $ingredientPrice');
+//                  logger.i('ingredientImageURL: $ingredientImageURL');
+
 
 //                  print(' ingredientImageURL: $ingredientImageURL');
 //
@@ -1608,86 +1710,84 @@ class LoadFourIngredients extends StatelessWidget {
 //                  print('ingredientIsAvailable: $ingredientIsAvailable');
 
 
-                  final IngredientItem ingredientItemTest = new IngredientItem(
+                    final NewIngredient ingredientItemTest = new NewIngredient(
 //                FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
-                    ingredientName: ingredientName,
+                      ingredientName: ingredientName,
 
-                    imageURL: ingredientImageURL,
+                      imageURL: ingredientImageURL,
+                      price: ingredientPrice.toDouble(),
+//                    ingredientId:ingredientItemId,
+//
+//                    isAvailable: ingredientIsAvailable,
+                      documentId: document.documentID,
+
+                    );
 
 
-                    ingredientId:ingredientItemId,
-
-                    isAvailable: ingredientIsAvailable,
-                    documentId: document.documentID,
-
-                  );
-
-
-                  return
-                    Container(
-                        color: Color.fromRGBO(239, 239, 239, 0),
-                        padding: EdgeInsets.symmetric(
+                    return
+                      Container(
+                          color: Color.fromRGBO(239, 239, 239, 0),
+                          padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-                            horizontal: 4.0, vertical: 15.0),
-                        child: InkWell(
-                            child: Column(
-                              children: <Widget>[
+                              horizontal: 4.0, vertical: 15.0),
+                          child: InkWell(
+                              child: Column(
+                                children: <Widget>[
 
-                                new Container(
+                                  new Container(
 
 //                                    width: displayWidth(context) * 0.19,
 //                                    height: displayWidth(context) * 0.19,
 
-                                  child: ClipOval(
+                                    child: ClipOval(
 
-                                    child: CachedNetworkImage(
-                                      imageUrl: ingredientImageURL,
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) => new LinearProgressIndicator(),
+                                      child: CachedNetworkImage(
+                                        imageUrl: ingredientImageURL,
+                                        fit: BoxFit.cover,
+                                        placeholder: (context,
+                                            url) => new LinearProgressIndicator(),
+                                      ),
                                     ),
                                   ),
-                                ),
 
 //                              SizedBox(height: 10),
 
 
-                                Text(
+                                  Text(
 
-                                  ingredientName,
+                                    ingredientName,
 
-                                  style: TextStyle(
-                                    color:Color.fromRGBO(112,112,112,1),
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(112, 112, 112, 1),
 //                                    color: Colors.blueGrey[800],
 
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18,
-                                  ),
-                                )
-                                ,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18,
+                                    ),
+                                  )
+                                  ,
 
 
-                              ],
-                            ),
-                            onTap: () {
-
-
-                              print('for future use');
+                                ],
+                              ),
+                              onTap: () {
+                                print('for future use');
 //                            return Navigator.push(context,
 //
 //                                MaterialPageRoute(builder: (context)
 //                                => FoodItemDetails())
 //                            );
-                            }));
-                },
+                              }));
+                  },
 
-              )
+                )
 
-          );
-        }
+            );
+          }
+        },
+      );
 
-      },
-    );
   }
 
 }

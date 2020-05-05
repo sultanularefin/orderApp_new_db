@@ -104,9 +104,13 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 
   static Future <List> retrieveIngredients2() async {
     List<IngredientItem> ingItems = new List<IngredientItem>();
-    var snapshot = await Firestore.instance.collection("ingredientitems").
-    orderBy("uploadDate", descending: true)
+    var snapshot = await Firestore.instance.collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+        .collection('ingredients')
         .getDocuments();
+
+//    firestore
+//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+//        .collection('ingredients').
 
     List docList = snapshot.documents;
 //    print('doc List :  ******************* <================ : $docList');

@@ -2317,6 +2317,11 @@ class FoodList extends StatelessWidget {
 //    print('dlist ---------------------------------------------> $dlist');
 
     List<String> stringList = List<String>.from(dlist);
+    if (stringList.length==0) {
+      return " ";
+    } else if (stringList == null) {
+      return ' ';
+    }
 
 
 //    var strings = text.OfType<String>().ToList();
