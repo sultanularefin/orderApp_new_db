@@ -19,7 +19,7 @@ class NewIngredient {
 
   final String ingredientName;
   final String imageURL;
-  final num price;
+  final double price;
   final String documentId;
   final int ingredientAmountByUser;
 
@@ -39,7 +39,7 @@ class NewIngredient {
 
 //  NewIngredient.fromMap(Map<String, dynamic> data)
 //  NewIngredient.fromMap(Map<dynamic, dynamic> data)
-  NewIngredient.fromMap(Map<String, dynamic> data)
+  NewIngredient.fromMap(Map<String, dynamic> data,String docID)
 //      : ingredientName = data['ingredientName'],
 //        uploadDate = data['uploadDate'].toDate(),
 //        uploadedBy = data['uploadedBy'],
@@ -49,9 +49,10 @@ class NewIngredient {
 //  data['document'].documentID
       :imageURL= data['image'],
         ingredientName= data['name'],
-        documentId = 'ss',
-        price = 0,
+        price = data['price'].toDouble(),
+        documentId = docID,
         ingredientAmountByUser = 1;
+
 
 
 //        ingredientAmountByUser = 1;

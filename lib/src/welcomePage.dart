@@ -218,8 +218,8 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
 
-    print('width: ${MediaQuery.of(context).size.width}');
-    print('Height: ${MediaQuery.of(context).size.height}');
+//    print('width: ${MediaQuery.of(context).size.width}');
+//    print('Height: ${MediaQuery.of(context).size.height}');
 
     print('at build of welcomePage');
     return Scaffold(

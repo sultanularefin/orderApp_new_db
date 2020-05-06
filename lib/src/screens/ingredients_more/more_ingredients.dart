@@ -134,13 +134,34 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 //        .collection('ingredients').
 
     List docList = snapshot.documents;
-//    print('doc List :  ******************* <================ : $docList');
+    print('doc List :  ******************* <================ : $docList');
 
     // ingItems = snapshot.documents.map((documentSnapshot) => IngredientItem.fromMap
     //(documentSnapshot.data)).toList();
 
     ingItems = snapshot.documents.map((documentSnapshot) => NewIngredient.fromMap
-      (documentSnapshot.data)).toList();
+      (documentSnapshot.data,documentSnapshot.documentID)
+
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+        documentSnapshot.documentID
+    ).toList();
+
+    print('documents are: $documents');
+
+
+
+
+
+
+
+//    LoadFourIngredients(
+//        firestore: firestore,
+//        foodItemIngredientsList:oneFoodItemandId.ingredients
+//    )
 
 //    var logger = Logger(
 //      printer: PrettyPrinter(),
@@ -227,12 +248,18 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 
     else {
 
-      logger.i('defaultIngredientListForFood[0]: ',defaultIngredientListForFood[0].ingredientName);
-      logger.i('defaultIngredientListForFood[1]: ',defaultIngredientListForFood[1].imageURL);
+//      logger.i('defaultIngredientListForFood[0]: ',defaultIngredientListForFood[0].ingredientName);
+//      logger.i('defaultIngredientListForFood[1]: ',defaultIngredientListForFood[1].imageURL);
+//
+//      logger.i('defaultIngredientListForFood[0]: ',defaultIngredientListForFood[0].imageURL);
+//
+//      logger.i('defaultIngredientListForFood[2]: ',defaultIngredientListForFood[2].imageURL);
 
-      logger.i('defaultIngredientListForFood[0]: ',defaultIngredientListForFood[0].imageURL);
-
-      logger.i('defaultIngredientListForFood[2]: ',defaultIngredientListForFood[2].imageURL);
+//    logger.i('docID: ',defaultIngredientListForFood[0].documentId);
+//
+//    logger.i('docID: ',defaultIngredientListForFood[2].documentId);
+//    logger.i('docID: ',defaultIngredientListForFood[3].documentId);
+//    logger.i('docID: ',defaultIngredientListForFood[4].documentId);
 
       return Scaffold(
           body:
@@ -965,7 +992,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
         'fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
         : storageBucketURLPredicate + Uri.encodeComponent(unSelectedOneIngredient.imageURL) + '?alt=media';
 
-    logger.i("imageURLFinalNotSelected: ",imageURLFinalNotSelected);
+//    logger.i("imageURLFinalNotSelected: ",imageURLFinalNotSelected);
 
 
     return Container(
@@ -1012,8 +1039,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 //                    errorWidget:(context,imageURLFinalNotSelected,'Error'),
                 ),
               ),
-            )
-            ,
+            ),
 
 
             // PROBLEM CONTAINER WITH ROW. INCREMENT DECREMENT FUNCTIONALITY. -- BELOW.
@@ -1106,6 +1132,10 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 
 //  Widget _buildOneSizeSelected(IngredientItem selectedOneIngredient, int index) {
   Widget _buildOneSizeSelected(NewIngredient selectedOneIngredient, int index) {
+
+    print('selectedOneIngredient: ${selectedOneIngredient.ingredientName}');
+
+    logger.i('docID: ',selectedOneIngredient.documentId);
 
 
     String imageURLFinal = (selectedOneIngredient.imageURL == '') ?

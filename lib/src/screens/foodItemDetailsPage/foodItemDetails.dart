@@ -71,10 +71,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
   double totalCartPrice = 0;
   String _currentSize = "normal";
-  double euroPrice2= 11;
+
+  double initialPriceByQuantityANDSize;
+  double priceByQuantityANDSize;
 
 
-  int _itemCount=1;
+  int _itemCount= 1;
+
 
 //  oneFoodItemData
 
@@ -89,7 +92,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   void initState() {
 
 
-//    setDetailForFood();
+    setDetailForFood();
     retrieveIngredientsDefault();
     super.initState();
 
@@ -161,6 +164,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 */
 
 
+  // NOT NECESSARY NOW.
   Future<void> setDetailForFood() async {
     debugPrint("Entering in retrieveIngredients1");
 //    logger.i('ss',oneFoodItemandId);
@@ -168,18 +172,25 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //
 //    logger.i('ss','sss');
 
+//    final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
+
+
     dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
     double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
+
+
 
 //    logger.i('euroPrice1 :',euroPrice1);
 //    tryCast(normalPrice);
 
 
 //      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
-    setState(() {
+    setState(()
+        {
 
-      euroPrice2=euroPrice1;
-    }
+      priceByQuantityANDSize = euroPrice1;
+      initialPriceByQuantityANDSize = euroPrice1;
+        }
     );
 
 
@@ -205,13 +216,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   Widget build(BuildContext context) {
 
 //    final Map<String,dynamic> displayPrice = oneFoodItemandId.sizedFoodPrices;
-//    double euroPrice2 = tryCast<double>(displayPrice['normal'], fallback: 0.00);
+//    double priceByQuantityANDSize = tryCast<double>(displayPrice['normal'], fallback: 0.00);
 //
 //
 //    print('foodSizePrice __________________________${displayPrice['normal']}');
 
 //    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
+
     final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
+
 //    logger.i('foodSizePrice: ',foodSizePrice);
 
 //
@@ -219,7 +232,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //    final dynamic euroPrice = foodSizePrice['normal'];
 //
 //    double euroPrice1 = tryCast<double>(euroPrice, fallback: 0.00);
-//    euroPrice2=euroPrice1;
+//    priceByQuantityANDSize=euroPrice1;
 
 //    logger.i('oneFoodItemandId: ',oneFoodItemandId.itemName);
 
@@ -768,10 +781,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                       Container(
                                           color: Color(0xffF7F0EC),
                                           height:displayHeight(context)/9,
-                                          child:LoadFourIngredients(firestore: firestore,
-                                              )
+                                          child:LoadFourIngredients(
+                                              firestore: firestore,
+                                              foodItemIngredientsList:oneFoodItemandId.ingredients
+                                          )
 
-//                                        foodItemIngredientsList;
+//                                          LoadFourIngredients
+//                                        child:LoadFourIngredients(firestore: firestore,)
+
+//
 
 //  =  filteredItems[index].ingredients;
 
@@ -980,7 +998,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                                               height:45, // same as the heidth of increment decrement button.
                                               child:
-                                              Text(euroPrice2.toStringAsFixed(2) +'\u20AC',
+                                              Text(priceByQuantityANDSize.toStringAsFixed(2) +'\u20AC',
                                                   style: TextStyle(
                                                     fontSize: 26,
 //                                                    color: Colors.white
@@ -1030,9 +1048,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                     tooltip: 'Decrease product count by 1',
                                                     onPressed: () {
                                                       print('Decrease button pressed');
-                                                      setState(() {
-                                                        _itemCount -= 1;
-                                                      });
+                                                      if(_itemCount>1) {
+                                                        setState(() {
+                                                          _itemCount = _itemCount - 1;
+                                                          priceByQuantityANDSize =
+                                                              initialPriceByQuantityANDSize *
+                                                                  _itemCount;
+
+
+                                                        });
+                                                      }
                                                     },
 //                              size: 24,
                                                     color: Colors.grey,
@@ -1059,7 +1084,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                     onPressed: () {
                                                       print('Add button pressed');
                                                       setState(() {
-                                                        _itemCount += 1;
+                                                        _itemCount = _itemCount + 1;
+                                                        priceByQuantityANDSize =
+
+                                                            initialPriceByQuantityANDSize *
+                                                                _itemCount;
+
+
                                                       });
                                                     },
                                                     color: Colors.grey,
@@ -1377,7 +1408,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
       onTap: () {
 
         setState(() {
-          euroPrice2 = onePriceForSize;
+          initialPriceByQuantityANDSize = onePriceForSize;
+          priceByQuantityANDSize = onePriceForSize;
           _currentSize= oneSize;
         });
 //        print('_handleRadioValueChange called from Widget categoryItem ');
@@ -1546,10 +1578,10 @@ class LoadFourIngredients extends StatelessWidget {
 
   final Firestore firestore;
 
-//  final List<dynamic> foodItemIngredientsList;
+  final List<dynamic> foodItemIngredientsList;
 
 //  =  filteredItems[index].ingredients;
-  LoadFourIngredients({this.firestore});
+  LoadFourIngredients({this.firestore,this.foodItemIngredientsList});
 
   var logger = Logger(
     printer: PrettyPrinter(),
@@ -1583,14 +1615,78 @@ class LoadFourIngredients extends StatelessWidget {
 
   }
 
+
+
+  String isIngredientExist(String inputString) {
+    List<String> allIngredients = [
+      'ananas',
+      'aurajuusto',
+      'aurinklkuivattu_tomaatti',
+      'cheddar',
+      'emmental_laktoositon',
+      'fetajuusto',
+      'herkkusieni',
+      'jalapeno',
+      'jauheliha',
+      'juusto',
+      'kana',
+      'kanakebab',
+      'kananmuna',
+      'kapris',
+      'katkarapu',
+      'kebab',
+      'kinkku',
+      'mieto_jalapeno',
+      'mozzarella',
+      'oliivi',
+      'paprika',
+      'pekoni',
+      'pepperoni',
+      'persikka',
+      'punasipuli',
+      'rucola',
+      'salaatti',
+      'salami',
+      'savujuusto_hyla',
+      'simpukka',
+      'sipuli',
+      'suolakurkku',
+      'taco_jauheliha',
+      'tomaatti',
+      'tonnikala',
+      'tuore_chili',
+      'tuplajuusto',
+      'vuohejuusto'
+    ];
+
+// String s= allIngredients.where((oneItem) =>oneItem.toLowerCase().contains(inputString.toLowerCase())).toString();
+//
+// print('s , $s');
+
+//firstWhere(bool test(E element), {E orElse()}) {
+    String elementExists = allIngredients.firstWhere(
+            (oneItem) => oneItem.toLowerCase() == inputString.toLowerCase(),
+        orElse: () => '');
+
+    print('elementExists: $elementExists');
+
+    return elementExists;
+
+//allIngredients.every(test(t)) {
+//contains(
+//    searchString2.toLowerCase())).toList();
+  }
+
   List<String> convertDList2(List<dynamic> dlist) {
 
-    return dlist.map((name) =>
-
-    "\'"+name.trim().toString()+"\'"
-    ).toList();
+    List<String> stringList = List<String>.from(dlist);
+    return stringList.where((oneItem) =>oneItem.toString().toLowerCase()
+        ==
+        isIngredientExist(oneItem.toString().trim().toLowerCase())).toList();
 
   }
+
+
 
 
 //  firestore
@@ -1601,18 +1697,18 @@ class LoadFourIngredients extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-//    List<String> stringList = List<String>.from(foodItemIngredientsList);
-//
-//
-//    List<String> stringList2 = foodItemIngredientsList.map((name) => name as String).toList();
-//
-//
-//    logger.i('foodItemIngredientsList',foodItemIngredientsList);
-//
-//    logger.i('stringList: $stringList');
-//
-//    logger.i('stringList2: $stringList2');
+    List<String> stringList = List<String>.from(foodItemIngredientsList);
 
+    print('string List: $stringList');
+
+
+//    List<String> stringList2 = foodItemIngredientsList.map((name) => name as String).toList();
+
+//    logger.i('foodItemIngredientsList',foodItemIngredientsList);
+
+//    logger.i('stringList: $stringList');
+
+//    logger.i('stringList2: $stringList2');
 
 //    logger.i("foodItemIngredientsList is List<dynamic>:",foodItemIngredientsList is List<dynamic>);
 
@@ -1621,15 +1717,42 @@ class LoadFourIngredients extends StatelessWidget {
     // whereIn: ['Kinkku', 'Tonnikala', 'Ananas', 'Aurajuusto']
 
 
+
+    List<String> test = convertDList2(foodItemIngredientsList);
+
+
+//    String a1 = 'Kinkku';
+//    String a2 = 'Tonnikala';
+//    String a3 = 'Ananas';
+//    String a4 ='Aurajuusto';
+
+    logger.i('test: $test');
+
+
+
 //    part 'src/document_snapshot.dart';
 //    document_snapshot
 //    part 'src/query_snapshot.dart';
 
+    if(test.isEmpty){
+      return
+        Container(alignment: Alignment.center,
+          child:Text("No Ingredient"),
+        );
+    }
+    else {
       return StreamBuilder<QuerySnapshot>(
+//        stream: firestore
+//            .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+//            .collection('ingredients').where(
+//            'name', whereIn: [a1,a2,a3,a4]
+//
+//        ).snapshots(),
+
         stream: firestore
             .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
             .collection('ingredients').where(
-            'name', whereIn: ['Kinkku', 'Tonnikala', 'Ananas', 'Aurajuusto']
+            'name', whereIn: test
 
         ).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -1747,6 +1870,14 @@ class LoadFourIngredients extends StatelessWidget {
                                         fit: BoxFit.cover,
                                         placeholder: (context,
                                             url) => new LinearProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            Image.network(
+                                                'https://img.freepik.com/free-vector'
+                                                    '/404-error-design-with-donut_76243-30.jpg?size'
+                                                    '=338&ext=jpg'),
+//                    https://img.freepik.com/free-vector/404-error-design-with-donut_76243-30.jpg?size=338&ext=jpg
+//                    https://img.freepik.com/free-vector/404-error-page-found-with-donut_114341-54.jpg?size=626&ext=jpg
+
                                       ),
                                     ),
                                   ),
@@ -1787,6 +1918,7 @@ class LoadFourIngredients extends StatelessWidget {
           }
         },
       );
+    }
 
   }
 
