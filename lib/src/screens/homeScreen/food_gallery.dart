@@ -258,7 +258,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
   String _searchString = '';
-  String _currentCategory = "PIZZA";
+  String _currentCategory = "pizza";
   String _firstTimeCategoryString = "";
   double _total_cart_price = 1.00;
   // empty MEANS PIZZA
@@ -271,7 +271,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 //    final DocumentSnapshot document = snapshot.data.documents[index];
     final String categoryName = oneCategory;
 //    final String categoryName = document['name'];
-    if (_currentCategory==categoryName){
+    if (_currentCategory.toLowerCase()==categoryName.toLowerCase()){
       return ListTile(
 //        trailing: CustomPaint(size: Size(0,19),
 //          painter: MyPainter(),
@@ -344,7 +344,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //    final DocumentSnapshot document = snapshot.data.documents[index];
     final String categoryName = document['name'];
-    if (_currentCategory==categoryName){
+    if (_currentCategory.toLowerCase()==categoryName.toLowerCase()){
       return ListTile(
 //        trailing: CustomPaint(size: Size(0,19),
 //          painter: MyPainter(),
@@ -433,170 +433,170 @@ class _FoodGalleryState extends State<FoodGallery> {
 //      CONDITION 01.
 
       return  GestureDetector(
-          onTap: () {
+        onTap: () {
 
-            FocusScopeNode currentFocus = FocusScope.of(context);
+          FocusScopeNode currentFocus = FocusScope.of(context);
 
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
 
 //            FocusScope.of(context).unfocus();
-          },
-          child:Scaffold(
-        //      resizeToAvoidBottomPadding: false ,
-        //          appBar: AppBar(
-        //              title: Text('Food Gallery')
+        },
+        child:Scaffold(
+          //      resizeToAvoidBottomPadding: false ,
+          //          appBar: AppBar(
+          //              title: Text('Food Gallery')
 
 
-        //         ),
-        body:
-        SafeArea(
-          child:
-          SingleChildScrollView(
+          //         ),
+          body:
+          SafeArea(
             child:
-          Column(
-            //    mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
+            SingleChildScrollView(
+              child:
+              Column(
+                //    mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
 
 
 
 
-              //    #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
+                  //    #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
 
 
 
-              Container(
+                  Container(
 
-                //      color: Colors.yellowAccent,
-                // height:100 changed on MAY 5 2020
-                height:displayHeight(context)/13,
-                width: displayWidth(context),
+                    //      color: Colors.yellowAccent,
+                    // height:100 changed on MAY 5 2020
+                    height:displayHeight(context)/13,
+                    width: displayWidth(context),
 
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
 
-                    Container(
+                        Container(
 
-                      //     color: Color.fromARGB(255, 255,255,255),
-                      child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
+                          //     color: Color.fromARGB(255, 255,255,255),
+                          child:Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
 
 
-                          Container(
-                            margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color.fromRGBO(250, 200, 200, 1.0),
-                                      blurRadius: 10.0,
-                                      offset: Offset(0.0, 2.0))
-                                ],
-                                color: Colors.black54),
+                              Container(
+                                margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromRGBO(250, 200, 200, 1.0),
+                                          blurRadius: 10.0,
+                                          offset: Offset(0.0, 2.0))
+                                    ],
+                                    color: Colors.black54),
 
-                            width: displayWidth(context)/3,
-                            height: displayHeight(context)/27,
+                                width: displayWidth(context)/3,
+                                height: displayHeight(context)/27,
 
 
 //IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
 //                            width: displayWidth(context)/5,
 //                            height: displayHeight(context)/40,
 
-                            padding: EdgeInsets.only(
-                                left: 4, top: 3, bottom: 3, right: 3),
-                            child: Row(
+                                padding: EdgeInsets.only(
+                                    left: 4, top: 3, bottom: 3, right: 3),
+                                child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
 
-                                  height: 25,
-                                  width: 5,
-                                  margin: EdgeInsets.only(left: 0),
+                                      height: 25,
+                                      width: 5,
+                                      margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                  child: Icon(
-                                    Icons.add_shopping_cart,
-                                    size: 24,
-                                    color: Colors.white,
-                                  ),
+                                      child: Icon(
+                                        Icons.add_shopping_cart,
+                                        size: 24,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+//                                Spacer(),
+                                    Text(_total_cart_price.toStringAsFixed(2) +' kpl',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white)),
+//                                Spacer(),
+
+                                  ],
                                 ),
-//                                Spacer(),
-                                Text(_total_cart_price.toStringAsFixed(2) +' kpl',
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white)),
-//                                Spacer(),
-
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 0,  horizontal: displayWidth(context) /50,
-                            ),
-                            child:Icon(
-                              Icons.search,
-                              size: 24,
-                              color: Colors.red,
-                            ),
-                          ),
-
-
-
-                          Container(
-                            margin:  EdgeInsets.only(
-                              right:displayWidth(context) /32 ,
-                            ),
-                            width:displayWidth(context)/4,
-                            child: TextField(
-                              onChanged: (text) {
-                                setState(() => _searchString = text);
-                                print("First text field conditon 01 might not be needed also onTap().: $text");
-                              },
-                              onTap:(){
-                                setState(() {
-                                  _firstTimeCategoryString ='PIZZA';
-                                });
-
-                              },
-                              onEditingComplete: (){
-                                print('called onEditing complete');
-                                setState(() => _searchString = "");
-                              },
-
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Enter a meal term',
-                                labelText: 'Search about meal.',
-
                               ),
-                              onSubmitted: (String value) async {
-                                await showDialog<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text('Thanks!'),
-                                      content: Text ('You typed "$value".'),
-                                      actions: <Widget>[
-                                        FlatButton(
-                                          onPressed: () { Navigator.pop(context); },
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 0,  horizontal: displayWidth(context) /50,
+                                ),
+                                child:Icon(
+                                  Icons.search,
+                                  size: 24,
+                                  color: Colors.red,
+                                ),
+                              ),
+
+
+
+                              Container(
+                                margin:  EdgeInsets.only(
+                                  right:displayWidth(context) /32 ,
+                                ),
+                                width:displayWidth(context)/4,
+                                child: TextField(
+                                  onChanged: (text) {
+                                    setState(() => _searchString = text);
+                                    print("First text field conditon 01 might not be needed also onTap().: $text");
+                                  },
+                                  onTap:(){
+                                    setState(() {
+                                      _firstTimeCategoryString ='PIZZA';
+                                    });
+
+                                  },
+                                  onEditingComplete: (){
+                                    print('called onEditing complete');
+                                    setState(() => _searchString = "");
+                                  },
+
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Enter a meal term',
+                                    labelText: 'Search about meal.',
+
+                                  ),
+                                  onSubmitted: (String value) async {
+                                    await showDialog<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Thanks!'),
+                                          content: Text ('You typed "$value".'),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              onPressed: () { Navigator.pop(context); },
+                                              child: const Text('OK'),
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     );
                                   },
-                                );
-                              },
-                            ),
+                                ),
 
-                          )
+                              )
 //                          TextField(
 //                            decoration: InputDecoration(
 //                                border: InputBorder.none,
@@ -608,79 +608,79 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                  PROBLEM CODES ABOVE..
 
 
-                        ],
+                            ],
 
-                      ),
+                          ),
+                        ),
+
+
+
+                        // BLACK CONTAINER.
+                        Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
+
+                          color: Color.fromARGB(255, 84, 70, 62),
+
+                        ),
+
+                      ],
                     ),
-
-
-
-                    // BLACK CONTAINER.
-                    Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width / 3.8,
-
-                      color: Color.fromARGB(255, 84, 70, 62),
-
-                    ),
-
-                  ],
-                ),
-              ),
+                  ),
 
 
 
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
-              Container(
-                height: displayHeight(context) -
-                    MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                  Container(
+                    height: displayHeight(context) -
+                        MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
-                child:
-                Row(
-                  children: <Widget>[
+                    child:
+                    Row(
+                      children: <Widget>[
 
-                    Expanded(
-                      child: FoodListWithCategoryString(
-                          allFoods: _allFoodsList, categoryString: _currentCategory
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width / 3.8,
+                        Expanded(
+                          child: FoodListWithCategoryString(
+                              allFoods: _allFoodsList, categoryString: _currentCategory
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
 //                      there is ---- line when selected
-                      //ARGB (alpha= (0=transparent,255 = opaque);
-                      color: Color.fromARGB(255, 84, 70, 62),
+                          //ARGB (alpha= (0=transparent,255 = opaque);
+                          color: Color.fromARGB(255, 84, 70, 62),
 //239 239 239
 //              child:Text('ss'),
-                      child: new ListView.builder
-                        (
+                          child: new ListView.builder
+                            (
 
 //                          itemCount: categoryItems.length,
-                          itemCount: _allCategoryList.length,
-                          //    itemBuilder: (BuildContext ctxt, int index) {
-                          itemBuilder: (_, int index) {
-                            return _buildCategoryRow(
-                                _allCategoryList[index].categoryName, index);
-                          }
-                      ),
+                              itemCount: _allCategoryList.length,
+                              //    itemBuilder: (BuildContext ctxt, int index) {
+                              itemBuilder: (_, int index) {
+                                return _buildCategoryRow(
+                                    _allCategoryList[index].categoryName, index);
+                              }
+                          ),
+                        ),
+
+
+                      ],
                     ),
+                  )
 
 
-                  ],
-                ),
-              )
-
-
-            ],
-          ),
-          )
-          ,),
-      ),
+                ],
+              ),
+            )
+            ,),
+        ),
       );
     }
 
@@ -695,157 +695,157 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
       return  GestureDetector(
-          onTap: () {
+        onTap: () {
 
-            FocusScopeNode currentFocus = FocusScope.of(context);
+          FocusScopeNode currentFocus = FocusScope.of(context);
 
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
-          },
-          child:Scaffold(
-        //      resizeToAvoidBottomPadding: false ,
-        //          appBar: AppBar(
-        //              title: Text('Food Gallery')
-
-
-        //         ),
-        body:
-        SafeArea(
-          child:SingleChildScrollView(
-            child:
-            Column(
-              //    mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+        child:Scaffold(
+          //      resizeToAvoidBottomPadding: false ,
+          //          appBar: AppBar(
+          //              title: Text('Food Gallery')
 
 
-
-
-                //    #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
+          //         ),
+          body:
+          SafeArea(
+            child:SingleChildScrollView(
+              child:
+              Column(
+                //    mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
 
 
 
-                Container(
 
-                  //      color: Colors.yellowAccent,
-                  // height:100 changed on MAY 5 2020
-                  height:displayHeight(context)/13,
-                  width: displayWidth(context),
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-
-                      Container(
-
-                        //     color: Color.fromARGB(255, 255,255,255),
-                        child:Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-
-
-                            Container(
-                              margin:EdgeInsets.symmetric(horizontal:0,vertical: 0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color.fromRGBO(250, 200, 200, 1.0),
-                                        blurRadius: 10.0,
-                                        offset: Offset(0.0, 2.0))
-                                  ],
-                                  color: Colors.black54),
+                  //    #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
 
 
 
-                              width: displayWidth(context)/3,
-                              height: displayHeight(context)/27,
+                  Container(
+
+                    //      color: Colors.yellowAccent,
+                    // height:100 changed on MAY 5 2020
+                    height:displayHeight(context)/13,
+                    width: displayWidth(context),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+
+                        Container(
+
+                          //     color: Color.fromARGB(255, 255,255,255),
+                          child:Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+
+
+                              Container(
+                                margin:EdgeInsets.symmetric(horizontal:0,vertical: 0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromRGBO(250, 200, 200, 1.0),
+                                          blurRadius: 10.0,
+                                          offset: Offset(0.0, 2.0))
+                                    ],
+                                    color: Colors.black54),
+
+
+
+                                width: displayWidth(context)/3,
+                                height: displayHeight(context)/27,
 //IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
 //                            width: displayWidth(context)/5,
 //                            height: displayHeight(context)/40,
 
 
-                              padding: EdgeInsets.only(
-                                  left: 4, top: 3, bottom: 3, right: 3),
-                              child: Row(
+                                padding: EdgeInsets.only(
+                                    left: 4, top: 3, bottom: 3, right: 3),
+                                child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
 
-                                    height: 25,
-                                    width: 5,
-                                    margin: EdgeInsets.only(left: 0),
+                                      height: 25,
+                                      width: 5,
+                                      margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                    child: Icon(
-                                      Icons.add_shopping_cart,
-                                      size: 24,
-                                      color: Colors.white,
+                                      child: Icon(
+                                        Icons.add_shopping_cart,
+                                        size: 24,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
 //                                  Spacer(),
-                                  Text(_total_cart_price.toStringAsFixed(2) +' kpl',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white)),
+                                    Text(_total_cart_price.toStringAsFixed(2) +' kpl',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white)),
 //                                  Spacer(),
 
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 0,  horizontal: displayWidth(context) /50,
-                              ),
-                              child:Icon(
-                                Icons.search,
-                                size: 24,
-                                color: Colors.red,
-                              ),
-                            ),
-
-
-
-                            Container(
-                              margin:  EdgeInsets.only(
-                                right:displayWidth(context) /32 ,
-                              ),
-                              width:displayWidth(context)/4,
-                              child: TextField(
-                                onChanged: (text) {
-                                  setState(() => _searchString = text);
-                                  print("First text field: $text");
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Enter a meal term',
-                                  labelText: 'Search about meal.',
-
+                                  ],
                                 ),
-                                onSubmitted: (String value) async {
-                                  await showDialog<void>(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('Thanks!'),
-                                        content: Text ('You typed "$value".'),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                            onPressed: () { Navigator.pop(context); },
-                                            child: const Text('OK'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 0,  horizontal: displayWidth(context) /50,
+                                ),
+                                child:Icon(
+                                  Icons.search,
+                                  size: 24,
+                                  color: Colors.red,
+                                ),
                               ),
 
-                            )
+
+
+                              Container(
+                                margin:  EdgeInsets.only(
+                                  right:displayWidth(context) /32 ,
+                                ),
+                                width:displayWidth(context)/4,
+                                child: TextField(
+                                  onChanged: (text) {
+                                    setState(() => _searchString = text);
+                                    print("First text field: $text");
+                                  },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Enter a meal term',
+                                    labelText: 'Search about meal.',
+
+                                  ),
+                                  onSubmitted: (String value) async {
+                                    await showDialog<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Thanks!'),
+                                          content: Text ('You typed "$value".'),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              onPressed: () { Navigator.pop(context); },
+                                              child: const Text('OK'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+
+                              )
 //                          TextField(
 //                            decoration: InputDecoration(
 //                                border: InputBorder.none,
@@ -857,39 +857,39 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                  PROBLEM CODES ABOVE..
 
 
-                          ],
+                            ],
+
+                          ),
+                        ),
+
+
+
+                        // BLACK CONTAINER.
+                        Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
+
+                          color: Color.fromARGB(255, 84, 70, 62),
 
                         ),
-                      ),
 
-
-
-                      // BLACK CONTAINER.
-                      Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 3.8,
-
-                        color: Color.fromARGB(255, 84, 70, 62),
-
-                      ),
-
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
 
 
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
-                Container(
-                  height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                  Container(
+                    height: displayHeight(context) -
+                        MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
-                  child:
-                  Row(
-                    children: <Widget>[
+                    child:
+                    Row(
+                      children: <Widget>[
 
 
 //              Text('Craft beautiful UIs'),  TODO ANOTHER WIDGET.
@@ -899,45 +899,45 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                  child: const FlutterLogo(),
 //                ),
 //              ),
-                      Expanded(
-                        child: FoodListWithCategoryStringAndSearchString(
-                            allFoods: _allFoodsList, categoryString: _currentCategory,searchString2:_searchString),
+                        Expanded(
+                          child: FoodListWithCategoryStringAndSearchString(
+                              allFoods: _allFoodsList, categoryString: _currentCategory,searchString2:_searchString),
 
-                      ),
-                      Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 3.8,
+                        ),
+                        Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
 //                      there is ---- line when selected
-                        //ARGB (alpha= (0=transparent,255 = opaque);
-                        color: Color.fromARGB(255, 84, 70, 62),
+                          //ARGB (alpha= (0=transparent,255 = opaque);
+                          color: Color.fromARGB(255, 84, 70, 62),
 //239 239 239
 //              child:Text('ss'),
-                        child: new ListView.builder
-                          (
+                          child: new ListView.builder
+                            (
 
 //                          itemCount: categoryItems.length,
-                            itemCount: _allCategoryList.length,
-                            //    itemBuilder: (BuildContext ctxt, int index) {
-                            itemBuilder: (_, int index) {
-                              return _buildCategoryRow(
-                                  _allCategoryList[index].categoryName, index);
-                            }
+                              itemCount: _allCategoryList.length,
+                              //    itemBuilder: (BuildContext ctxt, int index) {
+                              itemBuilder: (_, int index) {
+                                return _buildCategoryRow(
+                                    _allCategoryList[index].categoryName, index);
+                              }
+                          ),
                         ),
-                      ),
 
 
-                    ],
-                  ),
-                )
+                      ],
+                    ),
+                  )
 
 
-              ],
+                ],
+              ),
             ),
           ),
         ),
-      ),
       )
 
       ;
@@ -953,159 +953,159 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
         return  GestureDetector(
-            onTap: () {
-              FocusScopeNode currentFocus = FocusScope.of(context);
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
 
-              if (!currentFocus.hasPrimaryFocus) {
-                currentFocus.unfocus();
-              }
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
 
-            },
-    child:Scaffold(
-          //      resizeToAvoidBottomPadding: false ,
-          //          appBar: AppBar(
-          //              title: Text('Food Gallery')
-
-
-          //         ),
-          body:
-          SafeArea(
-            child:SingleChildScrollView(child:
-
-            Column(
-              //    mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
+          },
+          child:Scaffold(
+            //      resizeToAvoidBottomPadding: false ,
+            //          appBar: AppBar(
+            //              title: Text('Food Gallery')
 
 
+            //         ),
+            body:
+            SafeArea(
+              child:SingleChildScrollView(child:
 
-
-                //    #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
+              Column(
+                //    mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
 
 
 
-                Container(
 
-                  //      color: Colors.yellowAccent,
-                  // height:100 changed on MAY 5 2020
-                  height:displayHeight(context)/13,
-                  width: displayWidth(context),
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-
-                      Container(
-
-                        //     color: Color.fromARGB(255, 255,255,255),
-                        child:Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-
-
-                            Container(
-                              margin:EdgeInsets.symmetric(horizontal:0,vertical: 0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color.fromRGBO(250, 200, 200, 1.0),
-                                        blurRadius: 10.0,
-                                        offset: Offset(0.0, 2.0))
-                                  ],
-                                  color: Colors.black54),
+                  //    #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
 
 
 
-                              width: displayWidth(context)/3,
-                              height: displayHeight(context)/27,
-                              //IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
+                  Container(
+
+                    //      color: Colors.yellowAccent,
+                    // height:100 changed on MAY 5 2020
+                    height:displayHeight(context)/13,
+                    width: displayWidth(context),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+
+                        Container(
+
+                          //     color: Color.fromARGB(255, 255,255,255),
+                          child:Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+
+
+                              Container(
+                                margin:EdgeInsets.symmetric(horizontal:0,vertical: 0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromRGBO(250, 200, 200, 1.0),
+                                          blurRadius: 10.0,
+                                          offset: Offset(0.0, 2.0))
+                                    ],
+                                    color: Colors.black54),
+
+
+
+                                width: displayWidth(context)/3,
+                                height: displayHeight(context)/27,
+                                //IN MY MOBILE DEVICE THIS LOOKED GOOD. ABOVE ONE
 //                            width: displayWidth(context)/5,
 //                            height: displayHeight(context)/40,
 
 
 
-                              padding: EdgeInsets.only(
-                                  left: 4, top: 3, bottom: 3, right: 3),
-                              child: Row(
+                                padding: EdgeInsets.only(
+                                    left: 4, top: 3, bottom: 3, right: 3),
+                                child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
 
-                                    height: 25,
-                                    width: 5,
-                                    margin: EdgeInsets.only(left: 0),
+                                      height: 25,
+                                      width: 5,
+                                      margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                    child: Icon(
-                                      Icons.add_shopping_cart,
-                                      size: 24,
-                                      color: Colors.white,
+                                      child: Icon(
+                                        Icons.add_shopping_cart,
+                                        size: 24,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
 //                                  Spacer(),
-                                  Text(_total_cart_price.toStringAsFixed(2) +' kpl',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white)),
+                                    Text(_total_cart_price.toStringAsFixed(2) +' kpl',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white)),
 //                                  Spacer(),
 
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 0,  horizontal: displayWidth(context) /50,
-                              ),
-                              child:Icon(
-                                Icons.search,
-                                size: 24,
-                                color: Colors.red,
-                              ),
-                            ),
-
-
-
-                            Container(
-                              margin:  EdgeInsets.only(
-                                right:displayWidth(context) /32 ,
-                              ),
-                              width:displayWidth(context)/4,
-                              child: TextField(
-                                onChanged: (text) {
-                                  setState(() => _searchString = text);
-                                  print("First text field: $text");
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Enter a meal term',
-                                  labelText: 'Search about meal.',
-
+                                  ],
                                 ),
-                                onSubmitted: (String value) async {
-                                  await showDialog<void>(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('Thanks!'),
-                                        content: Text ('You typed "$value".'),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                            onPressed: () { Navigator.pop(context); },
-                                            child: const Text('OK'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 0,  horizontal: displayWidth(context) /50,
+                                ),
+                                child:Icon(
+                                  Icons.search,
+                                  size: 24,
+                                  color: Colors.red,
+                                ),
                               ),
 
-                            )
+
+
+                              Container(
+                                margin:  EdgeInsets.only(
+                                  right:displayWidth(context) /32 ,
+                                ),
+                                width:displayWidth(context)/4,
+                                child: TextField(
+                                  onChanged: (text) {
+                                    setState(() => _searchString = text);
+                                    print("First text field: $text");
+                                  },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Enter a meal term',
+                                    labelText: 'Search about meal.',
+
+                                  ),
+                                  onSubmitted: (String value) async {
+                                    await showDialog<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Thanks!'),
+                                          content: Text ('You typed "$value".'),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              onPressed: () { Navigator.pop(context); },
+                                              child: const Text('OK'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+
+                              )
 //                          TextField(
 //                            decoration: InputDecoration(
 //                                border: InputBorder.none,
@@ -1117,39 +1117,39 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                  PROBLEM CODES ABOVE..
 
 
-                          ],
+                            ],
+
+                          ),
+                        ),
+
+
+
+                        // BLACK CONTAINER.
+                        Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
+
+                          color: Color.fromARGB(255, 84, 70, 62),
 
                         ),
-                      ),
 
-
-
-                      // BLACK CONTAINER.
-                      Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 3.8,
-
-                        color: Color.fromARGB(255, 84, 70, 62),
-
-                      ),
-
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
 
 
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
-                Container(
-                  height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                  Container(
+                    height: displayHeight(context) -
+                        MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
-                  child:
-                  Row(
-                    children: <Widget>[
+                    child:
+                    Row(
+                      children: <Widget>[
 
 
 //              Text('Craft beautiful UIs'),  TODO ANOTHER WIDGET.
@@ -1159,45 +1159,45 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                  child: const FlutterLogo(),
 //                ),
 //              ),
-                      Expanded(
-                        child: FoodListWithCategoryStringAndSearchString(
-                            allFoods: _allFoodsList,categoryString: _currentCategory, searchString2:_searchString),
-                      ),
-                      Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 3.8,
+                        Expanded(
+                          child: FoodListWithCategoryStringAndSearchString(
+                              allFoods: _allFoodsList,categoryString: _currentCategory, searchString2:_searchString),
+                        ),
+                        Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
 //                      there is ---- line when selected
-                        //ARGB (alpha= (0=transparent,255 = opaque);
-                        color: Color.fromARGB(255, 84, 70, 62),
+                          //ARGB (alpha= (0=transparent,255 = opaque);
+                          color: Color.fromARGB(255, 84, 70, 62),
 //239 239 239
 //              child:Text('ss'),
-                        child: new ListView.builder
-                          (
+                          child: new ListView.builder
+                            (
 
 //                          itemCount: categoryItems.length,
-                            itemCount: _allCategoryList.length,
-                            //    itemBuilder: (BuildContext ctxt, int index) {
-                            itemBuilder: (_, int index) {
-                              return _buildCategoryRow(
-                                  _allCategoryList[index].categoryName, index);
+                              itemCount: _allCategoryList.length,
+                              //    itemBuilder: (BuildContext ctxt, int index) {
+                              itemBuilder: (_, int index) {
+                                return _buildCategoryRow(
+                                    _allCategoryList[index].categoryName, index);
 
-                            }
+                              }
+                          ),
                         ),
-                      ),
 
 
-                    ],
-                  ),
-                )
+                      ],
+                    ),
+                  )
 
 
-              ],
-            ),
+                ],
+              ),
+              ),
             ),
           ),
-        ),
         );
 
       }
@@ -1210,163 +1210,163 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 // FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
       return  GestureDetector(
-          onTap: () {
-            FocusScopeNode currentFocus = FocusScope.of(context);
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
 
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
-          },
-    child:
-    Scaffold(
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+        child:
+        Scaffold(
 
 //      resizeToAvoidBottomPadding: false ,
-        // appBar: AppBar(title: Text('Food Gallery')),
-          body:
-          SafeArea(
-            child:SingleChildScrollView(child:
+          // appBar: AppBar(title: Text('Food Gallery')),
+            body:
+            SafeArea(
+              child:SingleChildScrollView(child:
 
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
 
 
 //                #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
 
 
 
-                Container(
+                  Container(
 
 //                  color: Colors.yellowAccent,
-                  // height:100 changed on MAY 5 2020
-                  height:displayHeight(context)/13,
-                  width: displayWidth(context),
+                    // height:100 changed on MAY 5 2020
+                    height:displayHeight(context)/13,
+                    width: displayWidth(context),
 
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
 
-                      Container(
+                        Container(
 
 //                      color: Color.fromARGB(255, 255,255,255),
-                        child:Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
+                          child:Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
 
-                            // CONTAINER FOR TOTAL PRICE CART BELOW.
-                            Container(
-                              margin:EdgeInsets.symmetric(
-                                  horizontal: 0,
-                                  vertical: 0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color.fromRGBO(250, 200, 200, 1.0),
-                                        blurRadius: 10.0,
-                                        offset: Offset(0.0, 2.0))
-                                  ],
-                                  color: Colors.black54),
-                              width: displayWidth(context)/3,
-                              height: displayHeight(context)/27,
-                              padding: EdgeInsets.only(
-                                  left: 4, top: 3, bottom: 3, right: 3),
-                              child: Row(
+                              // CONTAINER FOR TOTAL PRICE CART BELOW.
+                              Container(
+                                margin:EdgeInsets.symmetric(
+                                    horizontal: 0,
+                                    vertical: 0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromRGBO(250, 200, 200, 1.0),
+                                          blurRadius: 10.0,
+                                          offset: Offset(0.0, 2.0))
+                                    ],
+                                    color: Colors.black54),
+                                width: displayWidth(context)/3,
+                                height: displayHeight(context)/27,
+                                padding: EdgeInsets.only(
+                                    left: 4, top: 3, bottom: 3, right: 3),
+                                child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
 
-                                    height: 25,
-                                    width: 5,
-                                    margin: EdgeInsets.only(left: 0),
+                                      height: 25,
+                                      width: 5,
+                                      margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                    child: Icon(
-                                      Icons.add_shopping_cart,
-                                      size: 24,
-                                      color: Colors.white,
+                                      child: Icon(
+                                        Icons.add_shopping_cart,
+                                        size: 24,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
 //                                  Spacer(),
-                                  Text(_total_cart_price.toStringAsFixed(2) +' kpl',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white)),
+                                    Text(_total_cart_price.toStringAsFixed(2) +' kpl',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white)),
 //                                  Spacer(),
 
-                                ],
-                              ),
-                            ),
-
-                            // CONTAINER FOR TOTAL PRICE CART ABOVE.
-
-
-                            // PROBLEM CODES BELOW.....
-
-                            // SEARCH CODES ARE BELOW:
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 0,  horizontal: displayWidth(context) /50,
-                              ),
-                              child:Icon(
-                                Icons.search,
-                                size: 24,
-                                color: Colors.red,
-                              ),
-                            ),
-                            Container(
-                              margin:  EdgeInsets.only(
-                                right:displayWidth(context) /32 ,
-                              ),
-                              width:displayWidth(context)/4,
-                              // do it in both Container
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Enter a meal term',
-                                    labelText: 'Search about meal.'
+                                  ],
                                 ),
-                                onChanged: (text) {
-                                  setState(() => _searchString = text);
-                                  print("First text field from Condition 04: $text");
-                                },
-                                onTap:(){
-                                  print('condition 4');
-                                  setState(() {
-                                    _firstTimeCategoryString ='PIZZA';
-                                  });
-
-                                },
-
-                                onEditingComplete: (){
-                                  print('called onEditing complete');
-                                  setState(() => _searchString = "");
-                                },
-
-                                onSubmitted: (String value) async {
-                                  await showDialog<void>(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('Thanks!'),
-                                        content: Text ('You typed "$value".'),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                            onPressed: () { Navigator.pop(context); },
-                                            child: const Text('OK'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
                               ),
 
-                            )
+                              // CONTAINER FOR TOTAL PRICE CART ABOVE.
+
+
+                              // PROBLEM CODES BELOW.....
+
+                              // SEARCH CODES ARE BELOW:
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 0,  horizontal: displayWidth(context) /50,
+                                ),
+                                child:Icon(
+                                  Icons.search,
+                                  size: 24,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              Container(
+                                margin:  EdgeInsets.only(
+                                  right:displayWidth(context) /32 ,
+                                ),
+                                width:displayWidth(context)/4,
+                                // do it in both Container
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Enter a meal term',
+                                      labelText: 'Search about meal.'
+                                  ),
+                                  onChanged: (text) {
+                                    setState(() => _searchString = text);
+                                    print("First text field from Condition 04: $text");
+                                  },
+                                  onTap:(){
+                                    print('condition 4');
+                                    setState(() {
+                                      _firstTimeCategoryString ='PIZZA';
+                                    });
+
+                                  },
+
+                                  onEditingComplete: (){
+                                    print('called onEditing complete');
+                                    setState(() => _searchString = "");
+                                  },
+
+                                  onSubmitted: (String value) async {
+                                    await showDialog<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Thanks!'),
+                                          content: Text ('You typed "$value".'),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              onPressed: () { Navigator.pop(context); },
+                                              child: const Text('OK'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+
+                              )
 //                          TextField(
 //                            decoration: InputDecoration(
 //                                border: InputBorder.none,
@@ -1378,34 +1378,34 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                  PROBLEM CODES ABOVE..
 
 
-                          ],
+                            ],
+
+                          ),
+                        ),
+
+
+
+                        // BLACK CONTAINER.
+                        Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
+
+                          color: Color.fromARGB(255, 84, 70, 62),
 
                         ),
-                      ),
 
-
-
-                      // BLACK CONTAINER.
-                      Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 3.8,
-
-                        color: Color.fromARGB(255, 84, 70, 62),
-
-                      ),
-
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
 
 
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
-                Container(
-                  height: displayHeight(context) -
-                      MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                  Container(
+                    height: displayHeight(context) -
+                        MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
 
@@ -1413,30 +1413,30 @@ class _FoodGalleryState extends State<FoodGallery> {
 //                      MediaQuery.of(context).padding.top -
 //                      kToolbarHeight,
 
-                  child:
+                    child:
 
-                  Row(
-                    children: <Widget>[
+                    Row(
+                      children: <Widget>[
 
-                      Expanded(
-                        child: FoodList(firestore: firestore),
-                      ),
-                      Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 3.8,
+                        Expanded(
+                          child: FoodList(firestore: firestore),
+                        ),
+                        Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
 //              color: Colors.yellowAccent,
-                        color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color.fromARGB(255, 84, 70, 62),
 //              child:Text('ss'),
-                        child:StreamBuilder<QuerySnapshot>(
-                            stream: firestore
-                                .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
+                          child:StreamBuilder<QuerySnapshot>(
+                              stream: firestore
+                                  .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
 //        .where('category', isEqualTo: 'Pizza')
-                                .snapshots(),
-                            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (!snapshot.hasData)
-                                return Center(child: new LinearProgressIndicator());
+                                  .snapshots(),
+                              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (!snapshot.hasData)
+                                  return Center(child: new LinearProgressIndicator());
 
 //          const Text('Loading...');
 
@@ -1445,46 +1445,46 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //        int messageCount = filteredItems.length;
 
-                              else{
-                                final int categoryCount = snapshot.data.documents.length;
+                                else{
+                                  final int categoryCount = snapshot.data.documents.length;
 //                              print('categoryCount in condition 04: ');
 
 
 //                                logger.i("categoryCount in condition 04: $categoryCount");
 
-                                return(
-                                    new ListView.builder
-                                      (
-                                        itemCount: categoryCount,
+                                  return(
+                                      new ListView.builder
+                                        (
+                                          itemCount: categoryCount,
 
 
-                                        //    itemBuilder: (BuildContext ctxt, int index) {
-                                        itemBuilder: (_, int index) {
-                                          return _buildCategoryRowWithSnapshot(snapshot.data.documents[index]
-                                              /*categoryItems[index]*/, index);
-                                        }
-                                    )
-                                )
-                                ;
+                                          //    itemBuilder: (BuildContext ctxt, int index) {
+                                          itemBuilder: (_, int index) {
+                                            return _buildCategoryRowWithSnapshot(snapshot.data.documents[index]
+                                                /*categoryItems[index]*/, index);
+                                          }
+                                      )
+                                  )
+                                  ;
+                                }
                               }
-                            }
-                        ),
-                      )
+                          ),
+                        )
 
 
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
 
 
-              ],
-            ),
-            )
-            ,)
+                ],
+              ),
+              )
+              ,)
 
-      ),
+        ),
       );
 
     }
@@ -2436,6 +2436,8 @@ class FoodList extends StatelessWidget {
 //            final dynamic message = document['itemName'];
 //            final dynamic imageURL = document['imageURL'];
                 final DocumentSnapshot document = snapshot.data.documents[index];
+
+//                document.documentID
                 final String foodItemName = document['name'];
 
                 final String foodImageURL  =document['image']==''?

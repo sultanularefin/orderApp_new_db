@@ -5,26 +5,38 @@
 
 
 
-// dependency files
+// DEPENDENCY FILES BEGINS HERE.
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/models/IngredientItem.dart';
-import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
+import 'package:foodgallery/src/models/NewIngredient.dart';
+import 'package:logger/logger.dart';
 
-import './../../models/FoodItemWithDocID.dart';
-import './../../models/itemData.dart';
+// DEPENDENCY FILES ENDS HERE.
 //sizeConstantsList
 
 
 //import './../../shared/category_Constants.dart' as Constants;
+//SCREEN FILES
 
 
+// SCREEN FILES ENDS HERE.
+
+import 'package:foodgallery/src/models/IngredientItem.dart';
+import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
+
+// MODEL FILES BEGINS HERE.
+
+import './../../models/FoodItemWithDocID.dart';
+import './../../models/itemData.dart';
+import 'package:foodgallery/src/models/NewIngredient.dart';
+// BOTH ARE CORRECT.
+//import './../../models/NewIngredient.dart';
+
+// MODEL FILES ENDS HERE.
 
 final Firestore firestore = Firestore();
-
-
 
 class MoreIngredients extends StatefulWidget {
 //  AdminFirebase({this.firestore});
@@ -52,20 +64,29 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
   int _radioValue = 0;
   int _sizeValue = 0;
 
-  double _total_cart_price = 1.00;
+  double totalCartPrice = 0;
+//  double totalCartPrice = 1.00;
   int _itemCount=1;
   final _itemData = ItemData();
   String _searchString = '';
-  String _currentCategory = "PIZZA";
+  String _currentCategory = "PIZZA".toLowerCase();
   String _firstTimeCategoryString = "";
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
   int selectedIngredientCount = 4; // DEFAULT INGREDIENTS.
 
 //  List<UserIngredientAmountData> defaultIngredientListForFood = new List<UserIngredientAmountData>();
 
 //  List<IngredientItem> defaultIngredientListForFood = new List<IngredientItem>();
-  List<IngredientItem> defaultIngredientListForFood;
-  List<IngredientItem> ingredientlistUnSelected;
+//  List<IngredientItem> defaultIngredientListForFood;
+
+  List<NewIngredient> defaultIngredientListForFood;
+
+
+  List<NewIngredient> ingredientlistUnSelected;
 
   FoodItemWithDocID oneFoodItemandId;
   _FoodItemDetailsState(this.oneFoodItemandId);
@@ -103,7 +124,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
   }
 
   static Future <List> retrieveIngredients2() async {
-    List<IngredientItem> ingItems = new List<IngredientItem>();
+    List<NewIngredient> ingItems = new List<NewIngredient>();
     var snapshot = await Firestore.instance.collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
         .collection('ingredients')
         .getDocuments();
@@ -115,7 +136,20 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
     List docList = snapshot.documents;
 //    print('doc List :  ******************* <================ : $docList');
 
-    ingItems = snapshot.documents.map((documentSnapshot) => IngredientItem.fromMap(documentSnapshot.data)).toList();
+    // ingItems = snapshot.documents.map((documentSnapshot) => IngredientItem.fromMap
+    //(documentSnapshot.data)).toList();
+
+    ingItems = snapshot.documents.map((documentSnapshot) => NewIngredient.fromMap
+      (documentSnapshot.data)).toList();
+
+//    var logger = Logger(
+//      printer: PrettyPrinter(),
+//    );
+
+
+//    logger.i(ingItems,ingItems);
+
+
 
     return ingItems;
   }
@@ -178,7 +212,9 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
     print('at build _____________________________________________________________________');
 //
 //    print('widget.oneFoodItemData.itemName:__________________________________________ ${widget.oneFoodItemData.imageURL}');
-//    print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId.imageURL}');
+    print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId.imageURL}');
+
+    logger.i('oneFoodItemandId',oneFoodItemandId);
 
 //    String a = Constants.SUCCESS_MESSAGE;
     if(ingredientlistUnSelected==null){
@@ -190,6 +226,14 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
     }
 
     else {
+
+      logger.i('defaultIngredientListForFood[0]: ',defaultIngredientListForFood[0].ingredientName);
+      logger.i('defaultIngredientListForFood[1]: ',defaultIngredientListForFood[1].imageURL);
+
+      logger.i('defaultIngredientListForFood[0]: ',defaultIngredientListForFood[0].imageURL);
+
+      logger.i('defaultIngredientListForFood[2]: ',defaultIngredientListForFood[2].imageURL);
+
       return Scaffold(
           body:
           SafeArea(
@@ -319,7 +363,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
                                       ),
                                     ),
                                     Spacer(),
-                                    Text(_total_cart_price.toStringAsFixed(2) +
+                                    Text(totalCartPrice.toStringAsFixed(2) +
                                         ' kpl',
                                         style: TextStyle(
                                             fontSize: 20, color: Colors.white)),
@@ -511,7 +555,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
                                               ///childAspectRatio:
                                               /// The ratio of the cross-axis to the main-axis extent of each child.
                                               /// H/Verti
-                                              childAspectRatio: 370/330,
+                                              childAspectRatio: 370/350,
 
                                             ),
 
@@ -905,10 +949,25 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
   }
 
 
-  Widget _buildOneSizeUNSelected(IngredientItem unSelectedOneIngredient, int index) {
+//  Widget _buildOneSizeUNSelected(IngredientItem unSelectedOneIngredient, int index) {
+
+
+  Widget _buildOneSizeUNSelected(NewIngredient unSelectedOneIngredient, int index) {
 
     print('unSelectedOneIngredient: ${unSelectedOneIngredient.ingredientName}');
+
+
     int currentAmount =unSelectedOneIngredient.ingredientAmountByUser-1;
+
+    String imageURLFinalNotSelected = (unSelectedOneIngredient.imageURL == '') ?
+    'https://thumbs.dreamstime.com/z/smiling-orange-fruit-'
+        'cartoon-mascot-character-holding-blank-sign-smiling-orange-'
+        'fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+        : storageBucketURLPredicate + Uri.encodeComponent(unSelectedOneIngredient.imageURL) + '?alt=media';
+
+    logger.i("imageURLFinalNotSelected: ",imageURLFinalNotSelected);
+
+
     return Container(
         color: Color.fromRGBO(239, 239, 239, 0),
         padding: EdgeInsets.symmetric(
@@ -941,9 +1000,16 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
               child: ClipOval(
 
                 child: CachedNetworkImage(
-                  imageUrl: unSelectedOneIngredient.imageURL,
+                  imageUrl: imageURLFinalNotSelected,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => new LinearProgressIndicator(),
+                  errorWidget: (context, url, error) =>
+                      Image.network(
+                          'https://img.freepik.com/free-vector/404-error-design-with-donut_76243-30.jpg?size=338&ext=jpg'),
+//                    https://img.freepik.com/free-vector/404-error-design-with-donut_76243-30.jpg?size=338&ext=jpg
+//                    https://img.freepik.com/free-vector/404-error-page-found-with-donut_114341-54.jpg?size=626&ext=jpg
+
+//                    errorWidget:(context,imageURLFinalNotSelected,'Error'),
                 ),
               ),
             )
@@ -1038,9 +1104,15 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
     );
   }
 
-  Widget _buildOneSizeSelected(IngredientItem selectedOneIngredient, int index) {
+//  Widget _buildOneSizeSelected(IngredientItem selectedOneIngredient, int index) {
+  Widget _buildOneSizeSelected(NewIngredient selectedOneIngredient, int index) {
 
 
+    String imageURLFinal = (selectedOneIngredient.imageURL == '') ?
+    'https://thumbs.dreamstime.com/z/smiling-orange-fruit-'
+        'cartoon-mascot-character-holding-blank-sign-smiling-orange-'
+        'fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+        : storageBucketURLPredicate + Uri.encodeComponent(selectedOneIngredient.imageURL) + '?alt=media';
     // FILTER BY CATEGORY.
 //    final List filteredItemsByCategory = allFoods.where((oneItem ) => oneItem.categoryName.toLowerCase() ==
 //        categoryString.toLowerCase()).toList();
@@ -1067,7 +1139,6 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
           horizontal: 4.0, vertical: 15.0),
       child: Column(
         children: <Widget>[
-
           new Container(
 
 //                                    width: displayWidth(context) * 0.19,
@@ -1078,7 +1149,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
             child: ClipOval(
 
               child: CachedNetworkImage(
-                imageUrl: selectedOneIngredient.imageURL,
+                imageUrl: imageURLFinal,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => new LinearProgressIndicator(),
               ),
@@ -1131,7 +1202,7 @@ class FoodDetailImageInMoreIngredients extends StatelessWidget {
     return Transform.translate(
       offset:Offset(-displayWidth(context)/27,0),
 //FROM 18 TO 22
-    // 22 to 27.
+      // 22 to 27.
 
 //      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
       // -displayWidth(context)/9
