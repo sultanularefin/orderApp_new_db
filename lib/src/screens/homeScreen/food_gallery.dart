@@ -1807,7 +1807,8 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //                              Text('D'),
 
 
-                          FittedBox(fit:BoxFit.fitWidth,child:
+                          FittedBox(fit:BoxFit.fitWidth,
+                            child:
                           Text(
 //                '${dummy.counter}',
                             foodItemName,

@@ -186,11 +186,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 //      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
     setState(()
-        {
+    {
 
       priceByQuantityANDSize = euroPrice1;
       initialPriceByQuantityANDSize = euroPrice1;
-        }
+    }
     );
 
 
@@ -894,7 +894,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                             // INGREDIENT CARD ENDS HERE.
 
-                            SizedBox(height:100),
+                            SizedBox(height:50),
 
                             // CHECKOUT CARD STARTS HERE.
 
@@ -907,7 +907,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
                               child:
                               Container(
-                                  height:200,
+                                  height:230,
                                   color: Color(0xffF7F0EC),
 //                                  color:Color(0xffDAD7C3),
                                   width: displayWidth(context)*0.57,
@@ -982,39 +982,49 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                             vertical: 20),
 
                                         //      color: Colors.yellowAccent,
-                                        height:60,
+                                        height:displayHeight(context)/18,
                                         width: displayWidth(context)*0.57,
 
                                         child: Row(
 //                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: <Widget>[
 
                                             // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
 
                                             // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
 
+                                            //PPPPP
+
+
                                             Container(
 
                                               height:45, // same as the heidth of increment decrement button.
+                                              width: displayWidth(context)/6,
                                               child:
-                                              Text(priceByQuantityANDSize.toStringAsFixed(2) +'\u20AC',
+                                              FittedBox(
+                                                fit:BoxFit.fitWidth,
+                                                child:Text(priceByQuantityANDSize.toStringAsFixed(2) +'\u20AC',
                                                   style: TextStyle(
-                                                    fontSize: 26,
+                                                    fontSize: 30,
 //                                                    color: Colors.white
 //                                                    color:Color.fromRGBO(112,112,112,1),
                                                     color:Color(0xff707070),
 
                                                     fontWeight: FontWeight.bold,
                                                   )
-                                              ),
-                                              margin:EdgeInsets.fromLTRB(
-                                                  20,15,0,0),
+                                              ),),
+//                                              margin:EdgeInsets.fromLTRB(
+//                                                  20,15,0,0),
+
+                                              margin:EdgeInsets.symmetric(
+                                                  horizontal: 0,
+                                                  vertical: 0),
                                             ),
 
 
                                             SizedBox(
-                                              width: displayWidth(context)*0.09,
+                                              width: displayWidth(context)*0.07,
                                             ),
 
 
@@ -1026,13 +1036,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                   horizontal: 0,
                                                   vertical: 0),
 
-                                              width: displayWidth(context)*0.17,
+                                              width: displayWidth(context)/5,
 //                                              height: displayHeight(context) *0.11,
                                               height:45, // same as the heidth of increment decrement button. // 45
                                               // later changed height to 40.
                                               decoration: BoxDecoration(
 //                                              color: Colors.black54,
-                                                color:Color(0xffFFFFFF),
+                                                color:Color(0xff8278FA),
                                                 borderRadius: BorderRadius.circular(25),
                                               ),
 
@@ -1042,6 +1052,40 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: <Widget>[
+                                                  IconButton(
+                                                    icon: Icon(Icons.add),
+                                                    iconSize: 26,
+
+                                                    tooltip: 'Increase product count by 1',
+                                                    onPressed: () {
+                                                      print('Add button pressed');
+                                                      setState(() {
+                                                        _itemCount = _itemCount + 1;
+                                                        priceByQuantityANDSize =
+
+                                                            initialPriceByQuantityANDSize *
+                                                                _itemCount;
+
+
+                                                      });
+                                                    },
+                                                    color: Colors.white,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    _itemCount.toString(),
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.normal,
+                                                      fontSize: 22,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+
                                                   IconButton(
                                                     icon: Icon(Icons.remove),
                                                     iconSize: 26,
@@ -1060,44 +1104,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                       }
                                                     },
 //                              size: 24,
-                                                    color: Colors.grey,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Text(
-                                                    _itemCount.toString(),
-                                                    style: TextStyle(
-                                                      color: Colors.blueGrey[800],
-                                                      fontWeight: FontWeight.normal,
-                                                      fontSize: 22,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  IconButton(
-                                                    icon: Icon(Icons.add),
-                                                    iconSize: 26,
-
-                                                    tooltip: 'Increase product count by 1',
-                                                    onPressed: () {
-                                                      print('Add button pressed');
-                                                      setState(() {
-                                                        _itemCount = _itemCount + 1;
-                                                        priceByQuantityANDSize =
-
-                                                            initialPriceByQuantityANDSize *
-                                                                _itemCount;
-
-
-                                                      });
-                                                    },
-                                                    color: Colors.grey,
+                                                    color: Colors.white,
                                                   ),
                                                 ],
 
                                               ),
+
+
+
 
                                             ),
 
