@@ -167,12 +167,20 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
       logger.i('important default list (test): ',filteredIngredients);
 
 //      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
+
+
+      List<NewIngredient> defaultMinus =
+      onValue.toSet().difference(filteredIngredients.toSet()).toList();
+
+
       setState(() {
 
         defaultIngredientListForFood = filteredIngredients;
 
 //        defaultIngredientListForFood = onValue.sublist(0,4);
-        ingredientlistUnSelected = onValue.sublist(4);
+//        ingredientlistUnSelected = onValue.sublist(4);
+
+        ingredientlistUnSelected=defaultMinus;
       }
       );
 
