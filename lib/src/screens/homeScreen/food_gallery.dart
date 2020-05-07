@@ -455,6 +455,7 @@ class _FoodGalleryState extends State<FoodGallery> {
           SafeArea(
             child:
             SingleChildScrollView(
+
               child:
               Column(
                 //    mainAxisAlignment: MainAxisAlignment.center,
@@ -469,7 +470,8 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                   Container(
-
+                    margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                    color: Color(0xffFFFFFF),
                     //      color: Colors.yellowAccent,
                     // height:100 changed on MAY 5 2020
                     height:displayHeight(context)/13,
@@ -623,7 +625,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                               .size
                               .width / 3.8,
 
-                          color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color(0xff54463E),
+//                          color: Color.fromARGB(255, 84, 70, 62),
 
                         ),
 
@@ -635,6 +638,8 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                   Container(
+                    margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                    color: Color(0xffFFFFFF),
                     height: displayHeight(context) -
                         MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
@@ -655,7 +660,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                               .width / 3.8,
 //                      there is ---- line when selected
                           //ARGB (alpha= (0=transparent,255 = opaque);
-                          color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color(0xff54463E),
+//                          color: Color.fromARGB(255, 84, 70, 62),
 //239 239 239
 //              child:Text('ss'),
                           child: new ListView.builder
@@ -728,6 +734,9 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                   Container(
+                    margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+
+                    color: Color(0xffFFFFFF),
 
                     //      color: Colors.yellowAccent,
                     // height:100 changed on MAY 5 2020
@@ -872,7 +881,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                               .size
                               .width / 3.8,
 
-                          color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color(0xff54463E),
+//                          color: Color.fromARGB(255, 84, 70, 62),
 
                         ),
 
@@ -884,6 +894,9 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                   Container(
+                    margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                    color: Color(0xffFFFFFF),
+
                     height: displayHeight(context) -
                         MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
@@ -912,7 +925,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                               .width / 3.8,
 //                      there is ---- line when selected
                           //ARGB (alpha= (0=transparent,255 = opaque);
-                          color: Color.fromARGB(255, 84, 70, 62),
+//                          color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color(0xff54463E),
 //239 239 239
 //              child:Text('ss'),
                           child: new ListView.builder
@@ -986,6 +1000,9 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
                   Container(
+
+                    margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                    color: Color(0xffFFFFFF),
 
                     //      color: Colors.yellowAccent,
                     // height:100 changed on MAY 5 2020
@@ -1132,7 +1149,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                               .size
                               .width / 3.8,
 
-                          color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color(0xff54463E),
+//                          color: Color.fromARGB(255, 84, 70, 62),
 
                         ),
 
@@ -1144,6 +1162,8 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                   Container(
+                    margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                    color: Color(0xffFFFFFF),
                     height: displayHeight(context) -
                         MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
@@ -1171,7 +1191,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                               .width / 3.8,
 //                      there is ---- line when selected
                           //ARGB (alpha= (0=transparent,255 = opaque);
-                          color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color(0xff54463E),
+//                          color: Color.fromARGB(255, 84, 70, 62),
 //239 239 239
 //              child:Text('ss'),
                           child: new ListView.builder
@@ -1238,6 +1259,8 @@ class _FoodGalleryState extends State<FoodGallery> {
 
                   Container(
 
+                    margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                    color: Color(0xffFFFFFF),
 //                  color: Colors.yellowAccent,
                     // height:100 changed on MAY 5 2020
                     height:displayHeight(context)/13,
@@ -1392,8 +1415,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                               .of(context)
                               .size
                               .width / 3.8,
-
-                          color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color(0xff54463E),
+//                          color: Color.fromARGB(255, 84, 70, 62),
 
                         ),
 
@@ -1405,6 +1428,8 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 //                #### 2ND CONTAINER SIDE MENUS AND GRIDLIST.
                   Container(
+                    margin:EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                    color: Color(0xffFFFFFF),
                     height: displayHeight(context) -
                         MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
@@ -1428,7 +1453,8 @@ class _FoodGalleryState extends State<FoodGallery> {
                               .size
                               .width / 3.8,
 //              color: Colors.yellowAccent,
-                          color: Color.fromARGB(255, 84, 70, 62),
+                          color: Color(0xff54463E),
+//                          color: Color.fromARGB(255, 84, 70, 62),
 //              child:Text('ss'),
                           child:StreamBuilder<QuerySnapshot>(
                               stream: firestore
@@ -1724,7 +1750,7 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
               Container(
                 // `opacity` is alpha channel of this color as a double, with 0.0 being
                 //  ///   transparent and 1.0 being fully opaque.
-                  color: Color.fromRGBO(239, 239, 239, 1.0),
+                 color: Color(0xffFFFFFF),
                   padding: EdgeInsets.symmetric(
                       horizontal: 4.0, vertical: 16.0),
                   child: InkWell(
@@ -1873,6 +1899,8 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
     );
   }
 }
+
+
 class FoodListWithCategoryString extends StatelessWidget {
 
 
@@ -2091,7 +2119,7 @@ class FoodListWithCategoryString extends StatelessWidget {
               Container(
                 // `opacity` is alpha channel of this color as a double, with 0.0 being
                 //  ///   transparent and 1.0 being fully opaque.
-                  color: Color.fromRGBO(239, 239, 239, 1.0),
+                 color: Color(0xffFFFFFF),
                   padding: EdgeInsets.symmetric(
                       horizontal: 4.0, vertical: 16.0),
                   child: InkWell(
@@ -2535,7 +2563,7 @@ class FoodList extends StatelessWidget {
 
                 return
                   Container(
-                      color: Color.fromRGBO(239, 239, 239, 0),
+                     color: Color(0xffFFFFFF),
                       padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
                           horizontal: 4.0, vertical: 16.0),
