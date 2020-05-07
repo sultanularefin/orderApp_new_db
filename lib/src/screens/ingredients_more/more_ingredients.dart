@@ -6,6 +6,8 @@
 
 
 // DEPENDENCY FILES BEGINS HERE.
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,6 +32,9 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 import './../../models/FoodItemWithDocID.dart';
 import './../../models/itemData.dart';
+
+import './../../models/OrderList.dart';
+
 import 'package:foodgallery/src/models/NewIngredient.dart';
 // BOTH ARE CORRECT.
 //import './../../models/NewIngredient.dart';
@@ -43,21 +48,28 @@ class MoreIngredients extends StatefulWidget {
 
   final Widget child;
 //  final FoodItem oneFoodItemData;
-  final FoodItemWithDocID oneFoodItemData;
+
   final Firestore firestore = Firestore.instance;
+  final FoodItemWithDocID oneFoodItemData1;
+  final List<String> onlyIngredientsNames1;
 
 
-  MoreIngredients({Key key, this.child,this.oneFoodItemData}) : super(key: key);
+  MoreIngredients({Key key, this.child,this.oneFoodItemData1,this.onlyIngredientsNames1}) : super(key: key);
 
   @override
-  _FoodItemDetailsState createState() => new _FoodItemDetailsState(oneFoodItemData);
+  _MoreIngredientsPageState createState() => new _MoreIngredientsPageState(oneFoodItemData1,onlyIngredientsNames1);
 
 }
 
 
-class _FoodItemDetailsState extends State<MoreIngredients> {
+class _MoreIngredientsPageState extends State<MoreIngredients> {
 
   //  final _formKey = GlobalKey();
+
+  FoodItemWithDocID oneFoodItemandId2;
+
+  final List<String> onlyIngredientsNames2;
+  _MoreIngredientsPageState(this.oneFoodItemandId2,this.onlyIngredientsNames2);
 
   final _formKey = GlobalKey<FormState>();
 
@@ -71,6 +83,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
   String _searchString = '';
   String _currentCategory = "PIZZA".toLowerCase();
   String _firstTimeCategoryString = "";
+  List<NewIngredient> ingredients;
 
   var logger = Logger(
     printer: PrettyPrinter(),
@@ -88,8 +101,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 
   List<NewIngredient> ingredientlistUnSelected;
 
-  FoodItemWithDocID oneFoodItemandId;
-  _FoodItemDetailsState(this.oneFoodItemandId);
+
 
 
   final _allIngredientsList = [];
@@ -107,21 +119,6 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 
   }
 
-  Future<void> retrieveIngredients1() async {
-    debugPrint("Entering in retrieveIngredients1");
-
-    await retrieveIngredients2().then((onValue){
-
-//      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
-      setState(() {
-        defaultIngredientListForFood = onValue.sublist(0,4);
-        ingredientlistUnSelected = onValue.sublist(4);
-      }
-      );
-
-    }
-    );
-  }
 
   static Future <List> retrieveIngredients2() async {
     List<NewIngredient> ingItems = new List<NewIngredient>();
@@ -147,77 +144,73 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 
 
     List<String> documents = snapshot.documents.map((documentSnapshot) =>
-        documentSnapshot.documentID
+    documentSnapshot.documentID
     ).toList();
 
     print('documents are: $documents');
 
 
-
-
-
-
-
-//    LoadFourIngredients(
-//        firestore: firestore,
-//        foodItemIngredientsList:oneFoodItemandId.ingredients
-//    )
-
-//    var logger = Logger(
-//      printer: PrettyPrinter(),
-//    );
-
-
-//    logger.i(ingItems,ingItems);
-
-
-
     return ingItems;
   }
 
-  /*
-  getIngredientDataFromFirestore() async {
-    Firestore.instance
-        .collection('ingredientitems').orderBy("uploadDate", descending: true)
-        .snapshots()
-        .listen((data) =>
-        data.documents.forEach((doc) {
-//      document['itemName'];
-
-          print('doc: ***************************** ${doc['uploadDate']
-              .toDate()}');
-//          print('doc.toObject: ',doc.)
-
-          final dynamic ingredientName = doc['ingredientName'];
-          final dynamic ingredientImageURL = doc['imageURL'];
 
 
-          final String ingredientItemId = doc['ingredientId'];
+  Future<void> retrieveIngredients1() async {
+    debugPrint("Entering in retrieveIngredients1");
 
-          final bool IsAvailableIngredient = doc['isAvailable'];
-          final String ingredientDocumentID = doc.documentID;
+    await retrieveIngredients2().then((onValue){
 
+      List<NewIngredient> filteredIngredients = filterSelectedIngredients(onValue);
 
-          IngredientItem oneIngredientItemWithDocID = new IngredientItem(
-            ingredientName: ingredientName,
-            imageURL: ingredientImageURL,
-            ingredientId: ingredientItemId,
-            isAvailable: IsAvailableIngredient,
-            documentId: ingredientDocumentID,
+      logger.i('filteredIngredients: ',filteredIngredients);
 
+      logger.i('important default list (test): ',filteredIngredients);
 
-          );
+//      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
+      setState(() {
 
-          _allIngredientsList.add(oneIngredientItemWithDocID);
-        }
-        ), onDone: () {
-      print("Task Done zzzzz zzzzzz zzzzzzz zzzzzzz zzzzzz zzzzzzzz zzzzzzzzz zzzzzzz zzzzzzz");
-    }, onError: (error, StackTrace stackTrace) {
-      print("Some Error $stackTrace");
-    });
+        defaultIngredientListForFood = filteredIngredients;
+
+//        defaultIngredientListForFood = onValue.sublist(0,4);
+        ingredientlistUnSelected = onValue.sublist(4);
+      }
+      );
+
+    }
+    );
   }
 
-   */
+  List<NewIngredient> filterSelectedIngredients(List<NewIngredient> dlist) {
+
+    // List<String> stringList = List<String>.from(dlist);
+
+    logger.i('dlist ====================================> ',dlist);
+
+    return dlist.where((oneItem) =>oneItem.ingredientName.trim().toLowerCase()
+        ==
+        searchForThisIngredient(oneItem.ingredientName.trim().toLowerCase())
+    ).toList();
+
+  }
+
+  String searchForThisIngredient(String inputString) {
+
+
+    List<String> foodIngredients = onlyIngredientsNames2;
+
+//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
+
+
+    String elementExists = foodIngredients.firstWhere(
+            (oneItem) => oneItem.toLowerCase() == inputString,
+        orElse: () => '');
+
+    print('elementExists: $elementExists');
+
+    return elementExists.toLowerCase();
+
+  }
+
 
 
   @override
@@ -233,9 +226,9 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
     print('at build _____________________________________________________________________');
 //
 //    print('widget.oneFoodItemData.itemName:__________________________________________ ${widget.oneFoodItemData.imageURL}');
-    print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId.imageURL}');
+    print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId2.imageURL}');
 
-    logger.i('oneFoodItemandId',oneFoodItemandId);
+    logger.i('oneFoodItemandId',oneFoodItemandId2);
 
 //    String a = Constants.SUCCESS_MESSAGE;
     if(ingredientlistUnSelected==null){
@@ -454,7 +447,7 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
 
                         alignment: Alignment.centerLeft,
                         child: FoodDetailImageInMoreIngredients(
-                            oneFoodItemandId.imageURL),
+                            oneFoodItemandId2.imageURL),
 
                       ),
                       Container(
@@ -807,21 +800,25 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
                                                   index);
                                             },
                                             gridDelegate:
-                                            new SliverGridDelegateWithFixedCrossAxisCount(
-                                                mainAxisSpacing: 8,
-                                                // H  direction
-                                                crossAxisSpacing: 0,
+//                                            new SliverGridDelegateWithFixedCrossAxisCount(
+//                                              crossAxisCount: 3,
+                                            new SliverGridDelegateWithMaxCrossAxisExtent(
+                                              maxCrossAxisExtent: 260,
 
-                                                ///childAspectRatio:
-                                                /// The ratio of the cross-axis to the main-axis extent of each child.
-                                                /// H/V
-                                                childAspectRatio: 400 / 380,
+                                              mainAxisSpacing: 8,
+                                              // H  direction
+                                              crossAxisSpacing: 0,
+
+                                              ///childAspectRatio:
+                                              /// The ratio of the cross-axis to the main-axis extent of each child.
+                                              /// H/V
+                                              childAspectRatio: 380 / 400,
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
 //                                  /// H/V
-                                                // horizontal / vertical
+                                              // horizontal / vertical
 //                                              childAspectRatio: 280/360,
-                                                crossAxisCount: 3
+
                                             ),
 
 
@@ -1005,16 +1002,25 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
           children: <Widget>[
 //                              SizedBox(height: 10),
 
-            Text(
+            Container(
 
-              unSelectedOneIngredient.ingredientName,
+//          height:45, // same as the heidth of increment decrement button.
+              width: displayWidth(context)/7,
+              height:45,
+              child:
 
-              style: TextStyle(
-                color:Color.fromRGBO(112,112,112,1),
+              Text(
+
+                unSelectedOneIngredient.ingredientName,
+
+                style: TextStyle(
+                  color:Color.fromRGBO(112,112,112,1),
 //                                    color: Colors.blueGrey[800],
 
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                ),
+
               ),
             ),
 
@@ -1182,6 +1188,13 @@ class _FoodItemDetailsState extends State<MoreIngredients> {
                 imageUrl: imageURLFinal,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => new LinearProgressIndicator(),
+                errorWidget: (context, url, error) =>
+                    Image.network(
+                        'https://img.freepik.com/free-vector/404-error-design-with-donut_76243-30.jpg?size=338&ext=jpg'),
+//                    https://img.freepik.com/free-vector/404-error-design-with-donut_76243-30.jpg?size=338&ext=jpg
+//                    https://img.freepik.com/free-vector/404-error-page-found-with-donut_114341-54.jpg?size=626&ext=jpg
+
+//                    errorWidget:(context,imageURLFinalNotSelected,'Error'),
               ),
             ),
           ),
@@ -1316,12 +1329,12 @@ class LongHeaderPainter extends CustomPainter {
   void paint(Canvas canvas, Size size){
 
 //    canvas.drawLine(...);
-    final p1 = Offset(700, 28); //(X,Y) TO (X,Y)
-    final p2 = Offset(0, 28);
+    final p1 = Offset(700, 30); //(X,Y) TO (X,Y)
+    final p2 = Offset(0, 30);
     final paint = Paint()
       ..color = Color.fromRGBO(112,112,112,1)
 //          Colors.white
-      ..strokeWidth = 1;
+      ..strokeWidth = 2;
     canvas.drawLine(p1, p2, paint);
 
 
