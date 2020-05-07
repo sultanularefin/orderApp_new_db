@@ -198,7 +198,8 @@ class _FoodGalleryState extends State<FoodGallery> {
 
 
     Firestore.instance
-        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
+        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').
+    collection('categories').orderBy("rating", descending: true)
         .snapshots()
         .listen((data) =>
         data.documents.forEach((doc) {
@@ -573,7 +574,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Enter a meal term',
+//                                    hintText: 'Enter a meal term',
                                     labelText: 'Search about meal.',
 
                                   ),
@@ -822,7 +823,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Enter a meal term',
+//                                    hintText: 'Enter a meal term',
                                     labelText: 'Search about meal.',
 
                                   ),
@@ -1082,7 +1083,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                   },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Enter a meal term',
+//                                    hintText: 'Enter a meal term',
                                     labelText: 'Search about meal.',
 
                                   ),
@@ -1327,7 +1328,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                 child: TextField(
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: 'Enter a meal term',
+//                                      hintText: 'Enter a meal term',
                                       labelText: 'Search about meal.'
                                   ),
                                   onChanged: (text) {
@@ -1431,7 +1432,8 @@ class _FoodGalleryState extends State<FoodGallery> {
 //              child:Text('ss'),
                           child:StreamBuilder<QuerySnapshot>(
                               stream: firestore
-                                  .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('categories')
+                                  .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').
+                              collection('categories').orderBy("rating", descending: true)
 //        .where('category', isEqualTo: 'Pizza')
                                   .snapshots(),
                               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
