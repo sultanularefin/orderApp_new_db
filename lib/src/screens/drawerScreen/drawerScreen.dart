@@ -7,6 +7,7 @@ import 'package:foodgallery/src/screens/homeScreen/food_gallery.dart';
 import 'package:foodgallery/src/screens/productScan/product_scan_checkBox.dart';
 import 'package:foodgallery/src/screens/storageTest.dart';
 import 'package:foodgallery/src/screens/testPages/customClipper_test.dart';
+import 'package:foodgallery/src/screens/testPages/NumorphicTest.dart';
 import 'package:foodgallery/src/screens/wastedDetails/wasted_details.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -190,6 +191,19 @@ class drawerScreen extends StatelessWidget {
   }
 
 
+
+  Future<void>goToNumorphicPage(BuildContext context2) async {
+    print('what i do is : ||go To Custom Clipper Example.||');
+
+//    SharedPreferences preferences = await SharedPreferences.getInstance();
+//    preferences.clear();
+    Navigator.push(
+      context2,
+      MaterialPageRoute(builder: (context2) => NumorphicTest()),
+    );
+
+
+  }
 
   Future<void>goToCustomClipperTest(BuildContext context2) async {
     print('what i do is : ||go To Custom Clipper Example.||');
@@ -381,7 +395,14 @@ class drawerScreen extends StatelessWidget {
 
               ),
 
+              CustomListTile(
+                  iconData:Icons.lock,
+                  text:'Neumorphic Test',
+                  onPressed :()=>goToNumorphicPage(context)
 
+
+
+              ),
 
 
 

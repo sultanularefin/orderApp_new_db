@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
+//import 'package:neumorphic_example/data/item.dart';
+import 'package:neumorphic/neumorphic.dart';
+
+
+import 'package:flutter/widgets.dart';
+import 'package:meta/meta.dart';
+import 'package:foodgallery/src/screens/testPages/neumorphicWidgets/section_button.dart';
+
+import 'package:foodgallery/src/screens/testPages/neumorphicWidgets/section_neumorphic.dart';
+
+import 'package:foodgallery/src/screens/testPages/neumorphicWidgets/section_switch.dart';
+//import 'package:foodgallery/src/screens/wastedDetails/wasted_details.dart';
+
+import 'package:foodgallery/src/screens/testPages/data/item.dart';
+
+class WidgetDetailsScreen extends StatelessWidget {
+  const WidgetDetailsScreen({
+    @required this.isInTabletLayout,
+    @required this.item,
+  });
+
+  final bool isInTabletLayout;
+  final Item item;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    Widget content;
+    if (item?.section == null) {
+      content = Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              item?.title ?? 'No item selected!',
+              style: textTheme.headline,
+            ),
+            Text(
+              item?.subtitle ?? 'Please select one on the left.',
+              style: textTheme.body2,
+            ),
+          ],
+        ),
+      );
+    } else {
+      content = item.section;
+    }
+
+    content = Padding(
+      padding: EdgeInsets.all(isInTabletLayout ? 32 : 16),
+      child: content,
+    );
+
+    if (!isInTabletLayout) {
+      content = Scaffold(
+        appBar: NeuAppBar(
+          title: Text(item.title),
+        ),
+        body: content,
+      );
+    }
+
+    return content;
+  }
+}
