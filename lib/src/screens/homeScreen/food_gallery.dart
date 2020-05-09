@@ -1008,7 +1008,7 @@ class _FoodGalleryState extends State<FoodGallery> {
 
       logger.i('_allCategoryList: $_allCategoryList');
 //      print('_allCategoryList: $_allCategoryList');
-      {
+          {
 
 
         return  GestureDetector(
@@ -1042,220 +1042,220 @@ class _FoodGalleryState extends State<FoodGallery> {
                   Expanded(
                       child: Column(
 
-                      mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
 
-                      children: <Widget>[
+                          children: <Widget>[
 
-                        Container(
+                            Container(
 
-                          height:displayHeight(context)/13,
-                          color: Color(0xffFFFFFF),
+                              height:displayHeight(context)/13,
+                              color: Color(0xffFFFFFF),
 //                      color: Color.fromARGB(255, 255,255,255),
-                          child:Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
+                              child:Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: <Widget>[
 
-                              // CONTAINER FOR TOTAL PRICE CART BELOW.
-                              Container(
-                                margin:EdgeInsets.symmetric(
-                                    horizontal: 0,
-                                    vertical: 0),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    boxShadow: [
-                                      BoxShadow(
+                                  // CONTAINER FOR TOTAL PRICE CART BELOW.
+                                  Container(
+                                    margin:EdgeInsets.symmetric(
+                                        horizontal: 0,
+                                        vertical: 0),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                          color: Color(0xff54463E),
-                                          blurRadius: 10.0,
-                                          offset: Offset(0.0, 2.0))
-                                    ],
-                                    color: Colors.black54),
-                                width: displayWidth(context)/5,
-                                height: displayHeight(context)/27,
-                                padding: EdgeInsets.only(
-                                    left: 4, top: 3, bottom: 3, right: 3),
-                                child: Row(
+                                              color: Color(0xff54463E),
+                                              blurRadius: 10.0,
+                                              offset: Offset(0.0, 2.0))
+                                        ],
+                                        color: Colors.black54),
+                                    width: displayWidth(context)/5,
+                                    height: displayHeight(context)/27,
+                                    padding: EdgeInsets.only(
+                                        left: 4, top: 3, bottom: 3, right: 3),
+                                    child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
 
-                                      height: 25,
-                                      width: 5,
-                                      margin: EdgeInsets.only(left: 0),
+                                          height: 25,
+                                          width: 5,
+                                          margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                      child: Icon(
-                                        Icons.add_shopping_cart,
-                                        size: 28,
-                                        color: Colors.white,
-                                      ),
+                                          child: Icon(
+                                            Icons.add_shopping_cart,
+                                            size: 28,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+//                                  Spacer(),
+                                        Text(_total_cart_price.toStringAsFixed(2) +' kpl',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+
+                                            )),
+//                                  Spacer(),
+
+                                      ],
                                     ),
-//                                  Spacer(),
-                                    Text(_total_cart_price.toStringAsFixed(2) +' kpl',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600,
-
-                                        )),
-//                                  Spacer(),
-
-                                  ],
-                                ),
-                              ),
-
-                              Container(
-                                margin:EdgeInsets.symmetric(
-                                    horizontal: 0,
-                                    vertical: 0),
-                                decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                                  borderRadius: BorderRadius.circular(25),
-                                  border: Border.all(
-
-                                    color: Color(0xffBCBCBD),
-                                    style: BorderStyle.solid,
-                                    width: 1.0,
-
-
                                   ),
 
-                                  boxShadow: [
-                                    BoxShadow(
+                                  Container(
+                                    margin:EdgeInsets.symmetric(
+                                        horizontal: 0,
+                                        vertical: 0),
+                                    decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                                      borderRadius: BorderRadius.circular(25),
+                                      border: Border.all(
+
+                                        color: Color(0xffBCBCBD),
+                                        style: BorderStyle.solid,
+                                        width: 1.0,
+
+
+                                      ),
+
+                                      boxShadow: [
+                                        BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                        color: Color(0xffFFFFFF),
-                                        blurRadius: 10.0,
-                                        offset: Offset(0.0, 2.0))
-                                  ],
+                                            color: Color(0xffFFFFFF),
+                                            blurRadius: 10.0,
+                                            offset: Offset(0.0, 2.0))
+                                      ],
 
 
-                                  color: Color(0xffFFFFFF),
+                                      color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                                ),
+                                    ),
 
 //                                  color: Color(0xffFFFFFF),
-                                width: displayWidth(context)/3,
-                                height: displayHeight(context)/27,
-                                padding: EdgeInsets.only(
-                                    left: 4, top: 3, bottom: 3, right: 3),
-                                child: Row(
+                                    width: displayWidth(context)/3,
+                                    height: displayHeight(context)/27,
+                                    padding: EdgeInsets.only(
+                                        left: 4, top: 3, bottom: 3, right: 3),
+                                    child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
 
-                                      height: 25,
-                                      width: 5,
-                                      margin: EdgeInsets.only(left: 0),
+                                          height: 25,
+                                          width: 5,
+                                          margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                      child: Icon(
+                                          child: Icon(
 //                                          Icons.add_shopping_cart,
-                                        Icons.search,
-                                        size: 28,
-                                        color: Color(0xffBCBCBD),
-                                      ),
+                                            Icons.search,
+                                            size: 28,
+                                            color: Color(0xffBCBCBD),
+                                          ),
 
 
-                                    ),
+                                        ),
 
-                                    Container(
+                                        Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                                      alignment: Alignment.center,
-                                      width:displayWidth(context)/4,
+                                          alignment: Alignment.center,
+                                          width:displayWidth(context)/4,
 //                                        color:Colors.purpleAccent,
-                                      // do it in both Container
-                                      child: TextField(
-                                        decoration: InputDecoration(
+                                          // do it in both Container
+                                          child: TextField(
+                                            decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                                          border: InputBorder.none,
-                                          hintText: 'Search about meal',
+                                              border: InputBorder.none,
+                                              hintText: 'Search about meal',
 
 //                                        labelText: 'Search about meal.'
-                                        ),
-                                        onChanged: (text) {
-                                          logger.i('onChanged');
-                                          setState(() => _searchString = text);
-                                          print("First text field from Condition 04: $text");
-                                        },
-                                        onTap:(){
-                                          logger.i('onTap');
-                                          print('condition 4');
-                                          setState(() {
-                                            _firstTimeCategoryString ='PIZZA';
-                                          });
+                                            ),
+                                            onChanged: (text) {
+                                              logger.i('onChanged');
+                                              setState(() => _searchString = text);
+                                              print("First text field from Condition 04: $text");
+                                            },
+                                            onTap:(){
+                                              logger.i('onTap');
+                                              print('condition 4');
+                                              setState(() {
+                                                _firstTimeCategoryString ='PIZZA';
+                                              });
 
-                                        },
+                                            },
 
-                                        onEditingComplete: (){
-                                          logger.i('onEditingComplete');
-                                          print('called onEditing complete');
-                                          setState(() => _searchString = "");
-                                        },
+                                            onEditingComplete: (){
+                                              logger.i('onEditingComplete');
+                                              print('called onEditing complete');
+                                              setState(() => _searchString = "");
+                                            },
 
-                                        onSubmitted: (String value) async {
-                                          await showDialog<void>(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text('Thanks!'),
-                                                content: Text ('You typed "$value".'),
-                                                actions: <Widget>[
-                                                  FlatButton(
-                                                    onPressed: () { Navigator.pop(context); },
-                                                    child: const Text('OK'),
-                                                  ),
-                                                ],
+                                            onSubmitted: (String value) async {
+                                              await showDialog<void>(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text('Thanks!'),
+                                                    content: Text ('You typed "$value".'),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        onPressed: () { Navigator.pop(context); },
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
                                               );
                                             },
-                                          );
-                                        },
-                                      ),
+                                          ),
 
-                                    )
+                                        )
 
-                                  ],
-                                ),
+                                      ],
+                                    ),
 
 
 
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
+                            ),
 
-                        // CONTAINER FOR TOTAL PRICE CART ABOVE.
+                            // CONTAINER FOR TOTAL PRICE CART ABOVE.
 
-                        // 2ND CONTAINER IN GRIDVIEW
-                        // IN FIRST COLUMN. BELOW
-                        Container(
-                          height:displayHeight(context) -
-                              MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                            // 2ND CONTAINER IN GRIDVIEW
+                            // IN FIRST COLUMN. BELOW
+                            Container(
+                              height:displayHeight(context) -
+                                  MediaQuery.of(context).padding.top  - displayHeight(context)/13,
 //                          child: FoodList(firestore: firestore),
 
-                          child: FoodListWithCategoryStringAndSearchString(
-                              allFoods: _allFoodsList,categoryString: _currentCategory, searchString2:_searchString),
+                              child: FoodListWithCategoryStringAndSearchString(
+                                  allFoods: _allFoodsList,categoryString: _currentCategory, searchString2:_searchString),
 
-                        ),
+                            ),
 
-                        // 2ND CONTAINER IN GRIDVIEW
-                        // IN FIRST COLUMN. ABOVE.
+                            // 2ND CONTAINER IN GRIDVIEW
+                            // IN FIRST COLUMN. ABOVE.
 
-                      ]
-                  )
+                          ]
+                      )
                   ),
 
 
@@ -1340,215 +1340,215 @@ class _FoodGalleryState extends State<FoodGallery> {
                     Expanded(
                         child: Column(
 
-                        mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
 
-                        children: <Widget>[
+                            children: <Widget>[
 
-                          Container(
+                              Container(
 
-                            height:displayHeight(context)/13,
-                            color: Color(0xffFFFFFF),
+                                height:displayHeight(context)/13,
+                                color: Color(0xffFFFFFF),
 //                      color: Color.fromARGB(255, 255,255,255),
-                            child:Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
+                                child:Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: <Widget>[
 
-                                // CONTAINER FOR TOTAL PRICE CART BELOW.
-                                Container(
-                                  margin:EdgeInsets.symmetric(
-                                      horizontal: 0,
-                                      vertical: 0),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      boxShadow: [
-                                        BoxShadow(
+                                    // CONTAINER FOR TOTAL PRICE CART BELOW.
+                                    Container(
+                                      margin:EdgeInsets.symmetric(
+                                          horizontal: 0,
+                                          vertical: 0),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          boxShadow: [
+                                            BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                            color: Color(0xff54463E),
-                                            blurRadius: 10.0,
-                                            offset: Offset(0.0, 2.0))
-                                      ],
-                                      color: Colors.black54),
-                                  width: displayWidth(context)/5,
-                                  height: displayHeight(context)/27,
-                                  padding: EdgeInsets.only(
-                                      left: 4, top: 3, bottom: 3, right: 3),
-                                  child: Row(
+                                                color: Color(0xff54463E),
+                                                blurRadius: 10.0,
+                                                offset: Offset(0.0, 2.0))
+                                          ],
+                                          color: Colors.black54),
+                                      width: displayWidth(context)/5,
+                                      height: displayHeight(context)/27,
+                                      padding: EdgeInsets.only(
+                                          left: 4, top: 3, bottom: 3, right: 3),
+                                      child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
 
-                                        height: 25,
-                                        width: 5,
-                                        margin: EdgeInsets.only(left: 0),
+                                            height: 25,
+                                            width: 5,
+                                            margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                        child: Icon(
-                                          Icons.add_shopping_cart,
-                                          size: 28,
-                                          color: Colors.white,
-                                        ),
+                                            child: Icon(
+                                              Icons.add_shopping_cart,
+                                              size: 28,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+//                                  Spacer(),
+                                          Text(_total_cart_price.toStringAsFixed(2) +' kpl',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600,
+
+                                              )),
+//                                  Spacer(),
+
+                                        ],
                                       ),
-//                                  Spacer(),
-                                      Text(_total_cart_price.toStringAsFixed(2) +' kpl',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-
-                                          )),
-//                                  Spacer(),
-
-                                    ],
-                                  ),
-                                ),
-
-                                Container(
-                                  margin:EdgeInsets.symmetric(
-                                      horizontal: 0,
-                                      vertical: 0),
-                                  decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                                    borderRadius: BorderRadius.circular(25),
-                                    border: Border.all(
-
-                                      color: Color(0xffBCBCBD),
-                                      style: BorderStyle.solid,
-                                      width: 1.0,
-
-
                                     ),
 
-                                    boxShadow: [
-                                      BoxShadow(
+                                    Container(
+                                      margin:EdgeInsets.symmetric(
+                                          horizontal: 0,
+                                          vertical: 0),
+                                      decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                                        borderRadius: BorderRadius.circular(25),
+                                        border: Border.all(
+
+                                          color: Color(0xffBCBCBD),
+                                          style: BorderStyle.solid,
+                                          width: 1.0,
+
+
+                                        ),
+
+                                        boxShadow: [
+                                          BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                          color: Color(0xffFFFFFF),
-                                          blurRadius: 10.0,
-                                          offset: Offset(0.0, 2.0))
-                                    ],
+                                              color: Color(0xffFFFFFF),
+                                              blurRadius: 10.0,
+                                              offset: Offset(0.0, 2.0))
+                                        ],
 
 
-                                    color: Color(0xffFFFFFF),
+                                        color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                                  ),
+                                      ),
 
 //                                  color: Color(0xffFFFFFF),
-                                  width: displayWidth(context)/3,
-                                  height: displayHeight(context)/27,
-                                  padding: EdgeInsets.only(
-                                      left: 4, top: 3, bottom: 3, right: 3),
-                                  child: Row(
+                                      width: displayWidth(context)/3,
+                                      height: displayHeight(context)/27,
+                                      padding: EdgeInsets.only(
+                                          left: 4, top: 3, bottom: 3, right: 3),
+                                      child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
 
-                                        height: 25,
-                                        width: 5,
-                                        margin: EdgeInsets.only(left: 0),
+                                            height: 25,
+                                            width: 5,
+                                            margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                        child: Icon(
+                                            child: Icon(
 //                                          Icons.add_shopping_cart,
-                                          Icons.search,
-                                          size: 28,
-                                          color: Color(0xffBCBCBD),
-                                        ),
+                                              Icons.search,
+                                              size: 28,
+                                              color: Color(0xffBCBCBD),
+                                            ),
 
 
-                                      ),
+                                          ),
 
-                                      Container(
+                                          Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                                        alignment: Alignment.center,
-                                        width:displayWidth(context)/4,
+                                            alignment: Alignment.center,
+                                            width:displayWidth(context)/4,
 //                                        color:Colors.purpleAccent,
-                                        // do it in both Container
-                                        child: TextField(
-                                          decoration: InputDecoration(
+                                            // do it in both Container
+                                            child: TextField(
+                                              decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                                            border: InputBorder.none,
-                                            hintText: 'Search about meal',
+                                                border: InputBorder.none,
+                                                hintText: 'Search about meal',
 
 //                                        labelText: 'Search about meal.'
-                                          ),
-                                          onChanged: (text) {
-                                            logger.i('on onChanged of condition 4');
+                                              ),
+                                              onChanged: (text) {
+                                                logger.i('on onChanged of condition 4');
 
-                                            setState(() => _searchString = text);
-                                            print("First text field from Condition 04: $text");
-                                          },
-                                          onTap:(){
-                                            print('condition 4');
-                                            logger.i('on Tap of condition 4');
-                                            setState(() {
-                                              _firstTimeCategoryString ='PIZZA';
-                                            });
+                                                setState(() => _searchString = text);
+                                                print("First text field from Condition 04: $text");
+                                              },
+                                              onTap:(){
+                                                print('condition 4');
+                                                logger.i('on Tap of condition 4');
+                                                setState(() {
+                                                  _firstTimeCategoryString ='PIZZA';
+                                                });
 
-                                          },
+                                              },
 
-                                          onEditingComplete: (){
-                                            logger.i('onEditingComplete  of condition 4');
-                                            print('called onEditing complete');
-                                            setState(() => _searchString = "");
-                                          },
+                                              onEditingComplete: (){
+                                                logger.i('onEditingComplete  of condition 4');
+                                                print('called onEditing complete');
+                                                setState(() => _searchString = "");
+                                              },
 
-                                          onSubmitted: (String value) async {
-                                            await showDialog<void>(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text('Thanks!'),
-                                                  content: Text ('You typed "$value".'),
-                                                  actions: <Widget>[
-                                                    FlatButton(
-                                                      onPressed: () { Navigator.pop(context); },
-                                                      child: const Text('OK'),
-                                                    ),
-                                                  ],
+                                              onSubmitted: (String value) async {
+                                                await showDialog<void>(
+                                                  context: context,
+                                                  builder: (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: const Text('Thanks!'),
+                                                      content: Text ('You typed "$value".'),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () { Navigator.pop(context); },
+                                                          child: const Text('OK'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
                                                 );
                                               },
-                                            );
-                                          },
-                                        ),
+                                            ),
 
-                                      )
+                                          )
 
 //                                  Spacer(),
 
 //                                  Spacer(),
 
-                                    ],
-                                  ),
+                                        ],
+                                      ),
+                                    ),
+
+
+
+                                  ],
                                 ),
+                              ),
 
+                              // CONTAINER FOR TOTAL PRICE CART ABOVE.
+                              Container(
+                                height:displayHeight(context) -
+                                    MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                                child: FoodList(firestore: firestore),
+                              ),
 
-
-                              ],
-                            ),
-                          ),
-
-                          // CONTAINER FOR TOTAL PRICE CART ABOVE.
-                          Container(
-                            height:displayHeight(context) -
-                                MediaQuery.of(context).padding.top  - displayHeight(context)/13,
-                            child: FoodList(firestore: firestore),
-                          ),
-
-                        ]
-                    )
+                            ]
+                        )
                     ),
 
                     Container(
@@ -1872,19 +1872,20 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
                             decoration: new BoxDecoration(
                               shape: BoxShape.circle,
                               boxShadow: [
+
+
                                 BoxShadow(
-
-                              /*
-//                                    color: Color.fromRGBO(173, 179, 191, 1.0),
-//                                    blurRadius: 8.0,
-//                                    offset: Offset(0.0, 1.0))
-
-                            */
-                                    color:Color(0xffEAB45E),
+//                                          707070
+//                                              color:Color(0xffEAB45E),
+// good yellow color
+//                                            color:Color(0xff000000),
+                                    color:Color(0xff707070),
+// adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                    blurRadius: 20.0,
-                                    spreadRadius: 20.0,
-                                    offset: Offset(0, 63))
+                                    blurRadius: 40.0,
+                                    spreadRadius: 1.0,
+                                    offset: Offset(0, 21)
+                                )
                               ],
                             ),
                             child: ClipOval(
@@ -2265,17 +2266,17 @@ class FoodListWithCategoryString extends StatelessWidget {
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                            /*
-                                    color: Color.fromRGBO(173, 179, 191, 1.0),
-                                    blurRadius: 8.0,
-                                    offset: Offset(0.0, 1.0))
-
-                                */
-                                    color:Color(0xffEAB45E),
+//                                          707070
+//                                              color:Color(0xffEAB45E),
+// good yellow color
+//                                            color:Color(0xff000000),
+                                    color:Color(0xff707070),
+// adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                    blurRadius: 20.0,
-                                    spreadRadius: 20.0,
-                                    offset: Offset(0, 63))
+                                    blurRadius: 40.0,
+                                    spreadRadius: 1.0,
+                                    offset: Offset(0, 21)
+                                )
                               ],
                             ),
                             child: ClipOval(
@@ -2731,13 +2732,17 @@ class FoodList extends StatelessWidget {
                                         shape: BoxShape.circle,
                                         boxShadow: [
                                           BoxShadow(
-
+//                                          707070
+//                                              color:Color(0xffEAB45E),
+// good yellow color
 //                                            color:Color(0xff000000),
-                                          color:Color(0xffEAB45E),
+                                              color:Color(0xff707070),
+// adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                              blurRadius: 20.0,
-                                              spreadRadius: 20.0,
-                                              offset: Offset(0, 63))
+                                              blurRadius: 40.0,
+                                              spreadRadius: 1.0,
+                                              offset: Offset(0, 21)
+                                          )
                                         ],
                                       ),
                                       child: ClipOval(
@@ -2776,9 +2781,10 @@ class FoodList extends StatelessWidget {
                                           euroPrice3 +'\u20AC',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
-                                          color: Color(0xff707070),
+                                              color: Color(0xff707070),
 //                                              color:Color.fromRGBO(112,112,112,1),
                                               fontSize: 20),
+
                                         ),
 //                                    SizedBox(width: 10),
                                         SizedBox(width: displayWidth(context)/100),
@@ -2872,7 +2878,7 @@ class FoodList extends StatelessWidget {
                                     => FoodItemDetails(oneFoodItemData:oneFoodItem))
                                 );
                               }
-                              )
+                          )
                       );
 //            return SpoiledItem(/*dummy: snapshot.data[index]*/);
                   },

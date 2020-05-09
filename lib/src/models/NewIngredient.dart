@@ -47,6 +47,17 @@ class NewIngredient {
         ingredientAmountByUser = 1;
 
 
+  NewIngredient.updateIngredient(NewIngredient oneIngredient)
+       :imageURL= oneIngredient.imageURL,
+        ingredientName= oneIngredient.ingredientName,
+        price = oneIngredient.price,
+        documentId = oneIngredient.documentId,
+        ingredientAmountByUser = 0;
+
+
+
+
+
 
 //        ingredientAmountByUser = 1;
 

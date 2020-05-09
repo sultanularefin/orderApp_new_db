@@ -99,7 +99,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
   List<NewIngredient> defaultIngredientListForFood;
 
 
-  List<NewIngredient> ingredientlistUnSelected;
+  List<NewIngredient> _ingredientlistUnSelected;
 
 
 
@@ -139,7 +139,6 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
     ingItems = snapshot.documents.map((documentSnapshot) => NewIngredient.fromMap
       (documentSnapshot.data,documentSnapshot.documentID)
 
-
     ).toList();
 
 
@@ -172,21 +171,65 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
       List<NewIngredient> defaultMinus =
       onValue.toSet().difference(filteredIngredients.toSet()).toList();
 
+//      ingItems = snapshot.documents.map((documentSnapshot) => NewIngredient.fromMap
+//        (documentSnapshot.data,documentSnapshot.documentID)
+//
+//      ).toList();
+
+
+      List<NewIngredient> unSelectedDecremented =  defaultMinus.map((oneIngredient)=>NewIngredient.updateIngredient(
+        oneIngredient
+      )).toList();
+
+
+//      return dlist.where((oneItem) =>oneItem.ingredientName.trim().toLowerCase()
+//          ==
+//          searchForThisIngredient(oneItem.ingredientName.trim().toLowerCase())
+//      ).toList();
+      
+//      List<NewIngredient> unSelectedDecremented = <NewIngredient>[defaultMinus.length];
+//      final List<Widget> children = <Widget>[];
+//      _tasks.forEach((StorageUploadTask task) {
+//        final Widget tile = UploadTaskListTile(
+//          task: task,
+//          onDismissed: () => setState(() => _tasks.remove(task)),
+//          onDownload: () => _downloadFile(task.lastSnapshot.ref),
+//        );
+//        children.add(tile);
+//      });
 
       setState(() {
 
         defaultIngredientListForFood = filteredIngredients;
 
 //        defaultIngredientListForFood = onValue.sublist(0,4);
-//        ingredientlistUnSelected = onValue.sublist(4);
+//        _ingredientlistUnSelected = onValue.sublist(4);
 
-        ingredientlistUnSelected=defaultMinus;
+        _ingredientlistUnSelected = unSelectedDecremented;
       }
       );
 
     }
     );
   }
+
+
+
+
+//  NewIngredient updateIngredient(NewIngredient oneNewIngredient) {
+//
+//    // List<String> stringList = List<String>.from(dlist);
+//
+//    logger.i('oneNewIngredient ====================================> ',oneNewIngredient);
+//
+//    return oneNewIngredient.addAll({
+//      "lastName": "Smith",
+//      "age": 26,
+//    });
+//
+//  }
+
+
 
   List<NewIngredient> filterSelectedIngredients(List<NewIngredient> dlist) {
 
@@ -229,7 +272,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
 //    print('ingredientlistFinal ====================================: $defaultIngredientListForFood');
 //
-//    print('_ingredientlistUnSelected ||||||||||||||||||||||||||||||||||: $ingredientlistUnSelected');
+//    print('__ingredientlistUnSelected ||||||||||||||||||||||||||||||||||: $_ingredientlistUnSelected');
 //
     print('at build _____________________________________________________________________');
 //
@@ -239,7 +282,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
     logger.i('oneFoodItemandId',oneFoodItemandId2);
 
 //    String a = Constants.SUCCESS_MESSAGE;
-    if(ingredientlistUnSelected==null){
+    if(_ingredientlistUnSelected==null){
       return Container
         (
           alignment: Alignment.center,
@@ -798,14 +841,15 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                                                   .padding
                                                   .top - 600,
                                           child: GridView.builder(
-                                            itemCount: ingredientlistUnSelected
+                                            itemCount: _ingredientlistUnSelected
                                                 .length,
 
                                             itemBuilder: (_, int index) {
                                               return _buildOneSizeUNSelected
                                                 (
-                                                  ingredientlistUnSelected[index],
-                                                  index);
+                                                  _ingredientlistUnSelected[index],
+                                                  index,_ingredientlistUnSelected
+                                              );
                                             },
                                             gridDelegate:
 //                                            new SliverGridDelegateWithFixedCrossAxisCount(
@@ -862,7 +906,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                                             MediaQuery.of(context).padding.top -400,
 
                                         child:
-                                        LoadUncommonIngredients(allIngredientItems:ingredientlistUnSelected)
+                                        LoadUncommonIngredients(allIngredientItems:_ingredientlistUnSelected)
                                     ),
 
                                     */
@@ -933,63 +977,26 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
 
 
-  Widget categoryItem(Color color, String name,int index) {
-    return GestureDetector(
-
-      onTap: () {
-//        print('_handleRadioValueChange called from Widget categoryItem ');
-
-        _handleRadioValueChange(index);
-      },
-      child:Container(
-        child: _radioValue == index ?
-        (
-            Card(
-              color: color,
-              elevation: 2.5,
-              shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                borderRadius: BorderRadius.circular(35.0),
-              ),
-              child:
-              Align(
-                  alignment: Alignment.center,
-                  child: Text(name, style: TextStyle(color: Colors.white))
-              ),
-
-
-
-            )
-        ):
-        (
-            Card(
-              color: color,
-              elevation: 2.5,
-              shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                borderRadius: BorderRadius.circular(35.0),
-              ),
-              child:Align(
-                  alignment: Alignment.center,
-                  child: Text(name, style: TextStyle(color: Colors.white))
-              ),
-            )
-        ),
-      ),
-    );
-
-  }
 
 
 //  Widget _buildOneSizeUNSelected(IngredientItem unSelectedOneIngredient, int index) {
 
+//  itemSelectedCallback,buttonTypeCallkack
+//  onPressed: () =>
+//
+//  _handlePressForProfile('profile',context)
 
-  Widget _buildOneSizeUNSelected(NewIngredient unSelectedOneIngredient, int index) {
+
+
+  Widget _buildOneSizeUNSelected(NewIngredient unSelectedOneIngredient, int index, List<NewIngredient> allUnSelected
+      ) {
 
     print('unSelectedOneIngredient: ${unSelectedOneIngredient.ingredientName}');
 
+    logger.i("unSelectedOneIngredient: ",unSelectedOneIngredient.ingredientAmountByUser);
 
-    int currentAmount =unSelectedOneIngredient.ingredientAmountByUser-1;
+
+    int currentAmount = unSelectedOneIngredient.ingredientAmountByUser;
 
     String imageURLFinalNotSelected = (unSelectedOneIngredient.imageURL == '') ?
     'https://thumbs.dreamstime.com/z/smiling-orange-fruit-'
@@ -1084,29 +1091,6 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.remove),
-                    iconSize: 30,
-                    tooltip: 'Decrease product count by 1',
-                    onPressed: () {
-                      print('Decrease button pressed');
-//                                      setState(() {
-//                                        _itemCount -= 1;
-//                                      });
-                    },
-//                              size: 24,
-                    color: Colors.grey,
-                  ),
-//      double.parse(doc['priceinEuro'])
-//          .toStringAsFixed(2);
-                  Text(
-                    currentAmount.toString(),
-                    style: TextStyle(
-                      color: Colors.blueGrey[800],
-                      fontWeight: FontWeight.normal,
-                      fontSize: 22,
-                    ),
-                  ),
 
                   Container(
                     alignment:Alignment.topCenter,
@@ -1118,16 +1102,71 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                       icon: Icon(Icons.add),
                       iconSize: 30,
 
-                      tooltip: 'Increase product count by 1',
+                      tooltip: 'Increase Ingredient count by 1',
                       onPressed: () {
                         print('Add button pressed');
-//                                      setState(() {
-//                                        _itemCount += 1;
-//                                      });
+                        NewIngredient c1 = new NewIngredient(
+                            ingredientName : unSelectedOneIngredient.ingredientName,
+                            imageURL: unSelectedOneIngredient.imageURL,
+
+                            price: unSelectedOneIngredient.price,
+                            documentId: unSelectedOneIngredient.documentId,
+                            ingredientAmountByUser :unSelectedOneIngredient.ingredientAmountByUser+1
+
+                        );
+
+                        allUnSelected[index] = c1;
+
+                        setState(() {
+                          _ingredientlistUnSelected= allUnSelected;
+                        });
                       },
                       color: Colors.grey,
                     ),
                   ),
+
+//      double.parse(doc['priceinEuro'])
+//          .toStringAsFixed(2);
+                  Text(
+                    currentAmount.toString(),
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontWeight: FontWeight.normal,
+                      fontSize: 22,
+                    ),
+                  ),
+
+
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    iconSize: 30,
+                    tooltip: 'Decrease Ingredient count by 1',
+                    onPressed: () {
+                      print('Decrease button pressed');
+                      if (currentAmount > 1) {
+//                      if(currentAmount>=2)
+//                      City c1 = new City()..name = 'Blum'..state = 'SC';
+                        NewIngredient c1 = new NewIngredient(
+                            ingredientName: unSelectedOneIngredient
+                                .ingredientName,
+                            imageURL: unSelectedOneIngredient.imageURL,
+
+                            price: unSelectedOneIngredient.price,
+                            documentId: unSelectedOneIngredient.documentId,
+                            ingredientAmountByUser: unSelectedOneIngredient
+                                .ingredientAmountByUser - 1
+                        );
+
+                        allUnSelected[index] = c1;
+                        setState(() {
+                          _ingredientlistUnSelected = allUnSelected;
+                        });
+                      }
+                    },
+//                              size: 24,
+                    color: Colors.grey,
+                  ),
+
                 ],
 
               ),
@@ -1170,7 +1209,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //
 //
 //
-//    ingredientlistUnSelected
+//    _ingredientlistUnSelected
 //
 //    if(oneIngredient.ingredientName)
 
