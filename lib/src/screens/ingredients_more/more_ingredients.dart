@@ -798,7 +798,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //                                                            defaultIngredientListForFood.expand((i) =>
 //                                                            [i, unSelectedToSelected]).toList();
 
-                                                             [...defaultIngredientListForFood, ...unSelectedToSelected];
+                                                            [...defaultIngredientListForFood, ...unSelectedToSelected];
 
                                                             List<NewIngredient> newUnselected =
                                                             _allIngredientsList.toSet().
