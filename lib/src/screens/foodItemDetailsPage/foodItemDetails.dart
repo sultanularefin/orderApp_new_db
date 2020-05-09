@@ -312,9 +312,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 
 
-
-
-
     List<String> test = convertDList2(foodItemIngredientsList);
 
 
@@ -1468,6 +1465,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
     else {
       // CONDITION 2 WHEN TEST [INGREDIENT LIST IS NOT EMPTY]
 
+      print('at else where $test is not empty');
+
       return GestureDetector(
         onTap: () {
 //        FocusScopeNode currentFocus = FocusScope.of(context);
@@ -2016,15 +2015,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 // GRID VIEW FROM INGREDIENT IMAGES. STARTS FROM BELOW.
 
                                         Container(
-                                            color: Color(0xffF7F0EC),
-                                            height: displayHeight(context) / 9,
+                                          color: Color(0xffF7F0EC),
+                                          height: displayHeight(context) / 9,
 //                                            child: LoadSelectedIngredients(
 //                                                firestore: firestore,
 //                                                oneFoodItemandId: oneFoodItemandId
 //                                            )
 
-                                            child:
-                                            StreamBuilder<QuerySnapshot>(
+                                          child:
+                                          StreamBuilder<QuerySnapshot>(
 //        stream: firestore
 //            .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
 //            .collection('ingredients').where(
@@ -2032,31 +2031,37 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //
 //        ).snapshots(),
 
-                                              stream: firestore
-                                                  .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
-                                                  .collection('ingredients').where(
-                                                  'name', whereIn: ['Kinkku','Tonnikala','Ananas'
-                                              ]
+                                            stream: firestore
+                                                .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+                                                .collection('ingredients').where(
+                                                'name', whereIn: test
 
-                                              ).snapshots(),
-                                              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                                                if (!snapshot.hasData)
-                                                  return Center(child: new LinearProgressIndicator(
+                                            ).snapshots(),
+                                            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                                              if (!snapshot.hasData)
+                                                return Center(child: new LinearProgressIndicator(
 
 //            valueColor: Colors.deepOrangeAccent,
-                                                    backgroundColor: Colors.purpleAccent,
-                                                  ));
+                                                  backgroundColor: Colors.purpleAccent,
+                                                ));
 
-                                                else {
-                                                  final int ingredientCount = snapshot.data.documents.length;
-                                                  print('ingredientCount: $ingredientCount');
-                                                  return (
+                                              else {
+                                                final int ingredientCount = snapshot.data.documents.length;
+                                                print('ingredientCount: $ingredientCount');
+                                                return (
 
-                                                      GridView.builder(
-                                                        itemCount: ingredientCount,
+                                                    GridView.builder(
+                                                      itemCount: ingredientCount,
 
-                                                        gridDelegate:
-                                                        new SliverGridDelegateWithFixedCrossAxisCount(
+                                                      gridDelegate:
+                                                      new SliverGridDelegateWithMaxCrossAxisExtent(
+
+                                                        maxCrossAxisExtent: 180,
+                                                        mainAxisSpacing: 6, // Vertical  direction
+                                                        crossAxisSpacing: 5,
+                                                        childAspectRatio: 200/240,
+
+                                                        /*
                                                             mainAxisSpacing: 5,
                                                             // H  direction
 //
@@ -2066,8 +2071,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //                                  /// H/V
                                                             // horizontal / vertical
                                                             childAspectRatio: 220 / 450,
+
                                                             crossAxisCount: 4
-                                                        ),
+
+                                                             */
+                                                      ),
 
 
 //              new SliverGridDelegateWithMaxCrossAxisExtent(
@@ -2081,28 +2089,28 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //                childAspectRatio: 160/220,
 //
 //              ),
-                                                        shrinkWrap: false,
+                                                      shrinkWrap: false,
 
-                                                        itemBuilder: (_, int index) {
-                                                          final DocumentSnapshot document = snapshot.data
-                                                              .documents[index];
-                                                          final dynamic ingredientName = document['name'];
+                                                      itemBuilder: (_, int index) {
+                                                        final DocumentSnapshot document = snapshot.data
+                                                            .documents[index];
+                                                        final dynamic ingredientName = document['name'];
 //                  final dynamic ingredientImageURL = document['image'];
-                                                          final num ingredientPrice = document['price'];
+                                                        final num ingredientPrice = document['price'];
 
-                                                          final dynamic ingredientImageURL = document['image'] == '' ?
-                                                          'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
-                                                              :
-                                                          storageBucketURLPredicate +
-                                                              Uri.encodeComponent(document['image'])
+                                                        final dynamic ingredientImageURL = document['image'] == '' ?
+                                                        'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+                                                            :
+                                                        storageBucketURLPredicate +
+                                                            Uri.encodeComponent(document['image'])
 
-                                                              + '?alt=media';
+                                                            + '?alt=media';
 
 //                  final String ingredientItemId =  document['ingredientId'];
 //                  final bool ingredientIsAvailable =  document['isAvailable'];
 
 //                  LOADING ERROR FOR THE IMAGE: ingredientName: Salaatti;
-                                                          // DATABASE || SERVER ERROR.
+                                                        // DATABASE || SERVER ERROR.
 
 //                  logger.i('ingredientName: $ingredientName');
 //                  logger.i('price: $ingredientPrice');
@@ -2118,96 +2126,96 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //                  print('ingredientIsAvailable: $ingredientIsAvailable');
 
 
-                                                          final NewIngredient ingredientItemTest = new NewIngredient(
+                                                        final NewIngredient ingredientItemTest = new NewIngredient(
 //                FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
-                                                            ingredientName: ingredientName,
+                                                          ingredientName: ingredientName,
 
-                                                            imageURL: ingredientImageURL,
-                                                            price: ingredientPrice.toDouble(),
+                                                          imageURL: ingredientImageURL,
+                                                          price: ingredientPrice.toDouble(),
 //                    ingredientId:ingredientItemId,
 //
 //                    isAvailable: ingredientIsAvailable,
-                                                            documentId: document.documentID,
+                                                          documentId: document.documentID,
 
-                                                          );
+                                                        );
 
 
-                                                          return
-                                                            Container(
-                                                                color: Color.fromRGBO(239, 239, 239, 0),
-                                                                padding: EdgeInsets.symmetric(
+                                                        return
+                                                          Container(
+                                                              color: Color.fromRGBO(239, 239, 239, 0),
+                                                              padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-                                                                    horizontal: 4.0, vertical: 15.0),
-                                                                child: InkWell(
-                                                                    child: Column(
-                                                                      children: <Widget>[
+                                                                  horizontal: 4.0, vertical: 15.0),
+                                                              child: InkWell(
+                                                                  child: Column(
+                                                                    children: <Widget>[
 
-                                                                        new Container(
+                                                                      new Container(
 
-//                                    width: displayWidth(context) * 0.19,
-//                                    height: displayWidth(context) * 0.19,
+                                                                        width: displayWidth(context) * 0.09,
+                                                                        height: displayWidth(context) * 0.11,
 
-                                                                          child: ClipOval(
+                                                                        child: ClipOval(
 
-                                                                            child: CachedNetworkImage(
-                                                                              imageUrl: ingredientImageURL,
-                                                                              fit: BoxFit.cover,
-                                                                              placeholder: (context,
-                                                                                  url) => new LinearProgressIndicator(),
-                                                                              errorWidget: (context, url, error) =>
-                                                                                  Image.network(
-                                                                                      'https://img.freepik.com/free-vector'
-                                                                                          '/404-error-design-with-donut_76243-30.jpg?size'
-                                                                                          '=338&ext=jpg'),
+                                                                          child: CachedNetworkImage(
+                                                                            imageUrl: ingredientImageURL,
+                                                                            fit: BoxFit.cover,
+                                                                            placeholder: (context,
+                                                                                url) => new LinearProgressIndicator(),
+                                                                            errorWidget: (context, url, error) =>
+                                                                                Image.network(
+                                                                                    'https://img.freepik.com/free-vector'
+                                                                                        '/404-error-design-with-donut_76243-30.jpg?size'
+                                                                                        '=338&ext=jpg'),
 //                    https://img.freepik.com/free-vector/404-error-design-with-donut_76243-30.jpg?size=338&ext=jpg
 //                    https://img.freepik.com/free-vector/404-error-page-found-with-donut_114341-54.jpg?size=626&ext=jpg
 
-                                                                            ),
                                                                           ),
                                                                         ),
+                                                                      ),
 
 //                              SizedBox(height: 10),
 
 
-                                                                        Text(
+                                                                      Text(
 
-                                                                          ingredientName,
+                                                                        ingredientName,
 
-                                                                          style: TextStyle(
-                                                                            color: Color.fromRGBO(112, 112, 112, 1),
+                                                                        style: TextStyle(
+                                                                          color: Color.fromRGBO(112, 112, 112, 1),
 //                                    color: Colors.blueGrey[800],
 
-                                                                            fontWeight: FontWeight.normal,
-                                                                            fontSize: 18,
-                                                                          ),
-                                                                        )
-                                                                        ,
+                                                                          fontWeight: FontWeight.normal,
+                                                                          fontSize: 18,
+                                                                        ),
+                                                                      )
+                                                                      ,
 
 
-                                                                      ],
-                                                                    ),
-                                                                    onTap: () {
-                                                                      print('for future use');
+                                                                    ],
+                                                                  ),
+                                                                  onTap: () {
+                                                                    print('for future use');
 //                            return Navigator.push(context,
 //
 //                                MaterialPageRoute(builder: (context)
 //                                => FoodItemDetails())
 //                            );
-                                                                    }));
-                                                        },
+                                                                  }));
+                                                      },
 
-                                                      )
+                                                    )
 
-                                                  );
-                                                }
-                                              },
-
-
+                                                );
+                                              }
+                                            },
 
 
 
-                                            ),
+
+
+                                          ),
 
 //                                          LoadSelectedIngredients
 //                                        child:LoadSelectedIngredients(firestore: firestore,)

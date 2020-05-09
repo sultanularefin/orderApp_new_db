@@ -102,9 +102,9 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
   List<NewIngredient> _ingredientlistUnSelected;
 
 
+  List<NewIngredient> _allIngredientsList;
 
-
-  final _allIngredientsList = [];
+//  final _allIngredientsList = [];
 
 
 
@@ -161,9 +161,9 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
       List<NewIngredient> filteredIngredients = filterSelectedIngredients(onValue);
 
-      logger.i('filteredIngredients: ',filteredIngredients);
-
-      logger.i('important default list (test): ',filteredIngredients);
+//      logger.i('filteredIngredients: ',filteredIngredients);
+//
+//      logger.i('important default list (test): ',filteredIngredients);
 
 //      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
 
@@ -178,7 +178,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
 
       List<NewIngredient> unSelectedDecremented =  defaultMinus.map((oneIngredient)=>NewIngredient.updateIngredient(
-        oneIngredient
+          oneIngredient
       )).toList();
 
 
@@ -186,7 +186,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //          ==
 //          searchForThisIngredient(oneItem.ingredientName.trim().toLowerCase())
 //      ).toList();
-      
+
 //      List<NewIngredient> unSelectedDecremented = <NewIngredient>[defaultMinus.length];
 //      final List<Widget> children = <Widget>[];
 //      _tasks.forEach((StorageUploadTask task) {
@@ -206,6 +206,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //        _ingredientlistUnSelected = onValue.sublist(4);
 
         _ingredientlistUnSelected = unSelectedDecremented;
+        _allIngredientsList = onValue;
       }
       );
 
@@ -235,7 +236,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
     // List<String> stringList = List<String>.from(dlist);
 
-    logger.i('dlist ====================================> ',dlist);
+//    logger.i('dlist ====================================> ',dlist);
 
     return dlist.where((oneItem) =>oneItem.ingredientName.trim().toLowerCase()
         ==
@@ -619,14 +620,22 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                                               /// DELEGATE WILL CREATE A GRID WITH 4
                                               /// COLUMNS THAT ARE 125.0 PIXELS WIDE.
                                               ///
-                                              maxCrossAxisExtent: 190,
+                                              maxCrossAxisExtent: 180,
                                               mainAxisSpacing: 6, // Vertical  direction
-                                              crossAxisSpacing: 8,
-
+                                              crossAxisSpacing: 5,
+                                              childAspectRatio: 200/240,
                                               ///childAspectRatio:
                                               /// The ratio of the cross-axis to the main-axis extent of each child.
                                               /// H/Verti
-                                              childAspectRatio: 370/350,
+
+
+
+                                              /*
+                                              maxCrossAxisExtent: 260,
+                                              mainAxisSpacing: 8,
+                                              crossAxisSpacing: 0,
+                                              childAspectRatio: 380 / 400,
+                                              */
 
                                             ),
 
@@ -762,17 +771,59 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
                                                     Container(
                                                         child: GestureDetector(
-                                                          onLongPress: () {
-                                                            print(
-                                                                'at on Loong Press: ');
-                                                          },
-                                                          onLongPressUp: () {
-                                                            print(
-                                                                'on Long Press Up:');
-                                                          },
+//                                                          onLongPress: () {
+//                                                            print(
+//                                                                'at on Loong Press: ');
+//                                                          },
+//                                                          onLongPressUp: () {
+//                                                            print(
+//                                                                'on Long Press Up:');
+//                                                          },
                                                           onTap: () {
                                                             print('on Tap');
+
+
+                                                            List<NewIngredient> unSelectedToSelected =
+                                                            _ingredientlistUnSelected.where((oneItem) =>
+                                                            oneItem.ingredientAmountByUser>=1
+
+                                                            ).toList();
+
+//                                                            logger.i('unSelectedToSelected.ingredientName: ',unSelectedToSelected[0]
+//                                                                .ingredientName);
+//                                                            logger.i('unSelectedToSelected.ingredientName: ',unSelectedToSelected[1]
+//                                                                .ingredientName);
+
+                                                            List<NewIngredient> combinedIngredientList =
+//                                                            defaultIngredientListForFood.expand((i) =>
+//                                                            [i, unSelectedToSelected]).toList();
+
+                                                             [...defaultIngredientListForFood, ...unSelectedToSelected];
+
+                                                            List<NewIngredient> newUnselected =
+                                                            _allIngredientsList.toSet().
+                                                            difference(combinedIngredientList.toSet()).toList();
+
+                                                            List<NewIngredient> unSelectedDecremented =  newUnselected.map
+                                                              ((oneIngredient)=>NewIngredient.updateIngredient(
+                                                                oneIngredient
+                                                            )).toList();
+
+                                                            logger.i('unSelectedDecremented.length',unSelectedDecremented.length);
+
+                                                            logger.i('NEW SELECTED ||combinedIngredientList.length',
+                                                                combinedIngredientList.length);
+                                                            logger.i('_allIngredientsList.length',_allIngredientsList.length);
+
+
+                                                            setState(() {
+                                                              defaultIngredientListForFood = combinedIngredientList;
+                                                              _ingredientlistUnSelected = unSelectedDecremented;
+                                                            });
+
+
                                                           },
+
                                                           child: Container(
 
                                                             decoration: BoxDecoration(
@@ -941,39 +992,6 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
   }
 
 
-  void _handleRadioValueChange(int value) {
-    // print('at _handleRadioValueChange() method ???????????');
-    print('value is: $value');
-    setState(() {
-
-      switch (_radioValue) {
-        case 0:
-          _radioValue = value;
-          //print('case 0: $value');
-          break;
-        case 1:
-          _radioValue = value;
-          //print('case 1: $value');
-          break;
-        case 2:
-          _radioValue = value;
-          //print('case 2: $value');
-          break;
-        case 3:
-          _radioValue = value;
-          //print('case 0: $value');
-          break;
-        case 4:
-          _radioValue = value;
-          //print('case 1: $value');
-          break;
-        case 5:
-          _radioValue = value;
-          //print('case 2: $value');
-          break;
-      }
-    });
-  }
 
 
 
@@ -1014,14 +1032,18 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
             horizontal: 4.0, vertical: 15.0),
 
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+
 //                              SizedBox(height: 10),
 
             Container(
-
+// TO Be
 //          height:45, // same as the heidth of increment decrement button.
               width: displayWidth(context)/7,
               height:45,
+              alignment: Alignment.center,
+
               child:
 
               Text(
@@ -1042,6 +1064,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
             Container(
 
               width: displayWidth(context) * 0.09,
+              height: displayWidth(context) * 0.11,
               padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
 //                                    height: displayWidth(context) * 0.19,
 
@@ -1092,38 +1115,34 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
 
-                  Container(
-                    alignment:Alignment.topCenter,
-//                    margin: EdgeInsets.only(top:0),
-////                    padding: EdgeInsets.only(top:0),
-                    child:
 
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      iconSize: 30,
 
-                      tooltip: 'Increase Ingredient count by 1',
-                      onPressed: () {
-                        print('Add button pressed');
-                        NewIngredient c1 = new NewIngredient(
-                            ingredientName : unSelectedOneIngredient.ingredientName,
-                            imageURL: unSelectedOneIngredient.imageURL,
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    iconSize: 30,
 
-                            price: unSelectedOneIngredient.price,
-                            documentId: unSelectedOneIngredient.documentId,
-                            ingredientAmountByUser :unSelectedOneIngredient.ingredientAmountByUser+1
+//                      tooltip: 'Increase Ingredient count by 1',
+                    onPressed: () {
+                      print('Add button pressed');
+                      NewIngredient c1 = new NewIngredient(
+                          ingredientName : unSelectedOneIngredient.ingredientName,
+                          imageURL: unSelectedOneIngredient.imageURL,
 
-                        );
+                          price: unSelectedOneIngredient.price,
+                          documentId: unSelectedOneIngredient.documentId,
+                          ingredientAmountByUser :unSelectedOneIngredient.ingredientAmountByUser+1
 
-                        allUnSelected[index] = c1;
+                      );
 
-                        setState(() {
-                          _ingredientlistUnSelected= allUnSelected;
-                        });
-                      },
-                      color: Colors.grey,
-                    ),
+                      allUnSelected[index] = c1;
+
+                      setState(() {
+                        _ingredientlistUnSelected= allUnSelected;
+                      });
+                    },
+                    color: Colors.grey,
                   ),
+
 
 //      double.parse(doc['priceinEuro'])
 //          .toStringAsFixed(2);
@@ -1137,15 +1156,13 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                   ),
 
 
-                  IconButton(
-                    icon: Icon(Icons.remove),
-                    iconSize: 30,
-                    tooltip: 'Decrease Ingredient count by 1',
-                    onPressed: () {
+                  InkResponse(
+                    onTap: (){
                       print('Decrease button pressed');
                       if (currentAmount > 1) {
 //                      if(currentAmount>=2)
 //                      City c1 = new City()..name = 'Blum'..state = 'SC';
+
                         NewIngredient c1 = new NewIngredient(
                             ingredientName: unSelectedOneIngredient
                                 .ingredientName,
@@ -1157,15 +1174,57 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                                 .ingredientAmountByUser - 1
                         );
 
+
+
                         allUnSelected[index] = c1;
                         setState(() {
                           _ingredientlistUnSelected = allUnSelected;
                         });
                       }
                     },
+                    splashColor:Colors.deepOrangeAccent,
+                    focusColor:Colors.blue,
+                    hoverColor:Colors.lightGreen,
+                    highlightColor:Colors.indigo,
+                    child:
+
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      iconSize: 30,
+//                      tooltip: 'Decrease Ingredient count by 1',
+                      onPressed: () {
+                        print('Decrease button pressed');
+                        if (currentAmount > 1) {
+//                      if(currentAmount>=2)
+//                      City c1 = new City()..name = 'Blum'..state = 'SC';
+
+                          NewIngredient c1 = new NewIngredient(
+                              ingredientName: unSelectedOneIngredient
+                                  .ingredientName,
+                              imageURL: unSelectedOneIngredient.imageURL,
+
+                              price: unSelectedOneIngredient.price,
+                              documentId: unSelectedOneIngredient.documentId,
+                              ingredientAmountByUser: unSelectedOneIngredient
+                                  .ingredientAmountByUser - 1
+                          );
+
+
+
+                          allUnSelected[index] = c1;
+                          setState(() {
+                            _ingredientlistUnSelected = allUnSelected;
+                          });
+                        }
+                      },
+                      splashColor:Colors.deepOrangeAccent,
+                      focusColor:Colors.blue,
+                      hoverColor:Colors.lightGreen,
+                      highlightColor:Colors.indigo,
 //                              size: 24,
-                    color: Colors.grey,
-                  ),
+                      color: Colors.grey,
+                    ),),
+
 
                 ],
 
@@ -1225,7 +1284,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
           new Container(
 
 //                                    width: displayWidth(context) * 0.19,
-//                                    height: displayWidth(context) * 0.19,
+            height: displayWidth(context) * 0.13,
 
             width: displayWidth(context) * 0.11,
             padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
