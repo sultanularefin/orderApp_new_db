@@ -18,7 +18,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
+//import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:neumorphic/neumorphic.dart';
 
+//C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/neumorphic-0.3.0/lib/src/components/neu_card.dart
 // local packages
 
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
@@ -273,7 +276,40 @@ class _FoodGalleryState extends State<FoodGallery> {
     final String categoryName = oneCategory;
 //    final String categoryName = document['name'];
     if (_currentCategory.toLowerCase()==categoryName.toLowerCase()){
-      return ListTile(
+
+
+      return
+/*
+        Neumorphic(
+          style: NeumorphicStyle(
+          border: NeumorphicBorder(
+          color: Color(0xff54463E),
+//                  width: 0.8,
+    )
+    ),
+
+ */
+        NeuCard(
+          // State of Neumorphic (may be convex, flat & emboss)
+          curveType: CurveType.concave,
+//            padding: EdgeInsets.symmetric(horizontal: 3,vertical:0),
+          margin: EdgeInsets.fromLTRB(12, 0, 5, 0),
+
+          // Elevation relative to parent. Main constituent of Neumorphism
+//            bevel: 12,
+
+          // Specified decorations, like `BoxDecoration` but only limited
+          decoration: NeumorphicDecoration(
+            borderRadius: BorderRadius.circular(8),
+            shape: BoxShape.rectangle,
+            clipBehavior: Clip.antiAlias,
+            color: Color(0xff54463E),
+          ),
+
+          //ZZZ
+          // Other arguments such as margin, padding etc. (Like `Container`)
+          child:
+          ListTile(
 //        trailing: CustomPaint(size: Size(0,19),
 //          painter: MyPainter(),
 //        ),
@@ -281,43 +317,45 @@ class _FoodGalleryState extends State<FoodGallery> {
 //        contentPadding: EdgeInsets.symmetric(
 //            horizontal: 4.0, vertical: 6.0),
 
-        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
-//    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
-        title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(categoryName
-                ,
-//    Text(categoryName.substring(0, 2),
-                style: TextStyle(
-                  color:Color.fromRGBO(255,255,255,1),
-//                  color:Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
+            contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
 
-              ),CustomPaint(size: Size(0,19),
-                painter: MyPainter(),
-              )
-            ]
-        ),
-        onTap: () { // Add 9 lines from here...
-          print('onTap pressed');
-          print('index: $index');
-          setState(() {
-            _currentCategory = categoryName;
-            _firstTimeCategoryString =categoryName;
-            _searchString = '';
-          });
-        }, // ... to here.
-      );
+            title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(categoryName.toUpperCase()
+                    ,
+//    Text(categoryName.substring(0, 2),
+                    style: TextStyle(
+                      color:Color.fromRGBO(255,255,255,1),
+//                  color:Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+
+                  ),CustomPaint(size: Size(0,19),
+                    painter: MyPainter(),
+                  )
+                ]
+            ),
+
+            onTap: () { // Add 9 lines from here...
+              print('onTap pressed');
+              print('index: $index');
+              setState(() {
+                _currentCategory = categoryName;
+                _firstTimeCategoryString =categoryName;
+                _searchString = '';
+              });
+            }, // ... to here.
+          ),
+        );
     }
     else {
       return ListTile(
         contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
 
-        title:  Text(categoryName,
+        title:  Text(categoryName.toUpperCase(),
 //    Text(categoryName.substring(0, 2),
           style: TextStyle(
 //            color:Color.fromRGBO(84,70,62,1),
@@ -346,50 +384,74 @@ class _FoodGalleryState extends State<FoodGallery> {
 //    final DocumentSnapshot document = snapshot.data.documents[index];
     final String categoryName = document['name'];
     if (_currentCategory.toLowerCase()==categoryName.toLowerCase()){
-      return ListTile(
-//        trailing: CustomPaint(size: Size(0,19),
-//          painter: MyPainter(),
-//        ),
+      return
+/*
+        Neumorphic(
+          style: NeumorphicStyle(
+          border: NeumorphicBorder(
+          color: Color(0xff54463E),
+//                  width: 0.8,
+    )
+    ),
 
-//        contentPadding: EdgeInsets.symmetric(
-//            horizontal: 4.0, vertical: 6.0),
+ */
+        NeuCard(
+          // State of Neumorphic (may be convex, flat & emboss)
+            curveType: CurveType.concave,
+//            padding: EdgeInsets.symmetric(horizontal: 3,vertical:0),
+            margin: EdgeInsets.fromLTRB(12, 0, 5, 0),
 
-        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
+            // Elevation relative to parent. Main constituent of Neumorphism
+//            bevel: 12,
+
+            // Specified decorations, like `BoxDecoration` but only limited
+            decoration: NeumorphicDecoration(
+              borderRadius: BorderRadius.circular(8),
+              shape: BoxShape.rectangle,
+              clipBehavior: Clip.antiAlias,
+              color: Color(0xff54463E),
+            ),
+
+            // Other arguments such as margin, padding etc. (Like `Container`)
+            child: ListTile(
+
+              contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
 //    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
-        title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(categoryName
-                ,
+              title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(categoryName.toUpperCase()
+                      ,
 //    Text(categoryName.substring(0, 2),
-                style: TextStyle(
-                  color:Color.fromRGBO(255,255,255,1),
+                      style: TextStyle(
+                        color:Color.fromRGBO(255,255,255,1),
 //                  color:Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
 
-              ),CustomPaint(size: Size(0,19),
-                painter: MyPainter(),
-              )
-            ]
-        ),
-        onTap: () { // Add 9 lines from here...
-          print('onTap pressed');
-          print('index: $index');
-          setState(() {
-            _currentCategory = categoryName;
-            _firstTimeCategoryString =categoryName;
-          });
-        }, // ... to here.
-      );
+                    ),CustomPaint(size: Size(0,19),
+                      painter: MyPainter(),
+                    )
+                  ]
+              ),
+              onTap: () { // Add 9 lines from here...
+                print('onTap pressed');
+                print('index: $index');
+                setState(() {
+                  _currentCategory = categoryName;
+                  _firstTimeCategoryString =categoryName;
+                });
+              }, // ... to here.
+            )
+        );
     }
     else {
       return ListTile(
         contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
 
-        title:  Text(categoryName,
+        title:  Text(categoryName.toUpperCase(),
 //    Text(categoryName.substring(0, 2),
           style: TextStyle(
 //            color:Color.fromRGBO(84,70,62,1),
@@ -488,6 +550,7 @@ class _FoodGalleryState extends State<FoodGallery> {
                                     vertical: 0),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
+
                                     boxShadow: [
                                       BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),

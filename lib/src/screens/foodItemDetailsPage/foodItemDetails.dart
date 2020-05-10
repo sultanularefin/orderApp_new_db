@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/models/NewIngredient.dart';
 import 'package:logger/logger.dart';
+import 'package:neumorphic/neumorphic.dart';
 
 
 //sizeConstantsList
@@ -21,7 +22,7 @@ import 'package:foodgallery/src/models/SizeConstants.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 import './../../models/FoodItemWithDocID.dart';
-import './../../models/OrderList.dart';
+import './../../models/Order.dart';
 //import './../../models/itemData.dart';
 
 
@@ -86,8 +87,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   FoodItemWithDocID oneFoodItemandId;
 
   _FoodItemDetailsState(this.oneFoodItemandId);
-  List<IngredientItem> defaultIngredientListForFood;
+  List<NewIngredient> defaultIngredientListForFood;
 
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
+
+
+  Order oneOrder = new Order();
 
 
   @override
@@ -103,7 +110,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   Future<void> retrieveIngredientsDefault() async {
     debugPrint("Entering in retrieveIngredients1");
 
-/*
+
     await retrieveIngredients2().then((onValue){
 
 //      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
@@ -116,50 +123,93 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
     }
 
     );
-    */
 
 
   }
 
 
-//  firestore
-//      .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
-//      .collection('ingredients').where(
-//  'name', whereIn: foodItemIngredientsList
-//  )
-//      .snapshots(),
 
 
 
 
-  /*
 
-  static Future <List> retrieveIngredients2() async {
-    final List<dynamic> foodItemIngredientsList =
+  Future <List> retrieveIngredients2() async {
+    var logger = Logger(
+      printer: PrettyPrinter(),
+    );
 
-    List<NewIngredient> ingItems = new List<NewIngredient>();
-    var snapshot = await Firestore.instance.collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
-        .collection('ingredients').
-    where('name', whereIn: foodItemIngredientsList)
+//    final List<dynamic> foodItemIngredientsList =
 
-        .getDocuments();
+    List <NewIngredient> ingItems = new List<NewIngredient>();
+
+
+    final List<dynamic> foodItemIngredientsList2 =  oneFoodItemandId.ingredients;
+    List<String> test2 = dListFilteredToSList(foodItemIngredientsList2);
+
+    if(test2.length!=0) {
+      logger.i('test in retrieveIngredients2() : $test2');
 
 //    firestore
 //        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
-//        .collection('ingredients').
+//        .collection('ingredients').where(
+//        'name', whereIn: test
+//
+//    ).snapshots(),
 
-    List docList = snapshot.documents;
-//    print('doc List :  ******************* <================ : $docList');
 
-    ingItems = snapshot.documents.map((documentSnapshot) =>
-        IngredientItem.fromMap(documentSnapshot.data)).toList();
+      var snapshot = await Firestore.instance.collection("restaurants")
+          .document('USWc8IgrHKdjeDe9Ft4j')
+          .collection('ingredients').where(
+          'name', whereIn: test2)
+          .getDocuments();
 
-    return ingItems;
+      //    firestore
+      //        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
+      //        .collection('ingredients').
+
+      //    List docList = snapshot.documents;
+      //    print('doc List at FoodDetails page (init State) :  ******************* <================ : $docList');
+
+      // ingItems = snapshot.documents.map((documentSnapshot) => IngredientItem.fromMap
+      //(documentSnapshot.data)).toList();
+
+      ingItems = snapshot.documents.map((documentSnapshot) =>
+          NewIngredient.fromMap
+            (documentSnapshot.data, documentSnapshot.documentID)
+
+      ).toList();
+
+
+      List<String> documents = snapshot.documents.map((documentSnapshot) =>
+      documentSnapshot.documentID
+      ).toList();
+
+      print('documents are: $documents');
+
+
+      return ingItems;
+    }
+    else{
+      NewIngredient c1 = new NewIngredient(
+          ingredientName : 'None',
+          imageURL: 'None',
+
+          price: 0.01,
+          documentId: 'None',
+          ingredientAmountByUser :1000
+
+      );
+
+      ingItems.add(c1);
+
+      return ingItems;
+
+    }
   }
-*/
 
 
-  // NOT NECESSARY NOW.
+
+  // !(NOT) NECESSARY NOW.
   Future<void> setDetailForFood() async {
     debugPrint("Entering in retrieveIngredients1");
 //    logger.i('ss',oneFoodItemandId);
@@ -201,9 +251,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 //  final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
 
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+
 
   num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
 
@@ -280,7 +328,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 //    searchString2.toLowerCase())).toList();
   }
 
-  List<String> convertDList2(List<dynamic> dlist) {
+  List<String> dListFilteredToSList(List<dynamic> dlist) {
 
     List<String> stringList = List<String>.from(dlist);
     return stringList.where((oneItem) =>oneItem.toString().toLowerCase()
@@ -303,28 +351,32 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
 
     final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
+    List<String> ingredientStringsForWhereInClause;
 
-    final List<dynamic> foodItemIngredientsList = oneFoodItemandId.ingredients;
+    if (defaultIngredientListForFood == null) {
+      return Center(child: new LinearProgressIndicator(
 
-    List<String> stringList = List<String>.from(foodItemIngredientsList);
+//            valueColor: Colors.deepOrangeAccent,
+        backgroundColor: Colors.purpleAccent,
+      ));
+    }
+    
+    else if (defaultIngredientListForFood[0].ingredientName == 'None'){
+      ingredientStringsForWhereInClause = [];
 
-    print('string List: $stringList');
+    // final List<dynamic> foodItemIngredientsList = oneFoodItemandId.ingredients;
+      
 
-
-
-    List<String> test = convertDList2(foodItemIngredientsList);
-
-
-
-
-    logger.i('test: $test');
+    logger.i('ingredientStringsForWhereInClause: $ingredientStringsForWhereInClause');
 
 
     //QQQQ
     // FUTURE USE.
+      /*
     final List<NewIngredient> orderedItemsIngredients = new List<NewIngredient> ();
 
-    test.forEach((doc) {
+
+    ingredientStringsForWhereInClause.forEach((doc) {
       NewIngredient oneIngredient = new NewIngredient(
 
           ingredientName:doc,
@@ -338,9 +390,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
       orderedItemsIngredients.add(oneIngredient);
     });
+    */
 
     // CONDITION 1 WHEN TEST [INGREDIENT LIST] IS EMPTY
-    if(test.isEmpty) {
+
       return GestureDetector(
         onTap: () {
 //        FocusScopeNode currentFocus = FocusScope.of(context);
@@ -816,57 +869,48 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                               // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
 
                                               Container(
-                                                  child: GestureDetector(
-                                                    onLongPress: () {
-                                                      print(
-                                                          'at on Loong Press: ');
-                                                    },
-                                                    onLongPressUp: () {
 
-                                                    },
-                                                    child: Container(
-
-                                                      decoration: BoxDecoration(
+                                                decoration: BoxDecoration(
 //                                              color: Colors.black54,
-                                                        color: Color(
-                                                            0xffC27FFF),
-                                                        borderRadius: BorderRadius
-                                                            .circular(5),
-                                                      ),
+                                                  color: Color(
+                                                      0xffC27FFF),
+                                                  borderRadius: BorderRadius
+                                                      .circular(5),
+                                                ),
 
 
 //                                            color:Color(0xffC27FFF),
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .center,
-                                                        children: <Widget>[
-                                                          Icon(
-                                                            Icons
-                                                                .lightbulb_outline,
-                                                            size: 32.0,
-                                                            color: Color(
-                                                                0xffFFFFFF),),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .start,
+                                                  crossAxisAlignment: CrossAxisAlignment
+                                                      .center,
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons
+                                                          .lightbulb_outline,
+                                                      size: 32.0,
+                                                      color: Color(
+                                                          0xffFFFFFF),),
 
 
-                                                          Text(
-                                                            'Long press to remove ingredient',
-                                                            style: TextStyle(
-                                                                fontWeight: FontWeight
-                                                                    .normal,
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 15),
-                                                          ),
-
-
-                                                        ],
-                                                      ),
-
+                                                    Text(
+                                                      'Long press to remove ingredient',
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .normal,
+                                                          color: Colors
+                                                              .white,
+                                                          fontSize: 15),
                                                     ),
-                                                  )
-                                              )
+
+
+                                                  ],
+                                                ),
+
+                                              ),
+
+
 
                                               // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
                                               // ENDED HERE.
@@ -948,7 +992,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                                   context) =>
                                                                   MoreIngredients(
                                                                     oneFoodItemData1: oneFoodItemandId,
-                                                                    onlyIngredientsNames1:test,
+                                                                    onlyIngredientsNames1:ingredientStringsForWhereInClause,
                                                                   )
                                                             //oneFoodItem
 //                                                          oneFoodItemandId
@@ -1462,10 +1506,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
       );
     }
 
+
     else {
       // CONDITION 2 WHEN TEST [INGREDIENT LIST IS NOT EMPTY]
 
-      print('at else where $test is not empty');
+
+    ingredientStringsForWhereInClause =
+    defaultIngredientListForFood.map((oneIngredient)=> oneIngredient.ingredientName).toList();
+
+
+    print('at else where $ingredientStringsForWhereInClause is not empty');
 
       return GestureDetector(
         onTap: () {
@@ -1942,57 +1992,46 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                               // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
 
                                               Container(
-                                                  child: GestureDetector(
-                                                    onLongPress: () {
-                                                      print(
-                                                          'at on Loong Press: ');
-                                                    },
-                                                    onLongPressUp: () {
 
-                                                    },
-                                                    child: Container(
-
-                                                      decoration: BoxDecoration(
+                                                decoration: BoxDecoration(
 //                                              color: Colors.black54,
-                                                        color: Color(
-                                                            0xffC27FFF),
-                                                        borderRadius: BorderRadius
-                                                            .circular(5),
-                                                      ),
+                                                  color: Color(
+                                                      0xffC27FFF),
+                                                  borderRadius: BorderRadius
+                                                      .circular(5),
+                                                ),
 
 
 //                                            color:Color(0xffC27FFF),
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .center,
-                                                        children: <Widget>[
-                                                          Icon(
-                                                            Icons
-                                                                .lightbulb_outline,
-                                                            size: 32.0,
-                                                            color: Color(
-                                                                0xffFFFFFF),),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .start,
+                                                  crossAxisAlignment: CrossAxisAlignment
+                                                      .center,
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons
+                                                          .lightbulb_outline,
+                                                      size: 32.0,
+                                                      color: Color(
+                                                          0xffFFFFFF),),
 
 
-                                                          Text(
-                                                            'Long press to remove ingredient',
-                                                            style: TextStyle(
-                                                                fontWeight: FontWeight
-                                                                    .normal,
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 15),
-                                                          ),
-
-
-                                                        ],
-                                                      ),
-
+                                                    Text(
+                                                      'Long press to remove ingredient',
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .normal,
+                                                          color: Colors
+                                                              .white,
+                                                          fontSize: 15),
                                                     ),
-                                                  )
-                                              )
+
+
+                                                  ],
+                                                ),
+
+                                              ),
 
                                               // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
                                               // ENDED HERE.
@@ -2034,7 +2073,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                             stream: firestore
                                                 .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
                                                 .collection('ingredients').where(
-                                                'name', whereIn: test
+                                                'name', whereIn: ingredientStringsForWhereInClause
 
                                             ).snapshots(),
                                             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -2099,32 +2138,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                         final num ingredientPrice = document['price'];
 
                                                         final dynamic ingredientImageURL = document['image'] == '' ?
-                                                        'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+                                                        'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
                                                             :
                                                         storageBucketURLPredicate +
                                                             Uri.encodeComponent(document['image'])
 
                                                             + '?alt=media';
-
-//                  final String ingredientItemId =  document['ingredientId'];
-//                  final bool ingredientIsAvailable =  document['isAvailable'];
-
-//                  LOADING ERROR FOR THE IMAGE: ingredientName: Salaatti;
-                                                        // DATABASE || SERVER ERROR.
-
-//                  logger.i('ingredientName: $ingredientName');
-//                  logger.i('price: $ingredientPrice');
-//                  logger.i('ingredientImageURL: $ingredientImageURL');
-
-
-//                  print(' ingredientImageURL: $ingredientImageURL');
-//
-//
-//                  print('ingredientItemId: $ingredientItemId');
-//
-//
-//                  print('ingredientIsAvailable: $ingredientIsAvailable');
-
 
                                                         final NewIngredient ingredientItemTest = new NewIngredient(
 //                FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
@@ -2141,68 +2160,101 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                         );
 
 
+//                                                        logger.i('ingredientImageURL: ',ingredientImageURL);
+
                                                         return
                                                           Container(
-                                                              color: Color.fromRGBO(239, 239, 239, 0),
-                                                              padding: EdgeInsets.symmetric(
+                                                            color: Color.fromRGBO(239, 239, 239, 0),
+                                                            padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-                                                                  horizontal: 4.0, vertical: 15.0),
-                                                              child: InkWell(
-                                                                  child: Column(
-                                                                    children: <Widget>[
+                                                                horizontal: 4.0, vertical: 15.0),
+                                                            child: GestureDetector(
+                                                                onLongPress: () {
+                                                                  print(
+                                                                      'at Long Press: ');
+                                                                },
+                                                                onLongPressUp: (){
+                                                                  logger.i('test.length',ingredientStringsForWhereInClause.length);
+                                                                  print('at Long Press UP');
+                                                                  ingredientStringsForWhereInClause.removeAt(index);
+                                                                  logger.i('test.length after removing: ',
+                                                                      ingredientStringsForWhereInClause.length);
+                                                                  defaultIngredientListForFood.removeAt(index);
+                                                                  Order initialOrder = new Order(
+                                                                    foodItemName: oneFoodItemandId.itemName,
+                                                                    foodItemImageURL:oneFoodItemandId.imageURL,
+                                                                    unitPrice:initialPriceByQuantityANDSize,
+                                                                    foodDocumentId:oneFoodItemandId.documentId,
+                                                                    quantity:_itemCount,
+                                                                    foodItemSize:_currentSize,
+//                                                                    foodItemOrderID:,
+                                                                    ingredients:defaultIngredientListForFood,
+                                                                  );
 
-                                                                      new Container(
 
-                                                                        width: displayWidth(context) * 0.09,
-                                                                        height: displayWidth(context) * 0.11,
+//                                                                  TO DO UPDATE WITH setState(() ) call the current
+//                                                                Order
+                                                                  setState(() {
+                                                                    oneOrder= initialOrder;
 
-                                                                        child: ClipOval(
+//                                                                    _itemCount =
+//                                                                        _itemCount + 1;
+//                                                                    priceByQuantityANDSize =
+//
+//                                                                        initialPriceByQuantityANDSize *
+//                                                                            _itemCount;
+                                                                  });
+                                                                },
+                                                                child: Column(
+                                                                  children: <Widget>[
 
-                                                                          child: CachedNetworkImage(
-                                                                            imageUrl: ingredientImageURL,
-                                                                            fit: BoxFit.cover,
-                                                                            placeholder: (context,
-                                                                                url) => new LinearProgressIndicator(),
-                                                                            errorWidget: (context, url, error) =>
-                                                                                Image.network(
-                                                                                    'https://img.freepik.com/free-vector'
-                                                                                        '/404-error-design-with-donut_76243-30.jpg?size'
-                                                                                        '=338&ext=jpg'),
-//                    https://img.freepik.com/free-vector/404-error-design-with-donut_76243-30.jpg?size=338&ext=jpg
-//                    https://img.freepik.com/free-vector/404-error-page-found-with-donut_114341-54.jpg?size=626&ext=jpg
+                                                                    new Container(
 
-                                                                          ),
+                                                                      width: displayWidth(context) * 0.09,
+                                                                      height: displayWidth(context) * 0.11,
+
+                                                                      child: ClipOval(
+
+                                                                        child: CachedNetworkImage(
+                                                                          imageUrl: ingredientImageURL,
+                                                                          fit: BoxFit.cover,
+                                                                          placeholder: (context,
+                                                                              url) => new LinearProgressIndicator(),
+                                                                          errorWidget: (context, url, error) =>
+                                                                              Image.network(
+                                                                                  'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+//
                                                                         ),
                                                                       ),
-
+                                                                    ),
 //                              SizedBox(height: 10),
+                                                                    Text(
 
+                                                                      ingredientName,
 
-                                                                      Text(
-
-                                                                        ingredientName,
-
-                                                                        style: TextStyle(
-                                                                          color: Color.fromRGBO(112, 112, 112, 1),
+                                                                      style: TextStyle(
+                                                                        color: Color.fromRGBO(112, 112, 112, 1),
 //                                    color: Colors.blueGrey[800],
 
-                                                                          fontWeight: FontWeight.normal,
-                                                                          fontSize: 18,
-                                                                        ),
-                                                                      )
-                                                                      ,
+                                                                        fontWeight: FontWeight.normal,
+                                                                        fontSize: 18,
+                                                                      ),
+                                                                    )
+                                                                    ,
 
 
-                                                                    ],
-                                                                  ),
-                                                                  onTap: () {
-                                                                    print('for future use');
+                                                                  ],
+                                                                ),
+                                                                onTap: () {
+                                                                  print('for future use');
 //                            return Navigator.push(context,
 //
 //                                MaterialPageRoute(builder: (context)
 //                                => FoodItemDetails())
 //                            );
-                                                                  }));
+                                                                }
+                                                            ),
+                                                          );
                                                       },
 
                                                     )
@@ -2272,7 +2324,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
                                                                   context) =>
                                                                   MoreIngredients(
                                                                     oneFoodItemData1: oneFoodItemandId,
-                                                                    onlyIngredientsNames1:test,
+                                                                    onlyIngredientsNames1:ingredientStringsForWhereInClause,
                                                                   )
                                                             //oneFoodItem
 //                                                          oneFoodItemandId
@@ -2911,7 +2963,22 @@ class FoodDetailImage extends StatelessWidget {
 //      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
       // -displayWidth(context)/9
 
-      child:
+      child:NeuCard(
+        // State of Neumorphic (may be convex, flat & emboss)
+        curveType: CurveType.concave,
+//            padding: EdgeInsets.symmetric(horizontal: 3,vertical:0),
+//        margin: EdgeInsets.fromLTRB(12, 0, 5, 0),
+
+        // Elevation relative to parent. Main constituent of Neumorphism
+//            bevel: 12,
+
+        // Specified decorations, like `BoxDecoration` but only limited
+        decoration: NeumorphicDecoration(
+//          borderRadius: BorderRadius.circular(8),
+          shape: BoxShape.circle,
+          clipBehavior: Clip.antiAlias,
+          color: Color(0xffFFFFFF),
+        ),child:
       ClipOval(child:
       Container(
         color:Color(0xffFFFFFF),
@@ -2932,7 +2999,7 @@ class FoodDetailImage extends StatelessWidget {
         ),
       ),
       ),
-
+      ),
 
 //                Image.network(imageURLBig)
 

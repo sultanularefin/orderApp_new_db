@@ -17,7 +17,7 @@ import 'package:foodgallery/src/models/NewIngredient.dart';
 //final String storageBucketURLPredicate_Same =
 //    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
 
-class OrderList {
+class Order {
 
 
 
@@ -27,13 +27,13 @@ class OrderList {
   final String foodDocumentId;
   final int    quantity;
   final String foodItemSize;
-  final String foodItemOrderID;     // random might not be needed.
+  // final String foodItemOrderID;     // random might not be needed.
   List<NewIngredient> ingredients;
 
 //  String ingredients;
 //  itemId = await generateItemId(6);
 
-  OrderList(
+  Order(
       {
         this.foodItemName,
         this.foodItemImageURL,
@@ -41,7 +41,7 @@ class OrderList {
         this.foodDocumentId,
         this.quantity,
         this.foodItemSize,
-        this.foodItemOrderID,
+       // this.foodItemOrderID,
         this.ingredients,
       }
   );

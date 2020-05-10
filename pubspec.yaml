@@ -14,6 +14,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
+#  sdk: ">=2.1.0 <3.0.0"
   sdk: ">=2.2.2 <3.0.0"
 
 #  - sdk: ">=2.1.0 <3.0.0" // changed on may 9 2020.
@@ -40,6 +41,7 @@ dependencies:
   logger: ^0.9.1
   cached_network_image: ^2.2.0
   random_color: ^1.0.5
+  flutter_neumorphic: ^2.0.0
 
 dev_dependencies:
   flutter_test:
