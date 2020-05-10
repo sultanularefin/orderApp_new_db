@@ -623,7 +623,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                                               maxCrossAxisExtent: 180,
                                               mainAxisSpacing: 6, // Vertical  direction
                                               crossAxisSpacing: 5,
-                                              childAspectRatio: 200/240,
+                                              childAspectRatio: 200/247,
                                               ///childAspectRatio:
                                               /// The ratio of the cross-axis to the main-axis extent of each child.
                                               /// H/Verti
@@ -1158,7 +1158,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
                   InkResponse(
                     onTap: (){
-                      print('Decrease button pressed');
+                      print('Decrease button pressed InkResponse');
                       if (currentAmount > 1) {
 //                      if(currentAmount>=2)
 //                      City c1 = new City()..name = 'Blum'..state = 'SC';
@@ -1193,8 +1193,8 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                       iconSize: 30,
 //                      tooltip: 'Decrease Ingredient count by 1',
                       onPressed: () {
-                        print('Decrease button pressed');
-                        if (currentAmount > 1) {
+                        print('Decrease button pressed IconButton');
+                        if (currentAmount >= 1) {
 //                      if(currentAmount>=2)
 //                      City c1 = new City()..name = 'Blum'..state = 'SC';
 
