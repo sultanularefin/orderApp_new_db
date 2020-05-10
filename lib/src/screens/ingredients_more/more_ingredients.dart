@@ -264,6 +264,30 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
   }
 
 
+  /*
+  // MODIFICATION OF THIS CODE TO BE USED WHEN USED WITH BLOCK PATTERN.
+  FILTER selected from the unselected since set operation is deep, but we need to compare only one field.
+
+  ingrendient name to ingredient name of unselected INGREDIENT ITEM, e.g.
+  String searchForThisIngredientInIngredientList(String inputString) {
+
+
+    List<String> foodIngredients = onlyIngredientsNames2;
+
+//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
+
+
+    String elementExists = foodIngredients.firstWhere(
+            (oneItem) => oneItem.toLowerCase() == inputString,
+        orElse: () => '');
+
+    print('elementExists: $elementExists');
+
+    return elementExists.toLowerCase();
+
+  }
+
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -794,7 +818,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //                                                            logger.i('unSelectedToSelected.ingredientName: ',unSelectedToSelected[1]
 //                                                                .ingredientName);
 
-                                                            List<NewIngredient> combinedIngredientList =
+                                                            List<NewIngredient> combinedSelectedIngredientList =
 //                                                            defaultIngredientListForFood.expand((i) =>
 //                                                            [i, unSelectedToSelected]).toList();
 
@@ -802,7 +826,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
                                                             List<NewIngredient> newUnselected =
                                                             _allIngredientsList.toSet().
-                                                            difference(combinedIngredientList.toSet()).toList();
+                                                            difference(combinedSelectedIngredientList.toSet()).toList();
 
                                                             List<NewIngredient> unSelectedDecremented =  newUnselected.map
                                                               ((oneIngredient)=>NewIngredient.updateIngredient(
@@ -811,13 +835,13 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
                                                             logger.i('unSelectedDecremented.length',unSelectedDecremented.length);
 
-                                                            logger.i('NEW SELECTED ||combinedIngredientList.length',
-                                                                combinedIngredientList.length);
+                                                            logger.i('NEW SELECTED ||combinedSelectedIngredientList.length',
+                                                                combinedSelectedIngredientList.length);
                                                             logger.i('_allIngredientsList.length',_allIngredientsList.length);
 
 
                                                             setState(() {
-                                                              defaultIngredientListForFood = combinedIngredientList;
+                                                              defaultIngredientListForFood = combinedSelectedIngredientList;
                                                               _ingredientlistUnSelected = unSelectedDecremented;
                                                             });
 
