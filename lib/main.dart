@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodgallery/src/screens/homeScreen/food_gallery.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'src/screens/homeScreen/food_gallery.dart';
 import 'src/welcomePage.dart';
 
 void main() => runApp(MyApp());
@@ -13,15 +14,18 @@ class MyApp extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return MaterialApp(
       title: 'Flutter Demo',
-    // commented for Tablet testing on april 25.
+      // commented for Tablet testing on april 25.
       theme: ThemeData(
-         primarySwatch: Colors.blue,
-         textTheme:GoogleFonts.latoTextTheme(textTheme).copyWith(
-           body1: GoogleFonts.montserrat(textStyle: textTheme.body1),
-         ),
+        primarySwatch: Colors.blue,
+        textTheme:GoogleFonts.latoTextTheme(textTheme).copyWith(
+          body1: GoogleFonts.montserrat(textStyle: textTheme.body1),
+        ),
       ),
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+//      home: WelcomePage(),
+      home:FoodGallery(),
+
+
 //      home: FoodGallery(),
     );
   }
