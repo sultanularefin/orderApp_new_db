@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/screens/homeScreen/food_gallery.dart';
+//import 'package:foodgallery/src/screens/foodGallery/food_gallery.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'src/screens/homeScreen/food_gallery.dart';
+import 'src/screens/foodGallery/foodgallery2.dart';
+
 import 'src/welcomePage.dart';
 
 void main() => runApp(MyApp());
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
 //      home: WelcomePage(),
-      home:FoodGallery(),
+      home:FoodGallery2(),
 
 
 //      home: FoodGallery(),

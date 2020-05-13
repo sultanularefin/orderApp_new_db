@@ -6,16 +6,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:foodgallery/src/models/newCategory.dart';
+
 //import 'package:foodgallery/src/screens/drawerScreen/drawerScreen.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'dart:io';
-import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 //import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -33,11 +33,11 @@ import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails.dart
 
 // model, dummy data file:
 
-import './../../models/itemData.dart';
-import './../../models/FoodItem.dart';
-import './../../models/FoodItemWithDocID.dart';
-import './../../models/CategoryItemsLIst.dart';
-//import './../../models/dummy.dart';
+import '../../DataLayer/itemData.dart';
+import '../../DataLayer/FoodItem.dart';
+import '../../DataLayer/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/newCategory.dart';
+
 
 
 //import './../../shared/category_Constants.dart' as Constants;

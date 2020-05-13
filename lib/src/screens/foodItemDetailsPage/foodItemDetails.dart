@@ -7,7 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:logger/logger.dart';
 import 'package:neumorphic/neumorphic.dart';
 
@@ -17,13 +17,13 @@ import 'package:neumorphic/neumorphic.dart';
 
 // SCREEN FILES AND MODLE FILES AND UTILITY FILES.
 import 'package:foodgallery/src/screens/ingredients_more/more_ingredients.dart';
-import 'package:foodgallery/src/models/IngredientItem.dart';
-import 'package:foodgallery/src/models/SizeConstants.dart';
+import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
+import 'package:foodgallery/src/DataLayer/SizeConstants.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
-import './../../models/FoodItemWithDocID.dart';
-import './../../models/Order.dart';
-//import './../../models/itemData.dart';
+import './../../DataLayer/FoodItemWithDocID.dart';
+import './../../DataLayer/Order.dart';
+//import './../../DataLayer/itemData.dart';
 
 
 //import './../../shared/category_Constants.dart' as Constants;

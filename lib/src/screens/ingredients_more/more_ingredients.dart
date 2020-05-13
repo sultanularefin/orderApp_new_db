@@ -1,8 +1,5 @@
 
-
-
 //food_gallery.dart
-
 
 
 // DEPENDENCY FILES BEGINS HERE.
@@ -12,7 +9,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:logger/logger.dart';
 
 // DEPENDENCY FILES ENDS HERE.
@@ -25,17 +22,17 @@ import 'package:logger/logger.dart';
 
 // SCREEN FILES ENDS HERE.
 
-import 'package:foodgallery/src/models/IngredientItem.dart';
+import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 // MODEL FILES BEGINS HERE.
 
-import './../../models/FoodItemWithDocID.dart';
-import './../../models/itemData.dart';
+import './../../DataLayer/FoodItemWithDocID.dart';
+import './../../DataLayer/itemData.dart';
 
-import './../../models/Order.dart';
+import './../../DataLayer/Order.dart';
 
-import 'package:foodgallery/src/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 // BOTH ARE CORRECT.
 //import './../../models/NewIngredient.dart';
 

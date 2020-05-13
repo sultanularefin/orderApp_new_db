@@ -13,7 +13,7 @@
 //import 'dart:core';
 import 'dart:math';
 
-import 'package:foodgallery/src/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 //final String storageBucketURLPredicate_Same =
 //    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
 

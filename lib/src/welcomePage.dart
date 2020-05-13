@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 
-
+import 'package:logger/logger.dart';
 
 // above are local files i.e. pages .
-import 'package:foodgallery/src/identity/loginPage.dart';
-import 'package:foodgallery/src/identity/signup.dart';
-import 'package:foodgallery/src/screens/drawerScreen/drawerScreen.dart';
-import 'package:foodgallery/src/screens/homeScreen/food_gallery.dart';
+
+//import 'package:foodgallery/src/screens/foodGallery/food_gallery.dart';
+
 // above are local file.
 
 
@@ -29,6 +29,12 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
 
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
+
+
   // Login Button.
   Widget _submitButton() {
     return InkWell(
@@ -47,8 +53,26 @@ class _WelcomePageState extends State<WelcomePage> {
         //                    duration: Duration(seconds: 4),
         //                  )
         //              );
+
+
+
+        logger.w('uncomment the below lines and add'
+            ' the missing identity files from master branch'
+            'LOGIN WILL NOT WORK');
+
+        return Navigator.push(context,
+            MaterialPageRoute(builder: (context) => FoodGallery2())
+
+
+        );
+
+
+        /*
         return Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
+        */
+
+
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -77,8 +101,24 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _signUpButton() {
     return InkWell(
       onTap: () {
+
+
+        logger.w('uncomment the below lines and add'
+            ' the missing identity files from master branch'
+            'SIGN UP WILL NOT WORK');
+
+
+        return Navigator.push(context,
+            MaterialPageRoute(builder: (context) => FoodGallery())
+
+
+        );
+
+        /*
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => SignUpPage()));
+
+        */
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -185,6 +225,25 @@ class _WelcomePageState extends State<WelcomePage> {
       print('password $passWord');
       print('uid $passWord');
 
+
+
+      logger.w('uncomment the below lines and add'
+          ' the missing identity files from master branch'
+          'DRAWER SCREEN WILL NOW COME OUT.');
+
+
+      if ((email != null) && (passWord != null)) {
+        print("email && password found");
+        return Navigator.push(context,
+            MaterialPageRoute(builder: (context) => FoodGallery())
+
+
+        );
+      }
+
+
+      /*
+
       if ((email != null) && (passWord != null)) {
         print("email && password found");
         return Navigator.push(context,
@@ -193,6 +252,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
         );
       }
+      */
     }
     print("not found");
 
