@@ -2092,6 +2092,7 @@ class FoodListWithCategoryString extends StatelessWidget {
   );
 
   final String categoryString;
+
   FoodListWithCategoryString({this.allFoods,this.categoryString});
 
 
