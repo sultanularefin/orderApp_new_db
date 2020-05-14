@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'src/screens/foodGallery/foodgallery2.dart';
 
-import 'src/welcomePage.dart';
+//import 'src/welcomePage.dart';
 
 void main() => runApp(MyApp());
 
