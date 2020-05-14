@@ -37,7 +37,9 @@ class FirebaseClient {
 
   List<FoodItemWithDocID> _allFoodsList = [];
 
-  Future<List<FoodItemWithDocID>> fetchFoodItems(String query) async {
+  Future<List<FoodItemWithDocID>> fetchFoodItems() async {
+
+    print ('at here ==================================== *************** ');
 
     Firestore.instance
         .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
@@ -57,6 +59,7 @@ class FirebaseClient {
 
 
           final String foodItemName = doc['name'];
+          print('foodItemName $foodItemName');
 
 //          final String foodImageURL  =document['image']==''?'':
 //          storageBucketURLPredicate + Uri.encodeComponent(document['image'])
@@ -94,7 +97,7 @@ class FirebaseClient {
 //          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
 
 
-          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
+//          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
 
           final String foodCategoryName = doc['category'];
           final String foodItemDocumentID = doc.documentID;
