@@ -34,6 +34,7 @@ class FoodItemsQueryBloc implements Bloc {
   Stream<List<FoodItemWithDocID>> get foodItemsStream => _controller.stream;
 
 
+  /*
   void fetchFoodItems0() async {
 
 
@@ -47,6 +48,7 @@ class FoodItemsQueryBloc implements Bloc {
 
 
   }
+  */
 
   /*
 

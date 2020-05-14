@@ -37,109 +37,17 @@ class FirebaseClient {
 
   List<FoodItemWithDocID> _allFoodsList = [];
 
-  Future<List<FoodItemWithDocID>> fetchFoodItems() async {
+
+  Future<QuerySnapshot> fetchFoodItems() async {
 
     print ('at here ==================================== *************** ');
 
-    Firestore.instance
+   var snapshot= Firestore.instance
         .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
-        .snapshots()
-        .listen((data) =>
-        data.documents.forEach((doc) {
-//      document['itemName'];
+        .getDocuments();
 
-//          print('doc: ***************************** ${doc['uploadDate']
-//              .toDate()}');
-//      doc: ***************************** Instance of 'DocumentSnapshot'
+   return snapshot;
 
-//      final DocumentSnapshot document = snapshot.data.documents[index];
-
-
-//      final DocumentSnapshot document = snapshot.data.documents[index];
-
-
-          final String foodItemName = doc['name'];
-          print('foodItemName $foodItemName');
-
-//          final String foodImageURL  =document['image']==''?'':
-//          storageBucketURLPredicate + Uri.encodeComponent(document['image'])
-
-
-//          final String foodImageURL  = doc['image']==''?'':storageBucketURLPredicate +
-//              Uri.encodeComponent(doc['image'])
-//              +'?alt=media';
-
-
-          final String foodImageURL  = doc['image']==''?
-          'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
-              :
-          storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
-              +'?alt=media';
-
-
-//          final String foodImageURL = doc['imageURL'];
-//          final String euroPrice = double.parse(doc['priceinEuro'])
-//              .toStringAsFixed(2);
-//          final String foodItemIngredients = doc['ingredients'];
-
-
-//          final String foodItemId = doc['itemId'];
-//          final bool foodIsHot = doc['isHot'];
-
-          final bool foodIsAvailable =  doc['available'];
-
-
-//                final String foodCategoryName = document['categoryName'];
-
-          final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
-
-          final List<dynamic> foodItemIngredientsList =  doc['ingredient'];
-//          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
-
-
-//          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
-
-          final String foodCategoryName = doc['category'];
-          final String foodItemDocumentID = doc.documentID;
-
-
-          FoodItemWithDocID oneFoodItemWithDocID = new FoodItemWithDocID(
-
-
-            itemName: foodItemName,
-            categoryName: foodCategoryName,
-            imageURL: foodImageURL,
-            sizedFoodPrices: oneFoodSizePriceMap,
-
-
-//            priceinEuro: euroPrice,
-            ingredients: foodItemIngredientsList,
-
-//            itemId: foodItemId,
-//            isHot: foodIsHot,
-            isAvailable: foodIsAvailable,
-            documentId: foodItemDocumentID,
-
-          );
-
-          _allFoodsList.add(oneFoodItemWithDocID);
-        }
-        ), onDone: () {
-      print("Task Done zzzzz zzzzzz zzzzzzz zzzzzzz zzzzzz zzzzzzzz zzzzzzzzz zzzzzzz zzzzzzz");
-    }, onError: (error, StackTrace stackTrace) {
-      print("Some Error $stackTrace");
-    });
-    /*
-    final results = await request(
-        path: 'locations', parameters: {'query': query, 'count': '10'});
-
-    final suggestions = results['location_suggestions'];
-    return suggestions
-        .map<FoodItemWithDocID>((json) => FoodItemWithDocID.fromJson(json))
-        .toList(growable: false);
-
-    */
-    return _allFoodsList;
   }
 
   /*

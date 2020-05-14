@@ -79,9 +79,7 @@ class FoodGalleryBloc implements Bloc {
   Future<List<FoodItemWithDocID>> getAllFoodItems() async {
 
 
-    var snapshot = await Firestore.instance.collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j')
-        .collection('foodItems')
-        .getDocuments();
+    var snapshot = await _client.fetchFoodItems();
     List docList = snapshot.documents;
 
     docList.forEach((doc) {
@@ -183,15 +181,7 @@ class FoodGalleryBloc implements Bloc {
 
   }
 
-  Future<List<FoodItemWithDocID>> getAllFoodItems2() async {
 
-    List<FoodItemWithDocID> total =  await _client.fetchFoodItems();
-
-//      _foodItemController.sink.add(total);
-
-    return total;
-
-  }
 
 //    FoodGalleryBloc() {
 //      List<FoodItemWithDocID> result = new List<FoodItemWithDocID> ();
