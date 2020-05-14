@@ -795,12 +795,12 @@ class FoodList extends StatelessWidget {
 //          Text('${messageCount.toString()}')
 //          );
 
-          print('categoryString  ##################################: $categoryString');
+//          print('categoryString  ##################################: $categoryString');
           final List allFoods =snapshot.data;
 
           final List filteredItems = allFoods.where((oneItem ) => oneItem.categoryName.
           toLowerCase() ==
-              categoryString.toLowerCase()).toList();
+              'PIZZA'.toLowerCase()).toList();
           return(Container(
             color: Color(0xffFFFFFF),
             child:
