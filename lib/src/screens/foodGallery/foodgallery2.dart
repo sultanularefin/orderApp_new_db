@@ -708,9 +708,6 @@ class FoodList extends StatelessWidget {
 
 
 
-
-
-
 //          int messageCount = filteredItems.length;
 
           //..p
@@ -749,10 +746,19 @@ class FoodList extends StatelessWidget {
                 /// The ratio of the cross-axis to the main-axis extent of each child.
                 /// H/V
 
+                /*
                 maxCrossAxisExtent: 290,
                 mainAxisSpacing: 0, // H  direction
                 crossAxisSpacing: 5,
                 childAspectRatio: 160/160,
+
+                 */
+                //Above to below for 3 not 2 Food Items:
+                maxCrossAxisExtent: 240,
+                mainAxisSpacing: 0, // H  direction
+                crossAxisSpacing: 5,
+                childAspectRatio: 140/170,
+
 
 
               ),
@@ -833,19 +839,13 @@ class FoodList extends StatelessWidget {
                           horizontal: 4.0, vertical: 16.0),
                       child: InkWell(
                           child: Column(
+//                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                      crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
-//                                  Text(
-//                                    'item name',
-//                                    style: TextStyle(
-//                                        fontWeight: FontWeight.bold,
-//                                        color: Colors.blueGrey[800],
-//                                        fontSize: 16),
-//                                  ),
-//                                  SizedBox(height: 10),
                               new Container(
                                 child: new Container(
-                                  width: displayWidth(context) *  0.23,
-                                  height: displayWidth(context) *  0.23,
+                                  width: displayWidth(context) /  7,
+                                  height: displayWidth(context) /7,
                                   decoration: new BoxDecoration(
                                     shape: BoxShape.circle,
                                     boxShadow: [
@@ -857,7 +857,7 @@ class FoodList extends StatelessWidget {
                                           color:Color(0xff707070),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                          blurRadius: 40.0,
+                                          blurRadius: 30.0,
                                           spreadRadius: 1.0,
                                           offset: Offset(0, 21)
                                       )
@@ -872,9 +872,10 @@ class FoodList extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
                               ),
 //                              SizedBox(height: 10),
+
 
 
                               Row(
@@ -958,7 +959,10 @@ class FoodList extends StatelessWidget {
                                 MaterialPageRoute(builder: (context)
                                 => FoodItemDetails(oneFoodItemData:oneFoodItem))
                             );
-                          }));
+                          }
+
+                          )
+                  );
 //            return SpoiledItem(/*dummy: snapshot.data[index]*/);
               },
 

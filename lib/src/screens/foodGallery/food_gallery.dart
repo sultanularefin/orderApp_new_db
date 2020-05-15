@@ -1914,12 +1914,15 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
             Container(
               // `opacity` is alpha channel of this color as a double, with 0.0 being
               //  ///   transparent and 1.0 being fully opaque.
-                color: Color(0xffFFFFFF),
-                padding: EdgeInsets.symmetric(
-                    horizontal: 4.0, vertical: 16.0),
-                child: InkWell(
-                    child: Column(
-                      children: <Widget>[
+
+
+              color: Color(0xffFFFFFF),
+              padding: EdgeInsets.symmetric(
+                  horizontal: 4.0, vertical: 16.0),
+              child:  Hero(tag: 'GalleryToDetails', child:
+              InkWell(
+                  child: Column(
+                    children: <Widget>[
 //                                  Text(
 //                                    'item name',
 //                                    style: TextStyle(
@@ -1928,68 +1931,68 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //                                        fontSize: 16),
 //                                  ),
 //                                  SizedBox(height: 10),
-                        new Container(
-                          child: new Container(
-                            width: displayWidth(context) *  0.23,
-                            height: displayWidth(context) *  0.23,
-                            decoration: new BoxDecoration(
-                              shape: BoxShape.circle,
-                              boxShadow: [
+                      new Container(
+                        child: new Container(
+                          width: displayWidth(context) *  0.23,
+                          height: displayWidth(context) *  0.23,
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
 
 
-                                BoxShadow(
+                              BoxShadow(
 //                                          707070
 //                                              color:Color(0xffEAB45E),
 // good yellow color
 //                                            color:Color(0xff000000),
-                                    color:Color(0xff707070),
+                                  color:Color(0xff707070),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                    blurRadius: 40.0,
-                                    spreadRadius: 1.0,
-                                    offset: Offset(0, 21)
-                                )
-                              ],
-                            ),
-                            child: ClipOval(
-                              child: CachedNetworkImage(
+                                  blurRadius: 40.0,
+                                  spreadRadius: 1.0,
+                                  offset: Offset(0, 21)
+                              )
+                            ],
+                          ),
+                          child: ClipOval(
+                            child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                imageUrl: foodImageURL,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) => new CircularProgressIndicator(),
-                              ),
+                              imageUrl: foodImageURL,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => new CircularProgressIndicator(),
                             ),
                           ),
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         ),
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      ),
 //                              SizedBox(height: 10),
 
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                                euroPrice3 +'\u20AC',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.normal,
+                              euroPrice3 +'\u20AC',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
 //                                          color: Colors.blue,
-                                    color:Color.fromRGBO(112,112,112,1),
-                                    fontSize: 20),
-                              ),
+                                  color:Color.fromRGBO(112,112,112,1),
+                                  fontSize: 20),
+                            ),
 //                                    SizedBox(width: 10),
-                              SizedBox(width: displayWidth(context)/100),
+                            SizedBox(width: displayWidth(context)/100),
 
-                              Icon(
-                                Icons.whatshot,
-                                size: 24,
-                                color: Colors.red,
-                              ),
-                            ]),
+                            Icon(
+                              Icons.whatshot,
+                              size: 24,
+                              color: Colors.red,
+                            ),
+                          ]),
 
 
 //                              SizedBox(height: 10),
 
-                        /*
+                      /*
                               Container(
                                 height: 20,
                                 child:Text(
@@ -2009,63 +2012,70 @@ class FoodListWithCategoryStringAndSearchString extends StatelessWidget{
 //                              Text('D'),
 
 
-                        FittedBox(fit:BoxFit.fitWidth,
-                          child:
-                          Text(
+                      FittedBox(fit:BoxFit.fitWidth,
+                        child:
+                        Text(
 //                '${dummy.counter}',
-                            foodItemName,
+                          foodItemName,
 
-                            style: TextStyle(
-                              color: Color(0xff707070),
+                          style: TextStyle(
+                            color: Color(0xff707070),
 //                                color:Color.fromRGBO(112,112,112,1),
 
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),)
-                        ,
-                        Container(
-                            height: displayHeight(context)/61,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),)
+                      ,
+                      Container(
+                          height: displayHeight(context)/61,
 
-                            child:Text(
+                          child:Text(
 //                                    stringifiedFoodItemIngredients,
 
 
-                              stringifiedFoodItemIngredients.length==0?
-                              'EMPTY':  stringifiedFoodItemIngredients.length>12?
-                              stringifiedFoodItemIngredients.substring(0,12)+'...':
-                              stringifiedFoodItemIngredients,
+                            stringifiedFoodItemIngredients.length==0?
+                            'EMPTY':  stringifiedFoodItemIngredients.length>12?
+                            stringifiedFoodItemIngredients.substring(0,12)+'...':
+                            stringifiedFoodItemIngredients,
 //                                    foodItemIngredients.substring(0,10)+'..',
-                              style: TextStyle(
-                                color: Color(0xff707070),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 15,
-                              ),
-                            )
-                        ),
+                            style: TextStyle(
+                              color: Color(0xff707070),
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                            ),
+                          )
+                      ),
 //
 //
-                      ],
-                    ),
-                    onTap: () {
+                    ],
+                  ),
+                  onTap: () {
+                    // IMPORTANT CODE BELOW SHOULD PLAY WITH IT..
 //          Navigator.of(context)
 //              .push(MaterialPageRoute(builder: (BuildContext context) {
 //            return BlocProvider<InventoryBloc>(
 //              bloc: InventoryBloc(),
 //              child: SpoiledDetails(dummy: dummy),
 //            );
+                    // IMPORTANT CODE ABOVE.
 
 //                        Type focusedType = Focus.of(context).context.widget.runtimeType;
 //                        logger.i('focusedType: $focusedType');
 
 //                        FocusScope.of(context).unfocus();
 
-                      return Navigator.push(context,
+                    return Navigator.push(context,
 
-                          MaterialPageRoute(builder: (context)
-                          => FoodItemDetails(oneFoodItemData:oneFoodItem))
-                      );
-                    }));
+                        MaterialPageRoute(builder: (context)
+                        => FoodItemDetails(oneFoodItemData:oneFoodItem))
+                    );
+
+                  }
+              ),
+              ),
+
+            );
 //            return SpoiledItem(/*dummy: snapshot.data[index]*/);
         },
 
