@@ -1,6 +1,7 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
@@ -843,36 +844,39 @@ class FoodList extends StatelessWidget {
 //                      crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               new Container(child:
-                              Hero(tag:foodItemName,
-                                child: new Container(
-                                  width: displayWidth(context) /  7,
-                                  height: displayWidth(context) /7,
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
+                              new Container(
+                                width: displayWidth(context) /  7,
+                                height: displayWidth(context) /7,
+                                decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
 //                                          707070
 //                                              color:Color(0xffEAB45E),
 // good yellow color
 //                                            color:Color(0xff000000),
-                                          color:Color(0xff707070),
+                                        color:Color(0xff707070),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                          blurRadius: 30.0,
-                                          spreadRadius: 1.0,
-                                          offset: Offset(0, 21)
-                                      )
-                                    ],
-                                  ),
-                                  child: ClipOval(
+                                        blurRadius: 30.0,
+                                        spreadRadius: 1.0,
+                                        offset: Offset(0, 21)
+                                    )
+                                  ],
+                                ),
+                                child:Hero(
+                                  tag:foodItemName,
+                                  child:
+                                  ClipOval(
                                     child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                      imageUrl: foodImageURL,
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) => new CircularProgressIndicator(),
-                                    ),
+                                    imageUrl: foodImageURL,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) => new CircularProgressIndicator(),
+                                  ),
                                   ),
                                 ),
+
                               ),
 
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
@@ -944,23 +948,24 @@ class FoodList extends StatelessWidget {
                             ],
                           ),
                           onTap: () {
-//          Navigator.of(context)
-//              .push(MaterialPageRoute(builder: (BuildContext context) {
-//            return BlocProvider<InventoryBloc>(
-//              bloc: InventoryBloc(),
-//              child: SpoiledDetails(dummy: dummy),
-//            );
-
-
-//                        Type focusedType = Focus.of(context).context.widget.runtimeType;
-//                        logger.i('focusedType: $focusedType');
-//                        FocusScope.of(context).unfocus();
-
 
                             return Navigator.push(context,
 
-                                MaterialPageRoute(builder: (context)
-                                => FoodItemDetails(oneFoodItemData:oneFoodItem))
+                              PageRouteBuilder(
+                                  transitionDuration: Duration(milliseconds: 900),
+                                  pageBuilder: (_, __, ___) =>
+                                      FoodItemDetails2
+                                        (
+                                          oneFoodItemData:oneFoodItem
+                                      )
+                              ),
+
+                              /*
+                                builder: (context)
+                                => FoodItemDetails2(
+                                    oneFoodItemData:oneFoodItem),
+                                fullscreenDialog: false
+                                */
                             );
                           }
 
