@@ -1,6 +1,7 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,12 +59,7 @@ class FoodGallery2 extends StatefulWidget {
 
   final Firestore firestore = Firestore.instance;
 
-
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-
   FoodGallery2({Key key, this.child}) : super(key: key);
-
-
 
   _FoodGalleryState createState() => _FoodGalleryState();
 
@@ -124,15 +120,19 @@ class _FoodGalleryState extends State<FoodGallery2> {
                 Text(categoryName.toLowerCase()
                   ,
 //    Text(categoryName.substring(0, 2),
-                  style: TextStyle(
-                    color:Color(0xff000000),
-//                        color:Color.fromRGBO(255,255,255,1),
-//                  color:Colors.white,
-                    fontWeight: FontWeight.bold,
-
-                    fontSize: 20,
-                    fontFamily: 'Reross Quadratic',
+//                  style: GoogleFonts.Tangerine(),
+//            niconne, lato ,cookie,tangerine,niconne, itim.
+                  style: GoogleFonts.itim(
+                    textStyle: Theme.of(context).textTheme.display1,
+                    fontSize: 30,
+                    fontWeight: FontWeight.normal,
+//                    fontStyle: FontStyle.italic,
+                    color: Color(0xff000000),
                   ),
+
+
+//                    'Reross Quadratic',
+
 
                 ),CustomPaint(size: Size(0,19),
                   painter: MyPainter(),
@@ -156,13 +156,12 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
         title:  Text(categoryName.toLowerCase(),
 //    Text(categoryName.substring(0, 2),
-          style: TextStyle(
-//            color:Color.fromRGBO(84,70,62,1),
-            color:Color(0xff000000),
-//            color:Color.fromRGBO(255,255,255,1),
+          style: GoogleFonts.itim(
+            textStyle: Theme.of(context).textTheme.display1,
+            fontSize: 24,
             fontWeight: FontWeight.normal,
-            fontSize: 20,
-            fontFamily: 'Reross Quadratic',
+//                    fontStyle: FontStyle.italic,
+            color: Color(0xff000000),
           ),
 
         ),
@@ -211,9 +210,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //      resizeToAvoidBottomPadding: false ,
         // appBar: AppBar(title: Text('Food Gallery')),
-          body:
-          SafeArea(
-            child:SingleChildScrollView(
+        body:
+        SafeArea(
+          child:SingleChildScrollView(
               child:
 
               Row(
@@ -232,67 +231,25 @@ class _FoodGalleryState extends State<FoodGallery2> {
                           children: <Widget>[
 
                             Container(
-
-                              height:displayHeight(context)/13,
+                              height:displayHeight(context)/14,
                               color: Color(0xffFFFFFF),
 //                      color: Color.fromARGB(255, 255,255,255),
                               child:Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: <Widget>[
 
-                                  // CONTAINER FOR TOTAL PRICE CART BELOW.
                                   Container(
                                     margin:EdgeInsets.symmetric(
-                                        horizontal: 0,
+                                        horizontal: 9,
                                         vertical: 0),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        boxShadow: [
-                                          BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                              color: Color(0xff54463E),
-                                              blurRadius: 10.0,
-                                              offset: Offset(0.0, 2.0))
-                                        ],
-                                        color: Colors.black54),
+
                                     width: displayWidth(context)/5,
-                                    height: displayHeight(context)/27,
-                                    padding: EdgeInsets.only(
-                                        left: 4, top: 3, bottom: 3, right: 3),
-                                    child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Container(
+                                    height: displayHeight(context)/21,
+                                    child: Image.asset('assets/Group520.png'),
 
-                                          height: 25,
-                                          width: 5,
-                                          margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
-                                          child: Icon(
-                                            Icons.add_shopping_cart,
-                                            size: 28,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-//                                  Spacer(),
-                                        Text(_total_cart_price.toStringAsFixed(2) +' kpl',
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600,
-
-                                            )),
-//                                  Spacer(),
-
-                                      ],
-                                    ),
                                   ),
+                                  // CONTAINER FOR TOTAL PRICE CART BELOW.
+
 
                                   Container(
                                     margin:EdgeInsets.symmetric(
@@ -421,17 +378,73 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                     ),
                                   ),
 
+                                  Container(
+                                    margin:EdgeInsets.symmetric(
+                                        horizontal: 0,
+                                        vertical: 0),
+                                    width: displayWidth(context)/9,
+                                    height: displayHeight(context)/27,
+                                    padding: EdgeInsets.only(
+                                        left: 4, top: 3, bottom: 3, right: 3),
+                                    child: Icon(
+                                      Icons.add_shopping_cart,
+                                      size: 28,
+                                      color: Color(0xff54463E),
+                                    ),
+                                  ),
+
 
 
                                 ],
                               ),
                             ),
 
+                            Container(
+                              height:displayHeight(context)/20,
+                              color: Color(0xffffffff),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+
+                                    Spacer(),
+                                    CustomPaint(size: Size(0, 19),
+                                      painter: LongHeaderPainterBefore(),
+                                    ),
+                                    Text('$_currentCategory'.toLowerCase(),
+                                        style: GoogleFonts.itim(
+                                          textStyle: Theme.of(context).textTheme.display1,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.normal,
+//                    fontStyle: FontStyle.italic,
+                                          color: Color(0xff000000),
+                                        )),
+                                    CustomPaint(size: Size(0, 19),
+                                      painter: LongHeaderPainterAfter(),
+                                    ),
+                                    Spacer(),
+                                  ]
+                              ),
+                              /*
+                              child:Text('$_currentCategory'.toLowerCase(),
+                                style: GoogleFonts.itim(
+                                  textStyle: Theme.of(context).textTheme.display1,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.normal,
+//                    fontStyle: FontStyle.italic,
+                                  color: Color(0xff000000),
+                                ),
+
+                              ),
+                              */
+
+                            ),
+
                             // CONTAINER FOR TOTAL PRICE CART ABOVE.
                             Container(
                               height:displayHeight(context) -
                                   MediaQuery.of(context).padding.top  - displayHeight(context)/13,
-                              child: FoodList(categoryString: _currentCategory),
+                              child: FoodList(categoryString: _currentCategory,searchString2:_searchString),
 
 
                             ),
@@ -442,30 +455,72 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                   Container(
                     height: displayHeight(context) -
-                        MediaQuery.of(context).padding.top ,
-                    padding:EdgeInsets.symmetric(horizontal: 0,vertical: displayHeight(context)/13),
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width / 3.8,
-//              color: Colors.yellowAccent,
-//                    color: Color(0xff54463E),
-                    color: Color(0xffFFE18E),
+                        MediaQuery.of(context).padding.top + displayHeight(context)/20 ,
+
 //                          color: Color.fromARGB(255, 84, 70, 62),
 //              child:Text('ss'),
-                    child:StreamBuilder<List<NewCategoryItem>>(
 
-                        stream:bloc.categoryItemsStream,
-                        initialData: bloc.allCategories,
+                    child:Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          padding:EdgeInsets.only(top:20,right: 20,bottom: 0,left:0 ),
+//                        height:100,
+                          height:displayHeight(context)/13,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
+//              color: Colors.yellowAccent,
+//                    color: Color(0xff54463E),
+                          color: Color(0xffFFE18E),
+
+                          alignment: Alignment.topRight,
+                          child:IconButton(
+                            onPressed: () {
+                              print(
+                                  'Menu button pressed');
+
+                            },
+                            icon: const Icon(Icons.menu, size: 32.0),
+//                            color: Colors.grey,
+                            color: Color(0xff54463E),
+
+                            tooltip: MaterialLocalizations
+                                .of(context)
+                                .openAppDrawerTooltip,
+                          ),
+
+                        ),
+
+
+                        Container(
+                          height:displayHeight(context) -
+                              MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+//                          height:800,
+//                          padding:EdgeInsets.symmetric(horizontal: 0,vertical: displayHeight(context)/13),
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 3.8,
+//              color: Colors.yellowAccent,
+//                    color: Color(0xff54463E),
+                          color: Color(0xffFFE18E),
+
+                          child:StreamBuilder<List<NewCategoryItem>>(
+
+                              stream:bloc.categoryItemsStream,
+                              initialData: bloc.allCategories,
 //        initialData: bloc.getAllFoodItems(),
-                        builder: (context, snapshot){
+                              builder: (context, snapshot){
 
-                          if (!snapshot.hasData) {
-                            return Center(child: new LinearProgressIndicator());
-                          }
-                          else{
-                            final List allCategories =snapshot.data;
-                            final int categoryCount = snapshot.data.length;
+                                if (!snapshot.hasData) {
+                                  return Center(child: new LinearProgressIndicator());
+                                }
+                                else{
+                                  final List allCategories =snapshot.data;
+                                  final int categoryCount = snapshot.data.length;
 
 
 //                              print('categoryCount in condition 04: ');
@@ -473,30 +528,40 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //                                logger.i("categoryCount in condition 04: $categoryCount");
 
-                            return(
-                                new ListView.builder
-                                  (
-                                    itemCount: categoryCount,
+                                  return(
+                                      new ListView.builder
+                                        (
+                                          itemCount: categoryCount,
 
 
 
-                                    //    itemBuilder: (BuildContext ctxt, int index) {
-                                    itemBuilder: (_, int index) {
-                                      return _buildCategoryRow(allCategories[index]
-                                          /*categoryItems[index]*/, index);
-                                    }
-                                )
-                            )
-                            ;
-                          }
-                        }
+                                          //    itemBuilder: (BuildContext ctxt, int index) {
+                                          itemBuilder: (_, int index) {
+
+
+//                                            return (Text('ss'));
+
+
+                                            return _buildCategoryRow(allCategories[index]
+                                                /*categoryItems[index]*/, index);
+
+                                          }
+                                      )
+                                  )
+                                  ;
+                                }
+                              }
+                          ),
+                        ),
+
+                      ],
                     ),
-                  )
-                ],
-              ),
-            )
-            ,)
+                  ),
+                ]
+                ,)
 
+          ),
+        ),
       ),
     );
 
@@ -515,8 +580,9 @@ class FoodList extends StatelessWidget {
 
 
   final String categoryString;
+  final String searchString2;
 
-  FoodList({this.categoryString});
+  FoodList({this.categoryString,this.searchString2});
 
   var logger = Logger(
     printer: PrettyPrinter(),
@@ -636,13 +702,29 @@ class FoodList extends StatelessWidget {
 //          return Center(child:
 //          Text('${messageCount.toString()}')
 //          );
-
+          print('searchString  ##################################: $searchString2');
           print('categoryString  ##################################: $categoryString');
+          // ..p
+
+
+
+
+
+
+//          int messageCount = filteredItems.length;
+
+          //..p
           final List allFoods =snapshot.data;
 
-          final List filteredItems = allFoods.where((oneItem ) => oneItem.categoryName.
+          final List filteredItemsByCategory = allFoods.where((oneItem ) => oneItem.categoryName.
           toLowerCase() ==
               categoryString.toLowerCase()).toList();
+
+          // to do test.
+          // if(searchString2!=null)
+          final List filteredItems = filteredItemsByCategory.where((oneItem) =>oneItem.itemName.toLowerCase().
+          contains(
+              searchString2.toLowerCase())).toList();
 
           final int categoryItemsCount = filteredItems.length;
           print('categoryItemsCount: $categoryItemsCount');
@@ -902,10 +984,10 @@ class MyPainter extends CustomPainter {
   void paint(Canvas canvas, Size size){
 
 //    canvas.drawLine(...);
-    final p1 = Offset(60, 10);
-    final p2 = Offset(10, 10);
+    final p1 = Offset(50, 20);
+    final p2 = Offset(5, 20);
     final paint = Paint()
-      ..color = Colors.white
+      ..color = Colors.black
       ..strokeWidth = 3;
     canvas.drawLine(p1, p2, paint);
 
@@ -920,6 +1002,53 @@ class MyPainter extends CustomPainter {
 //    canvas.drawImageNine();
 //    canvas.drawParagraph();
 //...
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
+
+class LongHeaderPainterAfter extends CustomPainter {
+
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(250, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(10, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
+
+
+class LongHeaderPainterBefore extends CustomPainter {
+
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(-250, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(-10, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
   }
   @override
   bool shouldRepaint(CustomPainter old) {
