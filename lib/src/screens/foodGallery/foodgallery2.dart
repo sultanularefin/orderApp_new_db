@@ -842,7 +842,8 @@ class FoodList extends StatelessWidget {
 //                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                      crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
-                              new Container(
+                              new Container(child:
+                              Hero(tag:foodItemName,
                                 child: new Container(
                                   width: displayWidth(context) /  7,
                                   height: displayWidth(context) /7,
@@ -872,6 +873,8 @@ class FoodList extends StatelessWidget {
                                     ),
                                   ),
                                 ),
+                              ),
+
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
                               ),
 //                              SizedBox(height: 10),
@@ -961,7 +964,7 @@ class FoodList extends StatelessWidget {
                             );
                           }
 
-                          )
+                      )
                   );
 //            return SpoiledItem(/*dummy: snapshot.data[index]*/);
               },
