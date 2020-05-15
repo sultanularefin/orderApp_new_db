@@ -75,9 +75,8 @@ class FoodGalleryBloc implements Bloc {
   */
 
 
-
-  Future<List<FoodItemWithDocID>> getAllFoodItems() async {
-
+//  Future<List<FoodItemWithDocID>> getAllFoodItems() async {
+  void getAllFoodItems() async {
 
     var snapshot = await _client.fetchFoodItems();
     List docList = snapshot.documents;
@@ -131,18 +130,17 @@ class FoodGalleryBloc implements Bloc {
     );
 
     _foodItemController.sink.add(_allFoodsList);
-    return _allFoodsList;
+
 
   }
 
+  //  Future<List<NewCategoryItem>> getAllCategories() async {
+  void getAllCategories() async {
 
-  Future<List<NewCategoryItem>> getAllCategories() async {
 
-    var snapshot = await Firestore.instance.collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').
-    collection('categories').orderBy("rating", descending: true)
-        .getDocuments();
-
+    var snapshot = await _client.fetchCategoryItems();
     List docList = snapshot.documents;
+
 
     docList.forEach((doc) {
 
@@ -174,40 +172,24 @@ class FoodGalleryBloc implements Bloc {
     }
     );
     _categoriesController.sink.add(_allCategoryList);
-//    _foodItemController.sink.add(_allCategoryList);
-//    return _allFoodsList;
-
-  return _allCategoryList;
+    //    _foodItemController.sink.add(_allCategoryList);
+    //    return _allFoodsList;
 
   }
 
 
 
-//    FoodGalleryBloc() {
-//      List<FoodItemWithDocID> result = new List<FoodItemWithDocID> ();
-//
-//      for (var i = 10; i >= 1; i--) {
-//        FoodItemWithDocID oneNewFoodItem = new FoodItemWithDocID(
-//          itemName: 'a' + i.toString(),
-//          categoryName: 'a' + i.toString(),
-//          sizedFoodPrices: null,
-//          uploadDate: null,
-//          imageURL: 'a' + i.toString(),
-//          content: 'a' + i.toString(),
-//          ingredients: null,
-//          itemId: 'a' + i.toString(),
-//          indicatorValue: i.toDouble(),
-//          isAvailable: false,
-//          isHot: false,
-//          uploadedBy: 'a' + i.toString(),
-//          documentId: 'a' + i.toString(),
-//        );
-//
-//        result.add(oneNewFoodItem);
-//
-//      }
-//      _foodItemController.sink.add(result);
-//    }
+
+
+    FoodGalleryBloc() {
+
+    getAllFoodItems();
+    getAllCategories();
+
+//    this.getAllFoodItems();
+//    this.getAllCategories();
+
+    }
 
 
 

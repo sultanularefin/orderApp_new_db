@@ -40,17 +40,34 @@ class FirebaseClient {
 
   Future<QuerySnapshot> fetchFoodItems() async {
 
-    print ('at here ==================================== *************** ');
+    print ('at here fetchFoodItems ==================================== *************** ');
 
-   var snapshot= Firestore.instance
+    var snapshot= Firestore.instance
         .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
         .getDocuments();
 
-   return snapshot;
+    return snapshot;
 
   }
 
-  /*
+  Future<QuerySnapshot> fetchCategoryItems() async {
+
+
+
+    print ('at here fetchCategories ==================================== *************** ');
+
+    var snapshot= Firestore.instance
+        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').
+    collection('categories').orderBy("rating", descending: true)
+        .getDocuments();
+
+    return snapshot;
+
+  }
+
+
+
+/*
   Future<List<Restaurant>> fetchRestaurants(
       Location location, String query) async {
     final results = await request(path: 'search', parameters: {

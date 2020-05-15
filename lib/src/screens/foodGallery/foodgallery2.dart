@@ -453,18 +453,12 @@ class _FoodGalleryState extends State<FoodGallery2> {
                     color: Color(0xffFFE18E),
 //                          color: Color.fromARGB(255, 84, 70, 62),
 //              child:Text('ss'),
-                    child:FutureBuilder<List<NewCategoryItem>>(
+                    child:StreamBuilder<List<NewCategoryItem>>(
 
-                        future:bloc.getAllCategories(),
-
-
+                        stream:bloc.categoryItemsStream,
                         initialData: bloc.allCategories,
 //        initialData: bloc.getAllFoodItems(),
                         builder: (context, snapshot){
-
-
-
-
 
                           if (!snapshot.hasData) {
                             return Center(child: new LinearProgressIndicator());
@@ -613,10 +607,10 @@ class FoodList extends StatelessWidget {
 
 //    bloc.getAllFoodItems();
     //*
-    return FutureBuilder<List<FoodItemWithDocID>>(
+    return StreamBuilder<List<FoodItemWithDocID>>(
 //        stream:bloc.getAllFoodItems(),
 
-      future:bloc.getAllFoodItems(),
+      stream:bloc.foodItemsStream,
 
 
       initialData: bloc.allFoodItems,
@@ -636,8 +630,7 @@ class FoodList extends StatelessWidget {
 
         */
         print('snapshot.hasData : ${snapshot.hasData}');
-        final int messageCount = snapshot.data.length;
-        print('message count in condition 04: $messageCount');
+
 
         if(snapshot.hasData) {
 //          return Center(child:
@@ -650,11 +643,14 @@ class FoodList extends StatelessWidget {
           final List filteredItems = allFoods.where((oneItem ) => oneItem.categoryName.
           toLowerCase() ==
               categoryString.toLowerCase()).toList();
+
+          final int categoryItemsCount = filteredItems.length;
+          print('categoryItemsCount: $categoryItemsCount');
           return(Container(
             color: Color(0xffFFFFFF),
             child:
             GridView.builder(
-              itemCount:  messageCount,
+              itemCount:  categoryItemsCount,
               gridDelegate:
               new SliverGridDelegateWithMaxCrossAxisExtent(
 
