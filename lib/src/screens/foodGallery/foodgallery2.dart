@@ -949,14 +949,10 @@ class FoodList extends StatelessWidget {
                           ),
                           onTap: () {
 
-                            /*
-                            ---sss
-                            https://stackoverflow.com/questions/51908187/how-to-make-a-full-screen-dialog-in-flutter
-*/
                             return Navigator.push(context,
 
                               PageRouteBuilder(
-                                  opaque: true,
+                                  opaque: false,
                                   transitionDuration: Duration(milliseconds: 900),
                                   pageBuilder: (_, __, ___) =>
                                       FoodItemDetails2
