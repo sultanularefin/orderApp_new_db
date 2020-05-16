@@ -39,7 +39,7 @@ and show those in a separate list. That too can be solved with the BLoC pattern.
 
 class FoodItemDetailsBloc implements Bloc {
 
-  var _oneFoodItem ;
+  var _oneFoodItem =new FoodItemWithDocID() ;
 
 
   FoodItemWithDocID get currentFoodItem => _oneFoodItem;

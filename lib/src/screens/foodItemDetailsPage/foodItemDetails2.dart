@@ -43,16 +43,15 @@ class FoodItemDetails2 extends StatefulWidget {
 
   final Widget child;
 //  final FoodItem oneFoodItemData;
-  final FoodItemWithDocID oneFoodItemData;
-  final Firestore firestore = Firestore.instance;
+
 
 //  FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
 
 
-  FoodItemDetails2({Key key, this.child,this.oneFoodItemData}) : super(key: key);
+  FoodItemDetails2({Key key, this.child}) : super(key: key);
 
   @override
-  _FoodItemDetailsState createState() => new _FoodItemDetailsState(oneFoodItemData);
+  _FoodItemDetailsState createState() => new _FoodItemDetailsState();
 
 
 
@@ -92,9 +91,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //  _FoodItemDetailsState(this.oneFoodItemandId)
 //
 //
-  FoodItemWithDocID oneFoodItemandId;
 
-  _FoodItemDetailsState(this.oneFoodItemandId);
+  _FoodItemDetailsState();
   List<NewIngredient> defaultIngredientListForFood;
 
   var logger = Logger(
@@ -121,87 +119,111 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   @override
   Widget build(BuildContext context) {
-
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
 
-//    final bloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+    final bloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+    return StreamBuilder<FoodItemWithDocID>(
 
-    final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
 
-    return GestureDetector(
-      onTap: () {
+        stream: bloc.currentFoodItemsStream,
+        initialData: bloc.currentFoodItem,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: new LinearProgressIndicator());
+          }
+          else {
+            print('snapshot.hasData : ${snapshot.hasData}');
+
+            final FoodItemWithDocID oneFood = snapshot.data;
+
+
+//        return(Container(
+//            color: Color(0xffFFFFFF),
+//            child:
+//            GridView.builder(
+
+
+            final Map<String, dynamic> foodSizePrice = oneFood.sizedFoodPrices;
+
+            return GestureDetector(
+              onTap: () {
 //        FocusScopeNode currentFocus = FocusScope.of(context);
 //
 //        if (!currentFocus.hasPrimaryFocus) {
 //          currentFocus.unfocus();
 //        }
 
-        FocusScope.of(context).unfocus();
-      },
-      child:
-      Scaffold(
-        body:
-        SafeArea(child:
-        SingleChildScrollView(
+                FocusScope.of(context).unfocus();
+              },
+              child:
+              Scaffold(
+                body:
+                SafeArea(child:
+                SingleChildScrollView(
 
-          child:
-          // MAIN COLUMN FOR THIS PAGE.
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
+                  child:
+                  // MAIN COLUMN FOR THIS PAGE.
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
 
 //      1ST CONTAINER STARTS HERE || BELOW ||
 //                #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
-              // EVERYTHING IS FINE HERE.
-              //
+                      // EVERYTHING IS FINE HERE.
+                      //
 
 
-              Container(
+                      Container(
 
 //                color:Color.fromRGBO(239, 239, 239, 1.0),
-                color: Color(0xffF7F0EC),
-                height: displayHeight(context) -
-                    MediaQuery
-                        .of(context)
-                        .padding
-                        .top - 100,
-                //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
+                        color: Color(0xffF7F0EC),
+                        height: displayHeight(context) -
+                            MediaQuery
+                                .of(context)
+                                .padding
+                                .top - 100,
+                        //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
 
 
-                //                  height: displayHeight(context) -
-                //                      MediaQuery.of(context).padding.top -
-                //                      kToolbarHeight,
+                        //                  height: displayHeight(context) -
+                        //                      MediaQuery.of(context).padding.top -
+                        //                      kToolbarHeight,
 
-                child:
+                        child:
 
-                Row(
-                  children: <Widget>[
+                        Row(
+                          children: <Widget>[
 
-                    // 1ST CONTAINER OF THIS ROW HANDLES THE BIG DETAIL PAGE IMAGE.
-                    Container(
+                            // 1ST CONTAINER OF THIS ROW HANDLES THE BIG DETAIL PAGE IMAGE.
+                            Container(
 //                      height: 900,
 //                      color:Color(0xffCCCCCC),
-                      color: Color(0xffF7F0EC),
-                      width: displayWidth(context) * 0.43,
+                              color: Color(0xffF7F0EC),
+                              width: displayWidth(context) * 0.43,
 //                      height: displayHeight(context)*0.50,
 
-                      alignment: Alignment.centerLeft,
-                      child: FoodDetailImage(oneFoodItemandId.imageURL,oneFoodItemandId.itemName),
+                              alignment: Alignment.centerLeft,
+                              child: FoodDetailImage(oneFood.imageURL,
+                                  oneFood.itemName),
 
-                    ),
+                            ),
 
 
-                  ],
+                          ],
+                        ),
+                      ),
+
+
+                    ],
+                  )
+                  ,)
+
                 ),
               ),
-
-
-            ],
-          )
-          ,)
-
-        ),
-      ),
+            );
+          }
+        }
     );
   }
 
@@ -321,8 +343,6 @@ class FoodDetailImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-
     return Transform.translate(
       offset:Offset(-displayWidth(context)/22,0),
 
@@ -352,11 +372,7 @@ class FoodDetailImage extends StatelessWidget {
       ),
       ),
     );
-
-
   }
-
-
 }
 
 

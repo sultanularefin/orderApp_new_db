@@ -963,10 +963,8 @@ class FoodList extends StatelessWidget {
                                       BlocProvider<FoodItemDetailsBloc>(
                                         bloc: FoodItemDetailsBloc(oneFoodItem),
 
-                                        child: FoodItemDetails2
-                                          (
-                                            oneFoodItemData:oneFoodItem
-                                        )
+                                        child: FoodItemDetails2()
+
                                         ,),
                                   transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
                                     return FadeTransition(
