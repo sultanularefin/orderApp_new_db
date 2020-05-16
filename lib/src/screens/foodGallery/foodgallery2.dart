@@ -1,6 +1,7 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -949,17 +950,20 @@ class FoodList extends StatelessWidget {
                           ),
                           onTap: () {
 
-                            return Navigator.push(context,
+
+                            return Navigator.of(context).push(
+
 
                               PageRouteBuilder(
                                   opaque: false,
                                   transitionDuration: Duration(milliseconds: 900),
                                   pageBuilder: (_, __, ___) =>
-                                      FoodItemDetails2
-                                        (
-                                          oneFoodItemData:oneFoodItem
-                                      )
-                                  ,
+                                      BlocProvider<FoodItemDetailsBloc>(
+                                        bloc: FoodItemDetailsBloc(oneFoodItem),
+
+                                        child: FoodItemDetails2()
+
+                                        ,),
                                   transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
                                     return FadeTransition(
                                       opacity: animation,

@@ -349,6 +349,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
   Widget build(BuildContext context) {
 
     final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
+
     List<String> ingredientStringsForWhereInClause;
 
     if (defaultIngredientListForFood == null) {
