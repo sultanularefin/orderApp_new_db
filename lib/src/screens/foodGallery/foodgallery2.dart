@@ -1,6 +1,7 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -953,17 +954,20 @@ class FoodList extends StatelessWidget {
                             ---sss
                             https://stackoverflow.com/questions/51908187/how-to-make-a-full-screen-dialog-in-flutter
 */
-                            return Navigator.push(context,
+                            return Navigator.of(context).push(
 
                               PageRouteBuilder(
                                   opaque: true,
                                   transitionDuration: Duration(milliseconds: 900),
                                   pageBuilder: (_, __, ___) =>
-                                      FoodItemDetails2
-                                        (
-                                          oneFoodItemData:oneFoodItem
-                                      )
-                                  ,
+                                      BlocProvider<FoodItemDetailsBloc>(
+                                        bloc: FoodItemDetailsBloc(oneFoodItem),
+
+                                        child: FoodItemDetails2
+                                          (
+                                            oneFoodItemData:oneFoodItem
+                                        )
+                                        ,),
                                   transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
                                     return FadeTransition(
                                       opacity: animation,
