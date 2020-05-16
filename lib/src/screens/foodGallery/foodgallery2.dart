@@ -410,7 +410,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                                     Spacer(),
                                     CustomPaint(size: Size(0, 19),
-                                      painter: LongHeaderPainterBefore(),
+                                      painter: LongHeaderPainterBefore(context),
                                     ),
                                     Text('$_currentCategory'.toLowerCase(),
                                         style: GoogleFonts.itim(
@@ -421,7 +421,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                           color: Color(0xff000000),
                                         )),
                                     CustomPaint(size: Size(0, 19),
-                                      painter: LongHeaderPainterAfter(),
+                                      painter: LongHeaderPainterAfter(context),
                                     ),
                                     Spacer(),
                                   ]
@@ -870,10 +870,10 @@ class FoodList extends StatelessWidget {
                                   ClipOval(
                                     child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                    imageUrl: foodImageURL,
-                                    fit: BoxFit.cover,
-                                    placeholder: (context, url) => new CircularProgressIndicator(),
-                                  ),
+                                      imageUrl: foodImageURL,
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) => new CircularProgressIndicator(),
+                                    ),
                                   ),
                                 ),
 
@@ -949,15 +949,30 @@ class FoodList extends StatelessWidget {
                           ),
                           onTap: () {
 
+                            /*
+                            ---sss
+                            https://stackoverflow.com/questions/51908187/how-to-make-a-full-screen-dialog-in-flutter
+*/
                             return Navigator.push(context,
 
                               PageRouteBuilder(
+                                  opaque: true,
                                   transitionDuration: Duration(milliseconds: 900),
                                   pageBuilder: (_, __, ___) =>
                                       FoodItemDetails2
                                         (
                                           oneFoodItemData:oneFoodItem
                                       )
+                                  ,
+                                  transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
+                                    return FadeTransition(
+                                      opacity: animation,
+                                      child: RotationTransition(
+                                        turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+                                        child: child,
+                                      ),
+                                    );
+                                  }
                               ),
 
                               /*
@@ -967,6 +982,47 @@ class FoodList extends StatelessWidget {
                                 fullscreenDialog: false
                                 */
                             );
+                            /*
+
+
+                            ---ss
+                             */
+
+
+
+                            /*
+--ppp
+
+
+                            Navigator.push(context, PageRouteBuilder(
+                              opaque: false,
+                              pageBuilder: (BuildContext context, _, __) {
+                                return
+
+                                 Center(child: Text('My PageRoute')
+
+                                  /*
+                                FoodItemDetails2
+                                        (
+                                          oneFoodItemData:oneFoodItem
+
+
+                                );
+                                */
+                              },
+                              transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: RotationTransition(
+                                    turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+                                    child: child,
+                                  ),
+                                );
+                              }
+                            ));
+
+---ppp
+                            */
                           }
 
                       )
@@ -1025,11 +1081,13 @@ class MyPainter extends CustomPainter {
 
 class LongHeaderPainterAfter extends CustomPainter {
 
+  final BuildContext context;
+  LongHeaderPainterAfter(this.context);
   @override
   void paint(Canvas canvas, Size size){
 
 //    canvas.drawLine(...);
-    final p1 = Offset(250, 15); //(X,Y) TO (X,Y)
+    final p1 = Offset(displayWidth(context)/4, 15); //(X,Y) TO (X,Y)
     final p2 = Offset(10, 15);
     final paint = Paint()
       ..color = Color(0xff000000)
@@ -1049,11 +1107,16 @@ class LongHeaderPainterAfter extends CustomPainter {
 
 class LongHeaderPainterBefore extends CustomPainter {
 
+
+  final BuildContext context;
+  LongHeaderPainterBefore(this.context);
+
+
   @override
   void paint(Canvas canvas, Size size){
 
 //    canvas.drawLine(...);
-    final p1 = Offset(-250, 15); //(X,Y) TO (X,Y)
+    final p1 = Offset(-displayWidth(context)/4, 15); //(X,Y) TO (X,Y)
     final p2 = Offset(-10, 15);
     final paint = Paint()
       ..color = Color(0xff000000)
