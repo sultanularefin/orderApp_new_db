@@ -136,12 +136,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     final bloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-
     print('totalCartPrice -----------> : $totalCartPrice');
     print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
-
-
-
 
 
     return StreamBuilder<FoodItemWithDocID>(
@@ -169,13 +165,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             num normalPrice3 = foodSizePrice['normal'];
 
 
-            double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
+
 
             print('normalPrice1: $normalPrice ');
             print('normalPrice2: ${foodSizePrice['normal']} ');
             print('normalPrice3: $normalPrice3');
 
             print('euroPrice1: $normalPrice ');
+            double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
+
+          initialPriceByQuantityANDSize = normalPrice;
+          priceByQuantityANDSize = normalPrice;
 
 
 
