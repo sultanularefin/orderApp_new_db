@@ -71,7 +71,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   String _currentSize = "normal";
 
-  double initialPriceByQuantityANDSize;
+  double initialPriceByQuantityANDSize = 0.0;
   double priceByQuantityANDSize = 0.0;
 
 //  priceByQuantityANDSize = euroPrice1;
@@ -135,6 +135,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   Widget build(BuildContext context) {
 
     final bloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+
+    print('totalCartPrice -----------> : $totalCartPrice');
+    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
 
 
 
