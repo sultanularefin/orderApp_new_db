@@ -793,13 +793,13 @@ class FoodList extends StatelessWidget {
 //            final Map<String,dynamic> foodSizePrice = document['size'];
 
 //            final List<dynamic> foodItemIngredientsList =  document['ingredient'];
-                print('foodSizePrice __________________________${foodSizePrice['normal']}');
+//                print('foodSizePrice __________________________${foodSizePrice['normal']}');
                 final dynamic euroPrice = foodSizePrice['normal'];
 
 //                num euroPrice2 = tryCast(euroPrice);
                 double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.00);
 //                String euroPrice3= num.toString();
-                print('euroPrice2 :$euroPrice2');
+//                print('euroPrice2 :$euroPrice2');
 
                 String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
@@ -876,6 +876,44 @@ class FoodList extends StatelessWidget {
                                       placeholder: (context, url) => new CircularProgressIndicator(),
                                     ),
                                   ),
+                                  placeholderBuilder: (context,heroSize, child) {
+                                    return Opacity(opacity: 0.5, child:Container(
+                                      width: displayWidth(context) /  7,
+                                      height: displayWidth(context) /7,
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+//                                          707070
+//                                              color:Color(0xffEAB45E),
+// good yellow color
+//                                            color:Color(0xff000000),
+                                              color:Color(0xffEAB45E),
+// adobe xd color
+//                                              color: Color.fromRGBO(173, 179, 191, 1.0),
+                                              blurRadius: 30.0,
+                                              spreadRadius: 1.0,
+                                              offset: Offset(0, 21)
+                                          )
+                                        ],
+                                      ),
+                                      child:
+                                      ClipOval(child:CachedNetworkImage(
+//                  imageUrl: dummy.url,
+                                        imageUrl: foodImageURL,
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) => new CircularProgressIndicator(),
+                                      ),
+                                      ),
+                                    ),
+                                    );
+                                  },
+//                                  placeholderBuilder: (context,
+//                                      Size.fromWidth(displayWidth(context) / 7),
+//                          Image.network(foodImageURL)
+//
+//                                );
+                                  //Placeholder Image.network(foodImageURL),
                                 ),
 
                               ),
@@ -964,6 +1002,8 @@ class FoodList extends StatelessWidget {
                                         child: FoodItemDetails2()
 
                                         ,),
+                                  // fUTURE USE -- ANIMATION TRANSITION CODE.
+                                /*
                                   transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
                                     return FadeTransition(
                                       opacity: animation,
@@ -973,6 +1013,7 @@ class FoodList extends StatelessWidget {
                                       ),
                                     );
                                   }
+                                  */
                               ),
 
                               /*

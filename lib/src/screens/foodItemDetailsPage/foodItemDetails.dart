@@ -350,6 +350,24 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
 
     final Map<String,dynamic> foodSizePrice = oneFoodItemandId.sizedFoodPrices;
 
+
+
+    
+
+
+
+
+//    logger.i('euroPrice1 :',euroPrice1);
+//    tryCast(normalPrice);
+
+
+//      print('onValue: |||||||||||||||||||||||||||||||||||||||||||||||||||||||$onValue');
+
+
+
+
+
+
     List<String> ingredientStringsForWhereInClause;
 
     if (defaultIngredientListForFood == null) {
