@@ -1,6 +1,9 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //
-class FoodItemWithDocID {
+
+import './FoodItemWithDocID.dart';
+
+class FoodItemWithDocIDViewModel {
 
   String itemName;
   String categoryName;
@@ -20,8 +23,10 @@ class FoodItemWithDocID {
   bool isHot;
   String uploadedBy;
   String documentId;
+  String itemSize;        // initially Normal;
+  double itemPrice;       // double price of Normal initially.
 
-  FoodItemWithDocID(
+  FoodItemWithDocIDViewModel(
       {
 
         this.itemName,
@@ -37,8 +42,41 @@ class FoodItemWithDocID {
         this.isHot,
         this.uploadedBy,
         this.documentId,
+
+        this.itemSize,
+        this.itemPrice,
       }
       );
+
+
+  FoodItemWithDocIDViewModel.customCastFrom(FoodItemWithDocID data,String size, double price)
+      : itemName = data.itemName,
+        categoryName = data.categoryName,
+        sizedFoodPrices = data.sizedFoodPrices,
+        uploadDate = data.uploadDate,
+        imageURL = data.imageURL,
+        content = data.content,
+        ingredients = data.ingredients,
+        itemId = data.itemId,
+        indicatorValue = data.indicatorValue,
+        isAvailable = data.isAvailable,
+        isHot = data.isHot,
+        uploadedBy = data.uploadedBy,
+        documentId = data.documentId,
+        itemSize = size,
+        itemPrice = price;
+
+
+
+
+
+//  NewIngredient.fromMap(Map<String, dynamic> data,String docID)
+//      :imageURL= data['image'],
+//        ingredientName= data['name'],
+//        price = data['price'].toDouble(),
+//        documentId = docID,
+//        ingredientAmountByUser = 1;
+
 }
 
 

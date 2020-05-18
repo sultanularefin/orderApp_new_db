@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
 import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
@@ -63,50 +64,18 @@ class FoodItemDetails2 extends StatefulWidget {
 
 class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
-  //  final _formKey = GlobalKey();
-
-  final _formKey = GlobalKey<FormState>();
-
-  double totalCartPrice = 0;
-
-  String _currentSize = "normal";
-
-  double initialPriceByQuantityANDSize = 0.0;
-  double priceByQuantityANDSize = 0.0;
-
-//  priceByQuantityANDSize = euroPrice1;
-//  initialPriceByQuantityANDSize = euroPrice1;
-  int _itemCount= 1;
-
-
-//  oneFoodItemData
-
-
-//  FoodItemWithDocID oneFoodItemandId;
-//
-//  _FoodItemDetailsState(this.oneFoodItemandId)
-//
-//
-
-  _FoodItemDetailsState();
-  List<NewIngredient> defaultIngredientListForFood;
-
   var logger = Logger(
     printer: PrettyPrinter(),
   );
 
-
-  Order oneOrder = new Order();
-
+  String _currentSize;
 
   @override
   void initState() {
 
-
 //    setDetailForFood();
 //    retrieveIngredientsDefault();
     super.initState();
-
   }
 
 
@@ -136,11 +105,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     final bloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-    print('totalCartPrice -----------> : $totalCartPrice');
-    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
+//    print('totalCartPrice -----------> : $totalCartPrice');
+//    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
 
 
-    return StreamBuilder<FoodItemWithDocID>(
+    return StreamBuilder<FoodItemWithDocIDViewModel>(
 
 
         stream: bloc.currentFoodItemsStream,
@@ -153,33 +122,21 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           else {
             print('snapshot.hasData : ${snapshot.hasData}');
 
-            final FoodItemWithDocID oneFood = snapshot.data;
+            final FoodItemWithDocIDViewModel oneFood = snapshot.data;
 
             final Map<String,dynamic> foodSizePrice =  oneFood.sizedFoodPrices;
 
 
-            logger.i('foodSizePrice: ',foodSizePrice);
-            dynamic normalPrice = foodSizePrice['normal'];
+
+            double initialPriceByQuantityANDSize = 0.0;
+            double priceByQuantityANDSize = 0.0;
+            //            initialPriceByQuantityANDSize = oneFood.itemSize;
+
+            initialPriceByQuantityANDSize = oneFood.itemPrice;
+            priceByQuantityANDSize = oneFood.itemPrice;
+            _currentSize = oneFood.itemSize;
 
 
-            num normalPrice3 = foodSizePrice['normal'];
-
-
-
-
-            print('normalPrice1: $normalPrice ');
-            print('normalPrice2: ${foodSizePrice['normal']} ');
-            print('normalPrice3: $normalPrice3');
-
-            print('euroPrice1: $normalPrice ');
-            double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
-
-          initialPriceByQuantityANDSize = normalPrice;
-          priceByQuantityANDSize = normalPrice;
-
-
-
-            logger.i('initialPriceByQuantityANDSize',initialPriceByQuantityANDSize);
 
 //        return(Container(
 //            color: Color(0xffFFFFFF),
@@ -335,7 +292,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               children: <Widget>[
                                 //pppp
                                 Container(
-                                    child:_buildOverlayContent(context,oneFood.sizedFoodPrices)
+                                    child:_buildOverlayContent(context,foodSizePrice)
                                 ),
                               ]
                           ),
@@ -357,251 +314,257 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   Widget _buildOverlayContent(BuildContext context, Map<String,dynamic> allPrices) {
 
-    final Map<String,dynamic> foodSizePrice =allPrices;
-    return Container(
-      alignment: Alignment.topCenter,
+    final Map<String,dynamic> foodSizePrice = allPrices;
+
+    if(allPrices==null){
+      return Container
+        (
+          alignment: Alignment.center,
+          child: CircularProgressIndicator(),
+      );
+    }
+    else {
+      return Container(
+        alignment: Alignment.topCenter,
 //      width: 200,
 
-      height: displayHeight(context)/3,
+        height: displayHeight(context) / 3,
 //      height: 400,
-      color: Colors.white,
-      child: Column(
-//        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
+        color: Colors.white,
 
-          Container(
-              color: Color(0xffFFFFFF),
+        child: Column(
+//        mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+
+            Container(
+                color: Color(0xffFFFFFF),
 //                                  color:Color(0xffDAD7C3),
-              width: displayWidth(context) * 0.57,
-              child: Column(children: <Widget>[
+                width: displayWidth(context) * 0.57,
+                child: Column(children: <Widget>[
 // 1st container outsource below:
 
-                // 1st CONTAINER OF THE COLUMN LAYOUT HOLDS VSM ORG VS TODO. BEGINS HERE
-                Container(
+                  // 1st CONTAINER OF THE COLUMN LAYOUT HOLDS VSM ORG VS TODO. BEGINS HERE
+                  Container(
 
 
-                  //      color: Colors.yellowAccent,
-                  height: 40,
-                  width: displayWidth(context) * 0.57,
+                    //      color: Colors.yellowAccent,
+                    height: 40,
+                    width: displayWidth(context) * 0.57,
 
-                  // M VSM ORG VS TODO. BEGINS HERE.
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .end,
-                    children: <Widget>[
+                    // M VSM ORG VS TODO. BEGINS HERE.
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .end,
+                      children: <Widget>[
 
-                      // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                        // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
 
-                      Container(
-                        margin: EdgeInsets.fromLTRB(5, 0,0,0),
-                        child:OutlineButton(
+                        Container(
+                          margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: OutlineButton(
 //                        color: Color(0xffFEE295),
-                          clipBehavior:Clip.hardEdge,
-                          splashColor: Color(0xffB47C00),
-                          highlightElevation:12,
-                          shape:RoundedRectangleBorder(
-                            side: BorderSide(
-                              color:Color(0xffB47C00),
-                              style: BorderStyle.solid,
-                              width:1.6,
+                            clipBehavior: Clip.hardEdge,
+                            splashColor: Color(0xffB47C00),
+                            highlightElevation: 12,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Color(0xffB47C00),
+                                style: BorderStyle.solid,
+                                width: 1.6,
+                              ),
+                              borderRadius: BorderRadius.circular(35.0),
                             ),
-                            borderRadius: BorderRadius.circular(35.0),
-                          ),
 
-                          child:Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'M'.toUpperCase(), style:
-                            TextStyle(
-                                color:Color(0xffB47C00),
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'M'.toUpperCase(), style:
+                              TextStyle(
+                                  color: Color(0xffB47C00),
 
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                              ),
                             ),
-                          ),
-                          onPressed: () {
+                            onPressed: () {
+                              print('M pressed');
+                            },
+                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          ),),
 
-                            print('M pressed');
-                          },
-                          padding: EdgeInsets.fromLTRB(5, 0,0,0),
-                        ),),
-
-                      Container(
-                        margin: EdgeInsets.fromLTRB(5, 0,0,0),
-                        child:OutlineButton(
+                        Container(
+                          margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: OutlineButton(
 //                        color: Color(0xffFEE295),
-                          splashColor: Color(0xff34720D),
-                          highlightElevation:12,
-                          clipBehavior:Clip.hardEdge,
-                          shape:RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xff34720D),
-                              style: BorderStyle.solid,
+                            splashColor: Color(0xff34720D),
+                            highlightElevation: 12,
+                            clipBehavior: Clip.hardEdge,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Color(0xff34720D),
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(35.0),
                             ),
-                            borderRadius: BorderRadius.circular(35.0),
-                          ),
-                          child:Container(
+                            child: Container(
 
-                            alignment: Alignment.center,
-                            child: Text(
-                              'VSM'.toUpperCase(), style:
-                            TextStyle(
-                                color:Color(0xff34720D),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'VSM'.toUpperCase(), style:
+                              TextStyle(
+                                  color: Color(0xff34720D),
 
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-
-                            print('VSM pressed');
-                          },
-                          padding: EdgeInsets.fromLTRB(5, 0,0,0),
-                        ),)
-                      ,
-                      Container(
-                        margin: EdgeInsets.fromLTRB(5, 0,0,0),
-                        child:OutlineButton(
+                            onPressed: () {
+                              print('VSM pressed');
+                            },
+                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          ),)
+                        ,
+                        Container(
+                          margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: OutlineButton(
 //                        color: Color(0xffFEE295),
-                          splashColor: Color(0xff95CB04),
-                          highlightElevation:12,
-                          clipBehavior:Clip.hardEdge,
-                          shape:RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xff95CB04),
-                              style: BorderStyle.solid,
+                            splashColor: Color(0xff95CB04),
+                            highlightElevation: 12,
+                            clipBehavior: Clip.hardEdge,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Color(0xff95CB04),
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(35.0),
                             ),
-                            borderRadius: BorderRadius.circular(35.0),
-                          ),
-                          child:Container(
+                            child: Container(
 
-                            alignment: Alignment.center,
-                            child: Text(
-                              'VS'.toUpperCase(), style:
-                            TextStyle(
-                                color:Color(0xff95CB04),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'VS'.toUpperCase(), style:
+                              TextStyle(
+                                  color: Color(0xff95CB04),
 
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                              ),
                             ),
+                            onPressed: () {
+                              print('VS pressed');
+                            },
+                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
                           ),
-                          onPressed: () {
-
-                            print('VS pressed');
-                          },
-                          padding: EdgeInsets.fromLTRB(5, 0,0,0),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(5, 0,0,0),
-                        child:
-                        OutlineButton(
+                        Container(
+                          margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child:
+                          OutlineButton(
 //                        color: Color(0xffFEE295),
-                          splashColor: Color(0xff739DFA),
-                          highlightElevation:12,
-                          clipBehavior:Clip.hardEdge,
-                          shape:RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xff739DFA),
-                              style: BorderStyle.solid,
+                            splashColor: Color(0xff739DFA),
+                            highlightElevation: 12,
+                            clipBehavior: Clip.hardEdge,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Color(0xff739DFA),
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(35.0),
                             ),
-                            borderRadius: BorderRadius.circular(35.0),
-                          ),
-                          child:Container(
+                            child: Container(
 
-                            alignment: Alignment.center,
-                            child: Text(
-                              'ORG'.toUpperCase(), style:
-                            TextStyle(
-                                color:Color(0xff739DFA),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'ORG'.toUpperCase(), style:
+                              TextStyle(
+                                  color: Color(0xff739DFA),
 
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                              ),
                             ),
+                            onPressed: () {
+                              print('ORG pressed');
+                            },
+
                           ),
-                          onPressed: () {
-
-                            print('ORG pressed');
-                          },
-
-                        ),
-                      )
+                        )
 
 
+                        // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                        // ENDED HERE.
+
+                        // BLACK CONTAINER WILL BE DELETED LATER.
+                        // BLACK CONTAINER.
 
 
-                      // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-                      // ENDED HERE.
-
-                      // BLACK CONTAINER WILL BE DELETED LATER.
-                      // BLACK CONTAINER.
-
-
-                    ],
+                      ],
+                    ),
+                    // M VSM ORG VS TODO. ENDS HERE.
                   ),
-                  // M VSM ORG VS TODO. ENDS HERE.
-                ),
 
 
-                SizedBox(height: 20,),
+                  SizedBox(height: 20,),
 //1st container.
-                Container(
+                  Container(
 
-                    child: GridView.builder(
+                      child: GridView.builder(
 
 //                                          itemCount: sizeConstantsList.length,
-                      itemCount: foodSizePrice.length,
+                        itemCount: foodSizePrice.length,
 
-                      gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 120,
+                        gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 120,
 //                                            maxCrossAxisExtent: 270,
 //                                          new SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisSpacing: 5,
-                        // H  direction
+                          mainAxisSpacing: 5,
+                          // H  direction
 //
-                        crossAxisSpacing: 5,
+                          crossAxisSpacing: 5,
 
 
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
 //                                  /// H/Vertical
-                        childAspectRatio: 200 / 80,
+                          childAspectRatio: 200 / 80,
 //                                              crossAxisCount: 3
-                      ),
+                        ),
 
-                      itemBuilder: (_, int index) {
-                        String key = foodSizePrice.keys
-                            .elementAt(index);
-                        dynamic value = foodSizePrice
-                            .values.elementAt(index);
+                        itemBuilder: (_, int index) {
+                          String key = foodSizePrice.keys
+                              .elementAt(index);
+                          dynamic value = foodSizePrice
+                              .values.elementAt(index);
 //
-                        double valuePrice = tryCast<
-                            double>(
-                            value, fallback: 0.00);
-                        print('valuePrice at line # 583: $valuePrice and key is $key');
-                        return _buildOneSize(
-                            key, valuePrice, index);
-                      },
+                          double valuePrice = tryCast<
+                              double>(
+                              value, fallback: 0.00);
+                          print(
+                              'valuePrice at line # 583: $valuePrice and key is $key');
+                          return _buildOneSize(
+                              key, valuePrice, index);
+                        },
 
 
-                      controller: new ScrollController(
-                          keepScrollOffset: false),
-                      shrinkWrap: true,
-                    )
-                ),
-              ],)
+                        controller: new ScrollController(
+                            keepScrollOffset: false),
+                        shrinkWrap: true,
+                      )
+                  ),
+                ],)
 
-          ),
+            ),
 
-          RaisedButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Dismiss'),
-          )
-        ],
-      ),
+            RaisedButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Dismiss'),
+            )
+          ],
+        ),
 
-    );
+      );
+    }
   }
 
   /*
@@ -743,12 +706,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             ),
             onPressed: () {
 
-              logger.i('onePriceForSize: ',onePriceForSize);
-              setState(() {
-                initialPriceByQuantityANDSize = onePriceForSize;
-                priceByQuantityANDSize = onePriceForSize;
-                _currentSize= oneSize;
-              });
+//              logger.i('onePriceForSize: ',onePriceForSize);
+
+              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+              foodItemDetailsbloc.setNewSizePlusPrice(oneSize);
+
+
+//              setNewSizePlusPrice
+//              setState(() {
+//                initialPriceByQuantityANDSize = onePriceForSize;
+//                priceByQuantityANDSize = onePriceForSize;
+//                _currentSize= oneSize;
+//              });
             },
 
 
@@ -792,12 +762,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               ),
             ),
             onPressed: () {
-              logger.i('onePriceForSize: ',onePriceForSize);
-              setState(() {
-                initialPriceByQuantityANDSize = onePriceForSize;
-                priceByQuantityANDSize = onePriceForSize;
-                _currentSize= oneSize;
-              });
+
+//              logger.i('onePriceForSize: ',onePriceForSize);
+//              setState(() {
+//                initialPriceByQuantityANDSize = onePriceForSize;
+//                priceByQuantityANDSize = onePriceForSize;
+//                _currentSize= oneSize;
+//              });
+
+              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+              foodItemDetailsbloc.setNewSizePlusPrice(oneSize);
+
             },
           ),
         )
