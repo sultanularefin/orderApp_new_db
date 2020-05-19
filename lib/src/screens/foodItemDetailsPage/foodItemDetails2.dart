@@ -108,6 +108,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //    print('totalCartPrice -----------> : $totalCartPrice');
 //    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
 
+    logger.w('defaultIngredients: ',bloc.defaultIngredients);
+
+    List<NewIngredient> defaultIngredients = bloc.defaultIngredients;
 
     return StreamBuilder<FoodItemWithDocIDViewModel>(
 
@@ -126,8 +129,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             final Map<String,dynamic> foodSizePrice =  oneFood.sizedFoodPrices;
 
-
-
             double initialPriceByQuantityANDSize = 0.0;
             double priceByQuantityANDSize = 0.0;
             //            initialPriceByQuantityANDSize = oneFood.itemSize;
@@ -145,48 +146,62 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //            final Map<String, dynamic> foodSizePrice = oneFood.sizedFoodPrices;
+            return  GestureDetector(
+              onTap: () {
+                print('s');
+                Navigator.pop(context);
+                FocusScopeNode currentFocus = FocusScope.of(context);
 
-            return Scaffold(
-              backgroundColor: Colors.white.withOpacity(0.05),
-              // this is the main reason of transparency at next screen.
-              // I am ignoring rest implementation but what i have achieved is you can see.
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+//                  Navigator.pop(context);
 
-              body: SafeArea(
+                }
+              },
+              child:
+              Scaffold(
+
+                backgroundColor: Colors.white.withOpacity(0.05),
+                // this is the main reason of transparency at next screen.
+                // I am ignoring rest implementation but what i have achieved is you can see.
+
+                body: SafeArea(
 
 
 
-                child:Container(
+                  // smaller container containing all modal FoodItem Details things.
+                  child:Container(
 
-                  alignment: Alignment.bottomCenter,
-                  height: displayHeight(context)/3,
-                  //width:displayWidth(context) / 1.5, /* 3.8*/
-                  width:displayWidth(context)
-                      - displayWidth(context)/3.8  /* this is about the width of yellow side menu */
-                      -displayWidth(context)/20,/* 10% of widht of the device for padding margin.*/
+                    alignment: Alignment.bottomCenter,
+                    height: displayHeight(context)/1.5,
+                    //width:displayWidth(context) / 1.5, /* 3.8*/
+                    width:displayWidth(context)
+                        - displayWidth(context)/3.8  /* this is about the width of yellow side menu */
+                        -displayWidth(context)/20,/* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
-                  margin:EdgeInsets.fromLTRB(18,20,20,18),
+                    margin:EdgeInsets.fromLTRB(18,20,20,18),
 
-                  decoration:
-                  new BoxDecoration(
-                    borderRadius: new BorderRadius.circular(10.0),
-                    color:Colors.purple,
-                  ),
-
-
-                  child:Neumorphic(
-                    // State of Neumorphic (may be convex, flat & emboss)
-
-                    boxShape: NeumorphicBoxShape.roundRect(
-                      BorderRadius.all(Radius.circular(15)),
-
+                    decoration:
+                    new BoxDecoration(
+                      borderRadius: new BorderRadius.circular(10.0),
+                      color:Colors.purple,
                     ),
-                    curve: Neumorphic.DEFAULT_CURVE,
-                    style: NeumorphicStyle(
-                        shape: NeumorphicShape.concave,
-                        depth: 8,
-                        lightSource: LightSource.topLeft,
-                        color: Colors.grey
-                    ),
+
+
+                    child:Neumorphic(
+                      // State of Neumorphic (may be convex, flat & emboss)
+
+                        boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.all(Radius.circular(15)),
+
+                        ),
+                        curve: Neumorphic.DEFAULT_CURVE,
+                        style: NeumorphicStyle(
+                            shape: NeumorphicShape.concave,
+                            depth: 8,
+                            lightSource: LightSource.topLeft,
+                            color: Colors.grey
+                        ),
 
 //                    MAX_DEPTH,DEFAULT_CURVE
 
@@ -194,117 +209,241 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      BorderRadius.circular(25),
 //                  border: Border.all(
 
-                    child:Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                        // , 2ND PART(ROW) HANDLES THE
-                        // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+                        child:Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(child:Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                // , 2ND PART(ROW) HANDLES THE
+                                // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
 
 
-                        Container(
-                            height: displayHeight(context)/3,
+                                Container(
+                                    height: displayHeight(context)/2.6,
 
-                            color: Colors.red,
-                            width: displayWidth(context) /5,
+                                    color: Colors.red,
+                                    width: displayWidth(context) /5,
 // INCREASE THE DIVIDER TO MAKE IT MORE SAMLLER. I.E. WIDTH
 //                      height: displayHeight(context)*0.50,
-                            alignment: Alignment.centerLeft,
+//                                    alignment: Alignment.centerLeft,
 
 
-                            //ZZZ
-                            // Other arguments such as margin, padding etc. (Like `Container`)
-                            child:Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                                    //ZZZ
+                                    // Other arguments such as margin, padding etc. (Like `Container`)
+                                    child:Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
 
 //        mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                //pppp
-                                Container(
-                                  padding:EdgeInsets.fromLTRB(10,15,0,15),
-                                  child:
+                                      children: <Widget>[
+                                        //pppp
+                                        Container(
+                                          padding:EdgeInsets.fromLTRB(10,0,0,10),
+                                          child:
 
-                                  Text(
-                                      '${oneFood.itemName}',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight
-                                            .bold,
+                                          Text(
+                                              '${oneFood.itemName}',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight
+                                                    .bold,
 //                                                      color: Colors.white
-                                        color: Colors.black,
+                                                color: Colors.black,
 
-                                      )
-                                  ),
-                                ),
+                                              )
+                                          ),
+                                        ),
 
-                                Container(
-                                  padding:EdgeInsets.fromLTRB(10,5,0,15),
-                                  child:
+                                        Container(
+                                          padding:EdgeInsets.fromLTRB(10,0,0,10),
+                                          child:
 
-                                  Text(
-                                      '$initialPriceByQuantityANDSize '+ '\u20AC' ,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight
-                                            .normal,
+                                          Text(
+                                              '$initialPriceByQuantityANDSize '+ '\u20AC' ,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight
+                                                    .normal,
 //                                                      color: Colors.white
-                                        color: Colors.black,
+                                                color: Colors.black,
 
-                                      )
-                                  ),
-                                ),
+                                              )
+                                          ),
+                                        ),
 
-                                Container(
-                                  /*
+                                        Container(
+                                          /*
                               color:Colors.blue,
                             width:displayWidth(context)/4.6,
                             */
+                                          padding:EdgeInsets.fromLTRB(0,0,0,displayHeight(context)/25),
 
-                                  child: FoodDetailImage(oneFood.imageURL,
-                                      oneFood.itemName),
+                                          child: FoodDetailImage(oneFood.imageURL,
+                                              oneFood.itemName),
+                                        ),
+
+
+                                      ],
+
+                                    )
                                 ),
 
-
-                              ],
-
-                            )
-                        ),
-
-                        // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                        // , 2ND PART(ROW) HANDLES THE
-                        // DIFFERENT SIZES OF PRODUCTS.
-                        // ENDS HERE.
+                                // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                // , 2ND PART(ROW) HANDLES THE
+                                // DIFFERENT SIZES OF PRODUCTS.
+                                // ENDS HERE.
 
 
-                        // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
+                                // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
 
-                        Container(
-                          width:displayWidth(context) -displayWidth(context) /3.7 /* about the width of left most
+                                Container(
+                                  height: displayHeight(context)/2.6,
+                                  width:displayWidth(context) -displayWidth(context) /3.7 /* about the width of left most
                           container holding the food Item Image, image name and food item price */
-                              - displayWidth(context)/3.8 /* this is about the width of yellow side menu */,
-                          child:Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                                      - displayWidth(context)/3.8 /* this is about the width of yellow side menu */,
+                                  child:Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
 
 
 //        mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                //pppp
-                                Container(
-                                    child:_buildOverlayContent(context,foodSizePrice)
-                                ),
-                              ]
-                          ),
-                        )
-                        // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
+                                      children: <Widget>[
+                                        //pppp
+                                        Container(
+                                            child:_buildProductSizes(context,foodSizePrice)
+                                        ),
 
-                      ],
+//                                  Text('ss'),
+                                        Container(
+                                            child:buildDefaultIngredients(context,defaultIngredients)
+                                        ),
+
+                                        // MORE INGREDIENTS BEGINS HERE.
+                                        Container(
+                                            child:Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children:<Widget>[
+                                                  Container(
+
+                                                    margin:EdgeInsets.fromLTRB(0,0,displayHeight(context)/55,0),
+                                                    //      color: Colors.yellowAccent,
+                                                    height: displayHeight(context) / 20,
+                                                    width: displayWidth(context) /3,
+
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .start,
+                                                      children: <Widget>[
+
+                                                        // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+
+                                                        // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
+
+                                                        Container(
+                                                            child: GestureDetector(
+//                                                onLongPress: (){
+//                                                  print('at on Loong Press: ');
+//                                                },
+//                                                onLongPressUp: (){
+//
+//                                                },
+                                                              onTap: () {
+
+
+                                                                print('xyz');
+
+                                                              },
+                                                              child: Container(
+                                                                width: displayWidth(
+                                                                    context) * 0.33,
+                                                                height:50,
+                                                                decoration: BoxDecoration(
+//                                              color: Colors.black54,
+                                                                  color: Color(
+                                                                      0xffFFFFFF),
+                                                                  borderRadius: BorderRadius
+                                                                      .circular(15),
+                                                                ),
+
+
+//                                            color:Color(0xffC27FFF),
+                                                                child: Row(
+                                                                  mainAxisAlignment: MainAxisAlignment
+                                                                      .start,
+                                                                  crossAxisAlignment: CrossAxisAlignment
+                                                                      .center,
+                                                                  children: <Widget>[
+                                                                    Icon(
+                                                                      Icons.add,
+                                                                      size: 32.0,
+                                                                      color: Color
+                                                                          .fromRGBO(112,
+                                                                          112, 112, 1),
+                                                                      //        color: Color(0xffFFFFFF),
+                                                                    ),
+                                                                    Text(
+                                                                      'More Ingredients',
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color: Color
+                                                                              .fromRGBO(
+                                                                              112, 112,
+                                                                              112, 1),
+                                                                          fontSize: 22),
+                                                                    ),
+                                                                  ],
+                                                                ),
+
+                                                              ),
+                                                            )
+                                                        )
+
+
+                                                        // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                                                        // ENDED HERE.
+
+                                                        // BLACK CONTAINER WILL BE DELETED LATER.
+                                                        // BLACK CONTAINER.
+
+
+
+
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ]
+                                            )
+                                        )
+
+                                        // MORE INGREDIENTS ENDS HERE.
+
+
+                                      ]
+                                  ),
+                                )
+                                // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
+
+                              ],
+                            ),
+                            ),
+
+                            Container(child:Text("Unselected Ingredients are here")),
+
+
+                          ],
+                        )
+
                     ),
                   ),
-                ),
 
+                ),
               ),
+
             );
           }
         }
@@ -312,23 +451,22 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   }
 
 
-  Widget _buildOverlayContent(BuildContext context, Map<String,dynamic> allPrices) {
+  Widget _buildProductSizes(BuildContext context, Map<String,dynamic> allPrices) {
 
     final Map<String,dynamic> foodSizePrice = allPrices;
 
     if(allPrices==null){
       return Container
         (
-          alignment: Alignment.center,
-          child: CircularProgressIndicator(),
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(),
       );
     }
     else {
       return Container(
-        alignment: Alignment.topCenter,
+//        alignment: Alignment.topCenter,
 //      width: 200,
-
-        height: displayHeight(context) / 3,
+        height: displayHeight(context) / 5,
 //      height: 400,
         color: Colors.white,
 
@@ -556,12 +694,165 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             ),
 
-            RaisedButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Dismiss'),
-            )
+
+            // Todo DefaultItemsStreamBuilder
+
+
+
+
           ],
         ),
+
+      );
+    }
+  }
+
+  Widget buildDefaultIngredients(BuildContext context,List<NewIngredient> defaltIngs){
+
+
+    logger.w("DefaultIngs",defaltIngs);
+    print("DefaultIngs: $defaltIngs");
+
+    print('defaltIngs.length LINE# 600: ${defaltIngs.length}');
+
+    if( (defaltIngs.length==1)&& (defaltIngs[0].ingredientName.toLowerCase()=='none')){
+
+      return Container(
+          height: displayHeight(context) / 8,
+//          height:190,
+          width: displayWidth(context) * 0.57,
+//              color: Colors.yellowAccent,
+//                    color: Color(0xff54463E),
+          color: Color(0xfffebaca),
+          alignment: Alignment.center,
+
+          // PPPPP
+
+          child:(
+              Text("No Ingredients, Please Select 1 or more",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.blueAccent,
+                ),
+              )
+          )
+      );
+    }
+
+
+    else {
+      return Container(
+//          height: 190,
+          height: displayHeight(context) / 8,
+          width: displayWidth(context) * 0.57,
+//              color: Colors.yellowAccent,
+//                    color: Color(0xff54463E),
+          color: Color(0xfffebaca),
+
+
+          // PPPPP
+
+          child: (
+
+              GridView.builder(
+                itemCount: defaltIngs.length,
+
+                gridDelegate:
+                new SliverGridDelegateWithMaxCrossAxisExtent(
+
+                  maxCrossAxisExtent: 180,
+                  mainAxisSpacing: 6, // Vertical  direction
+                  crossAxisSpacing: 5,
+                  childAspectRatio: 200 / 240,
+
+                ),
+
+                shrinkWrap: false,
+//        final String foodItemName =          filteredItems[index].itemName;
+//        final String foodImageURL =          filteredItems[index].imageURL;
+                itemBuilder: (_, int index) {
+                  final String ingredientName = defaltIngs[index]
+                      .ingredientName;
+//                  final dynamic ingredientImageURL = document['image'];
+//    final num ingredientPrice = document['price'];
+
+                  final dynamic ingredientImageURL = defaltIngs[index]
+                      .imageURL == '' ?
+                  'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
+                      :
+                  storageBucketURLPredicate +
+                      Uri.encodeComponent(defaltIngs[index].imageURL)
+
+                      + '?alt=media';
+
+
+                  return
+                    Container(
+                      color: Color.fromRGBO(239, 239, 239, 0),
+                      padding: EdgeInsets.symmetric(
+//                          horizontal: 10.0, vertical: 22.0),
+                          horizontal: 4.0, vertical: 15.0),
+                      child: GestureDetector(
+                          onLongPress: () {
+                            print(
+                                'at Long Press: ');
+                          },
+
+                          child: Column(
+                            children: <Widget>[
+
+                              new Container(
+
+                                width: displayWidth(context) * 0.09,
+                                height: displayWidth(context) * 0.11,
+
+                                child: ClipOval(
+
+                                  child: CachedNetworkImage(
+                                    imageUrl: ingredientImageURL,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context,
+                                        url) => new LinearProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Image.network(
+                                            'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+//
+                                  ),
+                                ),
+                              ),
+//                              SizedBox(height: 10),
+                              Text(
+
+                                ingredientName,
+
+                                style: TextStyle(
+                                  color: Color.fromRGBO(112, 112, 112, 1),
+//                                    color: Colors.blueGrey[800],
+
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18,
+                                ),
+                              )
+                              ,
+
+
+                            ],
+                          ),
+                          onTap: () {
+                            print('for future use');
+//                            return Navigator.push(context,
+//
+//                                MaterialPageRoute(builder: (context)
+//                                => FoodItemDetails())
+//                            );
+                          }
+                      ),
+                    );
+                },
+
+              ))
+        // PPPPP
 
       );
     }

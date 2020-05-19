@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -672,6 +673,7 @@ class FoodList extends StatelessWidget {
 //    final blocZZ = FoodItemsQueryBloc();
 
     final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+    List<NewIngredient> testIngs = bloc.allIngredients;
 
 //    bloc.getAllFoodItems();
     //*
@@ -997,7 +999,7 @@ class FoodList extends StatelessWidget {
                                   transitionDuration: Duration(milliseconds: 900),
                                   pageBuilder: (_, __, ___) =>
                                       BlocProvider<FoodItemDetailsBloc>(
-                                        bloc: FoodItemDetailsBloc(oneFoodItem),
+                                        bloc: FoodItemDetailsBloc(oneFoodItem,testIngs),
 
                                         child: FoodItemDetails2()
 

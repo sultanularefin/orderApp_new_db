@@ -2,6 +2,7 @@
 // BLOC
 //    import 'package:foodgallery/src/Bloc/
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 
 
 //MODELS
@@ -29,7 +30,10 @@ class FoodGalleryBloc implements Bloc {
   // id ,type ,title <= Location.
 
   List<FoodItemWithDocID> _allFoodsList=[];
+
   List<NewCategoryItem> _allCategoryList=[];
+
+  List<NewIngredient> _allIngItems =[];
 
 
 
@@ -39,8 +43,11 @@ class FoodGalleryBloc implements Bloc {
 
   //  getter for the above may be
 
+
   List<FoodItemWithDocID> get allFoodItems => _allFoodsList;
   List<NewCategoryItem> get allCategories => _allCategoryList;
+  List<NewIngredient> get allIngredients => _allIngItems;
+
 
   //  The => expr syntax is a shorthand for { return expr; }.
   //  The => notation is sometimes referred to as arrow syntax.
@@ -49,6 +56,8 @@ class FoodGalleryBloc implements Bloc {
   // 1
   final _foodItemController = StreamController <List<FoodItemWithDocID>>();
   final _categoriesController = StreamController <List<NewCategoryItem>>();
+
+  final _allIngredientListController = StreamController <List<NewIngredient>>();
 
   // 2
 
@@ -137,6 +146,41 @@ class FoodGalleryBloc implements Bloc {
   }
 
   //  Future<List<NewCategoryItem>> getAllCategories() async {
+
+
+
+  void getAllIngredients() async {
+
+
+    var snapshot = await _client.fetchAllIngredients();
+    List docList = snapshot.documents;
+
+
+
+    List <NewIngredient> ingItems = new List<NewIngredient>();
+    ingItems = snapshot.documents.map((documentSnapshot) =>
+        NewIngredient.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+    print('documents are: $documents');
+
+
+    _allIngItems = ingItems;
+
+    _allIngredientListController.sink.add(ingItems);
+
+//    return ingItems;
+
+  }
+
+
   void getAllCategories() async {
 
 
@@ -183,10 +227,14 @@ class FoodGalleryBloc implements Bloc {
 
 
 
+    // Constructor.
     FoodGalleryBloc() {
 
     getAllFoodItems();
     getAllCategories();
+
+    getAllIngredients();
+    // invoking this here to make the transition in details page faster.
 
 //    this.getAllFoodItems();
 //    this.getAllCategories();
@@ -201,5 +249,6 @@ class FoodGalleryBloc implements Bloc {
   void dispose() {
     _foodItemController.close();
     _categoriesController.close();
+    _allIngredientListController.close();
   }
 }

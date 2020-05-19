@@ -5,6 +5,7 @@
 //import 'package:zomatoblock/BLoC/location_query_bloc.dart';
 //
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:logger/logger.dart';
 
 //MODELS
@@ -47,16 +48,30 @@ class FoodItemDetailsBloc implements Bloc {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
+
+  final _client = FirebaseClient();
+
+
   // can also use var _oneFoodItem = new FoodItemWithDocID() ;
 //  FoodItemWithDocID _oneFoodItem = new FoodItemWithDocID() ;
   FoodItemWithDocIDViewModel _thisFoodItem ;
 //  String _currentSize = 'normal';
 
-  var _currentSize = new Map<String ,double>();
+//  var _currentSize = new Map<String ,double>(); // currentlyNotUsing.
 
 //  Map<String,Dynamic>
 
   FoodItemWithDocIDViewModel get currentFoodItem => _thisFoodItem;
+
+
+
+  List<NewIngredient> _allIngItems=[];
+
+  List<NewIngredient> _defaultIngItems = [];
+  List<NewIngredient> _unSelectedIngItems = [];
+
+
+//  List <NewIngredient> ingItems = new List<NewIngredient>();
 
 
 
@@ -74,17 +89,33 @@ class FoodItemDetailsBloc implements Bloc {
   //  How it know's from the Restaurant array that this are favorite;
 
   // 1
+
+  List<NewIngredient> get allIngredients => _allIngItems;
+
+  List<NewIngredient> get defaultIngredients => _defaultIngItems;
+  List<NewIngredient> get unSelectedIngredients => _unSelectedIngItems;
+
+
+
+
   final _controller = StreamController <FoodItemWithDocIDViewModel>();
 
+  // final _itemSizeController = StreamController<Map<String, double>>(); // currentlyNotUsing.
 
-  final _itemSizeController = StreamController<Map<String, double>>();
+  final _allIngredientListController =  StreamController <List<NewIngredient>>();
+
+  final _unSelectedIngredientListController   =  StreamController <List<NewIngredient>>();
+  final _defaultIngredientListController      =  StreamController <List<NewIngredient>>();
+
+
+//  final _foodItemController = StreamController <List<FoodItemWithDocID>>();
 
   // INVOKER -> stream: bloc.favoritesStream,
 
   Stream<FoodItemWithDocIDViewModel> get currentFoodItemsStream => _controller.stream;
 
 
-  Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream;
+  // Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream; // currentlyNotUsing.
 
 
   /*
@@ -100,14 +131,82 @@ class FoodItemDetailsBloc implements Bloc {
 
   */
 
-  // constructor
+  // CONSTRUCTOR BEGINS HERE.
 
-  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem) {
+
+  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped ) {
 
 //    _oneFoodItem = oneFoodItem;
 
 
+    //  logger.w(" allIngsScoped: ", allIngsScoped);
+
+      //  print(" allIngsScoped: $allIngsScoped ");
+
+
+
+
     final Map<String,dynamic> foodSizePrice = oneFoodItem.sizedFoodPrices;
+
+    /* INGREDIENTS HANDLING CODES STARTS HERE: */
+    List<String> ingredientStringsForWhereInClause;
+    List <NewIngredient> ingItems = new List<NewIngredient>();
+
+
+    final List<dynamic> foodItemIngredientsList2 =  oneFoodItem.ingredients;
+    List<String> listStringIngredients = dynamicListFilteredToStringList(foodItemIngredientsList2);
+
+//    print('listStringIngredients: $listStringIngredients');
+    logger.w('listStringIngredients at foodItem Details Block line # 160',listStringIngredients);
+
+
+//    List<NewIngredient> allIngsScoped = getAllIngredients();
+
+
+    // DDD todo
+
+//    print('allIng_s : $allIngsScoped');
+
+    if(listStringIngredients.length!=0) {
+
+
+
+      filterSelectedIngredientsDefault(allIngsScoped,listStringIngredients);// only default<NewIngredient>
+
+      filterSelectedIngredientsUnSelected(allIngsScoped,listStringIngredients);// only default<NewIngredient>
+
+
+    }
+
+    else{
+      NewIngredient c1 = new NewIngredient(
+          ingredientName : 'None',
+          imageURL: 'None',
+
+          price: 0.01,
+          documentId: 'None',
+          ingredientAmountByUser :1000
+
+      );
+
+      ingItems.add(c1);
+
+//      _allIngItems = ingItems;
+
+//      _allIngredientListController.sink.add(ingItems);
+
+//      _unSelectedIngredientListController
+      _defaultIngItems=ingItems;
+      _defaultIngredientListController.sink.add(ingItems);
+      _unSelectedIngredientListController.sink.add(allIngsScoped);
+//      return ingItems;
+
+    }
+
+    //DDDD todo
+
+    /* INGREDIENTS HANDLING CODES ENDS HERE: */
+
 
 
     dynamic normalPrice = foodSizePrice['normal'];
@@ -154,6 +253,8 @@ class FoodItemDetailsBloc implements Bloc {
 
     _controller.sink.add(thisFood);
   }
+
+  // CONSTRUCTOR ENDS HERE.
 
   /*
     else {
@@ -236,28 +337,39 @@ class FoodItemDetailsBloc implements Bloc {
 //    this.getAllFoodItems();
 //    this.getAllCategories();
 
+/*
+  void getAllIngredients() async {
+
+
+    var snapshot = await _client.fetchAllIngredients();
+    List docList = snapshot.documents;
 
 
 
-  double tryCast<num>(dynamic x, {num fallback }) {
+    List <NewIngredient> ingItems = new List<NewIngredient>();
+    ingItems = snapshot.documents.map((documentSnapshot) =>
+        NewIngredient.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
 
-    print(" at tryCast");
-    print('x: $x');
+    ).toList();
 
-    bool status = x is num;
 
-    print('status : x is num $status');
-    print('status : x is dynamic ${x is dynamic}');
-    print('status : x is int ${x is int}');
-    if(status) {
-      return x.toDouble() ;
-    }
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
 
-    if(x is int) {return x.toDouble();}
-    else if(x is double) {return x.toDouble();}
+    print('documents are: $documents');
 
-    else return 0.0;
+
+    _allIngItems = ingItems;
+
+    _allIngredientListController.sink.add(ingItems);
+
+    return ingItems;
+
   }
+
+  */
 
   void setNewSizePlusPrice(String sizeKey) {
     final Map<String,dynamic> foodSizePrice = _thisFoodItem.sizedFoodPrices;
@@ -295,9 +407,199 @@ class FoodItemDetailsBloc implements Bloc {
 
   }
 
+
+  // HELPER METHOD tryCast Number (1)
+  double tryCast<num>(dynamic x, {num fallback }) {
+
+    print(" at tryCast");
+    print('x: $x');
+
+    bool status = x is num;
+
+    print('status : x is num $status');
+    print('status : x is dynamic ${x is dynamic}');
+    print('status : x is int ${x is int}');
+    if(status) {
+      return x.toDouble() ;
+    }
+
+    if(x is int) {return x.toDouble();}
+    else if(x is double) {return x.toDouble();}
+
+    else return 0.0;
+  }
+
+  // HELPER METHOD  dynamicListFilteredToStringList Number (2)
+
+  List<String> dynamicListFilteredToStringList(List<dynamic> dlist) {
+
+    List<String> stringList = List<String>.from(dlist);
+    return stringList.where((oneItem) =>oneItem.toString().toLowerCase()
+        ==
+        isIngredientExist(oneItem.toString().trim().toLowerCase())).toList();
+
+  }
+
+  // HELPER METHOD  isIngredientExist ==> NUMBER 3
+
+
+  String isIngredientExist(String inputString) {
+    List<String> allIngredients = [
+      'ananas',
+      'aurajuusto',
+      'aurinklkuivattu_tomaatti',
+      'cheddar',
+      'emmental_laktoositon',
+      'fetajuusto',
+      'herkkusieni',
+      'jalapeno',
+      'jauheliha',
+      'juusto',
+      'kana',
+      'kanakebab',
+      'kananmuna',
+      'kapris',
+      'katkarapu',
+      'kebab',
+      'kinkku',
+      'mieto_jalapeno',
+      'mozzarella',
+      'oliivi',
+      'paprika',
+      'pekoni',
+      'pepperoni',
+      'persikka',
+      'punasipuli',
+      'rucola',
+      'salaatti',
+      'salami',
+      'savujuusto_hyla',
+      'simpukka',
+      'sipuli',
+      'suolakurkku',
+      'taco_jauheliha',
+      'tomaatti',
+      'tonnikala',
+      'tuore_chili',
+      'tuplajuusto',
+      'vuohejuusto'
+    ];
+
+// String s= allIngredients.where((oneItem) =>oneItem.toLowerCase().contains(inputString.toLowerCase())).toString();
+//
+// print('s , $s');
+
+//firstWhere(bool test(E element), {E orElse()}) {
+    String elementExists = allIngredients.firstWhere(
+            (oneItem) => oneItem.toLowerCase() == inputString.toLowerCase(),
+        orElse: () => '');
+
+    print('elementExists: $elementExists');
+
+    return elementExists;
+
+//allIngredients.every(test(t)) {
+//contains(
+//    searchString2.toLowerCase())).toList();
+  }
+
+  // helper method 04
+  filterSelectedIngredientsDefault(List<NewIngredient> allIngList , List<String> listStringIngredients2) {
+// foox
+
+    logger.w("at filterSelectedIngredientsDefault","filterSelectedIngredientsDefault");
+
+
+
+//    print("allIngList: $allIngList");
+
+    print("listStringIngredients2: $listStringIngredients2");
+
+
+
+    List<NewIngredient> default2 =[];
+//    List<NewIngredient> y = [];
+    listStringIngredients2.forEach((stringIngredient) {
+      NewIngredient elementExists = allIngList.where(
+            (oneItem) => oneItem.ingredientName.trim().toLowerCase() == stringIngredient.trim().toLowerCase()).first;
+
+      print('elementExists: $elementExists');
+      // WITHOUT THE ABOVE PRINT STATEMENT SOME TIMES THE APPLICATION CRUSHES.
+
+      default2.add(elementExists);
+
+    });
+
+    _defaultIngItems = default2;
+    _defaultIngredientListController.sink.add(default2);
+
+//    return default2;
+
+    logger.i('_defaultIngItems: ',_defaultIngItems);
+
+  }
+
+  filterSelectedIngredientsUnSelected (
+      List<NewIngredient> allIngList , List<String> listStringIngredients2
+      ) {
+// foox
+
+
+    List<NewIngredient> allUnSelected =[];
+
+    listStringIngredients2.forEach((stringIngredient) {
+      NewIngredient elementUNSelected = allIngList.where(
+            (oneItem) => oneItem.ingredientName.trim().toLowerCase() !=
+          stringIngredient.trim().toLowerCase()).first;
+
+
+      allUnSelected.add(elementUNSelected);
+
+    });
+
+
+    _unSelectedIngItems = allUnSelected;
+//    _defaultIngredientListController.sink.add(default2);
+    _unSelectedIngredientListController.sink.add(allUnSelected);
+
+//    return allUnSelected;
+
+    logger.i('allUnSelected: ',allUnSelected);
+
+  }
+
+
+  /*
+  String searchForThisIngredient(String inputString) {
+
+
+    List<String> foodIngredients = onlyIngredientsNames2;
+
+//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
+
+
+    String elementExists = foodIngredients.firstWhere(
+            (oneItem) => oneItem.toLowerCase() == inputString,
+        orElse: () => '');
+
+    print('elementExists: $elementExists');
+
+    return elementExists.toLowerCase();
+
+  }
+
+  */
+
+
+
   @override
   void dispose() {
     _controller.close();
-    _itemSizeController.close();
+//    _itemSizeController.close();
+    _allIngredientListController.close();
+    _defaultIngredientListController.close();
+    _unSelectedIngredientListController.close();
+
+
   }
 }
