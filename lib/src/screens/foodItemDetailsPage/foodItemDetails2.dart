@@ -21,7 +21,7 @@ import 'package:foodgallery/src/screens/ingredients_more/more_ingredients.dart';
 import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
 import 'package:foodgallery/src/DataLayer/SizeConstants.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
-
+import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailImage.dart';
 import './../../DataLayer/FoodItemWithDocID.dart';
 import './../../DataLayer/Order.dart';
 //import './../../DataLayer/itemData.dart';
@@ -360,13 +360,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                               child: Container(
                                                                 width: displayWidth(
                                                                     context) * 0.33,
-                                                                height:50,
+                                                                height:45,
                                                                 decoration: BoxDecoration(
 //                                              color: Colors.black54,
                                                                   color: Color(
                                                                       0xffFFFFFF),
                                                                   borderRadius: BorderRadius
-                                                                      .circular(15),
+                                                                      .circular(25),
                                                                 ),
 
 
@@ -1080,104 +1080,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-class FoodDetailImage extends StatelessWidget {
 
 
-  final String imageURLBig;
-  final String foodItemName;
-  FoodDetailImage(this.imageURLBig,this.foodItemName);
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Container(
-
-      color:Colors.white,
-//      height: displayHeight(context)/4,
-      height:displayWidth(context)/3.8,
-      width:displayWidth(context)/4.6,
-      child:Transform.translate(
-        offset:Offset(-displayWidth(context)/18,0),
-
-//      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
-        // -displayWidth(context)/9
-        child:
-        Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              width: displayWidth(context)/3.9,
-              height:displayWidth(context)/4.4,
-
-              // INCREASE THE HEIGHT TO MAKE THE IMAGE CONTAINER MORE SMALLER.
-
-              decoration: new BoxDecoration(
-                color: Colors.orange,
-                shape: BoxShape.circle,
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Hero(
-                tag: foodItemName,
-                child:
-                ClipOval(
-                  child:CachedNetworkImage(
-                    width: displayWidth(context)/3.9,
-                    height:displayWidth(context)/4.4,
-                    imageUrl: imageURLBig,
-//                    fit: BoxFit.scaleDown,cover,scaleDown,fill
-                    fit: BoxFit.fill,
-//
-                    placeholder: (context, url) => new CircularProgressIndicator(),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-class CustomRect extends CustomClipper<Rect>{
-  @override
-  Rect getClip(Size size) {
-    print('at get Clip');
-//    Rect rect = Rect.fromLTRB(100, 0.0, size.width, size.height);
-    Rect rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
-    return rect;
-    // TODO: implement getClip
-  }
-  @override
-  bool shouldReclip(CustomRect oldClipper) {
-    // TODO: implement shouldReclip
-    //    return true;
-    return false;
-  }
-}
-
-
-class TriangleClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.lineTo(size.width, 0.0); // (x,h) =(width,0)
-    path.lineTo(size.width - 1, size.height- 1);
-    path.lineTo(size.width - 2, size.height- 2);
-    path.lineTo(size.width - 3, size.height- 3);
-    path.lineTo(size.width - 4, size.height- 4);
-    path.lineTo(size.width - 5, size.height- 5);
-    path.lineTo(size.width - 6, size.height- 6);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(TriangleClipper oldClipper) => false;
-}
 
 

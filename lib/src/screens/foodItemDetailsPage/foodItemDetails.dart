@@ -33,9 +33,6 @@ import './../../DataLayer/Order.dart';
 final Firestore firestore = Firestore();
 
 
-
-
-
 class FoodItemDetails extends StatefulWidget {
 //  AdminFirebase({this.firestore});
 
