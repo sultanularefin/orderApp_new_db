@@ -141,7 +141,7 @@ class FoodItemDetailsBloc implements Bloc {
 
     //  logger.w(" allIngsScoped: ", allIngsScoped);
 
-      //  print(" allIngsScoped: $allIngsScoped ");
+    //  print(" allIngsScoped: $allIngsScoped ");
 
 
 
@@ -171,9 +171,9 @@ class FoodItemDetailsBloc implements Bloc {
 
 
 
-      filterSelectedIngredientsDefault(allIngsScoped,listStringIngredients);// only default<NewIngredient>
+      filterSelectedDefaultIngredients(allIngsScoped,listStringIngredients);// only default<NewIngredient>
 
-      filterSelectedIngredientsUnSelected(allIngsScoped,listStringIngredients);// only default<NewIngredient>
+      filterUnSelectedIngredients(allIngsScoped,listStringIngredients);// only default<NewIngredient>
 
 
     }
@@ -504,10 +504,10 @@ class FoodItemDetailsBloc implements Bloc {
   }
 
   // helper method 04
-  filterSelectedIngredientsDefault(List<NewIngredient> allIngList , List<String> listStringIngredients2) {
+  filterSelectedDefaultIngredients(List<NewIngredient> allIngList , List<String> listStringIngredients2) {
 // foox
 
-    logger.w("at filterSelectedIngredientsDefault","filterSelectedIngredientsDefault");
+    logger.w("at filterSelectedDefaultIngredients","filterSelectedDefaultIngredients");
 
 
 
@@ -521,7 +521,7 @@ class FoodItemDetailsBloc implements Bloc {
 //    List<NewIngredient> y = [];
     listStringIngredients2.forEach((stringIngredient) {
       NewIngredient elementExists = allIngList.where(
-            (oneItem) => oneItem.ingredientName.trim().toLowerCase() == stringIngredient.trim().toLowerCase()).first;
+              (oneItem) => oneItem.ingredientName.trim().toLowerCase() == stringIngredient.trim().toLowerCase()).first;
 
       print('elementExists: $elementExists');
       // WITHOUT THE ABOVE PRINT STATEMENT SOME TIMES THE APPLICATION CRUSHES.
@@ -539,32 +539,57 @@ class FoodItemDetailsBloc implements Bloc {
 
   }
 
-  filterSelectedIngredientsUnSelected (
+  filterUnSelectedIngredients (
       List<NewIngredient> allIngList , List<String> listStringIngredients2
       ) {
 // foox
 
 
-    List<NewIngredient> allUnSelected =[];
+    logger.w("at filterUnSelectedIngredients ","filterUnSelectedIngredients");
+    logger.w("at allIngList ",allIngList);
 
+
+
+//    print("allIngList: $allIngList");
+
+    print("listStringIngredients2: $listStringIngredients2");
+
+    List <NewIngredient> allUnSelected;
+
+    Set<NewIngredient> elementUNSelected = new Set<NewIngredient>();
     listStringIngredients2.forEach((stringIngredient) {
-      NewIngredient elementUNSelected = allIngList.where(
-            (oneItem) => oneItem.ingredientName.trim().toLowerCase() !=
-          stringIngredient.trim().toLowerCase()).first;
+
+      print('ingredient in foreach loop $stringIngredient');
+
+      List<NewIngredient> oneResult = allIngList.where(
+              (oneItem) => oneItem.ingredientName.trim().toLowerCase() !=
+              stringIngredient.trim().toLowerCase()).toList();
+//      print('elementUNSelected: $elementUNSelected');
+
+      print('oneResult ===>  $oneResult');
 
 
-      allUnSelected.add(elementUNSelected);
+      Set<NewIngredient> oneResultSet = oneResult.toSet();
 
-    });
+      elementUNSelected.addAll(oneResultSet);
+    }
 
 
-    _unSelectedIngItems = allUnSelected;
+//        print('oneResult: $oneResult');
+//        elementUNSelected =  oneResult;
+
+//
+    );
+
+    List<NewIngredient> convertSetToList = elementUNSelected.toList();
+
+    _unSelectedIngItems = convertSetToList;
 //    _defaultIngredientListController.sink.add(default2);
-    _unSelectedIngredientListController.sink.add(allUnSelected);
+    _unSelectedIngredientListController.sink.add(convertSetToList);
 
 //    return allUnSelected;
 
-    logger.i('allUnSelected: ',allUnSelected);
+    logger.i('allUnSelected: ',convertSetToList);
 
   }
 
