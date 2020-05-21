@@ -447,6 +447,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                             Container(
                               height:displayHeight(context) -
                                   MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                              padding: EdgeInsets.fromLTRB(
+                                  20, 0, 10, 0),
                               child: FoodList(categoryString: _currentCategory,searchString2:_searchString),
 
 

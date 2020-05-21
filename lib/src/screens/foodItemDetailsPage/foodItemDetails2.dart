@@ -102,7 +102,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   bool showUnSelectedIngredients = false;
   @override
   Widget build(BuildContext context) {
-
     final bloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 //    print('totalCartPrice -----------> : $totalCartPrice');
@@ -113,11 +112,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     List<NewIngredient> defaultIngredients = bloc.defaultIngredients;
     List<NewIngredient> unSelectedIngredients = bloc.unSelectedIngredients;
 
-    logger.w('unSelectedIngredients in foodItemDetails2 line #116 : ',unSelectedIngredients);
+    logger.w('unSelectedIngredients in foodItemDetails2 line #116 : ',
+        unSelectedIngredients);
 
 
-
-    if(unSelectedIngredients == null){
+    if (unSelectedIngredients == null) {
       return Container
         (
         alignment: Alignment.center,
@@ -126,98 +125,33 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     }
     else {
       return Container(
-          color: Colors.blue,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
 
-                top: 60,
-                left: 150,
-//            bottom:10,
-//            right:10,
-                child: Container(
-                    height: displayHeight(context) -
-                        MediaQuery
-                            .of(context)
-                            .padding
-                            .top - 600,
-                    child: GridView.builder(
-                      itemCount: unSelectedIngredients
-                          .length,
-
-                      itemBuilder: (_, int index) {
-                        return _buildOneSizeUNSelected
-                          (
-                            unSelectedIngredients[index],
-                            index, unSelectedIngredients
-                        );
-                      },
-                      gridDelegate:
-//                                            new SliverGridDelegateWithFixedCrossAxisCount(
-//                                              crossAxisCount: 3,
-                      new SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 260,
-
-                        mainAxisSpacing: 8,
-                        // H  direction
-                        crossAxisSpacing: 0,
-
-                        ///childAspectRatio:
-                        /// The ratio of the cross-axis to the main-axis extent of each child.
-                        /// H/V
-                        childAspectRatio: 380 / 400,
-//                                  ///childAspectRatio:
-//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
-//                                  /// H/V
-                        // horizontal / vertical
-//                                              childAspectRatio: 280/360,
-
-                      ),
+          child: StreamBuilder<FoodItemWithDocIDViewModel>(
 
 
-                      controller: new ScrollController(
-                          keepScrollOffset: false),
+              stream: bloc.currentFoodItemsStream,
+              initialData: bloc.currentFoodItem,
 
-                      shrinkWrap: false,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: new LinearProgressIndicator());
+                }
+                else {
+                  print('snapshot.hasData : ${snapshot.hasData}');
 
+                  final FoodItemWithDocIDViewModel oneFood = snapshot
+                      .data;
 
-                    )
-                ),
-              ),
-              AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
-                top: showUnSelectedIngredients ? 220 : 60,
-                left: 150,
+                  final Map<String, dynamic> foodSizePrice = oneFood
+                      .sizedFoodPrices;
 
-//            right:10,
-                child: Container(
+                  double initialPriceByQuantityANDSize = 0.0;
+                  double priceByQuantityANDSize = 0.0;
+                  //            initialPriceByQuantityANDSize = oneFood.itemSize;
 
-                  child: StreamBuilder<FoodItemWithDocIDViewModel>(
-
-
-                      stream: bloc.currentFoodItemsStream,
-                      initialData: bloc.currentFoodItem,
-
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return Center(child: new LinearProgressIndicator());
-                        }
-                        else {
-                          print('snapshot.hasData : ${snapshot.hasData}');
-
-                          final FoodItemWithDocIDViewModel oneFood = snapshot
-                              .data;
-
-                          final Map<String, dynamic> foodSizePrice = oneFood
-                              .sizedFoodPrices;
-
-                          double initialPriceByQuantityANDSize = 0.0;
-                          double priceByQuantityANDSize = 0.0;
-                          //            initialPriceByQuantityANDSize = oneFood.itemSize;
-
-                          initialPriceByQuantityANDSize = oneFood.itemPrice;
-                          priceByQuantityANDSize = oneFood.itemPrice;
-                          _currentSize = oneFood.itemSize;
+                  initialPriceByQuantityANDSize = oneFood.itemPrice;
+                  priceByQuantityANDSize = oneFood.itemPrice;
+                  _currentSize = oneFood.itemSize;
 
 
 //        return(Container(
@@ -227,65 +161,154 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //            final Map<String, dynamic> foodSizePrice = oneFood.sizedFoodPrices;
-                          return GestureDetector(
-                            onTap: () {
-                              print('s');
-                              Navigator.pop(context);
-                              FocusScopeNode currentFocus = FocusScope.of(
-                                  context);
+                  return GestureDetector(
+                      onTap: () {
+                        print('s');
+                        Navigator.pop(context);
+                        FocusScopeNode currentFocus = FocusScope.of(
+                            context);
 
-                              if (!currentFocus.hasPrimaryFocus) {
-                                currentFocus.unfocus();
+                        if (!currentFocus.hasPrimaryFocus) {
+                          currentFocus.unfocus();
 //                  Navigator.pop(context);
 
-                              }
-                            },
-                            child:
-                            Scaffold(
+                        }
+                      },
+                      child:
+                      Scaffold(
 
-                              backgroundColor: Colors.white.withOpacity(0.05),
-                              // this is the main reason of transparency at next screen.
-                              // I am ignoring rest implementation but what i have achieved is you can see.
+                        backgroundColor: Colors.white.withOpacity(0.05),
+                        // this is the main reason of transparency at next screen.
+                        // I am ignoring rest implementation but what i have achieved is you can see.
 
-                              body: SafeArea(
+                        body: SafeArea(
 
 
-                                // smaller container containing all modal FoodItem Details things.
-                                child: Container(
+                          // smaller container containing all modal FoodItem Details things.
+                          child: Container(
+                              height: displayHeight(context) -
+                                  MediaQuery.of(context).padding.top -
+                                  kToolbarHeight,
+                              child: Stack(
+                                children: <Widget>[
+                                  // todo==>
 
-                                  alignment: Alignment.bottomCenter,
-                                  height: displayHeight(context) / 1.5,
-                                  //width:displayWidth(context) / 1.5, /* 3.8*/
-                                  width: displayWidth(context)
-                                      - displayWidth(context) /
-                                          3.8 /* this is about the width of yellow side menu */
-                                      - displayWidth(context) /
-                                          20, /* 10% of widht of the device for padding margin.*/
+                                  AnimatedPositioned(
+                                    child: Container(
+                                      color:Colors.white,
+                                      height: displayHeight(context) -
+                                          MediaQuery
+                                              .of(context)
+                                              .padding
+                                              .top - 500,
+//                                      width:220,
+//                                      height: displayHeight(context) / 2.4,
+                                      //width:displayWidth(context) / 1.5, /* 3.8*/
+                                      width: displayWidth(context)
+                                          - displayWidth(context) /
+                                              3.8 /* this is about the width of yellow side menu */
+                                          - displayWidth(context) /
+                                              20, /* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
-                                  margin: EdgeInsets.fromLTRB(18, 20, 20, 18),
+                                      margin: EdgeInsets.fromLTRB(
+                                          10, 20, 20, 5),
+                                      child: GridView.builder(
+                                        itemCount: unSelectedIngredients
+                                            .length,
+                                        itemBuilder: (_, int index) {
+                                          return _buildOneSizeUNSelected
+                                            (
+                                              unSelectedIngredients[index],
+                                              index, unSelectedIngredients
+                                          );
+                                        },
+                                        gridDelegate:
+//                                            new SliverGridDelegateWithFixedCrossAxisCount(
+//                                              crossAxisCount: 3,
+                                        new SliverGridDelegateWithMaxCrossAxisExtent(
+                                          maxCrossAxisExtent: 260,
 
-                                  decoration:
-                                  new BoxDecoration(
-                                    borderRadius: new BorderRadius.circular(
-                                        10.0),
-                                    color: Colors.purple,
+                                          mainAxisSpacing: 8,
+                                          // H  direction
+                                          crossAxisSpacing: 0,
+
+                                          ///childAspectRatio:
+                                          /// The ratio of the cross-axis to the main-axis extent of each child.
+                                          /// H/V
+                                          childAspectRatio: 380 / 400,
+//                                  ///childAspectRatio:
+//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
+//                                  /// H/V
+                                          // horizontal / vertical
+//                                              childAspectRatio: 280/360,
+
+                                        ),
+
+
+                                        controller: new ScrollController(
+                                            keepScrollOffset: false),
+
+                                        shrinkWrap: false,
+
+
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 1000),
+                                    top: showUnSelectedIngredients
+                                        ? 400
+                                        : 60,
+//                left: 150,
+
+//            right:10,
+
                                   ),
+                                  Positioned(
+//                                top: 60,
+//                                left: 150,
+//            bottom:10,
+//            right:10,
+                                    child: Container(
 
 
-                                  child: Neumorphic(
-                                    // State of Neumorphic (may be convex, flat & emboss)
+                                      alignment: Alignment.bottomCenter,
+                                      height: displayHeight(context) / 2.4,
+                                      //width:displayWidth(context) / 1.5, /* 3.8*/
+                                      width: displayWidth(context)
+                                          - displayWidth(context) /
+                                              3.8 /* this is about the width of yellow side menu */
+                                          - displayWidth(context) /
+                                              20, /* 10% of widht of the device for padding margin.*/
+//                  color:Colors.lightGreenAccent,
+                                      margin: EdgeInsets.fromLTRB(
+                                          10, 20, 20, 5),
 
-                                      boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.all(Radius.circular(15)),
-
+                                      decoration:
+                                      new BoxDecoration(
+                                        borderRadius: new BorderRadius
+                                            .circular(
+                                            10.0),
+                                        color: Colors.purple,
                                       ),
-                                      curve: Neumorphic.DEFAULT_CURVE,
-                                      style: NeumorphicStyle(
-                                          shape: NeumorphicShape.concave,
-                                          depth: 8,
-                                          lightSource: LightSource.topLeft,
-                                          color: Colors.grey
-                                      ),
+
+
+                                      child: Neumorphic(
+                                        // State of Neumorphic (may be convex, flat & emboss)
+
+                                          boxShape: NeumorphicBoxShape
+                                              .roundRect(
+                                            BorderRadius.all(
+                                                Radius.circular(15)),
+
+                                          ),
+                                          curve: Neumorphic.DEFAULT_CURVE,
+                                          style: NeumorphicStyle(
+                                              shape: NeumorphicShape
+                                                  .concave,
+                                              depth: 8,
+                                              lightSource: LightSource
+                                                  .topLeft,
+                                              color: Colors.white
+                                          ),
 
 //                    MAX_DEPTH,DEFAULT_CURVE
 
@@ -293,211 +316,216 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      BorderRadius.circular(25),
 //                  border: Border.all(
 
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start,
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .start,
-                                        children: <Widget>[
-                                          Container(child: Row(
+                                          child: Column(
                                             mainAxisAlignment: MainAxisAlignment
                                                 .start,
+                                            crossAxisAlignment: CrossAxisAlignment
+                                                .start,
                                             children: <Widget>[
-                                              // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                              // , 2ND PART(ROW) HANDLES THE
-                                              // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+                                              Container(child: Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .start,
+                                                children: <Widget>[
+                                                  // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                                  // , 2ND PART(ROW) HANDLES THE
+                                                  // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
 
 
-                                              Container(
-                                                  height: displayHeight(
-                                                      context) / 2.6,
+                                                  Container(
+                                                      height: displayHeight(
+                                                          context) / 2.6,
 
-                                                  color: Colors.red,
-                                                  width: displayWidth(context) /
-                                                      5,
+                                                      color: Colors.red,
+                                                      width: displayWidth(
+                                                          context) /
+                                                          5,
 // INCREASE THE DIVIDER TO MAKE IT MORE SAMLLER. I.E. WIDTH
 //                      height: displayHeight(context)*0.50,
 //                                    alignment: Alignment.centerLeft,
 
 
-                                                  //ZZZ
-                                                  // Other arguments such as margin, padding etc. (Like `Container`)
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .center,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                      //ZZZ
+                                                      // Other arguments such as margin, padding etc. (Like `Container`)
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment
+                                                            .center,
+                                                        crossAxisAlignment: CrossAxisAlignment
+                                                            .start,
 
 //        mainAxisSize: MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      //pppp
-                                                      Container(
-                                                        padding: EdgeInsets
-                                                            .fromLTRB(
-                                                            10, 0, 0, 10),
-                                                        child:
+                                                        children: <Widget>[
+                                                          //pppp
+                                                          Container(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                10, 0, 0,
+                                                                10),
+                                                            child:
 
-                                                        Text(
-                                                            '${oneFood
-                                                                .itemName}',
-                                                            style: TextStyle(
-                                                              fontSize: 20,
-                                                              fontWeight: FontWeight
-                                                                  .bold,
+                                                            Text(
+                                                                '${oneFood
+                                                                    .itemName}',
+                                                                style: TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight: FontWeight
+                                                                      .bold,
 //                                                      color: Colors.white
-                                                              color: Colors
-                                                                  .black,
+                                                                  color: Colors
+                                                                      .black,
 
-                                                            )
-                                                        ),
-                                                      ),
+                                                                )
+                                                            ),
+                                                          ),
 
-                                                      Container(
-                                                        padding: EdgeInsets
-                                                            .fromLTRB(
-                                                            10, 0, 0, 10),
-                                                        child:
+                                                          Container(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                10, 0, 0,
+                                                                10),
+                                                            child:
 
-                                                        Text(
-                                                            '$initialPriceByQuantityANDSize ' +
-                                                                '\u20AC',
-                                                            style: TextStyle(
-                                                              fontSize: 20,
-                                                              fontWeight: FontWeight
-                                                                  .normal,
+                                                            Text(
+                                                                '$initialPriceByQuantityANDSize ' +
+                                                                    '\u20AC',
+                                                                style: TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight: FontWeight
+                                                                      .normal,
 //                                                      color: Colors.white
-                                                              color: Colors
-                                                                  .black,
+                                                                  color: Colors
+                                                                      .black,
 
-                                                            )
-                                                        ),
-                                                      ),
+                                                                )
+                                                            ),
+                                                          ),
 
-                                                      Container(
-                                                        /*
+                                                          Container(
+                                                            /*
                                 color:Colors.blue,
                               width:displayWidth(context)/4.6,
                               */
-                                                        padding: EdgeInsets
-                                                            .fromLTRB(0, 0, 0,
-                                                            displayHeight(
-                                                                context) / 25),
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                0, 0, 0,
+                                                                displayHeight(
+                                                                    context) /
+                                                                    25),
 
-                                                        child: FoodDetailImage(
-                                                            oneFood.imageURL,
-                                                            oneFood.itemName),
-                                                      ),
-
-
-                                                    ],
-
-                                                  )
-                                              ),
-
-                                              // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                              // , 2ND PART(ROW) HANDLES THE
-                                              // DIFFERENT SIZES OF PRODUCTS.
-                                              // ENDS HERE.
+                                                            child: FoodDetailImage(
+                                                                oneFood
+                                                                    .imageURL,
+                                                                oneFood
+                                                                    .itemName),
+                                                          ),
 
 
-                                              // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
+                                                        ],
 
-                                              Container(
-                                                height: displayHeight(context) /
-                                                    2.6,
-                                                width: displayWidth(context) -
-                                                    displayWidth(context) / 3.7 /* about the width of left most
+                                                      )
+                                                  ),
+
+                                                  // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                                  // , 2ND PART(ROW) HANDLES THE
+                                                  // DIFFERENT SIZES OF PRODUCTS.
+                                                  // ENDS HERE.
+
+
+                                                  // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
+
+                                                  Container(
+                                                    height: displayHeight(
+                                                        context) /
+                                                        2.6,
+                                                    width: displayWidth(
+                                                        context) -
+                                                        displayWidth(
+                                                            context) / 3.7 /* about the width of left most
                             container holding the food Item Image, image name and food item price */
-                                                    - displayWidth(context) /
-                                                        3.8 /* this is about the width of yellow side menu */,
-                                                child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                        - displayWidth(
+                                                            context) /
+                                                            3.8 /* this is about the width of yellow side menu */,
+                                                    child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment: CrossAxisAlignment
+                                                            .start,
 
 
 //        mainAxisSize: MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      //pppp
-                                                      Container(
-                                                          child: _buildProductSizes(
-                                                              context,
-                                                              foodSizePrice)
-                                                      ),
+                                                        children: <Widget>[
+                                                          //pppp
+                                                          Container(
+                                                              child: _buildProductSizes(
+                                                                  context,
+                                                                  foodSizePrice)
+                                                          ),
 
 //                                  Text('ss'),
-                                                      Container(
-                                                          child: buildDefaultIngredients(
-                                                              context,
-                                                              defaultIngredients)
-                                                      ),
+                                                          Container(
+                                                              child: buildDefaultIngredients(
+                                                                  context,
+                                                                  defaultIngredients)
+                                                          ),
 
-                                                      // MORE INGREDIENTS BEGINS HERE.
-                                                      Container(
-                                                          child: Row(
-                                                              mainAxisAlignment: MainAxisAlignment
-                                                                  .end,
-                                                              crossAxisAlignment: CrossAxisAlignment
-                                                                  .center,
-                                                              children: <
-                                                                  Widget>[
-                                                                Container(
+                                                          // MORE INGREDIENTS Row BEGINS HERE.
+                                                          Container(
+                                                              child: Row(
+                                                                  mainAxisAlignment: MainAxisAlignment
+                                                                      .end,
+                                                                  crossAxisAlignment: CrossAxisAlignment
+                                                                      .center,
+                                                                  children: <
+                                                                      Widget>[
+                                                                    Container(
 
-                                                                  margin: EdgeInsets
-                                                                      .fromLTRB(
-                                                                      0, 0,
-                                                                      displayHeight(
+                                                                      margin: EdgeInsets
+                                                                          .fromLTRB(
+                                                                          0,
+                                                                          0,
+                                                                          displayHeight(
+                                                                              context) /
+                                                                              55,
+                                                                          0),
+                                                                      //      color: Colors.yellowAccent,
+                                                                      height: displayHeight(
                                                                           context) /
-                                                                          55,
-                                                                      0),
-                                                                  //      color: Colors.yellowAccent,
-                                                                  height: displayHeight(
-                                                                      context) /
-                                                                      20,
-                                                                  width: displayWidth(
-                                                                      context) /
-                                                                      3,
+                                                                          20,
+                                                                      width: displayWidth(
+                                                                          context) /
+                                                                          3,
 
-                                                                  child: Row(
-                                                                    mainAxisAlignment: MainAxisAlignment
-                                                                        .start,
-                                                                    children: <
-                                                                        Widget>[
+                                                                      child: Row(
+                                                                        mainAxisAlignment: MainAxisAlignment
+                                                                            .start,
+                                                                        children: <
+                                                                            Widget>[
 
-                                                                      // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
 
-                                                                      // 2ND CONTAINER VIOLET IN THE ROW. STARTS HERE.
-
-                                                                      Container(
-                                                                          child: GestureDetector(
-//                                                onLongPress: (){
-//                                                  print('at on Loong Press: ');
-//                                                },
-//                                                onLongPressUp: (){
-//
-//                                                },
-                                                                            onTap: () {
-                                                                              print(
-                                                                                  'xyz');
-                                                                            },
-                                                                            child: Container(
-                                                                              width: displayWidth(
-                                                                                  context) *
-                                                                                  0.33,
-                                                                              height: 45,
-                                                                              decoration: BoxDecoration(
-//                                              color: Colors.black54,
-                                                                                color: Color(
-                                                                                    0xffFFFFFF),
-                                                                                borderRadius: BorderRadius
-                                                                                    .circular(
-                                                                                    25),
+                                                                          // MORE INGREDIENTS row BEGINS HERE.
+                                                                          Container(
+//                                                                        width:60,
+                                                                            width: displayWidth(
+                                                                                context) *
+                                                                                0.33,
+                                                                            height: 45,
+                                                                            alignment: Alignment.center,
+                                                                            margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                                                            child:
+                                                                            OutlineButton(
+//                        color: Color(0xffFEE295),
+                                                                              clipBehavior: Clip.hardEdge,
+                                                                              splashColor: Color(0xffB47C00),
+                                                                              highlightElevation: 12,
+                                                                              shape: RoundedRectangleBorder(
+                                                                                side: BorderSide(
+                                                                                  color: Color(0xffB47C00),
+                                                                                  style: BorderStyle.solid,
+                                                                                  width: 1.6,
+                                                                                ),
+                                                                                borderRadius: BorderRadius.circular(35.0),
                                                                               ),
 
-
-//                                            color:Color(0xffC27FFF),
-                                                                              child: Row(
+                                                                              child:Container(child: Row(
                                                                                 mainAxisAlignment: MainAxisAlignment
                                                                                     .start,
                                                                                 crossAxisAlignment: CrossAxisAlignment
@@ -531,58 +559,68 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                                   ),
                                                                                 ],
                                                                               ),
+                                                                              ),
+                                                                              onPressed: () {
+                                                                                logger.i('s  =>   =>   => ','ss');
+                                                                                setState(() {
+                                                                                  showUnSelectedIngredients =!showUnSelectedIngredients ;
+                                                                                });
+                                                                                print(
+                                                                                    'xyz');
+
+                                                                              },
+                                                                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
                                                                             ),
-                                                                          )
-                                                                      )
+                                                                          ),
+                                                                          // MORE INGREDIENTS ENDS HERE.
 
 
-                                                                      // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-                                                                      // ENDED HERE.
+                                                                        ],
+                                                                      ),
 
-                                                                      // BLACK CONTAINER WILL BE DELETED LATER.
-                                                                      // BLACK CONTAINER.
-
-
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ]
+                                                                    ),
+                                                                  ]
+                                                              )
                                                           )
-                                                      )
 
-                                                      // MORE INGREDIENTS ENDS HERE.
+                                                          // MORE INGREDIENTS ROW ENDS HERE.
 
 
-                                                    ]
-                                                ),
-                                              )
-                                              // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
+                                                        ]
+                                                    ),
+                                                  )
+                                                  // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
+
+                                                ],
+                                              ),
+                                              ),
+
+                                              Container(child: Text(
+                                                  "Unselected Ingredients are here")),
+
 
                                             ],
-                                          ),
-                                          ),
+                                          )
 
-                                          Container(child: Text(
-                                              "Unselected Ingredients are here")),
-
-
-                                        ],
-                                      )
-
+                                      ),
+                                    ),
                                   ),
-                                ),
 
-                              ),
-                            ),
 
-                          );
-                        }
-                      }
-                  ),
-                ),
-              ),
-            ],
+                                ],
+                              )
+
+
+                          ),
+                        ),
+
+                      )
+
+
+                  );
+                }
+              }
           )
       );
     }
@@ -1119,7 +1157,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
-                  color: Colors.blueAccent,
+                  color: Colors.lightGreenAccent,
                 ),
               )
           )
