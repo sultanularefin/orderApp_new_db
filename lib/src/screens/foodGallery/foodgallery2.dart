@@ -908,7 +908,8 @@ class FoodList extends StatelessWidget {
                                                 ],
                                               ),
                                               child:
-                                              ClipOval(child:CachedNetworkImage(
+                                              ClipOval(
+                                                child:CachedNetworkImage(
 //                  imageUrl: dummy.url,
                                                 imageUrl: foodImageURL,
                                                 fit: BoxFit.cover,

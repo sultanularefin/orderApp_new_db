@@ -193,26 +193,44 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               child: Stack(
                                 children: <Widget>[
                                   // todo==>
-
+                                  // showUnSelectedIngredients displayHeight(context)/7.5
                                   AnimatedPositioned(
                                     child: Container(
-                                      color:Colors.white,
+                                      color:Colors.blueAccent,
                                       height: displayHeight(context) -
                                           MediaQuery
                                               .of(context)
                                               .padding
-                                              .top - 500,
+                                              .top - displayHeight(context) / 2.6 /* /2.4 IS THE HEIGHT
+                                              OF TOP CONTAINER*/ -
+
+                                      /* TOP MARGIN OF TOP CONTAINER*/ displayHeight(context)/7.5,
 //                                      width:220,
-//                                      height: displayHeight(context) / 2.4,
+//                                      height: displayHeight(context) / 2.6,
                                       //width:displayWidth(context) / 1.5, /* 3.8*/
                                       width: displayWidth(context)
                                           - displayWidth(context) /
                                               3.8 /* this is about the width of yellow side menu */
                                           - displayWidth(context) /
-                                              20, /* 10% of widht of the device for padding margin.*/
+                                              26, /* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
                                       margin: EdgeInsets.fromLTRB(
-                                          10, 20, 10, 5),
+                                          12, 20, 10, 5),
+
+
+                                      // REFERENCE WIDTH AND MARGIN FROM THE BELOW CONTAINER.
+                                      // TOP LEVEL CONTAINER.
+                                  /*
+                                      width: displayWidth(context)
+                                          - displayWidth(context) /
+                                              3.8 /* this is about the width of yellow side menu */
+                                          - displayWidth(context) /
+                                              26, /* 10% of widht of the device for padding margin.*/
+//                  color:Colors.lightGreenAccent,
+
+                                    */
+
+                                      //sssssss
                                       child: GridView.builder(
                                         itemCount: unSelectedIngredients
                                             .length,
@@ -256,23 +274,28 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                     ),
                                     duration: Duration(milliseconds: 1000),
                                     top: showUnSelectedIngredients
-                                        ? 400
-                                        : 60,
+                                        ? displayHeight(context)/7.5 +MediaQuery
+                                        .of(context)
+                                        .padding
+                                        .top + displayHeight(context) / 2.6
+                                        :  displayHeight(context)/7.5,
 //                left: 150,
 
 //            right:10,
 
                                   ),
-                                  Positioned(
+/*                                  Positioned(
 //                                top: 60,
 //                                left: 150,
 //            bottom:10,
 //            right:10,
-                                    child: Container(
+
+                          /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE BEGINS HERE. */
+                                    child:*/ Container(
 
 
-                                      alignment: Alignment.bottomCenter,
-                                      height: displayHeight(context) / 2.4,
+//                                      alignment: Alignment.bottomCenter,
+                                      height: displayHeight(context) / 2.6,
                                       //width:displayWidth(context) / 1.5, /* 3.8*/
                                       width: displayWidth(context)
                                           - displayWidth(context) /
@@ -281,7 +304,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                               26, /* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
                                       margin: EdgeInsets.fromLTRB(
-                                          12, 20, 10, 5),
+                                          12, displayHeight(context)/7.5, 10, 5),
 
                                       decoration:
                                       new BoxDecoration(
@@ -686,8 +709,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                               ),
                                               ),
 
-                                              Container(child: Text(
-                                                  "Unselected Ingredients are here")),
+                                             
 
 
                                             ],
@@ -695,7 +717,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                       ),
                                     ),
-                                  ),
+
+                                  /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
 
 
                                 ],
@@ -749,34 +772,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                              SizedBox(height: 10),
 
-            Container(
-// TO Be
-//          height:45, // same as the heidth of increment decrement button.
-              width: displayWidth(context)/7,
-              height:45,
-              alignment: Alignment.center,
 
-              child:
-
-              Text(
-
-                unSelectedOneIngredient.ingredientName,
-
-                style: TextStyle(
-                  color:Color.fromRGBO(112,112,112,1),
-//                                    color: Colors.blueGrey[800],
-
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18,
-                ),
-
-              ),
-            ),
 
             Container(
 
-              width: displayWidth(context) * 0.09,
-              height: displayWidth(context) * 0.11,
+              width: displayWidth(context) /10,
+              height: displayWidth(context) /9,
               padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
 //                                    height: displayWidth(context) * 0.19,
 
@@ -797,7 +798,40 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               ),
             ),
 
+            Container(
+// TO Be
+//          height:45, // same as the heidth of increment decrement button.
+              width: displayWidth(context)/7,
+//              height:45,
+              alignment: Alignment.center,
+              // pp ToDOPPP
 
+              padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
+              child:
+
+
+//              stringifiedFoodItemIngredients.length==0?
+//              'EMPTY':  stringifiedFoodItemIngredients.length>12?
+//              stringifiedFoodItemIngredients.substring(0,12)+'...':
+//              stringifiedFoodItemIngredients,
+//
+
+              Text(
+//                unSelectedOneIngredient.ingredientName,
+                unSelectedOneIngredient.ingredientName.length==0?
+                'EMPTY':  unSelectedOneIngredient.ingredientName.length>12?
+                unSelectedOneIngredient.ingredientName.substring(0,12)+'...':
+                unSelectedOneIngredient.ingredientName,
+                style: TextStyle(
+                  color:Color(0xff707070),
+//                                    color: Colors.blueGrey[800],
+
+                  fontWeight: FontWeight.normal,
+                  fontSize: 15,
+                ),
+
+              ),
+            ),
             // PROBLEM CONTAINER WITH ROW. INCREMENT DECREMENT FUNCTIONALITY. -- BELOW.
             Container(
               margin:EdgeInsets.symmetric(
