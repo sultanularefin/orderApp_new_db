@@ -784,9 +784,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   Widget _buildOneSizeUNSelected(NewIngredient unSelectedOneIngredient, int index, List<NewIngredient> allUnSelected
       ) {
 
-    print('unSelectedOneIngredient: ${unSelectedOneIngredient.ingredientName}');
-
-    logger.i("unSelectedOneIngredient: ",unSelectedOneIngredient.ingredientAmountByUser);
+//    print('unSelectedOneIngredient: ${unSelectedOneIngredient.ingredientName}');
+//
+//    logger.i("unSelectedOneIngredient: ",unSelectedOneIngredient.ingredientAmountByUser);
 
 
     int currentAmount = unSelectedOneIngredient.ingredientAmountByUser;
@@ -1547,7 +1547,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //    logger.i('oneSize: $oneSize');
-    logger.i('onePriceForSize: for oneSize: $oneSize is $onePriceForSize');
+//    logger.i('onePriceForSize: for oneSize: $oneSize is $onePriceForSize');
 
     return Container(
 

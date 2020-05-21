@@ -543,77 +543,81 @@ class FoodItemDetailsBloc implements Bloc {
       List<NewIngredient> allIngList , List<String> listStringIngredients2
       ) {
 // foox
-
-
+  
     logger.w("at filterUnSelectedIngredients ","filterUnSelectedIngredients");
-    logger.w("at allIngList ",allIngList);
-
-
-
+    print("at allIngList ${allIngList.length}");
+    
 //    print("allIngList: $allIngList");
 
-    print("listStringIngredients2: $listStringIngredients2");
+    print("listStringIngredients2: ${listStringIngredients2.length}");
 
     List <NewIngredient> allUnSelected;
 
-    Set<NewIngredient> elementUNSelected = new Set<NewIngredient>();
-    listStringIngredients2.forEach((stringIngredient) {
+//    Set<NewIngredient> elementUNSelected = new Set<NewIngredient>();
+//    listStringIngredients2.forEach((stringIngredient) {
+//
+//      print('ingredient in foreach loop $stringIngredient');
 
-      print('ingredient in foreach loop $stringIngredient');
-
-      List<NewIngredient> oneResult = allIngList.where(
+      List<NewIngredient> unSelectedIngredientsFiltered = allIngList.where(
               (oneItem) => oneItem.ingredientName.trim().toLowerCase() !=
-              stringIngredient.trim().toLowerCase()).toList();
+              checkThisIngredientInDefatultStringIngredient(
+                  oneItem,listStringIngredients2
+              )
+      ).toList();
 //      print('elementUNSelected: $elementUNSelected');
 
-      print('oneResult ===>  $oneResult');
+      print('unSelectedIngredientsFiltered ===>  ${unSelectedIngredientsFiltered.length}');
 
 
-      Set<NewIngredient> oneResultSet = oneResult.toSet();
+//      Set<NewIngredient> unSelectedIngredientsFilteredSet = unSelectedIngredientsFiltered.toSet();
+//
+//      elementUNSelected.addAll(unSelectedIngredientsFilteredSet);
+    
+    
+    
 
-      elementUNSelected.addAll(oneResultSet);
-    }
 
-
-//        print('oneResult: $oneResult');
-//        elementUNSelected =  oneResult;
+//        print('unSelectedIngredientsFiltered: $unSelectedIngredientsFiltered');
+//        elementUNSelected =  unSelectedIngredientsFiltered;
 
 //
-    );
+    
 
-    List<NewIngredient> convertSetToList = elementUNSelected.toList();
+//    List<NewIngredient> convertSetToList = elementUNSelected.toList();
 
-    _unSelectedIngItems = convertSetToList;
+    _unSelectedIngItems = unSelectedIngredientsFiltered;
 //    _defaultIngredientListController.sink.add(default2);
-    _unSelectedIngredientListController.sink.add(convertSetToList);
+    _unSelectedIngredientListController.sink.add(unSelectedIngredientsFiltered);
 
 //    return allUnSelected;
 
-    logger.i('allUnSelected: ',convertSetToList);
+    logger.i('allUnSelected: ',unSelectedIngredientsFiltered);
 
   }
 
 
-  /*
-  String searchForThisIngredient(String inputString) {
+  
+  String checkThisIngredientInDefatultStringIngredient(NewIngredient x, List<String> ingredientsString) {
 
+    print('ingredientsString: $ingredientsString');
+    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
 
-    List<String> foodIngredients = onlyIngredientsNames2;
+//    List<String> foodIngredients =ingredientsString;
 
 //    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
 
 
-    String elementExists = foodIngredients.firstWhere(
-            (oneItem) => oneItem.toLowerCase() == inputString,
+    String elementExists = ingredientsString.firstWhere(
+            (oneItem) => oneItem.toLowerCase().trim() == x.ingredientName.toLowerCase().trim(),
         orElse: () => '');
 
-    print('elementExists: $elementExists');
+    print('elementExists: Line # 612:  $elementExists');
 
     return elementExists.toLowerCase();
 
   }
 
-  */
+
 
 
 

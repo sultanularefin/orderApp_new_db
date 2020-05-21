@@ -530,7 +530,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                 }
                                 else{
                                   final List allCategories =snapshot.data;
-                                  logger.i('allCategories.length:', allCategories.length);
+//                                  logger.i('allCategories.length:', allCategories.length);
 
 
 //                                  _allCategoryList.add(All);
@@ -736,7 +736,7 @@ class FoodList extends StatelessWidget {
 
           List filteredItemsByCategory;
 
-          logger.i('categoryString.toLowerCase().trim(): ',categoryString.toLowerCase().trim());
+//          logger.i('categoryString.toLowerCase().trim(): ',categoryString.toLowerCase().trim());
 
           if(categoryString.toLowerCase().trim() != 'all'){
 
