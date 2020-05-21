@@ -69,6 +69,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   );
 
   String _currentSize;
+  int _itemCount= 1;
 
   @override
   void initState() {
@@ -211,7 +212,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                               20, /* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
                                       margin: EdgeInsets.fromLTRB(
-                                          10, 20, 20, 5),
+                                          10, 20, 10, 5),
                                       child: GridView.builder(
                                         itemCount: unSelectedIngredients
                                             .length,
@@ -277,10 +278,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                           - displayWidth(context) /
                                               3.8 /* this is about the width of yellow side menu */
                                           - displayWidth(context) /
-                                              20, /* 10% of widht of the device for padding margin.*/
+                                              26, /* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
                                       margin: EdgeInsets.fromLTRB(
-                                          10, 20, 20, 5),
+                                          12, 20, 10, 5),
 
                                       decoration:
                                       new BoxDecoration(
@@ -469,6 +470,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                           // MORE INGREDIENTS Row BEGINS HERE.
                                                           Container(
+//                                                              color:Colors.yellowAccent,
                                                               child: Row(
                                                                   mainAxisAlignment: MainAxisAlignment
                                                                       .end,
@@ -476,113 +478,201 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                       .center,
                                                                   children: <
                                                                       Widget>[
+
+                                                                    // MORE INGREDIENTS row BEGINS HERE.
                                                                     Container(
-
-                                                                      margin: EdgeInsets
-                                                                          .fromLTRB(
-                                                                          0,
-                                                                          0,
-                                                                          displayHeight(
-                                                                              context) /
-                                                                              55,
-                                                                          0),
-                                                                      //      color: Colors.yellowAccent,
-                                                                      height: displayHeight(
-                                                                          context) /
-                                                                          20,
-                                                                      width: displayWidth(
-                                                                          context) /
-                                                                          3,
-
-                                                                      child: Row(
-                                                                        mainAxisAlignment: MainAxisAlignment
-                                                                            .start,
-                                                                        children: <
-                                                                            Widget>[
-
-
-                                                                          // MORE INGREDIENTS row BEGINS HERE.
-                                                                          Container(
 //                                                                        width:60,
-                                                                            width: displayWidth(
-                                                                                context) *
-                                                                                0.33,
-                                                                            height: 45,
-                                                                            alignment: Alignment.center,
-                                                                            margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                                                            child:
-                                                                            OutlineButton(
+                                                                      width: displayWidth(
+                                                                          context) /4,
+                                                                      height: displayHeight(context)/21,
+                                                                      alignment: Alignment.center,
+                                                                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                                                      child:
+                                                                      OutlineButton(
 //                        color: Color(0xffFEE295),
-                                                                              clipBehavior: Clip.hardEdge,
-                                                                              splashColor: Color(0xffB47C00),
-                                                                              highlightElevation: 12,
-                                                                              shape: RoundedRectangleBorder(
-                                                                                side: BorderSide(
-                                                                                  color: Color(0xffB47C00),
-                                                                                  style: BorderStyle.solid,
-                                                                                  width: 1.6,
-                                                                                ),
-                                                                                borderRadius: BorderRadius.circular(35.0),
-                                                                              ),
-
-                                                                              child:Container(child: Row(
-                                                                                mainAxisAlignment: MainAxisAlignment
-                                                                                    .start,
-                                                                                crossAxisAlignment: CrossAxisAlignment
-                                                                                    .center,
-                                                                                children: <
-                                                                                    Widget>[
-                                                                                  Icon(
-                                                                                    Icons
-                                                                                        .add,
-                                                                                    size: 32.0,
-                                                                                    color: Color
-                                                                                        .fromRGBO(
-                                                                                        112,
-                                                                                        112,
-                                                                                        112,
-                                                                                        1),
-                                                                                    //        color: Color(0xffFFFFFF),
-                                                                                  ),
-                                                                                  Text(
-                                                                                    'More Ingredients',
-                                                                                    style: TextStyle(
-                                                                                        fontWeight: FontWeight
-                                                                                            .bold,
-                                                                                        color: Color
-                                                                                            .fromRGBO(
-                                                                                            112,
-                                                                                            112,
-                                                                                            112,
-                                                                                            1),
-                                                                                        fontSize: 22),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                              ),
-                                                                              onPressed: () {
-                                                                                logger.i('s  =>   =>   => ','ss');
-                                                                                setState(() {
-                                                                                  showUnSelectedIngredients =!showUnSelectedIngredients ;
-                                                                                });
-                                                                                print(
-                                                                                    'xyz');
-
-                                                                              },
-                                                                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-
-                                                                            ),
+                                                                        highlightColor: Colors.lightGreenAccent,
+                                                                        highlightedBorderColor: Colors.blueAccent,
+                                                                        clipBehavior: Clip.hardEdge,
+                                                                        splashColor: Color(0xffB47C00),
+                                                                        highlightElevation: 12,
+                                                                        shape: RoundedRectangleBorder(
+                                                                          side: BorderSide(
+                                                                            color: Color(0xff000000),
+                                                                            style: BorderStyle.solid,
+                                                                            width: 11.6,
                                                                           ),
-                                                                          // MORE INGREDIENTS ENDS HERE.
+                                                                          borderRadius: BorderRadius.circular(35.0),
+                                                                        ),
+
+                                                                        child:Container(child: Row(
+                                                                          mainAxisAlignment: MainAxisAlignment
+                                                                              .start,
+                                                                          crossAxisAlignment: CrossAxisAlignment
+                                                                              .center,
+                                                                          children: <
+                                                                              Widget>[
+                                                                            Icon(
+                                                                              Icons
+                                                                                  .add,
+                                                                              size: 22.0,
+                                                                              color: Color(0xff707070),
+                                                                              //        color: Color(0xffFFFFFF),
+                                                                            ),
+                                                                            Text(
+                                                                              'More Ingredients'.toUpperCase(),
+                                                                              style: TextStyle(
+                                                                                  fontWeight: FontWeight
+                                                                                      .bold,
+                                                                                  color: Color(0xff707070),
+                                                                                  fontSize: 16),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        ),
+                                                                        onPressed: () {
+                                                                          logger.i('s  =>   =>   => ','ss');
+                                                                          setState(() {
+                                                                            showUnSelectedIngredients =!showUnSelectedIngredients ;
+                                                                          });
+                                                                          print(
+                                                                              'xyz');
+
+                                                                        },
+                                                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+                                                                      ),
+                                                                    ),
+                                                                    // MORE INGREDIENTS ENDS HERE.
 
 
+                                                                    Container(
+                                                                      margin: EdgeInsets.symmetric(
+                                                                          horizontal: 0,
+                                                                          vertical: 0),
+
+                                                                      width: displayWidth(context) /
+                                                                          5.4,
+                                                                      height: 45,
+
+//                                            color:Color(0xffC27FFF),
+                                                                      child:
+                                                                      Row(
+                                                                        mainAxisAlignment: MainAxisAlignment
+                                                                            .center,
+                                                                        children: <Widget>[
+                                                                          IconButton(
+                                                                            icon: Icon(Icons.add_circle_outline),
+                                                                            iconSize: 30,
+
+                                                                            tooltip: 'Increase product count by 1',
+                                                                            onPressed: () {
+                                                                              print(
+                                                                                  'Add button pressed');
+                                                                              setState(() {
+                                                                                _itemCount =
+                                                                                    _itemCount + 1;
+                                                                                initialPriceByQuantityANDSize =
+
+                                                                                    initialPriceByQuantityANDSize *
+                                                                                        _itemCount;
+                                                                              });
+                                                                            },
+                                                                            color: Color(0xff707070),
+                                                                          ),
+
+
+                                                                          Container(
+                                                                              child:Stack(
+
+                                                                                  children: <Widget>[
+
+
+                                                                                    Container(child:
+                                                                                    Icon(
+                                                                                      Icons.add_shopping_cart,
+                                                                                      size: 44,
+                                                                                      color: Color(0xff707070),
+                                                                                    ),
+                                                                                    ),
+
+                                                                                    Container(
+
+                                                                                      width:  25.0,
+                                                                                      height: 25.0,
+                                                                                      decoration: new BoxDecoration(
+                                                                                        color: Colors.red,
+                                                                                        border: new Border.all(
+                                                                                            color: Colors.green,
+                                                                                            width: 1.0,
+                                                                                            style: BorderStyle.solid
+                                                                                        ),
+                                                                                        shape: BoxShape.circle,
+
+                                                                                      ),
+
+                                                                                      alignment: Alignment.center,
+                                                                                      child:   Text(
+                                                                                        _itemCount.toString(),
+                                                                                        style: TextStyle(
+                                                                                          color: Colors.white,
+                                                                                          fontWeight: FontWeight
+                                                                                              .normal,
+                                                                                          fontSize: 22,
+                                                                                        ),
+                                                                                      ),
+
+                                                                                    ),
+
+
+
+
+                                                                                  ]
+                                                                              )
+                                                                          ),
+
+                                                                          // todo shopping.
+
+//                                                                          SizedBox(
+//                                                                            width: 3,
+//                                                                          ),
+
+                                                                          IconButton(
+                                                                            icon: Icon(Icons.remove_circle_outline),
+//                                                                            icon: Icon(Icons.remove),
+                                                                            iconSize: 30,
+                                                                            tooltip: 'Decrease product count by 1',
+                                                                            onPressed: () {
+                                                                              print(
+                                                                                  'Decrease button pressed');
+                                                                              if (_itemCount > 1) {
+                                                                                setState(() {
+                                                                                  _itemCount =
+                                                                                      _itemCount - 1;
+                                                                                  initialPriceByQuantityANDSize =
+                                                                                      initialPriceByQuantityANDSize *
+                                                                                          _itemCount;
+                                                                                });
+                                                                              }
+                                                                            },
+//                              size: 24,
+                                                                            color: Color(0xff707070),
+                                                                          ),
                                                                         ],
+
                                                                       ),
 
+
                                                                     ),
+
+
+
                                                                   ]
                                                               )
-                                                          )
+                                                          ),
+
+
+
+
 
                                                           // MORE INGREDIENTS ROW ENDS HERE.
 

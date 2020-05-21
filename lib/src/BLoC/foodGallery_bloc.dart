@@ -217,6 +217,17 @@ class FoodGalleryBloc implements Bloc {
       _allCategoryList.add(oneCategoryItem);
     }
     );
+
+    NewCategoryItem all = new NewCategoryItem(
+      categoryName: 'All',
+      imageURL: 'None',
+      rating: 0,
+      totalRating: 5,
+
+    );
+
+    _allCategoryList.add(all);
+
     _categoriesController.sink.add(_allCategoryList);
     //    _foodItemController.sink.add(_allCategoryList);
     //    return _allFoodsList;
