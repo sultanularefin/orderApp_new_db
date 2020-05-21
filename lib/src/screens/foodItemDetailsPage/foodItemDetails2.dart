@@ -101,6 +101,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     else return 0.0;
   }
   bool showUnSelectedIngredients = false;
+  double addedHeight =0.0;
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<FoodItemDetailsBloc>(context);
@@ -195,16 +196,34 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   // todo==>
                                   // showUnSelectedIngredients displayHeight(context)/7.5
                                   AnimatedPositioned(
-                                    child: Container(
-                                      color:Colors.blueAccent,
-                                      height: displayHeight(context) -
-                                          MediaQuery
-                                              .of(context)
-                                              .padding
-                                              .top - displayHeight(context) / 2.6 /* /2.4 IS THE HEIGHT
-                                              OF TOP CONTAINER*/ -
+                                    child: AnimatedContainer(
+                                      // Use the properties stored in the State class.
+//                                      width: _width,
+//                                      height: _height,
+                                      decoration: BoxDecoration(
+                                        color: Colors.blueAccent,
+                                        borderRadius: BorderRadius.circular(25),
+//                                        borderRadius: BorderRadius.all(20),
+                                      ),
+                                      // Define how long the animation should take.
+                                      duration: Duration(seconds: 1),
+                                      // Provide an optional curve to make the animation feel smoother.
+                                      curve: Curves.fastOutSlowIn,
+//                                      color:Colors.blueAccent,
+                                      height:  displayHeight(context) / 2.6 + addedHeight,
+                                      /* /2.6 IS THE HEIGHT
+                                              OF TOP CONTAINER*/
+                                      /*
+                                       -
 
-                                      /* TOP MARGIN OF TOP CONTAINER*/ displayHeight(context)/7.5,
+                                       /* TOP MARGIN OF TOP CONTAINER*/ displayHeight(context)/7.5,
+                                      displayHeight(context) -
+                                 MediaQuery
+                                     .of(context)
+                                     .padding
+                                     .top -
+                                    */
+
 //                                      width:220,
 //                                      height: displayHeight(context) / 2.6,
                                       //width:displayWidth(context) / 1.5, /* 3.8*/
@@ -215,12 +234,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                               26, /* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
                                       margin: EdgeInsets.fromLTRB(
-                                          12, 20, 10, 5),
+                                          12, 0, 10, 5),
+                                      padding: EdgeInsets.fromLTRB(
+                                          0, 6, 0, 6),
+
 
 
                                       // REFERENCE WIDTH AND MARGIN FROM THE BELOW CONTAINER.
                                       // TOP LEVEL CONTAINER.
-                                  /*
+                                      /*
                                       width: displayWidth(context)
                                           - displayWidth(context) /
                                               3.8 /* this is about the width of yellow side menu */
@@ -274,11 +296,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                     ),
                                     duration: Duration(milliseconds: 1000),
                                     top: showUnSelectedIngredients
-                                        ? displayHeight(context)/7.5 +MediaQuery
-                                        .of(context)
-                                        .padding
-                                        .top + displayHeight(context) / 2.6
-                                        :  displayHeight(context)/7.5,
+                                        ? displayHeight(context)/7.5
+                                        /*THIS IS TOP MARGIN */ - MediaQuery
+                                            .of(context)
+                                            .padding
+                                            .top /*THIS IS SAFE AREA. AT THE TOP.*/ +
+                                        displayHeight(context) / 2.6
+                                        :  displayHeight(context)/7.5
+                                        /*THIS IS TOP MARGIN */ /*- MediaQuery
+                                            .of(context)
+                                            .padding
+                                            .top + 5 */ /*5 is adjustment value at top*/,
 //                left: 150,
 
 //            right:10,
@@ -295,44 +323,44 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //                                      alignment: Alignment.bottomCenter,
-                                      height: displayHeight(context) / 2.6,
-                                      //width:displayWidth(context) / 1.5, /* 3.8*/
-                                      width: displayWidth(context)
-                                          - displayWidth(context) /
-                                              3.8 /* this is about the width of yellow side menu */
-                                          - displayWidth(context) /
-                                              26, /* 10% of widht of the device for padding margin.*/
+                                    height: displayHeight(context) / 2.6,
+                                    //width:displayWidth(context) / 1.5, /* 3.8*/
+                                    width: displayWidth(context)
+                                        - displayWidth(context) /
+                                            3.8 /* this is about the width of yellow side menu */
+                                        - displayWidth(context) /
+                                            26, /* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
-                                      margin: EdgeInsets.fromLTRB(
-                                          12, displayHeight(context)/7.5, 10, 5),
+                                    margin: EdgeInsets.fromLTRB(
+                                        12, displayHeight(context)/7.5, 10, 5),
 
-                                      decoration:
-                                      new BoxDecoration(
-                                        borderRadius: new BorderRadius
-                                            .circular(
-                                            10.0),
-                                        color: Colors.purple,
-                                      ),
+                                    decoration:
+                                    new BoxDecoration(
+                                      borderRadius: new BorderRadius
+                                          .circular(
+                                          10.0),
+                                      color: Colors.purple,
+                                    ),
 
 
-                                      child: Neumorphic(
-                                        // State of Neumorphic (may be convex, flat & emboss)
+                                    child: Neumorphic(
+                                      // State of Neumorphic (may be convex, flat & emboss)
 
-                                          boxShape: NeumorphicBoxShape
-                                              .roundRect(
-                                            BorderRadius.all(
-                                                Radius.circular(15)),
+                                        boxShape: NeumorphicBoxShape
+                                            .roundRect(
+                                          BorderRadius.all(
+                                              Radius.circular(15)),
 
-                                          ),
-                                          curve: Neumorphic.DEFAULT_CURVE,
-                                          style: NeumorphicStyle(
-                                              shape: NeumorphicShape
-                                                  .concave,
-                                              depth: 8,
-                                              lightSource: LightSource
-                                                  .topLeft,
-                                              color: Colors.white
-                                          ),
+                                        ),
+                                        curve: Neumorphic.DEFAULT_CURVE,
+                                        style: NeumorphicStyle(
+                                            shape: NeumorphicShape
+                                                .concave,
+                                            depth: 8,
+                                            lightSource: LightSource
+                                                .topLeft,
+                                            color: Colors.white
+                                        ),
 
 //                    MAX_DEPTH,DEFAULT_CURVE
 
@@ -340,383 +368,395 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      BorderRadius.circular(25),
 //                  border: Border.all(
 
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .start,
-                                            crossAxisAlignment: CrossAxisAlignment
-                                                .start,
-                                            children: <Widget>[
-                                              Container(child: Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .start,
-                                                children: <Widget>[
-                                                  // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                                  // , 2ND PART(ROW) HANDLES THE
-                                                  // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .start,
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .start,
+                                          children: <Widget>[
+                                            Container(child: Row(
+                                              mainAxisAlignment: MainAxisAlignment
+                                                  .start,
+                                              children: <Widget>[
+                                                // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                                // , 2ND PART(ROW) HANDLES THE
+                                                // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
 
 
-                                                  Container(
-                                                      height: displayHeight(
-                                                          context) / 2.6,
+                                                Container(
+                                                    height: displayHeight(
+                                                        context) / 2.6,
 
-                                                      color: Colors.red,
-                                                      width: displayWidth(
-                                                          context) /
-                                                          5,
+                                                    color: Colors.red,
+                                                    width: displayWidth(
+                                                        context) /
+                                                        5,
 // INCREASE THE DIVIDER TO MAKE IT MORE SAMLLER. I.E. WIDTH
 //                      height: displayHeight(context)*0.50,
 //                                    alignment: Alignment.centerLeft,
 
 
-                                                      //ZZZ
-                                                      // Other arguments such as margin, padding etc. (Like `Container`)
-                                                      child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .center,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .start,
+                                                    //ZZZ
+                                                    // Other arguments such as margin, padding etc. (Like `Container`)
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .center,
+                                                      crossAxisAlignment: CrossAxisAlignment
+                                                          .start,
 
 //        mainAxisSize: MainAxisSize.min,
-                                                        children: <Widget>[
-                                                          //pppp
-                                                          Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(
-                                                                10, 0, 0,
-                                                                10),
-                                                            child:
+                                                      children: <Widget>[
+                                                        //pppp
+                                                        Container(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                              10, 0, 0,
+                                                              10),
+                                                          child:
 
-                                                            Text(
-                                                                '${oneFood
-                                                                    .itemName}',
-                                                                style: TextStyle(
-                                                                  fontSize: 20,
-                                                                  fontWeight: FontWeight
-                                                                      .bold,
+                                                          Text(
+                                                              '${oneFood
+                                                                  .itemName}',
+                                                              style: TextStyle(
+                                                                fontSize: 20,
+                                                                fontWeight: FontWeight
+                                                                    .bold,
 //                                                      color: Colors.white
-                                                                  color: Colors
-                                                                      .black,
+                                                                color: Colors
+                                                                    .black,
 
-                                                                )
-                                                            ),
+                                                              )
                                                           ),
+                                                        ),
 
-                                                          Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(
-                                                                10, 0, 0,
-                                                                10),
-                                                            child:
+                                                        Container(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                              10, 0, 0,
+                                                              10),
+                                                          child:
 
-                                                            Text(
-                                                                '$initialPriceByQuantityANDSize ' +
-                                                                    '\u20AC',
-                                                                style: TextStyle(
-                                                                  fontSize: 20,
-                                                                  fontWeight: FontWeight
-                                                                      .normal,
+                                                          Text(
+                                                              '$initialPriceByQuantityANDSize ' +
+                                                                  '\u20AC',
+                                                              style: TextStyle(
+                                                                fontSize: 20,
+                                                                fontWeight: FontWeight
+                                                                    .normal,
 //                                                      color: Colors.white
-                                                                  color: Colors
-                                                                      .black,
+                                                                color: Colors
+                                                                    .black,
 
-                                                                )
-                                                            ),
+                                                              )
                                                           ),
+                                                        ),
 
-                                                          Container(
-                                                            /*
+                                                        Container(
+                                                          /*
                                 color:Colors.blue,
                               width:displayWidth(context)/4.6,
                               */
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(
-                                                                0, 0, 0,
-                                                                displayHeight(
-                                                                    context) /
-                                                                    25),
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                              0, 0, 0,
+                                                              displayHeight(
+                                                                  context) /
+                                                                  25),
 
-                                                            child: FoodDetailImage(
-                                                                oneFood
-                                                                    .imageURL,
-                                                                oneFood
-                                                                    .itemName),
-                                                          ),
-
-
-                                                        ],
-
-                                                      )
-                                                  ),
-
-                                                  // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                                  // , 2ND PART(ROW) HANDLES THE
-                                                  // DIFFERENT SIZES OF PRODUCTS.
-                                                  // ENDS HERE.
+                                                          child: FoodDetailImage(
+                                                              oneFood
+                                                                  .imageURL,
+                                                              oneFood
+                                                                  .itemName),
+                                                        ),
 
 
-                                                  // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
+                                                      ],
 
-                                                  Container(
-                                                    height: displayHeight(
-                                                        context) /
-                                                        2.6,
-                                                    width: displayWidth(
-                                                        context) -
-                                                        displayWidth(
-                                                            context) / 3.7 /* about the width of left most
+                                                    )
+                                                ),
+
+                                                // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                                // , 2ND PART(ROW) HANDLES THE
+                                                // DIFFERENT SIZES OF PRODUCTS.
+                                                // ENDS HERE.
+
+
+                                                // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
+
+                                                Container(
+                                                  height: displayHeight(
+                                                      context) /
+                                                      2.6,
+                                                  width: displayWidth(
+                                                      context) -
+                                                      displayWidth(
+                                                          context) / 3.7 /* about the width of left most
                             container holding the food Item Image, image name and food item price */
-                                                        - displayWidth(
-                                                            context) /
-                                                            3.8 /* this is about the width of yellow side menu */,
-                                                    child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .start,
+                                                      - displayWidth(
+                                                          context) /
+                                                          3.8 /* this is about the width of yellow side menu */,
+                                                  child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .start,
+                                                      crossAxisAlignment: CrossAxisAlignment
+                                                          .start,
 
 
 //        mainAxisSize: MainAxisSize.min,
-                                                        children: <Widget>[
-                                                          //pppp
-                                                          Container(
-                                                              child: _buildProductSizes(
-                                                                  context,
-                                                                  foodSizePrice)
-                                                          ),
+                                                      children: <Widget>[
+                                                        //pppp
+                                                        Container(
+                                                            child: _buildProductSizes(
+                                                                context,
+                                                                foodSizePrice)
+                                                        ),
 
 //                                  Text('ss'),
-                                                          Container(
-                                                              child: buildDefaultIngredients(
-                                                                  context,
-                                                                  defaultIngredients)
-                                                          ),
+                                                        Container(
+                                                            child: buildDefaultIngredients(
+                                                                context,
+                                                                defaultIngredients)
+                                                        ),
 
-                                                          // MORE INGREDIENTS Row BEGINS HERE.
-                                                          Container(
+                                                        // MORE INGREDIENTS Row BEGINS HERE.
+                                                        Container(
 //                                                              color:Colors.yellowAccent,
-                                                              child: Row(
-                                                                  mainAxisAlignment: MainAxisAlignment
-                                                                      .end,
-                                                                  crossAxisAlignment: CrossAxisAlignment
-                                                                      .center,
-                                                                  children: <
-                                                                      Widget>[
+                                                            child: Row(
+                                                                mainAxisAlignment: MainAxisAlignment
+                                                                    .end,
+                                                                crossAxisAlignment: CrossAxisAlignment
+                                                                    .center,
+                                                                children: <
+                                                                    Widget>[
 
-                                                                    // MORE INGREDIENTS row BEGINS HERE.
-                                                                    Container(
+                                                                  // MORE INGREDIENTS row BEGINS HERE.
+                                                                  Container(
 //                                                                        width:60,
-                                                                      width: displayWidth(
-                                                                          context) /4,
-                                                                      height: displayHeight(context)/21,
-                                                                      alignment: Alignment.center,
-                                                                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                                                      child:
-                                                                      OutlineButton(
+                                                                    width: displayWidth(
+                                                                        context) /4,
+                                                                    height: displayHeight(context)/21,
+                                                                    alignment: Alignment.center,
+                                                                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                                                    child:
+                                                                    OutlineButton(
 //                        color: Color(0xffFEE295),
-                                                                        highlightColor: Colors.lightGreenAccent,
-                                                                        highlightedBorderColor: Colors.blueAccent,
-                                                                        clipBehavior: Clip.hardEdge,
-                                                                        splashColor: Color(0xffB47C00),
-                                                                        highlightElevation: 12,
-                                                                        shape: RoundedRectangleBorder(
-                                                                          side: BorderSide(
-                                                                            color: Color(0xff000000),
-                                                                            style: BorderStyle.solid,
-                                                                            width: 11.6,
-                                                                          ),
-                                                                          borderRadius: BorderRadius.circular(35.0),
+                                                                      highlightColor: Colors.lightGreenAccent,
+                                                                      highlightedBorderColor: Colors.blueAccent,
+                                                                      clipBehavior: Clip.hardEdge,
+                                                                      splashColor: Color(0xffB47C00),
+                                                                      highlightElevation: 12,
+                                                                      shape: RoundedRectangleBorder(
+                                                                        side: BorderSide(
+                                                                          color: Color(0xff000000),
+                                                                          style: BorderStyle.solid,
+                                                                          width: 11.6,
                                                                         ),
+                                                                        borderRadius: BorderRadius.circular(35.0),
+                                                                      ),
 
-                                                                        child:Container(child: Row(
-                                                                          mainAxisAlignment: MainAxisAlignment
-                                                                              .start,
-                                                                          crossAxisAlignment: CrossAxisAlignment
-                                                                              .center,
-                                                                          children: <
-                                                                              Widget>[
-                                                                            Icon(
-                                                                              Icons
-                                                                                  .add,
-                                                                              size: 22.0,
-                                                                              color: Color(0xff707070),
-                                                                              //        color: Color(0xffFFFFFF),
-                                                                            ),
-                                                                            Text(
-                                                                              'More Ingredients'.toUpperCase(),
-                                                                              style: TextStyle(
-                                                                                  fontWeight: FontWeight
-                                                                                      .bold,
-                                                                                  color: Color(0xff707070),
-                                                                                  fontSize: 16),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                        ),
-                                                                        onPressed: () {
-                                                                          logger.i('s  =>   =>   => ','ss');
+                                                                      child:Container(child: Row(
+                                                                        mainAxisAlignment: MainAxisAlignment
+                                                                            .start,
+                                                                        crossAxisAlignment: CrossAxisAlignment
+                                                                            .center,
+                                                                        children: <
+                                                                            Widget>[
+                                                                          Icon(
+                                                                            Icons
+                                                                                .add,
+                                                                            size: 22.0,
+                                                                            color: Color(0xff707070),
+                                                                            //        color: Color(0xffFFFFFF),
+                                                                          ),
+                                                                          Text(
+                                                                            'More Ingredients'.toUpperCase(),
+                                                                            style: TextStyle(
+                                                                                fontWeight: FontWeight
+                                                                                    .bold,
+                                                                                color: Color(0xff707070),
+                                                                                fontSize: 16),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      ),
+                                                                      onPressed: () {
+//                                                                        logger.i('s  =>   =>   => ','ss');
+
+                                                                        logger.i('addedHeight: ',addedHeight);
+                                                                        if( addedHeight == 0.0 ){
                                                                           setState(() {
+                                                                            addedHeight = /* displayHeight(context)/10*/
+                                                                            30.0;
                                                                             showUnSelectedIngredients =!showUnSelectedIngredients ;
                                                                           });
-                                                                          print(
-                                                                              'xyz');
+                                                                        }else{
+                                                                          setState(() {
+                                                                            addedHeight= 0.0;
+                                                                            showUnSelectedIngredients =!showUnSelectedIngredients;
+                                                                          });
+                                                                        }
 
-                                                                        },
-                                                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                                                        print(
+                                                                            'xyz');
 
-                                                                      ),
+                                                                      },
+                                                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
                                                                     ),
-                                                                    // MORE INGREDIENTS ENDS HERE.
+                                                                  ),
+                                                                  // MORE INGREDIENTS ENDS HERE.
 
 
-                                                                    Container(
-                                                                      margin: EdgeInsets.symmetric(
-                                                                          horizontal: 0,
-                                                                          vertical: 0),
+                                                                  Container(
+                                                                    margin: EdgeInsets.symmetric(
+                                                                        horizontal: 0,
+                                                                        vertical: 0),
 
-                                                                      width: displayWidth(context) /
-                                                                          5.4,
-                                                                      height: 45,
+                                                                    width: displayWidth(context) /
+                                                                        5.4,
+                                                                    height: 45,
 
 //                                            color:Color(0xffC27FFF),
-                                                                      child:
-                                                                      Row(
-                                                                        mainAxisAlignment: MainAxisAlignment
-                                                                            .center,
-                                                                        children: <Widget>[
-                                                                          IconButton(
-                                                                            icon: Icon(Icons.add_circle_outline),
-                                                                            iconSize: 30,
+                                                                    child:
+                                                                    Row(
+                                                                      mainAxisAlignment: MainAxisAlignment
+                                                                          .center,
+                                                                      children: <Widget>[
+                                                                        IconButton(
+                                                                          icon: Icon(Icons.add_circle_outline),
+                                                                          iconSize: 30,
 
-                                                                            tooltip: 'Increase product count by 1',
-                                                                            onPressed: () {
-                                                                              print(
-                                                                                  'Add button pressed');
-                                                                              setState(() {
-                                                                                _itemCount =
-                                                                                    _itemCount + 1;
-                                                                                initialPriceByQuantityANDSize =
+                                                                          tooltip: 'Increase product count by 1',
+                                                                          onPressed: () {
+                                                                            print(
+                                                                                'Add button pressed');
+                                                                            setState(() {
+                                                                              _itemCount =
+                                                                                  _itemCount + 1;
+                                                                              initialPriceByQuantityANDSize =
 
-                                                                                    initialPriceByQuantityANDSize *
-                                                                                        _itemCount;
-                                                                              });
-                                                                            },
-                                                                            color: Color(0xff707070),
-                                                                          ),
-
-
-                                                                          Container(
-                                                                              child:Stack(
-
-                                                                                  children: <Widget>[
+                                                                                  initialPriceByQuantityANDSize *
+                                                                                      _itemCount;
+                                                                            });
+                                                                          },
+                                                                          color: Color(0xff707070),
+                                                                        ),
 
 
-                                                                                    Container(child:
-                                                                                    Icon(
-                                                                                      Icons.add_shopping_cart,
-                                                                                      size: 44,
-                                                                                      color: Color(0xff707070),
-                                                                                    ),
-                                                                                    ),
+                                                                        Container(
+                                                                            child:Stack(
 
-                                                                                    Container(
+                                                                                children: <Widget>[
 
-                                                                                      width:  25.0,
-                                                                                      height: 25.0,
-                                                                                      decoration: new BoxDecoration(
-                                                                                        color: Colors.red,
-                                                                                        border: new Border.all(
-                                                                                            color: Colors.green,
-                                                                                            width: 1.0,
-                                                                                            style: BorderStyle.solid
-                                                                                        ),
-                                                                                        shape: BoxShape.circle,
 
+                                                                                  Container(child:
+                                                                                  Icon(
+                                                                                    Icons.add_shopping_cart,
+                                                                                    size: 44,
+                                                                                    color: Color(0xff707070),
+                                                                                  ),
+                                                                                  ),
+
+                                                                                  Container(
+
+                                                                                    width:  35.0,
+                                                                                    height: 35.0,
+                                                                                    decoration: new BoxDecoration(
+                                                                                      color: Colors.red,
+                                                                                      border: new Border.all(
+                                                                                          color: Colors.green,
+                                                                                          width: 1.0,
+                                                                                          style: BorderStyle.solid
                                                                                       ),
-
-                                                                                      alignment: Alignment.center,
-                                                                                      child:   Text(
-                                                                                        _itemCount.toString(),
-                                                                                        style: TextStyle(
-                                                                                          color: Colors.white,
-                                                                                          fontWeight: FontWeight
-                                                                                              .normal,
-                                                                                          fontSize: 22,
-                                                                                        ),
-                                                                                      ),
+                                                                                      shape: BoxShape.circle,
 
                                                                                     ),
 
+                                                                                    alignment: Alignment.center,
+                                                                                    child:   Text(
+                                                                                      _itemCount.toString(),
+                                                                                      style: TextStyle(
+                                                                                        color: Colors.white,
+                                                                                        fontWeight: FontWeight
+                                                                                            .normal,
+                                                                                        fontSize: 22,
+                                                                                      ),
+                                                                                    ),
+
+                                                                                  ),
 
 
 
-                                                                                  ]
-                                                                              )
-                                                                          ),
 
-                                                                          // todo shopping.
+                                                                                ]
+                                                                            )
+                                                                        ),
+
+                                                                        // todo shopping.
 
 //                                                                          SizedBox(
 //                                                                            width: 3,
 //                                                                          ),
 
-                                                                          IconButton(
-                                                                            icon: Icon(Icons.remove_circle_outline),
+                                                                        IconButton(
+                                                                          icon: Icon(Icons.remove_circle_outline),
 //                                                                            icon: Icon(Icons.remove),
-                                                                            iconSize: 30,
-                                                                            tooltip: 'Decrease product count by 1',
-                                                                            onPressed: () {
-                                                                              print(
-                                                                                  'Decrease button pressed');
-                                                                              if (_itemCount > 1) {
-                                                                                setState(() {
-                                                                                  _itemCount =
-                                                                                      _itemCount - 1;
-                                                                                  initialPriceByQuantityANDSize =
-                                                                                      initialPriceByQuantityANDSize *
-                                                                                          _itemCount;
-                                                                                });
-                                                                              }
-                                                                            },
+                                                                          iconSize: 30,
+                                                                          tooltip: 'Decrease product count by 1',
+                                                                          onPressed: () {
+                                                                            print(
+                                                                                'Decrease button pressed');
+                                                                            if (_itemCount > 1) {
+                                                                              setState(() {
+                                                                                _itemCount =
+                                                                                    _itemCount - 1;
+                                                                                initialPriceByQuantityANDSize =
+                                                                                    initialPriceByQuantityANDSize *
+                                                                                        _itemCount;
+                                                                              });
+                                                                            }
+                                                                          },
 //                              size: 24,
-                                                                            color: Color(0xff707070),
-                                                                          ),
-                                                                        ],
-
-                                                                      ),
-
+                                                                          color: Color(0xff707070),
+                                                                        ),
+                                                                      ],
 
                                                                     ),
 
 
-
-                                                                  ]
-                                                              )
-                                                          ),
+                                                                  ),
 
 
 
+                                                                ]
+                                                            )
+                                                        ),
 
 
-                                                          // MORE INGREDIENTS ROW ENDS HERE.
 
 
-                                                        ]
-                                                    ),
-                                                  )
-                                                  // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
 
-                                                ],
-                                              ),
-                                              ),
-
-                                             
+                                                        // MORE INGREDIENTS ROW ENDS HERE.
 
 
-                                            ],
-                                          )
+                                                      ]
+                                                  ),
+                                                )
+                                                // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
 
-                                      ),
+                                              ],
+                                            ),
+                                            ),
+
+
+
+
+                                          ],
+                                        )
+
                                     ),
+                                  ),
 
                                   /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
 
@@ -769,10 +809,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
 //                              SizedBox(height: 10),
-
-
 
             Container(
 
@@ -1352,8 +1389,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                               new Container(
 
-                                width: displayWidth(context) * 0.09,
-                                height: displayWidth(context) * 0.11,
+//                                width: displayWidth(context) * 0.09,
+//                                height: displayWidth(context) * 0.11,
+                                width: displayWidth(context) /10,
+                                height: displayWidth(context) /9,
+                                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
 
                                 child: ClipOval(
 
