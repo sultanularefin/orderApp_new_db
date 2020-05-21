@@ -527,7 +527,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                       AnimatedSwitcher(
                                                         duration: Duration(milliseconds: 1000),
 //
-                                                        child:myAnimatedWidget1(),
+                                                        child: showPressWhenFinishButton? myAnimatedWidget1(): myAnimatedWidget2(),
 
                                                       ),
                                                       // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH BEGINS HERE.
@@ -646,6 +646,25 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         ),
         onPressed: () {
 //
+
+          logger.i('addedHeight: ',addedHeight);
+          if( addedHeight == 0.0 ){
+            setState(() {
+              addedHeight = /* displayHeight(context)/10*/
+              30.0;
+              showUnSelectedIngredients = !showUnSelectedIngredients ;
+              showPressWhenFinishButton = !showPressWhenFinishButton;
+//                          myAnimatedWidget1 = myAnimatedWidget2;
+
+            });
+          }else{
+            setState(() {
+              addedHeight= 0.0;
+              showUnSelectedIngredients = !showUnSelectedIngredients;
+              showPressWhenFinishButton = !showPressWhenFinishButton;
+//                        myAnimatedWidget2 = myAnimatedWidget1();
+            });
+          }
           print(
               'finish button pressed');
 
@@ -729,7 +748,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         addedHeight = /* displayHeight(context)/10*/
                         30.0;
                         showUnSelectedIngredients = !showUnSelectedIngredients ;
-//                        showPressWhenFinishButton = !showPressWhenFinishButton;
+                        showPressWhenFinishButton = !showPressWhenFinishButton;
 //                          myAnimatedWidget1 = myAnimatedWidget2;
 
                       });
@@ -737,7 +756,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       setState(() {
                         addedHeight= 0.0;
                         showUnSelectedIngredients = !showUnSelectedIngredients;
-//                        showPressWhenFinishButton = !showPressWhenFinishButton;
+                        showPressWhenFinishButton = !showPressWhenFinishButton;
 //                        myAnimatedWidget2 = myAnimatedWidget1();
                       });
                     }
