@@ -174,7 +174,8 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //      ).toList();
 
 
-      List<NewIngredient> unSelectedDecremented =  defaultMinus.map((oneIngredient)=>NewIngredient.updateIngredient(
+      List<NewIngredient> unSelectedDecremented =
+      defaultMinus.map((oneIngredient)=>NewIngredient.updateIngredient(
           oneIngredient
       )).toList();
 

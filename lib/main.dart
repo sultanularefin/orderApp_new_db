@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 //import 'package:foodgallery/src/screens/foodGallery/food_gallery.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,23 +30,26 @@ class MyApp extends StatelessWidget {
     return
       BlocProvider<FoodGalleryBloc>(
         bloc: FoodGalleryBloc(),
+        child:BlocProvider<FoodGalleryBloc>(
 
-        child: MaterialApp(
+          bloc:FoodGalleryBloc(),
+          child: MaterialApp(
 
-          title: 'Flutter Demo',
-          // commented for Tablet testing on april 25.
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            textTheme:GoogleFonts.latoTextTheme(textTheme).copyWith(
-              body1: GoogleFonts.montserrat(textStyle: textTheme.body1),
+            title: 'Flutter Demo',
+            // commented for Tablet testing on april 25.
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              textTheme:GoogleFonts.latoTextTheme(textTheme).copyWith(
+                body1: GoogleFonts.montserrat(textStyle: textTheme.body1),
+              ),
             ),
-          ),
-          debugShowCheckedModeBanner: false,
+            debugShowCheckedModeBanner: false,
 //      home: WelcomePage(),
-          home:FoodGallery2(),
+            home:FoodGallery2(),
 
 
 //      home: FoodGallery(),
+          ),
         ),
       );
   }

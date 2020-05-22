@@ -527,7 +527,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                       AnimatedSwitcher(
                                                         duration: Duration(milliseconds: 1000),
 //
-                                                        child: showPressWhenFinishButton? myAnimatedWidget1(): myAnimatedWidget2(),
+                                                        child: showPressWhenFinishButton? animatedWidgetPressToFinish():
+                                                        animatedWidgetMoreIngredientsButton(),
 
                                                       ),
                                                       // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH BEGINS HERE.
@@ -584,15 +585,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   }
 
 
-  Widget myAnimatedWidget1(){
+  Widget animatedWidgetPressToFinish(){
     return Container(
+
+//      ==>alignment: THIS CAUSES THE RAISED BUTTON'S HEIGHT SHRINK.
       // Use the properties stored in the State class.
       // Define how long the animation should take.
 
       // Provide an optional curve to make the animation feel smoother.
 
-      color:Colors.yellowAccent,
+      color:Colors.white,
 
+      /*
       width: displayWidth(context)
           - displayWidth(context) /
               3.8 /* this is about the width of yellow side menu */
@@ -600,84 +604,107 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               26  /* 10% of widht of the device for padding margin.*/
           - displayWidth(
               context) /5, /* this is the image Container left most column width probably
-                                                                  */
-      height: displayHeight(context)/21,
-      child:RaisedButton(
-//                        color: Color(0xffFEE295),
-        color:Colors.redAccent,
-        highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-        clipBehavior: Clip.hardEdge,
-        splashColor: Color(0xffB47C00),
-        highlightElevation: 12,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Color(0xff000000),
-            style: BorderStyle.solid,
-            width: 11.6,
-          ),
-          borderRadius: BorderRadius.circular(35.0),
-        ),
+                      */                                            */
 
-        child:Container(child: Row(
-          mainAxisAlignment: MainAxisAlignment
-              .start,
-          crossAxisAlignment: CrossAxisAlignment
-              .center,
-          children: <
-              Widget>[
-            Icon(
-              Icons
-                  .check,
-              size: 22.0,
-              color: Color(0xffFFFFFF),
-              //        color: Color(0xffFFFFFF),
+
+
+
+//        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+
+      child:Center(
+//          widthFactor: displayWidth(context)/4,
+
+        heightFactor: 1.5,
+
+        child:
+
+        RaisedButton(
+//                        color: Color(0xffFEE295),
+          color:Colors.redAccent,
+          highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+          clipBehavior: Clip.hardEdge,
+          splashColor: Color(0xffB47C00),
+          highlightElevation: 12,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Color(0xff707070),
+              style: BorderStyle.solid,
+//            width: 1,
             ),
-            Text(
-              'PRESS TO FINISH'.toUpperCase(),
-              style: TextStyle(
-                  fontWeight: FontWeight
-                      .bold,
-                  color: Color(0xffFFFFFF),
-                  fontSize: 16),
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+
+          child:Container(
+
+            width:displayWidth(context)/4,
+
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment
+                  .center,
+              crossAxisAlignment: CrossAxisAlignment
+                  .center,
+              children: <
+                  Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 6, 0),
+                  child:
+                  Icon(
+                    Icons
+                        .check,
+                    size: 22.0,
+                    color: Color(0xffFFFFFF),
+                    //        color: Color(0xffFFFFFF),
+                  ),),
+                Container(child:Text(
+                  'PRESS TO FINISH'.toUpperCase(),
+                  style: TextStyle(
+                      fontWeight: FontWeight
+                          .bold,
+                      color: Color(0xffFFFFFF),
+                      fontSize: 16),
+                ),
+                )
+              ],
             ),
-          ],
-        ),
-        ),
-        onPressed: () {
+          ),
+          onPressed: () {
 //
 
-          logger.i('addedHeight: ',addedHeight);
-          if( addedHeight == 0.0 ){
-            setState(() {
-              addedHeight = /* displayHeight(context)/10*/
-              30.0;
-              showUnSelectedIngredients = !showUnSelectedIngredients ;
-              showPressWhenFinishButton = !showPressWhenFinishButton;
+            logger.i('addedHeight: ',addedHeight);
+            if( addedHeight == 0.0 ){
+              setState(() {
+                addedHeight = /* displayHeight(context)/10*/
+                30.0;
+                showUnSelectedIngredients = !showUnSelectedIngredients ;
+                showPressWhenFinishButton = !showPressWhenFinishButton;
 //                          myAnimatedWidget1 = myAnimatedWidget2;
 
-            });
-          }else{
-            setState(() {
-              addedHeight= 0.0;
-              showUnSelectedIngredients = !showUnSelectedIngredients;
-              showPressWhenFinishButton = !showPressWhenFinishButton;
+              });
+            }else{
+              setState(() {
+                addedHeight= 0.0;
+                showUnSelectedIngredients = !showUnSelectedIngredients;
+                showPressWhenFinishButton = !showPressWhenFinishButton;
 //                        myAnimatedWidget2 = myAnimatedWidget1();
-            });
-          }
-          print(
-              'finish button pressed');
+              });
+            }
+            print(
+                'finish button pressed');
 
-        },
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+          },
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
+        ),
       ),
+
+
 
     );
   }
 
 
-  Widget myAnimatedWidget2(){
+  Widget animatedWidgetMoreIngredientsButton(){
     return    Container(
 
         color:Colors.white,
@@ -1011,27 +1038,30 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               child:
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
 
 
-
-                  IconButton(
-                    icon: Icon(Icons.add),
-                    iconSize: 30,
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    child:
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      iconSize: 30,
 
 //                      tooltip: 'Increase Ingredient count by 1',
-                    onPressed: () {
-                      print('Add button pressed');
+                      onPressed: () {
+                        print('Add button pressed');
 
 
 //                      setState(() {
 //                        _ingredientlistUnSelected= allUnSelected;
 //                      });
-                    },
-                    color: Colors.grey,
-                  ),
+                      },
+                      color: Color(0xff707070),
+                    ),),
+
 
 
 //      double.parse(doc['priceinEuro'])
@@ -1039,18 +1069,26 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   Text(
                     currentAmount.toString(),
                     style: TextStyle(
-                      color: Colors.blueGrey[800],
+                      color: Colors.black,
                       fontWeight: FontWeight.normal,
                       fontSize: 22,
                     ),
                   ),
 
 
-                  InkResponse(
-                    onTap: (){
 
-                      print('Decrease button pressed InkResponse');
-                      /*
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child:
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      iconSize: 30,
+
+//                      tooltip: 'Increase Ingredient count by 1',
+                      onPressed: () {
+                        print('Add button pressed');
+                        print('Decrease button pressed InkResponse');
+                        /*
                       if (currentAmount > 1) {
 //                      if(currentAmount>=2)
 //                      City c1 = new City()..name = 'Blum'..state = 'SC';
@@ -1075,63 +1113,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         });
                       */
 
-                    },
-                    splashColor:Colors.deepOrangeAccent,
-                    focusColor:Colors.blue,
-                    hoverColor:Colors.lightGreen,
-                    highlightColor:Colors.indigo,
-                    child:
-
-                    IconButton(
-                      icon: Icon(Icons.remove),
-                      iconSize: 30,
-//                      tooltip: 'Decrease Ingredient count by 1',
-                      onPressed: () {
-                        print('Decrease button pressed IconButton');
-
-                        /*
-                        if (currentAmount >= 1) {
-//                      if(currentAmount>=2)
-//                      City c1 = new City()..name = 'Blum'..state = 'SC';
-
-                          NewIngredient c1 = new NewIngredient(
-                              ingredientName: unSelectedOneIngredient
-                                  .ingredientName,
-                              imageURL: unSelectedOneIngredient.imageURL,
-
-                              price: unSelectedOneIngredient.price,
-                              documentId: unSelectedOneIngredient.documentId,
-                              ingredientAmountByUser: unSelectedOneIngredient
-                                  .ingredientAmountByUser - 1
-                          );
-
-
-
-                          allUnSelected[index] = c1;
-                          setState(() {
-                            _ingredientlistUnSelected = allUnSelected;
-                          });
-                        }
-                        */
+//                      setState(() {
+//                        _ingredientlistUnSelected= allUnSelected;
+//                      });
                       },
-                      splashColor:Colors.deepOrangeAccent,
-                      focusColor:Colors.blue,
-                      hoverColor:Colors.lightGreen,
-                      highlightColor:Colors.indigo,
-//                              size: 24,
-                      color: Colors.grey,
+                      color: Color(0xff707070),
                     ),),
-
-
                 ],
 
               ),
             ),
-
             // PROBLEM CONTAINER WITH ROW. INCREMENT DECREMENT FUNCTIONALITY. -- ABOVE.
-
-
-
 
           ],
         )

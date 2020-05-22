@@ -59,6 +59,8 @@ class FoodGalleryBloc implements Bloc {
 
   final _allIngredientListController = StreamController <List<NewIngredient>>();
 
+//  final _controller = StreamController<List<Restaurant>>.broadcast();
+
   // 2
 
   // getter that get's the stream with _locationController.stream;
@@ -72,6 +74,7 @@ class FoodGalleryBloc implements Bloc {
 
   Stream<List<NewCategoryItem>> get categoryItemsStream => _categoriesController.stream;
 
+  Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
   // 3
   // CALLED LIKE THIS:
 
@@ -95,7 +98,7 @@ class FoodGalleryBloc implements Bloc {
     docList.forEach((doc) {
 
       final String foodItemName = doc['name'];
-      print('foodItemName $foodItemName');
+//      print('foodItemName $foodItemName');
 
 
       final String foodImageURL  = doc['image']==''?
@@ -169,12 +172,13 @@ class FoodGalleryBloc implements Bloc {
     documentSnapshot.documentID
     ).toList();
 
-    print('documents are: $documents');
+    print('Ingredient documents are at Line# 175 in FoodGalleryBlock: $documents');
 
 
     _allIngItems = ingItems;
 
     _allIngredientListController.sink.add(ingItems);
+
 
 //    return ingItems;
 
@@ -238,7 +242,7 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-    // Constructor.
+    // CONSTRUCTOR BIGINS HERE..
     FoodGalleryBloc() {
 
     getAllFoodItems();
@@ -251,6 +255,8 @@ class FoodGalleryBloc implements Bloc {
 //    this.getAllCategories();
 
     }
+
+  // CONSTRUCTOR ENDS HERE..
 
 
 

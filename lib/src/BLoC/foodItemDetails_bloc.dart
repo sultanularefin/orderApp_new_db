@@ -15,6 +15,7 @@ import 'package:foodgallery/src/DataLayer/itemData.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
 import 'package:foodgallery/src/DataLayer/newCategory.dart';
+//import './foodGallery_bloc.dart';
 //import 'package:zomatoblock/DataLayer/location.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
 
@@ -65,7 +66,8 @@ class FoodItemDetailsBloc implements Bloc {
 
 
 
-  List<NewIngredient> _allIngItems=[];
+//  List<NewIngredient> _allIngItems=[];
+  List<NewIngredient> _allIngItems =[];
 
   List<NewIngredient> _defaultIngItems = [];
   List<NewIngredient> _unSelectedIngItems = [];
@@ -91,6 +93,7 @@ class FoodItemDetailsBloc implements Bloc {
   // 1
 
   List<NewIngredient> get allIngredients => _allIngItems;
+//  List<NewIngredient> get allIngredients => _allIngItems;
 
   List<NewIngredient> get defaultIngredients => _defaultIngItems;
   List<NewIngredient> get unSelectedIngredients => _unSelectedIngItems;
@@ -103,6 +106,7 @@ class FoodItemDetailsBloc implements Bloc {
   // final _itemSizeController = StreamController<Map<String, double>>(); // currentlyNotUsing.
 
   final _allIngredientListController =  StreamController <List<NewIngredient>>();
+//  final _allIngredientListController = StreamController <List<NewIngredient>>();
 
   final _unSelectedIngredientListController   =  StreamController <List<NewIngredient>>();
   final _defaultIngredientListController      =  StreamController <List<NewIngredient>>();
@@ -113,6 +117,7 @@ class FoodItemDetailsBloc implements Bloc {
   // INVOKER -> stream: bloc.favoritesStream,
 
   Stream<FoodItemWithDocIDViewModel> get currentFoodItemsStream => _controller.stream;
+  Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
 
 
   // Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream; // currentlyNotUsing.
@@ -131,10 +136,56 @@ class FoodItemDetailsBloc implements Bloc {
 
   */
 
+
+
+
+
+  void getAllIngredients() async {
+
+
+    var snapshot = await _client.fetchAllIngredients();
+    List docList = snapshot.documents;
+
+
+
+    List <NewIngredient> ingItems = new List<NewIngredient>();
+    ingItems = snapshot.documents.map((documentSnapshot) =>
+        NewIngredient.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+//    print('Ingredient documents are: $documents');
+
+
+    _allIngItems = ingItems;
+
+    _allIngredientListController.sink.add(ingItems);
+
+
+//    return ingItems;
+
+  }
+
   // CONSTRUCTOR BEGINS HERE.
+  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem,List<NewIngredient> allIngsScoped ) {
 
 
-  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped ) {
+//    getAllIngredients();
+
+//    List<NewIngredient> allIngsScoped= _allIngItems;
+    print("at the begin of Constructor [FoodItemDetailsBloc]");
+    print("oneFoodItem ===> ===> ===> $oneFoodItem");
+    print("allIngsScoped ===> ===> ===> $allIngsScoped");
+
+
+
+
 
 //    _oneFoodItem = oneFoodItem;
 
@@ -179,6 +230,10 @@ class FoodItemDetailsBloc implements Bloc {
     }
 
     else{
+
+      print('at else statement:  ===> ===> ===> ===>');
+
+      print('allIngsScoped.length  ===> ===> ===> ===> ${allIngsScoped.length}');
       NewIngredient c1 = new NewIngredient(
           ingredientName : 'None',
           imageURL: 'None',
@@ -198,7 +253,21 @@ class FoodItemDetailsBloc implements Bloc {
 //      _unSelectedIngredientListController
       _defaultIngItems=ingItems;
       _defaultIngredientListController.sink.add(ingItems);
-      _unSelectedIngredientListController.sink.add(allIngsScoped);
+
+
+      List<NewIngredient> unSelectedDecremented =
+      allIngsScoped.map((oneIngredient)=>
+          NewIngredient.updateIngredient(
+              oneIngredient
+          )).toList();
+
+      print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented.length}');
+      print("length of unSelectedIngredientsFiltered ===>  =======> ========>> ==========> =========> ");
+      _unSelectedIngItems=unSelectedDecremented;
+
+
+      _unSelectedIngredientListController.sink.add(unSelectedDecremented);
+
 //      return ingItems;
 
     }
@@ -514,6 +583,7 @@ class FoodItemDetailsBloc implements Bloc {
 //    print("allIngList: $allIngList");
 
     print("listStringIngredients2: $listStringIngredients2");
+    print("allIngList :$allIngList");
 
 
 
@@ -521,7 +591,8 @@ class FoodItemDetailsBloc implements Bloc {
 //    List<NewIngredient> y = [];
     listStringIngredients2.forEach((stringIngredient) {
       NewIngredient elementExists = allIngList.where(
-              (oneItem) => oneItem.ingredientName.trim().toLowerCase() == stringIngredient.trim().toLowerCase()).first;
+              (oneItem) => oneItem.ingredientName.trim().toLowerCase()
+                  == stringIngredient.trim().toLowerCase()).first;
 
       print('elementExists: $elementExists');
       // WITHOUT THE ABOVE PRINT STATEMENT SOME TIMES THE APPLICATION CRUSHES.
@@ -566,7 +637,14 @@ class FoodItemDetailsBloc implements Bloc {
       ).toList();
 //      print('elementUNSelected: $elementUNSelected');
 
-      print('unSelectedIngredientsFiltered ===>  ${unSelectedIngredientsFiltered.length}');
+
+    List<NewIngredient> unSelectedDecremented =
+    unSelectedIngredientsFiltered.map((oneIngredient)=>
+        NewIngredient.updateIngredient(
+        oneIngredient
+    )).toList();
+
+      print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented.length}');
 
 
 //      Set<NewIngredient> unSelectedIngredientsFilteredSet = unSelectedIngredientsFiltered.toSet();
@@ -585,13 +663,13 @@ class FoodItemDetailsBloc implements Bloc {
 
 //    List<NewIngredient> convertSetToList = elementUNSelected.toList();
 
-    _unSelectedIngItems = unSelectedIngredientsFiltered;
+    _unSelectedIngItems = unSelectedDecremented;
 //    _defaultIngredientListController.sink.add(default2);
-    _unSelectedIngredientListController.sink.add(unSelectedIngredientsFiltered);
+    _unSelectedIngredientListController.sink.add(unSelectedDecremented);
 
 //    return allUnSelected;
 
-    logger.i('allUnSelected: ',unSelectedIngredientsFiltered);
+    logger.i('allUnSelected: ',unSelectedDecremented);
 
   }
 

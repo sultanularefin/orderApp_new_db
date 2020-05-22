@@ -76,15 +76,18 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
   File _image;
 
-  List<NewCategoryItem>_allCategoryList=[];
-
+//  List<NewCategoryItem>_allCategoryList=[];
+  List<NewIngredient> _ingredientItemsList= [];
 
   @override
   void initState() {
+    //    setIngredientItemsForFood();
     super.initState();
-
   }
 
+
+
+  // !(NOT) NECESSARY NOW.
 
   //  final _formKey = GlobalKey();
 
@@ -95,7 +98,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
   String _searchString = '';
   String _currentCategory = "pizza";
   String _firstTimeCategoryString = "";
-  double _total_cart_price = 1.00;
+
   // empty MEANS PIZZA
 
 
@@ -190,11 +193,35 @@ class _FoodGalleryState extends State<FoodGallery2> {
   );
 
 
+
+
+
   @override
   Widget build(BuildContext context) {
 //    String a = Constants.SUCCESS_MESSAGE;
 
     final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+    Stream<List<NewIngredient>> s = bloc.ingredientItemsStream;
+
+
+//    StreamBuilder<List<NewIngredient>>(
+
+//
+//        stream: bloc.ingredientItemsStream,
+//    builder: (context, snapshot) {
+//      final List<NewIngredient> IngredientData = snapshot.data;
+//    });
+
+
+    List<NewIngredient> testIngs =  bloc.allIngredients;
+
+    
+    print('testIngs at foodGallery2 at the main Class StateFul Widget'
+        '===> <===  //// ====>>>> /////// ##### !!!!!'
+        ': $testIngs');
+
+
+    print('testIngs in foodgallery2: $testIngs');
 
 //    _searchString
 
@@ -451,7 +478,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                   20, 0, 10, 0),
                               // FOR CATEGORY SERARCH.
 
-                              child: FoodList(categoryString: _currentCategory,searchString2:_searchString),
+                              child: FoodList(categoryString: _currentCategory,searchString2:_searchString,
+                                   allIngredients:testIngs  ),
 
                               // FOR SEARCHING AMONG ALL THE CATEGORIES.
 //                              child: FoodList(searchString2:_searchString),
@@ -595,16 +623,13 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 class FoodList extends StatelessWidget {
 
-
-
-
-
   final String categoryString;
   final String searchString2;
+  final List<NewIngredient> allIngredients;
 
-  FoodList({this.categoryString, this.searchString2});
+  FoodList({this.categoryString, this.searchString2 ,this.allIngredients });
 
-  var logger = Logger(
+  final logger = Logger(
     printer: PrettyPrinter(),
   );
 
@@ -684,25 +709,40 @@ class FoodList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
 //    final bloc = LocationQueryBloc();
 
 //    final blocZZ = FoodItemsQueryBloc();
 
     final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+    /*
+
     List<NewIngredient> testIngs = bloc.allIngredients;
 
-//    bloc.getAllFoodItems();
-    //*
+
+    print('testIngs in foodgallery2: $testIngs');
+
+
+
+
+    if ((testIngs) == null || (testIngs.length == 0)) {
+      return Container
+        (
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    else {
+      */
     return StreamBuilder<List<FoodItemWithDocID>>(
 //        stream:bloc.getAllFoodItems(),
 
-      stream:bloc.foodItemsStream,
+      stream: bloc.foodItemsStream,
 
 
       initialData: bloc.allFoodItems,
 //        initialData: bloc.getAllFoodItems(),
-      builder: (context, snapshot){
+      builder: (context, snapshot) {
 
         /*
         print('snapshot.connectionState : ${snapshot.connectionState}');
@@ -719,39 +759,40 @@ class FoodList extends StatelessWidget {
         print('snapshot.hasData : ${snapshot.hasData}');
 
 
-        if(snapshot.hasData) {
+        if (snapshot.hasData) {
 //          return Center(child:
 //          Text('${messageCount.toString()}')
 //          );
-          print('searchString  ##################################: $searchString2');
-          print('categoryString  ##################################: $categoryString');
+          print(
+              'searchString  ##################################: $searchString2');
+          print(
+              'categoryString  ##################################: $categoryString');
           // ..p
-
 
 
 //          int messageCount = filteredItems.length;
 
           //..p
-          final List allFoods =snapshot.data;
+          final List allFoods = snapshot.data;
 
           List filteredItemsByCategory;
 
 //          logger.i('categoryString.toLowerCase().trim(): ',categoryString.toLowerCase().trim());
 
-          if(categoryString.toLowerCase().trim() != 'all'){
-
-
-            filteredItemsByCategory = allFoods.where((oneItem ) => oneItem.categoryName.
+          if (categoryString.toLowerCase().trim() != 'all') {
+            filteredItemsByCategory = allFoods.where((oneItem) =>
+            oneItem.categoryName.
             toLowerCase() ==
                 categoryString.toLowerCase()).toList();
 
 
-
             // to do test.
             // if(searchString2!=null)
-            final List filteredItems = filteredItemsByCategory.where((oneItem) =>oneItem.itemName.toLowerCase().
-            contains(
-                searchString2.toLowerCase())).toList();
+            final List filteredItems = filteredItemsByCategory.where((
+                oneItem) =>
+                oneItem.itemName.toLowerCase().
+                contains(
+                    searchString2.toLowerCase())).toList();
 
             final int categoryItemsCount = filteredItems.length;
             print('categoryItemsCount: $categoryItemsCount');
@@ -761,7 +802,7 @@ class FoodList extends StatelessWidget {
                     color: Color(0xffFFFFFF),
                     child:
                     GridView.builder(
-                      itemCount:  categoryItemsCount,
+                      itemCount: categoryItemsCount,
                       gridDelegate:
                       new SliverGridDelegateWithMaxCrossAxisExtent(
 
@@ -769,36 +810,41 @@ class FoodList extends StatelessWidget {
                         maxCrossAxisExtent: 240,
                         mainAxisSpacing: 0, // H  direction
                         crossAxisSpacing: 5,
-                        childAspectRatio: 140/180,
-
+                        childAspectRatio: 140 / 180,
 
 
                       ),
-                      shrinkWrap:false,
+                      shrinkWrap: false,
 
                       itemBuilder: (_, int index) {
 //            logger.i("allFoods Category STring testing line # 1862: ${filteredItems[index]}");
 
 //
-                        final String foodItemName =          filteredItems[index].itemName;
-                        final String foodImageURL =          filteredItems[index].imageURL;
+                        final String foodItemName = filteredItems[index]
+                            .itemName;
+                        final String foodImageURL = filteredItems[index]
+                            .imageURL;
 
 //            logger.i("foodImageURL in CAtegory tap: $foodImageURL");
 
 
-
-
 //            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
-                        final Map<String,dynamic> foodSizePrice = filteredItems[index].sizedFoodPrices;
+                        final Map<String,
+                            dynamic> foodSizePrice = filteredItems[index]
+                            .sizedFoodPrices;
 
 //            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
-                        final List<dynamic> foodItemIngredientsList =  filteredItems[index].ingredients;
+                        final List<
+                            dynamic> foodItemIngredientsList = filteredItems[index]
+                            .ingredients;
 
 //            final String foodItemIngredients =    filteredItems[index].ingredients;
 //            final String foodItemId =             filteredItems[index].itemId;
 //            final bool foodIsHot =                filteredItems[index].isHot;
-                        final bool foodIsAvailable =          filteredItems[index].isAvailable;
-                        final String foodCategoryName =       filteredItems[index].categoryName;
+                        final bool foodIsAvailable = filteredItems[index]
+                            .isAvailable;
+                        final String foodCategoryName = filteredItems[index]
+                            .categoryName;
 
 //            final Map<String,dynamic> foodSizePrice = document['size'];
 
@@ -807,13 +853,14 @@ class FoodList extends StatelessWidget {
                         final dynamic euroPrice = foodSizePrice['normal'];
 
 //                num euroPrice2 = tryCast(euroPrice);
-                        double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.00);
+                        double euroPrice2 = tryCast<double>(
+                            euroPrice, fallback: 0.00);
 //                String euroPrice3= num.toString();
 //                print('euroPrice2 :$euroPrice2');
 
                         String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
-                        FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
+                        FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
 
                           itemName: foodItemName,
@@ -833,8 +880,8 @@ class FoodList extends StatelessWidget {
 
 //            logger.i('ingredients:',foodItemIngredientsList);
 
-                        String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
-
+                        String stringifiedFoodItemIngredients = listTitleCase(
+                            foodItemIngredientsList);
 
 
 //            print('document__________________________: ${document.data}');
@@ -856,8 +903,8 @@ class FoodList extends StatelessWidget {
                                     children: <Widget>[
                                       new Container(child:
                                       new Container(
-                                        width: displayWidth(context) /  7,
-                                        height: displayWidth(context) /7,
+                                        width: displayWidth(context) / 7,
+                                        height: displayWidth(context) / 7,
                                         decoration: new BoxDecoration(
                                           shape: BoxShape.circle,
                                           boxShadow: [
@@ -866,7 +913,7 @@ class FoodList extends StatelessWidget {
 //                                              color:Color(0xffEAB45E),
 // good yellow color
 //                                            color:Color(0xff000000),
-                                                color:Color(0xff707070),
+                                                color: Color(0xff707070),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                                 blurRadius: 30.0,
@@ -875,21 +922,26 @@ class FoodList extends StatelessWidget {
                                             )
                                           ],
                                         ),
-                                        child:Hero(
-                                          tag:foodItemName,
+                                        child: Hero(
+                                          tag: foodItemName,
                                           child:
                                           ClipOval(
                                             child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
                                               imageUrl: foodImageURL,
                                               fit: BoxFit.cover,
-                                              placeholder: (context, url) => new CircularProgressIndicator(),
+                                              placeholder: (context,
+                                                  url) => new CircularProgressIndicator(),
                                             ),
                                           ),
-                                          placeholderBuilder: (context,heroSize, child) {
-                                            return Opacity(opacity: 0.5, child:Container(
-                                              width: displayWidth(context) /  7,
-                                              height: displayWidth(context) /7,
+                                          placeholderBuilder: (context,
+                                              heroSize, child) {
+                                            return Opacity(
+                                              opacity: 0.5, child: Container(
+                                              width: displayWidth(context) /
+                                                  7,
+                                              height: displayWidth(context) /
+                                                  7,
                                               decoration: new BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 boxShadow: [
@@ -898,7 +950,8 @@ class FoodList extends StatelessWidget {
 //                                              color:Color(0xffEAB45E),
 // good yellow color
 //                                            color:Color(0xff000000),
-                                                      color:Color(0xffEAB45E),
+                                                      color: Color(
+                                                          0xffEAB45E),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                                       blurRadius: 30.0,
@@ -909,12 +962,13 @@ class FoodList extends StatelessWidget {
                                               ),
                                               child:
                                               ClipOval(
-                                                child:CachedNetworkImage(
+                                                child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                                imageUrl: foodImageURL,
-                                                fit: BoxFit.cover,
-                                                placeholder: (context, url) => new CircularProgressIndicator(),
-                                              ),
+                                                  imageUrl: foodImageURL,
+                                                  fit: BoxFit.cover,
+                                                  placeholder: (context,
+                                                      url) => new CircularProgressIndicator(),
+                                                ),
                                               ),
                                             ),
                                             );
@@ -929,26 +983,31 @@ class FoodList extends StatelessWidget {
 
                                       ),
 
-                                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 0, 0, 12),
                                       ),
 //                              SizedBox(height: 10),
 
 
-
                                       Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .center,
                                           children: <Widget>[
                                             Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                                              euroPrice3 +'\u20AC',
+                                              euroPrice3 + '\u20AC',
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.normal,
+                                                  fontWeight: FontWeight
+                                                      .normal,
 //                                          color: Colors.blue,
-                                                  color:Color.fromRGBO(112,112,112,1),
+                                                  color: Color.fromRGBO(
+                                                      112, 112, 112, 1),
                                                   fontSize: 20),
                                             ),
 //                                    SizedBox(width: 10),
-                                            SizedBox(width: displayWidth(context)/100),
+                                            SizedBox(
+                                                width: displayWidth(context) /
+                                                    100),
 
                                             Icon(
                                               Icons.whatshot,
@@ -958,8 +1017,7 @@ class FoodList extends StatelessWidget {
                                           ]),
 
 
-
-                                      FittedBox(fit:BoxFit.fitWidth,child:
+                                      FittedBox(fit: BoxFit.fitWidth, child:
                                       Text(
 //                '${dummy.counter}',
                                         foodItemName,
@@ -974,15 +1032,20 @@ class FoodList extends StatelessWidget {
                                       ),)
                                       ,
                                       Container(
-                                          height: displayHeight(context)/61,
+                                          height: displayHeight(context) / 61,
 
-                                          child:Text(
+                                          child: Text(
 //                                'stringifiedFoodItemIngredients',
 
 
-                                            stringifiedFoodItemIngredients.length==0?
-                                            'EMPTY':  stringifiedFoodItemIngredients.length>12?
-                                            stringifiedFoodItemIngredients.substring(0,12)+'...':
+                                            stringifiedFoodItemIngredients
+                                                .length == 0
+                                                ?
+                                            'EMPTY'
+                                                : stringifiedFoodItemIngredients
+                                                .length > 12 ?
+                                            stringifiedFoodItemIngredients
+                                                .substring(0, 12) + '...' :
                                             stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
@@ -998,17 +1061,20 @@ class FoodList extends StatelessWidget {
                                     ],
                                   ),
                                   onTap: () {
-
-
                                     return Navigator.of(context).push(
 
 
                                       PageRouteBuilder(
                                         opaque: false,
-                                        transitionDuration: Duration(milliseconds: 900),
+                                        transitionDuration: Duration(
+                                            milliseconds: 900),
                                         pageBuilder: (_, __, ___) =>
                                             BlocProvider<FoodItemDetailsBloc>(
-                                              bloc: FoodItemDetailsBloc(oneFoodItem,testIngs),
+                                              bloc: FoodItemDetailsBloc(
+                                                  oneFoodItem,allIngredients),
+
+
+
 
                                               child: FoodItemDetails2()
 
@@ -1027,7 +1093,6 @@ class FoodList extends StatelessWidget {
                                   */
                                       ),
                                     );
-
                                   }
 
                               )
@@ -1039,20 +1104,20 @@ class FoodList extends StatelessWidget {
                   )
               );
           }
-          else{
+          else {
+            logger.i('allFoods at all else is: ', allFoods.length);
 
-            logger.i('allFoods at all else is: ',allFoods.length);
-
-            final List filteredItems = allFoods.where((oneItem) =>oneItem.itemName.toLowerCase().
-            contains(
-                searchString2.toLowerCase())).toList();
+            final List filteredItems = allFoods.where((oneItem) =>
+                oneItem.itemName.toLowerCase().
+                contains(
+                    searchString2.toLowerCase())).toList();
             return
               (
                   Container(
                     color: Color(0xffFFFFFF),
                     child:
                     GridView.builder(
-                      itemCount:  filteredItems.length,
+                      itemCount: filteredItems.length,
                       gridDelegate:
                       new SliverGridDelegateWithMaxCrossAxisExtent(
 
@@ -1080,36 +1145,41 @@ class FoodList extends StatelessWidget {
                         maxCrossAxisExtent: 240,
                         mainAxisSpacing: 0, // H  direction
                         crossAxisSpacing: 5,
-                        childAspectRatio: 140/180,
-
+                        childAspectRatio: 140 / 180,
 
 
                       ),
-                      shrinkWrap:false,
+                      shrinkWrap: false,
 
                       itemBuilder: (_, int index) {
 //            logger.i("allFoods Category STring testing line # 1862: ${filteredItems[index]}");
 
 //
-                        final String foodItemName =          filteredItems[index].itemName;
-                        final String foodImageURL =          filteredItems[index].imageURL;
+                        final String foodItemName = filteredItems[index]
+                            .itemName;
+                        final String foodImageURL = filteredItems[index]
+                            .imageURL;
 
 //            logger.i("foodImageURL in CAtegory tap: $foodImageURL");
 
 
-
-
 //            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
-                        final Map<String,dynamic> foodSizePrice = filteredItems[index].sizedFoodPrices;
+                        final Map<String,
+                            dynamic> foodSizePrice = filteredItems[index]
+                            .sizedFoodPrices;
 
 //            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
-                        final List<dynamic> foodItemIngredientsList =  filteredItems[index].ingredients;
+                        final List<
+                            dynamic> foodItemIngredientsList = filteredItems[index]
+                            .ingredients;
 
 //            final String foodItemIngredients =    filteredItems[index].ingredients;
 //            final String foodItemId =             filteredItems[index].itemId;
 //            final bool foodIsHot =                filteredItems[index].isHot;
-                        final bool foodIsAvailable =          filteredItems[index].isAvailable;
-                        final String foodCategoryName =       filteredItems[index].categoryName;
+                        final bool foodIsAvailable = filteredItems[index]
+                            .isAvailable;
+                        final String foodCategoryName = filteredItems[index]
+                            .categoryName;
 
 //            final Map<String,dynamic> foodSizePrice = document['size'];
 
@@ -1118,13 +1188,14 @@ class FoodList extends StatelessWidget {
                         final dynamic euroPrice = foodSizePrice['normal'];
 
 //                num euroPrice2 = tryCast(euroPrice);
-                        double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.00);
+                        double euroPrice2 = tryCast<double>(
+                            euroPrice, fallback: 0.00);
 //                String euroPrice3= num.toString();
 //                print('euroPrice2 :$euroPrice2');
 
                         String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
-                        FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
+                        FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
 
                           itemName: foodItemName,
@@ -1144,8 +1215,8 @@ class FoodList extends StatelessWidget {
 
 //            logger.i('ingredients:',foodItemIngredientsList);
 
-                        String stringifiedFoodItemIngredients =listTitleCase(foodItemIngredientsList);
-
+                        String stringifiedFoodItemIngredients = listTitleCase(
+                            foodItemIngredientsList);
 
 
 //            print('document__________________________: ${document.data}');
@@ -1167,8 +1238,8 @@ class FoodList extends StatelessWidget {
                                     children: <Widget>[
                                       new Container(child:
                                       new Container(
-                                        width: displayWidth(context) /  7,
-                                        height: displayWidth(context) /7,
+                                        width: displayWidth(context) / 7,
+                                        height: displayWidth(context) / 7,
                                         decoration: new BoxDecoration(
                                           shape: BoxShape.circle,
                                           boxShadow: [
@@ -1177,7 +1248,7 @@ class FoodList extends StatelessWidget {
 //                                              color:Color(0xffEAB45E),
 // good yellow color
 //                                            color:Color(0xff000000),
-                                                color:Color(0xff707070),
+                                                color: Color(0xff707070),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                                 blurRadius: 30.0,
@@ -1186,21 +1257,26 @@ class FoodList extends StatelessWidget {
                                             )
                                           ],
                                         ),
-                                        child:Hero(
-                                          tag:foodItemName,
+                                        child: Hero(
+                                          tag: foodItemName,
                                           child:
                                           ClipOval(
                                             child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
                                               imageUrl: foodImageURL,
                                               fit: BoxFit.cover,
-                                              placeholder: (context, url) => new CircularProgressIndicator(),
+                                              placeholder: (context,
+                                                  url) => new CircularProgressIndicator(),
                                             ),
                                           ),
-                                          placeholderBuilder: (context,heroSize, child) {
-                                            return Opacity(opacity: 0.5, child:Container(
-                                              width: displayWidth(context) /  7,
-                                              height: displayWidth(context) /7,
+                                          placeholderBuilder: (context,
+                                              heroSize, child) {
+                                            return Opacity(
+                                              opacity: 0.5, child: Container(
+                                              width: displayWidth(context) /
+                                                  7,
+                                              height: displayWidth(context) /
+                                                  7,
                                               decoration: new BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 boxShadow: [
@@ -1209,7 +1285,8 @@ class FoodList extends StatelessWidget {
 //                                              color:Color(0xffEAB45E),
 // good yellow color
 //                                            color:Color(0xff000000),
-                                                      color:Color(0xffEAB45E),
+                                                      color: Color(
+                                                          0xffEAB45E),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                                       blurRadius: 30.0,
@@ -1219,12 +1296,14 @@ class FoodList extends StatelessWidget {
                                                 ],
                                               ),
                                               child:
-                                              ClipOval(child:CachedNetworkImage(
+                                              ClipOval(
+                                                child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                                imageUrl: foodImageURL,
-                                                fit: BoxFit.cover,
-                                                placeholder: (context, url) => new CircularProgressIndicator(),
-                                              ),
+                                                  imageUrl: foodImageURL,
+                                                  fit: BoxFit.cover,
+                                                  placeholder: (context,
+                                                      url) => new CircularProgressIndicator(),
+                                                ),
                                               ),
                                             ),
                                             );
@@ -1239,26 +1318,31 @@ class FoodList extends StatelessWidget {
 
                                       ),
 
-                                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 0, 0, 12),
                                       ),
 //                              SizedBox(height: 10),
 
 
-
                                       Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .center,
                                           children: <Widget>[
                                             Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                                              euroPrice3 +'\u20AC',
+                                              euroPrice3 + '\u20AC',
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.normal,
+                                                  fontWeight: FontWeight
+                                                      .normal,
 //                                          color: Colors.blue,
-                                                  color:Color.fromRGBO(112,112,112,1),
+                                                  color: Color.fromRGBO(
+                                                      112, 112, 112, 1),
                                                   fontSize: 20),
                                             ),
 //                                    SizedBox(width: 10),
-                                            SizedBox(width: displayWidth(context)/100),
+                                            SizedBox(
+                                                width: displayWidth(context) /
+                                                    100),
 
                                             Icon(
                                               Icons.whatshot,
@@ -1268,8 +1352,7 @@ class FoodList extends StatelessWidget {
                                           ]),
 
 
-
-                                      FittedBox(fit:BoxFit.fitWidth,child:
+                                      FittedBox(fit: BoxFit.fitWidth, child:
                                       Text(
 //                '${dummy.counter}',
                                         foodItemName,
@@ -1284,15 +1367,20 @@ class FoodList extends StatelessWidget {
                                       ),)
                                       ,
                                       Container(
-                                          height: displayHeight(context)/61,
+                                          height: displayHeight(context) / 61,
 
-                                          child:Text(
+                                          child: Text(
 //                                'stringifiedFoodItemIngredients',
 
 
-                                            stringifiedFoodItemIngredients.length==0?
-                                            'EMPTY':  stringifiedFoodItemIngredients.length>12?
-                                            stringifiedFoodItemIngredients.substring(0,12)+'...':
+                                            stringifiedFoodItemIngredients
+                                                .length == 0
+                                                ?
+                                            'EMPTY'
+                                                : stringifiedFoodItemIngredients
+                                                .length > 12 ?
+                                            stringifiedFoodItemIngredients
+                                                .substring(0, 12) + '...' :
                                             stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
@@ -1308,17 +1396,17 @@ class FoodList extends StatelessWidget {
                                     ],
                                   ),
                                   onTap: () {
-
-
                                     return Navigator.of(context).push(
 
 
                                       PageRouteBuilder(
                                         opaque: false,
-                                        transitionDuration: Duration(milliseconds: 900),
+                                        transitionDuration: Duration(
+                                            milliseconds: 900),
                                         pageBuilder: (_, __, ___) =>
                                             BlocProvider<FoodItemDetailsBloc>(
-                                              bloc: FoodItemDetailsBloc(oneFoodItem,testIngs),
+                                              bloc: FoodItemDetailsBloc(
+                                                  oneFoodItem ,allIngredients),
 
                                               child: FoodItemDetails2()
 
@@ -1337,7 +1425,6 @@ class FoodList extends StatelessWidget {
                                   */
                                       ),
                                     );
-
                                   }
 
                               )
@@ -1348,17 +1435,16 @@ class FoodList extends StatelessWidget {
                     ),
                   )
               );
-
           }
-
         }
-        else{
+        else {
           return Center(child:
           Text('No Data')
           );
         }
       },
     );
+
   }
 }
 
