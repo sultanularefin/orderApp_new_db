@@ -63,7 +63,9 @@ class FoodItemDetailsBloc implements Bloc {
 
   FoodItemWithDocIDViewModel get currentFoodItem => _thisFoodItem;
 
-
+//  _thisFoodItem =thisFoodpriceModified;
+//
+//  _controller.sink.add(thisFoodpriceModified);
 
   List<NewIngredient> _allIngItems=[];
 
@@ -105,6 +107,7 @@ class FoodItemDetailsBloc implements Bloc {
   final _allIngredientListController =  StreamController <List<NewIngredient>>();
 //  final _allIngredientListController = StreamController <List<NewIngredient>>();
 
+
   final _unSelectedIngredientListController   =  StreamController <List<NewIngredient>>();
   final _defaultIngredientListController      =  StreamController <List<NewIngredient>>();
 
@@ -115,6 +118,9 @@ class FoodItemDetailsBloc implements Bloc {
 
   Stream<FoodItemWithDocIDViewModel> get currentFoodItemsStream => _controller.stream;
   Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
+
+  Stream<List<NewIngredient>> get getUnSelectedIngredientItemsStream => _unSelectedIngredientListController.stream;
+  Stream<List<NewIngredient>> get getDefaultIngredientItemsStream => _defaultIngredientListController.stream;
 
 
   // Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream; // currentlyNotUsing.
@@ -432,6 +438,52 @@ class FoodItemDetailsBloc implements Bloc {
   }
 
   */
+
+
+
+
+  void incrementThisIngredientItem(NewIngredient unSelectedOneIngredient,int index){
+
+    print('reached here: incrementThisIngredientItem ');
+
+//                          NewIngredient c1 = oneUnselectedIngredient;
+
+
+    print('modified ingredientAmountByUser at begin: ${_unSelectedIngItems[index].
+    ingredientAmountByUser}');
+
+    NewIngredient c1 = new NewIngredient(
+        ingredientName: unSelectedOneIngredient
+            .ingredientName,
+        imageURL: unSelectedOneIngredient.imageURL,
+
+        price: unSelectedOneIngredient.price,
+        documentId: unSelectedOneIngredient.documentId,
+        ingredientAmountByUser: unSelectedOneIngredient
+            .ingredientAmountByUser + 1
+    );
+
+
+
+    List<NewIngredient> allUnselectedbutOneDecremented = _unSelectedIngItems;
+    print('_unSelectedIngItems.length: ${allUnselectedbutOneDecremented.length}');
+
+    allUnselectedbutOneDecremented[index] = c1;
+
+
+    _unSelectedIngItems= allUnselectedbutOneDecremented;
+    print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
+    print('modified ingredientAmountByUser at end: ${_unSelectedIngItems[index].
+    ingredientAmountByUser}');
+
+
+//   _thisFoodItem =thisFoodpriceModified;
+
+    _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+
+    //THIS LINE MIGHT NOT BE NECESSARY.
+  }
+
 
 
   void decrementThisIngredientItem(NewIngredient unSelectedOneIngredient,int index){

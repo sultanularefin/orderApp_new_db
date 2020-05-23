@@ -115,6 +115,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     List<NewIngredient> defaultIngredients = foodItemDetailsbloc.defaultIngredients;
     List<NewIngredient> unSelectedIngredients = foodItemDetailsbloc.unSelectedIngredients;
 
+
+
     logger.w('unSelectedIngredients in foodItemDetails2 line #116 : ',
         unSelectedIngredients);
 
@@ -127,6 +129,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       );
     }
     else {
+
+
       return Container(
 
           child: StreamBuilder<FoodItemWithDocIDViewModel>(
@@ -155,6 +159,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   initialPriceByQuantityANDSize = oneFood.itemPrice;
                   priceByQuantityANDSize = oneFood.itemPrice;
                   _currentSize = oneFood.itemSize;
+
+
+
+//                  print('oneFood.itemSize: ${oneFood.itemSize}');
 
 
 //        return(Container(
@@ -254,45 +262,61 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                     */
 
                                     //sssssss
-                                    child: GridView.builder(
-                                      itemCount: unSelectedIngredients
-                                          .length,
-                                      itemBuilder: (_, int index) {
-                                        return _buildOneSizeUNSelected
-                                          (
-                                            unSelectedIngredients[index],
-                                            index, unSelectedIngredients
-                                        );
-                                      },
-                                      gridDelegate:
+//                                    child: GridView.builder(
+                                    child:StreamBuilder(
+                                      stream: foodItemDetailsbloc.getUnSelectedIngredientItemsStream,
+                                      initialData: foodItemDetailsbloc.unSelectedIngredients,
+
+                                      builder: (context, snapshot) {
+                                        if (!snapshot.hasData) {
+                                          return Center(child: new LinearProgressIndicator());
+                                        }
+                                        else {
+
+                                          List<NewIngredient> unSelectedIngredients = snapshot.data;
+
+                                          return GridView.builder(
+                                            itemCount: unSelectedIngredients
+                                                .length,
+                                            itemBuilder: (_, int index) {
+                                              return _buildOneUNSelected
+                                                (
+                                                  unSelectedIngredients[index],
+                                                  index/*, unSelectedIngredients*/
+                                              );
+                                            },
+                                            gridDelegate:
 //                                            new SliverGridDelegateWithFixedCrossAxisCount(
 //                                              crossAxisCount: 3,
-                                      new SliverGridDelegateWithMaxCrossAxisExtent(
-                                        maxCrossAxisExtent: 260,
+                                            new SliverGridDelegateWithMaxCrossAxisExtent(
+                                              maxCrossAxisExtent: 260,
 
-                                        mainAxisSpacing: 8,
-                                        // H  direction
-                                        crossAxisSpacing: 0,
+                                              mainAxisSpacing: 8,
+                                              // H  direction
+                                              crossAxisSpacing: 0,
 
-                                        ///childAspectRatio:
-                                        /// The ratio of the cross-axis to the main-axis extent of each child.
-                                        /// H/V
-                                        childAspectRatio: 380 / 400,
+                                              ///childAspectRatio:
+                                              /// The ratio of the cross-axis to the main-axis extent of each child.
+                                              /// H/V
+                                              childAspectRatio: 380 / 400,
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
 //                                  /// H/V
-                                        // horizontal / vertical
+                                              // horizontal / vertical
 //                                              childAspectRatio: 280/360,
 
-                                      ),
+                                            ),
 
 
-                                      controller: new ScrollController(
-                                          keepScrollOffset: false),
+                                            controller: new ScrollController(
+                                                keepScrollOffset: false),
 
-                                      shrinkWrap: false,
+                                            shrinkWrap: false,
 
 
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
                                   duration: Duration(milliseconds: 1000),
@@ -818,10 +842,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       icon: Icon(Icons.add_circle_outline),
                       iconSize: 30,
 
-                      tooltip: 'Increase product count by 1',
+                      tooltip: 'Increase product count by 1 ',
                       onPressed: () {
                         print(
-                            'Add button pressed');
+                            'Add button pressed  related to _itemCount');
 //                        setState(() {
 //                          _itemCount =
 //                              _itemCount + 1;
@@ -897,7 +921,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       tooltip: 'Decrease product count by 1',
                       onPressed: () {
                         print(
-                            'Decrease button pressed');
+                            'Decrease button pressed related to _itemCount');
 //                        if (_itemCount > 1) {
 //                          setState(() {
 //                            _itemCount =
@@ -925,10 +949,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     );
   }
 
-  Widget _buildOneSizeUNSelected(NewIngredient unSelectedOneIngredient, int index
-      ,
-      List<NewIngredient> allUnSelected
+  Widget _buildOneUNSelected(NewIngredient unSelectedOneIngredient, int index
+      /*,
+      List<NewIngredient> allUnSelected */
       ) {
+
+//    print('index : $index');
 
 //    print('unSelectedOneIngredient: ${unSelectedOneIngredient.ingredientName}');
 //
@@ -1045,24 +1071,30 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 children: <Widget>[
 
 
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                    child:
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      iconSize: 30,
+
+                  IconButton(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 1),
+                    icon: Icon(Icons.add),
+                    iconSize: 30,
 
 //                      tooltip: 'Increase Ingredient count by 1',
-                      onPressed: () {
-                        print('Add button pressed');
+                    onPressed: () {
+
+
+                      print('Add button pressed in unselected Ing');
+
+
+                      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+                      foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
 
 
 //                      setState(() {
 //                        _ingredientlistUnSelected= allUnSelected;
 //                      });
-                      },
-                      color: Color(0xff707070),
-                    ),),
+                    },
+                    color: Color(0xff707070),
+                  ),
 
 
 
@@ -1079,19 +1111,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    child:
-                    IconButton(
-                      icon: Icon(Icons.remove),
-                      iconSize: 30,
+
+                  IconButton(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 1),
+                    icon: Icon(Icons.remove),
+                    iconSize: 30,
 
 //                      tooltip: 'Increase Ingredient count by 1',
-                      onPressed: () {
-                        print('Add button pressed');
-                        print('Decrease button pressed InkResponse');
+                    onPressed: () {
+                      print('Minus button pressed in unselected ing');
+                      print('Decrease button pressed InkResponse');
 
-                        if (currentAmount > 1) {
+                      if (currentAmount > 1) {
 //                      if(currentAmount>=2)
 //                      City c1 = new City()..name = 'Blum'..state = 'SC';
 
@@ -1112,11 +1143,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                           */
 
-                          final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+                        final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-                          foodItemDetailsbloc.decrementThisIngredientItem(unSelectedOneIngredient,index);
+                        foodItemDetailsbloc.decrementThisIngredientItem(unSelectedOneIngredient,index);
 
-                          /*
+                        /*
                           setState(() {
                             // _ingredientlistUnSelected = allUnSelected;
                           });
@@ -1126,10 +1157,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      setState(() {
 //                        _ingredientlistUnSelected= allUnSelected;
 //                      });
-                        }
-                      },
-                      color: Color(0xff707070),
-                    ),),
+                      }
+                      else{
+                        print('decrease button pressed '
+                            'but nothing will happen since it is less than 1');
+                      }
+                    },
+                    color: Color(0xff707070),
+                  ),
                 ],
 
               ),
