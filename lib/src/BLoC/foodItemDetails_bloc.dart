@@ -15,7 +15,6 @@ import 'package:foodgallery/src/DataLayer/itemData.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
 import 'package:foodgallery/src/DataLayer/newCategory.dart';
-//import './foodGallery_bloc.dart';
 //import 'package:zomatoblock/DataLayer/location.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
 
@@ -66,8 +65,7 @@ class FoodItemDetailsBloc implements Bloc {
 
 
 
-//  List<NewIngredient> _allIngItems=[];
-  List<NewIngredient> _allIngItems =[];
+  List<NewIngredient> _allIngItems=[];
 
   List<NewIngredient> _defaultIngItems = [];
   List<NewIngredient> _unSelectedIngItems = [];
@@ -93,7 +91,6 @@ class FoodItemDetailsBloc implements Bloc {
   // 1
 
   List<NewIngredient> get allIngredients => _allIngItems;
-//  List<NewIngredient> get allIngredients => _allIngItems;
 
   List<NewIngredient> get defaultIngredients => _defaultIngItems;
   List<NewIngredient> get unSelectedIngredients => _unSelectedIngItems;
@@ -173,19 +170,15 @@ class FoodItemDetailsBloc implements Bloc {
   }
 
   // CONSTRUCTOR BEGINS HERE.
-  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem,List<NewIngredient> allIngsScoped ) {
 
 
+  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped ) {
 //    getAllIngredients();
 
 //    List<NewIngredient> allIngsScoped= _allIngItems;
     print("at the begin of Constructor [FoodItemDetailsBloc]");
     print("oneFoodItem ===> ===> ===> $oneFoodItem");
     print("allIngsScoped ===> ===> ===> $allIngsScoped");
-
-
-
-
 
 //    _oneFoodItem = oneFoodItem;
 
@@ -583,7 +576,6 @@ class FoodItemDetailsBloc implements Bloc {
 //    print("allIngList: $allIngList");
 
     print("listStringIngredients2: $listStringIngredients2");
-    print("allIngList :$allIngList");
 
 
 

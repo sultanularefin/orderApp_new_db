@@ -180,7 +180,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails> {
       documentSnapshot.documentID
       ).toList();
 
-      print('documents are: $documents');
+
+      print('documents length in food Item Details page [Ingredient Documents ] : ${documents.length}');
+
+//      print('documents are: $documents');
 
 
       return ingItems;

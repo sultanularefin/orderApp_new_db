@@ -143,7 +143,8 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
     documentSnapshot.documentID
     ).toList();
 
-    print('documents are: $documents');
+    print('documents are [More_ingredients page] : ${documents.length}');
+//    print('documents are: $documents');
 
 
     return ingItems;
@@ -174,8 +175,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //      ).toList();
 
 
-      List<NewIngredient> unSelectedDecremented =
-      defaultMinus.map((oneIngredient)=>NewIngredient.updateIngredient(
+      List<NewIngredient> unSelectedDecremented =  defaultMinus.map((oneIngredient)=>NewIngredient.updateIngredient(
           oneIngredient
       )).toList();
 

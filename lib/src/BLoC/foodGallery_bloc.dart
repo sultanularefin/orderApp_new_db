@@ -75,6 +75,9 @@ class FoodGalleryBloc implements Bloc {
   Stream<List<NewCategoryItem>> get categoryItemsStream => _categoriesController.stream;
 
   Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
+
+
+
   // 3
   // CALLED LIKE THIS:
 
@@ -152,7 +155,7 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-  void getAllIngredients() async {
+  Future getAllIngredients() async {
 
 
     var snapshot = await _client.fetchAllIngredients();
@@ -172,7 +175,7 @@ class FoodGalleryBloc implements Bloc {
     documentSnapshot.documentID
     ).toList();
 
-    print('Ingredient documents are at Line# 175 in FoodGalleryBlock: $documents');
+    print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
     _allIngItems = ingItems;
@@ -202,7 +205,7 @@ class FoodGalleryBloc implements Bloc {
       storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
           +'?alt=media';
 
-      print('categoryImageURL: $categoryImageURL');
+//      print('categoryImageURL in food Gallery Bloc: $categoryImageURL');
 
       final num categoryRating = doc['rating'];
       final num totalCategoryRating = doc['total_rating'];
@@ -248,7 +251,7 @@ class FoodGalleryBloc implements Bloc {
     getAllFoodItems();
     getAllCategories();
 
-    getAllIngredients();
+//    getAllIngredients();
     // invoking this here to make the transition in details page faster.
 
 //    this.getAllFoodItems();

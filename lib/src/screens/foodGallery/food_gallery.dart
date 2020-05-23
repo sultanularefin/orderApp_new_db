@@ -229,7 +229,7 @@ class _FoodGalleryState extends State<FoodGallery> {
           storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
               +'?alt=media';
 
-          print('categoryImageURL: $categoryImageURL');
+//          print('categoryImageURL in food gallery Block: $categoryImageURL');
 
           final num categoryRating = doc['rating'];
           final num totalCategoryRating = doc['total_rating'];
