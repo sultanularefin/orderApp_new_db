@@ -24,6 +24,7 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailImage.dart';
 import './../../DataLayer/FoodItemWithDocID.dart';
 import './../../DataLayer/Order.dart';
+import 'package:foodgallery/src/DataLayer/FoodPropertyMultiSelect.dart';
 //import './../../DataLayer/itemData.dart';
 
 
@@ -70,6 +71,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   String _currentSize;
   int _itemCount= 1;
+
+
+
+
+
+
+//  color: Color(0xff34720D),
+//  VS 0xffFEE295 3 0xffFEE295 false
+//  ORG 0xff739DFA 4 0xff739DFA false
+
+
+
 
   @override
   void initState() {
@@ -531,6 +544,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //        mainAxisSize: MainAxisSize.min,
                                                   children: <Widget>[
                                                     //pppp
+
+                                                    Container(
+                                                      color:Colors.deepOrangeAccent,
+                                                      height: 40,
+                                                      width: displayWidth(context) * 0.57,
+                                                      child:  _buildMultiSelectOptions(),
+
+                                                    ),
                                                     Container(
                                                         child: _buildProductSizes(
                                                             context,
@@ -1182,6 +1203,47 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     );
   }
 
+ Widget _buildMultiSelectOptions(){
+//   height: 40,
+//   width: displayWidth(context) * 0.57,
+
+
+   final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+   return StreamBuilder(
+       stream: foodItemDetailsbloc.getMultiSelectStream,
+       initialData: foodItemDetailsbloc.getMultiSelectForFood,
+
+       builder: (context, snapshot) {
+         if (!snapshot.hasData) {
+           print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+           return Container(child: Text('Null'));
+         }
+         else {
+           List<FoodPropertyMultiSelect> foodItemPropertyOptions = snapshot.data;
+           return ListView.builder(
+             scrollDirection: Axis.horizontal,
+
+             reverse: true,
+
+             shrinkWrap: false,
+//        final String foodItemName =          filteredItems[index].itemName;
+//        final String foodImageURL =          filteredItems[index].imageURL;
+             itemCount: foodItemPropertyOptions.length,
+
+             itemBuilder: (_, int index) {
+               return oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
+                   index);
+             },
+           );
+         }
+       }
+
+     // M VSM ORG VS TODO. ENDS HERE.
+   );
+
+ }
 
   Widget _buildProductSizes(BuildContext context, Map<String,dynamic> allPrices) {
 
@@ -1198,7 +1260,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       return Container(
 //        alignment: Alignment.topCenter,
 //      width: 200,
-        height: displayHeight(context) / 5,
+        height: displayHeight(context) / 6,
 //      height: 400,
         color: Colors.white,
 
@@ -1215,180 +1277,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 // 1st container outsource below:
 
                   // 1st CONTAINER OF THE COLUMN LAYOUT HOLDS VSM ORG VS TODO. BEGINS HERE
-                  Container(
 
-
-                    //      color: Colors.yellowAccent,
-                    height: 40,
-                    width: displayWidth(context) * 0.57,
-
-                    // M VSM ORG VS TODO. BEGINS HERE.
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment
-                          .end,
-                      children: <Widget>[
-
-                        // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-
-                        Container(
-                          width:60,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child: OutlineButton(
-//                        color: Color(0xffFEE295),
-                            clipBehavior: Clip.hardEdge,
-                            splashColor: Color(0xffB47C00),
-                            highlightElevation: 12,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: Color(0xffB47C00),
-                                style: BorderStyle.solid,
-                                width: 1.6,
-                              ),
-                              borderRadius: BorderRadius.circular(35.0),
-                            ),
-
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'M'.toUpperCase(), style:
-                              TextStyle(
-                                  color: Color(0xffB47C00),
-
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                              ),
-                            ),
-                            onPressed: () {
-                              print('M pressed');
-                            },
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-
-                          ),
-                        ),
-
-                        Container(
-                          width:60,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child: OutlineButton(
-//                        color: Color(0xffFEE295),
-                            splashColor: Color(0xff34720D),
-                            highlightElevation: 12,
-                            clipBehavior: Clip.hardEdge,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: Color(0xff34720D),
-                                style: BorderStyle.solid,
-                              ),
-                              borderRadius: BorderRadius.circular(35.0),
-                            ),
-                            child: Container(
-
-                              alignment: Alignment.center,
-                              child: Text(
-                                'VSM'.toUpperCase(), style:
-                              TextStyle(
-                                  color: Color(0xff34720D),
-
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                              ),
-                            ),
-                            onPressed: () {
-                              print('VSM pressed');
-                            },
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-//                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          ),)
-                        ,
-                        Container(
-                          width:60,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child: OutlineButton(
-//                        color: Color(0xffFEE295),
-                            splashColor: Color(0xff95CB04),
-                            highlightElevation: 12,
-                            clipBehavior: Clip.hardEdge,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: Color(0xff95CB04),
-                                style: BorderStyle.solid,
-                              ),
-                              borderRadius: BorderRadius.circular(35.0),
-                            ),
-                            child: Container(
-
-                              alignment: Alignment.center,
-                              child: Text(
-                                'VS'.toUpperCase(), style:
-                              TextStyle(
-                                  color: Color(0xff95CB04),
-
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                              ),
-                            ),
-                            onPressed: () {
-                              print('VS pressed');
-                            },
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-//                            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          ),
-                        ),
-                        Container(
-                          width:60,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          child:
-                          OutlineButton(
-//                        color: Color(0xffFEE295),
-                            splashColor: Color(0xff739DFA),
-                            highlightElevation: 12,
-                            clipBehavior: Clip.hardEdge,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: Color(0xff739DFA),
-                                style: BorderStyle.solid,
-                              ),
-                              borderRadius: BorderRadius.circular(35.0),
-                            ),
-                            child: Container(
-
-                              alignment: Alignment.center,
-                              child: Text(
-                                'ORG'.toUpperCase(), style:
-                              TextStyle(
-                                  color: Color(0xff739DFA),
-
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                              ),
-                            ),
-                            onPressed: () {
-                              print('ORG pressed');
-                            },
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-
-                          ),
-                        )
-
-
-                        // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-                        // ENDED HERE.
-
-                        // BLACK CONTAINER WILL BE DELETED LATER.
-                        // BLACK CONTAINER.
-
-
-                      ],
-                    ),
-                    // M VSM ORG VS TODO. ENDS HERE.
-                  ),
-
-
-                  SizedBox(height: 20,),
+//                  SizedBox(height: 20,),
 //1st container.
                   Container(
 
@@ -1450,6 +1340,56 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
       );
     }
+  }
+
+
+  Widget oneMultiSelectInDetailsPage (FoodPropertyMultiSelect x,int index){
+
+
+    String color1 = x.itemTextColor.replaceAll('#', '0xff');
+
+     Color c1 = Color(int.parse(color1));
+
+
+     String itemName = x.itemName;
+
+    return
+      Container(
+        width:60,
+        alignment: Alignment.center,
+        margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+        child: OutlineButton(
+//                        color: Color(0xffFEE295),
+          clipBehavior: Clip.hardEdge,
+          splashColor: c1,
+          highlightElevation: 12,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: c1,
+              style: BorderStyle.solid,
+              width: 1.6,
+            ),
+            borderRadius: BorderRadius.circular(35.0),
+          ),
+
+          child: Container(
+            alignment: Alignment.center,
+            child: Text(
+              itemName.toUpperCase(), style:
+            TextStyle(
+                color: c1,
+
+                fontWeight: FontWeight.bold,
+                fontSize: 18),
+            ),
+          ),
+          onPressed: () {
+            print('$itemName pressed');
+          },
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+        ),
+      );
   }
 
   //now now

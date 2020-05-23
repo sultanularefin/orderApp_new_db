@@ -5,6 +5,7 @@
 //import 'package:zomatoblock/BLoC/location_query_bloc.dart';
 //
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:logger/logger.dart';
 
@@ -71,6 +72,7 @@ class FoodItemDetailsBloc implements Bloc {
 
   List<NewIngredient> _defaultIngItems = [];
   List<NewIngredient> _unSelectedIngItems = [];
+  List<FoodPropertyMultiSelect> _multiSelectForFood =[];
 
 
 //  List <NewIngredient> ingItems = new List<NewIngredient>();
@@ -98,6 +100,10 @@ class FoodItemDetailsBloc implements Bloc {
   List<NewIngredient> get unSelectedIngredients => _unSelectedIngItems;
 
 
+  List<FoodPropertyMultiSelect> get getMultiSelectForFood => _multiSelectForFood;
+
+
+
 
 
   final _controller = StreamController <FoodItemWithDocIDViewModel>();
@@ -111,6 +117,8 @@ class FoodItemDetailsBloc implements Bloc {
   final _unSelectedIngredientListController   =  StreamController <List<NewIngredient>>();
   final _defaultIngredientListController      =  StreamController <List<NewIngredient>>();
 
+  final _multiSelectForFoodController      =  StreamController <List<FoodPropertyMultiSelect>>();
+
 
 //  final _foodItemController = StreamController <List<FoodItemWithDocID>>();
 
@@ -121,6 +129,8 @@ class FoodItemDetailsBloc implements Bloc {
 
   Stream<List<NewIngredient>> get getUnSelectedIngredientItemsStream => _unSelectedIngredientListController.stream;
   Stream<List<NewIngredient>> get getDefaultIngredientItemsStream => _defaultIngredientListController.stream;
+
+  Stream<List<FoodPropertyMultiSelect>> get getMultiSelectStream => _multiSelectForFoodController.stream;
 
 
   // Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream; // currentlyNotUsing.
@@ -317,9 +327,66 @@ class FoodItemDetailsBloc implements Bloc {
 //      itemPrice: normalPriceCasted,
 //    );
 
+
+    /*
+    * INITIATE MULTISELECT FOODiTEM OPTIONS*/
+
+
     _thisFoodItem = thisFood; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
+
+    initiateAllMultiSelectOptions();
+
     _controller.sink.add(thisFood);
+  }
+
+//  List<FoodPropertyMultiSelect> initiateAllMultiSelectOptions()
+  void initiateAllMultiSelectOptions()
+  {
+
+    FoodPropertyMultiSelect _m = new FoodPropertyMultiSelect(
+      borderColor: '0xffB47C00',
+      index: 1,
+      isSelected: false,
+      itemName: 'M',
+      itemTextColor: '0xffB47C00',
+    );
+
+//     0xffFEE295 false
+    FoodPropertyMultiSelect _vsm = new FoodPropertyMultiSelect(
+      borderColor: '0xffFEE295',
+      index: 2,
+      isSelected: false,
+      itemName: 'VSM',
+      itemTextColor: '0xffFEE295',
+    );
+
+    FoodPropertyMultiSelect _vs = new FoodPropertyMultiSelect(
+      borderColor: '0xff95CB04',
+      index: 3,
+      isSelected: false,
+      itemName: 'VS',
+      itemTextColor: '0xff95CB04',
+    );
+
+    FoodPropertyMultiSelect _org = new FoodPropertyMultiSelect(
+      borderColor: '0xff739DFA',
+      index: 4,
+      isSelected: false,
+      itemName: 'ORG',
+      itemTextColor: '0xff739DFA',
+    );
+    List <FoodPropertyMultiSelect> multiSelectArray = new List<FoodPropertyMultiSelect>();
+
+    multiSelectArray.addAll([_m,_vsm, _vs,_org]);
+
+    _multiSelectForFood = multiSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+
+
+//    initiateAllMultiSelectOptions();
+
+    _multiSelectForFoodController.sink.add(_multiSelectForFood);
+
   }
 
   // CONSTRUCTOR ENDS HERE.
@@ -504,7 +571,7 @@ class FoodItemDetailsBloc implements Bloc {
     _defaultIngredientListController.sink.add(_defaultIngItems);
 
 
-      //  NOW ADD PART BEGINS HERE
+    //  NOW ADD PART BEGINS HERE
 
     List<NewIngredient> allUnSelectedIngredientItems = _unSelectedIngItems;
 
@@ -816,7 +883,6 @@ class FoodItemDetailsBloc implements Bloc {
     _allIngredientListController.close();
     _defaultIngredientListController.close();
     _unSelectedIngredientListController.close();
-
-
+    _multiSelectForFoodController.close();
   }
 }
