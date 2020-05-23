@@ -112,7 +112,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //    logger.w('defaultIngredients: ',bloc.defaultIngredients);
 
-    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.defaultIngredients;
+//    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
     List<NewIngredient> unSelectedIngredients = foodItemDetailsbloc.unSelectedIngredients;
 
 
@@ -539,9 +539,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                                  Text('ss'),
                                                     Container(
+                                                        height: displayHeight(context) / 8,
+                                                        width: displayWidth(context) * 0.57,
+
+                                                        color: Color(0xfffebaca),
+                                                        alignment: Alignment.center,
                                                         child: buildDefaultIngredients(
-                                                            context,
-                                                            defaultIngredients)
+                                                            context
+                                                        )
                                                     ),
 
                                                     // NEWANIMATEDPOSITIONED HERE BEGINS =><=
@@ -1447,56 +1452,92 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     }
   }
 
-  Widget buildDefaultIngredients(BuildContext context,List<NewIngredient> defaltIngs){
+  //now now
+  /* DEAFULT INGREDIENT ITEMS BUILD STARTS HERE.*/
+  Widget buildDefaultIngredients(BuildContext context /*,List<NewIngredient> defaltIngs*/){
 
 
-    logger.w("DefaultIngs",defaltIngs);
-    print("DefaultIngs: $defaltIngs");
+//    defaultIngredients
+    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-    print('defaltIngs.length LINE# 600: ${defaltIngs.length}');
+    return StreamBuilder(
+        stream: foodItemDetailsbloc.getDefaultIngredientItemsStream,
+        initialData: foodItemDetailsbloc.getDefaultIngredients,
 
-    if( (defaltIngs.length==1)&& (defaltIngs[0].ingredientName.toLowerCase()=='none')){
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
 
-      return Container(
-          height: displayHeight(context) / 8,
-//          height:190,
-          width: displayWidth(context) * 0.57,
-//              color: Colors.yellowAccent,
-//                    color: Color(0xff54463E),
-          color: Color(0xfffebaca),
-          alignment: Alignment.center,
-
-          // PPPPP
-
-          child:(
+            print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+            return
               Text("No Ingredients, Please Select 1 or more",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.lightGreenAccent,
                 ),
-              )
-          )
-      );
-    }
 
 
-    else {
-      return Container(
-//          height: 190,
-          height: displayHeight(context) / 8,
-          width: displayWidth(context) * 0.57,
+              );
+          }
+
+          else {
+
+            print('snapshot.hasData and else statement');
+            List<NewIngredient> selectedIngredients = snapshot.data;
+
+            if( (selectedIngredients.length ==1)&&
+                (selectedIngredients[0].ingredientName.toLowerCase()=='none')){
+
+              return Container(
+                  height: displayHeight(context) / 8,
+//          height:190,
+                  width: displayWidth(context) * 0.57,
 //              color: Colors.yellowAccent,
 //                    color: Color(0xff54463E),
-          color: Color(0xfffebaca),
+                  color: Color(0xfffebaca),
+                  alignment: Alignment.center,
 
+                  // PPPPP
 
-          // PPPPP
+                  child:(
+                      Text("No Ingredients, Please Select 1 or more",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.lightGreenAccent,
+                        ),
+                      )
+                  )
+              );
+            }
+            else if(selectedIngredients.length==0){
+              return Container(
+                  height: displayHeight(context) / 8,
+//          height:190,
+                  width: displayWidth(context) * 0.57,
+//              color: Colors.yellowAccent,
+//                    color: Color(0xff54463E),
+                  color: Color(0xfffebaca),
+                  alignment: Alignment.center,
 
-          child: (
+                  // PPPPP
 
-              GridView.builder(
-                itemCount: defaltIngs.length,
+                  child:(
+                      Text("No Ingredients, Please Select 1 or more",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.lightGreenAccent,
+                        ),
+                      )
+                  )
+              );
+            }
+            else{
+
+              return GridView.builder(
+
 
                 gridDelegate:
                 new SliverGridDelegateWithMaxCrossAxisExtent(
@@ -1511,96 +1552,154 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 shrinkWrap: false,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
+                itemCount: selectedIngredients
+                    .length,
                 itemBuilder: (_, int index) {
-                  final String ingredientName = defaltIngs[index]
-                      .ingredientName;
+                  return oneDefaultIngredient(selectedIngredients[index],
+                      index);
+                },
+              );
+            }
+          }
+        }
+    );
+  }
+
+
+
+  Widget oneDefaultIngredient(NewIngredient oneSelected,int index){
+    final String ingredientName = oneSelected.ingredientName;
 //                  final dynamic ingredientImageURL = document['image'];
 //    final num ingredientPrice = document['price'];
 
-                  final dynamic ingredientImageURL = defaltIngs[index]
-                      .imageURL == '' ?
-                  'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
-                      :
-                  storageBucketURLPredicate +
-                      Uri.encodeComponent(defaltIngs[index].imageURL)
+    final dynamic ingredientImageURL = oneSelected.imageURL == '' ?
+    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
+        :
+    storageBucketURLPredicate +
+        Uri.encodeComponent(oneSelected.imageURL)
 
-                      + '?alt=media';
+        + '?alt=media';
 
 
-                  return
-                    Container(
-                      color: Color.fromRGBO(239, 239, 239, 0),
-                      padding: EdgeInsets.symmetric(
+    print('ingredientImageUR L   L    L   L: $ingredientImageURL');
+
+    return Container(
+//          height: 190,
+      height: displayHeight(context) / 8,
+      width: displayWidth(context) * 0.57,
+//              color: Colors.yellowAccent,
+//                    color: Color(0xff54463E),
+      color: Color(0xfffebaca),
+
+
+      // PPPPP
+
+      child: (
+          Container(
+            color: Color.fromRGBO(239, 239, 239, 0),
+            padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-                          horizontal: 4.0, vertical: 15.0),
-                      child: GestureDetector(
-                          onLongPress: () {
-                            print(
-                                'at Long Press: ');
-                          },
+                horizontal: 4.0, vertical: 15.0),
+            child: GestureDetector(
+                onLongPress: () {
+                  print(
+                      'at Long Press: ');
+                },
+                onLongPressUp: (){
 
-                          child: Column(
-                            children: <Widget>[
+                  print(
+                      'at Long Press UP: ');
 
-                              new Container(
+                  final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+                  foodItemDetailsbloc.removeThisDefaultIngredientItem(oneSelected,index);
+//              final locationBloc = BlocProvider.of<>(context);
+//                            foodItemDetailsbloc.decrementThisIngredientItem(unSelectedOneIngredient,index);
+
+                  /*
+                            logger.i('test.length',ingredientStringsForWhereInClause.length);
+                            print('at Long Press UP');
+                            ingredientStringsForWhereInClause.removeAt(index);
+                            logger.i('test.length after removing: ',
+                                ingredientStringsForWhereInClause.length);
+                            defaultIngredientListForFood.removeAt(index);
+                            Order initialOrder = new Order(
+                              foodItemName: oneFoodItemandId.itemName,
+                              foodItemImageURL:oneFoodItemandId.imageURL,
+                              unitPrice:initialPriceByQuantityANDSize,
+                              foodDocumentId:oneFoodItemandId.documentId,
+                              quantity:_itemCount,
+                              foodItemSize:_currentSize,
+//                                                                    foodItemOrderID:,
+                              ingredients:defaultIngredientListForFood,
+                            );
+
+                            */
+
+
+//                                                                  TO DO UPDATE WITH setState(() ) call the current
+//                                                                Order
+//                            setState(() {
+//                              oneOrder= initialOrder;
+//                            });
+                },
+
+                child: Column(
+                  children: <Widget>[
+
+                    new Container(
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                                width: displayWidth(context) /10,
-                                height: displayWidth(context) /9,
-                                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
+                      width: displayWidth(context) /10,
+                      height: displayWidth(context) /9,
+                      padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
 
-                                child: ClipOval(
+                      child: ClipOval(
 
-                                  child: CachedNetworkImage(
-                                    imageUrl: ingredientImageURL,
-                                    fit: BoxFit.cover,
-                                    placeholder: (context,
-                                        url) => new LinearProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        Image.network(
-                                            'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+                        child: CachedNetworkImage(
+                          imageUrl: ingredientImageURL,
+                          fit: BoxFit.cover,
+                          placeholder: (context,
+                              url) => new LinearProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Image.network(
+                                  'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
 //
-                                  ),
-                                ),
-                              ),
+                        ),
+                      ),
+                    ),
 //                              SizedBox(height: 10),
-                              Text(
+                    Text(
 
-                                ingredientName,
+                      ingredientName,
 
-                                style: TextStyle(
-                                  color: Color.fromRGBO(112, 112, 112, 1),
+                      style: TextStyle(
+                        color: Color.fromRGBO(112, 112, 112, 1),
 //                                    color: Colors.blueGrey[800],
 
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 18,
-                                ),
-                              )
-                              ,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 18,
+                      ),
+                    )
+                    ,
 
 
-                            ],
-                          ),
-                          onTap: () {
-                            print('for future use');
+                  ],
+                ),
+                onTap: () {
+                  print('for future use');
 //                            return Navigator.push(context,
 //
 //                                MaterialPageRoute(builder: (context)
 //                                => FoodItemDetails())
 //                            );
-                          }
-                      ),
-                    );
-                },
-
-              ))
-        // PPPPP
-
-      );
-    }
+                }
+            ),
+          )
+      ),
+    );
   }
-
   /*
   Widget build2(BuildContext context) {
 

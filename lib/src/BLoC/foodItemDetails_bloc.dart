@@ -94,7 +94,7 @@ class FoodItemDetailsBloc implements Bloc {
 
   List<NewIngredient> get allIngredients => _allIngItems;
 
-  List<NewIngredient> get defaultIngredients => _defaultIngItems;
+  List<NewIngredient> get getDefaultIngredients => _defaultIngItems;
   List<NewIngredient> get unSelectedIngredients => _unSelectedIngItems;
 
 
@@ -484,6 +484,38 @@ class FoodItemDetailsBloc implements Bloc {
     //THIS LINE MIGHT NOT BE NECESSARY.
   }
 
+
+  void removeThisDefaultIngredientItem(NewIngredient unSelectedOneIngredient,int index){
+    print('reached here ==> : <==  remove This Default Ingredient Item ');
+
+    List<NewIngredient> allDefaultIngredientItems = _defaultIngItems;
+
+    NewIngredient temp =  allDefaultIngredientItems[index];
+
+    allDefaultIngredientItems.removeAt(index);
+
+//    _unSelectedIngItems.add(_defaultIngItems[index]);
+
+//    allUnselectedbutOneDecremented[index] = c1;
+    _defaultIngItems= allDefaultIngredientItems;
+//    _unSelectedIngItems= allUnselectedbutOneDecremented;
+//   _thisFoodItem =thisFoodpriceModified;
+
+    _defaultIngredientListController.sink.add(_defaultIngItems);
+
+
+      //  NOW ADD PART BEGINS HERE
+
+    List<NewIngredient> allUnSelectedIngredientItems = _unSelectedIngItems;
+
+    allUnSelectedIngredientItems.add(temp);
+
+
+    _unSelectedIngItems  = allUnSelectedIngredientItems;
+    _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+
+
+  }
 
 
   void decrementThisIngredientItem(NewIngredient unSelectedOneIngredient,int index){
