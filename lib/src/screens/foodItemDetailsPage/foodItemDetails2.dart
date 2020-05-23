@@ -105,15 +105,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   double addedHeight =0.0;
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 //    print('totalCartPrice -----------> : $totalCartPrice');
 //    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
 
 //    logger.w('defaultIngredients: ',bloc.defaultIngredients);
 
-    List<NewIngredient> defaultIngredients = bloc.defaultIngredients;
-    List<NewIngredient> unSelectedIngredients = bloc.unSelectedIngredients;
+    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.defaultIngredients;
+    List<NewIngredient> unSelectedIngredients = foodItemDetailsbloc.unSelectedIngredients;
 
     logger.w('unSelectedIngredients in foodItemDetails2 line #116 : ',
         unSelectedIngredients);
@@ -132,8 +132,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           child: StreamBuilder<FoodItemWithDocIDViewModel>(
 
 
-              stream: bloc.currentFoodItemsStream,
-              initialData: bloc.currentFoodItem,
+              stream: foodItemDetailsbloc.currentFoodItemsStream,
+              initialData: foodItemDetailsbloc.currentFoodItem,
 
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -925,7 +925,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     );
   }
 
-  Widget _buildOneSizeUNSelected(NewIngredient unSelectedOneIngredient, int index, List<NewIngredient> allUnSelected
+  Widget _buildOneSizeUNSelected(NewIngredient unSelectedOneIngredient, int index
+      ,
+      List<NewIngredient> allUnSelected
       ) {
 
 //    print('unSelectedOneIngredient: ${unSelectedOneIngredient.ingredientName}');
@@ -1088,34 +1090,43 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       onPressed: () {
                         print('Add button pressed');
                         print('Decrease button pressed InkResponse');
-                        /*
-                      if (currentAmount > 1) {
+
+                        if (currentAmount > 1) {
 //                      if(currentAmount>=2)
 //                      City c1 = new City()..name = 'Blum'..state = 'SC';
 
-                        NewIngredient c1 = new NewIngredient(
-                            ingredientName: unSelectedOneIngredient
-                                .ingredientName,
-                            imageURL: unSelectedOneIngredient.imageURL,
+                        /*
+                          NewIngredient c1 = new NewIngredient(
+                              ingredientName: unSelectedOneIngredient
+                                  .ingredientName,
+                              imageURL: unSelectedOneIngredient.imageURL,
 
-                            price: unSelectedOneIngredient.price,
-                            documentId: unSelectedOneIngredient.documentId,
-                            ingredientAmountByUser: unSelectedOneIngredient
-                                .ingredientAmountByUser - 1
-                        );
+                              price: unSelectedOneIngredient.price,
+                              documentId: unSelectedOneIngredient.documentId,
+                              ingredientAmountByUser: unSelectedOneIngredient
+                                  .ingredientAmountByUser - 1
+                          );
 
 
+                          allUnSelected[index] = c1;
 
-                        allUnSelected[index] = c1;
+                          */
 
-                        setState(() {
-                         // _ingredientlistUnSelected = allUnSelected;
-                        });
-                      */
+                          final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+                          foodItemDetailsbloc.decrementThisIngredientItem(unSelectedOneIngredient,index);
+
+                          /*
+                          setState(() {
+                            // _ingredientlistUnSelected = allUnSelected;
+                          });
+                          */
+
 
 //                      setState(() {
 //                        _ingredientlistUnSelected= allUnSelected;
 //                      });
+                        }
                       },
                       color: Color(0xff707070),
                     ),),

@@ -433,6 +433,43 @@ class FoodItemDetailsBloc implements Bloc {
 
   */
 
+
+  void decrementThisIngredientItem(NewIngredient unSelectedOneIngredient,int index){
+
+    print('reached here: decrementThisIngredientItem ');
+
+//                          NewIngredient c1 = oneUnselectedIngredient;
+
+
+    NewIngredient c1 = new NewIngredient(
+        ingredientName: unSelectedOneIngredient
+            .ingredientName,
+        imageURL: unSelectedOneIngredient.imageURL,
+
+        price: unSelectedOneIngredient.price,
+        documentId: unSelectedOneIngredient.documentId,
+        ingredientAmountByUser: unSelectedOneIngredient
+            .ingredientAmountByUser - 1
+    );
+
+
+
+
+
+    List<NewIngredient> allUnselectedbutOneDecremented = _unSelectedIngItems;
+    allUnselectedbutOneDecremented[index] = c1;
+
+    _unSelectedIngItems= allUnselectedbutOneDecremented;
+//   _thisFoodItem =thisFoodpriceModified;
+
+    _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+
+    //THIS LINE MIGHT NOT BE NECESSARY.
+
+
+  }
+
+
   void setNewSizePlusPrice(String sizeKey) {
     final Map<String,dynamic> foodSizePrice = _thisFoodItem.sizedFoodPrices;
 
@@ -458,14 +495,7 @@ class FoodItemDetailsBloc implements Bloc {
 
     _controller.sink.add(thisFoodpriceModified);
 
-//  _thisFoodItem.itemSize =sizeKey;
-//  _thisFoodItem.itemPrice= changedPriceDouble;
 
-//  _controller.sink.add(_thisFoodItem);
-
-//  _currentSize[SizeKey]=changedPrice;
-
-//  _itemSizeController.sink.add(_currentSize);
 
   }
 
@@ -565,7 +595,7 @@ class FoodItemDetailsBloc implements Bloc {
 //    searchString2.toLowerCase())).toList();
   }
 
-  // helper method 04
+  // helper method 04 filterSelectedDefaultIngredients
   filterSelectedDefaultIngredients(List<NewIngredient> allIngList , List<String> listStringIngredients2) {
 // foox
 
@@ -584,7 +614,7 @@ class FoodItemDetailsBloc implements Bloc {
     listStringIngredients2.forEach((stringIngredient) {
       NewIngredient elementExists = allIngList.where(
               (oneItem) => oneItem.ingredientName.trim().toLowerCase()
-                  == stringIngredient.trim().toLowerCase()).first;
+              == stringIngredient.trim().toLowerCase()).first;
 
       print('elementExists: $elementExists');
       // WITHOUT THE ABOVE PRINT STATEMENT SOME TIMES THE APPLICATION CRUSHES.
@@ -602,14 +632,16 @@ class FoodItemDetailsBloc implements Bloc {
 
   }
 
+  // #### helper method 05 filterUnSelectedIngredients
+  //
   filterUnSelectedIngredients (
       List<NewIngredient> allIngList , List<String> listStringIngredients2
       ) {
 // foox
-  
+
     logger.w("at filterUnSelectedIngredients ","filterUnSelectedIngredients");
     print("at allIngList ${allIngList.length}");
-    
+
 //    print("allIngList: $allIngList");
 
     print("listStringIngredients2: ${listStringIngredients2.length}");
@@ -621,37 +653,37 @@ class FoodItemDetailsBloc implements Bloc {
 //
 //      print('ingredient in foreach loop $stringIngredient');
 
-      List<NewIngredient> unSelectedIngredientsFiltered = allIngList.where(
-              (oneItem) => oneItem.ingredientName.trim().toLowerCase() !=
-              checkThisIngredientInDefatultStringIngredient(
-                  oneItem,listStringIngredients2
-              )
-      ).toList();
+    List<NewIngredient> unSelectedIngredientsFiltered = allIngList.where(
+            (oneItem) => oneItem.ingredientName.trim().toLowerCase() !=
+            checkThisIngredientInDefatultStringIngredient(
+                oneItem,listStringIngredients2
+            )
+    ).toList();
 //      print('elementUNSelected: $elementUNSelected');
 
 
     List<NewIngredient> unSelectedDecremented =
     unSelectedIngredientsFiltered.map((oneIngredient)=>
         NewIngredient.updateIngredient(
-        oneIngredient
-    )).toList();
+            oneIngredient
+        )).toList();
 
-      print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented.length}');
+    print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented.length}');
 
 
 //      Set<NewIngredient> unSelectedIngredientsFilteredSet = unSelectedIngredientsFiltered.toSet();
 //
 //      elementUNSelected.addAll(unSelectedIngredientsFilteredSet);
-    
-    
-    
+
+
+
 
 
 //        print('unSelectedIngredientsFiltered: $unSelectedIngredientsFiltered');
 //        elementUNSelected =  unSelectedIngredientsFiltered;
 
 //
-    
+
 
 //    List<NewIngredient> convertSetToList = elementUNSelected.toList();
 
@@ -666,7 +698,9 @@ class FoodItemDetailsBloc implements Bloc {
   }
 
 
-  
+
+  // HELPER METHOD 06 checkThisIngredientInDefatultStringIngredient
+
   String checkThisIngredientInDefatultStringIngredient(NewIngredient x, List<String> ingredientsString) {
 
     print('ingredientsString: $ingredientsString');
