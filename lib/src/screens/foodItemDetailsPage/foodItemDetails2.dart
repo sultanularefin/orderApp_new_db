@@ -7,8 +7,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
 import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
+import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -71,6 +73,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   String _currentSize;
   int _itemCount= 1;
+  double initialPriceByQuantityANDSize = 0.0;
 
 
 
@@ -165,7 +168,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   final Map<String, dynamic> foodSizePrice = oneFood
                       .sizedFoodPrices;
 
-                  double initialPriceByQuantityANDSize = 0.0;
+
                   double priceByQuantityANDSize = 0.0;
                   //            initialPriceByQuantityANDSize = oneFood.itemSize;
 
@@ -902,62 +905,168 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                     Container(
-                        child:Stack(
 
-                            children: <Widget>[
+                        child:FlatButton(
+                          onPressed: () {
 
-
-                              Container(
-                                child:
-                                ///SSWW
+                            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 
 
-                                IconButton(
-                                  iconSize: 40,
-                                  icon:Icon(Icons.add_shopping_cart),
-                                  color: Color(0xff707070),
-                                  tooltip: 'Decrease product count by 1',
-                                  onPressed: () {
-                                    print(
-                                        'add_shopping_cart button pressed');
+//              final locationBloc = BlocProvider.of<>(context);
+//                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
 
-                                  },
-                                ),
+                            Order x = new Order(
+                              foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
+                              foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
+                              unitPrice:initialPriceByQuantityANDSize ,
+                              foodDocumentId: foodItemDetailsbloc.currentFoodItem.documentId,
+                              quantity: _itemCount,
+                              foodItemSize: _currentSize,
+                              ingredients: foodItemDetailsbloc.getDefaultIngredients,
+                            );
+                            print(
+
+                                'add_shopping_cart button pressed');
+
+                            return Navigator.of(context).push(
+
+
+                              PageRouteBuilder(
+                                opaque: false,
+                                transitionDuration: Duration(
+                                    milliseconds: 900),
+                                pageBuilder: (_, __, ___) =>
+                                    BlocProvider<ShoppingCartBloc>(
+                                      bloc: ShoppingCartBloc(
+                                          x),
+
+
+                                      child: ShoppingCart()
+
+                                      ,),
+                                // fUTURE USE -- ANIMATION TRANSITION CODE.
+                                /*
+                                    transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
+                                      return FadeTransition(
+                                        opacity: animation,
+                                        child: RotationTransition(
+                                          turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+                                          child: child,
+                                        ),
+                                      );
+                                    }
+                                    */
                               ),
+                            );
 
-                              Container(
+                          },
+                          child: Stack(
 
-                                width:  35.0,
-                                height: 35.0,
-                                decoration: new BoxDecoration(
-                                  color: Colors.red,
-                                  border: new Border.all(
-                                      color: Colors.green,
-                                      width: 1.0,
-                                      style: BorderStyle.solid
+                              children: <Widget>[
+
+
+                                Container(
+                                  child:
+                                  ///SSWW
+
+
+
+                                  IconButton(
+                                    iconSize: 40,
+                                    icon:Icon(Icons.add_shopping_cart),
+                                    color: Color(0xff707070),
+                                    tooltip: 'over shopping Cart Icon Button',
+                                    onPressed: () {
+
+                                      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+
+
+//              final locationBloc = BlocProvider.of<>(context);
+//                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
+
+                                      Order x = new Order(
+                                        foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
+                                        foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
+                                        unitPrice:initialPriceByQuantityANDSize ,
+                                        foodDocumentId: foodItemDetailsbloc.currentFoodItem.documentId,
+                                        quantity: _itemCount,
+                                        foodItemSize: _currentSize,
+                                        ingredients: foodItemDetailsbloc.getDefaultIngredients,
+                                      );
+                                      print(
+
+                                          'add_shopping_cart button pressed');
+
+                                      return Navigator.of(context).push(
+
+
+                                        PageRouteBuilder(
+                                          opaque: false,
+                                          transitionDuration: Duration(
+                                              milliseconds: 900),
+                                          pageBuilder: (_, __, ___) =>
+                                              BlocProvider<ShoppingCartBloc>(
+                                                bloc: ShoppingCartBloc(
+                                                    x),
+
+
+                                                child: ShoppingCart()
+
+                                                ,),
+                                          // fUTURE USE -- ANIMATION TRANSITION CODE.
+                                          /*
+                                    transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
+                                      return FadeTransition(
+                                        opacity: animation,
+                                        child: RotationTransition(
+                                          turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+                                          child: child,
+                                        ),
+                                      );
+                                    }
+                                    */
+                                        ),
+                                      );
+
+                                    },
                                   ),
-                                  shape: BoxShape.circle,
+                                ),
+
+                                Container(
+
+                                  width:  35.0,
+                                  height: 35.0,
+                                  decoration: new BoxDecoration(
+                                    color: Colors.red,
+                                    border: new Border.all(
+                                        color: Colors.green,
+                                        width: 1.0,
+                                        style: BorderStyle.solid
+                                    ),
+                                    shape: BoxShape.circle,
+
+                                  ),
+
+                                  alignment: Alignment.center,
+                                  child:   Text(
+                                    _itemCount.toString(),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight
+                                          .normal,
+                                      fontSize: 20,
+                                    ),
+                                  ),
 
                                 ),
 
-                                alignment: Alignment.center,
-                                child:   Text(
-                                  _itemCount.toString(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight
-                                        .normal,
-                                    fontSize: 20,
-                                  ),
-                                ),
-
-                              ),
 
 
 
-
-                            ]
+                              ]
+                          ),
                         )
                     ),
 

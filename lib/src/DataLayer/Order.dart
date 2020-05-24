@@ -41,8 +41,9 @@ class Order {
         this.foodDocumentId,
         this.quantity,
         this.foodItemSize,
-       // this.foodItemOrderID,
         this.ingredients,
+
+        // this.foodItemOrderID,
       }
   );
 

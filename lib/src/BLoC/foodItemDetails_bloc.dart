@@ -10,12 +10,12 @@ import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:logger/logger.dart';
 
 //MODELS
-import 'package:foodgallery/src/DataLayer/itemData.dart';
+//import 'package:foodgallery/src/DataLayer/itemData.dart';
 //    import 'package:foodgallery/src/DataLayer/FoodItem.dart';
 
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
-import 'package:foodgallery/src/DataLayer/newCategory.dart';
+//import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
+//import 'package:foodgallery/src/DataLayer/newCategory.dart';
 //import 'package:zomatoblock/DataLayer/location.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
 
