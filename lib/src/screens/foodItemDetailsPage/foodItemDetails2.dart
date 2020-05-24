@@ -546,8 +546,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                     //pppp
 
                                                     Container(
-                                                      color:Colors.deepOrangeAccent,
-                                                      height: 40,
+                                                      padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                                      padding::::
+                                                      color:Colors.white,
+                                                      height: 50,
                                                       width: displayWidth(context) * 0.57,
                                                       child:  _buildMultiSelectOptions(),
 
@@ -560,11 +562,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                                  Text('ss'),
                                                     Container(
-                                                        height: displayHeight(context) / 8,
+                                                        height: displayHeight(context) / 9,
                                                         width: displayWidth(context) * 0.57,
 
                                                         color: Color(0xfffebaca),
-                                                        alignment: Alignment.center,
+//                                                        alignment: Alignment.center,
                                                         child: buildDefaultIngredients(
                                                             context
                                                         )
@@ -722,16 +724,29 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //
 
             logger.i('addedHeight: ',addedHeight);
+            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+            foodItemDetailsbloc.updateDefaultIngredientItems(/*oneSelected,index*/);
             if( addedHeight == 0.0 ){
               setState(() {
                 addedHeight = /* displayHeight(context)/10*/
                 30.0;
                 showUnSelectedIngredients = !showUnSelectedIngredients ;
                 showPressWhenFinishButton = !showPressWhenFinishButton;
+
+
+
+
+
+//                ::::A
 //                          myAnimatedWidget1 = myAnimatedWidget2;
 
               });
             }else{
+
+              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+              foodItemDetailsbloc.updateDefaultIngredientItems(/*oneSelected,index*/);
+
+
               setState(() {
                 addedHeight= 0.0;
                 showUnSelectedIngredients = !showUnSelectedIngredients;
@@ -1264,16 +1279,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //      height: 400,
         color: Colors.white,
 
-        child: Column(
-//        mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
+        child:
 
             Container(
                 color: Color(0xffFFFFFF),
 //                                  color:Color(0xffDAD7C3),
+
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+
                 width: displayWidth(context) * 0.57,
-                child: Column(children: <Widget>[
+                child:
 // 1st container outsource below:
 
                   // 1st CONTAINER OF THE COLUMN LAYOUT HOLDS VSM ORG VS TODO. BEGINS HERE
@@ -1325,18 +1341,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         shrinkWrap: true,
                       )
                   ),
-                ],)
+
 
             ),
 
 
             // Todo DefaultItemsStreamBuilder
 
-
-
-
-          ],
-        ),
 
       );
     }
@@ -1350,27 +1361,83 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
      Color c1 = Color(int.parse(color1));
 
-
      String itemName = x.itemName;
 
-    return
+
+    return Container(
+
+//      height:displayHeight(context)/30,
+//      width:displayWidth(context)/10,
+
+      child:  x.isSelected == true  ?
       Container(
-        width:60,
+        width:70,
         alignment: Alignment.center,
-        margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        child:
+        RaisedButton(
+          color: c1,
+
+          elevation: 2.5,
+          shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+            side: BorderSide(
+              color:c1,
+              style: BorderStyle.solid,
+            ),
+            borderRadius: BorderRadius.circular(35.0),
+          ),
+
+          child:Container(
+
+            alignment: Alignment.center,
+            child: Text(
+              itemName.toUpperCase(), style:
+            TextStyle(
+                color:Colors.white,
+
+                fontWeight: FontWeight.bold,
+                fontSize: 16),
+            ),
+          ),
+          onPressed: () {
+
+            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+            foodItemDetailsbloc.setMultiSelectOptionForFood(x,index);
+
+          },
+
+
+
+        ),
+      )
+
+
+          :
+
+      Container(
+        width:70,
+        alignment: Alignment.center,
+        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child: OutlineButton(
 //                        color: Color(0xffFEE295),
           clipBehavior: Clip.hardEdge,
           splashColor: c1,
+//          splashColor: Color(0xff739DFA),
           highlightElevation: 12,
+//          clipBehavior: Clip.hardEdge,
+//          highlightElevation: 12,
           shape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: c1,
-              style: BorderStyle.solid,
-              width: 1.6,
-            ),
+
             borderRadius: BorderRadius.circular(35.0),
           ),
+//          disabledBorderColor: false,
+        borderSide: BorderSide(
+          color: c1,
+          style: BorderStyle.solid,
+          width: 3.6,
+        ),
 
           child: Container(
             alignment: Alignment.center,
@@ -1380,16 +1447,25 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 color: c1,
 
                 fontWeight: FontWeight.bold,
-                fontSize: 18),
+                fontSize: 16),
             ),
           ),
           onPressed: () {
+
             print('$itemName pressed');
+            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+            foodItemDetailsbloc.setMultiSelectOptionForFood(x,index);
           },
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
         ),
-      );
+      ),
+
+
+      // : Container for 2nd argument of ternary condition ends here.
+
+    );
   }
 
   //now now
@@ -1485,7 +1561,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   maxCrossAxisExtent: 180,
                   mainAxisSpacing: 6, // Vertical  direction
                   crossAxisSpacing: 5,
-                  childAspectRatio: 200 / 240,
+                  childAspectRatio: 200 / 250,
 
                 ),
 
@@ -1553,35 +1629,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
                   foodItemDetailsbloc.removeThisDefaultIngredientItem(oneSelected,index);
-//              final locationBloc = BlocProvider.of<>(context);
-//                            foodItemDetailsbloc.decrementThisIngredientItem(unSelectedOneIngredient,index);
 
-                  /*
-                            logger.i('test.length',ingredientStringsForWhereInClause.length);
-                            print('at Long Press UP');
-                            ingredientStringsForWhereInClause.removeAt(index);
-                            logger.i('test.length after removing: ',
-                                ingredientStringsForWhereInClause.length);
-                            defaultIngredientListForFood.removeAt(index);
-                            Order initialOrder = new Order(
-                              foodItemName: oneFoodItemandId.itemName,
-                              foodItemImageURL:oneFoodItemandId.imageURL,
-                              unitPrice:initialPriceByQuantityANDSize,
-                              foodDocumentId:oneFoodItemandId.documentId,
-                              quantity:_itemCount,
-                              foodItemSize:_currentSize,
-//                                                                    foodItemOrderID:,
-                              ingredients:defaultIngredientListForFood,
-                            );
-
-                            */
-
-
-//                                                                  TO DO UPDATE WITH setState(() ) call the current
-//                                                                Order
-//                            setState(() {
-//                              oneOrder= initialOrder;
-//                            });
                 },
 
                 child: Column(
@@ -1745,7 +1793,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     return Container(
 
-        height:displayHeight(context)/30,
+        margin: EdgeInsets.fromLTRB(0, 5,0,5),
+        height:displayHeight(context)/26,
         width:displayWidth(context)/10,
 
         child:  oneSize.toLowerCase() == _currentSize  ?
@@ -1765,6 +1814,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               ),
               borderRadius: BorderRadius.circular(35.0),
             ),
+
             child:Container(
 
               alignment: Alignment.center,
@@ -1811,15 +1861,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
+            borderSide: BorderSide(
+              color: Color(0xff53453D), // 0xff54463E
+              style: BorderStyle.solid,
+              width: 3.6,
+            ),
             shape:RoundedRectangleBorder(
 
-              side: BorderSide(
-                color: Color(0xffF7F0EC),
-                style: BorderStyle.solid,
-              ),
-//                BorderStyle(
-//                  BorderStyle.solid,
-//                )
+
               borderRadius: BorderRadius.circular(35.0),
             ),
             child:Container(
@@ -1828,7 +1877,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               child: Text(
                 oneSize.toUpperCase(), style:
               TextStyle(
-                  color:Color(0xff707070),
+                  color:Color(0xff54463E),
 
                   fontWeight: FontWeight.bold,
                   fontSize: 12),

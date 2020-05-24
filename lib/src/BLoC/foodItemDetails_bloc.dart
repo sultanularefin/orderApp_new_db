@@ -344,21 +344,12 @@ class FoodItemDetailsBloc implements Bloc {
   void initiateAllMultiSelectOptions()
   {
 
-    FoodPropertyMultiSelect _m = new FoodPropertyMultiSelect(
-      borderColor: '0xffB47C00',
-      index: 1,
+    FoodPropertyMultiSelect _org = new FoodPropertyMultiSelect(
+      borderColor: '0xff739DFA',
+      index: 4,
       isSelected: false,
-      itemName: 'M',
-      itemTextColor: '0xffB47C00',
-    );
-
-//     0xffFEE295 false
-    FoodPropertyMultiSelect _vsm = new FoodPropertyMultiSelect(
-      borderColor: '0xffFEE295',
-      index: 2,
-      isSelected: false,
-      itemName: 'VSM',
-      itemTextColor: '0xffFEE295',
+      itemName: 'ORG',
+      itemTextColor: '0xff739DFA',
     );
 
     FoodPropertyMultiSelect _vs = new FoodPropertyMultiSelect(
@@ -369,13 +360,26 @@ class FoodItemDetailsBloc implements Bloc {
       itemTextColor: '0xff95CB04',
     );
 
-    FoodPropertyMultiSelect _org = new FoodPropertyMultiSelect(
-      borderColor: '0xff739DFA',
-      index: 4,
+
+//     0xffFEE295 false
+    FoodPropertyMultiSelect _vsm = new FoodPropertyMultiSelect(
+      borderColor: '0xffFEE295',
+      index: 2,
       isSelected: false,
-      itemName: 'ORG',
-      itemTextColor: '0xff739DFA',
+      itemName: 'VSM',
+      itemTextColor: '0xffFEE295',
     );
+
+
+    FoodPropertyMultiSelect _m = new FoodPropertyMultiSelect(
+      borderColor: '0xffB47C00',
+      index: 1,
+      isSelected: false,
+      itemName: 'M',
+      itemTextColor: '0xffB47C00',
+    );
+
+
     List <FoodPropertyMultiSelect> multiSelectArray = new List<FoodPropertyMultiSelect>();
 
     multiSelectArray.addAll([_m,_vsm, _vs,_org]);
@@ -388,6 +392,24 @@ class FoodItemDetailsBloc implements Bloc {
     _multiSelectForFoodController.sink.add(_multiSelectForFood);
 
   }
+
+  void setMultiSelectOptionForFood(FoodPropertyMultiSelect x, int index){
+
+
+    List <FoodPropertyMultiSelect> multiSelectArray = _multiSelectForFood;
+
+    x.isSelected= !x.isSelected;
+    multiSelectArray[index]=x;
+
+    _multiSelectForFood = multiSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+
+
+//    initiateAllMultiSelectOptions();
+
+    _multiSelectForFoodController.sink.add(_multiSelectForFood);
+  }
+
+
 
   // CONSTRUCTOR ENDS HERE.
 
@@ -584,6 +606,47 @@ class FoodItemDetailsBloc implements Bloc {
 
   }
 
+  void updateDefaultIngredientItems(/*NewIngredient unSelectedOneIngredient,int index*/){
+    print('reached here ==> : <==  update Default IngredientItem ');
+
+    List<NewIngredient> allDefaultIngredientItems = _defaultIngItems;
+
+    List<NewIngredient> allPreviouslyUnSelectedIngredientItems = _unSelectedIngItems;
+
+    List <NewIngredient> valueIncrementedUNselectedIngredient =
+
+    allPreviouslyUnSelectedIngredientItems.where((oneItem) => oneItem.ingredientAmountByUser >0).toList();
+
+
+    List <NewIngredient> valueUnChangedUNselectedIngredient =
+
+    allPreviouslyUnSelectedIngredientItems.where((oneItem) => oneItem.ingredientAmountByUser == 0).toList();
+
+//    List<String> stringList = List<String>.from(dlist);
+//    return stringList.where((oneItem) =>oneItem.toString().toLowerCase()
+//    ==
+//    isIngredientExist(oneItem.toString().trim().toLowerCase())).toList();
+
+    allDefaultIngredientItems.addAll(valueIncrementedUNselectedIngredient);
+
+    _defaultIngItems= allDefaultIngredientItems;
+//    _unSelectedIngItems= allUnselectedbutOneDecremented;
+//   _thisFoodItem =thisFoodpriceModified;
+
+    _defaultIngredientListController.sink.add(_defaultIngItems);
+
+
+    //  NOW ADD PART BEGINS HERE
+
+    List<NewIngredient> allUnSelectedIngredientItems = valueUnChangedUNselectedIngredient;
+
+
+    _unSelectedIngItems  = allUnSelectedIngredientItems;
+    _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+
+
+  }
+
 
   void decrementThisIngredientItem(NewIngredient unSelectedOneIngredient,int index){
 
@@ -619,6 +682,7 @@ class FoodItemDetailsBloc implements Bloc {
 
 
   }
+
 
 
   void setNewSizePlusPrice(String sizeKey) {
