@@ -33,7 +33,7 @@ class ShoppingCartBloc implements Bloc {
 
   final _orderController = StreamController <Order>();
 
-  Stream<Order> get currentOrderStream => _orderController.stream;
+  Stream<Order> get getCurrentOrderStream => _orderController.stream;
 
 
 
@@ -65,6 +65,8 @@ class ShoppingCartBloc implements Bloc {
 
     print('food Item name in Shopping Cart BlocK ${x.foodItemName}');
 
+    _curretnOrder=x;
+    _orderController.sink.add(x);
 
   }
 // CONSTRUCTOR ENDS HERE.

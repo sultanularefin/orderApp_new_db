@@ -578,6 +578,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                     // NEWANIMATEDPOSITIONED HERE BEGINS =><=
                                                     // MORE INGREDIENTS Row BEGINS HERE.
                                                     Container(
+                                                      width: displayWidth(context) /1.8,
                                                       child:
                                                       AnimatedSwitcher(
                                                         duration: Duration(milliseconds: 1000),
@@ -868,12 +869,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
               Container(
+                color:Colors.white,
                 margin: EdgeInsets.symmetric(
                     horizontal: 0,
                     vertical: 0),
 
                 width: displayWidth(context) /
-                    5.2,
+                    4.8,
 //                height: 45,
                 height: displayHeight(context)/21,
 
@@ -881,9 +883,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 child:
                 Row(
                   mainAxisAlignment: MainAxisAlignment
-                      .center,
+                      .start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+
+
+
+                    // todo shopping.
+
+//                                                                          SizedBox(
+//                                                                            width: 3,
+//                                                                          ),
                     IconButton(
+
+                      padding:   EdgeInsets.symmetric(horizontal: 0,vertical: 0),
                       icon: Icon(Icons.add_circle_outline),
                       iconSize: 30,
 
@@ -903,50 +916,55 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       color: Color(0xff707070),
                     ),
 
-
                     Container(
+//                                                                        width:60,
+                      width: displayWidth(
+                          context) /13,
+                      height: displayHeight(context)/25,
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
-                        child:FlatButton(
-                          onPressed: () {
+                      child: OutlineButton(
+                        onPressed: (){
 
-                            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+                          final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 
 
 //              final locationBloc = BlocProvider.of<>(context);
 //                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
 
-                            Order x = new Order(
-                              foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
-                              foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
-                              unitPrice:initialPriceByQuantityANDSize ,
-                              foodDocumentId: foodItemDetailsbloc.currentFoodItem.documentId,
-                              quantity: _itemCount,
-                              foodItemSize: _currentSize,
-                              ingredients: foodItemDetailsbloc.getDefaultIngredients,
-                            );
-                            print(
+                          Order x = new Order(
+                            foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
+                            foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
+                            unitPrice:initialPriceByQuantityANDSize ,
+                            foodDocumentId: foodItemDetailsbloc.currentFoodItem.documentId,
+                            quantity: _itemCount,
+                            foodItemSize: _currentSize,
+                            ingredients: foodItemDetailsbloc.getDefaultIngredients,
+                          );
+                          print(
 
-                                'add_shopping_cart button pressed');
+                              'add_shopping_cart button pressed');
 
-                            return Navigator.of(context).push(
-
-
-                              PageRouteBuilder(
-                                opaque: false,
-                                transitionDuration: Duration(
-                                    milliseconds: 900),
-                                pageBuilder: (_, __, ___) =>
-                                    BlocProvider<ShoppingCartBloc>(
-                                      bloc: ShoppingCartBloc(
-                                          x),
+                          return Navigator.of(context).push(
 
 
-                                      child: ShoppingCart()
+                            PageRouteBuilder(
+                              opaque: false,
+                              transitionDuration: Duration(
+                                  milliseconds: 900),
+                              pageBuilder: (_, __, ___) =>
+                                  BlocProvider<ShoppingCartBloc>(
+                                    bloc: ShoppingCartBloc(
+                                        x),
 
-                                      ,),
-                                // fUTURE USE -- ANIMATION TRANSITION CODE.
-                                /*
+
+                                    child: ShoppingCart()
+
+                                    ,),
+                              // fUTURE USE -- ANIMATION TRANSITION CODE.
+                              /*
                                     transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
                                       return FadeTransition(
                                         opacity: animation,
@@ -957,89 +975,52 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       );
                                     }
                                     */
-                              ),
-                            );
+                            ),
+                          );
+                        },
+//                        color: Color(0xffFEE295),
+                        clipBehavior: Clip.hardEdge,
+                        splashColor:  Color(0xffFEE295),
+//          splashColor: Color(0xff739DFA),
+                        highlightElevation: 12,
+//          clipBehavior: Clip.hardEdge,
+//          highlightElevation: 12,
+                        shape: RoundedRectangleBorder(
 
-                          },
+                          borderRadius: BorderRadius.circular(35.0),
+                        ),
+//          disabledBorderColor: false,
+                        borderSide: BorderSide(
+                          color:  Color(0xffFEE295),
+                          style: BorderStyle.solid,
+                          width: 3.6,
+                        ),
+
+
+                        child:
+                        ///SSWW
+
+
+
+                        Center(
                           child: Stack(
+                              children: <Widget>[ Center(
+                                child: Icon(
 
-                              children: <Widget>[
-
-
-                                Container(
-                                  child:
-                                  ///SSWW
-
-
-
-                                  IconButton(
-                                    iconSize: 40,
-                                    icon:Icon(Icons.add_shopping_cart),
-                                    color: Color(0xff707070),
-                                    tooltip: 'over shopping Cart Icon Button',
-                                    onPressed: () {
-
-                                      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-
-
-
-//              final locationBloc = BlocProvider.of<>(context);
-//                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
-
-                                      Order x = new Order(
-                                        foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
-                                        foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
-                                        unitPrice:initialPriceByQuantityANDSize ,
-                                        foodDocumentId: foodItemDetailsbloc.currentFoodItem.documentId,
-                                        quantity: _itemCount,
-                                        foodItemSize: _currentSize,
-                                        ingredients: foodItemDetailsbloc.getDefaultIngredients,
-                                      );
-                                      print(
-
-                                          'add_shopping_cart button pressed');
-
-                                      return Navigator.of(context).push(
-
-
-                                        PageRouteBuilder(
-                                          opaque: false,
-                                          transitionDuration: Duration(
-                                              milliseconds: 900),
-                                          pageBuilder: (_, __, ___) =>
-                                              BlocProvider<ShoppingCartBloc>(
-                                                bloc: ShoppingCartBloc(
-                                                    x),
-
-
-                                                child: ShoppingCart()
-
-                                                ,),
-                                          // fUTURE USE -- ANIMATION TRANSITION CODE.
-                                          /*
-                                    transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
-                                      return FadeTransition(
-                                        opacity: animation,
-                                        child: RotationTransition(
-                                          turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-                                          child: child,
-                                        ),
-                                      );
-                                    }
-                                    */
-                                        ),
-                                      );
-
-                                    },
-                                  ),
+                                  Icons.add_shopping_cart,
+                                  size: 40,
+                                  color: Color(0xff707070),
                                 ),
+                              ),
 
                                 Container(
+//                                              color:Colors.red,
+                                  width:  30,
 
-                                  width:  35.0,
-                                  height: 35.0,
+
                                   decoration: new BoxDecoration(
-                                    color: Colors.red,
+                                    color: Colors.redAccent,
+
                                     border: new Border.all(
                                         color: Colors.green,
                                         width: 1.0,
@@ -1050,7 +1031,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   ),
 
                                   alignment: Alignment.center,
-                                  child:   Text(
+                                  child:Text(
                                     _itemCount.toString(),
                                     style: TextStyle(
                                       color: Colors.white,
@@ -1062,21 +1043,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                 ),
 
-
-
-
                               ]
                           ),
-                        )
+                        ),
+
+                      ),
                     ),
 
-                    // todo shopping.
-
-//                                                                          SizedBox(
-//                                                                            width: 3,
-//                                                                          ),
 
                     IconButton(
+                      padding:   EdgeInsets.symmetric(horizontal: 0,vertical: 0),
                       icon: Icon(Icons.remove_circle_outline),
 //                                                                            icon: Icon(Icons.remove),
                       iconSize: 30,
@@ -1097,6 +1073,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                              size: 24,
                       color: Color(0xff707070),
                     ),
+
+
+
+
+
+
                   ],
 
                 ),
