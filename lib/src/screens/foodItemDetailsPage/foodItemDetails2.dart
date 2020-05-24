@@ -870,8 +870,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     vertical: 0),
 
                 width: displayWidth(context) /
-                    5.4,
-                height: 45,
+                    5.2,
+//                height: 45,
+                height: displayHeight(context)/21,
 
 //                                            color:Color(0xffC27FFF),
                 child:
@@ -887,14 +888,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       onPressed: () {
                         print(
                             'Add button pressed  related to _itemCount');
-//                        setState(() {
-//                          _itemCount =
-//                              _itemCount + 1;
+                        setState(() {
+                          _itemCount =
+                              _itemCount + 1;
 //                          initialPriceByQuantityANDSize =
 //
 //                              initialPriceByQuantityANDSize *
 //                                  _itemCount;
-//                        });
+                        });
                       },
                       color: Color(0xff707070),
                     ),
@@ -906,12 +907,23 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             children: <Widget>[
 
 
-                              Container(child:
-                              Icon(
-                                Icons.add_shopping_cart,
-                                size: 44,
-                                color: Color(0xff707070),
-                              ),
+                              Container(
+                                child:
+                                ///SSWW
+
+
+
+                                IconButton(
+                                  iconSize: 40,
+                                  icon:Icon(Icons.add_shopping_cart),
+                                  color: Color(0xff707070),
+                                  tooltip: 'Decrease product count by 1',
+                                  onPressed: () {
+                                    print(
+                                        'add_shopping_cart button pressed');
+
+                                  },
+                                ),
                               ),
 
                               Container(
@@ -936,7 +948,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                     color: Colors.white,
                                     fontWeight: FontWeight
                                         .normal,
-                                    fontSize: 22,
+                                    fontSize: 20,
                                   ),
                                 ),
 
@@ -963,15 +975,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       onPressed: () {
                         print(
                             'Decrease button pressed related to _itemCount');
-//                        if (_itemCount > 1) {
-//                          setState(() {
-//                            _itemCount =
-//                                _itemCount - 1;
+                        if (_itemCount > 1) {
+                          setState(() {
+                            _itemCount =
+                                _itemCount - 1;
 //                            initialPriceByQuantityANDSize =
 //                                initialPriceByQuantityANDSize *
 //                                    _itemCount;
-//                          });
-//                        }
+                          });
+                        }
                       },
 //                              size: 24,
                       color: Color(0xff707070),
@@ -1218,47 +1230,47 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     );
   }
 
- Widget _buildMultiSelectOptions(){
+  Widget _buildMultiSelectOptions(){
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
 
 
-   final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-   return StreamBuilder(
-       stream: foodItemDetailsbloc.getMultiSelectStream,
-       initialData: foodItemDetailsbloc.getMultiSelectForFood,
+    return StreamBuilder(
+        stream: foodItemDetailsbloc.getMultiSelectStream,
+        initialData: foodItemDetailsbloc.getMultiSelectForFood,
 
-       builder: (context, snapshot) {
-         if (!snapshot.hasData) {
-           print('!snapshot.hasData');
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            print('!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
-           return Container(child: Text('Null'));
-         }
-         else {
-           List<FoodPropertyMultiSelect> foodItemPropertyOptions = snapshot.data;
-           return ListView.builder(
-             scrollDirection: Axis.horizontal,
+            return Container(child: Text('Null'));
+          }
+          else {
+            List<FoodPropertyMultiSelect> foodItemPropertyOptions = snapshot.data;
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
 
-             reverse: true,
+              reverse: true,
 
-             shrinkWrap: false,
+              shrinkWrap: false,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
-             itemCount: foodItemPropertyOptions.length,
+              itemCount: foodItemPropertyOptions.length,
 
-             itemBuilder: (_, int index) {
-               return oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
-                   index);
-             },
-           );
-         }
-       }
+              itemBuilder: (_, int index) {
+                return oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
+                    index);
+              },
+            );
+          }
+        }
 
-     // M VSM ORG VS TODO. ENDS HERE.
-   );
+      // M VSM ORG VS TODO. ENDS HERE.
+    );
 
- }
+  }
 
   Widget _buildProductSizes(BuildContext context, Map<String,dynamic> allPrices) {
 
@@ -1281,72 +1293,72 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
         child:
 
-            Container(
-                color: Color(0xffFFFFFF),
+        Container(
+          color: Color(0xffFFFFFF),
 //                                  color:Color(0xffDAD7C3),
 
-                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+          padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
 
-                width: displayWidth(context) * 0.57,
-                child:
+          width: displayWidth(context) * 0.57,
+          child:
 // 1st container outsource below:
 
-                  // 1st CONTAINER OF THE COLUMN LAYOUT HOLDS VSM ORG VS TODO. BEGINS HERE
+          // 1st CONTAINER OF THE COLUMN LAYOUT HOLDS VSM ORG VS TODO. BEGINS HERE
 
 //                  SizedBox(height: 20,),
 //1st container.
-                  Container(
+          Container(
 
-                      child: GridView.builder(
+              child: GridView.builder(
 
 //                                          itemCount: sizeConstantsList.length,
-                        itemCount: foodSizePrice.length,
+                itemCount: foodSizePrice.length,
 
-                        gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 120,
+                gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 120,
 //                                            maxCrossAxisExtent: 270,
 //                                          new SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisSpacing: 5,
-                          // H  direction
+                  mainAxisSpacing: 5,
+                  // H  direction
 //
-                          crossAxisSpacing: 5,
+                  crossAxisSpacing: 5,
 
 
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
 //                                  /// H/Vertical
-                          childAspectRatio: 200 / 80,
+                  childAspectRatio: 200 / 80,
 //                                              crossAxisCount: 3
-                        ),
+                ),
 
-                        itemBuilder: (_, int index) {
-                          String key = foodSizePrice.keys
-                              .elementAt(index);
-                          dynamic value = foodSizePrice
-                              .values.elementAt(index);
+                itemBuilder: (_, int index) {
+                  String key = foodSizePrice.keys
+                      .elementAt(index);
+                  dynamic value = foodSizePrice
+                      .values.elementAt(index);
 //
-                          double valuePrice = tryCast<
-                              double>(
-                              value, fallback: 0.00);
-                          print(
-                              'valuePrice at line # 583: $valuePrice and key is $key');
-                          return _buildOneSize(
-                              key, valuePrice, index);
-                        },
+                  double valuePrice = tryCast<
+                      double>(
+                      value, fallback: 0.00);
+                  print(
+                      'valuePrice at line # 583: $valuePrice and key is $key');
+                  return _buildOneSize(
+                      key, valuePrice, index);
+                },
 
 
-                        controller: new ScrollController(
-                            keepScrollOffset: false),
-                        shrinkWrap: true,
-                      )
-                  ),
+                controller: new ScrollController(
+                    keepScrollOffset: false),
+                shrinkWrap: true,
+              )
+          ),
 
 
-            ),
+        ),
 
 
-            // Todo DefaultItemsStreamBuilder
+        // Todo DefaultItemsStreamBuilder
 
 
       );
@@ -1359,9 +1371,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     String color1 = x.itemTextColor.replaceAll('#', '0xff');
 
-     Color c1 = Color(int.parse(color1));
+    Color c1 = Color(int.parse(color1));
 
-     String itemName = x.itemName;
+    String itemName = x.itemName;
 
 
     return Container(
@@ -1433,11 +1445,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             borderRadius: BorderRadius.circular(35.0),
           ),
 //          disabledBorderColor: false,
-        borderSide: BorderSide(
-          color: c1,
-          style: BorderStyle.solid,
-          width: 3.6,
-        ),
+          borderSide: BorderSide(
+            color: c1,
+            style: BorderStyle.solid,
+            width: 3.6,
+          ),
 
           child: Container(
             alignment: Alignment.center,
