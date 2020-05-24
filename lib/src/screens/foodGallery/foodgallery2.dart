@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -150,13 +150,10 @@ class _FoodGalleryState extends State<FoodGallery2> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(categoryName.toLowerCase()
-                  ,
-//    Text(categoryName.substring(0, 2),
-//                  style: GoogleFonts.Tangerine(),
-//            niconne, lato ,cookie,tangerine,niconne, itim.
-                  style: GoogleFonts.itim(
-                    textStyle: Theme.of(context).textTheme.display1,
+                Text(categoryName.toLowerCase(), style:
+                  TextStyle(
+
+                    fontFamily: 'Itim-Regular',
                     fontSize: 30,
                     fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
@@ -189,8 +186,10 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
         title:  Text(categoryName.toLowerCase(),
 //    Text(categoryName.substring(0, 2),
-          style: GoogleFonts.itim(
-            textStyle: Theme.of(context).textTheme.display1,
+          style: TextStyle(
+
+          fontFamily: 'Itim-Regular',
+
             fontSize: 24,
             fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
@@ -458,13 +457,16 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                       painter: LongHeaderPainterBefore(context),
                                     ),
                                     Text('$_currentCategory'.toLowerCase(),
-                                        style: GoogleFonts.itim(
-                                          textStyle: Theme.of(context).textTheme.display1,
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.normal,
+                                         style:
+                                        TextStyle(
+
+                                        fontFamily: 'Itim-Regular',
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
-                                          color: Color(0xff000000),
-                                        )),
+                                        color: Color(0xff000000),
+                            ),
+                                    ),
                                     CustomPaint(size: Size(0, 19),
                                       painter: LongHeaderPainterAfter(context),
                                     ),
