@@ -23,7 +23,7 @@ import 'package:foodgallery/src/screens/ingredients_more/more_ingredients.dart';
 import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
 import 'package:foodgallery/src/DataLayer/SizeConstants.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
-import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailImage.dart';
+//import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailImage.dart';
 import './../../DataLayer/FoodItemWithDocID.dart';
 import './../../DataLayer/Order.dart';
 import 'package:foodgallery/src/DataLayer/FoodPropertyMultiSelect.dart';
@@ -142,8 +142,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    logger.w('defaultIngredients: ',bloc.defaultIngredients);
 
 //    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
-    Order thisOrder  = shoppingCartBloc.getCurrentOrder;
-
+    Order thisOrder = shoppingCartBloc.getCurrentOrder;
 
 
     logger.w('thisOrder : ',
@@ -158,8 +157,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
     }
     else {
-
-
       return Container(
 
           child: StreamBuilder<Order>(
@@ -204,7 +201,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         // smaller container containing all modal FoodItem Details things.
                         child: Container(
                             height: displayHeight(context) -
-                                MediaQuery.of(context).padding.top -
+                                MediaQuery
+                                    .of(context)
+                                    .padding
+                                    .top -
                                 kToolbarHeight,
                             child: Column(
                               children: <Widget>[
@@ -220,9 +220,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   ,
 //                  color:Colors.lightGreenAccent,
                                   margin: EdgeInsets.fromLTRB(
-                                      12, displayHeight(context)/11, 10, 5),
-
-
+                                      12, displayHeight(context) / 11, 10, 5),
 
 
                                   child: Neumorphic(
@@ -259,44 +257,58 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                          /WWW??
                                           Container(
-                                            width: displayWidth(context)/1.1,
-                                            height: displayHeight(context)/20,
+                                            width: displayWidth(context) / 1.1,
+                                            height: displayHeight(context) / 20,
                                             color: Color(0xffffffff),
-                                            child:Row(
-                                              mainAxisAlignment: MainAxisAlignment.start
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment
+                                                  .start
                                               ,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment
+                                                  .center,
                                               children: <Widget>[
 
 
                                                 Container(
-                                                  width: displayWidth(context)/1.5,
-                                                  height: displayHeight(context)/20,
+                                                  width: displayWidth(context) /
+                                                      1.5,
+                                                  height: displayHeight(
+                                                      context) / 20,
                                                   color: Color(0xffffffff),
 
                                                   child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.start
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .start
                                                       ,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment
+                                                          .center,
                                                       children: <Widget>[
 
                                                         Container(
-                                                          margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                                                          alignment:Alignment.center,
-                                                          child: Text('Shopping Cart',
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                              20, 0, 10, 0),
+                                                          alignment: Alignment
+                                                              .center,
+                                                          child: Text(
+                                                              'Shopping Cart',
                                                               style: TextStyle(
                                                                 fontSize: 30,
-                                                                fontWeight: FontWeight.normal,
+                                                                fontWeight: FontWeight
+                                                                    .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                                                color: Color(0xff000000),
+                                                                color: Color(
+                                                                    0xff000000),
                                                               )
                                                           ),
                                                         ),
 
-                                                        CustomPaint(size: Size(0, 19),
-                                                          painter: LongHeaderPainterAfter(context),
+                                                        CustomPaint(
+                                                          size: Size(0, 19),
+                                                          painter: LongHeaderPainterAfter(
+                                                              context),
                                                         ),
 
 
@@ -308,27 +320,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
                                                 Container(
 //                                                  alignment: Alignment.center,
-                                                padding: EdgeInsets.fromLTRB(0,2,0,0),
-                                                    width: displayWidth(context)/16,
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 2, 0, 0),
+                                                  width: displayWidth(context) /
+                                                      16,
 //                                                height: displayHeight(context)/20,
-                                                    color: Color(0xffffffff),
+                                                  color: Color(0xffffffff),
 //                                                    child:Row(
 //                                                      mainAxisAlignment: MainAxisAlignment.end,
 //                                                      children: <Widget>[
-                                                        child:Container(
-                                                          padding: EdgeInsets.fromLTRB(0, 0, 200, 0),
-                                                          child: Icon(
+                                                  child: Container(
+                                                    padding: EdgeInsets
+                                                        .fromLTRB(0, 0, 200, 0),
+                                                    child: Icon(
 
-                                                            Icons.add_shopping_cart,
-                                                            size: 30,
-                                                            color: Color(0xff54463E),
-                                                          ),
-                                                        ),
-
+                                                      Icons.add_shopping_cart,
+                                                      size: 30,
+                                                      color: Color(0xff54463E),
+                                                    ),
+                                                  ),
 
 
                                                 ),
-
 
 
                                                 // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
@@ -338,165 +351,45 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             ),
                                           ),
 
-                                          Container(child: Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .start,
-                                            children: <Widget>[
-                                              // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                              // , 2ND PART(ROW) HANDLES THE
-                                              // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+                                          // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
 
-
-                                              Container(
-                                                  height: displayHeight(
-                                                      context) / 2.6,
-
-                                                  color: Colors.red,
-                                                  width: displayWidth(
-                                                      context) /
-                                                      5,
-// INCREASE THE DIVIDER TO MAKE IT MORE SAMLLER. I.E. WIDTH
-//                      height: displayHeight(context)*0.50,
-//                                    alignment: Alignment.centerLeft,
-
-
-                                                  //ZZZ
-                                                  // Other arguments such as margin, padding etc. (Like `Container`)
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .center,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
-
-//        mainAxisSize: MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      //pppp
-
-
-
-
-                                                      Container(
-                                                        /*
-                                color:Colors.blue,
-                              width:displayWidth(context)/4.6,
-                              */
-                                                        padding: EdgeInsets
-                                                            .fromLTRB(
-                                                            0, 0, 0,
-                                                            displayHeight(
-                                                                context) /
-                                                                25),
-
-                                                        child: FoodImageInShoppingCart(
-                                                            oneOrder.foodItemImageURL,
-                                                            oneOrder.foodItemName
-                                                        ),
-                                                      ),
-
-
-                                                    ],
-
-                                                  )
-                                              ),
-
-                                              // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                              // , 2ND PART(ROW) HANDLES THE
-                                              // DIFFERENT SIZES OF PRODUCTS.
-                                              // ENDS HERE.
-
-
-                                              // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
-
-                                              /*
-                                              Container(
-                                                height: displayHeight(
-                                                    context) /
-                                                    2.6,
-                                                width: displayWidth(
-                                                    context) -
-                                                    displayWidth(
-                                                        context) / 3.7 /* about the width of left most
-                            container holding the food Item Image, image name and food item price */
-                                                    - displayWidth(
-                                                        context) /
-                                                        3.8 /* this is about the width of yellow side menu */,
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .start,
-                                                  crossAxisAlignment: CrossAxisAlignment
-                                                      .start,
-
-
-//        mainAxisSize: MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    //pppp
-
-                                                    Container(
-                                                      padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                          Container(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 10, 0, 5),
 //                                                      padding::::
-                                                      color:Colors.white,
-                                                      height: 50,
-                                                      width: displayWidth(context) * 0.57,
-                                                      child:  _buildMultiSelectOptions(),
+                                            color: Colors.white,
+                                            height: displayHeight(context) / 4,
+                                            width: displayWidth(context)
+                                                - displayWidth(context) /
+                                                    5, /* this is about the width of yellow side menu */
 
-                                                    ),
-                                                    Container(
-                                                        child: _buildProductSizes(
-                                                            context,
-                                                            foodSizePrice)
-                                                    ),
+//                                            width: displayWidth(context) * 0.57,
+                                            child: _buildQuantityTimesofFood(
+                                                oneOrder),
 
-//                                  Text('ss'),
-                                                    Container(
-                                                        height: displayHeight(context) / 9,
-                                                        width: displayWidth(context) * 0.57,
+                                          ),
 
-                                                        color: Color(0xfffebaca),
-//                                                        alignment: Alignment.center,
-                                                        child: buildDefaultIngredients(
-                                                            context
-                                                        )
-                                                    ),
-
-                                                    // NEWANIMATEDPOSITIONED HERE BEGINS =><=
-                                                    // MORE INGREDIENTS Row BEGINS HERE.
-                                                    Container(
-                                                      width: displayWidth(context) /1.8,
-                                                      child:
-                                                      AnimatedSwitcher(
-                                                        duration: Duration(milliseconds: 1000),
-//
-                                                        child: showPressWhenFinishButton? animatedWidgetPressToFinish():
-                                                        animatedWidgetMoreIngredientsButton(),
-
-                                                      ),
-                                                      // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH BEGINS HERE.
+                                          Container(
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .start,
+                                                children: <Widget>[
+                                                  // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                                  // , 2ND PART(ROW) HANDLES THE
+                                                  // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
 
 
-                                                      // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH ENDS HERE.
-                                                      // todo==>
-                                                      // showUnSelectedIngredients displayHeight(context)/7.5
-                                                      // THIS CONTAINER WILL HOLD THE MORE INGREDIENTS OUTLINE BUTTON AND ITEM COUNT BEGINS HERE.
+                                                  // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                                  // , 2ND PART(ROW) HANDLES THE
+                                                  // DIFFERENT SIZES OF PRODUCTS.
+                                                  // ENDS HERE.
 
 
-                                                      // THIS CONTAINER WILL HOLD THE MORE INGREDIENTS OUTLINE BUTTON AND ITEM COUNT ENDS HERE.
-                                                      // MORE INGREDIENTS ROW ENDS HERE.
-
-                                                    )
-                                                    // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
+                                                  // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
 
 
-                                                  ],
-                                                ),
-                                              ),
-
-                                              */
-
-
-
-
-                                            ],
-                                          )
+                                                ],
+                                              )
 
                                           ),
 
@@ -527,43 +420,59 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  Widget _buildQuantityTimesofFood(Order qTimes) {
+//   height: 40,
+//   width: displayWidth(context) * 0.57,
+
+
+//    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
+    if ((qTimes.foodItemName == '') && (qTimes.quantity == 0)) {
+      print('Order has no data');
+      print('this will never happen don\'t worry');
+//        return Center(child: new LinearProgressIndicator());
+      return Container(child: Text('Null'));
+    }
+    else {
+      int quantity = qTimes.quantity;
+      String OrderedFoodItemName = qTimes.foodItemName;
+      String OrderedFoodImageURL = qTimes.foodItemImageURL;
+
+//      final String imageURLBig;
+//      final String foodItemName;
+      final List<NewIngredient> selectedIngredients =qTimes.ingredients;
+      final double price = qTimes.unitPrice;
+
+      return Container(
+
+        color: Colors.green,
+
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+
+          reverse: false,
+
+          shrinkWrap: false,
+//        final String foodItemName =          filteredItems[index].itemName;
+//        final String foodImageURL =          filteredItems[index].imageURL;
+          itemCount: quantity,
+
+          itemBuilder: (_, int index) {
+            return FoodImageInShoppingCart(
+                OrderedFoodImageURL,OrderedFoodItemName,selectedIngredients,price,index
+            );
+//          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
+//            index);
+          },
+        ),
+
+
+        // M VSM ORG VS TODO. ENDS HERE.
+      );
+    }
+  }
 
 
 }
-
-
-class MyPainter extends CustomPainter {
-
-  @override
-  void paint(Canvas canvas, Size size){
-
-//    canvas.drawLine(...);
-    final p1 = Offset(50, 20);
-    final p2 = Offset(5, 20);
-    final paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 3;
-    canvas.drawLine(p1, p2, paint);
-
-
-//    canvas.drawRect();
-//    canvas.drawCircle();
-//    canvas.drawArc();
-//    canvas.drawPath();
-//
-//    canvas.draImage();
-//    canvas.drawRect();
-//    canvas.drawImageNine();
-//    canvas.drawParagraph();
-//...
-  }
-  @override
-  bool shouldRepaint(CustomPainter old) {
-    return false;
-  }
-
-}
-
 
 class LongHeaderPainterAfter extends CustomPainter {
 

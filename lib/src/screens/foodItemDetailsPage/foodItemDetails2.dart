@@ -1074,19 +1074,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       color: Color(0xff707070),
                     ),
 
-
-
-
-
-
                   ],
 
                 ),
 
-
               ),
-
-
 
             ]
         )
