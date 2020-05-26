@@ -212,7 +212,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //                                      alignment: Alignment.bottomCenter,
-                                  height: displayHeight(context) / 2.6,
+                                  height: displayHeight(context) / 1.2,
                                   //width:displayWidth(context) / 1.5, /* 3.8*/
                                   width: displayWidth(context)
                                       - displayWidth(context) /
@@ -369,6 +369,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                           ),
 
+                                          /*
                                           Container(
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment
@@ -391,6 +392,104 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 ],
                                               )
 
+                                          ),
+                                          */
+
+                                          Container(
+                                            width: displayWidth(context) / 1.1,
+                                            height: displayHeight(context) / 20,
+                                            color: Color(0xffffffff),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment
+                                                  .start
+                                              ,
+                                              crossAxisAlignment: CrossAxisAlignment
+                                                  .center,
+                                              children: <Widget>[
+
+
+                                                Container(
+                                                  width: displayWidth(context) /
+                                                      1.5,
+                                                  height: displayHeight(
+                                                      context) / 20,
+                                                  color: Color(0xffffffff),
+
+                                                  child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .start
+                                                      ,
+                                                      crossAxisAlignment: CrossAxisAlignment
+                                                          .center,
+                                                      children: <Widget>[
+
+                                                        Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                              20, 0, 10, 0),
+                                                          alignment: Alignment
+                                                              .center,
+                                                          child: Text(
+                                                              'Choose Order Type',
+                                                              style: TextStyle(
+                                                                fontSize: 30,
+                                                                fontWeight: FontWeight
+                                                                    .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                                                color: Color(
+                                                                    0xff000000),
+                                                              )
+                                                          ),
+                                                        ),
+
+                                                        CustomPaint(
+                                                          size: Size(0, 19),
+                                                          painter: LongPainterForChooseOrderType(
+                                                              context),
+                                                        ),
+
+
+                                                      ]
+                                                  ),
+
+                                                ),
+
+                                                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                                              /*
+                                                Container(
+//                                                  alignment: Alignment.center,
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 2, 0, 0),
+                                                  width: displayWidth(context) /
+                                                      16,
+//                                                height: displayHeight(context)/20,
+                                                  color: Color(0xffffffff),
+//                                                    child:Row(
+//                                                      mainAxisAlignment: MainAxisAlignment.end,
+//                                                      children: <Widget>[
+                                                  child: Container(
+                                                    padding: EdgeInsets
+                                                        .fromLTRB(0, 0, 200, 0),
+                                                    child: Icon(
+
+                                                      Icons.add_shopping_cart,
+                                                      size: 30,
+                                                      color: Color(0xff54463E),
+                                                    ),
+                                                  ),
+
+
+                                                ),
+                                                */
+
+
+                                                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+
+
+                                              ],
+                                            ),
                                           ),
 
 
@@ -496,7 +595,35 @@ class LongHeaderPainterAfter extends CustomPainter {
     return false;
   }
 
+
+
 }
+
+
+class LongPainterForChooseOrderType extends CustomPainter {
+
+  final BuildContext context;
+  LongPainterForChooseOrderType(this.context);
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(displayWidth(context)/3.8, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(10, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
 
 
 
