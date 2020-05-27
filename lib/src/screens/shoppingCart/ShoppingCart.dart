@@ -70,12 +70,15 @@ class ShoppingCart extends StatefulWidget {
 
 class _ShoppingCartState extends State<ShoppingCart> {
 
+
   var logger = Logger(
     printer: PrettyPrinter(),
   );
 
   String _currentSize;
   int _itemCount = 1;
+  int _currentOrderTypeIndex=0;
+
 
 
 //  color: Color(0xff34720D),
@@ -146,6 +149,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
     Order thisOrder = shoppingCartBloc.getCurrentOrder;
+
+//    priceByQuantityANDSize = oneFood.itemPrice;
+
 
 
     logger.w('thisOrder : ',
@@ -509,14 +515,609 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                      padding::::
                                             color:Colors.white,
 //                                            height: 200,
-                                            height: displayHeight(context) /6,
+                                            height: displayHeight(context) /7,
                                             width: displayWidth(context)
                                                 - displayWidth(context) /
                                                     5,
 //                                            width: displayWidth(context) * 0.57,
-                                            child:  _buildOrderTypeSingletOption(),
+                                            child:  _buildOrderTypeSingleSelectOption(),
 
                                           ),
+
+                                          Container(
+                                            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                                      padding::::
+                                            color:Colors.yellow,
+//                                            height: 200,
+                                            height: displayHeight(context) /4,
+                                            width: displayWidth(context)
+                                                - displayWidth(context) /
+                                                    5,
+//                                            width: displayWidth(context) * 0.57,
+                                            child:  Center(child: Container(
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: <Widget>[
+
+                                                Container(
+                                                    alignment: Alignment.center,
+
+                                                    child: Text('Enter user address',
+                                                      style: TextStyle(
+                                                        color:
+                                                      Color(0xffFC0000),
+                                                        fontSize: 30,
+                                                      ),)
+                                                ),
+
+
+                                                // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
+                                                Container(
+                                                  margin:EdgeInsets.symmetric(
+                                                      horizontal: 0,
+                                                      vertical: 0),
+                                                  decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    border: Border.all(
+
+                                                      color: Color(0xffBCBCBD),
+                                                      style: BorderStyle.solid,
+                                                      width: 2.0,
+
+
+                                                    ),
+
+                                                    boxShadow: [
+                                                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                                          color: Color(0xffFFFFFF),
+                                                          blurRadius: 10.0,
+                                                          offset: Offset(0.0, 2.0))
+                                                    ],
+
+
+                                                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                                                  ),
+
+//                                  color: Color(0xffFFFFFF),
+                                                  width: displayWidth(context)/2.5,
+                                                  height: displayHeight(context)/27,
+                                                  padding: EdgeInsets.only(
+                                                      left: 4, top: 3, bottom: 3, right: 3),
+                                                  child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Container(
+
+                                                        height: 25,
+                                                        width: 5,
+                                                        margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                                        child: Icon(
+//                                          Icons.add_shopping_cart,
+                                                          Icons.location_on,
+
+                                                          size: 28,
+                                                          color: Color(0xffBCBCBD),
+                                                        ),
+
+
+                                                      ),
+
+                                                      Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                                        alignment: Alignment.center,
+                                                        width:displayWidth(context)/4,
+//                                        color:Colors.purpleAccent,
+                                                        // do it in both Container
+                                                        child: TextField(
+
+
+                                                          textAlign: TextAlign.center,
+                                                          decoration: InputDecoration(
+                                                            focusColor: Colors.red,
+//                                                            fillColor: Colors.red,
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                                                            border: InputBorder.none,
+                                                            hintText: 'Enter delivery location',
+
+//                                        labelText: 'Search about meal.'
+                                                          ),
+                                                          /*
+                                                          onChanged: (text) {
+                                                            logger.i('on onChanged of condition 4');
+
+                                                            setState(() => _searchString = text);
+                                                            print("First text field from Condition 04: $text");
+                                                          },
+                                                          onTap:(){
+                                                            print('condition 4');
+                                                            logger.i('on Tap of condition 4');
+                                                            setState(() {
+                                                              _firstTimeCategoryString ='PIZZA';
+                                                            });
+
+                                                          },
+
+                                                          onEditingComplete: (){
+                                                            logger.i('onEditingComplete  of condition 4');
+                                                            print('called onEditing complete');
+                                                            setState(() => _searchString = "");
+                                                          },
+
+                                                          onSubmitted: (String value) async {
+                                                            await showDialog<void>(
+                                                              context: context,
+                                                              builder: (BuildContext context) {
+                                                                return AlertDialog(
+                                                                  title: const Text('Thanks!'),
+                                                                  content: Text ('You typed "$value".'),
+                                                                  actions: <Widget>[
+                                                                    FlatButton(
+                                                                      onPressed: () { Navigator.pop(context); },
+                                                                      child: const Text('OK'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+
+                                                            */
+
+                                                          style: TextStyle(color: Colors.red,fontSize: 15),
+                                                        ),
+
+                                                      )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+
+                                                    ],
+                                                  ),
+                                                ),
+
+                                                // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
+
+                                                // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
+                                                Container(
+                                                  margin:EdgeInsets.symmetric(
+                                                      horizontal: 0,
+                                                      vertical: 0),
+                                                  decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    border: Border.all(
+
+                                                      color: Color(0xffBCBCBD),
+                                                      style: BorderStyle.solid,
+                                                      width: 2.0,
+
+
+                                                    ),
+
+                                                    boxShadow: [
+                                                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                                          color: Color(0xffFFFFFF),
+                                                          blurRadius: 10.0,
+                                                          offset: Offset(0.0, 2.0))
+                                                    ],
+
+
+                                                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                                                  ),
+
+//                                  color: Color(0xffFFFFFF),
+                                                  width: displayWidth(context)/2.5,
+                                                  height: displayHeight(context)/27,
+                                                  padding: EdgeInsets.only(
+                                                      left: 4, top: 3, bottom: 3, right: 3),
+                                                  child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Container(
+
+                                                        height: 25,
+                                                        width: 5,
+                                                        margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                                        child: Icon(
+//                                          Icons.add_shopping_cart,
+                                                          Icons.home,
+                                                          size: 28,
+                                                          color: Color(0xffBCBCBD),
+                                                        ),
+
+
+                                                      ),
+
+                                                      Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                                        alignment: Alignment.center,
+                                                        width:displayWidth(context)/4,
+//                                        color:Colors.purpleAccent,
+                                                        // do it in both Container
+                                                        child: TextField(
+
+                                                          textAlign: TextAlign.center,
+                                                          decoration: InputDecoration(
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                                                            border: InputBorder.none,
+                                                            hintText: 'Enter House/Flat address/number',
+
+//                                        labelText: 'Search about meal.'
+                                                          ),
+                                                          /*
+                                                          onChanged: (text) {
+                                                            logger.i('on onChanged of condition 4');
+
+                                                            setState(() => _searchString = text);
+                                                            print("First text field from Condition 04: $text");
+                                                          },
+                                                          onTap:(){
+                                                            print('condition 4');
+                                                            logger.i('on Tap of condition 4');
+                                                            setState(() {
+                                                              _firstTimeCategoryString ='PIZZA';
+                                                            });
+
+                                                          },
+
+                                                          onEditingComplete: (){
+                                                            logger.i('onEditingComplete  of condition 4');
+                                                            print('called onEditing complete');
+                                                            setState(() => _searchString = "");
+                                                          },
+
+                                                          onSubmitted: (String value) async {
+                                                            await showDialog<void>(
+                                                              context: context,
+                                                              builder: (BuildContext context) {
+                                                                return AlertDialog(
+                                                                  title: const Text('Thanks!'),
+                                                                  content: Text ('You typed "$value".'),
+                                                                  actions: <Widget>[
+                                                                    FlatButton(
+                                                                      onPressed: () { Navigator.pop(context); },
+                                                                      child: const Text('OK'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+
+                                                          */
+
+                                                          style: TextStyle(color: Colors.red,fontSize: 15),
+                                                        ),
+
+                                                      )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+
+                                                    ],
+                                                  ),
+                                                ),
+
+
+
+
+
+                                                // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
+
+                                                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
+                                                Container(
+                                                  margin:EdgeInsets.symmetric(
+                                                      horizontal: 0,
+                                                      vertical: 0),
+                                                  decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    border: Border.all(
+
+                                                      color: Color(0xffBCBCBD),
+                                                      style: BorderStyle.solid,
+                                                      width: 2.0,
+
+
+                                                    ),
+
+                                                    boxShadow: [
+                                                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                                          color: Color(0xffFFFFFF),
+                                                          blurRadius: 10.0,
+                                                          offset: Offset(0.0, 2.0))
+                                                    ],
+
+
+                                                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                                                  ),
+
+//                                  color: Color(0xffFFFFFF),
+                                                  width: displayWidth(context)/2.5,
+                                                  height: displayHeight(context)/27,
+                                                  padding: EdgeInsets.only(
+                                                      left: 4, top: 3, bottom: 3, right: 3),
+                                                  child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Container(
+
+                                                        height: 25,
+                                                        width: 5,
+                                                        margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                                        child: Icon(
+//                                          Icons.add_shopping_cart,
+                                                          Icons.phone,
+                                                          size: 28,
+                                                          color: Color(0xffBCBCBD),
+                                                        ),
+
+
+                                                      ),
+
+                                                      Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                                        alignment: Alignment.center,
+                                                        width:displayWidth(context)/4,
+//                                        color:Colors.purpleAccent,
+                                                        // do it in both Container
+                                                        child: TextField(
+
+                                                          textAlign: TextAlign.center,
+                                                          decoration: InputDecoration(
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                                                            border: InputBorder.none,
+                                                            hintText: 'Enter phone / telephone number',
+
+//                                        labelText: 'Search about meal.'
+                                                          ),
+
+                                                          style: TextStyle(color: Colors.red,fontSize: 15),
+                                                          /*
+                                                          onChanged: (text) {
+                                                            logger.i('on onChanged of condition 4');
+
+                                                            setState(() => _searchString = text);
+                                                            print("First text field from Condition 04: $text");
+                                                          },
+                                                          onTap:(){
+                                                            print('condition 4');
+                                                            logger.i('on Tap of condition 4');
+                                                            setState(() {
+                                                              _firstTimeCategoryString ='PIZZA';
+                                                            });
+
+                                                          },
+
+                                                          onEditingComplete: (){
+                                                            logger.i('onEditingComplete  of condition 4');
+                                                            print('called onEditing complete');
+                                                            setState(() => _searchString = "");
+                                                          },
+
+                                                          onSubmitted: (String value) async {
+                                                            await showDialog<void>(
+                                                              context: context,
+                                                              builder: (BuildContext context) {
+                                                                return AlertDialog(
+                                                                  title: const Text('Thanks!'),
+                                                                  content: Text ('You typed "$value".'),
+                                                                  actions: <Widget>[
+                                                                    FlatButton(
+                                                                      onPressed: () { Navigator.pop(context); },
+                                                                      child: const Text('OK'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                            */
+                                                        ),
+
+                                                      )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+
+                                                    ],
+                                                  ),
+                                                ),
+
+
+                                            // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
+
+                                            // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
+
+                                                Container(
+                                                  margin:EdgeInsets.symmetric(
+                                                      horizontal: 0,
+                                                      vertical: 0),
+                                                  decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                                                    borderRadius: BorderRadius.circular(25),
+                                                    border: Border.all(
+
+                                                      color: Color(0xffBCBCBD),
+                                                      style: BorderStyle.solid,
+                                                      width: 2.0,
+
+
+                                                    ),
+
+                                                    boxShadow: [
+                                                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                                          color: Color(0xffFFFFFF),
+                                                          blurRadius: 10.0,
+                                                          offset: Offset(0.0, 2.0))
+                                                    ],
+
+
+                                                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                                                  ),
+
+//                                  color: Color(0xffFFFFFF),
+                                                  width: displayWidth(context)/2.5,
+                                                  height: displayHeight(context)/27,
+                                                  padding: EdgeInsets.only(
+                                                      left: 4, top: 3, bottom: 3, right: 3),
+                                                  child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: <Widget>[
+                                                      Container(
+
+                                                        height: 25,
+                                                        width: 5,
+                                                        margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                                        child: Icon(
+//                                          Icons.add_shopping_cart,
+                                                          Icons.watch_later,
+                                                          size: 28,
+                                                          color: Color(0xffBCBCBD),
+                                                        ),
+
+
+                                                      ),
+
+                                                      Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                                        alignment: Alignment.center,
+                                                        width:displayWidth(context)/4,
+//                                        color:Colors.purpleAccent,
+                                                        // do it in both Container
+                                                        child: TextField(
+
+                                                          textAlign: TextAlign.center,
+                                                          decoration: InputDecoration(
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                                                            border: InputBorder.none,
+                                                            hintText: 'Enter reach out time',
+
+//                                        labelText: 'Search about meal.'
+                                                          ),
+
+                                                          style: TextStyle(color: Colors.red,fontSize: 15),
+                                                          /*
+                                                          onChanged: (text) {
+                                                            logger.i('on onChanged of condition 4');
+
+                                                            setState(() => _searchString = text);
+                                                            print("First text field from Condition 04: $text");
+                                                          },
+                                                          onTap:(){
+                                                            print('condition 4');
+                                                            logger.i('on Tap of condition 4');
+                                                            setState(() {
+                                                              _firstTimeCategoryString ='PIZZA';
+                                                            });
+
+                                                          },
+
+
+
+                                                          onEditingComplete: (){
+                                                            logger.i('onEditingComplete  of condition 4');
+                                                            print('called onEditing complete');
+                                                            setState(() => _searchString = "");
+                                                          },
+
+                                                           */
+
+                                                          onSubmitted: (String value) async {
+                                                            await showDialog<void>(
+                                                              context: context,
+                                                              builder: (BuildContext context) {
+                                                                return AlertDialog(
+                                                                  title: const Text('Thanks!'),
+                                                                  content: Text ('You typed "$value".'),
+                                                                  actions: <Widget>[
+                                                                    FlatButton(
+                                                                      onPressed: () { Navigator.pop(context); },
+                                                                      child: const Text('OK'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                        ),
+
+                                                      )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+
+                                                    ],
+                                                  ),
+                                                ),
+
+                                            // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+
+
+                                              ],
+                                            ))),
+
+                                          ),
+
+
+
 
 
                                         ],
@@ -594,7 +1195,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget _buildOrderTypeSingletOption(){
+  Widget _buildOrderTypeSingleSelectOption(){
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
 
@@ -613,6 +1214,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
           }
           else {
             List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
+
+//            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
+
+            print('orderTypes: $allOrderTypesSingleSelect');
+            OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect.firstWhere((oneOrderType) =>oneOrderType.isSelected==true);
+            _currentOrderTypeIndex = selectedOne.index;
+
+
             return ListView.builder(
               scrollDirection: Axis.horizontal,
 
@@ -637,16 +1246,57 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
+  IconData getIconForName(String iconName) {
 
+    print ('iconName at getIconForName: $iconName');
+    switch(iconName) {
+      case 'facebook': {
+//        return FontAwesomeIcons.facebook;
+        return FontAwesomeIcons.facebook;
+      }
+      break;
+
+      case 'twitter': {
+        return FontAwesomeIcons.twitter;
+      }
+      break;
+      case 'TakeAway': {
+        return Icons.work;
+      }
+      break;
+      case 'Delivery': {
+        return Icons.local_shipping;
+      }
+      break;
+      case 'Phone': {
+        return Icons.phone_in_talk;
+      }
+      break;
+      case 'DinningRoom': {
+        return Icons.fastfood;
+      }
+      break;
+
+
+
+
+
+      default: {
+        return FontAwesomeIcons.home;
+      }
+    }
+  }
 
   Widget oneSingleDeliveryTypeSelectInShoppingCartPage (OrderTypeSingleSelect x,int index){
 
 //    String color1 = x.itemTextColor.replaceAll('#', '0xff');
 
 //    Color c1 = Color(int.parse(color1));
+//    print('x: ',x.i)
 
-    IconData x = IconData(int.parse(x.iconData));
+//    IconData x = IconData(int.parse(x.iconDataString),fontFamily: 'MaterialIcons');
 
+    print('x.icondataString: ${x.iconDataString}');
     print('x.orderType: ${x.orderType}');
     logger.i('isSelected check at Shopping Cart Page: ',x.isSelected);
 
@@ -661,12 +1311,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      height:displayHeight(context)/30,
 //      width:displayWidth(context)/10,
 
-      child:  x.isSelected == true  ?
+      child:  index == _currentOrderTypeIndex  ?
 
       Container(
 
-        width: 170,
-        height:140,
+        width: 150,
+        height: displayHeight(context) /7,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
@@ -685,33 +1335,42 @@ class _ShoppingCartState extends State<ShoppingCart> {
             borderRadius: BorderRadius.circular(35.0),
           ),
 
-          child:Column(
-            children: <Widget>[
+          child:Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Column(
+              children: <Widget>[
 
-              new Container(
+                new Container(
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                width: 150,
-                height:150,
+                    width:  displayWidth(context)/6.5,
+                    height: displayWidth(context)/6.5,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
 //                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
+                  decoration: BoxDecoration(
+                    border: Border.all(
 //                    color: Colors.black,
-                    color: Colors.black,
-                    style: BorderStyle.solid,
-                    width: 1.0,
+                      color: Colors.black,
+                      style: BorderStyle.solid,
+                      width: 1.0,
 
-                  ),
-                  shape: BoxShape.circle,
+                    ),
+                    shape: BoxShape.circle,
 //                    borderRadius: BorderRadius.all(Radius.circular(20))
-                ),
+                  ),
 //                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
 
 
+                  child: Icon(
+                      getIconForName(orderTypeName),
+                      color: Colors.red,
+                    size: displayWidth(context)/9,
+
+                  ),
 //
 //                child: Icon(IconData(58840, fontFamily: 'MaterialIcons')),
 //                Icon(
@@ -719,9 +1378,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                               color: Colors.red,
 //                  size: 36.0,
 //                ),
-                child: Icon(IconData(), color: Colors.red),
+//                child: Icon(IconData(), color: Colors.red), todo
 
-              ),
+                ),
 //              Container(
 //
 //                alignment: Alignment.center,
@@ -735,25 +1394,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                ),
 //              ),
 
-              Container(
+                Container(
 
-                alignment: Alignment.center,
-                child: Text(
-                  orderTypeName, style:
-                TextStyle(
-                    color:Colors.red,
+                  alignment: Alignment.center,
+                  child: Text(
+                    orderTypeName, style:
+                  TextStyle(
+                      color:Colors.red,
 
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           onPressed: () {
 
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index);
+            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+
+//            setState(() {
+//              _currentOrderTypeIndex=index;
+//            });
+
 
           },
         ),
@@ -762,8 +1427,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ):
 
       Container(
-        width: 170,
-        height:140,
+        width: 150,
+        height: displayHeight(context) /7,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
@@ -780,37 +1445,44 @@ class _ShoppingCartState extends State<ShoppingCart> {
             borderRadius: BorderRadius.circular(35.0),
           ),
 
-          child:Column(
-            children: <Widget>[
+          child:Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Column(
+              children: <Widget>[
 
-              new Container(
+                new Container(
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                width: 150,
-                height:150,
-                decoration: BoxDecoration(
-                  border: Border.all(
+                  width:  displayWidth(context)/6.5,
+                  height: displayWidth(context)/6.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
 //                      color: Colors.red[500],
-                    color: Colors.black,
-                    style: BorderStyle.solid,
-                    width: 1.0,
+                      color: Colors.black,
+                      style: BorderStyle.solid,
+                      width: 1.0,
 
-                  ),
-                  shape: BoxShape.circle,
+                    ),
+                    shape: BoxShape.circle,
 //                    borderRadius: BorderRadius.all(Radius.circular(20))
-                ),
+                  ),
 //                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
 
 
+                  child: Icon(
+                      getIconForName(orderTypeName),
+                      color: Colors.grey,
+                    size: displayWidth(context)/9,
+                  ),
+//                child: Icon(
+//                  Icons.beach_access,
+//                  color: Colors.grey,
+//                  size: 36.0,
+//                ),
 
-                child: Icon(
-                  Icons.beach_access,
-                  color: Colors.grey,
-                  size: 36.0,
                 ),
-
-              ),
 //              Container(
 //
 //                alignment: Alignment.center,
@@ -824,25 +1496,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                ),
 //              ),
 
-              Container(
+                Container(
 
-                alignment: Alignment.center,
-                child: Text(
-                  orderTypeName, style:
-                TextStyle(
-                    color:Colors.red,
+                  alignment: Alignment.center,
+                  child: Text(
+                    orderTypeName, style:
+                  TextStyle(
+                      color:Colors.red,
 
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           onPressed: () {
 
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index);
+            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+
+
+//            setState(() {
+//              _currentOrderTypeIndex=index;
+//            });
+
 
           },
         ),

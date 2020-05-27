@@ -26,7 +26,7 @@ class ShoppingCartBloc implements Bloc {
 
 
 //  List<Order> _curretnOrder = [];
-  int _currentOrderTypeIndex =0;
+
   Order _curretnOrder ;
   List<OrderTypeSingleSelect> _orderType;
 
@@ -92,9 +92,9 @@ class ShoppingCartBloc implements Bloc {
     OrderTypeSingleSelect _takeAway = new OrderTypeSingleSelect(
       borderColor: '0xff739DFA',
       index: 0,
-      isSelected: false,
+      isSelected: true,
       orderType: 'TakeAway',
-      iconData: 'FontAwesomeIcons.facebook',
+      iconDataString: 'FontAwesomeIcons.facebook',
 
       orderIconName: 'flight_takeoff',
     );
@@ -104,7 +104,7 @@ class ShoppingCartBloc implements Bloc {
       index: 1,
       isSelected: false,
       orderType: 'Delivery',
-      iconData: 'FontAwesomeIcons.twitter',
+      iconDataString: 'FontAwesomeIcons.twitter',
 
       orderIconName: 'local_shipping',
     );
@@ -116,7 +116,7 @@ class ShoppingCartBloc implements Bloc {
       index: 2,
       isSelected: false,
       orderType: 'Phone',
-      iconData: 'FontAwesomeIcons.home',
+      iconDataString: 'FontAwesomeIcons.home',
 
       orderIconName: 'phone_in_talk',
     );
@@ -127,7 +127,7 @@ class ShoppingCartBloc implements Bloc {
       index: 3,
       isSelected: false,
       orderType: 'DinningRoom',
-      iconData: 'Icons.audiotrack',
+      iconDataString: 'Icons.audiotrack',
       orderIconName: 'fastfood',
     );
 
@@ -147,16 +147,23 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
-  void setOrderTypeSingleSelectOptionForOrder(OrderTypeSingleSelect x, int index){
+  void setOrderTypeSingleSelectOptionForOrder(OrderTypeSingleSelect x, int newIndex,int oldIndex){
+
+    print('newIndex is $newIndex');
+    print('oldIndex is $oldIndex');
 
 
     List <OrderTypeSingleSelect> singleSelectArray = _orderType;
 //    _currentOrderTypeIndex
 
-    singleSelectArray[_currentOrderTypeIndex].isSelected =
-    !singleSelectArray[_currentOrderTypeIndex].isSelected;
 
-    singleSelectArray[index].isSelected = true;
+    singleSelectArray[oldIndex].isSelected =
+    !singleSelectArray[oldIndex].isSelected;
+
+    singleSelectArray[newIndex].isSelected =
+    !singleSelectArray[newIndex].isSelected;
+
+//    singleSelectArray[index].isSelected = true;
 
 //    x.isSelected= !x.isSelected;
 

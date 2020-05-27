@@ -11,7 +11,7 @@ class OrderTypeSingleSelect {
   String  borderColor;
   String  iconColor;
   bool    isSelected;
-  String iconData;
+  String iconDataString;
 
 
   OrderTypeSingleSelect(
@@ -23,7 +23,7 @@ class OrderTypeSingleSelect {
         this.borderColor,
         this.isSelected,
         this.iconColor,
-        this.iconData,
+        this.iconDataString,
 
       }
       );
