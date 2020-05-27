@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
+import 'package:foodgallery/src/DataLayer/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
 import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
 import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppingCart.dart';
@@ -78,6 +79,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
   String _currentSize;
   int _itemCount = 1;
   int _currentOrderTypeIndex=0;
+  bool showFullOrderType = true;
+
+  final addressController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    addressController.dispose();
+    super.dispose();
+  }
 
 
 
@@ -187,7 +198,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   return GestureDetector(
                     onTap: () {
                       print('s');
-                      Navigator.pop(context);
+//                      Navigator.pop(context);
                       FocusScopeNode currentFocus = FocusScope.of(
                           context);
 
@@ -379,749 +390,57 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                             ),
 
+
+
                                             /*
-                                            Container(
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .start,
-                                                  children: <Widget>[
-                                                    // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                                    // , 2ND PART(ROW) HANDLES THE
-                                                    // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+                                            * INITIAL CHOOSE ORDER TYPE BEGINS HERE.*/
 
-
-                                                    // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                                    // , 2ND PART(ROW) HANDLES THE
-                                                    // DIFFERENT SIZES OF PRODUCTS.
-                                                    // ENDS HERE.
-
-
-                                                    // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
-
-
-                                                  ],
-                                                )
-
-                                            ),
-                                            */
+//                                            showFullOrderType
 
                                             Container(
+//                                        width: displayWidth(context) /1.8,
                                               width: displayWidth(context) / 1.1,
-                                              height: displayHeight(context) / 20,
-                                              color: Color(0xffffffff),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .start
-                                                ,
-                                                crossAxisAlignment: CrossAxisAlignment
-                                                    .center,
-                                                children: <Widget>[
+                                              child:
+                                              AnimatedSwitcher(
+                                                duration: Duration(milliseconds: 1000),
+//
+                                                child: showFullOrderType? animatedWidgetShowFullOrderType():
+                                                animatedWidgetshowSelectedOrderType(),
 
-
-                                                  Container(
-                                                    width: displayWidth(context) /
-                                                        1.5,
-                                                    height: displayHeight(
-                                                        context) / 20,
-                                                    color: Color(0xffffffff),
-
-                                                    child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start
-                                                        ,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .center,
-                                                        children: <Widget>[
-
-                                                          Container(
-                                                            margin: EdgeInsets
-                                                                .fromLTRB(
-                                                                20, 0, 10, 0),
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: Text(
-                                                                'Choose Order Type',
-                                                                style: TextStyle(
-                                                                  fontSize: 30,
-                                                                  fontWeight: FontWeight
-                                                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                                                  color: Color(
-                                                                      0xff000000),
-                                                                )
-                                                            ),
-                                                          ),
-
-                                                          CustomPaint(
-                                                            size: Size(0, 19),
-                                                            painter: LongPainterForChooseOrderType(
-                                                                context),
-                                                          ),
-
-
-
-
-                                                        ]
-                                                    ),
-
-                                                  ),
-
-                                                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                                                  /*
-                                                  Container(
-//                                                  alignment: Alignment.center,
-                                                    padding: EdgeInsets.fromLTRB(
-                                                        0, 2, 0, 0),
-                                                    width: displayWidth(context) /
-                                                        16,
-//                                                height: displayHeight(context)/20,
-                                                    color: Color(0xffffffff),
-//                                                    child:Row(
-//                                                      mainAxisAlignment: MainAxisAlignment.end,
-//                                                      children: <Widget>[
-                                                    child: Container(
-                                                      padding: EdgeInsets
-                                                          .fromLTRB(0, 0, 200, 0),
-                                                      child: Icon(
-
-                                                        Icons.add_shopping_cart,
-                                                        size: 30,
-                                                        color: Color(0xff54463E),
-                                                      ),
-                                                    ),
-
-
-                                                  ),
-                                                  */
-
-
-                                                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-
-
-                                                  ////WWWEEEQQQ
-
-
-
-
-                                                ],
                                               ),
+
+
                                             ),
+
+
+
+                                            /*
+                                            * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
 
 
                                             /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
+
+
+
                                             Container(
-                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                                      padding::::
                                               color:Colors.white,
-//                                            height: 200,
-                                              height: displayHeight(context) /7,
-                                              width: displayWidth(context)
-                                                  - displayWidth(context) /
-                                                      5,
-//                                            width: displayWidth(context) * 0.57,
-                                              child:  _buildOrderTypeSingleSelectOption(),
+//                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                        width: displayWidth(context) /1.8,
+                                              width: displayWidth(context) / 1.1,
+                                              child:
+                                              AnimatedSwitcher(
+                                                duration: Duration(milliseconds: 1000),
+//
+                                                child: showFullOrderType? animatedObscuredTextInputContainer():
+                                                animatedUnObscuredTextInputContainer(),
+
+                                              ),
+
 
                                             ),
 
-                                            Container(
-                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                                      padding::::
-                                              color:Colors.yellow,
-//                                            height: 200,
-                                              height: displayHeight(context) /4,
-                                              width: displayWidth(context)
-                                                  - displayWidth(context) /
-                                                      5,
-//                                            width: displayWidth(context) * 0.57,
-                                              child:  Center(child: Container(
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                children: <Widget>[
+                                            //xxxx
 
-                                                  Container(
-                                                      alignment: Alignment.center,
-
-                                                      child: Text('Enter user address',
-                                                        style: TextStyle(
-                                                          color:
-                                                        Color(0xffFC0000),
-                                                          fontSize: 30,
-                                                        ),)
-                                                  ),
-
-
-                                                  // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
-                                                  Container(
-                                                    margin:EdgeInsets.symmetric(
-                                                        horizontal: 0,
-                                                        vertical: 0),
-                                                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                                                      borderRadius: BorderRadius.circular(25),
-                                                      border: Border.all(
-
-                                                        color: Color(0xffBCBCBD),
-                                                        style: BorderStyle.solid,
-                                                        width: 2.0,
-
-
-                                                      ),
-
-                                                      boxShadow: [
-                                                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                                            color: Color(0xffFFFFFF),
-                                                            blurRadius: 10.0,
-                                                            offset: Offset(0.0, 2.0))
-                                                      ],
-
-
-                                                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                                                    ),
-
-//                                  color: Color(0xffFFFFFF),
-                                                    width: displayWidth(context)/2.5,
-                                                    height: displayHeight(context)/27,
-                                                    padding: EdgeInsets.only(
-                                                        left: 4, top: 3, bottom: 3, right: 3),
-                                                    child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: <Widget>[
-                                                        Container(
-
-                                                          height: 25,
-                                                          width: 5,
-                                                          margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
-                                                          child: Icon(
-//                                          Icons.add_shopping_cart,
-                                                            Icons.location_on,
-
-                                                            size: 28,
-                                                            color: Color(0xffBCBCBD),
-                                                          ),
-
-
-                                                        ),
-
-                                                        Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
-                                                          alignment: Alignment.center,
-                                                          width:displayWidth(context)/4,
-//                                        color:Colors.purpleAccent,
-                                                          // do it in both Container
-                                                          child: TextField(
-
-
-                                                            textAlign: TextAlign.center,
-                                                            decoration: InputDecoration(
-                                                              focusColor: Colors.red,
-//                                                            fillColor: Colors.red,
-//                                            prefixIcon: new Icon(Icons.search),
-//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//                                        border: Border.all(color: Colors.white, width: 2),
-                                                              border: InputBorder.none,
-                                                              hintText: 'Enter delivery location',
-                                                              hintStyle: TextStyle(color: Colors.red,fontSize: 15),
-
-
-
-//                                        labelText: 'Search about meal.'
-                                                            ),
-                                                            /*
-                                                            onChanged: (text) {
-                                                              logger.i('on onChanged of condition 4');
-
-                                                              setState(() => _searchString = text);
-                                                              print("First text field from Condition 04: $text");
-                                                            },
-                                                            onTap:(){
-                                                              print('condition 4');
-                                                              logger.i('on Tap of condition 4');
-                                                              setState(() {
-                                                                _firstTimeCategoryString ='PIZZA';
-                                                              });
-
-                                                            },
-
-                                                            onEditingComplete: (){
-                                                              logger.i('onEditingComplete  of condition 4');
-                                                              print('called onEditing complete');
-                                                              setState(() => _searchString = "");
-                                                            },
-
-                                                            onSubmitted: (String value) async {
-                                                              await showDialog<void>(
-                                                                context: context,
-                                                                builder: (BuildContext context) {
-                                                                  return AlertDialog(
-                                                                    title: const Text('Thanks!'),
-                                                                    content: Text ('You typed "$value".'),
-                                                                    actions: <Widget>[
-                                                                      FlatButton(
-                                                                        onPressed: () { Navigator.pop(context); },
-                                                                        child: const Text('OK'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
-
-                                                              */
-
-                                                            style: TextStyle(color: Colors.red,fontSize: 15),
-                                                          ),
-
-                                                        )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                                  // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
-
-                                                  // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
-                                                  Container(
-                                                    margin:EdgeInsets.symmetric(
-                                                        horizontal: 0,
-                                                        vertical: 0),
-                                                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                                                      borderRadius: BorderRadius.circular(25),
-                                                      border: Border.all(
-
-                                                        color: Color(0xffBCBCBD),
-                                                        style: BorderStyle.solid,
-                                                        width: 2.0,
-
-
-                                                      ),
-
-                                                      boxShadow: [
-                                                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                                            color: Color(0xffFFFFFF),
-                                                            blurRadius: 10.0,
-                                                            offset: Offset(0.0, 2.0))
-                                                      ],
-
-
-                                                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                                                    ),
-
-//                                  color: Color(0xffFFFFFF),
-                                                    width: displayWidth(context)/2.5,
-                                                    height: displayHeight(context)/27,
-                                                    padding: EdgeInsets.only(
-                                                        left: 4, top: 3, bottom: 3, right: 3),
-                                                    child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: <Widget>[
-                                                        Container(
-
-                                                          height: 25,
-                                                          width: 5,
-                                                          margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
-                                                          child: Icon(
-//                                          Icons.add_shopping_cart,
-                                                            Icons.home,
-                                                            size: 28,
-                                                            color: Color(0xffBCBCBD),
-                                                          ),
-
-
-                                                        ),
-
-                                                        Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
-                                                          alignment: Alignment.center,
-                                                          width:displayWidth(context)/4,
-//                                        color:Colors.purpleAccent,
-                                                          // do it in both Container
-                                                          child: TextField(
-
-                                                            textAlign: TextAlign.center,
-                                                            decoration: InputDecoration(
-//                                            prefixIcon: new Icon(Icons.search),
-//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//                                        border: Border.all(color: Colors.white, width: 2),
-                                                              border: InputBorder.none,
-                                                              hintText: 'Enter House/Flat address/number',
-                                                              hintStyle: TextStyle(color: Colors.red,fontSize: 15),
-
-//                                        labelText: 'Search about meal.'
-                                                            ),
-                                                            /*
-                                                            onChanged: (text) {
-                                                              logger.i('on onChanged of condition 4');
-
-                                                              setState(() => _searchString = text);
-                                                              print("First text field from Condition 04: $text");
-                                                            },
-                                                            onTap:(){
-                                                              print('condition 4');
-                                                              logger.i('on Tap of condition 4');
-                                                              setState(() {
-                                                                _firstTimeCategoryString ='PIZZA';
-                                                              });
-
-                                                            },
-
-                                                            onEditingComplete: (){
-                                                              logger.i('onEditingComplete  of condition 4');
-                                                              print('called onEditing complete');
-                                                              setState(() => _searchString = "");
-                                                            },
-
-                                                            onSubmitted: (String value) async {
-                                                              await showDialog<void>(
-                                                                context: context,
-                                                                builder: (BuildContext context) {
-                                                                  return AlertDialog(
-                                                                    title: const Text('Thanks!'),
-                                                                    content: Text ('You typed "$value".'),
-                                                                    actions: <Widget>[
-                                                                      FlatButton(
-                                                                        onPressed: () { Navigator.pop(context); },
-                                                                        child: const Text('OK'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
-
-                                                            */
-
-                                                            style: TextStyle(color: Colors.red,fontSize: 15),
-                                                          ),
-
-                                                        )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                                                      ],
-                                                    ),
-                                                  ),
-
-
-
-
-
-                                                  // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
-
-                                                  // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
-                                                  Container(
-                                                    margin:EdgeInsets.symmetric(
-                                                        horizontal: 0,
-                                                        vertical: 0),
-                                                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                                                      borderRadius: BorderRadius.circular(25),
-                                                      border: Border.all(
-
-                                                        color: Color(0xffBCBCBD),
-                                                        style: BorderStyle.solid,
-                                                        width: 2.0,
-
-
-                                                      ),
-
-                                                      boxShadow: [
-                                                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                                            color: Color(0xffFFFFFF),
-                                                            blurRadius: 10.0,
-                                                            offset: Offset(0.0, 2.0))
-                                                      ],
-
-
-                                                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                                                    ),
-
-//                                  color: Color(0xffFFFFFF),
-                                                    width: displayWidth(context)/2.5,
-                                                    height: displayHeight(context)/27,
-                                                    padding: EdgeInsets.only(
-                                                        left: 4, top: 3, bottom: 3, right: 3),
-                                                    child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: <Widget>[
-                                                        Container(
-
-                                                          height: 25,
-                                                          width: 5,
-                                                          margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
-                                                          child: Icon(
-//                                          Icons.add_shopping_cart,
-                                                            Icons.phone,
-                                                            size: 28,
-                                                            color: Color(0xffBCBCBD),
-                                                          ),
-
-
-                                                        ),
-
-                                                        Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
-                                                          alignment: Alignment.center,
-                                                          width:displayWidth(context)/4,
-//                                        color:Colors.purpleAccent,
-                                                          // do it in both Container
-                                                          child: TextField(
-
-                                                            textAlign: TextAlign.center,
-                                                            decoration: InputDecoration(
-//                                            prefixIcon: new Icon(Icons.search),
-//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//                                        border: Border.all(color: Colors.white, width: 2),
-                                                              border: InputBorder.none,
-                                                              hintText: 'Enter phone / telephone number',
-                                                              hintStyle: TextStyle(color: Colors.red,fontSize: 15),
-
-//                                        labelText: 'Search about meal.'
-                                                            ),
-
-                                                            style: TextStyle(color: Colors.red,fontSize: 15),
-                                                            /*
-                                                            onChanged: (text) {
-                                                              logger.i('on onChanged of condition 4');
-
-                                                              setState(() => _searchString = text);
-                                                              print("First text field from Condition 04: $text");
-                                                            },
-                                                            onTap:(){
-                                                              print('condition 4');
-                                                              logger.i('on Tap of condition 4');
-                                                              setState(() {
-                                                                _firstTimeCategoryString ='PIZZA';
-                                                              });
-
-                                                            },
-
-                                                            onEditingComplete: (){
-                                                              logger.i('onEditingComplete  of condition 4');
-                                                              print('called onEditing complete');
-                                                              setState(() => _searchString = "");
-                                                            },
-
-                                                            onSubmitted: (String value) async {
-                                                              await showDialog<void>(
-                                                                context: context,
-                                                                builder: (BuildContext context) {
-                                                                  return AlertDialog(
-                                                                    title: const Text('Thanks!'),
-                                                                    content: Text ('You typed "$value".'),
-                                                                    actions: <Widget>[
-                                                                      FlatButton(
-                                                                        onPressed: () { Navigator.pop(context); },
-                                                                        child: const Text('OK'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
-                                                              */
-                                                          ),
-
-                                                        )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                                                      ],
-                                                    ),
-                                                  ),
-
-
-                                              // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
-
-                                              // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
-
-                                                  Container(
-                                                    margin:EdgeInsets.symmetric(
-                                                        horizontal: 0,
-                                                        vertical: 0),
-                                                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                                                      borderRadius: BorderRadius.circular(25),
-                                                      border: Border.all(
-
-                                                        color: Color(0xffBCBCBD),
-                                                        style: BorderStyle.solid,
-                                                        width: 2.0,
-
-
-                                                      ),
-
-                                                      boxShadow: [
-                                                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                                            color: Color(0xffFFFFFF),
-                                                            blurRadius: 10.0,
-                                                            offset: Offset(0.0, 2.0))
-                                                      ],
-
-
-                                                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                                                    ),
-
-//                                  color: Color(0xffFFFFFF),
-                                                    width: displayWidth(context)/2.5,
-                                                    height: displayHeight(context)/27,
-                                                    padding: EdgeInsets.only(
-                                                        left: 4, top: 3, bottom: 3, right: 3),
-                                                    child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: <Widget>[
-                                                        Container(
-
-                                                          height: 25,
-                                                          width: 5,
-                                                          margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
-                                                          child: Icon(
-//                                          Icons.add_shopping_cart,
-                                                            Icons.watch_later,
-                                                            size: 28,
-                                                            color: Color(0xffBCBCBD),
-                                                          ),
-
-
-                                                        ),
-
-                                                        Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
-                                                          alignment: Alignment.center,
-                                                          width:displayWidth(context)/4,
-//                                        color:Colors.purpleAccent,
-                                                          // do it in both Container
-                                                          child: TextField(
-
-                                                            textAlign: TextAlign.center,
-                                                            decoration: InputDecoration(
-//                                            prefixIcon: new Icon(Icons.search),
-//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//                                        border: Border.all(color: Colors.white, width: 2),
-                                                              border: InputBorder.none,
-                                                              hintText: 'Enter reach out time',
-                                                              hintStyle: TextStyle(color: Colors.red,fontSize: 15),
-
-//                                        labelText: 'Search about meal.'
-                                                            ),
-
-                                                            style: TextStyle(color: Colors.red,fontSize: 15),
-                                                            /*
-                                                            onChanged: (text) {
-                                                              logger.i('on onChanged of condition 4');
-
-                                                              setState(() => _searchString = text);
-                                                              print("First text field from Condition 04: $text");
-                                                            },
-                                                            onTap:(){
-                                                              print('condition 4');
-                                                              logger.i('on Tap of condition 4');
-                                                              setState(() {
-                                                                _firstTimeCategoryString ='PIZZA';
-                                                              });
-
-                                                            },
-
-
-
-                                                            onEditingComplete: (){
-                                                              logger.i('onEditingComplete  of condition 4');
-                                                              print('called onEditing complete');
-                                                              setState(() => _searchString = "");
-                                                            },
-
-                                                             */
-
-                                                            onSubmitted: (String value) async {
-                                                              await showDialog<void>(
-                                                                context: context,
-                                                                builder: (BuildContext context) {
-                                                                  return AlertDialog(
-                                                                    title: const Text('Thanks!'),
-                                                                    content: Text ('You typed "$value".'),
-                                                                    actions: <Widget>[
-                                                                      FlatButton(
-                                                                        onPressed: () { Navigator.pop(context); },
-                                                                        child: const Text('OK'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
-                                                          ),
-
-                                                        )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                              // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
-
-
-                                                ],
-                                              ))),
-
-                                            ),
 
 
 
@@ -1148,6 +467,254 @@ class _ShoppingCartState extends State<ShoppingCart> {
           )
       );
     }
+  }
+
+  Widget animatedWidgetShowFullOrderType() {
+    return
+      Container(
+        height: displayHeight(context) / 20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +  displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: displayWidth(context) / 1.1,
+              height: displayHeight(context) / 20,
+              color: Color(0xffffffff),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment
+                    .start
+                ,
+                crossAxisAlignment: CrossAxisAlignment
+                    .center,
+                children: <Widget>[
+
+
+                  Container(
+                    width: displayWidth(context) /
+                        1.5,
+                    height: displayHeight(
+                        context) / 20,
+                    color: Color(0xffffffff),
+
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start
+                        ,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
+
+                          Container(
+                            margin: EdgeInsets
+                                .fromLTRB(
+                                20, 0, 10, 0),
+                            alignment: Alignment
+                                .center,
+                            child: Text(
+                                'Choose Order Type',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight
+                                      .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                  color: Color(
+                                      0xff000000),
+                                )
+                            ),
+                          ),
+
+                          CustomPaint(
+                            size: Size(0, 19),
+                            painter: LongPainterForChooseOrderType(
+                                context),
+                          ),
+
+
+
+
+                        ]
+                    ),
+
+                  ),
+
+                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                  /*
+                                                        Container(
+//                                                  alignment: Alignment.center,
+                                                          padding: EdgeInsets.fromLTRB(
+                                                              0, 2, 0, 0),
+                                                          width: displayWidth(context) /
+                                                              16,
+//                                                height: displayHeight(context)/20,
+                                                          color: Color(0xffffffff),
+//                                                    child:Row(
+//                                                      mainAxisAlignment: MainAxisAlignment.end,
+//                                                      children: <Widget>[
+                                                          child: Container(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(0, 0, 200, 0),
+                                                            child: Icon(
+
+                                                              Icons.add_shopping_cart,
+                                                              size: 30,
+                                                              color: Color(0xff54463E),
+                                                            ),
+                                                          ),
+
+
+                                                        ),
+                                                        */
+
+
+                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+
+
+                  ////WWWEEEQQQ
+
+
+
+
+                ],
+              ),
+            ),
+
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                                      padding::::
+              color:Colors.white,
+//                                            height: 200,
+              height: displayHeight(context) /7,
+              width: displayWidth(context)
+                  - displayWidth(context) /
+                      5,
+//                                            width: displayWidth(context) * 0.57,
+              child:  _buildOrderTypeSingleSelectOption(),
+
+            ),
+          ],
+        ),
+      );
+  }
+
+  Widget animatedWidgetshowSelectedOrderType() {
+    return Container(
+      width: displayWidth(context) / 1.1,
+      height: displayHeight(context) / 20,
+      color: Color(0xffffffff),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+
+
+          Container(
+            width: displayWidth(context) /
+                1.5,
+            height: displayHeight(
+                context) / 20,
+            color: Color(0xffffffff),
+
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment
+                    .start
+                ,
+                crossAxisAlignment: CrossAxisAlignment
+                    .center,
+                children: <Widget>[
+
+                  Container(
+                    margin: EdgeInsets
+                        .fromLTRB(
+                        20, 0, 10, 0),
+                    alignment: Alignment
+                        .center,
+                    child: Text(
+                        'Choose Order Type',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight
+                              .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                          color: Color(
+                              0xff000000),
+                        )
+                    ),
+                  ),
+
+                  CustomPaint(
+                    size: Size(0, 19),
+                    painter: LongPainterForAnimatedWidgetShowSelectedOrderType(
+                        context),
+                  ),
+
+                ]
+            ),
+
+          ),
+
+        ],
+      ),
+    );
+  }
+
+  Widget animatedUnObscuredTextInputContainer(){
+
+    print('at animated Un Obscured Text Input Container');
+    return
+      Container(
+          padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                                      padding::::
+          color:Colors.white,
+//                                            height: 200,
+          height: displayHeight(context) /4,
+          width: displayWidth(context)
+              - displayWidth(context) /
+                  5,
+//                                            width: displayWidth(context) * 0.57,
+
+          child: _buildShoppingCartInputFields()
+
+
+      );
+
+
+  }
+
+  Widget animatedObscuredTextInputContainer(){
+//    child:  AbsorbPointer(
+//        child: _buildShoppingCartInputFields()
+//    ),
+
+   print('at animated Obscured Text Input Container');
+    return
+    AbsorbPointer(
+        child: Opacity(
+          opacity:0.5,
+          child: Container(
+//            Colors.white.withOpacity(0.10),
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                                      padding::::
+              color:Colors.white,
+//                                            height: 200,
+              height: displayHeight(context) /4,
+              width: displayWidth(context)
+                  - displayWidth(context) /
+                      5,
+//                                            width: displayWidth(context) * 0.57,
+              /*
+                                                    child:  AbsorbPointer(
+                                                      child: _buildShoppingCartInputFields()
+                                                  ),
+                                                  */
+              child: _buildShoppingCartInputFields()
+
+
+          ),
+        ),
+      );
   }
 
 
@@ -1208,11 +775,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //   width: displayWidth(context) * 0.57,
 
 
-    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
+    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     return StreamBuilder(
-        stream: foodItemDetailsbloc.getCurrentOrderTypeSingleSelectStream,
-        initialData: foodItemDetailsbloc.getCurrentOrder,
+        stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
+        initialData: shoppingCartbloc.getCurrentOrder,
 
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -1250,6 +817,641 @@ class _ShoppingCartState extends State<ShoppingCart> {
         }
 
       // M VSM ORG VS TODO. ENDS HERE.
+    );
+
+  }
+
+
+  Widget _buildShoppingCartInputFields(){
+
+    //    CustomerInformation
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    return StreamBuilder(
+        stream: shoppingCartBloc.getCurrentCustomerInformationStream,
+        initialData: shoppingCartBloc.getCurrentCustomerInfo,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+            return Container(child: Text('Null'));
+          }
+          else {
+
+            CustomerInformation currentUser =  snapshot.data;
+
+            return Center(
+
+                child: Container(
+//                  color: Colors.green,
+//                    color:Colors.white.withOpacity(0.9),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+
+                        Container(
+                            alignment: Alignment.center,
+
+                            child: Text('Enter user address',
+                              style: TextStyle(
+                                color:
+                                Color(0xffFC0000),
+                                fontSize: 30,
+                              ),)
+                        ),
+
+
+                        // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: 0),
+                          decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+
+                              color: Color(0xffBCBCBD),
+                              style: BorderStyle.solid,
+                              width: 2.0,
+
+
+                            ),
+
+                            boxShadow: [
+                              BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                  color: Color(0xffFFFFFF),
+                                  blurRadius: 10.0,
+                                  offset: Offset(0.0, 2.0))
+                            ],
+
+
+                            color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                          ),
+
+//                                  color: Color(0xffFFFFFF),
+                          width: displayWidth(context) / 2.5,
+                          height: displayHeight(context) / 27,
+                          padding: EdgeInsets.only(
+                              left: 4, top: 3, bottom: 3, right: 3),
+                          child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+
+                                height: 25,
+                                width: 5,
+                                margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                child: Icon(
+//                                          Icons.add_shopping_cart,
+                                  Icons.location_on,
+
+                                  size: 28,
+                                  color: Color(0xffBCBCBD),
+                                ),
+
+
+                              ),
+
+                              Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                alignment: Alignment.center,
+                                width: displayWidth(context) / 4,
+//                                        color:Colors.purpleAccent,
+                                // do it in both Container
+                                child: TextField(
+                                  controller: addressController,
+
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+                                    focusColor: Colors.red,
+//                                                            fillColor: Colors.red,
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                                    border: InputBorder.none,
+                                    hintText: 'Enter delivery location',
+                                    hintStyle: TextStyle(
+                                        color: Colors.red, fontSize: 15),
+
+//                                      currentUser
+//                                        labelText: 'Search about meal.'
+                                  ),
+
+                                  onChanged: (text) {
+                                    //RRRR
+
+                                    final shoppingCartBloc = BlocProvider.of<
+                                        ShoppingCartBloc>(context);
+//
+                                    shoppingCartBloc.setAddressForOrder(text);
+
+                                    setState(() => showFullOrderType = false);
+                                  },
+
+                                  onTap: () {
+                                    setState(() => showFullOrderType = false);
+                                  },
+                                  /*
+
+                                                            onEditingComplete: (){
+                                                              logger.i('onEditingComplete  of condition 4');
+                                                              print('called onEditing complete');
+                                                              setState(() => _searchString = "");
+                                                            },
+
+
+
+                                                            onSubmitted: (String value) async {
+                                                              await showDialog<void>(
+                                                                context: context,
+                                                                builder: (BuildContext context) {
+                                                                  return AlertDialog(
+                                                                    title: const Text('Thanks!'),
+                                                                    content: Text ('You typed "$value".'),
+                                                                    actions: <Widget>[
+                                                                      FlatButton(
+                                                                        onPressed: () { Navigator.pop(context); },
+                                                                        child: const Text('OK'),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              );
+                                                            },
+                          */
+
+
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 15),
+                                ),
+
+                              )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+
+                            ],
+                          ),
+                        ),
+
+                        // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
+
+                        // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: 0),
+                          decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+
+                              color: Color(0xffBCBCBD),
+                              style: BorderStyle.solid,
+                              width: 2.0,
+
+
+                            ),
+
+                            boxShadow: [
+                              BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                  color: Color(0xffFFFFFF),
+                                  blurRadius: 10.0,
+                                  offset: Offset(0.0, 2.0))
+                            ],
+
+
+                            color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                          ),
+
+//                                  color: Color(0xffFFFFFF),
+                          width: displayWidth(context) / 2.5,
+                          height: displayHeight(context) / 27,
+                          padding: EdgeInsets.only(
+                              left: 4, top: 3, bottom: 3, right: 3),
+                          child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+
+                                height: 25,
+                                width: 5,
+                                margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                child: Icon(
+//                                          Icons.add_shopping_cart,
+                                  Icons.home,
+                                  size: 28,
+                                  color: Color(0xffBCBCBD),
+                                ),
+
+
+                              ),
+
+                              Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                alignment: Alignment.center,
+                                width: displayWidth(context) / 4,
+//                                        color:Colors.purpleAccent,
+                                // do it in both Container
+                                child: TextField(
+
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                                    border: InputBorder.none,
+                                    hintText: 'Enter House/Flat address/number',
+                                    hintStyle: TextStyle(
+                                        color: Colors.red, fontSize: 15),
+
+//                                        labelText: 'Search about meal.'
+                                  ),
+
+                                  onChanged: (text) {
+                                    final shoppingCartBloc = BlocProvider.of<
+                                        ShoppingCartBloc>(context);
+//
+                                    shoppingCartBloc
+                                        .setHouseorFlatNumberForOrder(
+                                        text);
+
+                                    setState(() => showFullOrderType = false);
+                                  },
+
+
+                                  onTap: () {
+                                    setState(() => showFullOrderType = false);
+                                  },
+                                  /*
+
+                                                            onEditingComplete: (){
+                                                              logger.i('onEditingComplete  of condition 4');
+                                                              print('called onEditing complete');
+                                                              setState(() => _searchString = "");
+                                                            },
+
+                                                            onSubmitted: (String value) async {
+                                                              await showDialog<void>(
+                                                                context: context,
+                                                                builder: (BuildContext context) {
+                                                                  return AlertDialog(
+                                                                    title: const Text('Thanks!'),
+                                                                    content: Text ('You typed "$value".'),
+                                                                    actions: <Widget>[
+                                                                      FlatButton(
+                                                                        onPressed: () { Navigator.pop(context); },
+                                                                        child: const Text('OK'),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              );
+                                                            },
+
+                                                            */
+
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 15),
+                                ),
+
+                              )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+
+                            ],
+                          ),
+                        ),
+
+
+                        // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
+
+                        // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: 0),
+                          decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+
+                              color: Color(0xffBCBCBD),
+                              style: BorderStyle.solid,
+                              width: 2.0,
+
+
+                            ),
+
+                            boxShadow: [
+                              BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                  color: Color(0xffFFFFFF),
+                                  blurRadius: 10.0,
+                                  offset: Offset(0.0, 2.0))
+                            ],
+
+
+                            color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                          ),
+
+//                                  color: Color(0xffFFFFFF),
+                          width: displayWidth(context) / 2.5,
+                          height: displayHeight(context) / 27,
+                          padding: EdgeInsets.only(
+                              left: 4, top: 3, bottom: 3, right: 3),
+                          child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+
+                                height: 25,
+                                width: 5,
+                                margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                child: Icon(
+//                                          Icons.add_shopping_cart,
+                                  Icons.phone,
+                                  size: 28,
+                                  color: Color(0xffBCBCBD),
+                                ),
+
+
+                              ),
+
+                              Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                alignment: Alignment.center,
+                                width: displayWidth(context) / 4,
+//                                        color:Colors.purpleAccent,
+                                // do it in both Container
+                                child: TextField(
+
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                                    border: InputBorder.none,
+                                    hintText: 'Enter phone / telephone number',
+                                    hintStyle: TextStyle(
+                                        color: Colors.red, fontSize: 15),
+
+//                                        labelText: 'Search about meal.'
+                                  ),
+
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 15),
+
+                                  onChanged: (text) {
+                                    print("33: $text");
+
+                                    final shoppingCartBloc = BlocProvider.of<
+                                        ShoppingCartBloc>(context);
+//
+                                    shoppingCartBloc.setPhoneNumberForOrder(
+                                        text);
+
+                                    setState(() => showFullOrderType = false);
+                                  },
+
+
+                                  onTap: () {
+                                    setState(() => showFullOrderType = false);
+                                  },
+                                  /*
+
+                                                            onEditingComplete: (){
+                                                              logger.i('onEditingComplete  of condition 4');
+                                                              print('called onEditing complete');
+                                                              setState(() => _searchString = "");
+                                                            },
+
+                                                            onSubmitted: (String value) async {
+                                                              await showDialog<void>(
+                                                                context: context,
+                                                                builder: (BuildContext context) {
+                                                                  return AlertDialog(
+                                                                    title: const Text('Thanks!'),
+                                                                    content: Text ('You typed "$value".'),
+                                                                    actions: <Widget>[
+                                                                      FlatButton(
+                                                                        onPressed: () { Navigator.pop(context); },
+                                                                        child: const Text('OK'),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              );
+                                                            },
+                                                              */
+                                ),
+
+                              )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+
+                            ],
+                          ),
+                        ),
+
+
+                        // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
+
+                        // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
+
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: 0),
+                          decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+
+                              color: Color(0xffBCBCBD),
+                              style: BorderStyle.solid,
+                              width: 2.0,
+
+
+                            ),
+
+                            boxShadow: [
+                              BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                  color: Color(0xffFFFFFF),
+                                  blurRadius: 10.0,
+                                  offset: Offset(0.0, 2.0))
+                            ],
+
+
+                            color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                          ),
+
+//                                  color: Color(0xffFFFFFF),
+                          width: displayWidth(context) / 2.5,
+                          height: displayHeight(context) / 27,
+                          padding: EdgeInsets.only(
+                              left: 4, top: 3, bottom: 3, right: 3),
+                          child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+
+                                height: 25,
+                                width: 5,
+                                margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                child: Icon(
+//                                          Icons.add_shopping_cart,
+                                  Icons.watch_later,
+                                  size: 28,
+                                  color: Color(0xffBCBCBD),
+                                ),
+
+
+                              ),
+
+                              Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                alignment: Alignment.center,
+                                width: displayWidth(context) / 4,
+//                                        color:Colors.purpleAccent,
+                                // do it in both Container
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                                    border: InputBorder.none,
+                                    hintText: 'Enter reach out time',
+                                    hintStyle: TextStyle(
+                                        color: Colors.red, fontSize: 15),
+
+//                                        labelText: 'Search about meal.'
+                                  ),
+
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 15),
+
+                                  onChanged: (text) {
+                                    print("0444: $text");
+
+
+                                    print("33: $text");
+                                    final shoppingCartBloc = BlocProvider.of<
+                                        ShoppingCartBloc>(context);
+
+                                    shoppingCartBloc.setETAForOrder(text);
+                                    setState(() => showFullOrderType = false);
+                                  },
+
+                                  onTap: () {
+                                    setState(() => showFullOrderType = false);
+                                  },
+                                  /*
+
+
+
+                                                            onEditingComplete: (){
+                                                              logger.i('onEditingComplete  of condition 4');
+                                                              print('called onEditing complete');
+                                                              setState(() => _searchString = "");
+                                                            },
+
+
+
+                          onSubmitted: (String value) async {
+                            await showDialog<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Thanks!'),
+                                  content: Text ('You typed "$value".'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      onPressed: () { Navigator.pop(context); },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          */
+                                ),
+
+                              )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+
+                            ],
+                          ),
+                        ),
+
+                        // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+
+
+                      ],
+                    )
+                )
+
+            );
+          }
+
+        }
     );
 
   }
@@ -1353,8 +1555,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                    width:  displayWidth(context)/6.5,
-                    height: displayWidth(context)/6.5,
+                  width:  displayWidth(context)/6.5,
+                  height: displayWidth(context)/6.5,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -1374,8 +1576,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   child: Icon(
-                      getIconForName(orderTypeName),
-                      color: Colors.red,
+                    getIconForName(orderTypeName),
+                    color: Colors.red,
                     size: displayWidth(context)/9,
 
                   ),
@@ -1480,8 +1682,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   child: Icon(
-                      getIconForName(orderTypeName),
-                      color: Colors.grey,
+                    getIconForName(orderTypeName),
+                    color: Colors.grey,
                     size: displayWidth(context)/9,
                   ),
 //                child: Icon(
@@ -1580,6 +1782,30 @@ class LongPainterForChooseOrderType extends CustomPainter {
 
 //    canvas.drawLine(...);
     final p1 = Offset(displayWidth(context)/2.9, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(10, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
+class LongPainterForAnimatedWidgetShowSelectedOrderType extends CustomPainter {
+
+  final BuildContext context;
+  LongPainterForAnimatedWidgetShowSelectedOrderType(this.context);
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(displayWidth(context)/3.9, 15); //(X,Y) TO (X,Y)
     final p2 = Offset(10, 15);
     final paint = Paint()
       ..color = Color(0xff000000)
