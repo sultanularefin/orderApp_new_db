@@ -9,6 +9,7 @@ import 'package:logger/logger.dart';
 import 'package:foodgallery/src/DataLayer/firebase_client.dart';
 import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/Order.dart';
+import 'package:foodgallery/src/DataLayer/OrderTypeSingleSelect.dart';
 
 //MODELS
 
@@ -25,15 +26,22 @@ class ShoppingCartBloc implements Bloc {
 
 
 //  List<Order> _curretnOrder = [];
+  int _currentOrderTypeIndex =0;
   Order _curretnOrder ;
+  List<OrderTypeSingleSelect> _orderType;
 
 
 //  List<Order> get getCurrentOrder => _curretnOrder;
   Order get getCurrentOrder => _curretnOrder;
+  List<OrderTypeSingleSelect> get getCurrentOrderType => _orderType;
+
 
   final _orderController = StreamController <Order>();
+  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>();
+
 
   Stream<Order> get getCurrentOrderStream => _orderController.stream;
+  Stream  <List<OrderTypeSingleSelect>> get getCurrentOrderTypeSingleSelectStream => _orderTypeController.stream;
 
 
 
@@ -43,6 +51,7 @@ class ShoppingCartBloc implements Bloc {
 
   ShoppingCartBloc(
       /*FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped */
+
 
       Order x
       ) {
@@ -65,18 +74,106 @@ class ShoppingCartBloc implements Bloc {
 
     print('food Item name in Shopping Cart BlocK ${x.foodItemName}');
 
+    initiateOrderTypeSingleSelectOptions();
+
     _curretnOrder=x;
     _orderController.sink.add(x);
+
+
 
   }
 // CONSTRUCTOR ENDS HERE.
 
 
 
+  void initiateOrderTypeSingleSelectOptions()
+  {
+
+    OrderTypeSingleSelect _takeAway = new OrderTypeSingleSelect(
+      borderColor: '0xff739DFA',
+      index: 0,
+      isSelected: false,
+      orderType: 'TakeAway',
+      iconData: 'FontAwesomeIcons.facebook',
+
+      orderIconName: 'flight_takeoff',
+    );
+
+    OrderTypeSingleSelect _delivery = new OrderTypeSingleSelect(
+      borderColor: '0xff95CB04',
+      index: 1,
+      isSelected: false,
+      orderType: 'Delivery',
+      iconData: 'FontAwesomeIcons.twitter',
+
+      orderIconName: 'local_shipping',
+    );
+
+
+//     0xffFEE295 false
+    OrderTypeSingleSelect _phone = new OrderTypeSingleSelect(
+      borderColor: '0xffFEE295',
+      index: 2,
+      isSelected: false,
+      orderType: 'Phone',
+      iconData: 'FontAwesomeIcons.home',
+
+      orderIconName: 'phone_in_talk',
+    );
+
+
+    OrderTypeSingleSelect _dinningRoom = new OrderTypeSingleSelect(
+      borderColor: '0xffB47C00',
+      index: 3,
+      isSelected: false,
+      orderType: 'DinningRoom',
+      iconData: 'Icons.audiotrack',
+      orderIconName: 'fastfood',
+    );
+
+
+
+    List <OrderTypeSingleSelect> orderTypeSingleSelectArray = new List<OrderTypeSingleSelect>();
+
+
+    orderTypeSingleSelectArray.addAll([_takeAway,_delivery, _phone, _dinningRoom]);
+
+    _orderType = orderTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+
+
+//    initiateAllMultiSelectOptions();
+
+    _orderTypeController.sink.add(_orderType);
+
+  }
+
+  void setOrderTypeSingleSelectOptionForOrder(OrderTypeSingleSelect x, int index){
+
+
+    List <OrderTypeSingleSelect> singleSelectArray = _orderType;
+//    _currentOrderTypeIndex
+
+    singleSelectArray[_currentOrderTypeIndex].isSelected =
+    !singleSelectArray[_currentOrderTypeIndex].isSelected;
+
+    singleSelectArray[index].isSelected = true;
+
+//    x.isSelected= !x.isSelected;
+
+
+    _orderType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+
+
+//    initiateAllMultiSelectOptions();
+
+    _orderTypeController.sink.add(_orderType);
+  }
 
     @override
   void dispose() {
     _orderController.close();
+    _orderTypeController.close();
+//    _multiSelectForFoodController.close();
 
   }
 }

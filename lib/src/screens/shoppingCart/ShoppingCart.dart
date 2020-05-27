@@ -14,6 +14,8 @@ import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppin
 import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 //sizeConstantsList
 
@@ -22,6 +24,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:foodgallery/src/screens/ingredients_more/more_ingredients.dart';
 import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
 import 'package:foodgallery/src/DataLayer/SizeConstants.dart';
+import 'package:foodgallery/src/DataLayer/OrderTypeSingleSelect.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 //import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailImage.dart';
 import './../../DataLayer/FoodItemWithDocID.dart';
@@ -451,13 +454,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                         ),
 
 
+
+
                                                       ]
                                                   ),
 
                                                 ),
 
                                                 // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                                              /*
+                                                /*
                                                 Container(
 //                                                  alignment: Alignment.center,
                                                   padding: EdgeInsets.fromLTRB(
@@ -488,12 +493,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
 
 
+                                                ////WWWEEEQQQ
+
+
+
+
                                               ],
                                             ),
                                           ),
 
 
                                           /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
+                                          Container(
+                                            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                                      padding::::
+                                            color:Colors.white,
+//                                            height: 200,
+                                            height: displayHeight(context) /6,
+                                            width: displayWidth(context)
+                                                - displayWidth(context) /
+                                                    5,
+//                                            width: displayWidth(context) * 0.57,
+                                            child:  _buildOrderTypeSingletOption(),
+
+                                          ),
 
 
                                         ],
@@ -571,6 +594,267 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  Widget _buildOrderTypeSingletOption(){
+//   height: 40,
+//   width: displayWidth(context) * 0.57,
+
+
+    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    return StreamBuilder(
+        stream: foodItemDetailsbloc.getCurrentOrderTypeSingleSelectStream,
+        initialData: foodItemDetailsbloc.getCurrentOrder,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+            return Container(child: Text('Null'));
+          }
+          else {
+            List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+
+//              reverse: true,
+
+              shrinkWrap: false,
+//        final String foodItemName =          filteredItems[index].itemName;
+//        final String foodImageURL =          filteredItems[index].imageURL;
+              itemCount: allOrderTypesSingleSelect.length,
+
+              itemBuilder: (_, int index) {
+                return oneSingleDeliveryTypeSelectInShoppingCartPage(
+                    allOrderTypesSingleSelect[index],
+                    index);
+              },
+            );
+          }
+        }
+
+      // M VSM ORG VS TODO. ENDS HERE.
+    );
+
+  }
+
+
+
+  Widget oneSingleDeliveryTypeSelectInShoppingCartPage (OrderTypeSingleSelect x,int index){
+
+//    String color1 = x.itemTextColor.replaceAll('#', '0xff');
+
+//    Color c1 = Color(int.parse(color1));
+
+    IconData x = IconData(int.parse(x.iconData));
+
+    print('x.orderType: ${x.orderType}');
+    logger.i('isSelected check at Shopping Cart Page: ',x.isSelected);
+
+
+
+    String orderTypeName = x.orderType;
+    String orderIconName = x.orderIconName;
+    String borderColor = x.borderColor;
+    const Color OrderTypeIconColor=Color(0xff070707);
+    return Container(
+
+//      height:displayHeight(context)/30,
+//      width:displayWidth(context)/10,
+
+      child:  x.isSelected == true  ?
+
+      Container(
+
+        width: 170,
+        height:140,
+        alignment: Alignment.center,
+        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        child:
+        OutlineButton(
+          color: Color(0xff000000),
+
+//          elevation: 2.5,
+          // RoundedRectangleBorder
+//          shape: CircleBorder(
+          shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+            side: BorderSide(
+              color:Color(0xff000000),
+              style: BorderStyle.solid,
+            ),
+            borderRadius: BorderRadius.circular(35.0),
+          ),
+
+          child:Column(
+            children: <Widget>[
+
+              new Container(
+
+//                                width: displayWidth(context) * 0.09,
+//                                height: displayWidth(context) * 0.11,
+                width: 150,
+                height:150,
+//                decoration: new BoxDecoration(
+//                  color: Colors.orange,
+//                  shape: BoxShape.circle,
+//                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+//                    color: Colors.black,
+                    color: Colors.black,
+                    style: BorderStyle.solid,
+                    width: 1.0,
+
+                  ),
+                  shape: BoxShape.circle,
+//                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
+//                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
+
+
+//
+//                child: Icon(IconData(58840, fontFamily: 'MaterialIcons')),
+//                Icon(
+//                  IconData(x.orderIconName),
+//                               color: Colors.red,
+//                  size: 36.0,
+//                ),
+                child: Icon(IconData(), color: Colors.red),
+
+              ),
+//              Container(
+//
+//                alignment: Alignment.center,
+//                child: Text(
+//                  orderTypeName, style:
+//                TextStyle(
+//                    color:Colors.white,
+//
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 16),
+//                ),
+//              ),
+
+              Container(
+
+                alignment: Alignment.center,
+                child: Text(
+                  orderTypeName, style:
+                TextStyle(
+                    color:Colors.red,
+
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+          onPressed: () {
+
+            final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index);
+
+          },
+        ),
+        // : Container for 2nd argument of ternary condition ends here.
+
+      ):
+
+      Container(
+        width: 170,
+        height:140,
+        alignment: Alignment.center,
+        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        child:
+        OutlineButton(
+          color: Color(0xff000000),
+
+//          elevation: 2.5,
+          shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+            side: BorderSide(
+              color:Color(0xff000000),
+              style: BorderStyle.solid,
+            ),
+            borderRadius: BorderRadius.circular(35.0),
+          ),
+
+          child:Column(
+            children: <Widget>[
+
+              new Container(
+
+//                                width: displayWidth(context) * 0.09,
+//                                height: displayWidth(context) * 0.11,
+                width: 150,
+                height:150,
+                decoration: BoxDecoration(
+                  border: Border.all(
+//                      color: Colors.red[500],
+                    color: Colors.black,
+                    style: BorderStyle.solid,
+                    width: 1.0,
+
+                  ),
+                  shape: BoxShape.circle,
+//                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
+//                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
+
+
+
+                child: Icon(
+                  Icons.beach_access,
+                  color: Colors.grey,
+                  size: 36.0,
+                ),
+
+              ),
+//              Container(
+//
+//                alignment: Alignment.center,
+//                child: Text(
+//                  orderTypeName, style:
+//                TextStyle(
+//                    color:Colors.white,
+//
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 16),
+//                ),
+//              ),
+
+              Container(
+
+                alignment: Alignment.center,
+                child: Text(
+                  orderTypeName, style:
+                TextStyle(
+                    color:Colors.red,
+
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+          onPressed: () {
+
+            final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index);
+
+          },
+        ),
+
+
+
+
+      ),
+    );
+  }
+
+
 }
 
 class LongHeaderPainterAfter extends CustomPainter {
@@ -608,7 +892,7 @@ class LongPainterForChooseOrderType extends CustomPainter {
   void paint(Canvas canvas, Size size){
 
 //    canvas.drawLine(...);
-    final p1 = Offset(displayWidth(context)/3.8, 15); //(X,Y) TO (X,Y)
+    final p1 = Offset(displayWidth(context)/2.9, 15); //(X,Y) TO (X,Y)
     final p2 = Offset(10, 15);
     final paint = Paint()
       ..color = Color(0xff000000)
