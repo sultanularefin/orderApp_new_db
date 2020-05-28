@@ -104,7 +104,7 @@ class ShoppingCartBloc implements Bloc {
       address:'',
       flatOrHouseNumber:'',
       phoneNumber:'',
-      etaTimeInMinutes:0,
+      etaTimeInMinutes:-1,
 //        CustomerInformation currentUser = _oneCustomerInfo;
 //    currentUser.address = address;
 //
