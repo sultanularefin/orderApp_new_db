@@ -263,11 +263,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             color: Colors.white
                                         ),
 
-//                    MAX_DEPTH,DEFAULT_CURVE
 
-//
-//                      BorderRadius.circular(25),
-//                  border: Border.all(
+
+                                        // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
 
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment
@@ -405,7 +403,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 duration: Duration(milliseconds: 1000),
 //
                                                 child: showFullOrderType? animatedWidgetShowFullOrderType():
-                                                animatedWidgetshowSelectedOrderType(),
+                                                animatedWidgetShowSelectedOrderType(),
 
                                               ),
 
@@ -429,10 +427,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               width: displayWidth(context) / 1.1,
                                               child:
                                               AnimatedSwitcher(
-                                                duration: Duration(milliseconds: 1000),
+                                                duration: Duration(milliseconds: 500),
 //
-                                                child: showFullOrderType? animatedObscuredTextInputContainer():
-                                                animatedUnObscuredTextInputContainer(),
+//                                                child: showFullOrderType? animatedObscuredTextInputContainer():
+//                                                animatedUnObscuredTextInputContainer(),
+                                                child: oneOrder.deliveryTypeIndex ==1 ?
+                                                animatedUnObscuredTextInputContainer()
+                                                :oneOrder.deliveryTypeIndex ==2?
+                                                animatedUnObscuredTextInputContainer():
+                                                animatedObscuredTextInputContainer(),
+
 
                                               ),
 
@@ -597,66 +601,94 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
   }
 
-  Widget animatedWidgetshowSelectedOrderType() {
-    return Container(
-      width: displayWidth(context) / 1.1,
-      height: displayHeight(context) / 20,
-      color: Color(0xffffffff),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
+  Widget animatedWidgetShowSelectedOrderType() {
+
+    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    return StreamBuilder(
+        stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
+        initialData: shoppingCartbloc.getCurrentOrderType,
+
+        builder: (context, snapshot)
+    {
+      if (!snapshot.hasData) {
+        print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+        return Container(child: Text('Null'));
+      }
+      else {
+        List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
+
+//            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
+
+        print('orderTypes: $allOrderTypesSingleSelect');
+        OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect
+            .firstWhere((oneOrderType) => oneOrderType.isSelected == true);
+        _currentOrderTypeIndex = selectedOne.index;
+
+        return Container(
+          width: displayWidth(context) / 1.1,
+          height: displayHeight(context) / 20,
+          color: Color(0xffffffff),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
 
 
-          Container(
-            width: displayWidth(context) /
-                1.5,
-            height: displayHeight(
-                context) / 20,
-            color: Color(0xffffffff),
+              Container(
+                width: displayWidth(context) /
+                    1.5,
+                height: displayHeight(
+                    context) / 20,
+                color: Color(0xffffffff),
 
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .start
-                ,
-                crossAxisAlignment: CrossAxisAlignment
-                    .center,
-                children: <Widget>[
-
-                  Container(
-                    margin: EdgeInsets
-                        .fromLTRB(
-                        20, 0, 10, 0),
-                    alignment: Alignment
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment
+                        .start
+                    ,
+                    crossAxisAlignment: CrossAxisAlignment
                         .center,
-                    child: Text(
-                        'Choose Order Type',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight
-                              .normal,
+                    children: <Widget>[
+
+                      Container(
+                        margin: EdgeInsets
+                            .fromLTRB(
+                            20, 0, 10, 0),
+                        alignment: Alignment
+                            .center,
+                        child: Text(
+                            'Choose Order Type',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight
+                                  .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                          color: Color(
-                              0xff000000),
-                        )
-                    ),
-                  ),
+                              color: Color(
+                                  0xff000000),
+                            )
+                        ),
+                      ),
 
-                  CustomPaint(
-                    size: Size(0, 19),
-                    painter: LongPainterForAnimatedWidgetShowSelectedOrderType(
-                        context),
-                  ),
+                      CustomPaint(
+                        size: Size(0, 19),
+                        painter: LongPainterForanimatedWidgetShowSelectedOrderType(
+                            context),
+                      ),
 
-                ]
-            ),
+                    ]
+                ),
 
+              ),
+
+
+            ],
           ),
-
-        ],
-      ),
+        );
+      }
+    }
     );
   }
 
@@ -671,8 +703,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                            height: 200,
           height: displayHeight(context) /4,
           width: displayWidth(context)
-              - displayWidth(context) /
-                  5,
+              - displayWidth(context) / 5,
 //                                            width: displayWidth(context) * 0.57,
 
           child: _buildShoppingCartInputFields()
@@ -692,7 +723,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return
     AbsorbPointer(
         child: Opacity(
-          opacity:0.5,
+          opacity:0.8,
           child: Container(
 //            Colors.white.withOpacity(0.10),
               padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -779,7 +810,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     return StreamBuilder(
         stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
-        initialData: shoppingCartbloc.getCurrentOrder,
+        initialData: shoppingCartbloc.getCurrentOrderType,
 
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -808,7 +839,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               itemCount: allOrderTypesSingleSelect.length,
 
               itemBuilder: (_, int index) {
-                return oneSingleDeliveryTypeSelectInShoppingCartPage(
+                return oneSingleDeliveryType(
                     allOrderTypesSingleSelect[index],
                     index);
               },
@@ -894,7 +925,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                  color: Color(0xffFFFFFF),
                           width: displayWidth(context) / 2.5,
-                          height: displayHeight(context) / 27,
+                          height: displayHeight(context) / 24,
                           padding: EdgeInsets.only(
                               left: 4, top: 3, bottom: 3, right: 3),
                           child: Row(
@@ -944,7 +975,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     border: InputBorder.none,
                                     hintText: 'Enter delivery location',
                                     hintStyle: TextStyle(
-                                        color: Colors.red, fontSize: 15),
+                                        color: Color(0xffFC0000), fontSize: 16),
 
 //                                      currentUser
 //                                        labelText: 'Search about meal.'
@@ -995,7 +1026,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                   style: TextStyle(
-                                      color: Colors.red, fontSize: 15),
+                                      color: Color(0xffFC0000), fontSize: 16),
                                 ),
 
                               )
@@ -1042,7 +1073,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                  color: Color(0xffFFFFFF),
                           width: displayWidth(context) / 2.5,
-                          height: displayHeight(context) / 27,
+                          height: displayHeight(context) / 24,
                           padding: EdgeInsets.only(
                               left: 4, top: 3, bottom: 3, right: 3),
                           child: Row(
@@ -1088,7 +1119,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     border: InputBorder.none,
                                     hintText: 'Enter House/Flat address/number',
                                     hintStyle: TextStyle(
-                                        color: Colors.red, fontSize: 15),
+                                        color: Color(0xffFC0000), fontSize: 16),
 
 //                                        labelText: 'Search about meal.'
                                   ),
@@ -1137,7 +1168,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                             */
 
                                   style: TextStyle(
-                                      color: Colors.red, fontSize: 15),
+                                      color: Color(0xffFC0000), fontSize: 16),
                                 ),
 
                               )
@@ -1185,7 +1216,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                  color: Color(0xffFFFFFF),
                           width: displayWidth(context) / 2.5,
-                          height: displayHeight(context) / 27,
+                          height: displayHeight(context) / 24,
                           padding: EdgeInsets.only(
                               left: 4, top: 3, bottom: 3, right: 3),
                           child: Row(
@@ -1231,13 +1262,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     border: InputBorder.none,
                                     hintText: 'Enter phone / telephone number',
                                     hintStyle: TextStyle(
-                                        color: Colors.red, fontSize: 15),
+                                        color: Color(0xffFC0000), fontSize: 16),
 
 //                                        labelText: 'Search about meal.'
                                   ),
 
                                   style: TextStyle(
-                                      color: Colors.red, fontSize: 15),
+                                      color: Color(0xffFC0000), fontSize: 16),
 
                                   onChanged: (text) {
                                     print("33: $text");
@@ -1329,7 +1360,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                  color: Color(0xffFFFFFF),
                           width: displayWidth(context) / 2.5,
-                          height: displayHeight(context) / 27,
+                          height: displayHeight(context) / 24,
                           padding: EdgeInsets.only(
                               left: 4, top: 3, bottom: 3, right: 3),
                           child: Row(
@@ -1376,13 +1407,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     border: InputBorder.none,
                                     hintText: 'Enter reach out time',
                                     hintStyle: TextStyle(
-                                        color: Colors.red, fontSize: 15),
+                                        color: Color(0xffFC0000), fontSize: 16),
 
 //                                        labelText: 'Search about meal.'
                                   ),
 
                                   style: TextStyle(
-                                      color: Colors.red, fontSize: 15),
+                                      color: Color(0xffFC0000), fontSize: 16),
 
                                   onChanged: (text) {
                                     print("0444: $text");
@@ -1497,7 +1528,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
   }
 
-  Widget oneSingleDeliveryTypeSelectInShoppingCartPage (OrderTypeSingleSelect x,int index){
+  Widget oneSingleDeliveryType (OrderTypeSingleSelect x,int index){
 
 //    String color1 = x.itemTextColor.replaceAll('#', '0xff');
 
@@ -1508,7 +1539,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print('x.icondataString: ${x.iconDataString}');
     print('x.orderType: ${x.orderType}');
-    logger.i('isSelected check at Shopping Cart Page: ',x.isSelected);
+    print('isSelected check at Shopping Cart Page: ${x.isSelected}');
+//    logger.i('isSelected check at Shopping Cart Page: ',x.isSelected);
 
 
 
@@ -1797,10 +1829,10 @@ class LongPainterForChooseOrderType extends CustomPainter {
 
 }
 
-class LongPainterForAnimatedWidgetShowSelectedOrderType extends CustomPainter {
+class LongPainterForanimatedWidgetShowSelectedOrderType extends CustomPainter {
 
   final BuildContext context;
-  LongPainterForAnimatedWidgetShowSelectedOrderType(this.context);
+  LongPainterForanimatedWidgetShowSelectedOrderType(this.context);
   @override
   void paint(Canvas canvas, Size size){
 

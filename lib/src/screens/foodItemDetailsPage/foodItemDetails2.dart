@@ -942,6 +942,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             quantity: _itemCount,
                             foodItemSize: _currentSize,
                             ingredients: foodItemDetailsbloc.getDefaultIngredients,
+                            deliveryTypeIndex: 0,
                           );
                           print(
 
@@ -1692,7 +1693,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         + '?alt=media';
 
 
-    print('ingredientImageUR L   L    L   L: $ingredientImageURL');
+//    print('ingredientImageUR L   L    L   L: $ingredientImageURL');
 
     return Container(
 //          height: 190,

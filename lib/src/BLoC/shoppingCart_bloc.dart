@@ -42,12 +42,17 @@ class ShoppingCartBloc implements Bloc {
 
 
   final _orderController = StreamController <Order>();
-  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>();
-  final _customerInformationController = StreamController <CustomerInformation>();
+  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
+//  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
+//  final _customerInformationController = StreamController <CustomerInformation>();
+  final _customerInformationController = StreamController <CustomerInformation>.broadcast();
 
 
   Stream<Order> get getCurrentOrderStream => _orderController.stream;
-  Stream  <List<OrderTypeSingleSelect>> get getCurrentOrderTypeSingleSelectStream => _orderTypeController.stream;
+
+  Stream  <List<OrderTypeSingleSelect>> get getCurrentOrderTypeSingleSelectStream =>
+      _orderTypeController.stream;
+
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
       _customerInformationController.stream;
 
@@ -190,12 +195,19 @@ class ShoppingCartBloc implements Bloc {
 //    x.isSelected= !x.isSelected;
 
 
+    Order currentOrderTemp = _curretnOrder;
+
+    currentOrderTemp.deliveryTypeIndex=newIndex;
+
+
     _orderType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
+    _curretnOrder = currentOrderTemp;
 
 //    initiateAllMultiSelectOptions();
 
     _orderTypeController.sink.add(_orderType);
+    _orderController.sink.add(_curretnOrder);
   }
 
   setAddressForOrder(String address){
