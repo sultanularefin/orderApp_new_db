@@ -363,7 +363,7 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             ).then((onValue){
 
-                              Navigator.of(context).push(
+                              Navigator.of(context).pushAndRemoveUntil(
                                 //        MaterialPageRoute(builder: (context) => HomeScreen())
                                 //
                                 //        MaterialPageRoute(builder: (context) => MyHomePage())
@@ -383,7 +383,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-                                }),);
+                                }),(Route<dynamic> route) => false);
 
 
 
