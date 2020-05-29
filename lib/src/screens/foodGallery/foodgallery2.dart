@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
-import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -35,8 +35,8 @@ import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails.dart
 
 import '../../DataLayer/itemData.dart';
 import '../../DataLayer/FoodItem.dart';
-import '../../DataLayer/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/newCategory.dart';
+import '../../DataLayer/models/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
 
 // Blocks
 

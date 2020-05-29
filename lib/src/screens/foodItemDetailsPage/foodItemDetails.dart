@@ -7,7 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:logger/logger.dart';
 import 'package:neumorphic/neumorphic.dart';
 
@@ -21,8 +21,8 @@ import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
 import 'package:foodgallery/src/DataLayer/SizeConstants.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
-import './../../DataLayer/FoodItemWithDocID.dart';
-import './../../DataLayer/Order.dart';
+import '../../DataLayer/models/FoodItemWithDocID.dart';
+import '../../DataLayer/models/Order.dart';
 //import './../../DataLayer/itemData.dart';
 
 

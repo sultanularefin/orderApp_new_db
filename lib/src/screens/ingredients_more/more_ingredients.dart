@@ -9,7 +9,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:logger/logger.dart';
 
 // DEPENDENCY FILES ENDS HERE.
@@ -27,12 +27,12 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 // MODEL FILES BEGINS HERE.
 
-import './../../DataLayer/FoodItemWithDocID.dart';
-import './../../DataLayer/itemData.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/itemData.dart';
 
-import './../../DataLayer/Order.dart';
+import 'package:foodgallery/src/DataLayer/models/Order.dart';
 
-import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 // BOTH ARE CORRECT.
 //import './../../models/NewIngredient.dart';
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+import 'package:foodgallery/src/welcomePage.dart';
 //import 'package:foodgallery/src/screens/foodGallery/food_gallery.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,11 +30,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return
-      BlocProvider<FoodGalleryBloc>(
-        bloc: FoodGalleryBloc(),
-        child:BlocProvider<FoodGalleryBloc>(
-
-          bloc:FoodGalleryBloc(),
+      BlocProvider<IdentityBloc>(
+        bloc: IdentityBloc(),
+//        child:BlocProvider<IdentityBloc>(
+//
+//          bloc:IdentityBloc(),
           child: MaterialApp(
 
             title: 'Flutter Demo',
@@ -45,12 +47,12 @@ class MyApp extends StatelessWidget {
             ),
             debugShowCheckedModeBanner: false,
 //      home: WelcomePage(),
-            home:FoodGallery2(),
+            home:WelcomePage(),
 
 
 //      home: FoodGallery(),
           ),
-        ),
+//        ),
       );
   }
 }

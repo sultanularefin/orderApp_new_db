@@ -8,10 +8,10 @@ import 'package:foodgallery/src/BLoC/bloc.dart';
 
 // MODEL.
 
-import 'package:foodgallery/src/DataLayer/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 
 // DATA ACCESS CLASS.
-import 'package:foodgallery/src/DataLayer/firebase_client.dart';
+import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 
 
 // DART PACKAGE.

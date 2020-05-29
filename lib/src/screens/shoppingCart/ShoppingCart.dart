@@ -10,14 +10,14 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
-import 'package:foodgallery/src/DataLayer/CustomerInformation.dart';
-import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
-import 'package:foodgallery/src/DataLayer/OrderTypeSingleSelect.dart';
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
 import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppingCart.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:logger/logger.dart';
 
-import './../../DataLayer/Order.dart';
+import '../../DataLayer/models/Order.dart';
 
 final Firestore firestore = Firestore();
 

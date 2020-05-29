@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
-import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
@@ -24,9 +24,9 @@ import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
 import 'package:foodgallery/src/DataLayer/SizeConstants.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailImage.dart';
-import './../../DataLayer/FoodItemWithDocID.dart';
-import './../../DataLayer/Order.dart';
-import 'package:foodgallery/src/DataLayer/FoodPropertyMultiSelect.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/models/Order.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 //import './../../DataLayer/itemData.dart';
 
 

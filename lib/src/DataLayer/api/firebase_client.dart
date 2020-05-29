@@ -18,9 +18,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:foodgallery/src/DataLayer/itemData.dart';
 //    import 'package:foodgallery/src/DataLayer/FoodItem.dart';
-import 'package:foodgallery/src/DataLayer/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
-import 'package:foodgallery/src/DataLayer/newCategory.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+//import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
+//    ''file:
+///C:/Users/Taxi/Programs/foodgallery/lib/src/DataLayer/models/newCategory.dart'tegory.dart';
 
 
 

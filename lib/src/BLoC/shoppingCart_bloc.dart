@@ -6,19 +6,17 @@ import 'package:logger/logger.dart';
 
 
 //### LOCAL DATA RELATED RESOURCES
-import 'package:foodgallery/src/DataLayer/firebase_client.dart';
+import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 import 'package:foodgallery/src/BLoC/bloc.dart';
-import 'package:foodgallery/src/DataLayer/Order.dart';
-import 'package:foodgallery/src/DataLayer/OrderTypeSingleSelect.dart';
-import 'package:foodgallery/src/DataLayer/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/Order.dart';
+import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 
 
 //MODELS
 
 
 class ShoppingCartBloc implements Bloc {
-
-
 
   var logger = Logger(
     printer: PrettyPrinter(),

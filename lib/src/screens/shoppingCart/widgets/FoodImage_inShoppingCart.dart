@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:foodgallery/src/DataLayer/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 
 

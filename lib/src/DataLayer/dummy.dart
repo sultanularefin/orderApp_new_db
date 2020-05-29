@@ -10,5 +10,15 @@ class Dummy {
   double indicatorValue;
 
   Dummy(
-      {this.id, this.title, this.price, this.counter, this.url, this.content, this.amountPerUnit, this.level, this.indicatorValue, });
+      {this.id,
+        this.title,
+        this.price,
+        this.counter,
+        this.url,
+        this.content,
+        this.amountPerUnit,
+        this.level,
+        this.indicatorValue,
+      }
+      );
 }

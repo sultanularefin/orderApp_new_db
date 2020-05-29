@@ -35,8 +35,8 @@ import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails.dart
 
 import '../../DataLayer/itemData.dart';
 import '../../DataLayer/FoodItem.dart';
-import '../../DataLayer/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/newCategory.dart';
+import '../../DataLayer/models/FoodItemWithDocID.dart';
+import 'file:///C:/Users/Taxi/Programs/foodgallery/lib/src/DataLayer/models/newCategory.dart';
 
 
 
