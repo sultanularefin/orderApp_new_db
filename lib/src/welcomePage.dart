@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 
 
 
@@ -24,6 +25,7 @@ import 'package:foodgallery/src/identity/signup.dart';
 
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 
 /*  Block related Files ABOVE */
 class WelcomePage extends StatefulWidget {
@@ -158,7 +160,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState(){
 
-    print('at initState of welcomePage');
+//    print('at initState of welcomePage');
     super.initState();
 //    loadUser();
   }
@@ -205,6 +207,8 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
 
     final bloc = BlocProvider.of<IdentityBloc>(context);
+
+
     /*
 
     StreamBuilder<List<NewCategoryItem>>(
@@ -229,109 +233,95 @@ class _WelcomePageState extends State<WelcomePage> {
 
     print('at build of welcomePage');
     return Scaffold(
-      body:SingleChildScrollView(
-        child:Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          height: MediaQuery.of(context).size.height,
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
 
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Colors.grey.shade200,
-                    offset: Offset(2, 4),
-                    blurRadius: 5,
-                    spreadRadius: 2)
-              ],
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color(0xfffbb448), Color(0xffe46b10)])),
-          child: StreamBuilder<FirebaseUser>(
-   /* stream:bloc.categoryItemsStream,
-    initialData: bloc.allCategories,
-//        initialData: bloc.getAllFoodItems(),
-    builder: (context, snapshot){
+          child:StreamBuilder<FirebaseUser>(
+            /*
 
-    if (!snapshot.hasData) {
-    return Center(child: new LinearProgressIndicator());
-    }
-    else{*/
-            stream: bloc.getCurrentFirebaseUserStream,
+           stream:bloc.categoryItemsStream,
+          initialData: bloc.allCategories,
+          //  initialData: bloc.getAllFoodItems(),
+          builder: (context, snapshot){
+
+          if (!snapshot.hasData) {
+          return Center(child: new LinearProgressIndicator());
+          }
+          else{
+
+    */
+              stream: bloc.getCurrentFirebaseUserStream,
               initialData: bloc.getCurrentFirebaseUser,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _title(),
-                    SizedBox(
-                      height: 80,
-                    ),
-                    _loginButton(),
-                    // STRIPPED FOR NOW ON MAY 29 2020.
-                    /*
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _signUpButton(),
-                    */
-                    /*
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _label()
-                    */
-                    // Touch
-                  ],
-                );
+              builder: (context, snapshot) {
 
-              }
-              else {
-                return
-                  BlocProvider<IdentityBloc>(
-                    bloc: IdentityBloc(),
-//        child:BlocProvider<IdentityBloc>(
-//
-//          bloc:IdentityBloc(),
-                    child: MaterialApp(
+                print('snapshot.hasData: ${snapshot.hasData}');
 
-                      title: 'Flutter Demo',
-                      // commented for Tablet testing on april 25.
-                      theme: ThemeData(
-                        // Define the default brightness and colors.
-                        brightness: Brightness.dark,
-                        primaryColor: Colors.lightBlue[800],
-                        accentColor: Colors.cyan[600],
 
-                        // Define the default font family.
-                        fontFamily: 'Georgia',
+                if (!snapshot.hasData) {
 
-                        // Define the default TextTheme. Use this to specify the default
-                        // text styling for headlines, titles, bodies of text, and more.
-                        textTheme: TextTheme(
-                          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-                          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-                          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+
+                  return Center(
+                    child: Column(
+                      children: <Widget>[
+
+                        Center(
+                          child: Container(
+                              alignment: Alignment.center,
+                              child: new CircularProgressIndicator(backgroundColor: Colors.lightGreenAccent)
+                          ),
                         ),
-                      ),
-                      debugShowCheckedModeBanner: false,
-//      home: WelcomePage(),
-                      home:LoginPage(),
-
-
-//      home: FoodGallery(),
+                        Center(
+                          child: Container(
+                              alignment: Alignment.center,
+                              child: new CircularProgressIndicator(backgroundColor: Colors.yellow,)
+                          ),
+                        ),
+                        Center(
+                          child: Container(
+                              alignment: Alignment.center,
+                              child: new CircularProgressIndicator(backgroundColor: Colors.redAccent )
+                          ),
+                        ),
+                      ],
                     ),
-//        ),
+                  );
+                }
+                else {
+                  print('snapshot.hasData is ${snapshot.hasData} in Welcome page ');
+                  /*
+                return
+                  BlocProvider<FoodGalleryBloc>(
+                    bloc: FoodGalleryBloc(),
+                    child: FoodGallery2(),
+                  );
+                */
+
+                  return (
+                      BlocProvider<FoodGalleryBloc>(
+                          bloc: FoodGalleryBloc(),
+                          child: FoodGallery2()
+
+                      )
                   );
 
-                return Center(child: new CircularProgressIndicator());
+
+
+//                                      drawerScreen()
+
+
+
+
+
+
+
+//
+                }
               }
-            }
           ),
-        ),
+
       ),
+
     );
   }
 }

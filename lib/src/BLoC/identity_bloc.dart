@@ -106,6 +106,10 @@ class IdentityBloc implements Bloc {
       FirebaseUser fireBaseUserRemote = result.user;
 
       _currentFBUser = fireBaseUserRemote;
+
+      await _saveUser(fireBaseUserRemote,email,password);
+
+
       _firebaseUserController.sink.add(_currentFBUser);
 
       return result;
@@ -114,11 +118,52 @@ class IdentityBloc implements Bloc {
       return result;
     }
 
-
-
 //    AssertionError(result.user.email);
 //    print('result: ' + result.user.email);
 
+  }
+
+  _saveUser(/*String uid*/ FirebaseUser x,String loggerEmail,String loggerPassword) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+//    ??=
+//    Assign the value only if the variable is null
+
+    Map<String, dynamic> toJson() => {
+      'email': loggerEmail,
+      'password': loggerPassword,
+//      'uid': uid,
+    };
+
+
+
+    print('setString method going to be called where key is userInfo');
+    prefs.setString('userInfo', jsonEncode({
+      'email': loggerEmail,
+      'password': loggerPassword,
+//      'uid': uid,
+    })).then((onValue) =>{
+      print('at then of prefs.setString(userInfo.....')
+
+    });
+
+
+    print('user set in mobile storage');
+
+
+
+    final resultString =  prefs.getString("userInfo");
+
+    Map<String,  dynamic> user = jsonDecode(
+        resultString
+    );
+
+    print('Howdy, ${user['email']}');
+
+
+    print('password ${user['password']}');
+
+    print('result_in_prefs: ' + resultString);
 
 
   }
@@ -202,8 +247,9 @@ class IdentityBloc implements Bloc {
 
       }
     }
-    print("at not found of loadUser From Constructor");
-
+    else {
+      print("at not found of loadUser From Constructor");
+    }
     //1 means SharedPreference not empty.
 
   }

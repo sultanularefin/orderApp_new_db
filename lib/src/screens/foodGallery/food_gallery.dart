@@ -33,10 +33,10 @@ import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails.dart
 
 // model, dummy data file:
 
-import '../../DataLayer/itemData.dart';
-import '../../DataLayer/FoodItem.dart';
-import '../../DataLayer/models/FoodItemWithDocID.dart';
-import 'file:///C:/Users/Taxi/Programs/foodgallery/lib/src/DataLayer/models/newCategory.dart';
+import 'package:foodgallery/src/DataLayer/itemData.dart';
+import 'package:foodgallery/src/DataLayer/FoodItem.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
 
 
 
