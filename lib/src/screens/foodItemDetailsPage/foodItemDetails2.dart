@@ -98,14 +98,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   double tryCast<num>(dynamic x, {num fallback }) {
 
-    print(" at tryCast");
-    print('x: $x');
+//    print(" at tryCast");
+//    print('x: $x');
 
     bool status = x is num;
 
-    print('status : x is num $status');
-    print('status : x is dynamic ${x is dynamic}');
-    print('status : x is int ${x is int}');
+//    print('status : x is num $status');
+//    print('status : x is dynamic ${x is dynamic}');
+//    print('status : x is int ${x is int}');
     if(status) {
       return x.toDouble() ;
     }
@@ -133,9 +133,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
+    /*
     logger.w('unSelectedIngredients in foodItemDetails2 line #116 : ',
         unSelectedIngredients);
 
+
+    */
 
     if (unSelectedIngredients == null) {
       return Container

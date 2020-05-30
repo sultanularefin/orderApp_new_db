@@ -908,7 +908,7 @@ class FoodItemDetailsBloc implements Bloc {
 
 //    return allUnSelected;
 
-    logger.i('allUnSelected: ',unSelectedDecremented);
+//    logger.i('allUnSelected: ',unSelectedDecremented);
 
   }
 

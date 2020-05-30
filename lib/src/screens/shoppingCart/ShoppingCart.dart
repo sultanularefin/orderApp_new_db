@@ -59,19 +59,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
   bool showFullOrderType = true;
   bool showCustomerInformationHeader = false;
 
-  bool showEditingCompleteCustomerAddressIformation   = false;
+  bool showEditingCompleteCustomerAddressInformation   = false;
   bool showEditingCompleteCustomerHouseFlatIformation = false;
   bool showEditingCompleteCustomerPhoneIformation     = false;
   bool showEditingCompleteCustomerReachoutIformation  = false;
 
 //  bool showInputtedCustomerIformation = false;
 
-  final addressController = TextEditingController();
+  final addressController         = TextEditingController();
+  final houseFlatNumberController = TextEditingController();
+  final phoneNumberController     = TextEditingController();
+  final etaController             = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     addressController.dispose();
+    houseFlatNumberController.dispose();
+    phoneNumberController.dispose();
+    etaController.dispose();
     super.dispose();
   }
 
@@ -801,7 +807,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                      padding::::
           color:Colors.white,
 //                                            height: 200,
-          height: displayHeight(context) /4,
+          height: displayHeight(context) /3,
           width: displayWidth(context)
               - displayWidth(context) / 5,
 //                                            width: displayWidth(context) * 0.57,
@@ -1138,7 +1144,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         .fromLTRB(
                                         10, 0, 5, 0),
                                     alignment: Alignment
-                                        .topLeft,
+                                        .centerLeft,
                                     child: Text(
                                         '${currentUserForInline.address}',
                                         overflow: TextOverflow.ellipsis,
@@ -1441,15 +1447,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
             print('currentUser.phoneNumber: ${currentUser.phoneNumber}');
             print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
 
-            if((showEditingCompleteCustomerAddressIformation == true)||
+            if((showEditingCompleteCustomerAddressInformation == true)||
                 (showEditingCompleteCustomerHouseFlatIformation == true)||
                 (showEditingCompleteCustomerPhoneIformation == true)||
                 (showEditingCompleteCustomerReachoutIformation == true)){
 
               return Container(
                 width: displayWidth(context) / 1.1,
-//          height: displayHeight(context) / 20,
-                color: Color(0xff00A6FF),
+//                height: displayHeight(context) / 3,
+                color: Colors.tealAccent,
 
                 child: Column(
                   children: <Widget>[
@@ -1458,26 +1464,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     // FOR EACH ELEMENT BELOW WE NEED TO CHECK ONE BOOLEAN CONDITON LIKE
 //                    "show_______"
                     //UUUU
-                    Center(
+                    Container(
+                        alignment:Alignment.topCenter,
 
                         child: Container(
-//                  color: Colors.green,
+//                            height: displayHeight(context) / 3.7,
+                            color: Colors.green,
+
 //                    color:Colors.white.withOpacity(0.9),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
 
 
 
 
                                 // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
-//                            showEditingCompleteCustomerAddressIformation
+//                            showEditingCompleteCustomerAddressInformation
 //                            showEditingCompleteCustomerHouseFlatIformation
 //                            showEditingCompleteCustomerPhoneIformation
 //                            showEditingCompleteCustomerReachoutIformation
-//                                showEditingCompleteCustomerAddressIformation BEGINS HERE.
+//                                showEditingCompleteCustomerAddressInformation BEGINS HERE.
                                 Container(
-                                  child: showEditingCompleteCustomerAddressIformation? Container():
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 0,
+                                      vertical: 4),
+                                  child: showEditingCompleteCustomerAddressInformation? Container():
                                   Container(
                                     margin: EdgeInsets.symmetric(
                                         horizontal: 0,
@@ -1569,6 +1581,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        labelText: 'Search about meal.'
                                             ),
 
+                                            /*
                                             onChanged: (text) {
                                               //RRRR
 
@@ -1577,6 +1590,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                                               shoppingCartBloc.setAddressForOrder(text);
 
+                                              /*
                                               setState(() =>
 
                                               {
@@ -1586,15 +1600,40 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                               );
+                                              */
                                             },
+                                            */
 
+
+
+                                              /*
                                             onTap: () {
-                                              setState(() =>
+
+                                              print('on tap of line # 1607');
+
+                                              if((currentUser.phoneNumber.trim().length) >0 ||
+                                                  (currentUser.flatOrHouseNumber.trim().length) >0 ||
+                                                  (currentUser.etaTimeInMinutes != null)  )
                                               {
-                                                showFullOrderType = false,
-//                                                showCustomerInformationHeader = true,
-                                              });
+                                                showEditingCompleteCustomerAddressInformation = true;
+                                              } else {
+                                                setState(() =>
+                                                {
+                                                  showFullOrderType = false,
+//                                        showCustomerInformationHeader = true,
+                                                });
+                                              }
                                             },
+                                            */
+//                                              setState(() =>
+//                                              {
+//                                                showFullOrderType = false,
+////                                                showCustomerInformationHeader = true,
+//                                              }
+
+                                            //);
+//                                            },
+//                                          },
 
 
                                             onEditingComplete: () {
@@ -1603,7 +1642,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                              print('called onEditing complete');
                                               setState(() =>
                                               {
-                                                showEditingCompleteCustomerAddressIformation =
+                                                showEditingCompleteCustomerAddressInformation =
                                                 true
 //                                          showInputtedCustomerIformation= true,
                                               }
@@ -1655,6 +1694,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                showEditingCompleteCustomerHouseFlatIformation BEGINS HERE
 
                                 Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 0,
+                                      vertical: 4),
                                   child: showEditingCompleteCustomerHouseFlatIformation?Container():
                                   Container(
                                     margin: EdgeInsets.symmetric(
@@ -1754,8 +1796,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                             onTap: () {
-                                              setState(() => showFullOrderType = false);
+
+
+                                              if ((currentUser.address
+                                                  .trim()
+                                                  .length) > 0 ||
+                                                  (currentUser.flatOrHouseNumber
+                                                      .trim()
+                                                      .length) > 0 ||
+                                                  (currentUser.etaTimeInMinutes !=
+                                                      null)) {
+                                                showEditingCompleteCustomerHouseFlatIformation =
+                                                true;
+                                              } else {
+                                                setState(() =>
+                                                showFullOrderType = false);
+                                              }
                                             },
+
+
                                             onEditingComplete: () {
 
                                               print('at editing complete of House or Flat Iformation ');
@@ -1816,6 +1875,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 //  showEditingCompleteCustomerPhoneIformation BEGINS HERE.
 
                                 Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 0,
+                                      vertical: 4),
                                   child: showEditingCompleteCustomerPhoneIformation? Container():
                                   Container(
                                     margin: EdgeInsets.symmetric(
@@ -1917,10 +1979,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               setState(() => showFullOrderType = false);
                                             },
 
-
                                             onTap: () {
-                                              setState(() => showFullOrderType = false);
+                                              if ((currentUser.address
+                                                  .trim()
+                                                  .length) > 0 ||
+                                                  (currentUser.flatOrHouseNumber
+                                                      .trim()
+                                                      .length) > 0 ||
+                                                  (currentUser.etaTimeInMinutes !=
+                                                      null)) {
+                                                showEditingCompleteCustomerHouseFlatIformation =
+                                                true;
+                                              } else {
+                                                setState(() =>
+                                                showFullOrderType = false);
+                                              }
                                             },
+
                                             onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
@@ -1976,7 +2051,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                showEditingCompleteCustomerReachoutIformation BEGINS HERE.
                                 Container(
-                                  child: showEditingCompleteCustomerReachoutIformation? Container():
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 0,
+                                      vertical: 4),
+                                  child: showEditingCompleteCustomerReachoutIformation ? Container():
                                   Container(
                                     margin: EdgeInsets.symmetric(
                                         horizontal: 0,
@@ -2079,8 +2157,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             },
 
                                             onTap: () {
-                                              setState(() => showFullOrderType = false);
+                                              if ((currentUser.address
+                                                  .trim()
+                                                  .length) > 0 ||
+                                                  (currentUser.flatOrHouseNumber
+                                                      .trim()
+                                                      .length) > 0 ||
+                                                  (currentUser.phoneNumber.trim()
+                                                      .length) > 0 ) {
+                                                showEditingCompleteCustomerHouseFlatIformation =
+                                                true;
+                                              } else {
+                                                setState(() =>
+                                                showFullOrderType = false);
+                                              }
                                             },
+
+
+//                                            onTap: () {
+//                                              setState(() => showFullOrderType = false);
+//                                            },
                                             onEditingComplete: () {
 
                                               print('at editing complete of Customer\'s address ETA Time:');
@@ -2141,6 +2237,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
               );
 // GGG),
             }
+
+            /* THE ELSE CONDITION IS OPPOSITE OF THIS , i.e. NORMAL , THE OBSCURED IS IN THE BOOTOM.
+            if((showEditingCompleteCustomerAddressInformation == true)||
+                (showEditingCompleteCustomerHouseFlatIformation == true)||
+                (showEditingCompleteCustomerPhoneIformation == true)||
+                (showEditingCompleteCustomerReachoutIformation == true)){
+            * */
             else {
               return Center(
 
@@ -2262,6 +2365,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                                       shoppingCartBloc.setAddressForOrder(text);
 
+
+                                      /*
+
                                       setState(() =>
 
                                       {
@@ -2270,23 +2376,36 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       }
 
 
-                                      );
-                                    },
 
+                                      );
+                                      */
+                                    }
+                                    ,
+
+                                      /*
                                     onTap: () {
-                                      setState(() =>
+
+                                      if((currentUser.phoneNumber.trim().length) >0 ||
+                                          (currentUser.flatOrHouseNumber.trim().length) >0 ||
+                                          (currentUser.etaTimeInMinutes != null)  )
                                       {
-                                        showFullOrderType = false,
+                                        showEditingCompleteCustomerAddressInformation = true;
+                                      } else {
+                                        setState(() =>
+                                        {
+                                          showFullOrderType = false,
 //                                        showCustomerInformationHeader = true,
-                                      });
+                                        });
+                                      }
                                     },
+                                    */
 
 
                                     onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
                                       setState(() =>
-                                      showEditingCompleteCustomerAddressIformation = true
+                                      showEditingCompleteCustomerAddressInformation = true
 //                                          showInputtedCustomerIformation= true,
 
                                       );
@@ -2425,11 +2544,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           text);
 
                                       setState(() => showFullOrderType = false);
+
                                     },
 
 
                                     onTap: () {
-                                      setState(() => showFullOrderType = false);
+                                      if ((currentUser.phoneNumber
+                                          .trim()
+                                          .length) > 0 ||
+                                          (currentUser.address
+                                              .trim()
+                                              .length) > 0 ||
+                                          (currentUser.etaTimeInMinutes !=
+                                              null)) {
+                                        showEditingCompleteCustomerAddressInformation =
+                                        true;
+                                      } else {
+                                        setState(() =>
+                                        showFullOrderType = false);
+                                      }
                                     },
                                     onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
@@ -2578,13 +2711,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                                       shoppingCartBloc.setPhoneNumberForOrder(
                                           text);
-
+//                                      if(text.trim().length>0){
+//                                        showEditingCompleteCustomerPhoneIformation = true;
+//                                      } else{
                                       setState(() => showFullOrderType = false);
+
+
+
                                     },
 
 
                                     onTap: () {
-                                      setState(() => showFullOrderType = false);
+                                      if ((currentUser.address
+                                          .trim()
+                                          .length) > 0 ||
+                                          (currentUser.flatOrHouseNumber
+                                              .trim()
+                                              .length) > 0 ||
+                                          (currentUser.etaTimeInMinutes !=
+                                              null)) {
+                                        showEditingCompleteCustomerHouseFlatIformation =
+                                        true;
+                                      } else {
+                                        setState(() =>
+                                        showFullOrderType = false);
+                                      }
                                     },
                                     onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
@@ -2700,11 +2851,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                                   // do it in both Container
                                   child: TextField(
+//                                    controller:etaController,
+//                                    houseFlatNumberController
+//                                      phoneNumberController
+//                                      backgroundCursorColor: Colors.yellow,// test to be chnaged later.,
+                                    autocorrect:false,
+                                    cursorColor: Colors.redAccent,// test to be chnaged later.,
                                     keyboardType: TextInputType.number,
                                     textInputAction: TextInputAction.done,
                                     onSubmitted: (_) => FocusScope.of(context).unfocus(),
-
+                                    focusNode: FocusNode(),
                                     textAlign: TextAlign.center,
+
                                     decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -2718,6 +2876,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        labelText: 'Search about meal.'
                                     ),
 
+
                                     style: TextStyle(
                                         color: Color(0xffFC0000), fontSize: 16),
 
@@ -2730,17 +2889,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           ShoppingCartBloc>(context);
 
                                       shoppingCartBloc.setETAForOrder(text);
+//                                      if (text
+//                                          .trim()
+//                                          .length > 0) {
+//                                        showEditingCompleteCustomerReachoutIformation =
+//                                        true;
+//                                      }
+//                                      else{
                                       setState(() => showFullOrderType = false);
+
                                     },
 
+
                                     onTap: () {
-                                      setState(() => showFullOrderType = false);
+                                      if ((currentUser.address
+                                          .trim()
+                                          .length) > 0 ||
+                                          (currentUser.flatOrHouseNumber
+                                              .trim()
+                                              .length) > 0 ||
+                                          (currentUser.phoneNumber.trim()
+                                              .length) > 0 ) {
+                                        showEditingCompleteCustomerPhoneIformation =
+                                        true;
+                                      } else {
+                                        setState(() => showFullOrderType = false);
+                                      }
                                     },
                                     onEditingComplete: () {
                                       setState(() =>
                                       showEditingCompleteCustomerReachoutIformation = true
                                       );
                                     },
+//                                      onSelectionChanged:(){
+//
+//                                      }
 
 
 /*
