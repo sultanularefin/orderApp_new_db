@@ -1077,7 +1077,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             //HHH
 
             Container(
-              height: displayHeight(context) / 16,
+              height: displayHeight(context) / 14,
               color:Colors.amber,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -1087,7 +1087,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Container(
                     width: displayWidth(context) /
-                        1.3,
+                        1.25,
                     height: displayHeight(
                         context) / 12,
                     color: Color(0xffE2F600),
@@ -1097,12 +1097,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         // THIS CONTAINER IS ABOUT ADDRESS INFORMATION BEGINS HERE.
-                        Container(
+                        RaisedButton(
+                          color:Colors.redAccent,
+                          highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                          clipBehavior: Clip.hardEdge,
+                          splashColor: Color(0xffB47C00),
+                          highlightElevation: 12,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Color(0xff707070),
+                              style: BorderStyle.solid,
+//            width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: currentUserForInline.address != ''? Container(
                             color:Colors.lightBlueAccent,
-                            width:displayWidth(context) /4,
+                            width:displayWidth(context) /4.6,
                             height:displayHeight(
                                 context) / 12,
-                            child: currentUserForInline.address != ''? Row(
+                            child:  Row(
                               mainAxisAlignment: MainAxisAlignment
                                   .start
                               ,
@@ -1117,22 +1132,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
                                   child:
-                                  IconButton(
-                                    icon: const Icon(Icons.location_on, size: 32.0),
-                                    color: Colors.black,
-                                    onPressed: () {
+                                  Icon(Icons.location_on,
+                                      size: 32.0,
+                                      color: Colors.black),
 
-                                      //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+
+                                  //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-                                      //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+                                  //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
 
 //                    setState(() {
 //                      showFullOrderType = !showFullOrderType;
 //                    });
 
 
-                                    },
-                                  ),
+
+
                                   // : Container for 2nd argument of ternary condition ends here.
 
                                 ),
@@ -1142,7 +1158,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                  height: displayHeight(context) /28,
                                     padding: EdgeInsets
                                         .fromLTRB(
-                                        10, 0, 5, 0),
+                                        5, 0, 5, 0),
                                     alignment: Alignment
                                         .centerLeft,
                                     child: Text(
@@ -1171,19 +1187,44 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                               ],
-                            ):  Container(
-                                width:displayWidth(context) /5.5
-                            )
+                            ),):  Container(
+                            width:displayWidth(context) /4.6,
+//                              width:displayWidth(context) /5.5
+                          ),
+
+                          onPressed: ()=>{
+                            setState(() {
+
+                              showEditingCompleteCustomerAddressInformation = !showEditingCompleteCustomerAddressInformation;
+//                      showFullOrderType = !showFullOrderType;
+                            })
+                          },
                         ),
 
                         // THIS CONTAINER IS ABOUT ADDRESS INFORMATION ENDS HERE.
 
                         // THIS CONTAINER IS ABOUT HOUSE OR FLAT NUMBER INFORMATION BEGINS HERE.
-                        Container(
+                        RaisedButton(
+                          color:Colors.redAccent,
+                          highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                          clipBehavior: Clip.hardEdge,
+                          splashColor: Color(0xffB47C00),
+                          highlightElevation: 12,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Color(0xff707070),
+                              style: BorderStyle.solid,
+//            width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: currentUserForInline.flatOrHouseNumber != ''?
+                          Container(
                             color:Colors.brown,
 
-                            width:displayWidth(context) /6,
-                            child: currentUserForInline.flatOrHouseNumber != ''? Row(
+                            width:displayWidth(context) /8,
+                            child:  Row(
                               mainAxisAlignment: MainAxisAlignment
                                   .start
                               ,
@@ -1191,37 +1232,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   .center,
                               children: <Widget>[
 
-                                Container(
 
-                                  width: 30,
-                                  height: displayHeight(context) /28,
-//                    alignment: Alignment.center,
-//                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
-                                  child:
-                                  IconButton(
-                                    icon: const Icon(Icons.home, size: 32.0),
-                                    color: Colors.black,
-                                    onPressed: () {
-
-                                      //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
-                                      //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-
-//                    setState(() {
-//                      showFullOrderType = !showFullOrderType;
-//                    });
-
-
-                                    },
-                                  ),
-                                  // : Container for 2nd argument of ternary condition ends here.
-
+                                Icon(
+                                    Icons.home,
+                                    size: 32.0,
+                                    color: Colors.black
                                 ),
+
+
+
+                                // : Container for 2nd argument of ternary condition ends here.
+
+
                                 Expanded(
                                   child: Container(
                                     padding: EdgeInsets
                                         .fromLTRB(
-                                        10, 0, 5, 0),
+                                        5, 0, 5, 0),
                                     alignment: Alignment
                                         .center,
                                     child: Text(
@@ -1247,17 +1274,43 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                               ],
-                            ):  Container(
-                                width:displayWidth(context) /5.5
-                            )
+                            ),):  Container(
+//                              width:displayWidth(context) /5.5
+                            width:displayWidth(context) /8,
+                          )
+                          ,
+                          onPressed: ()=>{
+                            setState(() {
+
+                              showEditingCompleteCustomerHouseFlatIformation =
+                              !showEditingCompleteCustomerHouseFlatIformation;
+//                      showFullOrderType = !showFullOrderType;
+                            })
+                          },
                         ),
 
                         // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
                         // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
-                        Container(
+                        RaisedButton(
+                          color:Colors.redAccent,
+                          highlightColor: Colors.lightGreenAccent,
+//                        highlightedBorderColor: Colors.blueAccent,
+                          clipBehavior: Clip.hardEdge,
+                          splashColor: Color(0xffB47C00),
+                          highlightElevation: 12,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Color(0xff707070),
+                              style: BorderStyle.solid,
+//            width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: currentUserForInline.phoneNumber != ''?
+                          Container(
                             color:Colors.lightGreenAccent,
-                            width:displayWidth(context) /4,
-                            child: currentUserForInline.phoneNumber != ''? Row(
+                            width:displayWidth(context) /5.9,
+                            child:  Row(
                               mainAxisAlignment: MainAxisAlignment
                                   .start
                               ,
@@ -1265,37 +1318,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   .center,
                               children: <Widget>[
 
-                                Container(
-
-                                  width: 30,
-                                  height: displayHeight(context) /28,
-//                    alignment: Alignment.center,
-//                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
-                                  child:
-                                  IconButton(
-                                    icon: const Icon(Icons.phone, size: 32.0),
-                                    color: Colors.black,
-                                    onPressed: () {
-
-                                      //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
-                                      //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-
-//                    setState(() {
-//                      showFullOrderType = !showFullOrderType;
-//                    });
+                                Icon(Icons.phone,
+                                    size: 32.0,
+                                    color: Colors.black)
+                                ,
 
 
-                                    },
-                                  ),
-                                  // : Container for 2nd argument of ternary condition ends here.
+                                // : Container for 2nd argument of ternary condition ends here.
 
-                                ),
+
                                 Expanded(
                                   child: Container(
                                     padding: EdgeInsets
                                         .fromLTRB(
-                                        10, 0, 5, 0),
+                                        5, 0, 5, 0),
                                     alignment: Alignment
                                         .center,
                                     child: Text(
@@ -1321,19 +1357,45 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                               ],
-                            ):  Container(
-                                width:displayWidth(context) /5.5
-                            )
+                            ),):  Container(
+//                              width:displayWidth(context) /5.5
+                            width:displayWidth(context) /5.9,
+                          )
+                          ,
+                          onPressed: ()=>{
+                            setState(() {
+
+                              showEditingCompleteCustomerPhoneIformation =
+                              !showEditingCompleteCustomerPhoneIformation;
+//                      showFullOrderType = !showFullOrderType;
+                            })
+                          },
                         ),
 
                         // THIS CONTAINER ABOVE IS ABOUT PHONE NUMBER INFORMATION ENDS HERE.
 
                         // THIS CONTAINER BELOW IS ABOUT ETA INFORMATION BEGINS HERE.
 
-                        Container(
+                        RaisedButton(
+                          color:Colors.redAccent,
+                          highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                          clipBehavior: Clip.hardEdge,
+                          splashColor: Color(0xffB47C00),
+                          highlightElevation: 12,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Color(0xff707070),
+                              style: BorderStyle.solid,
+//            width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: currentUserForInline.etaTimeInMinutes != -1?
+                          Container(
                             color:Colors.red,
                             width:displayWidth(context) /10,
-                            child: currentUserForInline.etaTimeInMinutes != -1? Row(
+                            child:  Row(
                               mainAxisAlignment: MainAxisAlignment
                                   .start
                               ,
@@ -1341,36 +1403,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   .center,
                               children: <Widget>[
 
-                                Container(
 
-                                  width: 30,
-                                  height: displayHeight(context) /28,
-//                    alignment: Alignment.center,
-//                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
-                                  child:
-                                  IconButton(
-                                    icon: const Icon(Icons.watch, size: 32.0),
-                                    color: Colors.black,
-                                    onPressed: () {
-
-                                      //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
-                                      //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-
-//                    setState(() {
-//                      showFullOrderType = !showFullOrderType;
-//                    });
-
-
-                                    },
-                                  ),
-                                  // : Container for 2nd argument of ternary condition ends here.
-
+                                Icon(
+                                    Icons.watch,
+                                    size: 32.0,
+                                    color: Colors.black
                                 ),
+
+
+
+                                // : Container for 2nd argument of ternary condition ends here.
+
+
                                 Container(
                                   padding: EdgeInsets
                                       .fromLTRB(
-                                      10, 0, 5, 0),
+                                      5, 0, 5, 0),
                                   alignment: Alignment
                                       .center,
                                   child: Text(
@@ -1395,11 +1443,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                               ],
-                            ):  Container(
-                                width:displayWidth(context) /5.5
-                            )
+                            ),
+                          ):  Container(
+                            width:displayWidth(context) /10,
+                          )
 
                           // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
+                          ,
+                          onPressed: ()=>{
+                            setState(() {
+
+                              showEditingCompleteCustomerReachoutIformation =
+                              !showEditingCompleteCustomerReachoutIformation;
+//                      showFullOrderType = !showFullOrderType;
+                            })
+                          },
                         ),
                       ],
                     ),
@@ -1581,14 +1639,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        labelText: 'Search about meal.'
                                             ),
 
-                                            /*
+
                                             onChanged: (text) {
                                               //RRRR
+
+                                              print('at address of unobsecured (deliver loc)');
 
                                               final shoppingCartBloc = BlocProvider.of<
                                                   ShoppingCartBloc>(context);
 //
                                               shoppingCartBloc.setAddressForOrder(text);
+
+                                              setState(() =>
+
+                                              {
+                                                showFullOrderType = false,
+//                                                showCustomerInformationHeader = true,
+                                              }
+
+
+                                              );
 
                                               /*
                                               setState(() =>
@@ -1602,11 +1672,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               );
                                               */
                                             },
-                                            */
 
 
 
-                                              /*
+
+                                            /*
                                             onTap: () {
 
                                               print('on tap of line # 1607');
@@ -1792,9 +1862,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   text);
 
                                               setState(() => showFullOrderType = false);
+                                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
                                             },
 
 
+                                            /*
                                             onTap: () {
 
 
@@ -1804,8 +1876,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   (currentUser.flatOrHouseNumber
                                                       .trim()
                                                       .length) > 0 ||
-                                                  (currentUser.etaTimeInMinutes !=
-                                                      null)) {
+                                                  (currentUser.etaTimeInMinutes !=-1
+                                                      )) {
                                                 showEditingCompleteCustomerHouseFlatIformation =
                                                 true;
                                               } else {
@@ -1813,6 +1885,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 showFullOrderType = false);
                                               }
                                             },
+
+                                            */
 
 
                                             onEditingComplete: () {
@@ -1977,8 +2051,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   text);
 
                                               setState(() => showFullOrderType = false);
+                                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
                                             },
 
+                                            /*
                                             onTap: () {
                                               if ((currentUser.address
                                                   .trim()
@@ -1986,8 +2062,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   (currentUser.flatOrHouseNumber
                                                       .trim()
                                                       .length) > 0 ||
-                                                  (currentUser.etaTimeInMinutes !=
-                                                      null)) {
+                                                  (currentUser.etaTimeInMinutes !=-1
+                                                      )) {
                                                 showEditingCompleteCustomerHouseFlatIformation =
                                                 true;
                                               } else {
@@ -1995,6 +2071,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 showFullOrderType = false);
                                               }
                                             },
+                                            */
 
                                             onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
@@ -2156,6 +2233,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               setState(() => showFullOrderType = false);
                                             },
 
+
                                             onTap: () {
                                               if ((currentUser.address
                                                   .trim()
@@ -2172,6 +2250,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 showFullOrderType = false);
                                               }
                                             },
+
 
 
 //                                            onTap: () {
@@ -2245,6 +2324,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 (showEditingCompleteCustomerReachoutIformation == true)){
             * */
             else {
+
+              // THIS ELSE IS EXECUTED IN THE FIRST TIME.
+              // WHEN THE ROW VIEW CONTAINING
+              // ALL INPUTS ARE NOT VISIBLE.
+
+              print(' in the eles =============== < > =============');
+
               return Center(
 
                   child: Container(
@@ -2339,6 +2425,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                    controller: addressController,
                                     textInputAction: TextInputAction.next,
                                     onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+//                                    focusNode: FocusNode(),// FOCUS NOT NEEDED
 
                                     textAlign: TextAlign.center,
                                     decoration: InputDecoration(
@@ -2365,29 +2452,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                                       shoppingCartBloc.setAddressForOrder(text);
 
-
-                                      /*
-
                                       setState(() =>
 
                                       {
                                         showFullOrderType = false,
+                                      });
+
+                                      // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+
+
+                                      /*
+                                      setState(() =>
+
+                                      {
+//                                        showFullOrderType = false,
+                                      showEditingCompleteCustomerAddressInformation = true,
 //                                        showCustomerInformationHeader = true,
                                       }
 
 
 
+
                                       );
                                       */
+
                                     }
                                     ,
 
-                                      /*
+
+                                    // on tap of address input of unobsecured.
+                                    /*
                                     onTap: () {
 
                                       if((currentUser.phoneNumber.trim().length) >0 ||
                                           (currentUser.flatOrHouseNumber.trim().length) >0 ||
-                                          (currentUser.etaTimeInMinutes != null)  )
+                                          (currentUser.etaTimeInMinutes !=-1)  )
                                       {
                                         showEditingCompleteCustomerAddressInformation = true;
                                       } else {
@@ -2399,6 +2498,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       }
                                     },
                                     */
+
 
 
                                     onEditingComplete: () {
@@ -2545,9 +2645,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                       setState(() => showFullOrderType = false);
 
+                                      // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+
                                     },
 
 
+                                    /*
                                     onTap: () {
                                       if ((currentUser.phoneNumber
                                           .trim()
@@ -2555,8 +2658,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           (currentUser.address
                                               .trim()
                                               .length) > 0 ||
-                                          (currentUser.etaTimeInMinutes !=
-                                              null)) {
+                                          (currentUser.etaTimeInMinutes !=-1
+                                              )) {
                                         showEditingCompleteCustomerAddressInformation =
                                         true;
                                       } else {
@@ -2564,6 +2667,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         showFullOrderType = false);
                                       }
                                     },
+                                    */
                                     onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
@@ -2716,6 +2820,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                      } else{
                                       setState(() => showFullOrderType = false);
 
+                                      // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
 
 
                                     },
@@ -2860,7 +2965,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     keyboardType: TextInputType.number,
                                     textInputAction: TextInputAction.done,
                                     onSubmitted: (_) => FocusScope.of(context).unfocus(),
-                                    focusNode: FocusNode(),
+//                                    focusNode: FocusNode(),
                                     textAlign: TextAlign.center,
 
                                     decoration: InputDecoration(
@@ -2897,7 +3002,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                      }
 //                                      else{
                                       setState(() => showFullOrderType = false);
-
+                                      // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
                                     },
 
 
