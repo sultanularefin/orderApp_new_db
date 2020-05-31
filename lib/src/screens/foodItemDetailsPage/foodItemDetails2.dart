@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 import 'package:logger/logger.dart';
@@ -937,6 +938,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //              final locationBloc = BlocProvider.of<>(context);
 //                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
 
+                          CustomerInformation oneCustomerInfo = new CustomerInformation(
+                            address:'',
+                            flatOrHouseNumber:'',
+                            phoneNumber:'',
+                            etaTimeInMinutes:-1,
+//        CustomerInformation currentUser = _oneCustomerInfo;
+//    currentUser.address = address;
+//
+
+                          );
+
                           Order x = new Order(
                             foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
                             foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
@@ -946,6 +958,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             foodItemSize: _currentSize,
                             ingredients: foodItemDetailsbloc.getDefaultIngredients,
                             deliveryTypeIndex: 0,
+                            ordersCustomer:oneCustomerInfo,
                           );
                           print(
 

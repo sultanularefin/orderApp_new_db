@@ -10,7 +10,7 @@ import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
-import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+
 
 
 //MODELS
@@ -29,13 +29,13 @@ class ShoppingCartBloc implements Bloc {
 
   Order _curretnOrder ;
   List<OrderTypeSingleSelect> _orderType;
-  CustomerInformation _oneCustomerInfo;
+//  CustomerInformation _oneCustomerInfo;
 
 
 //  List<Order> get getCurrentOrder => _curretnOrder;
   Order get getCurrentOrder => _curretnOrder;
   List<OrderTypeSingleSelect> get getCurrentOrderType => _orderType;
-  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
+//  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
 
 
 
@@ -43,7 +43,7 @@ class ShoppingCartBloc implements Bloc {
   final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
 //  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
 //  final _customerInformationController = StreamController <CustomerInformation>();
-  final _customerInformationController = StreamController <CustomerInformation>.broadcast();
+//  final _customerInformationController = StreamController <CustomerInformation>.broadcast();
 
 
   Stream<Order> get getCurrentOrderStream => _orderController.stream;
@@ -51,8 +51,10 @@ class ShoppingCartBloc implements Bloc {
   Stream  <List<OrderTypeSingleSelect>> get getCurrentOrderTypeSingleSelectStream =>
       _orderTypeController.stream;
 
+  /*
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
       _customerInformationController.stream;
+  */
 
 
 
@@ -85,7 +87,8 @@ class ShoppingCartBloc implements Bloc {
     print('food Item name in Shopping Cart BlocK ${x.foodItemName}');
 
     initiateOrderTypeSingleSelectOptions();
-    initiateCustomerInformation();
+
+    //    initiateCustomerInformation();
 
     _curretnOrder=x;
     _orderController.sink.add(x);
@@ -96,6 +99,7 @@ class ShoppingCartBloc implements Bloc {
 // CONSTRUCTOR ENDS HERE.
 
 
+  /*
 
   void initiateCustomerInformation(){
     CustomerInformation customerInfoAtConstructor = new CustomerInformation(
@@ -111,6 +115,7 @@ class ShoppingCartBloc implements Bloc {
     _oneCustomerInfo = customerInfoAtConstructor;
     _customerInformationController.sink.add(_oneCustomerInfo);
   }
+  */
   void initiateOrderTypeSingleSelectOptions()
   {
 
@@ -210,46 +215,79 @@ class ShoppingCartBloc implements Bloc {
 
   setAddressForOrder(String address){
 
-    CustomerInformation currentUser = _oneCustomerInfo;
-    currentUser.address = address;
+    Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    _oneCustomerInfo = currentUser;
-    _customerInformationController.sink.add(_oneCustomerInfo);
+    tempOrderModifyCustomerInfo.ordersCustomer.address= address;
+
+    _curretnOrder = tempOrderModifyCustomerInfo;
+
+    _orderController.sink.add(_curretnOrder);
 
   }
 
   setHouseorFlatNumberForOrder(String houseOrFlatNumber){
 
-    CustomerInformation currentUser = _oneCustomerInfo;
+    Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    currentUser.flatOrHouseNumber = houseOrFlatNumber;
+    tempOrderModifyCustomerInfo.ordersCustomer.flatOrHouseNumber= houseOrFlatNumber;
 
-    _oneCustomerInfo = currentUser;
-    _customerInformationController.sink.add(_oneCustomerInfo);
+    _curretnOrder = tempOrderModifyCustomerInfo;
+
+    _orderController.sink.add(_curretnOrder);
+
+
+
+//    CustomerInformation currentUser = _oneCustomerInfo;
+//
+//    currentUser.flatOrHouseNumber = houseOrFlatNumber;
+//
+//    _oneCustomerInfo = currentUser;
+//    _customerInformationController.sink.add(_oneCustomerInfo);
 
   }
 
   setPhoneNumberForOrder(String phoneNumber){
-    CustomerInformation currentUser = _oneCustomerInfo;
 
-    currentUser.phoneNumber=phoneNumber;
+    Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    _oneCustomerInfo = currentUser;
-    _customerInformationController.sink.add(_oneCustomerInfo);
+    tempOrderModifyCustomerInfo.ordersCustomer.phoneNumber = phoneNumber;
+
+    _curretnOrder = tempOrderModifyCustomerInfo;
+
+    _orderController.sink.add(_curretnOrder);
+//
+//    CustomerInformation currentUser = _oneCustomerInfo;
+//
+//    currentUser.phoneNumber=phoneNumber;
+//
+//    _oneCustomerInfo = currentUser;
+//    _customerInformationController.sink.add(_oneCustomerInfo);
   }
 
   // ETA = estimated time of arrival.
   setETAForOrder(String minutes){
 
+
+
     double minutes2 = double.parse(minutes);
     int minutes3 =minutes2.ceil();
 
-    CustomerInformation currentUser = _oneCustomerInfo;
+    Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    currentUser.etaTimeInMinutes=minutes3;
+    tempOrderModifyCustomerInfo.ordersCustomer.etaTimeInMinutes = minutes3;
 
-    _oneCustomerInfo = currentUser;
-    _customerInformationController.sink.add(_oneCustomerInfo);
+    _curretnOrder = tempOrderModifyCustomerInfo;
+
+    _orderController.sink.add(_curretnOrder);
+
+
+
+//    CustomerInformation currentUser = _oneCustomerInfo;
+//
+//    currentUser.etaTimeInMinutes=minutes3;
+//
+//    _oneCustomerInfo = currentUser;
+//    _customerInformationController.sink.add(_oneCustomerInfo);
 
 
   }
@@ -258,7 +296,7 @@ class ShoppingCartBloc implements Bloc {
   void dispose() {
     _orderController.close();
     _orderTypeController.close();
-    _customerInformationController.close();
+//    _customerInformationController.close();
 //    _multiSelectForFoodController.close();
 
   }

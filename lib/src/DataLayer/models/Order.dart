@@ -14,6 +14,7 @@
 import 'dart:math';
 
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 //import 'packages:foodgallery/src/DataLayer/models/NewIngredient.dart';
 //final String storageBucketURLPredicate_Same =
 //    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
@@ -31,6 +32,7 @@ class Order {
   // final String foodItemOrderID;     // random might not be needed.
   List<NewIngredient> ingredients;
   int deliveryTypeIndex;
+  CustomerInformation ordersCustomer;
 
 //  String ingredients;
 //  itemId = await generateItemId(6);
@@ -45,6 +47,7 @@ class Order {
         this.foodItemSize,
         this.ingredients,
         this.deliveryTypeIndex,
+        this.ordersCustomer
 
         // this.foodItemOrderID,
       }
