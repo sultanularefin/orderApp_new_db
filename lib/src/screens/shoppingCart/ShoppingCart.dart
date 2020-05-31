@@ -225,7 +225,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //                                      alignment: Alignment.bottomCenter,
-                                    height: displayHeight(context) / 1.2,
+                                    height: displayHeight(context) / 1.13,
                                     //width:displayWidth(context) / 1.5, /* 3.8*/
                                     width: displayWidth(context)
                                         - displayWidth(context) /
@@ -233,7 +233,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     ,
 //                  color:Colors.lightGreenAccent,
                                     margin: EdgeInsets.fromLTRB(
-                                        12, displayHeight(context) / 11, 10, 5),
+                                        12, displayHeight(context) / 18, 10, 5),
 
 
                                     child: Neumorphic(
@@ -503,12 +503,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   Widget animatedWidgetShowFullOrderType() {
+    print ('at animatedWidgetShowFullOrderType() ');
     return
       Container(
         color: Colors.deepPurple,
-        height: displayHeight(context) / 25
-            /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
-            displayHeight(context) /10 /* HEIGHT OF MULTI SELECT PORTION */,
+        height:
+         displayHeight(context) / 23 +
+            /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ // +
+
+            displayHeight(context) /10,
+            /* HEIGHT OF MULTI SELECT PORTION */
+           // + 15  /* padding in 2nd child */
+           // + 50 , /* THIS 2O IS EXTRA*/
         child: Column(
           children: <Widget>[
             Container(
