@@ -430,7 +430,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             height: displayWidth(context)/2,
                                             child:
                                             AnimatedSwitcher(
-                                              duration: Duration(milliseconds: 500),
+                                              duration: Duration(milliseconds: 300),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
@@ -1670,7 +1670,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // 3. If all 4 inputs are there show user the payment
       return SingleChildScrollView(
         child: Container(
-        
+
           height: displayWidth(context)/2,
           width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
