@@ -151,54 +151,67 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
 
-
-
-
-  //  assert(user.displayName != null);
-
-
   @override
   void initState(){
 
-//    print('at initState of welcomePage');
+    // possible scenarios:
+
+
+    // 1. no local storage, (app deleted and reinstalled || or first time user ) go to Login page.
+    // MORE AT HERE : localStorageCheck();
+
+    // 2. if the email found in loCAL STORAGE, LOCAL STORAGE ARE CREATED ONLY WHEN SUCCESSFUL LOGIN WERE MADE WITH
+    // CERTAIN EMAIL AND PASSWORD.
+    // THUS THERE COULD BE 2 SCENARIOS{
+    /*
+     1. CHECK WITH THIS CREDENTIALS WITH FIRE BASE AUTH IF SUCCESS GO TO FIREBASE PAGE.
+     2. ADMIN CAN DELETE THE USER FROM FIREBASE AUTH LIST THEN USER CAN'T LOGIN AND HE NEEDS TO LOGIN AGAIN WITH THE
+     ADMIN RPOVIDE USER NAME AND PASSWROD.
+
+     3. I THINK I IMPLEMENTED ALL BUT SOME NETWORKING RELATED CODE LIKE connectionState etc needs to be checked again.
+     in the future (might not need now.).
+
+     */
+    localStorageCheck();
+
+    //  this requred since stream can only handle one kind of variale. In this page FirebaseUser.
+
+    //  // check paper why we need it.
+    // check the data Type at here.
+    /*
+    stream: identityBloc.getCurrentFirebaseUserStream,
+            initialData: identityBloc.getCurrentFirebaseUser,
+    */
+
     super.initState();
-//    loadUser();
+
   }
 
-  /*
-  // !!(NOT) NECESSARY NOW. -- CONFUSED.
-  Future<void> loadUser() async {
+  // Future<void> return type .  ??
+  localStorageCheck () async{
 
-    debugPrint("loadUser()");
-    final IdentityBlockWelcomePage = BlocProvider.of<IdentityBloc>(context);
-
-//    Future<void> setAllIngredients() async {
-    await IdentityBlockWelcomePage.loadUser();
+    // 3 scenarios.
 
 
-    await IdentityBlockWPage.getAllIngredients();
-    List<NewIngredient> test = bloc.allIngredients;
 
-//    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
+    print('< >   <   >   <    >  :: // ::  // at here: localStorageCheck');
+    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
 
-    print('done: ');
+    bool x= await identityBlockinInitState.checkUserinLocalStorage();
 
-//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
-//    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
+    if (x==false){
 
-    setState(()
-    {
-      _allIngredientState = test;
-//      priceByQuantityANDSize = euroPrice1;
-//      initialPriceByQuantityANDSize = euroPrice1;
+      return Navigator.push(
+
+          context, MaterialPageRoute(builder: (context) => LoginPage())
+
+      );
     }
-    );
-
-
 
   }
 
-  */
+
+
 
 
 
@@ -206,26 +219,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final bloc = BlocProvider.of<IdentityBloc>(context);
-
-
-    /*
-
-    StreamBuilder<List<NewCategoryItem>>(
-
-        stream:bloc.categoryItemsStream,
-        initialData: bloc.allCategories,
-//        initialData: bloc.getAllFoodItems(),
-        builder: (context, snapshot){
-
-      if (!snapshot.hasData) {
-        return Center(child: new LinearProgressIndicator());
-      }
-      else{
-
-
-      }
-      */
+    final identityBloc = BlocProvider.of<IdentityBloc>(context);
 
 
     print('width: ${MediaQuery.of(context).size.width}');
@@ -237,58 +231,29 @@ class _WelcomePageState extends State<WelcomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
 
-          child:StreamBuilder<FirebaseUser>(
-            /*
+        child:StreamBuilder<FirebaseUser>(
 
-           stream:bloc.categoryItemsStream,
-          initialData: bloc.allCategories,
-          //  initialData: bloc.getAllFoodItems(),
-          builder: (context, snapshot){
+            stream: identityBloc.getCurrentFirebaseUserStream,
+            initialData: identityBloc.getCurrentFirebaseUser,
+            builder: (context, snapshot) {
 
-          if (!snapshot.hasData) {
-          return Center(child: new LinearProgressIndicator());
-          }
-          else{
-
-    */
-              stream: bloc.getCurrentFirebaseUserStream,
-              initialData: bloc.getCurrentFirebaseUser,
-              builder: (context, snapshot) {
-
-                print('snapshot.hasData: ${snapshot.hasData}');
+              print('snapshot.hasData: ${snapshot.hasData}');
 
 
-                if (!snapshot.hasData) {
+              if(snapshot.connectionState == ConnectionState.done) {
 
-
-                  return Center(
-                    child: Column(
-                      children: <Widget>[
-
-                        Center(
-                          child: Container(
-                              alignment: Alignment.center,
-                              child: new CircularProgressIndicator(backgroundColor: Colors.lightGreenAccent)
-                          ),
-                        ),
-                        Center(
-                          child: Container(
-                              alignment: Alignment.center,
-                              child: new CircularProgressIndicator(backgroundColor: Colors.yellow,)
-                          ),
-                        ),
-                        Center(
-                          child: Container(
-                              alignment: Alignment.center,
-                              child: new CircularProgressIndicator(backgroundColor: Colors.redAccent )
-                          ),
-                        ),
-                      ],
+                if (snapshot.hasError) {
+                  return  Center(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text('something went wrong'),
                     ),
                   );
                 }
-                else {
-                  print('snapshot.hasData is ${snapshot.hasData} in Welcome page ');
+
+                if (snapshot.hasData) {
+                  print('snapshot.hasData is ${snapshot
+                      .hasData} in Welcome page ');
                   /*
                 return
                   BlocProvider<FoodGalleryBloc>(
@@ -304,21 +269,54 @@ class _WelcomePageState extends State<WelcomePage> {
 
                       )
                   );
+                }
+                else{
 
+                  return LoginPage();
 
-
-//                                      drawerScreen()
-
-
-
-
-
-
-
-//
                 }
               }
-          ),
+
+              // (snapshot.connectionState == ConnectionState.active)
+              //  inclued in else statement
+//                else if (snapshot.connectionState == ConnectionState.active)  {
+
+
+              else{
+
+                print('at else of this condition (snapshot.connectionState == ConnectionState.done) ');
+
+                return Center(
+                  child: Column(
+                    children: <Widget>[
+
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(backgroundColor: Colors.lightGreenAccent)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(backgroundColor: Colors.yellow,)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(backgroundColor: Colors.redAccent )
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+
+              
+            }
+        ),
 
       ),
 

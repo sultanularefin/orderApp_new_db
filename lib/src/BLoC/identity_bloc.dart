@@ -25,7 +25,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 class IdentityBloc implements Bloc {
 
 
-
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -47,18 +46,25 @@ class IdentityBloc implements Bloc {
 
 //  List<Order> get getCurrentOrder => _curretnOrder;
   FirebaseUser get getCurrentFirebaseUser => _currentFBUser;
+
 //  List<OrderTypeSingleSelect> get getCurrentOrderType => _orderType;
 //  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
 
 
-
   final _firebaseUserController = StreamController <FirebaseUser>();
+
 //  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
 //  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
 //  final _customerInformationController = StreamController <CustomerInformation>();
 //  final _customerInformationController = StreamController <CustomerInformation>.broadcast();
 
-  Stream<FirebaseUser> get getCurrentFirebaseUserStream => _firebaseUserController.stream;
+  Stream<FirebaseUser> get getCurrentFirebaseUserStream =>
+      _firebaseUserController.stream;
+
+//  Future<FirebaseUser> get getCurrentFirebaseUserStream =>
+//      _firebaseUserController.stream;
+
+//  getCurrentFirebaseUserStream
 
 //  Stream<Order> get getCurrentOrderStream => _orderController.stream;
 //
@@ -69,14 +75,10 @@ class IdentityBloc implements Bloc {
 //      _customerInformationController.stream;
 
 
-
   // CONSTRUCTOR BEGINS HERE.
 
 
-  IdentityBloc(
-
-      ) {
-
+  IdentityBloc() {
     print("at the begin of Constructor [IdentityBloc]");
 
     // TO  DO NEED TO CHECK SHARED PREFERENCES.
@@ -90,31 +92,31 @@ class IdentityBloc implements Bloc {
 
 
     loadUserFromConstructor();
-
   }
+
 // CONSTRUCTOR ENDS HERE.
 
-  Future<AuthResult> handleSignInFromLoginPage(String email,String password) async {
-
+  Future<AuthResult> handleSignInFromLoginPage(String email,
+      String password) async {
     AuthResult result = await _auth.signInWithEmailAndPassword(email:
-    email,password: password);
+    email, password: password);
 
 //  print('result: '  + result);
 
 
-    if(result.user.email != null){
+    if (result.user.email != null) {
       FirebaseUser fireBaseUserRemote = result.user;
 
       _currentFBUser = fireBaseUserRemote;
 
-      await _saveUser(fireBaseUserRemote,email,password);
+      await _saveUser(fireBaseUserRemote, email, password);
 
 
       _firebaseUserController.sink.add(_currentFBUser);
 
       return result;
     }
-    else{
+    else {
       return result;
     }
 
@@ -123,18 +125,19 @@ class IdentityBloc implements Bloc {
 
   }
 
-  _saveUser(/*String uid*/ FirebaseUser x,String loggerEmail,String loggerPassword) async {
+  _saveUser(/*String uid*/ FirebaseUser x, String loggerEmail,
+      String loggerPassword) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
 //    ??=
 //    Assign the value only if the variable is null
 
-    Map<String, dynamic> toJson() => {
-      'email': loggerEmail,
-      'password': loggerPassword,
+    Map<String, dynamic> toJson() =>
+        {
+          'email': loggerEmail,
+          'password': loggerPassword,
 //      'uid': uid,
-    };
-
+        };
 
 
     print('setString method going to be called where key is userInfo');
@@ -142,19 +145,18 @@ class IdentityBloc implements Bloc {
       'email': loggerEmail,
       'password': loggerPassword,
 //      'uid': uid,
-    })).then((onValue) =>{
+    })).then((onValue) =>
+    {
       print('at then of prefs.setString(userInfo.....')
-
     });
 
 
     print('user set in mobile storage');
 
 
+    final resultString = prefs.getString("userInfo");
 
-    final resultString =  prefs.getString("userInfo");
-
-    Map<String,  dynamic> user = jsonDecode(
+    Map<String, dynamic> user = jsonDecode(
         resultString
     );
 
@@ -164,16 +166,12 @@ class IdentityBloc implements Bloc {
     print('password ${user['password']}');
 
     print('result_in_prefs: ' + resultString);
-
-
   }
 
 
-  Future<FirebaseUser> _handleSignIn(String email,String password) async {
-
-
+  Future<FirebaseUser> _handleSignIn(String email, String password) async {
     AuthResult result = await _auth.signInWithEmailAndPassword(email:
-    email,password: password);
+    email, password: password);
 
 //  print('result: '  + result);
 
@@ -183,15 +181,43 @@ class IdentityBloc implements Bloc {
 
 
     return fireBaseUserRemote;
-
   }
-
 
 
   // Future<void> setAllIngredients() async {
   // FROM WELCOME PAGE ==>
 
+  Future <bool> checkUserinLocalStorage() async {
 
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+//    ??=
+//    Assign the value only if the variable is null
+
+
+  final resultString = prefs.getString("userInfo");
+
+  if (resultString == null){
+    // first time this will be the condition.
+    // no need to further check go to login page.
+
+    return false;
+  }
+  else{
+    Map<String, dynamic> user = jsonDecode(
+        resultString
+    );
+
+    // NEEED TO CHECK ABOVE '$user' again in future.
+    if(user['email']== null){
+      return false;
+    }
+    else return true;
+  }
+
+
+}
 
   void loadUserFromConstructor(/*String uid*/) async {
 

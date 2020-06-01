@@ -423,7 +423,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         SingleChildScrollView(
                                           child: Container(
-                                            color:Colors.white,
+                                            color:Colors.yellowAccent,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
                                             width: displayWidth(context) / 1.1,
@@ -435,9 +435,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
                                               child: oneOrder.deliveryTypeIndex == 1 ?
-                                              animatedUnObscuredTextInputContainer(oneOrder)
+                                              _buildShoppingCartInputFieldsUNObscured(oneOrder)
                                                   :oneOrder.deliveryTypeIndex == 2 ?
-                                              animatedUnObscuredTextInputContainer (oneOrder):
+                                              _buildShoppingCartInputFieldsUNObscured (oneOrder):
                                               animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
 
 
@@ -958,6 +958,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
+  /*
   Widget animatedUnObscuredTextInputContainer(Order forUnObscured){
 
     print('at animated Un Obscured Text Input Container');
@@ -981,6 +982,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   }
+  */
 
   Widget animatedObscuredTextInputContainer(CustomerInformation forObscuredCustomerInputDisplay){
 //    child:  AbsorbPointer(
@@ -1644,200 +1646,186 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 // YYYY
-  Widget _buildShoppingCartInputFieldsUNObscured(Order unObsecuredInputandPayment){
 
-    CustomerInformation x = unObsecuredInputandPayment.ordersCustomer;
-    //if(getOneOrdercustomerInfoFieldsNotEmpty(x)!=0){
-
-    CustomerInformation currentUser =  x;
-
-    print('currentUser.address: ${currentUser.address}');
-    print('currentUser.flatOrHouseNumber: ${currentUser.flatOrHouseNumber}');
-    print('currentUser.phoneNumber: ${currentUser.phoneNumber}');
-    print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
-
-//    animatedObscuredTextInputContainer
-//    if((showEditingCompleteCustomerAddressInformation == true)||
-//        (showEditingCompleteCustomerHouseFlatIformation == true)||
-//        (showEditingCompleteCustomerPhoneIformation == true)||
-//        (showEditingCompleteCustomerReachoutIformation == true)){
+  Widget unobscureInputandRest(Order unObsecuredInputandPayment){
 
 
-    if(showFullOrderType == false){
-      // means
-      // 1. Row Holding user's information.
-      // 2. means holding the inputFields for User Input.
-      // 3. If all 4 inputs are there show user the payment
-      return SingleChildScrollView(
-        child: Container(
 
-          height: displayWidth(context)/2,
-          width: displayWidth(context) / 1.1,
+    CustomerInformation currentUser = unObsecuredInputandPayment.ordersCustomer;
+    // means
+    // 1. Row Holding user's information.
+    // 2. means holding the inputFields for User Input.
+    // 3. If all 4 inputs are there show user the payment
+    return SingleChildScrollView(
+      child: Container(
+
+        height: displayWidth(context)/2,
+        width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
-          color: Colors.tealAccent,
+        color: Colors.tealAccent,
 
-          child: Column(
-            children: <Widget>[
+        child: Column(
+          children: <Widget>[
 
-              // 1.
-              animatedShowUserAddressDetailsInLine(currentUser),
+            // 1.
+            animatedShowUserAddressDetailsInLine(currentUser),
 
 
-              // FOR EACH ELEMENT BELOW WE NEED TO CHECK ONE BOOLEAN CONDITON LIKE
+            // FOR EACH ELEMENT BELOW WE NEED TO CHECK ONE BOOLEAN CONDITON LIKE
 //                    "show_______"
-              //UUUU
+            //UUUU
 
-              // 2.
-              Container(
-                  alignment:Alignment.topCenter,
+            // 2.
+            Container(
+                alignment:Alignment.topCenter,
 
-                  child: Container(
+                child: Container(
 //                            height: displayHeight(context) / 3.7,
-                      color: Colors.green,
+                    color: Colors.green,
 
 //                    color:Colors.white.withOpacity(0.9),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
 
 
 
 
-                          // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
+                        // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
 //                            showEditingCompleteCustomerAddressInformation
 //                            showEditingCompleteCustomerHouseFlatIformation
 //                            showEditingCompleteCustomerPhoneIformation
 //                            showEditingCompleteCustomerReachoutIformation
 //                                showEditingCompleteCustomerAddressInformation BEGINS HERE.
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: 4),
+                          child: showEditingCompleteCustomerAddressInformation? Container():
                           Container(
                             margin: EdgeInsets.symmetric(
                                 horizontal: 0,
-                                vertical: 4),
-                            child: showEditingCompleteCustomerAddressInformation? Container():
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 0,
-                                  vertical: 0),
-                              decoration: BoxDecoration(
+                                vertical: 0),
+                            decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                                borderRadius: BorderRadius.circular(25),
-                                border: Border.all(
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(
 
-                                  color: Color(0xffBCBCBD),
-                                  style: BorderStyle.solid,
-                                  width: 2.0,
-
-
-                                ),
-
-                                boxShadow: [
-                                  BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                      color: Color(0xffFFFFFF),
-                                      blurRadius: 10.0,
-                                      offset: Offset(0.0, 2.0))
-                                ],
+                                color: Color(0xffBCBCBD),
+                                style: BorderStyle.solid,
+                                width: 2.0,
 
 
-                                color: Color(0xffFFFFFF),
-//                                      Colors.black54
                               ),
 
+                              boxShadow: [
+                                BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                    color: Color(0xffFFFFFF),
+                                    blurRadius: 10.0,
+                                    offset: Offset(0.0, 2.0))
+                              ],
+
+
+                              color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                            ),
+
 //                                  color: Color(0xffFFFFFF),
-                              width: displayWidth(context) / 2.5,
-                              height: displayHeight(context) / 24,
-                              padding: EdgeInsets.only(
-                                  left: 4, top: 3, bottom: 3, right: 3),
-                              child: Row(
+                            width: displayWidth(context) / 2.5,
+                            height: displayHeight(context) / 24,
+                            padding: EdgeInsets.only(
+                                left: 4, top: 3, bottom: 3, right: 3),
+                            child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
 
-                                    height: 25,
-                                    width: 5,
-                                    margin: EdgeInsets.only(left: 0),
+                                  height: 25,
+                                  width: 5,
+                                  margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                    child: Icon(
+                                  child: Icon(
 //                                          Icons.add_shopping_cart,
-                                      Icons.location_on,
+                                    Icons.location_on,
 
-                                      size: 28,
-                                      color: Color(0xffBCBCBD),
-                                    ),
-
-
+                                    size: 28,
+                                    color: Color(0xffBCBCBD),
                                   ),
 
-                                  Container(
+
+                                ),
+
+                                Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                                    alignment: Alignment.center,
-                                    width: displayWidth(context) / 4,
+                                  alignment: Alignment.center,
+                                  width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                                    // do it in both Container
-                                    child: TextField(
+                                  // do it in both Container
+                                  child: TextField(
 //                                            controller: addressController,
-                                      textInputAction: TextInputAction.next,
-                                      onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                                    textInputAction: TextInputAction.next,
+                                    onSubmitted: (_) => FocusScope.of(context).nextFocus(),
 
 
-                                      textAlign: TextAlign.center,
-                                      decoration: InputDecoration(
-                                        focusColor: Colors.red,
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
+                                      focusColor: Colors.red,
 //                                                            fillColor: Colors.red,
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                                        border: InputBorder.none,
-                                        hintText: 'Enter delivery location',
-                                        hintStyle: TextStyle(
-                                            color: Color(0xffFC0000),
-                                            fontSize: 17),
+                                      border: InputBorder.none,
+                                      hintText: 'Enter delivery location',
+                                      hintStyle: TextStyle(
+                                          color: Color(0xffFC0000),
+                                          fontSize: 17),
 
 //                                      currentUser
 //                                        labelText: 'Search about meal.'
-                                      ),
+                                    ),
 
 
-                                      onChanged: (text) {
-                                        //RRRR
+                                    onChanged: (text) {
+                                      //RRRR
 
-                                        print('at address of unobsecured (deliver loc)');
+                                      print('at address of unobsecured (deliver loc)');
 
-                                        final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+                                      final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //
-                                        shoppingCartBloc.setAddressForOrder(text);
-                                        if((text.trim().length) >0){
-                                          print('at (text.trim().length) >0)');
-                                          setState(() =>
+                                      shoppingCartBloc.setAddressForOrder(text);
+                                      if((text.trim().length) >0){
+                                        print('at (text.trim().length) >0)');
+                                        setState(() =>
 
-                                          {
+                                        {
 //                                          showEditingCompleteCustomerAddressInformation = true ,
-                                            showFullOrderType = false,
+                                          showFullOrderType = false,
 
-                                          });
-                                        }
-                                        else {
-                                          setState(() =>
+                                        });
+                                      }
+                                      else {
+                                        setState(() =>
 
-                                          {
-                                            showFullOrderType = false,
+                                        {
+                                          showFullOrderType = false,
 
 //                                                showCustomerInformationHeader = true,
 
-                                          });
-                                        }
+                                        });
+                                      }
 
 
 
-                                        /*
+                                      /*
                                                 setState(() =>
                                                 {
                                                   showFullOrderType = false,
@@ -1846,12 +1834,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                                 );
                                                 */
-                                      },
+                                    },
 
 
 
 
-                                      /*
+                                    /*
                                               onTap: () {
 
                                                 print('on tap of line # 1607');
@@ -1876,24 +1864,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 ////                                                showCustomerInformationHeader = true,
 //                                              }
 
-                                      //);
+                                    //);
 //                                            },
 //                                          },
 
 
-                                      onEditingComplete: () {
-                                        print('at editing complete of address ');
+                                    onEditingComplete: () {
+                                      print('at editing complete of address ');
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
-                                        setState(() =>
-                                        {
-                                          showEditingCompleteCustomerAddressInformation =
-                                          true
+                                      setState(() =>
+                                      {
+                                        showEditingCompleteCustomerAddressInformation =
+                                        true
 //                                          showInputtedCustomerIformation= true,
-                                        }
-                                        );
-                                      },
-                                      /*
+                                      }
+                                      );
+                                    },
+                                    /*
 
 
                                                                 onSubmitted: (String value) async {
@@ -1916,131 +1904,131 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             */
 
 
-                                      style: TextStyle(
-                                          color: Color(0xffFC0000), fontSize: 16),
-                                    ),
+                                    style: TextStyle(
+                                        color: Color(0xffFC0000), fontSize: 16),
+                                  ),
 
-                                  )
-
-//                                  Spacer(),
+                                )
 
 //                                  Spacer(),
 
-                                ],
-                              ),
+//                                  Spacer(),
+
+                              ],
                             ),
                           ),
+                        ),
 
-                          // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
+                        // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
 
-                          // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
+                        // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
 
-                          //
+                        //
 //                                showEditingCompleteCustomerHouseFlatIformation BEGINS HERE
 
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: 4),
+                          child: showEditingCompleteCustomerHouseFlatIformation?Container():
                           Container(
                             margin: EdgeInsets.symmetric(
                                 horizontal: 0,
-                                vertical: 4),
-                            child: showEditingCompleteCustomerHouseFlatIformation?Container():
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 0,
-                                  vertical: 0),
-                              decoration: BoxDecoration(
+                                vertical: 0),
+                            decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                                borderRadius: BorderRadius.circular(25),
-                                border: Border.all(
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(
 
-                                  color: Color(0xffBCBCBD),
-                                  style: BorderStyle.solid,
-                                  width: 2.0,
-
-
-                                ),
-
-                                boxShadow: [
-                                  BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                      color: Color(0xffFFFFFF),
-                                      blurRadius: 10.0,
-                                      offset: Offset(0.0, 2.0))
-                                ],
+                                color: Color(0xffBCBCBD),
+                                style: BorderStyle.solid,
+                                width: 2.0,
 
 
-                                color: Color(0xffFFFFFF),
-//                                      Colors.black54
                               ),
 
+                              boxShadow: [
+                                BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                    color: Color(0xffFFFFFF),
+                                    blurRadius: 10.0,
+                                    offset: Offset(0.0, 2.0))
+                              ],
+
+
+                              color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                            ),
+
 //                                  color: Color(0xffFFFFFF),
-                              width: displayWidth(context) / 2.5,
-                              height: displayHeight(context) / 24,
-                              padding: EdgeInsets.only(
-                                  left: 4, top: 3, bottom: 3, right: 3),
-                              child: Row(
+                            width: displayWidth(context) / 2.5,
+                            height: displayHeight(context) / 24,
+                            padding: EdgeInsets.only(
+                                left: 4, top: 3, bottom: 3, right: 3),
+                            child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
 
-                                    height: 25,
-                                    width: 5,
-                                    margin: EdgeInsets.only(left: 0),
+                                  height: 25,
+                                  width: 5,
+                                  margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                    child: Icon(
+                                  child: Icon(
 //                                          Icons.add_shopping_cart,
-                                      Icons.home,
-                                      size: 28,
-                                      color: Color(0xffBCBCBD),
-                                    ),
-
-
+                                    Icons.home,
+                                    size: 28,
+                                    color: Color(0xffBCBCBD),
                                   ),
 
-                                  Container(
+
+                                ),
+
+                                Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                                    alignment: Alignment.center,
-                                    width: displayWidth(context) / 4,
+                                  alignment: Alignment.center,
+                                  width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                                    // do it in both Container
-                                    child: TextField(
+                                  // do it in both Container
+                                  child: TextField(
 
-                                      textInputAction: TextInputAction.next,
-                                      onSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                                      textAlign: TextAlign.center,
-                                      decoration: InputDecoration(
+                                    textInputAction: TextInputAction.next,
+                                    onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                                        border: InputBorder.none,
-                                        hintText: 'Enter House/Flat address/number',
-                                        hintStyle: TextStyle(
-                                            color: Color(0xffFC0000),
-                                            fontSize: 17),
+                                      border: InputBorder.none,
+                                      hintText: 'Enter House/Flat address/number',
+                                      hintStyle: TextStyle(
+                                          color: Color(0xffFC0000),
+                                          fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                                      ),
+                                    ),
 
-                                      onChanged: (text) {
-                                        final shoppingCartBloc = BlocProvider.of<
-                                            ShoppingCartBloc>(context);
+                                    onChanged: (text) {
+                                      final shoppingCartBloc = BlocProvider.of<
+                                          ShoppingCartBloc>(context);
 //
-                                        shoppingCartBloc
-                                            .setHouseorFlatNumberForOrder(text);
+                                      shoppingCartBloc
+                                          .setHouseorFlatNumberForOrder(text);
 
-                                        setState(() => showFullOrderType = false);
-                                        // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-                                      },
+                                      setState(() => showFullOrderType = false);
+                                      // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                                    },
 
 
-                                      /*
+                                    /*
                                               onTap: () {
 
 
@@ -2063,20 +2051,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               */
 
 
-                                      onEditingComplete: () {
+                                    onEditingComplete: () {
 
-                                        print('at editing complete of House or Flat Iformation ');
+                                      print('at editing complete of House or Flat Iformation ');
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
-                                        setState(() =>
-                                        {
-                                          showEditingCompleteCustomerHouseFlatIformation =
-                                          true
+                                      setState(() =>
+                                      {
+                                        showEditingCompleteCustomerHouseFlatIformation =
+                                        true
 //                                          showInputtedCustomerIformation= true,
-                                        }
-                                        );
-                                      },
-                                      /*
+                                      }
+                                      );
+                                    },
+                                    /*
 
 
 
@@ -2100,135 +2088,135 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                                                 */
 
-                                      style: TextStyle(
-                                          color: Color(0xffFC0000), fontSize: 16),
-                                    ),
+                                    style: TextStyle(
+                                        color: Color(0xffFC0000), fontSize: 16),
+                                  ),
 
-                                  )
-
-//                                  Spacer(),
+                                )
 
 //                                  Spacer(),
 
-                                ],
-                              ),
+//                                  Spacer(),
+
+                              ],
                             ),
                           ),
+                        ),
 
 
-                          // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
+                        // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
 
-                          // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
+                        // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
 
-                          //  showEditingCompleteCustomerPhoneIformation BEGINS HERE.
+                        //  showEditingCompleteCustomerPhoneIformation BEGINS HERE.
 
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: 4),
+                          child: showEditingCompleteCustomerPhoneIformation? Container():
                           Container(
                             margin: EdgeInsets.symmetric(
                                 horizontal: 0,
-                                vertical: 4),
-                            child: showEditingCompleteCustomerPhoneIformation? Container():
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 0,
-                                  vertical: 0),
-                              decoration: BoxDecoration(
+                                vertical: 0),
+                            decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                                borderRadius: BorderRadius.circular(25),
-                                border: Border.all(
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(
 
-                                  color: Color(0xffBCBCBD),
-                                  style: BorderStyle.solid,
-                                  width: 2.0,
-
-
-                                ),
-
-                                boxShadow: [
-                                  BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                      color: Color(0xffFFFFFF),
-                                      blurRadius: 10.0,
-                                      offset: Offset(0.0, 2.0))
-                                ],
+                                color: Color(0xffBCBCBD),
+                                style: BorderStyle.solid,
+                                width: 2.0,
 
 
-                                color: Color(0xffFFFFFF),
-//                                      Colors.black54
                               ),
 
+                              boxShadow: [
+                                BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                    color: Color(0xffFFFFFF),
+                                    blurRadius: 10.0,
+                                    offset: Offset(0.0, 2.0))
+                              ],
+
+
+                              color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                            ),
+
 //                                  color: Color(0xffFFFFFF),
-                              width: displayWidth(context) / 2.5,
-                              height: displayHeight(context) / 24,
-                              padding: EdgeInsets.only(
-                                  left: 4, top: 3, bottom: 3, right: 3),
-                              child: Row(
+                            width: displayWidth(context) / 2.5,
+                            height: displayHeight(context) / 24,
+                            padding: EdgeInsets.only(
+                                left: 4, top: 3, bottom: 3, right: 3),
+                            child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
 
-                                    height: 25,
-                                    width: 5,
-                                    margin: EdgeInsets.only(left: 0),
+                                  height: 25,
+                                  width: 5,
+                                  margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                    child: Icon(
+                                  child: Icon(
 //                                          Icons.add_shopping_cart,
-                                      Icons.phone,
-                                      size: 28,
-                                      color: Color(0xffBCBCBD),
-                                    ),
-
-
+                                    Icons.phone,
+                                    size: 28,
+                                    color: Color(0xffBCBCBD),
                                   ),
 
-                                  Container(
+
+                                ),
+
+                                Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                                    alignment: Alignment.center,
-                                    width: displayWidth(context) / 4,
+                                  alignment: Alignment.center,
+                                  width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                                    // do it in both Container
-                                    child: TextField(
-                                      textInputAction: TextInputAction.next,
-                                      onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                                  // do it in both Container
+                                  child: TextField(
+                                    textInputAction: TextInputAction.next,
+                                    onSubmitted: (_) => FocusScope.of(context).nextFocus(),
 
-                                      textAlign: TextAlign.center,
-                                      decoration: InputDecoration(
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                                        border: InputBorder.none,
-                                        hintText: 'Enter phone / telephone number',
-                                        hintStyle: TextStyle(
-                                            color: Color(0xffFC0000),
-                                            fontSize: 17),
+                                      border: InputBorder.none,
+                                      hintText: 'Enter phone / telephone number',
+                                      hintStyle: TextStyle(
+                                          color: Color(0xffFC0000),
+                                          fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                                      ),
+                                    ),
 
-                                      style: TextStyle(
-                                          color: Color(0xffFC0000), fontSize: 16),
+                                    style: TextStyle(
+                                        color: Color(0xffFC0000), fontSize: 16),
 
-                                      onChanged: (text) {
-                                        print("33: $text");
+                                    onChanged: (text) {
+                                      print("33: $text");
 
-                                        final shoppingCartBloc = BlocProvider.of<
-                                            ShoppingCartBloc>(context);
+                                      final shoppingCartBloc = BlocProvider.of<
+                                          ShoppingCartBloc>(context);
 //
-                                        shoppingCartBloc.setPhoneNumberForOrder(
-                                            text);
+                                      shoppingCartBloc.setPhoneNumberForOrder(
+                                          text);
 
-                                        setState(() => showFullOrderType = false);
-                                        // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-                                      },
+                                      setState(() => showFullOrderType = false);
+                                      // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                                    },
 
-                                      /*
+                                    /*
                                               onTap: () {
                                                 if ((currentUser.address
                                                     .trim()
@@ -2247,21 +2235,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               },
                                               */
 
-                                      onEditingComplete: () {
+                                    onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
 
-                                        print('at editing complete of Customer Phone Iformation ');
-                                        setState(() =>
-                                        {
-                                          showEditingCompleteCustomerPhoneIformation =
-                                          true
+                                      print('at editing complete of Customer Phone Iformation ');
+                                      setState(() =>
+                                      {
+                                        showEditingCompleteCustomerPhoneIformation =
+                                        true
 //                                          showInputtedCustomerIformation= true,
 
-                                        }
+                                      }
 
-                                        );
-                                      },
+                                      );
+                                    },
 
 /*
                                                                 onSubmitted: (String value) async {
@@ -2282,165 +2270,165 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                                   );
                                                                 },
                                                                   */
-                                    ),
+                                  ),
 
-                                  )
-
-//                                  Spacer(),
+                                )
 
 //                                  Spacer(),
 
-                                ],
-                              ),
+//                                  Spacer(),
+
+                              ],
                             ),
                           ),
+                        ),
 
 
-                          // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
+                        // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
 
-                          // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
+                        // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
 
 //                                showEditingCompleteCustomerReachoutIformation BEGINS HERE.
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 0,
+                              vertical: 4),
+                          child: showEditingCompleteCustomerReachoutIformation ? Container():
                           Container(
                             margin: EdgeInsets.symmetric(
                                 horizontal: 0,
-                                vertical: 4),
-                            child: showEditingCompleteCustomerReachoutIformation ? Container():
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 0,
-                                  vertical: 0),
-                              decoration: BoxDecoration(
+                                vertical: 0),
+                            decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                                borderRadius: BorderRadius.circular(25),
-                                border: Border.all(
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(
 
-                                  color: Color(0xffBCBCBD),
-                                  style: BorderStyle.solid,
-                                  width: 2.0,
-
-
-                                ),
-
-                                boxShadow: [
-                                  BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                      color: Color(0xffFFFFFF),
-                                      blurRadius: 10.0,
-                                      offset: Offset(0.0, 2.0))
-                                ],
+                                color: Color(0xffBCBCBD),
+                                style: BorderStyle.solid,
+                                width: 2.0,
 
 
-                                color: Color(0xffFFFFFF),
-//                                      Colors.black54
                               ),
 
+                              boxShadow: [
+                                BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                    color: Color(0xffFFFFFF),
+                                    blurRadius: 10.0,
+                                    offset: Offset(0.0, 2.0))
+                              ],
+
+
+                              color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                            ),
+
 //                                  color: Color(0xffFFFFFF),
-                              width: displayWidth(context) / 2.5,
-                              height: displayHeight(context) / 24,
-                              padding: EdgeInsets.only(
-                                  left: 4, top: 3, bottom: 3, right: 3),
-                              child: Row(
+                            width: displayWidth(context) / 2.5,
+                            height: displayHeight(context) / 24,
+                            padding: EdgeInsets.only(
+                                left: 4, top: 3, bottom: 3, right: 3),
+                            child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
 
-                                    height: 25,
-                                    width: 5,
-                                    margin: EdgeInsets.only(left: 0),
+                                  height: 25,
+                                  width: 5,
+                                  margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                    child: Icon(
+                                  child: Icon(
 //                                          Icons.add_shopping_cart,
-                                      Icons.watch_later,
-                                      size: 28,
-                                      color: Color(0xffBCBCBD),
-                                    ),
-
-
+                                    Icons.watch_later,
+                                    size: 28,
+                                    color: Color(0xffBCBCBD),
                                   ),
 
-                                  Container(
+
+                                ),
+
+                                Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                                    alignment: Alignment.center,
-                                    width: displayWidth(context) / 4,
+                                  alignment: Alignment.center,
+                                  width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                                    // do it in both Container
-                                    child: TextField(
-                                      keyboardType: TextInputType.number,
-                                      textInputAction: TextInputAction.done,
+                                  // do it in both Container
+                                  child: TextField(
+                                    keyboardType: TextInputType.number,
+                                    textInputAction: TextInputAction.done,
 //
-                                      onSubmitted: (_) => FocusScope.of(context).unfocus(),
-                                      textAlign: TextAlign.center,
-                                      decoration: InputDecoration(
+                                    onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                                        border: InputBorder.none,
-                                        hintText: 'Enter reach out time',
-                                        hintStyle: TextStyle(
-                                            color: Color(0xffFC0000),
-                                            fontSize: 17),
+                                      border: InputBorder.none,
+                                      hintText: 'Enter reach out time',
+                                      hintStyle: TextStyle(
+                                          color: Color(0xffFC0000),
+                                          fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                                      ),
+                                    ),
 
-                                      style: TextStyle(
-                                          color: Color(0xffFC0000), fontSize: 16),
+                                    style: TextStyle(
+                                        color: Color(0xffFC0000), fontSize: 16),
 
-                                      onChanged: (text) {
-                                        print("0444: $text");
-
-
-                                        print("33: $text");
-                                        final shoppingCartBloc = BlocProvider.of<
-                                            ShoppingCartBloc>(context);
-
-                                        shoppingCartBloc.setETAForOrder(text);
-                                        setState(() => showFullOrderType = false);
-                                      },
+                                    onChanged: (text) {
+                                      print("0444: $text");
 
 
-                                      onTap: () {
-                                        if ((currentUser.address
-                                            .trim()
-                                            .length) > 0 ||
-                                            (currentUser.flatOrHouseNumber
-                                                .trim()
-                                                .length) > 0 ||
-                                            (currentUser.phoneNumber.trim()
-                                                .length) > 0 ) {
-                                          showEditingCompleteCustomerHouseFlatIformation =
-                                          true;
-                                        } else {
-                                          setState(() =>
-                                          showFullOrderType = false);
-                                        }
-                                      },
+                                      print("33: $text");
+                                      final shoppingCartBloc = BlocProvider.of<
+                                          ShoppingCartBloc>(context);
+
+                                      shoppingCartBloc.setETAForOrder(text);
+                                      setState(() => showFullOrderType = false);
+                                    },
+
+
+                                    onTap: () {
+                                      if ((currentUser.address
+                                          .trim()
+                                          .length) > 0 ||
+                                          (currentUser.flatOrHouseNumber
+                                              .trim()
+                                              .length) > 0 ||
+                                          (currentUser.phoneNumber.trim()
+                                              .length) > 0 ) {
+                                        showEditingCompleteCustomerHouseFlatIformation =
+                                        true;
+                                      } else {
+                                        setState(() =>
+                                        showFullOrderType = false);
+                                      }
+                                    },
 
 
 
 //                                            onTap: () {
 //                                              setState(() => showFullOrderType = false);
 //                                            },
-                                      onEditingComplete: () {
+                                    onEditingComplete: () {
 
-                                        print('at editing complete of Customer\'s address ETA Time:');
-                                        setState(() =>
-                                        {
-                                          showEditingCompleteCustomerReachoutIformation =
-                                          true
-                                        }
-                                        );
+                                      print('at editing complete of Customer\'s address ETA Time:');
+                                      setState(() =>
+                                      {
+                                        showEditingCompleteCustomerReachoutIformation =
+                                        true
+                                      }
+                                      );
 
-                                      },
+                                    },
 
 
 /*
@@ -2463,77 +2451,79 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               );
                             },
                             */
-                                    ),
+                                  ),
 
-                                  )
+                                )
 
 
 
-                                ],
-                              ),
+                              ],
                             ),
                           ),
+                        ),
 
-                          // showEditingCompleteCustomerReachoutIformation ENDS HERE.
-                          // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+                        // showEditingCompleteCustomerReachoutIformation ENDS HERE.
+                        // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
 
 
 
 
-                        ],
-                      )
-                  )
+                      ],
+                    )
+                )
 
-              ),
+            ),
 
 //            OOOO
 
 
 
 
-              //VVVVVV
+            //VVVVVV
 
-              // PAYMENT RELATED CONTAINER INVOKED FROM HERE:
+            // PAYMENT RELATED CONTAINER INVOKED FROM HERE:
 
 //                        Flexible(
 //                          child:
 
             // 3.
 
-              Container(
-                color:Colors.indigoAccent,
+            Container(
+              color:Colors.indigoAccent,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
-                width: displayWidth(context) / 1.1,
+              width: displayWidth(context) / 1.1,
 //              height: 300,
-                child:
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
+              child:
+              AnimatedSwitcher(
+                duration: Duration(milliseconds: 500),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                  child:
-                  getOneOrdercustomerInfoFieldsNotEmpty
-                    (unObsecuredInputandPayment.ordersCustomer) != 0 ?
-                  animatedUnObscuredCardUnSelectContainer(unObsecuredInputandPayment):
-                  animatedObscuredCardSelectContainer(unObsecuredInputandPayment),
+                child:
+                getOneOrdercustomerInfoFieldsNotEmpty
+                  (unObsecuredInputandPayment.ordersCustomer) != 0 ?
+                animatedUnObscuredCardUnSelectContainer(unObsecuredInputandPayment):
+                animatedObscuredCardSelectContainer(unObsecuredInputandPayment),
 
-
-                ),
-
-
-                // ),
 
               ),
-              // 3. ends here.
-            ],
 
-            //showInputtedCustomerIformation
-          ),
+
+              // ),
+
+            ),
+            // 3. ends here.
+          ],
+
+          //showInputtedCustomerIformation
         ),
-      );
+      ),
+    );
 // GGG),
-    }
+
+  }
+  Widget unobsuredEsleFirstTime(Order xT){
 
     /* THE ELSE CONDITION IS OPPOSITE OF THIS , i.e. NORMAL , THE OBSCURED IS IN THE BOOTOM.
             if((showEditingCompleteCustomerAddressInformation == true)||
@@ -2544,137 +2534,138 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     // THE TRANSITION IS DIFFERENT BETWEEN THE THE ALTERNATE CONTAINER.
     // ONE HA A LEBEL TEXT "ENTER USER ADDRESS" THAT IS DEALT WITH BY THE BELOW CODE.
-    else {
+//    else {
 
-      // THIS ELSE IS EXECUTED IN THE FIRST TIME.
-      // WHEN THE ROW VIEW CONTAINING
-      // ALL INPUTS ARE NOT VISIBLE.
+    // THIS ELSE IS EXECUTED IN THE FIRST TIME.
+    // WHEN THE ROW VIEW CONTAINING
+    // ALL INPUTS ARE NOT VISIBLE.
 
-      print(' in the eles =============== < > =============');
+    print(' in the eles =============== < > =============');
 
-      return Center(
+    CustomerInformation currentUser = xT.ordersCustomer;
+    return Center(
 
-          child: Container(
+        child: Container(
 //                  color: Colors.green,
 //                    color:Colors.white.withOpacity(0.9),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
 
-                  Container(
-                      alignment: Alignment.center,
+                Container(
+                    alignment: Alignment.center,
 
-                      child: Text('Enter user address',
-                        style: TextStyle(
-                          color:
-                          Color(0xffFC0000),
-                          fontSize: 30,
-                        ),)
-                  ),
+                    child: Text('Enter user address',
+                      style: TextStyle(
+                        color:
+                        Color(0xffFC0000),
+                        fontSize: 30,
+                      ),)
+                ),
 
 
-                  // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: 0),
-                    decoration: BoxDecoration(
+                // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 0),
+                  decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
 
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 2.0,
-
-
-                      ),
-
-                      boxShadow: [
-                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 2.0))
-                      ],
+                      color: Color(0xffBCBCBD),
+                      style: BorderStyle.solid,
+                      width: 2.0,
 
 
-                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
                     ),
 
+                    boxShadow: [
+                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                          color: Color(0xffFFFFFF),
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 2.0))
+                    ],
+
+
+                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                  ),
+
 //                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 2.5,
-                    height: displayHeight(context) / 24,
-                    padding: EdgeInsets.only(
-                        left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 24,
+                  padding: EdgeInsets.only(
+                      left: 4, top: 3, bottom: 3, right: 3),
+                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
 
-                          height: 25,
-                          width: 5,
-                          margin: EdgeInsets.only(left: 0),
+                        height: 25,
+                        width: 5,
+                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                          child: Icon(
+                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                            Icons.location_on,
+                          Icons.location_on,
 
-                            size: 28,
-                            color: Color(0xffBCBCBD),
-                          ),
-
-
+                          size: 28,
+                          color: Color(0xffBCBCBD),
                         ),
 
-                        Container(
+
+                      ),
+
+                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4,
+                        alignment: Alignment.center,
+                        width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                          // do it in both Container
-                          child: TextField(
+                        // do it in both Container
+                        child: TextField(
 //                                    controller: addressController,
-                            textInputAction: TextInputAction.next,
-                            onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          textInputAction: TextInputAction.next,
+                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
 //                                    focusNode: FocusNode(),// FOCUS NOT NEEDED
 
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              focusColor: Colors.red,
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            focusColor: Colors.red,
 //                                                            fillColor: Colors.red,
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                              border: InputBorder.none,
-                              hintText: 'Enter delivery location',
-                              hintStyle: TextStyle(
-                                  color: Color(0xffFC0000),
-                                  fontSize: 17),
+                            border: InputBorder.none,
+                            hintText: 'Enter delivery location',
+                            hintStyle: TextStyle(
+                                color: Color(0xffFC0000),
+                                fontSize: 17),
 
 //                                      currentUser
 //                                        labelText: 'Search about meal.'
-                            ),
+                          ),
 
-                            onChanged: (text) {
-                              //RRRR
+                          onChanged: (text) {
+                            //RRRR
 
-                              final shoppingCartBloc = BlocProvider.of<
-                                  ShoppingCartBloc>(context);
+                            final shoppingCartBloc = BlocProvider.of<
+                                ShoppingCartBloc>(context);
 //
-                              shoppingCartBloc.setAddressForOrder(text);
+                            shoppingCartBloc.setAddressForOrder(text);
 
 //                                      shoppingCartBloc.setAddressForOrder(text);
-                              /*
+                            /*
                                       if((text.trim().length) >0){
                                         print('at (text.trim().length) >0)');
                                         setState(() =>
@@ -2687,7 +2678,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       }
                                       else {
                                         */
-                              /*
+                            /*
                                         setState(() =>
 
                                         {
@@ -2702,10 +2693,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                            // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
 
 
-                              /*
+                            /*
                                       setState(() =>
 
                                       {
@@ -2720,21 +2711,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       );
                                       */
 
-                            }
-                            ,
+                          }
+                          ,
 
 
-                            // on tap of address input of unobsecured.
+                          // on tap of address input of unobsecured.
 
-                            onTap: () {
+                          onTap: () {
 
-                              setState(() =>
-                              {
-                                showFullOrderType = false,
+                            setState(() =>
+                            {
+                              showFullOrderType = false,
 //                                        showCustomerInformationHeader = true,
-                              });
+                            });
 
-                              /*
+                            /*
                                       if((currentUser.phoneNumber.trim().length) >0 ||
                                           (currentUser.flatOrHouseNumber.trim().length) >0 ||
                                           (currentUser.etaTimeInMinutes !=-1)  )
@@ -2748,21 +2739,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         });
                                       }
                                       */
-                            },
+                          },
 
 
 
 
-                            onEditingComplete: () {
+                          onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
-                              setState(() =>
-                              showEditingCompleteCustomerAddressInformation = true
+                            setState(() =>
+                            showEditingCompleteCustomerAddressInformation = true
 //                                          showInputtedCustomerIformation= true,
 
-                              );
-                            },
-                            /*
+                            );
+                          },
+                          /*
 
 
                                                             onSubmitted: (String value) async {
@@ -2785,132 +2776,132 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           */
 
 
-                            style: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 16),
-                          ),
+                          style: TextStyle(
+                              color: Color(0xffFC0000), fontSize: 16),
+                        ),
 
-                        )
-
-//                                  Spacer(),
+                      )
 
 //                                  Spacer(),
 
-                      ],
+//                                  Spacer(),
+
+                    ],
+                  ),
+                ),
+
+                // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
+
+                // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 0),
+                  decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+
+                      color: Color(0xffBCBCBD),
+                      style: BorderStyle.solid,
+                      width: 2.0,
+
+
                     ),
+
+                    boxShadow: [
+                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                          color: Color(0xffFFFFFF),
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 2.0))
+                    ],
+
+
+                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
                   ),
 
-                  // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
-
-                  // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: 0),
-                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 2.0,
-
-
-                      ),
-
-                      boxShadow: [
-                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 2.0))
-                      ],
-
-
-                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                    ),
-
 //                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 2.5,
-                    height: displayHeight(context) / 24,
-                    padding: EdgeInsets.only(
-                        left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 24,
+                  padding: EdgeInsets.only(
+                      left: 4, top: 3, bottom: 3, right: 3),
+                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
 
-                          height: 25,
-                          width: 5,
-                          margin: EdgeInsets.only(left: 0),
+                        height: 25,
+                        width: 5,
+                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                          child: Icon(
+                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                            Icons.home,
-                            size: 28,
-                            color: Color(0xffBCBCBD),
-                          ),
-
-
+                          Icons.home,
+                          size: 28,
+                          color: Color(0xffBCBCBD),
                         ),
 
-                        Container(
+
+                      ),
+
+                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4,
+                        alignment: Alignment.center,
+                        width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                          // do it in both Container
-                          child: TextField(
+                        // do it in both Container
+                        child: TextField(
 
-                            textAlign: TextAlign.center,
-                            textInputAction: TextInputAction.next,
-                            onSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                            decoration: InputDecoration(
+                          textAlign: TextAlign.center,
+                          textInputAction: TextInputAction.next,
+                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                              border: InputBorder.none,
-                              hintText: 'Enter House/Flat address/number',
-                              hintStyle: TextStyle(
-                                  color: Color(0xffFC0000),
-                                  fontSize: 17),
+                            border: InputBorder.none,
+                            hintText: 'Enter House/Flat address/number',
+                            hintStyle: TextStyle(
+                                color: Color(0xffFC0000),
+                                fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                            ),
+                          ),
 
-                            onChanged: (text) {
-                              final shoppingCartBloc = BlocProvider.of<
-                                  ShoppingCartBloc>(context);
+                          onChanged: (text) {
+                            final shoppingCartBloc = BlocProvider.of<
+                                ShoppingCartBloc>(context);
 //
-                              shoppingCartBloc
-                                  .setHouseorFlatNumberForOrder(
-                                  text);
+                            shoppingCartBloc
+                                .setHouseorFlatNumberForOrder(
+                                text);
 
-                              setState(() => showFullOrderType = false);
+                            setState(() => showFullOrderType = false);
 
-                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                            // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
 
-                            },
+                          },
 
-                            onTap: () {
-                              setState(() =>
-                              {
-                                showFullOrderType = false,
+                          onTap: () {
+                            setState(() =>
+                            {
+                              showFullOrderType = false,
 //                                        showCustomerInformationHeader = true,
-                              });
-                            },
+                            });
+                          },
 
 
-                            /*
+                          /*
                                     onTap: () {
                                       if ((currentUser.phoneNumber
                                           .trim()
@@ -2928,16 +2919,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       }
                                     },
                                     */
-                            onEditingComplete: () {
+                          onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
-                              setState(() =>
-                              showEditingCompleteCustomerHouseFlatIformation = true
+                            setState(() =>
+                            showEditingCompleteCustomerHouseFlatIformation = true
 //                                          showInputtedCustomerIformation= true,
 
-                              );
-                            },
-                            /*
+                            );
+                          },
+                          /*
 
 
 
@@ -2961,156 +2952,156 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                                             */
 
-                            style: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 16),
-                          ),
+                          style: TextStyle(
+                              color: Color(0xffFC0000), fontSize: 16),
+                        ),
 
-                        )
-
-//                                  Spacer(),
+                      )
 
 //                                  Spacer(),
 
-                      ],
+//                                  Spacer(),
+
+                    ],
+                  ),
+                ),
+
+
+                // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
+
+                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 0),
+                  decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+
+                      color: Color(0xffBCBCBD),
+                      style: BorderStyle.solid,
+                      width: 2.0,
+
+
                     ),
+
+                    boxShadow: [
+                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                          color: Color(0xffFFFFFF),
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 2.0))
+                    ],
+
+
+                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
                   ),
 
-
-                  // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
-
-                  // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: 0),
-                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 2.0,
-
-
-                      ),
-
-                      boxShadow: [
-                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 2.0))
-                      ],
-
-
-                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                    ),
-
 //                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 2.5,
-                    height: displayHeight(context) / 24,
-                    padding: EdgeInsets.only(
-                        left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 24,
+                  padding: EdgeInsets.only(
+                      left: 4, top: 3, bottom: 3, right: 3),
+                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
 
-                          height: 25,
-                          width: 5,
-                          margin: EdgeInsets.only(left: 0),
+                        height: 25,
+                        width: 5,
+                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                          child: Icon(
+                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                            Icons.phone,
-                            size: 28,
-                            color: Color(0xffBCBCBD),
-                          ),
-
-
+                          Icons.phone,
+                          size: 28,
+                          color: Color(0xffBCBCBD),
                         ),
 
-                        Container(
+
+                      ),
+
+                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4,
+                        alignment: Alignment.center,
+                        width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                          // do it in both Container
-                          child: TextField(
+                        // do it in both Container
+                        child: TextField(
 
-                            textAlign: TextAlign.center,
-                            textInputAction: TextInputAction.next,
-                            onSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                            decoration: InputDecoration(
+                          textAlign: TextAlign.center,
+                          textInputAction: TextInputAction.next,
+                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                              border: InputBorder.none,
-                              hintText: 'Enter phone / telephone number',
-                              hintStyle: TextStyle(
-                                  color: Color(0xffFC0000),
-                                  fontSize: 17),
+                            border: InputBorder.none,
+                            hintText: 'Enter phone / telephone number',
+                            hintStyle: TextStyle(
+                                color: Color(0xffFC0000),
+                                fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                            ),
+                          ),
 
-                            style: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 16),
+                          style: TextStyle(
+                              color: Color(0xffFC0000), fontSize: 16),
 
-                            onChanged: (text) {
-                              print("33: $text");
+                          onChanged: (text) {
+                            print("33: $text");
 
-                              final shoppingCartBloc = BlocProvider.of<
-                                  ShoppingCartBloc>(context);
+                            final shoppingCartBloc = BlocProvider.of<
+                                ShoppingCartBloc>(context);
 //
-                              shoppingCartBloc.setPhoneNumberForOrder(
-                                  text);
+                            shoppingCartBloc.setPhoneNumberForOrder(
+                                text);
 //                                      if(text.trim().length>0){
 //                                        showEditingCompleteCustomerPhoneIformation = true;
 //                                      } else{
-                              setState(() => showFullOrderType = false);
+                            setState(() => showFullOrderType = false);
 
-                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-
-
-                            },
+                            // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
 
 
-                            onTap: () {
-                              if ((currentUser.address
-                                  .trim()
-                                  .length) > 0 ||
-                                  (currentUser.flatOrHouseNumber
-                                      .trim()
-                                      .length) > 0 ||
-                                  (currentUser.etaTimeInMinutes !=
-                                      null)) {
-                                showEditingCompleteCustomerHouseFlatIformation =
-                                true;
-                              } else {
-                                setState(() =>
-                                showFullOrderType = false);
-                              }
-                            },
-                            onEditingComplete: () {
+                          },
+
+
+                          onTap: () {
+                            if ((currentUser.address
+                                .trim()
+                                .length) > 0 ||
+                                (currentUser.flatOrHouseNumber
+                                    .trim()
+                                    .length) > 0 ||
+                                (currentUser.etaTimeInMinutes !=
+                                    null)) {
+                              showEditingCompleteCustomerHouseFlatIformation =
+                              true;
+                            } else {
+                              setState(() =>
+                              showFullOrderType = false);
+                            }
+                          },
+                          onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
-                              setState(() =>
-                              showEditingCompleteCustomerPhoneIformation = true
+                            setState(() =>
+                            showEditingCompleteCustomerPhoneIformation = true
 //                                          showInputtedCustomerIformation= true,
 
-                              );
-                            },
+                            );
+                          },
 
 /*
                                                             onSubmitted: (String value) async {
@@ -3131,129 +3122,129 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                               );
                                                             },
                                                               */
-                          ),
+                        ),
 
-                        )
-
-//                                  Spacer(),
+                      )
 
 //                                  Spacer(),
 
-                      ],
+//                                  Spacer(),
+
+                    ],
+                  ),
+                ),
+
+
+                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
+
+                // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
+
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 0),
+                  decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+
+                      color: Color(0xffBCBCBD),
+                      style: BorderStyle.solid,
+                      width: 2.0,
+
+
                     ),
+
+                    boxShadow: [
+                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                          color: Color(0xffFFFFFF),
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 2.0))
+                    ],
+
+
+                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
                   ),
 
-
-                  // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
-
-                  // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
-
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: 0),
-                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 2.0,
-
-
-                      ),
-
-                      boxShadow: [
-                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 2.0))
-                      ],
-
-
-                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                    ),
-
 //                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 2.5,
-                    height: displayHeight(context) / 24,
-                    padding: EdgeInsets.only(
-                        left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 24,
+                  padding: EdgeInsets.only(
+                      left: 4, top: 3, bottom: 3, right: 3),
+                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
 
-                          height: 25,
-                          width: 5,
-                          margin: EdgeInsets.only(left: 0),
+                        height: 25,
+                        width: 5,
+                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                          child: Icon(
+                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                            Icons.watch_later,
-                            size: 28,
-                            color: Color(0xffBCBCBD),
-                          ),
-
-
+                          Icons.watch_later,
+                          size: 28,
+                          color: Color(0xffBCBCBD),
                         ),
 
-                        Container(
+
+                      ),
+
+                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4,
+                        alignment: Alignment.center,
+                        width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                          // do it in both Container
-                          child: TextField(
+                        // do it in both Container
+                        child: TextField(
 //                                    controller:etaController,
 //                                    houseFlatNumberController
 //                                      phoneNumberController
 //                                      backgroundCursorColor: Colors.yellow,// test to be chnaged later.,
-                            autocorrect:false,
-                            cursorColor: Colors.redAccent,// test to be chnaged later.,
-                            keyboardType: TextInputType.number,
-                            textInputAction: TextInputAction.done,
-                            onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                          autocorrect:false,
+                          cursorColor: Colors.redAccent,// test to be chnaged later.,
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.done,
+                          onSubmitted: (_) => FocusScope.of(context).unfocus(),
 //                                    focusNode: FocusNode(),
-                            textAlign: TextAlign.center,
+                          textAlign: TextAlign.center,
 
-                            decoration: InputDecoration(
+                          decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                              border: InputBorder.none,
-                              hintText: 'Enter reach out time',
-                              hintStyle: TextStyle(
-                                  color: Color(0xffFC0000),
-                                  fontSize: 17),
+                            border: InputBorder.none,
+                            hintText: 'Enter reach out time',
+                            hintStyle: TextStyle(
+                                color: Color(0xffFC0000),
+                                fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                            ),
+                          ),
 
 
-                            style: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 16),
+                          style: TextStyle(
+                              color: Color(0xffFC0000), fontSize: 16),
 
-                            onChanged: (text) {
-                              print("0444: $text");
+                          onChanged: (text) {
+                            print("0444: $text");
 
 
-                              print("33: $text");
-                              final shoppingCartBloc = BlocProvider.of<
-                                  ShoppingCartBloc>(context);
+                            print("33: $text");
+                            final shoppingCartBloc = BlocProvider.of<
+                                ShoppingCartBloc>(context);
 
-                              shoppingCartBloc.setETAForOrder(text);
+                            shoppingCartBloc.setETAForOrder(text);
 //                                      if (text
 //                                          .trim()
 //                                          .length > 0) {
@@ -3261,31 +3252,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        true;
 //                                      }
 //                                      else{
+                            setState(() => showFullOrderType = false);
+                            // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                          },
+
+
+                          onTap: () {
+                            if ((currentUser.address
+                                .trim()
+                                .length) > 0 ||
+                                (currentUser.flatOrHouseNumber
+                                    .trim()
+                                    .length) > 0 ||
+                                (currentUser.phoneNumber.trim()
+                                    .length) > 0 ) {
+                              showEditingCompleteCustomerPhoneIformation =
+                              true;
+                            } else {
                               setState(() => showFullOrderType = false);
-                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-                            },
-
-
-                            onTap: () {
-                              if ((currentUser.address
-                                  .trim()
-                                  .length) > 0 ||
-                                  (currentUser.flatOrHouseNumber
-                                      .trim()
-                                      .length) > 0 ||
-                                  (currentUser.phoneNumber.trim()
-                                      .length) > 0 ) {
-                                showEditingCompleteCustomerPhoneIformation =
-                                true;
-                              } else {
-                                setState(() => showFullOrderType = false);
-                              }
-                            },
-                            onEditingComplete: () {
-                              setState(() =>
-                              showEditingCompleteCustomerReachoutIformation = true
-                              );
-                            },
+                            }
+                          },
+                          onEditingComplete: () {
+                            setState(() =>
+                            showEditingCompleteCustomerReachoutIformation = true
+                            );
+                          },
 //                                      onSelectionChanged:(){
 //
 //                                      }
@@ -3311,27 +3302,64 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             );
                           },
                           */
-                          ),
+                        ),
 
-                        )
-
-//                                  Spacer(),
+                      )
 
 //                                  Spacer(),
 
-                      ],
-                    ),
+//                                  Spacer(),
+
+                    ],
                   ),
+                ),
 
-                  // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+                // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
 
 
-                ],
-              )
-          )
+              ],
+            )
+        )
 
-      );
-    }
+    );
+  }
+
+
+
+  Widget _buildShoppingCartInputFieldsUNObscured(Order unObsecuredInputandPayment){
+
+    CustomerInformation x = unObsecuredInputandPayment.ordersCustomer;
+    //if(getOneOrdercustomerInfoFieldsNotEmpty(x)!=0){
+
+    CustomerInformation currentUser =  x;
+
+    print('currentUser.address: ${currentUser.address}');
+    print('currentUser.flatOrHouseNumber: ${currentUser.flatOrHouseNumber}');
+    print('currentUser.phoneNumber: ${currentUser.phoneNumber}');
+    print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
+
+//    animatedObscuredTextInputContainer
+//    if((showEditingCompleteCustomerAddressInformation == true)||
+//        (showEditingCompleteCustomerHouseFlatIformation == true)||
+//        (showEditingCompleteCustomerPhoneIformation == true)||
+//        (showEditingCompleteCustomerReachoutIformation == true)){
+
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 300),
+//
+//                                                child: showFullOrderType? animatedObscuredTextInputContainer():
+//                                                animatedUnObscuredTextInputContainer(),
+      child: (showFullOrderType == false)? unobscureInputandRest(unObsecuredInputandPayment)
+//      _buildShoppingCartInputFieldsUNObscured(oneOrder)
+          :unobsuredEsleFirstTime(unObsecuredInputandPayment),
+//      _buildShoppingCartInputFieldsUNObscured (oneOrder):
+//      animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
+
+
+    );
+
+
+
 
   }
 
@@ -4048,7 +4076,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             alignment: Alignment
                                 .center,
                             child: Text(
-                                'Payment method',
+                                'Payment Method',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight
@@ -4165,7 +4193,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                       child: _buildShoppingCartInputFields()
                                                   ),
                                                   */
-              child: _buildShoppingCartCardSelectContainerObscured()
+              child: _buildShoppingCartCardSelectContainerObscured(priceandselectedCardFunctionality)
 
             //RRRRRR
 
@@ -4175,7 +4203,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
   }
 
-  Widget _buildShoppingCartCardSelectContainerObscured() {
+  Widget _buildShoppingCartCardSelectContainerObscured(Order priceandselectedCardFunctionality) {
 
 
     return
@@ -4183,6 +4211,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         height: displayHeight(context) / 20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +  displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
         child: Column(
           children: <Widget>[
+
+            // 1ST CONTAINER HOLDS THE HEADER Payment Method and Line paint begins here.
             Container(
               width: displayWidth(context) / 1.1,
               height: displayHeight(context) / 20,
@@ -4218,7 +4248,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             alignment: Alignment
                                 .center,
                             child: Text(
-                                'Payment method',
+                                'Payment Method',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight
@@ -4226,8 +4256,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
+                                  color: Colors.redAccent
+                                      ,
                                 )
                             ),
                           ),
@@ -4286,6 +4316,53 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ],
               ),
             ),
+
+            // 1ST CONTAINER HOLDS THE HEADER Payment Method and Line paint ENDs here.
+
+
+
+
+            // 2ND CONTAINER HOLDS THE total price BEGINS HERE..
+            Container(
+
+              margin: EdgeInsets
+                  .fromLTRB(
+                  20, 0, 10, 0),
+              alignment: Alignment
+                  .center,
+              child: Row(
+                children: <Widget>[
+                  Text(
+                      'TOTAL : ',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight
+                            .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                        color: Colors.redAccent
+                        ,
+                      )
+                  ),
+
+                  Text(
+                      'TOTAL : ',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight
+                            .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                        color: Colors.redAccent
+                        ,
+                      )
+                  )
+                ],
+              ),
+            ),
+            // 2ND CONTAINER HOLDS THE total price ENDNS HERE..
 
             Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 5),

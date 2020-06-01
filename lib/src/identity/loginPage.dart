@@ -394,7 +394,7 @@ class _LoginPageState extends State<LoginPage> {
 //                            _handleSignIn();
                             }).catchError((onError){
                               _scaffoldKey.currentState.showSnackBar(
-                                new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                new SnackBar(duration: new Duration(seconds: 6), content:Container(
                                   child:
                                   new Row(
                                     children: <Widget>[
