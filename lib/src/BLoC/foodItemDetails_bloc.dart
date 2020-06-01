@@ -918,8 +918,8 @@ class FoodItemDetailsBloc implements Bloc {
 
   String checkThisIngredientInDefatultStringIngredient(NewIngredient x, List<String> ingredientsString) {
 
-    print('ingredientsString: $ingredientsString');
-    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
+//    print('ingredientsString: $ingredientsString');
+//    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
 
 //    List<String> foodIngredients =ingredientsString;
 
