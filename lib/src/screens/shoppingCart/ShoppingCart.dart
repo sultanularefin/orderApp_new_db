@@ -4347,7 +4347,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
 
                   Text(
-                      'TOTAL : ',
+                      'TOTAL : '+'${
+                          priceandselectedCardFunctionality.unitPrice
+                          * priceandselectedCardFunctionality.quantity}',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight

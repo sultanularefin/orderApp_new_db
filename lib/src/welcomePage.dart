@@ -236,24 +236,66 @@ class _WelcomePageState extends State<WelcomePage> {
             stream: identityBloc.getCurrentFirebaseUserStream,
             initialData: identityBloc.getCurrentFirebaseUser,
             builder: (context, snapshot) {
+//              switch (snapshot.connectionState){
+//                case ConnectionState.waiting:
+//                case ConnectionState.none:
+//                return Center(
+//                  child: Column(
+//                    children: <Widget>[
+//
+//                      Center(
+//                        child: Container(
+//                            alignment: Alignment.center,
+//                            child: new CircularProgressIndicator(
+//                                backgroundColor: Colors.lightGreenAccent)
+//                        ),
+//                      ),
+//                      Center(
+//                        child: Container(
+//                            alignment: Alignment.center,
+//                            child: new CircularProgressIndicator(
+//                              backgroundColor: Colors.yellow,)
+//                        ),
+//                      ),
+//                      Center(
+//                        child: Container(
+//                            alignment: Alignment.center,
+//                            child: new CircularProgressIndicator(
+//                                backgroundColor: Colors.redAccent)
+//                        ),
+//                      ),
+//                    ],
+//                  ),
+//                );
+//                case ConnectionState.active:
+//                case ConnectionState.done:
+//              }
+//              if(snapshot.error){
+//                return  Center(
+//                  child: Container(
+//                    alignment: Alignment.center,
+//                    child: Text('something went wrong'),
+//                  ),
+//                );
+//              }
 
               print('snapshot.hasData: ${snapshot.hasData}');
 
 
-              if(snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text('something went wrong'),
+                  ),
+                );
+              }
 
-                if (snapshot.hasError) {
-                  return  Center(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text('something went wrong'),
-                    ),
-                  );
-                }
+              if (snapshot.hasData) {
+                print('snapshot.hasData is ${snapshot
+                    .hasData} in Welcome page ');
 
-                if (snapshot.hasData) {
-                  print('snapshot.hasData is ${snapshot
-                      .hasData} in Welcome page ');
+                if (snapshot.data is FirebaseUser) {
                   /*
                 return
                   BlocProvider<FoodGalleryBloc>(
@@ -270,51 +312,81 @@ class _WelcomePageState extends State<WelcomePage> {
                       )
                   );
                 }
-                else{
-
+                else {
                   return LoginPage();
+                }
+              }
+              else {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                  case ConnectionState.none:
+                    return Center(
+                      child: Column(
+                        children: <Widget>[
+
+                          Center(
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: new CircularProgressIndicator(
+                                    backgroundColor: Colors.lightGreenAccent)
+                            ),
+                          ),
+                          Center(
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: new CircularProgressIndicator(
+                                  backgroundColor: Colors.yellow,)
+                            ),
+                          ),
+                          Center(
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: new CircularProgressIndicator(
+                                    backgroundColor: Colors.redAccent)
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                    break;
+                  case ConnectionState.active:
+                    return (snapshot.data is FirebaseUser) ?
+
+                    BlocProvider<FoodGalleryBloc>(
+                        bloc: FoodGalleryBloc(),
+                        child: FoodGallery2()
+
+                    ):LoginPage();
+//                  print('at ConnectionState.active of switch');
+                    break;
+
+                  case ConnectionState.done:
+//                  print('at ConnectionState.done of switch');
+//                break;
+
+
+                    return (snapshot.data is FirebaseUser) ?
+
+                    BlocProvider<FoodGalleryBloc>(
+                        bloc: FoodGalleryBloc(),
+                        child: FoodGallery2()
+
+                    ):LoginPage();
+
+                    break;
+                  default:
+
+                    return (snapshot.data is FirebaseUser) ?
+
+                    BlocProvider<FoodGalleryBloc>(
+                        bloc: FoodGalleryBloc(),
+                        child: FoodGallery2()
+
+                    ):LoginPage();
 
                 }
               }
 
-              // (snapshot.connectionState == ConnectionState.active)
-              //  inclued in else statement
-//                else if (snapshot.connectionState == ConnectionState.active)  {
-
-
-              else{
-
-                print('at else of this condition (snapshot.connectionState == ConnectionState.done) ');
-
-                return Center(
-                  child: Column(
-                    children: <Widget>[
-
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(backgroundColor: Colors.lightGreenAccent)
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(backgroundColor: Colors.yellow,)
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(backgroundColor: Colors.redAccent )
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-
-              
             }
         ),
 
