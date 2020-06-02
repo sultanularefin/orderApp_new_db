@@ -358,8 +358,6 @@ class _LoginPageState extends State<LoginPage> {
 
                               print("called when future completes");
 
-
-
                             }
                             ).then((onValue){
 

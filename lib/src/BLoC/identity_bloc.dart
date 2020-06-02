@@ -101,7 +101,7 @@ class IdentityBloc implements Bloc {
     AuthResult result = await _auth.signInWithEmailAndPassword(email:
     email, password: password);
 
-//  print('result: '  + result);
+  print('result:  IIIII   >>>>>  $result'  );
 
 
     if (result.user.email != null) {
