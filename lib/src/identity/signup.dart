@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/identity/Widget/bezierContainer.dart';
 import 'package:foodgallery/src/identity/loginPage.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 
 
@@ -123,8 +123,8 @@ class _SignUpPageState extends State<SignUpPage> {
       text: TextSpan(
           text: 'd',
 //          style: TextStyle(fontStyle: FontStyle.italic),
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
+          style: //GoogleFonts.portLligatSans(
+            TextStyle( //Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
             color: Color(0xffe46b10),

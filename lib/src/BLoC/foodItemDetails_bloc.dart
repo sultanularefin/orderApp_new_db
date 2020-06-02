@@ -260,7 +260,7 @@ class FoodItemDetailsBloc implements Bloc {
 //      _allIngredientListController.sink.add(ingItems);
 
 //      _unSelectedIngredientListController
-      _defaultIngItems=ingItems;
+      _defaultIngItems  = ingItems;
       _defaultIngredientListController.sink.add(ingItems);
 
 
@@ -272,7 +272,7 @@ class FoodItemDetailsBloc implements Bloc {
 
       print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented.length}');
       print("length of unSelectedIngredientsFiltered ===>  =======> ========>> ==========> =========> ");
-      _unSelectedIngItems=unSelectedDecremented;
+      _unSelectedIngItems = unSelectedDecremented;
 
 
       _unSelectedIngredientListController.sink.add(unSelectedDecremented);
