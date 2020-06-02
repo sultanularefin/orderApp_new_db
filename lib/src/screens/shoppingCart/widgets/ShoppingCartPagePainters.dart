@@ -7,7 +7,7 @@ import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 
-
+/*
 Widget animatedWidgetShowFullOrderType(BuildContext context) {
 //    print ('at animatedWidgetShowFullOrderType() ');
 
@@ -139,59 +139,8 @@ Widget animatedWidgetShowFullOrderType(BuildContext context) {
 }
 
 
-Widget _buildOrderTypeSingleSelectOption(BuildContext context){
 
-//   height: 40,
-//   width: displayWidth(context) * 0.57,
-
-
-  final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-  return StreamBuilder(
-      stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
-      initialData: shoppingCartbloc.getCurrentOrderType,
-
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          print('!snapshot.hasData');
-//        return Center(child: new LinearProgressIndicator());
-          return Container(child: Text('Null'));
-        }
-        else {
-          List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
-
-//            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
-
-          print('orderTypes: $allOrderTypesSingleSelect');
-          OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect.firstWhere((oneOrderType) =>
-          oneOrderType.isSelected==true);
-          _currentOrderTypeIndex = selectedOne.index;
-
-
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-
-//              reverse: true,
-
-            shrinkWrap: false,
-//        final String foodItemName =          filteredItems[index].itemName;
-//        final String foodImageURL =          filteredItems[index].imageURL;
-            itemCount: allOrderTypesSingleSelect.length,
-
-            itemBuilder: (_, int index) {
-              return oneSingleDeliveryType(
-                  allOrderTypesSingleSelect[index],
-                  index);
-            },
-          );
-        }
-      }
-
-    // M VSM ORG VS TODO. ENDS HERE.
-  );
-
-}
-
+*/
 
 
 
@@ -205,6 +154,90 @@ class LongPainterForChooseOrderType extends CustomPainter {
 //    canvas.drawLine(...);
     final p1 = Offset(displayWidth(context)/2.9, 15); //(X,Y) TO (X,Y)
     final p2 = Offset(10, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
+
+
+class LongHeaderPainterAfter extends CustomPainter {
+
+  final BuildContext context;
+  LongHeaderPainterAfter(this.context);
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(displayWidth(context)/2.8, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(10, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+
+
+}
+
+
+
+class LongPainterForanimatedWidgetShowSelectedOrderType extends CustomPainter {
+
+  final BuildContext context;
+  LongPainterForanimatedWidgetShowSelectedOrderType(this.context);
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(displayWidth(context)/3.9, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(10, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
+
+
+
+class LongHeaderPainterBefore extends CustomPainter {
+
+
+  final BuildContext context;
+  LongHeaderPainterBefore(this.context);
+
+
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(-displayWidth(context)/4, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(-10, 15);
     final paint = Paint()
       ..color = Color(0xff000000)
 //          Colors.white
