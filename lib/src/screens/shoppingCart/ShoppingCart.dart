@@ -192,9 +192,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
               print('snapshot.hasData : ${snapshot.hasData}');
 
               final Order oneOrder = snapshot.data;
-              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
+//              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
 
-              logger.i(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
+
+//              logger.i(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
 
 
               return GestureDetector(
@@ -3540,7 +3541,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Text(
                       '${
                           (unObsecuredInputandPayment.unitPrice
-                              * unObsecuredInputandPayment.quantity).toStringAsFixed(3)} +'
+                              * unObsecuredInputandPayment.quantity).toStringAsFixed(2)} '
                           '\u20AC',
                       style: TextStyle(
                         fontSize: 24,
@@ -3564,7 +3565,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               color: Colors.blueGrey,
 //              color:Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /7,
+              height: displayHeight(context) /10,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
@@ -4225,11 +4226,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
-            print('orderTypes: $allPaymentTypesSingleSelect');
+//            print('paymentTypes: $allPaymentTypesSingleSelect');
+
             PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect.firstWhere(
                     (onePaymentType) =>
                     onePaymentType.isSelected==true);
             _currentPaymentTypeIndex = selectedOne.index;
+
+            print('_currentPaymentTypeIndex: 000  0000 $_currentPaymentTypeIndex');
 
 
 
@@ -4286,12 +4290,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      height:displayHeight(context)/30,
 //      width:displayWidth(context)/10,
 
-      child:  index == _currentOrderTypeIndex  ?
+      child:  index == _currentPaymentTypeIndex  ?
 
       Container(
 
-        width: 150,
-        height: displayHeight(context) /7,
+        width: 110,
+        height: displayHeight(context) /11,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
@@ -4320,8 +4324,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                  width:  displayWidth(context)/6.5,
-                  height: displayWidth(context)/6.5,
+                  width:  displayWidth(context)/11.5,
+                  height: displayWidth(context)/11.5,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -4343,7 +4347,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(
                     getIconForName(paymentTypeName),
                     color: Colors.red,
-                    size: displayWidth(context)/9,
+                    size: displayWidth(context)/12,
 
                   ),
 //
@@ -4402,8 +4406,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ):
 
       Container(
-        width: 150,
-        height: displayHeight(context) /7,
+        width: 110,
+        height: displayHeight(context) /10,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
@@ -4430,8 +4434,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                  width:  displayWidth(context)/6.5,
-                  height: displayWidth(context)/6.5,
+                  width:  displayWidth(context)/11.5,
+                  height: displayWidth(context)/11.5,
                   decoration: BoxDecoration(
                     border: Border.all(
 //                      color: Colors.red[500],
@@ -4449,7 +4453,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(
                     getIconForName(paymentTypeName),
                     color: Colors.grey,
-                    size: displayWidth(context)/9,
+                    size: displayWidth(context)/12,
                   ),
 //                child: Icon(
 //                  Icons.beach_access,

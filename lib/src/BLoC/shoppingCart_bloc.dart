@@ -186,21 +186,21 @@ class ShoppingCartBloc implements Bloc {
     _paymentTypeController.sink.add(_paymentType);
   }
 
-  void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newIndex,int oldIndex){
+  void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newPaymentIndex,int oldPaymentIndex){
 
-    print('newIndex is $newIndex');
-    print('oldIndex is $oldIndex');
+    print('new Payment Index is $newPaymentIndex');
+    print('old Payment Index is $oldPaymentIndex');
 
 
     List <PaymentTypeSingleSelect> singleSelectArray = _paymentType;
 //    _currentOrderTypeIndex
 
 
-    singleSelectArray[oldIndex].isSelected =
-    !singleSelectArray[oldIndex].isSelected;
+    singleSelectArray[oldPaymentIndex].isSelected =
+    !singleSelectArray[oldPaymentIndex].isSelected;
 
-    singleSelectArray[newIndex].isSelected =
-    !singleSelectArray[newIndex].isSelected;
+    singleSelectArray [newPaymentIndex].isSelected =
+    !singleSelectArray[newPaymentIndex].isSelected;
 
 //    singleSelectArray[index].isSelected = true;
 
@@ -209,7 +209,7 @@ class ShoppingCartBloc implements Bloc {
 
     Order currentOrderTemp = _curretnOrder;
 
-    currentOrderTemp.paymentTypeIndex = newIndex;
+    currentOrderTemp.paymentTypeIndex = newPaymentIndex;
 
 
     _paymentType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
