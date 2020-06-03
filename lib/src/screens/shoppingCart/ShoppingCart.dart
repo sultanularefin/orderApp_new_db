@@ -10,15 +10,19 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
-import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
-import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
-import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
+
 import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppingCart.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:logger/logger.dart';
 
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 
+// model files
+
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
+import 'package:foodgallery/src/DataLayer/models/PaymentTypeSingleSelect.dart';
 
 // LOCAL SCREEN FILES:
 
@@ -60,7 +64,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   String _currentSize;
   int _itemCount = 1;
-  int _currentOrderTypeIndex=0;
+  int _currentOrderTypeIndex = 0;
+  int _currentPaymentTypeIndex = 0;
   bool showFullOrderType = true;
   bool showCustomerInformationHeader = false;
 
@@ -187,6 +192,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
               print('snapshot.hasData : ${snapshot.hasData}');
 
               final Order oneOrder = snapshot.data;
+              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
+
+              logger.i(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
 
 
               return GestureDetector(
@@ -961,7 +969,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                height: displayWidth(context) * 0.11,
 
                               width:  90,
-                              height: displayHeight(context) /15,
+                              height: displayHeight(context) /14,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -1700,7 +1708,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               animatedShowUserAddressDetailsInLine(currentUser)
 
                   :Container(
-                height: displayHeight(context) / 8,
+                height: displayHeight(context) / 15,
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: 5),
@@ -1759,7 +1767,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
                       child:
-                      allInputsEmpty
+                      zeroORMoreInputsEmpty
                         (unObsecuredInputandPayment.ordersCustomer) == true ?
 
                       animatedObscuredCardSelectContainer
@@ -1778,10 +1786,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 AnimatedPositioned(
                   duration: Duration(milliseconds: 500),
-                  bottom: getThreeInputsFilledUp(
-                      unObsecuredInputandPayment.ordersCustomer)?
-                  displayHeight(context)/3.5:
-                  displayHeight(context)/9.5,
+                  bottom: getNumberOfInputsFilledUp (
+                      unObsecuredInputandPayment.ordersCustomer)<=1?
+                  displayHeight(context)/9.5:
+
+                  getNumberOfInputsFilledUp (
+                      unObsecuredInputandPayment.ordersCustomer) ==2?
+                  displayHeight(context)/ 7.5:
+
+
+                  getNumberOfInputsFilledUp (
+                      unObsecuredInputandPayment.ordersCustomer) ==3?
+                  displayHeight(context)/ 5:
+                  displayHeight(context)/4,
+//                  getNumberOfInputsFilledUp (
+//                      unObsecuredInputandPayment.ordersCustomer) ==4?
+
+
 //                  displayWidth(context)/2.6 - displayWidth(context)/2,
 
                   // bottom 0 means full of green Container content shown.
@@ -3518,8 +3539,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Text(
                       '${
-                          unObsecuredInputandPayment.unitPrice
-                              * unObsecuredInputandPayment.quantity}',
+                          (unObsecuredInputandPayment.unitPrice
+                              * unObsecuredInputandPayment.quantity).toStringAsFixed(3)} +'
+                          '\u20AC',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight
@@ -3547,7 +3569,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildOrderTypeSingleSelectOption(),
+              child:  _buildPaymentTypeSingleSelectOption(),
 
             ),
           ],
@@ -3556,226 +3578,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedObscuredCardSelectContainer(Order priceandselectedCardFunctionality){
-//  Widget animatedObscuredTextInputContainer(){
-//    child:  AbsorbPointer(
-//        child: _buildShoppingCartInputFields()
-//    ),
 
-    print(' < >  <   >    <<        >>  \\    '
-        ' Widget name: '
-        'animated Obscured Card Select Container()');
-    return
-      AbsorbPointer(
-        child: Opacity(
-          opacity:0.2,
-          child: Container(
-              color: Colors.grey,
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                                      padding::::
-//              color:Colors.white,
-//                                            height: 200,
-//              height: displayHeight(context) /6,
-              width: displayWidth(context)
-                  - displayWidth(context) /
-                      5,
-//                                            width: displayWidth(context) * 0.57,
-              /*
-                                                    child:  AbsorbPointer(
-                                                      child: _buildShoppingCartInputFields()
-                                                  ),
-                                                  */
-              child: _buildShoppingCartCardSelectContainerObscured(priceandselectedCardFunctionality)
-
-            //RRRRRR
-
-
-          ),
-        ),
-      );
-  }
-
-  Widget _buildShoppingCartCardSelectContainerObscured(Order priceandselectedCardFunctionality) {
-
-
-    return
-      Container(
-        height: displayHeight(context) / 20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +  displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
-        child: Column(
-          children: <Widget>[
-
-            // 1ST CONTAINER HOLDS THE HEADER Payment Method and Line paint begins here.
-            Container(
-              width: displayWidth(context) / 1.1,
-              height: displayHeight(context) / 20,
-              color: Color(0xffffffff),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .start
-                ,
-                crossAxisAlignment: CrossAxisAlignment
-                    .center,
-                children: <Widget>[
-
-
-                  Container(
-                    width: displayWidth(context) /
-                        1.5,
-                    height: displayHeight(
-                        context) / 20,
-                    color: Color(0xffffffff),
-
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Container(
-                            margin: EdgeInsets
-                                .fromLTRB(
-                                20, 0, 10, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'Payment Method',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Colors.redAccent
-                                  ,
-                                )
-                            ),
-                          ),
-
-                          CustomPaint(
-                            size: Size(0, 19),
-                            painter: LongPainterForChooseOrderType(
-                                context),
-                          ),
-
-
-
-
-                        ]
-                    ),
-
-                  ),
-
-                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                  /*
-                                                        Container(
-//                                                  alignment: Alignment.center,
-                                                          padding: EdgeInsets.fromLTRB(
-                                                              0, 2, 0, 0),
-                                                          width: displayWidth(context) /
-                                                              16,
-//                                                height: displayHeight(context)/20,
-                                                          color: Color(0xffffffff),
-//                                                    child:Row(
-//                                                      mainAxisAlignment: MainAxisAlignment.end,
-//                                                      children: <Widget>[
-                                                          child: Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(0, 0, 200, 0),
-                                                            child: Icon(
-
-                                                              Icons.add_shopping_cart,
-                                                              size: 30,
-                                                              color: Color(0xff54463E),
-                                                            ),
-                                                          ),
-
-
-                                                        ),
-                                                        */
-
-
-                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-
-
-                  ////WWWEEEQQQ
-
-
-
-
-                ],
-              ),
-            ),
-
-            // 1ST CONTAINER HOLDS THE HEADER Payment Method and Line paint ENDs here.
-
-
-            // 2ND CONTAINER HOLDS THE total price BEGINS HERE..
-            Container(
-
-              margin: EdgeInsets
-                  .fromLTRB(
-                  20, 0, 10, 0),
-              alignment: Alignment
-                  .center,
-              child: Row(
-                children: <Widget>[
-                  Text(
-                      'TOTAL : ',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight
-                            .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                        color: Colors.redAccent
-                        ,
-                      )
-                  ),
-
-                  Text(
-                      'TOTAL : '+'${
-                          priceandselectedCardFunctionality.unitPrice
-                              * priceandselectedCardFunctionality.quantity}',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight
-                            .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                        color: Colors.redAccent
-                        ,
-                      )
-                  )
-                ],
-              ),
-            ),
-            // 2ND CONTAINER HOLDS THE total price ENDNS HERE..
-
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                                      padding::::
-              color:Colors.white,
-//                                            height: 200,
-              height: displayHeight(context) /7,
-              width: displayWidth(context)
-                  - displayWidth(context) /
-                      5,
-//                                            width: displayWidth(context) * 0.57,
-              child:  _buildOrderTypeSingleSelectOption(),
-
-            ),
-          ],
-        ),
-      );
-
-  }
-
-  bool getThreeInputsFilledUp(CustomerInformation customerInfoFieldsCheck){
+  int  getNumberOfInputsFilledUp(CustomerInformation customerInfoFieldsCheck){
 
     int total=0;
     switch (customerInfoFieldsCheck.address.trim().length) {
@@ -3819,42 +3623,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     }
 
-    if (total >3){
-      return true;
-    }
+
+    print('-----  ||  ** **  **TOTAL : $total');
+    return total;
 
 
-    else{
-      return false;
-      // empty; 3 inputs are not filled.
-    }
-
-  }
-
-  bool allInputsEmpty(CustomerInformation customerInfoFieldsCheck){
-
-
-
-    print('customerInfoFieldsCheck '
-        '${customerInfoFieldsCheck.flatOrHouseNumber}'
-        '${customerInfoFieldsCheck.address} '
-        '${customerInfoFieldsCheck.etaTimeInMinutes}'
-        '${customerInfoFieldsCheck.phoneNumber}');
-    if(
-    (customerInfoFieldsCheck.address.trim().length >0)
-        &&
-        (customerInfoFieldsCheck.flatOrHouseNumber.trim().length >0)
-        &&
-        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
-        &&
-        (customerInfoFieldsCheck.etaTimeInMinutes != -1)
-    ) return false;
-
-    else{
-      return true; // empty; one or more of the user inputs are.
-    }
+//    else{
+//      return false;
+//      // empty; 3 inputs are not filled.
+//    }
 
   }
+
+
 
   IconData getIconForName(String iconName) {
 
@@ -3885,6 +3666,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
       case 'DinningRoom': {
         return Icons.fastfood;
       }
+
+      case 'Card': {
+        return FontAwesomeIcons.solidCreditCard;
+
+      }
+      break;
+      case 'Cash': {
+        return FontAwesomeIcons.moneyBill;
+      }
+      break;
+      case 'Later': {
+        return FontAwesomeIcons.bookmark;
+      }
       break;
 
 
@@ -3897,6 +3691,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
   }
 
+//  oneSingleDeliveryType to be replaced with oneSinglePaymentType
   Widget oneSingleDeliveryType (OrderTypeSingleSelect x,int index){
 
 
@@ -4144,6 +3939,576 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ),
     );
   }
+
+  // PAYMENT RELATED WIDGETS ARE HERE  --- below:
+
+
+
+  Widget animatedObscuredCardSelectContainer(Order priceandselectedCardFunctionality){
+//  Widget animatedObscuredTextInputContainer(){
+//    child:  AbsorbPointer(
+//        child: _buildShoppingCartInputFields()
+//    ),
+
+    print(' < >  <   >    << TT       >>  \\    '
+        ' Widget name: '
+        'animated Obscured Card Select Container()');
+    return
+      AbsorbPointer(
+        child: Opacity(
+          opacity:0.2,
+          child: Container(
+              color: Colors.grey,
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                                      padding::::
+//              color:Colors.white,
+//                                            height: 200,
+//              height: displayHeight(context) /6,
+              width: displayWidth(context)
+                  - displayWidth(context) /
+                      5,
+//                                            width: displayWidth(context) * 0.57,
+              /*
+                                                    child:  AbsorbPointer(
+                                                      child: _buildShoppingCartInputFields()
+                                                  ),
+                                                  */
+              child: _buildShoppingCartCardSelectContainerObscured(priceandselectedCardFunctionality)
+
+            //RRRRRR
+
+
+          ),
+        ),
+      );
+  }
+
+  Widget _buildShoppingCartCardSelectContainerObscured(Order priceandselectedCardFunctionality) {
+
+
+    return
+      Container(
+        height: displayHeight(context) / 20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +  displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
+        child: Column(
+          children: <Widget>[
+
+            // 1ST CONTAINER HOLDS THE HEADER Payment Method and Line paint begins here.
+            Container(
+              width: displayWidth(context) / 1.1,
+              height: displayHeight(context) / 20,
+              color: Color(0xffffffff),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment
+                    .start
+                ,
+                crossAxisAlignment: CrossAxisAlignment
+                    .center,
+                children: <Widget>[
+
+
+                  Container(
+                    width: displayWidth(context) /
+                        1.5,
+                    height: displayHeight(
+                        context) / 20,
+                    color: Color(0xffffffff),
+
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start
+                        ,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
+
+                          Container(
+                            margin: EdgeInsets
+                                .fromLTRB(
+                                20, 0, 10, 0),
+                            alignment: Alignment
+                                .center,
+                            child: Text(
+                                'Payment Method',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight
+                                      .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                  color: Colors.redAccent
+                                  ,
+                                )
+                            ),
+                          ),
+
+                          CustomPaint(
+                            size: Size(0, 19),
+                            painter: LongPainterForChooseOrderType(
+                                context),
+                          ),
+
+
+
+
+                        ]
+                    ),
+
+                  ),
+
+                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                  /*
+                                                        Container(
+//                                                  alignment: Alignment.center,
+                                                          padding: EdgeInsets.fromLTRB(
+                                                              0, 2, 0, 0),
+                                                          width: displayWidth(context) /
+                                                              16,
+//                                                height: displayHeight(context)/20,
+                                                          color: Color(0xffffffff),
+//                                                    child:Row(
+//                                                      mainAxisAlignment: MainAxisAlignment.end,
+//                                                      children: <Widget>[
+                                                          child: Container(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(0, 0, 200, 0),
+                                                            child: Icon(
+
+                                                              Icons.add_shopping_cart,
+                                                              size: 30,
+                                                              color: Color(0xff54463E),
+                                                            ),
+                                                          ),
+
+
+                                                        ),
+                                                        */
+
+
+                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+
+
+                  ////WWWEEEQQQ
+
+
+
+
+                ],
+              ),
+            ),
+
+            // 1ST CONTAINER HOLDS THE HEADER Payment Method and Line paint ENDs here.
+
+
+            // 2ND CONTAINER HOLDS THE total price BEGINS HERE..
+            Container(
+
+              margin: EdgeInsets
+                  .fromLTRB(
+                  20, 0, 10, 0),
+              alignment: Alignment
+                  .center,
+              child: Row(
+                children: <Widget>[
+                  Text(
+                      'TOTAL : ',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight
+                            .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                        color: Colors.redAccent
+                        ,
+                      )
+                  ),
+
+                  Text(
+                      'TOTAL : '+'${
+                          priceandselectedCardFunctionality.unitPrice
+                              * priceandselectedCardFunctionality.quantity}',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight
+                            .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                        color: Colors.redAccent
+                        ,
+                      )
+                  )
+                ],
+              ),
+            ),
+            // 2ND CONTAINER HOLDS THE total price ENDNS HERE..
+
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                                      padding::::
+              color:Colors.white,
+//                                            height: 200,
+              height: displayHeight(context) /7,
+              width: displayWidth(context)
+                  - displayWidth(context) /
+                      5,
+//                                            width: displayWidth(context) * 0.57,
+              child:  _buildPaymentTypeSingleSelectOption(),
+
+            ),
+          ],
+        ),
+      );
+
+  }
+
+
+  bool zeroORMoreInputsEmpty(CustomerInformation customerInfoFieldsCheck){
+
+
+
+    print( ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
+    print('customerInfoFieldsCheck '
+        ' FH :${customerInfoFieldsCheck.flatOrHouseNumber}'
+        ' A :${customerInfoFieldsCheck.address} '
+        ' ETA : ${customerInfoFieldsCheck.etaTimeInMinutes}'
+        ' PH : ${customerInfoFieldsCheck.phoneNumber}');
+
+//    assert(customerInfoFieldsCheck.address.trim().length >0);
+//    assert(customerInfoFieldsCheck.flatOrHouseNumber.trim().length >0);
+//    assert(customerInfoFieldsCheck.phoneNumber.trim().length >0);
+//    assert(customerInfoFieldsCheck.etaTimeInMinutes != -1);
+    if(
+    (customerInfoFieldsCheck.address.trim().length >0)
+        &&
+        (customerInfoFieldsCheck.flatOrHouseNumber.trim().length >0)
+        &&
+        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
+        &&
+        (customerInfoFieldsCheck.etaTimeInMinutes != -1)
+    )
+
+    {
+      print('WILL RETURN FALSE');
+      return false;
+    }
+
+    else{
+      print('WILL RETURN TRUE');
+      return true; // empty; one or more of the user inputs are.
+    }
+
+  }
+
+
+  Widget _buildPaymentTypeSingleSelectOption(){
+
+//   height: 40,
+//   width: displayWidth(context) * 0.57,
+
+
+    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    return StreamBuilder(
+        stream: shoppingCartbloc.getCurrentPaymentTypeSingleSelectStream,
+        initialData: shoppingCartbloc.getCurrentPaymentType,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+            return Container(child: Text('Null'));
+          }
+          else {
+            List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot.data;
+
+//            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
+
+            print('orderTypes: $allPaymentTypesSingleSelect');
+            PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect.firstWhere(
+                    (onePaymentType) =>
+                    onePaymentType.isSelected==true);
+            _currentPaymentTypeIndex = selectedOne.index;
+
+
+
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+
+//              reverse: true,
+
+              shrinkWrap: false,
+//        final String foodItemName =          filteredItems[index].itemName;
+//        final String foodImageURL =          filteredItems[index].imageURL;
+              itemCount: allPaymentTypesSingleSelect.length,
+
+              itemBuilder: (_, int index) {
+                return oneSinglePaymentType(
+                    allPaymentTypesSingleSelect[index],
+                    index);
+              },
+            );
+          }
+        }
+
+      // M VSM ORG VS TODO. ENDS HERE.
+    );
+
+  }
+
+
+
+//  oneSingleDeliveryType to be replaced with oneSinglePaymentType
+  Widget oneSinglePaymentType (PaymentTypeSingleSelect x,int index){
+
+
+//    String color1 = x.itemTextColor.replaceAll('#', '0xff');
+
+//    Color c1 = Color(int.parse(color1));
+//    print('x: ',x.i)
+
+//    IconData x = IconData(int.parse(x.iconDataString),fontFamily: 'MaterialIcons');
+
+//    print('x.icondataString: ${x.iconDataString}');
+//    print('x.orderType: ${x.orderType}');
+//    print('isSelected check at Shopping Cart Page: ${x.isSelected}');
+//    logger.i('isSelected check at Shopping Cart Page: ',x.isSelected);
+
+
+
+    String paymentTypeName = x.paymentTypeName;
+    String paymentIconName = x.paymentTypeName;
+    String borderColor = x.borderColor;
+    const Color OrderTypeIconColor=Color(0xff070707);
+    return Container(
+
+//      height:displayHeight(context)/30,
+//      width:displayWidth(context)/10,
+
+      child:  index == _currentOrderTypeIndex  ?
+
+      Container(
+
+        width: 150,
+        height: displayHeight(context) /7,
+        alignment: Alignment.center,
+        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        child:
+        OutlineButton(
+          color: Color(0xff000000),
+
+//          elevation: 2.5,
+          // RoundedRectangleBorder
+//          shape: CircleBorder(
+          shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+            side: BorderSide(
+              color:Color(0xff000000),
+              style: BorderStyle.solid,
+            ),
+            borderRadius: BorderRadius.circular(35.0),
+          ),
+
+          child:Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Column(
+              children: <Widget>[
+
+                new Container(
+
+//                                width: displayWidth(context) * 0.09,
+//                                height: displayWidth(context) * 0.11,
+                  width:  displayWidth(context)/6.5,
+                  height: displayWidth(context)/6.5,
+//                decoration: new BoxDecoration(
+//                  color: Colors.orange,
+//                  shape: BoxShape.circle,
+//                ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+//                    color: Colors.black,
+                      color: Colors.black,
+                      style: BorderStyle.solid,
+                      width: 1.0,
+
+                    ),
+                    shape: BoxShape.circle,
+//                    borderRadius: BorderRadius.all(Radius.circular(20))
+                  ),
+//                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
+
+
+                  child: Icon(
+                    getIconForName(paymentTypeName),
+                    color: Colors.red,
+                    size: displayWidth(context)/9,
+
+                  ),
+//
+//                child: Icon(IconData(58840, fontFamily: 'MaterialIcons')),
+//                Icon(
+//                  IconData(x.orderIconName),
+//                               color: Colors.red,
+//                  size: 36.0,
+//                ),
+//                child: Icon(IconData(), color: Colors.red), todo
+
+                ),
+//              Container(
+//
+//                alignment: Alignment.center,
+//                child: Text(
+//                  orderTypeName, style:
+//                TextStyle(
+//                    color:Colors.white,
+//
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 16),
+//                ),
+//              ),
+
+                Container(
+
+                  alignment: Alignment.center,
+                  child: Text(
+                    paymentTypeName, style:
+                  TextStyle(
+                      color:Colors.red,
+
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onPressed: () {
+
+            final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+
+//            setState(() {
+//              _currentOrderTypeIndex=index;
+//            });
+
+
+          },
+        ),
+        // : Container for 2nd argument of ternary condition ends here.
+
+      ):
+
+      Container(
+        width: 150,
+        height: displayHeight(context) /7,
+        alignment: Alignment.center,
+        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        child:
+        OutlineButton(
+          color: Color(0xff000000),
+
+//          elevation: 2.5,
+          shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+            side: BorderSide(
+              color:Color(0xff000000),
+              style: BorderStyle.solid,
+            ),
+            borderRadius: BorderRadius.circular(35.0),
+          ),
+
+          child:Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Column(
+              children: <Widget>[
+
+                new Container(
+
+//                                width: displayWidth(context) * 0.09,
+//                                height: displayWidth(context) * 0.11,
+                  width:  displayWidth(context)/6.5,
+                  height: displayWidth(context)/6.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+//                      color: Colors.red[500],
+                      color: Colors.black,
+                      style: BorderStyle.solid,
+                      width: 1.0,
+
+                    ),
+                    shape: BoxShape.circle,
+//                    borderRadius: BorderRadius.all(Radius.circular(20))
+                  ),
+//                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
+
+
+                  child: Icon(
+                    getIconForName(paymentTypeName),
+                    color: Colors.grey,
+                    size: displayWidth(context)/9,
+                  ),
+//                child: Icon(
+//                  Icons.beach_access,
+//                  color: Colors.grey,
+//                  size: 36.0,
+//                ),
+
+                ),
+//              Container(
+//
+//                alignment: Alignment.center,
+//                child: Text(
+//                  orderTypeName, style:
+//                TextStyle(
+//                    color:Colors.white,
+//
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 16),
+//                ),
+//              ),
+
+                Container(
+
+                  alignment: Alignment.center,
+                  child: Text(
+                    paymentTypeName, style:
+                  TextStyle(
+                      color:Colors.red,
+
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onPressed: () {
+
+            final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+
+
+//            setState(() {
+//              _currentOrderTypeIndex=index;
+//            });
+
+
+          },
+        ),
+
+
+
+
+      ),
+    );
+  }
+
+
 
 
 

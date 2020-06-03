@@ -32,6 +32,7 @@ class Order {
   // final String foodItemOrderID;     // random might not be needed.
   List<NewIngredient> ingredients;
   int deliveryTypeIndex;
+  int paymentTypeIndex;
   CustomerInformation ordersCustomer;
 
 //  String ingredients;
@@ -47,6 +48,7 @@ class Order {
         this.foodItemSize,
         this.ingredients,
         this.deliveryTypeIndex,
+        this.paymentTypeIndex,
         this.ordersCustomer
 
         // this.foodItemOrderID,

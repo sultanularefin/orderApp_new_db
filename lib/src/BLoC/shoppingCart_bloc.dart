@@ -10,6 +10,8 @@ import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
+import 'package:foodgallery/src/DataLayer/models/PaymentTypeSingleSelect.dart';
+
 
 
 
@@ -29,18 +31,22 @@ class ShoppingCartBloc implements Bloc {
 
   Order _curretnOrder ;
   List<OrderTypeSingleSelect> _orderType;
+  List<PaymentTypeSingleSelect> _paymentType;
 //  CustomerInformation _oneCustomerInfo;
 
 
 //  List<Order> get getCurrentOrder => _curretnOrder;
   Order get getCurrentOrder => _curretnOrder;
   List<OrderTypeSingleSelect> get getCurrentOrderType => _orderType;
+  List<PaymentTypeSingleSelect> get getCurrentPaymentType => _paymentType;
 //  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
 
 
 
   final _orderController = StreamController <Order>();
   final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
+  final _paymentTypeController = StreamController <List<PaymentTypeSingleSelect>>.broadcast();
+
 //  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
 //  final _customerInformationController = StreamController <CustomerInformation>();
 //  final _customerInformationController = StreamController <CustomerInformation>.broadcast();
@@ -50,6 +56,9 @@ class ShoppingCartBloc implements Bloc {
 
   Stream  <List<OrderTypeSingleSelect>> get getCurrentOrderTypeSingleSelectStream =>
       _orderTypeController.stream;
+
+  Stream  <List<PaymentTypeSingleSelect>> get getCurrentPaymentTypeSingleSelectStream =>
+      _paymentTypeController.stream;
 
   /*
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
@@ -88,6 +97,8 @@ class ShoppingCartBloc implements Bloc {
 
     initiateOrderTypeSingleSelectOptions();
 
+    initiatePaymentTypeSingleSelectOptions();
+
     //    initiateCustomerInformation();
 
     _curretnOrder=x;
@@ -116,6 +127,102 @@ class ShoppingCartBloc implements Bloc {
     _customerInformationController.sink.add(_oneCustomerInfo);
   }
   */
+
+  void initiatePaymentTypeSingleSelectOptions(){
+    PaymentTypeSingleSelect Later = new PaymentTypeSingleSelect(
+      borderColor: '0xff739DFA',
+      index: 0,
+      isSelected: true,
+      paymentTypeName: 'Later',
+      iconDataString: 'FontAwesomeIcons.facebook',
+
+      paymentIconName: 'Later',
+    );
+
+    PaymentTypeSingleSelect Cash = new PaymentTypeSingleSelect(
+      borderColor: '0xff95CB04',
+      index: 1,
+      isSelected: false,
+      paymentTypeName: 'Cash',
+      iconDataString: 'FontAwesomeIcons.twitter',
+
+      paymentIconName: 'Cash',
+    );
+
+
+//     0xffFEE295 false
+    PaymentTypeSingleSelect Card = new PaymentTypeSingleSelect(
+      borderColor: '0xffFEE295',
+      index: 2,
+      isSelected: false,
+      paymentTypeName: 'Card',
+      iconDataString: 'FontAwesomeIcons.home',
+
+      paymentIconName: 'Card',
+    );
+
+//
+//    OrderTypeSingleSelect _dinningRoom = new OrderTypeSingleSelect(
+//      borderColor: '0xffB47C00',
+//      index: 3,
+//      isSelected: false,
+//      orderType: 'DinningRoom',
+//      iconDataString: 'Icons.audiotrack',
+//      orderIconName: 'fastfood',
+//    );
+
+
+
+    List <PaymentTypeSingleSelect> paymentTypeSingleSelectArray = new List<PaymentTypeSingleSelect>();
+
+
+    paymentTypeSingleSelectArray.addAll([Later, Cash, Card  ]);
+
+    _paymentType = paymentTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+
+
+//    initiateAllMultiSelectOptions();
+
+    _paymentTypeController.sink.add(_paymentType);
+  }
+
+  void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newIndex,int oldIndex){
+
+    print('newIndex is $newIndex');
+    print('oldIndex is $oldIndex');
+
+
+    List <PaymentTypeSingleSelect> singleSelectArray = _paymentType;
+//    _currentOrderTypeIndex
+
+
+    singleSelectArray[oldIndex].isSelected =
+    !singleSelectArray[oldIndex].isSelected;
+
+    singleSelectArray[newIndex].isSelected =
+    !singleSelectArray[newIndex].isSelected;
+
+//    singleSelectArray[index].isSelected = true;
+
+//    x.isSelected= !x.isSelected;
+
+
+    Order currentOrderTemp = _curretnOrder;
+
+    currentOrderTemp.paymentTypeIndex = newIndex;
+
+
+    _paymentType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+
+    _curretnOrder = currentOrderTemp;
+
+//    initiateAllMultiSelectOptions();
+
+    _paymentTypeController.sink.add(_paymentType);
+    _orderController.sink.add(_curretnOrder);
+  }
+
+
   void initiateOrderTypeSingleSelectOptions()
   {
 
@@ -296,6 +403,7 @@ class ShoppingCartBloc implements Bloc {
   void dispose() {
     _orderController.close();
     _orderTypeController.close();
+    _paymentTypeController.close();
 //    _customerInformationController.close();
 //    _multiSelectForFoodController.close();
 
