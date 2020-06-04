@@ -164,6 +164,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
     Order thisOrder = shoppingCartBloc.getCurrentOrder;
 
+
+
 //    priceByQuantityANDSize = oneFood.itemPrice;
 
 
@@ -195,6 +197,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               final Order oneOrder = snapshot.data;
 //              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
+
+              CustomerInformation x = oneOrder.ordersCustomer;
+              addressController.text = x.address;
+              houseFlatNumberController.text = x.flatOrHouseNumber;
+              phoneNumberController.text = x.phoneNumber;
+              etaController.text = x.etaTimeInMinutes.toString();
 
 
 //              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
@@ -384,6 +392,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
 
 
+                                        // work -1
+                                        /*
                                         Container(
                                           padding: EdgeInsets.fromLTRB(
                                               0, 10, 0, 5),
@@ -399,6 +409,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               oneOrder),
 
                                         ),
+                                        */
 
 
 
@@ -441,7 +452,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                                        //Work 12
+
                                         Container(
                                           color:Colors.yellowAccent,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -1068,13 +1079,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     return Container(
       width: displayWidth(context) / 1.1,
-      height: displayHeight(context) / 8,
+      height: displayHeight(context) / 21 +  displayHeight(context) / 15,
+//      height: displayHeight(context) / 8,
+      // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
+      // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
       color: Color(0xffffffff),
       child: Column(
           children: <Widget>[
             Container(
-              height: displayHeight(context) / 20,
-              color:Colors.purple,
+              height: displayHeight(context) / 21,
+//              color:Colors.purple,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -1085,7 +1099,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     width: displayWidth(context) /
                         1.5,
                     height: displayHeight(
-                        context) / 20,
+                        context) / 21,
                     color: Color(0xffffffff),
 
                     child: Row(
@@ -1147,70 +1161,56 @@ class _ShoppingCartState extends State<ShoppingCart> {
             //HHH
 
             Container(
-              height: displayHeight(context) / 14,
+              height: displayHeight(context) / 20,
               color:Colors.amber,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child:    ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.all(8),
                 children: <Widget>[
-
-
-                  Container(
-                    width: displayWidth(context) /
-                        1.25,
-                    height: displayHeight(
-                        context) / 12,
-                    color: Color(0xffE2F600),
-
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        // THIS CONTAINER IS ABOUT ADDRESS INFORMATION BEGINS HERE.
-                        RaisedButton(
-                          color:Colors.redAccent,
-                          highlightColor: Colors.lightGreenAccent,
+                  RaisedButton(
+                    color:Colors.redAccent,
+                    highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
-                          clipBehavior: Clip.hardEdge,
-                          splashColor: Color(0xffB47C00),
-                          highlightElevation: 12,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xff707070),
-                              style: BorderStyle.solid,
+                    clipBehavior: Clip.hardEdge,
+                    splashColor: Color(0xffB47C00),
+                    highlightElevation: 12,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Color(0xff707070),
+                        style: BorderStyle.solid,
 //            width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: currentUserForInline.address != ''? Container(
-                            color:Colors.lightBlueAccent,
-                            width:displayWidth(context) /4.6,
-                            height:displayHeight(
-                                context) / 12,
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .start
-                              ,
-                              crossAxisAlignment: CrossAxisAlignment
-                                  .center,
-                              children: <Widget>[
+                      ),
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: currentUserForInline.address != ''? Container(
+                      color:Colors.lightBlueAccent,
+                      width:displayWidth(context) /2.6,
+                      height:displayHeight(
+                          context) / 20,
+                      child:  Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start
+                        ,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
 
-                                Container(
+                          Container(
 
-                                  width: 30,
-                                  height: displayHeight(context) /28,
+                            width: 30,
+//                             height: displayHeight(context) /28,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
-                                  child:
-                                  Icon(Icons.location_on,
-                                      size: 32.0,
-                                      color: Colors.black),
+                            child:
+                            Icon(Icons.location_on,
+                                size: 32.0,
+                                color: Colors.black),
 
 
 
-                                  //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+                            //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-                                  //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+                            //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
 
 //                    setState(() {
 //                      showFullOrderType = !showFullOrderType;
@@ -1219,325 +1219,333 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                                  // : Container for 2nd argument of ternary condition ends here.
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color:Colors.red,
+                          ),
+                          Expanded(
+                            child: Container(
+                              color:Colors.red,
 //                                  height: displayHeight(context) /28,
-                                    padding: EdgeInsets
-                                        .fromLTRB(
-                                        5, 0, 5, 0),
-                                    alignment: Alignment
-                                        .centerLeft,
-                                    child: Text(
-                                        '${currentUserForInline.address}',
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 3,
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  5, 0, 5, 0),
+                              alignment: Alignment
+                                  .centerLeft,
+                              child: Text(
+                                  '${currentUserForInline.address}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
 //                                      textAlign: TextAlign.justify,
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight
-                                              .normal,
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight
+                                        .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                          color: Color(
-                                              0xff000000),
-                                        )
-                                    ),
-                                  ),
-                                ),
+                                    color: Color(
+                                        0xff000000),
+                                  )
+                              ),
+                            ),
+                          ),
 
 
 
 
-                                //ZZZZ
+                          //ZZZZ
 
 
-                              ],
-                            ),):  Container(
-                            width:displayWidth(context) /4.6,
+                        ],
+                      ),):  Container(
+                      width:displayWidth(context) /4.6,
 //                              width:displayWidth(context) /5.5
-                          ),
-
-                          onPressed: ()=>{
-                            setState(() {
-
-                              showEditingCompleteCustomerAddressInformation = !showEditingCompleteCustomerAddressInformation;
-//                      showFullOrderType = !showFullOrderType;
-                            })
-                          },
-                        ),
-
-                        // THIS CONTAINER IS ABOUT ADDRESS INFORMATION ENDS HERE.
-
-                        // THIS CONTAINER IS ABOUT HOUSE OR FLAT NUMBER INFORMATION BEGINS HERE.
-                        RaisedButton(
-                          color:Colors.redAccent,
-                          highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                          clipBehavior: Clip.hardEdge,
-                          splashColor: Color(0xffB47C00),
-                          highlightElevation: 12,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xff707070),
-                              style: BorderStyle.solid,
-//            width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: currentUserForInline.flatOrHouseNumber != ''?
-                          Container(
-                            color:Colors.brown,
-
-                            width:displayWidth(context) /8,
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .start
-                              ,
-                              crossAxisAlignment: CrossAxisAlignment
-                                  .center,
-                              children: <Widget>[
-
-
-                                Icon(
-                                    Icons.home,
-                                    size: 32.0,
-                                    color: Colors.black
-                                ),
-
-
-
-                                // : Container for 2nd argument of ternary condition ends here.
-
-
-                                Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets
-                                        .fromLTRB(
-                                        5, 0, 5, 0),
-                                    alignment: Alignment
-                                        .center,
-                                    child: Text(
-                                        '${currentUserForInline.flatOrHouseNumber}',
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight
-                                              .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                          color: Color(
-                                              0xff000000),
-                                        )
-                                    ),
-                                  ),
-                                ),
-
-
-
-
-                                //ZZZZ
-
-
-                              ],
-                            ),):  Container(
-//                              width:displayWidth(context) /5.5
-                            width:displayWidth(context) /8,
-                          )
-                          ,
-                          onPressed: ()=>{
-                            setState(() {
-
-                              showEditingCompleteCustomerHouseFlatIformation =
-                              !showEditingCompleteCustomerHouseFlatIformation;
-//                      showFullOrderType = !showFullOrderType;
-                            })
-                          },
-                        ),
-
-                        // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
-                        // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
-                        RaisedButton(
-                          color:Colors.redAccent,
-                          highlightColor: Colors.lightGreenAccent,
-//                        highlightedBorderColor: Colors.blueAccent,
-                          clipBehavior: Clip.hardEdge,
-                          splashColor: Color(0xffB47C00),
-                          highlightElevation: 12,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xff707070),
-                              style: BorderStyle.solid,
-//            width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: currentUserForInline.phoneNumber != ''?
-                          Container(
-                            color:Colors.lightGreenAccent,
-                            width:displayWidth(context) /5.9,
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .start
-                              ,
-                              crossAxisAlignment: CrossAxisAlignment
-                                  .center,
-                              children: <Widget>[
-
-                                Icon(Icons.phone,
-                                    size: 32.0,
-                                    color: Colors.black)
-                                ,
-
-
-                                // : Container for 2nd argument of ternary condition ends here.
-
-
-                                Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets
-                                        .fromLTRB(
-                                        5, 0, 5, 0),
-                                    alignment: Alignment
-                                        .center,
-                                    child: Text(
-                                        '${currentUserForInline.phoneNumber}',
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight
-                                              .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                          color: Color(
-                                              0xff000000),
-                                        )
-                                    ),
-                                  ),
-                                ),
-
-
-
-
-                                //ZZZZ
-
-
-                              ],
-                            ),):  Container(
-//                              width:displayWidth(context) /5.5
-                            width:displayWidth(context) /5.9,
-                          )
-                          ,
-                          onPressed: ()=>{
-                            setState(() {
-
-                              showEditingCompleteCustomerPhoneIformation =
-                              !showEditingCompleteCustomerPhoneIformation;
-//                      showFullOrderType = !showFullOrderType;
-                            })
-                          },
-                        ),
-
-                        // THIS CONTAINER ABOVE IS ABOUT PHONE NUMBER INFORMATION ENDS HERE.
-
-                        // THIS CONTAINER BELOW IS ABOUT ETA INFORMATION BEGINS HERE.
-
-                        RaisedButton(
-                          color:Colors.redAccent,
-                          highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                          clipBehavior: Clip.hardEdge,
-                          splashColor: Color(0xffB47C00),
-                          highlightElevation: 12,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xff707070),
-                              style: BorderStyle.solid,
-//            width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: currentUserForInline.etaTimeInMinutes != -1?
-                          Container(
-                            color:Colors.red,
-                            width:displayWidth(context) /10,
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .start
-                              ,
-                              crossAxisAlignment: CrossAxisAlignment
-                                  .center,
-                              children: <Widget>[
-
-
-                                Icon(
-                                    Icons.watch,
-                                    size: 32.0,
-                                    color: Colors.black
-                                ),
-
-
-
-                                // : Container for 2nd argument of ternary condition ends here.
-
-
-                                Container(
-                                  padding: EdgeInsets
-                                      .fromLTRB(
-                                      5, 0, 5, 0),
-                                  alignment: Alignment
-                                      .center,
-                                  child: Text(
-                                      '${currentUserForInline.etaTimeInMinutes}',
-                                      style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight
-                                            .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                        color: Color(
-                                            0xff000000),
-                                      )
-                                  ),
-                                ),
-
-
-
-
-                                //ZZZZ
-
-
-                              ],
-                            ),
-                          ):  Container(
-                            width:displayWidth(context) /10,
-                          )
-
-                          // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
-                          ,
-                          onPressed: ()=>{
-                            setState(() {
-
-                              showEditingCompleteCustomerReachoutIformation =
-                              !showEditingCompleteCustomerReachoutIformation;
-//                      showFullOrderType = !showFullOrderType;
-                            })
-                          },
-                        ),
-                      ],
                     ),
 
-                    // ABOVE ROW HANDLES THE CUSTOMER INFORMATION ALONG WITH ICON AND POSSIBLY EDIT BUTTON.
+                    onPressed: ()=>{
+                      setState(() {
 
+                        showEditingCompleteCustomerAddressInformation = !showEditingCompleteCustomerAddressInformation;
+//                      showFullOrderType = !showFullOrderType;
+                      })
+                    },
+                  ),
+                  RaisedButton(
+                    color:Colors.redAccent,
+                    highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                    clipBehavior: Clip.hardEdge,
+                    splashColor: Color(0xffB47C00),
+                    highlightElevation: 12,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Color(0xff707070),
+                        style: BorderStyle.solid,
+//            width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: currentUserForInline.flatOrHouseNumber != ''?
+                    Container(
+                      color:Colors.brown,
+//                       width:displayWidth(context) /2.6,
+                      width:displayWidth(context) /4,
+                      child:  Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start
+                        ,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
+
+
+                          Icon(
+                              Icons.home,
+                              size: 32.0,
+                              color: Colors.black
+                          ),
+
+
+
+                          // : Container for 2nd argument of ternary condition ends here.
+
+
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  5, 0, 5, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  '${currentUserForInline.flatOrHouseNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight
+                                        .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(
+                                        0xff000000),
+                                  )
+                              ),
+                            ),
+                          ),
+
+
+
+
+                          //ZZZZ
+
+
+                        ],
+                      ),):  Container(
+//                              width:displayWidth(context) /5.5
+//                       width:displayWidth(context) /8,
+                      width:displayWidth(context) /4,
+                    )
+                    ,
+                    onPressed: ()=>{
+                      setState(() {
+
+                        showEditingCompleteCustomerHouseFlatIformation =
+                        !showEditingCompleteCustomerHouseFlatIformation;
+//                      showFullOrderType = !showFullOrderType;
+                      })
+                    },
                   ),
 
+                  // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
+                  // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
+                  RaisedButton(
+                    color:Colors.redAccent,
+                    highlightColor: Colors.lightGreenAccent,
+//                        highlightedBorderColor: Colors.blueAccent,
+                    clipBehavior: Clip.hardEdge,
+                    splashColor: Color(0xffB47C00),
+                    highlightElevation: 12,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Color(0xff707070),
+                        style: BorderStyle.solid,
+//            width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: currentUserForInline.phoneNumber != ''?
+                    Container(
+                      color:Colors.lightGreenAccent,
+                      width:displayWidth(context) /3,
+
+                      child:  Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start
+                        ,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
+
+                          Icon(Icons.phone,
+                              size: 32.0,
+                              color: Colors.black)
+                          ,
+
+
+                          // : Container for 2nd argument of ternary condition ends here.
+
+
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  5, 0, 5, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  '${currentUserForInline.phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight
+                                        .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(
+                                        0xff000000),
+                                  )
+                              ),
+                            ),
+                          ),
+
+
+
+
+                          //ZZZZ
+
+
+                        ],
+                      ),):  Container(
+                      width:displayWidth(context) /3,
+//                              width:displayWidth(context) /5.5
+//                       width:displayWidth(context) /5.9,
+                    )
+                    ,
+                    onPressed: ()=>{
+                      setState(() {
+
+                        showEditingCompleteCustomerPhoneIformation =
+                        !showEditingCompleteCustomerPhoneIformation;
+//                      showFullOrderType = !showFullOrderType;
+                      })
+                    },
+                  ),
+                  RaisedButton(
+                    color:Colors.redAccent,
+                    highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                    clipBehavior: Clip.hardEdge,
+                    splashColor: Color(0xffB47C00),
+                    highlightElevation: 12,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Color(0xff707070),
+                        style: BorderStyle.solid,
+//            width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: currentUserForInline.etaTimeInMinutes != -1?
+                    Container(
+                      color:Colors.red,
+//                       width:displayWidth(context) /10,
+                      width:displayWidth(context) /4,
+                      child:  Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start
+                        ,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
+
+
+                          Icon(
+                              Icons.watch,
+                              size: 32.0,
+                              color: Colors.black
+                          ),
+
+
+
+                          // : Container for 2nd argument of ternary condition ends here.
+
+
+                          Container(
+                            padding: EdgeInsets
+                                .fromLTRB(
+                                5, 0, 5, 0),
+                            alignment: Alignment
+                                .center,
+                            child: Text(
+                                '${currentUserForInline.etaTimeInMinutes}',
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight
+                                      .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                  color: Color(
+                                      0xff000000),
+                                )
+                            ),
+                          ),
+
+
+
+
+                          //ZZZZ
+
+
+                        ],
+                      ),
+                    ):  Container(
+                      width:displayWidth(context) /4,
+//                       width:displayWidth(context) /10,
+                    )
+
+                    // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
+                    ,
+                    onPressed: ()=>{
+                      setState(() {
+
+                        showEditingCompleteCustomerReachoutIformation =
+                        !showEditingCompleteCustomerReachoutIformation;
+//                      showFullOrderType = !showFullOrderType;
+                      })
+                    },
+                  ),
+
+                  /*
+                   Container(
+                     height: 50,
+                     color: Colors.amber[500],
+                     child: const Center(child: Text('Entry B')),
+                   ),
+                   Container(
+                     height: 50,
+                     color: Colors.amber[100],
+                     child: const Center(child: Text('Entry C')),
+                   ),
+                   Container(
+                     height: 50,
+                     color: Colors.amber[100],
+                     child: const Center(child: Text('Entry C')),
+                   ),
+                   */
                 ],
               ),
+
             )
 
 
@@ -1572,6 +1580,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
         children: <Widget>[
 
 
+          // 1ST CONTAINER OF INPUTS BEGINS HERE. HOLDS
+          // LABEL TEXT, OR
+          // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
           Container(
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
@@ -1580,6 +1591,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                animatedUnObscuredTextInputContainer(),
               child: (showFullOrderType == false)?
 //      unobscureInputandRest(unObsecuredInputandPayment)
+              // work 0
               animatedShowUserAddressDetailsInLine(currentUser)
 
               /* work 1*/
@@ -1694,10 +1706,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
 
+          // 1ST CONTAINER OF INPUTS ENDS HERE. HOLDS
+          // LABEL TEXT, OR
+          // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
 
 
+
+          // work 01
           Container(
-            color:Colors.orange,
+            color:Colors.black87,
 //            height: displayWidth(context)/2.6,
             height: displayWidth(context)/2.1,
             child: Stack(
@@ -1744,22 +1761,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 AnimatedPositioned(
                   duration: Duration(milliseconds: 500),
-                  bottom: getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer)==0?
-                  displayHeight(context)/12:
-                  getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer)== 1?
-                  displayHeight(context)/9.5:
-
-                  getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer) ==2?
-                  displayHeight(context)/ 6:
-
-
-                  getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer) ==3?
-                  displayHeight(context)/ 5:
-                  displayHeight(context)/4,
+                  top:
+                  0,
+//                  displayHeight(context)/4,
 //                  getNumberOfInputsFilledUp (
 //                      unObsecuredInputandPayment.ordersCustomer) ==4?
 
@@ -1804,7 +1808,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   margin: EdgeInsets.symmetric(
                                       horizontal: 0,
                                       vertical: 6),
-                                  child: showEditingCompleteCustomerAddressInformation? Container():
+                                  child: showEditingCompleteCustomerAddressInformation?
+                                  Container():
                                   Container(
                                     margin: EdgeInsets.symmetric(
                                         horizontal: 0,
@@ -1874,7 +1879,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                                           // do it in both Container
                                           child: TextField(
-//                                            controller: addressController,
+                                            controller: addressController,
+
                                             textInputAction: TextInputAction.next,
                                             onSubmitted: (_) => FocusScope.of(context).nextFocus(),
 
@@ -2114,6 +2120,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                                           // do it in both Container
                                           child: TextField(
+                                            controller: houseFlatNumberController,
+
 
                                             textInputAction: TextInputAction.next,
                                             onSubmitted: (_) => FocusScope.of(context).nextFocus(),
@@ -2307,6 +2315,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                                           // do it in both Container
                                           child: TextField(
+                                            controller: phoneNumberController,
+
+
                                             textInputAction: TextInputAction.next,
                                             onSubmitted: (_) => FocusScope.of(context).nextFocus(),
 
@@ -2495,6 +2506,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                                           // do it in both Container
                                           child: TextField(
+
+                                            controller:  etaController,
+
+
+
                                             keyboardType: TextInputType.number,
                                             textInputAction: TextInputAction.done,
 //
