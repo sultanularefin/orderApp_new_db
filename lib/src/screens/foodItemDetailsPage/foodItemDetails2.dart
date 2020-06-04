@@ -958,7 +958,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             foodItemSize: _currentSize,
                             ingredients: foodItemDetailsbloc.getDefaultIngredients,
                             deliveryTypeIndex: 0,
-                            paymentTypeIndex: 0,
+                            paymentTypeIndex: 4,
                             ordersCustomer:oneCustomerInfo,
                           );
                           print(
