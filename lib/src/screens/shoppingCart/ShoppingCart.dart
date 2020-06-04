@@ -68,11 +68,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
   int _currentPaymentTypeIndex = 0;
   bool showFullOrderType = true;
   bool showCustomerInformationHeader = false;
+  bool showFullPaymentType = true;
 
   bool showEditingCompleteCustomerAddressInformation   = false;
   bool showEditingCompleteCustomerHouseFlatIformation = false;
   bool showEditingCompleteCustomerPhoneIformation     = false;
   bool showEditingCompleteCustomerReachoutIformation  = false;
+
 
 //  bool showInputtedCustomerIformation = false;
 
@@ -192,7 +194,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               print('snapshot.hasData : ${snapshot.hasData}');
 
               final Order oneOrder = snapshot.data;
-              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
+//              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
 
 
 //              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
@@ -409,7 +411,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                            showFullOrderType
 
 
-                                        //Work 1
+
                                         Container(
 //                                        width: displayWidth(context) /1.8,
                                           width: displayWidth(context) / 1.1,
@@ -3247,26 +3249,367 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print('at animated Un Obscured Card UnSelect Container');
     return
-      Container(
+      Column(
+        children: <Widget>[
+          Container(
 //          padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
-          color:Colors.white,
+              color:Colors.white,
 //                                            height: 200,
-          height: displayHeight(context) /3,
-          width: displayWidth(context)
-              - displayWidth(context) / 5,
+//          height: displayHeight(context) /3,
+              width: displayWidth(context)
+                  - displayWidth(context) / 5,
 //                                            width: displayWidth(context) * 0.57,
 
-          child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
-        //HHHH
 
 
+
+              // Work 1.
+              child: Container(child:
+              AnimatedSwitcher(
+                duration: Duration(milliseconds: 3000),
+//
+                child: showFullPaymentType==false ? animatedWidgetShowSelectedPaymentType():
+                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
+                ,
+
+              ),
+
+
+
+
+
+              )
+            //HHHH
+
+
+          ),
+
+          Container(
+//            alignment: Alignment.center,
+            /*
+    padding: EdgeInsets.fromLTRB(displayWidth(context)/3,
+                0, 0, 0),
+            */
+            child:
+            AnimatedSwitcher(
+              duration: Duration(milliseconds: 1000),
+//
+              child: showFullPaymentType==false ?
+              animatedUnObscuredCancelPayButton(unObsecuredInputandPayment):
+              animatedObscuredCancelPayButton(unObsecuredInputandPayment)
+
+              ,
+
+            ),
+          ),
+
+
+        ],
       );
 
 
   }
 
 
+  Widget animatedObscuredCancelPayButton(Order CancelPaySelect){
+//  Widget animatedObscuredTextInputContainer(){
+//    child:  AbsorbPointer(
+//        child: _buildShoppingCartInputFields()
+//    ),
+
+    print(' < >  <   >    << TT       >>  \\    '
+        ' Widget name: '
+        'animated Obscured Cancel Pay Button()');
+    return
+      AbsorbPointer(
+        child: Opacity(
+          opacity:0.2,
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  child: OutlineButton(
+                    onPressed: ()=>{
+                      print('on Pressed of Cancel')
+                    },
+                    child: Text('Cancel',style: TextStyle(color: Colors.red),),
+                  ),
+
+                ),
+                SizedBox(width: displayWidth(context)/12,),
+                Container(
+                  child: OutlineButton(
+                    onPressed: ()=>{
+                      print('on Pressed of Pay')
+                    },
+                    child: Text('Pay',style: TextStyle(color: Colors.green),),
+                  ),
+
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+  }
+
+  Widget animatedUnObscuredCancelPayButton(Order CancelPaySelect){
+//  Widget animatedObscuredTextInputContainer(){
+//    child:  AbsorbPointer(
+//        child: _buildShoppingCartInputFields()
+//    ),
+
+    print(' < >  <   >    << TT       >>  \\    '
+        ' Widget name: '
+        'animated Obscured Cancel Pay Button()');
+    return
+      Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: OutlineButton(
+                onPressed: ()=>{
+                  print('on Pressed of Cancel')
+                },
+                child: Text('Cancel',style: TextStyle(color: Colors.red),),
+              ),
+
+            ),
+            SizedBox(width: displayWidth(context)/12,),
+            Container(
+              child: OutlineButton(
+                onPressed: ()=>{
+                  print('on Pressed of Pay')
+                },
+                child: Text('Pay',style: TextStyle(color: Colors.green),),
+              ),
+
+            ),
+          ],
+        ),
+      );
+
+  }
+
+
+
+
+  Widget animatedWidgetShowSelectedPaymentType() {
+
+    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    return Container(
+      height: displayHeight(context) / 9,
+      child: StreamBuilder(
+          stream: shoppingCartbloc.getCurrentPaymentTypeSingleSelectStream,
+          initialData: shoppingCartbloc.getCurrentPaymentType,
+
+          builder: (context, snapshot)
+          {
+            if (!snapshot.hasData) {
+              print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+              return Container(child: Text('Null'));
+            }
+            else {
+              List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot.data;
+
+//            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
+
+//            print('orderTypes: $allOrderTypesSingleSelect');
+              PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
+                  .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
+
+//              _currentPaymentTypeIndex = selectedOne.index;
+
+
+              String orderTypeName = selectedOne.paymentTypeName;
+              String orderIconName = selectedOne.paymentIconName;
+              String borderColor = selectedOne.borderColor;
+              const Color OrderTypeIconColor=Color(0xff070707);
+
+
+
+
+              return Container(
+                width: displayWidth(context) / 1.1,
+                height: displayHeight(context) / 12,
+                color: Color(0xffffffff),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+
+
+                    Container(
+                      width: displayWidth(context) /
+                          1.5,
+                      height: displayHeight(
+                          context) / 20,
+                      color: Color(0xffffffff),
+
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+
+                            Container(
+                              margin: EdgeInsets
+                                  .fromLTRB(
+                                  20, 0, 10, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  'Payment Method',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight
+                                        .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(
+                                        0xff000000),
+                                  )
+                              ),
+                            ),
+
+                            CustomPaint(
+                              size: Size(0, 19),
+                              painter: LongPainterForanimatedWidgetShowSelectedOrderType(
+                                  context),
+                            ),
+
+                          ]
+                      ),
+
+                    ),
+                    // THE ABOVE PART DEALS WITH LINES AND TEXT,
+                    // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
+
+                    Container(
+
+                      width: 100,
+                      height: displayHeight(context) /10,
+//                    alignment: Alignment.center,
+//                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+                      child:
+                      OutlineButton(
+                        color: Color(0xff000000),
+
+//          elevation: 2.5,
+                        // RoundedRectangleBorder
+//          shape: CircleBorder(
+                        shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+                          side: BorderSide(
+                            color:Color(0xff000000),
+                            style: BorderStyle.solid,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+
+                        child:Container(
+//                        alignment: Alignment.topCenter,
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment
+                                .start
+                            ,
+//                          crossAxisAlignment: CrossAxisAlignment
+//                              .center,
+//                          AA
+                            children: <Widget>[
+
+                              new Container(
+
+//                                width: displayWidth(context) * 0.09,
+//                                height: displayWidth(context) * 0.11,
+
+                                width:  90,
+                                height: displayHeight(context) /14,
+//                decoration: new BoxDecoration(
+//                  color: Colors.orange,
+//                  shape: BoxShape.circle,
+//                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+//                    color: Colors.black,
+                                    color: Colors.black,
+                                    style: BorderStyle.solid,
+                                    width: 1.0,
+
+                                  ),
+                                  shape: BoxShape.circle,
+//                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+//                padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
+
+
+                                child: Icon(
+                                  getIconForName(orderTypeName),
+                                  color: Colors.black,
+                                  size: displayHeight(context) /30,
+
+                                ),
+                              ),
+
+                              Container(
+
+                                alignment: Alignment.center,
+                                child: Text(
+                                  orderTypeName, style:
+                                TextStyle(
+                                    color:Colors.red,
+
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onPressed: () {
+
+                          //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+//                          final ShoppingCartBlock = BlocProvider.of<ShoppingCartBloc>(context);
+//                          ShoppingCartBlock.setPaymentTypeSingleSelectOptionForOrder(selectedOne,4,_currentOrderTypeIndex);
+
+                          setState(() {
+
+                            showFullPaymentType = !showFullPaymentType;
+//                            _currentPaymentTypeIndex= 4;
+//                            showFullOrderType = !showFullOrderType;
+                          });
+
+
+                        },
+                      ),
+                      // : Container for 2nd argument of ternary condition ends here.
+
+                    )
+
+
+
+                    //ZZZZ
+
+
+                  ],
+                ),
+              );
+            }
+          }
+      ),
+    );
+  }
 
   Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelected(Order unObsecuredInputandPayment)
   {
@@ -4269,9 +4612,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              final locationBloc = BlocProvider.of<>(context);
             shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
 
-//            setState(() {
-//              _currentOrderTypeIndex=index;
-//            });
+            setState(() {
+              showFullPaymentType= false;
+            });
 
 
           },
@@ -4372,9 +4715,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
             shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
 
 
-//            setState(() {
-//              _currentOrderTypeIndex=index;
-//            });
+            setState(() {
+              showFullPaymentType = false;
+            });
 
 
           },
