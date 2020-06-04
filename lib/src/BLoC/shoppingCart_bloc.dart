@@ -195,9 +195,14 @@ class ShoppingCartBloc implements Bloc {
     List <PaymentTypeSingleSelect> singleSelectArray = _paymentType;
 //    _currentOrderTypeIndex
 
+    logger.w('singleSelectArray[oldPaymentIndex].isSelected:'
+        ' ${singleSelectArray[oldPaymentIndex].isSelected}');
 
     singleSelectArray[oldPaymentIndex].isSelected =
     !singleSelectArray[oldPaymentIndex].isSelected;
+
+    logger.w('singleSelectArray[oldPaymentIndex].isSelected:'
+        ' ${singleSelectArray[oldPaymentIndex].isSelected}');
 
     singleSelectArray [newPaymentIndex].isSelected =
     !singleSelectArray[newPaymentIndex].isSelected;

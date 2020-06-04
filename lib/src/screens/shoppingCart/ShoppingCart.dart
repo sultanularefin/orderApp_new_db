@@ -192,10 +192,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
               print('snapshot.hasData : ${snapshot.hasData}');
 
               final Order oneOrder = snapshot.data;
-//              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
+              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
 
 
-//              logger.i(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
+//              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
 
 
               return GestureDetector(
@@ -1788,12 +1788,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 AnimatedPositioned(
                   duration: Duration(milliseconds: 500),
                   bottom: getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer)<=1?
+                      unObsecuredInputandPayment.ordersCustomer)==0?
+                  displayHeight(context)/12:
+                  getNumberOfInputsFilledUp (
+                      unObsecuredInputandPayment.ordersCustomer)== 1?
                   displayHeight(context)/9.5:
 
                   getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) ==2?
-                  displayHeight(context)/ 7.5:
+                  displayHeight(context)/ 6:
 
 
                   getNumberOfInputsFilledUp (
@@ -4205,6 +4208,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget _buildPaymentTypeSingleSelectOption(){
 
+    logger.i('at here: _buildPaymentTypeSingleSelectOption');
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
 
@@ -4226,15 +4230,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
-//            print('paymentTypes: $allPaymentTypesSingleSelect');
+            print('paymentTypes: $allPaymentTypesSingleSelect');
 
+            /*
             PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect.firstWhere(
                     (onePaymentType) =>
                     onePaymentType.isSelected==true);
             _currentPaymentTypeIndex = selectedOne.index;
 
-            print('_currentPaymentTypeIndex: 000  0000 $_currentPaymentTypeIndex');
+            print('_currentPaymentTypeIndex: at 4237 000  0000 $_currentPaymentTypeIndex');
 
+
+             */
 
 
             return ListView.builder(
@@ -4281,6 +4288,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+  logger.i('_currentPaymentTypeIndex: at line # 4287 $_currentPaymentTypeIndex');
     String paymentTypeName = x.paymentTypeName;
     String paymentIconName = x.paymentTypeName;
     String borderColor = x.borderColor;
