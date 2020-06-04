@@ -420,8 +420,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             duration: Duration(milliseconds: 1000),
 //
                                             child: showFullOrderType?
-                                            animatedWidgetShowFullOrderType():
-                                            animatedWidgetShowSelectedOrderType(),
+                                            animatedWidgetShowFullOrderType():/*1 */
+                                            animatedWidgetShowSelectedOrderType(), /* 2*/
+                                            // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
+                                            // 2 => height: displayHeight(context) / 9,
 
                                           ),
 
@@ -439,7 +441,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                                        //Work 2
+                                        //Work 12
                                         Container(
                                           color:Colors.yellowAccent,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -518,7 +520,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     return
       Container(
-        height: displayHeight(context) / 20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +  displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
+        height: displayHeight(context) / 20
+            /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */
+            +  displayHeight(context) /8.5 /* HEIGHT OF MULTI SELECT PORTION */,
+//        from 7 to /8.5 on june 03
+
         child: Column(
           children: <Widget>[
             Container(
@@ -572,7 +578,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           CustomPaint(
                             size: Size(0, 19),
-                            painter: LongPainterForChooseOrderType(
+                            painter: LongPainterForChooseOrderTypeUpdated(
                                 context),
                           ),
 
@@ -626,11 +632,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
 
             Container(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
 //                                                      padding::::
               color:Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /7,
+              height: displayHeight(context) /8.5,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
@@ -1576,24 +1582,107 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      unobscureInputandRest(unObsecuredInputandPayment)
               animatedShowUserAddressDetailsInLine(currentUser)
 
+              /* work 1*/
                   :Container(
-                height: displayHeight(context) / 15,
-                child: Column(
+                width: displayWidth(context) / 1.1,
+                height: displayHeight(context) / 20,
+                color: Color(0xffffffff),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment
+                      .start
+                  ,
+                  crossAxisAlignment: CrossAxisAlignment
+                      .center,
                   children: <Widget>[
-                    SizedBox(height: 5),
-                    Container(
-                        alignment: Alignment.center,
 
-                        child: Text('Enter user address',
-                          style: TextStyle(
-                            color:
-                            Color(0xffFC0000),
-                            fontSize: 40,
-                          ),)
+
+                    Container(
+                      width: displayWidth(context) /
+                          1.5,
+                      height: displayHeight(
+                          context) / 20,
+                      color: Color(0xffffffff),
+
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+
+                            Container(
+                              margin: EdgeInsets
+                                  .fromLTRB(
+                                  20, 0, 10, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  'Enter user address',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight
+                                        .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(
+                                        0xff000000),
+                                  )
+                              ),
+                            ),
+
+                            CustomPaint(
+                              size: Size(0, 19),
+                              painter: LongPainterForChooseOrderTypeAdress(
+                                  context),
+                            ),
+
+
+
+
+                          ]
+                      ),
+
                     ),
 
+                    // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                    /*
+                                                        Container(
+//                                                  alignment: Alignment.center,
+                                                          padding: EdgeInsets.fromLTRB(
+                                                              0, 2, 0, 0),
+                                                          width: displayWidth(context) /
+                                                              16,
+//                                                height: displayHeight(context)/20,
+                                                          color: Color(0xffffffff),
+//                                                    child:Row(
+//                                                      mainAxisAlignment: MainAxisAlignment.end,
+//                                                      children: <Widget>[
+                                                          child: Container(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(0, 0, 200, 0),
+                                                            child: Icon(
 
-                    SizedBox(height: 5),
+                                                              Icons.add_shopping_cart,
+                                                              size: 30,
+                                                              color: Color(0xff54463E),
+                                                            ),
+                                                          ),
+
+
+                                                        ),
+                                                        */
+
+
+                    // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+
+
+                    ////WWWEEEQQQ
+
+
+
+
                   ],
                 ),
               ),
@@ -3264,7 +3353,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-              // Work 1.
+              // Work 5.
               child: Container(child:
               AnimatedSwitcher(
                 duration: Duration(milliseconds: 3000),
@@ -3336,6 +3425,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       print('on Pressed of Cancel')
                     },
                     child: Text('Cancel',style: TextStyle(color: Colors.red),),
+                    shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+                      side: BorderSide(
+                        color:Colors.red,
+                        style: BorderStyle.solid,
+                      ),
+                      borderRadius: BorderRadius.circular(35.0),
+                    ),
                   ),
 
                 ),
@@ -3346,6 +3443,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       print('on Pressed of Pay')
                     },
                     child: Text('Pay',style: TextStyle(color: Colors.green),),
+                    shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+                      side: BorderSide(
+                        color:Colors.green,
+                        style: BorderStyle.solid,
+                      ),
+                      borderRadius: BorderRadius.circular(35.0),
+                    ),
                   ),
 
                 ),
@@ -3377,6 +3482,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   print('on Pressed of Cancel')
                 },
                 child: Text('Cancel',style: TextStyle(color: Colors.red),),
+                shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+                  side: BorderSide(
+                    color: Colors.red,
+                    style: BorderStyle.solid,
+                  ),
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
               ),
 
             ),
@@ -3387,6 +3500,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   print('on Pressed of Pay')
                 },
                 child: Text('Pay',style: TextStyle(color: Colors.green),),
+                shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+                  side: BorderSide(
+                    color:Colors.green,
+                    style: BorderStyle.solid,
+                  ),
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
               ),
 
             ),
@@ -3937,7 +4058,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Container(
 
         width: 150,
-        height: displayHeight(context) /7,
+        height: displayHeight(context) /8,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
@@ -3966,8 +4087,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                  width:  displayWidth(context)/6.5,
-                  height: displayWidth(context)/6.5,
+                  width:  displayWidth(context)/7.5,
+                  height: displayWidth(context)/7.5,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -4049,7 +4170,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       Container(
         width: 150,
-        height: displayHeight(context) /7,
+        height: displayHeight(context) /8,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
@@ -4076,8 +4197,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                  width:  displayWidth(context)/6.5,
-                  height: displayWidth(context)/6.5,
+                  width:  displayWidth(context)/7.5,
+                  height: displayWidth(context)/7.5,
                   decoration: BoxDecoration(
                     border: Border.all(
 //                      color: Colors.red[500],

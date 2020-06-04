@@ -142,7 +142,54 @@ Widget animatedWidgetShowFullOrderType(BuildContext context) {
 
 */
 
+class LongPainterForChooseOrderTypeAdress extends CustomPainter {
 
+  final BuildContext context;
+  LongPainterForChooseOrderTypeAdress(this.context);
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(displayWidth(context)/2.3, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(5, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
+
+class LongPainterForChooseOrderTypeUpdated extends CustomPainter {
+
+  final BuildContext context;
+  LongPainterForChooseOrderTypeUpdated(this.context);
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(displayWidth(context)/2.3, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(10, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
 
 class LongPainterForChooseOrderType extends CustomPainter {
 
