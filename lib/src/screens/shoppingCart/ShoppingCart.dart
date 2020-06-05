@@ -1742,7 +1742,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // top:20,//displayHeight(context)/10,
                   top: getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) <= 3?
-                  60:
+                  100:
 
                   20,
                   // from top to top distance offset related to Starting (top ) of
