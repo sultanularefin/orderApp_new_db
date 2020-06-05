@@ -15,48 +15,35 @@ import 'dart:math';
 
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
-import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
-//import 'packages:foodgallery/src/DataLayer/models/NewIngredient.dart';
-//final String storageBucketURLPredicate_Same =
-//    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
-
-class Order {
 
 
+class SelectedFood {
 
-//  final String foodItemName;      // one of foodItems> collection.
-//  final String foodItemImageURL;
-//  final double unitPrice;
-//  final String foodDocumentId;
-//  final int    quantity;
-//  final String foodItemSize;
-//  // final String foodItemOrderID;     // random might not be needed.
-//  List<NewIngredient> ingredients;
-  List<SelectedFood> selectedFoodInOrder;
-
-  int deliveryTypeIndex;
-  int paymentTypeIndex;
-  CustomerInformation ordersCustomer;
+  final String foodItemName;      // one of foodItems> collection.
+  final String foodItemImageURL;
+  final double unitPrice;
+  final String foodDocumentId;
+  int    quantity;
+  final String foodItemSize;
+  // final String foodItemOrderID;     // random might not be needed.
+  List<NewIngredient> ingredients;
 
 //  String ingredients;
 //  itemId = await generateItemId(6);
 
-  Order(
+  SelectedFood(
       {
-//        this.foodItemName,
-//        this.foodItemImageURL,
-//        this.unitPrice,
-//        this.foodDocumentId,
-//        this.quantity,
-//        this.foodItemSize,
-        this.selectedFoodInOrder,
-        this.deliveryTypeIndex,
-        this.paymentTypeIndex,
-        this.ordersCustomer
+        this.foodItemName,
+        this.foodItemImageURL,
+        this.unitPrice,
+        this.foodDocumentId,
+        this.quantity,
+        this.foodItemSize,
+        this.ingredients,
 
         // this.foodItemOrderID,
       }
-  );
+      );
 
 //  WHAT ABOUT:
 

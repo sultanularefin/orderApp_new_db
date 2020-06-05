@@ -7,11 +7,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
+//import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
-import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
+//import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -28,6 +28,7 @@ import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailIm
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
+import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 //import './../../DataLayer/itemData.dart';
 
 
@@ -73,7 +74,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   );
 
   String _currentSize;
-  int _itemCount= 1;
+  int _itemCount= 0;
   double initialPriceByQuantityANDSize = 0.0;
 
 
@@ -898,6 +899,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                                          SizedBox(
 //                                                                            width: 3,
 //                                                                          ),
+                  // WORK 1
                     IconButton(
 
                       padding:   EdgeInsets.symmetric(horizontal: 0,vertical: 0),
@@ -906,8 +908,32 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                       tooltip: 'Increase product count by 1 ',
                       onPressed: () {
+                        final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
                         print(
                             'Add button pressed  related to _itemCount');
+
+
+                        SelectedFood oneSelectedFoodFD = new SelectedFood(
+                          foodItemName : foodItemDetailsbloc.currentFoodItem.itemName,
+                          foodItemImageURL : foodItemDetailsbloc.currentFoodItem.imageURL,
+                          unitPrice : initialPriceByQuantityANDSize ,
+                          foodDocumentId : foodItemDetailsbloc.currentFoodItem.documentId,
+                          quantity : _itemCount + 1,
+                          foodItemSize :_currentSize,
+                          // index or int value not good enought since size may vary best on Food Types .
+                        );
+
+                        if(_itemCount==0) {
+                          foodItemDetailsbloc.incrementOneSelectedFoodForOrder(
+                              oneSelectedFoodFD,_itemCount);
+                        }else{
+
+                          foodItemDetailsbloc.incrementOneSelectedFoodForOrder(
+                              oneSelectedFoodFD,_itemCount);
+
+                        }
+
+
                         setState(() {
                           _itemCount =
                               _itemCount + 1;
@@ -931,70 +957,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       child: OutlineButton(
                         onPressed: (){
 
-                          final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+                          print(' method for old Outline button that deals with navigation to Shopping Cart Page');
 
-
-
-//              final locationBloc = BlocProvider.of<>(context);
-//                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
-
-                          CustomerInformation oneCustomerInfo = new CustomerInformation(
-                            address:'',
-                            flatOrHouseNumber:'',
-                            phoneNumber:'',
-                            etaTimeInMinutes:-1,
-//        CustomerInformation currentUser = _oneCustomerInfo;
-//    currentUser.address = address;
-//
-
-                          );
-
-                          Order x = new Order(
-                            foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
-                            foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
-                            unitPrice:initialPriceByQuantityANDSize ,
-                            foodDocumentId: foodItemDetailsbloc.currentFoodItem.documentId,
-                            quantity: _itemCount,
-                            foodItemSize: _currentSize,
-                            ingredients: foodItemDetailsbloc.getDefaultIngredients,
-                            deliveryTypeIndex: 0,
-                            paymentTypeIndex: 4,
-                            ordersCustomer:oneCustomerInfo,
-                          );
-                          print(
-
-                              'add_shopping_cart button pressed');
-
-                          return Navigator.of(context).push(
-
-
-                            PageRouteBuilder(
-                              opaque: false,
-                              transitionDuration: Duration(
-                                  milliseconds: 900),
-                              pageBuilder: (_, __, ___) =>
-                                  BlocProvider<ShoppingCartBloc>(
-                                    bloc: ShoppingCartBloc(
-                                        x),
-
-
-                                    child: ShoppingCart()
-
-                                    ,),
-                              // fUTURE USE -- ANIMATION TRANSITION CODE.
-                              /*
-                                    transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
-                                      return FadeTransition(
-                                        opacity: animation,
-                                        child: RotationTransition(
-                                          turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-                                          child: child,
-                                        ),
-                                      );
-                                    }
-                                    */
-                            ),
-                          );
                         },
 //                        color: Color(0xffFEE295),
                         clipBehavior: Clip.hardEdge,
@@ -1076,9 +1040,49 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       iconSize: 30,
                       tooltip: 'Decrease product count by 1',
                       onPressed: () {
+                        final foodItemDetailsbloc = BlocProvider.of<
+                            FoodItemDetailsBloc>(context);
                         print(
                             'Decrease button pressed related to _itemCount');
                         if (_itemCount > 1) {
+
+                          if(_itemCount == 1) {
+
+                            print(
+                                'Add button pressed  related to _itemCount');
+
+                            SelectedFood oneSelectedFoodFD = new SelectedFood(
+                              foodItemName: foodItemDetailsbloc.currentFoodItem
+                                  .itemName,
+                              foodItemImageURL: foodItemDetailsbloc
+                                  .currentFoodItem.imageURL,
+                              unitPrice: initialPriceByQuantityANDSize,
+                              foodDocumentId: foodItemDetailsbloc
+                                  .currentFoodItem.documentId,
+                              quantity: _itemCount - 1,
+                              foodItemSize: _currentSize,
+                              // index or int value not good enought since size may vary best on Food Types .
+                            );
+                            foodItemDetailsbloc.decrementOneSelectedFoodForOrder(
+                                oneSelectedFoodFD,0);
+                          }
+                          else{
+                            // WHEN _itemCount not 1-1 = zero. but getter than 0(zero).
+                            SelectedFood oneSelectedFoodFD = new SelectedFood(
+                              foodItemName: foodItemDetailsbloc.currentFoodItem
+                                  .itemName,
+                              foodItemImageURL: foodItemDetailsbloc
+                                  .currentFoodItem.imageURL,
+                              unitPrice: initialPriceByQuantityANDSize,
+                              foodDocumentId: foodItemDetailsbloc
+                                  .currentFoodItem.documentId,
+                              quantity: _itemCount - 1,
+                              foodItemSize: _currentSize,
+                              // index or int value not good enought since size may vary best on Food Types .
+                            );
+                            foodItemDetailsbloc.decrementOneSelectedFoodForOrder(
+                                oneSelectedFoodFD,_itemCount - 1);
+                          }
                           setState(() {
                             _itemCount =
                                 _itemCount - 1;
@@ -1442,8 +1446,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   double valuePrice = tryCast<
                       double>(
                       value, fallback: 0.00);
-                  print(
-                      'valuePrice at line # 583: $valuePrice and key is $key');
+//                  print(
+//                      'valuePrice at line # 583: $valuePrice and key is $key');
                   return _buildOneSize(
                       key, valuePrice, index);
                 },

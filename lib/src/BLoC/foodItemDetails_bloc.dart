@@ -5,8 +5,11 @@
 //import 'package:zomatoblock/BLoC/location_query_bloc.dart';
 //
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/Order.dart';
+import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:logger/logger.dart';
 
 //MODELS
@@ -73,6 +76,7 @@ class FoodItemDetailsBloc implements Bloc {
   List<NewIngredient> _defaultIngItems = [];
   List<NewIngredient> _unSelectedIngItems = [];
   List<FoodPropertyMultiSelect> _multiSelectForFood =[];
+  Order _currentOrderFoodDetails ;
 
 
 //  List <NewIngredient> ingItems = new List<NewIngredient>();
@@ -94,6 +98,7 @@ class FoodItemDetailsBloc implements Bloc {
 
   // 1
 
+  Order get getCurrentOrderFoodDetails => _currentOrderFoodDetails;
   List<NewIngredient> get allIngredients => _allIngItems;
 
   List<NewIngredient> get getDefaultIngredients => _defaultIngItems;
@@ -106,6 +111,7 @@ class FoodItemDetailsBloc implements Bloc {
 
 
 
+  final _orderControllerFoodDetails = StreamController <Order>();
   final _controller = StreamController <FoodItemWithDocIDViewModel>();
 
   // final _itemSizeController = StreamController<Map<String, double>>(); // currentlyNotUsing.
@@ -124,6 +130,7 @@ class FoodItemDetailsBloc implements Bloc {
 
   // INVOKER -> stream: bloc.favoritesStream,
 
+  Stream<Order> get getCurrentOrderStream => _orderControllerFoodDetails.stream;
   Stream<FoodItemWithDocIDViewModel> get currentFoodItemsStream => _controller.stream;
   Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
 
@@ -203,6 +210,32 @@ class FoodItemDetailsBloc implements Bloc {
 
     //  print(" allIngsScoped: $allIngsScoped ");
 
+    /* Ordered Food Related codes starts here. */
+
+    CustomerInformation oneCustomerInfo = new CustomerInformation(
+      address:'',
+      flatOrHouseNumber:'',
+      phoneNumber:'',
+      etaTimeInMinutes:-1,
+//        CustomerInformation currentUser = _oneCustomerInfo;
+//    currentUser.address = address;
+//
+
+    );
+
+    Order constructorOrderFD = new Order(
+      selectedFoodInOrder: [],
+      deliveryTypeIndex: 0,
+      paymentTypeIndex: 4,
+      ordersCustomer: oneCustomerInfo,
+    );
+
+
+    _currentOrderFoodDetails= constructorOrderFD;
+
+    _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+
+    /* Ordered Food Related codes ends here. */
 
 
 
@@ -392,6 +425,106 @@ class FoodItemDetailsBloc implements Bloc {
     _multiSelectForFoodController.sink.add(_multiSelectForFood);
 
   }
+
+  /*  Below ARE OrderedFoodItem related codes decrement increment( SET) */
+  void decrementOneSelectedFoodForOrder(SelectedFood oneSelectedFoodFD,itemCount){
+
+    int numberOFSelectedFoods;
+    Order constructorOrderFD = _currentOrderFoodDetails;
+    if(itemCount==0){
+      constructorOrderFD.selectedFoodInOrder = null;
+      _currentOrderFoodDetails = constructorOrderFD;
+
+      _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+    }
+    else{
+
+      if(constructorOrderFD.selectedFoodInOrder==null){
+        print(' ** ***  ****  THIS PROBABLY WILL NOT EXECUTE EVER');
+
+        numberOFSelectedFoods= 0;
+      }
+      else{
+        numberOFSelectedFoods=  constructorOrderFD.selectedFoodInOrder.length;
+      }
+      constructorOrderFD.selectedFoodInOrder[numberOFSelectedFoods].quantity = itemCount;
+
+
+      _currentOrderFoodDetails = constructorOrderFD;
+
+      _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+    }
+
+
+
+
+
+//    x.selectedFoodInOrder.add(constructorSelectedFoodFD);
+  }
+
+  void incrementOneSelectedFoodForOrder(SelectedFood oneSelectedFoodFD,int itemCount){
+
+
+
+
+
+
+  // work 01
+    if( itemCount == 0 ) {
+
+      print( '>>>> itemCount == 0  <<<< ');
+      logger.e('oneSelectedFoodFD.quantity: ', oneSelectedFoodFD.quantity);
+
+      Order tempOrderFDForIncrementCheck = _currentOrderFoodDetails;
+
+      tempOrderFDForIncrementCheck.selectedFoodInOrder.add(oneSelectedFoodFD);
+
+      logger.e(' ANY CHANGES IN HERE ? tempOrderFDForIncrementCheck.selectedFoodInOrder[itemCount].quantity: ',
+          tempOrderFDForIncrementCheck.selectedFoodInOrder[itemCount].quantity);
+
+
+      _currentOrderFoodDetails = tempOrderFDForIncrementCheck;
+
+      _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+
+    }
+    else{
+
+      int numberOFSelectedFoods;
+      Order tempOrderFDForIncrementCheck = _currentOrderFoodDetails;
+
+      if(tempOrderFDForIncrementCheck.selectedFoodInOrder == null){
+        print(' ** ***  ****  THIS PROBABLY WILL NOT EXECUTE EVER');
+
+        numberOFSelectedFoods= 0;
+      }
+      else{
+        numberOFSelectedFoods =  tempOrderFDForIncrementCheck.selectedFoodInOrder.length;
+      }
+
+//      logger.e('oneSelectedFoodFD.quantity: ', oneSelectedFoodFD.quantity);
+//      Order constructorOrderFD = _currentOrderFoodDetails;
+
+      tempOrderFDForIncrementCheck.selectedFoodInOrder[numberOFSelectedFoods].quantity = itemCount;
+
+
+      _currentOrderFoodDetails = tempOrderFDForIncrementCheck ;
+
+      _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+
+
+//      constructorOrderFD.selectedFoodInOrder.add(oneSelectedFoodFD);
+//
+//      _currentOrderFoodDetails = constructorOrderFD;
+//
+//      _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+
+    }
+
+//    x.selectedFoodInOrder.add(constructorSelectedFoodFD);
+  }
+
+  /*  ABOVE ARE OrderedFoodItem related codes*/
 
   void setMultiSelectOptionForFood(FoodPropertyMultiSelect x, int index){
 
@@ -718,14 +851,14 @@ class FoodItemDetailsBloc implements Bloc {
   // HELPER METHOD tryCast Number (1)
   double tryCast<num>(dynamic x, {num fallback }) {
 
-    print(" at tryCast");
-    print('x: $x');
+//    print(" at tryCast");
+//    print('x: $x');
 
     bool status = x is num;
 
-    print('status : x is num $status');
-    print('status : x is dynamic ${x is dynamic}');
-    print('status : x is int ${x is int}');
+//    print('status : x is num $status');
+//    print('status : x is dynamic ${x is dynamic}');
+//    print('status : x is int ${x is int}');
     if(status) {
       return x.toDouble() ;
     }
@@ -930,7 +1063,7 @@ class FoodItemDetailsBloc implements Bloc {
             (oneItem) => oneItem.toLowerCase().trim() == x.ingredientName.toLowerCase().trim(),
         orElse: () => '');
 
-    print('elementExists: Line # 612:  $elementExists');
+//    print('elementExists: Line # 612:  $elementExists');
 
     return elementExists.toLowerCase();
 
@@ -943,6 +1076,7 @@ class FoodItemDetailsBloc implements Bloc {
   @override
   void dispose() {
     _controller.close();
+    _orderControllerFoodDetails.close();
 //    _itemSizeController.close();
     _allIngredientListController.close();
     _defaultIngredientListController.close();

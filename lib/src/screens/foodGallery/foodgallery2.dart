@@ -25,7 +25,7 @@ import 'package:neumorphic/neumorphic.dart';
 // local packages
 
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
-import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails.dart';
+//import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 // Screen files.
