@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
       BlocProvider<IdentityBloc>(
         bloc: IdentityBloc(),
 
-        child:BlocProvider<FoodGalleryBloc>(
-
-          bloc:FoodGalleryBloc(),
+//        child:BlocProvider<FoodGalleryBloc>(
+//
+//          bloc:FoodGalleryBloc(),
           child: MaterialApp(
 
             title: 'Flutter Demo',
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
 
 //      home: FoodGallery(),
           ),
-        ),
+        // ),
 //        ),
       );
   }

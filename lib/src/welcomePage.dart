@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 
 
@@ -26,6 +28,7 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 
@@ -256,12 +259,20 @@ class _WelcomePageState extends State<WelcomePage> {
                   );
                 */
 
+                  FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+                  List<NewIngredient> emptyIngs = [];
+
+//                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
                       BlocProvider<FoodGalleryBloc>(
                           bloc: FoodGalleryBloc(),
-                          child: FoodGallery2()
+                          child: BlocProvider<FoodItemDetailsBloc>(
+                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs,fromWelComePage:1),
+                              child: FoodGallery2()
 
+                          )
                       )
+
                   );
                 }
                 else {
@@ -273,36 +284,36 @@ class _WelcomePageState extends State<WelcomePage> {
                   case ConnectionState.waiting:
                   case ConnectionState.none:
 
-                      return Container(
-                        margin: EdgeInsets.fromLTRB(0, displayHeight(context)/2, 0, 0),
-                        child: Center(
-                          child: Column(
-                            children: <Widget>[
+                    return Container(
+                      margin: EdgeInsets.fromLTRB(0, displayHeight(context)/2, 0, 0),
+                      child: Center(
+                        child: Column(
+                          children: <Widget>[
 
-                              Center(
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.lightGreenAccent)
-                                ),
+                            Center(
+                              child: Container(
+                                  alignment: Alignment.center,
+                                  child: new CircularProgressIndicator(
+                                      backgroundColor: Colors.lightGreenAccent)
                               ),
-                              Center(
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    child: new CircularProgressIndicator(
-                                      backgroundColor: Colors.yellow,)
-                                ),
+                            ),
+                            Center(
+                              child: Container(
+                                  alignment: Alignment.center,
+                                  child: new CircularProgressIndicator(
+                                    backgroundColor: Colors.yellow,)
                               ),
-                              Center(
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.redAccent)
-                                ),
+                            ),
+                            Center(
+                              child: Container(
+                                  alignment: Alignment.center,
+                                  child: new CircularProgressIndicator(
+                                      backgroundColor: Colors.redAccent)
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
+                      ),
 
                     );
                     break;

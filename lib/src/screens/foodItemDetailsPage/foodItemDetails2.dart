@@ -1044,12 +1044,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             FoodItemDetailsBloc>(context);
                         print(
                             'Decrease button pressed related to _itemCount');
-                        if (_itemCount > 1) {
+                        if (_itemCount >= 1) {
 
                           if(_itemCount == 1) {
 
                             print(
-                                'Add button pressed  related to _itemCount');
+                                '_itemCount == 1');
 
                             SelectedFood oneSelectedFoodFD = new SelectedFood(
                               foodItemName: foodItemDetailsbloc.currentFoodItem

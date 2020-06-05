@@ -1,8 +1,9 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -42,8 +43,8 @@ import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
 
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-import 'package:foodgallery/src/BLoC/foodItems_query_bloc.dart';
-
+//import 'package:foodgallery/src/BLoC/foodItems_query_bloc.dart';
+import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 
 //import './../../shared/category_Constants.dart' as Constants;
 
@@ -224,6 +225,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //    String a = Constants.SUCCESS_MESSAGE;
 
     final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+
+    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 
 
@@ -423,6 +426,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                     ),
                                   ),
 
+                                  /*
                                   Container(
                                     margin:EdgeInsets.symmetric(
                                         horizontal: 0,
@@ -437,6 +441,205 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                       color: Color(0xff54463E),
                                     ),
                                   ),
+
+                                  */
+
+
+
+
+                                  StreamBuilder<Order>(
+                                    stream: foodItemDetailsBlocForOrderProcessing.getCurrentOrderStream,
+                                    initialData: foodItemDetailsBlocForOrderProcessing.getCurrentOrderFoodDetails,
+                                    builder: (context, snapshot) {
+                                      int selectedFoodsForOrderLength = 0;
+
+                                      print('selectedFoodsForOrderLength: $selectedFoodsForOrderLength');
+
+                                          if (!snapshot.hasData) {
+//                                          return Center(child: new LinearProgressIndicator());
+                                            return Container(
+//                                                                        width:60,
+                                              width: displayWidth(
+                                                  context) /13,
+                                              height: displayHeight(context)/25,
+                                              alignment: Alignment.center,
+                                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+                                              child: OutlineButton(
+                                                onPressed: (){
+
+                                                  print(' method for old Outline button that deals with navigation to Shopping Cart Page');
+
+                                                },
+//                        color: Color(0xffFEE295),
+                                                clipBehavior: Clip.hardEdge,
+                                                splashColor:  Color(0xffFEE295),
+//          splashColor: Color(0xff739DFA),
+                                                highlightElevation: 12,
+//          clipBehavior: Clip.hardEdge,
+//          highlightElevation: 12,
+                                                shape: RoundedRectangleBorder(
+
+                                                  borderRadius: BorderRadius.circular(35.0),
+                                                ),
+//          disabledBorderColor: false,
+                                                borderSide: BorderSide(
+                                                  color:  Color(0xffFEE295),
+                                                  style: BorderStyle.solid,
+                                                  width: 3.6,
+                                                ),
+
+
+                                                child:
+                                                ///SSWW
+
+
+
+                                                Center(
+                                                  child: Stack(
+                                                      children: <Widget>[ Center(
+                                                        child: Icon(
+
+                                                          Icons.add_shopping_cart,
+                                                          size: 40,
+                                                          color: Color(0xff707070),
+                                                        ),
+                                                      ),
+
+                                                        Container(
+//                                              color:Colors.red,
+                                                          width:  30,
+
+
+                                                          decoration: new BoxDecoration(
+                                                            color: Colors.redAccent,
+
+                                                            border: new Border.all(
+                                                                color: Colors.green,
+                                                                width: 1.0,
+                                                                style: BorderStyle.solid
+                                                            ),
+                                                            shape: BoxShape.circle,
+
+                                                          ),
+
+                                                          alignment: Alignment.center,
+                                                          child:Text(
+                                                            selectedFoodsForOrderLength.toString(),
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontWeight: FontWeight
+                                                                  .normal,
+                                                              fontSize: 20,
+                                                            ),
+                                                          ),
+
+                                                        ),
+
+                                                      ]
+                                                  ),
+                                                ),
+
+                                              ),
+                                            );
+                                          }
+                                          else{
+                                            Order sessionedOrder = snapshot.data;
+
+                                            int selectedFoodsForOrderLength = sessionedOrder.selectedFoodInOrder.length;
+
+                                            print('selectedFoodsForOrderLength: $selectedFoodsForOrderLength');
+                                            return Container(
+//                                                                        width:60,
+                                              width: displayWidth(
+                                                  context) /13,
+                                              height: displayHeight(context)/25,
+                                              alignment: Alignment.center,
+                                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+                                              child: OutlineButton(
+                                                onPressed: (){
+
+                                                  print(' method for old Outline button that deals with navigation to Shopping Cart Page');
+
+                                                },
+//                        color: Color(0xffFEE295),
+                                                clipBehavior: Clip.hardEdge,
+                                                splashColor:  Color(0xffFEE295),
+//          splashColor: Color(0xff739DFA),
+                                                highlightElevation: 12,
+//          clipBehavior: Clip.hardEdge,
+//          highlightElevation: 12,
+                                                shape: RoundedRectangleBorder(
+
+                                                  borderRadius: BorderRadius.circular(35.0),
+                                                ),
+//          disabledBorderColor: false,
+                                                borderSide: BorderSide(
+                                                  color:  Color(0xffFEE295),
+                                                  style: BorderStyle.solid,
+                                                  width: 3.6,
+                                                ),
+
+
+                                                child:
+                                                ///SSWW
+
+
+
+                                                Center(
+                                                  child: Stack(
+                                                      children: <Widget>[ Center(
+                                                        child: Icon(
+
+                                                          Icons.add_shopping_cart,
+                                                          size: 40,
+                                                          color: Color(0xff707070),
+                                                        ),
+                                                      ),
+
+                                                        Container(
+//                                              color:Colors.red,
+                                                          width:  30,
+
+
+                                                          decoration: new BoxDecoration(
+                                                            color: Colors.redAccent,
+
+                                                            border: new Border.all(
+                                                                color: Colors.green,
+                                                                width: 1.0,
+                                                                style: BorderStyle.solid
+                                                            ),
+                                                            shape: BoxShape.circle,
+
+                                                          ),
+
+                                                          alignment: Alignment.center,
+                                                          child:Text(
+                                                            selectedFoodsForOrderLength.toString(),
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontWeight: FontWeight
+                                                                  .normal,
+                                                              fontSize: 20,
+                                                            ),
+                                                          ),
+
+                                                        ),
+
+                                                      ]
+                                                  ),
+                                                ),
+
+                                              ),
+                                            );
+                                          }
+
+                                    }
+                                  ),
+
+
 
 
 
