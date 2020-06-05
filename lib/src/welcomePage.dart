@@ -17,7 +17,7 @@ import 'package:foodgallery/src/identity/signup.dart';
 
 //import 'package:google_fonts/google_fonts.dart';
 
-
+import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 //TODO STATE ful widget not required
 //class MyApp extends StatelessWidget {
@@ -26,6 +26,10 @@ import 'package:foodgallery/src/identity/signup.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
+
+
+
 
 /*  Block related Files ABOVE */
 class WelcomePage extends StatefulWidget {
@@ -95,60 +99,7 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
 
-  // Register.
-  Widget _signUpButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          border: Border.all(color: Colors.white, width: 2),
-        ),
-        child: Text(
-          'Register now',
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-      ),
-    );
-  }
 
-
-
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'F',
-//          style: TextStyle(fontStyle: FontStyle.italic),
-//            style: GoogleFonts.portLligatSans(
-//            textStyle: Theme.of(context).textTheme.display1,
-//            fontSize: 30,
-//            fontWeight: FontWeight.w700,
-//            color: Colors.white,
-//          ),
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-          children: [
-            TextSpan(
-              text: 'ood',
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            TextSpan(
-              text: 'Gallery',
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            ),
-          ]),
-    );
-  }
 
 
   @override
@@ -321,33 +272,38 @@ class _WelcomePageState extends State<WelcomePage> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
                   case ConnectionState.none:
-                    return Center(
-                      child: Column(
-                        children: <Widget>[
 
-                          Center(
-                            child: Container(
-                                alignment: Alignment.center,
-                                child: new CircularProgressIndicator(
-                                    backgroundColor: Colors.lightGreenAccent)
-                            ),
+                      return Container(
+                        margin: EdgeInsets.fromLTRB(0, displayHeight(context)/2, 0, 0),
+                        child: Center(
+                          child: Column(
+                            children: <Widget>[
+
+                              Center(
+                                child: Container(
+                                    alignment: Alignment.center,
+                                    child: new CircularProgressIndicator(
+                                        backgroundColor: Colors.lightGreenAccent)
+                                ),
+                              ),
+                              Center(
+                                child: Container(
+                                    alignment: Alignment.center,
+                                    child: new CircularProgressIndicator(
+                                      backgroundColor: Colors.yellow,)
+                                ),
+                              ),
+                              Center(
+                                child: Container(
+                                    alignment: Alignment.center,
+                                    child: new CircularProgressIndicator(
+                                        backgroundColor: Colors.redAccent)
+                                ),
+                              ),
+                            ],
                           ),
-                          Center(
-                            child: Container(
-                                alignment: Alignment.center,
-                                child: new CircularProgressIndicator(
-                                  backgroundColor: Colors.yellow,)
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                                alignment: Alignment.center,
-                                child: new CircularProgressIndicator(
-                                    backgroundColor: Colors.redAccent)
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+
                     );
                     break;
                   case ConnectionState.active:

@@ -246,7 +246,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               Container(
 
 
-//                                      alignment: Alignment.bottomCenter,
+//                              alignment: Alignment.bottomCenter,
                                 height: displayHeight(context) / 1.12,
                                 //width:displayWidth(context) / 1.5, /* 3.8*/
                                 width: displayWidth(context)
@@ -255,7 +255,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 ,
 //                  color:Colors.lightGreenAccent,
                                 margin: EdgeInsets.fromLTRB(
-                                    12, displayHeight(context) / 13, 10, 0),
+                                    12, displayHeight(context) / 16, 10, 0),
 
 
                                 child: Neumorphic(
@@ -903,7 +903,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
 
                           setState(() {
-                            showFullOrderType = !showFullOrderType;
+                            showFullOrderType =
+                            !showFullOrderType;
+
+
+                            showEditingCompleteCustomerAddressInformation=
+                            !showEditingCompleteCustomerAddressInformation;
+
+                            showEditingCompleteCustomerHouseFlatIformation=
+                            !showEditingCompleteCustomerHouseFlatIformation;
+
+                            showEditingCompleteCustomerPhoneIformation=
+                            !showEditingCompleteCustomerPhoneIformation;
+
+                            showEditingCompleteCustomerReachoutIformation=
+                            !showEditingCompleteCustomerReachoutIformation;
+
+                            showFullPaymentType =
+                            !showFullPaymentType;
                           });
 
 
