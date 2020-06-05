@@ -7,10 +7,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 //import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
@@ -196,7 +198,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   return GestureDetector(
                     onTap: () {
                       print('s');
-                      Navigator.pop(context);
+
                       FocusScopeNode currentFocus = FocusScope.of(
                           context);
 
@@ -205,6 +207,48 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                  Navigator.pop(context);
 
                       }
+
+//                      return Navigator.of(context).pop(
+//                           BlocProvider<FoodGalleryBloc>(
+//                              bloc: FoodGalleryBloc(),
+//                                  child: FoodGallery2()
+//
+//                              )
+//
+//                      );
+
+
+//                      Navigator.pop(context);
+
+                      return Navigator.of(context).pop(
+
+
+                        PageRouteBuilder(
+                          opaque: true,
+                          transitionDuration: Duration(
+                              milliseconds: 300),
+                          pageBuilder: (_, __, ___) =>
+                              BlocProvider<FoodGalleryBloc>(
+                                bloc: FoodGalleryBloc(),
+                                  child: FoodGallery2()
+                                ),
+                          // fUTURE USE -- ANIMATION TRANSITION CODE.
+                          /*
+                                  transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
+                                    return FadeTransition(
+                                      opacity: animation,
+                                      child: RotationTransition(
+                                        turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+                                        child: child,
+                                      ),
+                                    );
+                                  }
+                                  */
+                        ),
+                      );
+
+
+
                     },
                     child:
                     Scaffold(
