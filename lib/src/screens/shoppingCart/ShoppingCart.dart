@@ -199,10 +199,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
 
               CustomerInformation x = oneOrder.ordersCustomer;
-              addressController.text = x.address;
-              houseFlatNumberController.text = x.flatOrHouseNumber;
-              phoneNumberController.text = x.phoneNumber;
-              etaController.text = x.etaTimeInMinutes.toString();
+
 
 
 //              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
@@ -1266,6 +1263,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       setState(() {
 
                         showEditingCompleteCustomerAddressInformation = !showEditingCompleteCustomerAddressInformation;
+                        addressController.text = currentUserForInline.address;
+
 //                      showFullOrderType = !showFullOrderType;
                       })
                     },
@@ -1351,6 +1350,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         showEditingCompleteCustomerHouseFlatIformation =
                         !showEditingCompleteCustomerHouseFlatIformation;
+
+                        addressController.text = currentUserForInline.address;
+                        houseFlatNumberController.text = currentUserForInline.flatOrHouseNumber;
+
 //                      showFullOrderType = !showFullOrderType;
                       })
                     },
@@ -1436,6 +1439,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         showEditingCompleteCustomerPhoneIformation =
                         !showEditingCompleteCustomerPhoneIformation;
+
+
+                        phoneNumberController.text = currentUserForInline.phoneNumber;
+
+
+
 //                      showFullOrderType = !showFullOrderType;
                       })
                     },
@@ -1521,6 +1530,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         showEditingCompleteCustomerReachoutIformation =
                         !showEditingCompleteCustomerReachoutIformation;
+
+
+                        etaController.text = currentUserForInline.etaTimeInMinutes.toString();
+
+
 //                      showFullOrderType = !showFullOrderType;
                       })
                     },
@@ -1712,6 +1726,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+          // 2ND CONTAINER HOLDING THE INPUT FIELDS
+          // AND THE PAYMENT OPTIONS IN A STACK
+          // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
+          // BEGINS HERE.
           // work 01
           Container(
             color:Colors.black87,
@@ -1720,43 +1738,35 @@ class _ShoppingCartState extends State<ShoppingCart> {
             child: Stack(
               children: <Widget>[
                 Positioned(
-                  left:0,
+//                  left:0,
                   // top:20,//displayHeight(context)/10,
-                  top: displayHeight(context)/10,
+                  top: getNumberOfInputsFilledUp (
+                      unObsecuredInputandPayment.ordersCustomer) <= 3?
+                  60:
+
+                  20,
                   // from top to top distance offset related to Starting (top ) of
                   // orance Container.
-                  right:0,
-                  bottom:0,
-                  child: Container(
-//                      color:Colors.indigoAccent,
-//                    height: displayWidth(context)/2.6,
-                    color:Colors.blueAccent,
-//                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                        width: displayWidth(context) /1.8,
-                    width: displayWidth(context) / 1.1,
-//              height: 300,
-                    child:
-                    AnimatedSwitcher(
-                      duration: Duration(milliseconds: 500),
+//                  right:0,
+//                  bottom:0,
+                  child:
+                  AnimatedSwitcher(
+                    duration: Duration(milliseconds: 500),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                      child:
-                      zeroORMoreInputsEmpty
-                        (unObsecuredInputandPayment.ordersCustomer) == true ?
+                    child:
+                    zeroORMoreInputsEmpty
+                      (unObsecuredInputandPayment.ordersCustomer) == true ?
 
-                      animatedObscuredCardSelectContainer
-                        (unObsecuredInputandPayment):
-                      animatedUnObscuredCardUnSelectContainer
-                        (unObsecuredInputandPayment),
+                    animatedObscuredCardSelectContainer
+                      (unObsecuredInputandPayment):
+                    animatedUnObscuredCardUnSelectContainer
+                      (unObsecuredInputandPayment),
 
-
-                    ),
-
-
-                    // ),
 
                   ),
+                  // ),
 
                 ),
                 AnimatedPositioned(
@@ -1805,15 +1815,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            showEditingCompleteCustomerReachoutIformation
 //                                showEditingCompleteCustomerAddressInformation BEGINS HERE.
                                 Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 0,
-                                      vertical: 6),
                                   child: showEditingCompleteCustomerAddressInformation?
                                   Container():
                                   Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 0,
-                                        vertical: 0),
+                                    margin: EdgeInsets.fromLTRB(
+                                        0,0,0,15),
                                     decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                       borderRadius: BorderRadius.circular(25),
@@ -2048,14 +2054,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                showEditingCompleteCustomerHouseFlatIformation BEGINS HERE
 
                                 Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 0,
-                                      vertical: 6),
+
                                   child: showEditingCompleteCustomerHouseFlatIformation?Container():
                                   Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 0,
-                                        vertical: 0),
+                                    margin: EdgeInsets.fromLTRB(
+                                        0,0,0,15),
                                     decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                       borderRadius: BorderRadius.circular(25),
@@ -2243,14 +2246,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 //  showEditingCompleteCustomerPhoneIformation BEGINS HERE.
 
                                 Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 0,
-                                      vertical: 6),
+
                                   child: showEditingCompleteCustomerPhoneIformation? Container():
                                   Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 0,
-                                        vertical: 0),
+                                    margin: EdgeInsets.fromLTRB(
+                                        0,0,0,15),
                                     decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                       borderRadius: BorderRadius.circular(25),
@@ -2279,6 +2279,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                  color: Color(0xffFFFFFF),
                                     width: displayWidth(context) / 2.5,
                                     height: displayHeight(context) / 24,
+
                                     padding: EdgeInsets.only(
                                         left: 4, top: 3, bottom: 3, right: 3),
                                     child: Row(
@@ -2434,14 +2435,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                showEditingCompleteCustomerReachoutIformation BEGINS HERE.
                                 Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 0,
-                                      vertical: 6),
+
                                   child: showEditingCompleteCustomerReachoutIformation ? Container():
                                   Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 0,
-                                        vertical: 0),
+                                    margin: EdgeInsets.fromLTRB(
+                                        0,0,0,15),
                                     decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                       borderRadius: BorderRadius.circular(25),
@@ -2628,6 +2626,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ],
             ),
           ),
+
+          // ENDS HERE.
+          // 2ND CONTAINER HOLDING THE INPUT FIELDS
+          // AND THE PAYMENT OPTIONS IN A STACK
+          // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
 
 
 //            OOOO
@@ -3562,9 +3565,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
               PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
                   .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
 
-//              _currentPaymentTypeIndex = selectedOne.index;
+              _currentPaymentTypeIndex = selectedOne.index;
+              logger.e('selectedOne.index',selectedOne.index);
+              logger.e('selectedOne.isSelected',selectedOne.isSelected);
 
 
+//              WORK 05
               String orderTypeName = selectedOne.paymentTypeName;
               String orderIconName = selectedOne.paymentIconName;
               String borderColor = selectedOne.borderColor;
@@ -3809,7 +3815,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           CustomPaint(
                             size: Size(0, 19),
-                            painter: LongPainterForChooseOrderType(
+                            painter: LongPainterForPaymentUnSelected(
                                 context),
                           ),
 
@@ -4553,6 +4559,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  // 3926 IS FOR THE UNOBSCURE PART.
+  // 4511 is for the OBSCURED PART.
   Widget _buildPaymentTypeSingleSelectOption(){
 
     logger.i('at here: _buildPaymentTypeSingleSelectOption');
@@ -4618,7 +4626,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
-  Widget oneSinglePaymentType (PaymentTypeSingleSelect x,int index){
+  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
 
 
 //    String color1 = x.itemTextColor.replaceAll('#', '0xff');
@@ -4635,10 +4643,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+//    work 02
     logger.i('_currentPaymentTypeIndex: at line # 4287 $_currentPaymentTypeIndex');
-    String paymentTypeName = x.paymentTypeName;
-    String paymentIconName = x.paymentTypeName;
-    String borderColor = x.borderColor;
+    String paymentTypeName = onePaymentType.paymentTypeName;
+    String paymentIconName = onePaymentType.paymentTypeName;
+    String borderColor = onePaymentType.borderColor;
     const Color OrderTypeIconColor=Color(0xff070707);
     return Container(
 
@@ -4747,7 +4756,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+//    void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newPaymentIndex,int oldPaymentIndex){
+            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(onePaymentType,index,_currentPaymentTypeIndex);
 
             setState(() {
               showFullPaymentType= false;
@@ -4849,7 +4859,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(onePaymentType,index,_currentPaymentTypeIndex);
 
 
             setState(() {
