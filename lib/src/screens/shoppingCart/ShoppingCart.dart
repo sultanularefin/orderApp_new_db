@@ -390,23 +390,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                         // work -1
-                                        /*
-                                        Container(
-                                          padding: EdgeInsets.fromLTRB(
-                                              0, 10, 0, 5),
+
+
+                                         Container(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 0, 0, 0),
 //                                                      padding::::
-                                          color: Colors.white,
-                                          height: displayHeight(context) / 4,
-                                          width: displayWidth(context)
-                                              - displayWidth(context) /
-                                                  5, /* this is about the width of yellow side menu */
+                                            color: Colors.amberAccent,
+                                            height: displayHeight(context) / 5.2,
+                                            width: displayWidth(context)
+                                                - displayWidth(context) /
+                                                    5, /* this is about the width of yellow side menu */
 
 //                                            width: displayWidth(context) * 0.57,
-                                          child: _buildQuantityTimesofFood(
-                                              oneOrder),
+                                            child: _buildQuantityTimesofFood(
+                                                oneOrder),
 
-                                        ),
-                                        */
+                                          ),
+
+
+                                        
 
 
 
@@ -850,8 +853,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
 
-                                width:  90,
-                                height: displayHeight(context) /14,
+                                width:  85,
+                                height: displayHeight(context) /15,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -1584,7 +1587,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2,
+      height: displayHeight(context)/2.3,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
@@ -1732,6 +1735,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // BEGINS HERE.
           // work 01
           Container(
+//            color:Colors.white38,
             color:Colors.black87,
 //            height: displayWidth(context)/2.6,
             height: displayWidth(context)/2.1,
@@ -1740,11 +1744,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 Positioned(
 //                  left:0,
                   // top:20,//displayHeight(context)/10,
-                  top: getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer) <= 3?
-                  100:
+                  // initial Case.
+                  bottom: getNumberOfInputsFilledUp (
+                      unObsecuredInputandPayment.ordersCustomer) <= 1?
+                  0:
+                  getNumberOfInputsFilledUp (
+                      unObsecuredInputandPayment.ordersCustomer) <= 2?
+                  0:
+                  getNumberOfInputsFilledUp (
+                      unObsecuredInputandPayment.ordersCustomer) == 3?
 
-                  20,
+                  -90:-10,
                   // from top to top distance offset related to Starting (top ) of
                   // orance Container.
 //                  right:0,
@@ -3449,6 +3459,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       side: BorderSide(
                         color:Colors.red,
                         style: BorderStyle.solid,
+                        width: 3.6,
                       ),
                       borderRadius: BorderRadius.circular(35.0),
                     ),
@@ -3467,6 +3478,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       side: BorderSide(
                         color:Colors.green,
                         style: BorderStyle.solid,
+                        width: 3.6,
                       ),
                       borderRadius: BorderRadius.circular(35.0),
                     ),
@@ -3506,6 +3518,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   side: BorderSide(
                     color: Colors.red,
                     style: BorderStyle.solid,
+                    width: 3.6,
                   ),
                   borderRadius: BorderRadius.circular(35.0),
                 ),
@@ -3524,6 +3537,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   side: BorderSide(
                     color:Colors.green,
                     style: BorderStyle.solid,
+                    width: 3.6,
                   ),
                   borderRadius: BorderRadius.circular(35.0),
                 ),
@@ -3938,6 +3952,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   int  getNumberOfInputsFilledUp(CustomerInformation customerInfoFieldsCheck){
 
+    print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
     int total=0;
     switch (customerInfoFieldsCheck.address.trim().length) {
 
@@ -4311,214 +4326,40 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ' Widget name: '
         'animated Obscured Card Select Container()');
     return
-      AbsorbPointer(
-        child: Opacity(
-          opacity:0.2,
-          child: Container(
-              color: Colors.grey,
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+      Container(
+        height: displayWidth(context)/2.1,
+        child: AbsorbPointer(
+          child: Opacity(
+            opacity:0.2,
+            child: Container(
+                color: Colors.yellowAccent,
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
 //              color:Colors.white,
 //                                            height: 200,
 //              height: displayHeight(context) /6,
-              width: displayWidth(context)
-                  - displayWidth(context) /
-                      5,
+                width: displayWidth(context)
+                    - displayWidth(context) /
+                        5,
 //                                            width: displayWidth(context) * 0.57,
-              /*
-                                                    child:  AbsorbPointer(
-                                                      child: _buildShoppingCartInputFields()
-                                                  ),
-                                                  */
-              child: _buildShoppingCartCardSelectContainerObscured(priceandselectedCardFunctionality)
+                /*
+                                                      child:  AbsorbPointer(
+                                                        child: _buildShoppingCartInputFields()
+                                                    ),
+                                                    */
+                child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(priceandselectedCardFunctionality)
+//                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
+//                _buildShoppingCartPaymentMethodsUNObscuredUnSelected
 
-            //RRRRRR
+              //RRRRRR
 
 
+            ),
           ),
         ),
       );
   }
 
-  Widget _buildShoppingCartCardSelectContainerObscured(Order priceandselectedCardFunctionality) {
-
-
-    return
-      Container(
-        height: displayHeight(context) / 20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +  displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
-        child: Column(
-          children: <Widget>[
-
-            // 1ST CONTAINER HOLDS THE HEADER Payment Method and Line paint begins here.
-            Container(
-              width: displayWidth(context) / 1.1,
-              height: displayHeight(context) / 20,
-              color: Color(0xffffffff),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .start
-                ,
-                crossAxisAlignment: CrossAxisAlignment
-                    .center,
-                children: <Widget>[
-
-
-                  Container(
-                    width: displayWidth(context) /
-                        1.5,
-                    height: displayHeight(
-                        context) / 20,
-                    color: Color(0xffffffff),
-
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Container(
-                            margin: EdgeInsets
-                                .fromLTRB(
-                                20, 0, 10, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'Payment Method',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Colors.redAccent
-                                  ,
-                                )
-                            ),
-                          ),
-
-                          CustomPaint(
-                            size: Size(0, 19),
-                            painter: LongPainterForChooseOrderType(
-                                context),
-                          ),
-
-
-
-
-                        ]
-                    ),
-
-                  ),
-
-                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                  /*
-                                                        Container(
-//                                                  alignment: Alignment.center,
-                                                          padding: EdgeInsets.fromLTRB(
-                                                              0, 2, 0, 0),
-                                                          width: displayWidth(context) /
-                                                              16,
-//                                                height: displayHeight(context)/20,
-                                                          color: Color(0xffffffff),
-//                                                    child:Row(
-//                                                      mainAxisAlignment: MainAxisAlignment.end,
-//                                                      children: <Widget>[
-                                                          child: Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(0, 0, 200, 0),
-                                                            child: Icon(
-
-                                                              Icons.add_shopping_cart,
-                                                              size: 30,
-                                                              color: Color(0xff54463E),
-                                                            ),
-                                                          ),
-
-
-                                                        ),
-                                                        */
-
-
-                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-
-
-                  ////WWWEEEQQQ
-
-
-
-
-                ],
-              ),
-            ),
-
-            // 1ST CONTAINER HOLDS THE HEADER Payment Method and Line paint ENDs here.
-
-
-            // 2ND CONTAINER HOLDS THE total price BEGINS HERE..
-            Container(
-
-              margin: EdgeInsets
-                  .fromLTRB(
-                  20, 0, 10, 0),
-              alignment: Alignment
-                  .center,
-              child: Row(
-                children: <Widget>[
-                  Text(
-                      'TOTAL : ',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight
-                            .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                        color: Colors.redAccent
-                        ,
-                      )
-                  ),
-
-                  Text(
-                      'TOTAL : '+'${
-                          priceandselectedCardFunctionality.unitPrice
-                              * priceandselectedCardFunctionality.quantity}',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight
-                            .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                        color: Colors.redAccent
-                        ,
-                      )
-                  )
-                ],
-              ),
-            ),
-            // 2ND CONTAINER HOLDS THE total price ENDNS HERE..
-
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                                      padding::::
-              color:Colors.white,
-//                                            height: 200,
-              height: displayHeight(context) /7,
-              width: displayWidth(context)
-                  - displayWidth(context) /
-                      5,
-//                                            width: displayWidth(context) * 0.57,
-              child:  _buildPaymentTypeSingleSelectOption(),
-
-            ),
-          ],
-        ),
-      );
-
-  }
 
 
   bool zeroORMoreInputsEmpty(CustomerInformation customerInfoFieldsCheck){

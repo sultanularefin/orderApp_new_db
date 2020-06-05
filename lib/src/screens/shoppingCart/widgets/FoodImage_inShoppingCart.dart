@@ -42,7 +42,10 @@ class FoodImageInShoppingCart extends StatelessWidget {
         height: displayWidth(context) / 3,
         width:displayWidth(context)/4.5,
         margin: EdgeInsets.fromLTRB(
-            0, 12, 12, 12),
+            0,  0, 12, 0),
+
+//        margin: EdgeInsets.fromLTRB(
+//            displayWidth(context)/17, 0, 12, 0),
 //      padding: EdgeInsets.fromLTRB(
 //          0, 12, 12, 5),
 
@@ -158,8 +161,33 @@ class FoodImageInShoppingCart extends StatelessWidget {
               margin: EdgeInsets.fromLTRB(
                   0, 10, 0, 0),
               width: 130,
-              height: 60,
+              height: 20,
 //              alignment: Alignment.centerLeft,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+
+                reverse: false,
+
+                shrinkWrap: false,
+//        final String foodItemName =          filteredItems[index].itemName;
+//        final String foodImageURL =          filteredItems[index].imageURL;
+                itemCount: selectedIngredients.length,
+
+                itemBuilder: (_, int index) {
+                  return Text('${selectedIngredients[index].ingredientName}'+ ', ',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight
+                          .bold,
+//                                                      color: Colors.white
+                      color: Color(0xff707070),
+                    ),
+                  );
+//          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
+//            index);
+                },
+              ),
+              /*
               child: GridView.builder(
                 gridDelegate:
                 new SliverGridDelegateWithFixedCrossAxisCount(
@@ -200,6 +228,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
 //            index);
                 },
               ),
+              */
+
 
 
             )
@@ -218,9 +248,10 @@ class FoodImageInShoppingCart extends StatelessWidget {
         color: Color(0xffF4F6CE),
 //      height: displayHeight(context)/4,
         height:displayWidth(context)/3.8,
+//        height: displayWidth(context) / 3,
         width:displayWidth(context)/5,
         margin: EdgeInsets.fromLTRB(
-            displayWidth(context)/17, 12, 12, 5),
+            displayWidth(context)/17, 0, 12, 0),
 
 
 
@@ -347,8 +378,30 @@ class FoodImageInShoppingCart extends StatelessWidget {
               margin: EdgeInsets.fromLTRB(
                   0, 10, 0, 0),
               width: 130,
-              height: 60,
+              height: 20,
 //              alignment: Alignment.centerLeft,
+              child: ListView.builder
+                (
+                  scrollDirection: Axis.horizontal,
+
+                  reverse: false,
+
+                  shrinkWrap: false,
+                  itemCount: selectedIngredients.length,
+
+                  itemBuilder: (_, int index) {
+                    return Text('${selectedIngredients[index].ingredientName}' + ', ',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight
+                            .bold,
+//                                                      color: Colors.white
+                        color: Color(0xff707070),
+                      ),
+                    );
+                  }
+              ),
+              /*
               child: GridView.builder(
                 gridDelegate:
                 new SliverGridDelegateWithFixedCrossAxisCount(
@@ -389,6 +442,7 @@ class FoodImageInShoppingCart extends StatelessWidget {
 //            index);
                 },
               ),
+              */
 
 
             )
