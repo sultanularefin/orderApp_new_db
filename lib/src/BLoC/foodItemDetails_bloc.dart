@@ -195,13 +195,20 @@ class FoodItemDetailsBloc implements Bloc {
   // CONSTRUCTOR BEGINS HERE.
 
 
-  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0} ) {
+  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWhichPage=0} ) {
 //    getAllIngredients();
 
 //    List<NewIngredient> allIngsScoped= _allIngItems;
 
-    if (fromWelComePage == 1) {
+    if (fromWhichPage == 0) {
 
+      print('fromWhichPage == 0');
+
+    }
+
+    else if(fromWhichPage == 2){
+
+      print('fromWhichPage == 2');
     }
     else {
       print("at the begin of Constructor [FoodItemDetailsBloc]");
@@ -1120,7 +1127,7 @@ class FoodItemDetailsBloc implements Bloc {
   @override
   void dispose() {
     _controller.close();
-//    _orderControllerFoodDetails.close();
+    _orderControllerFoodDetails.close();
 //    _itemSizeController.close();
     _allIngredientListController.close();
     _defaultIngredientListController.close();
