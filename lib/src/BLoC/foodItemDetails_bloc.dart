@@ -1120,7 +1120,7 @@ class FoodItemDetailsBloc implements Bloc {
   @override
   void dispose() {
     _controller.close();
-    _orderControllerFoodDetails.close();
+//    _orderControllerFoodDetails.close();
 //    _itemSizeController.close();
     _allIngredientListController.close();
     _defaultIngredientListController.close();

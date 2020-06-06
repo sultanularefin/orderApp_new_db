@@ -220,6 +220,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
   );
 
 
+
+
   @override
   Widget build(BuildContext context) {
 //    String a = Constants.SUCCESS_MESSAGE;
@@ -450,13 +452,15 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                   StreamBuilder<Order>(
                                     stream: foodItemDetailsBlocForOrderProcessing.getCurrentOrderStream,
                                     initialData: foodItemDetailsBlocForOrderProcessing.getCurrentOrderFoodDetails,
-                                    builder: (context, snapshot) {
-                                      int selectedFoodsForOrderLength = 0;
 
-                                      print('selectedFoodsForOrderLength: $selectedFoodsForOrderLength');
+                                    builder: (context, snapshot) {
+
 
                                           if (!snapshot.hasData) {
 //                                          return Center(child: new LinearProgressIndicator());
+                                            int selectedFoodsForOrderLength = 0;
+
+                                            print('selectedFoodsForOrderLength: $selectedFoodsForOrderLength');
                                             return Container(
 //                                                                        width:60,
                                               width: displayWidth(
@@ -545,6 +549,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                           }
                                           else{
                                             Order sessionedOrder = snapshot.data;
+
+                                            print('sessionedOrder: $sessionedOrder');
 
                                             int selectedFoodsForOrderLength = sessionedOrder.selectedFoodInOrder.length;
 
@@ -980,7 +986,7 @@ class FoodList extends StatelessWidget {
         print('snapshot.hasError : ${snapshot.hasError}');
 
         */
-          print('snapshot.hasData : ${snapshot.hasData}');
+          print('snapshot.hasData FG2 : ${snapshot.hasData}');
 
 
           if (snapshot.hasData) {

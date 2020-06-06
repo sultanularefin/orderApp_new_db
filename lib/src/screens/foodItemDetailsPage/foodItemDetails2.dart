@@ -167,7 +167,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   return Center(child: new LinearProgressIndicator());
                 }
                 else {
-                  print('snapshot.hasData : ${snapshot.hasData}');
+                  print('snapshot.hasData FDetails: ${snapshot.hasData}');
 
                   final FoodItemWithDocIDViewModel oneFood = snapshot
                       .data;
@@ -220,6 +220,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                      Navigator.pop(context);
 
+                      FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+                      List<NewIngredient> emptyIngs = [];
+                      print('navigating to FoodGallery 2 again with block');
                       return Navigator.of(context).pop(
 
 
@@ -230,10 +233,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                           pageBuilder: (_, __, ___) =>
                               BlocProvider<FoodGalleryBloc>(
                                 bloc: FoodGalleryBloc(),
-                                  child: FoodGallery2()
+
+                                /*
+                                child: BlocProvider<FoodItemDetailsBloc>(
+                                    bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs /*,fromWelComePage:0 */),
+
+                                    */
+                                    child: FoodGallery2()
+//                                  child: FoodGallery2()
                                 ),
-                          // fUTURE USE -- ANIMATION TRANSITION CODE.
-                          /*
+                                // fUTURE USE -- ANIMATION TRANSITION CODE.
+                                /*
                                   transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
                                     return FadeTransition(
                                       opacity: animation,
@@ -244,7 +254,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                     );
                                   }
                                   */
-                        ),
+                              ),
+//                        ),
                       );
 
 
@@ -943,7 +954,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                                          SizedBox(
 //                                                                            width: 3,
 //                                                                          ),
-                  // WORK 1
+                    // WORK 1
                     IconButton(
 
                       padding:   EdgeInsets.symmetric(horizontal: 0,vertical: 0),
@@ -1660,7 +1671,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           else {
 
-            print('snapshot.hasData and else statement');
+            print('snapshot.hasData and else statement at FDetailS2');
             List<NewIngredient> selectedIngredients = snapshot.data;
 
             if( (selectedIngredients.length ==1)&&
