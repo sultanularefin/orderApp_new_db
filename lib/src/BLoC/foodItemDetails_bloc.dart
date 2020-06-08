@@ -195,22 +195,30 @@ class FoodItemDetailsBloc implements Bloc {
   // CONSTRUCTOR BEGINS HERE.
 
 
-  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWhichPage=0} ) {
+  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWhichPage=1} ) {
 //    getAllIngredients();
 
 //    List<NewIngredient> allIngsScoped= _allIngItems;
 
     if (fromWhichPage == 0) {
 
+      print('0 means from welcome page');
       print('fromWhichPage == 0');
 
     }
 
     else if(fromWhichPage == 2){
 
+//
+
+      print('2 means from Food Item Details page to FoogGallery2 page [ pop ] '); // pop
       print('fromWhichPage == 2');
     }
     else {
+
+      print(' 1 means from Food Gallery Page to Food Item Details Page');
+      print(' which IS NORMAL');
+
       print("at the begin of Constructor [FoodItemDetailsBloc]");
       print("oneFoodItem ===> ===> ===> $oneFoodItem");
       print("allIngsScoped ===> ===> ===> $allIngsScoped");
@@ -237,6 +245,7 @@ class FoodItemDetailsBloc implements Bloc {
 
       Order constructorOrderFD = new Order(
         selectedFoodInOrder: [],
+        selectedFoodListLength:0,
         deliveryTypeIndex: 0,
         paymentTypeIndex: 4,
         ordersCustomer: oneCustomerInfo,
@@ -262,8 +271,8 @@ class FoodItemDetailsBloc implements Bloc {
           foodItemIngredientsList2);
 
 //    print('listStringIngredients: $listStringIngredients');
-      logger.w('listStringIngredients at foodItem Details Block line # 160',
-          listStringIngredients);
+//      logger.w('listStringIngredients at foodItem Details Block line # 160',
+//          listStringIngredients);
 
 
 //    List<NewIngredient> allIngsScoped = getAllIngredients();
@@ -448,19 +457,36 @@ class FoodItemDetailsBloc implements Bloc {
   }
 
   /*  Below ARE OrderedFoodItem related codes decrement increment( SET) */
-  void decrementOneSelectedFoodForOrder(SelectedFood oneSelectedFoodFD,itemCount){
+  void decrementOneSelectedFoodForOrder(/* SelectedFood oneSelectedFoodFD,
+   first arg IS NOT REQUIRED FOR DECREMENT */itemCount){
 
-    print('_currentOrderFoodDetails.selectedFoodInOrder[0].quantity:'
-        '${_currentOrderFoodDetails.selectedFoodInOrder[0].quantity}');
+
 
     print('/// ////         // itemCount at DEC : $itemCount');
     int numberOFSelectedFoods;
-    Order tempOrderFDForDecrement = _currentOrderFoodDetails;
-    if(itemCount==0){
-      // from 1 to 0 and passed as parameter.
-      tempOrderFDForDecrement.selectedFoodInOrder = [];
+    Order tempOrderDecrementOperation = _currentOrderFoodDetails;
 
-      _currentOrderFoodDetails = tempOrderFDForDecrement;
+    if(itemCount==1){
+
+      print('_currentOrderFoodDetails.selectedFoodInOrder[0].quantity:'
+          '${_currentOrderFoodDetails.selectedFoodInOrder[tempOrderDecrementOperation.selectedFoodListLength-1].quantity}');
+
+      
+      int newSelectedFoodOrderLength = tempOrderDecrementOperation.selectedFoodListLength-1;
+
+
+      // from 1 to 0 and passed as parameter.
+      tempOrderDecrementOperation.selectedFoodInOrder.removeAt(newSelectedFoodOrderLength);
+
+      // remove at 0 means first item.
+
+      //      List x=[1,2,3,4];
+//      print('List(0) $List(0)');
+
+
+      tempOrderDecrementOperation.selectedFoodListLength= newSelectedFoodOrderLength;
+
+      _currentOrderFoodDetails = tempOrderDecrementOperation;
 
       print('_currentOrderFoodDetails.selectedFoodInOrder.length:'
           +'${_currentOrderFoodDetails.selectedFoodInOrder.length} ');
@@ -471,28 +497,30 @@ class FoodItemDetailsBloc implements Bloc {
 
       // _itemCount= itemCount > 0;
 
-//      if(tempOrderFDForDecrement.selectedFoodInOrder == null){
+//      if(tempOrderDecrementOperation.selectedFoodInOrder == null){
 //        print(' ** ***  ****  THIS PROBABLY WILL NOT EXECUTE EVER');
 //
 //        numberOFSelectedFoods = 0;
 //      }
 //      else{
-        numberOFSelectedFoods=  tempOrderFDForDecrement.selectedFoodInOrder.length;
-        print('tempOrderFDForDecrement.selectedFoodInOrder.length:'
-            +'${tempOrderFDForDecrement.selectedFoodInOrder.length} ');
+
+    print('tempOrderDecrementOperation.selectedFoodInOrder: ${tempOrderDecrementOperation.selectedFoodInOrder}');
+        numberOFSelectedFoods=  tempOrderDecrementOperation.selectedFoodInOrder.length;
+        print('tempOrderDecrementOperation.selectedFoodInOrder.length:'
+            +'${tempOrderDecrementOperation.selectedFoodInOrder.length} ');
 //      }
 
       print('at DEC __ ** __ ** numberOFSelectedFoods: $numberOFSelectedFoods');
 
-      tempOrderFDForDecrement.selectedFoodInOrder[numberOFSelectedFoods-1].quantity = itemCount;
+      tempOrderDecrementOperation.selectedFoodInOrder[numberOFSelectedFoods-1].quantity = itemCount-1;
       //ITEMCOUNT IS --ITEMCOUNT WHEN SENT AS PARAMETER.
 
 
       print('at DEC quantity: ___ * ||'
-          ' ${tempOrderFDForDecrement.selectedFoodInOrder[numberOFSelectedFoods-1].quantity}');
+          ' ${tempOrderDecrementOperation.selectedFoodInOrder[numberOFSelectedFoods-1].quantity}');
 
 
-      _currentOrderFoodDetails = tempOrderFDForDecrement;
+      _currentOrderFoodDetails = tempOrderDecrementOperation;
 
       _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
     }
@@ -504,7 +532,8 @@ class FoodItemDetailsBloc implements Bloc {
 //    x.selectedFoodInOrder.add(constructorSelectedFoodFD);
   }
 
-  void incrementOneSelectedFoodForOrder(SelectedFood oneSelectedFoodFD,int initialItemCount){
+  void incrementOneSelectedFoodForOrder(SelectedFood oneSelectedFoodFD,int  initialItemCount  /*ItemCount */){
+
 
 
 
@@ -512,56 +541,116 @@ class FoodItemDetailsBloc implements Bloc {
     print('_   _    _ itemCount _   _   _:$initialItemCount');
 
 
+
   // work 01
-    if( initialItemCount == 0 ) {
+
+    /*
+    if( ItemCount == 0 ) {
 
       print( '>>>> itemCount == 0  <<<< ');
       logger.e('oneSelectedFoodFD.quantity: ', oneSelectedFoodFD.quantity);
 
-      Order tempOrderFDForIncrementCheck = _currentOrderFoodDetails;
+      Order tempOrderIncrementOperation = _currentOrderFoodDetails;
 
-      tempOrderFDForIncrementCheck.selectedFoodInOrder.add(oneSelectedFoodFD);
-      print('length: of // tempOrderFDForIncrementCheck.selectedFoodInOrder:'
-          ' ${tempOrderFDForIncrementCheck.selectedFoodInOrder.length}');
+      tempOrderIncrementOperation.selectedFoodInOrder.add(oneSelectedFoodFD);
 
-      logger.e(' ANY CHANGES IN HERE ? tempOrderFDForIncrementCheck.selectedFoodInOrder[itemCount].quantity: ',
-          tempOrderFDForIncrementCheck.selectedFoodInOrder[initialItemCount].quantity);
+      print('length: of // tempOrderIncrementOperation.selectedFoodInOrder:'
+          ' ${tempOrderIncrementOperation.selectedFoodInOrder.length}');
+
+      int lengthOfSelectedItemsLength=  tempOrderIncrementOperation.selectedFoodListLength;
 
 
-      _currentOrderFoodDetails = tempOrderFDForIncrementCheck;
+      logger.e(' ANY CHANGES IN HERE ? tempOrderIncrementOperation.selectedFoodInOrder[itemCount].quantity: ',
+
+          tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity);
+
+
+      _currentOrderFoodDetails = tempOrderIncrementOperation;
+
+      _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+
+    }
+    */
+
+    if( initialItemCount == 0 ) {
+
+      print( '>>>> initialItemCount == 0  <<<< ');
+//      logger.e('oneSelectedFoodFD.quantity: ', oneSelectedFoodFD.quantity);
+
+      Order tempOrderIncrementOperation = _currentOrderFoodDetails;
+
+      tempOrderIncrementOperation.selectedFoodInOrder.add(oneSelectedFoodFD);
+
+      print('length: of // tempOrderIncrementOperation.selectedFoodInOrder:'
+          ' ${tempOrderIncrementOperation.selectedFoodInOrder.length}');
+
+      tempOrderIncrementOperation.selectedFoodListLength = 1;
+
+      int lengthOfSelectedItemsLength =  tempOrderIncrementOperation.selectedFoodListLength;
+
+//      List x=[1,2,3,4];
+//      print('List(0) $List(0)');
+
+
+      print('lengthOfSelectedItemsLength: $lengthOfSelectedItemsLength');
+
+      List<SelectedFood> x2 = tempOrderIncrementOperation.selectedFoodInOrder;
+
+      print('x2: $x2');
+      print('x2[lengthOfSelectedItemsLength]: ${x2[lengthOfSelectedItemsLength-1]}');
+
+      print('x2[lengthOfSelectedItemsLength].quantity: ${x2[lengthOfSelectedItemsLength-1].quantity}');
+
+
+      /*
+
+      logger.e(' ANY CHANGES IN HERE ? tempOrderIncrementOperation.selectedFoodInOrder[itemCount].quantity: ',
+
+          tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength].quantity);
+      */
+
+
+      _currentOrderFoodDetails = tempOrderIncrementOperation;
 
       _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
 
     }
     else{
 
-      int numberOFSelectedFoods;
-      Order tempOrderFDForIncrementCheck = _currentOrderFoodDetails;
+//      int numberOFSelectedFoods;
+      Order tempOrderIncrementOperation = _currentOrderFoodDetails;
 
-      if(tempOrderFDForIncrementCheck.selectedFoodInOrder.length==0){
+      /*
+      if(tempOrderIncrementOperation.selectedFoodInOrder.length==0){
         print(' ** ***  ****  THIS PROBABLY WILL NOT EXECUTE EVER');
 
         numberOFSelectedFoods= 0;
       }
       else{
-        numberOFSelectedFoods =  tempOrderFDForIncrementCheck.selectedFoodInOrder.length;
+        numberOFSelectedFoods =  tempOrderIncrementOperation.selectedFoodInOrder.length;
       }
 
       print(' INC __ ** __ ** numberOFSelectedFoods: $numberOFSelectedFoods');
 
 //      logger.e('oneSelectedFoodFD.quantity: ', oneSelectedFoodFD.quantity);
 //      Order constructorOrderFD = _currentOrderFoodDetails;
+*/
+      int lengthOfSelectedItemsLength=  tempOrderIncrementOperation.selectedFoodListLength;
 
-      tempOrderFDForIncrementCheck.selectedFoodInOrder[numberOFSelectedFoods-1].quantity =
-          initialItemCount + 1;
+      tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity =
+          tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity + 1;
+
       // first time was set to 1, thus adding 1 required , please check the _itemCount state.
 
 
       print('quantity: * * * '
-          '${tempOrderFDForIncrementCheck.selectedFoodInOrder[numberOFSelectedFoods-1].quantity}');
-      _currentOrderFoodDetails = tempOrderFDForIncrementCheck ;
+          '${tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity}');
+
+      _currentOrderFoodDetails = tempOrderIncrementOperation;
+
 
       _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+
 
 
 //      constructorOrderFD.selectedFoodInOrder.add(oneSelectedFoodFD);
@@ -874,7 +963,7 @@ class FoodItemDetailsBloc implements Bloc {
 
     print("_thisFoodItem.sizedFoodPrices: ${_thisFoodItem.sizedFoodPrices}");
 
-    logger.i('sizeKey: ',sizeKey);
+//    logger.i('sizeKey: ',sizeKey);
 
     dynamic changedPrice1 = foodSizePrice[sizeKey];
 
@@ -998,7 +1087,7 @@ class FoodItemDetailsBloc implements Bloc {
   filterSelectedDefaultIngredients(List<NewIngredient> allIngList , List<String> listStringIngredients2) {
 // foox
 
-    logger.w("at filterSelectedDefaultIngredients","filterSelectedDefaultIngredients");
+//    logger.w("at filterSelectedDefaultIngredients","filterSelectedDefaultIngredients");
 
 
 
@@ -1027,7 +1116,7 @@ class FoodItemDetailsBloc implements Bloc {
 
 //    return default2;
 
-    logger.i('_defaultIngItems: ',_defaultIngItems);
+//    logger.i('_defaultIngItems: ',_defaultIngItems);
 
   }
 
@@ -1038,12 +1127,13 @@ class FoodItemDetailsBloc implements Bloc {
       ) {
 // foox
 
-    logger.w("at filterUnSelectedIngredients ","filterUnSelectedIngredients");
-    print("at allIngList ${allIngList.length}");
+//    logger.w("at filterUnSelectedIngredients ","filterUnSelectedIngredients");
+
+//    print("at allIngList ${allIngList.length}");
 
 //    print("allIngList: $allIngList");
 
-    print("listStringIngredients2: ${listStringIngredients2.length}");
+//    print("listStringIngredients2: ${listStringIngredients2.length}");
 
     List <NewIngredient> allUnSelected;
 
@@ -1067,7 +1157,7 @@ class FoodItemDetailsBloc implements Bloc {
             oneIngredient
         )).toList();
 
-    print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented.length}');
+//    print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented.length}');
 
 
 //      Set<NewIngredient> unSelectedIngredientsFilteredSet = unSelectedIngredientsFiltered.toSet();

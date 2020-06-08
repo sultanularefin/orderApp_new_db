@@ -76,7 +76,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   );
 
   String _currentSize;
-  int _itemCount= 0;
+//  int _itemCount= 0;
   double initialPriceByQuantityANDSize = 0.0;
 
 
@@ -236,7 +236,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                                 child: BlocProvider<FoodItemDetailsBloc>(
-                                    bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage: ),
+                                    bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:2 ),
 
 
                                     child: FoodGallery2()
@@ -834,6 +834,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
   Widget animatedWidgetMoreIngredientsButton(){
+
+    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
     return    Container(
 
         color:Colors.white,
@@ -928,233 +930,340 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               // MORE INGREDIENTS ENDS HERE.
 
 
-              Container(
-                color:Colors.white,
-                margin: EdgeInsets.symmetric(
-                    horizontal: 0,
-                    vertical: 0),
+              StreamBuilder<Order>(
+                  stream: foodItemDetailsbloc.getCurrentOrderStream,
+                  initialData: foodItemDetailsbloc.getCurrentOrderFoodDetails,
+                builder: (context, snapshot) {
+                  if ((snapshot.hasError) || (!snapshot.hasData)) {
+                    return Center(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text('WRNG'),
+                      ),
+                    );
+                  }
+                  else {
+//                    logger.e('snapshot.hasData: ${snapshot.hasData} getCurrentOrderStream');
 
-                width: displayWidth(context) /
-                    4.8,
+                    Order incrementOrderProcessing = snapshot.data;
+
+
+                    int lengthOfSelectedItemsLength = incrementOrderProcessing.selectedFoodListLength;
+//                    logger.e('lengthOfSelectedItemsLength: $lengthOfSelectedItemsLength');
+
+                    int itemCountNew;
+
+                    print('incrementOrderProcessing.selectedFoodInOrder.isEmpty:'
+                        ' ${incrementOrderProcessing.selectedFoodInOrder.isEmpty}');
+
+                    if( incrementOrderProcessing.selectedFoodInOrder.isEmpty) {
+                      itemCountNew=0;
+
+                    }
+                    else {
+                      itemCountNew = incrementOrderProcessing
+                          .selectedFoodInOrder[lengthOfSelectedItemsLength-1]
+                          .quantity;
+                    }
+
+
+//                    logger.e('itemCountNew: $itemCountNew');
+                    return Container(
+                      color: Colors.white,
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: 0),
+
+                      width: displayWidth(context) /
+                          4.8,
 //                height: 45,
-                height: displayHeight(context)/21,
+                      height: displayHeight(context) / 21,
 
 //                                            color:Color(0xffC27FFF),
-                child:
-                Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
+                      child:
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
 
 
-
-                    // todo shopping.
+                          // todo shopping.
 
 //                                                                          SizedBox(
 //                                                                            width: 3,
 //                                                                          ),
-                    // WORK 1
-                    IconButton(
+                          // WORK 1
+                          IconButton(
 
-                      padding:   EdgeInsets.symmetric(horizontal: 0,vertical: 0),
-                      icon: Icon(Icons.add_circle_outline),
-                      iconSize: 30,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 0),
+                            icon: Icon(Icons.add_circle_outline),
+                            iconSize: 30,
 
-                      tooltip: 'Increase product count by 1 ',
-                      onPressed: () {
-                        final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-                        print(
-                            'Add button pressed  related to _itemCount');
+                            tooltip: 'Increase product count by 1 ',
+                            onPressed: () {
+//                            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+//                              incrementOrderProcessing.selectedFoodInOrder.isEmpty
+                              Order incrementOrderProcessing = snapshot.data;
+                              int lengthOfSelectedItemsLength = incrementOrderProcessing.selectedFoodListLength;
+
+                              if(lengthOfSelectedItemsLength == 0){
+                                print(' JJJJ at lengthOfSelectedItemsLength  == 0 ');
+
+                                print('itemCountNew JJJJ $itemCountNew');
+
+                                int initialItemCount = 0;
+
+                                int quantity =1;
+                                // INITIAL CASE FIRST ITEM FROM ENTERING THIS PAGE FROM FOOD GALLERY PAGE.
+                                SelectedFood oneSelectedFoodFD = new SelectedFood(
+                                  foodItemName: foodItemDetailsbloc
+                                      .currentFoodItem.itemName,
+                                  foodItemImageURL: foodItemDetailsbloc
+                                      .currentFoodItem.imageURL,
+                                  unitPrice: initialPriceByQuantityANDSize,
+                                  foodDocumentId: foodItemDetailsbloc
+                                      .currentFoodItem.documentId,
+                                  quantity: quantity,
+                                  foodItemSize: _currentSize,
+                                  // index or int value not good enought since size may vary best on Food Types .
+                                );
+
+                                foodItemDetailsbloc
+                                    .incrementOneSelectedFoodForOrder(
+                                    oneSelectedFoodFD, initialItemCount);
+                              }
+                              else{
+                                print(' at else RRRRR');
+
+//                                itemCountNew = incrementOrderProcessing
+//                                    .selectedFoodInOrder[lengthOfSelectedItemsLength-1]
+//                                    .quantity;
+
+                                int oldQuantity = incrementOrderProcessing.
+                                selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity;
+
+                                int newQuantity = oldQuantity + 1;
+
+                                SelectedFood oneSelectedFoodFD = new SelectedFood(
+                                  foodItemName: foodItemDetailsbloc
+                                      .currentFoodItem.itemName,
+                                  foodItemImageURL: foodItemDetailsbloc
+                                      .currentFoodItem.imageURL,
+                                  unitPrice: initialPriceByQuantityANDSize,
+                                  foodDocumentId: foodItemDetailsbloc
+                                      .currentFoodItem.documentId,
+                                  quantity: newQuantity,
+                                  foodItemSize: _currentSize,
+                                  // index or int value not good enought since size may vary best on Food Types .
+                                );
 
 
-                        SelectedFood oneSelectedFoodFD = new SelectedFood(
-                          foodItemName : foodItemDetailsbloc.currentFoodItem.itemName,
-                          foodItemImageURL : foodItemDetailsbloc.currentFoodItem.imageURL,
-                          unitPrice : initialPriceByQuantityANDSize ,
-                          foodDocumentId : foodItemDetailsbloc.currentFoodItem.documentId,
-                          quantity : _itemCount + 1,
-                          foodItemSize :_currentSize,
-                          // index or int value not good enought since size may vary best on Food Types .
-                        );
+                                foodItemDetailsbloc
+                                    .incrementOneSelectedFoodForOrder(oneSelectedFoodFD /*
+                                    THIS oneSelectedFoodFD WILL NOT BE USED WHEN SAME ITEM IS INCREMENTED AND
 
-                        if(_itemCount==0) {
-                          foodItemDetailsbloc.incrementOneSelectedFoodForOrder(
-                              oneSelectedFoodFD,_itemCount);
-                        }else{
-
-                          foodItemDetailsbloc.incrementOneSelectedFoodForOrder(
-                              oneSelectedFoodFD,_itemCount);
-
-                        }
+                                    QUANTITY IS MORE THAN ONE.
+                                    */,oldQuantity);
+                              }
 
 
-                        setState(() {
-                          _itemCount =
-                              _itemCount + 1;
+                              /*
+                              print(
+                                  'Add button pressed  related to _itemCount');
+
+
+
+
+                              if (_itemCount == 0) {
+
+                              } else {
+                                foodItemDetailsbloc
+                                    .incrementOneSelectedFoodForOrder(
+                                    oneSelectedFoodFD, _itemCount);
+                              }
+
+
+                              setState(() {
+                                _itemCount =
+                                    _itemCount + 1;
 //                          initialPriceByQuantityANDSize =
 //
 //                              initialPriceByQuantityANDSize *
 //                                  _itemCount;
-                        });
-                      },
-                      color: Color(0xff707070),
-                    ),
+                              });
+                              */
+                            },
+                            color: Color(0xff707070),
+                          ),
 
-                    Container(
+                          Container(
 //                                                                        width:60,
-                      width: displayWidth(
-                          context) /13,
-                      height: displayHeight(context)/25,
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            width: displayWidth(
+                                context) / 13,
+                            height: displayHeight(context) / 25,
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
-                      child: OutlineButton(
-                        onPressed: (){
-
-                          print(' method for old Outline button that deals with navigation to Shopping Cart Page');
-
-                        },
+                            child: OutlineButton(
+                              onPressed: () {
+                                print(
+                                    ' method for old Outline button that deals with navigation to Shopping Cart Page');
+                              },
 //                        color: Color(0xffFEE295),
-                        clipBehavior: Clip.hardEdge,
-                        splashColor:  Color(0xffFEE295),
+                              clipBehavior: Clip.hardEdge,
+                              splashColor: Color(0xffFEE295),
 //          splashColor: Color(0xff739DFA),
-                        highlightElevation: 12,
+                              highlightElevation: 12,
 //          clipBehavior: Clip.hardEdge,
 //          highlightElevation: 12,
-                        shape: RoundedRectangleBorder(
+                              shape: RoundedRectangleBorder(
 
-                          borderRadius: BorderRadius.circular(35.0),
-                        ),
+                                borderRadius: BorderRadius.circular(35.0),
+                              ),
 //          disabledBorderColor: false,
-                        borderSide: BorderSide(
-                          color:  Color(0xffFEE295),
-                          style: BorderStyle.solid,
-                          width: 3.6,
-                        ),
+                              borderSide: BorderSide(
+                                color: Color(0xffFEE295),
+                                style: BorderStyle.solid,
+                                width: 3.6,
+                              ),
 
 
-                        child:
-                        ///SSWW
+                              child:
+
+                              ///SSWW
 
 
+                              Center(
+                                child: Stack(
+                                    children: <Widget>[ Center(
+                                      child: Icon(
 
-                        Center(
-                          child: Stack(
-                              children: <Widget>[ Center(
-                                child: Icon(
+                                        Icons.add_shopping_cart,
+                                        size: 40,
+                                        color: Color(0xff707070),
+                                      ),
+                                    ),
 
-                                  Icons.add_shopping_cart,
-                                  size: 40,
-                                  color: Color(0xff707070),
+                                      Container(
+//                                              color:Colors.red,
+                                        width: 30,
+
+
+                                        decoration: new BoxDecoration(
+                                          color: Colors.redAccent,
+
+                                          border: new Border.all(
+                                              color: Colors.green,
+                                              width: 1.0,
+                                              style: BorderStyle.solid
+                                          ),
+                                          shape: BoxShape.circle,
+
+                                        ),
+
+                                        alignment: Alignment.center,
+                                        child: Text(
+
+                                          itemCountNew.toString(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight
+                                                .normal,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+
+                                      ),
+
+                                    ]
                                 ),
                               ),
 
-                                Container(
-//                                              color:Colors.red,
-                                  width:  30,
-
-
-                                  decoration: new BoxDecoration(
-                                    color: Colors.redAccent,
-
-                                    border: new Border.all(
-                                        color: Colors.green,
-                                        width: 1.0,
-                                        style: BorderStyle.solid
-                                    ),
-                                    shape: BoxShape.circle,
-
-                                  ),
-
-                                  alignment: Alignment.center,
-                                  child:Text(
-                                    _itemCount.toString(),
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight
-                                          .normal,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-
-                                ),
-
-                              ]
+                            ),
                           ),
-                        ),
+
+
+                          IconButton(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 0),
+                            icon: Icon(Icons.remove_circle_outline),
+//                                                                            icon: Icon(Icons.remove),
+                            iconSize: 30,
+                            tooltip: 'Decrease product count by 1',
+                            onPressed: () {
+                              final foodItemDetailsbloc = BlocProvider.of<
+                                  FoodItemDetailsBloc>(context);
+                              print(
+                                  'Decrease button pressed related to _itemCount');
+                              if (itemCountNew >= 1) {
+//                                if (itemCountNew == 1) {
+                                  print(
+                                      'itemCountNew== $itemCountNew');
+
+                                  /*
+                                  SelectedFood oneSelectedFoodFD = new SelectedFood(
+                                    foodItemName: foodItemDetailsbloc
+                                        .currentFoodItem
+                                        .itemName,
+                                    foodItemImageURL: foodItemDetailsbloc
+                                        .currentFoodItem.imageURL,
+                                    unitPrice: initialPriceByQuantityANDSize,
+                                    foodDocumentId: foodItemDetailsbloc
+                                        .currentFoodItem.documentId,
+                                    quantity: _itemCount - 1,
+                                    foodItemSize: _currentSize,
+                                    // index or int value not good enought since size may vary best on Food Types .
+                                  );
+                                  */
+                                  foodItemDetailsbloc
+                                      .decrementOneSelectedFoodForOrder(itemCountNew);
+
+                                /*
+                                else {
+                                  /*
+                                  // WHEN _itemCount not 1-1 = zero. but getter than 0(zero).
+                                  SelectedFood oneSelectedFoodFD = new SelectedFood(
+                                    foodItemName: foodItemDetailsbloc
+                                        .currentFoodItem
+                                        .itemName,
+                                    foodItemImageURL: foodItemDetailsbloc
+                                        .currentFoodItem.imageURL,
+                                    unitPrice: initialPriceByQuantityANDSize,
+                                    foodDocumentId: foodItemDetailsbloc
+                                        .currentFoodItem.documentId,
+                                    quantity: _itemCount - 1,
+                                    foodItemSize: _currentSize,
+                                    // index or int value not good enough since size may vary based on Food Types .
+                                  );
+                                  */
+                                  foodItemDetailsbloc
+                                      .decrementOneSelectedFoodForOrder(
+                                      oneSelectedFoodFD, _itemCount - 1);
+                                      */
+
+//                                }
+
+
+
+                              }
+                            },
+//                              size: 24,
+                            color: Color(0xff707070),
+                          ),
+
+
+
+
+                        ],
 
                       ),
-                    ),
 
-
-                    IconButton(
-                      padding:   EdgeInsets.symmetric(horizontal: 0,vertical: 0),
-                      icon: Icon(Icons.remove_circle_outline),
-//                                                                            icon: Icon(Icons.remove),
-                      iconSize: 30,
-                      tooltip: 'Decrease product count by 1',
-                      onPressed: () {
-                        final foodItemDetailsbloc = BlocProvider.of<
-                            FoodItemDetailsBloc>(context);
-                        print(
-                            'Decrease button pressed related to _itemCount');
-                        if (_itemCount >= 1) {
-
-                          if(_itemCount == 1) {
-
-                            print(
-                                '_itemCount == 1');
-
-                            SelectedFood oneSelectedFoodFD = new SelectedFood(
-                              foodItemName: foodItemDetailsbloc.currentFoodItem
-                                  .itemName,
-                              foodItemImageURL: foodItemDetailsbloc
-                                  .currentFoodItem.imageURL,
-                              unitPrice: initialPriceByQuantityANDSize,
-                              foodDocumentId: foodItemDetailsbloc
-                                  .currentFoodItem.documentId,
-                              quantity: _itemCount - 1,
-                              foodItemSize: _currentSize,
-                              // index or int value not good enought since size may vary best on Food Types .
-                            );
-                            foodItemDetailsbloc.decrementOneSelectedFoodForOrder(
-                                oneSelectedFoodFD,0);
-                          }
-                          else{
-                            // WHEN _itemCount not 1-1 = zero. but getter than 0(zero).
-                            SelectedFood oneSelectedFoodFD = new SelectedFood(
-                              foodItemName: foodItemDetailsbloc.currentFoodItem
-                                  .itemName,
-                              foodItemImageURL: foodItemDetailsbloc
-                                  .currentFoodItem.imageURL,
-                              unitPrice: initialPriceByQuantityANDSize,
-                              foodDocumentId: foodItemDetailsbloc
-                                  .currentFoodItem.documentId,
-                              quantity: _itemCount - 1,
-                              foodItemSize: _currentSize,
-                              // index or int value not good enought since size may vary best on Food Types .
-                            );
-                            foodItemDetailsbloc.decrementOneSelectedFoodForOrder(
-                                oneSelectedFoodFD,_itemCount - 1);
-                          }
-                          setState(() {
-                            _itemCount =
-                                _itemCount - 1;
-//                            initialPriceByQuantityANDSize =
-//                                initialPriceByQuantityANDSize *
-//                                    _itemCount;
-                          });
-                        }
-                      },
-//                              size: 24,
-                      color: Color(0xff707070),
-                    ),
-
-                  ],
-
-                ),
-
+                    );
+                  }
+                }
               ),
 
             ]

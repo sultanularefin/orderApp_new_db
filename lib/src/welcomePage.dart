@@ -267,7 +267,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       BlocProvider<FoodGalleryBloc>(
                           bloc: FoodGalleryBloc(),
                           child: BlocProvider<FoodItemDetailsBloc>(
-                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs,fromWhichPage:0),
+                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
                               child: FoodGallery2()
 
                           )

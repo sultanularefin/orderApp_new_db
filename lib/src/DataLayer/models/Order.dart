@@ -33,6 +33,7 @@ class Order {
 //  // final String foodItemOrderID;     // random might not be needed.
 //  List<NewIngredient> ingredients;
   List<SelectedFood> selectedFoodInOrder;
+  int selectedFoodListLength;
 
   int deliveryTypeIndex;
   int paymentTypeIndex;
@@ -50,6 +51,7 @@ class Order {
 //        this.quantity,
 //        this.foodItemSize,
         this.selectedFoodInOrder,
+        this.selectedFoodListLength,
         this.deliveryTypeIndex,
         this.paymentTypeIndex,
         this.ordersCustomer
