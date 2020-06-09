@@ -234,11 +234,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               BlocProvider<FoodGalleryBloc>(
                                 bloc: FoodGalleryBloc(),
 
-
+/*
                                 child: BlocProvider<FoodItemDetailsBloc>(
                                     bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:2
                                       /* what about the default one.*/),
 
+                                    */
 
                                     child: FoodGallery2()
 //                                  child: FoodGallery2()
@@ -256,7 +257,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   }
                                   */
                               ),
-                        ),
+//                        ),
                       );
 
 

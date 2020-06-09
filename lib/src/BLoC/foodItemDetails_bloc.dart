@@ -217,10 +217,10 @@ class FoodItemDetailsBloc implements Bloc {
 
 //      List<NewIngredient> _allIngItems=[];
 
-      List<NewIngredient> _defaultIngItems = [];
-      List<NewIngredient> _unSelectedIngItems = [];
-      List<FoodPropertyMultiSelect> _multiSelectForFood =[];
-      Order _currentOrderFoodDetails ;
+//      List<NewIngredient> _defaultIngItems = [];
+//      List<NewIngredient> _unSelectedIngItems = [];
+//      List<FoodPropertyMultiSelect> _multiSelectForFood =[];
+//      Order _currentOrderFoodDetails ;
 
 
 //      Order get getCurrentOrderFoodDetails => _currentOrderFoodDetails;

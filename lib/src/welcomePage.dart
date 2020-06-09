@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
@@ -28,6 +27,10 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+
+import 'package:foodgallery/src/BLoC/app_bloc.dart';
+import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
@@ -46,60 +49,9 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
 
+
   // Login Button.
-  Widget _loginButton() {
-    return InkWell(
-      onTap: () {
 
-        //              Scaffold.of(context).showSnackBar(
-        //                  SnackBar(content: Row(
-        //                    children:[
-        //                      Icon(Icons.thumb_up),
-        //                      SizedBox(width:20),
-        //                      Expanded(child: Text("Hello",
-        //                        style: TextStyle(fontSize: 20,
-        //                            color: Colors.lightBlueAccent,
-        //                            backgroundColor:Colors.deepOrange ),
-        //                      ),),],),
-        //                    duration: Duration(seconds: 4),
-        //                  )
-        //              );
-        return Navigator.push(
-
-//            BlocProvider<FoodItemDetailsBloc>(
-//              bloc: FoodItemDetailsBloc(
-//                  oneFoodItem,
-//                  allIngredients),
-//
-//
-//              child: FoodItemDetails2()
-//
-//              ,),
-            context, MaterialPageRoute(builder: (context) => LoginPage())
-
-        );
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 13),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Color(0xffdf8e33).withAlpha(100),
-                  offset: Offset(2, 4),
-                  blurRadius: 8,
-                  spreadRadius: 2)
-            ],
-            color: Colors.white),
-        child: Text(
-          'Login',
-          style: TextStyle(fontSize: 20, color: Color(0xfff7892b)),
-        ),
-      ),
-    );
-  }
 
 
 
@@ -173,6 +125,10 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final appBloc = AppBloc();
+    final AppBloc appBlockinWelcomePage =appBloc;
+
 
     final identityBloc = BlocProvider.of<IdentityBloc>(context);
 
@@ -262,15 +218,20 @@ class _WelcomePageState extends State<WelcomePage> {
                   FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
                   List<NewIngredient> emptyIngs = [];
 
+
+
 //                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
-                      BlocProvider<FoodGalleryBloc>(
-                          bloc: FoodGalleryBloc(),
+                      BlocProvider2(
+                          bloc: AppBloc(),
+                          /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
                               child: FoodGallery2()
 
                           )
+                          */
+                          child: FoodGallery2()
                       )
 
                   );

@@ -1,6 +1,7 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
@@ -93,7 +94,10 @@ class _FoodGalleryState extends State<FoodGallery2> {
   Future<void> setAllIngredients() async {
 
     debugPrint("Entering in retrieveIngredients1");
-    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+
+//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+    
+    BlocProvider2.of(context).getFoodGalleryBlockObject;
     await bloc.getAllIngredients();
     List<NewIngredient> test = bloc.allIngredients;
 
@@ -226,7 +230,11 @@ class _FoodGalleryState extends State<FoodGallery2> {
   Widget build(BuildContext context) {
 //    String a = Constants.SUCCESS_MESSAGE;
 
-    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+
+
+//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
 
 //    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<FoodItemDetailsBloc>(context);
 
@@ -473,7 +481,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                     */
                                     // FOR CATEGORY SERARCH.
 
-                                    child: shoppingCartClass(
+                                    child: ShoppingCartClass(
 
                                       /*
                                         categoryString: _currentCategory,
@@ -487,7 +495,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
                                   ),
-//                                  shoppingCartClass(),
+//                                  ShoppingCartClass(),
 
 
 
@@ -692,14 +700,14 @@ class _FoodGalleryState extends State<FoodGallery2> {
 }
 
 
-class shoppingCartClass extends StatelessWidget {
+class ShoppingCartClass extends StatelessWidget {
 
 
 //  final String categoryString;
 //  final String searchString2;
 //  final List<NewIngredient> allIngredients;
 
-  shoppingCartClass(
+  ShoppingCartClass(
       /*{this.categoryString, this.searchString2 ,this.allIngredients } */);
 
   final logger = Logger(

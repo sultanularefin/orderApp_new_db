@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
-import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+
 import 'package:foodgallery/src/identity/signup.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:logger/logger.dart';
 import './Widget/bezierContainer.dart';
 //import 'package:fluttercrud/src/screens/drawerScreen/drawerScreen.dart';
 //import 'package:fluttercrud/src/screens/homeScreen/admin_firebase_food.dart';
@@ -18,6 +15,16 @@ import './Widget/bezierContainer.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+
+/* bloc's  */
+
+import 'package:foodgallery/src/BLoC/bloc_provider.dart';
+import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
+import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+import 'package:foodgallery/src/BLoC/app_bloc.dart';
+import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -37,6 +44,10 @@ class _LoginPageState extends State<LoginPage> {
 //  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   String emailState ='';
   String passwordState = '';
+
+  final logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
   void setEmailState( text){
 
@@ -329,7 +340,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         InkWell(
                           onTap: (){
-                            print("Container clicked");
+                            print("login button pressed");
 //                            showDialog(
 //                                context: context,
 //                                builder: (BuildContext context) {
@@ -337,11 +348,13 @@ class _LoginPageState extends State<LoginPage> {
 //                                });
 
                             _scaffoldKey.currentState.showSnackBar(
-                                new SnackBar(duration: new Duration(seconds: 6), content:
+                                new SnackBar(duration: new Duration(seconds: 2), content:
                                 new Row(
                                   children: <Widget>[
                                     new CircularProgressIndicator(),
-                                    new Text("  Signing-In...")
+                                    new Text("  Signing-In...",style:TextStyle(
+                                      color: Colors.white38,
+                                    ))
                                   ],
                                 ),
                                 )
@@ -350,7 +363,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
                             Future<AuthResult> userCheck=
-                            identityBlocLoginPage.handleSignInFromLoginPage(emailState,passwordState);
+                            identityBlocLoginPage.handleSignInFromLoginPage(emailState.trim(),passwordState.trim());
 
 //                            _handleSignIn();
 
@@ -367,11 +380,18 @@ class _LoginPageState extends State<LoginPage> {
                                 //        MaterialPageRoute(builder: (context) => MyHomePage())
                                 MaterialPageRoute(builder: (BuildContext context) {
 
+                                  return BlocProvider2(
+                                      bloc: AppBloc(),
+                                      child: FoodGallery2()
+                                  );
+                                  /*
                                   return BlocProvider<FoodGalleryBloc>(
                                       bloc: FoodGalleryBloc(),
                                       child: FoodGallery2()
 
                                   );
+
+                                  */
 
 
 
@@ -391,6 +411,7 @@ class _LoginPageState extends State<LoginPage> {
 
 //                            _handleSignIn();
                             }).catchError((onError){
+                               logger.e('at onError');
                               _scaffoldKey.currentState.showSnackBar(
                                 new SnackBar(duration: new Duration(seconds: 6), content:Container(
                                   child:
@@ -398,7 +419,8 @@ class _LoginPageState extends State<LoginPage> {
                                     children: <Widget>[
                                       new CircularProgressIndicator(),
                                       new Text("Error: ${onError.message.substring(0,40)}",style:
-                                      TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                      TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                                          color:Colors.white)),
                                     ],
                                   ),
                                 )),);
