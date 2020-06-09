@@ -209,6 +209,30 @@ class FoodItemDetailsBloc implements Bloc {
 
     else if(fromWhichPage == 2){
 
+      allIngsScoped = _allIngItems;
+//      oneFoodItem= _thisFoodItem;
+
+      FoodItemWithDocIDViewModel _thisFoodItem ;
+
+
+//      List<NewIngredient> _allIngItems=[];
+
+      List<NewIngredient> _defaultIngItems = [];
+      List<NewIngredient> _unSelectedIngItems = [];
+      List<FoodPropertyMultiSelect> _multiSelectForFood =[];
+      Order _currentOrderFoodDetails ;
+
+
+//      Order get getCurrentOrderFoodDetails => _currentOrderFoodDetails;
+//      List<NewIngredient> get allIngredients => _allIngItems;
+//
+//      List<NewIngredient> get getDefaultIngredients => _defaultIngItems;
+//      List<NewIngredient> get unSelectedIngredients => _unSelectedIngItems;
+//
+//
+//      List<FoodPropertyMultiSelect> get getMultiSelectForFood => _multiSelectForFood;
+
+
 //
 
       print('2 means from Food Item Details page to FoogGallery2 page [ pop ] '); // pop

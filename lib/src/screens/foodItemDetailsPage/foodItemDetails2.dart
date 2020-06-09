@@ -236,7 +236,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                                 child: BlocProvider<FoodItemDetailsBloc>(
-                                    bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:2 ),
+                                    bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:2
+                                      /* what about the default one.*/),
 
 
                                     child: FoodGallery2()
