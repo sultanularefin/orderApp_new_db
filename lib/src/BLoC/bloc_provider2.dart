@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:foodgallery/src/BLoC/app_bloc.dart';
 //extends InheritedWidget
-class BlocProvider2 extends StatefulWidget  {
+class BlocProvider2 extends /* StatefulWidget */ InheritedWidget {
   final AppBloc bloc;
 
   final Widget child;
 //  final T bloc;
-  BlocProvider2({Key key, this.bloc, /*child*/ @required this.child}) : super(key: key/*, child: child */);
+  BlocProvider2({Key key, this.bloc, /*child*/ @required this.child}) : super(key: key, child: child /**/);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
@@ -24,10 +24,12 @@ class BlocProvider2 extends StatefulWidget  {
 //  @override
 //  StatefulElement createElement() => StatefulElement(this);
 
-  @override
-  _BlocProvider2State createState() => _BlocProvider2State();
+  // STATEFUL WDIGET
+//  @override
+//  _BlocProvider2State createState() => _BlocProvider2State();
 }
 
+/*
 class _BlocProvider2State extends State<BlocProvider2> {
   // 4
   @override
@@ -41,3 +43,4 @@ class _BlocProvider2State extends State<BlocProvider2> {
   }
 }
 
+*/
