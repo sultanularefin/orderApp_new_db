@@ -16,7 +16,7 @@ import 'package:logger/logger.dart';
 
 
 
-class AppBloc extends StatefulWidget {
+class AppBloc {
 
   final logger = Logger(
     printer: PrettyPrinter(),
@@ -90,19 +90,6 @@ class AppBloc extends StatefulWidget {
 //
 //  @override
 //  _WelcomePageState createState() => _WelcomePageState();
-  @override
-  _AppBlocState createState() => _AppBlocState();
+
 }
 
-class _AppBlocState extends State<AppBloc> {
-  // 4
-  @override
-  Widget build(BuildContext context) => widget.child;
-
-  // 5
-  @override
-  void dispose() {
-//    widget.bloc.dispose();
-    super.dispose();
-  }
-}

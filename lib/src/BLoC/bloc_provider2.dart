@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:foodgallery/src/BLoC/app_bloc.dart';
-
-class BlocProvider2 extends InheritedWidget {
+//extends InheritedWidget
+class BlocProvider2 extends StatefulWidget  {
   final AppBloc bloc;
 
-  BlocProvider2({Key key, this.bloc, child}) : super(key: key, child: child);
+  final Widget child;
+//  final T bloc;
+  BlocProvider2({Key key, this.bloc, /*child*/ @required this.child}) : super(key: key/*, child: child */);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
@@ -14,4 +16,28 @@ class BlocProvider2 extends InheritedWidget {
       (context.inheritFromWidgetOfExactType(BlocProvider2) as BlocProvider2).bloc;
 
 //  (context.dependOnInheritedWidgetOfExactType(/*BlocProvider*/) as BlocProvider).bloc;
+
+
+//
+//  @override
+//  _WelcomePageState createState() => _WelcomePageState();
+//  @override
+//  StatefulElement createElement() => StatefulElement(this);
+
+  @override
+  _BlocProvider2State createState() => _BlocProvider2State();
 }
+
+class _BlocProvider2State extends State<BlocProvider2> {
+  // 4
+  @override
+  Widget build(BuildContext context) => widget.child;
+
+  // 5
+  @override
+  void dispose() {
+//    widget.bloc.dispose();
+    super.dispose();
+  }
+}
+
