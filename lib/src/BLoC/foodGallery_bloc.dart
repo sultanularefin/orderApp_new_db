@@ -33,7 +33,7 @@ class FoodGalleryBloc implements Bloc {
 
   List<NewCategoryItem> _allCategoryList=[];
 
-  List<NewIngredient> _allIngItems =[];
+
 
 
 
@@ -46,7 +46,7 @@ class FoodGalleryBloc implements Bloc {
 
   List<FoodItemWithDocID> get allFoodItems => _allFoodsList;
   List<NewCategoryItem> get allCategories => _allCategoryList;
-  List<NewIngredient> get allIngredients => _allIngItems;
+
 
 
   //  The => expr syntax is a shorthand for { return expr; }.
@@ -57,7 +57,7 @@ class FoodGalleryBloc implements Bloc {
   final _foodItemController = StreamController <List<FoodItemWithDocID>>();
   final _categoriesController = StreamController <List<NewCategoryItem>>();
 
-  final _allIngredientListController = StreamController <List<NewIngredient>>();
+
 
 //  final _controller = StreamController<List<Restaurant>>.broadcast();
 
@@ -74,7 +74,7 @@ class FoodGalleryBloc implements Bloc {
 
   Stream<List<NewCategoryItem>> get categoryItemsStream => _categoriesController.stream;
 
-  Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
+
 
 
 
@@ -154,6 +154,8 @@ class FoodGalleryBloc implements Bloc {
   //  Future<List<NewCategoryItem>> getAllCategories() async {
 
 
+  // COPIED TO IDENTITY BLOC
+/*
 
   Future getAllIngredients() async {
 
@@ -186,6 +188,8 @@ class FoodGalleryBloc implements Bloc {
 //    return ingItems;
 
   }
+
+  */
 
 
   void getAllCategories() async {
@@ -269,6 +273,6 @@ class FoodGalleryBloc implements Bloc {
   void dispose() {
     _foodItemController.close();
     _categoriesController.close();
-    _allIngredientListController.close();
+//    _allIngredientListController.close();
   }
 }

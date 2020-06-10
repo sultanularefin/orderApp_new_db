@@ -2,6 +2,7 @@
 
 //### EXTERNAL PACKAGES
 import 'dart:async';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:logger/logger.dart';
 
 
@@ -22,15 +23,25 @@ import 'package:google_sign_in/google_sign_in.dart';
 //MODELS
 
 
+
+
 class IdentityBloc implements Bloc {
 
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+
   var logger = Logger(
     printer: PrettyPrinter(),
   );
+
+
+  List<NewIngredient> _allIngItems =[];
+  List<NewIngredient> get allIngredients => _allIngItems;
+  final _allIngredientListController = StreamController <List<NewIngredient>>();
+  Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
 
   final _client = FirebaseClient();
 
@@ -92,6 +103,40 @@ class IdentityBloc implements Bloc {
 
 
     loadUserFromConstructor();
+  }
+
+
+// this code bloc cut paste from foodGallery Bloc:
+  Future getAllIngredients() async {
+
+
+    var snapshot = await _client.fetchAllIngredients();
+    List docList = snapshot.documents;
+
+
+
+    List <NewIngredient> ingItems = new List<NewIngredient>();
+    ingItems = snapshot.documents.map((documentSnapshot) =>
+        NewIngredient.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+    print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+
+
+    _allIngItems = ingItems;
+
+    _allIngredientListController.sink.add(ingItems);
+
+
+//    return ingItems;
+
   }
 
 // CONSTRUCTOR ENDS HERE.
@@ -342,6 +387,7 @@ class IdentityBloc implements Bloc {
   @override
   void dispose() {
     _firebaseUserController.close();
+    _allIngredientListController.close();
 //    _orderController.close();
 //    _orderTypeController.close();
 //    _customerInformationController.close();

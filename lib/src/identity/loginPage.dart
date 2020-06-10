@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 import 'package:foodgallery/src/identity/signup.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
@@ -265,38 +267,8 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'F',
-          style:
-            TextStyle( //Theme.of(context).textTheme.display1,
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Color(0xffe46b10),
-          ),
-          children: [
-            TextSpan(
-              text: 'ood',
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            TextSpan(
-              text: 'Gallery',
-              style: TextStyle(color: Color(0xffe46b10), fontSize: 30),
-            ),
-          ]),
-    );
-  }
 
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField("Email id"),
-        _entryField("Password", isPassword: true),
-      ],
-    );
-  }
+  List<NewIngredient> loginPageIngredients;
 
 
   @override
@@ -305,8 +277,47 @@ class _LoginPageState extends State<LoginPage> {
     print('at initState of Login Page');
     super.initState();
     _showSettingsPanel();
+    setAllIngredients();
 
   }
+
+  Future<void> setAllIngredients() async {
+
+    debugPrint("Entering in retrieveIngredients1");
+
+//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+
+//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
+//    await bloc.getAllIngredients();
+
+    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
+    await identityBlockinInitState.getAllIngredients();
+    List<NewIngredient> test = identityBlockinInitState.allIngredients;
+
+
+//    List<NewIngredient> test = bloc.allIngredients;
+
+//    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
+
+    print('done: ');
+
+//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
+//    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
+
+    setState(()
+    {
+      print('_allIngredientState: $test');
+      loginPageIngredients = test;
+//      priceByQuantityANDSize = euroPrice1;
+//      initialPriceByQuantityANDSize = euroPrice1;
+    }
+    );
+
+
+
+  }
+
+
 
 
 
@@ -374,6 +385,9 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             ).then((onValue){
 
+                              FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+                              List<NewIngredient> emptyIngs = [];
+
                               Navigator.of(context).pushAndRemoveUntil(
                                 //        MaterialPageRoute(builder: (context) => HomeScreen())
                                 //
@@ -381,7 +395,7 @@ class _LoginPageState extends State<LoginPage> {
                                 MaterialPageRoute(builder: (BuildContext context) {
 
                                   return BlocProvider2(
-                                      bloc: AppBloc(),
+                                      bloc: AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
                                       child: FoodGallery2()
                                   );
                                   /*
@@ -468,6 +482,40 @@ class _LoginPageState extends State<LoginPage> {
               ),
             )
         )
+    );
+  }
+
+
+  Widget _title() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+          text: 'F',
+          style:
+          TextStyle( //Theme.of(context).textTheme.display1,
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+            color: Color(0xffe46b10),
+          ),
+          children: [
+            TextSpan(
+              text: 'ood',
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            TextSpan(
+              text: 'Gallery',
+              style: TextStyle(color: Color(0xffe46b10), fontSize: 30),
+            ),
+          ]),
+    );
+  }
+
+  Widget _emailPasswordWidget() {
+    return Column(
+      children: <Widget>[
+        _entryField("Email id"),
+        _entryField("Password", isPassword: true),
+      ],
     );
   }
 }

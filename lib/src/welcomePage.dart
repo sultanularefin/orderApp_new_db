@@ -56,7 +56,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
 
 
-
+  List<NewIngredient> welcomPageIngredients;
   @override
   void initState(){
 
@@ -78,6 +78,7 @@ class _WelcomePageState extends State<WelcomePage> {
      in the future (might not need now.).
 
      */
+    setAllIngredients();
     localStorageCheck();
 
     //  this requred since stream can only handle one kind of variale. In this page FirebaseUser.
@@ -117,6 +118,42 @@ class _WelcomePageState extends State<WelcomePage> {
 
   }
 
+  Future<void> setAllIngredients() async {
+
+    debugPrint("Entering in retrieveIngredients1");
+
+//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+
+//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
+//    await bloc.getAllIngredients();
+
+    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
+    await identityBlockinInitState.getAllIngredients();
+    List<NewIngredient> test = identityBlockinInitState.allIngredients;
+
+
+//    List<NewIngredient> test = bloc.allIngredients;
+
+//    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
+
+    print('done: ');
+
+//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
+//    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
+
+    setState(()
+    {
+      print('_allIngredientState: $test');
+      welcomPageIngredients = test;
+//      priceByQuantityANDSize = euroPrice1;
+//      initialPriceByQuantityANDSize = euroPrice1;
+    }
+    );
+
+
+
+  }
+
 
 
 
@@ -126,8 +163,11 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final appBloc = AppBloc();
-    final AppBloc appBlockinWelcomePage =appBloc;
+    FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+    List<NewIngredient> emptyIngs = [];
+
+    final appBloc = AppBloc(emptyFoodItemWithDocID,emptyIngs,fromWhichPage:0);
+    final AppBloc appBlockinWelcomePage = appBloc;
 
 
     final identityBloc = BlocProvider.of<IdentityBloc>(context);
@@ -216,14 +256,22 @@ class _WelcomePageState extends State<WelcomePage> {
                 */
 
                   FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+
+
+
+
+                  List<NewIngredient> _allIngredientState=[];
                   List<NewIngredient> emptyIngs = [];
 
+
+
+//                  final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
 
 
 //                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
                       BlocProvider2(
-                          bloc: AppBloc(),
+                          bloc: AppBloc(emptyFoodItemWithDocID,welcomPageIngredients,fromWhichPage:0),
                           /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
