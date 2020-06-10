@@ -306,7 +306,7 @@ class _LoginPageState extends State<LoginPage> {
 
     setState(()
     {
-      print('_allIngredientState: $test');
+      logger.e('_allIngredientState length : ${test.length}');
       loginPageIngredients = test;
 //      priceByQuantityANDSize = euroPrice1;
 //      initialPriceByQuantityANDSize = euroPrice1;

@@ -1,5 +1,12 @@
+
+
+
+// EXTERNAL PKGS BELOW.
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logger/logger.dart';
 import 'package:flutter/material.dart';
+// EXTERNAL PKGS ABOVE.
+
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
@@ -22,6 +29,7 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 //TODO STATE ful widget not required
 //class MyApp extends StatelessWidget {
+
 /*  Block related Files BELOW */
 
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
@@ -38,6 +46,8 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 
 /*  Block related Files ABOVE */
+
+
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key key, this.title}) : super(key: key);
 
@@ -57,6 +67,12 @@ class _WelcomePageState extends State<WelcomePage> {
 
 
   List<NewIngredient> welcomPageIngredients;
+
+  final logger = Logger(
+    printer: PrettyPrinter(),
+  );
+
+
   @override
   void initState(){
 
@@ -143,7 +159,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
     setState(()
     {
-      print('_allIngredientState: $test');
+      logger.i('_allIngredientState length : ${test.length}');
       welcomPageIngredients = test;
 //      priceByQuantityANDSize = euroPrice1;
 //      initialPriceByQuantityANDSize = euroPrice1;
@@ -166,8 +182,8 @@ class _WelcomePageState extends State<WelcomePage> {
     FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
     List<NewIngredient> emptyIngs = [];
 
-    final appBloc = AppBloc(emptyFoodItemWithDocID,emptyIngs,fromWhichPage:0);
-    final AppBloc appBlockinWelcomePage = appBloc;
+//    final appBloc = AppBloc(emptyFoodItemWithDocID,emptyIngs,,fromWhichPage:0);
+//    final AppBloc appBlockinWelcomePage = appBloc;
 
 
     final identityBloc = BlocProvider.of<IdentityBloc>(context);
@@ -271,7 +287,8 @@ class _WelcomePageState extends State<WelcomePage> {
 //                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
                       BlocProvider2(
-                          bloc: AppBloc(emptyFoodItemWithDocID,welcomPageIngredients,fromWhichPage:0),
+                          bloc: AppBloc(emptyFoodItemWithDocID,welcomPageIngredients,
+                              fromWhichPage:0),
                           /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),

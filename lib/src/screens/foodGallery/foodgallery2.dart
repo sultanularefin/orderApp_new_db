@@ -393,14 +393,14 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                        labelText: 'Search about meal.'
                                             ),
                                             onChanged: (text) {
-                                              logger.i('on onChanged of condition 4');
+//                                              logger.i('on onChanged of condition 4');
 
                                               setState(() => _searchString = text);
                                               print("First text field from Condition 04: $text");
                                             },
                                             onTap:(){
                                               print('condition 4');
-                                              logger.i('on Tap of condition 4');
+//                                              logger.i('on Tap of condition 4');
                                               setState(() {
                                                 _firstTimeCategoryString ='PIZZA';
                                               });
@@ -408,7 +408,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                             },
 
                                             onEditingComplete: (){
-                                              logger.i('onEditingComplete  of condition 4');
+//                                              logger.i('onEditingComplete  of condition 4');
                                               print('called onEditing complete');
                                               setState(() => _searchString = "");
                                             },
@@ -749,7 +749,7 @@ Widget work1(BuildContext context){
 
         builder: (context, snapshot) {
           if ((snapshot.hasError) || (!snapshot.hasData)) {
-            logger.e('no Order data fetched');
+//            logger.e('no Order data fetched');
 
 //                                          return Center(child: new LinearProgressIndicator());
             int selectedFoodsForOrderLength = 0;
@@ -843,7 +843,7 @@ Widget work1(BuildContext context){
           else {
             Order sessionedOrder = snapshot.data;
 
-            logger.e('sessionedOrder TTTT: $sessionedOrder');
+//            logger.e('sessionedOrder TTTT: $sessionedOrder');
 
             int selectedFoodsForOrderLength = sessionedOrder.selectedFoodInOrder
                 .length;
@@ -1445,7 +1445,7 @@ class FoodList extends StatelessWidget {
               );
           }
           else {
-            logger.i('allFoods at all else is: ', allFoods.length);
+//            logger.i('allFoods at all else is: ', allFoods.length);
 
             final List filteredItems = allFoods.where((oneItem) =>
                 oneItem.itemName.toLowerCase().

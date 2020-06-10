@@ -107,7 +107,7 @@ class IdentityBloc implements Bloc {
 
 
 // this code bloc cut paste from foodGallery Bloc:
-  Future getAllIngredients() async {
+  Future<void> getAllIngredients() async {
 
 
     var snapshot = await _client.fetchAllIngredients();

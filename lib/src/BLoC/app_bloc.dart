@@ -16,17 +16,24 @@ import 'package:logger/logger.dart';
 
 
 
-class AppBloc {
+class AppBloc extends StatefulWidget {
 
-  var logger = Logger(
+  final logger = Logger(
     printer: PrettyPrinter(),
   );
+
+//  final Widget child;
+//  /*final */Widget child;
+//  final T bloc;
+
+//  const AppBloc({Key key /*, @required this.bloc */, @required this.child})
+//      : super(key: key);
 
   FoodGalleryBloc foodGalleryBlockObject;
   FoodItemDetailsBloc foodItemDetailsBlockObject;
 
   FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
-  List<NewIngredient> emptyIngs = [];
+  List<NewIngredient> thisAllIngredients = [];
 
 
 
@@ -45,9 +52,13 @@ class AppBloc {
 
 //  FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
 
-  AppBloc(FoodItemWithDocID oneFoodItemWithDocID,List<NewIngredient> allIngredients,{int fromWhichPage =1}) {
+  AppBloc(FoodItemWithDocID oneFoodItemWithDocID,List<NewIngredient> allIngredients,
+      {int fromWhichPage =1}) {
 
 //    getAllIngredients(/*fromWhichPage*/);
+
+    thisAllIngredients =allIngredients;
+    logger.i('thisAllIngredients.lenght: ${thisAllIngredients.length}');
 
     if(fromWhichPage==0){
 
@@ -63,7 +74,7 @@ class AppBloc {
 
       logger.w('allIngredients: $allIngredients');
       foodGalleryBlockObject = FoodGalleryBloc();
-      foodItemDetailsBlockObject = FoodItemDetailsBloc(oneFoodItemWithDocID,allIngredients ,fromWhichPage:1);
+      foodItemDetailsBlockObject = FoodItemDetailsBloc(oneFoodItemWithDocID,thisAllIngredients ,fromWhichPage:1);
     }
 
 //    foodGalleryBlockObject.counter$.listen(foodItemDetailsBlockObject.increment.add);
@@ -75,4 +86,23 @@ class AppBloc {
 
   FoodGalleryBloc get getFoodGalleryBlockObject => foodGalleryBlockObject;
   FoodItemDetailsBloc get getFoodItemDetailsBlockObject => foodItemDetailsBlockObject;
+
+//
+//  @override
+//  _WelcomePageState createState() => _WelcomePageState();
+  @override
+  _AppBlocState createState() => _AppBlocState();
+}
+
+class _AppBlocState extends State<AppBloc> {
+  // 4
+  @override
+  Widget build(BuildContext context) => widget.child;
+
+  // 5
+  @override
+  void dispose() {
+//    widget.bloc.dispose();
+    super.dispose();
+  }
 }
