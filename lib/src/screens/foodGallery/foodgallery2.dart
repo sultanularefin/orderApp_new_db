@@ -91,7 +91,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
   @override
   void initState() {
-    setAllIngredients();
+//    setAllIngredients();
     super.initState();
 
   }

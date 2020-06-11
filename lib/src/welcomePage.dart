@@ -95,7 +95,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
      */
 
-    localStorageCheck();
+//    localStorageCheck();
 
     //  this requred since stream can only handle one kind of variale. In this page FirebaseUser.
 
@@ -219,8 +219,10 @@ class _WelcomePageState extends State<WelcomePage> {
 
         child:StreamBuilder<FirebaseUser>(
 
-            stream: identityBlocInvokerAppBlockWelcomPageBuildMethod.getCurrentFirebaseUserStream,
-            initialData: identityBlocInvokerAppBlockWelcomPageBuildMethod.getCurrentFirebaseUser,
+            stream: identityBlocInvokerAppBlockWelcomPageBuildMethod.
+            getCurrentFirebaseUserStream,
+            initialData: identityBlocInvokerAppBlockWelcomPageBuildMethod.
+            getCurrentFirebaseUser,
             builder: (context, snapshot) {
 //              switch (snapshot.connectionState){
 //                case ConnectionState.waiting:
