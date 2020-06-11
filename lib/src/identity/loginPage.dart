@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
@@ -114,7 +115,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
+        SystemNavigator.pop();
+//        Navigator.pop(context);
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -213,54 +215,10 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-  List<NewIngredient> loginPageIngredients;
-
-
-  @override
-  void initState(){
-
-    print('at initState of Login Page');
-    super.initState();
-//    _showSettingsPanel();
-//    setAllIngredients();
-
-  }
-
-  Future<void> setAllIngredients() async {
-
-    debugPrint("Entering in retrieveIngredients1");
-
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
-//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
-//    await bloc.getAllIngredients();
-
-    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
-    await identityBlockinInitState.getAllIngredients();
-    List<NewIngredient> test = identityBlockinInitState.allIngredients;
-
-
-//    List<NewIngredient> test = bloc.allIngredients;
-
-//    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
-
-    print('done: ');
-
-//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
-//    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
-
-    setState(()
-    {
-      logger.e('_allIngredientState length : ${test.length}');
-      loginPageIngredients = test;
-//      priceByQuantityANDSize = euroPrice1;
-//      initialPriceByQuantityANDSize = euroPrice1;
-    }
-    );
 
 
 
-  }
+
 
 
 
@@ -315,7 +273,8 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 )
                             );
-                            final identityBlocLoginPage = BlocProvider.of<IdentityBloc>(context);
+                            final identityBlocLoginPage =
+                            BlocProvider.of<IdentityBloc>(context);
 
 
                             Future<AuthResult> userCheck=

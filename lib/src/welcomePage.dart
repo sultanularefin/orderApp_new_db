@@ -73,6 +73,7 @@ class _WelcomePageState extends State<WelcomePage> {
   );
 
 
+  /*
   @override
   void initState(){
 
@@ -109,6 +110,7 @@ class _WelcomePageState extends State<WelcomePage> {
     super.initState();
 
   }
+  */
 
   // Future<void> return type .  ??
   Future<void> localStorageCheck () async{
@@ -191,6 +193,20 @@ class _WelcomePageState extends State<WelcomePage> {
 
 
 
+  /*
+  @override
+  void didChangeDependencies() {
+
+    localStorageCheck();
+    super.didChangeDependencies();
+//    final foo = Foo.of(context);
+//    if (this.foo != foo) {
+//      this.foo = foo;
+//      foo.doSomething();
+//    }
+  }
+
+  */
 
 
 

@@ -244,6 +244,20 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
+    _scaffoldKey.currentState.showSnackBar(
+        new SnackBar(duration: new Duration(seconds: 5), content:
+        new Row(
+          children: <Widget>[
+            new CircularProgressIndicator(),
+            new Text("  Signing-In...",style:TextStyle(
+              color: Colors.white38,
+            ))
+          ],
+        ),
+        )
+    );
+
+
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
 //    THIS ALSO WORKS
@@ -316,6 +330,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
       },
       child:
       Scaffold(
+        key: _scaffoldKey,
 //          backgroundColor: Colors.purpleAccent,
 
 //      resizeToAvoidBottomPadding: false ,
@@ -652,18 +667,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                               print(
                                   'Menu button pressed');
 
-                              _scaffoldKey.currentState.showSnackBar(
-                                  new SnackBar(duration: new Duration(seconds: 5), content:
-                                  new Row(
-                                    children: <Widget>[
-                                      new CircularProgressIndicator(),
-                                      new Text("  Signing-In...",style:TextStyle(
-                                        color: Colors.white38,
-                                      ))
-                                    ],
-                                  ),
-                                  )
-                              );
+
 
                               await logout(context);
 
