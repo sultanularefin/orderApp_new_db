@@ -57,6 +57,11 @@ class FoodItemDetailsBloc implements Bloc {
   final _client = FirebaseClient();
 
 
+//  final Sink<int> _external;
+//
+//  Bloc(this._external);
+
+
   // can also use var _oneFoodItem = new FoodItemWithDocID() ;
 //  FoodItemWithDocID _oneFoodItem = new FoodItemWithDocID() ;
   FoodItemWithDocIDViewModel _thisFoodItem ;
@@ -201,8 +206,8 @@ class FoodItemDetailsBloc implements Bloc {
 
 //    List<NewIngredient> allIngsScoped= _allIngItems;
 
-      IdentityBloc x = new IdentityBloc();
-      List<NewIngredient> p= x.allIngredients();
+//      IdentityBloc x = new IdentityBloc();
+//      List<NewIngredient> p= x.allIngredients();
 
     if (fromWhichPage == 0) {
 
