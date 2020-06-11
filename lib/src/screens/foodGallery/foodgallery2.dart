@@ -244,18 +244,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
-    _scaffoldKey.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 5), content:
-        new Row(
-          children: <Widget>[
-            new CircularProgressIndicator(),
-            new Text("  Signing-In...",style:TextStyle(
-              color: Colors.white38,
-            ))
-          ],
-        ),
-        )
-    );
+//    _scaffoldKey.currentState.showSnackBar(
+//    ABOVE ONE ALSO WORKS
+
 
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -269,6 +260,12 @@ class _FoodGalleryState extends State<FoodGallery2> {
     */
 
 
+//    return Navigator.push(context,
+//
+//        MaterialPageRoute(builder: (context)
+//        => FoodItemDetails(oneFoodItemData:oneFoodItem))
+//    );
+
 
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (BuildContext context) {
@@ -276,7 +273,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
           return BlocProvider<IdentityBloc>(
               bloc: IdentityBloc(),
               //AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
-              child: WelcomePage()
+              child: WelcomePage(fromWhicPage:'foodGallery2')
           );
           /*
                                   return BlocProvider<FoodGalleryBloc>(
@@ -666,6 +663,30 @@ class _FoodGalleryState extends State<FoodGallery2> {
                             onPressed: () async  {
                               print(
                                   'Menu button pressed');
+
+//                              Scaffold.of(context).showSnackBar(
+                                  _scaffoldKey.currentState.showSnackBar(
+                                  new SnackBar(
+                                    action: SnackBarAction(
+                                      label: ' Signed out Undo',
+                                      onPressed: () {
+                                        // Some code to undo the change.
+                                      },
+                                    ),
+
+                                    duration: new Duration(seconds: 5),
+
+                                    content:
+                                  new Row(
+                                    children: <Widget>[
+                                      new CircularProgressIndicator(),
+                                      new Text("Signed out...",style:TextStyle(
+                                        color: Colors.white38,
+                                      ))
+                                    ],
+                                  ),
+                                  )
+                              );
 
 
 

@@ -31,15 +31,23 @@ import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
+  final bool showSnackbar0;
+  LoginPage({Key key, this.title,this.showSnackbar0}) : super(key: key);
 
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState(showSnackbar0);
+
+//  _WelcomePageState createState() => _WelcomePageState(fromWhicPage);
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
+  bool fromWhicPage1;
+  _LoginPageState(this.fromWhicPage1);
+
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -221,16 +229,185 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-
+Widget test() {
+    return Text('you are logged out',
+      style: TextStyle(color: Colors.red, fontSize: 40),);
+}
 
 
   @override
   Widget build(BuildContext context) {
+
+
     return new Scaffold(
         key: _scaffoldKey,
 //    return Scaffold(
         body: SingleChildScrollView(
-            child: Container(
+            child: fromWhicPage1==true? Container(
+              height: MediaQuery.of(context).size.height,
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 3,
+                          child: SizedBox(),
+                        ),
+                        _title(),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        _emailPasswordWidget(),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+                        InkWell(
+                          onTap: (){
+                            print("login button pressed");
+//                            showDialog(
+//                                context: context,
+//                                builder: (BuildContext context) {
+//                                  return Center(child: CircularProgressIndicator(),);
+//                                });
+
+                            _scaffoldKey.currentState.showSnackBar(
+                                new SnackBar(duration: new Duration(seconds: 30), content:
+                                new Row(
+                                  children: <Widget>[
+                                    new CircularProgressIndicator(),
+                                    new Text("  Signing-In...",style:TextStyle(
+                                      color: Colors.white38,
+                                    ))
+                                  ],
+                                ),
+                                )
+                            );
+                            final identityBlocLoginPage =
+                            BlocProvider.of<IdentityBloc>(context);
+
+
+                            Future<AuthResult> userCheck=
+                            identityBlocLoginPage.handleSignInFromLoginPage(emailState.trim(),passwordState.trim());
+
+//                            _handleSignIn();
+
+                            userCheck.whenComplete(() {
+
+                              print("called when future completes");
+
+                            }
+                            ).then((onValue){
+
+                              FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+                              List<NewIngredient> emptyIngs = [];
+
+//                              Navigator.of(context).pop();
+
+
+                              Navigator.of(context).pushAndRemoveUntil(
+                                //        MaterialPageRoute(builder: (context) => HomeScreen())
+                                //
+                                //        MaterialPageRoute(builder: (context) => MyHomePage())
+                                  MaterialPageRoute(builder: (BuildContext context) {
+
+                                    return BlocProvider<IdentityBloc>(
+                                        bloc: IdentityBloc(),
+                                        //AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
+                                        child: WelcomePage()
+                                    );
+                                    /*
+                                  return BlocProvider<FoodGalleryBloc>(
+                                      bloc: FoodGalleryBloc(),
+                                      child: FoodGallery2()
+
+                                  );
+
+                                  */
+
+
+
+//                                      drawerScreen()
+
+
+
+
+
+                                  }),(Route<dynamic> route) => false);
+
+
+
+
+
+
+
+
+
+//                            _handleSignIn();
+                            }).catchError((onError){
+                              logger.e('at onError');
+                              _scaffoldKey.currentState.showSnackBar(
+                                new SnackBar(duration: new Duration(seconds: 6), content:Container(
+                                  child:
+                                  new Row(
+                                    children: <Widget>[
+                                      new CircularProgressIndicator(),
+                                      new Text("Error: ${onError.message.substring(0,40)}",style:
+                                      TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                                          color:Colors.white)),
+                                    ],
+                                  ),
+                                )),);
+
+                            });
+                          },
+
+                          child:  _submitButton(),
+                        ),
+                        /*
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          alignment: Alignment.centerRight,
+                          child: Text('Forgot Password ?',
+                              style:
+                              TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                        ),
+
+                         */
+
+                        /*
+                        _divider(),
+                        _facebookButton(),
+                        */
+                        test(),
+                        Expanded(
+                          flex: 2,
+                          child: SizedBox(),
+                        ),
+                        /* */
+                      ],
+                    ),
+                  ),
+                  /*
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: _createAccountLabel(),
+                  ),
+                  */
+                  Positioned(top: 40, left: 0, child: _backButton()),
+                  Positioned(
+                      top: -MediaQuery.of(context).size.height * .15,
+                      right: -MediaQuery.of(context).size.width * .4,
+                      child: BezierContainer())
+                ],
+              ),
+            ) :
+
+            Container(
               height: MediaQuery.of(context).size.height,
               child: Stack(
                 children: <Widget>[
@@ -262,7 +439,7 @@ class _LoginPageState extends State<LoginPage> {
 //                                });
 
                             _scaffoldKey.currentState.showSnackBar(
-                                new SnackBar(duration: new Duration(seconds: 2), content:
+                                new SnackBar(duration: new Duration(seconds: 30), content:
                                 new Row(
                                   children: <Widget>[
                                     new CircularProgressIndicator(),

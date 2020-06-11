@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/identity/loginPage.dart';
 import 'package:logger/logger.dart';
+
 
 import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
@@ -12,7 +12,7 @@ import 'package:foodgallery/src/welcomePage.dart';
 //import 'package:foodgallery/src/screens/foodGallery/food_gallery.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
-import 'src/screens/foodGallery/foodgallery2.dart';
+//import 'src/screens/foodGallery/foodgallery2.dart';
 
 //import 'src/welcomePage.dart';
 
@@ -20,7 +20,7 @@ import 'src/screens/foodGallery/foodgallery2.dart';
 //import 'package:foodgallery/src/
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 //import 'package:foodgallery/src/BLoC/favorite_bloc.dart';
-import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
+//import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 
 
 void main() => runApp(MyApp());
@@ -28,153 +28,20 @@ void main() => runApp(MyApp());
 
 
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
 
 
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+  Widget build(BuildContext context) {
 
 
-
-  List<NewIngredient> welcomPageIngredients;
-
-  final logger = Logger(
-    printer: PrettyPrinter(),
-  );
-
-
-
-  @override
-  void initState(){
-
-    // possible scenarios:
-
-
-    // 1. no local storage, (app deleted and reinstalled || or first time user ) go to Login page.
-    // MORE AT HERE : localStorageCheck();
-
-    // 2. if the email found in loCAL STORAGE, LOCAL STORAGE ARE CREATED ONLY WHEN SUCCESSFUL LOGIN WERE MADE WITH
-    // CERTAIN EMAIL AND PASSWORD.
-    // THUS THERE COULD BE 2 SCENARIOS{
-    /*
-     1. CHECK WITH THIS CREDENTIALS WITH FIRE BASE AUTH IF SUCCESS GO TO FIREBASE PAGE.
-     2. ADMIN CAN DELETE THE USER FROM FIREBASE AUTH LIST THEN USER CAN'T LOGIN AND HE NEEDS TO LOGIN AGAIN WITH THE
-     ADMIN RPOVIDE USER NAME AND PASSWROD.
-
-     3. I THINK I IMPLEMENTED ALL BUT SOME NETWORKING RELATED CODE LIKE connectionState etc needs to be checked again.
-     in the future (might not need now.).
-
-     */
-
-    localStorageCheck();
-
-    //  this requred since stream can only handle one kind of variale. In this page FirebaseUser.
-
-    //  // check paper why we need it.
-    // check the data Type at here.
-    /*
-    stream: identityBloc.getCurrentFirebaseUserStream,
-            initialData: identityBloc.getCurrentFirebaseUser,
-    */
-
-    super.initState();
-
-  }
-
-
-  // Future<void> return type .  ??
-  Future<void> localStorageCheck () async{
-
-    // 3 scenarios.
-
-
-
-    print('< >   <   >   <    >  :: // ::  // at here: localStorageCheck');
-
-//    final identityBlocInvokerAppBlockWelcomPageInitState =
-//        BlocProvider2.of(context).getIdentityBlocsObject;
-    final identityBlockinInitStateMainPage = BlocProvider.of<IdentityBloc>(context);
-
-    bool x= await identityBlockinInitStateMainPage.checkUserinLocalStorage();
-
-    if (x==false){
-
-      logger.e('going to login page from main page');
-      return Navigator.push(
-
-          context, MaterialPageRoute(builder: (context) => LoginPage())
-
-      );
-    }
-
-    else{
-
-      logger.e('returning from init State of main page');
-      // await setAllIngredients();
-      return;
-    }
-
-  }
-
-
-  /*
-  Future<void> setAllIngredients() async {
-
-    debugPrint("Entering in retrieveIngredients1");
-
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
-//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
-//    await bloc.getAllIngredients();
-
-    /*
-    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
-    await identityBlockinInitState.getAllIngredients();
-    List<NewIngredient> test = identityBlockinInitState.allIngredients;
-
-    */
-//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
-    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
-    await identityBlocInvokerAppBlockWelcomPageInitState.getAllIngredients();
-    List<NewIngredient> test = identityBlocInvokerAppBlockWelcomPageInitState.allIngredients;
-
-
-//    List<NewIngredient> test = bloc.allIngredients;
-
-//    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
-
-    print('done: ');
-
-
-//    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
-//    await identityBlockinInitState.getAllIngredients();
-//    List<NewIngredient> test = identityBlockinInitState.allIngredients;
-
-//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
-//    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
-
-    setState(()
-    {
-      logger.i('_allIngredientState length : ${test.length}');
-      welcomPageIngredients = test;
-//      priceByQuantityANDSize = euroPrice1;
-//      initialPriceByQuantityANDSize = euroPrice1;
-    }
+    final logger = Logger(
+      printer: PrettyPrinter(),
     );
 
-
-
-  }
-
-  */
-
-  @override
-  Widget build(BuildContext context) {
+    logger.e('reached main\'s build');
     final textTheme = Theme.of(context).textTheme;
 
     FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
@@ -201,15 +68,11 @@ class _MyAppState extends State<MyApp> {
     return
       BlocProvider<IdentityBloc>(
         bloc: IdentityBloc(),
-
-        /*
+  /*
         bloc: AppBloc(emptyFoodItemWithDocID,/* emptyIngs,*/
             fromWhichPage:-1),
 
 */
-
-
-
 
 //        child:BlocProvider<FoodGalleryBloc>(
 //

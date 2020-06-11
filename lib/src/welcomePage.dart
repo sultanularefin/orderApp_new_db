@@ -49,18 +49,25 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 
 class WelcomePage extends StatefulWidget {
-  WelcomePage({Key key, this.title}) : super(key: key);
 
+  final String fromWhicPage;
   final String title;
+  WelcomePage({Key key, this.title,this.fromWhicPage}) : super(key: key);
+
+
+
+//  (fromWhicPage:'foodGallery2')
 
   @override
-  _WelcomePageState createState() => _WelcomePageState();
+  _WelcomePageState createState() => _WelcomePageState(fromWhicPage);
 }
 
 class _WelcomePageState extends State<WelcomePage> {
 
 
   // Login Button.
+  String fromWhicPage2='';
+  _WelcomePageState(this.fromWhicPage2);
 
 
   List<NewIngredient> welcomPageIngredients;
@@ -70,7 +77,7 @@ class _WelcomePageState extends State<WelcomePage> {
   );
 
 
-  /*
+
   @override
   void initState(){
 
@@ -93,7 +100,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
      */
 
-//    localStorageCheck();
+    localStorageCheck(fromWhicPage2);
 
     //  this requred since stream can only handle one kind of variale. In this page FirebaseUser.
 
@@ -107,23 +114,38 @@ class _WelcomePageState extends State<WelcomePage> {
     super.initState();
 
   }
-  */
+
 
   // Future<void> return type .  ??
-  Future<void> localStorageCheck () async{
+  Future<void> localStorageCheck (String fromWhichPageString) async{
 
     // 3 scenarios.
 
-
+    logger.e('at localStorageCheck of welcome page\'s init state :  ');
 
     print('< >   <   >   <    >  :: // ::  // at here: localStorageCheck');
 
-    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
-//    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
+    /*
+    final identityBlocInvokerAppBlockWelcomPageInitState
+    = BlocProvider2.of(context).getIdentityBlocsObject;
+    */
+    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
 
-    bool x= await identityBlocInvokerAppBlockWelcomPageInitState.checkUserinLocalStorage();
+    bool x= await identityBlockinInitState.checkUserinLocalStorage();
 
-    if (x==false){
+    if ((x==false) && (fromWhichPageString=='foodGallery2')){
+
+      logger.e('going to welcome page\'s init state : fromWhichPageString==\'foodGallery2\'  ');
+
+      return Navigator.push(
+
+          context, MaterialPageRoute(builder: (context) => LoginPage(showSnackbar0:true))
+
+      );
+    }
+    else if (x==false){
+
+      logger.e('going to welcome page\'s init state :  ');
 
       return Navigator.push(
 
@@ -134,58 +156,15 @@ class _WelcomePageState extends State<WelcomePage> {
 
     else{
       // await setAllIngredients();
+      /* ${test.length}*/
+
+      logger.e('at return of welcome page\'s init state :  ');
       return;
     }
 
   }
 
-  Future<void> setAllIngredients() async {
 
-    debugPrint("Entering in retrieveIngredients1");
-
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
-//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
-//    await bloc.getAllIngredients();
-
-    /*
-    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
-    await identityBlockinInitState.getAllIngredients();
-    List<NewIngredient> test = identityBlockinInitState.allIngredients;
-
-    */
-//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
-    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
-    await identityBlocInvokerAppBlockWelcomPageInitState.getAllIngredients();
-    List<NewIngredient> test = identityBlocInvokerAppBlockWelcomPageInitState.allIngredients;
-
-
-//    List<NewIngredient> test = bloc.allIngredients;
-
-//    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
-
-    print('done: ');
-
-
-//    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
-//    await identityBlockinInitState.getAllIngredients();
-//    List<NewIngredient> test = identityBlockinInitState.allIngredients;
-
-//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
-//    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
-
-    setState(()
-    {
-      logger.i('_allIngredientState length : ${test.length}');
-      welcomPageIngredients = test;
-//      priceByQuantityANDSize = euroPrice1;
-//      initialPriceByQuantityANDSize = euroPrice1;
-    }
-    );
-
-
-
-  }
 
 
 
@@ -209,22 +188,31 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     logger.e('at build of welcome page');
 
-    FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+    FoodItemWithDocID emptyFoodItemWithDocID = new FoodItemWithDocID();
     List<NewIngredient> emptyIngs = [];
 
 //    final appBloc = AppBloc(emptyFoodItemWithDocID,emptyIngs,,fromWhichPage:0);
 //    final AppBloc appBlockinWelcomePage = appBloc;
 
 
-    final identityBlocInvokerAppBlockWelcomPageBuildMethod = BlocProvider2.of(context).getIdentityBlocsObject;
-//    final identityBloc = BlocProvider.of<IdentityBloc>(context);
+//    final identityBlocInvokerAppBlockWelcomPageBuildMethod = BlocProvider2
+//        .of(context)
+//        .getIdentityBlocsObject;
 
 
-    print('width: ${MediaQuery.of(context).size.width}');
-    print('Height: ${MediaQuery.of(context).size.height}');
+    final identityBloc = BlocProvider.of<IdentityBloc>(context);
+
+
+    print('width: ${MediaQuery
+        .of(context)
+        .size
+        .width}');
+    print('Height: ${MediaQuery
+        .of(context)
+        .size
+        .height}');
 
     print('at build of welcomePage');
     return Scaffold(
@@ -232,11 +220,11 @@ class _WelcomePageState extends State<WelcomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
 
-        child:StreamBuilder<FirebaseUser>(
+        child: StreamBuilder<FirebaseUser>(
 
-            stream: identityBlocInvokerAppBlockWelcomPageBuildMethod.
+            stream: identityBloc.
             getCurrentFirebaseUserStream,
-            initialData: identityBlocInvokerAppBlockWelcomPageBuildMethod.
+            initialData: identityBloc.
             getCurrentFirebaseUser,
             builder: (context, snapshot) {
 //              switch (snapshot.connectionState){
@@ -309,14 +297,11 @@ class _WelcomePageState extends State<WelcomePage> {
 
                   print('  :: ::  snapshot.data is FirebaseUser');
 
-                  FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+                  FoodItemWithDocID emptyFoodItemWithDocID = new FoodItemWithDocID();
 
 
-
-
-                  List<NewIngredient> _allIngredientState=[];
+                  List<NewIngredient> _allIngredientState = [];
                   List<NewIngredient> emptyIngs = [];
-
 
 
 //                  final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
@@ -325,8 +310,9 @@ class _WelcomePageState extends State<WelcomePage> {
 //                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
                       BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                          bloc: AppBloc(emptyFoodItemWithDocID,/* welcomPageIngredients, */
-                              fromWhichPage:0),
+                          bloc: AppBloc(
+                              emptyFoodItemWithDocID, /* welcomPageIngredients, */
+                              fromWhichPage: 0),
                           /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
@@ -347,9 +333,9 @@ class _WelcomePageState extends State<WelcomePage> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
                   case ConnectionState.none:
-
                     return Container(
-                      margin: EdgeInsets.fromLTRB(0, displayHeight(context)/2, 0, 0),
+                      margin: EdgeInsets.fromLTRB(
+                          0, displayHeight(context) / 2, 0, 0),
                       child: Center(
                         child: Column(
                           children: <Widget>[
@@ -385,8 +371,9 @@ class _WelcomePageState extends State<WelcomePage> {
                     return (snapshot.data is FirebaseUser) ?
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc: AppBloc(emptyFoodItemWithDocID,/* welcomPageIngredients, */
-                            fromWhichPage:0),
+                        bloc: AppBloc(
+                            emptyFoodItemWithDocID, /* welcomPageIngredients, */
+                            fromWhichPage: 0),
                         /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
@@ -396,12 +383,12 @@ class _WelcomePageState extends State<WelcomePage> {
                           */
                         child: FoodGallery2()
                     )
-                        /*
+                    /*
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
                         child: FoodGallery2()
 
-                    )*/:LoginPage();
+                    )*/ : LoginPage();
 //                  print('at ConnectionState.active of switch');
                     break;
 
@@ -413,8 +400,9 @@ class _WelcomePageState extends State<WelcomePage> {
                     return (snapshot.data is FirebaseUser) ?
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc: AppBloc(emptyFoodItemWithDocID /*, welcomPageIngredients*/,
-                            fromWhichPage:0),
+                        bloc: AppBloc(
+                            emptyFoodItemWithDocID /*, welcomPageIngredients*/,
+                            fromWhichPage: 0),
                         /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
@@ -424,21 +412,21 @@ class _WelcomePageState extends State<WelcomePage> {
                           */
                         child: FoodGallery2()
                     )
-                        /*
+                    /*
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
                         child: FoodGallery2()
 
-                    )*/:LoginPage();
+                    )*/ : LoginPage();
 
                     break;
                   default:
-
                     return (snapshot.data is FirebaseUser) ?
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc: AppBloc(emptyFoodItemWithDocID, /*welcomPageIngredients ,*/
-                            fromWhichPage:0),
+                        bloc: AppBloc(
+                            emptyFoodItemWithDocID, /*welcomPageIngredients ,*/
+                            fromWhichPage: 0),
                         /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
@@ -448,16 +436,14 @@ class _WelcomePageState extends State<WelcomePage> {
                           */
                         child: FoodGallery2()
                     )
-                        /*
+                    /*
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
                         child: FoodGallery2()
 
-                    )*/:LoginPage();
-
+                    )*/ : LoginPage();
                 }
               }
-
             }
         ),
 
