@@ -147,9 +147,16 @@ class _WelcomePageState extends State<WelcomePage> {
 //    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
 //    await bloc.getAllIngredients();
 
+    /*
     final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
     await identityBlockinInitState.getAllIngredients();
     List<NewIngredient> test = identityBlockinInitState.allIngredients;
+
+    */
+//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
+    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
+    await identityBlocInvokerAppBlockWelcomPageInitState.getAllIngredients();
+    List<NewIngredient> test = identityBlocInvokerAppBlockWelcomPageInitState.allIngredients;
 
 
 //    List<NewIngredient> test = bloc.allIngredients;
@@ -157,6 +164,11 @@ class _WelcomePageState extends State<WelcomePage> {
 //    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
 
     print('done: ');
+
+
+//    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
+//    await identityBlockinInitState.getAllIngredients();
+//    List<NewIngredient> test = identityBlockinInitState.allIngredients;
 
 //    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
 //    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);

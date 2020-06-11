@@ -1440,7 +1440,7 @@ class FoodList extends StatelessWidget {
                                             milliseconds: 900),
                                         pageBuilder: (_, __, ___) =>
                                             BlocProvider2 /*<FoodItemDetailsBloc>*/(
-                                              thisAllIngredients2:allIngredients,
+                                              /* thisAllIngredients2:allIngredients,*/
                                               /*bloc: FoodItemDetailsBloc(
                                                   oneFoodItem,
                                                   allIngredients), */
@@ -1791,7 +1791,8 @@ class FoodList extends StatelessWidget {
                                             milliseconds: 900),
                                         pageBuilder: (_, __, ___) =>
 
-                                            BlocProvider2 /*<FoodItemDetailsBloc>*/(thisAllIngredients2:allIngredients,
+                                            BlocProvider2 /*<FoodItemDetailsBloc>*/(
+                                              /*thisAllIngredients2:allIngredients,*/
                                               /*bloc: FoodItemDetailsBloc(
                                                   oneFoodItem,
                                                   allIngredients), */

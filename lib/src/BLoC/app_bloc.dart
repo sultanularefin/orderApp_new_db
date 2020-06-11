@@ -46,8 +46,12 @@ class AppBloc {
   AppBloc(final FoodItemWithDocID oneFoodItemWithDocID,final List<NewIngredient> allIngredients,{int fromWhichPage =1}) {
 
     foodGalleryBlockObject = FoodGalleryBloc();
-    foodItemDetailsBlockObject = (fromWhichPage==0)? FoodItemDetailsBloc(emptyFoodItemWithDocID,[] ,fromWhichPage:0):
-    foodItemDetailsBlockObject = FoodItemDetailsBloc(oneFoodItemWithDocID,allIngredients ,fromWhichPage:1);
+    identityBlocObject = IdentityBloc();
+    foodItemDetailsBlockObject = (fromWhichPage==0)?
+
+    FoodItemDetailsBloc(emptyFoodItemWithDocID,[] ,fromWhichPage:0):(fromWhichPage==-1)?
+    FoodItemDetailsBloc(emptyFoodItemWithDocID,[] ,fromWhichPage:0):
+    FoodItemDetailsBloc(oneFoodItemWithDocID,allIngredients ,fromWhichPage:1);
 
 
 //    foodGalleryBlockObject.counter$.listen(foodItemDetailsBlockObject.increment.add);
@@ -59,4 +63,5 @@ class AppBloc {
 
   FoodGalleryBloc get getFoodGalleryBlockObject => foodGalleryBlockObject;
   FoodItemDetailsBloc get getFoodItemDetailsBlockObject => foodItemDetailsBlockObject;
+  IdentityBloc get getIdentityBlocsObject => getIdentityBlocsObject;
 }

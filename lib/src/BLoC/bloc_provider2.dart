@@ -7,12 +7,12 @@ class BlocProvider2 extends /* StatefulWidget */ InheritedWidget {
   /*final */final AppBloc bloc;
 
   final Widget child;
-  final List<NewIngredient> thisAllIngredients2;
+//  final List<NewIngredient> thisAllIngredients2;
 
 
 //  final T bloc;
   BlocProvider2({Key key, this.bloc, /*child*/
-    @required this.thisAllIngredients2,
+    /*@required this.thisAllIngredients2,*/
     /*@required */this.child}) : super(key: key, child: child /**/);
 
   @override
@@ -26,12 +26,15 @@ class BlocProvider2 extends /* StatefulWidget */ InheritedWidget {
 
 
   static AppBloc of(BuildContext context) /*=>*/ {
+    /*
     var x =
         context.
         dependOnInheritedWidgetOfExactType<BlocProvider2>().
         thisAllIngredients2;
 
 
+
+     */
 
     /*
     AppBloc.thisAllIngredients= context.

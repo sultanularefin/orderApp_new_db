@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/app_bloc.dart';
+import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/welcomePage.dart';
 //import 'package:foodgallery/src/screens/foodGallery/food_gallery.dart';
 //import 'package:google_fonts/google_fonts.dart';
@@ -29,9 +33,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+
+    FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+//    List<NewIngredient> _allIngredientState=[];
+    List<NewIngredient> emptyIngs = [];
+
+    /*
+      return (
+                      BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
+                          bloc: AppBloc(emptyFoodItemWithDocID, welcomPageIngredients,
+                              fromWhichPage:0),
+                          /*
+                          child: BlocProvider<FoodItemDetailsBloc>(
+                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
+                              child: FoodGallery2()
+
+                          )
+                          */
+                          child: FoodGallery2()
+                      )
+
+                  );
+    */
     return
-      BlocProvider<IdentityBloc>(
-        bloc: IdentityBloc(),
+      BlocProvider2/*<IdentityBloc>*/(
+//        bloc: IdentityBloc(),
+        bloc: AppBloc(emptyFoodItemWithDocID, emptyIngs,
+            fromWhichPage:-1),
 
 //        child:BlocProvider<FoodGalleryBloc>(
 //
