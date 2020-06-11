@@ -63,9 +63,6 @@ class _WelcomePageState extends State<WelcomePage> {
   // Login Button.
 
 
-
-
-
   List<NewIngredient> welcomPageIngredients;
 
   final logger = Logger(
@@ -212,6 +209,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    logger.e('at build of welcome page');
 
     FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
     List<NewIngredient> emptyIngs = [];
