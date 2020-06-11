@@ -119,9 +119,10 @@ class _WelcomePageState extends State<WelcomePage> {
 
     print('< >   <   >   <    >  :: // ::  // at here: localStorageCheck');
 
-    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
+    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
+//    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
 
-    bool x= await identityBlockinInitState.checkUserinLocalStorage();
+    bool x= await identityBlocInvokerAppBlockWelcomPageInitState.checkUserinLocalStorage();
 
     if (x==false){
 
@@ -133,7 +134,8 @@ class _WelcomePageState extends State<WelcomePage> {
     }
 
     else{
-      await setAllIngredients();
+      // await setAllIngredients();
+      return;
     }
 
   }
@@ -202,7 +204,8 @@ class _WelcomePageState extends State<WelcomePage> {
 //    final AppBloc appBlockinWelcomePage = appBloc;
 
 
-    final identityBloc = BlocProvider.of<IdentityBloc>(context);
+    final identityBlocInvokerAppBlockWelcomPageBuildMethod = BlocProvider2.of(context).getIdentityBlocsObject;
+//    final identityBloc = BlocProvider.of<IdentityBloc>(context);
 
 
     print('width: ${MediaQuery.of(context).size.width}');
@@ -216,8 +219,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
         child:StreamBuilder<FirebaseUser>(
 
-            stream: identityBloc.getCurrentFirebaseUserStream,
-            initialData: identityBloc.getCurrentFirebaseUser,
+            stream: identityBlocInvokerAppBlockWelcomPageBuildMethod.getCurrentFirebaseUserStream,
+            initialData: identityBlocInvokerAppBlockWelcomPageBuildMethod.getCurrentFirebaseUser,
             builder: (context, snapshot) {
 //              switch (snapshot.connectionState){
 //                case ConnectionState.waiting:
@@ -305,7 +308,7 @@ class _WelcomePageState extends State<WelcomePage> {
 //                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
                       BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                          bloc: AppBloc(emptyFoodItemWithDocID, welcomPageIngredients,
+                          bloc: AppBloc(emptyFoodItemWithDocID,/* welcomPageIngredients, */
                               fromWhichPage:0),
                           /*
                           child: BlocProvider<FoodItemDetailsBloc>(
@@ -364,11 +367,24 @@ class _WelcomePageState extends State<WelcomePage> {
                   case ConnectionState.active:
                     return (snapshot.data is FirebaseUser) ?
 
+                    BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
+                        bloc: AppBloc(emptyFoodItemWithDocID,/* welcomPageIngredients, */
+                            fromWhichPage:0),
+                        /*
+                          child: BlocProvider<FoodItemDetailsBloc>(
+                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
+                              child: FoodGallery2()
+
+                          )
+                          */
+                        child: FoodGallery2()
+                    )
+                        /*
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
                         child: FoodGallery2()
 
-                    ):LoginPage();
+                    )*/:LoginPage();
 //                  print('at ConnectionState.active of switch');
                     break;
 
@@ -379,22 +395,48 @@ class _WelcomePageState extends State<WelcomePage> {
 
                     return (snapshot.data is FirebaseUser) ?
 
+                    BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
+                        bloc: AppBloc(emptyFoodItemWithDocID /*, welcomPageIngredients*/,
+                            fromWhichPage:0),
+                        /*
+                          child: BlocProvider<FoodItemDetailsBloc>(
+                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
+                              child: FoodGallery2()
+
+                          )
+                          */
+                        child: FoodGallery2()
+                    )
+                        /*
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
                         child: FoodGallery2()
 
-                    ):LoginPage();
+                    )*/:LoginPage();
 
                     break;
                   default:
 
                     return (snapshot.data is FirebaseUser) ?
 
+                    BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
+                        bloc: AppBloc(emptyFoodItemWithDocID, /*welcomPageIngredients ,*/
+                            fromWhichPage:0),
+                        /*
+                          child: BlocProvider<FoodItemDetailsBloc>(
+                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
+                              child: FoodGallery2()
+
+                          )
+                          */
+                        child: FoodGallery2()
+                    )
+                        /*
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
                         child: FoodGallery2()
 
-                    ):LoginPage();
+                    )*/:LoginPage();
 
                 }
               }

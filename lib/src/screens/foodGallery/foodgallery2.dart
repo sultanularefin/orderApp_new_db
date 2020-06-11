@@ -77,6 +77,8 @@ class FoodGallery2 extends StatefulWidget {
 
 class _FoodGalleryState extends State<FoodGallery2> {
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 
   _FoodGalleryState({firestore});
 
@@ -89,13 +91,13 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
   @override
   void initState() {
-//    setAllIngredients();
+    setAllIngredients();
     super.initState();
 
   }
 
 
-  /*
+
   // !(NOT) NECESSARY NOW.
   Future<void> setAllIngredients() async {
 
@@ -103,7 +105,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
 
-    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
+//    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
+    final bloc = BlocProvider2.of(context).getIdentityBlocsObject;
+
     await bloc.getAllIngredients();
     List<NewIngredient> test = bloc.allIngredients;
 
@@ -126,7 +130,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
   }
-  */
+
 
 
 
@@ -237,6 +241,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
   Future<void> logout(BuildContext context2) async {
     print('what i do is : ||Logout||');
+
+
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
@@ -645,6 +651,19 @@ class _FoodGalleryState extends State<FoodGallery2> {
                             onPressed: () async  {
                               print(
                                   'Menu button pressed');
+
+                              _scaffoldKey.currentState.showSnackBar(
+                                  new SnackBar(duration: new Duration(seconds: 5), content:
+                                  new Row(
+                                    children: <Widget>[
+                                      new CircularProgressIndicator(),
+                                      new Text("  Signing-In...",style:TextStyle(
+                                        color: Colors.white38,
+                                      ))
+                                    ],
+                                  ),
+                                  )
+                              );
 
                               await logout(context);
 
@@ -1080,6 +1099,8 @@ class FoodList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    print('_allIngredientState: in FoodLIst: $allIngredients');
 //    final bloc = LocationQueryBloc();
 
 //    final blocZZ = FoodItemsQueryBloc();
@@ -1431,6 +1452,13 @@ class FoodList extends StatelessWidget {
                                     ],
                                   ),
                                   onTap: () {
+
+                                    final foodItemDetailsBlocForOrderProcessing =
+                                        BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+
+                                    foodItemDetailsBlocForOrderProcessing.setallIngredients(allIngredients);
+//                                    _allIngredientState
                                     return Navigator.of(context).push(
 
 
@@ -1447,7 +1475,7 @@ class FoodList extends StatelessWidget {
 
                                               bloc: AppBloc(
                                                   oneFoodItem,
-                                                  allIngredients, fromWhichPage:1),
+                                                  /*allIngredients,*/ fromWhichPage:1),
 
 
                                               child: FoodItemDetails2()
@@ -1782,6 +1810,13 @@ class FoodList extends StatelessWidget {
                                     ],
                                   ),
                                   onTap: () {
+
+                                    final foodItemDetailsBlocForOrderProcessing =
+                                        BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+                                    foodItemDetailsBlocForOrderProcessing.setallIngredients(allIngredients);
+
+
                                     return Navigator.of(context).push(
 
 
@@ -1799,7 +1834,7 @@ class FoodList extends StatelessWidget {
 
                                               bloc: AppBloc(
                                                   oneFoodItem,
-                                                  allIngredients,fromWhichPage:1),
+                                                  /*allIngredients,*/ fromWhichPage:1),
 
 
                                               child: FoodItemDetails2()

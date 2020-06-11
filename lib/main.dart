@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
     return
       BlocProvider2/*<IdentityBloc>*/(
 //        bloc: IdentityBloc(),
-        bloc: AppBloc(emptyFoodItemWithDocID, emptyIngs,
+        bloc: AppBloc(emptyFoodItemWithDocID,/* emptyIngs,*/
             fromWhichPage:-1),
 
 //        child:BlocProvider<FoodGalleryBloc>(

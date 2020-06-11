@@ -198,9 +198,22 @@ class FoodItemDetailsBloc implements Bloc {
 
   }
 
+
+
+
+  void setallIngredients(List<NewIngredient> allIngredients){
+
+    print('setallIngredients : ___ ___ ___   $allIngredients');
+
+    _allIngItems = allIngredients;
+    _allIngredientListController.sink.add(_allIngItems);
+
+//    List <FoodPropertyMultiSelect> multiSelectArray = _multiSelectForFood;
+
+
+  }
+
   // CONSTRUCTOR BEGINS HERE.
-
-
   FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWhichPage=1} ) {
 //    getAllIngredients();
 
@@ -248,6 +261,8 @@ class FoodItemDetailsBloc implements Bloc {
       print('fromWhichPage == 2');
     }
     else {
+
+      allIngsScoped= _allIngItems;
 
       print(' 1 means from Food Gallery Page to Food Item Details Page');
       print(' which IS NORMAL');

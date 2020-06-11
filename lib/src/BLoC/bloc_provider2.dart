@@ -16,7 +16,7 @@ class BlocProvider2 extends /* StatefulWidget */ InheritedWidget {
     /*@required */this.child}) : super(key: key, child: child /**/);
 
   @override
-  bool updateShouldNotify(InheritedWidget oldWidget) => true;
+  bool updateShouldNotify(InheritedWidget oldWidget) => false;
 
 
   /*
