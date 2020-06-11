@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
@@ -18,6 +19,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodgallery/src/welcomePage.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
@@ -28,6 +30,7 @@ import 'package:neumorphic/neumorphic.dart';
 // local packages
 
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
@@ -230,6 +233,43 @@ class _FoodGalleryState extends State<FoodGallery2> {
   );
 
 
+
+
+  Future<void> logout(BuildContext context2) async {
+    print('what i do is : ||Logout||');
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+//    THIS ALSO WORKS
+    /*
+    Navigator.push(
+      context2,
+      MaterialPageRoute(builder: (context2) => WelcomePage()),
+    );
+    */
+
+
+
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) {
+
+          return BlocProvider<IdentityBloc>(
+              bloc: IdentityBloc(),
+              //AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
+              child: WelcomePage()
+          );
+          /*
+                                  return BlocProvider<FoodGalleryBloc>(
+                                      bloc: FoodGalleryBloc(),
+                                      child: FoodGallery2()
+
+                                  );
+                                  */
+
+        }),(Route<dynamic> route) => false);
+
+
+  }
 
 
   @override
@@ -602,9 +642,14 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                           alignment: Alignment.topRight,
                           child:IconButton(
-                            onPressed: () {
+                            onPressed: () async  {
                               print(
                                   'Menu button pressed');
+
+                              await logout(context);
+
+//                              work 0
+
 
                             },
                             icon: const Icon(Icons.menu, size: 32.0),
@@ -1395,13 +1440,14 @@ class FoodList extends StatelessWidget {
                                             milliseconds: 900),
                                         pageBuilder: (_, __, ___) =>
                                             BlocProvider2 /*<FoodItemDetailsBloc>*/(
+                                              thisAllIngredients2:allIngredients,
                                               /*bloc: FoodItemDetailsBloc(
                                                   oneFoodItem,
                                                   allIngredients), */
 
                                               bloc: AppBloc(
                                                   oneFoodItem,
-                                                  allIngredients,fromWhichPage:1),
+                                                  allIngredients, fromWhichPage:1),
 
 
                                               child: FoodItemDetails2()
@@ -1745,7 +1791,7 @@ class FoodList extends StatelessWidget {
                                             milliseconds: 900),
                                         pageBuilder: (_, __, ___) =>
 
-                                            BlocProvider2 /*<FoodItemDetailsBloc>*/(
+                                            BlocProvider2 /*<FoodItemDetailsBloc>*/(thisAllIngredients2:allIngredients,
                                               /*bloc: FoodItemDetailsBloc(
                                                   oneFoodItem,
                                                   allIngredients), */

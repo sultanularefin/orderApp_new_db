@@ -40,7 +40,7 @@ class IdentityBloc implements Bloc {
 
   List<NewIngredient> _allIngItems =[];
   List<NewIngredient> get allIngredients => _allIngItems;
-  final _allIngredientListController = StreamController <List<NewIngredient>>();
+  final _allIngredientListController = StreamController <List<NewIngredient>>.broadcast();
   Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
 
   final _client = FirebaseClient();

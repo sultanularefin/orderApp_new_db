@@ -94,7 +94,7 @@ class _WelcomePageState extends State<WelcomePage> {
      in the future (might not need now.).
 
      */
-    setAllIngredients();
+
     localStorageCheck();
 
     //  this requred since stream can only handle one kind of variale. In this page FirebaseUser.
@@ -111,7 +111,7 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   // Future<void> return type .  ??
-  localStorageCheck () async{
+  Future<void> localStorageCheck () async{
 
     // 3 scenarios.
 
@@ -130,6 +130,10 @@ class _WelcomePageState extends State<WelcomePage> {
           context, MaterialPageRoute(builder: (context) => LoginPage())
 
       );
+    }
+
+    else{
+      await setAllIngredients();
     }
 
   }
@@ -271,6 +275,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   );
                 */
 
+                  print('  :: ::  snapshot.data is FirebaseUser');
+
                   FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
 
 
@@ -286,8 +292,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
 //                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
-                      BlocProvider2(
-                          bloc: AppBloc(emptyFoodItemWithDocID,welcomPageIngredients,
+                      BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
+                          bloc: AppBloc(emptyFoodItemWithDocID, welcomPageIngredients,
                               fromWhichPage:0),
                           /*
                           child: BlocProvider<FoodItemDetailsBloc>(

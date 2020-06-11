@@ -5,6 +5,7 @@
 //import 'package:zomatoblock/BLoC/location_query_bloc.dart';
 //
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
@@ -199,6 +200,9 @@ class FoodItemDetailsBloc implements Bloc {
 //    getAllIngredients();
 
 //    List<NewIngredient> allIngsScoped= _allIngItems;
+
+      IdentityBloc x = new IdentityBloc();
+      List<NewIngredient> p= x.allIngredients();
 
     if (fromWhichPage == 0) {
 

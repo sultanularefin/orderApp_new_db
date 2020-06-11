@@ -1,0 +1,112 @@
+warning: LF will be replaced by CRLF in lib/src/BLoC/app_bloc.dart.
+The file will have its original line endings in your working directory
+[1mdiff --git a/lib/src/BLoC/app_bloc.dart b/lib/src/BLoC/app_bloc.dart[m
+[1mindex c0b2f5b..91e5919 100644[m
+[1m--- a/lib/src/BLoC/app_bloc.dart[m
+[1m+++ b/lib/src/BLoC/app_bloc.dart[m
+[36m@@ -2,6 +2,7 @@[m
+ // bloc 's[m
+ import 'package:flutter/cupertino.dart';[m
+ import 'package:foodgallery/src/BLoC/bloc_provider.dart';[m
+[32m+[m[32mimport 'package:foodgallery/src/BLoC/bloc_provider2.dart';[m
+ import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';[m
+ import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';[m
+ [m
+[36m@@ -16,7 +17,23 @@[m [mimport 'package:logger/logger.dart';[m
+ [m
+ [m
+ [m
+[31m-class AppBloc {[m
+[32m+[m[32mclass AppBloc  {[m
+[32m+[m
+[32m+[m[32m  final Widget child;[m
+[32m+[m[32m  final FoodItemWithDocID foodItemWithDocIDCouldBeEmpty;[m
+[32m+[m
+[32m+[m[32m  final List<NewIngredient> thisAllIngredientsAppBloc1;[m
+[32m+[m[32m//  final Firestore firestore = Firestore.instance;[m
+[32m+[m
+[32m+[m[32m  AppBloc({Key key, this.child,[m
+[32m+[m[32m    this.foodItemWithDocIDCouldBeEmpty,this.thisAllIngredientsAppBloc1[m
+[32m+[m[32m  }) : super(key: key);[m
+[32m+[m
+[32m+[m[32m//  static final Firestore firestore = Firestore.instance;[m
+[32m+[m
+[32m+[m
+[32m+[m[32m//  @override[m
+[32m+[m[32m//  _AppBlocState createState() => _AppBlocState();[m
+ [m
+   final logger = Logger([m
+     printer: PrettyPrinter(),[m
+[36m@@ -33,9 +50,10 @@[m [mclass AppBloc {[m
+   FoodItemDetailsBloc foodItemDetailsBlockObject;[m
+ [m
+   FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();[m
+[31m-  List<NewIngredient> thisAllIngredients = [];[m
+[31m-[m
+[32m+[m[32m      static /*final */ List<NewIngredient> thisAllIngredients;[m
+[32m+[m[32m  //  = AppBloc.thisAllIngredients;[m
+ [m
+[32m+[m[32m//    List<NewIngredient> thisAllIngredients = BlocProvider2().thisAllIngredients;[m
+ [m
+   /*[m
+   Future<void> getAllIngredients(/*int pageFrom */) async {[m
+[36m@@ -52,13 +70,21 @@[m [mclass AppBloc {[m
+ [m
+ //  FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),[m
+ [m
+[31m-  AppBloc(FoodItemWithDocID oneFoodItemWithDocID,List<NewIngredient> allIngredients,[m
+[32m+[m[32m  AppBloc(FoodItemWithDocID oneFoodItemWithDocID, /*List<NewIngredient> allIngredients,*/[m
+       {int fromWhichPage =1}) {[m
+ [m
+[32m+[m
+[32m+[m[32m//    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;[m
+[32m+[m
+[32m+[m
+ //    getAllIngredients(/*fromWhichPage*/);[m
+ [m
+[31m-    thisAllIngredients =allIngredients;[m
+[31m-    logger.i('thisAllIngredients.lenght: ${thisAllIngredients.length}');[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    logger.i('x X x   x X x   '[m
+[32m+[m[32m        'thisAllIngredients in AppBloc: $thisAllIngredients');[m
+ [m
+     if(fromWhichPage==0){[m
+ [m
+[36m@@ -70,10 +96,21 @@[m [mclass AppBloc {[m
+     }[m
+     else{[m
+ [m
+[32m+[m[32m      if(thisAllIngredients!=null) {[m
+[32m+[m[32m//      thisAllIngredients = allIngredients;[m
+[32m+[m[32m        logger.i('thisAllIngredients.lenght: ${thisAllIngredients.length}');[m
+[32m+[m
+[32m+[m[32m//        logger.w('allIngredients: $allIngredients');[m
+[32m+[m[32m      }[m
+       print('from which page ==1 means from Food Gallery page to FoodDetails Page');[m
+ [m
+[31m-      logger.w('allIngredients: $allIngredients');[m
+[32m+[m[32m//      thisAllIngredients = BlocProvider2.of(context)[m
+[32m+[m
+       foodGalleryBlockObject = FoodGalleryBloc();[m
+[32m+[m
+[32m+[m[32m//      var x2 = BlocProvider2().thisAllIngredients;[m
+[32m+[m[32m//[m
+[32m+[m[32m//      print('x2 X2 x2  x2 X2 x2  x2 X2 x2: $x2');[m
+       foodItemDetailsBlockObject = FoodItemDetailsBloc(oneFoodItemWithDocID,thisAllIngredients ,fromWhichPage:1);[m
+     }[m
+ [m
+[36m@@ -86,10 +123,7 @@[m [mclass AppBloc {[m
+ [m
+   FoodGalleryBloc get getFoodGalleryBlockObject => foodGalleryBlockObject;[m
+   FoodItemDetailsBloc get getFoodItemDetailsBlockObject => foodItemDetailsBlockObject;[m
+[32m+[m[32m}[m
+ [m
+[31m-//[m
+[31m-//  @override[m
+[31m-//  _WelcomePageState createState() => _WelcomePageState();[m
+ [m
+[31m-}[m
+ [m

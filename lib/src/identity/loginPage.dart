@@ -8,6 +8,7 @@ import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodgallery/src/welcomePage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import './Widget/bezierContainer.dart';
@@ -107,62 +108,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 
-  void _showSettingsPanel() async{
-
-    var loginRequiredStatus = await loadUser();
-
-    print('at _showSettingsPane of Login Page: ');
-
-    print("loginRequiredStatus: $loginRequiredStatus");
-
-
-
-    if(loginRequiredStatus){
-
-      //            showModalBottomSheet(context: context, builder:(context){
-      //              return Container(
-      //                padding: EdgeInsets.symmetric(vertical:20.0, horizontal: 60.0),
-      //                child: Text('Please Login',
-      //                  style: TextStyle(
-      //                      fontSize: 20,
-      //                      color: Colors.redAccent,
-      //                      backgroundColor:Colors.lightBlue )),
-      //
-      //              ); // Container
-      //            });
-
-      //      important might be needed for future.
-      //            return Row(
-      //              children:[
-      //                Icon(Icons.thumb_up),
-      //                SizedBox(width:20),
-      //                Expanded(child: Text("Hello",
-      //                  style: TextStyle(fontSize: 20,
-      //                      color: Colors.lightBlueAccent,
-      //                      backgroundColor:Colors.deepOrange ),
-      //                ),),],); // Container
-      //    });
-
-      //      ABOVE ONE DISPLAYS BUT THE STYLE IS NOT GOOD.
-
-      //      Scaffold.of(context).showSnackBar(
-      //          SnackBar(content: Row(
-      //            children:[
-      //              Icon(Icons.thumb_up),
-      //              SizedBox(width:20),
-      //              Expanded(child: Text("Hello",
-      //                style: TextStyle(fontSize: 20,
-      //                    color: Colors.lightBlueAccent,
-      //                    backgroundColor:Colors.deepOrange ),
-      //              ),),],),
-      //            duration: Duration(seconds: 4),
-      //          )
-      //      );
-
-      return;
-    };
-
-  }
 
 
 
@@ -276,8 +221,8 @@ class _LoginPageState extends State<LoginPage> {
 
     print('at initState of Login Page');
     super.initState();
-    _showSettingsPanel();
-    setAllIngredients();
+//    _showSettingsPanel();
+//    setAllIngredients();
 
   }
 
@@ -388,15 +333,19 @@ class _LoginPageState extends State<LoginPage> {
                               FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
                               List<NewIngredient> emptyIngs = [];
 
+//                              Navigator.of(context).pop();
+
+
                               Navigator.of(context).pushAndRemoveUntil(
                                 //        MaterialPageRoute(builder: (context) => HomeScreen())
                                 //
                                 //        MaterialPageRoute(builder: (context) => MyHomePage())
                                 MaterialPageRoute(builder: (BuildContext context) {
 
-                                  return BlocProvider2(
-                                      bloc: AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
-                                      child: FoodGallery2()
+                                  return BlocProvider<IdentityBloc>(
+                                      bloc: IdentityBloc(),
+                                      //AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
+                                      child: WelcomePage()
                                   );
                                   /*
                                   return BlocProvider<FoodGalleryBloc>(
@@ -416,6 +365,8 @@ class _LoginPageState extends State<LoginPage> {
 
 
                                 }),(Route<dynamic> route) => false);
+
+
 
 
 
