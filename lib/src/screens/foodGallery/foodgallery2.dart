@@ -87,8 +87,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //  List<NewCategoryItem>_allCategoryList=[];
 
 
-  List<NewIngredient> _allIngredientState=[];
+  // List<NewIngredient> _allIngredientState=[];
 
+  /*
   @override
   void initState() {
 //    setAllIngredients();
@@ -130,6 +131,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
   }
+
+  */
 
 
 
@@ -623,7 +626,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                               child: FoodList(
                                   categoryString: _currentCategory,
-                                  searchString2:_searchString,allIngredients:_allIngredientState),
+                                  searchString2:_searchString,/*allIngredients:_allIngredientState */),
 
                               // FOR SEARCHING AMONG ALL THE CATEGORIES.
 //                              child: FoodList(searchString2:_searchString),
@@ -1040,9 +1043,9 @@ class FoodList extends StatelessWidget {
 
   final String categoryString;
   final String searchString2;
-  final List<NewIngredient> allIngredients;
+//  final List<NewIngredient> allIngredients;
 
-  FoodList({this.categoryString, this.searchString2 ,this.allIngredients });
+  FoodList({this.categoryString, this.searchString2 /*,this.allIngredients */});
 
   final logger = Logger(
     printer: PrettyPrinter(),
@@ -1125,7 +1128,7 @@ class FoodList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    print('_allIngredientState: in FoodLIst: $allIngredients');
+//    print('_allIngredientState: in FoodLIst: $allIngredients');
 //    final bloc = LocationQueryBloc();
 
 //    final blocZZ = FoodItemsQueryBloc();
@@ -1478,11 +1481,21 @@ class FoodList extends StatelessWidget {
                                   ),
                                   onTap: () {
 
-                                    final foodItemDetailsBlocForOrderProcessing =
-                                        BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+                                    final blocG =
+                                        BlocProvider2.of(context).getFoodGalleryBlockObject;
+
+                                    List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
+
+                                    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+//                                    blocD.getAllIngredients();
+//                                    List<NewIngredient> test = blocD.allIngredients;
 
 
-                                    foodItemDetailsBlocForOrderProcessing.setallIngredients(allIngredients);
+                                    logger.e('tempIngs_push 1: $tempIngs');
+
+
+                                    blocD.setallIngredients(tempIngs);
 //                                    _allIngredientState
                                     return Navigator.of(context).push(
 
@@ -1499,8 +1512,8 @@ class FoodList extends StatelessWidget {
                                                   allIngredients), */
 
                                               bloc: AppBloc(
-                                                  oneFoodItem,
-                                                  /*allIngredients,*/ fromWhichPage:1),
+                                                  oneFoodItem, tempIngs
+                                                  /*allIngredients,*/ /*fromWhichPage:1*/),
 
 
                                               child: FoodItemDetails2()
@@ -1836,11 +1849,21 @@ class FoodList extends StatelessWidget {
                                   ),
                                   onTap: () {
 
-                                    final foodItemDetailsBlocForOrderProcessing =
-                                        BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+                                    final blocG =
+                                        BlocProvider2.of(context).getFoodGalleryBlockObject;
 
-                                    foodItemDetailsBlocForOrderProcessing.setallIngredients(allIngredients);
+                                    List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
 
+                                    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+//                                    blocD.getAllIngredients();
+//                                    List<NewIngredient> test = blocD.allIngredients;
+
+
+                                    logger.e('tempIngs_push 2: $tempIngs');
+
+
+                                    blocD.setallIngredients(tempIngs);
 
                                     return Navigator.of(context).push(
 
@@ -1858,8 +1881,7 @@ class FoodList extends StatelessWidget {
                                                   allIngredients), */
 
                                               bloc: AppBloc(
-                                                  oneFoodItem,
-                                                  /*allIngredients,*/ fromWhichPage:1),
+                                                  oneFoodItem, tempIngs),
 
 
                                               child: FoodItemDetails2()

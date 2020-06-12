@@ -24,7 +24,7 @@ class AppBloc {
 
   FoodGalleryBloc foodGalleryBlockObject;
   FoodItemDetailsBloc foodItemDetailsBlockObject;
-  IdentityBloc identityBlocObject;
+//  IdentityBloc identityBlocObject;
 
   FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
   List<NewIngredient> emptyIngs = [];
@@ -44,21 +44,18 @@ class AppBloc {
 //  FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
 
   AppBloc(FoodItemWithDocID oneFoodItemWithDocID,
-      /*final List<NewIngredient> allIngredients,*/{int fromWhichPage =1}) {
+      /*final*/ List<NewIngredient> allIngredients  /*{int fromWhichPage =1}*/) {
 
-    logger.e('fromWhichPage: $fromWhichPage');
+//    logger.e('fromWhichPage: $fromWhichPage');
 
 
     foodGalleryBlockObject = FoodGalleryBloc();
-    identityBlocObject = IdentityBloc();
-    foodItemDetailsBlockObject = (fromWhichPage==0)?
+//    identityBlocObject = IdentityBloc();
+    foodItemDetailsBlockObject =
 
-    FoodItemDetailsBloc(emptyFoodItemWithDocID,[] ,fromWhichPage:0):(fromWhichPage==-1)?
-    FoodItemDetailsBloc(emptyFoodItemWithDocID,[] ,fromWhichPage:0):
-    FoodItemDetailsBloc(oneFoodItemWithDocID,/*allIngredients , TO DO -->INTENTION IS CHANGE THIS VALUE BY
-    MAKING A SETTER CALL TO FoodItemDetailsBloc FROM OTHER PAGE.
-     like from FoodGallery page set the foodItemd details List<NewIngredients> object=set value*/[],
-        fromWhichPage:1);
+    FoodItemDetailsBloc(emptyFoodItemWithDocID,allIngredients);
+
+//    fromWhichPage:0
 
 
 //    foodGalleryBlockObject.counter$.listen(foodItemDetailsBlockObject.increment.add);
@@ -70,5 +67,5 @@ class AppBloc {
 
   FoodGalleryBloc get getFoodGalleryBlockObject => foodGalleryBlockObject;
   FoodItemDetailsBloc get getFoodItemDetailsBlockObject => foodItemDetailsBlockObject;
-  IdentityBloc get getIdentityBlocsObject => identityBlocObject;
+//  IdentityBloc get getIdentityBlocsObject => identityBlocObject;
 }

@@ -33,8 +33,11 @@ class FoodGalleryBloc implements Bloc {
 
   List<NewCategoryItem> _allCategoryList=[];
 
-
-
+  List<NewIngredient> _allIngItemsFGBloc =[];
+  
+  List<NewIngredient> get getAllIngredientsPublicFGB2 => _allIngItemsFGBloc;
+  Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
+  final _allIngredientListController = StreamController <List<NewIngredient>> /*.broadcast*/();
 
 
 
@@ -90,6 +93,40 @@ class FoodGalleryBloc implements Bloc {
     _locationController.sink.add(location);
   }
   */
+
+
+// this code bloc cut paste from foodGallery Bloc:
+  Future<void> getAllIngredients() async {
+
+
+    var snapshot = await _client.fetchAllIngredients();
+    List docList = snapshot.documents;
+
+
+
+    List <NewIngredient> ingItems = new List<NewIngredient>();
+    ingItems = snapshot.documents.map((documentSnapshot) =>
+        NewIngredient.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+    print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+
+
+    _allIngItemsFGBloc = ingItems;
+
+    _allIngredientListController.sink.add(ingItems);
+
+
+//    return ingItems;
+
+  }
 
 
 //  Future<List<FoodItemWithDocID>> getAllFoodItems() async {
@@ -180,7 +217,7 @@ class FoodGalleryBloc implements Bloc {
     print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
-    _allIngItems = ingItems;
+    _allIngItemsFGBloc = ingItems;
 
     _allIngredientListController.sink.add(ingItems);
 
@@ -249,10 +286,14 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-    // CONSTRUCTOR BIGINS HERE..
-    FoodGalleryBloc() {
+  // CONSTRUCTOR BIGINS HERE..
+  FoodGalleryBloc() {
+
+    // need to use this when moving to food Item Details page.
+    getAllIngredients();
 
     getAllFoodItems();
+
     getAllCategories();
 
 //    getAllIngredients();
@@ -261,7 +302,7 @@ class FoodGalleryBloc implements Bloc {
 //    this.getAllFoodItems();
 //    this.getAllCategories();
 
-    }
+  }
 
   // CONSTRUCTOR ENDS HERE..
 
@@ -273,6 +314,7 @@ class FoodGalleryBloc implements Bloc {
   void dispose() {
     _foodItemController.close();
     _categoriesController.close();
+    _allIngredientListController.close();
 //    _allIngredientListController.close();
   }
 }

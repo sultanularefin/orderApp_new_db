@@ -77,7 +77,7 @@ class FoodItemDetailsBloc implements Bloc {
 //
 //  _controller.sink.add(thisFoodpriceModified);
 
-  List<NewIngredient> _allIngItems=[];
+  List<NewIngredient> _allIngItemsDetailsBlock =[];
 
   List<NewIngredient> _defaultIngItems = [];
   List<NewIngredient> _unSelectedIngItems = [];
@@ -105,7 +105,7 @@ class FoodItemDetailsBloc implements Bloc {
   // 1
 
   Order get getCurrentOrderFoodDetails => _currentOrderFoodDetails;
-  List<NewIngredient> get allIngredients => _allIngItems;
+  List<NewIngredient> get allIngredients => _allIngItemsDetailsBlock;
 
   List<NewIngredient> get getDefaultIngredients => _defaultIngItems;
   List<NewIngredient> get unSelectedIngredients => _unSelectedIngItems;
@@ -189,7 +189,7 @@ class FoodItemDetailsBloc implements Bloc {
 //    print('Ingredient documents are: $documents');
 
 
-    _allIngItems = ingItems;
+    _allIngItemsDetailsBlock = ingItems;
 
     _allIngredientListController.sink.add(ingItems);
 
@@ -205,8 +205,8 @@ class FoodItemDetailsBloc implements Bloc {
 
     print('setallIngredients : ___ ___ ___   $allIngredients');
 
-    _allIngItems = allIngredients;
-    _allIngredientListController.sink.add(_allIngItems);
+    _allIngItemsDetailsBlock = allIngredients;
+    _allIngredientListController.sink.add(_allIngItemsDetailsBlock);
 
 //    List <FoodPropertyMultiSelect> multiSelectArray = _multiSelectForFood;
 
@@ -214,110 +214,83 @@ class FoodItemDetailsBloc implements Bloc {
   }
 
   // CONSTRUCTOR BEGINS HERE.
-  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWhichPage=1} ) {
-//    getAllIngredients();
+  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped ) {
 
-//    List<NewIngredient> allIngsScoped= _allIngItems;
+//    if(allIngsScoped==[]) return;
 
-//      IdentityBloc x = new IdentityBloc();
-//      List<NewIngredient> p= x.allIngredients();
+    print("allIngsScoped: $allIngsScoped ");
+    allIngsScoped= _allIngItemsDetailsBlock;
 
-    if (fromWhichPage == 0) {
+    print(' 1 means from Food Gallery Page to Food Item Details Page');
+    print(' which IS NORMAL');
 
-      print('0 means from welcome page');
-      print('fromWhichPage == 0');
+    print("at the begin of Constructor [FoodItemDetailsBloc]");
+    print("oneFoodItem ===> ===> ===> $oneFoodItem");
+    print("allIngsScoped _allIngItemsDetailsBlock ===> ===> ===> $_allIngItemsDetailsBlock");
 
-    }
-
-    else if(fromWhichPage == 2){
-
-      allIngsScoped = _allIngItems;
-//      oneFoodItem= _thisFoodItem;
-
-      FoodItemWithDocIDViewModel _thisFoodItem ;
-
-
-//      List<NewIngredient> _allIngItems=[];
-
-//      List<NewIngredient> _defaultIngItems = [];
-//      List<NewIngredient> _unSelectedIngItems = [];
-//      List<FoodPropertyMultiSelect> _multiSelectForFood =[];
-//      Order _currentOrderFoodDetails ;
-
-
-//      Order get getCurrentOrderFoodDetails => _currentOrderFoodDetails;
-//      List<NewIngredient> get allIngredients => _allIngItems;
-//
-//      List<NewIngredient> get getDefaultIngredients => _defaultIngItems;
-//      List<NewIngredient> get unSelectedIngredients => _unSelectedIngItems;
-//
-//
-//      List<FoodPropertyMultiSelect> get getMultiSelectForFood => _multiSelectForFood;
-
-
-//
-
-      print('2 means from Food Item Details page to FoogGallery2 page [ pop ] '); // pop
-      print('fromWhichPage == 2');
-    }
-    else {
-
-      allIngsScoped= _allIngItems;
-
-      print(' 1 means from Food Gallery Page to Food Item Details Page');
-      print(' which IS NORMAL');
-
-      print("at the begin of Constructor [FoodItemDetailsBloc]");
-      print("oneFoodItem ===> ===> ===> $oneFoodItem");
-      print("allIngsScoped ===> ===> ===> $allIngsScoped");
 
 //    _oneFoodItem = oneFoodItem;
 
 
-      //  logger.w(" allIngsScoped: ", allIngsScoped);
+    //  logger.w(" allIngsScoped: ", allIngsScoped);
 
-      //  print(" allIngsScoped: $allIngsScoped ");
+    //  print(" allIngsScoped: $allIngsScoped ");
 
-      /* Ordered Food Related codes starts here. */
+    /* Ordered Food Related codes starts here. */
 
-      CustomerInformation oneCustomerInfo = new CustomerInformation(
-        address: '',
-        flatOrHouseNumber: '',
-        phoneNumber: '',
-        etaTimeInMinutes: -1,
+    CustomerInformation oneCustomerInfo = new CustomerInformation(
+      address: '',
+      flatOrHouseNumber: '',
+      phoneNumber: '',
+      etaTimeInMinutes: -1,
 //        CustomerInformation currentUser = _oneCustomerInfo;
 //    currentUser.address = address;
 //
 
-      );
+    );
 
-      Order constructorOrderFD = new Order(
-        selectedFoodInOrder: [],
-        selectedFoodListLength:0,
-        deliveryTypeIndex: 0,
-        paymentTypeIndex: 4,
-        ordersCustomer: oneCustomerInfo,
-      );
-
-
-      _currentOrderFoodDetails = constructorOrderFD;
-
-      _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
-
-      /* Ordered Food Related codes ends here. */
+    Order constructorOrderFD = new Order(
+      selectedFoodInOrder: [],
+      selectedFoodListLength:0,
+      deliveryTypeIndex: 0,
+      paymentTypeIndex: 4,
+      ordersCustomer: oneCustomerInfo,
+    );
 
 
-      final Map<String, dynamic> foodSizePrice = oneFoodItem.sizedFoodPrices;
+    _currentOrderFoodDetails = constructorOrderFD;
 
-      /* INGREDIENTS HANDLING CODES STARTS HERE: */
-      List<String> ingredientStringsForWhereInClause;
-      List <NewIngredient> ingItems = new List<NewIngredient>();
+    _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+
+    /* Ordered Food Related codes ends here. */
 
 
-      final List<dynamic> foodItemIngredientsList2 = oneFoodItem.ingredients;
-      List<String> listStringIngredients = dynamicListFilteredToStringList(
-          foodItemIngredientsList2);
+    final Map<String, dynamic> foodSizePrice = oneFoodItem.sizedFoodPrices;
 
+    /* INGREDIENTS HANDLING CODES STARTS HERE: */
+    List<String> ingredientStringsForWhereInClause;
+    List <NewIngredient> ingItems = new List<NewIngredient>();
+
+
+    //    oneFoodItem, List<NewIngredient> allIngsScoped
+
+//    if(oneFoodItem==null){
+//      foodItemIngredientsList2=null;
+//
+//    }
+
+    // COUNTER MEASURES SINCE WE INVOKE APPBLOC FROM WELCOME PAGE WHERE THIS CONSTRUCTOR IS CALLED 1.
+    // COUNTER MEASURE 01.
+
+    print('^^  ^ ^^  oneFoodItem.itemName: ${oneFoodItem.itemName}');
+    final List<dynamic> foodItemIngredientsList2 = oneFoodItem.itemName==null ? null:oneFoodItem.ingredients;
+
+    // COUNTER MEASURE 02.
+    List<String> listStringIngredients = oneFoodItem.itemName==null ?null:dynamicListFilteredToStringList(
+        foodItemIngredientsList2);
+
+
+    logger.e(' I  I   I  I  any error until this line executed ** ');
 //    print('listStringIngredients: $listStringIngredients');
 //      logger.w('listStringIngredients at foodItem Details Block line # 160',
 //          listStringIngredients);
@@ -326,97 +299,112 @@ class FoodItemDetailsBloc implements Bloc {
 //    List<NewIngredient> allIngsScoped = getAllIngredients();
 
 
-      // DDD todo
+    // DDD todo
 
 //    print('allIng_s : $allIngsScoped');
 
-      if (listStringIngredients.length != 0) {
-        filterSelectedDefaultIngredients(allIngsScoped,
-            listStringIngredients); // only default<NewIngredient>
+    // COUNTER MEASURE 03. && (listStringIngredients!=null)
 
-        filterUnSelectedIngredients(allIngsScoped,
-            listStringIngredients); // only default<NewIngredient>
+    // SHORT CIRCUIT WORKING HERE.
+    if ((listStringIngredients!=null) && (listStringIngredients.length != 0)) {
+      filterSelectedDefaultIngredients(allIngsScoped,
+          listStringIngredients); // only default<NewIngredient>
+
+      filterUnSelectedIngredients(allIngsScoped,
+          listStringIngredients); // only default<NewIngredient>
 
 
-      }
+    }
 
-      else {
-        print('at else statement:  ===> ===> ===> ===>');
+    else {
+      print('at else statement:  ===> ===> ===> ===>');
 
-        print('allIngsScoped.length  ===> ===> ===> ===> ${allIngsScoped
-            .length}');
-        NewIngredient c1 = new NewIngredient(
-            ingredientName: 'None',
-            imageURL: 'None',
+      print('allIngsScoped.length  ===> ===> ===> ===> ${allIngsScoped
+          .length}');
+      NewIngredient c1 = new NewIngredient(
+          ingredientName: 'None',
+          imageURL: 'None',
 
-            price: 0.01,
-            documentId: 'None',
-            ingredientAmountByUser: 1000
+          price: 0.01,
+          documentId: 'None',
+          ingredientAmountByUser: 1000
 
-        );
+      );
 
-        ingItems.add(c1);
+      ingItems.add(c1);
 
-//      _allIngItems = ingItems;
+//      _allIngItemsDetailsBlock = ingItems;
 
 //      _allIngredientListController.sink.add(ingItems);
 
 //      _unSelectedIngredientListController
-        _defaultIngItems = ingItems;
-        _defaultIngredientListController.sink.add(ingItems);
+      _defaultIngItems = ingItems;
+      _defaultIngredientListController.sink.add(ingItems);
 
 
-        List<NewIngredient> unSelectedDecremented =
-        allIngsScoped.map((oneIngredient) =>
-            NewIngredient.updateIngredient(
-                oneIngredient
-            )).toList();
+      List<NewIngredient> unSelectedDecremented =
+      allIngsScoped.map((oneIngredient) =>
+          NewIngredient.updateIngredient(
+              oneIngredient
+          )).toList();
 
-        print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented
-            .length}');
-        print(
-            "length of unSelectedIngredientsFiltered ===>  =======> ========>> ==========> =========> ");
-        _unSelectedIngItems = unSelectedDecremented;
+      print('unSelectedIngredientsFiltered ===>  ${unSelectedDecremented
+          .length}');
+      print(
+          "length of unSelectedIngredientsFiltered ===>  =======> ========>> ==========> =========> ");
+      _unSelectedIngItems = unSelectedDecremented;
 
 
-        _unSelectedIngredientListController.sink.add(unSelectedDecremented);
+      _unSelectedIngredientListController.sink.add(unSelectedDecremented);
 
 //      return ingItems;
 
-      }
+    }
 
-      //DDDD todo
+    //DDDD todo
 
-      /* INGREDIENTS HANDLING CODES ENDS HERE: */
+    /* INGREDIENTS HANDLING CODES ENDS HERE: */
 
-
-      dynamic normalPrice = foodSizePrice['normal'];
-
-      if (normalPrice is double) {
-        print('price double at foodItemDetails bloc');
-      }
+    // COUNTER MEASURE 04.
+    dynamic normalPrice = oneFoodItem.itemName==null ? 0 :foodSizePrice['normal'];
 
 
-      else if (normalPrice is num) {
-        print('price num at foodItemDetails bloc');
-      }
+
+//    dynamic normalPrice = foodSizePrice['normal'];
+//    if (!normalPrice ) {
+//      print('price is is null');
+//    }
+
+    /*
+    logger.e('normalPrice: $normalPrice');
+
+    if (normalPrice is double) {
+      print('price double at foodItemDetails bloc');
+    }
 
 
-      else if (normalPrice is int) {
-        print('price int at foodItemDetails bloc');
-      }
-
-      else {
-        print('normalPrice is dynamic: ${normalPrice is dynamic}');
-        print('price dynamic at foodItemDetails bloc');
-      }
+    else if (normalPrice is num) {
+      print('price num at foodItemDetails bloc');
+    }
 
 
-      double normalPriceCasted = tryCast<double>(normalPrice, fallback: 0.00);
+    else if (normalPrice is int) {
+      print('price int at foodItemDetails bloc');
+    }
 
-      FoodItemWithDocIDViewModel thisFood =
-      FoodItemWithDocIDViewModel.customCastFrom(
-          oneFoodItem, 'normal', normalPriceCasted);
+    else {
+      print('normalPrice is dynamic: ${normalPrice is dynamic}');
+      print('price dynamic at foodItemDetails bloc');
+    }
+    */
+
+
+
+    double normalPriceCasted = tryCast<double>(normalPrice, fallback: 0.00);
+
+    FoodItemWithDocIDViewModel thisFood =
+    FoodItemWithDocIDViewModel.customCastFrom(
+        oneFoodItem, 'normal', normalPriceCasted);
 
 //    FoodItemWithDocIDViewModel thisFood = new FoodItemWithDocIDViewModel(
 //      itemName: oneFoodItem.itemName,
@@ -437,18 +425,17 @@ class FoodItemDetailsBloc implements Bloc {
 //    );
 
 
-      /*
+    /*
     * INITIATE MULTISELECT FOODiTEM OPTIONS*/
 
 
-      _thisFoodItem =
-          thisFood; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+    _thisFoodItem =
+        thisFood; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
 
-      initiateAllMultiSelectOptions();
+    initiateAllMultiSelectOptions();
 
-      _controller.sink.add(thisFood);
-    }
+    _controller.sink.add(thisFood);
   }
 
 //  List<FoodPropertyMultiSelect> initiateAllMultiSelectOptions()
@@ -519,7 +506,7 @@ class FoodItemDetailsBloc implements Bloc {
       print('_currentOrderFoodDetails.selectedFoodInOrder[0].quantity:'
           '${_currentOrderFoodDetails.selectedFoodInOrder[tempOrderDecrementOperation.selectedFoodListLength-1].quantity}');
 
-      
+
       int newSelectedFoodOrderLength = tempOrderDecrementOperation.selectedFoodListLength-1;
 
 
@@ -552,10 +539,10 @@ class FoodItemDetailsBloc implements Bloc {
 //      }
 //      else{
 
-    print('tempOrderDecrementOperation.selectedFoodInOrder: ${tempOrderDecrementOperation.selectedFoodInOrder}');
-        numberOFSelectedFoods=  tempOrderDecrementOperation.selectedFoodInOrder.length;
-        print('tempOrderDecrementOperation.selectedFoodInOrder.length:'
-            +'${tempOrderDecrementOperation.selectedFoodInOrder.length} ');
+      print('tempOrderDecrementOperation.selectedFoodInOrder: ${tempOrderDecrementOperation.selectedFoodInOrder}');
+      numberOFSelectedFoods=  tempOrderDecrementOperation.selectedFoodInOrder.length;
+      print('tempOrderDecrementOperation.selectedFoodInOrder.length:'
+          +'${tempOrderDecrementOperation.selectedFoodInOrder.length} ');
 //      }
 
       print('at DEC __ ** __ ** numberOFSelectedFoods: $numberOFSelectedFoods');
@@ -590,7 +577,7 @@ class FoodItemDetailsBloc implements Bloc {
 
 
 
-  // work 01
+    // work 01
 
     /*
     if( ItemCount == 0 ) {
@@ -839,7 +826,7 @@ class FoodItemDetailsBloc implements Bloc {
     print('documents are: $documents');
 
 
-    _allIngItems = ingItems;
+    _allIngItemsDetailsBlock = ingItems;
 
     _allIngredientListController.sink.add(ingItems);
 
@@ -1039,8 +1026,8 @@ class FoodItemDetailsBloc implements Bloc {
   // HELPER METHOD tryCast Number (1)
   double tryCast<num>(dynamic x, {num fallback }) {
 
-//    print(" at tryCast");
-//    print('x: $x');
+    print(" at tryCast");
+    print('x: $x');
 
     bool status = x is num;
 

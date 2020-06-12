@@ -311,8 +311,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   return (
                       BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                           bloc: AppBloc(
-                              emptyFoodItemWithDocID, /* welcomPageIngredients, */
-                              fromWhichPage: 0),
+                              emptyFoodItemWithDocID, []),
                           /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
@@ -372,8 +371,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                         bloc: AppBloc(
-                            emptyFoodItemWithDocID, /* welcomPageIngredients, */
-                            fromWhichPage: 0),
+                            emptyFoodItemWithDocID, []),
                         /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
@@ -401,8 +399,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                         bloc: AppBloc(
-                            emptyFoodItemWithDocID /*, welcomPageIngredients*/,
-                            fromWhichPage: 0),
+                            emptyFoodItemWithDocID, []),
                         /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
@@ -425,8 +422,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                         bloc: AppBloc(
-                            emptyFoodItemWithDocID, /*welcomPageIngredients ,*/
-                            fromWhichPage: 0),
+                            emptyFoodItemWithDocID, [] /*,*/
+                            /* fromWhichPage: 0 */),
                         /*
                           child: BlocProvider<FoodItemDetailsBloc>(
                               bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
