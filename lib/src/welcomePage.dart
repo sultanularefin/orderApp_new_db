@@ -121,7 +121,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
     // 3 scenarios.
 
-    logger.e('at localStorageCheck of welcome page\'s init state :  ');
+//    logger.e('at localStorageCheck of welcome page\'s init state :  ');
 
     print('< >   <   >   <    >  :: // ::  // at here: localStorageCheck');
 
@@ -135,7 +135,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
     if ((x==false) && (fromWhichPageString=='foodGallery2')){
 
-      logger.e('going to welcome page\'s init state : fromWhichPageString==\'foodGallery2\'  ');
+//      logger.e('going to welcome page\'s init state : fromWhichPageString==\'foodGallery2\'  ');
 
       return Navigator.push(
 
@@ -145,7 +145,7 @@ class _WelcomePageState extends State<WelcomePage> {
     }
     else if (x==false){
 
-      logger.e('going to welcome page\'s init state :  ');
+//      logger.e('going to welcome page\'s init state :  ');
 
       return Navigator.push(
 
@@ -158,7 +158,7 @@ class _WelcomePageState extends State<WelcomePage> {
       // await setAllIngredients();
       /* ${test.length}*/
 
-      logger.e('at return of welcome page\'s init state :  ');
+//      logger.e('at return of welcome page\'s init state :  ');
       return;
     }
 

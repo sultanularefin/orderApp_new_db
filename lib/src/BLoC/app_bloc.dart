@@ -26,7 +26,7 @@ class AppBloc {
   FoodItemDetailsBloc foodItemDetailsBlockObject;
 //  IdentityBloc identityBlocObject;
 
-  FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+//  FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
   List<NewIngredient> emptyIngs = [];
 
 
@@ -53,7 +53,7 @@ class AppBloc {
 //    identityBlocObject = IdentityBloc();
     foodItemDetailsBlockObject =
 
-    FoodItemDetailsBloc(emptyFoodItemWithDocID,allIngredients);
+    FoodItemDetailsBloc(oneFoodItemWithDocID,allIngredients);
 
 //    fromWhichPage:0
 

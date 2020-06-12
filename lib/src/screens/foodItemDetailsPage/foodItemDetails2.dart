@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
@@ -90,6 +91,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
+  /*
 
   @override
   void initState() {
@@ -98,6 +100,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //    retrieveIngredientsDefault();
     super.initState();
   }
+  */
+
 
 
   double tryCast<num>(dynamic x, {num fallback }) {
@@ -125,7 +129,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   double addedHeight =0.0;
   @override
   Widget build(BuildContext context) {
-    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+    logger.e('blocD: $blocD');
+//    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 //    print('totalCartPrice -----------> : $totalCartPrice');
 //    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
@@ -133,14 +139,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //    logger.w('defaultIngredients: ',bloc.defaultIngredients);
 
 //    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
-    List<NewIngredient> unSelectedIngredients = foodItemDetailsbloc.unSelectedIngredients;
+    List<NewIngredient> unSelectedIngredients = blocD.unSelectedIngredients;
+
+    print('unSelectedIngredients: $unSelectedIngredients');
 
 
 
     /*
     logger.w('unSelectedIngredients in foodItemDetails2 line #116 : ',
         unSelectedIngredients);
-
 
     */
 
@@ -159,8 +166,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           child: StreamBuilder<FoodItemWithDocIDViewModel>(
 
 
-              stream: foodItemDetailsbloc.currentFoodItemsStream,
-              initialData: foodItemDetailsbloc.currentFoodItem,
+              stream: blocD.currentFoodItemsStream,
+              initialData: blocD.currentFoodItem,
 
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -171,6 +178,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                   final FoodItemWithDocIDViewModel oneFood = snapshot
                       .data;
+
+                  logger.i('oneFood.itemName after '
+                      ''
+                      'snapshot.hasData FDetails: ${oneFood.itemName}');
 
                   final Map<String, dynamic> foodSizePrice = oneFood
                       .sizedFoodPrices;
@@ -342,8 +353,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                     //sssssss
 //                                    child: GridView.builder(
                                     child:StreamBuilder(
-                                      stream: foodItemDetailsbloc.getUnSelectedIngredientItemsStream,
-                                      initialData: foodItemDetailsbloc.unSelectedIngredients,
+                                      stream: blocD.getUnSelectedIngredientItemsStream,
+                                      initialData: blocD.unSelectedIngredients,
 
                                       builder: (context, snapshot) {
                                         if (!snapshot.hasData) {

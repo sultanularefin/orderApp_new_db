@@ -1518,7 +1518,7 @@ class FoodList extends StatelessWidget {
 
                                               child: FoodItemDetails2()
 
-                                              ,),
+                                              ),
                                         /*
                                             BlocProvider<FoodItemDetailsBloc>(
                                               bloc: FoodItemDetailsBloc(

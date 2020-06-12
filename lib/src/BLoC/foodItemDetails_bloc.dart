@@ -219,7 +219,18 @@ class FoodItemDetailsBloc implements Bloc {
 //    if(allIngsScoped==[]) return;
 
     print("allIngsScoped: $allIngsScoped ");
+
+    // I THOUTHT THIS _allIngItemsDetailsBlock WILL CONTAIN DATA SINCE I SET THEM FROM FOODGALLERY PAGE BEFORE CALLING THE
+    // CONSTRUCTOR
+    /*
+     print("_allIngItemsDetailsBlock: $_allIngItemsDetailsBlock");
     allIngsScoped= _allIngItemsDetailsBlock;
+
+    BUT THEY SHOW [].
+     */
+
+
+
 
     print(' 1 means from Food Gallery Page to Food Item Details Page');
     print(' which IS NORMAL');
@@ -290,7 +301,7 @@ class FoodItemDetailsBloc implements Bloc {
         foodItemIngredientsList2);
 
 
-    logger.e(' I  I   I  I  any error until this line executed ** ');
+//    logger.e(' I  I   I  I  any error until this line executed ** ');
 //    print('listStringIngredients: $listStringIngredients');
 //      logger.w('listStringIngredients at foodItem Details Block line # 160',
 //          listStringIngredients);
@@ -1129,6 +1140,7 @@ class FoodItemDetailsBloc implements Bloc {
 //    print("allIngList: $allIngList");
 
     print("listStringIngredients2: $listStringIngredients2");
+    print('allIngList: $allIngList');
 
 
 
