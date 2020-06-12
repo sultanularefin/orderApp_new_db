@@ -1127,7 +1127,7 @@ class FoodList extends StatelessWidget {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
 
 //    print('_allIngredientState: in FoodLIst: $allIngredients');
 //    final bloc = LocationQueryBloc();
@@ -1498,6 +1498,7 @@ class FoodList extends StatelessWidget {
 
                                     blocD.setallIngredients(tempIngs);
 //                                    _allIngredientState
+//                                    final result = await
                                     return Navigator.of(context).push(
 
 
