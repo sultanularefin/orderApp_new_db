@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
@@ -242,6 +243,21 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                           transitionDuration: Duration(
                               milliseconds: 300),
                           pageBuilder: (_, __, ___) =>
+
+                              BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
+                                  bloc2: AppBloc(
+                                      emptyFoodItemWithDocID, [] /*,*/
+                                    /* fromWhichPage: 0 */),
+                                  /*
+                          child: BlocProvider<FoodItemDetailsBloc>(
+                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
+                              child: FoodGallery2()
+
+                          )
+                          */
+                                  child: FoodGallery2()
+                              )
+                          /*
                               BlocProvider<FoodGalleryBloc>(
                                 bloc: FoodGalleryBloc(),
 
@@ -255,6 +271,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                     child: FoodGallery2()
 //                                  child: FoodGallery2()
                                 ),
+                                */
                                 // fUTURE USE -- ANIMATION TRANSITION CODE.
                                 /*
                                   transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
@@ -364,6 +381,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                           List<NewIngredient> unSelectedIngredients = snapshot.data;
 
+                                          logger.w('unSelectedIngredients.length:'
+                                              ' ${unSelectedIngredients.length}');
                                           return GridView.builder(
                                             itemCount: unSelectedIngredients
                                                 .length,
@@ -457,7 +476,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   ),
 
 
-                                  child: Neumorphic(
+                                  child:
+                                  Neumorphic(
                                     // State of Neumorphic (may be convex, flat & emboss)
 
                                       boxShape: NeumorphicBoxShape
@@ -627,13 +647,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                       color:Colors.white,
                                                       height: 50,
                                                       width: displayWidth(context) * 0.57,
-                                                      child:  _buildMultiSelectOptions(),
+                                                      child:
+                                                      _buildMultiSelectOptions(),
+
+                                                      // Text('_buildMultiSelectOptions()')
 
                                                     ),
                                                     Container(
                                                         child: _buildProductSizes(
                                                             context,
                                                             foodSizePrice)
+                                                        //Text('_buildProductSizes('
+                                                        //    'context,'
+                                                        //    'foodSizePrice)'),
                                                     ),
 
 //                                  Text('ss'),
@@ -646,6 +672,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                         child: buildDefaultIngredients(
                                                             context
                                                         )
+                                                       //Text('buildDefaultIngredients('
+                                                       //    'context'
+                                                       //')'),
                                                     ),
 
                                                     // NEWANIMATEDPOSITIONED HERE BEGINS =><=
@@ -658,6 +687,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //
                                                         child: showPressWhenFinishButton? animatedWidgetPressToFinish():
                                                         animatedWidgetMoreIngredientsButton(),
+                                                        // Text('showPressWhenFinishButton? animatedWidgetPressToFinish():'
+                                                        //     'animatedWidgetMoreIngredientsButton(),'),
 
                                                       ),
                                                       // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH BEGINS HERE.
@@ -801,8 +832,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //
 
             logger.i('addedHeight: ',addedHeight);
-            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-            foodItemDetailsbloc.updateDefaultIngredientItems(/*oneSelected,index*/);
+            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+            blocD.updateDefaultIngredientItems(/*oneSelected,index*/);
             if( addedHeight == 0.0 ){
               setState(() {
                 addedHeight = /* displayHeight(context)/10*/
@@ -820,8 +852,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               });
             }else{
 
-              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-              foodItemDetailsbloc.updateDefaultIngredientItems(/*oneSelected,index*/);
+              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+//              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+              blocD.updateDefaultIngredientItems(/*oneSelected,index*/);
 
 
               setState(() {
@@ -848,7 +882,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   Widget animatedWidgetMoreIngredientsButton(){
 
-    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
     return    Container(
 
         color:Colors.white,
@@ -944,8 +979,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
               StreamBuilder<Order>(
-                  stream: foodItemDetailsbloc.getCurrentOrderStream,
-                  initialData: foodItemDetailsbloc.getCurrentOrderFoodDetails,
+                  stream: blocD.getCurrentOrderStream,
+                  initialData: blocD.getCurrentOrderFoodDetails,
                 builder: (context, snapshot) {
                   if ((snapshot.hasError) || (!snapshot.hasData)) {
                     return Center(
@@ -1032,19 +1067,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                 int quantity =1;
                                 // INITIAL CASE FIRST ITEM FROM ENTERING THIS PAGE FROM FOOD GALLERY PAGE.
                                 SelectedFood oneSelectedFoodFD = new SelectedFood(
-                                  foodItemName: foodItemDetailsbloc
+                                  foodItemName: blocD
                                       .currentFoodItem.itemName,
-                                  foodItemImageURL: foodItemDetailsbloc
+                                  foodItemImageURL: blocD
                                       .currentFoodItem.imageURL,
                                   unitPrice: initialPriceByQuantityANDSize,
-                                  foodDocumentId: foodItemDetailsbloc
+                                  foodDocumentId: blocD
                                       .currentFoodItem.documentId,
                                   quantity: quantity,
                                   foodItemSize: _currentSize,
                                   // index or int value not good enought since size may vary best on Food Types .
                                 );
 
-                                foodItemDetailsbloc
+                                blocD
                                     .incrementOneSelectedFoodForOrder(
                                     oneSelectedFoodFD, initialItemCount);
                               }
@@ -1061,12 +1096,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                 int newQuantity = oldQuantity + 1;
 
                                 SelectedFood oneSelectedFoodFD = new SelectedFood(
-                                  foodItemName: foodItemDetailsbloc
+                                  foodItemName: blocD
                                       .currentFoodItem.itemName,
-                                  foodItemImageURL: foodItemDetailsbloc
+                                  foodItemImageURL: blocD
                                       .currentFoodItem.imageURL,
                                   unitPrice: initialPriceByQuantityANDSize,
-                                  foodDocumentId: foodItemDetailsbloc
+                                  foodDocumentId: blocD
                                       .currentFoodItem.documentId,
                                   quantity: newQuantity,
                                   foodItemSize: _currentSize,
@@ -1074,7 +1109,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                 );
 
 
-                                foodItemDetailsbloc
+                                blocD
                                     .incrementOneSelectedFoodForOrder(oneSelectedFoodFD /*
                                     THIS oneSelectedFoodFD WILL NOT BE USED WHEN SAME ITEM IS INCREMENTED AND
 
@@ -1517,11 +1552,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //   width: displayWidth(context) * 0.57,
 
 
-    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
     return StreamBuilder(
-        stream: foodItemDetailsbloc.getMultiSelectStream,
-        initialData: foodItemDetailsbloc.getMultiSelectForFood,
+        stream: blocD.getMultiSelectStream,
+        initialData:blocD.getMultiSelectForFood,
 
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -1768,11 +1804,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //    defaultIngredients
-    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
     return StreamBuilder(
-        stream: foodItemDetailsbloc.getDefaultIngredientItemsStream,
-        initialData: foodItemDetailsbloc.getDefaultIngredients,
+        stream: blocD.getDefaultIngredientItemsStream,
+        initialData: blocD.getDefaultIngredients,
 
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -2125,9 +2162,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //              logger.i('onePriceForSize: ',onePriceForSize);
 
-              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-              foodItemDetailsbloc.setNewSizePlusPrice(oneSize);
+              blocD.setNewSizePlusPrice(oneSize);
 
 
 //              setNewSizePlusPrice

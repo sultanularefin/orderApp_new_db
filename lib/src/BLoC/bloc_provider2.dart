@@ -4,7 +4,9 @@ import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 //extends InheritedWidget
 class BlocProvider2 extends StatefulWidget  /*InheritedWidget*/ {
-  /*final */final AppBloc bloc2;
+  /*final */final
+
+  AppBloc bloc2;
 
   final Widget child;
 //  final List<NewIngredient> thisAllIngredients2;

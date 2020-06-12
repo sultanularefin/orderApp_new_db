@@ -82,6 +82,8 @@ class AppBloc implements Bloc {
 //    _defaultIngredientListController.close();
 //    _unSelectedIngredientListController.close();
 //    _multiSelectForFoodController.close();
+
+
     foodGalleryBlockObject.dispose();
     foodItemDetailsBlockObject.dispose();
 
