@@ -149,6 +149,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
+  bool _reloadRequired = false;
   String _searchString = '';
   String _currentCategory = "pizza";
   String _firstTimeCategoryString = "";
@@ -948,6 +949,12 @@ Widget work1(BuildContext context){
                 .length;
 
             print('selectedFoodsForOrderLength: $selectedFoodsForOrderLength');
+
+//            print('blocD.getCurrentOrderFoodDetails: ${all.selectedFoodInOrder[0].foodItemName}');
+//            List<SelectedFood> tempSelectedFoodInOrder = all.selectedFoodInOrder;
+//            int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
+
+
             return Container(
 //                                                                        width:60,
               width: displayWidth(
@@ -1971,51 +1978,11 @@ class FoodList extends StatelessWidget {
     // After the Selection Screen returns a result, hide any previous snackbars
     // and show the new result.
 
-    if(totalCartOrder.selectedFoodListLength>0){
-
-//      final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-
-//                                    blocD.getAllIngredients();
-//                                    List<NewIngredient> test = blocD.allIngredients;
+    if(totalCartOrder.selectedFoodListLength>0) {
+//      setState(() => _reloadRequired = true);
 
 
-      logger.e('whereAmI is: $totalCartOrder');
-
-
-      Order checkIfSameAsBefore = blocD.getCurrentOrderFoodDetails;
-
-      print('blocD.getCurrentOrderFoodDetails: ${blocD.getCurrentOrderFoodDetails}');
-
-
-
-      print('checkIfSameAsBefore.selectedFoodListLength: ${checkIfSameAsBefore.selectedFoodListLength}');
-
-
-//      List<int> test= [1,2,3,4,5,6];
-//      int result = test.reduce((a, b) => a + b);
-//      print('x  X  x : $result');
-
-      List<SelectedFood> tempSelectedFoodInOrder = checkIfSameAsBefore.selectedFoodInOrder;
-      int tempSelectedFoodListLength = checkIfSameAsBefore.selectedFoodListLength;
-
-//      totalCartOrder.selectedFoodInOrder
-
-      final list = ['a', 'bb', 'ccc'];
-// compute the sum of all length
-      list.fold(0, (t, e) => t + e.length); // result is 6
-
-      int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
-//      int totalCount = tempSelectedFoodInOrder.reduce((a,element) => a.quantity +test1(element));
-
-
-      Scaffold.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text("$totalCount")));
     }
-
-
-
-
 
   }
 
@@ -2025,6 +1992,7 @@ int test1(SelectedFood x) {
 
   return x.quantity ;
 }
+
 
 
 
