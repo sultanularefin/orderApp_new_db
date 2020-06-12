@@ -819,7 +819,8 @@ class ShoppingCartClass extends StatelessWidget {
 
 //    final blocZZ = FoodItemsQueryBloc();
 
-    final foodItemDetailsBlocForOrderProcessing = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//    BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<
 //        FoodItemDetailsBloc>(context);
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
@@ -835,13 +836,13 @@ Widget work1(BuildContext context){
 
   */
     return StreamBuilder<Order>(
-        stream: foodItemDetailsBlocForOrderProcessing.getCurrentOrderStream,
-        initialData: foodItemDetailsBlocForOrderProcessing
+        stream: blocD.getCurrentOrderStream,
+        initialData: blocD
             .getCurrentOrderFoodDetails,
 
         builder: (context, snapshot) {
           if ((snapshot.hasError) || (!snapshot.hasData)) {
-//            logger.e('no Order data fetched');
+            logger.e('snapshot.hasError) || (!snapshot.hasData)');
 
 //                                          return Center(child: new LinearProgressIndicator());
             int selectedFoodsForOrderLength = 0;
@@ -935,7 +936,7 @@ Widget work1(BuildContext context){
           else {
             Order sessionedOrder = snapshot.data;
 
-//            logger.e('sessionedOrder TTTT: $sessionedOrder');
+            logger.e('sessionedOrder TTTT: $sessionedOrder');
 
             int selectedFoodsForOrderLength = sessionedOrder.selectedFoodInOrder
                 .length;
