@@ -1,7 +1,7 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //
 
-import 'models/FoodItemWithDocID.dart';
+import 'FoodItemWithDocID.dart';
 
 class FoodItemWithDocIDViewModel {
 
@@ -65,6 +65,9 @@ class FoodItemWithDocIDViewModel {
         documentId = data.documentId,
         itemSize = size,
         itemPrice = price;
+
+
+
 
 
 

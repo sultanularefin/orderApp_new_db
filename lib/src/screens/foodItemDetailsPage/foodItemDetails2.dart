@@ -11,7 +11,8 @@ import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
-import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
+//import 'file:///C:/Users/Taxi/Progrms/linkup/lib/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
@@ -210,6 +211,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   return GestureDetector(
                     onTap: () {
                       print('s');
+                      print('navigating to FoodGallery 2 again with block');
 
                       FocusScopeNode currentFocus = FocusScope.of(
                           context);
@@ -232,9 +234,43 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                      Navigator.pop(context);
 
-                      FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
-                      List<NewIngredient> emptyIngs = [];
-                      print('navigating to FoodGallery 2 again with block');
+//                      FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+//                      List<NewIngredient> emptyIngs = [];
+
+
+                      final blocG =
+                          BlocProvider2.of(context).getFoodGalleryBlockObject;
+
+                      List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
+
+                      FoodItemWithDocID emptyFoodItemWithDocID = FoodItemWithDocID.reverseCustomCast(oneFood);
+
+                      return Navigator.of(context).pop(
+
+                          /*context,*/ MaterialPageRoute(builder: (context) =>
+
+                          BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
+                              bloc2: AppBloc(
+                                  emptyFoodItemWithDocID, []),
+                              /*
+                          child: BlocProvider<FoodItemDetailsBloc>(
+                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
+                              child: FoodGallery2()
+
+                          )
+                          */
+                              child: FoodGallery2()
+                          )
+
+//                          LoginPage(showSnackbar0:true)
+
+
+                      )
+
+                      );
+
+
+                      /*
                       return Navigator.of(context).pop(
 
 
@@ -246,7 +282,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                               BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                                   bloc2: AppBloc(
-                                      emptyFoodItemWithDocID, [] /*,*/
+                                      emptyFoodItemWithDocID,tempIngs
+                                      // AFTER FINDING THIS " emptyFoodItemWithDocID, []" DOESN'T WORKS.
+                                      // emptyFoodItemWithDocID, []
+
+
+                                    /*,*/
                                     /* fromWhichPage: 0 */),
                                   /*
                           child: BlocProvider<FoodItemDetailsBloc>(
@@ -287,6 +328,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               ),
 //                        ),
                       );
+
+                      */
 
 
 

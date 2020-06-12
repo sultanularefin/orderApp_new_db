@@ -1,5 +1,9 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //
+
+import './FoodItemWithDocIDViewModel.dart';
+
+
 class FoodItemWithDocID {
 
   String itemName;
@@ -39,7 +43,27 @@ class FoodItemWithDocID {
         this.documentId,
       }
       );
+
+
+  FoodItemWithDocID.reverseCustomCast(FoodItemWithDocIDViewModel data /*,String size, double price*/)
+      : itemName = data.itemName,
+        categoryName = data.categoryName,
+        sizedFoodPrices = data.sizedFoodPrices,
+        uploadDate = data.uploadDate,
+        imageURL = data.imageURL,
+        content = data.content,
+        ingredients = data.ingredients,
+        itemId = data.itemId,
+        indicatorValue = data.indicatorValue,
+        isAvailable = data.isAvailable,
+        isHot = data.isHot,
+        uploadedBy = data.uploadedBy,
+        documentId = data.documentId;
+//        itemSize = size,
+//        itemPrice = price;
 }
+
+
 
 
 

@@ -21,11 +21,11 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 //import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
 //import 'package:foodgallery/src/DataLayer/newCategory.dart';
 //import 'package:zomatoblock/DataLayer/location.dart';
-import 'package:foodgallery/src/DataLayer/FoodItemWithDocIDViewModel.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
 
 import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 
-
+import 'package:flutter/material.dart';
 import 'dart:async';
 
 
@@ -46,7 +46,7 @@ and show those in a separate list. That too can be solved with the BLoC pattern.
 
 //Map<String, int> mapOneSize = new Map();
 
-class FoodItemDetailsBloc implements Bloc {
+class FoodItemDetailsBloc with ChangeNotifier implements Bloc  {
 
 
 
@@ -569,6 +569,8 @@ class FoodItemDetailsBloc implements Bloc {
       _currentOrderFoodDetails = tempOrderDecrementOperation;
 
       _orderControllerFoodDetails.sink.add(_currentOrderFoodDetails);
+
+      notifyListeners();
     }
 
 
@@ -888,6 +890,8 @@ class FoodItemDetailsBloc implements Bloc {
 //   _thisFoodItem =thisFoodpriceModified;
 
     _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+
+    notifyListeners();
 
     //THIS LINE MIGHT NOT BE NECESSARY.
   }
