@@ -1,13 +1,19 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// BLOC'S IMPORT BEGIN HERE:
 import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 
+
+// MODEL'S IMPORT BEGINS HERE.
+import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
+
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
@@ -1903,7 +1909,7 @@ class FoodList extends StatelessWidget {
 //                                    _allIngredientState
 //                                    final result = await
 
-    final Order whereAmI = await
+    final Order totalCartOrder = await
      Navigator.of(context).push(
 
 
@@ -1965,7 +1971,7 @@ class FoodList extends StatelessWidget {
     // After the Selection Screen returns a result, hide any previous snackbars
     // and show the new result.
 
-    if(whereAmI.selectedFoodListLength>0){
+    if(totalCartOrder.selectedFoodListLength>0){
 
 //      final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
@@ -1973,24 +1979,52 @@ class FoodList extends StatelessWidget {
 //                                    List<NewIngredient> test = blocD.allIngredients;
 
 
-      logger.e('whereAmI is: $whereAmI');
+      logger.e('whereAmI is: $totalCartOrder');
 
 
-//      Order checkIfSameAsBefore = blocD.getCurrentOrderFoodDetails;
+      Order checkIfSameAsBefore = blocD.getCurrentOrderFoodDetails;
 
-//      print('checkIfSameAsBefore.selectedFoodListLength: ${checkIfSameAsBefore.selectedFoodListLength}');
+      print('blocD.getCurrentOrderFoodDetails: ${blocD.getCurrentOrderFoodDetails}');
 
 
+
+      print('checkIfSameAsBefore.selectedFoodListLength: ${checkIfSameAsBefore.selectedFoodListLength}');
+
+
+//      List<int> test= [1,2,3,4,5,6];
+//      int result = test.reduce((a, b) => a + b);
+//      print('x  X  x : $result');
+
+      List<SelectedFood> tempSelectedFoodInOrder = checkIfSameAsBefore.selectedFoodInOrder;
+      int tempSelectedFoodListLength = checkIfSameAsBefore.selectedFoodListLength;
+
+//      totalCartOrder.selectedFoodInOrder
+
+      final list = ['a', 'bb', 'ccc'];
+// compute the sum of all length
+      list.fold(0, (t, e) => t + e.length); // result is 6
+
+      int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
+//      int totalCount = tempSelectedFoodInOrder.reduce((a,element) => a.quantity +test1(element));
 
 
       Scaffold.of(context)
         ..removeCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text("${whereAmI.selectedFoodListLength}")));
+        ..showSnackBar(SnackBar(content: Text("$totalCount")));
     }
 
 
 
+
+
   }
+
+// HELPER METHOD tryCast Number (1)
+int test1(SelectedFood x) {
+
+
+  return x.quantity ;
+}
 
 
 
