@@ -1,5 +1,6 @@
 // bloc 's
 import 'package:flutter/cupertino.dart';
+import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
@@ -14,9 +15,11 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 // external pkg's
 import 'package:logger/logger.dart';
 
+//abstract class Bloc {
+//  void dispose();
+//}
 
-
-class AppBloc {
+class AppBloc implements Bloc {
 
   var logger = Logger(
     printer: PrettyPrinter(),
@@ -68,4 +71,19 @@ class AppBloc {
   FoodGalleryBloc get getFoodGalleryBlockObject => foodGalleryBlockObject;
   FoodItemDetailsBloc get getFoodItemDetailsBlockObject => foodItemDetailsBlockObject;
 //  IdentityBloc get getIdentityBlocsObject => identityBlocObject;
+
+
+  @override
+  void dispose() {
+//    _controller.close();
+//    _orderControllerFoodDetails.close();
+//    _itemSizeController.close();
+//    _allIngredientListController.close();
+//    _defaultIngredientListController.close();
+//    _unSelectedIngredientListController.close();
+//    _multiSelectForFoodController.close();
+    foodGalleryBlockObject.dispose();
+    foodItemDetailsBlockObject.dispose();
+
+  }
 }

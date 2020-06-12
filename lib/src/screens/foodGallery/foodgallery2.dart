@@ -1511,7 +1511,7 @@ class FoodList extends StatelessWidget {
                                                   oneFoodItem,
                                                   allIngredients), */
 
-                                              bloc: AppBloc(
+                                              bloc2: AppBloc(
                                                   oneFoodItem, tempIngs
                                                   /*allIngredients,*/ /*fromWhichPage:1*/),
 
@@ -1880,7 +1880,7 @@ class FoodList extends StatelessWidget {
                                                   oneFoodItem,
                                                   allIngredients), */
 
-                                              bloc: AppBloc(
+                                              bloc2: AppBloc(
                                                   oneFoodItem, tempIngs),
 
 

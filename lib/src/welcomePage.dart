@@ -310,7 +310,7 @@ class _WelcomePageState extends State<WelcomePage> {
 //                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
                       BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                          bloc: AppBloc(
+                          bloc2: AppBloc(
                               emptyFoodItemWithDocID, []),
                           /*
                           child: BlocProvider<FoodItemDetailsBloc>(
@@ -370,7 +370,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     return (snapshot.data is FirebaseUser) ?
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc: AppBloc(
+                        bloc2: AppBloc(
                             emptyFoodItemWithDocID, []),
                         /*
                           child: BlocProvider<FoodItemDetailsBloc>(
@@ -398,7 +398,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     return (snapshot.data is FirebaseUser) ?
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc: AppBloc(
+                        bloc2: AppBloc(
                             emptyFoodItemWithDocID, []),
                         /*
                           child: BlocProvider<FoodItemDetailsBloc>(
@@ -421,7 +421,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     return (snapshot.data is FirebaseUser) ?
 
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc: AppBloc(
+                        bloc2: AppBloc(
                             emptyFoodItemWithDocID, [] /*,*/
                             /* fromWhichPage: 0 */),
                         /*
