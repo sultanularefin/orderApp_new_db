@@ -1481,73 +1481,10 @@ class FoodList extends StatelessWidget {
                                     ],
                                   ),
                                   onTap: () {
+                                    _navigateAndDisplaySelection(
+                                        context, oneFoodItem);
+                                  },
 
-                                    final blocG =
-                                        BlocProvider2.of(context).getFoodGalleryBlockObject;
-
-                                    List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
-
-                                    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-
-//                                    blocD.getAllIngredients();
-//                                    List<NewIngredient> test = blocD.allIngredients;
-
-
-                                    logger.e('tempIngs_push 1: $tempIngs');
-
-
-                                    blocD.setallIngredients(tempIngs);
-//                                    _allIngredientState
-//                                    final result = await
-                                    return Navigator.of(context).push(
-
-
-                                      PageRouteBuilder(
-                                        opaque: false,
-                                        transitionDuration: Duration(
-                                            milliseconds: 900),
-                                        pageBuilder: (_, __, ___) =>
-                                            BlocProvider2 /*<FoodItemDetailsBloc>*/(
-                                              /* thisAllIngredients2:allIngredients,*/
-                                              /*bloc: FoodItemDetailsBloc(
-                                                  oneFoodItem,
-                                                  allIngredients), */
-
-                                              bloc2: AppBloc(
-                                                  oneFoodItem, tempIngs
-                                                  /*allIngredients,*/ /*fromWhichPage:1*/),
-
-
-                                              child: FoodItemDetails2()
-
-                                              ),
-                                        /*
-                                            BlocProvider<FoodItemDetailsBloc>(
-                                              bloc: FoodItemDetailsBloc(
-                                                  oneFoodItem,
-                                                  allIngredients),
-
-
-                                              child: FoodItemDetails2()
-
-                                              ,),
-
-                                        */
-                                        // fUTURE USE -- ANIMATION TRANSITION CODE.
-                                        /*
-                                  transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
-                                    return FadeTransition(
-                                      opacity: animation,
-                                      child: RotationTransition(
-                                        turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-                                        child: child,
-                                      ),
-                                    );
-                                  }
-                                  */
-                                      ),
-                                    );
-                                  }
 
                               )
                           );
@@ -1935,6 +1872,127 @@ class FoodList extends StatelessWidget {
   }
 /*}*/
 }
+
+
+  _navigateAndDisplaySelection(BuildContext context,FoodItemWithDocID oneFoodItem) async {
+
+
+    var logger = Logger(
+      printer: PrettyPrinter(),
+    );
+
+
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+
+    final blocG =
+        BlocProvider2.of(context).getFoodGalleryBlockObject;
+
+    List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
+
+    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+//                                    blocD.getAllIngredients();
+//                                    List<NewIngredient> test = blocD.allIngredients;
+
+
+    logger.e('tempIngs_push 1: $tempIngs');
+
+
+    blocD.setallIngredients(tempIngs);
+//                                    _allIngredientState
+//                                    final result = await
+
+    final Order whereAmI = await
+     Navigator.of(context).push(
+
+
+      PageRouteBuilder(
+        opaque: false,
+        transitionDuration: Duration(
+            milliseconds: 900),
+        pageBuilder: (_, __, ___) =>
+            BlocProvider2 /*<FoodItemDetailsBloc>*/(
+              /* thisAllIngredients2:allIngredients,*/
+              /*bloc: FoodItemDetailsBloc(
+                                                  oneFoodItem,
+                                                  allIngredients), */
+
+                bloc2: AppBloc(
+                    oneFoodItem, tempIngs
+                  /*allIngredients,*/ /*fromWhichPage:1*/),
+
+
+                child: FoodItemDetails2()
+
+            ),
+        /*
+                                            BlocProvider<FoodItemDetailsBloc>(
+                                              bloc: FoodItemDetailsBloc(
+                                                  oneFoodItem,
+                                                  allIngredients),
+
+
+                                              child: FoodItemDetails2()
+
+                                              ,),
+
+                                        */
+        // fUTURE USE -- ANIMATION TRANSITION CODE.
+        /*
+                                  transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
+                                    return FadeTransition(
+                                      opacity: animation,
+                                      child: RotationTransition(
+                                        turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+                                        child: child,
+                                      ),
+                                    );
+                                  }
+                                  */
+      ),
+    );
+
+    /*
+    Navigator.push(
+      context,
+      // Create the SelectionScreen in the next step.
+      MaterialPageRoute(builder: (context) => SelectionScreen()),
+    );
+
+    */
+
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+
+    if(whereAmI.selectedFoodListLength>0){
+
+//      final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+//                                    blocD.getAllIngredients();
+//                                    List<NewIngredient> test = blocD.allIngredients;
+
+
+      logger.e('whereAmI is: $whereAmI');
+
+
+//      Order checkIfSameAsBefore = blocD.getCurrentOrderFoodDetails;
+
+//      print('checkIfSameAsBefore.selectedFoodListLength: ${checkIfSameAsBefore.selectedFoodListLength}');
+
+
+
+
+      Scaffold.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text("${whereAmI.selectedFoodListLength}")));
+    }
+
+
+
+  }
+
+
 
 
 

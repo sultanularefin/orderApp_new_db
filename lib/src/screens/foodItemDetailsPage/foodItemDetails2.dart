@@ -238,13 +238,23 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      List<NewIngredient> emptyIngs = [];
 
 
-                      final blocG =
-                          BlocProvider2.of(context).getFoodGalleryBlockObject;
+                      final blocD =
+                          BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
-                      List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
+                      Order temp = blocD.getCurrentOrderFoodDetails;
 
-                      FoodItemWithDocID emptyFoodItemWithDocID = FoodItemWithDocID.reverseCustomCast(oneFood);
+                      return Navigator.pop(context,temp);
 
+//                      NOT REQUIRED ACTUALLY THIS BELOW LINES OF CODE
+//                      List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
+//
+//                      FoodItemWithDocID emptyFoodItemWithDocID = FoodItemWithDocID.reverseCustomCast(oneFood);
+
+//                      Navigator.pop(context, 'Yep!');
+
+
+
+                      /*
                       return Navigator.of(context).pop(
 
                           /*context,*/ MaterialPageRoute(builder: (context) =>
@@ -268,6 +278,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       )
 
                       );
+                      */
 
 
                       /*
