@@ -989,7 +989,7 @@ Widget work1(BuildContext context){
 //          orderFG
 
 
-      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+//      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 
 
