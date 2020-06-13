@@ -243,7 +243,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                       Order temp = blocD.getCurrentOrderFoodDetails;
 
-                      return Navigator.pop(context,temp);
+                      SelectedFood tempSelectedFood = temp.selectedFoodInOrder.first;
+
+
+
+                      // WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
+                      // WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
+                      // FROM FOOD ITEM PAGE.
+
+
+
+
+                      return Navigator.pop(context,tempSelectedFood);
 
 //                      NOT REQUIRED ACTUALLY THIS BELOW LINES OF CODE
 //                      List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
@@ -1508,9 +1519,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       print('Add button pressed in unselected Ing');
 
 
-                      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+                      final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//                      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-                      foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
+                      blocD.incrementThisIngredientItem(unSelectedOneIngredient,index);
 
 
 //                      setState(() {
@@ -1567,9 +1579,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                           */
 
-                        final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+                        final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//                        final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-                        foodItemDetailsbloc.decrementThisIngredientItem(unSelectedOneIngredient,index);
+                        blocD.decrementThisIngredientItem(unSelectedOneIngredient,index);
 
                         /*
                           setState(() {
@@ -1606,6 +1619,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //   width: displayWidth(context) * 0.57,
 
 
+//    BlocProvider.of<FoodItemDetailsBloc>
     final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
@@ -1786,9 +1800,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           ),
           onPressed: () {
 
-            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+            //    BlocProvider.of<FoodItemDetailsBloc>
+            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-            foodItemDetailsbloc.setMultiSelectOptionForFood(x,index);
+            blocD.setMultiSelectOptionForFood(x,index);
 
           },
 
@@ -1837,9 +1853,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           onPressed: () {
 
             print('$itemName pressed');
-            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-            foodItemDetailsbloc.setMultiSelectOptionForFood(x,index);
+//            blocD.setMultiSelectOptionForFood(x,index);
+//            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final locationBloc = BlocProvider.of<>(context);
+            blocD.setMultiSelectOptionForFood(x,index);
           },
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
@@ -2011,9 +2031,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   print(
                       'at Long Press UP: ');
 
-                  final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+                  final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//                  final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-                  foodItemDetailsbloc.removeThisDefaultIngredientItem(oneSelected,index);
+                  blocD.removeThisDefaultIngredientItem(oneSelected,index);
 
                 },
 
@@ -2278,9 +2299,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                _currentSize= oneSize;
 //              });
 
-              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-              foodItemDetailsbloc.setNewSizePlusPrice(oneSize);
+              blocD.setNewSizePlusPrice(oneSize);
 
             },
           ),

@@ -627,6 +627,9 @@ class FoodItemDetailsBloc with ChangeNotifier implements Bloc  {
 
       Order tempOrderIncrementOperation = _currentOrderFoodDetails;
 
+      oneSelectedFoodFD.selectedIngredients=_defaultIngItems;
+
+
       tempOrderIncrementOperation.selectedFoodInOrder.add(oneSelectedFoodFD);
 
       print('length: of // tempOrderIncrementOperation.selectedFoodInOrder:'

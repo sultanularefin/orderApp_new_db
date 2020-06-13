@@ -38,6 +38,11 @@ class Order {
   int deliveryTypeIndex;
   int paymentTypeIndex;
   CustomerInformation ordersCustomer;
+  double totalPrice;
+
+  // SINCE WE DON'T NEED TO
+  // CALCULATE THIS PRICE IN SHOPPING CART PAGE BUT DO IT IN FOOD GALLERY PAGE,
+  //  AND PASS LATER PAGES.
 
 //  String ingredients;
 //  itemId = await generateItemId(6);
@@ -54,7 +59,9 @@ class Order {
         this.selectedFoodListLength,
         this.deliveryTypeIndex,
         this.paymentTypeIndex,
-        this.ordersCustomer
+        this.ordersCustomer,
+        this.totalPrice,
+
 
         // this.foodItemOrderID,
       }
