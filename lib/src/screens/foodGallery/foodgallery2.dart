@@ -12,6 +12,7 @@ import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
+import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 
 //import 'package:google_fonts/google_fonts.dart';
@@ -19,18 +20,18 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//import 'package:foodgallery/src/screens/drawerScreen/drawerScreen.dart';
+//import 'package:foodgallery/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
 
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:foodgallery/src/welcomePage.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:google_sign_in/google_sign_in.dart';
+
+//import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 //import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:neumorphic/neumorphic.dart';
+//import 'package:neumorphic/neumorphic.dart';
 
 //C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/neumorphic-0.3.0/lib/src/components/neu_card.dart
 // local packages
@@ -41,6 +42,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 // Screen files.
+import 'package:foodgallery/src/welcomePage.dart';
 
 
 // models, dummy data file:
@@ -53,6 +55,7 @@ import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
 // Blocks
 
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
+
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/foodItems_query_bloc.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
@@ -84,6 +87,9 @@ class FoodGallery2 extends StatefulWidget {
 class _FoodGalleryState extends State<FoodGallery2> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+//  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
 
   _FoodGalleryState({firestore});
@@ -141,33 +147,29 @@ class _FoodGalleryState extends State<FoodGallery2> {
   */
 
 
-
-
   //  final _formKey = GlobalKey();
 
   final _formKey = GlobalKey<FormState>();
 
 
-
-  bool _reloadRequired = false;
+  int _totalCount = 0;
   String _searchString = '';
   String _currentCategory = "pizza";
   String _firstTimeCategoryString = "";
+
 //  double _total_cart_price = 1.00;
   // empty MEANS PIZZA
 
 
-
   Widget _buildCategoryRow(/*DocumentSnapshot document*/
       NewCategoryItem oneCategory, int index) {
-
 //    final DocumentSnapshot document = snapshot.data.documents[index];
     final String categoryName = oneCategory.categoryName;
 //    final String categoryName = document['name'];
 
 //    final DocumentSnapshot document = snapshot.data.documents[index];
 //    final String categoryName = document['name'];
-    if (_currentCategory.toLowerCase()==categoryName.toLowerCase()){
+    if (_currentCategory.toLowerCase() == categoryName.toLowerCase()) {
       return
 
         ListTile(
@@ -192,7 +194,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                    'Reross Quadratic',
 
 
-                ),CustomPaint(size: Size(0,19),
+                ), CustomPaint(size: Size(0, 19),
                   painter: MyPainter(),
                 )
               ]
@@ -202,7 +204,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
             print('index: $index');
             setState(() {
               _currentCategory = categoryName;
-              _firstTimeCategoryString =categoryName;
+              _firstTimeCategoryString = categoryName;
             });
           }, // ... to here.
         )
@@ -212,7 +214,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
       return ListTile(
         contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
 
-        title:  Text(categoryName.toLowerCase(),
+        title: Text(categoryName.toLowerCase(),
 //    Text(categoryName.substring(0, 2),
           style: TextStyle(
 
@@ -230,12 +232,11 @@ class _FoodGalleryState extends State<FoodGallery2> {
           print('index: $index');
           setState(() {
             _currentCategory = categoryName;
-            _firstTimeCategoryString =categoryName;
+            _firstTimeCategoryString = categoryName;
           });
         }, // ... to here.
       );
     }
-
   }
 
 
@@ -248,6 +249,34 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('want to logout'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('This is a demo alert dialog.'),
+                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('yes won\'t work'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   Future<void> logout(BuildContext context2) async {
     print('what i do is : ||Logout||');
@@ -258,6 +287,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //    ABOVE ONE ALSO WORKS
 
 
+//    _showMyDialog();
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
@@ -299,6 +329,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
   }
 
 
+
+
+
   @override
   Widget build(BuildContext context) {
 //    String a = Constants.SUCCESS_MESSAGE;
@@ -307,10 +340,12 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-    final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
+    final bloc = BlocProvider2
+        .of(context)
+        .getFoodGalleryBlockObject;
+
 
 //    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<FoodItemDetailsBloc>(context);
-
 
 
 //    List<NewIngredient> testIngs =  bloc.allIngredients;
@@ -327,7 +362,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
     */
 
 // FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
-    return  GestureDetector(
+    return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
 
@@ -344,7 +379,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
         // appBar: AppBar(title: Text('Food Gallery')),
         body:
         SafeArea(
-          child:SingleChildScrollView(
+          child: SingleChildScrollView(
               child:
 
               Row(
@@ -363,20 +398,21 @@ class _FoodGalleryState extends State<FoodGallery2> {
                           children: <Widget>[
 
                             Container(
-                              height:displayHeight(context)/14,
+                              height: displayHeight(context) / 14,
                               color: Color(0xffFFFFFF),
 //                      color: Color.fromARGB(255, 255,255,255),
-                              child:Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceAround,
                                 children: <Widget>[
 
                                   Container(
-                                    margin:EdgeInsets.symmetric(
+                                    margin: EdgeInsets.symmetric(
                                         horizontal: 9,
                                         vertical: 0),
 
-                                    width: displayWidth(context)/5,
-                                    height: displayHeight(context)/21,
+                                    width: displayWidth(context) / 5,
+                                    height: displayHeight(context) / 21,
                                     child: Image.asset('assets/Group520.png'),
 
                                   ),
@@ -384,7 +420,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
                                   Container(
-                                    margin:EdgeInsets.symmetric(
+                                    margin: EdgeInsets.symmetric(
                                         horizontal: 0,
                                         vertical: 0),
                                     decoration: BoxDecoration(
@@ -413,15 +449,17 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                     ),
 
 //                                  color: Color(0xffFFFFFF),
-                                    width: displayWidth(context)/3,
-                                    height: displayHeight(context)/27,
+                                    width: displayWidth(context) / 3,
+                                    height: displayHeight(context) / 27,
                                     padding: EdgeInsets.only(
                                         left: 4, top: 3, bottom: 3, right: 3),
                                     child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .center,
                                       children: <Widget>[
                                         Container(
 
@@ -447,7 +485,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
                                           alignment: Alignment.center,
-                                          width:displayWidth(context)/4,
+                                          width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
                                           // do it in both Container
                                           child: TextField(
@@ -463,34 +501,44 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                             onChanged: (text) {
 //                                              logger.i('on onChanged of condition 4');
 
-                                              setState(() => _searchString = text);
-                                              print("First text field from Condition 04: $text");
+                                              setState(() =>
+                                              _searchString = text);
+                                              print(
+                                                  "First text field from Condition 04: $text");
                                             },
-                                            onTap:(){
+                                            onTap: () {
                                               print('condition 4');
 //                                              logger.i('on Tap of condition 4');
                                               setState(() {
-                                                _firstTimeCategoryString ='PIZZA';
+                                                _firstTimeCategoryString =
+                                                'PIZZA';
                                               });
-
                                             },
 
-                                            onEditingComplete: (){
+                                            onEditingComplete: () {
 //                                              logger.i('onEditingComplete  of condition 4');
-                                              print('called onEditing complete');
-                                              setState(() => _searchString = "");
+                                              print(
+                                                  'called onEditing complete');
+                                              setState(() =>
+                                              _searchString = "");
                                             },
 
                                             onSubmitted: (String value) async {
                                               await showDialog<void>(
                                                 context: context,
-                                                builder: (BuildContext context) {
+                                                builder: (
+                                                    BuildContext context) {
                                                   return AlertDialog(
-                                                    title: const Text('Thanks!'),
-                                                    content: Text ('You typed "$value".'),
+                                                    title: const Text(
+                                                        'Thanks!'),
+                                                    content: Text(
+                                                        'You typed "$value".'),
                                                     actions: <Widget>[
                                                       FlatButton(
-                                                        onPressed: () { Navigator.pop(context); },
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
                                                         child: const Text('OK'),
                                                       ),
                                                     ],
@@ -555,6 +603,11 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                     */
                                     // FOR CATEGORY SERARCH.
 
+
+                                    child: shoppingCartWidget(), // CLASS TO WIDGET SINCE I NEED TO INVOKE THE
+                                    // SETSTATE CALL FROM ANOTHER WIDGET ,
+                                    // IF IT IS IN STATE LESS WIDGET THEN IT WILL NOT INVOKED.
+                                    /*
                                     child: ShoppingCartClass(
 
                                       /*
@@ -563,6 +616,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                         allIngredients:_allIngredientState
                                         */
                                     ),
+                                    */
 
                                     // FOR SEARCHING AMONG ALL THE CATEGORIES.
 //                              child: FoodList(searchString2:_searchString),
@@ -572,15 +626,12 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                  ShoppingCartClass(),
 
 
-
-
-
                                 ],
                               ),
                             ),
 
                             Container(
-                              height:displayHeight(context)/20,
+                              height: displayHeight(context) / 20,
                               color: Color(0xffffffff),
                               child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -625,15 +676,25 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                             // CONTAINER FOR TOTAL PRICE CART ABOVE.
                             Container(
-                              height:displayHeight(context) -
-                                  MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                              height: displayHeight(context) -
+                                  MediaQuery
+                                      .of(context)
+                                      .padding
+                                      .top - displayHeight(context) / 13,
                               padding: EdgeInsets.fromLTRB(
                                   20, 0, 10, 0),
                               // FOR CATEGORY SERARCH.
 
+                              child: foodList(_currentCategory,_searchString,
+                                  context /*allIngredients:_allIngredientState */),
+                              // FROM CLASS TO WIDGET SINCE SETSTATE CALL REQUIRED.
+
+                                /*
                               child: FoodList(
-                                  categoryString: _currentCategory,
-                                  searchString2:_searchString,/*allIngredients:_allIngredientState */),
+                                categoryString: _currentCategory,
+                                searchString2: _searchString, /*allIngredients:_allIngredientState */),
+
+                              */
 
                               // FOR SEARCHING AMONG ALL THE CATEGORIES.
 //                              child: FoodList(searchString2:_searchString),
@@ -647,19 +708,23 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                   Container(
                     height: displayHeight(context) -
-                        MediaQuery.of(context).padding.top + displayHeight(context)/20 ,
+                        MediaQuery
+                            .of(context)
+                            .padding
+                            .top + displayHeight(context) / 20,
 
 //                          color: Color.fromARGB(255, 84, 70, 62),
 //              child:Text('ss'),
 
-                    child:Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Container(
-                          padding:EdgeInsets.only(top:20,right: 20,bottom: 0,left:0 ),
+                          padding: EdgeInsets.only(
+                              top: 20, right: 20, bottom: 0, left: 0),
 //                        height:100,
-                          height:displayHeight(context)/13,
+                          height: displayHeight(context) / 13,
                           width: MediaQuery
                               .of(context)
                               .size
@@ -669,11 +734,19 @@ class _FoodGalleryState extends State<FoodGallery2> {
                           color: Color(0xffFFE18E),
 
                           alignment: Alignment.topRight,
-                          child:IconButton(
-                            onPressed: () async  {
+                          child: IconButton(
+                            onPressed: () async {
                               print(
                                   'Menu button pressed');
+//                              DRAWER WITHOUT APP BAR
+//TODO 1
+                            // NEED TO TRY
+//                              https://stackoverflow.com/questions/54270729/how-to-keep-hamburger-icon-without-visible-appbar-flutter
+//                              onPressed: () => _drawerKey.currentState.openDrawer(); // open drawer
+//                              _scaffoldKey
+//                              return drawerScreenFoodGallery();
 
+                              /*
 //                              Scaffold.of(context).showSnackBar(
                                   _scaffoldKey.currentState.showSnackBar(
                                   new SnackBar(
@@ -698,6 +771,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                   )
                               );
 
+                                  */
 
 
                               await logout(context);
@@ -719,8 +793,11 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
                         Container(
-                          height:displayHeight(context) -
-                              MediaQuery.of(context).padding.top  - displayHeight(context)/13,
+                          height: displayHeight(context) -
+                              MediaQuery
+                                  .of(context)
+                                  .padding
+                                  .top - displayHeight(context) / 13,
 //                          height:800,
 //                          padding:EdgeInsets.symmetric(horizontal: 0,vertical: displayHeight(context)/13),
                           width: MediaQuery
@@ -731,29 +808,29 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                    color: Color(0xff54463E),
                           color: Color(0xffFFE18E),
 
-                          child:StreamBuilder<List<NewCategoryItem>>(
+                          child: StreamBuilder<List<NewCategoryItem>>(
 
-                              stream:bloc.categoryItemsStream,
+                              stream: bloc.categoryItemsStream,
                               initialData: bloc.allCategories,
 //        initialData: bloc.getAllFoodItems(),
-                              builder: (context, snapshot){
-
+                              builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
-                                  return Center(child: new LinearProgressIndicator());
+                                  return Center(
+                                      child: new LinearProgressIndicator());
                                 }
-                                else{
-                                  final List allCategories =snapshot.data;
+                                else {
+                                  final List allCategories = snapshot.data;
 //                                  logger.i('allCategories.length:', allCategories.length);
 
 
 //                                  _allCategoryList.add(All);
 
 
-
 //                                  allCategories.add(all);
 //                                  logger.i('allCategories.length after :', allCategories.length);
 
-                                  final int categoryCount = allCategories.length;
+                                  final int categoryCount = allCategories
+                                      .length;
 
 
 //                              print('categoryCount in condition 04: ');
@@ -761,23 +838,21 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //                                logger.i("categoryCount in condition 04: $categoryCount");
 
-                                  return(
+                                  return (
                                       new ListView.builder
                                         (
                                           itemCount: categoryCount,
 
 
-
                                           //    itemBuilder: (BuildContext ctxt, int index) {
                                           itemBuilder: (_, int index) {
-
-
 //                                            return (Text('ss'));
 
 
-                                            return _buildCategoryRow(allCategories[index]
-                                                /*categoryItems[index]*/, index);
-
+                                            return _buildCategoryRow(
+                                                allCategories[index]
+                                                /*categoryItems[index]*/,
+                                                index);
                                           }
                                       )
                                   )
@@ -797,31 +872,62 @@ class _FoodGalleryState extends State<FoodGallery2> {
         ),
       ),
     );
-
-
   }
 
 
-}
+  Widget drawerTest(BuildContext context) {
+    key: _drawerKey;
+    return Scaffold(
+//        appBar: AppBar(
+//          title: Text('Side Menu Burger Icon'),
+//          backgroundColor: Colors.deepOrange,
+//        ),
+//        key: _drawerKey, // assign key to Scaffold
+//        endDrawer: Drawer(
+      drawer: Drawer(
+
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+
+        // Populate the Drawer in the next step.
+      ),
+    );
+  }
+
+  // FROM CLASS TO WIDGET REQUIRED, SINCE I NEED TO CALL SETTATE FROM THE RETURNED ORDER
 
 
-class ShoppingCartClass extends StatelessWidget {
+
+  Widget shoppingCartWidget(){
 
 
-//  final String categoryString;
-//  final String searchString2;
-//  final List<NewIngredient> allIngredients;
-
-  ShoppingCartClass(
-      /*{this.categoryString, this.searchString2 ,this.allIngredients } */);
-
-  final logger = Logger(
-    printer: PrettyPrinter(),
-  );
-
-
-  @override
-  Widget build(BuildContext context) {
 //    final bloc = LocationQueryBloc();
 
 //    final blocZZ = FoodItemsQueryBloc();
@@ -842,6 +948,100 @@ Widget work1(BuildContext context){
   )
 
   */
+
+    // NOT REQUIRED THIS STREAM WILL BE REQUIRED IN SHOPPING CART PAGE.
+    // PLANNED TO PASS IT FROM HERE.
+    // HOW CAN I HAVE IT HERE ????
+
+
+    return Container(
+//                                                                        width:60,
+      width: displayWidth(
+          context) / 13,
+      height: displayHeight(context) / 25,
+      alignment: Alignment.center,
+      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+      child: OutlineButton(
+        onPressed: () {
+          print(
+              ' method for old Outline button that deals with navigation to Shopping Cart Page');
+        },
+//                        color: Color(0xffFEE295),
+        clipBehavior: Clip.hardEdge,
+        splashColor: Color(0xffFEE295),
+//          splashColor: Color(0xff739DFA),
+        highlightElevation: 12,
+//          clipBehavior: Clip.hardEdge,
+//          highlightElevation: 12,
+        shape: RoundedRectangleBorder(
+
+          borderRadius: BorderRadius.circular(35.0),
+        ),
+//          disabledBorderColor: false,
+        borderSide: BorderSide(
+          color: Color(0xffFEE295),
+          style: BorderStyle.solid,
+          width: 3.6,
+        ),
+
+
+        child:
+
+        ///SSWW
+
+
+        Center(
+          child: Stack(
+              children: <Widget>[ Center(
+                child: Icon(
+
+                  Icons.add_shopping_cart,
+                  size: 40,
+                  color: Color(0xff707070),
+                ),
+              ),
+
+                Container(
+//                                              color:Colors.red,
+                  width: 30,
+
+
+                  decoration: new BoxDecoration(
+                    color: Colors.redAccent,
+
+                    border: new Border.all(
+                        color: Colors.green,
+                        width: 1.0,
+                        style: BorderStyle.solid
+                    ),
+                    shape: BoxShape.circle,
+
+                  ),
+
+                  alignment: Alignment.center,
+                  child: Text(
+                    _totalCount.toString(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight
+                          .normal,
+                      fontSize: 20,
+                    ),
+                  ),
+
+                ),
+
+              ]
+          ),
+        ),
+
+      ),
+    );
+
+
+
+    /*
     return StreamBuilder<Order>(
         stream: blocD.getCurrentOrderStream,
         initialData: blocD
@@ -1042,28 +1242,15 @@ Widget work1(BuildContext context){
           }
         }
     );
+
+    */
   }
-}
-
-//
-//class FoodList extends StatelessWidget {
-//  FoodList({this.firestore});
-
-class FoodList extends StatelessWidget {
 
 
+  // ALL FOODLIST CLASS RELATED FUNCTIONS ARE BLOW UNTIL CLASS STARTS THAT WE CAN PUT IN ANOTHER FILE.
+// IF WE WANT, START'S HERE:
 
 
-
-  final String categoryString;
-  final String searchString2;
-//  final List<NewIngredient> allIngredients;
-
-  FoodList({this.categoryString, this.searchString2 /*,this.allIngredients */});
-
-  final logger = Logger(
-    printer: PrettyPrinter(),
-  );
 
   String titleCase(var text) {
     // print("text: $text");
@@ -1134,13 +1321,11 @@ class FoodList extends StatelessWidget {
   }
 
 
-  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
+//  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
 
 
 
-
-  @override
-  Widget build(BuildContext context)  {
+  Widget foodList(String categoryString,String searchString2,BuildContext context)  {
 
 //    print('_allIngredientState: in FoodLIst: $allIngredients');
 //    final bloc = LocationQueryBloc();
@@ -1330,173 +1515,173 @@ class FoodList extends StatelessWidget {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 4.0, vertical: 16.0),
                               child: InkWell(
-                                  child: Column(
+                                child: Column(
 //                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                      crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      new Container(child:
-                                      new Container(
-                                        width: displayWidth(context) / 7,
-                                        height: displayWidth(context) / 7,
-                                        decoration: new BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
+                                  children: <Widget>[
+                                    new Container(child:
+                                    new Container(
+                                      width: displayWidth(context) / 7,
+                                      height: displayWidth(context) / 7,
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
 //                                          707070
 //                                              color:Color(0xffEAB45E),
 // good yellow color
 //                                            color:Color(0xff000000),
-                                                color: Color(0xff707070),
+                                              color: Color(0xff707070),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                                blurRadius: 30.0,
-                                                spreadRadius: 1.0,
-                                                offset: Offset(0, 21)
-                                            )
-                                          ],
-                                        ),
-                                        child: Hero(
-                                          tag: foodItemName,
-                                          child:
-                                          ClipOval(
-                                            child: CachedNetworkImage(
+                                              blurRadius: 30.0,
+                                              spreadRadius: 1.0,
+                                              offset: Offset(0, 21)
+                                          )
+                                        ],
+                                      ),
+                                      child: Hero(
+                                        tag: foodItemName,
+                                        child:
+                                        ClipOval(
+                                          child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                              imageUrl: foodImageURL,
-                                              fit: BoxFit.cover,
-                                              placeholder: (context,
-                                                  url) => new CircularProgressIndicator(),
+                                            imageUrl: foodImageURL,
+                                            fit: BoxFit.cover,
+                                            placeholder: (context,
+                                                url) => new CircularProgressIndicator(),
+                                          ),
+                                        ),
+                                        placeholderBuilder: (context,
+                                            heroSize, child) {
+                                          return Opacity(
+                                            opacity: 0.5, child: Container(
+                                            width: displayWidth(context) /
+                                                7,
+                                            height: displayWidth(context) /
+                                                7,
+                                            decoration: new BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              boxShadow: [
+                                                BoxShadow(
+//                                          707070
+//                                              color:Color(0xffEAB45E),
+// good yellow color
+//                                            color:Color(0xff000000),
+                                                    color: Color(
+                                                        0xffEAB45E),
+// adobe xd color
+//                                              color: Color.fromRGBO(173, 179, 191, 1.0),
+                                                    blurRadius: 30.0,
+                                                    spreadRadius: 1.0,
+                                                    offset: Offset(0, 21)
+                                                )
+                                              ],
+                                            ),
+                                            child:
+                                            ClipOval(
+                                              child: CachedNetworkImage(
+//                  imageUrl: dummy.url,
+                                                imageUrl: foodImageURL,
+                                                fit: BoxFit.cover,
+                                                placeholder: (context,
+                                                    url) => new CircularProgressIndicator(),
+                                              ),
                                             ),
                                           ),
-                                          placeholderBuilder: (context,
-                                              heroSize, child) {
-                                            return Opacity(
-                                              opacity: 0.5, child: Container(
-                                              width: displayWidth(context) /
-                                                  7,
-                                              height: displayWidth(context) /
-                                                  7,
-                                              decoration: new BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                boxShadow: [
-                                                  BoxShadow(
-//                                          707070
-//                                              color:Color(0xffEAB45E),
-// good yellow color
-//                                            color:Color(0xff000000),
-                                                      color: Color(
-                                                          0xffEAB45E),
-// adobe xd color
-//                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                                      blurRadius: 30.0,
-                                                      spreadRadius: 1.0,
-                                                      offset: Offset(0, 21)
-                                                  )
-                                                ],
-                                              ),
-                                              child:
-                                              ClipOval(
-                                                child: CachedNetworkImage(
-//                  imageUrl: dummy.url,
-                                                  imageUrl: foodImageURL,
-                                                  fit: BoxFit.cover,
-                                                  placeholder: (context,
-                                                      url) => new CircularProgressIndicator(),
-                                                ),
-                                              ),
-                                            ),
-                                            );
-                                          },
+                                          );
+                                        },
 //                                  placeholderBuilder: (context,
 //                                      Size.fromWidth(displayWidth(context) / 7),
 //                          Image.network(foodImageURL)
 //
 //                                );
-                                          //Placeholder Image.network(foodImageURL),
-                                        ),
-
+                                        //Placeholder Image.network(foodImageURL),
                                       ),
 
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 0, 0, 12),
-                                      ),
+                                    ),
+
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 0, 0, 12),
+                                    ),
 //                              SizedBox(height: 10),
 
 
-                                      Row(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .center,
-                                          children: <Widget>[
-                                            Text(
+                                    Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .center,
+                                        children: <Widget>[
+                                          Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                                              euroPrice3 + '\u20AC',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight
-                                                      .normal,
+                                            euroPrice3 + '\u20AC',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight
+                                                    .normal,
 //                                          color: Colors.blue,
-                                                  color: Color.fromRGBO(
-                                                      112, 112, 112, 1),
-                                                  fontSize: 20),
-                                            ),
+                                                color: Color.fromRGBO(
+                                                    112, 112, 112, 1),
+                                                fontSize: 20),
+                                          ),
 //                                    SizedBox(width: 10),
-                                            SizedBox(
-                                                width: displayWidth(context) /
-                                                    100),
+                                          SizedBox(
+                                              width: displayWidth(context) /
+                                                  100),
 
-                                            Icon(
-                                              Icons.whatshot,
-                                              size: 24,
-                                              color: Colors.red,
-                                            ),
-                                          ]),
+                                          Icon(
+                                            Icons.whatshot,
+                                            size: 24,
+                                            color: Colors.red,
+                                          ),
+                                        ]),
 
 
-                                      FittedBox(fit: BoxFit.fitWidth, child:
-                                      Text(
+                                    FittedBox(fit: BoxFit.fitWidth, child:
+                                    Text(
 //                '${dummy.counter}',
-                                        foodItemName,
+                                      foodItemName,
 
-                                        style: TextStyle(
-                                          color: Color(0xff707070),
+                                      style: TextStyle(
+                                        color: Color(0xff707070),
 //                                color:Color.fromRGBO(112,112,112,1),
 
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
-                                      ),)
-                                      ,
-                                      Container(
-                                          height: displayHeight(context) / 61,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),)
+                                    ,
+                                    Container(
+                                        height: displayHeight(context) / 61,
 
-                                          child: Text(
+                                        child: Text(
 //                                'stringifiedFoodItemIngredients',
 
 
-                                            stringifiedFoodItemIngredients
-                                                .length == 0
-                                                ?
-                                            'EMPTY'
-                                                : stringifiedFoodItemIngredients
-                                                .length > 12 ?
-                                            stringifiedFoodItemIngredients
-                                                .substring(0, 12) + '...' :
-                                            stringifiedFoodItemIngredients,
+                                          stringifiedFoodItemIngredients
+                                              .length == 0
+                                              ?
+                                          'EMPTY'
+                                              : stringifiedFoodItemIngredients
+                                              .length > 12 ?
+                                          stringifiedFoodItemIngredients
+                                              .substring(0, 12) + '...' :
+                                          stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
-                                            style: TextStyle(
-                                              color: Color(0xff707070),
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 15,
-                                            ),
-                                          )
-                                      ),
+                                          style: TextStyle(
+                                            color: Color(0xff707070),
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 15,
+                                          ),
+                                        )
+                                    ),
 //
 //
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    _navigateAndDisplaySelection(
-                                        context, oneFoodItem);
-                                  },
+                                  ],
+                                ),
+                                onTap: () {
+                                  _navigateAndDisplaySelection(
+                                      context, oneFoodItem);
+                                },
 
 
                               )
@@ -1883,8 +2068,6 @@ class FoodList extends StatelessWidget {
       },
     );
   }
-/*}*/
-}
 
 
   _navigateAndDisplaySelection(BuildContext context,FoodItemWithDocID oneFoodItem) async {
@@ -1917,7 +2100,7 @@ class FoodList extends StatelessWidget {
 //                                    final result = await
 
     final Order totalCartOrder = await
-     Navigator.of(context).push(
+    Navigator.of(context).push(
 
 
       PageRouteBuilder(
@@ -1979,7 +2162,21 @@ class FoodList extends StatelessWidget {
     // and show the new result.
 
     if(totalCartOrder.selectedFoodListLength>0) {
+
+      List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+      int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
+//      int totalCount = tempSelectedFoodInOrder.reduce((a,element) => a.quantity +test1(element));
+
+
+
+      Scaffold.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text("$totalCount")));
 //      setState(() => _reloadRequired = true);
+
+      setState(() => _totalCount = _totalCount + totalCount);
+
+      // bloc 1.
 
 
     }
@@ -1987,11 +2184,55 @@ class FoodList extends StatelessWidget {
   }
 
 // HELPER METHOD tryCast Number (1)
-int test1(SelectedFood x) {
+  int test1(SelectedFood x) {
 
 
-  return x.quantity ;
+    return x.quantity ;
+  }
+// ALL FOODLIST CLASS RELATED FUNCTIONS ARE BLOW UNTIL CLASS STARTS THAT WE CAN PUT IN ANOTHER FILE.
+// IF WE WANT, END'S HERE:
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//class FoodList extends StatelessWidget {
+//  FoodList({this.firestore});
+
+//Widget FoodList extends StatelessWidget {
+//
+//
+//final String categoryString;
+//final String searchString2;
+////  final List<NewIngredient> allIngredients;
+//
+//FoodList({this.categoryString, this.searchString2 /*,this.allIngredients */
+//});
+//
+//final logger = Logger(
+//  printer: PrettyPrinter(),
+//);
+//
+//}
+
+
+
+
+
+/*}*/
+//}
+
+
 
 
 

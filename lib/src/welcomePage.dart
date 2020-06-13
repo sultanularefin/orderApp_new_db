@@ -16,7 +16,7 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 // above are local files i.e. pages .
 import 'package:foodgallery/src/identity/loginPage.dart';
 import 'package:foodgallery/src/identity/signup.dart';
-//import 'package:foodgallery/src/screens/drawerScreen/drawerScreen.dart';
+//import 'package:foodgallery/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
 //import 'package:foodgallery/src/screens/homeScreen/food_gallery.dart';
 // above are local file.
 
