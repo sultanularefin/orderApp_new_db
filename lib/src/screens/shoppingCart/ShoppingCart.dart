@@ -414,7 +414,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                                        /*
+
 
                                         /*
                                             * INITIAL CHOOSE ORDER TYPE BEGINS HERE.*/
@@ -499,7 +499,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-*/
+
 
 
 
