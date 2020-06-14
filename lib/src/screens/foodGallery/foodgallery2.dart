@@ -982,7 +982,7 @@ Widget work1(BuildContext context){
       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
       child: OutlineButton(
-        onPressed: () {
+        onPressed: () async {
           print(
               ' method for old Outline button that deals with navigation to Shopping Cart Page');
 
@@ -1046,7 +1046,10 @@ Widget work1(BuildContext context){
 
               'add_shopping_cart button pressed');
 
-          return Navigator.of(context).push(
+          //          Navigator.of(context).push(
+
+//          return
+          final bool pay = await Navigator.of(context).push(
 
             PageRouteBuilder(
               opaque: false,

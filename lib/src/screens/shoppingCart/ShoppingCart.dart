@@ -48,9 +48,7 @@ class ShoppingCart extends StatefulWidget {
   @override
   _ShoppingCartState createState() => new _ShoppingCartState();
 
-
 //  _FoodItemDetailsState createState() => _FoodItemDetailsState();
-
 
 
 }
@@ -192,16 +190,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           initialData: shoppingCartBloc.getCurrentOrder,
 
           builder: (context, snapshot) {
-            if (!snapshot.hasData) {
+            if (snapshot.hasData) {
 
-//                    return Container
-//        (
-//        alignment: Alignment.center,
-//        child: CircularProgressIndicator(),
-//      );
-              return Center(child: new LinearProgressIndicator());
-            }
-            else {
               print('snapshot.hasData in main build(BuildContext context) : ${snapshot.hasData}');
 
               final Order oneOrder = snapshot.data;
@@ -529,6 +519,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                 ),
               );
+            }
+            else {
+
+//                    return Container
+//        (
+//        alignment: Alignment.center,
+//        child: CircularProgressIndicator(),
+//      );
+              return Center(child: new LinearProgressIndicator());
             }
           }
 
@@ -1137,8 +1136,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
           itemBuilder: (_, int index) {
-            return Text('ss');
-            /*
+//            return Text('ss');
+
             return FoodImageInShoppingCart(
                 selectedFoodforDisplay[index].foodItemImageURL, /*OrderedFoodImageURL,*/
                 selectedFoodforDisplay[index].foodItemName,
@@ -1150,7 +1149,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
 //            index);
 
-          */
+
 
           },
         ),
