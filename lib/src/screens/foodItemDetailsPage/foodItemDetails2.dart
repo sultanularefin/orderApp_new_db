@@ -7,15 +7,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/BLoC/app_bloc.dart';
+//import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
-import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
+//import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
 //import 'file:///C:/Users/Taxi/Progrms/linkup/lib/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
-import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+//import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
-import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+//import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 //import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
@@ -25,12 +25,12 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 
 // SCREEN FILES AND MODLE FILES AND UTILITY FILES.
-import 'package:foodgallery/src/screens/ingredients_more/more_ingredients.dart';
-import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
-import 'package:foodgallery/src/DataLayer/SizeConstants.dart';
+//import 'package:foodgallery/src/screens/ingredients_more/more_ingredients.dart';
+//import 'package:foodgallery/src/DataLayer/IngredientItem.dart';
+//import 'package:foodgallery/src/DataLayer/SizeConstants.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailImage.dart';
-import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+//import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
@@ -126,14 +126,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     else return 0.0;
   }
+
   bool showUnSelectedIngredients = false;
   bool showPressWhenFinishButton = false;
   double addedHeight =0.0;
+
+
   @override
   Widget build(BuildContext context) {
-    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-    logger.e('blocD: $blocD');
-//    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//    logger.e('blocD: $blocD');
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 //    print('totalCartPrice -----------> : $totalCartPrice');
 //    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
@@ -238,8 +242,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      List<NewIngredient> emptyIngs = [];
 
 
-                      final blocD =
-                          BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+                      final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//                      final blocD =
+//                          BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
                       Order temp = blocD.getCurrentOrderFoodDetails;
 
@@ -902,7 +907,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //
 
             logger.i('addedHeight: ',addedHeight);
-            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
             blocD.updateDefaultIngredientItems(/*oneSelected,index*/);
             if( addedHeight == 0.0 ){
@@ -922,7 +928,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               });
             }else{
 
-              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
 //              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
               blocD.updateDefaultIngredientItems(/*oneSelected,index*/);
@@ -952,7 +959,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   Widget animatedWidgetMoreIngredientsButton(){
 
-    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
     return    Container(
 
@@ -1524,7 +1532,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       print('Add button pressed in unselected Ing');
 
 
-                      final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+                      final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//                      final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //                      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
                       blocD.incrementThisIngredientItem(unSelectedOneIngredient,index);
@@ -1584,7 +1593,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                           */
 
-                        final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+                        final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//                        final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //                        final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
                         blocD.decrementThisIngredientItem(unSelectedOneIngredient,index);
@@ -1625,7 +1635,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //    BlocProvider.of<FoodItemDetailsBloc>
-    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
     return StreamBuilder(
@@ -1806,7 +1817,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           onPressed: () {
 
             //    BlocProvider.of<FoodItemDetailsBloc>
-            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
             blocD.setMultiSelectOptionForFood(x,index);
@@ -1858,7 +1870,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           onPressed: () {
 
             print('$itemName pressed');
-            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
 //            blocD.setMultiSelectOptionForFood(x,index);
@@ -1883,7 +1896,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //    defaultIngredients
-    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
     return StreamBuilder(
@@ -2036,7 +2050,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   print(
                       'at Long Press UP: ');
 
-                  final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+                  final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//                  final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //                  final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
                   blocD.removeThisDefaultIngredientItem(oneSelected,index);
@@ -2242,7 +2257,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //              logger.i('onePriceForSize: ',onePriceForSize);
 
-              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
               blocD.setNewSizePlusPrice(oneSize);
@@ -2304,7 +2320,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                _currentSize= oneSize;
 //              });
 
-              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
               blocD.setNewSizePlusPrice(oneSize);

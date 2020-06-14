@@ -239,6 +239,13 @@ Widget test() {
   Widget build(BuildContext context) {
 
 
+    if(fromWhicPage1==true){
+
+      print(': : : : : fromWhicPage1: $fromWhicPage1 condition check in login page : : : : ');
+      Scaffold.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text("You have been logged out")));
+    }
     return new Scaffold(
         key: _scaffoldKey,
 //    return Scaffold(

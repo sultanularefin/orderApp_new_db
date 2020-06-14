@@ -69,7 +69,7 @@ import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 //import CategoryItems from 'package:foodgallery/src/shared/category_Constants.dart';
 
 
-final Firestore firestore = Firestore();
+//final Firestore firestore = Firestore();
 
 
 
@@ -78,7 +78,7 @@ class FoodGallery2 extends StatefulWidget {
 
   final Widget child;
 
-  final Firestore firestore = Firestore.instance;
+//  final Firestore firestore = Firestore.instance;
 
   FoodGallery2({Key key, this.child}) : super(key: key);
 
@@ -95,7 +95,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
 
-  _FoodGalleryState({firestore});
+  _FoodGalleryState(/*{firestore} */);
 
 //  File _image;
 
@@ -159,10 +159,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
   String _currentCategory = "pizza";
   String _firstTimeCategoryString = "";
 
-
 //  this can be defined in Shopping cart page like old way
-
-
 
   List<SelectedFood> allSelectedFoodGallery = [];
 
@@ -180,83 +177,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
   // empty MEANS PIZZA
 
 
-  Widget _buildCategoryRow(/*DocumentSnapshot document*/
-      NewCategoryItem oneCategory, int index) {
-//    final DocumentSnapshot document = snapshot.data.documents[index];
-    final String categoryName = oneCategory.categoryName;
-//    final String categoryName = document['name'];
 
-//    final DocumentSnapshot document = snapshot.data.documents[index];
-//    final String categoryName = document['name'];
-    if (_currentCategory.toLowerCase() == categoryName.toLowerCase()) {
-      return
-
-        ListTile(
-
-          contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
-//    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
-          title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(categoryName.toLowerCase(), style:
-                TextStyle(
-
-                  fontFamily: 'Itim-Regular',
-                  fontSize: 30,
-                  fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
-                  color: Color(0xff000000),
-                ),
-
-
-//                    'Reross Quadratic',
-
-
-                ), CustomPaint(size: Size(0, 19),
-                  painter: MyPainter(),
-                )
-              ]
-          ),
-          onTap: () { // Add 9 lines from here...
-            print('onTap pressed');
-            print('index: $index');
-            setState(() {
-              _currentCategory = categoryName;
-              _firstTimeCategoryString = categoryName;
-            });
-          }, // ... to here.
-        )
-      ;
-    }
-    else {
-      return ListTile(
-        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
-
-        title: Text(categoryName.toLowerCase(),
-//    Text(categoryName.substring(0, 2),
-          style: TextStyle(
-
-            fontFamily: 'Itim-Regular',
-
-            fontSize: 24,
-            fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
-            color: Color(0xff000000),
-          ),
-
-        ),
-        onTap: () { // Add 9 lines from here...
-          print('onTap pressed');
-          print('index: $index');
-          setState(() {
-            _currentCategory = categoryName;
-            _firstTimeCategoryString = categoryName;
-          });
-        }, // ... to here.
-      );
-    }
-  }
 
 
   num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
@@ -351,6 +272,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
+
+
   @override
   Widget build(BuildContext context) {
 //    String a = Constants.SUCCESS_MESSAGE;
@@ -358,10 +281,10 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
 
 
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-    final bloc = BlocProvider2
-        .of(context)
-        .getFoodGalleryBlockObject;
+    final blocG = BlocProvider.of<FoodGalleryBloc>(context);
+//    final bloc = BlocProvider2
+//        .of(context)
+//        .getFoodGalleryBlockObject;
 
 
 //    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<FoodItemDetailsBloc>(context);
@@ -829,8 +752,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                           child: StreamBuilder<List<NewCategoryItem>>(
 
-                              stream: bloc.categoryItemsStream,
-                              initialData: bloc.allCategories,
+                              stream: blocG.categoryItemsStream,
+                              initialData: blocG.allCategories,
 //        initialData: bloc.getAllFoodItems(),
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
@@ -893,6 +816,84 @@ class _FoodGalleryState extends State<FoodGallery2> {
     );
   }
 
+  Widget _buildCategoryRow(/*DocumentSnapshot document*/
+      NewCategoryItem oneCategory, int index) {
+//    final DocumentSnapshot document = snapshot.data.documents[index];
+    final String categoryName = oneCategory.categoryName;
+//    final String categoryName = document['name'];
+
+//    final DocumentSnapshot document = snapshot.data.documents[index];
+//    final String categoryName = document['name'];
+    if (_currentCategory.toLowerCase() == categoryName.toLowerCase()) {
+      return
+
+        ListTile(
+
+          contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
+//    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
+          title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(categoryName.toLowerCase(), style:
+                TextStyle(
+
+                  fontFamily: 'Itim-Regular',
+                  fontSize: 30,
+                  fontWeight: FontWeight.normal,
+//                    fontStyle: FontStyle.italic,
+                  color: Color(0xff000000),
+                ),
+
+
+//                    'Reross Quadratic',
+
+
+                ), CustomPaint(size: Size(0, 19),
+                  painter: MyPainter(),
+                )
+              ]
+          ),
+          onTap: () { // Add 9 lines from here...
+            print('onTap pressed');
+            print('index: $index');
+            setState(() {
+              _currentCategory = categoryName;
+              _firstTimeCategoryString = categoryName;
+            });
+          }, // ... to here.
+        )
+      ;
+    }
+    else {
+      return ListTile(
+        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
+
+        title: Text(categoryName.toLowerCase(),
+//    Text(categoryName.substring(0, 2),
+          style: TextStyle(
+
+            fontFamily: 'Itim-Regular',
+
+            fontSize: 24,
+            fontWeight: FontWeight.normal,
+//                    fontStyle: FontStyle.italic,
+            color: Color(0xff000000),
+          ),
+
+        ),
+        onTap: () { // Add 9 lines from here...
+          print('onTap pressed');
+          print('index: $index');
+          setState(() {
+            _currentCategory = categoryName;
+            _firstTimeCategoryString = categoryName;
+          });
+        }, // ... to here.
+      );
+    }
+  }
+
 
   Widget drawerTest(BuildContext context) {
     key: _drawerKey;
@@ -952,7 +953,10 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //    final blocZZ = FoodItemsQueryBloc();
 
 //    BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+    // I AM NOT USING THIS HERE.
+//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+
 //    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<
 //        FoodItemDetailsBloc>(context);
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
@@ -1445,8 +1449,8 @@ Widget work1(BuildContext context){
 
 //    final blocZZ = FoodItemsQueryBloc();
 
-    final foodGalleryBloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
-//  final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+//    final foodGalleryBloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
+  final foodGalleryBloc = BlocProvider.of<FoodGalleryBloc>(context);
 
 /*
     List<NewIngredient> testIngs = bloc.allIngredients;
@@ -2099,8 +2103,9 @@ Widget work1(BuildContext context){
                                   ),
                                   onTap: () {
 
-                                    final blocG =
-                                        BlocProvider2.of(context).getFoodGalleryBlockObject;
+                                    final blocG = BlocProvider.of<FoodGalleryBloc>(context);
+//                                    final blocG =
+//                                        BlocProvider2.of(context).getFoodGalleryBlockObject;
 
                                     List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
 
@@ -2124,6 +2129,7 @@ Widget work1(BuildContext context){
                                             milliseconds: 900),
                                         pageBuilder: (_, __, ___) =>
 
+                                        /*
                                             BlocProvider2 /*<FoodItemDetailsBloc>*/(
                                               /*thisAllIngredients2:allIngredients,*/
                                               /*bloc: FoodItemDetailsBloc(
@@ -2137,16 +2143,17 @@ Widget work1(BuildContext context){
                                               child: FoodItemDetails2()
 
                                               ,),
-                                        /*
+                                        */
+
                                             BlocProvider<FoodItemDetailsBloc>(
                                               bloc: FoodItemDetailsBloc(
                                                   oneFoodItem,
-                                                  allIngredients),
+                                                  tempIngs),
 
                                               child: FoodItemDetails2()
 
                                               ,),
-                                        */
+
                                         // fUTURE USE -- ANIMATION TRANSITION CODE.
                                         /*
                                   transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
@@ -2194,12 +2201,17 @@ Widget work1(BuildContext context){
     // Navigator.push returns a Future that completes after calling
     // Navigator.pop on the Selection Screen.
 
-    final blocG =
-        BlocProvider2.of(context).getFoodGalleryBlockObject;
+
+
+    final blocG = BlocProvider.of<FoodGalleryBloc>(context);
+
+
+//    final blocG =
+//        BlocProvider2.of(context).getFoodGalleryBlockObject;
 
     List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
 
-    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
 //                                    blocD.getAllIngredients();
 //                                    List<NewIngredient> test = blocD.allIngredients;
@@ -2208,7 +2220,7 @@ Widget work1(BuildContext context){
     logger.e('tempIngs_push 1: $tempIngs');
 
 
-    blocD.setallIngredients(tempIngs);
+//    blocD.setallIngredients(tempIngs);
 //                                    _allIngredientState
 //                                    final result = await
 
@@ -2221,6 +2233,7 @@ Widget work1(BuildContext context){
         transitionDuration: Duration(
             milliseconds: 900),
         pageBuilder: (_, __, ___) =>
+        /*
             BlocProvider2 /*<FoodItemDetailsBloc>*/(
               /* thisAllIngredients2:allIngredients,*/
               /*bloc: FoodItemDetailsBloc(
@@ -2235,18 +2248,20 @@ Widget work1(BuildContext context){
                 child: FoodItemDetails2()
 
             ),
-        /*
+
+         */
+
                                             BlocProvider<FoodItemDetailsBloc>(
                                               bloc: FoodItemDetailsBloc(
                                                   oneFoodItem,
-                                                  allIngredients),
+                                                  tempIngs),
 
 
                                               child: FoodItemDetails2()
 
                                               ,),
 
-                                        */
+
         // fUTURE USE -- ANIMATION TRANSITION CODE.
         /*
                                   transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {

@@ -15,7 +15,7 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 //import 'package:foodgallery/src
 // above are local files i.e. pages .
 import 'package:foodgallery/src/identity/loginPage.dart';
-import 'package:foodgallery/src/identity/signup.dart';
+//import 'package:foodgallery/src/identity/signup.dart';
 //import 'package:foodgallery/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
 //import 'package:foodgallery/src/screens/homeScreen/food_gallery.dart';
 // above are local file.
@@ -36,11 +36,11 @@ import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 
-import 'package:foodgallery/src/BLoC/app_bloc.dart';
-import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+//import 'package:foodgallery/src/BLoC/app_bloc.dart';
+//import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
-import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
+//import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+//import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 
 
@@ -309,6 +309,13 @@ class _WelcomePageState extends State<WelcomePage> {
 
 //                  FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped, {int fromWelComePage=0
                   return (
+
+                      BlocProvider<FoodGalleryBloc>(
+                          bloc: FoodGalleryBloc(),
+                          child: FoodGallery2()
+
+                      )
+                  /*
                       BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                           bloc2: AppBloc(
                               emptyFoodItemWithDocID, []),
@@ -321,6 +328,8 @@ class _WelcomePageState extends State<WelcomePage> {
                           */
                           child: FoodGallery2()
                       )
+
+                      */
 
                   );
                 }
@@ -369,6 +378,13 @@ class _WelcomePageState extends State<WelcomePage> {
                   case ConnectionState.active:
                     return (snapshot.data is FirebaseUser) ?
 
+                    BlocProvider<FoodGalleryBloc>(
+                        bloc: FoodGalleryBloc(),
+                        child: FoodGallery2()
+
+                    )
+
+                    /*
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                         bloc2: AppBloc(
                             emptyFoodItemWithDocID, []),
@@ -381,6 +397,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           */
                         child: FoodGallery2()
                     )
+              */
                     /*
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
@@ -397,6 +414,12 @@ class _WelcomePageState extends State<WelcomePage> {
 
                     return (snapshot.data is FirebaseUser) ?
 
+                    BlocProvider<FoodGalleryBloc>(
+                        bloc: FoodGalleryBloc(),
+                        child: FoodGallery2()
+
+                    )
+                    /*
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                         bloc2: AppBloc(
                             emptyFoodItemWithDocID, []),
@@ -409,6 +432,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           */
                         child: FoodGallery2()
                     )
+                    */
                     /*
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
@@ -420,6 +444,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   default:
                     return (snapshot.data is FirebaseUser) ?
 
+                    /*
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
                         bloc2: AppBloc(
                             emptyFoodItemWithDocID, [] /*,*/
@@ -433,12 +458,14 @@ class _WelcomePageState extends State<WelcomePage> {
                           */
                         child: FoodGallery2()
                     )
-                    /*
+                    */
+
+
                     BlocProvider<FoodGalleryBloc>(
                         bloc: FoodGalleryBloc(),
                         child: FoodGallery2()
 
-                    )*/ : LoginPage();
+                    ) : LoginPage();
                 }
               }
             }
