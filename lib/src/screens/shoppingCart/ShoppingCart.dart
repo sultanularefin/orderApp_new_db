@@ -1004,6 +1004,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  List<SelectedFood> makeMoreFoodByQuantity(SelectedFood X){
+
+    print('X X is $X');
+    print('X.quantity is: ${X.quantity}');
+
+    SelectedFood oneSelectedFood = X;
+    oneSelectedFood.quantity = 1;
+    print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
+    print('oneSelectedFood.foodItemName is: ${oneSelectedFood.foodItemName}');
+
+    List<SelectedFood> multiplied = List.filled(X.quantity, oneSelectedFood);
+
+    print('multiplied: $multiplied');
+
+//    List<SelectedFood> multiplied2 = new List<SelectedFood>(X.quantity);
+//    List.filled(int length, E fill, {bool growable = false});
+
+    return multiplied;
+  }
   Widget _buildQuantityTimesofFood(Order qTimes) {
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
@@ -1035,6 +1054,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       List<SelectedFood> allOrderedFoods = qTimes.selectedFoodInOrder;
 
+      int tempItemCount = allOrderedFoods.fold(0, (t, e) => t + e.quantity);
+
+//      const tempAllOptionsState =ChildrensFromData.map((oneQuestion,index) => {
+//      const opt1 = Array(oneQuestion.option1.length).fill({...templateOptionsState, key: index + 'o1'})
+//      for(let i=0; i<opt1.length;i++){
+//        opt1[i]= {key:index+'_o1_'+i,value:false};
+//
+//        }
+
+//      void forEach(void f(E element)) {
+//        for (E element in this) f(element);
+//      }
+      List<SelectedFood> forDisplay ;
+       allOrderedFoods.forEach((oneFood) {
+         forDisplay.addAll(makeMoreFoodByQuantity(oneFood));
+
+       });
+
+       logger.w('|| || || || forDisplay: $forDisplay');
+//       allOrderedFoods.map((oneFood)=>
+//      makeMoreFoodByQuantity(oneFood.quantity));
 //      String OrderedFoodItemName = qTimes.foodItemName;
 //      String OrderedFoodImageURL = qTimes.foodItemImageURL;
 
@@ -1056,7 +1096,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
           shrinkWrap: false,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
-          itemCount: quantity,
+//          itemCount: quantity,
+          itemCount: allOrderedFoods.fold(0, (t, e) => t + e.quantity),
+          // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+
 
           itemBuilder: (_, int index) {
             return FoodImageInShoppingCart(

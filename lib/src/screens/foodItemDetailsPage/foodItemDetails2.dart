@@ -243,7 +243,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                       Order temp = blocD.getCurrentOrderFoodDetails;
 
-                      SelectedFood tempSelectedFood = temp.selectedFoodInOrder.first;
+                      print('temp is $temp');
+
+
+
+                      SelectedFood tempSelectedFood = temp.selectedFoodInOrder.length == 0? new SelectedFood():
+                      temp.selectedFoodInOrder.first;
 
 
 

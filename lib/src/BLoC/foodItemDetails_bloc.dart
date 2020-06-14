@@ -449,6 +449,8 @@ class FoodItemDetailsBloc with ChangeNotifier implements Bloc  {
     _controller.sink.add(thisFood);
   }
 
+  // CONSTRUCTOR ENDS HERE.
+
 //  List<FoodPropertyMultiSelect> initiateAllMultiSelectOptions()
   void initiateAllMultiSelectOptions()
   {
