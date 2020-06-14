@@ -1006,6 +1006,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   List<SelectedFood> makeMoreFoodByQuantity(SelectedFood X){
 
+    int fillingLength = X.quantity;
     print('X X is $X');
     print('X.quantity is: ${X.quantity}');
 
@@ -1014,7 +1015,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
     print('oneSelectedFood.foodItemName is: ${oneSelectedFood.foodItemName}');
 
-    List<SelectedFood> multiplied = List.filled(X.quantity, oneSelectedFood);
+    List<SelectedFood> multiplied = List.filled(fillingLength, oneSelectedFood);
+
+    print('\n \n AFTER ... FILLING');
+    print('X.quantity is: ${fillingLength}');
+    print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
 
     print('multiplied: $multiplied');
 
@@ -1050,11 +1055,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     */
     else {
 //      int quantity = qTimes.quantity;
-      int quantity = qTimes.selectedFoodInOrder.length;
+//      int quantity = qTimes.selectedFoodInOrder.length;
 
       List<SelectedFood> allOrderedFoods = qTimes.selectedFoodInOrder;
 
-      int tempItemCount = allOrderedFoods.fold(0, (t, e) => t + e.quantity);
+//      int tempItemCount = allOrderedFoods.fold(0, (t, e) => t + e.quantity);
 
 //      const tempAllOptionsState =ChildrensFromData.map((oneQuestion,index) => {
 //      const opt1 = Array(oneQuestion.option1.length).fill({...templateOptionsState, key: index + 'o1'})
@@ -1066,13 +1071,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      void forEach(void f(E element)) {
 //        for (E element in this) f(element);
 //      }
-      List<SelectedFood> forDisplay ;
+      List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>() ;
+
+
        allOrderedFoods.forEach((oneFood) {
-         forDisplay.addAll(makeMoreFoodByQuantity(oneFood));
+         print('oneFood details: ===> ===> ');
+         print('oneFood: ${oneFood.foodItemName}');
+         print('oneFood: ${oneFood.quantity}');
+//         print('oneFood: ${oneFood.foodItemName}');
+          List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
+
+          print('MOMENT OF TRUTH: ');
+          print(':::: ::: :: $test');
+         selectedFoodforDisplay.addAll(test);
 
        });
 
-       logger.w('|| || || || forDisplay: $forDisplay');
+       logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
+       print('item count : ${selectedFoodforDisplay.length}');
+
+       print('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
 //       allOrderedFoods.map((oneFood)=>
 //      makeMoreFoodByQuantity(oneFood.quantity));
 //      String OrderedFoodItemName = qTimes.foodItemName;
@@ -1097,17 +1115,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
 //          itemCount: quantity,
-          itemCount: allOrderedFoods.fold(0, (t, e) => t + e.quantity),
+          itemCount: selectedFoodforDisplay.length,
           // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
 
           itemBuilder: (_, int index) {
             return FoodImageInShoppingCart(
-                allOrderedFoods[index].foodItemImageURL, /*OrderedFoodImageURL,*/
-                allOrderedFoods[index].foodItemName,
+                selectedFoodforDisplay[index].foodItemImageURL, /*OrderedFoodImageURL,*/
+                selectedFoodforDisplay[index].foodItemName,
                 /*OrderedFoodItemName, */
-                allOrderedFoods[index].selectedIngredients,
-                allOrderedFoods[index].unitPrice,
+                selectedFoodforDisplay[index].selectedIngredients,
+                selectedFoodforDisplay[index].unitPrice,
                 index
             );
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
