@@ -35,7 +35,7 @@ class Order {
   List<SelectedFood> selectedFoodInOrder;
   int selectedFoodListLength;
 
-  int deliveryTypeIndex;
+  int orderTypeIndex;
   int paymentTypeIndex;
   CustomerInformation ordersCustomer;
   double totalPrice;
@@ -57,7 +57,7 @@ class Order {
 //        this.foodItemSize,
         this.selectedFoodInOrder,
         this.selectedFoodListLength,
-        this.deliveryTypeIndex,
+        this.orderTypeIndex,
         this.paymentTypeIndex,
         this.ordersCustomer,
         this.totalPrice,

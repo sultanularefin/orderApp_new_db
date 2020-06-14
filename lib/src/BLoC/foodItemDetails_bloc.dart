@@ -263,7 +263,7 @@ class FoodItemDetailsBloc with ChangeNotifier implements Bloc  {
     Order constructorOrderFD = new Order(
       selectedFoodInOrder: [],
       selectedFoodListLength:0,
-      deliveryTypeIndex: 0,
+      orderTypeIndex: 0,
       paymentTypeIndex: 4,
       ordersCustomer: oneCustomerInfo,
     );

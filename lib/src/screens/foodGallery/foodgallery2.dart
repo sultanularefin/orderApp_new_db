@@ -169,7 +169,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
   Order orderFG = new Order(
     selectedFoodInOrder: [],
     selectedFoodListLength:0,
-    deliveryTypeIndex: 0,
+    orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
     paymentTypeIndex: 4,
     ordersCustomer: null,
     totalPrice: 0,
@@ -1031,7 +1031,7 @@ Widget work1(BuildContext context){
         quantity: _itemCount,
         foodItemSize: _currentSize,
         ingredients: foodItemDetailsbloc.getDefaultIngredients,
-        deliveryTypeIndex: 0,
+        orderTypeIndex: 0,
         paymentTypeIndex: 4,
         ordersCustomer:oneCustomerInfo,
       );

@@ -77,6 +77,8 @@ class ShoppingCartBloc implements Bloc {
       Order x
       ) {
 
+    logger.e('enterred into ShoppingCartBloc ');
+
 //    Order x = new Order(
 //      foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
 //      foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
@@ -312,7 +314,7 @@ class ShoppingCartBloc implements Bloc {
 
     Order currentOrderTemp = _curretnOrder;
 
-    currentOrderTemp.deliveryTypeIndex=newIndex;
+    currentOrderTemp.orderTypeIndex=newIndex;
 
 
     _orderType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.

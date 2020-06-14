@@ -63,10 +63,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
     printer: PrettyPrinter(),
   );
 
-  String _currentSize;
-  int _itemCount = 1;
-  int _currentOrderTypeIndex = 0;
-  int _currentPaymentTypeIndex = 0;
+//  String _currentSize;
+//  int _itemCount = 1;
+  int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
+  int _currentPaymentTypeIndex = 4;
   bool showFullOrderType = true;
   bool showCustomerInformationHeader = false;
   bool showFullPaymentType = true;
@@ -87,11 +87,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
+    super.dispose();
     addressController.dispose();
     houseFlatNumberController.dispose();
     phoneNumberController.dispose();
     etaController.dispose();
-    super.dispose();
+
   }
 
 
@@ -101,12 +102,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  ORG 0xff739DFA 4 0xff739DFA false
 
 
+  /*
   @override
   void initState() {
 //    setDetailForFood();
 //    retrieveIngredientsDefault();
     super.initState();
   }
+
+  */
 
 
   double tryCast<num>(dynamic x, {num fallback }) {
@@ -173,14 +177,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
         thisOrder);
 
 
-    if (thisOrder == null) {
-      return Container
-        (
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(),
-      );
-    }
-    else {
+//    if (thisOrder == null) {
+//      return Container
+//        (
+//        alignment: Alignment.center,
+//        child: CircularProgressIndicator(),
+//      );
+//    }
+//    else {
       return StreamBuilder<Order>(
 
 
@@ -189,10 +193,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
+
+//                    return Container
+//        (
+//        alignment: Alignment.center,
+//        child: CircularProgressIndicator(),
+//      );
               return Center(child: new LinearProgressIndicator());
             }
             else {
-              print('snapshot.hasData : ${snapshot.hasData}');
+              print('snapshot.hasData in main build(BuildContext context) : ${snapshot.hasData}');
 
               final Order oneOrder = snapshot.data;
 //              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
@@ -414,6 +424,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+                                        /*
 
                                         /*
                                             * INITIAL CHOOSE ORDER TYPE BEGINS HERE.*/
@@ -466,20 +477,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                                          child:
-                                          AnimatedSwitcher(
+                                          //Text('AnimatedSwitcher('),
+                                          child: AnimatedSwitcher(
                                             duration: Duration(milliseconds: 300),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                                            child: oneOrder.deliveryTypeIndex == 1 ?
+                                            child: oneOrder.orderTypeIndex == 1 ?
                                             _buildShoppingCartInputFieldsUNObscured(oneOrder)
-                                                :oneOrder.deliveryTypeIndex == 2 ?
+                                                :oneOrder.orderTypeIndex == 2 ?
                                             _buildShoppingCartInputFieldsUNObscured (oneOrder):
                                             animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
 
 
                                           ),
+
 
 
                                         ),
@@ -497,7 +509,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
+*/
 
 
 
@@ -521,7 +533,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           }
 
       );
-    }
+//    }
   }
 
 
@@ -1073,7 +1085,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      }
       List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>() ;
 
+      List<SelectedFood> test = makeMoreFoodByQuantity(allOrderedFoods.first);
 
+      /*
        allOrderedFoods.forEach((oneFood) {
          print('oneFood details: ===> ===> ');
          print('oneFood: ${oneFood.foodItemName}');
@@ -1086,6 +1100,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
          selectedFoodforDisplay.addAll(test);
 
        });
+       */
+
+      selectedFoodforDisplay.addAll(test);
 
        logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
        print('item count : ${selectedFoodforDisplay.length}');
@@ -1120,6 +1137,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
           itemBuilder: (_, int index) {
+            return Text('ss');
+            /*
             return FoodImageInShoppingCart(
                 selectedFoodforDisplay[index].foodItemImageURL, /*OrderedFoodImageURL,*/
                 selectedFoodforDisplay[index].foodItemName,
@@ -1130,6 +1149,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
             );
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
 //            index);
+
+          */
+
           },
         ),
 
