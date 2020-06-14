@@ -238,7 +238,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             default:
               Order oneOrder = snapshot.data;
 
-              logger.e('selectedFoodListLength: ${oneOrder.selectedFoodListLength}');
+
 
 
 //              int x = 5;
@@ -1057,6 +1057,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
 
+    logger.e('selectedFoodListLength: ${qTimes.selectedFoodListLength}');
 
 //    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
@@ -1098,9 +1099,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      }
       List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>() ;
 
-      List<SelectedFood> test = makeMoreFoodByQuantity(allOrderedFoods.first);
+//      List<SelectedFood> test = makeMoreFoodByQuantity(allOrderedFoods.first);
 
-      /*
+
        allOrderedFoods.forEach((oneFood) {
          print('oneFood details: ===> ===> ');
          print('oneFood: ${oneFood.foodItemName}');
@@ -1113,9 +1114,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
          selectedFoodforDisplay.addAll(test);
 
        });
-       */
 
-      selectedFoodforDisplay.addAll(test);
+
+//      selectedFoodforDisplay.addAll(test);
 
       logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
       print('item count : ${selectedFoodforDisplay.length}');
