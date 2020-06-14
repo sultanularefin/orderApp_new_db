@@ -165,14 +165,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    logger.w('defaultIngredients: ',bloc.defaultIngredients);
 
 //    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
-    Order thisOrder = shoppingCartBloc.getCurrentOrder;
+
+//    Order thisOrder = shoppingCartBloc.getCurrentOrder;
 
 //    priceByQuantityANDSize = oneFood.itemPrice;
 
 
 
-    logger.w('thisOrder : ',
-        thisOrder);
+//    logger.w('thisOrder : ',
+//        thisOrder);
 
 
 //    if (thisOrder == null) {
@@ -183,23 +184,66 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      );
 //    }
 //    else {
-      return StreamBuilder<Order>(
+    return StreamBuilder<Order>(
 
 
-          stream: shoppingCartBloc.getCurrentOrderStream,
-          initialData: shoppingCartBloc.getCurrentOrder,
+        stream: shoppingCartBloc.getCurrentOrderStream,
+        initialData: shoppingCartBloc.getCurrentOrder,
 
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
+        builder: (context, snapshot) {
+//            if (snapshot.hasData) {
 
-              print('snapshot.hasData in main build(BuildContext context) : ${snapshot.hasData}');
+//              print('snapshot.hasData in main build(BuildContext context) : ${snapshot.hasData}');
+          // ---
 
-              final Order oneOrder = snapshot.data;
-//              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+              return Container(
+                margin: EdgeInsets.fromLTRB(
+                    0, displayHeight(context) / 2, 0, 0),
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                                backgroundColor: Colors.lightGreenAccent)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                              backgroundColor: Colors.yellow,)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                                backgroundColor: Colors.redAccent)
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              );
+              break;
+
+            case ConnectionState.active:
+            default:
+              Order oneOrder = snapshot.data;
+
+              logger.e('selectedFoodListLength: ${oneOrder.selectedFoodListLength}');
+
+
+//              int x = 5;
 
               CustomerInformation x = oneOrder.ordersCustomer;
-
-
 
 //              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
 
@@ -239,212 +283,200 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                  .padding
 //                                  .top -
 //                              kToolbarHeight,
-                          height: displayHeight(context) ,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
+                        height: displayHeight(context) ,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
 
 
 //                              alignment: Alignment.bottomCenter,
-                                height: displayHeight(context) / 1.12,
-                                //width:displayWidth(context) / 1.5, /* 3.8*/
-                                width: displayWidth(context)
-                                    - displayWidth(context) /
-                                        5 /* this is about the width of yellow side menu */
-                                ,
+                              height: displayHeight(context) / 1.12,
+                              //width:displayWidth(context) / 1.5, /* 3.8*/
+                              width: displayWidth(context)
+                                  - displayWidth(context) /
+                                      5 /* this is about the width of yellow side menu */
+                              ,
 //                  color:Colors.lightGreenAccent,
-                                margin: EdgeInsets.fromLTRB(
-                                    12, displayHeight(context) / 16, 10, 0),
+                              margin: EdgeInsets.fromLTRB(
+                                  12, displayHeight(context) / 16, 10, 0),
 
 
-                                child: Neumorphic(
-                                  // State of Neumorphic (may be convex, flat & emboss)
+                              child: Neumorphic(
+                                // State of Neumorphic (may be convex, flat & emboss)
 
-                                    boxShape: NeumorphicBoxShape
-                                        .roundRect(
-                                      BorderRadius.all(
-                                          Radius.circular(15)),
+                                boxShape: NeumorphicBoxShape
+                                    .roundRect(
+                                  BorderRadius.all(
+                                      Radius.circular(15)),
 
-                                    ),
-                                    curve: Neumorphic.DEFAULT_CURVE,
-                                    style: NeumorphicStyle(
-                                        shape: NeumorphicShape
-                                            .concave,
-                                        depth: 8,
-                                        lightSource: LightSource
-                                            .topLeft,
-                                        color: Colors.white
-                                    ),
-
-
-
-                                    // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
+                                ),
+                                curve: Neumorphic.DEFAULT_CURVE,
+                                style: NeumorphicStyle(
+                                    shape: NeumorphicShape
+                                        .concave,
+                                    depth: 8,
+                                    lightSource: LightSource
+                                        .topLeft,
+                                    color: Colors.white
+                                ),
 
 
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .start,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .start,
-                                      children: <Widget>[
+
+                                // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
+
+
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .start,
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .start,
+                                  children: <Widget>[
 
 //                                          /WWW??
-                                        Container(
-                                          width: displayWidth(context) / 1.1,
-                                          height: displayHeight(context) / 20,
-                                          color: Color(0xffffffff),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .start
-                                            ,
-                                            crossAxisAlignment: CrossAxisAlignment
-                                                .center,
-                                            children: <Widget>[
 
 
-                                              Container(
-                                                width: displayWidth(context) /
-                                                    1.5,
-                                                height: displayHeight(
-                                                    context) / 20,
-                                                color: Color(0xffffffff),
 
-                                                child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start
-                                                    ,
-                                                    crossAxisAlignment: CrossAxisAlignment
+                                    // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
+
+
+                                    // work -1
+
+
+
+                                    Container(
+                                      width: displayWidth(context) / 1.1,
+                                      height: displayHeight(context) / 20,
+                                      color: Color(0xffffffff),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .start
+                                        ,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .center,
+                                        children: <Widget>[
+
+
+                                          Container(
+                                            width: displayWidth(context) /
+                                                1.5,
+                                            height: displayHeight(
+                                                context) / 20,
+                                            color: Color(0xffffffff),
+
+                                            child: Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .start
+                                                ,
+                                                crossAxisAlignment: CrossAxisAlignment
+                                                    .center,
+                                                children: <Widget>[
+
+                                                  Container(
+                                                    margin: EdgeInsets
+                                                        .fromLTRB(
+                                                        20, 0, 10, 0),
+                                                    alignment: Alignment
                                                         .center,
-                                                    children: <Widget>[
-
-                                                      Container(
-                                                        margin: EdgeInsets
-                                                            .fromLTRB(
-                                                            20, 0, 10, 0),
-                                                        alignment: Alignment
-                                                            .center,
-                                                        child: Text(
-                                                            'Shopping Cart',
-                                                            style: TextStyle(
-                                                              fontSize: 30,
-                                                              fontWeight: FontWeight
-                                                                  .normal,
+                                                    child: Text(
+                                                        'Shopping Cart',
+                                                        style: TextStyle(
+                                                          fontSize: 30,
+                                                          fontWeight: FontWeight
+                                                              .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                                              color: Color(
-                                                                  0xff000000),
-                                                            )
-                                                        ),
-                                                      ),
+                                                          color: Color(
+                                                              0xff000000),
+                                                        )
+                                                    ),
+                                                  ),
 
-                                                      CustomPaint(
-                                                        size: Size(0, 19),
-                                                        painter: LongHeaderPainterAfter(
-                                                            context),
-                                                      ),
+                                                  CustomPaint(
+                                                    size: Size(0, 19),
+                                                    painter: LongHeaderPainterAfter(
+                                                        context),
+                                                  ),
 
 
-                                                    ]
-                                                ),
+                                                ]
+                                            ),
 
-                                              ),
+                                          ),
 
-                                              // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                                              Container(
+                                          // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                                          Container(
 //                                                  alignment: Alignment.center,
-                                                padding: EdgeInsets.fromLTRB(
-                                                    0, 2, 0, 0),
-                                                width: displayWidth(context) /
-                                                    16,
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 2, 0, 0),
+                                            width: displayWidth(context) /
+                                                16,
 //                                                height: displayHeight(context)/20,
-                                                color: Color(0xffffffff),
+                                            color: Color(0xffffffff),
 //                                                    child:Row(
 //                                                      mainAxisAlignment: MainAxisAlignment.end,
 //                                                      children: <Widget>[
-                                                child: Container(
-                                                  padding: EdgeInsets
-                                                      .fromLTRB(0, 0, 200, 0),
-                                                  child: Icon(
+                                            child: Container(
+                                              padding: EdgeInsets
+                                                  .fromLTRB(0, 0, 200, 0),
+                                              child: Icon(
 
-                                                    Icons.add_shopping_cart,
-                                                    size: 30,
-                                                    color: Color(0xff54463E),
-                                                  ),
-                                                ),
-
-
+                                                Icons.add_shopping_cart,
+                                                size: 30,
+                                                color: Color(0xff54463E),
                                               ),
+                                            ),
 
 
-                                              // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-
-
-                                            ],
                                           ),
-                                        ),
 
 
-                                        // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
+                                          // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
 
 
-                                        // work -1
+                                        ],
+                                      ),
+                                    ),
 
-
-                                         Container(
-                                            padding: EdgeInsets.fromLTRB(
-                                                0, 0, 0, 0),
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(
+                                          0, 0, 0, 0),
 //                                                      padding::::
-                                            color: Colors.amberAccent,
-                                            height: displayHeight(context) / 5.2,
-                                            width: displayWidth(context)
-                                                - displayWidth(context) /
-                                                    5, /* this is about the width of yellow side menu */
+                                      color: Colors.amberAccent,
+                                      height: displayHeight(context) / 5.2,
+                                      width: displayWidth(context)
+                                          - displayWidth(context) /
+                                              5, /* this is about the width of yellow side menu */
 
 //                                            width: displayWidth(context) * 0.57,
-                                            child: _buildQuantityTimesofFood(
-                                                oneOrder),
-
-                                          ),
-
-
-                                        
+                                      child: _buildQuantityTimesofFood(
+                                          oneOrder),
+                                    ),
 
 
 
-
-
-
-
-                                        /*
-                                            * INITIAL CHOOSE ORDER TYPE BEGINS HERE.*/
-
-//                                            showFullOrderType
-
-
-
-                                        Container(
+                                    Container(
 //                                        width: displayWidth(context) /1.8,
-                                          width: displayWidth(context) / 1.1,
-                                          child:
-                                          AnimatedSwitcher(
-                                            duration: Duration(milliseconds: 1000),
+                                      width: displayWidth(context) / 1.1,
+                                      child:
+                                      AnimatedSwitcher(
+                                        duration: Duration(milliseconds: 1000),
 //
-                                            child: showFullOrderType?
-                                            animatedWidgetShowFullOrderType():/*1 */
-                                            animatedWidgetShowSelectedOrderType(), /* 2*/
-                                            // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
-                                            // 2 => height: displayHeight(context) / 9,
+                                        child: showFullOrderType?
+                                        animatedWidgetShowFullOrderType():/*1 */
+                                        animatedWidgetShowSelectedOrderType(), /* 2*/
+                                        // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
+                                        // 2 => height: displayHeight(context) / 9,
 
-                                          ),
-
-
-                                        ),
+                                      ),
 
 
+                                    ),
 
 
-                                        /*
+
+
+                                    /*
                                             * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
 
 
@@ -453,86 +485,68 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                                        Container(
-                                          color:Colors.yellowAccent,
+                                    Container(
+                                      color:Colors.yellowAccent,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
-                                          width: displayWidth(context) / 1.1,
+                                      width: displayWidth(context) / 1.1,
 //                                            height: displayHeight(context)/2.5,
-                                          // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
-                                          // A CERTAIN PORTION OF OF THE CONTAINER
-                                          // WITH YELLOW ACCENT BG COLOR IS
-                                          // THERE WHEN THE CHILD WIDGETS ARE NOT
-                                          // BIG ENOGH LIKE , AS BIG AS displayHeight(context)/2.5,
+                                      // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
+                                      // A CERTAIN PORTION OF OF THE CONTAINER
+                                      // WITH YELLOW ACCENT BG COLOR IS
+                                      // THERE WHEN THE CHILD WIDGETS ARE NOT
+                                      // BIG ENOGH LIKE , AS BIG AS displayHeight(context)/2.5,
 
 
 
-                                          //Text('AnimatedSwitcher('),
-                                          child: AnimatedSwitcher(
-                                            duration: Duration(milliseconds: 300),
+                                      //Text('AnimatedSwitcher('),
+                                      child: AnimatedSwitcher(
+                                        duration: Duration(milliseconds: 300),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                                            child: oneOrder.orderTypeIndex == 1 ?
-                                            _buildShoppingCartInputFieldsUNObscured(oneOrder)
-                                                :oneOrder.orderTypeIndex == 2 ?
-                                            _buildShoppingCartInputFieldsUNObscured (oneOrder):
-                                            animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
+                                        child: oneOrder.orderTypeIndex == 1 ?
+                                        _buildShoppingCartInputFieldsUNObscured(oneOrder)
+                                            :oneOrder.orderTypeIndex == 2 ?
+                                        _buildShoppingCartInputFieldsUNObscured (oneOrder):
+                                        animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
 
 
-                                          ),
-
-
-
-                                        ),
-//                                        SingleChildScrollView(
-//                                            child:
-//                                        )
+                                      ),
 
 
 
+                                    ),
 
-
-
-
-                                        //xxxx
-
-
-
-
-
-
-
-                                      ],
-                                    )
-
-
+                                  ],
                                 ),
                               ),
-
-                            ],
-                          )
-
-
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               );
-            }
-            else {
 
-//                    return Container
-//        (
-//        alignment: Alignment.center,
-//        child: CircularProgressIndicator(),
-//      );
-              return Center(child: new LinearProgressIndicator());
-            }
+          //return Text('${x.toString()}');
+
           }
+        }
 
-      );
+      //---
+    );
 //    }
+  }
+
+
+
+  Widget test1(Order oneOrder){
+//    final Order oneOrder = snapshot.data;
+//              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
+
+
   }
 
 
@@ -1103,10 +1117,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       selectedFoodforDisplay.addAll(test);
 
-       logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
-       print('item count : ${selectedFoodforDisplay.length}');
+      logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
+      print('item count : ${selectedFoodforDisplay.length}');
 
-       print('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
+      print('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
 //       allOrderedFoods.map((oneFood)=>
 //      makeMoreFoodByQuantity(oneFood.quantity));
 //      String OrderedFoodItemName = qTimes.foodItemName;

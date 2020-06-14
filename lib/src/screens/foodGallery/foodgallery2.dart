@@ -164,7 +164,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
-  List<SelectedFood> allSelectedOFFoodGallery = [];
+  List<SelectedFood> allSelectedFoodGallery = [];
 
   Order orderFG = new Order(
     selectedFoodInOrder: [],
@@ -1038,8 +1038,8 @@ Widget work1(BuildContext context){
 
       */
 
-          orderFG.selectedFoodInOrder = allSelectedOFFoodGallery;
-          orderFG.selectedFoodListLength = allSelectedOFFoodGallery.length;
+          orderFG.selectedFoodInOrder = allSelectedFoodGallery;
+          orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
           orderFG.totalPrice= totalPriceState;
           orderFG.ordersCustomer = oneCustomerInfo;
           print(
@@ -2290,7 +2290,7 @@ Widget work1(BuildContext context){
 //    Order tempOrder = orderFG;
 
 //    tempOrder.selectedFoodInOrder.add(receivedSelectedFood);
-      totalPriceState = totalPriceState + currentFoodItemQuantity * unitPricecurrentFood;
+
 
       // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 //       int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
@@ -2298,16 +2298,19 @@ Widget work1(BuildContext context){
 
       Scaffold.of(context)
         ..removeCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text("${receivedSelectedFood.quantity}")));
+        ..showSnackBar(SnackBar(content: Text("selected ${receivedSelectedFood.quantity} items")));
 //      setState(() => _reloadRequired = true);
 
       setState(
               ()
           {
             _totalCount = _totalCount + receivedSelectedFood.quantity;
-            allSelectedOFFoodGallery.add(receivedSelectedFood);
+            allSelectedFoodGallery.add(receivedSelectedFood);
+            totalPriceState =
+                totalPriceState + currentFoodItemQuantity * unitPricecurrentFood;
 
-          });
+          }
+      );
 
       // bloc 1.
 
