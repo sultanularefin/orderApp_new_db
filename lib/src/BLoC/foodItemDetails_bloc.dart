@@ -298,7 +298,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     /* INGREDIENTS HANDLING CODES STARTS HERE: */
     List<String> ingredientStringsForWhereInClause;
-    List <NewIngredient> ingItems = new List<NewIngredient>();
+
 
 
     //    oneFoodItem, List<NewIngredient> allIngsScoped
@@ -350,6 +350,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
       print('allIngsScoped.length  ===> ===> ===> ===> ${allIngsScoped
           .length}');
+      List <NewIngredient> ingItems = new List<NewIngredient>();
+      // ARE THIS TWO STATEMENTS WHERE I PUT A 'NONE' ITEM IN DEFAULT INGREDIENTS NECESSARY ???*/
+
+      /*
       NewIngredient c1 = new NewIngredient(
           ingredientName: 'None',
           imageURL: 'None',
@@ -361,14 +365,16 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       );
 
       ingItems.add(c1);
+      */
 
 //      _allIngItemsDetailsBlock = ingItems;
 
 //      _allIngredientListController.sink.add(ingItems);
 
 //      _unSelectedIngredientListController
+
       _defaultIngItems = ingItems;
-      _defaultIngredientListController.sink.add(ingItems);
+      _defaultIngredientListController.sink.add(_defaultIngItems);
 
 
       List<NewIngredient> unSelectedDecremented =
@@ -977,14 +983,22 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     allPreviouslyUnSelectedIngredientItems.where((oneItem) => oneItem.ingredientAmountByUser >0).toList();
 
 
+    logger.e('valueIncrementedUNselectedIngredient: $valueIncrementedUNselectedIngredient');
+
+
     List <NewIngredient> valueUnChangedUNselectedIngredient =
 
     allPreviouslyUnSelectedIngredientItems.where((oneItem) => oneItem.ingredientAmountByUser == 0).toList();
+
 
 //    List<String> stringList = List<String>.from(dlist);
 //    return stringList.where((oneItem) =>oneItem.toString().toLowerCase()
 //    ==
 //    isIngredientExist(oneItem.toString().trim().toLowerCase())).toList();
+
+    logger.e('valueUnChangedUNselectedIngredient: $valueUnChangedUNselectedIngredient');
+
+
 
     allDefaultIngredientItems.addAll(valueIncrementedUNselectedIngredient);
 
