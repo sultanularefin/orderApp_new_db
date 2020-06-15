@@ -246,14 +246,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      final blocD =
 //                          BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
-                      Order temp = blocD.getCurrentOrderFoodDetails;
+                      SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
 
                       print('temp is $temp');
 
 
 
-                      SelectedFood tempSelectedFood = temp.selectedFoodInOrder.length == 0? new SelectedFood():
-                      temp.selectedFoodInOrder.first;
+                      SelectedFood tempSelectedFood = temp == null? new SelectedFood():
+                      temp /*.selectedFoodInOrder.first*/;
 
 
 
@@ -976,6 +976,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               // MORE INGREDIENTS row BEGINS HERE.
               Container(
 //                                                                        width:60,
+              // FROM 4 TO 3.8 AND AGAIN 4. displayWidth(context) /4,
                 width: displayWidth(
                     context) /4,
                 height: displayHeight(context)/21,
@@ -983,6 +984,25 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child:
                 OutlineButton(
+
+                  clipBehavior: Clip.hardEdge,
+                  splashColor: Color(0xffFEE295),
+//          splashColor: Color(0xff739DFA),
+                  highlightElevation: 12,
+//          clipBehavior: Clip.hardEdge,
+//          highlightElevation: 12,
+                  shape: RoundedRectangleBorder(
+
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
+//          disabledBorderColor: false,
+                  borderSide: BorderSide(
+                    color: Color(0xffFEE295),
+                    style: BorderStyle.solid,
+                    width: 3.6,
+                  ),
+
+                  /*
 //                        color: Color(0xffFEE295),
                   highlightColor: Colors.lightGreenAccent,
                   highlightedBorderColor: Colors.blueAccent,
@@ -993,21 +1013,24 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     side: BorderSide(
                       color: Color(0xff000000),
                       style: BorderStyle.solid,
-                      width: 11.6,
+                      width: 2.6,
                     ),
                     borderRadius: BorderRadius.circular(35.0),
                   ),
 
-                  child:Container(child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .start,
+                  */
+
+                  child:Container(
+                    padding: EdgeInsets.fromLTRB(10,0,0,0),
+                    child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment
                         .center,
                     children: <
                         Widget>[
+                          SizedBox(width: 5,),
                       Icon(
-                        Icons
-                            .add,
+                        Icons.add,
                         size: 22.0,
                         color: Color(0xff707070),
                         //        color: Color(0xffFFFFFF),
@@ -1017,7 +1040,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         style: TextStyle(
                             fontWeight: FontWeight
                                 .bold,
-                            color: Color(0xff707070),
+                            color: Color(0xff000000),
                             fontSize: 16),
                       ),
                     ],
@@ -1056,9 +1079,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               // MORE INGREDIENTS ENDS HERE.
 
 
-              StreamBuilder<Order>(
-                  stream: blocD.getCurrentOrderStream,
-                  initialData: blocD.getCurrentOrderFoodDetails,
+              // WHAT WE NEED IS CURRENT SELECTED FOOD STREAM
+              // StreamBuilder<Order>( TO StreamBuilder<Order>(
+
+
+              StreamBuilder<SelectedFood>(
+
+                  stream: blocD.getCurrentSelectedFoodStream,
+                  initialData: blocD.getCurrentSelectedFoodDetails,
                 builder: (context, snapshot) {
                   if ((snapshot.hasError) || (!snapshot.hasData)) {
                     return Center(
@@ -1069,28 +1097,37 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     );
                   }
                   else {
-//                    logger.e('snapshot.hasData: ${snapshot.hasData} getCurrentOrderStream');
+//                    logger.e('snapshot.hasData: ${snapshot.hasData} getCurrentSelectedFoodStream');
+//                    Order incrementCurrentFoodProcessing = snapshot.data;
 
-                    Order incrementOrderProcessing = snapshot.data;
+                    SelectedFood incrementCurrentFoodProcessing = snapshot.data;
 
 
-                    int lengthOfSelectedItemsLength = incrementOrderProcessing.selectedFoodListLength;
+//                    int lengthOfSelectedItemsLength = incrementOrderProcessing.selectedFoodListLength;
 //                    logger.e('lengthOfSelectedItemsLength: $lengthOfSelectedItemsLength');
 
                     int itemCountNew;
 
-                    print('incrementOrderProcessing.selectedFoodInOrder.isEmpty:'
-                        ' ${incrementOrderProcessing.selectedFoodInOrder.isEmpty}');
 
-                    if( incrementOrderProcessing.selectedFoodInOrder.isEmpty) {
-                      itemCountNew=0;
+//                    print('incrementOrderProcessing.selectedFoodInOrder.isEmpty:'
+//                        ' ${incrementOrderProcessing.selectedFoodInOrder.isEmpty}');
+                    print('incrementCurrentFoodProcessing==null ${incrementCurrentFoodProcessing==null}');
 
-                    }
+
+//                    if( incrementOrderProcessing.selectedFoodInOrder.isEmpty) {
+//                      itemCountNew=0;
+//
+//                    }
+                if(incrementCurrentFoodProcessing==null){
+                  itemCountNew=0;
+                }
                     else {
-                      itemCountNew = incrementOrderProcessing
-                          .selectedFoodInOrder[lengthOfSelectedItemsLength-1]
-                          .quantity;
+//                      itemCountNew = incrementOrderProcessing
+////                          .selectedFoodInOrder[lengthOfSelectedItemsLength-1]
+////                          .quantity;
+                  itemCountNew = incrementCurrentFoodProcessing.quantity;
                     }
+
 
 
 //                    logger.e('itemCountNew: $itemCountNew');
@@ -1132,10 +1169,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 //                              incrementOrderProcessing.selectedFoodInOrder.isEmpty
-                              Order incrementOrderProcessing = snapshot.data;
-                              int lengthOfSelectedItemsLength = incrementOrderProcessing.selectedFoodListLength;
 
-                              if(lengthOfSelectedItemsLength == 0){
+                              SelectedFood incrementCurrentFoodProcessing = snapshot.data;
+//                              Order incrementOrderProcessing = snapshot.data;
+//                              int lengthOfSelectedItemsLength = incrementOrderProcessing.selectedFoodListLength;
+
+                              if(incrementCurrentFoodProcessing.quantity == 0){
                                 print(' JJJJ at lengthOfSelectedItemsLength  == 0 ');
 
                                 print('itemCountNew JJJJ $itemCountNew');
@@ -1168,10 +1207,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                    .selectedFoodInOrder[lengthOfSelectedItemsLength-1]
 //                                    .quantity;
 
-                                int oldQuantity = incrementOrderProcessing.
-                                selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity;
+                                  int oldQuantity = incrementCurrentFoodProcessing.quantity;
+//                                int oldQuantity = incrementOrderProcessing.
+//                                selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity;
 
                                 int newQuantity = oldQuantity + 1;
+
 
                                 SelectedFood oneSelectedFoodFD = new SelectedFood(
                                   foodItemName: blocD
@@ -1187,6 +1228,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                 );
 
 
+                                //incrementCurrentFoodProcessing.quantity= newQuantity;
+
+                                // TODO TODO TODO.
+                                // TO DO SOME CODES CAN BE OMITTED HERE, LIKE WE DON'T NEED TO PASS THIS PARAMETER OR
+                                // NEITHER NEED TO RECREATE IT ABOVE, WE NEED TO PASS BUT NOT CREATE IT ABOVE.
                                 blocD
                                     .incrementOneSelectedFoodForOrder(oneSelectedFoodFD /*
                                     THIS oneSelectedFoodFD WILL NOT BE USED WHEN SAME ITEM IS INCREMENTED AND
@@ -1371,8 +1417,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       */
 
 //                                }
-
-
 
                               }
                             },

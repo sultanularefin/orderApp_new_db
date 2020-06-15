@@ -2289,7 +2289,9 @@ Widget work1(BuildContext context){
     // After the Selection Screen returns a result, hide any previous snackbars
     // and show the new result.
 
-    if(receivedSelectedFood.foodItemName!=null) {
+    if(
+    (receivedSelectedFood!=null) && (receivedSelectedFood.foodItemName!=null)
+    ) {
 
       print('| | | | | | | |   receivedSelectedFood.quantity: ${receivedSelectedFood.quantity}');
 
@@ -2330,6 +2332,11 @@ Widget work1(BuildContext context){
       // bloc 1.
 
 
+    }
+    else{
+      Scaffold.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text("selected 0 items")));
     }
 
   }
