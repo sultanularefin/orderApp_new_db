@@ -39,7 +39,6 @@ class ShoppingCart extends StatefulWidget {
   final Widget child;
 //  final FoodItem oneFoodItemData;
 
-
 //  FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
 
 
@@ -450,7 +449,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                            width: displayWidth(context) * 0.57,
                                       child: _buildQuantityTimesofFood(
-                                          oneOrder),
+                                          /*oneOrder*/),
                                     ),
 
 
@@ -1029,49 +1028,35 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  List<SelectedFood> makeMoreFoodByQuantity(SelectedFood X){
-
-    int fillingLength = X.quantity;
-    print('X X is $X');
-    print('X.quantity is: ${X.quantity}');
-
-    SelectedFood oneSelectedFood = X;
-    oneSelectedFood.quantity = 1;
-    print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
-    print('oneSelectedFood.foodItemName is: ${oneSelectedFood.foodItemName}');
-
-    List<SelectedFood> multiplied = List.filled(fillingLength, oneSelectedFood);
-
-    print('\n \n AFTER ... FILLING');
-    print('X.quantity is: ${fillingLength}');
-    print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
-
-    print('multiplied: $multiplied');
-
-//    List<SelectedFood> multiplied2 = new List<SelectedFood>(X.quantity);
-//    List.filled(int length, E fill, {bool growable = false});
-
-    return multiplied;
-  }
-  Widget _buildQuantityTimesofFood(Order qTimes) {
+  Widget _buildQuantityTimesofFood(/*Order qTimes */) {
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
 
-    logger.e('selectedFoodListLength: ${qTimes.selectedFoodListLength}');
+    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    return StreamBuilder<List<SelectedFood>>(
+        stream: shoppingCartbloc.getExpandedFoodsStream,
+        initialData: shoppingCartbloc.getExpandedSelectedFood,
+
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<SelectedFood> expandedSelectedFoodInOrder = snapshot.data;
+
+
+//            logger.e(
+//                'selectedFoodListLength: ${qTimes.selectedFoodListLength}');
 
 //    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-    if(qTimes.selectedFoodInOrder==null){
-      print('Order has no data');
-      print('this will never happen don\'t worry');
+            if (expandedSelectedFoodInOrder == null) {
+              print('Order has no data');
+              print('this will never happen don\'t worry');
 //        return Center(child: new LinearProgressIndicator());
-      return Container(child: Text('Null'));
+              return Container(child: Text('expandedSelectedFoodInOrder == Null'));
+            }
 
-
-    }
-
-    //    VIEW MODEL CHANGE THUS CONDITION CHANGE 1.
-    /*
+            //    VIEW MODEL CHANGE THUS CONDITION CHANGE 1.
+            /*
     if ((qTimes.foodItemName == '') && (qTimes.quantity == 0)) {
       print('Order has no data');
       print('this will never happen don\'t worry');
@@ -1079,12 +1064,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       return Container(child: Text('Null'));
     }
     */
-    else {
+            else {
 //      int quantity = qTimes.quantity;
 //      int quantity = qTimes.selectedFoodInOrder.length;
 
-      List<SelectedFood> allOrderedFoods = qTimes.selectedFoodInOrder;
-
+              List<SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
+/*
 //      int tempItemCount = allOrderedFoods.fold(0, (t, e) => t + e.quantity);
 
 //      const tempAllOptionsState =ChildrensFromData.map((oneQuestion,index) => {
@@ -1097,31 +1082,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      void forEach(void f(E element)) {
 //        for (E element in this) f(element);
 //      }
-      List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>() ;
+              List<SelectedFood> selectedFoodforDisplay = new List<
+                  SelectedFood>();
 
 //      List<SelectedFood> test = makeMoreFoodByQuantity(allOrderedFoods.first);
 
 
-       allOrderedFoods.forEach((oneFood) {
-         print('oneFood details: ===> ===> ');
-         print('oneFood: ${oneFood.foodItemName}');
-         print('oneFood: ${oneFood.quantity}');
+              allOrderedFoods.forEach((oneFood) {
+                print('oneFood details: ===> ===> ');
+                print('oneFood: ${oneFood.foodItemName}');
+                print('oneFood: ${oneFood.quantity}');
 //         print('oneFood: ${oneFood.foodItemName}');
-          List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
+                List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
 
-          print('MOMENT OF TRUTH: ');
-          print(':::: ::: :: $test');
-         selectedFoodforDisplay.addAll(test);
-
-       });
+                print('MOMENT OF TRUTH: ');
+                print(':::: ::: :: $test');
+                selectedFoodforDisplay.addAll(test);
+              });
 
 
 //      selectedFoodforDisplay.addAll(test);
 
-      logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
-      print('item count : ${selectedFoodforDisplay.length}');
+              logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
+              print('item count : ${selectedFoodforDisplay.length}');
 
-      print('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
+              print('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
 //       allOrderedFoods.map((oneFood)=>
 //      makeMoreFoodByQuantity(oneFood.quantity));
 //      String OrderedFoodItemName = qTimes.foodItemName;
@@ -1133,47 +1118,55 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      final List<NewIngredient> selectedIngredients =qTimes.ingredients;
 //      final double price = qTimes.unitPrice;
 
-      return Container(
+              */
+              return Container(
 
-        color: Colors.green,
+                color: Colors.green,
 
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
 
-          reverse: false,
+                  reverse: false,
 
-          shrinkWrap: false,
+                  shrinkWrap: false,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
 //          itemCount: quantity,
-          itemCount: selectedFoodforDisplay.length,
-          // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+                  itemCount: allOrderedFoods.length,
+                  // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
 
-          itemBuilder: (_, int index) {
+                  itemBuilder: (_, int index) {
 //            return Text('ss');
 
-            return FoodImageInShoppingCart(
-                selectedFoodforDisplay[index].foodItemImageURL, /*OrderedFoodImageURL,*/
-                selectedFoodforDisplay[index].foodItemName,
-                /*OrderedFoodItemName, */
-                selectedFoodforDisplay[index].selectedIngredients,
-                selectedFoodforDisplay[index].unitPrice,
-                index
-            );
+                    return FoodImageInShoppingCart(
+                        allOrderedFoods[index].foodItemImageURL, /*OrderedFoodImageURL,*/
+                        allOrderedFoods[index].foodItemName, /*OrderedFoodItemName, */
+                        allOrderedFoods[index].selectedIngredients,
+                        allOrderedFoods[index].unitPrice,
+                        index
+                    );
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
 //            index);
 
 
+                  },
+                ),
 
-          },
-        ),
 
-
-        // M VSM ORG VS TODO. ENDS HERE.
-      );
-    }
+                // M VSM ORG VS TODO. ENDS HERE.
+              );
+            }
+          }
+          else {
+            print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+            return Container(child: Text('Null'));
+          }
+        }
+    );
   }
+
 
 
 
@@ -3585,8 +3578,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
               children: <Widget>[
                 Container(
                   child: OutlineButton(
-                    onPressed: ()=>{
-                      print('on Pressed of Cancel')
+                    onPressed: (){ print('Cancel Pressed');
+
+                    return Navigator.pop(context,true);
                     },
                     child: Text('Cancel',style: TextStyle(color: Colors.red),),
                     shape: RoundedRectangleBorder(
@@ -3604,8 +3598,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 SizedBox(width: displayWidth(context)/12,),
                 Container(
                   child: OutlineButton(
-                    onPressed: ()=>{
-                      print('on Pressed of Pay')
+                    onPressed: (){
+
+                      print('on Pressed of Pay');
+
+
                     },
                     child: Text('Pay',style: TextStyle(color: Colors.green),),
                     shape: RoundedRectangleBorder(

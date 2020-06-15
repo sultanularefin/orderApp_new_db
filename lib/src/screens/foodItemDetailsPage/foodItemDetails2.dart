@@ -1616,7 +1616,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       print('Minus button pressed in unselected ing');
                       print('Decrease button pressed InkResponse');
 
-                      if (currentAmount > 1) {
+                      if (currentAmount >=1) {
 //                      if(currentAmount>=2)
 //                      City c1 = new City()..name = 'Blum'..state = 'SC';
 

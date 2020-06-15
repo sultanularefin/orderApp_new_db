@@ -2,6 +2,7 @@
 
 //### EXTERNAL PACKAGES
 import 'dart:async';
+import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:logger/logger.dart';
 
 
@@ -32,6 +33,7 @@ class ShoppingCartBloc implements Bloc {
   Order _curretnOrder ;
   List<OrderTypeSingleSelect> _orderType;
   List<PaymentTypeSingleSelect> _paymentType;
+  List<SelectedFood> _expandedSelectedFood =[];
 //  CustomerInformation _oneCustomerInfo;
 
 
@@ -39,11 +41,13 @@ class ShoppingCartBloc implements Bloc {
   Order get getCurrentOrder => _curretnOrder;
   List<OrderTypeSingleSelect> get getCurrentOrderType => _orderType;
   List<PaymentTypeSingleSelect> get getCurrentPaymentType => _paymentType;
+  List<SelectedFood> get getExpandedSelectedFood => _expandedSelectedFood;
 //  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
 
 
 
   final _orderController = StreamController <Order>();
+  final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>();
   final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
   final _paymentTypeController = StreamController <List<PaymentTypeSingleSelect>>.broadcast();
 
@@ -53,6 +57,8 @@ class ShoppingCartBloc implements Bloc {
 
 
   Stream<Order> get getCurrentOrderStream => _orderController.stream;
+
+  Stream  <List<SelectedFood>> get getExpandedFoodsStream => _expandedSelectedFoodController.stream;
 
   Stream  <List<OrderTypeSingleSelect>> get getCurrentOrderTypeSingleSelectStream =>
       _orderTypeController.stream;
@@ -101,6 +107,41 @@ class ShoppingCartBloc implements Bloc {
 
     initiatePaymentTypeSingleSelectOptions();
 
+
+
+    List<SelectedFood> allOrderedFoods = x.selectedFoodInOrder;
+
+    List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>() ;
+
+//      List<SelectedFood> test = makeMoreFoodByQuantity(allOrderedFoods.first);
+
+
+    allOrderedFoods.forEach((oneFood) {
+      print('oneFood details: ===> ===> ');
+      print('oneFood: ${oneFood.foodItemName}');
+      print('oneFood: ${oneFood.quantity}');
+//         print('oneFood: ${oneFood.foodItemName}');
+      List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
+
+      print('MOMENT OF TRUTH: ');
+      print(':::: ::: :: $test');
+      selectedFoodforDisplay.addAll(test);
+
+    });
+
+
+//      selectedFoodforDisplay.addAll(test);
+
+    logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
+    print('item count : ${selectedFoodforDisplay.length}');
+
+    print('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
+
+    _expandedSelectedFood = selectedFoodforDisplay;
+    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
+
+
+
     //    initiateCustomerInformation();
 
     _curretnOrder=x;
@@ -112,6 +153,31 @@ class ShoppingCartBloc implements Bloc {
 // CONSTRUCTOR ENDS HERE.
 
 
+
+  List<SelectedFood> makeMoreFoodByQuantity(SelectedFood X){
+
+    int fillingLength = X.quantity;
+    print('X X is $X');
+    print('X.quantity is: ${X.quantity}');
+
+    SelectedFood oneSelectedFood = X;
+    oneSelectedFood.quantity = 1;
+    print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
+    print('oneSelectedFood.foodItemName is: ${oneSelectedFood.foodItemName}');
+
+    List<SelectedFood> multiplied = List.filled(fillingLength, oneSelectedFood);
+
+    print('\n \n AFTER ... FILLING');
+    print('X.quantity is: ${fillingLength}');
+    print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
+
+    print('multiplied: $multiplied');
+
+//    List<SelectedFood> multiplied2 = new List<SelectedFood>(X.quantity);
+//    List.filled(int length, E fill, {bool growable = false});
+
+    return multiplied;
+  }
   /*
 
   void initiateCustomerInformation(){
@@ -409,6 +475,7 @@ class ShoppingCartBloc implements Bloc {
   @override
   void dispose() {
     _orderController.close();
+    _expandedSelectedFoodController.close();
     _orderTypeController.close();
     _paymentTypeController.close();
 //    _customerInformationController.close();

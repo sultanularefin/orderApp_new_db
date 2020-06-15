@@ -1053,7 +1053,7 @@ Widget work1(BuildContext context){
           //          Navigator.of(context).push(
 
 //          return
-          final bool pay = await Navigator.of(context).push(
+          final bool isCancelButtonPressed = await Navigator.of(context).push(
 
             PageRouteBuilder(
               opaque: false,
@@ -1081,6 +1081,39 @@ Widget work1(BuildContext context){
                                     }
                                     */
             ),
+          );
+
+
+          if(isCancelButtonPressed==true){
+
+            Scaffold.of(context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text("Order Cancelled by user.")));
+//      setState(() => _reloadRequired = true);
+
+            setState(
+                    ()
+                {
+                  _totalCount = 0;
+                  totalPriceState = 0;
+
+                }
+            );
+          }
+
+          else{
+            Scaffold.of(context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text("order is received..., please wait....")));
+          }
+
+          setState(
+                  ()
+              {
+                _totalCount = 0;
+                totalPriceState = 0;
+
+              }
           );
 
         },
