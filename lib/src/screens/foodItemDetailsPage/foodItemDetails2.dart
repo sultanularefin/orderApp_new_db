@@ -1021,14 +1021,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   */
 
                   child:Container(
-                    padding: EdgeInsets.fromLTRB(10,0,0,0),
+                    padding: EdgeInsets.fromLTRB(0,0,0,0),
                     child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment
                         .center,
                     children: <
                         Widget>[
-                          SizedBox(width: 5,),
+//                          SizedBox(width: 5,),
                       Icon(
                         Icons.add,
                         size: 22.0,
