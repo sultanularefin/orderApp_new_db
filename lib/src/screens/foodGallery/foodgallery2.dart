@@ -167,7 +167,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
     selectedFoodInOrder: [],
     selectedFoodListLength:0,
     orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-    paymentTypeIndex: 4,
+    paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
     ordersCustomer: null,
     totalPrice: 0,
   );
