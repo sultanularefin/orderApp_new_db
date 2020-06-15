@@ -64,9 +64,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  int _itemCount = 1;
   int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
   int _currentPaymentTypeIndex = 2;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-  bool showFullOrderType = true;
-  bool showCustomerInformationHeader = false;
-  bool showFullPaymentType = true;
+  bool showFullOrderType              = true;
+  bool showCustomerInformationHeader  = false;
+  bool showFullPaymentType            = true;
 
   bool showEditingCompleteCustomerAddressInformation   = false;
   bool showEditingCompleteCustomerHouseFlatIformation = false;
@@ -932,6 +932,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             showFullOrderType =
                             !showFullOrderType;
 
+//                            showFullOrderType
+                            /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                            showCustomerInformationHeader = false;
+                            showFullPaymentType = false;
+
 
                             showEditingCompleteCustomerAddressInformation=
                             !showEditingCompleteCustomerAddressInformation;
@@ -945,8 +950,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             showEditingCompleteCustomerReachoutIformation=
                             !showEditingCompleteCustomerReachoutIformation;
 
-                            showFullPaymentType =
-                            !showFullPaymentType;
+                            // BELOW LINES COMMENTED ON JUNE 15 2020
+//                            showFullPaymentType = !showFullPaymentType;
                           });
 
 
@@ -2436,14 +2441,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                  // zeroORMoreInputsEmpty
-                  // zeroORMoreInputsEmptyTakeAway
+                    // zeroORMoreInputsEmpty
+                    // zeroORMoreInputsEmptyTakeAway
                     child:
                     zeroORMoreInputsEmptyTakeAway
                       (unObsecuredInputandPayment.ordersCustomer) == true ?
 
-                        // animatedObscuredPaymentSelectContainerTakeAway
-                      // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
+                    // animatedObscuredPaymentSelectContainerTakeAway
+                    // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
                     // animatedUnObscuredPaymentUnSelectContainer
                     animatedObscuredPaymentSelectContainerTakeAway
                       (unObsecuredInputandPayment):
@@ -2500,7 +2505,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            showEditingCompleteCustomerPhoneIformation
 //                            showEditingCompleteCustomerReachoutIformation
 //                                showEditingCompleteCustomerAddressInformation BEGINS HERE.
-    /*
+                                /*
                                 Container(
                                   child: showEditingCompleteCustomerAddressInformation?
                                   Container():
@@ -2743,7 +2748,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                showEditingCompleteCustomerHouseFlatIformation BEGINS HERE
 
 
-                                  /*
+                                /*
                                 Container(
 
                                   child: showEditingCompleteCustomerHouseFlatIformation?Container():
@@ -3235,7 +3240,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   ShoppingCartBloc>(context);
 
                                               shoppingCartBloc.setETAForOrder(text);
-                                              setState(() => showFullOrderType = false);
+                                              setState(() {
+                                                showFullOrderType = false;
+
+                                                // showFullOrderType
+                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                showCustomerInformationHeader = false;
+                                                showFullPaymentType = false;
+                                              }
+
+
+                                              );
                                             },
 
 
@@ -3251,8 +3266,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 showEditingCompleteCustomerHouseFlatIformation =
                                                 true;
                                               } else {
-                                                setState(() =>
-                                                showFullOrderType = false);
+                                                setState(() {
+                                                  showFullOrderType = false;
+                                                  // showFullOrderType
+                                                  /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                  showCustomerInformationHeader = false;
+                                                  showFullPaymentType = false;
+                                                }
+
+                                                );
                                               }
                                             },
 
@@ -3704,19 +3726,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               shoppingCartBloc.setAddressForOrder(text);
                                               if((text.trim().length) >0){
                                                 print('at (text.trim().length) >0)');
-                                                setState(() =>
+                                                setState(()
 
                                                 {
 //                                          showEditingCompleteCustomerAddressInformation = true ,
-                                                  showFullOrderType = false,
+                                                showFullOrderType = false;
+//                                                showFullOrderType = false;
+                                                // showFullOrderType
+                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                  showCustomerInformationHeader = false;
+                                                  showFullPaymentType = false;
 
                                                 });
                                               }
                                               else {
-                                                setState(() =>
+                                                setState(()
 
                                                 {
-                                                  showFullOrderType = false,
+                                                  showFullOrderType = false;
+                                                  // showFullOrderType = false;
+                                                  // showFullOrderType
+                                                  /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                  showCustomerInformationHeader = false;
+                                                  showFullPaymentType = false;
 
 //                                                showCustomerInformationHeader = true,
 
@@ -3738,9 +3770,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                             onTap: () {
 
-                                              setState(() =>
+                                              setState(()
                                               {
-                                                showFullOrderType = false,
+                                                showFullOrderType = false;
+                                                // showFullOrderType = false;
+                                                // showFullOrderType
+                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                showCustomerInformationHeader = false;
+                                                showFullPaymentType = false;
 
                                               });
 
@@ -3934,14 +3971,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               shoppingCartBloc
                                                   .setHouseorFlatNumberForOrder(text);
 
-                                              setState(() => showFullOrderType = false);
+                                              setState((){
+                                                showFullOrderType = false;
+                                                // showFullOrderType = false;
+                                                // showFullOrderType
+                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                showCustomerInformationHeader = false;
+                                                showFullPaymentType = false;
+                                              }
+                                              );
                                               // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
                                             },
                                             onTap: () {
 
-                                              setState(() =>
+                                              setState(()
                                               {
-                                                showFullOrderType = false,
+                                                showFullOrderType = false;
+                                                // showFullOrderType = false;
+                                                // showFullOrderType
+                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                showCustomerInformationHeader = false;
+                                                showFullPaymentType = false;
 
                                               });
 
@@ -4132,7 +4182,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               shoppingCartBloc.setPhoneNumberForOrder(
                                                   text);
 
-                                              setState(() => showFullOrderType = false);
+                                              setState((){
+                                                showFullOrderType
+                                                = false;
+                                                // showFullOrderType = false;
+                                                // showFullOrderType
+                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                showCustomerInformationHeader = false;
+                                                showFullPaymentType = false;
+                                              }
+                                              );
                                               // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
                                             },
 
@@ -4157,9 +4216,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                             onTap: () {
 
-                                              setState(() =>
+                                              setState(()
                                               {
-                                                showFullOrderType = false,
+                                                showFullOrderType
+                                                = false;
+                                                // showFullOrderType = false;
+                                                // showFullOrderType
+                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                showCustomerInformationHeader = false;
+                                                showFullPaymentType = false;
+//                                                showFullOrderType = false,
 
                                               });
 
@@ -4323,7 +4389,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   ShoppingCartBloc>(context);
 
                                               shoppingCartBloc.setETAForOrder(text);
-                                              setState(() => showFullOrderType = false);
+                                              setState(() {
+                                                // showFullOrderType = false;
+                                                showFullOrderType
+                                                = false;
+                                                // showFullOrderType = false;
+                                                // showFullOrderType
+                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                showCustomerInformationHeader = false;
+                                                showFullPaymentType = false;
+                                              }
+
+                                              );
                                             },
 
 
@@ -4339,8 +4416,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 showEditingCompleteCustomerHouseFlatIformation =
                                                 true;
                                               } else {
-                                                setState(() =>
-                                                showFullOrderType = false);
+                                                setState((){
+
+                                                  // showFullOrderType = false;
+                                                  showFullOrderType
+                                                  = false;
+                                                  // showFullOrderType = false;
+                                                  // showFullOrderType
+                                                  /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                  showCustomerInformationHeader = false;
+                                                  showFullPaymentType = false;
+                                                }
+//                                                }
+//                                                showFullOrderType = false
+
+
+                                                );
                                               }
                                             },
 
@@ -4672,11 +4763,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                             shoppingCartBloc.setAddressForOrder(text);
 
-                            setState(() => showFullOrderType = false);
+                            setState(() {
+                              // showFullOrderType = false;
+                              showFullOrderType
+                              = false;
+                              // showFullOrderType = false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                              showCustomerInformationHeader = false;
+                              showFullPaymentType = false;
+                            }
+//                            showFullOrderType = false;
+                            );
                           },
 
                           onTap: () {
-                            setState(() => showFullOrderType = false);
+                            setState(() {
+                              // showFullOrderType = false;
+                              showFullOrderType
+                              = false;
+                              // showFullOrderType = false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                              showCustomerInformationHeader = false;
+                              showFullPaymentType = false;
+                            }
+
+                            );
                           },
                           /*
 
@@ -4817,12 +4930,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 .setHouseorFlatNumberForOrder(
                                 text);
 
-                            setState(() => showFullOrderType = false);
+                            setState((){
+
+                                // showFullOrderType = false;
+                                showFullOrderType
+                                = false;
+                                // showFullOrderType = false;
+                                // showFullOrderType
+                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                showCustomerInformationHeader = false;
+                                showFullPaymentType = false;
+
+
+
+//                              showFullOrderType = false;
+                            });
                           },
 
 
                           onTap: () {
-                            setState(() => showFullOrderType = false);
+                            setState(() {
+
+
+//                              showFullOrderType = false;
+
+                              // showFullOrderType = false;
+                              showFullOrderType
+                              = false;
+                              // showFullOrderType = false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                              showCustomerInformationHeader = false;
+                              showFullPaymentType = false;
+
+//                              showFullOrderType = false;
+                            });
                           },
                           /*
 
@@ -4967,12 +5109,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             shoppingCartBloc.setPhoneNumberForOrder(
                                 text);
 
-                            setState(() => showFullOrderType = false);
+                            setState(() {
+                              showFullOrderType = false;
+                              showCustomerInformationHeader = false;
+                              showFullPaymentType = false;
+                            }
+
+
+                            );
                           },
 
 
                           onTap: () {
-                            setState(() => showFullOrderType = false);
+                            setState(() {
+                              showFullOrderType = false;
+
+                              showCustomerInformationHeader = false;
+                              showFullPaymentType = false;
+                            }
+                            );
                           },
                           /*
 
@@ -5114,11 +5269,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 ShoppingCartBloc>(context);
 
                             shoppingCartBloc.setETAForOrder(text);
-                            setState(() => showFullOrderType = false);
+                            setState((){ showFullOrderType = false;
+
+                            showCustomerInformationHeader = false;
+                            showFullPaymentType = false;
+                            });
                           },
 
                           onTap: () {
-                            setState(() => showFullOrderType = false);
+                            setState(() {
+                              showFullOrderType = false;
+                              showCustomerInformationHeader = false;
+                              showFullPaymentType = false;
+                            }
+                            );
                           },
                           /*
 
@@ -5197,7 +5361,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               AnimatedSwitcher(
                 duration: Duration(milliseconds: 3000),
 //
-              // animatedWidgetShowSelectedPaymentType
+                // animatedWidgetShowSelectedPaymentType
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelected
                 // animatedWidgetShowSelectedPaymentType
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelected
@@ -5222,7 +5386,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             AnimatedSwitcher(
               duration: Duration(milliseconds: 1000),
 //
-            // animatedUnObscuredCancelPayButtonTakeAway
+              // animatedUnObscuredCancelPayButtonTakeAway
               // animatedObscuredCancelPayButtonTakeAway
               // animatedUnObscuredCancelPayButton
               // animatedObscuredCancelPayButton
@@ -6775,49 +6939,49 @@ class _ShoppingCartState extends State<ShoppingCart> {
   // PAYMENT RELATED WIDGETS ARE HERE  --- below:
 
 
-Widget animatedObscuredPaymentSelectContainerTakeAway(Order priceandselectedCardFunctionality){
+  Widget animatedObscuredPaymentSelectContainerTakeAway(Order priceandselectedCardFunctionality){
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
 //    ),
 
-  print(' < >  <   >    << TT       >>  \\    '
-      ' Widget name: '
-      'animated Obscured Card Select Container()');
-  return
-    Container(
-      height: displayWidth(context)/2.1,
-      child: AbsorbPointer(
-        child: Opacity(
-          opacity:0.2,
-          child: Container(
-              color: Colors.yellowAccent,
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+    print(' < >  <   >    << TT       >>  \\    '
+        ' Widget name: '
+        'animated Obscured Card Select Container()');
+    return
+      Container(
+        height: displayWidth(context)/2.1,
+        child: AbsorbPointer(
+          child: Opacity(
+            opacity:0.2,
+            child: Container(
+                color: Colors.yellowAccent,
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
 //              color:Colors.white,
 //                                            height: 200,
 //              height: displayHeight(context) /6,
-              width: displayWidth(context)
-                  - displayWidth(context) /
-                      5,
+                width: displayWidth(context)
+                    - displayWidth(context) /
+                        5,
 //                                            width: displayWidth(context) * 0.57,
-              /*
+                /*
                                                       child:  AbsorbPointer(
                                                         child: _buildShoppingCartInputFields()
                                                     ),
                                                     */
-              child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(priceandselectedCardFunctionality)
+                child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(priceandselectedCardFunctionality)
 //                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
 //                _buildShoppingCartPaymentMethodsUNObscuredUnSelected
 
-            //RRRRRR
+              //RRRRRR
 
 
+            ),
           ),
         ),
-      ),
-    );
-}
+      );
+  }
   Widget animatedObscuredPaymentSelectContainer(Order priceandselectedCardFunctionality){
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
@@ -6885,7 +7049,7 @@ Widget animatedObscuredPaymentSelectContainerTakeAway(Order priceandselectedCard
 //        &&
 //        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
 //        &&
-        (customerInfoFieldsCheck.etaTimeInMinutes != -1)
+    (customerInfoFieldsCheck.etaTimeInMinutes != -1)
 
 
     {
