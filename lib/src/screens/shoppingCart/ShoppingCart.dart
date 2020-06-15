@@ -4279,7 +4279,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(
                     getIconForName(orderTypeName),
                     color: Colors.red,
-                    size: displayWidth(context)/9,
+                    size: displayWidth(context)/11,
 
                   ),
 //
@@ -4385,7 +4385,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(
                     getIconForName(orderTypeName),
                     color: Colors.grey,
-                    size: displayWidth(context)/9,
+                    size: displayWidth(context)/11,
                   ),
 //                child: Icon(
 //                  Icons.beach_access,
