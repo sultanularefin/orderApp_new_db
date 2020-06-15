@@ -103,9 +103,11 @@ class ShoppingCartBloc implements Bloc {
 
 //    print('food Item name in Shopping Cart BlocK ${x.foodItemName}');
 
+    print('x.paymentTypeIndex: ${x.paymentTypeIndex}');
+    int paymentTypeIndex = x.paymentTypeIndex;
     initiateOrderTypeSingleSelectOptions();
 
-    initiatePaymentTypeSingleSelectOptions();
+    initiatePaymentTypeSingleSelectOptions(paymentTypeIndex);
 
 
 
@@ -196,11 +198,11 @@ class ShoppingCartBloc implements Bloc {
   }
   */
 
-  void initiatePaymentTypeSingleSelectOptions(){
+  void initiatePaymentTypeSingleSelectOptions(int selectedPayment){
     PaymentTypeSingleSelect Later = new PaymentTypeSingleSelect(
       borderColor: '0xff739DFA',
       index: 0,
-      isSelected: true,
+      isSelected: false,
       paymentTypeName: 'Later',
       iconDataString: 'FontAwesomeIcons.facebook',
 
@@ -245,6 +247,8 @@ class ShoppingCartBloc implements Bloc {
 
 
     paymentTypeSingleSelectArray.addAll([Later, Cash, Card  ]);
+
+    paymentTypeSingleSelectArray[selectedPayment].isSelected =true;
 
     _paymentType = paymentTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 

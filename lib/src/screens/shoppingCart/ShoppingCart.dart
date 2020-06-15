@@ -64,9 +64,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  int _itemCount = 1;
   int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
   int _currentPaymentTypeIndex = 2;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-  bool showFullOrderType              = true;
-  bool showCustomerInformationHeader  = false;
-  bool showFullPaymentType            = true;
+  bool showFullOrderType                  = true;
+  bool showUserInputOptionsLikeFirstTime  = true;
+  bool showCustomerInformationHeader      = false;
+  bool showFullPaymentType                = true;
 
   bool showEditingCompleteCustomerAddressInformation   = false;
   bool showEditingCompleteCustomerHouseFlatIformation = false;
@@ -454,6 +455,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+                                    // work 1
                                     Container(
 //                                        width: displayWidth(context) /1.8,
                                       width: displayWidth(context) / 1.1,
@@ -934,7 +936,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                            showFullOrderType
                             /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                            showCustomerInformationHeader = false;
+                            showCustomerInformationHeader = true;
+                            showUserInputOptionsLikeFirstTime =true;
                             showFullPaymentType = false;
 
 
@@ -2277,12 +2280,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-              child: (showFullOrderType == false)?
+              child: (showUserInputOptionsLikeFirstTime == false)?
 //      unobscureInputandRest(unObsecuredInputandPayment)
               // work 0
               animatedShowUserAddressDetailsInLineTakeAway(currentUser)
 
-              /* work 1*/
+              /* work 2*/
                   :Container(
                 width: displayWidth(context) / 1.1,
                 height: displayHeight(context) / 20,
@@ -3245,7 +3248,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                showCustomerInformationHeader = false;
+//                                                showCustomerInformationHeader = false;
+                                                showCustomerInformationHeader = true;
+                                                showUserInputOptionsLikeFirstTime =false;
                                                 showFullPaymentType = false;
                                               }
 
@@ -3270,7 +3275,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   showFullOrderType = false;
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                  showCustomerInformationHeader = false;
+//                                                  showCustomerInformationHeader = false;
+                                                  showCustomerInformationHeader = true;
+                                                  showUserInputOptionsLikeFirstTime = false;
                                                   showFullPaymentType = false;
                                                 }
 
@@ -3403,12 +3410,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-              child: (showFullOrderType == false)?
+              child: (showUserInputOptionsLikeFirstTime == false)?
 //      unobscureInputandRest(unObsecuredInputandPayment)
               // work 0
               animatedShowUserAddressDetailsInLine(currentUser)
 
-              /* work 1*/
+              /* work 3*/
                   :Container(
                 width: displayWidth(context) / 1.1,
                 height: displayHeight(context) / 20,
@@ -3734,7 +3741,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                showFullOrderType = false;
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                  showCustomerInformationHeader = false;
+//                                                  showCustomerInformationHeader = false;
+                                                  showCustomerInformationHeader = true;
+                                                  showUserInputOptionsLikeFirstTime = false;
                                                   showFullPaymentType = false;
 
                                                 });
@@ -3747,7 +3756,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   // showFullOrderType = false;
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                  showCustomerInformationHeader = false;
+//                                                  showCustomerInformationHeader = false;
+                                                  showCustomerInformationHeader = true;
+                                                  showUserInputOptionsLikeFirstTime = false;
                                                   showFullPaymentType = false;
 
 //                                                showCustomerInformationHeader = true,
@@ -3776,7 +3787,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // showFullOrderType = false;
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                showCustomerInformationHeader = false;
+//                                                showCustomerInformationHeader = false;
+                                                showCustomerInformationHeader = true;
+                                                showUserInputOptionsLikeFirstTime = false;
                                                 showFullPaymentType = false;
 
                                               });
@@ -3976,7 +3989,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // showFullOrderType = false;
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                showCustomerInformationHeader = false;
+                                                showCustomerInformationHeader = true;
+                                                showUserInputOptionsLikeFirstTime = false;
                                                 showFullPaymentType = false;
                                               }
                                               );
@@ -3990,7 +4004,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // showFullOrderType = false;
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                showCustomerInformationHeader = false;
+                                                showCustomerInformationHeader = true;
+                                                showUserInputOptionsLikeFirstTime = false;
                                                 showFullPaymentType = false;
 
                                               });
@@ -4188,7 +4203,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // showFullOrderType = false;
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                showCustomerInformationHeader = false;
+//                                                showCustomerInformationHeader = false;
+                                                showCustomerInformationHeader = true;
+                                                showUserInputOptionsLikeFirstTime = false;
                                                 showFullPaymentType = false;
                                               }
                                               );
@@ -4223,7 +4240,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // showFullOrderType = false;
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                showCustomerInformationHeader = false;
+//                                                showCustomerInformationHeader = false;
+                                                showCustomerInformationHeader = true;
+                                                showUserInputOptionsLikeFirstTime = false;
                                                 showFullPaymentType = false;
 //                                                showFullOrderType = false,
 
@@ -4396,7 +4415,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // showFullOrderType = false;
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                showCustomerInformationHeader = false;
+//                                                showCustomerInformationHeader = false;
+                                                showCustomerInformationHeader = true;
+                                                showUserInputOptionsLikeFirstTime = false;
                                                 showFullPaymentType = false;
                                               }
 
@@ -4424,7 +4445,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   // showFullOrderType = false;
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                  showCustomerInformationHeader = false;
+//                                                  showCustomerInformationHeader = false;
+                                                  showCustomerInformationHeader = true;
+                                                  showUserInputOptionsLikeFirstTime = false;
                                                   showFullPaymentType = false;
                                                 }
 //                                                }
@@ -4770,7 +4793,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               // showFullOrderType = false;
                               // showFullOrderType
                               /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                              showCustomerInformationHeader = false;
+//                              showCustomerInformationHeader = false;
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
                               showFullPaymentType = false;
                             }
 //                            showFullOrderType = false;
@@ -4785,7 +4810,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               // showFullOrderType = false;
                               // showFullOrderType
                               /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                              showCustomerInformationHeader = false;
+//                              showCustomerInformationHeader = false;
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
                               showFullPaymentType = false;
                             }
 
@@ -4938,7 +4965,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 // showFullOrderType = false;
                                 // showFullOrderType
                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                showCustomerInformationHeader = false;
+//                                showCustomerInformationHeader = false;
+                                showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
+
                                 showFullPaymentType = false;
 
 
@@ -4960,7 +4990,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               // showFullOrderType = false;
                               // showFullOrderType
                               /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                              showCustomerInformationHeader = false;
+//                              showCustomerInformationHeader = false;
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
                               showFullPaymentType = false;
 
 //                              showFullOrderType = false;
@@ -5111,7 +5143,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                             setState(() {
                               showFullOrderType = false;
-                              showCustomerInformationHeader = false;
+//                              showCustomerInformationHeader = false;
+                              showCustomerInformationHeader = true;
                               showFullPaymentType = false;
                             }
 
@@ -5124,7 +5157,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             setState(() {
                               showFullOrderType = false;
 
-                              showCustomerInformationHeader = false;
+//                              showCustomerInformationHeader = false;
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
                               showFullPaymentType = false;
                             }
                             );
@@ -5271,15 +5306,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             shoppingCartBloc.setETAForOrder(text);
                             setState((){ showFullOrderType = false;
 
-                            showCustomerInformationHeader = false;
+//                            showCustomerInformationHeader = false;
+                            showCustomerInformationHeader = true;
                             showFullPaymentType = false;
+                            showUserInputOptionsLikeFirstTime = false;
                             });
                           },
 
                           onTap: () {
                             setState(() {
                               showFullOrderType = false;
-                              showCustomerInformationHeader = false;
+//                              showCustomerInformationHeader = false;
+                              showUserInputOptionsLikeFirstTime = false;
+                              showCustomerInformationHeader = true;
                               showFullPaymentType = false;
                             }
                             );
