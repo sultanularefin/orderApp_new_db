@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 
-import 'package:foodgallery/src/BLoC/app_bloc.dart';
-import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
-import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+//import 'package:foodgallery/src/BLoC/app_bloc.dart';
+//import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+//import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';

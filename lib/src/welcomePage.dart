@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 // EXTERNAL PKGS ABOVE.
 
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+//import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 
 
@@ -70,7 +70,7 @@ class _WelcomePageState extends State<WelcomePage> {
   _WelcomePageState(this.fromWhicPage2);
 
 
-  List<NewIngredient> welcomPageIngredients;
+//  List<NewIngredient> welcomPageIngredients;
 
   final logger = Logger(
     printer: PrettyPrinter(),
@@ -191,7 +191,7 @@ class _WelcomePageState extends State<WelcomePage> {
     logger.e('at build of welcome page');
 
     FoodItemWithDocID emptyFoodItemWithDocID = new FoodItemWithDocID();
-    List<NewIngredient> emptyIngs = [];
+//    List<NewIngredient> emptyIngs = [];
 
 //    final appBloc = AppBloc(emptyFoodItemWithDocID,emptyIngs,,fromWhichPage:0);
 //    final AppBloc appBlockinWelcomePage = appBloc;
@@ -300,8 +300,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   FoodItemWithDocID emptyFoodItemWithDocID = new FoodItemWithDocID();
 
 
-                  List<NewIngredient> _allIngredientState = [];
-                  List<NewIngredient> emptyIngs = [];
+//                  List<NewIngredient> _allIngredientState = [];
+//                  List<NewIngredient> emptyIngs = [];
 
 
 //                  final bloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
