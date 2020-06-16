@@ -7083,7 +7083,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
   }
 
-  Widget animatedUnObscuredCancelPayButtonTakeAway(Order CancelPaySelect){
+  Widget animatedUnObscuredCancelPayButtonTakeAway(Order cancelPaySelect){
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -7094,6 +7094,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'animated Obscured Cancel Pay Button()');
     return
       Container(
+        margin:EdgeInsets.fromLTRB(0,9,0,9),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -7143,7 +7144,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedUnObscuredCancelPayButton(Order CancelPaySelect){
+  Widget animatedUnObscuredCancelPayButton(Order cancelPaySelect){
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -7154,6 +7155,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'animated Obscured Cancel Pay Button()');
     return
       Container(
+        margin:EdgeInsets.fromLTRB(0,9,0,9),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -7368,7 +7370,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     child: Icon(
                                       getIconForName(orderTypeName),
                                       color: Colors.black,
-                                      size: displayHeight(context) /30,
+                                      size: displayHeight(context) /34,
 
                                     ),
                                   ),
@@ -7430,7 +7432,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight
-                                  .normal,
+                                  .bold,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
@@ -7447,7 +7449,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight
-                                  .normal,
+                                  .bold,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
@@ -7811,7 +7813,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight
-                            .normal,
+                            .bold,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
@@ -7828,7 +7830,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight
-                            .normal,
+                            .bold,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
@@ -7990,7 +7992,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight
-                            .normal,
+                            .bold,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
@@ -8007,7 +8009,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight
-                            .normal,
+                            .bold,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
