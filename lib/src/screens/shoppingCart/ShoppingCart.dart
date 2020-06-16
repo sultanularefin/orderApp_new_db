@@ -2263,7 +2263,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2,
+      height: displayHeight(context)/2.3,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
