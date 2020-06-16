@@ -282,6 +282,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 );
               }
 
+
+              /*
               if (snapshot.hasData) {
                 print('snapshot.hasData is ${snapshot
                     .hasData} in Welcome page ');
@@ -337,6 +339,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   return LoginPage();
                 }
               }
+              */
               else {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
@@ -376,6 +379,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     );
                     break;
                   case ConnectionState.active:
+                    /*
                     return (snapshot.data is FirebaseUser) ?
 
                     BlocProvider<FoodGalleryBloc>(
@@ -406,6 +410,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     )*/ : LoginPage();
 //                  print('at ConnectionState.active of switch');
                     break;
+
 
                   case ConnectionState.done:
 //                  print('at ConnectionState.done of switch');
@@ -441,6 +446,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     )*/ : LoginPage();
 
                     break;
+                    */
                   default:
                     return (snapshot.data is FirebaseUser) ?
 

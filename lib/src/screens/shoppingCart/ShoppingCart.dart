@@ -339,7 +339,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
 
 
-                                    // work -1
+
 
 
 
@@ -930,13 +930,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              final locationBloc = BlocProvider.of<>(context);
                           //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
 
+                           // only one instance of this animatedWidgetShowSelectedOrderType() IS AVAILABLE AND IN below ().
+                          // animatedWidgetShowSelectedOrderType()
                           setState(() {
                             showFullOrderType =
                             !showFullOrderType;
 
 //                            showFullOrderType
                             /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                            showCustomerInformationHeader = true;
+                            showCustomerInformationHeader = false;
                             showUserInputOptionsLikeFirstTime =true;
                             showFullPaymentType = false;
 
@@ -2282,10 +2284,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                animatedUnObscuredTextInputContainer(),
               child: (showUserInputOptionsLikeFirstTime == false)?
 //      unobscureInputandRest(unObsecuredInputandPayment)
-              // work 0
+
               animatedShowUserAddressDetailsInLineTakeAway(currentUser)
 
-              /* work 2*/
+
                   :Container(
                 width: displayWidth(context) / 1.1,
                 height: displayHeight(context) / 20,
@@ -2407,7 +2409,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // AND THE PAYMENT OPTIONS IN A STACK
           // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
           // BEGINS HERE.
-          // work 01
+
           Container(
 //            color:Colors.white38,
             color:Colors.amber,
@@ -3412,10 +3414,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                animatedUnObscuredTextInputContainer(),
               child: (showUserInputOptionsLikeFirstTime == false)?
 //      unobscureInputandRest(unObsecuredInputandPayment)
-              // work 0
+
               animatedShowUserAddressDetailsInLine(currentUser)
 
-              /* work 3*/
+
                   :Container(
                 width: displayWidth(context) / 1.1,
                 height: displayHeight(context) / 20,
@@ -3537,7 +3539,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // AND THE PAYMENT OPTIONS IN A STACK
           // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
           // BEGINS HERE.
-          // work 01
+
           Container(
 //            color:Colors.white38,
             color:Colors.black87,
@@ -5800,7 +5802,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               logger.e('selectedOne.isSelected',selectedOne.isSelected);
 
 
-//              WORK 05
+
               String orderTypeName = selectedOne.paymentTypeName;
               String orderIconName = selectedOne.paymentIconName;
               String borderColor = selectedOne.borderColor;
@@ -6014,7 +6016,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               logger.e('selectedOne.isSelected',selectedOne.isSelected);
 
 
-//              WORK 05
+
               String orderTypeName = selectedOne.paymentTypeName;
               String orderIconName = selectedOne.paymentIconName;
               String borderColor = selectedOne.borderColor;
@@ -6856,7 +6858,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
             shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-
+              // setState(()=>) NEEDED IN THE UNSELECTED PART,
+            // WE NEED TO RENDER THEM AS THEY ARE IN THE FIRST
+            // TIME.
 //            setState(() {
 //              _currentOrderTypeIndex=index;
 //            });
@@ -6958,11 +6962,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
             shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+              // WORK -1
 
 
-//            setState(() {
-//              _currentOrderTypeIndex=index;
-//            });
+
+            setState(() {
+
+            //   _currentOrderTypeIndex=index;
+
+            showCustomerInformationHeader = true;
+            showUserInputOptionsLikeFirstTime =true;
+            showFullPaymentType = false;
+            }
+            );
 
 
           },
@@ -7225,7 +7237,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-//    work 02
+
     logger.i('_currentPaymentTypeIndex: at line # 4287 $_currentPaymentTypeIndex');
     String paymentTypeName = onePaymentType.paymentTypeName;
     String paymentIconName = onePaymentType.paymentTypeName;
