@@ -512,10 +512,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         _buildShoppingCartInputFieldsUNObscured(oneOrder)
                                             :oneOrder.orderTypeIndex == 2 ?
                                         _buildShoppingCartInputFieldsUNObscured (oneOrder):
-                                            //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
+                                        //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
                                         // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
 //                                        _buildShoppingCartInputFieldsUNObscuredTakeAway(oneOrder)
-                                          _buildShoppingCartInputFieldsUNObscuredDinningRoom(oneOrder),
+                                        _buildShoppingCartInputFieldsUNObscuredDinningRoom(oneOrder),
 //                                        animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
 
 
@@ -934,7 +934,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              final locationBloc = BlocProvider.of<>(context);
                           //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
 
-                           // only one instance of this animatedWidgetShowSelectedOrderType() IS AVAILABLE AND IN below ().
+                          // only one instance of this animatedWidgetShowSelectedOrderType() IS AVAILABLE AND IN below ().
                           // animatedWidgetShowSelectedOrderType()
                           setState(() {
                             showFullOrderType =
@@ -1186,6 +1186,222 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //  animatedShowUserAddressDetailsInLineTakeAway
+
+  Widget animatedShowUserAddressDetailsInLineDinningRoom(CustomerInformation currentUserForInline){
+
+    return Container(
+      width: displayWidth(context) / 1.1,
+      height: displayHeight(context) / 21 +  displayHeight(context) / 15,
+//      height: displayHeight(context) / 8,
+      // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
+      // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
+      color: Color(0xffffffff),
+      child: Column(
+          children: <Widget>[
+            Container(
+              height: displayHeight(context) / 21,
+//              color:Colors.purple,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+
+
+                  Container(
+                    width: displayWidth(context) /
+                        1.5,
+                    height: displayHeight(
+                        context) / 21,
+                    color: Color(0xffffffff),
+
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start
+                        ,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
+
+                          Container(
+                            margin: EdgeInsets
+                                .fromLTRB(
+                                20, 0, 10, 0),
+                            alignment: Alignment
+                                .center,
+                            child: Text(
+                                'when you want to receive it',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight
+                                      .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                  color: Color(
+                                      0xff000000),
+                                )
+                            ),
+                          ),
+
+                          CustomPaint(
+                            size: Size(0, 19),
+                            painter: LongPainterForanimatedWidgetShowSelectedOrderType(
+                                context),
+                          ),
+
+                        ]
+                    ),
+
+                  ),
+                  // THE ABOVE PART DEALS WITH LINES AND TEXT,
+                  // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
+
+
+
+
+
+                  //ZZZZ
+
+
+                ],
+              ),
+            ),
+            // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
+
+
+            // BELOW ROW HANDLES THE CUSTOMER INFORMATION ALONG WITH ICON AND POSSIBLY EDIT BUTTON.
+            //HHH
+
+            Container(
+              height: displayHeight(context) / 20,
+              color:Colors.amber,
+              child:    ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.all(8),
+                children: <Widget>[
+
+
+                  RaisedButton(
+                    color:Colors.redAccent,
+                    highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                    clipBehavior: Clip.hardEdge,
+                    splashColor: Color(0xffB47C00),
+                    highlightElevation: 12,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Color(0xff707070),
+                        style: BorderStyle.solid,
+//            width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: currentUserForInline.etaTimeInMinutes != -1?
+                    Container(
+                      color:Colors.red,
+//                       width:displayWidth(context) /10,
+                      width:displayWidth(context) /4,
+                      child:  Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .start
+                        ,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
+
+
+                          Icon(
+                              Icons.watch,
+                              size: 32.0,
+                              color: Colors.black
+                          ),
+
+
+
+                          // : Container for 2nd argument of ternary condition ends here.
+
+
+                          Container(
+                            padding: EdgeInsets
+                                .fromLTRB(
+                                5, 0, 5, 0),
+                            alignment: Alignment
+                                .center,
+                            child: Text(
+                                '${currentUserForInline.etaTimeInMinutes}',
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight
+                                      .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                  color: Color(
+                                      0xff000000),
+                                )
+                            ),
+                          ),
+
+
+
+
+                          //ZZZZ
+
+
+                        ],
+                      ),
+                    ):  Container(
+                      width:displayWidth(context) /4,
+//                       width:displayWidth(context) /10,
+                    )
+
+                    // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
+                    ,
+                    onPressed: ()=>{
+                      setState(() {
+
+                        showEditingCompleteCustomerReachoutIformation =
+                        !showEditingCompleteCustomerReachoutIformation;
+
+
+                        etaController.text = currentUserForInline.etaTimeInMinutes.toString();
+
+
+//                      showFullOrderType = !showFullOrderType;
+                      })
+                    },
+                  ),
+
+                  /*
+                   Container(
+                     height: 50,
+                     color: Colors.amber[500],
+                     child: const Center(child: Text('Entry B')),
+                   ),
+                   Container(
+                     height: 50,
+                     color: Colors.amber[100],
+                     child: const Center(child: Text('Entry C')),
+                   ),
+                   Container(
+                     height: 50,
+                     color: Colors.amber[100],
+                     child: const Center(child: Text('Entry C')),
+                   ),
+                   */
+                ],
+              ),
+
+            )
+
+
+          ]
+      ),
+    );
+//          }
+//        }
+//    );
+  }
   Widget animatedShowUserAddressDetailsInLineTakeAway(CustomerInformation currentUserForInline){
 
 //    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -2299,6 +2515,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   :
 
                   */
+
+          /*
+          Container(
+            child:
+
+            animatedShowUserAddressDetailsInLineDinningRoom(currentUser),
+          ),
+          */
+
           Container(
             width: displayWidth(context) / 1.1,
             height: displayHeight(context) / 20,
@@ -3423,8 +3648,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
 
 
-        // COMMENTING THIS FOR TAKE AWAY, WE DON'T NEED ANIMATION HERE.
-      /*
+          // COMMENTING THIS FOR TAKE AWAY, WE DON'T NEED ANIMATION HERE.
+          /*
           Container(
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
@@ -3440,71 +3665,80 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   :
 
                   */
-              Container(
-                width: displayWidth(context) / 1.1,
-                height: displayHeight(context) / 20,
-                color: Color(0xffffffff),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .start
-                  ,
-                  crossAxisAlignment: CrossAxisAlignment
-                      .center,
-                  children: <Widget>[
+
+          /*
+          Container(
+            child:
+
+            animatedShowUserAddressDetailsInLineTakeAway(currentUser),
+          ),
+
+          */
+          Container(
+            width: displayWidth(context) / 1.1,
+            height: displayHeight(context) / 20,
+            color: Color(0xffffffff),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment
+                  .start
+              ,
+              crossAxisAlignment: CrossAxisAlignment
+                  .center,
+              children: <Widget>[
 
 
-                    Container(
-                      width: displayWidth(context) /
-                          1.5,
-                      height: displayHeight(
-                          context) / 20,
-                      color: Color(0xffffffff),
+                Container(
+                  width: displayWidth(context) /
+                      1.5,
+                  height: displayHeight(
+                      context) / 20,
+                  color: Color(0xffffffff),
 
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .start
+                      ,
+                      crossAxisAlignment: CrossAxisAlignment
+                          .center,
+                      children: <Widget>[
+
+                        Container(
+                          margin: EdgeInsets
+                              .fromLTRB(
+                              20, 0, 10, 0),
+                          alignment: Alignment
                               .center,
-                          children: <Widget>[
-
-                            Container(
-                              margin: EdgeInsets
-                                  .fromLTRB(
-                                  20, 0, 10, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  'when you want to receive your Order',
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight
-                                        .normal,
+                          child: Text(
+                              'when you want to receive your Order',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight
+                                    .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
-                              ),
-                            ),
+                                color: Color(
+                                    0xff000000),
+                              )
+                          ),
+                        ),
 
-                            CustomPaint(
-                              size: Size(0, 19),
-                              painter: LongPainterForChooseOrderTypeAdress(
-                                  context),
-                            ),
-
-
+                        CustomPaint(
+                          size: Size(0, 19),
+                          painter: LongPainterForChooseOrderTypeAdress(
+                              context),
+                        ),
 
 
-                          ]
-                      ),
 
-                    ),
 
-                    // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                    /*
+                      ]
+                  ),
+
+                ),
+
+                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                /*
                                                         Container(
 //                                                  alignment: Alignment.center,
                                                           padding: EdgeInsets.fromLTRB(
@@ -3532,23 +3766,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                         */
 
 
-                    // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
 
 
-                    ////WWWEEEQQQ
+                ////WWWEEEQQQ
 
 
 
 
-                  ],
-                ),
-              ),
+              ],
+            ),
+          ),
 //      _buildShoppingCartInputFieldsUNObscured(oneOrder)
 //      _buildShoppingCartInputFieldsUNObscured (oneOrder):
 //      animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
 
 
-            // ),
+          // ),
           // ),
 
           // 1ST CONTAINER OF INPUTS ENDS HERE. HOLDS
@@ -4891,10 +5125,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                                 {
 //                                          showEditingCompleteCustomerAddressInformation = true ,
-                                                showFullOrderType = false;
+                                                  showFullOrderType = false;
 //                                                showFullOrderType = false;
-                                                // showFullOrderType
-                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                  // showFullOrderType
+                                                  /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                  showCustomerInformationHeader = false;
                                                   showCustomerInformationHeader = true;
                                                   showUserInputOptionsLikeFirstTime = false;
@@ -6154,17 +6388,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                             setState((){
 
-                                // showFullOrderType = false;
-                                showFullOrderType
-                                = false;
-                                // showFullOrderType = false;
-                                // showFullOrderType
-                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                              // showFullOrderType = false;
+                              showFullOrderType
+                              = false;
+                              // showFullOrderType = false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                showCustomerInformationHeader = false;
-                                showCustomerInformationHeader = true;
+                              showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
 
-                                showFullPaymentType  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showFullPaymentType  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 
 
@@ -8109,12 +8343,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
             shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-              // setState(()=>) NEEDED IN THE UNSELECTED PART,
+            // setState(()=>) NEEDED IN THE UNSELECTED PART,
             // WE NEED TO RENDER THEM AS THEY ARE IN THE FIRST
             // TIME.
+            // BUT IF THE ORDER TYPE IS DIFFERENT IN ORDER TO SHOW THEM AS THEY ARE IN FIRST TIME WE NEED
+            // CHANGE THIS ALIKES : showEditingCompleteCustomerReachoutIformation =
+            //                        !showEditingCompleteCustomerReachoutIformation;
 //            setState(() {
 //              _currentOrderTypeIndex=index;
 //            });
+
+          // WORK -2
 
 
           },
@@ -8213,18 +8452,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
             shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-              // WORK -1
+            // WORK -1
 
 
 
 
             setState(() {
 
-            //   _currentOrderTypeIndex=index;
+              //   _currentOrderTypeIndex=index;
 
-            showCustomerInformationHeader = true;
-            showUserInputOptionsLikeFirstTime =true;
-            // WE ARE oneSingleDeliveryType;
+              showCustomerInformationHeader = true;
+              showUserInputOptionsLikeFirstTime =true;
+              // MAKEING THEM AS THEY ARE IN THE FIRST TIME:
+
+              showEditingCompleteCustomerAddressInformation   = false;
+              showEditingCompleteCustomerHouseFlatIformation = false;
+              showEditingCompleteCustomerPhoneIformation     = false;
+              showEditingCompleteCustomerReachoutIformation  = false;
+
+              
+              // WE ARE oneSingleDeliveryType;
 //            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
             }
             );
