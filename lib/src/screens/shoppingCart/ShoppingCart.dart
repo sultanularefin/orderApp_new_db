@@ -485,7 +485,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
+                                    // work 2
                                     Container(
                                       color:Colors.yellowAccent,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -4769,7 +4769,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
-  Widget unobscureInputandRest(Order unObsecuredInputandPayment){
+  // unobscureInputandRest(
+  // unobscureInputandRestDeliveryPhone
+  Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment){
 
 
     CustomerInformation currentUser = unObsecuredInputandPayment.ordersCustomer;
@@ -4946,7 +4948,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) == 3?
 
-                  -90:-10,
+                  -90:10,
                   // from top to top distance offset related to Starting (top ) of
                   // orance Container.
 //                  right:0,
@@ -6049,7 +6051,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        (showEditingCompleteCustomerReachoutIformation == true)){
 
     return
-      unobscureInputandRest(unObsecuredInputandPayment);
+      unobscureInputandRestDeliveryPhone(unObsecuredInputandPayment);
 
 
     /*
