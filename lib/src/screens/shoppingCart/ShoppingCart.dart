@@ -6970,9 +6970,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
               children: <Widget>[
                 Container(
                   child: OutlineButton(
-                    onPressed: (){ print('Cancel Pressed');
+                    onPressed: (){ print('Cancel Pressed obscured');
 
-                    return Navigator.pop(context,true);
+//                    return Navigator.pop(context,true);
                     },
                     child: Text('Cancel',style: TextStyle(color: Colors.red,fontSize: 30),),
                     shape: RoundedRectangleBorder(
@@ -6992,15 +6992,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: OutlineButton(
                     onPressed: () async {
 
-                      final shoppingCartBloc = BlocProvider.of<
-                          ShoppingCartBloc>(context);
-
-
-                      String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
-                      print('on Pressed of Pay DocID=> $docId');
-
-                      return Navigator.pop(context,false);
-
+                     print('obscure pay');
 
                     },
                     child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
@@ -7043,9 +7035,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
               children: <Widget>[
                 Container(
                   child: OutlineButton(
-                    onPressed: (){ print('Cancel Pressed');
+                    onPressed: (){ print('Cancel Pressed obsured ...');
 
-                    return Navigator.pop(context,true);
+//                    return Navigator.pop(context,true);
                     },
                     child: Text('Cancel',style: TextStyle(color: Colors.red,fontSize: 30),),
                     shape: RoundedRectangleBorder(
@@ -7065,8 +7057,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: OutlineButton(
                     onPressed: (){
 
-                      print('on Pressed of Pay');
-                      return Navigator.pop(context,false);
+                      print('on Pressed of Pay obscured');
+//                      return Navigator.pop(context,false);
 
 
                     },
@@ -7109,7 +7101,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               child: OutlineButton(
                 onPressed: (){
-                  print('on Pressed of Cancel');
+
+                  final shoppingCartBloc = BlocProvider.of<
+                      ShoppingCartBloc>(context);
+
+
+                  shoppingCartBloc.cancelButtonPressed();
+
+
+                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
                   return Navigator.pop(context,true);
                 },
                 child: Text('Cancel',style: TextStyle(color: Colors.red,fontSize: 30),),
@@ -7128,9 +7128,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
             SizedBox(width: displayWidth(context)/12,),
             Container(
               child: OutlineButton(
-                onPressed: (){
-                  print('on Pressed of Pay');
+                onPressed: () async{
+//                  print('on Pressed of Pay');
+//                  return Navigator.pop(context,false);
+
+                  final shoppingCartBloc = BlocProvider.of<
+                      ShoppingCartBloc>(context);
+
+
+                  String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAway'
+                      ' DocID=> $docId');
+
                   return Navigator.pop(context,false);
+
                 },
                 child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
                 shape: RoundedRectangleBorder(
@@ -7172,7 +7183,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               child: OutlineButton(
                 onPressed: (){
-                  print('on Pressed of Cancel');
+                  print('on Pressed of Cancel animatedUnObscuredCancelPayButtonDeliveryPhone');
+                  final shoppingCartBloc = BlocProvider.of<
+                      ShoppingCartBloc>(context);
+                  shoppingCartBloc.cancelButtonPressed();
                   return Navigator.pop(context,true);
                 },
                 child: Text('Cancel',style: TextStyle(color: Colors.red,fontSize: 30),),
@@ -7191,9 +7205,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
             SizedBox(width: displayWidth(context)/12,),
             Container(
               child: OutlineButton(
-                onPressed: (){
-                  print('on Pressed of Pay');
+                onPressed: () async{
+                  final shoppingCartBloc = BlocProvider.of<
+                      ShoppingCartBloc>(context);
+
+
+                  String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAway'
+                      ' DocID=> $docId');
+
                   return Navigator.pop(context,false);
+
+//                  print('on Pressed of Pay');
+//                  return Navigator.pop(context,false);
                 },
                 child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
                 shape: RoundedRectangleBorder(
