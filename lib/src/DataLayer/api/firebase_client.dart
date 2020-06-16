@@ -6,6 +6,7 @@
 import 'dart:async';
 import 'dart:convert' show json;
 
+import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -65,6 +66,58 @@ class FirebaseClient {
 //        .getDocuments();
 
     return snapshot;
+  }
+
+  Future<String> insertOrder(Order currentOrderToFirebase,
+      String orderBy, String paidType)async {
+    print('currentOrderToFirebaseL: $currentOrderToFirebase');
+
+
+    String orderDocId='';
+    print('saving order data using a web service');
+
+    DocumentReference document = await Firestore.instance.collection(
+        "restaurants").
+    document('USWc8IgrHKdjeDe9Ft4j').
+    collection('orderList').add(<String, dynamic>{
+
+      'address': {
+        'apartNo': currentOrderToFirebase.ordersCustomer.flatOrHouseNumber,
+        'geo': [0, 0],
+        'state': currentOrderToFirebase.ordersCustomer.address,
+
+      },
+      'contact': currentOrderToFirebase.ordersCustomer.phoneNumber,
+      'driver': 'mhmd',
+      'end': FieldValue.serverTimestamp(),
+      'items': currentOrderToFirebase.selectedFoodInOrder,
+      'orderby': orderBy,
+      'p_status': paidType != 'Later' ? 'Paid' : 'Unpaid',
+      'p_type': paidType,
+      'price': currentOrderToFirebase.totalPrice,
+      'start': FieldValue.serverTimestamp(),
+      'status': "ready",
+      'table_no': '33',
+      'type': orderBy == 'Phone' ? 'Phone' : orderBy == 'Delivery'
+          ? 'Delivery'
+          : orderBy == 'TakeAway' ? 'TakeAway' : 'DinningRoom',
+
+
+    }).whenComplete(() => print("called when future completes"))
+        .then((document) {
+      print('Added document with ID: ${document.documentID}');
+      orderDocId= document.documentID;
+//      return document;
+//                            _handleSignIn();
+    }).catchError((onError) {
+      print('K   K    K   at onError for Order data push');
+      orderDocId= '';
+//      return '';
+    });
+
+    return orderDocId;
+
+
   }
 
   Future<QuerySnapshot> fetchCategoryItems() async {

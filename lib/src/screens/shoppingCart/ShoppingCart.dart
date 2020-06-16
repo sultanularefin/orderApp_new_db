@@ -6950,7 +6950,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedObscuredCancelPayButtonTakeAway(Order CancelPaySelect){
+  Widget animatedObscuredCancelPayButtonTakeAway(Order cancelPaySelect){
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -6990,9 +6990,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 SizedBox(width: displayWidth(context)/12,),
                 Container(
                   child: OutlineButton(
-                    onPressed: (){
+                    onPressed: () async {
 
-                      print('on Pressed of Pay');
+                      final shoppingCartBloc = BlocProvider.of<
+                          ShoppingCartBloc>(context);
+
+
+                      String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+                      print('on Pressed of Pay DocID=> $docId');
+
                       return Navigator.pop(context,false);
 
 
