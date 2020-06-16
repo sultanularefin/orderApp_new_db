@@ -946,18 +946,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             showUserInputOptionsLikeFirstTime =true;
                             showFullPaymentType = true; //DEFAULT.
 
+                            // JUST LIKE THE FIRST TIME.
+                            showEditingCompleteCustomerAddressInformation   = false;
+                            showEditingCompleteCustomerHouseFlatIformation = false;
+                            showEditingCompleteCustomerPhoneIformation     = false;
+                            showEditingCompleteCustomerReachoutIformation  = false;
 
-                            showEditingCompleteCustomerAddressInformation=
-                            !showEditingCompleteCustomerAddressInformation;
+                            //    showEditingCompleteCustomerAddressInformation=
+                            //    !showEditingCompleteCustomerAddressInformation;
 
-                            showEditingCompleteCustomerHouseFlatIformation=
-                            !showEditingCompleteCustomerHouseFlatIformation;
+                            //    showEditingCompleteCustomerHouseFlatIformation=
+                            //    !showEditingCompleteCustomerHouseFlatIformation;
 
-                            showEditingCompleteCustomerPhoneIformation=
-                            !showEditingCompleteCustomerPhoneIformation;
+                            //    showEditingCompleteCustomerPhoneIformation=
+                            //    !showEditingCompleteCustomerPhoneIformation;
 
-                            showEditingCompleteCustomerReachoutIformation=
-                            !showEditingCompleteCustomerReachoutIformation;
+                            //    showEditingCompleteCustomerReachoutIformation=
+                            //    !showEditingCompleteCustomerReachoutIformation;
 
                             // BELOW LINES COMMENTED ON JUNE 15 2020
 //                            showFullPaymentType = !showFullPaymentType;
