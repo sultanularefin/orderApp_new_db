@@ -7101,15 +7101,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               child: OutlineButton(
                 onPressed: (){
-
+                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
-
-
                   shoppingCartBloc.cancelButtonPressed();
-
-
-                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
                   return Navigator.pop(context,true);
                 },
                 child: Text('Cancel',style: TextStyle(color: Colors.red,fontSize: 30),),

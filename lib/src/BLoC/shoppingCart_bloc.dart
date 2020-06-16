@@ -31,7 +31,7 @@ class ShoppingCartBloc implements Bloc {
 //  List<Order> _curretnOrder = [];
 
   Order _curretnOrder ;
-  List<OrderTypeSingleSelect> _orderType;
+  List<OrderTypeSingleSelect>   _orderType;
   List<PaymentTypeSingleSelect> _paymentType;
   List<SelectedFood> _expandedSelectedFood =[];
 //  CustomerInformation _oneCustomerInfo;
@@ -314,20 +314,35 @@ class ShoppingCartBloc implements Bloc {
     logger.e('Order received, Firestore id: $documentID');
 
     _curretnOrder=null;
+    _expandedSelectedFood =[];
+    _orderType =[];
+    _paymentType =[];
+
 
     _orderController.sink.add(_curretnOrder);
+    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
+    _orderTypeController.sink.add(_orderType);
+    _paymentTypeController.sink.add(_paymentType);
 
       return documentID;
 
   }
 
-  void cancelButtonPressed() async{
+  void cancelButtonPressed(){
+
 
     _curretnOrder=null;
+    _expandedSelectedFood =[];
+    _orderType =[];
+    _paymentType =[];
+
 
     _orderController.sink.add(_curretnOrder);
+    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
+    _orderTypeController.sink.add(_orderType);
+    _paymentTypeController.sink.add(_paymentType);
 
-    
+
   }
 
 
