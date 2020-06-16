@@ -443,7 +443,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           0, 0, 0, 0),
 //                                                      padding::::
                                       color: Colors.amberAccent,
-                                      height: displayHeight(context) / 5.2,
+//                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
+                                      height: displayHeight(context) / 4.8,
                                       width: displayWidth(context)
                                           - displayWidth(context) /
                                               5, /* this is about the width of yellow side menu */
