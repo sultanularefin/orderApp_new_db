@@ -8353,6 +8353,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              _currentOrderTypeIndex=index;
 //            });
 
+            showEditingCompleteCustomerAddressInformation   = false;
+            showEditingCompleteCustomerHouseFlatIformation = false;
+            showEditingCompleteCustomerPhoneIformation     = false;
+            showEditingCompleteCustomerReachoutIformation  = false;
+
           // WORK -2
 
 
@@ -8470,7 +8475,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               showEditingCompleteCustomerPhoneIformation     = false;
               showEditingCompleteCustomerReachoutIformation  = false;
 
-              
+
               // WE ARE oneSingleDeliveryType;
 //            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
             }
