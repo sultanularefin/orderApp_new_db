@@ -83,7 +83,14 @@ class ShoppingCartBloc implements Bloc {
       Order x
       ) {
 
-    logger.e('enterred into ShoppingCartBloc ');
+    /*
+    if(x.page==1){
+      cancelButtonPressed();
+
+    }
+    else {
+  */
+      logger.e('enterred into ShoppingCartBloc ');
 
 //    Order x = new Order(
 //      foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
@@ -99,57 +106,53 @@ class ShoppingCartBloc implements Bloc {
 //    getAllIngredients();
 
 //    List<NewIngredient> allIngsScoped= _allIngItems;
-    print("at the begin of Constructor [ShoppingCartBloc]");
+      print("at the begin of Constructor [ShoppingCartBloc]");
 
 //    print('food Item name in Shopping Cart BlocK ${x.foodItemName}');
 
-    print('x.paymentTypeIndex: ${x.paymentTypeIndex}');
-    int paymentTypeIndex = x.paymentTypeIndex;
-    initiateOrderTypeSingleSelectOptions();
+      print('x.paymentTypeIndex: ${x.paymentTypeIndex}');
+      int paymentTypeIndex = x.paymentTypeIndex;
+      initiateOrderTypeSingleSelectOptions();
 
-    initiatePaymentTypeSingleSelectOptions(paymentTypeIndex);
+      initiatePaymentTypeSingleSelectOptions(paymentTypeIndex);
 
 
+      List<SelectedFood> allOrderedFoods = x.selectedFoodInOrder;
 
-    List<SelectedFood> allOrderedFoods = x.selectedFoodInOrder;
-
-    List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>() ;
+      List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>();
 
 //      List<SelectedFood> test = makeMoreFoodByQuantity(allOrderedFoods.first);
 
 
-    allOrderedFoods.forEach((oneFood) {
-      print('oneFood details: ===> ===> ');
-      print('oneFood: ${oneFood.foodItemName}');
-      print('oneFood: ${oneFood.quantity}');
+      allOrderedFoods.forEach((oneFood) {
+        print('oneFood details: ===> ===> ');
+        print('oneFood: ${oneFood.foodItemName}');
+        print('oneFood: ${oneFood.quantity}');
 //         print('oneFood: ${oneFood.foodItemName}');
-      List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
+        List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
 
-      print('MOMENT OF TRUTH: ');
-      print(':::: ::: :: $test');
-      selectedFoodforDisplay.addAll(test);
-
-    });
+        print('MOMENT OF TRUTH: ');
+        print(':::: ::: :: $test');
+        selectedFoodforDisplay.addAll(test);
+      });
 
 
 //      selectedFoodforDisplay.addAll(test);
 
-    logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
-    print('item count : ${selectedFoodforDisplay.length}');
+      logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
+      print('item count : ${selectedFoodforDisplay.length}');
 
-    print('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
+      print('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
 
-    _expandedSelectedFood = selectedFoodforDisplay;
-    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
-
-
-
-    //    initiateCustomerInformation();
-
-    _curretnOrder=x;
-    _orderController.sink.add(x);
+      _expandedSelectedFood = selectedFoodforDisplay;
+      _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
 
 
+      //    initiateCustomerInformation();
+
+      _curretnOrder = x;
+      _orderController.sink.add(x);
+//    }
 
   }
 // CONSTRUCTOR ENDS HERE.

@@ -243,10 +243,11 @@ class LongPainterForChooseOrderType extends CustomPainter {
 
 
 
-class LongHeaderPainterAfter extends CustomPainter {
+//LongHeaderPainterAfterShoppingCartPage
+class LongHeaderPainterAfterShoppingCartPage extends CustomPainter {
 
   final BuildContext context;
-  LongHeaderPainterAfter(this.context);
+  LongHeaderPainterAfterShoppingCartPage(this.context);
   @override
   void paint(Canvas canvas, Size size){
 

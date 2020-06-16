@@ -39,6 +39,7 @@ class Order {
   int paymentTypeIndex;
   CustomerInformation ordersCustomer;
   double totalPrice;
+  int page; // page =(0,1) = (0: from FoodGallery Page, 1: from Shopping Cart Page);
 
   // SINCE WE DON'T NEED TO
   // CALCULATE THIS PRICE IN SHOPPING CART PAGE BUT DO IT IN FOOD GALLERY PAGE,
@@ -61,6 +62,7 @@ class Order {
         this.paymentTypeIndex,
         this.ordersCustomer,
         this.totalPrice,
+        this.page,
 
 
         // this.foodItemOrderID,

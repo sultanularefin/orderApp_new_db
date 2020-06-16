@@ -170,6 +170,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
     paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
     ordersCustomer: null,
     totalPrice: 0,
+    page:0,
   );
   double totalPriceState = 0;
 
