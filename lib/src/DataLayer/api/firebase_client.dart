@@ -90,7 +90,9 @@ class FirebaseClient {
       'contact': currentOrderToFirebase.ordersCustomer.phoneNumber,
       'driver': 'mhmd',
       'end': FieldValue.serverTimestamp(),
-      'items': currentOrderToFirebase.selectedFoodInOrder,
+      'items': [],
+
+//      'items': currentOrderToFirebase.selectedFoodInOrder,
       'orderby': orderBy,
       'p_status': paidType != 'Later' ? 'Paid' : 'Unpaid',
       'p_type': paidType,

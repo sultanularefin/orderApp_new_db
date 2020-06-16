@@ -38,7 +38,9 @@ final Firestore firestore = Firestore();
 class ShoppingCart extends StatefulWidget {
 //  AdminFirebase({this.firestore});
 
+
   final Widget child;
+//  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 //  final FoodItem oneFoodItemData;
 
 //  FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
@@ -61,6 +63,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 //  String _currentSize;
 //  int _itemCount = 1;
@@ -113,6 +117,414 @@ class _ShoppingCartState extends State<ShoppingCart> {
   */
 
 
+
+
+  @override
+  Widget build(BuildContext context) {
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    return GestureDetector(
+        onTap: () {
+          print('s');
+//                      Navigator.pop(context);
+          FocusScopeNode currentFocus = FocusScope.of(
+              context);
+
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+//                  Navigator.pop(context);
+
+          }
+        },
+        child:
+        Scaffold(
+          key: _scaffoldKey,
+//          backgroundColor: Colors.purpleAccent,
+
+//      resizeToAvoidBottomPadding: false ,
+          // appBar: AppBar(title: Text('Food Gallery')),
+          body:
+          SafeArea(
+            child: SingleChildScrollView(
+              child:
+
+              StreamBuilder<Order>(
+
+
+                  stream: shoppingCartBloc.getCurrentOrderStream,
+                  initialData: shoppingCartBloc.getCurrentOrder,
+
+                  builder: (context, snapshot) {
+//            if (snapshot.hasData) {
+
+//              print('snapshot.hasData in main build(BuildContext context) : ${snapshot.hasData}');
+                    // ---
+
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                      case ConnectionState.none:
+                        return Container(
+                          margin: EdgeInsets.fromLTRB(
+                              0, displayHeight(context) / 2, 0, 0),
+                          child: Center(
+                            child: Column(
+                              children: <Widget>[
+
+                                Center(
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.lightGreenAccent)
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      child: new CircularProgressIndicator(
+                                        backgroundColor: Colors.yellow,)
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.redAccent)
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                        );
+                        break;
+
+                      case ConnectionState.active:
+                      default:
+                        if(snapshot.data ==null) {
+                          return Container(
+                            margin: EdgeInsets.fromLTRB(
+                                0, displayHeight(context) / 2, 0, 0),
+                            child: Center(
+                              child: Column(
+                                children: <Widget>[
+
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                            backgroundColor: Colors.lightGreenAccent)
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.yellow,)
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                            backgroundColor: Colors.redAccent)
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                          );
+                        }
+                        else {
+                          Order oneOrder = snapshot.data;
+
+
+//              int x = 5;
+
+                          CustomerInformation x = oneOrder.ordersCustomer;
+
+//              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
+
+
+//                  Scaffold(
+//                    key: _scaffoldKey,
+
+
+//                      backgroundColor: Colors.white,
+                          // this is the main reason of transparency at next screen.
+                          // I am ignoring rest implementation but what i have achieved is you can see.
+
+
+                          return Container(
+//                          height: displayHeight(context) -
+//                              MediaQuery
+//                                  .of(context)
+//                                  .padding
+//                                  .top -
+//                              kToolbarHeight,
+//                          backgroundColor: Colors.white.withOpacity(0.05),
+//                          backgroundColor: Colors.white.withOpacity(0.05),
+                            height: displayHeight(context),
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+
+
+//                              alignment: Alignment.bottomCenter,
+                                  height: displayHeight(context) / 1.12,
+                                  //width:displayWidth(context) / 1.5, /* 3.8*/
+                                  width: displayWidth(context)
+                                      - displayWidth(context) /
+                                          5 /* this is about the width of yellow side menu */
+                                  ,
+//                  color:Colors.lightGreenAccent,
+                                  margin: EdgeInsets.fromLTRB(
+                                      12, displayHeight(context) / 16, 10, 0),
+
+
+                                  child: Neumorphic(
+                                    // State of Neumorphic (may be convex, flat & emboss)
+
+                                    boxShape: NeumorphicBoxShape
+                                        .roundRect(
+                                      BorderRadius.all(
+                                          Radius.circular(15)),
+
+                                    ),
+                                    curve: Neumorphic.DEFAULT_CURVE,
+                                    style: NeumorphicStyle(
+                                        shape: NeumorphicShape
+                                            .concave,
+                                        depth: 8,
+                                        lightSource: LightSource
+                                            .topLeft,
+                                        color: Colors.white
+                                    ),
+
+
+                                    // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
+
+
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .start,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                      children: <Widget>[
+
+//                                          /WWW??
+
+
+                                        // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
+
+
+                                        Container(
+                                          width: displayWidth(context) / 1.1,
+                                          height: displayHeight(context) / 20,
+                                          color: Color(0xffffffff),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .start
+                                            ,
+                                            crossAxisAlignment: CrossAxisAlignment
+                                                .center,
+                                            children: <Widget>[
+
+
+                                              Container(
+                                                width: displayWidth(context) /
+                                                    1.5,
+                                                height: displayHeight(
+                                                    context) / 20,
+                                                color: Color(0xffffffff),
+
+                                                child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment
+                                                        .start
+                                                    ,
+                                                    crossAxisAlignment: CrossAxisAlignment
+                                                        .center,
+                                                    children: <Widget>[
+
+                                                      Container(
+                                                        margin: EdgeInsets
+                                                            .fromLTRB(
+                                                            20, 0, 10, 0),
+                                                        alignment: Alignment
+                                                            .center,
+                                                        child: Text(
+                                                            'Shopping Cart',
+                                                            style: TextStyle(
+                                                              fontSize: 30,
+                                                              fontWeight: FontWeight
+                                                                  .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                                              color: Color(
+                                                                  0xff000000),
+                                                            )
+                                                        ),
+                                                      ),
+
+                                                      CustomPaint(
+                                                        size: Size(0, 19),
+                                                        painter: LongHeaderPainterAfterShoppingCartPage(
+                                                            context),
+                                                      ),
+
+
+                                                    ]
+                                                ),
+
+                                              ),
+
+                                              // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                                              Container(
+//                                                  alignment: Alignment.center,
+                                                padding: EdgeInsets.fromLTRB(
+                                                    0, 2, 0, 0),
+                                                width: displayWidth(context) /
+                                                    16,
+//                                                height: displayHeight(context)/20,
+                                                color: Color(0xffffffff),
+//                                                    child:Row(
+//                                                      mainAxisAlignment: MainAxisAlignment.end,
+//                                                      children: <Widget>[
+                                                child: Container(
+                                                  padding: EdgeInsets
+                                                      .fromLTRB(0, 0, 200, 0),
+                                                  child: Icon(
+
+                                                    Icons.add_shopping_cart,
+                                                    size: 30,
+                                                    color: Color(0xff54463E),
+                                                  ),
+                                                ),
+
+
+                                              ),
+
+
+                                              // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+
+
+                                            ],
+                                          ),
+                                        ),
+
+                                        Container(
+                                          padding: EdgeInsets.fromLTRB(
+                                              0, 0, 0, 0),
+//                                                      padding::::
+                                          color: Colors.amberAccent,
+//                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
+                                          height: displayHeight(context) / 4.8,
+                                          width: displayWidth(context)
+                                              - displayWidth(context) /
+                                                  5, /* this is about the width of yellow side menu */
+
+//                                            width: displayWidth(context) * 0.57,
+                                          child: _buildQuantityTimesofFood(
+                                            /*oneOrder*/),
+                                        ),
+
+
+                                        // work 1
+                                        Container(
+//                                        width: displayWidth(context) /1.8,
+                                          width: displayWidth(context) / 1.1,
+                                          child:
+                                          AnimatedSwitcher(
+                                            duration: Duration(
+                                                milliseconds: 1000),
+//
+                                            child: showFullOrderType
+                                                ?
+                                            animatedWidgetShowFullOrderType()
+                                                : /*1 */
+                                            animatedWidgetShowSelectedOrderType(), /* 2*/
+                                            // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
+                                            // 2 => height: displayHeight(context) / 9,
+
+                                          ),
+
+
+                                        ),
+
+
+                                        /*
+                                            * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
+
+
+                                        // work 2
+                                        Container(
+                                          color: Colors.yellowAccent,
+//                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+//                                        width: displayWidth(context) /1.8,
+                                          width: displayWidth(context) / 1.1,
+//                                            height: displayHeight(context)/2.5,
+                                          // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
+                                          // A CERTAIN PORTION OF OF THE CONTAINER
+                                          // WITH YELLOW ACCENT BG COLOR IS
+                                          // THERE WHEN THE CHILD WIDGETS ARE NOT
+                                          // BIG ENOGH LIKE , AS BIG AS displayHeight(context)/2.5,
+
+
+                                          //Text('AnimatedSwitcher('),
+                                          child: AnimatedSwitcher(
+                                            duration: Duration(milliseconds: 300),
+//
+//                                                child: showFullOrderType? animatedObscuredTextInputContainer():
+//                                                animatedUnObscuredTextInputContainer(),
+                                            child: oneOrder.orderTypeIndex == 0 ?
+                                            _buildShoppingCartInputFieldsUNObscuredTakeAway(
+                                                oneOrder)
+                                                : oneOrder.orderTypeIndex == 1 ?
+                                            _buildShoppingCartInputFieldsUNObscured(
+                                                oneOrder)
+                                                : oneOrder.orderTypeIndex == 2 ?
+                                            _buildShoppingCartInputFieldsUNObscured(
+                                                oneOrder) :
+                                            //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
+                                            // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
+//                                        _buildShoppingCartInputFieldsUNObscuredTakeAway(oneOrder)
+                                            _buildShoppingCartInputFieldsUNObscuredDinningRoom(
+                                                oneOrder),
+//                                        animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
+
+
+                                          ),
+
+
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                          );
+                        }
+                    }
+                  }
+              ),
+            ),),)
+    );
+    //return Text('${x.toString()}');
+
+//  }
+//    }
+//}
+//
+////---
+//);
+////    }
+  }
+
+
   double tryCast<num>(dynamic x, {num fallback }) {
 //    print(" at tryCast");
 //    print('x: $x');
@@ -136,445 +548,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     else
       return 0.0;
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-//    print('totalCartPrice -----------> : $totalCartPrice');
-//    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
-
-//    logger.w('defaultIngredients: ',bloc.defaultIngredients);
-
-//    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
-//    List<NewIngredient> unSelectedIngredients = foodItemDetailsbloc
-//        .unSelectedIngredients;
-
-
-//    logger.w('unSelectedIngredients in ShoppingCart line #116 : ',
-//        unSelectedIngredients);
-
-//    return Center(
-//        child:
-//        Text("At Shopping Cart Page: ")
-//    );
-
-//    print('totalCartPrice -----------> : $totalCartPrice');
-//    print('initialPriceByQuantityANDSize ----------> $initialPriceByQuantityANDSize');
-
-//    logger.w('defaultIngredients: ',bloc.defaultIngredients);
-
-//    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
-
-//    Order thisOrder = shoppingCartBloc.getCurrentOrder;
-
-//    priceByQuantityANDSize = oneFood.itemPrice;
-
-
-
-//    logger.w('thisOrder : ',
-//        thisOrder);
-
-
-//    if (thisOrder == null) {
-//      return Container
-//        (
-//        alignment: Alignment.center,
-//        child: CircularProgressIndicator(),
-//      );
-//    }
-//    else {
-    return StreamBuilder<Order>(
-
-
-        stream: shoppingCartBloc.getCurrentOrderStream,
-        initialData: shoppingCartBloc.getCurrentOrder,
-
-        builder: (context, snapshot) {
-//            if (snapshot.hasData) {
-
-//              print('snapshot.hasData in main build(BuildContext context) : ${snapshot.hasData}');
-          // ---
-
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-            case ConnectionState.none:
-              return Container(
-                margin: EdgeInsets.fromLTRB(
-                    0, displayHeight(context) / 2, 0, 0),
-                child: Center(
-                  child: Column(
-                    children: <Widget>[
-
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                                backgroundColor: Colors.lightGreenAccent)
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                              backgroundColor: Colors.yellow,)
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                                backgroundColor: Colors.redAccent)
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              );
-              break;
-
-            case ConnectionState.active:
-            default:
-              if(snapshot.data ==null) {
-                return Container(
-                  margin: EdgeInsets.fromLTRB(
-                      0, displayHeight(context) / 2, 0, 0),
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-
-                        Center(
-                          child: Container(
-                              alignment: Alignment.center,
-                              child: new CircularProgressIndicator(
-                                  backgroundColor: Colors.lightGreenAccent)
-                          ),
-                        ),
-                        Center(
-                          child: Container(
-                              alignment: Alignment.center,
-                              child: new CircularProgressIndicator(
-                                backgroundColor: Colors.yellow,)
-                          ),
-                        ),
-                        Center(
-                          child: Container(
-                              alignment: Alignment.center,
-                              child: new CircularProgressIndicator(
-                                  backgroundColor: Colors.redAccent)
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                );
-              }
-              else {
-                Order oneOrder = snapshot.data;
-
-
-//              int x = 5;
-
-                CustomerInformation x = oneOrder.ordersCustomer;
-
-//              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
-
-
-                return GestureDetector(
-                  onTap: () {
-                    print('s');
-//                      Navigator.pop(context);
-                    FocusScopeNode currentFocus = FocusScope.of(
-                        context);
-
-                    if (!currentFocus.hasPrimaryFocus) {
-                      currentFocus.unfocus();
-//                  Navigator.pop(context);
-
-                    }
-                  },
-                  child:
-                  Scaffold(
-
-                    backgroundColor: Colors.white.withOpacity(0.05),
-//                      backgroundColor: Colors.white,
-                    // this is the main reason of transparency at next screen.
-                    // I am ignoring rest implementation but what i have achieved is you can see.
-
-                    body: SafeArea(
-
-
-                      // smaller container containing all modal FoodItem Details things.
-
-                      // HOW CAN I MAKE  SingleChildScrollView Scrollable.
-                      child: SingleChildScrollView(
-                        child: Container(
-//                          height: displayHeight(context) -
-//                              MediaQuery
-//                                  .of(context)
-//                                  .padding
-//                                  .top -
-//                              kToolbarHeight,
-                          height: displayHeight(context),
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-
-
-//                              alignment: Alignment.bottomCenter,
-                                height: displayHeight(context) / 1.12,
-                                //width:displayWidth(context) / 1.5, /* 3.8*/
-                                width: displayWidth(context)
-                                    - displayWidth(context) /
-                                        5 /* this is about the width of yellow side menu */
-                                ,
-//                  color:Colors.lightGreenAccent,
-                                margin: EdgeInsets.fromLTRB(
-                                    12, displayHeight(context) / 16, 10, 0),
-
-
-                                child: Neumorphic(
-                                  // State of Neumorphic (may be convex, flat & emboss)
-
-                                  boxShape: NeumorphicBoxShape
-                                      .roundRect(
-                                    BorderRadius.all(
-                                        Radius.circular(15)),
-
-                                  ),
-                                  curve: Neumorphic.DEFAULT_CURVE,
-                                  style: NeumorphicStyle(
-                                      shape: NeumorphicShape
-                                          .concave,
-                                      depth: 8,
-                                      lightSource: LightSource
-                                          .topLeft,
-                                      color: Colors.white
-                                  ),
-
-
-                                  // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
-
-
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .start,
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start,
-                                    children: <Widget>[
-
-//                                          /WWW??
-
-
-                                      // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
-
-
-                                      Container(
-                                        width: displayWidth(context) / 1.1,
-                                        height: displayHeight(context) / 20,
-                                        color: Color(0xffffffff),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .start
-                                          ,
-                                          crossAxisAlignment: CrossAxisAlignment
-                                              .center,
-                                          children: <Widget>[
-
-
-                                            Container(
-                                              width: displayWidth(context) /
-                                                  1.5,
-                                              height: displayHeight(
-                                                  context) / 20,
-                                              color: Color(0xffffffff),
-
-                                              child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .start
-                                                  ,
-                                                  crossAxisAlignment: CrossAxisAlignment
-                                                      .center,
-                                                  children: <Widget>[
-
-                                                    Container(
-                                                      margin: EdgeInsets
-                                                          .fromLTRB(
-                                                          20, 0, 10, 0),
-                                                      alignment: Alignment
-                                                          .center,
-                                                      child: Text(
-                                                          'Shopping Cart',
-                                                          style: TextStyle(
-                                                            fontSize: 30,
-                                                            fontWeight: FontWeight
-                                                                .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                                            color: Color(
-                                                                0xff000000),
-                                                          )
-                                                      ),
-                                                    ),
-
-                                                    CustomPaint(
-                                                      size: Size(0, 19),
-                                                      painter: LongHeaderPainterAfterShoppingCartPage(
-                                                          context),
-                                                    ),
-
-
-                                                  ]
-                                              ),
-
-                                            ),
-
-                                            // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                                            Container(
-//                                                  alignment: Alignment.center,
-                                              padding: EdgeInsets.fromLTRB(
-                                                  0, 2, 0, 0),
-                                              width: displayWidth(context) /
-                                                  16,
-//                                                height: displayHeight(context)/20,
-                                              color: Color(0xffffffff),
-//                                                    child:Row(
-//                                                      mainAxisAlignment: MainAxisAlignment.end,
-//                                                      children: <Widget>[
-                                              child: Container(
-                                                padding: EdgeInsets
-                                                    .fromLTRB(0, 0, 200, 0),
-                                                child: Icon(
-
-                                                  Icons.add_shopping_cart,
-                                                  size: 30,
-                                                  color: Color(0xff54463E),
-                                                ),
-                                              ),
-
-
-                                            ),
-
-
-                                            // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-
-
-                                          ],
-                                        ),
-                                      ),
-
-                                      Container(
-                                        padding: EdgeInsets.fromLTRB(
-                                            0, 0, 0, 0),
-//                                                      padding::::
-                                        color: Colors.amberAccent,
-//                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
-                                        height: displayHeight(context) / 4.8,
-                                        width: displayWidth(context)
-                                            - displayWidth(context) /
-                                                5, /* this is about the width of yellow side menu */
-
-//                                            width: displayWidth(context) * 0.57,
-                                        child: _buildQuantityTimesofFood(
-                                          /*oneOrder*/),
-                                      ),
-
-
-                                      // work 1
-                                      Container(
-//                                        width: displayWidth(context) /1.8,
-                                        width: displayWidth(context) / 1.1,
-                                        child:
-                                        AnimatedSwitcher(
-                                          duration: Duration(
-                                              milliseconds: 1000),
-//
-                                          child: showFullOrderType
-                                              ?
-                                          animatedWidgetShowFullOrderType()
-                                              : /*1 */
-                                          animatedWidgetShowSelectedOrderType(), /* 2*/
-                                          // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
-                                          // 2 => height: displayHeight(context) / 9,
-
-                                        ),
-
-
-                                      ),
-
-
-                                      /*
-                                            * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
-
-
-                                      // work 2
-                                      Container(
-                                        color: Colors.yellowAccent,
-//                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                        width: displayWidth(context) /1.8,
-                                        width: displayWidth(context) / 1.1,
-//                                            height: displayHeight(context)/2.5,
-                                        // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
-                                        // A CERTAIN PORTION OF OF THE CONTAINER
-                                        // WITH YELLOW ACCENT BG COLOR IS
-                                        // THERE WHEN THE CHILD WIDGETS ARE NOT
-                                        // BIG ENOGH LIKE , AS BIG AS displayHeight(context)/2.5,
-
-
-                                        //Text('AnimatedSwitcher('),
-                                        child: AnimatedSwitcher(
-                                          duration: Duration(milliseconds: 300),
-//
-//                                                child: showFullOrderType? animatedObscuredTextInputContainer():
-//                                                animatedUnObscuredTextInputContainer(),
-                                          child: oneOrder.orderTypeIndex == 0 ?
-                                          _buildShoppingCartInputFieldsUNObscuredTakeAway(
-                                              oneOrder)
-                                              : oneOrder.orderTypeIndex == 1 ?
-                                          _buildShoppingCartInputFieldsUNObscured(
-                                              oneOrder)
-                                              : oneOrder.orderTypeIndex == 2 ?
-                                          _buildShoppingCartInputFieldsUNObscured(
-                                              oneOrder) :
-                                          //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
-                                          // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
-//                                        _buildShoppingCartInputFieldsUNObscuredTakeAway(oneOrder)
-                                          _buildShoppingCartInputFieldsUNObscuredDinningRoom(
-                                              oneOrder),
-//                                        animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
-
-
-                                        ),
-
-
-                                      ),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-
-                //return Text('${x.toString()}');
-
-              }
-          }
-        }
-
-      //---
-    );
-//    }
   }
 
 
@@ -1019,7 +992,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  /*
+/*
   Widget animatedUnObscuredTextInputContainer(Order forUnObscured){
 
     print('at animated Un Obscured Text Input Container');
@@ -4804,8 +4777,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
-  // unobscureInputandRest(
-  // unobscureInputandRestDeliveryPhone
+// unobscureInputandRest(
+// unobscureInputandRestDeliveryPhone
   Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment){
 
 
@@ -6066,7 +6039,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
-  // work 3
+// work 3
   Widget _buildShoppingCartInputFieldsUNObscured(Order unObsecuredInputandPayment){
 
     CustomerInformation x = unObsecuredInputandPayment.ordersCustomer;
@@ -7184,14 +7157,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+
+                  _scaffoldKey.currentState
+//                  Scaffold.of(context)
+//                    ..removeCurrentSnackBar()
+                      .showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
+
+
 //                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
 
-                  print('docId: $docId');
 
-                  //   if(docId !=null)
-                  //   {
-                  //     return Navigator.pop(context,false);
-                  //   }
+
+//                  print('docId: $docId');
+
+//                     if(docId !=null)
+//                     {
+//                       return Navigator.pop(context,false);
+//                     }
 
                 },
                 child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
@@ -7213,8 +7195,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  // animatedUnObscuredCancelPayButton
-  // animatedUnObscuredCancelPayButtonDeliveryPhone
+// animatedUnObscuredCancelPayButton
+// animatedUnObscuredCancelPayButtonDeliveryPhone
   Widget animatedUnObscuredCancelPayButtonDeliveryPhone(Order cancelPaySelect){
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
@@ -7287,7 +7269,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAway DocID=> $docId');
 
-                print('docId: $docId');
+                  Scaffold.of(context)
+                    ..removeCurrentSnackBar()
+                    ..showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
+
+                  print('docId: $docId');
                   /*
                   if(docId !=null)
                   {
@@ -7587,8 +7573,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 //  Widget animatedWidgetShowSelectedPaymentTypeTakeAway(Order unObsecuredInputandPayment){
-  //animatedWidgetShowSelectedPaymentType
-  //animatedWidgetShowSelectedPaymentTypeDeliveryPhone
+//animatedWidgetShowSelectedPaymentType
+//animatedWidgetShowSelectedPaymentTypeDeliveryPhone
   Widget animatedWidgetShowSelectedPaymentTypeDeliveryPhone(Order unObsecuredInputandPayment) {
 
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -8722,7 +8708,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  // PAYMENT RELATED WIDGETS ARE HERE  --- below:
+// PAYMENT RELATED WIDGETS ARE HERE  --- below:
 
 
   Widget animatedObscuredPaymentSelectContainerTakeAway(Order priceandselectedCardFunctionality){
@@ -8926,8 +8912,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  // 3926 IS FOR THE UNOBSCURE PART.
-  // 4511 is for the OBSCURED PART.
+// 3926 IS FOR THE UNOBSCURE PART.
+// 4511 is for the OBSCURED PART.
   Widget _buildPaymentTypeSingleSelectOption(){
 
     logger.i('at here: _buildPaymentTypeSingleSelectOption');
