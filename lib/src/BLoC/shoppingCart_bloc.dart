@@ -305,27 +305,33 @@ class ShoppingCartBloc implements Bloc {
 
   Future<String> paymentButtonPressed(Order payMentProcessing) async{
 
+
+
     print('payment Button Pressed is ');
 
-    String orderBy = _orderType[payMentProcessing.orderTypeIndex].orderType;
-    String paidType0 = _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
+    String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
+    String paidType0 =  _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
 
-
+    // where should i put cancelButtonPressed();
+//
   // payMentProcessing
     String documentID = await _client.insertOrder(payMentProcessing,orderBy,paidType0);
 
+
     logger.e('Order received, Firestore id: $documentID');
 
-    _curretnOrder=null;
-    _expandedSelectedFood =[];
-    _orderType =[];
-    _paymentType =[];
+//    cancelButtonPressed();
 
-
-    _orderController.sink.add(_curretnOrder);
-    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
-    _orderTypeController.sink.add(_orderType);
-    _paymentTypeController.sink.add(_paymentType);
+//    _curretnOrder=null;
+//    _expandedSelectedFood =[];
+//    _orderType =[];
+//    _paymentType =[];
+//
+//
+//    _orderController.sink.add(_curretnOrder);
+//    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
+//    _orderTypeController.sink.add(_orderType);
+//    _paymentTypeController.sink.add(_paymentType);
 
       return documentID;
 

@@ -7184,10 +7184,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
-                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAway'
-                      ' DocID=> $docId');
+//                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
 
-                  return Navigator.pop(context,false);
+                  print('docId: $docId');
+
+                  //   if(docId !=null)
+                  //   {
+                  //     return Navigator.pop(context,false);
+                  //   }
 
                 },
                 child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
@@ -7273,18 +7277,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               child: OutlineButton(
                 onPressed: () async{
+
+
+
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
-
                   String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
-                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAway'
-                      ' DocID=> $docId');
 
-                  return Navigator.pop(context,false);
+//                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAway DocID=> $docId');
 
-//                  print('on Pressed of Pay');
-//                  return Navigator.pop(context,false);
+                print('docId: $docId');
+                  /*
+                  if(docId !=null)
+                  {
+                    return Navigator.pop(context,false);
+                  }
+
+                   */
+
+                  //   return Navigator.pop(context,false);
+
+                  //   print('on Pressed of Pay');
+                  //   return Navigator.pop(context,false);
                 },
                 child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
                 shape: RoundedRectangleBorder(

@@ -110,7 +110,7 @@ class FirebaseClient {
 //      return document;
 //                            _handleSignIn();
     }).catchError((onError) {
-      print('K   K    K   at onError for Order data push');
+      print('K   K    K   at onError for Order data push : $onError');
       orderDocId= '';
 //      return '';
     });
