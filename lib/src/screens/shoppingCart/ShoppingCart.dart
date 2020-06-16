@@ -940,7 +940,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
                             showCustomerInformationHeader = false;
                             showUserInputOptionsLikeFirstTime =true;
-                            showFullPaymentType = false;
+                            showFullPaymentType = true; //DEFAULT.
 
 
                             showEditingCompleteCustomerAddressInformation=
@@ -2263,7 +2263,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2.3,
+      height: displayHeight(context)/2,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
@@ -2276,6 +2276,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // 1ST CONTAINER OF INPUTS BEGINS HERE. HOLDS
           // LABEL TEXT, OR
           // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
+
+
+        // COMMENTING THIS FOR TAKE AWAY, WE DON'T NEED ANIMATION HERE.
+      /*
           Container(
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
@@ -2288,7 +2292,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
               animatedShowUserAddressDetailsInLineTakeAway(currentUser)
 
 
-                  :Container(
+                  :
+
+                  */
+              Container(
                 width: displayWidth(context) / 1.1,
                 height: displayHeight(context) / 20,
                 color: Color(0xffffffff),
@@ -2396,8 +2403,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
 
 
-            ),
-          ),
+            // ),
+          // ),
 
           // 1ST CONTAINER OF INPUTS ENDS HERE. HOLDS
           // LABEL TEXT, OR
@@ -3253,7 +3260,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                showCustomerInformationHeader = false;
                                                 showCustomerInformationHeader = true;
                                                 showUserInputOptionsLikeFirstTime =false;
-                                                showFullPaymentType = false;
+                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                               }
 
 
@@ -3280,7 +3287,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                  showCustomerInformationHeader = false;
                                                   showCustomerInformationHeader = true;
                                                   showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = false;
+                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                                 }
 
                                                 );
@@ -3746,7 +3753,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                  showCustomerInformationHeader = false;
                                                   showCustomerInformationHeader = true;
                                                   showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = false;
+                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
                                                 });
                                               }
@@ -3761,7 +3768,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                  showCustomerInformationHeader = false;
                                                   showCustomerInformationHeader = true;
                                                   showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = false;
+                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                                                showCustomerInformationHeader = true,
 
@@ -3792,7 +3799,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                showCustomerInformationHeader = false;
                                                 showCustomerInformationHeader = true;
                                                 showUserInputOptionsLikeFirstTime = false;
-                                                showFullPaymentType = false;
+                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
                                               });
 
@@ -3993,7 +4000,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
                                                 showCustomerInformationHeader = true;
                                                 showUserInputOptionsLikeFirstTime = false;
-                                                showFullPaymentType = false;
+                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                               }
                                               );
                                               // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
@@ -4008,7 +4015,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
                                                 showCustomerInformationHeader = true;
                                                 showUserInputOptionsLikeFirstTime = false;
-                                                showFullPaymentType = false;
+                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
                                               });
 
@@ -4208,7 +4215,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                showCustomerInformationHeader = false;
                                                 showCustomerInformationHeader = true;
                                                 showUserInputOptionsLikeFirstTime = false;
-                                                showFullPaymentType = false;
+                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                               }
                                               );
                                               // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
@@ -4245,7 +4252,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                showCustomerInformationHeader = false;
                                                 showCustomerInformationHeader = true;
                                                 showUserInputOptionsLikeFirstTime = false;
-                                                showFullPaymentType = false;
+                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 //                                                showFullOrderType = false,
 
                                               });
@@ -4420,7 +4427,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                showCustomerInformationHeader = false;
                                                 showCustomerInformationHeader = true;
                                                 showUserInputOptionsLikeFirstTime = false;
-                                                showFullPaymentType = false;
+                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                               }
 
                                               );
@@ -4450,7 +4457,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                  showCustomerInformationHeader = false;
                                                   showCustomerInformationHeader = true;
                                                   showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = false;
+                                                  showFullPaymentType  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.;
                                                 }
 //                                                }
 //                                                showFullOrderType = false
@@ -4798,7 +4805,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType = false;
+                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
 //                            showFullOrderType = false;
                             );
@@ -4815,7 +4822,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType = false;
+                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
 
                             );
@@ -4971,7 +4978,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
 
-                                showFullPaymentType = false;
+                                showFullPaymentType  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 
 
@@ -4995,7 +5002,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType = false;
+                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                              showFullOrderType = false;
                             });
@@ -5147,7 +5154,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               showFullOrderType = false;
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
-                              showFullPaymentType = false;
+                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
 
 
@@ -5162,7 +5169,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType = false;
+                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
                             );
                           },
@@ -5310,7 +5317,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                            showCustomerInformationHeader = false;
                             showCustomerInformationHeader = true;
-                            showFullPaymentType = false;
+                            showFullPaymentType  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             showUserInputOptionsLikeFirstTime = false;
                             });
                           },
@@ -5321,7 +5328,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showUserInputOptionsLikeFirstTime = false;
                               showCustomerInformationHeader = true;
-                              showFullPaymentType = false;
+                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
                             );
                           },
@@ -6966,13 +6973,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+
             setState(() {
 
             //   _currentOrderTypeIndex=index;
 
             showCustomerInformationHeader = true;
             showUserInputOptionsLikeFirstTime =true;
-            showFullPaymentType = false;
+            // WE ARE oneSingleDeliveryType;
+//            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
             }
             );
 
@@ -7353,6 +7362,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newPaymentIndex,int oldPaymentIndex){
             shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(onePaymentType,index,_currentPaymentTypeIndex);
 
+            // oneSinglePaymentType
             setState(() {
               showFullPaymentType= false;
             });
@@ -7456,6 +7466,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(onePaymentType,index,_currentPaymentTypeIndex);
 
 
+            // oneSinglePaymentType
             setState(() {
               showFullPaymentType = false;
             });
