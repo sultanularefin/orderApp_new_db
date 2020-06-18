@@ -739,9 +739,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                                  Text('ss'),
                                                     Container(
-                                                        height: displayHeight(context) / 9,
+                                                        height: displayHeight(context) / 8,
                                                         width: displayWidth(context) * 0.57,
-
                                                         color: Color(0xfffebaca),
 //                                                        alignment: Alignment.center,
                                                         child: buildDefaultIngredients(
@@ -2027,7 +2026,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 new SliverGridDelegateWithMaxCrossAxisExtent(
 
                   maxCrossAxisExtent: 180,
-                  mainAxisSpacing: 6, // Vertical  direction
+                  mainAxisSpacing: 2, // Vertical  direction
                   crossAxisSpacing: 5,
                   childAspectRatio: 200 / 250,
 
