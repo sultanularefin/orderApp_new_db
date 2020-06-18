@@ -1503,10 +1503,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //          height:45, // same as the heidth of increment decrement button.
               width: displayWidth(context)/7,
 //              height:45,
-              alignment: Alignment.center,
+//              alignment: Alignment.center,
               // pp ToDOPPP
 
-              padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child:
 
 
@@ -1527,7 +1527,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                    color: Colors.blueGrey[800],
 
                   fontWeight: FontWeight.normal,
-                  fontSize: 15,
+                  fontSize: 18,
                 ),
 
               ),
@@ -1732,7 +1732,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       return Container(
 //        alignment: Alignment.topCenter,
 //      width: 200,
-        height: displayHeight(context) / 6,
+        height: displayHeight(context) / 6.3,
 //      height: 400,
         color: Colors.white,
 
@@ -2019,28 +2019,37 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             }
             else{
 
-              return GridView.builder(
+              return Container(
+                color: Color(0xffabc111),
+                child: GridView.builder(
 
 
-                gridDelegate:
-                new SliverGridDelegateWithMaxCrossAxisExtent(
+                  gridDelegate:
+                  new SliverGridDelegateWithMaxCrossAxisExtent(
 
-                  maxCrossAxisExtent: 180,
-                  mainAxisSpacing: 2, // Vertical  direction
-                  crossAxisSpacing: 5,
-                  childAspectRatio: 200 / 250,
 
-                ),
 
-                shrinkWrap: false,
+
+
+
+                    maxCrossAxisExtent: 180,
+                    mainAxisSpacing: 0, // Vertical  direction
+                    crossAxisSpacing: 5,
+                    childAspectRatio: 200 / 280,
+
+
+                  ),
+
+                  shrinkWrap: true,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
-                itemCount: selectedIngredients
-                    .length,
-                itemBuilder: (_, int index) {
-                  return oneDefaultIngredient(selectedIngredients[index],
-                      index);
-                },
+                  itemCount: selectedIngredients
+                      .length,
+                  itemBuilder: (_, int index) {
+                    return oneDefaultIngredient(selectedIngredients[index],
+                        index);
+                  },
+                ),
               );
             }
           }
