@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // BLOC'S IMPORT BEGIN HERE:
-import 'package:foodgallery/src/BLoC/app_bloc.dart';
+// import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
@@ -14,17 +14,17 @@ import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
-import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
+// import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:foodgallery/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
 
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
@@ -1542,9 +1542,9 @@ Widget work1(BuildContext context){
 //          int messageCount = filteredItems.length;
 
           //..p
-          final List allFoods = snapshot.data;
+          final List<FoodItemWithDocID> allFoods = snapshot.data;
 
-          List filteredItemsByCategory;
+          List<FoodItemWithDocID> filteredItemsByCategory;
 
 //          logger.i('categoryString.toLowerCase().trim(): ',categoryString.toLowerCase().trim());
 
@@ -2137,22 +2137,29 @@ Widget work1(BuildContext context){
                                   ),
                                   onTap: () {
 
+
+                                      _navigateAndDisplaySelection(
+                                          context, oneFoodItem);
+
+
+                                      /*
                                     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
 //                                    final blocG =
 //                                        BlocProvider2.of(context).getFoodGalleryBlockObject;
 
                                     List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
 
-                                    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+//                                    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
 //                                    blocD.getAllIngredients();
 //                                    List<NewIngredient> test = blocD.allIngredients;
 
 
-                                    logger.e('tempIngs_push 2: $tempIngs');
+//                                    logger.e('tempIngs_push 2: $tempIngs');
 
 
-                                    blocD.setallIngredients(tempIngs);
+//                                    blocD.setallIngredients(tempIngs);
 
                                     return Navigator.of(context).push(
 
@@ -2202,6 +2209,8 @@ Widget work1(BuildContext context){
                                   */
                                       ),
                                     );
+
+                                    */
                                   }
 
                               )

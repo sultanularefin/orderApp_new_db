@@ -7269,8 +7269,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAway DocID=> $docId');
 
-                  Scaffold.of(context)
-                    ..removeCurrentSnackBar()
+                  _scaffoldKey.currentState
+//                  Scaffold.of(context)
+//                    ..removeCurrentSnackBar()
                     ..showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
 
                   print('docId: $docId');

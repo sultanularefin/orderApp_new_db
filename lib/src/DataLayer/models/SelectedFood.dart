@@ -23,7 +23,7 @@ class SelectedFood {
   final String foodItemImageURL;
   final double unitPrice;
   final String foodDocumentId;
-  int    quantity;
+  int          quantity;
   final String foodItemSize;
   // final String foodItemOrderID;     // random might not be needed.
   List<NewIngredient> selectedIngredients;

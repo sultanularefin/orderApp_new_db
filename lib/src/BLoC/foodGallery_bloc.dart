@@ -24,7 +24,7 @@ import 'dart:async';
 
 //Firestore should be in FirebaseClient file but for testing putted here:
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 //class LocationBloc implements Bloc {
 class FoodGalleryBloc implements Bloc {
   // id ,type ,title <= Location.
@@ -141,11 +141,13 @@ class FoodGalleryBloc implements Bloc {
 //      print('foodItemName $foodItemName');
 
 
+
       final String foodImageURL  = doc['image']==''?
       'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
           :
       storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
           +'?alt=media';
+//      print('doc[\'image\'] ${doc['image']}');
 
 
       final bool foodIsAvailable =  doc['available'];
@@ -160,7 +162,10 @@ class FoodGalleryBloc implements Bloc {
 //          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
 
       final String foodCategoryName = doc['category'];
+//      print('category: $foodCategoryName');
+
       final String foodItemDocumentID = doc.documentID;
+//      print('foodItemDocumentID $foodItemDocumentID');
 
 
       FoodItemWithDocID oneFoodItemWithDocID = new FoodItemWithDocID(

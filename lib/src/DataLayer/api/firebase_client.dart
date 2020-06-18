@@ -8,6 +8,7 @@ import 'dart:convert' show json;
 
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:http/http.dart' as http;
+import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:zomatoblock/UI/restaurant_tile.dart';
@@ -44,6 +45,13 @@ class FirebaseClient {
 
     print ('at here fetchFoodItems ==================================== *************** ');
 
+    /*
+    var snapshot= Firestore.instance
+        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems').limit(65)
+        .getDocuments();
+    */
+
+
     var snapshot= Firestore.instance
         .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
         .getDocuments();
@@ -71,7 +79,22 @@ class FirebaseClient {
   Future<String> insertOrder(Order currentOrderToFirebase,
       String orderBy, String paidType)async {
     print('currentOrderToFirebaseL: $currentOrderToFirebase');
+    print('currentOrderToFirebase.selectedFoodInOrder: '
+        '${currentOrderToFirebase.selectedFoodInOrder}');
 
+    List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
+
+    var map1 = Map.fromIterable(tempSelectedFood, key: (e) => e.foodItemName, value: (e)=>e.foodItemName); /*{
+
+      e.foodItemImageURL;
+      e.unitPrice;
+      e.foodDocumentId;
+      e.quantity;
+      e.foodItemSize;
+
+    }*/
+//    );
+    print('map1 $map1');
 
     String orderDocId='';
     print('saving order data using a web service');
@@ -90,9 +113,9 @@ class FirebaseClient {
       'contact': currentOrderToFirebase.ordersCustomer.phoneNumber,
       'driver': 'mhmd',
       'end': FieldValue.serverTimestamp(),
-      'items': [],
+//      'items': [],
 
-//      'items': currentOrderToFirebase.selectedFoodInOrder,
+      'items': map1,
       'orderby': orderBy,
       'p_status': paidType != 'Later' ? 'Paid' : 'Unpaid',
       'p_type': paidType,
