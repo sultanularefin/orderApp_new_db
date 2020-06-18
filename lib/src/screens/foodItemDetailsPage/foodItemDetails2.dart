@@ -2020,28 +2020,31 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             }
             else{
 
-              return GridView.builder(
+              return Container(
+                color: Color(0xffabc111),
+                child: GridView.builder(
 
 
-                gridDelegate:
-                new SliverGridDelegateWithMaxCrossAxisExtent(
+                  gridDelegate:
+                  new SliverGridDelegateWithMaxCrossAxisExtent(
 
-                  maxCrossAxisExtent: 180,
-                  mainAxisSpacing: 6, // Vertical  direction
-                  crossAxisSpacing: 5,
-                  childAspectRatio: 200 / 250,
+                    maxCrossAxisExtent: 180,
+                    mainAxisSpacing: 0, // Vertical  direction
+                    crossAxisSpacing: 5,
+                    childAspectRatio: 200 / 280,
 
-                ),
+                  ),
 
-                shrinkWrap: false,
+                  shrinkWrap: true,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
-                itemCount: selectedIngredients
-                    .length,
-                itemBuilder: (_, int index) {
-                  return oneDefaultIngredient(selectedIngredients[index],
-                      index);
-                },
+                  itemCount: selectedIngredients
+                      .length,
+                  itemBuilder: (_, int index) {
+                    return oneDefaultIngredient(selectedIngredients[index],
+                        index);
+                  },
+                ),
               );
             }
           }
