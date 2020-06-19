@@ -19,12 +19,14 @@ import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 
 class SelectedFood {
 
-  final String foodItemName;      // one of foodItems> collection.
-  final String foodItemImageURL;
-  final double unitPrice;
-  final String foodDocumentId;
-  int          quantity;
-  final String foodItemSize;
+  final String  foodItemName;      // one of foodItems> collection.
+  final String  foodItemImageURL;
+  final double  unitPrice;
+  final String  foodDocumentId;
+  int           quantity;
+  final String  foodItemSize;
+  final String  categoryName;
+  final double     discount;
   // final String foodItemOrderID;     // random might not be needed.
   List<NewIngredient> selectedIngredients;
 
@@ -40,6 +42,8 @@ class SelectedFood {
         this.quantity,
         this.foodItemSize,
         this.selectedIngredients,
+        this.categoryName,
+        this.discount,
 
         // this.foodItemOrderID,
       }

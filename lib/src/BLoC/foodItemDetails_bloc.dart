@@ -233,11 +233,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-    print(' 1 means from Food Gallery Page to Food Item Details Page');
-    print(' which IS NORMAL');
+//    print(' 1 means from Food Gallery Page to Food Item Details Page');
+//    print(' which IS NORMAL');
 
-    print("at the begin of Constructor [FoodItemDetailsBloc]");
-    print("oneFoodItem ===> ===> ===> $oneFoodItem");
+//    print("at the begin of Constructor [FoodItemDetailsBloc]");
+//    print("oneFoodItem ===> ===> ===> $oneFoodItem");
     print("allIngsScoped _allIngItemsDetailsBlock ===> ===> ===> $_allIngItemsDetailsBlock");
 
 
@@ -279,6 +279,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     /* Ordered Food Related codes ends here. */
 
+
+    logger.e('oneFoodItem.discount: ${oneFoodItem.discount}');
+
+
     SelectedFood selectedFoodInConstructor = new SelectedFood(
       foodItemName:oneFoodItem.itemName,
       foodItemImageURL: oneFoodItem.imageURL,
@@ -288,6 +292,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       quantity:0,
       foodItemSize: 'normal', // to be set from the UI.
       selectedIngredients:_defaultIngItems,
+      categoryName:oneFoodItem.categoryName,
+      discount:oneFoodItem.discount,
     );
 
     _currentSelectedFoodDetails = selectedFoodInConstructor;

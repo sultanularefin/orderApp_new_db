@@ -24,6 +24,7 @@ class FoodItemWithDocID {
   bool isHot;
   String uploadedBy;
   String documentId;
+  double discount;
 
   FoodItemWithDocID(
       {
@@ -41,6 +42,7 @@ class FoodItemWithDocID {
         this.isHot,
         this.uploadedBy,
         this.documentId,
+        this.discount,
       }
       );
 
@@ -58,7 +60,8 @@ class FoodItemWithDocID {
         isAvailable = data.isAvailable,
         isHot = data.isHot,
         uploadedBy = data.uploadedBy,
-        documentId = data.documentId;
+        documentId = data.documentId,
+        discount = data.discount;
 //        itemSize = size,
 //        itemPrice = price;
 }

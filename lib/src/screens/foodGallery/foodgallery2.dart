@@ -1484,7 +1484,7 @@ Widget work1(BuildContext context){
 //    final blocZZ = FoodItemsQueryBloc();
 
 //    final foodGalleryBloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
-  final foodGalleryBloc = BlocProvider.of<FoodGalleryBloc>(context);
+    final foodGalleryBloc = BlocProvider.of<FoodGalleryBloc>(context);
 
 /*
     List<NewIngredient> testIngs = bloc.allIngredients;
@@ -1614,6 +1614,7 @@ Widget work1(BuildContext context){
                             .isAvailable;
                         final String foodCategoryName = filteredItems[index]
                             .categoryName;
+                        final double discount = filteredItems[index].discount;
 
 //            final Map<String,dynamic> foodSizePrice = document['size'];
 
@@ -1632,17 +1633,18 @@ Widget work1(BuildContext context){
                         FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
 
-                          itemName: foodItemName,
-                          categoryName: foodCategoryName,
-                          imageURL: foodImageURL,
-                          sizedFoodPrices: foodSizePrice,
+                            itemName: foodItemName,
+                            categoryName: foodCategoryName,
+                            imageURL: foodImageURL,
+                            sizedFoodPrices: foodSizePrice,
 
 //              priceinEuro: euroPrice,
-                          ingredients: foodItemIngredientsList,
+                            ingredients: foodItemIngredientsList,
 
 //              itemId:foodItemId,
 //              isHot: foodIsHot,
-                          isAvailable: foodIsAvailable,
+                            isAvailable: foodIsAvailable,
+                            discount: discount
 
                         );
 
@@ -1927,6 +1929,8 @@ Widget work1(BuildContext context){
 //                print('foodSizePrice __________________________${foodSizePrice['normal']}');
                         final dynamic euroPrice = foodSizePrice['normal'];
 
+                        final double discount = filteredItems[index].discount;
+
 //                num euroPrice2 = tryCast(euroPrice);
                         double euroPrice2 = tryCast<double>(
                             euroPrice, fallback: 0.00);
@@ -1949,6 +1953,7 @@ Widget work1(BuildContext context){
 //              itemId:foodItemId,
 //              isHot: foodIsHot,
                           isAvailable: foodIsAvailable,
+                          discount: discount,
 
                         );
 
@@ -2138,11 +2143,11 @@ Widget work1(BuildContext context){
                                   onTap: () {
 
 
-                                      _navigateAndDisplaySelection(
-                                          context, oneFoodItem);
+                                    _navigateAndDisplaySelection(
+                                        context, oneFoodItem);
 
 
-                                      /*
+                                    /*
                                     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
 //                                    final blocG =
 //                                        BlocProvider2.of(context).getFoodGalleryBlockObject;
@@ -2294,15 +2299,15 @@ Widget work1(BuildContext context){
 
          */
 
-                                            BlocProvider<FoodItemDetailsBloc>(
-                                              bloc: FoodItemDetailsBloc(
-                                                  oneFoodItem,
-                                                  tempIngs),
+        BlocProvider<FoodItemDetailsBloc>(
+          bloc: FoodItemDetailsBloc(
+              oneFoodItem,
+              tempIngs),
 
 
-                                              child: FoodItemDetails2()
+          child: FoodItemDetails2()
 
-                                              ,),
+          ,),
 
 
         // fUTURE USE -- ANIMATION TRANSITION CODE.

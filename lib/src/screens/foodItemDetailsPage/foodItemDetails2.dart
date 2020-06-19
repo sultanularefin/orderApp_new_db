@@ -1192,6 +1192,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       .currentFoodItem.documentId,
                                   quantity: quantity,
                                   foodItemSize: _currentSize,
+                                    categoryName:blocD
+                                        .currentFoodItem.categoryName,
+                                    discount:blocD
+                                        .currentFoodItem.discount,
                                   // index or int value not good enought since size may vary best on Food Types .
                                 );
 
@@ -1212,7 +1216,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                 int newQuantity = oldQuantity + 1;
 
-
                                 SelectedFood oneSelectedFoodFD = new SelectedFood(
                                   foodItemName: blocD
                                       .currentFoodItem.itemName,
@@ -1223,6 +1226,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       .currentFoodItem.documentId,
                                   quantity: newQuantity,
                                   foodItemSize: _currentSize,
+                                  categoryName:blocD
+                                      .currentFoodItem.categoryName,
+                                  discount:blocD
+                                      .currentFoodItem.discount,
                                   // index or int value not good enought since size may vary best on Food Types .
                                 );
 
@@ -1560,8 +1567,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-
-
 
                   IconButton(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 1),

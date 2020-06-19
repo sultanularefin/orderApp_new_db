@@ -150,6 +150,7 @@ class FoodGalleryBloc implements Bloc {
 //      print('doc[\'image\'] ${doc['image']}');
 
 
+
       final bool foodIsAvailable =  doc['available'];
 
 
@@ -167,21 +168,20 @@ class FoodGalleryBloc implements Bloc {
       final String foodItemDocumentID = doc.documentID;
 //      print('foodItemDocumentID $foodItemDocumentID');
 
+      final double foodItemDiscount = doc['discount'];
+
+      print('foodItemDiscount: for $foodItemDocumentID is: $foodItemDiscount');
+
 
       FoodItemWithDocID oneFoodItemWithDocID = new FoodItemWithDocID(
-
-
         itemName: foodItemName,
         categoryName: foodCategoryName,
         imageURL: foodImageURL,
         sizedFoodPrices: oneFoodSizePriceMap,
-
-
         ingredients: foodItemIngredientsList,
-
         isAvailable: foodIsAvailable,
         documentId: foodItemDocumentID,
-
+        discount: foodItemDiscount,
       );
 
       _allFoodsList.add(oneFoodItemWithDocID);

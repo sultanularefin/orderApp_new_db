@@ -6,6 +6,7 @@
 import 'dart:async';
 import 'dart:convert' show json;
 
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:http/http.dart' as http;
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
@@ -31,7 +32,36 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 final String storageBucketURLPredicate =
     'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
 
+class OrderedFood{
+  final String category;      // one of foodItems> collection.
+//  final String foodItemImageURL;
+  final double discount;
+  final String image;
+//  int          quantity;
+//  final String foodItemSize;
+// final String foodItemOrderID;     // random might not be needed.
+//  List<NewIngredient> selectedIngredients;
+//
+//  category
+//  default_sauces
+//  discount
+//  image
 
+  OrderedFood(
+      {
+        this.category,
+        this.discount,
+        this.image,
+//        this.foodDocumentId,
+//        this.quantity,
+//        this.foodItemSize,
+//        this.selectedIngredients,
+
+        // this.foodItemOrderID,
+      }
+      );
+
+}
 
 class FirebaseClient {
 //  final _apiKey = zomatoKey;
@@ -76,6 +106,72 @@ class FirebaseClient {
     return snapshot;
   }
 
+  List <Map<String, dynamic>> /*<OrderedFood>*/ converterIngredients(List<NewIngredient> si){
+
+//    ingredientName;
+//    imageURL;
+//    price;
+//    documentId;
+//    ingredientAmountByUser
+
+
+    List<Map<String, dynamic>> testIngredients = new List<Map<String, dynamic>>();
+    int counter=0;
+    si.forEach((oneIngredient) {
+
+      print('si[counter].imageURL}: ${si[counter].imageURL}');
+      var identifier = {
+
+        'type': 0,
+        'name': si[counter].ingredientName,
+        'image': Uri.decodeComponent(si[counter].imageURL.replaceAll(
+            'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
+            '').replaceAll('?alt=media', '')),
+//        ROzgCEcTA7J9FpIIQJra
+        'ingredientAmountByUser': si[counter].ingredientAmountByUser,
+
+      };
+      testIngredients.add(identifier);
+      counter ++;
+
+
+    });
+    return testIngredients;
+//    return SF.length
+
+  }
+
+
+  List <Map<String, dynamic>> /*<OrderedFood>*/ converterFoods (List<SelectedFood> SF){
+
+    List<Map<String, dynamic>> testFoodItems = new List<Map<String, dynamic>>();
+    int counter=0;
+    SF.forEach((oneFood) {
+
+      print('SF[counter].foodItemImageURL: ${SF[counter].foodItemImageURL}');
+      var identifier = {
+
+        'category': SF[counter].categoryName,
+        'discount': SF[counter].discount,
+        'image': Uri.decodeComponent(SF[counter].foodItemImageURL.replaceAll(
+            'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
+            '').replaceAll('?alt=media', '')),
+//        ROzgCEcTA7J9FpIIQJra
+        'quantity': SF[counter].quantity,
+        'defult_sauces':[],
+        'ingredient':converterIngredients(SF[counter].selectedIngredients),
+      };
+      testFoodItems.add(identifier);
+      counter ++;
+
+
+    });
+    return testFoodItems;
+//    return SF.length
+
+  }
+
+
   Future<String> insertOrder(Order currentOrderToFirebase,
       String orderBy, String paidType)async {
     print('currentOrderToFirebaseL: $currentOrderToFirebase');
@@ -84,7 +180,11 @@ class FirebaseClient {
 
     List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
 
-    var map1 = Map.fromIterable(tempSelectedFood, key: (e) => e.foodItemName, value: (e)=>e.foodItemName); /*{
+    var map1 = Map.fromIterable(tempSelectedFood, key: (e)
+    => e.foodItemName, value: (e)=>e.foodItemName,
+
+//    key:'category', value:'t',
+    ); /*{
 
       e.foodItemImageURL;
       e.unitPrice;
@@ -115,7 +215,7 @@ class FirebaseClient {
       'end': FieldValue.serverTimestamp(),
 //      'items': [],
 
-      'items': map1,
+      'items': converterFoods(tempSelectedFood),
       'orderby': orderBy,
       'p_status': paidType != 'Later' ? 'Paid' : 'Unpaid',
       'p_type': paidType,
