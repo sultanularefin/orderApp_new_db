@@ -440,7 +440,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
                                               border: InputBorder.none,
-                                              hintText: 'Search meal',
+//                                              hintText: 'Search about meal',
 //                                              hintStyle: TextStyle(fontWeight: FontWeight.bold),
 
 
@@ -1606,7 +1606,7 @@ Widget work1(BuildContext context){
                         maxCrossAxisExtent: 240,
                         mainAxisSpacing: 0, // H  direction
                         crossAxisSpacing: 5,
-                        childAspectRatio: 140 / 180,
+                        childAspectRatio: 140 / 190,
 
 
                       ),
@@ -1914,7 +1914,8 @@ Widget work1(BuildContext context){
                         maxCrossAxisExtent: 240,
                         mainAxisSpacing: 0, // H  direction
                         crossAxisSpacing: 5,
-                        childAspectRatio: 140 / 180,
+//                        childAspectRatio: 140 / 180,
+                        childAspectRatio: 140 / 190,
 
 
                       ),
