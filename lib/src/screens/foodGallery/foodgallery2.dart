@@ -383,6 +383,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
                                             color: Color(0xffFFFFFF),
                                             blurRadius: 10.0,
+                                            // USER INPUT
                                             offset: Offset(0.0, 2.0))
                                       ],
 
@@ -390,6 +391,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                       color: Color(0xffFFFFFF),
 //                                      Colors.black54
                                     ),
+                                      // USER INPUT
+
 
 //                                  color: Color(0xffFFFFFF),
                                     width: displayWidth(context) / 3,
@@ -835,7 +838,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
         ListTile(
 
-          contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
+          contentPadding: EdgeInsets.fromLTRB(10, 6, 5, 6),
 //    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
           title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -860,7 +863,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                 ),
                 */
 
-                Text(categoryName.toLowerCase().length>9?categoryName.toLowerCase().substring(0,9)+'..':
+                Text(categoryName.toLowerCase().length>8?categoryName.toLowerCase().substring(0,8)+'..':
                 categoryName.toLowerCase()
 
                   , style:
@@ -895,7 +898,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
     }
     else {
       return ListTile(
-        contentPadding: EdgeInsets.fromLTRB(10, 6, 10, 6),
+        contentPadding: EdgeInsets.fromLTRB(10, 6, 5, 6),
 
         title: Text(categoryName.toLowerCase(),
 //    Text(categoryName.substring(0, 2),
@@ -1606,7 +1609,7 @@ Widget work1(BuildContext context){
                         maxCrossAxisExtent: 240,
                         mainAxisSpacing: 0, // H  direction
                         crossAxisSpacing: 5,
-                        childAspectRatio: 140 / 190,
+                        childAspectRatio: 140 / 180,
 
 
                       ),
@@ -1715,8 +1718,8 @@ Widget work1(BuildContext context){
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                               blurRadius: 30.0,
-                                              spreadRadius: 1.0,
-                                              offset: Offset(0, 21)
+                                              spreadRadius: 0.7,
+                                              offset: Offset(0, 10)
                                           )
                                         ],
                                       ),
@@ -1753,8 +1756,8 @@ Widget work1(BuildContext context){
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                                     blurRadius: 30.0,
-                                                    spreadRadius: 1.0,
-                                                    offset: Offset(0, 21)
+                                                    spreadRadius: 0.7,
+                                                    offset: Offset(0, 10)
                                                 )
                                               ],
                                             ),
@@ -1782,7 +1785,7 @@ Widget work1(BuildContext context){
                                     ),
 
                                       padding: const EdgeInsets.fromLTRB(
-                                          0, 0, 0, 12),
+                                          0, 0, 0, 6),
                                     ),
 //                              SizedBox(height: 10),
 
@@ -1851,7 +1854,7 @@ Widget work1(BuildContext context){
                                             color: Color(0xff707070),
                                             fontWeight: FontWeight.normal,
                                             letterSpacing:0.5,
-                                            fontSize: 18,
+                                            fontSize: 15,
                                           ),
                                         )
                                     ),
@@ -1916,7 +1919,7 @@ Widget work1(BuildContext context){
                         mainAxisSpacing: 0, // H  direction
                         crossAxisSpacing: 5,
 //                        childAspectRatio: 140 / 180,
-                        childAspectRatio: 140 / 190,
+                        childAspectRatio: 140 / 180,
 
 
                       ),
@@ -2026,8 +2029,8 @@ Widget work1(BuildContext context){
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                                 blurRadius: 30.0,
-                                                spreadRadius: 1.0,
-                                                offset: Offset(0, 21)
+                                                spreadRadius: 1,
+                                                offset: Offset(0, 10)
                                             )
                                           ],
                                         ),
@@ -2064,8 +2067,8 @@ Widget work1(BuildContext context){
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                                       blurRadius: 30.0,
-                                                      spreadRadius: 1.0,
-                                                      offset: Offset(0, 21)
+                                                      spreadRadius: 0.7,
+                                                      offset: Offset(0, 10)
                                                   )
                                                 ],
                                               ),
@@ -2093,7 +2096,7 @@ Widget work1(BuildContext context){
                                       ),
 
                                         padding: const EdgeInsets.fromLTRB(
-                                            0, 0, 0, 12),
+                                            0, 0, 0, 6),
                                       ),
 //                              SizedBox(height: 10),
 
@@ -2161,6 +2164,8 @@ Widget work1(BuildContext context){
                                             style: TextStyle(
                                               color: Color(0xff707070),
                                               fontWeight: FontWeight.normal,
+//                                              fontSize: 15,
+                                              letterSpacing:0.5,
                                               fontSize: 15,
                                             ),
                                           )
