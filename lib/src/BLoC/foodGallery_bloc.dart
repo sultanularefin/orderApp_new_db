@@ -170,7 +170,7 @@ class FoodGalleryBloc implements Bloc {
 
       final double foodItemDiscount = doc['discount'];
 
-      print('foodItemDiscount: for $foodItemDocumentID is: $foodItemDiscount');
+//      print('foodItemDiscount: for $foodItemDocumentID is: $foodItemDiscount');
 
 
       FoodItemWithDocID oneFoodItemWithDocID = new FoodItemWithDocID(

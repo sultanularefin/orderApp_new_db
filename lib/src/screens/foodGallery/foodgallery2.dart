@@ -406,17 +406,20 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                       children: <Widget>[
                                         Container(
 
-                                          height: 25,
+                                          height:displayWidth(context)/34,
+//                                          height: 25,
                                           width: 5,
-                                          margin: EdgeInsets.only(left: 0),
+                                          margin: EdgeInsets.only(left: 0,right:15,bottom: 5),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
+                                          // work 1
                                           child: Icon(
 //                                          Icons.add_shopping_cart,
                                             Icons.search,
-                                            size: 28,
+//                                            size: 28,
+                                            size: displayWidth(context)/24,
                                             color: Color(0xffBCBCBD),
                                           ),
 
@@ -428,7 +431,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
                                           alignment: Alignment.center,
-                                          width: displayWidth(context) / 4,
+                                          width: displayWidth(context) / 4.7,
 //                                        color:Colors.purpleAccent,
                                           // do it in both Container
                                           child: TextField(
@@ -437,7 +440,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
                                               border: InputBorder.none,
-                                              hintText: 'Search about meal',
+                                              hintText: 'Search meal',
 //                                              hintStyle: TextStyle(fontWeight: FontWeight.bold),
 
 
@@ -861,14 +864,14 @@ class _FoodGalleryState extends State<FoodGallery2> {
                 categoryName.toLowerCase()
 
                   , style:
-                TextStyle(
+                  TextStyle(
 
-                  fontFamily: 'Itim-Regular',
-                  fontSize: 30,
-                  fontWeight: FontWeight.normal,
+                    fontFamily: 'Itim-Regular',
+                    fontSize: 30,
+                    fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
-                  color: Color(0xff000000),
-                ),
+                    color: Color(0xff000000),
+                  ),
 
 
 //                    'Reross Quadratic',
@@ -1172,14 +1175,14 @@ Widget work1(BuildContext context){
                 child: Icon(
 
                   Icons.add_shopping_cart,
-                  size: 40,
+                  size: displayWidth(context)/19,
                   color: Color(0xff707070),
                 ),
               ),
 
                 Container(
 //                                              color:Colors.red,
-                  width: 30,
+                  width: displayWidth(context)/25,
 
 
                   decoration: new BoxDecoration(

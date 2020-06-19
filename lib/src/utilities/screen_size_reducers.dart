@@ -46,6 +46,9 @@ double displayHeight(BuildContext context) {
 double displayWidth(BuildContext context) {
 //  debugPrint('Width = ' + displaySize(context).width.toString());
   return displaySize(context).width;
+
+//  I/flutter ( 5454): Width = 800.0
+//  I/flutter ( 5454): Height = 1232.0
 }
 
 final String storageBucketURLPredicate =
