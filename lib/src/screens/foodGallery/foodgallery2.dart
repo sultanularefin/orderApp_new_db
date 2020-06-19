@@ -373,7 +373,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                                         color: Color(0xffBCBCBD),
                                         style: BorderStyle.solid,
-                                        width: 1.0,
+                                        width: 3,
 
 
                                       ),
@@ -438,6 +438,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                        border: Border.all(color: Colors.white, width: 2),
                                               border: InputBorder.none,
                                               hintText: 'Search about meal',
+//                                              hintStyle: TextStyle(fontWeight: FontWeight.bold),
+
 
 //                                        labelText: 'Search about meal.'
                                             ),
@@ -717,7 +719,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                   */
 
 
-                              await logout(context);
+                              //await logout(context);
 
 //                              work 0
 
