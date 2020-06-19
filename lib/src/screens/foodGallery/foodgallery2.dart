@@ -836,7 +836,29 @@ class _FoodGalleryState extends State<FoodGallery2> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(categoryName.toLowerCase(), style:
+
+                /*
+                Text(
+//                unSelectedOneIngredient.ingredientName,
+                  unSelectedOneIngredient.ingredientName.length==0?
+                  'EMPTY':  unSelectedOneIngredient.ingredientName.length>12?
+                  unSelectedOneIngredient.ingredientName.substring(0,12)+'...':
+                  unSelectedOneIngredient.ingredientName,
+                  style: TextStyle(
+                    color:Color(0xff707070),
+//                                    color: Colors.blueGrey[800],
+
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                  ),
+
+                ),
+                */
+
+                Text(categoryName.toLowerCase().length>9?categoryName.toLowerCase().substring(0,9)+'..':
+                categoryName.toLowerCase()
+
+                  , style:
                 TextStyle(
 
                   fontFamily: 'Itim-Regular',
