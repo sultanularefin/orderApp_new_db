@@ -757,7 +757,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                       width: displayWidth(context) /1.8,
                                                       child:
                                                       AnimatedSwitcher(
-                                                        duration: Duration(milliseconds: 1000),
+                                                        duration: Duration(milliseconds: 500),
 //
                                                         child: showPressWhenFinishButton? animatedWidgetPressToFinish():
                                                         animatedWidgetMoreIngredientsButton(),
