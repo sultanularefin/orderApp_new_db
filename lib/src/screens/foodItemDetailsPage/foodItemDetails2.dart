@@ -391,7 +391,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                      width: _width,
 //                                      height: _height,
                                     decoration: BoxDecoration(
-                                      color: Colors.blueAccent,
+                                      color: Colors.lightGreenAccent,
                                       borderRadius: BorderRadius.circular(25),
 //                                        borderRadius: BorderRadius.all(20),
                                     ),
@@ -742,7 +742,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                     Container(
                                                         height: displayHeight(context) / 8,
                                                         width: displayWidth(context) * 0.57,
-                                                        color: Color(0xfffebaca),
+                                                        color: Color(0xfff4444aa),
 //                                                        alignment: Alignment.center,
                                                         child: buildDefaultIngredients(
                                                             context
@@ -1528,8 +1528,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               Text(
 //                unSelectedOneIngredient.ingredientName,
                 unSelectedOneIngredient.ingredientName.length==0?
-                'EMPTY':  unSelectedOneIngredient.ingredientName.length>12?
-                unSelectedOneIngredient.ingredientName.substring(0,12)+'...':
+                'EMPTY':  unSelectedOneIngredient.ingredientName.length>10?
+                unSelectedOneIngredient.ingredientName.substring(0,10)+'...':
                 unSelectedOneIngredient.ingredientName,
                 style: TextStyle(
                   color:Color(0xff707070),
@@ -1833,7 +1833,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 Container(
                   height:60,
 //                  height: displayHeight(context) / 30,
-                  color: Colors.amber[600],
+//                  color: Colors.amber[600],
                   child: twins1(listpart1),
 //                child:twins1(foodSizePrice),
 
@@ -1841,7 +1841,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 Container(
                   height:60,
 //                  height: displayHeight(context) / 30,
-                  color: Colors.amber[500],
+//                  color: Colors.amber[500],
 //                  child:twins1(foodSizePrice),
                   child: twins2(listpart2),
                 ),
@@ -2027,7 +2027,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   width: displayWidth(context) * 0.57,
 //              color: Colors.yellowAccent,
 //                    color: Color(0xff54463E),
-                  color: Color(0xfffebaca),
+                  color: Color(0xfff4444aa),
                   alignment: Alignment.center,
 
                   // PPPPP
@@ -2050,7 +2050,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   width: displayWidth(context) * 0.57,
 //              color: Colors.yellowAccent,
 //                    color: Color(0xff54463E),
-                  color: Color(0xfffebaca),
+                  color: Color(0xfff4444aa),
                   alignment: Alignment.center,
 
                   // PPPPP
@@ -2130,7 +2130,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       width: displayWidth(context) * 0.57,
 //              color: Colors.yellowAccent,
 //                    color: Color(0xff54463E),
-      color: Color(0xfffebaca),
+      color: Color(0xfff4444aa),
 
 
       // PPPPP
