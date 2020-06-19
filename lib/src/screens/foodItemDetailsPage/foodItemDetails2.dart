@@ -729,7 +729,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                     ),
                                                     Container(
-                                                        height: displayHeight(context) / 7,
+                                                        height: displayHeight(context) / 6.6,
                                                         child: _buildProductSizes(
                                                             context,
                                                             foodSizePrice)
@@ -755,6 +755,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                     // NEWANIMATEDPOSITIONED HERE BEGINS =><=
                                                     // MORE INGREDIENTS Row BEGINS HERE.
                                                     Container(
+                                                      alignment: Alignment.center,
                                                       width: displayWidth(context) /1.8,
                                                       child:
                                                       AnimatedSwitcher(
