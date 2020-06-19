@@ -1830,7 +1830,7 @@ Widget work1(BuildContext context){
                                     ),)
                                     ,
                                     Container(
-                                        height: displayHeight(context) / 61,
+//                                        height: displayHeight(context) / 61,
 
                                         child: Text(
 //                                'stringifiedFoodItemIngredients',
@@ -1850,7 +1850,8 @@ Widget work1(BuildContext context){
                                           style: TextStyle(
                                             color: Color(0xff707070),
                                             fontWeight: FontWeight.normal,
-                                            fontSize: 15,
+                                            letterSpacing:0.5,
+                                            fontSize: 18,
                                           ),
                                         )
                                     ),
