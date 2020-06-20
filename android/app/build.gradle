@@ -76,9 +76,13 @@ android {
             // signingConfig signingConfigs.debug
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
 }
 
-lintOptions { checkReleaseBuilds false }
+
 
 flutter {
     source '../..'
