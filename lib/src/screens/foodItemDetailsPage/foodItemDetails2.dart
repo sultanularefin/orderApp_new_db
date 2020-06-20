@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:foodgallery/src/BLoC/app_bloc.dart';
-import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+//import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 //import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';

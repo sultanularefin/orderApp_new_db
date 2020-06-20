@@ -6,8 +6,8 @@ import 'package:logger/logger.dart';
 //import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 //import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
-import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+//import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+//import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/welcomePage.dart';
 //import 'package:foodgallery/src/screens/foodGallery/food_gallery.dart';
 //import 'package:google_fonts/google_fonts.dart';
@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
     );
 
     logger.e('reached main\'s build');
-    final textTheme = Theme.of(context).textTheme;
+//    final textTheme = Theme.of(context).textTheme;
 
-    FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+//    FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
 //    List<NewIngredient> _allIngredientState=[];
-    List<NewIngredient> emptyIngs = [];
+//    List<NewIngredient> emptyIngs = [];
 
     /*
       return (

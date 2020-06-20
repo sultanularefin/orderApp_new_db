@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // BLOC'S IMPORT BEGIN HERE:
 // import 'package:foodgallery/src/BLoC/app_bloc.dart';
-import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+//import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
@@ -50,9 +50,9 @@ import 'package:foodgallery/src/welcomePage.dart';
 
 // models, dummy data file:
 
-import '../../DataLayer/itemData.dart';
-import '../../DataLayer/FoodItem.dart';
-import '../../DataLayer/models/FoodItemWithDocID.dart';
+//import '../../DataLayer/itemData.dart';
+//import '../../DataLayer/FoodItem.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
 
 // Blocks
@@ -927,7 +927,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
   Widget drawerTest(BuildContext context) {
-    key: _drawerKey;
+//    key: _drawerKey;
     return Scaffold(
 //        appBar: AppBar(
 //          title: Text('Side Menu Burger Icon'),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+//import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
-import 'package:foodgallery/src/identity/signup.dart';
-import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+//import 'package:foodgallery/src/identity/signup.dart';
+//import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,15 +18,15 @@ import './Widget/bezierContainer.dart';
 
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
+//import 'dart:convert';
 
 /* bloc's  */
 
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
-import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
-import 'package:foodgallery/src/BLoC/app_bloc.dart';
+//import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+//import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
+//import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+//import 'package:foodgallery/src/BLoC/app_bloc.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 
 
@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
 //  _handleSignIn
   Widget _submitButton() {
 
-    child: return Container(
+    return Container(
       width: MediaQuery
           .of(context)
           .size
@@ -310,8 +310,8 @@ Widget test() {
                             }
                             ).then((onValue){
 
-                              FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
-                              List<NewIngredient> emptyIngs = [];
+//                              FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+//                              List<NewIngredient> emptyIngs = [];
 
 //                              Navigator.of(context).pop();
 
@@ -473,8 +473,8 @@ Widget test() {
                             }
                             ).then((onValue){
 
-                              FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
-                              List<NewIngredient> emptyIngs = [];
+//                              FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();
+//                              List<NewIngredient> emptyIngs = [];
 
 //                              Navigator.of(context).pop();
 

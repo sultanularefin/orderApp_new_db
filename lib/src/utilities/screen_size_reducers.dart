@@ -7,8 +7,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 
 
-final GoogleSignIn _googleSignIn = GoogleSignIn();
-final FirebaseAuth _auth = FirebaseAuth.instance;
+//final GoogleSignIn _googleSignIn = GoogleSignIn();
+//final FirebaseAuth _auth = FirebaseAuth.instance;
 
 
 Size screenSize(BuildContext context) {
@@ -53,6 +53,8 @@ double displayWidth(BuildContext context) {
 
 final String storageBucketURLPredicate =
     'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
+
+/*
 
 
 //Future<FirebaseUser> getUserInfo() async {
@@ -99,3 +101,5 @@ Future<String> getUserInfo2() async {
   //    print("signed in " + user.displayName);
 
 }
+
+*/
