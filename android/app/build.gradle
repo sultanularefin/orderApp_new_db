@@ -78,6 +78,8 @@ android {
     }
 }
 
+lintOptions { checkReleaseBuilds false }
+
 flutter {
     source '../..'
 }
