@@ -54,3 +54,6 @@ https://console.firebase.google.com/project/link-up-b0a24/overview
 ### flutter build apk --split-per-abi --no-shrink
 
 
+### PS C:\Users\Taxi\Progrms\linkup> flutter build apk
+
+
