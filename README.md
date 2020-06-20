@@ -45,4 +45,6 @@ https://console.firebase.google.com/project/link-up-b0a24/overview
 ## Ctro + shift + u ==> upper case text's
 
 
+### PS C:\Users\Taxi\Progrms\linkup> flutter build apk --target-platform android-x64 --no-shrink
+
 
