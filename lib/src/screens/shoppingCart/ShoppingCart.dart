@@ -7164,7 +7164,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       .showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
 
 
-//                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
+                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
 
 
 
