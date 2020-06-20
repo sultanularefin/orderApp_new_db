@@ -394,7 +394,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                      width: _width,
 //                                      height: _height,
                                     decoration: BoxDecoration(
-                                      color: Colors.lightGreenAccent,
+//                                      color: Colors.lightGreenAccent,
+                                      color: Colors.white,
                                       borderRadius: BorderRadius.circular(25),
 //                                        borderRadius: BorderRadius.all(20),
                                     ),
@@ -553,7 +554,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                     borderRadius: new BorderRadius
                                         .circular(
                                         10.0),
-                                    color: Colors.purple,
+//                                    color: Colors.purple,
+                                    color: Colors.white,
                                   ),
 
 
@@ -601,8 +603,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                               Container(
                                                   height: displayHeight(
                                                       context) / 2.6,
-
-                                                  color: Colors.red,
+                                                  color: Colors.white,
+//                                                  color: Colors.red,
                                                   width: displayWidth(
                                                       context) /
                                                       5,

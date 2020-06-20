@@ -41,7 +41,9 @@ class FoodDetailImage extends StatelessWidget {
               // INCREASE THE HEIGHT TO MAKE THE IMAGE CONTAINER MORE SMALLER.
 
               decoration: new BoxDecoration(
-                color: Colors.orange,
+//                color: Colors.orange,
+                color: Colors.white,
+
                 shape: BoxShape.circle,
               ),
             ),
