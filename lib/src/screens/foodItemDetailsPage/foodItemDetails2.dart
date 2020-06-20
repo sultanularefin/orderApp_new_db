@@ -2171,7 +2171,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       child: (
           Container(
 //            color: Color.fromRGBO(239, 239, 239, 0),
-            color: Colors.red,
+            color: Colors.white,
             padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
                 horizontal: 4.0, vertical: 15.0),
