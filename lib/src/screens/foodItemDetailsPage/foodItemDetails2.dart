@@ -729,7 +729,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                     ),
                                                     Container(
-                                                        height: displayHeight(context) / 6.6,
+                                                        height: displayHeight(context) / 7,
                                                         child: _buildProductSizes(
                                                             context,
                                                             foodSizePrice)
@@ -755,8 +755,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                     // NEWANIMATEDPOSITIONED HERE BEGINS =><=
                                                     // MORE INGREDIENTS Row BEGINS HERE.
                                                     Container(
-                                                      alignment: Alignment.center,
-                                                      width: displayWidth(context) /1.8,
+//                                                      alignment: Alignment.center,
+                                                      width: displayWidth(context) /2,
+                                                      color:Colors.greenAccent,
                                                       child:
                                                       AnimatedSwitcher(
                                                         duration: Duration(milliseconds: 500),
@@ -980,8 +981,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 // FROM 4 TO 3.8 AND AGAIN 4. displayWidth(context) /4,
                 width: displayWidth(
                     context) /4,
-                height: displayHeight(context)/21,
-                alignment: Alignment.center,
+
+                height: displayHeight(context)/23.4,
+//                alignment: Alignment.center,
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child:
                 OutlineButton(
