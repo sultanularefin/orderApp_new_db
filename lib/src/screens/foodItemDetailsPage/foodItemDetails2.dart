@@ -729,7 +729,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                      padding::::
                                                       color:Colors.white,
                                                       height: 65,
-                                                      width: displayWidth(context) /1.94,
+                                                      width: displayWidth(context) /1.80,
                                                       child:
                                                       _buildMultiSelectOptions(),
 
@@ -738,6 +738,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                     ),
                                                     Container(
                                                         height: displayHeight(context) / 7,
+//                                                        width: displayWidth(context) /1.80,
                                                         child: _buildProductSizes(
                                                             context,
                                                             foodSizePrice)
@@ -763,6 +764,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                     // NEWANIMATEDPOSITIONED HERE BEGINS =><=
                                                     // MORE INGREDIENTS Row BEGINS HERE.
                                                     Container(
+                                                      width: displayWidth(context) /1.80,
 //                                                      alignment: Alignment.center,
 //                                                      width: displayWidth(context) /2,
 
@@ -1144,7 +1146,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                    logger.e('itemCountNew: $itemCountNew');
                       return Container(
-                        color: Colors.indigoAccent,
+//                        color: Colors.indigoAccent,
+                        color: Colors.white,
                         margin: EdgeInsets.symmetric(
                             horizontal: 0,
                             vertical: 0),
