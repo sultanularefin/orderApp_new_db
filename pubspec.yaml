@@ -14,11 +14,12 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-#  sdk: ">=2.1.0 <3.0.0"
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
+  #  sdk: ">=2.1.0 <3.0.0"
+  # sdk: ">=2.2.2 <3.0.0"
 
-#  - sdk: ">=2.1.0 <3.0.0" // changed on may 9 2020.
-#  + sdk: ">=2.2.2 <3.0.0"
+  #  - sdk: ">=2.1.0 <3.0.0" // changed on may 9 2020.
+  #  + sdk: ">=2.2.2 <3.0.0"
 
 
 dependencies:
@@ -31,16 +32,16 @@ dependencies:
   flutter_neumorphic: ^2.0.1
   google_fonts: ^1.0.0
   path_provider: ^1.6.7
-#  cloud_firestore: ^0.13.5
+  #  cloud_firestore: ^0.13.5
   cloud_firestore: ^0.13.7
-#  firebase_core: ^0.4.0+9,
+  #  firebase_core: ^0.4.0+9,
   firebase_core: ^0.4.5
 
-#  firebase_auth: ^0.16.0
+  #  firebase_auth: ^0.16.0
   firebase_auth: ^0.16.1
-#  firebase_auth: ^0.14.0+5
+  #  firebase_auth: ^0.14.0+5
   firebase_storage: ^3.1.5
-#  google_sign_in: ^4.4.4
+  #  google_sign_in: ^4.4.4
   google_sign_in: ^4.5.1
   neumorphic: ^0.3.0
   image_picker_gallery_camera: ^0.1.4
@@ -100,16 +101,16 @@ flutter:
       fonts:
         - asset: fonts/Itim-Regular.ttf
           style: italic
-#    - family: Tangerine
-#      fonts:
-#        - asset: fonts/Tangerine-Bold.ttf
-#        - asset: fonts/Tangerine-Regular.ttf
-#          weight: 800
-#          style: italic
+  #    - family: Tangerine
+  #      fonts:
+  #        - asset: fonts/Tangerine-Bold.ttf
+  #        - asset: fonts/Tangerine-Regular.ttf
+  #          weight: 800
+  #          style: italic
 
 
-#         - asset: fonts/TrajanPro_Bold.ttf
-#           weight: 700
+  #         - asset: fonts/TrajanPro_Bold.ttf
+  #           weight: 700
   #     - family: Schyler
   #       fonts:
   #         - asset: fonts/Schyler-Regular.ttf
