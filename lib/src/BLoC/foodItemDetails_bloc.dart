@@ -5,11 +5,11 @@
 //import 'package:zomatoblock/BLoC/location_query_bloc.dart';
 //
 import 'package:foodgallery/src/BLoC/bloc.dart';
-import 'package:foodgallery/src/BLoC/identity_bloc.dart';
-import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+//import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+//import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
-import 'package:foodgallery/src/DataLayer/models/Order.dart';
+//import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:logger/logger.dart';
 
@@ -25,7 +25,7 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart
 
 import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 import 'dart:async';
 
 

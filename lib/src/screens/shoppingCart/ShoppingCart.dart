@@ -6086,7 +6086,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget _buildShoppingCartInputFieldsObscured( CustomerInformation ObscuredDisplay){
+  Widget _buildShoppingCartInputFieldsObscured( CustomerInformation obscuredDisplay){
 
     //    CustomerInformation
 //  final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -6103,7 +6103,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        }
 //        else {
 
-    CustomerInformation currentUser =  ObscuredDisplay;
+    CustomerInformation currentUser =  obscuredDisplay;
     // THIS INFORMATION ABOVE IS NOT USED NOW.
 
     return Center(

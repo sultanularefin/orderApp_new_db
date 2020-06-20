@@ -1,9 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
-import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
+//import 'package:foodgallery/src/BLoC/bloc_provider.dart';
+//import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
+//import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 

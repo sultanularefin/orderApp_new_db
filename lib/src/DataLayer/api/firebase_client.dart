@@ -4,13 +4,13 @@
  */
 
 import 'dart:async';
-import 'dart:convert' show json;
+//import 'dart:convert' show json;
 
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
-import 'package:meta/meta.dart';
+//import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:zomatoblock/UI/restaurant_tile.dart';
 //import './../Config/Secret.dart';
@@ -137,29 +137,29 @@ class FirebaseClient {
 
     });
     return testIngredients;
-//    return SF.length
+//    return sf.length
 
   }
 
 
-  List <Map<String, dynamic>> /*<OrderedFood>*/ converterFoods (List<SelectedFood> SF){
+  List <Map<String, dynamic>> /*<OrderedFood>*/ converterFoods (List<SelectedFood> sf){
 
     List<Map<String, dynamic>> testFoodItems = new List<Map<String, dynamic>>();
     int counter=0;
-    SF.forEach((oneFood) {
+    sf.forEach((oneFood) {
 
-      print('SF[counter].foodItemImageURL: ${SF[counter].foodItemImageURL}');
+      print('sf[counter].foodItemImageURL: ${sf[counter].foodItemImageURL}');
       var identifier = {
 
-        'category': SF[counter].categoryName,
-        'discount': SF[counter].discount,
-        'image': Uri.decodeComponent(SF[counter].foodItemImageURL.replaceAll(
+        'category': sf[counter].categoryName,
+        'discount': sf[counter].discount,
+        'image': Uri.decodeComponent(sf[counter].foodItemImageURL.replaceAll(
             'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
-        'quantity': SF[counter].quantity,
+        'quantity': sf[counter].quantity,
         'defult_sauces':[],
-        'ingredient':converterIngredients(SF[counter].selectedIngredients),
+        'ingredient':converterIngredients(sf[counter].selectedIngredients),
       };
       testFoodItems.add(identifier);
       counter ++;
@@ -167,7 +167,7 @@ class FirebaseClient {
 
     });
     return testFoodItems;
-//    return SF.length
+//    return sf.length
 
   }
 

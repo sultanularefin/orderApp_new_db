@@ -152,7 +152,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
   //  final _formKey = GlobalKey();
 
-  final _formKey = GlobalKey<FormState>();
+//  final _formKey = GlobalKey<FormState>();
 
   int _totalCount = 0;
   String _searchString = '';
