@@ -51,4 +51,6 @@ https://console.firebase.google.com/project/link-up-b0a24/overview
 
 ### /home/taxi/Programs/linkup/build/app/outputs/apk/release/app-release.apk
 
+### flutter build apk --split-per-abi --no-shrink
+
 
