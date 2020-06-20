@@ -117,7 +117,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
                   ),
 
                   Container(
-                    color:Colors.redAccent,
+//                    color:Colors.redAccent,
+                    color: Color(0xffF4F6CE),
 
                     width: 70,
                     alignment: Alignment.topLeft,
@@ -141,7 +142,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
 
             Container(
-              color:Colors.redAccent,
+//              color:Colors.redAccent,
+              color: Color(0xffF4F6CE),
 
               width: 130,
               alignment: Alignment.centerLeft,
@@ -158,7 +160,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
             Container(
 
-              color: Colors.green,
+//              color: Colors.green,
+              color: Color(0xffF4F6CE),
 
               margin: EdgeInsets.fromLTRB(
                   0, 10, 0, 0),
@@ -377,7 +380,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
             Container(
 
-              color: Colors.green,
+//              color: Colors.green,
+              color: Colors.white,
 
               margin: EdgeInsets.fromLTRB(
                   0, 10, 0, 0),

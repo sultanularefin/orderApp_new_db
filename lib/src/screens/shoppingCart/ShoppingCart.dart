@@ -1146,7 +1146,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               */
               return Container(
 
-                color: Colors.green,
+//                color: Colors.green,
+                color: Color(0xffFFFFFF),
 
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -1203,7 +1204,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      height: displayHeight(context) / 8,
       // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
       // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
-      color: Color(0xffffffff),
+      color: Color(0xFFffffff),
       child: Column(
           children: <Widget>[
             Container(
