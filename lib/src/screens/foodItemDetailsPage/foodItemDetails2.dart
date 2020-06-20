@@ -756,8 +756,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                     // MORE INGREDIENTS Row BEGINS HERE.
                                                     Container(
 //                                                      alignment: Alignment.center,
-                                                      width: displayWidth(context) /2,
-                                                      color:Colors.greenAccent,
+//                                                      width: displayWidth(context) /2,
+
                                                       child:
                                                       AnimatedSwitcher(
                                                         duration: Duration(milliseconds: 500),
@@ -966,7 +966,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
     return    Container(
 
-        color:Colors.white,
+        color:Colors.greenAccent,
+//        color:Colors.white,
         child: Row(
             mainAxisAlignment: MainAxisAlignment
                 .end,
