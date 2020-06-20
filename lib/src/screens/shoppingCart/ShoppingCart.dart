@@ -6893,6 +6893,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
           Container(
+            
 //            alignment: Alignment.center,
             /*
     padding: EdgeInsets.fromLTRB(displayWidth(context)/3,
@@ -6964,6 +6965,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
           Container(
+            
 //            alignment: Alignment.center,
             /*
     padding: EdgeInsets.fromLTRB(displayWidth(context)/3,
@@ -7011,88 +7013,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+
                 Container(
-                  child:
-                  RaisedButton(
-                    color:Color(0xffFC0000),
-//                    color:Color(0xffFC0000),
-                    // highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child:
-                    Container(
-                      color:Color(0xffFC0000),
-//                       width:displayWidth(context) /10,
-                      width:displayWidth(context) /4,
-                      child:  Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'currentUserForInline.etaTimeInMinutes',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    )
-
-                    // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
-                    ,
-                    onPressed: ()=>{},
-
-
-                  ),
-                ),
-                Container(
+                  width:displayWidth(context)/2.4,
                   child: OutlineButton(
                     onPressed: (){ print('Cancel Pressed obscured');
 
@@ -7110,7 +7033,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       borderRadius: BorderRadius.circular(35.0),
                     ),
 
-                    /*
+
+                      /*
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
                         color: Color(0xff707070),
@@ -7121,11 +7045,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
                     */
 
+
                   ),
 
                 ),
                 SizedBox(width: displayWidth(context)/12,),
                 Container(
+                  width:displayWidth(context)/2.4,
                   child: OutlineButton(
                     onPressed: () async {
 
@@ -7236,6 +7162,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
+              width:displayWidth(context)/2.4,
               child: OutlineButton(
                 onPressed: (){
                   print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
@@ -7267,7 +7194,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   return Navigator.pop(context,true);
                 },
-                child: Text('Cancel',style: TextStyle(color: Color(0xffFC0000),fontSize: 30),),
+                child: Text('Cancel',
+                  style: TextStyle(color: Color(0xffFC0000),fontSize: 30),),
                 shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
                   side: BorderSide(
@@ -7282,6 +7210,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
             SizedBox(width: displayWidth(context)/12,),
             Container(
+
+              width:displayWidth(context)/2.4,
               child: OutlineButton(
                 onPressed: () async{
 //                  print('on Pressed of Pay');
