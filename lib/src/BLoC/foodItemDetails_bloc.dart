@@ -11,7 +11,7 @@ import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 //import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 
 //MODELS
 //import 'package:foodgallery/src/DataLayer/itemData.dart';
@@ -50,9 +50,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+//  var logger = Logger(
+//    printer: PrettyPrinter(),
+//  );
 
   final _client = FirebaseClient();
 
@@ -204,7 +204,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   void setallIngredients(List<NewIngredient> allIngredients){
 
-    print('setallIngredients : ___ ___ ___   $allIngredients');
+    // print('setallIngredients : ___ ___ ___   $allIngredients');
 
     _allIngItemsDetailsBlock = allIngredients;
     _allIngredientListController.sink.add(_allIngItemsDetailsBlock);
@@ -219,7 +219,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    if(allIngsScoped==[]) return;
 
-    print("allIngsScoped: $allIngsScoped ");
+    // print("allIngsScoped: $allIngsScoped ");
 
     // I THOUTHT THIS _allIngItemsDetailsBlock WILL CONTAIN DATA SINCE I SET THEM FROM FOODGALLERY PAGE BEFORE CALLING THE
     // CONSTRUCTOR
@@ -238,7 +238,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    print("at the begin of Constructor [FoodItemDetailsBloc]");
 //    print("oneFoodItem ===> ===> ===> $oneFoodItem");
-    print("allIngsScoped _allIngItemsDetailsBlock ===> ===> ===> $_allIngItemsDetailsBlock");
+   //  print("allIngsScoped _allIngItemsDetailsBlock ===> ===> ===> $_allIngItemsDetailsBlock");
 
 
 //    _oneFoodItem = oneFoodItem;
@@ -280,7 +280,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     /* Ordered Food Related codes ends here. */
 
 
-    logger.e('oneFoodItem.discount: ${oneFoodItem.discount}');
+//    logger.e('oneFoodItem.discount: ${oneFoodItem.discount}');
 
 
     SelectedFood selectedFoodInConstructor = new SelectedFood(
@@ -317,7 +317,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     // COUNTER MEASURES SINCE WE INVOKE APPBLOC FROM WELCOME PAGE WHERE THIS CONSTRUCTOR IS CALLED 1.
     // COUNTER MEASURE 01.
 
-    print('^^  ^ ^^  oneFoodItem.itemName: ${oneFoodItem.itemName}');
+   //  print('^^  ^ ^^  oneFoodItem.itemName: ${oneFoodItem.itemName}');
     final List<dynamic> foodItemIngredientsList2 = oneFoodItem.itemName==null ? null:oneFoodItem.ingredients;
 
     // COUNTER MEASURE 02.
@@ -989,7 +989,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     allPreviouslyUnSelectedIngredientItems.where((oneItem) => oneItem.ingredientAmountByUser >0).toList();
 
 
-    logger.e('valueIncrementedUNselectedIngredient: $valueIncrementedUNselectedIngredient');
+//    logger.e('valueIncrementedUNselectedIngredient: $valueIncrementedUNselectedIngredient');
 
 
     List <NewIngredient> valueUnChangedUNselectedIngredient =
@@ -1002,7 +1002,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //    ==
 //    isIngredientExist(oneItem.toString().trim().toLowerCase())).toList();
 
-    logger.e('valueUnChangedUNselectedIngredient: $valueUnChangedUNselectedIngredient');
+//    logger.e('valueUnChangedUNselectedIngredient: $valueUnChangedUNselectedIngredient');
 
 
 

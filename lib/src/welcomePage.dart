@@ -3,7 +3,7 @@
 
 // EXTERNAL PKGS BELOW.
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 import 'package:flutter/material.dart';
 // EXTERNAL PKGS ABOVE.
 
@@ -72,9 +72,9 @@ class _WelcomePageState extends State<WelcomePage> {
 
 //  List<NewIngredient> welcomPageIngredients;
 
-  final logger = Logger(
-    printer: PrettyPrinter(),
-  );
+//  final logger = Logger(
+//    printer: PrettyPrinter(),
+//  );
 
 
 
@@ -123,7 +123,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
 //    logger.e('at localStorageCheck of welcome page\'s init state :  ');
 
-    print('< >   <   >   <    >  :: // ::  // at here: localStorageCheck');
+    // print('< >   <   >   <    >  :: // ::  // at here: localStorageCheck');
 
     /*
     final identityBlocInvokerAppBlockWelcomPageInitState
@@ -188,7 +188,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    logger.e('at build of welcome page');
+//    logger.e('at build of welcome page');
 
     FoodItemWithDocID emptyFoodItemWithDocID = new FoodItemWithDocID();
 //    List<NewIngredient> emptyIngs = [];
@@ -205,16 +205,16 @@ class _WelcomePageState extends State<WelcomePage> {
     final identityBloc = BlocProvider.of<IdentityBloc>(context);
 
 
-    print('width: ${MediaQuery
-        .of(context)
-        .size
-        .width}');
-    print('Height: ${MediaQuery
-        .of(context)
-        .size
-        .height}');
-
-    print('at build of welcomePage');
+//    print('width: ${MediaQuery
+//        .of(context)
+//        .size
+//        .width}');
+//    print('Height: ${MediaQuery
+//        .of(context)
+//        .size
+//        .height}');
+//
+//    print('at build of welcomePage');
     return Scaffold(
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -270,7 +270,7 @@ class _WelcomePageState extends State<WelcomePage> {
 //                );
 //              }
 
-              print('snapshot.hasData: ${snapshot.hasData}');
+           //   print('snapshot.hasData: ${snapshot.hasData}');
 
 
               if (snapshot.hasError) {

@@ -73,7 +73,7 @@ class DrawerScreenFoodGallery extends StatelessWidget {
 
 
   Future<void> Logout(BuildContext context2) async {
-    print('what i do is : ||Logout||');
+   // print('what i do is : ||Logout||');
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();

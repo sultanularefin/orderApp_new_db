@@ -17,7 +17,7 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 //import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 //import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -74,9 +74,9 @@ class FoodItemDetails2 extends StatefulWidget {
 
 class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+//  var logger = Logger(
+//    printer: PrettyPrinter(),
+//  );
 
   String _currentSize;
 //  int _itemCount= 0;
@@ -147,7 +147,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
     List<NewIngredient> unSelectedIngredients = blocD.unSelectedIngredients;
 
-    print('unSelectedIngredients: $unSelectedIngredients');
+   // print('unSelectedIngredients: $unSelectedIngredients');
 
 
 
@@ -180,14 +180,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   return Center(child: new LinearProgressIndicator());
                 }
                 else {
-                  print('snapshot.hasData FDetails: ${snapshot.hasData}');
+               //   print('snapshot.hasData FDetails: ${snapshot.hasData}');
 
                   final FoodItemWithDocIDViewModel oneFood = snapshot
                       .data;
 
+                  /*
                   logger.i('oneFood.itemName after '
                       ''
                       'snapshot.hasData FDetails: ${oneFood.itemName}');
+
+                  */
 
                   final Map<String, dynamic> foodSizePrice = oneFood
                       .sizedFoodPrices;
@@ -456,8 +459,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                           List<NewIngredient> unSelectedIngredients = snapshot.data;
 
+                                          /*
                                           logger.w('unSelectedIngredients.length:'
                                               ' ${unSelectedIngredients.length}');
+
+                                          */
                                           return GridView.builder(
                                             itemCount: unSelectedIngredients
                                                 .length,
@@ -908,7 +914,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           onPressed: () {
 //
 
-            logger.i('addedHeight: ',addedHeight);
+//            logger.i('addedHeight: ',addedHeight);
+
             final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
@@ -1052,7 +1059,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   onPressed: () {
 //                                                                        logger.i('s  =>   =>   => ','ss');
 
-                    logger.i('addedHeight: ',addedHeight);
+//                    logger.i('addedHeight: ',addedHeight);
                     if( addedHeight == 0.0 ){
                       setState(() {
                         addedHeight = /* displayHeight(context)/10*/

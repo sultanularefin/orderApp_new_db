@@ -19,7 +19,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'location.dart';
 //import 'restaurant.dart';
 
-import 'package:foodgallery/src/DataLayer/itemData.dart';
+//import 'package:foodgallery/src/DataLayer/itemData.dart';
 //    import 'package:foodgallery/src/DataLayer/FoodItem.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 //import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
@@ -73,7 +73,7 @@ class FirebaseClient {
 
   Future<QuerySnapshot> fetchFoodItems() async {
 
-    print ('at here fetchFoodItems ==================================== *************** ');
+   // print ('at here fetchFoodItems ==================================== *************** ');
 
     /*
     var snapshot= Firestore.instance
@@ -92,7 +92,7 @@ class FirebaseClient {
 
   Future<QuerySnapshot> fetchAllIngredients()async{
 
-    print ('at here fetchAllIngredients ==================================== *************** ');
+   // print ('at here fetchAllIngredients ==================================== *************** ');
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('USWc8IgrHKdjeDe9Ft4j')
@@ -119,7 +119,7 @@ class FirebaseClient {
     int counter=0;
     si.forEach((oneIngredient) {
 
-      print('si[counter].imageURL}: ${si[counter].imageURL}');
+    //  print('si[counter].imageURL}: ${si[counter].imageURL}');
       var identifier = {
 
         'type': 0,
@@ -148,7 +148,7 @@ class FirebaseClient {
     int counter=0;
     sf.forEach((oneFood) {
 
-      print('sf[counter].foodItemImageURL: ${sf[counter].foodItemImageURL}');
+     // print('sf[counter].foodItemImageURL: ${sf[counter].foodItemImageURL}');
       var identifier = {
 
         'category': sf[counter].categoryName,
@@ -174,9 +174,9 @@ class FirebaseClient {
 
   Future<String> insertOrder(Order currentOrderToFirebase,
       String orderBy, String paidType)async {
-    print('currentOrderToFirebaseL: $currentOrderToFirebase');
-    print('currentOrderToFirebase.selectedFoodInOrder: '
-        '${currentOrderToFirebase.selectedFoodInOrder}');
+   // print('currentOrderToFirebaseL: $currentOrderToFirebase');
+   /*print('currentOrderToFirebase.selectedFoodInOrder: '
+        '${currentOrderToFirebase.selectedFoodInOrder}'); */
 
     List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
 
@@ -194,10 +194,10 @@ class FirebaseClient {
 
     }*/
 //    );
-    print('map1 $map1');
+   // print('map1 $map1');
 
     String orderDocId='';
-    print('saving order data using a web service');
+   // print('saving order data using a web service');
 
     DocumentReference document = await Firestore.instance.collection(
         "restaurants").
@@ -230,12 +230,12 @@ class FirebaseClient {
 
     }).whenComplete(() => print("called when future completes"))
         .then((document) {
-      print('Added document with ID: ${document.documentID}');
+    //  print('Added document with ID: ${document.documentID}');
       orderDocId= document.documentID;
 //      return document;
 //                            _handleSignIn();
     }).catchError((onError) {
-      print('K   K    K   at onError for Order data push : $onError');
+   //   print('K   K    K   at onError for Order data push : $onError');
       orderDocId= '';
 //      return '';
     });
@@ -249,7 +249,7 @@ class FirebaseClient {
 
 
 
-    print ('at here fetchCategories ==================================== *************** ');
+    //print ('at here fetchCategories ==================================== *************** ');
 
     var snapshot= Firestore.instance
         .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').

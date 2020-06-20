@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodgallery/src/welcomePage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:logger/logger.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:logger/logger.dart';
 import './Widget/bezierContainer.dart';
 //import 'package:fluttercrud/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
 //import 'package:fluttercrud/src/screens/homeScreen/admin_firebase_food.dart';
@@ -57,9 +57,9 @@ class _LoginPageState extends State<LoginPage> {
   String emailState ='';
   String passwordState = '';
 
-  final logger = Logger(
-    printer: PrettyPrinter(),
-  );
+//  final logger = Logger(
+//    printer: PrettyPrinter(),
+//  );
 
   void setEmailState( text){
 
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+//  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
 
@@ -356,7 +356,7 @@ Widget test() {
 
 //                            _handleSignIn();
                             }).catchError((onError){
-                              logger.e('at onError');
+//                              logger.e('at onError');
                               _scaffoldKey.currentState.showSnackBar(
                                 new SnackBar(duration: new Duration(seconds: 6), content:Container(
                                   child:
@@ -519,7 +519,7 @@ Widget test() {
 
 //                            _handleSignIn();
                             }).catchError((onError){
-                               logger.e('at onError');
+//                               logger.e('at onError');
                               _scaffoldKey.currentState.showSnackBar(
                                 new SnackBar(duration: new Duration(seconds: 6), content:Container(
                                   child:

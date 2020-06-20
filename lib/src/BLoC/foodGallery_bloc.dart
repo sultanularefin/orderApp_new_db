@@ -116,7 +116,7 @@ class FoodGalleryBloc implements Bloc {
     documentSnapshot.documentID
     ).toList();
 
-    print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+   // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
     _allIngItemsFGBloc = ingItems;

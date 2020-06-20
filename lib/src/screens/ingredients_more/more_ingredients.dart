@@ -10,7 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 
 // DEPENDENCY FILES ENDS HERE.
 //sizeConstantsList
@@ -28,7 +28,7 @@ import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 // MODEL FILES BEGINS HERE.
 
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/itemData.dart';
+//import 'package:foodgallery/src/DataLayer/itemData.dart';
 
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 
@@ -76,15 +76,15 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
   double totalCartPrice = 0;
 //  double totalCartPrice = 1.00;
   int _itemCount=1;
-  final _itemData = ItemData();
+//  final _itemData = ItemData();
   String _searchString = '';
   String _currentCategory = "PIZZA".toLowerCase();
   String _firstTimeCategoryString = "";
   List<NewIngredient> ingredients;
 
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+//  var logger = Logger(
+//    printer: PrettyPrinter(),
+//  );
 
   int selectedIngredientCount = 4; // DEFAULT INGREDIENTS.
 
@@ -302,7 +302,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //    print('widget.oneFoodItemData.itemName:__________________________________________ ${widget.oneFoodItemData.imageURL}');
     print('oneFoodItemandId.imageURL:_________________________________________ ${oneFoodItemandId2.imageURL}');
 
-    logger.i('oneFoodItemandId',oneFoodItemandId2);
+//    logger.i('oneFoodItemandId',oneFoodItemandId2);
 
 //    String a = Constants.SUCCESS_MESSAGE;
     if(_ingredientlistUnSelected==null){
@@ -831,12 +831,15 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                                                                 oneIngredient
                                                             )).toList();
 
+
+                                                            /*
                                                             logger.i('unSelectedDecremented.length',unSelectedDecremented.length);
 
                                                             logger.i('NEW SELECTED ||combinedSelectedIngredientList.length',
                                                                 combinedSelectedIngredientList.length);
                                                             logger.i('_allIngredientsList.length',_allIngredientsList.length);
 
+                                                            */
 
                                                             setState(() {
                                                               defaultIngredientListForFood = combinedSelectedIngredientList;
@@ -1033,7 +1036,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
     print('unSelectedOneIngredient: ${unSelectedOneIngredient.ingredientName}');
 
-    logger.i("unSelectedOneIngredient: ",unSelectedOneIngredient.ingredientAmountByUser);
+//    logger.i("unSelectedOneIngredient: ",unSelectedOneIngredient.ingredientAmountByUser);
 
 
     int currentAmount = unSelectedOneIngredient.ingredientAmountByUser;
@@ -1269,7 +1272,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 
     print('selectedOneIngredient: ${selectedOneIngredient.ingredientName}');
 
-    logger.i('docID: ',selectedOneIngredient.documentId);
+//    logger.i('docID: ',selectedOneIngredient.documentId);
 
 
     String imageURLFinal = (selectedOneIngredient.imageURL == '') ?

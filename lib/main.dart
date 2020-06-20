@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 
 
 //import 'package:foodgallery/src/BLoC/app_bloc.dart';
@@ -37,11 +37,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    final logger = Logger(
-      printer: PrettyPrinter(),
-    );
+//    final logger = Logger(
+//      printer: PrettyPrinter(),
+//    );
 
-    logger.e('reached main\'s build');
+//    logger.e('reached main\'s build');
 //    final textTheme = Theme.of(context).textTheme;
 
 //    FoodItemWithDocID emptyFoodItemWithDocID =new FoodItemWithDocID();

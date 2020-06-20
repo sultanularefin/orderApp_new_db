@@ -3,7 +3,7 @@
 //### EXTERNAL PACKAGES
 import 'dart:async';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 
 
 //### LOCAL DATA RELATED RESOURCES
@@ -12,7 +12,7 @@ import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
 
 
 //import 'package:foodgallery/src/DataLayer/Order.dart';
@@ -28,14 +28,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 class IdentityBloc implements Bloc {
 
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+//  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
 
 
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+//  var logger = Logger(
+//    printer: PrettyPrinter(),
+//  );
 
 
 
@@ -90,7 +90,7 @@ class IdentityBloc implements Bloc {
 
 
   IdentityBloc() {
-    print("at the begin of Constructor [IdentityBloc]");
+    // print("at the begin of Constructor [IdentityBloc]");
 
     // TO  DO NEED TO CHECK SHARED PREFERENCES.
     // MAY BE MORE CHECK FIREBASE , TOO FOR THAT REGARD.
@@ -114,7 +114,7 @@ class IdentityBloc implements Bloc {
     AuthResult result = await _auth.signInWithEmailAndPassword(email:
     email, password: password);
 
-  print('result:  IIIII   >>>>>  $result'  );
+ // print('result:  IIIII   >>>>>  $result'  );
 
 
     if (result.user.email != null) {
@@ -153,18 +153,18 @@ class IdentityBloc implements Bloc {
         };
 
 
-    print('setString method going to be called where key is userInfo');
+  //  print('setString method going to be called where key is userInfo');
     prefs.setString('userInfo', jsonEncode({
       'email': loggerEmail,
       'password': loggerPassword,
 //      'uid': uid,
     })).then((onValue) =>
     {
-      print('at then of prefs.setString(userInfo.....')
+    //  print('at then of prefs.setString(userInfo.....')
     });
 
 
-    print('user set in mobile storage');
+   // print('user set in mobile storage');
 
 
     final resultString = prefs.getString("userInfo");
@@ -173,12 +173,12 @@ class IdentityBloc implements Bloc {
         resultString
     );
 
-    print('Howdy, ${user['email']}');
+   // print('Howdy, ${user['email']}');
 
 
-    print('password ${user['password']}');
+   // print('password ${user['password']}');
 
-    print('result_in_prefs: ' + resultString);
+  //  print('result_in_prefs: ' + resultString);
   }
 
 
@@ -188,7 +188,7 @@ class IdentityBloc implements Bloc {
 
 //  print('result: '  + result);
 
-    print('result: ' + result.user.email);
+   // print('result: ' + result.user.email);
 
     FirebaseUser fireBaseUserRemote = result.user;
 
@@ -234,7 +234,7 @@ class IdentityBloc implements Bloc {
 
   void loadUserFromConstructor(/*String uid*/) async {
 
-    print('at loadUser of Welcome Page');
+   // print('at loadUser of Welcome Page');
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
 //    ??=
@@ -245,28 +245,28 @@ class IdentityBloc implements Bloc {
     final resultString =  prefs.getString("userInfo");
 
     if(resultString != null) {
-      print('resultString in Welcome Page $resultString');
+   //   print('resultString in Welcome Page $resultString');
 
       Map<String, dynamic> user = jsonDecode(
           resultString
       );
 
-      print('Howdy, ${user['email']}!');
+     // print('Howdy, ${user['email']}!');
 
 
-      print('password ${user['password']}.');
+    //  print('password ${user['password']}.');
 
-      print('result_in_prefs: WelCome Page ' + resultString);
+    //  print('result_in_prefs: WelCome Page ' + resultString);
 
       String storedEmail = user['email'];
 
       String storedPassWord = user['password'];
 
-      print('email $storedEmail');
-      print('password $storedPassWord');
+     // print('email $storedEmail');
+     // print('password $storedPassWord');
 
       if ((storedEmail != null) && (storedPassWord != null)) {
-        print("email && password found");
+      //  print("email && password found");
 
         // NOW I NEED TO CHECK THIS STORED CREDENTIALS WITH FIREBASE AUTHENTICATION.
 
@@ -287,7 +287,7 @@ class IdentityBloc implements Bloc {
       }
     }
     else {
-      print("at not found of loadUser From Constructor");
+     // print("at not found of loadUser From Constructor");
     }
     //1 means SharedPreference not empty.
 
@@ -295,7 +295,7 @@ class IdentityBloc implements Bloc {
 
   Future loadUserNotConstructor(/*String uid*/) async {
 
-    print('at loadUser of Welcome Page');
+    // print('at loadUser of Welcome Page');
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
 //    ??=
@@ -305,29 +305,29 @@ class IdentityBloc implements Bloc {
 
     final resultString =  prefs.getString("userInfo");
 
-    print('resultString in Welcome Page $resultString');
+  //  print('resultString in Welcome Page $resultString');
 
     Map<String,  dynamic> user = jsonDecode(
         resultString
     );
 
-    print('Howdy, ${user['email']}!');
+   // print('Howdy, ${user['email']}!');
 
 
-    print('password ${user['password']}.');
+    // print('password ${user['password']}.');
 
-    print('result_in_prefs: WelCome Page ' + resultString);
+  //  print('result_in_prefs: WelCome Page ' + resultString);
 
     String storedEmail = user['email'];
 
     String storedPassWord = user['password'];
 
-    print('email $storedEmail');
-    print('password $storedPassWord');
+   // print('email $storedEmail');
+    // print('password $storedPassWord');
 
     if((storedEmail!= null) && (storedPassWord!=null)){
 
-      print("email && password found");
+    //  print("email && password found");
 
       // NOW I NEED TO CHECK THIS STORED CREDENTIALS WITH FIREBASE AUTHENTICATION.
 
@@ -344,7 +344,7 @@ class IdentityBloc implements Bloc {
 //      _allIngredientListController.sink.add(ingItems);
 
     }
-    print("not found");
+   // print("not found");
 
     //1 means SharedPreference not empty.
 

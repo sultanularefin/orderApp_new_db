@@ -16,7 +16,7 @@ import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 
 import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppingCart.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 
@@ -60,9 +60,9 @@ class ShoppingCart extends StatefulWidget {
 class _ShoppingCartState extends State<ShoppingCart> {
 
 
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+//  var logger = Logger(
+//    printer: PrettyPrinter(),
+//  );
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -7337,8 +7337,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
 
               _currentPaymentTypeIndex = selectedOne.index;
+
+              /*
               logger.e('selectedOne.index',selectedOne.index);
               logger.e('selectedOne.isSelected',selectedOne.isSelected);
+              */
 
 
 
@@ -7605,8 +7608,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
 
               _currentPaymentTypeIndex = selectedOne.index;
-              logger.e('selectedOne.index',selectedOne.index);
-              logger.e('selectedOne.isSelected',selectedOne.isSelected);
+//              logger.e('selectedOne.index',selectedOne.index);
+//              logger.e('selectedOne.isSelected',selectedOne.isSelected);
 
 
 
@@ -8917,7 +8920,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 // 4511 is for the OBSCURED PART.
   Widget _buildPaymentTypeSingleSelectOption(){
 
-    logger.i('at here: _buildPaymentTypeSingleSelectOption');
+//    logger.i('at here: _buildPaymentTypeSingleSelectOption');
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
 
@@ -8998,7 +9001,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    logger.i('_currentPaymentTypeIndex: at line # 4287 $_currentPaymentTypeIndex');
+//    logger.i('_currentPaymentTypeIndex: at line # 4287 $_currentPaymentTypeIndex');
     String paymentTypeName = onePaymentType.paymentTypeName;
     String paymentIconName = onePaymentType.paymentTypeName;
     String borderColor = onePaymentType.borderColor;

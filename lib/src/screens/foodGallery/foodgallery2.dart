@@ -32,7 +32,7 @@ import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 
 
 //import 'package:google_sign_in/google_sign_in.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 //import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 //import 'package:neumorphic/neumorphic.dart';
 
@@ -184,9 +184,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
   num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
 
 
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+//  var logger = Logger(
+//    printer: PrettyPrinter(),
+//  );
 
 
 
@@ -2275,9 +2275,9 @@ Widget work1(BuildContext context){
   _navigateAndDisplaySelection(BuildContext context,FoodItemWithDocID oneFoodItem) async {
 
 
-    var logger = Logger(
-      printer: PrettyPrinter(),
-    );
+//    var logger = Logger(
+//      printer: PrettyPrinter(),
+//    );
 
 
     // Navigator.push returns a Future that completes after calling
@@ -2299,7 +2299,7 @@ Widget work1(BuildContext context){
 //                                    List<NewIngredient> test = blocD.allIngredients;
 
 
-    logger.e('tempIngs_push 1: $tempIngs');
+//    logger.e('tempIngs_push 1: $tempIngs');
 
 
 //    blocD.setallIngredients(tempIngs);
