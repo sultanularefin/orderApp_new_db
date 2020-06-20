@@ -973,7 +973,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
     return    Container(
 
-        color:Colors.greenAccent,
+        color:Colors.white,
 //        color:Colors.white,
         child: Row(
             mainAxisAlignment: MainAxisAlignment
@@ -2034,7 +2034,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
-                  color: Colors.lightGreenAccent,
+                  color: Colors.white,
                 ),
 
 
@@ -2065,7 +2065,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
-                          color: Colors.lightGreenAccent,
+                          color: Colors.white,
                         ),
                       )
                   )
@@ -2088,7 +2088,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
-                          color: Colors.lightGreenAccent,
+                          color: Colors.white,
                         ),
                       )
                   )
@@ -2097,7 +2097,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             else{
 
               return Container(
-                color: Color(0xffabc111),
+                color: Color(0xFFffffff),
                 child: GridView.builder(
 
 
@@ -2440,7 +2440,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               child: Text(
                 oneSize.toUpperCase(), style:
               TextStyle(
-                  color:Color(0xff707070),
+                  color:Color(0xff54463E),
 
                   fontWeight: FontWeight.bold,
                   fontSize: 17),
