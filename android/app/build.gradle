@@ -72,6 +72,8 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+
+    /*
     splits {
         abi {
             reset()
@@ -81,6 +83,7 @@ android {
 //            , "arm64-v8a",
         }
     }
+    */
 
     buildTypes {
         release {
