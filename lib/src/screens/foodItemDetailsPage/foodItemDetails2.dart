@@ -502,7 +502,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       },
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 1000),
+                                  duration: Duration(milliseconds: 500),
                                   top: showUnSelectedIngredients
                                       ? displayHeight(context)/7.5
                                       /*THIS IS TOP MARGIN */ - MediaQuery
@@ -971,8 +971,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         child: Row(
             mainAxisAlignment: MainAxisAlignment
                 .end,
-            crossAxisAlignment: CrossAxisAlignment
-                .center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: <
                 Widget>[
 
@@ -983,7 +982,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 width: displayWidth(
                     context) /4,
 
-                height: displayHeight(context)/23.4,
+                height: displayHeight(context)/25.4,
 //                alignment: Alignment.center,
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child:
@@ -1001,7 +1000,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
 //          disabledBorderColor: false,
                   borderSide: BorderSide(
-                    color: Color(0xffFEE295),
+                    color: Color(0xff000000),
                     style: BorderStyle.solid,
                     width: 3.6,
                   ),
@@ -1045,7 +1044,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               fontWeight: FontWeight
                                   .bold,
                               color: Color(0xff000000),
-                              fontSize: 20),
+                              fontSize: 18),
                         ),
                       ],
                     ),
@@ -1136,13 +1135,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                    logger.e('itemCountNew: $itemCountNew');
                       return Container(
-                        color: Colors.white,
+                        color: Colors.indigoAccent,
                         margin: EdgeInsets.symmetric(
                             horizontal: 0,
                             vertical: 0),
 
                         width: displayWidth(context) /
-                            4.8,
+                            5,
 //                height: 45,
                         height: displayHeight(context) / 21,
 
@@ -1150,8 +1149,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         child:
                         Row(
                           mainAxisAlignment: MainAxisAlignment
-                              .start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                              .end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
 
 
@@ -1166,7 +1165,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 0, vertical: 0),
                               icon: Icon(Icons.add_circle_outline),
-                              iconSize: 30,
+                              iconSize: 32,
 
                               tooltip: 'Increase product count by 1 ',
                               onPressed: () {
@@ -1374,7 +1373,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   horizontal: 0, vertical: 0),
                               icon: Icon(Icons.remove_circle_outline),
 //                                                                            icon: Icon(Icons.remove),
-                              iconSize: 30,
+                              iconSize: 32,
                               tooltip: 'Decrease product count by 1',
                               onPressed: () {
                                 final foodItemDetailsbloc = BlocProvider.of<
