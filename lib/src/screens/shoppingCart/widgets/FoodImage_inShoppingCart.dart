@@ -62,7 +62,9 @@ class FoodImageInShoppingCart extends StatelessWidget {
                     width:90,
                     height: 170,
 //                  width:displayWidth(context) / 15,
-                    color:Colors.purpleAccent,
+//                    color:Colors.purpleAccent,
+//                    color: Colors
+                    color: Color(0xffF4F6CE),
                     padding: EdgeInsets.fromLTRB(
                         0, 12, 0, 12),
                     //  child: Card(
@@ -245,7 +247,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
     else{
       return Container(
-        color: Color(0xFFffffff),
+//        color: Color(0xFFffffff),
+        color: Color(0xffF4F6CE),
 //      height: displayHeight(context)/4,
         height:displayWidth(context)/3.8,
 //        height: displayWidth(context) / 3,
@@ -273,7 +276,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
                     width:90,
                     height: 170,
 //                  width:displayWidth(context) / 15,
-                    color:Colors.white,
+//                    color:Colors.white,
+                    color: Color(0xffF4F6CE),
                     padding: EdgeInsets.fromLTRB(
                         0, 12, 0, 12),
                     //  child: Card(
