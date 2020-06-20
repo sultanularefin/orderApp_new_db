@@ -308,7 +308,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
                                 // INCREASE THE HEIGHT TO MAKE THE IMAGE CONTAINER MORE SMALLER.
 
                                 decoration: new BoxDecoration(
-                                  color: Colors.white,
+//                                  color: Colors.white,
+                                  color: Color(0xffF4F6CE),
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -339,7 +340,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
                   ),
 
                   Container(
-                    color:Colors.white,
+//                    color:Colors.white,
+                    color: Color(0xffF4F6CE),
 
                     width: 70,
                     alignment: Alignment.topLeft,
@@ -363,7 +365,8 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
 
             Container(
-              color:Colors.white,
+//              color:Colors.white,
+              color: Color(0xffF4F6CE),
 
               width: 130,
               alignment: Alignment.centerLeft,
@@ -381,7 +384,9 @@ class FoodImageInShoppingCart extends StatelessWidget {
             Container(
 
 //              color: Colors.green,
-              color: Colors.white,
+//              color: Colors.white,
+
+              color: Color(0xffF4F6CE),
 
               margin: EdgeInsets.fromLTRB(
                   0, 10, 0, 0),
