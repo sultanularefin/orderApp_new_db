@@ -1042,7 +1042,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               fontWeight: FontWeight
                                   .bold,
                               color: Color(0xff000000),
-                              fontSize: 16),
+                              fontSize: 20),
                         ),
                       ],
                     ),
@@ -2410,6 +2410,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
         Container(
           margin: EdgeInsets.fromLTRB(5, 3,5,5),
+          width: displayWidth(context)/5.5,
           child:
           RaisedButton(
             color: Color(0xffFFE18E),
@@ -2433,7 +2434,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   color:Color(0xff707070),
 
                   fontWeight: FontWeight.bold,
-                  fontSize: 14),
+                  fontSize: 17),
               ),
             ),
             onPressed: () {
@@ -2465,6 +2466,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
         Container(
           margin: EdgeInsets.fromLTRB(5, 3,5,5),
+          width: displayWidth(context)/5.5,
           child:
           OutlineButton(
             color: Color(0xffFEE295),
@@ -2491,7 +2493,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   color:Color(0xff54463E),
 
                   fontWeight: FontWeight.bold,
-                  fontSize: 14),
+                  fontSize: 17),
               ),
             ),
             onPressed: () {
