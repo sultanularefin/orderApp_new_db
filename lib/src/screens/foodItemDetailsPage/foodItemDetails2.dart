@@ -1011,7 +1011,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
 //          disabledBorderColor: false,
                   borderSide: BorderSide(
-                    color: Color(0xff000000),
+                    color: Color(0xff707070),
                     style: BorderStyle.solid,
                     width: 3.6,
                   ),
@@ -1054,8 +1054,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                           style: TextStyle(
                               fontWeight: FontWeight
                                   .bold,
-                              color: Color(0xff000000),
-                              fontSize: 18),
+                              color: Color(0xff707070),
+                              fontSize: 17),
                         ),
                       ],
                     ),
@@ -2060,7 +2060,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   width: displayWidth(context) * 0.57,
 //              color: Colors.yellowAccent,
 //                    color: Color(0xff54463E),
-                  color: Color(0xfff4444aa),
+                  color: Color(0xFFffffff),
                   alignment: Alignment.center,
 
                   // PPPPP
@@ -2083,7 +2083,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   width: displayWidth(context) * 0.57,
 //              color: Colors.yellowAccent,
 //                    color: Color(0xff54463E),
-                  color: Color(0xfff4444aa),
+                  color: Color(0xffFFFFFF),
                   alignment: Alignment.center,
 
                   // PPPPP
@@ -2093,7 +2093,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
-                          color: Colors.white,
+                          color: Colors.grey,
                         ),
                       )
                   )
@@ -2163,14 +2163,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       width: displayWidth(context) * 0.57,
 //              color: Colors.yellowAccent,
 //                    color: Color(0xff54463E),
-      color: Color(0xfff4444aa),
+      color: Color(0xFFffffff),
 
 
       // PPPPP
 
       child: (
           Container(
-            color: Color.fromRGBO(239, 239, 239, 0),
+//            color: Color.fromRGBO(239, 239, 239, 0),
+            color: Colors.red,
             padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
                 horizontal: 4.0, vertical: 15.0),
