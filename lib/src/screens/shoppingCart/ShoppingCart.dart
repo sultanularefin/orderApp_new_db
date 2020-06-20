@@ -6893,7 +6893,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
           Container(
-            
+
+
+
 //            alignment: Alignment.center,
             /*
     padding: EdgeInsets.fromLTRB(displayWidth(context)/3,
@@ -6901,7 +6903,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             */
             child:
             AnimatedSwitcher(
-              duration: Duration(milliseconds: 1000),
+              duration: Duration(milliseconds: 500),
 //
               // animatedUnObscuredCancelPayButtonTakeAway
               // animatedObscuredCancelPayButtonTakeAway
@@ -6965,7 +6967,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
           Container(
-            
+
 //            alignment: Alignment.center,
             /*
     padding: EdgeInsets.fromLTRB(displayWidth(context)/3,
@@ -7015,7 +7017,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                 Container(
-                  width:displayWidth(context)/2.4,
+                  width:displayWidth(context)/3.1,
                   child: OutlineButton(
                     onPressed: (){ print('Cancel Pressed obscured');
 
@@ -7034,7 +7036,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
 
 
-                      /*
+                    /*
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
                         color: Color(0xff707070),
@@ -7051,7 +7053,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 SizedBox(width: displayWidth(context)/12,),
                 Container(
-                  width:displayWidth(context)/2.4,
+                  width:displayWidth(context)/3.1,
                   child: OutlineButton(
                     onPressed: () async {
 
@@ -7070,7 +7072,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
                   ),
 
+
+
                 ),
+
+
               ],
             ),
           ),
@@ -7161,15 +7167,38 @@ class _ShoppingCartState extends State<ShoppingCart> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+
+
+
+
             Container(
-              width:displayWidth(context)/2.4,
+              width:displayWidth(context)/3.0,
               child: OutlineButton(
+                color: Color(0xffFC0000),
+                clipBehavior:Clip.hardEdge,
+//            ContinuousRectangleBorder
+//            BeveledRectangleBorder
+//            RoundedRectangleBorder
+                borderSide: BorderSide(
+                  color: Color(0xff53453D), // 0xff54463E
+                  style: BorderStyle.solid,
+                  width: 3.6,
+                ),
+                shape:RoundedRectangleBorder(
+
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                child:Container(
+
+//              alignment: Alignment.center,
+                  child: Text('Cancel',
+                    style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+
+                ),
                 onPressed: (){
                   print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
 
-
                   /*
-
                   cancelPaySelect.page=1;
                   return Navigator.of(context).pop(
                       BlocProvider<ShoppingCartBloc>(
@@ -7178,41 +7207,45 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       BlocProvider<FoodGalleryBloc>(
                           bloc: FoodGalleryBloc(),
                           child: FoodGallery2()
-
                       )
                   ),);
                   */
 
-
-
-
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
                   shoppingCartBloc.cancelButtonPressed();
-
-
-
                   return Navigator.pop(context,true);
                 },
-                child: Text('Cancel',
-                  style: TextStyle(color: Color(0xffFC0000),fontSize: 30),),
-                shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                  side: BorderSide(
-                    color: Color(0xffFC0000),
-                    style: BorderStyle.solid,
-                    width: 3.6,
-                  ),
+              ),
+            ),
+
+            SizedBox(width: displayWidth(context)/12,),
+
+            Container(
+              width:displayWidth(context)/3.0,
+              child: OutlineButton(
+                color: Colors.green,
+                clipBehavior:Clip.hardEdge,
+//            ContinuousRectangleBorder
+//            BeveledRectangleBorder
+//            RoundedRectangleBorder
+                borderSide: BorderSide(
+                  color: Color(0xff53453D), // 0xff54463E
+                  style: BorderStyle.solid,
+                  width: 3.6,
+                ),
+                shape:RoundedRectangleBorder(
+
+
                   borderRadius: BorderRadius.circular(35.0),
                 ),
-              ),
+                child:Container(
 
-            ),
-            SizedBox(width: displayWidth(context)/12,),
-            Container(
+//              alignment: Alignment.center,
 
-              width:displayWidth(context)/2.4,
-              child: OutlineButton(
+                  child: Text('Pay',style: TextStyle(color: Colors.green,
+                    fontSize: 30,fontWeight: FontWeight.bold,),
+                  ),),
                 onPressed: () async{
 //                  print('on Pressed of Pay');
 //                  return Navigator.pop(context,false);
@@ -7227,33 +7260,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
                       .showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
-
-
                   print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
 
 
-
-//                  print('docId: $docId');
-
-//                     if(docId !=null)
-//                     {
-//                       return Navigator.pop(context,false);
-//                     }
-
                 },
-                child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
-                shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                  side: BorderSide(
-                    color:Colors.green,
-                    style: BorderStyle.solid,
-                    width: 3.6,
-                  ),
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
               ),
-
             ),
+
+
           ],
         ),
       );
@@ -7278,6 +7292,103 @@ class _ShoppingCartState extends State<ShoppingCart> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+
+
+            Container(
+              width:displayWidth(context)/3.0,
+              child: OutlineButton(
+                color: Color(0xffFC0000),
+                clipBehavior:Clip.hardEdge,
+//            ContinuousRectangleBorder
+//            BeveledRectangleBorder
+//            RoundedRectangleBorder
+                borderSide: BorderSide(
+                  color: Color(0xff53453D), // 0xff54463E
+                  style: BorderStyle.solid,
+                  width: 3.6,
+                ),
+                shape:RoundedRectangleBorder(
+
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                child:Container(
+
+//              alignment: Alignment.center,
+                  child: Text('Cancel',
+                    style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+
+                ),
+                onPressed: (){
+                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+
+                  /*
+                  cancelPaySelect.page=1;
+                  return Navigator.of(context).pop(
+                      BlocProvider<ShoppingCartBloc>(
+                          bloc: ShoppingCartBloc(cancelPaySelect),
+                      child:
+                      BlocProvider<FoodGalleryBloc>(
+                          bloc: FoodGalleryBloc(),
+                          child: FoodGallery2()
+                      )
+                  ),);
+                  */
+
+                  final shoppingCartBloc = BlocProvider.of<
+                      ShoppingCartBloc>(context);
+                  shoppingCartBloc.cancelButtonPressed();
+                  return Navigator.pop(context,true);
+                },
+              ),
+            ),
+
+            SizedBox(width: displayWidth(context)/12,),
+
+            Container(
+              width:displayWidth(context)/3.0,
+              child: OutlineButton(
+                color: Colors.green,
+                clipBehavior:Clip.hardEdge,
+//            ContinuousRectangleBorder
+//            BeveledRectangleBorder
+//            RoundedRectangleBorder
+                borderSide: BorderSide(
+                  color: Color(0xff53453D), // 0xff54463E
+                  style: BorderStyle.solid,
+                  width: 3.6,
+                ),
+                shape:RoundedRectangleBorder(
+
+
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                child:Container(
+
+//              alignment: Alignment.center,
+
+                  child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30,fontWeight: FontWeight.bold,),
+                  ),),
+                onPressed: () async{
+//                  print('on Pressed of Pay');
+//                  return Navigator.pop(context,false);
+
+                  final shoppingCartBloc = BlocProvider.of<
+                      ShoppingCartBloc>(context);
+
+
+                  String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+
+                  _scaffoldKey.currentState
+//                  Scaffold.of(context)
+//                    ..removeCurrentSnackBar()
+                      .showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
+                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
+
+
+                },
+              ),
+            ),
+            /*
             Container(
               child: OutlineButton(
                 onPressed: (){
@@ -7366,6 +7477,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ),
 
             ),
+
+            */
           ],
         ),
       );
