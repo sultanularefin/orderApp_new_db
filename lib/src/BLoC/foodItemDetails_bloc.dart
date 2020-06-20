@@ -504,11 +504,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //     0xffFEE295 false
     FoodPropertyMultiSelect _vsm = new FoodPropertyMultiSelect(
-      borderColor: '0xffFEE295',
+      borderColor: '0xff34720D',
       index: 2,
       isSelected: false,
       itemName: 'VSM',
-      itemTextColor: '0xffFEE295',
+      itemTextColor: '0xff34720D',
     );
 
 
@@ -523,7 +523,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List <FoodPropertyMultiSelect> multiSelectArray = new List<FoodPropertyMultiSelect>();
 
-    multiSelectArray.addAll([_m,_vsm, _vs,_org]);
+    multiSelectArray.addAll([_org,_vs,_vsm,_m]);
 
     _multiSelectForFood = multiSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 

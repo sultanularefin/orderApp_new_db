@@ -720,8 +720,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                       padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
                                                       color:Colors.white,
-                                                      height: 50,
-                                                      width: displayWidth(context) * 0.57,
+                                                      height: 65,
+                                                      width: displayWidth(context) /1.94,
                                                       child:
                                                       _buildMultiSelectOptions(),
 
@@ -1510,7 +1510,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             Container(
 // TO Be
 //          height:45, // same as the heidth of increment decrement button.
-              width: displayWidth(context)/7,
+              width: displayWidth(context) /5,
+              height: displayHeight(context) /36,
+
 //              height:45,
 //              alignment: Alignment.center,
               // pp ToDOPPP
@@ -1525,6 +1527,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //              stringifiedFoodItemIngredients,
 //
 
+                /*
               Text(
 //                unSelectedOneIngredient.ingredientName,
                 unSelectedOneIngredient.ingredientName.length==0?
@@ -1536,7 +1539,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                    color: Colors.blueGrey[800],
 
                   fontWeight: FontWeight.normal,
-                  fontSize: 18,
+                  fontSize: 17,
+                ),
+
+              ),
+              */
+              Text(unSelectedOneIngredient.ingredientName,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color:Color(0xff707070),
+//                                    color: Colors.blueGrey[800],
+
+                  fontWeight: FontWeight.normal,
+
+                  fontSize: 16,
                 ),
 
               ),
@@ -1551,7 +1567,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                                              height: displayHeight(context) *0.11,
               height:35,
-              width: 150,
+              width: displayWidth(context) /5,
               // same as the heidth of increment decrement button. // 45
               // later changed height to 40.
               decoration: BoxDecoration(
@@ -1877,9 +1893,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
       child:  x.isSelected == true  ?
       Container(
-        width:70,
-        alignment: Alignment.center,
-        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        width:displayWidth(context)/11,
+        height:displayHeight(context)/48,
+//        alignment: Alignment.center,
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         child:
         RaisedButton(
           color: c1,
@@ -1896,14 +1913,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           child:Container(
 
-            alignment: Alignment.center,
+//            alignment: Alignment.center,
             child: Text(
               itemName.toUpperCase(), style:
             TextStyle(
                 color:Colors.white,
 
                 fontWeight: FontWeight.bold,
-                fontSize: 16),
+                fontSize: 20),
             ),
           ),
           onPressed: () {
@@ -1926,9 +1943,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           :
 
       Container(
-        width:70,
-        alignment: Alignment.center,
-        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        width:displayWidth(context)/11,
+        height:displayHeight(context)/48,
+//        alignment: Alignment.center,
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         child: OutlineButton(
 //                        color: Color(0xffFEE295),
           clipBehavior: Clip.hardEdge,
@@ -1949,14 +1967,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           ),
 
           child: Container(
-            alignment: Alignment.center,
+//            alignment: Alignment.center,
             child: Text(
+
               itemName.toUpperCase(), style:
             TextStyle(
                 color: c1,
 
                 fontWeight: FontWeight.bold,
-                fontSize: 16),
+                fontSize: 20),
             ),
           ),
           onPressed: () {
@@ -2407,14 +2426,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             child:Container(
 
-              alignment: Alignment.center,
+//              alignment: Alignment.center,
               child: Text(
                 oneSize.toUpperCase(), style:
               TextStyle(
                   color:Color(0xff707070),
 
                   fontWeight: FontWeight.bold,
-                  fontSize: 12),
+                  fontSize: 14),
               ),
             ),
             onPressed: () {
@@ -2465,14 +2484,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             ),
             child:Container(
 
-              alignment: Alignment.center,
+//              alignment: Alignment.center,
               child: Text(
                 oneSize.toUpperCase(), style:
               TextStyle(
                   color:Color(0xff54463E),
 
                   fontWeight: FontWeight.bold,
-                  fontSize: 12),
+                  fontSize: 14),
               ),
             ),
             onPressed: () {
