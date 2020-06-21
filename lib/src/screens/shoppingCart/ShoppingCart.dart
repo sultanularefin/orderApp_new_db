@@ -7031,7 +7031,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       side: BorderSide(
                         color:Color(0xffFC0000),
                         style: BorderStyle.solid,
-                        width: 3.6,
+                        width:7.6,
                       ),
                       borderRadius: BorderRadius.circular(35.0),
                     ),
@@ -7067,7 +7067,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       side: BorderSide(
                         color:Colors.green,
                         style: BorderStyle.solid,
-                        width: 3.6,
+                        width:7.6,
                       ),
                       borderRadius: BorderRadius.circular(35.0),
                     ),
@@ -7115,7 +7115,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       side: BorderSide(
                         color:Color(0xffFC0000),
                         style: BorderStyle.solid,
-                        width: 3.6,
+                        width:7.6,
                       ),
                       borderRadius: BorderRadius.circular(35.0),
                     ),
@@ -7138,7 +7138,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       side: BorderSide(
                         color:Colors.green,
                         style: BorderStyle.solid,
-                        width: 3.6,
+                        width:7.6,
                       ),
                       borderRadius: BorderRadius.circular(35.0),
                     ),
@@ -7173,7 +7173,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-              width:displayWidth(context)/3.5,
+              width:displayWidth(context)/4,
+              height:displayHeight(context)/24,
               child: OutlineButton(
                 color: Color(0xffFC0000),
                 clipBehavior:Clip.hardEdge,
@@ -7181,9 +7182,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
                 borderSide: BorderSide(
-                  color: Color(0xff53453D), // 0xff54463E
+                  color: Color(0xffFC0000), // 0xff54463E
                   style: BorderStyle.solid,
-                  width: 3.6,
+                  width:7.6,
                 ),
                 shape:RoundedRectangleBorder(
 
@@ -7223,7 +7224,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             SizedBox(width: displayWidth(context)/12,),
 
             Container(
-              width:displayWidth(context)/3.5,
+              width:displayWidth(context)/4,
+              height:displayHeight(context)/24,
               child: OutlineButton(
                 color: Colors.green,
                 clipBehavior:Clip.hardEdge,
@@ -7231,9 +7233,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
                 borderSide: BorderSide(
-                  color: Color(0xff53453D), // 0xff54463E
+                  color: Colors.green, // 0xff54463E
                   style: BorderStyle.solid,
-                  width: 3.6,
+                  width:7.6,
                 ),
                 shape:RoundedRectangleBorder(
 
@@ -7296,7 +7298,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-              width:displayWidth(context)/3.5,
+              width:displayWidth(context)/4,
+              height:displayHeight(context)/24,
               child: OutlineButton(
                 color: Color(0xffFC0000),
                 clipBehavior:Clip.hardEdge,
@@ -7304,9 +7307,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
                 borderSide: BorderSide(
-                  color: Color(0xff53453D), // 0xff54463E
+                  color: Color(0xffFC0000), // 0xff54463E
                   style: BorderStyle.solid,
-                  width: 3.6,
+                  width:7.6,
                 ),
                 shape:RoundedRectangleBorder(
 
@@ -7346,7 +7349,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             SizedBox(width: displayWidth(context)/12,),
 
             Container(
-              width:displayWidth(context)/3.5,
+              width:displayWidth(context)/4,
+              height:displayHeight(context)/24,
               child: OutlineButton(
                 color: Colors.green,
                 clipBehavior:Clip.hardEdge,
@@ -7354,9 +7358,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
                 borderSide: BorderSide(
-                  color: Color(0xff53453D), // 0xff54463E
+                  color: Colors.green, // 0xff54463E
                   style: BorderStyle.solid,
-                  width: 3.6,
+                  width:7.6,
                 ),
                 shape:RoundedRectangleBorder(
 
