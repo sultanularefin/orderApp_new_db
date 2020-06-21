@@ -50,7 +50,7 @@ android {
         applicationId "com.linkup.foodgallery"
 //        minSdkVersion 16
         // changed on june 20. 16 to 21
-        minSdkVersion 21
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -112,7 +112,8 @@ flutter {
 
 dependencies {
 
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.1'  //with androidx libraries
+    // implementation 'com.android.support:multidex:1.0.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

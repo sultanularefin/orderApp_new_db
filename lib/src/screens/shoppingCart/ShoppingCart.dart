@@ -7173,7 +7173,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-              width:displayWidth(context)/3.0,
+              width:displayWidth(context)/3.5,
               child: OutlineButton(
                 color: Color(0xffFC0000),
                 clipBehavior:Clip.hardEdge,
@@ -7223,7 +7223,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             SizedBox(width: displayWidth(context)/12,),
 
             Container(
-              width:displayWidth(context)/3.0,
+              width:displayWidth(context)/3.5,
               child: OutlineButton(
                 color: Colors.green,
                 clipBehavior:Clip.hardEdge,
@@ -7296,7 +7296,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-              width:displayWidth(context)/3.0,
+              width:displayWidth(context)/3.5,
               child: OutlineButton(
                 color: Color(0xffFC0000),
                 clipBehavior:Clip.hardEdge,
@@ -7346,7 +7346,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             SizedBox(width: displayWidth(context)/12,),
 
             Container(
-              width:displayWidth(context)/3.0,
+              width:displayWidth(context)/3.5,
               child: OutlineButton(
                 color: Colors.green,
                 clipBehavior:Clip.hardEdge,
