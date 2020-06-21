@@ -1934,7 +1934,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 color:Colors.white,
 
                 fontWeight: FontWeight.bold,
-                fontSize: 20),
+                fontSize: 18),
             ),
           ),
           onPressed: () {
