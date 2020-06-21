@@ -9,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
+//import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
-import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+//import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 
 import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppingCart.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
@@ -23,7 +23,7 @@ import 'package:foodgallery/src/DataLayer/models/Order.dart';
 // model files
 
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
-import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+//import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/PaymentTypeSingleSelect.dart';
 
@@ -285,12 +285,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   child: Neumorphic(
                                     // State of Neumorphic (may be convex, flat & emboss)
 
-                                    boxShape: NeumorphicBoxShape
-                                        .roundRect(
-                                      BorderRadius.all(
-                                          Radius.circular(15)),
+//                                      NeumorphicStyle
+//                                      NeumorphicBoxShape
+//                                      boxShape:
 
-                                    ),
                                     curve: Neumorphic.DEFAULT_CURVE,
                                     style: NeumorphicStyle(
                                         shape: NeumorphicShape
@@ -298,7 +296,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         depth: 8,
                                         lightSource: LightSource
                                             .topLeft,
-                                        color: Colors.white
+                                        color: Colors.white,
+                                        boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+
+                          ),
                                     ),
 
 

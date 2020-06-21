@@ -563,12 +563,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   Neumorphic(
                                     // State of Neumorphic (may be convex, flat & emboss)
 
+                                    /*
                                       boxShape: NeumorphicBoxShape
                                           .roundRect(
                                         BorderRadius.all(
                                             Radius.circular(15)),
 
                                       ),
+                                      */
                                       curve: Neumorphic.DEFAULT_CURVE,
                                       style: NeumorphicStyle(
                                           shape: NeumorphicShape
@@ -576,7 +578,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                           depth: 8,
                                           lightSource: LightSource
                                               .topLeft,
-                                          color: Colors.white
+                                          color: Colors.white,
+                                          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+                                      ),
                                       ),
 
 //                    MAX_DEPTH,DEFAULT_CURVE
