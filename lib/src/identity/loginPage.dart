@@ -356,7 +356,7 @@ class _LoginPageState extends State<LoginPage> {
 
 //                            _handleSignIn();
                             }).catchError((onError){
-//                               logger.e('at onError');
+                               print('LOGIN ERROR **** at onError $onError ***');
                               _scaffoldKey.currentState.showSnackBar(
                                 new SnackBar(duration: new Duration(seconds: 6), content:Container(
                                   child:
