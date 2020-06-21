@@ -2283,7 +2283,14 @@ Widget work1(BuildContext context){
     // Navigator.push returns a Future that completes after calling
     // Navigator.pop on the Selection Screen.
 
+    //BELOW 2 LINES ARE FOR TEST FOR POPPING THE KEYBAORD FROM PAGE REDIRECTION
+    // FROM FOODDETAILS PAGE TO HERE.
+    // FOCUS WITH
+    FocusScopeNode currentFocus = FocusScope.of(context);
 
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
 
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
 
