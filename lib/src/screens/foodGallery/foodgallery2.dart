@@ -1862,11 +1862,11 @@ Widget work1(BuildContext context){
                                             euroPrice3 + '\u20AC',
                                             style: TextStyle(
                                                 fontWeight: FontWeight
-                                                    .normal,
+                                                    .w600,
 //                                          color: Colors.blue,
                                                 color: Color.fromRGBO(
                                                     112, 112, 112, 1),
-                                                fontSize: 20),
+                                                fontSize: 15),
                                           ),
 //                                    SizedBox(width: 10),
                                           SizedBox(
@@ -1891,7 +1891,7 @@ Widget work1(BuildContext context){
 //                                color:Color.fromRGBO(112,112,112,1),
 
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                                        fontSize: 16,
                                       ),
                                     ),)
                                     ,
@@ -1917,7 +1917,7 @@ Widget work1(BuildContext context){
                                             color: Color(0xff707070),
                                             fontWeight: FontWeight.normal,
                                             letterSpacing:0.5,
-                                            fontSize: 15,
+                                            fontSize: 12,
                                           ),
                                         )
                                     ),
@@ -2173,11 +2173,11 @@ Widget work1(BuildContext context){
                                               euroPrice3 + '\u20AC',
                                               style: TextStyle(
                                                   fontWeight: FontWeight
-                                                      .normal,
+                                                      .w600,
 //                                          color: Colors.blue,
                                                   color: Color.fromRGBO(
                                                       112, 112, 112, 1),
-                                                  fontSize: 20),
+                                                  fontSize: 15),
                                             ),
 //                                    SizedBox(width: 10),
                                             SizedBox(
@@ -2202,7 +2202,7 @@ Widget work1(BuildContext context){
 //                                color:Color.fromRGBO(112,112,112,1),
 
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 20,
+                                          fontSize: 16,
                                         ),
                                       ),)
                                       ,
@@ -2229,7 +2229,7 @@ Widget work1(BuildContext context){
                                               fontWeight: FontWeight.normal,
 //                                              fontSize: 15,
                                               letterSpacing:0.5,
-                                              fontSize: 15,
+                                              fontSize: 12,
                                             ),
                                           )
                                       ),
