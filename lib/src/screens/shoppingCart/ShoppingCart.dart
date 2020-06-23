@@ -115,15 +115,144 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   */
+/*
+  Future<void> _onBackPressed() {
+//    shoppingCartBloc.
+//    return StreamBuilder<List<SelectedFood>>(
+//      stream: shoppingCartbloc.getExpandedFoodsStream,
+    List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+    expandedFoodReturnTemp = shoppingCartBloc.getExpandedSelectedFood;
 
+    return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to go to home page'),
+        actions: <Widget>[
+          new GestureDetector(
+            onTap: () => Navigator.of(context).pop(expandedFoodReturnTemp),
+            child: Text("NO"),
+          ),
+          SizedBox(height: 16),
+          new GestureDetector(
+            onTap: () => Navigator.of(context).pop(expandedFoodReturnTemp),
+            child: Text("YES"),
+          ),
+        ],
+      ),
+    ) ??
+        return null;
+  }
+  */
 
+/*
+  Widget _onBackPressed2() async {
+
+    //    shoppingCartBloc.
+//    return StreamBuilder<List<SelectedFood>>(
+//      stream: shoppingCartbloc.getExpandedFoodsStream,
+
+//    List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
+
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    Order backReturnOrder = shoppingCartBloc.getCurrentOrder;
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Select some Food, please'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+//                        Text('you haven\'t selected any food yet, please select some food'),
+                Text('You need to select some food item in order to go to the shopping cart page.'),
+              ],
+            ),
+          ),
+
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Go to home page'),
+                onPressed: () {
+                  return Navigator.pop(context,backReturnOrder);
+//                Navigator.of(context).pop(backReturnOrder);
+                },
+              ),
+
+              FlatButton(
+                child: Text('Stay here'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+
+          ],
+        );
+      },
+    );
+
+    /*
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('This is a demo alert dialog.'),
+                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Go to home page'),
+              onPressed: () {
+                return Navigator.pop(context,backReturnOrder);
+//                Navigator.of(context).pop(backReturnOrder);
+              },
+            ),
+
+            FlatButton(
+              child: Text('Stay here'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+    */
+  }
+
+  */
 
 
   @override
   Widget build(BuildContext context) {
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-    return GestureDetector(
+    return   WillPopScope(
+        onWillPop: () async => true,
+//        onWillPop: () {
+
+//          return Navigator.pop(context,cancelPaySelect);
+//          return Future.value(_allow);
+
+          // if true allow back else block it
+//        },
+//      onWillPop: return _onBackPressed2(),
+
+
+    /*
+      GestureDetector(
         onTap: () {
           print('s');
 //                      Navigator.pop(context);
@@ -136,9 +265,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           }
         },
+
+          */
+
         child:
         Scaffold(
           key: _scaffoldKey,
+          backgroundColor: Colors.white.withOpacity(0.05),
 //          backgroundColor: Colors.purpleAccent,
 
 //      resizeToAvoidBottomPadding: false ,
@@ -256,13 +389,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                           return Container(
-//                          height: displayHeight(context) -
-//                              MediaQuery
-//                                  .of(context)
-//                                  .padding
-//                                  .top -
-//                              kToolbarHeight,
-//                          backgroundColor: Colors.white.withOpacity(0.05),
+//                            height: displayHeight(context) -
+//                                MediaQuery
+//                                    .of(context)
+//                                    .padding
+//                                    .top -
+//                                kToolbarHeight,
+//                            backgroundColor: Colors.white.withOpacity(0.05),
 //                          backgroundColor: Colors.white.withOpacity(0.05),
                             height: displayHeight(context),
                             child: Column(
@@ -7216,7 +7349,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
                   shoppingCartBloc.cancelButtonPressed();
-                  return Navigator.pop(context,true);
+
+
+//                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
+//                  List<SelectedFood> expandedFoodReturnTemp= [];
+//                  shoppingCartBloc.getExpandedSelectedFood;
+
+
+                  return Navigator.pop(context,cancelPaySelect);
+
+
+//                  return Navigator.pop(context,expandedFoodReturnTemp);
                 },
               ),
             ),
@@ -7257,13 +7400,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
 
 
-                  String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
 
-                  _scaffoldKey.currentState
+
+
+
+                  if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
+                    _scaffoldKey.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
-                      .showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
-                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
+                        .showSnackBar(
+                        SnackBar(content: Text("someThing went wrong")));
+                    print('something went wrong');
+                  }
+                  else{
+
+                    return Navigator.pop(context,tempOrderWithdocId);
+                  }
 
 
                 },
@@ -7341,7 +7494,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
                   shoppingCartBloc.cancelButtonPressed();
-                  return Navigator.pop(context,true);
+
+//                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
+//                  shoppingCartBloc.getExpandedSelectedFood;
+                  return Navigator.pop(context,cancelPaySelect);
+
+//                  return Navigator.pop(context,expandedFoodReturnTemp);
                 },
               ),
             ),
@@ -7379,7 +7537,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
+                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
 
+
+
+
+                  if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
+                    _scaffoldKey.currentState
+//                  Scaffold.of(context)
+//                    ..removeCurrentSnackBar()
+                        .showSnackBar(
+                        SnackBar(content: Text("someThing went wrong")));
+                    print('something went wrong');
+                  }
+                  else{
+
+                    return Navigator.pop(context,tempOrderWithdocId);
+                  }
+
+                  /*
 
                   String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
 
@@ -7389,6 +7565,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       .showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
                   print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
 
+                  */
 
                 },
               ),

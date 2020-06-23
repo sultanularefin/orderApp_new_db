@@ -154,14 +154,15 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //  final _formKey = GlobalKey<FormState>();
 
-  int _totalCount = 0;
+
   String _searchString = '';
   String _currentCategory = "pizza";
   String _firstTimeCategoryString = "";
 
 //  this can be defined in Shopping cart page like old way
-
+  int _totalCount = 0;
   List<SelectedFood> allSelectedFoodGallery = [];
+  double totalPriceState = 0;
 
   Order orderFG = new Order(
     selectedFoodInOrder: [],
@@ -172,7 +173,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
     totalPrice: 0,
     page:0,
   );
-  double totalPriceState = 0;
+
 
 //  double _total_cart_price = 1.00;
   // empty MEANS PIZZA
@@ -190,33 +191,33 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('want to logout'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('yes won\'t work'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+//  Future<void> _showMyDialog() async {
+//    return showDialog<void>(
+//      context: context,
+//      barrierDismissible: false, // user must tap button!
+//      builder: (BuildContext context) {
+//        return AlertDialog(
+//          title: Text('want to logout'),
+//          content: SingleChildScrollView(
+//            child: ListBody(
+//              children: <Widget>[
+//                Text('This is a demo alert dialog.'),
+//                Text('Would you like to approve of this message?'),
+//              ],
+//            ),
+//          ),
+//          actions: <Widget>[
+//            FlatButton(
+//              child: Text('yes won\'t work'),
+//              onPressed: () {
+//                Navigator.of(context).pop();
+//              },
+//            ),
+//          ],
+//        );
+//      },
+//    );
+//  }
 
 
   Future<void> logout(BuildContext context2) async {
@@ -1039,6 +1040,37 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
+  /*
+  Future<void> _showMyDialog33() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('This is a demo alert dialog.'),
+                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Approve'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+  */
+
+
   Widget shoppingCartWidget(){
 
 
@@ -1081,10 +1113,38 @@ Widget work1(BuildContext context){
 
       child: OutlineButton(
         onPressed: () async {
-          print(
-              ' method for old Outline button that deals with navigation to Shopping Cart Page');
+          if (_totalCount == 0) {
+            return showDialog<void>(
+              context: context,
+              barrierDismissible: true, // user must tap button!
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Select some Food, please'),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: <Widget>[
+//                        Text('you haven\'t selected any food yet, please select some food'),
+                        Text('You need to select some food item in order to go to the shopping cart page.'),
+                      ],
+                    ),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text('Agree'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+          else {
+            print(
+                ' method for old Outline button that deals with navigation to Shopping Cart Page');
 
-          // work 01.
+            // work 01.
 
 //          orderFG
 
@@ -1092,22 +1152,21 @@ Widget work1(BuildContext context){
 //      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 
-
 //              final locationBloc = BlocProvider.of<>(context);
 //                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
 
-          CustomerInformation oneCustomerInfo = new CustomerInformation(
-            address: '',
-            flatOrHouseNumber: '',
-            phoneNumber: '',
-            etaTimeInMinutes: -1,
+            CustomerInformation oneCustomerInfo = new CustomerInformation(
+              address: '',
+              flatOrHouseNumber: '',
+              phoneNumber: '',
+              etaTimeInMinutes: -1,
 //        CustomerInformation currentUser = _oneCustomerInfo;
 //    currentUser.address = address;
 //
 
-          );
+            );
 
-          /*
+            /*
       CustomerInformation oneCustomerInfo = new CustomerInformation(
         address:'',
         flatOrHouseNumber:'',
@@ -1120,7 +1179,7 @@ Widget work1(BuildContext context){
       );
       */
 
-          /*
+            /*
       Order x = new Order(
         foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
         foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
@@ -1136,34 +1195,39 @@ Widget work1(BuildContext context){
 
       */
 
-          orderFG.selectedFoodInOrder = allSelectedFoodGallery;
-          orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
-          orderFG.totalPrice= totalPriceState;
-          orderFG.ordersCustomer = oneCustomerInfo;
-          print(
+            orderFG.selectedFoodInOrder = allSelectedFoodGallery;
+            orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
+            orderFG.totalPrice = totalPriceState;
+            orderFG.ordersCustomer = oneCustomerInfo;
+            print(
 
-              'add_shopping_cart button pressed');
+                'add_shopping_cart button pressed');
+            print('allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity} ');
 
-          //          Navigator.of(context).push(
+            //          Navigator.of(context).push(
 
 //          return
-          final bool isCancelButtonPressed = await Navigator.of(context).push(
+//          List<SelectedFood> expandedFoodReturnTemp= [];
+//                  shoppingCartBloc.getExpandedSelectedFood;
+            // expandedFoodReturnTemp
+            // isCancelButtonPressed
+            final Order orderWithDocumentId = await Navigator.of(context).push(
 
-            PageRouteBuilder(
-              opaque: false,
-              transitionDuration: Duration(
-                  milliseconds: 900),
-              pageBuilder: (_, __, ___) =>
-                  BlocProvider<ShoppingCartBloc>(
-                    bloc: ShoppingCartBloc(
-                        orderFG),
+              PageRouteBuilder(
+                opaque: false,
+                transitionDuration: Duration(
+                    milliseconds: 900),
+                pageBuilder: (_, __, ___) =>
+                    BlocProvider<ShoppingCartBloc>(
+                      bloc: ShoppingCartBloc(
+                          orderFG),
 
 
-                    child: ShoppingCart(),
+                      child: ShoppingCart(),
 
-                  ),
-              // fUTURE USE -- ANIMATION TRANSITION CODE.
-              /*
+                    ),
+                // fUTURE USE -- ANIMATION TRANSITION CODE.
+                /*
                                     transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
                                       return FadeTransition(
                                         opacity: animation,
@@ -1174,42 +1238,105 @@ Widget work1(BuildContext context){
                                       );
                                     }
                                     */
-            ),
-          );
+              ),
+            );
 
 
-          if(isCancelButtonPressed==true){
+            if (orderWithDocumentId == null) {
 
+              print('//   //    //    // THIS ELSE IS FOR BACK BUTTON =>');
+              print('allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity}');
+              print('allSelectedFoodGallery: ${allSelectedFoodGallery[0].foodItemName}');
+              print('allSelectedFoodGallery: $allSelectedFoodGallery');
+              print('_totalCount: $_totalCount');
+              print('totalPriceState: $totalPriceState');
+              Scaffold.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(
+                    SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON")));
+//      setState(() => _reloadRequired = true);
+
+              setState(
+                      () {
+//                        int _totalCount = 0;
+//                        List<SelectedFood> allSelectedFoodGallery = [];
+//                        double totalPriceState = 0;
+//                    _totalCount = 0;
+//                    totalPriceState = 0;
+                  }
+              );
+            }
+
+            else if ((orderWithDocumentId.paymentButtonPressed) &&
+                (orderWithDocumentId.orderdocId != '')) {
+
+              print("Order received, id: ${orderWithDocumentId.orderdocId}");
+              Scaffold.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text(
+                    "Order received, id: ${orderWithDocumentId.orderdocId}")));
+
+              /*
             Scaffold.of(context)
               ..removeCurrentSnackBar()
               ..showSnackBar(SnackBar(content: Text("Order Cancelled by user.")));
+            */
 //      setState(() => _reloadRequired = true);
 
-            setState(
-                    ()
-                {
-                  _totalCount = 0;
-                  totalPriceState = 0;
+              setState(
+                      () {
+                    _totalCount = 0;
+                    totalPriceState = 0;
+                  }
+              );
+            }
 
-                }
-            );
-          }
 
-          else{
+            else {
+
+//              Order Cancelled by user.
+
+              print("Order Cancelled by user,");
+
+              print("orderWithDocumentId.paymentButtonPressed: ${orderWithDocumentId.paymentButtonPressed}");
+              print("orderWithDocumentId.orderdocId == '': ${orderWithDocumentId.orderdocId}");
+
+              Scaffold.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(SnackBar(content: Text(
+                    "Order Cancelled by user: ")));
+
+              /*
             Scaffold.of(context)
               ..removeCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text("You pressed the back button...")));
+              ..showSnackBar(SnackBar(content: Text("Order Cancelled by user.")));
+            */
+//      setState(() => _reloadRequired = true);
+
+              setState(
+                      () {
+//                        int _totalCount = 0;
+//                        List<SelectedFood> allSelectedFoodGallery = [];
+//                        double totalPriceState = 0;
+                    _totalCount = 0;
+                    totalPriceState = 0;
+                    allSelectedFoodGallery=[];
+                  }
+              );
+            }
+
+
+
+//          setState(
+//                  ()
+//              {
+//                _totalCount = 0;
+//                totalPriceState = 0;
+//
+//              }
+//          );
+
           }
-
-          setState(
-                  ()
-              {
-                _totalCount = 0;
-                totalPriceState = 0;
-
-              }
-          );
-
         },
 //                        color: Color(0xffFEE295),
         clipBehavior: Clip.hardEdge,

@@ -32,6 +32,7 @@ class Order {
 //  final String foodItemSize;
 //  // final String foodItemOrderID;     // random might not be needed.
 //  List<NewIngredient> ingredients;
+
   List<SelectedFood> selectedFoodInOrder;
   int selectedFoodListLength;
 
@@ -39,7 +40,10 @@ class Order {
   int paymentTypeIndex;
   CustomerInformation ordersCustomer;
   double totalPrice;
+  bool    paymentButtonPressed;
+  String  orderdocId;
   int page; // page =(0,1) = (0: from FoodGallery Page, 1: from Shopping Cart Page);
+
 
   // SINCE WE DON'T NEED TO
   // CALCULATE THIS PRICE IN SHOPPING CART PAGE BUT DO IT IN FOOD GALLERY PAGE,
@@ -62,6 +66,8 @@ class Order {
         this.paymentTypeIndex,
         this.ordersCustomer,
         this.totalPrice,
+        this.paymentButtonPressed:false,
+        this.orderdocId:'',
         this.page,
 
 

@@ -40,7 +40,7 @@ class FoodImageInShoppingCart extends StatelessWidget {
         color: Color(0xffF4F6CE),
 //      height: displayHeight(context)/4,
         height: displayWidth(context) / 3,
-        width:displayWidth(context)/4.5,
+        width:displayWidth(context)/5,
         margin: EdgeInsets.fromLTRB(
             0,  0, 12, 0),
 
@@ -141,13 +141,28 @@ class FoodImageInShoppingCart extends StatelessWidget {
             ),
 
 
+//            stringifiedFoodItemIngredients
+//                .length > 12 ?
+//            stringifiedFoodItemIngredients
+//                .substring(0, 12) + '...' :
+//            stringifiedFoodItemIngredients,
             Container(
 //              color:Colors.redAccent,
               color: Color(0xffF4F6CE),
 
               width: 130,
               alignment: Alignment.centerLeft,
-              child:Text('$foodItemName',
+              child:foodItemName.length >18?
+              Text('${foodItemName.substring(0, 16)}'+ '...' ,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight
+                        .bold,
+//                                                      color: Colors.white
+                    color: Color(0xff707070),
+
+                  )):
+              Text('$foodItemName',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight
@@ -156,6 +171,15 @@ class FoodImageInShoppingCart extends StatelessWidget {
                     color: Color(0xff707070),
 
                   )),
+              /*Text('$foodItemName',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight
+                        .bold,
+//                                                      color: Colors.white
+                    color: Color(0xff707070),
+
+                  ))*/
             ),
 
             Container(
@@ -365,12 +389,22 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
 
             Container(
-//              color:Colors.white,
+//              color:Colors.redAccent,
               color: Color(0xffF4F6CE),
 
               width: 130,
               alignment: Alignment.centerLeft,
-              child:Text('$foodItemName',
+              child:foodItemName.length >18?
+              Text('${foodItemName.substring(0, 16)}'+ '...' ,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight
+                        .bold,
+//                                                      color: Colors.white
+                    color: Color(0xff707070),
+
+                  )):
+              Text('$foodItemName',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight
@@ -379,6 +413,15 @@ class FoodImageInShoppingCart extends StatelessWidget {
                     color: Color(0xff707070),
 
                   )),
+              /*Text('$foodItemName',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight
+                        .bold,
+//                                                      color: Colors.white
+                    color: Color(0xff707070),
+
+                  ))*/
             ),
 
             Container(
