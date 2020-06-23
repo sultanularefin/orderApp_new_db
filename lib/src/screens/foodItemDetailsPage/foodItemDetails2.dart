@@ -734,8 +734,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                       color:Colors.white,
                                                       height: 65,
                                                       width: displayWidth(context) /1.80,
-                                                      child:
-                                                      _buildMultiSelectOptions(),
+                                                      child: _buildMultiSelectOptions(),
+//                                                      Card(child: _buildMultiSelectOptions()),
 
                                                       // Text('_buildMultiSelectOptions()')
 
@@ -1764,17 +1764,21 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     Map<String, dynamic> listpart1 = new Map<String, dynamic>();
     Map<String, dynamic> listpart2 = new Map<String, dynamic>();
+    Map<String, dynamic> listpart3 = new Map<String, dynamic>();
     // odd
 
     int len = foodSizePrice.length;
     print('len: $len');
 //    int middlePoint = (len%2 ==1)?
 //    (len/2).ceil():len/2;
+
+    /*
     int middlePoint = (len%2 ==1)?
     (len/2).ceil():(len~/2);
+    */
 
 
-    for(int i =0;i< middlePoint;i++){
+    for(int i =0;i< 3;i++){
       print('i: $i');
       String keyTest = foodSizePrice.keys
           .elementAt(i);
@@ -1785,27 +1789,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           double>(
           value, fallback: 0.00);
 
-      /*
-        Map<String,dynamic> oneMapkeyValue = {
 
-          key: valuePrice,
-
-        };
-
-         */
 
       listpart1[keyTest] =valuePrice;
-//        Listpart1.putIfAbsent(keyTest, () => valuePrice);
-//        Listpart1.add(oneMapkeyValue);
 
-
-//    final Map<String,dynamic> = new Map<String,dynamic>();
     }
 
 
 
 
-    for(int j =middlePoint ;j <foodSizePrice.length;j++){
+    for(int j =3 ;j <6;j++){
       print('j: $j');
       String keyTest2 = foodSizePrice.keys
           .elementAt(j);
@@ -1817,19 +1810,21 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           value, fallback: 0.00);
 
       listpart2[keyTest2] =valuePrice2;
-//      Listpart1.putIfAbsent(keyTest2, () => valuePrice2);
-      /*
 
-      Map<String,dynamic> oneMapkeyValue = {
+    }
+    for(int j =6 ;j <foodSizePrice.length;j++){
+      print('j: $j');
+      String keyTest2 = foodSizePrice.keys
+          .elementAt(j);
+      dynamic value = foodSizePrice
+          .values.elementAt(j);
+//
+      double valuePrice2 = tryCast<
+          double>(
+          value, fallback: 0.00);
 
-        key: valuePrice,
+      listpart3[keyTest2] =valuePrice2;
 
-      };
-      Listpart2.add(oneMapkeyValue);
-      */
-
-
-//    final Map<String,dynamic> = new Map<String,dynamic>();
     }
     //even
 
@@ -1851,7 +1846,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //      height: 400,
         color: Colors.white,
 
-        child:
+        child: allPrices.length<=3?
 
         Container(
             color: Color(0xffFFFFFF),
@@ -1866,24 +1861,73 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               children: <Widget>[
                 Container(
                   height:60,
-//                  height: displayHeight(context) / 30,
-//                  color: Colors.amber[600],
-                  child: twins1(listpart1),
-//                child:twins1(foodSizePrice),
 
+                  child: twins1(listpart1),
+
+
+                ),
+
+
+              ],
+            )
+
+        ):((allPrices.length>=3) &&(allPrices.length<=6))?
+        Container(
+            color: Color(0xffFFFFFF),
+//                                  color:Color(0xffDAD7C3),
+
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+
+            width: displayWidth(context) * 0.57,
+            child: ListView(
+              padding: const EdgeInsets.all(8),
+              children: <Widget>[
+                Container(
+                  height:60,
+                  child: twins1(listpart1),
                 ),
                 Container(
                   height:60,
-//                  height: displayHeight(context) / 30,
-//                  color: Colors.amber[500],
-//                  child:twins1(foodSizePrice),
+
                   child: twins2(listpart2),
                 ),
 
               ],
             )
 
-        ),
+        ):
+        Container(
+            color: Color(0xffFFFFFF),
+//                                  color:Color(0xffDAD7C3),
+
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+
+            width: displayWidth(context) * 0.57,
+            child: ListView(
+              padding: const EdgeInsets.all(8),
+              children: <Widget>[
+                Container(
+                  height:60,
+
+                  child: twins1(listpart1),
+
+                ),
+                Container(
+                  height:60,
+                  child: twins2(listpart2),
+                ),
+
+                Container(
+                  height:60,
+                  child: twins3(listpart3),
+                ),
+
+              ],
+            )
+
+        )
 
 
         // Todo DefaultItemsStreamBuilder
@@ -1906,14 +1950,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     return Container(
 
-//      height:displayHeight(context)/30,
-//      width:displayWidth(context)/10,
+
 
       child:  x.isSelected == true  ?
       Container(
         width:displayWidth(context)/11,
         height:displayHeight(context)/48,
-//        alignment: Alignment.center,
+
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         child:
         RaisedButton(
@@ -1921,7 +1964,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           elevation: 2.5,
           shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
+
             side: BorderSide(
               color:c1,
               style: BorderStyle.solid,
@@ -1931,7 +1974,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           child:Container(
 
-//            alignment: Alignment.center,
+
             child: Text(
               itemName.toUpperCase(), style:
             TextStyle(
@@ -1943,11 +1986,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           ),
           onPressed: () {
 
-            //    BlocProvider.of<FoodItemDetailsBloc>
+
             final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
             blocD.setMultiSelectOptionForFood(x,index);
 
           },
@@ -1963,21 +2003,21 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       Container(
         width:displayWidth(context)/11,
         height:displayHeight(context)/48,
-//        alignment: Alignment.center,
+
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         child: OutlineButton(
-//                        color: Color(0xffFEE295),
+
           clipBehavior: Clip.hardEdge,
           splashColor: c1,
-//          splashColor: Color(0xff739DFA),
+
           highlightElevation: 12,
-//          clipBehavior: Clip.hardEdge,
-//          highlightElevation: 12,
+
+
           shape: RoundedRectangleBorder(
 
             borderRadius: BorderRadius.circular(35.0),
           ),
-//          disabledBorderColor: false,
+
           borderSide: BorderSide(
             color: c1,
             style: BorderStyle.solid,
@@ -1985,7 +2025,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           ),
 
           child: Container(
-//            alignment: Alignment.center,
+
             child: Text(
 
               itemName.toUpperCase(), style:
@@ -2000,12 +2040,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             print('$itemName pressed');
             final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
-//            blocD.setMultiSelectOptionForFood(x,index);
-//            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
+
             blocD.setMultiSelectOptionForFood(x,index);
           },
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -2014,7 +2049,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       ),
 
 
-      // : Container for 2nd argument of ternary condition ends here.
+
 
     );
   }
@@ -2026,8 +2061,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //    defaultIngredients
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
 
     return StreamBuilder(
         stream: blocD.getDefaultIngredientItemsStream,
@@ -2037,7 +2071,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           if (!snapshot.hasData) {
 
             print('!snapshot.hasData');
-//        return Center(child: new LinearProgressIndicator());
+
             return
               Text("No Ingredients, Please Select 1 or more",
                 textAlign: TextAlign.center,
@@ -2062,8 +2096,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   height: displayHeight(context) / 8,
 //          height:190,
                   width: displayWidth(context) * 0.57,
-//              color: Colors.yellowAccent,
-//                    color: Color(0xff54463E),
+
                   color: Color(0xFFffffff),
                   alignment: Alignment.center,
 
@@ -2085,8 +2118,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   height: displayHeight(context) / 8,
 //          height:190,
                   width: displayWidth(context) * 0.57,
-//              color: Colors.yellowAccent,
-//                    color: Color(0xff54463E),
+
                   color: Color(0xffFFFFFF),
                   alignment: Alignment.center,
 
@@ -2127,8 +2159,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
 
                   shrinkWrap: true,
-//        final String foodItemName =          filteredItems[index].itemName;
-//        final String foodImageURL =          filteredItems[index].imageURL;
+
                   itemCount: selectedIngredients
                       .length,
                   itemBuilder: (_, int index) {
@@ -2147,8 +2178,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   Widget oneDefaultIngredient(NewIngredient oneSelected,int index){
     final String ingredientName = oneSelected.ingredientName;
-//                  final dynamic ingredientImageURL = document['image'];
-//    final num ingredientPrice = document['price'];
+
 
     final dynamic ingredientImageURL = oneSelected.imageURL == '' ?
     'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
@@ -2159,7 +2189,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         + '?alt=media';
 
 
-//    print('ingredientImageUR L   L    L   L: $ingredientImageURL');
+
 
     return Container(
 //          height: 190,
@@ -2190,8 +2220,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       'at Long Press UP: ');
 
                   final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//                  final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//                  final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
 
                   blocD.removeThisDefaultIngredientItem(oneSelected,index);
 
@@ -2202,8 +2231,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                     new Container(
 
-//                                width: displayWidth(context) * 0.09,
-//                                height: displayWidth(context) * 0.11,
+
                       width: displayWidth(context) /10,
                       height: displayWidth(context) /9,
                       padding:EdgeInsets.symmetric(vertical: 7,horizontal: 0),
@@ -2253,103 +2281,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       ),
     );
   }
-  /*
-  Widget build2(BuildContext context) {
 
 
 
-    return GestureDetector(
-      onTap: () {
-//        FocusScopeNode currentFocus = FocusScope.of(context);
-//
-//        if (!currentFocus.hasPrimaryFocus) {
-//          currentFocus.unfocus();
-//        }
-
-        FocusScope.of(context).unfocus();
-      },
-      child:
-      Scaffold(
-        backgroundColor: Colors.white.withOpacity(0.05),
-        body:
-        SafeArea(child:
-        SingleChildScrollView(
-
-          child: Center(
-              child: Container(
-                width: 200,
-                height: 400,
-                color: Colors.blueAccent,
-                // MAIN COLUMN FOR THIS PAGE.
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-
-//      1ST CONTAINER STARTS HERE || BELOW ||
-//                #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
-                    // EVERYTHING IS FINE HERE.
-                    //
-
-
-                    Container(
-
-//                color:Color.fromRGBO(239, 239, 239, 1.0),
-                      color: Color(0xffF7F0EC),
-                      height: displayHeight(context) -
-                          MediaQuery
-                              .of(context)
-                              .padding
-                              .top - 100,
-                      //where 100 IS THE HEIGHT OF 1ST CONTAINER HOLDING SEARCH INPUT AND TOTAL CART PRICE.
-
-
-                      //                  height: displayHeight(context) -
-                      //                      MediaQuery.of(context).padding.top -
-                      //                      kToolbarHeight,
-
-                      child:
-
-                      Row(
-                        children: <Widget>[
-
-                          // 1ST CONTAINER OF THIS ROW HANDLES THE BIG DETAIL PAGE IMAGE.
-                          Container(
-//                      height: 900,
-//                      color:Color(0xffCCCCCC),
-                            color: Color(0xffF7F0EC),
-                            width: displayWidth(context) * 0.43,
-//                      height: displayHeight(context)*0.50,
-
-                            alignment: Alignment.centerLeft,
-                            child: FoodDetailImage(oneFood.imageURL,
-                                oneFood.itemName),
-
-                          ),
-
-
-                        ],
-                      ),
-                    ),
-
-
-                  ],
-                )
-                ,)
-
-          ),
-        ),
-        ),
-      ),
-    );
-  }
-}
-);
-}
-
-
-*/
-
-//
   Widget twins1(Map<String,dynamic> part1) {
 
     return ListView.builder(
@@ -2380,7 +2314,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   }
 
-  Widget twins2(Map<String,dynamic> part2) {
+  Widget twins3(Map<String,dynamic> part2) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
 
@@ -2411,25 +2345,50 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   }
 
+  Widget twins2(Map<String,dynamic> part2) {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+
+//                                          itemCount: sizeConstantsList.length,
+      itemCount: part2.length,
+
+      itemBuilder: (_, int index) {
+        String key = part2.keys
+            .elementAt(index);
+        dynamic value = part2
+            .values.elementAt(index);
+//
+        double valuePrice = tryCast<
+            double>(
+            value, fallback: 0.00);
+//                  print(
+//                      'valuePrice at line # 583: $valuePrice and key is $key');
+        return _buildOneSize(
+            key, valuePrice, index);
+      },
+
+
+      shrinkWrap: false,
+    );
+
+  }
+
 
   Widget _buildOneSize(String oneSize,double onePriceForSize, int index) {
 
 
 
-//    logger.i('oneSize: $oneSize');
-//    logger.i('onePriceForSize: for oneSize: $oneSize is $onePriceForSize');
-
     return Container(
 
-        margin: EdgeInsets.fromLTRB(5, 5,5,5),
-        height:displayHeight(context)/24,
-//        width:displayWidth(context)/10,
+        margin: EdgeInsets.fromLTRB(5, 0,5,0),
+        height:displayHeight(context)/40,
+
 
         child:  oneSize.toLowerCase() == _currentSize  ?
 
         Container(
           margin: EdgeInsets.fromLTRB(5, 3,5,5),
-          width: displayWidth(context)/5.5,
+          width: displayWidth(context)/7,
           child:
           RaisedButton(
             color: Color(0xffFFE18E),
@@ -2453,7 +2412,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   color:Color(0xff54463E),
 
                   fontWeight: FontWeight.bold,
-                  fontSize: 17),
+                  fontSize: 12),
               ),
             ),
             onPressed: () {
@@ -2461,18 +2420,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //              logger.i('onePriceForSize: ',onePriceForSize);
 
               final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
+
               blocD.setNewSizePlusPrice(oneSize);
 
 
-//              setNewSizePlusPrice
-//              setState(() {
-//                initialPriceByQuantityANDSize = onePriceForSize;
-//                priceByQuantityANDSize = onePriceForSize;
-//                _currentSize= oneSize;
-//              });
+
             },
 
 
@@ -2485,14 +2437,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
         Container(
           margin: EdgeInsets.fromLTRB(5, 3,5,5),
-          width: displayWidth(context)/5.5,
+          width: displayWidth(context)/7,
           child:
           OutlineButton(
             color: Color(0xffFEE295),
             clipBehavior:Clip.hardEdge,
-//            ContinuousRectangleBorder
-//            BeveledRectangleBorder
-//            RoundedRectangleBorder
+
             borderSide: BorderSide(
               color: Color(0xff53453D), // 0xff54463E
               style: BorderStyle.solid,
@@ -2512,22 +2462,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   color:Color(0xff54463E),
 
                   fontWeight: FontWeight.bold,
-                  fontSize: 17),
+                  fontSize: 12),
               ),
             ),
             onPressed: () {
 
-//              logger.i('onePriceForSize: ',onePriceForSize);
-//              setState(() {
-//                initialPriceByQuantityANDSize = onePriceForSize;
-//                priceByQuantityANDSize = onePriceForSize;
-//                _currentSize= oneSize;
-//              });
+
 
               final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
+
               blocD.setNewSizePlusPrice(oneSize);
 
             },
@@ -2535,7 +2478,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         )
     );
   }
-//  child:MessageList(firestore: firestore),
+
 
 }
 

@@ -135,6 +135,7 @@ class FoodGalleryBloc implements Bloc {
     var snapshot = await _client.fetchFoodItems();
     List docList = snapshot.documents;
 
+    List<FoodItemWithDocID> tempAllFoodsList= new List<FoodItemWithDocID>();
     docList.forEach((doc) {
 
       final String foodItemName = doc['name'];
@@ -184,9 +185,11 @@ class FoodGalleryBloc implements Bloc {
         discount: foodItemDiscount,
       );
 
-      _allFoodsList.add(oneFoodItemWithDocID);
+      tempAllFoodsList.add(oneFoodItemWithDocID);
     }
     );
+
+    _allFoodsList= tempAllFoodsList;
 
     _foodItemController.sink.add(_allFoodsList);
 

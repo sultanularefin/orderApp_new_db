@@ -349,6 +349,68 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                     .spaceAround,
                                 children: <Widget>[
 
+                                  // image and string JEDILINE BEGINS HERE.
+                                  SizedBox(
+                                    height: kToolbarHeight+6,
+                                    width: 200,
+                                    child:  Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .start,
+                                      children: <Widget>[
+
+                                        Container(
+//                                          color: Colors.yellow,
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal:0,
+                                              vertical: 0),
+
+                                          width: displayWidth(context) / 13,
+                                          height: displayHeight(context) / 21,
+                                          child: Image.asset('assets/Path2008.png'),
+
+                                        ),
+                                        Container(
+
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 0,
+                                              vertical: 0),
+
+                                          width: displayWidth(context) / 6,
+                                          height: displayHeight(context) / 21,
+                                          child: Row(
+                                            children: <Widget>[
+
+//                                          Container(child: Image.asset('assets/Path2008.png')),
+                                              Container(
+                                                padding:EdgeInsets.symmetric(horizontal: 5,vertical: 1),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      'Jediline',
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyle(fontSize: 27,color: Color(0xff07D607)),
+                                                    ),
+                                                    Text(
+                                                      'Online Orders',
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyle(fontSize: 16.42,color: Color(0xff07D607)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+
+                                            ],
+                                          ),
+
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                  // image and string JEDILINE BEGINS HERE.
+                                  /*
                                   Container(
                                     margin: EdgeInsets.symmetric(
                                         horizontal: 9,
@@ -356,9 +418,10 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                                     width: displayWidth(context) / 5,
                                     height: displayHeight(context) / 21,
-                                    child: Image.asset('assets/Group520.png'),
+                                    child: Image.asset('assets/Path2008.png'),
 
                                   ),
+                                  */
                                   // CONTAINER FOR TOTAL PRICE CART BELOW.
 
 
@@ -391,7 +454,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                       color: Color(0xffFFFFFF),
 //                                      Colors.black54
                                     ),
-                                      // USER INPUT
+                                    // USER INPUT
 
 
 //                                  color: Color(0xffFFFFFF),

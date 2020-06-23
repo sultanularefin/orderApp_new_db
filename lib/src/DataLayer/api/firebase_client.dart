@@ -83,9 +83,10 @@ class FirebaseClient {
 
 
     var snapshot= Firestore.instance
-        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems').orderBy('sl',descending: false)
         .getDocuments();
 
+//    orderBy('_timeStampUTC', descending: true)
     return snapshot;
 
   }
