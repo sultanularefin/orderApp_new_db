@@ -394,8 +394,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                      width: _width,
 //                                      height: _height,
                                     decoration: BoxDecoration(
-//                                      color: Colors.lightGreenAccent,
-                                      color: Colors.white,
+                                      color: Colors.lightGreenAccent,
+//                                      color: Colors.white,
                                       borderRadius: BorderRadius.circular(25),
 //                                        borderRadius: BorderRadius.all(20),
                                     ),
@@ -716,7 +716,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             container holding the food Item Image, image name and food item price */
                                                     - displayWidth(
                                                         context) /
-                                                        3.8 /* this is about the width of yellow side menu */,
+                                                        3.8 /* this is about the width of yellow side menu */ +10,// this +10 value just adjustment, foodSize
+                                                // container width enlargement for scoll...
                                                 child: Column(
                                                   mainAxisAlignment: MainAxisAlignment
                                                       .start,
@@ -741,6 +742,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                     ),
                                                     Container(
+
                                                         height: displayHeight(context) / 7,
 //                                                        width: displayWidth(context) /1.80,
                                                         child: _buildProductSizes(
@@ -1860,7 +1862,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               padding: const EdgeInsets.all(8),
               children: <Widget>[
                 Container(
-                  height:60,
+                  height:55,
 
                   child: twins1(listpart1),
 
@@ -1884,11 +1886,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               padding: const EdgeInsets.all(8),
               children: <Widget>[
                 Container(
-                  height:60,
+                  height:55,
                   child: twins1(listpart1),
                 ),
                 Container(
-                  height:60,
+                  height:55,
 
                   child: twins2(listpart2),
                 ),
@@ -1909,18 +1911,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               padding: const EdgeInsets.all(8),
               children: <Widget>[
                 Container(
-                  height:60,
+                  height:50,
 
                   child: twins1(listpart1),
 
                 ),
                 Container(
-                  height:60,
+                  height:55,
                   child: twins2(listpart2),
                 ),
 
                 Container(
-                  height:60,
+                  height:50,
                   child: twins3(listpart3),
                 ),
 
@@ -2303,7 +2305,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             value, fallback: 0.00);
 //                  print(
 //                      'valuePrice at line # 583: $valuePrice and key is $key');
-        return _buildOneSize(
+        return _buildOneSizeFirstRow(
             key, valuePrice, index);
       },
 
@@ -2332,7 +2334,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             value, fallback: 0.00);
 //                  print(
 //                      'valuePrice at line # 583: $valuePrice and key is $key');
-        return _buildOneSize(
+        return _buildOneSizeThirdRow(
             key, valuePrice, index);
       },
 /*
@@ -2363,7 +2365,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             value, fallback: 0.00);
 //                  print(
 //                      'valuePrice at line # 583: $valuePrice and key is $key');
-        return _buildOneSize(
+        return _buildOneSizeMiddleRow(
             key, valuePrice, index);
       },
 
@@ -2373,21 +2375,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   }
 
-
-  Widget _buildOneSize(String oneSize,double onePriceForSize, int index) {
+  Widget _buildOneSizeThirdRow(String oneSize,double onePriceForSize, int index) {
 
 
 
     return Container(
 
-        margin: EdgeInsets.fromLTRB(5, 0,5,0),
-        height:displayHeight(context)/40,
+        margin: EdgeInsets.fromLTRB(0, 0,5,5),
+//        height:displayHeight(context)/50,
 
 
         child:  oneSize.toLowerCase() == _currentSize  ?
 
         Container(
-          margin: EdgeInsets.fromLTRB(5, 3,5,5),
+          margin: EdgeInsets.fromLTRB(0, 0,5,5),
           width: displayWidth(context)/7,
           child:
           RaisedButton(
@@ -2436,7 +2437,217 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             :
 
         Container(
-          margin: EdgeInsets.fromLTRB(5, 3,5,5),
+          margin: EdgeInsets.fromLTRB(0, 5,5,0),
+          width: displayWidth(context)/7,
+          child:
+          OutlineButton(
+            color: Color(0xffFEE295),
+            clipBehavior:Clip.hardEdge,
+
+            borderSide: BorderSide(
+              color: Color(0xff53453D), // 0xff54463E
+              style: BorderStyle.solid,
+              width: 3.6,
+            ),
+            shape:RoundedRectangleBorder(
+
+
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            child:Container(
+
+//              alignment: Alignment.center,
+              child: Text(
+                oneSize.toUpperCase(), style:
+              TextStyle(
+                  color:Color(0xff54463E),
+
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12),
+              ),
+            ),
+            onPressed: () {
+
+
+
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+              blocD.setNewSizePlusPrice(oneSize);
+
+            },
+          ),
+        )
+    );
+  }
+
+  Widget _buildOneSizeMiddleRow(String oneSize,double onePriceForSize, int index) {
+
+
+
+    return Container(
+
+        margin: EdgeInsets.fromLTRB(0, 5,5,5),
+//        height:displayHeight(context)/50,
+
+
+        child:  oneSize.toLowerCase() == _currentSize  ?
+
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 5,5,5),
+          width: displayWidth(context)/7,
+          child:
+          RaisedButton(
+            color: Color(0xffFFE18E),
+//          color: Colors.lightGreenAccent,
+            elevation: 2.5,
+            shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+              side: BorderSide(
+                color: Color(0xffF7F0EC),
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+
+            child:Container(
+
+//              alignment: Alignment.center,
+              child: Text(
+                oneSize.toUpperCase(), style:
+              TextStyle(
+                  color:Color(0xff54463E),
+
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12),
+              ),
+            ),
+            onPressed: () {
+
+//              logger.i('onePriceForSize: ',onePriceForSize);
+
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+              blocD.setNewSizePlusPrice(oneSize);
+
+
+
+            },
+
+
+
+          ),
+        )
+
+
+            :
+
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 0,5,5),
+          width: displayWidth(context)/7,
+          child:
+          OutlineButton(
+            color: Color(0xffFEE295),
+            clipBehavior:Clip.hardEdge,
+
+            borderSide: BorderSide(
+              color: Color(0xff53453D), // 0xff54463E
+              style: BorderStyle.solid,
+              width: 3.6,
+            ),
+            shape:RoundedRectangleBorder(
+
+
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            child:Container(
+
+//              alignment: Alignment.center,
+              child: Text(
+                oneSize.toUpperCase(), style:
+              TextStyle(
+                  color:Color(0xff54463E),
+
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12),
+              ),
+            ),
+            onPressed: () {
+
+
+
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+              blocD.setNewSizePlusPrice(oneSize);
+
+            },
+          ),
+        )
+    );
+  }
+
+
+  Widget _buildOneSizeFirstRow(String oneSize,double onePriceForSize, int index) {
+
+    return Container(
+//        color:Colors.yellow,
+
+        margin: EdgeInsets.fromLTRB(0, 0,5,5),
+//        height:displayHeight(context)/50,
+
+
+        child:  oneSize.toLowerCase() == _currentSize  ?
+
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 0,5,5),
+          width: displayWidth(context)/7,
+          child:
+          RaisedButton(
+            color: Color(0xffFFE18E),
+//          color: Colors.lightGreenAccent,
+            elevation: 2.5,
+            shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+              side: BorderSide(
+                color: Color(0xffF7F0EC),
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+
+            child:Container(
+
+//              alignment: Alignment.center,
+              child: Text(
+                oneSize.toUpperCase(), style:
+              TextStyle(
+                  color:Color(0xff54463E),
+
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12),
+              ),
+            ),
+            onPressed: () {
+
+//              logger.i('onePriceForSize: ',onePriceForSize);
+
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+              blocD.setNewSizePlusPrice(oneSize);
+
+
+
+            },
+
+
+
+          ),
+        )
+
+
+            :
+
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 0,5,5),
           width: displayWidth(context)/7,
           child:
           OutlineButton(
