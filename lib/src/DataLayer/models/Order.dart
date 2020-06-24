@@ -42,6 +42,7 @@ class Order {
   double totalPrice;
   bool    paymentButtonPressed;
   String  orderdocId;
+  bool    isCanceled;
   int page; // page =(0,1) = (0: from FoodGallery Page, 1: from Shopping Cart Page);
 
 
@@ -68,6 +69,7 @@ class Order {
         this.totalPrice,
         this.paymentButtonPressed:false,
         this.orderdocId:'',
+        this.isCanceled:false,
         this.page,
 
 

@@ -32,7 +32,7 @@ import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 
 
 //import 'package:google_sign_in/google_sign_in.dart';
-//import 'package:logger/logger.dart';
+import 'package:logger/logger.dart';
 //import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 //import 'package:neumorphic/neumorphic.dart';
 
@@ -185,9 +185,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
   num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
 
 
-//  var logger = Logger(
-//    printer: PrettyPrinter(),
-//  );
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
 
 
@@ -1242,18 +1242,19 @@ Widget work1(BuildContext context){
             );
 
 
-            if (orderWithDocumentId == null) {
-
+            if (orderWithDocumentId.isCanceled != true) {
               print('//   //    //    // THIS ELSE IS FOR BACK BUTTON =>');
-              print('allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity}');
-              print('allSelectedFoodGallery: ${allSelectedFoodGallery[0].foodItemName}');
-              print('allSelectedFoodGallery: $allSelectedFoodGallery');
+              print('allSelectedFoodGallery[0].quantity: ${orderWithDocumentId.selectedFoodInOrder[0].quantity}');
+              print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder[0].foodItemName}');
+              print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
               print('_totalCount: $_totalCount');
               print('totalPriceState: $totalPriceState');
               Scaffold.of(context)
                 ..removeCurrentSnackBar()
                 ..showSnackBar(
-                    SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON")));
+                    SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON"),
+                    duration: Duration(milliseconds: 4000),
+                    ),);
 //      setState(() => _reloadRequired = true);
 
               setState(
@@ -1270,7 +1271,7 @@ Widget work1(BuildContext context){
             else if ((orderWithDocumentId.paymentButtonPressed) &&
                 (orderWithDocumentId.orderdocId != '')) {
 
-              print("Order received, id: ${orderWithDocumentId.orderdocId}");
+              logger.e("Order received, id: ${orderWithDocumentId.orderdocId}");
               Scaffold.of(context)
                 ..removeCurrentSnackBar()
                 ..showSnackBar(SnackBar(content: Text(
@@ -1292,12 +1293,10 @@ Widget work1(BuildContext context){
             }
 
 
-            else {
+            else if (orderWithDocumentId.isCanceled == true) {
 
 //              Order Cancelled by user.
-
               print("Order Cancelled by user,");
-
               print("orderWithDocumentId.paymentButtonPressed: ${orderWithDocumentId.paymentButtonPressed}");
               print("orderWithDocumentId.orderdocId == '': ${orderWithDocumentId.orderdocId}");
 
@@ -1323,6 +1322,11 @@ Widget work1(BuildContext context){
                     allSelectedFoodGallery=[];
                   }
               );
+            }
+
+            else{
+              print('why this condition executed.');
+              logger.e('why this condition executed.');
             }
 
 

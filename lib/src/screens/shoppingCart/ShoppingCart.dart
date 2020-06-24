@@ -16,7 +16,7 @@ import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 
 import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppingCart.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
-//import 'package:logger/logger.dart';
+import 'package:logger/logger.dart';
 
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 
@@ -239,20 +239,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget build(BuildContext context) {
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-    return   WillPopScope(
-        onWillPop: () async => true,
-//        onWillPop: () {
 
-//          return Navigator.pop(context,cancelPaySelect);
-//          return Future.value(_allow);
-
-          // if true allow back else block it
-//        },
-//      onWillPop: return _onBackPressed2(),
+    var logger = Logger(
+      printer: PrettyPrinter(),
+    );
 
 
-    /*
-      GestureDetector(
+    return GestureDetector(
         onTap: () {
           print('s');
 //                      Navigator.pop(context);
@@ -266,7 +259,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           }
         },
 
-          */
+
 
         child:
         Scaffold(
@@ -277,6 +270,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      resizeToAvoidBottomPadding: false ,
           // appBar: AppBar(title: Text('Food Gallery')),
           body:
+          WillPopScope(
+            onWillPop: () {
+              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+              print('at WillPopScope: ');
+              Order z= shoppingCartBloc.getCurrentOrder;
+              logger.e('at WillPopScope Quantity: ${z.selectedFoodInOrder[0].quantity}');
+              Navigator.pop(context, z);
+              return new Future(() => false);
+            },child:
           SafeArea(
             child: SingleChildScrollView(
               child:
@@ -388,6 +390,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           // I am ignoring rest implementation but what i have achieved is you can see.
 
 
+                          logger.e('\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
+
                           return Container(
 //                            height: displayHeight(context) -
 //                                MediaQuery
@@ -424,15 +428,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                     curve: Neumorphic.DEFAULT_CURVE,
                                     style: NeumorphicStyle(
-                                        shape: NeumorphicShape
-                                            .concave,
-                                        depth: 8,
-                                        lightSource: LightSource
-                                            .topLeft,
-                                        color: Colors.white,
-                                        boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+                                      shape: NeumorphicShape
+                                          .concave,
+                                      depth: 8,
+                                      lightSource: LightSource
+                                          .topLeft,
+                                      color: Colors.white,
+                                      boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
 
-                          ),
+                                      ),
                                     ),
 
 
@@ -646,7 +650,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     }
                   }
               ),
-            ),),)
+            ),
+          ),
+          ),
+        )
     );
     //return Text('${x.toString()}');
 
@@ -1192,7 +1199,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
 
+    var logger = Logger(
+      printer: PrettyPrinter(),
+    );
+
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+
 
     return StreamBuilder<List<SelectedFood>>(
         stream: shoppingCartbloc.getExpandedFoodsStream,
@@ -1279,6 +1292,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      final double price = qTimes.unitPrice;
 
               */
+
+              logger.e('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
               return Container(
 
 //                color: Colors.green,
@@ -7356,6 +7371,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  shoppingCartBloc.getExpandedSelectedFood;
 
 
+                  cancelPaySelect.isCanceled=true;
                   return Navigator.pop(context,cancelPaySelect);
 
 
@@ -7497,7 +7513,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
 //                  shoppingCartBloc.getExpandedSelectedFood;
+                  cancelPaySelect.isCanceled=true;
                   return Navigator.pop(context,cancelPaySelect);
+//                  return Navigator.pop(context,cancelPaySelect);
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
                 },

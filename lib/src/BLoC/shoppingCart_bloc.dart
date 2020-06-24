@@ -3,7 +3,7 @@
 //### EXTERNAL PACKAGES
 import 'dart:async';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
-//import 'package:logger/logger.dart';
+import 'package:logger/logger.dart';
 
 
 //### LOCAL DATA RELATED RESOURCES
@@ -21,9 +21,9 @@ import 'package:foodgallery/src/DataLayer/models/PaymentTypeSingleSelect.dart';
 
 class ShoppingCartBloc implements Bloc {
 
-//  var logger = Logger(
-//    printer: PrettyPrinter(),
-//  );
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
   final _client = FirebaseClient();
 
@@ -127,7 +127,7 @@ class ShoppingCartBloc implements Bloc {
     allOrderedFoods.forEach((oneFood) {
       print('oneFood details: ===> ===> ');
       print('oneFood: ${oneFood.foodItemName}');
-      print('oneFood: ${oneFood.quantity}');
+      logger.e('oneFood.quantity: ${oneFood.quantity}');
 //         print('oneFood: ${oneFood.foodItemName}');
       List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
 
