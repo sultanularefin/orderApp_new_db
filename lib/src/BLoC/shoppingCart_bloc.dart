@@ -329,8 +329,13 @@ class ShoppingCartBloc implements Bloc {
 
     tempOrder.paymentButtonPressed=true;
 
+
+
+
     String documentID = await _client.insertOrder(payMentProcessing,orderBy,paidType0);
 
+
+    print('documentID: $documentID');
 
     if(documentID!=null){
       tempOrder.orderdocId= documentID;

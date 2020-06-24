@@ -1728,8 +1728,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   }
 
   Widget _buildProductSizes(BuildContext context, Map<String,dynamic> allPrices) {
-
-    final Map<String,dynamic> foodSizePrice = allPrices;
+    final Map<String, dynamic> foodSizePrice = allPrices;
 
     Map<String, dynamic> listpart1 = new Map<String, dynamic>();
     Map<String, dynamic> listpart2 = new Map<String, dynamic>();
@@ -1746,8 +1745,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     (len/2).ceil():(len~/2);
     */
 
+    if(len>3)
+    {
 
-    for(int i =0;i< 3;i++){
+    for (int i = 0; i < 3; i++) {
       print('i: $i');
       String keyTest = foodSizePrice.keys
           .elementAt(i);
@@ -1759,15 +1760,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           value, fallback: 0.00);
 
 
-
-      listpart1[keyTest] =valuePrice;
-
+      listpart1[keyTest] = valuePrice;
     }
 
 
-
-
-    for(int j =3 ;j <6;j++){
+    for (int j = 3; j < 6; j++) {
       print('j: $j');
       String keyTest2 = foodSizePrice.keys
           .elementAt(j);
@@ -1778,10 +1775,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           double>(
           value, fallback: 0.00);
 
-      listpart2[keyTest2] =valuePrice2;
-
+      listpart2[keyTest2] = valuePrice2;
     }
-    for(int j =6 ;j <foodSizePrice.length;j++){
+    for (int j = 6; j < foodSizePrice.length; j++) {
       print('j: $j');
       String keyTest2 = foodSizePrice.keys
           .elementAt(j);
@@ -1792,10 +1788,28 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           double>(
           value, fallback: 0.00);
 
-      listpart3[keyTest2] =valuePrice2;
-
+      listpart3[keyTest2] = valuePrice2;
     }
     //even
+
+  }
+
+    else{
+      for (int i = 0; i < len; i++) {
+        print('i: $i');
+        String keyTest = foodSizePrice.keys
+            .elementAt(i);
+        dynamic value = foodSizePrice
+            .values.elementAt(i);
+//
+        double valuePrice = tryCast<
+            double>(
+            value, fallback: 0.00);
+
+
+        listpart1[keyTest] = valuePrice;
+      }
+    }
 
 
 

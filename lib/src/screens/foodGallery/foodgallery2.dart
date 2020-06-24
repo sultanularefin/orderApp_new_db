@@ -1196,12 +1196,15 @@ Widget work1(BuildContext context){
       */
 
             orderFG.selectedFoodInOrder = allSelectedFoodGallery;
+
             orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
             orderFG.totalPrice = totalPriceState;
             orderFG.ordersCustomer = oneCustomerInfo;
             print(
 
                 'add_shopping_cart button pressed');
+
+            logger.e('orderFG.selectedFoodInOrder ${orderFG.selectedFoodInOrder}');
             print('allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity} ');
 
             //          Navigator.of(context).push(
@@ -1242,30 +1245,34 @@ Widget work1(BuildContext context){
             );
 
 
-            if (orderWithDocumentId.isCanceled != true) {
+            if ((orderWithDocumentId.isCanceled != true) && (orderWithDocumentId.orderdocId=='')) {
               print('//   //    //    // THIS ELSE IS FOR BACK BUTTON =>');
-              print('allSelectedFoodGallery[0].quantity: ${orderWithDocumentId.selectedFoodInOrder[0].quantity}');
-              print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder[0].foodItemName}');
+              print('orderWithDocumentId.selectedFoodInOrder: ${orderWithDocumentId.selectedFoodInOrder}');
               print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
+              print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
+
               print('_totalCount: $_totalCount');
               print('totalPriceState: $totalPriceState');
-              Scaffold.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(
-                    SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON"),
-                    duration: Duration(milliseconds: 4000),
-                    ),);
-//      setState(() => _reloadRequired = true);
 
-              setState(
-                      () {
+              setState((){
 //                        int _totalCount = 0;
-//                        List<SelectedFood> allSelectedFoodGallery = [];
+                    allSelectedFoodGallery = orderWithDocumentId.selectedFoodInOrder;
+
 //                        double totalPriceState = 0;
 //                    _totalCount = 0;
 //                    totalPriceState = 0;
                   }
               );
+
+              Scaffold.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(
+                    SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON"),
+                    duration: Duration(milliseconds: 8000),
+                    ),);
+//      setState(() => _reloadRequired = true);
+
+
             }
 
             else if ((orderWithDocumentId.paymentButtonPressed) &&
@@ -1275,7 +1282,10 @@ Widget work1(BuildContext context){
               Scaffold.of(context)
                 ..removeCurrentSnackBar()
                 ..showSnackBar(SnackBar(content: Text(
-                    "Order received, id: ${orderWithDocumentId.orderdocId}")));
+                    "Order received, id: ${orderWithDocumentId.orderdocId}"),
+                    duration: Duration(milliseconds: 8000)
+                )
+                );
 
               /*
             Scaffold.of(context)

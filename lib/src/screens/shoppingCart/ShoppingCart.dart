@@ -274,8 +274,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
             onWillPop: () {
               final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
               print('at WillPopScope: ');
+
+              List<SelectedFood> p =  shoppingCartBloc.getExpandedSelectedFood;
+              print('at WillPopScope: $p');
+
               Order z= shoppingCartBloc.getCurrentOrder;
+              z.selectedFoodInOrder=p;
+
+              shoppingCartBloc.cancelButtonPressed();
+
               logger.e('at WillPopScope Quantity: ${z.selectedFoodInOrder[0].quantity}');
+
               Navigator.pop(context, z);
               return new Future(() => false);
             },child:
@@ -564,8 +573,97 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   5, /* this is about the width of yellow side menu */
 
 //                                            width: displayWidth(context) * 0.57,
-                                          child: _buildQuantityTimesofFood(
-                                            /*oneOrder*/),
+                                          child:
+
+                                            //ssd
+
+                                            StreamBuilder<List<SelectedFood>>(
+                                        stream: shoppingCartBloc.getExpandedFoodsStream,
+                                            initialData: shoppingCartBloc.getExpandedSelectedFood,
+
+                                            builder: (context, snapshot) {
+                                              if (snapshot.hasData) {
+                                                List<SelectedFood> expandedSelectedFoodInOrder = snapshot.data;
+
+
+//            logger.e(
+//                'selectedFoodListLength: ${qTimes.selectedFoodListLength}');
+
+//    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+                                                if (expandedSelectedFoodInOrder == null) {
+                                                  print('Order has no data');
+                                                  print('this will never happen don\'t worry');
+//        return Center(child: new LinearProgressIndicator());
+                                                  return Container(child: Text('expandedSelectedFoodInOrder == Null'));
+                                                }
+
+                                                //    VIEW MODEL CHANGE THUS CONDITION CHANGE 1.
+                                                /*
+    if ((qTimes.foodItemName == '') && (qTimes.quantity == 0)) {
+      print('Order has no data');
+      print('this will never happen don\'t worry');
+//        return Center(child: new LinearProgressIndicator());
+      return Container(child: Text('Null'));
+    }
+    */
+                                                else {
+//      int quantity = qTimes.quantity;
+//      int quantity = qTimes.selectedFoodInOrder.length;
+
+                                                  List<SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
+
+
+
+                                                  logger.e('\n\n AM I EXECUTED TWICE  ;;;'
+                                                      ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
+                                                  return Container(
+//                color: Colors.green,
+                                                    color: Color(0xffFFFFFF),
+
+                                                    child: ListView.builder(
+                                                      scrollDirection: Axis.horizontal,
+
+                                                      reverse: false,
+
+                                                      shrinkWrap: false,
+//        final String foodItemName =          filteredItems[index].itemName;
+//        final String foodImageURL =          filteredItems[index].imageURL;
+//          itemCount: quantity,
+                                                      itemCount: allOrderedFoods.length,
+                                                      // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+
+
+                                                      itemBuilder: (_, int index) {
+//            return Text('ss');
+
+                                                        return FoodImageInShoppingCart(
+                                                            allOrderedFoods[index].foodItemImageURL, /*OrderedFoodImageURL,*/
+                                                            allOrderedFoods[index].foodItemName, /*OrderedFoodItemName, */
+                                                            allOrderedFoods[index].selectedIngredients,
+                                                            allOrderedFoods[index].unitPrice,
+                                                            index
+                                                        );
+//          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
+//            index);
+
+
+                                                      },
+                                                    ),
+
+
+                                                    // M VSM ORG VS TODO. ENDS HERE.
+                                                  );
+                                                }
+                                              }
+                                              else {
+                                                print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+                                                return Container(child: Text('Null'));
+                                              }
+                                            }
+                                        ),
+                                            //ssd
                                         ),
 
 
@@ -1195,6 +1293,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  /*
   Widget _buildQuantityTimesofFood(/*Order qTimes */) {
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
@@ -1294,6 +1393,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               */
 
               logger.e('\n\n AM I EXECUTED TWICE  ;;; \n\n ');
+              print('expandedSelectedFoodInOrder: $expandedSelectedFoodInOrder');
+
               return Container(
 
 //                color: Colors.green,
@@ -1342,6 +1443,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         }
     );
   }
+
+   */
 
 
 //  animatedShowUserAddressDetailsInLineTakeAway
@@ -7430,6 +7533,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else{
+                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
                     return Navigator.pop(context,tempOrderWithdocId);
                   }
@@ -7569,6 +7673,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else{
+                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
                     return Navigator.pop(context,tempOrderWithdocId);
                   }

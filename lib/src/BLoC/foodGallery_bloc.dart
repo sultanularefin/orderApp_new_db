@@ -13,7 +13,7 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
 //import 'package:zomatoblock/DataLayer/location.dart';
 
-
+import 'package:logger/logger.dart';
 
 
 import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
@@ -27,6 +27,11 @@ import 'dart:async';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 //class LocationBloc implements Bloc {
 class FoodGalleryBloc implements Bloc {
+
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
+
   // id ,type ,title <= Location.
 
   List<FoodItemWithDocID> _allFoodsList=[];
@@ -141,6 +146,13 @@ class FoodGalleryBloc implements Bloc {
       final String foodItemName = doc['name'];
 //      print('foodItemName $foodItemName');
 
+      final String foodItemDocumentID = doc.documentID;
+//      print('foodItemDocumentID $foodItemDocumentID');
+
+      if(foodItemName =='Junior Juustohampurilainen'){
+        logger.e('Junior Juustohampurilainen found check $foodItemDocumentID');
+      }
+
 
 
       final String foodImageURL  = doc['image']==''?
@@ -166,8 +178,7 @@ class FoodGalleryBloc implements Bloc {
       final String foodCategoryName = doc['category'];
 //      print('category: $foodCategoryName');
 
-      final String foodItemDocumentID = doc.documentID;
-//      print('foodItemDocumentID $foodItemDocumentID');
+
 
       final double foodItemDiscount = doc['discount'];
 
