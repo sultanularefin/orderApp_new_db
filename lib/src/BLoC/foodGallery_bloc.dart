@@ -211,41 +211,7 @@ class FoodGalleryBloc implements Bloc {
 
 
   // COPIED TO IDENTITY BLOC
-/*
 
-  Future getAllIngredients() async {
-
-
-    var snapshot = await _client.fetchAllIngredients();
-    List docList = snapshot.documents;
-
-
-
-    List <NewIngredient> ingItems = new List<NewIngredient>();
-    ingItems = snapshot.documents.map((documentSnapshot) =>
-        NewIngredient.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
-
-    ).toList();
-
-
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
-    ).toList();
-
-    print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
-
-
-    _allIngItemsFGBloc = ingItems;
-
-    _allIngredientListController.sink.add(ingItems);
-
-
-//    return ingItems;
-
-  }
-
-  */
 
 
   void getAllCategories() async {

@@ -361,11 +361,11 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                                         Container(
 //                                          color: Colors.yellow,
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal:0,
-                                              vertical: 0),
+//                                          margin: EdgeInsets.symmetric(
+//                                              horizontal:0,
+//                                              vertical: 0),
 
-                                          width: displayWidth(context) / 13,
+//                                          width: displayWidth(context) / 13,
                                           height: displayHeight(context) / 21,
                                           child: Image.asset('assets/Path2008.png'),
 
@@ -376,14 +376,14 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                               horizontal: 0,
                                               vertical: 0),
 
-                                          width: displayWidth(context) / 6,
+//                                          width: displayWidth(context) / 6,
                                           height: displayHeight(context) / 21,
                                           child: Row(
                                             children: <Widget>[
 
 //                                          Container(child: Image.asset('assets/Path2008.png')),
                                               Container(
-                                                padding:EdgeInsets.symmetric(horizontal: 5,vertical: 1),
+                                                padding:EdgeInsets.fromLTRB(0,1,0,0),
                                                 child: Column(
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -391,7 +391,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                                     Text(
                                                       'Jediline',
                                                       textAlign: TextAlign.left,
-                                                      style: TextStyle(fontSize: 27,color: Color(0xff07D607)),
+                                                      style: TextStyle(fontSize: 30,
+                                                          color: Color(0xff07D607),
+                                                        fontFamily: 'Itim-Regular'),
                                                     ),
                                                     Text(
                                                       'Online Orders',
@@ -459,7 +461,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 //                                  color: Color(0xffFFFFFF),
-                                    width: displayWidth(context) / 3,
+                                    width: displayWidth(context) / 3.3,
                                     height: displayHeight(context) / 27,
                                     padding: EdgeInsets.only(
                                         left: 4, top: 3, bottom: 3, right: 3),
