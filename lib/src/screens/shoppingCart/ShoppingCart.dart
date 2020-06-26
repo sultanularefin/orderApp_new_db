@@ -8949,12 +8949,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
-        OutlineButton(
-          color: Color(0xff000000),
+        InkWell(
+         // color: Color(0xff000000),
 
 //          elevation: 2.5,
           // RoundedRectangleBorder
 //          shape: CircleBorder(
+
+        /*
           shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
             side: BorderSide(
@@ -8964,9 +8966,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
             borderRadius: BorderRadius.circular(35.0),
           ),
 
+          */
+
+
           child:Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
               children: <Widget>[
 
@@ -8974,8 +8979,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                  width:  displayWidth(context)/7.5,
-                  height: displayWidth(context)/7.5,
+                  width:  displayWidth(context)/7.8,
+                  height: displayWidth(context)/7.8,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -9038,7 +9043,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ],
             ),
           ),
-          onPressed: () {
+          onTap: () {
 
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
@@ -9073,7 +9078,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
-        OutlineButton(
+        InkWell(
+          /*
           color: Color(0xff000000),
 
 //          elevation: 2.5,
@@ -9086,9 +9092,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
             borderRadius: BorderRadius.circular(35.0),
           ),
 
+          */
           child:Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
               children: <Widget>[
 
@@ -9096,8 +9103,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                  width:  displayWidth(context)/7.5,
-                  height: displayWidth(context)/7.5,
+                  width:  displayWidth(context)/7.8,
+                  height: displayWidth(context)/7.8,
                   decoration: BoxDecoration(
                     border: Border.all(
 //                      color: Colors.red[500],
@@ -9152,7 +9159,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ],
             ),
           ),
-          onPressed: () {
+          onTap: () {
 
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
