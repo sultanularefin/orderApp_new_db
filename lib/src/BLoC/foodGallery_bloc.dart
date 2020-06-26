@@ -221,6 +221,8 @@ class FoodGalleryBloc implements Bloc {
     List docList = snapshot.documents;
 
 
+    List<NewCategoryItem> tempAllCategories = new List<NewCategoryItem>();
+
     docList.forEach((doc) {
 
       final String categoryItemName = doc['name'];
@@ -247,19 +249,19 @@ class FoodGalleryBloc implements Bloc {
 
       );
 
-      _allCategoryList.add(oneCategoryItem);
+      tempAllCategories.add(oneCategoryItem);
     }
     );
 
-    NewCategoryItem all = new NewCategoryItem(
-      categoryName: 'All',
-      imageURL: 'None',
-      rating: 0,
-      totalRating: 5,
+//    NewCategoryItem all = new NewCategoryItem(
+//      categoryName: 'All',
+//      imageURL: 'None',
+//      rating: 0,
+//      totalRating: 5,
+//
+//    );
 
-    );
-
-    _allCategoryList.add(all);
+    _allCategoryList= tempAllCategories;
 
     _categoriesController.sink.add(_allCategoryList);
     //    _foodItemController.sink.add(_allCategoryList);
