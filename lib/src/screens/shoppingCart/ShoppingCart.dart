@@ -696,7 +696,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         // work 2
                                         Container(
-                                          color: Colors.yellowAccent,
+//                                          color: Colors.black87,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
                                           width: displayWidth(context) / 1.1,
@@ -1096,12 +1096,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
                       child:
-                      OutlineButton(
-                        color: Color(0xff000000),
+                      InkWell(
+//                        color: Color(0xff000000),
 
 //          elevation: 2.5,
                         // RoundedRectangleBorder
 //          shape: CircleBorder(
+
+          /*
                         shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
                           side: BorderSide(
@@ -1111,6 +1113,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
 
+                        */
                         child:Container(
 //                        alignment: Alignment.topCenter,
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -1171,7 +1174,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ],
                           ),
                         ),
-                        onPressed: () {
+                        onTap: () {
 
                           //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
@@ -1194,21 +1197,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             showEditingCompleteCustomerHouseFlatIformation = false;
                             showEditingCompleteCustomerPhoneIformation     = false;
                             showEditingCompleteCustomerReachoutIformation  = false;
-
-                            //    showEditingCompleteCustomerAddressInformation=
-                            //    !showEditingCompleteCustomerAddressInformation;
-
-                            //    showEditingCompleteCustomerHouseFlatIformation=
-                            //    !showEditingCompleteCustomerHouseFlatIformation;
-
-                            //    showEditingCompleteCustomerPhoneIformation=
-                            //    !showEditingCompleteCustomerPhoneIformation;
-
-                            //    showEditingCompleteCustomerReachoutIformation=
-                            //    !showEditingCompleteCustomerReachoutIformation;
-
-                            // BELOW LINES COMMENTED ON JUNE 15 2020
-//                            showFullPaymentType = !showFullPaymentType;
                           });
 
 
@@ -7196,7 +7184,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
               // Work 5.
               child: Container(child:
               AnimatedSwitcher(
@@ -9215,32 +9202,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'animated Obscured Card Select Container()');
     return
       Container(
-        height: displayWidth(context)/2.1,
+        height: displayWidth(context)/2.5,
         child: AbsorbPointer(
           child: Opacity(
             opacity:0.2,
             child: Container(
-                color: Colors.yellowAccent,
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                                      padding::::
-//              color:Colors.white,
-//                                            height: 200,
-//              height: displayHeight(context) /6,
+                color: Colors.greenAccent,
+                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                 width: displayWidth(context)
-                    - displayWidth(context) /
-                        5,
-//                                            width: displayWidth(context) * 0.57,
-                /*
-                                                      child:  AbsorbPointer(
-                                                        child: _buildShoppingCartInputFields()
-                                                    ),
-                                                    */
+                    - displayWidth(context) /  5,
                 child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(priceandselectedCardFunctionality)
-//                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
-//                _buildShoppingCartPaymentMethodsUNObscuredUnSelected
-
-              //RRRRRR
-
 
             ),
           ),
@@ -9248,43 +9219,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
   }
   Widget animatedObscuredPaymentSelectContainer(Order priceandselectedCardFunctionality){
-//  Widget animatedObscuredTextInputContainer(){
-//    child:  AbsorbPointer(
-//        child: _buildShoppingCartInputFields()
-//    ),
-
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
         'animated Obscured Card Select Container()');
     return
       Container(
-        height: displayWidth(context)/2.1,
+        height: displayWidth(context)/2.5,
         child: AbsorbPointer(
           child: Opacity(
             opacity:0.2,
             child: Container(
-                color: Colors.yellowAccent,
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                                      padding::::
-//              color:Colors.white,
-//                                            height: 200,
-//              height: displayHeight(context) /6,
+                color: Colors.blue,
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 width: displayWidth(context)
-                    - displayWidth(context) /
-                        5,
-//                                            width: displayWidth(context) * 0.57,
-                /*
-                                                      child:  AbsorbPointer(
-                                                        child: _buildShoppingCartInputFields()
-                                                    ),
-                                                    */
+                    - displayWidth(context) / 5,
                 child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(priceandselectedCardFunctionality)
-//                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
-//                _buildShoppingCartPaymentMethodsUNObscuredUnSelected
-
-              //RRRRRR
-
-
             ),
           ),
         ),
