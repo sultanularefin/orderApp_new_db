@@ -68,8 +68,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //  String _currentSize;
 //  int _itemCount = 1;
-  int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
-  int _currentPaymentTypeIndex = 2;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+//  int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
+//  int _currentPaymentTypeIndex = 2;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
   bool showFullOrderType                  = true;
   bool showUserInputOptionsLikeFirstTime  = true;
   bool showCustomerInformationHeader      = false;
@@ -382,6 +382,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         else {
                           Order oneOrder = snapshot.data;
 
+                          int _currentOrderTypeIndex    = oneOrder.orderTypeIndex; // phone, takeaway, delivery, dinning.
+                          int _currentPaymentTypeIndex  = oneOrder.paymentTypeIndex;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+
 
 //              int x = 5;
 
@@ -678,9 +681,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                                             child: showFullOrderType
                                                 ?
-                                            animatedWidgetShowFullOrderType()
+                                            animatedWidgetShowFullOrderType(_currentOrderTypeIndex)
                                                 : /*1 */
-                                            animatedWidgetShowSelectedOrderType(), /* 2*/
+                                            animatedWidgetShowSelectedOrderType(_currentOrderTypeIndex), /* 2*/
                                             // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
                                             // 2 => height: displayHeight(context) / 9,
 
@@ -800,7 +803,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedWidgetShowFullOrderType() {
+  Widget animatedWidgetShowFullOrderType(int _currentOrderTypeIndex) {
 //    print ('at animatedWidgetShowFullOrderType() ');
 
     return
@@ -926,7 +929,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildOrderTypeSingleSelectOption(),
+              child:  _buildOrderTypeSingleSelectOption(_currentOrderTypeIndex),
 
             ),
           ],
@@ -939,7 +942,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  Widget _buildOrderTypeSingleSelectOption(){
+  Widget _buildOrderTypeSingleSelectOption(int _currentOrderTypeIndex){
 
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
@@ -981,7 +984,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               itemBuilder: (_, int index) {
                 return oneSingleDeliveryType(
                     allOrderTypesSingleSelect[index],
-                    index);
+                    index,_currentOrderTypeIndex);
               },
             );
           }
@@ -993,7 +996,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedWidgetShowSelectedOrderType() {
+  Widget animatedWidgetShowSelectedOrderType(int _currentOrderTypeIndex) {
 
 
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -7806,7 +7809,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
                   .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
 
-              _currentPaymentTypeIndex = selectedOne.index;
+              unObsecuredInputandPayment.orderTypeIndex = selectedOne.index;
 
               /*
               logger.e('selectedOne.index',selectedOne.index);
@@ -8077,7 +8080,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
                   .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
 
-              _currentPaymentTypeIndex = selectedOne.index;
+//              _currentPaymentTypeIndex = selectedOne.index;
+              unObsecuredInputandPayment.paymentTypeIndex= selectedOne.index;
 //              logger.e('selectedOne.index',selectedOne.index);
 //              logger.e('selectedOne.isSelected',selectedOne.isSelected);
 
@@ -8491,7 +8495,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildPaymentTypeSingleSelectOption(),
+              child:  _buildPaymentTypeSingleSelectOption(unObsecuredInputandPayment.paymentTypeIndex),
 
             ),
           ],
@@ -8673,7 +8677,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildPaymentTypeSingleSelectOption(),
+              child:  _buildPaymentTypeSingleSelectOption(unObsecuredInputandPayment.paymentTypeIndex),
 
             ),
           ],
@@ -8910,7 +8914,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
-  Widget oneSingleDeliveryType (OrderTypeSingleSelect x,int index){
+  Widget oneSingleDeliveryType (OrderTypeSingleSelect x,int index,int _currentOrderTypeIndex){
 
 
 //    String color1 = x.itemTextColor.replaceAll('#', '0xff');
@@ -9356,7 +9360,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // 3926 IS FOR THE UNOBSCURE PART.
 // 4511 is for the OBSCURED PART.
-  Widget _buildPaymentTypeSingleSelectOption(){
+  Widget _buildPaymentTypeSingleSelectOption(int _currentPaymentTypeIndex){
 
 //    logger.i('at here: _buildPaymentTypeSingleSelectOption');
 //   height: 40,
@@ -9407,7 +9411,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               itemBuilder: (_, int index) {
                 return oneSinglePaymentType(
                     allPaymentTypesSingleSelect[index],
-                    index);
+                    index,_currentPaymentTypeIndex);
               },
             );
           }
@@ -9421,7 +9425,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
-  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
+  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index,int _currentPaymentTypeIndex){
 
 
 //    String color1 = x.itemTextColor.replaceAll('#', '0xff');
