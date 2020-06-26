@@ -656,7 +656,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                     MediaQuery
                                         .of(context)
                                         .padding
-                                        .top - displayHeight(context) / 14,
+                                        .top - displayHeight(context) / 13,
                                 padding: EdgeInsets.fromLTRB(
                                     20, 0, 10, 0),
                                 // FOR CATEGORY SERARCH.
