@@ -34,6 +34,7 @@ class ShoppingCartBloc implements Bloc {
   List<OrderTypeSingleSelect>   _orderType;
   List<PaymentTypeSingleSelect> _paymentType;
   List<SelectedFood> _expandedSelectedFood =[];
+  List<SelectedFood> _savedSelectedFood    =[];
 //  CustomerInformation _oneCustomerInfo;
 
 
@@ -42,12 +43,14 @@ class ShoppingCartBloc implements Bloc {
   List<OrderTypeSingleSelect> get getCurrentOrderType => _orderType;
   List<PaymentTypeSingleSelect> get getCurrentPaymentType => _paymentType;
   List<SelectedFood> get getExpandedSelectedFood => _expandedSelectedFood;
+  List<SelectedFood> get getSavedSelectedFood => _savedSelectedFood;
 //  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
 
 
 
   final _orderController = StreamController <Order>();
   final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>();
+  final _savedSelectedFoodController =  StreamController<List<SelectedFood>>();
   final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
   final _paymentTypeController = StreamController <List<PaymentTypeSingleSelect>>.broadcast();
 
@@ -65,6 +68,11 @@ class ShoppingCartBloc implements Bloc {
 
   Stream  <List<PaymentTypeSingleSelect>> get getCurrentPaymentTypeSingleSelectStream =>
       _paymentTypeController.stream;
+
+  Stream  <List<SelectedFood>> get getSavedFoodsStream => _savedSelectedFoodController.stream;
+
+
+
 
   /*
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
@@ -118,6 +126,11 @@ class ShoppingCartBloc implements Bloc {
 
 
     List<SelectedFood> allOrderedFoods = x.selectedFoodInOrder;
+
+
+    _savedSelectedFood = allOrderedFoods;
+    _savedSelectedFoodController.sink.add(_savedSelectedFood);
+
 
     List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>();
 
@@ -316,23 +329,80 @@ class ShoppingCartBloc implements Bloc {
   Future<Order> paymentButtonPressed(Order payMentProcessing) async{
 
 
-
-    print('payment Button Pressed is ');
-
     String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
+    logger.i('payment Button Pressed is payMentProcessing.orderTypeIndex ${payMentProcessing.orderTypeIndex} ::'
+        ' orderBy: $orderBy    ${_curretnOrder.paymentTypeIndex}');
+
+
+
+
     String paidType0 =  _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
 
     // where should i put cancelButtonPressed();
 //
     // payMentProcessing
-    Order tempOrder= _curretnOrder;
+    Order tempOrder= payMentProcessing;
 
     tempOrder.paymentButtonPressed=true;
+//    List<SelectedFood> selectedFoodCheckForList = tempOrder.selectedFoodInOrder;
+
+    List<SelectedFood> selectedFoodCheckForList = _expandedSelectedFood;
+    int length =tempOrder.selectedFoodListLength;
+
+
+    logger.e('tempOrder.selectedFoodListLength ${tempOrder.selectedFoodListLength}');
+
+    logger.e('selectedFoodCheckForList: $selectedFoodCheckForList');
+
+    print('selectedFoodCheckForList[3].quantity => ${selectedFoodCheckForList[3].quantity}');
+
+    Set<SelectedFood> selectedFoodCheckForListToSet= selectedFoodCheckForList.toSet();
+
+    int lengthOfNotDuplicateFoods= selectedFoodCheckForListToSet.length;
+
+//    unDuplicatedSelectedFoods
+//
+
+    selectedFoodCheckForListToSet.forEach((oneFood) {
+
+
+      for(int i=0;i<selectedFoodCheckForList.length;i++){
+        if(oneFood==selectedFoodCheckForList[i]){
+          oneFood.quantity= oneFood.quantity +1;
+        }
+      }
+
+//      print('oneFood details: ===> ===> ');
+//      print('oneFood: ${oneFood.foodItemName}');
+//      logger.i('oneFood.quantity: ${oneFood.quantity}');
+//         print('oneFood: ${oneFood.foodItemName}');
+
+
+
+    });
+
+    selectedFoodCheckForListToSet.forEach((oneFood) {
+
+      oneFood.quantity= oneFood.quantity-1; //initially 1 that was incremented in the previous forEach loop.
+      print('oneFood.quantity SS: ${oneFood.quantity}');
 
 
 
 
-    String documentID = await _client.insertOrder(payMentProcessing,orderBy,paidType0);
+
+    });
+
+
+
+
+
+    tempOrder.selectedFoodInOrder = selectedFoodCheckForListToSet.toList();
+
+
+
+
+
+    String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0);
 
 
     print('documentID: $documentID');
@@ -578,6 +648,7 @@ class ShoppingCartBloc implements Bloc {
   void dispose() {
     _orderController.close();
     _expandedSelectedFoodController.close();
+    _savedSelectedFoodController.close();
     _orderTypeController.close();
     _paymentTypeController.close();
 //    _customerInformationController.close();

@@ -68,8 +68,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //  String _currentSize;
 //  int _itemCount = 1;
-//  int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
-//  int _currentPaymentTypeIndex = 2;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+  int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
+  int _currentPaymentTypeIndex = 2;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
   bool showFullOrderType                  = true;
   bool showUserInputOptionsLikeFirstTime  = true;
   bool showCustomerInformationHeader      = false;
@@ -275,11 +275,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
               final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
               print('at WillPopScope: ');
 
-              List<SelectedFood> p =  shoppingCartBloc.getExpandedSelectedFood;
-              print('at WillPopScope: $p');
+              List<SelectedFood> backUP =  shoppingCartBloc.getExpandedSelectedFood;
+              print('at WillPopScope : $backUP');
 
               Order z= shoppingCartBloc.getCurrentOrder;
-              z.selectedFoodInOrder=p;
+              z.selectedFoodInOrder=backUP;
 
               shoppingCartBloc.cancelButtonPressed();
 
@@ -381,9 +381,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         }
                         else {
                           Order oneOrder = snapshot.data;
-
-                          int _currentOrderTypeIndex    = oneOrder.orderTypeIndex; // phone, takeaway, delivery, dinning.
-                          int _currentPaymentTypeIndex  = oneOrder.paymentTypeIndex;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
 
 
 //              int x = 5;
@@ -578,15 +575,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                            width: displayWidth(context) * 0.57,
                                           child:
 
-                                            //ssd
+                                          //ssd
 
-                                            StreamBuilder<List<SelectedFood>>(
-                                        stream: shoppingCartBloc.getExpandedFoodsStream,
-                                            initialData: shoppingCartBloc.getExpandedSelectedFood,
+                                          StreamBuilder<List<SelectedFood>>(
+                                              stream: shoppingCartBloc.getExpandedFoodsStream,
+                                              initialData: shoppingCartBloc.getExpandedSelectedFood,
 
-                                            builder: (context, snapshot) {
-                                              if (snapshot.hasData) {
-                                                List<SelectedFood> expandedSelectedFoodInOrder = snapshot.data;
+                                              builder: (context, snapshot) {
+                                                if (snapshot.hasData) {
+                                                  List<SelectedFood> expandedSelectedFoodInOrder = snapshot.data;
 
 
 //            logger.e(
@@ -594,15 +591,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-                                                if (expandedSelectedFoodInOrder == null) {
-                                                  print('Order has no data');
-                                                  print('this will never happen don\'t worry');
+                                                  if (expandedSelectedFoodInOrder == null) {
+                                                    print('Order has no data');
+                                                    print('this will never happen don\'t worry');
 //        return Center(child: new LinearProgressIndicator());
-                                                  return Container(child: Text('expandedSelectedFoodInOrder == Null'));
-                                                }
+                                                    return Container(child: Text('expandedSelectedFoodInOrder == Null'));
+                                                  }
 
-                                                //    VIEW MODEL CHANGE THUS CONDITION CHANGE 1.
-                                                /*
+                                                  //    VIEW MODEL CHANGE THUS CONDITION CHANGE 1.
+                                                  /*
     if ((qTimes.foodItemName == '') && (qTimes.quantity == 0)) {
       print('Order has no data');
       print('this will never happen don\'t worry');
@@ -610,63 +607,63 @@ class _ShoppingCartState extends State<ShoppingCart> {
       return Container(child: Text('Null'));
     }
     */
-                                                else {
+                                                  else {
 //      int quantity = qTimes.quantity;
 //      int quantity = qTimes.selectedFoodInOrder.length;
 
-                                                  List<SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
+                                                    List<SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
 
 
 
-                                                  logger.e('\n\n AM I EXECUTED TWICE  ;;;'
-                                                      ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
-                                                  return Container(
+                                                    logger.e('\n\n AM I EXECUTED TWICE  ;;;'
+                                                        ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
+                                                    return Container(
 //                color: Colors.green,
-                                                    color: Color(0xffFFFFFF),
+                                                      color: Color(0xffFFFFFF),
 
-                                                    child: ListView.builder(
-                                                      scrollDirection: Axis.horizontal,
+                                                      child: ListView.builder(
+                                                        scrollDirection: Axis.horizontal,
 
-                                                      reverse: false,
+                                                        reverse: false,
 
-                                                      shrinkWrap: false,
+                                                        shrinkWrap: false,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
 //          itemCount: quantity,
-                                                      itemCount: allOrderedFoods.length,
-                                                      // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+                                                        itemCount: allOrderedFoods.length,
+                                                        // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
 
-                                                      itemBuilder: (_, int index) {
+                                                        itemBuilder: (_, int index) {
 //            return Text('ss');
 
-                                                        return FoodImageInShoppingCart(
-                                                            allOrderedFoods[index].foodItemImageURL, /*OrderedFoodImageURL,*/
-                                                            allOrderedFoods[index].foodItemName, /*OrderedFoodItemName, */
-                                                            allOrderedFoods[index].selectedIngredients,
-                                                            allOrderedFoods[index].unitPrice,
-                                                            index
-                                                        );
+                                                          return FoodImageInShoppingCart(
+                                                              allOrderedFoods[index].foodItemImageURL, /*OrderedFoodImageURL,*/
+                                                              allOrderedFoods[index].foodItemName, /*OrderedFoodItemName, */
+                                                              allOrderedFoods[index].selectedIngredients,
+                                                              allOrderedFoods[index].unitPrice,
+                                                              index
+                                                          );
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
 //            index);
 
 
-                                                      },
-                                                    ),
+                                                        },
+                                                      ),
 
 
-                                                    // M VSM ORG VS TODO. ENDS HERE.
-                                                  );
+                                                      // M VSM ORG VS TODO. ENDS HERE.
+                                                    );
+                                                  }
+                                                }
+                                                else {
+                                                  print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+                                                  return Container(child: Text('Null'));
                                                 }
                                               }
-                                              else {
-                                                print('!snapshot.hasData');
-//        return Center(child: new LinearProgressIndicator());
-                                                return Container(child: Text('Null'));
-                                              }
-                                            }
-                                        ),
-                                            //ssd
+                                          ),
+                                          //ssd
                                         ),
 
 
@@ -681,9 +678,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                                             child: showFullOrderType
                                                 ?
-                                            animatedWidgetShowFullOrderType(_currentOrderTypeIndex)
+                                            animatedWidgetShowFullOrderType()
                                                 : /*1 */
-                                            animatedWidgetShowSelectedOrderType(_currentOrderTypeIndex), /* 2*/
+                                            animatedWidgetShowSelectedOrderType(), /* 2*/
                                             // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
                                             // 2 => height: displayHeight(context) / 9,
 
@@ -699,7 +696,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         // work 2
                                         Container(
-//                                          color: Colors.black87,
+                                          color: Colors.yellowAccent,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
                                           width: displayWidth(context) / 1.1,
@@ -803,7 +800,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedWidgetShowFullOrderType(int _currentOrderTypeIndex) {
+  Widget animatedWidgetShowFullOrderType() {
 //    print ('at animatedWidgetShowFullOrderType() ');
 
     return
@@ -929,7 +926,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildOrderTypeSingleSelectOption(_currentOrderTypeIndex),
+              child:  _buildOrderTypeSingleSelectOption(),
 
             ),
           ],
@@ -942,7 +939,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  Widget _buildOrderTypeSingleSelectOption(int _currentOrderTypeIndex){
+  Widget _buildOrderTypeSingleSelectOption(){
 
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
@@ -984,7 +981,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               itemBuilder: (_, int index) {
                 return oneSingleDeliveryType(
                     allOrderTypesSingleSelect[index],
-                    index,_currentOrderTypeIndex);
+                    index);
               },
             );
           }
@@ -996,7 +993,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedWidgetShowSelectedOrderType(int _currentOrderTypeIndex) {
+  Widget animatedWidgetShowSelectedOrderType() {
 
 
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -1106,7 +1103,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         // RoundedRectangleBorder
 //          shape: CircleBorder(
 
-          /*
+                        /*
                         shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
                           side: BorderSide(
@@ -7509,6 +7506,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
 
 
+                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelect.paymentTypeIndex}');
                   Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
 
 
@@ -7649,6 +7647,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
+
+                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelect.paymentTypeIndex}');
+
                   Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
 
 
@@ -7809,7 +7810,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
                   .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
 
-              unObsecuredInputandPayment.orderTypeIndex = selectedOne.index;
+              _currentPaymentTypeIndex = selectedOne.index;
 
               /*
               logger.e('selectedOne.index',selectedOne.index);
@@ -8080,8 +8081,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
                   .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
 
-//              _currentPaymentTypeIndex = selectedOne.index;
-              unObsecuredInputandPayment.paymentTypeIndex= selectedOne.index;
+              _currentPaymentTypeIndex = selectedOne.index;
 //              logger.e('selectedOne.index',selectedOne.index);
 //              logger.e('selectedOne.isSelected',selectedOne.isSelected);
 
@@ -8495,7 +8495,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildPaymentTypeSingleSelectOption(unObsecuredInputandPayment.paymentTypeIndex),
+              child:  _buildPaymentTypeSingleSelectOption(),
 
             ),
           ],
@@ -8677,7 +8677,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildPaymentTypeSingleSelectOption(unObsecuredInputandPayment.paymentTypeIndex),
+              child:  _buildPaymentTypeSingleSelectOption(),
 
             ),
           ],
@@ -8914,7 +8914,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
-  Widget oneSingleDeliveryType (OrderTypeSingleSelect x,int index,int _currentOrderTypeIndex){
+  Widget oneSingleDeliveryType (OrderTypeSingleSelect x,int index){
 
 
 //    String color1 = x.itemTextColor.replaceAll('#', '0xff');
@@ -9233,7 +9233,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           child: Opacity(
             opacity:0.2,
             child: Container(
-                color: Colors.blue,
+                color: Colors.white,
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 width: displayWidth(context)
                     - displayWidth(context) / 5,
@@ -9360,7 +9360,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // 3926 IS FOR THE UNOBSCURE PART.
 // 4511 is for the OBSCURED PART.
-  Widget _buildPaymentTypeSingleSelectOption(int _currentPaymentTypeIndex){
+  Widget _buildPaymentTypeSingleSelectOption(){
 
 //    logger.i('at here: _buildPaymentTypeSingleSelectOption');
 //   height: 40,
@@ -9411,7 +9411,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               itemBuilder: (_, int index) {
                 return oneSinglePaymentType(
                     allPaymentTypesSingleSelect[index],
-                    index,_currentPaymentTypeIndex);
+                    index);
               },
             );
           }
@@ -9425,7 +9425,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
-  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index,int _currentPaymentTypeIndex){
+  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
 
 
 //    String color1 = x.itemTextColor.replaceAll('#', '0xff');
