@@ -5501,7 +5501,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     animatedObscuredPaymentSelectContainer
                       (unObsecuredInputandPayment):
-                    animatedUnObscuredPaymentUnSelectContainer
+                    animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
                       (unObsecuredInputandPayment),
 
 
@@ -7386,7 +7386,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelected
                 // animatedWidgetShowSelectedPaymentTypeTakeAway
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway
-                child: showFullPaymentType==false ? animatedWidgetShowSelectedPaymentTypeTakeAway(unObsecuredInputandPayment):
+                child: showFullPaymentType==false ?
+
+                    animatedWidgetShowSelectedPaymentTypeTakeAway(unObsecuredInputandPayment):
                 _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(unObsecuredInputandPayment),
               ),
               )
@@ -7429,7 +7431,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedUnObscuredPaymentUnSelectContainer(Order unObsecuredInputandPayment){
+  Widget animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(Order unObsecuredInputandPayment){
 
     print('at animated Un Obscured Card UnSelect Container');
     return
@@ -7450,7 +7452,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               // Work 5.
               child: Container(child:
               AnimatedSwitcher(
-                duration: Duration(milliseconds: 3000),
+                duration: Duration(milliseconds: 0),
 //
                 child: showFullPaymentType==false ? animatedWidgetShowSelectedPaymentTypeDeliveryPhone(unObsecuredInputandPayment):
                 _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
@@ -7477,7 +7479,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             */
             child:
             AnimatedSwitcher(
-              duration: Duration(milliseconds: 1000),
+              duration: Duration(milliseconds: 0),
 //
               child: showFullPaymentType==false ?
               animatedUnObscuredCancelPayButtonDeliveryPhone(unObsecuredInputandPayment):
@@ -8317,6 +8319,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  Widget animatedWidgetShowSelectedPaymentTypeTakeAway(Order unObsecuredInputandPayment){
 //animatedWidgetShowSelectedPaymentType
 //animatedWidgetShowSelectedPaymentTypeDeliveryPhone
+
+  // work 4
   Widget animatedWidgetShowSelectedPaymentTypeDeliveryPhone(Order unObsecuredInputandPayment) {
 
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
