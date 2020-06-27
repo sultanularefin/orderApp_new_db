@@ -7378,7 +7378,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               // Work 5.
               child: Container(child:
               AnimatedSwitcher(
-                duration: Duration(milliseconds: 3000),
+                duration: Duration(milliseconds: 0),
 //
                 // animatedWidgetShowSelectedPaymentType
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelected
@@ -7408,7 +7408,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             */
             child:
             AnimatedSwitcher(
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 0),
 //
               // animatedUnObscuredCancelPayButtonTakeAway
               // animatedObscuredCancelPayButtonTakeAway
