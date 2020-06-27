@@ -192,6 +192,55 @@ class LongPainterForChooseOrderTypeAdress extends CustomPainter {
 
 }
 
+class LongPainterForDinning extends CustomPainter {
+
+  final BuildContext context;
+  LongPainterForDinning(this.context);
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(displayWidth(context)/3, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(5, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
+
+class LongPainterForETA extends CustomPainter {
+
+  final BuildContext context;
+  LongPainterForETA(this.context);
+  @override
+  void paint(Canvas canvas, Size size){
+
+//    canvas.drawLine(...);
+    final p1 = Offset(displayWidth(context)/9.3, 15); //(X,Y) TO (X,Y)
+    final p2 = Offset(5, 15);
+    final paint = Paint()
+      ..color = Color(0xff000000)
+//          Colors.white
+      ..strokeWidth = 3;
+    canvas.drawLine(p1, p2, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+
+}
+
 
 class LongPainterForChooseOrderTypeUpdated extends CustomPainter {
 

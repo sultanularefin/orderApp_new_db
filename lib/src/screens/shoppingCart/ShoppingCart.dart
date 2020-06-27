@@ -696,11 +696,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         // work 2
                                         Container(
-                                          color: Colors.yellowAccent,
+                                          color: Colors.red,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
                                           width: displayWidth(context) / 1.1,
-//                                            height: displayHeight(context)/2.5,
+                                            height: displayHeight(context)/2.2,
+//                                          height: displayHeight(context)/2-42,
                                           // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
                                           // A CERTAIN PORTION OF OF THE CONTAINER
                                           // WITH YELLOW ACCENT BG COLOR IS
@@ -1523,7 +1524,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             //HHH
 
             Container(
-              height: displayHeight(context) / 20,
+              height: displayHeight(context) / 15,
 //              color:Colors.amber,
               color:Colors.white,
               child:    ListView(
@@ -1773,7 +1774,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             //HHH
 
             Container(
-              height: displayHeight(context) / 20,
+              height: displayHeight(context) / 15,
 //              color:Colors.amber,
               color:Colors.white,
               child:    ListView(
@@ -2227,12 +2228,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    currentUserForInline
 
     return Container(
+      color:Colors.pink,
       width: displayWidth(context) / 1.1,
       height: displayHeight(context) / 21 +  displayHeight(context) / 15,
 //      height: displayHeight(context) / 8,
       // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
       // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
-      color: Color(0xffffffff),
+//      color: Color(0xffffffff),
       child: Column(
           children: <Widget>[
             Container(
@@ -2310,21 +2312,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
             //HHH
 
             Container(
-              height: displayHeight(context) / 20,
+              height: displayHeight(context) / 15,
 //              color:Colors.amber,
               color:Colors.white,
               child:    ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
-                  RaisedButton(
+                  InkWell(
+
+                    splashColor:Color(0xffEEF6CE),
+                    highlightColor: Color(0xffEEF6CE),
 //                    color:Color(0xffFC0000),
+                    /*
                     color:Color(0xffFFFFFF),
                     // highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
                     clipBehavior: Clip.hardEdge,
                     // splashColor: Color(0xffFC0000),
                     highlightElevation: 12,
+                    */
                     /*
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
@@ -2339,9 +2346,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     child: currentUserForInline.address != ''? Container(
                       color:Color(0xffFFFFFF),
 //                      color:Colors.lightBlueAccent,
-                      width:displayWidth(context) /2.6,
+                      width:displayWidth(context) /4.6,
                       height:displayHeight(
-                          context) / 20,
+                          context) / 15,
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -2418,7 +2425,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              width:displayWidth(context) /5.5
                     ),
 
-                    onPressed: ()=>{
+                    onTap: ()=>{
                       setState(() {
 
                         showEditingCompleteCustomerAddressInformation = !showEditingCompleteCustomerAddressInformation;
@@ -2428,14 +2435,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       })
                     },
                   ),
-                  RaisedButton(
-                    color:Color(0xffFFFFFF),
+                  InkWell(
+
+                    splashColor:Color(0xffEEF6CE),
+                    highlightColor: Color(0xffEEF6CE),
+//                    color:Color(0xffFFFFFF),
 //                    color:Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
+//
+//
+                    /*
+//                  highlightedBorderColor: Colors.blueAccent,
                     clipBehavior: Clip.hardEdge,
                     // splashColor: Color(0xffFC0000),
                     highlightElevation: 12,
+
+                    */
                     /*
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
@@ -2452,7 +2467,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      color:Colors.brown,
                       color:Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
-                      width:displayWidth(context) /4,
+                      width:displayWidth(context) /4.5,
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -2506,10 +2521,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),):  Container(
 //                              width:displayWidth(context) /5.5
 //                       width:displayWidth(context) /8,
-                      width:displayWidth(context) /4,
+                      width:displayWidth(context) /4.5,
                     )
                     ,
-                    onPressed: ()=>{
+                    onTap: ()=>{
                       setState(() {
 
                         showEditingCompleteCustomerHouseFlatIformation =
@@ -2525,7 +2540,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
                   // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
-                  RaisedButton(
+                  InkWell(
+                    splashColor:Color(0xffEEF6CE),
+                    highlightColor: Color(0xffEEF6CE),
+                    /*
                     color:Color(0xffFFFFFF),
 //                    color:Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
@@ -2533,6 +2551,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     clipBehavior: Clip.hardEdge,
                     // splashColor: Color(0xffFC0000),
                     highlightElevation: 12,
+                    */
                     /*
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
@@ -2547,7 +2566,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Container(
                       color:Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width:displayWidth(context) /3,
+                      width:displayWidth(context) /3.8,
 
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment
@@ -2597,12 +2616,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         ],
                       ),):  Container(
-                      width:displayWidth(context) /3,
+                      width:displayWidth(context) /3.8,
 //                              width:displayWidth(context) /5.5
 //                       width:displayWidth(context) /5.9,
                     )
                     ,
-                    onPressed: ()=>{
+                    onTap: ()=>{
                       setState(() {
 
                         showEditingCompleteCustomerPhoneIformation =
@@ -2617,7 +2636,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       })
                     },
                   ),
-                  RaisedButton(
+                  InkWell(
+                    splashColor:Color(0xffEEF6CE),
+                    highlightColor: Color(0xffEEF6CE),
+
+                    /*
                     color:Color(0xffFFFFFF),
 //                    color:Color(0xffFC0000),
 //                    // highlightColor: Colors.lightGreenAccent,
@@ -2626,6 +2649,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     clipBehavior: Clip.hardEdge,
 
                     highlightElevation: 12,
+                    */
                     /*
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
@@ -2700,7 +2724,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                     ,
-                    onPressed: ()=>{
+                    onTap: ()=>{
                       setState(() {
 
                         showEditingCompleteCustomerReachoutIformation =
@@ -2759,7 +2783,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2.3,
+      height: displayHeight(context)/2.2,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
@@ -2852,7 +2876,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         CustomPaint(
                           size: Size(0, 19),
-                          painter: LongPainterForChooseOrderTypeAdress(
+                          painter: LongPainterForDinning(
                               context),
                         ),
 
@@ -3913,7 +3937,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2.3,
+      height: displayHeight(context)/2.2,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
@@ -4006,7 +4030,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         CustomPaint(
                           size: Size(0, 19),
-                          painter: LongPainterForChooseOrderTypeAdress(
+                          painter: LongPainterForETA(
                               context),
                         ),
 
@@ -5064,12 +5088,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2.3,
+      height: displayHeight(context)/2.2,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
-//      color: Colors.tealAccent,
-      color: Colors.white,
+      color: Colors.tealAccent,
+//      color: Colors.deepPurpleAccent,
 
       child: Column(
         children: <Widget>[
@@ -5079,6 +5103,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // LABEL TEXT, OR
           // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
           Container(
+
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 300),
 //
@@ -5093,7 +5118,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   :Container(
                 width: displayWidth(context) / 1.1,
                 height: displayHeight(context) / 20,
-                color: Color(0xffffffff),
+                color:Colors.blue,
+//                color: Color(0xffffffff),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment
                       .start
@@ -5217,7 +5243,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            color:Colors.black87,
             color:Color(0xffFFFFFF),
 //            height: displayWidth(context)/2.6,
-            height: displayWidth(context)/2.1,
+            height: displayWidth(context)/2.2-displayHeight(context) / 20,
+            // height: HEIGHT OF PARENT - HEIGHT OF HEADER TEXT FOR USER INPUT..,
             child: Stack(
               children: <Widget>[
                 Positioned(
@@ -5229,11 +5256,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   0:
                   getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) <= 2?
-                  0:
+                  -80:
                   getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) == 3?
 
-                  -90:10,
+                  -90:-40,
                   // from top to top distance offset related to Starting (top ) of
                   // orance Container.
 //                  right:0,
@@ -8950,13 +8977,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
         InkWell(
-         // color: Color(0xff000000),
+          // color: Color(0xff000000),
 
 //          elevation: 2.5,
           // RoundedRectangleBorder
 //          shape: CircleBorder(
 
-        /*
+          /*
           shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
             side: BorderSide(
