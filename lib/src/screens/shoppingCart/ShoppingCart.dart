@@ -5251,6 +5251,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  left:0,
                   // top:20,//displayHeight(context)/10,
                   // initial Case.
+//                  height: displayWidth(context)/2.2-displayHeight(context) / 20,
                   bottom: getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) <= 1?
                   0:
