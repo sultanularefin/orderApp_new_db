@@ -696,11 +696,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         // work 2
                                         Container(
-                                          color: Colors.red,
+//                                          color: Colors.red,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
                                           width: displayWidth(context) / 1.1,
-                                            height: displayHeight(context)/2.2,
+                                          height: displayHeight(context)/2.2,
 //                                            height: displayWidth(context)/2.2
 //                                          height: displayHeight(context)/2-42,
                                           // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
@@ -809,7 +809,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Container(
         height: displayHeight(context) / 20
             /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */
-            +  displayHeight(context) /8.5 /* HEIGHT OF MULTI SELECT PORTION */,
+            +  displayHeight(context) /11 /* HEIGHT OF MULTI SELECT PORTION */,
 //        from 7 to /8.5 on june 03
 
         child: Column(
@@ -923,7 +923,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                      padding::::
               color:Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /8.5,
+              height: displayHeight(context) /11,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
@@ -1093,7 +1093,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     Container(
 
-                      width: 100,
+                      width: displayWidth(context)/8,
                       height: displayHeight(context) /10,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
@@ -1133,7 +1133,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
 
-                                width:  85,
+                                width:displayWidth(context)/8.4,
                                 height: displayHeight(context) /15,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
@@ -1814,7 +1814,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           Container(
 
-                            width: 30,
+                            width: displayWidth(context)/34,
 //                             height: displayHeight(context) /28,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
@@ -1875,7 +1875,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         ],
                       ),):  Container(
-                      width:displayWidth(context) /4.6,
+                      width:displayWidth(context) /4.9,
 //                              width:displayWidth(context) /5.5
                     ),
 
@@ -2229,13 +2229,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    currentUserForInline
 
     return Container(
-      color:Colors.pink,
+//      color:Colors.pink,
       width: displayWidth(context) / 1.1,
       height: displayHeight(context) / 21 +  displayHeight(context) / 15,
 //      height: displayHeight(context) / 8,
       // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
       // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
-//      color: Color(0xffffffff),
+      color: Color(0xffffffff),
       child: Column(
           children: <Widget>[
             Container(
@@ -2320,34 +2320,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
-                  InkWell(
+                  RaisedButton(
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
 
                     splashColor:Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
-//                    color:Color(0xffFC0000),
-                    /*
                     color:Color(0xffFFFFFF),
                     // highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
                     clipBehavior: Clip.hardEdge,
                     // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-                    */
-                    /*
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
+//                    highlightElevation: 12,
 
-                    */
+
+
+
+
                     child: currentUserForInline.address != ''? Container(
                       color:Color(0xffFFFFFF),
 //                      color:Colors.lightBlueAccent,
-                      width:displayWidth(context) /4.6,
+                      width:displayWidth(context) /4.9,
                       height:displayHeight(
                           context) / 15,
                       child:  Row(
@@ -2360,7 +2352,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           Container(
 
-                            width: 30,
+                            width: displayWidth(context)/34,
 //                             height: displayHeight(context) /28,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
@@ -2424,7 +2416,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),):  Container(
                       color:Color(0xffFFFFFF),
 //                      color:Colors.lightBlueAccent,
-                      width:displayWidth(context) /4.6,
+                      width:displayWidth(context) /4.9,
                       height:displayHeight(
                           context) / 15,
                       child:  Row(
@@ -2437,7 +2429,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           Container(
 
-                            width: 30,
+                            width: displayWidth(context)/34,
 //                             height: displayHeight(context) /28,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
@@ -2500,7 +2492,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ],
                       ),),
 
-                    onTap: ()=>{
+                    onPressed: ()=>{
                       setState(() {
 
                         showEditingCompleteCustomerAddressInformation = !showEditingCompleteCustomerAddressInformation;
@@ -2510,10 +2502,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       })
                     },
                   ),
-                  InkWell(
+                  RaisedButton(
 
                     splashColor:Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
+                    color:Color(0xffFFFFFF),
 //                    color:Color(0xffFFFFFF),
 //                    color:Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
@@ -2542,7 +2535,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      color:Colors.brown,
                       color:Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
-                      width:displayWidth(context) /4.5,
+                      width:displayWidth(context) /5.8,
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -2597,7 +2590,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      color:Colors.brown,
                       color:Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
-                      width:displayWidth(context) /4.5,
+                      width:displayWidth(context) /5.8,
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -2650,7 +2643,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ],
                       ),)
                     ,
-                    onTap: ()=>{
+                    onPressed: ()=>{
                       setState(() {
 
                         showEditingCompleteCustomerHouseFlatIformation =
@@ -2666,9 +2659,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
                   // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
-                  InkWell(
+                  RaisedButton(
                     splashColor:Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
+                    color:Color(0xffFFFFFF),
                     /*
                     color:Color(0xffFFFFFF),
 //                    color:Color(0xffFC0000),
@@ -2692,7 +2686,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Container(
                       color:Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width:displayWidth(context) /3.8,
+                      width:displayWidth(context) /5.5,
 
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment
@@ -2744,7 +2738,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),):  Container(
                       color:Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width:displayWidth(context) /3.8,
+                      width:displayWidth(context) /5.5,
 
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment
@@ -2795,7 +2789,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ],
                       ),)
                     ,
-                    onTap: ()=>{
+                    onPressed: ()=>{
                       setState(() {
 
                         showEditingCompleteCustomerPhoneIformation =
@@ -2810,9 +2804,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       })
                     },
                   ),
-                  InkWell(
+                  RaisedButton(
                     splashColor:Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
+                    color:Color(0xffFFFFFF),
 
                     /*
                     color:Color(0xffFFFFFF),
@@ -2949,7 +2944,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                     ,
-                    onTap: ()=>{
+                    onPressed: ()=>{
                       setState(() {
 
                         showEditingCompleteCustomerReachoutIformation =
@@ -3953,7 +3948,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       children: <Widget>[
                                         Container(
 
-                                          height: 25,
+//                                          height: 25,
+                                          height: displayHeight(context)/40,
                                           width: 5,
                                           margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -5102,7 +5098,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       children: <Widget>[
                                         Container(
 
-                                          height: 25,
+//                                          height: 25,
+                                          height: displayHeight(context)/40,
                                           width: 5,
                                           margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -5343,7 +5340,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   :Container(
                 width: displayWidth(context) / 1.1,
                 height: displayHeight(context) / 20,
-                color:Colors.blue,
+//                color:Colors.blue,
 //                color: Color(0xffffffff),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment
@@ -5466,9 +5463,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
 //            color:Colors.white38,
 //            color:Colors.black87,
-            color:Color(0xffFFFFFF),
+//            color:Colors.black87,
 //            height: displayWidth(context)/2.6,
-            height: displayHeight(context)/2.2 - displayHeight(context) / 20,
+            height: displayHeight(context)/2.2 - displayHeight(context) / 20-100,
+//            height: displayHeight(context)/2 - displayHeight(context) / 20,
             // height: HEIGHT OF PARENT - HEIGHT OF HEADER TEXT FOR USER INPUT..,
             child: Stack(
               children: <Widget>[
@@ -5479,14 +5477,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  height: displayWidth(context)/2.2-displayHeight(context) / 20,
                   bottom: getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) <= 1?
-                  0:
+                  -60:
                   getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) <= 2?
                   -80:
                   getNumberOfInputsFilledUp (
                       unObsecuredInputandPayment.ordersCustomer) == 3?
 
-                  -90:-40,
+                  -80:-0,
                   // from top to top distance offset related to Starting (top ) of
                   // orance Container.
 //                  right:0,
@@ -5513,7 +5511,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 Container(
 //                  height: displayWidth(context)/2.2
-//                      -displayHeight(context) / 20 -100,
+//                      -displayHeight(context) / 15,
                   child: AnimatedPositioned(
                     duration: Duration(milliseconds: 500),
                     top:
@@ -5604,7 +5602,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         children: <Widget>[
                                           Container(
 
-                                            height: 25,
+//                                            height: 25,
+                                            height: displayHeight(context)/40,
                                             width: 5,
                                             margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -5864,7 +5863,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         children: <Widget>[
                                           Container(
 
-                                            height: 25,
+//                                            height: 25,
+                                            height: displayHeight(context)/40,
                                             width: 5,
                                             margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -6071,7 +6071,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         children: <Widget>[
                                           Container(
 
-                                            height: 25,
+//                                            height: 25,
+                                            height: displayHeight(context)/40,
                                             width: 5,
                                             margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -6279,7 +6280,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         children: <Widget>[
                                           Container(
 
-                                            height: 25,
+//                                            height: 25,
+                                            height: displayHeight(context)/40,
                                             width: 5,
                                             margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -6705,7 +6707,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     children: <Widget>[
                       Container(
 
-                        height: 25,
+//                        height: 25,
+                        height: displayHeight(context)/40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -6881,7 +6884,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     children: <Widget>[
                       Container(
 
-                        height: 25,
+//                        height: 25,
+                        height: displayHeight(context)/40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -7060,7 +7064,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     children: <Widget>[
                       Container(
 
-                        height: 25,
+//                        height: 25,
+                        height: displayHeight(context)/40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -7223,7 +7228,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     children: <Widget>[
                       Container(
 
-                        height: 25,
+//                        height: 25,
+                        height: displayHeight(context)/40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -8148,7 +8154,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           Container(
 
-                            width: 100,
+//                            width: 100,
+                            width: displayWidth(context)/8,
                             height: displayHeight(context) /10,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
@@ -8418,7 +8425,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           Container(
 
-                            width: 100,
+//                            width: 100,
+                            width: displayWidth(context)/8,
                             height: displayHeight(context) /10,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
@@ -9182,10 +9190,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       Container(
 
-        width: 120,
+        width: displayWidth(context)/7,
         height: displayHeight(context) /11,
         alignment: Alignment.center,
-        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         child:
         InkWell(
           child:Container(
@@ -9256,10 +9264,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       ):
       Container(
-        width: 120,
+        width: displayWidth(context)/7,
         height: displayHeight(context) /11,
         alignment: Alignment.center,
-        margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         child:
         InkWell(
           child:Container(
@@ -9544,7 +9552,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //              reverse: true,
 
-              shrinkWrap: false,
+              shrinkWrap: true,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
               itemCount: allPaymentTypesSingleSelect.length,
@@ -9554,6 +9562,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     allPaymentTypesSingleSelect[index],
                     index);
               },
+
             );
           }
         }
@@ -9598,9 +9607,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       Container(
 
-        width: 110,
+//        width: 110,
+        width: displayWidth(context)/7.8,
         height: displayHeight(context) /11,
-        alignment: Alignment.center,
+//        alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
         OutlineButton(
@@ -9712,9 +9722,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ):
 
       Container(
-        width: 110,
+//        width: 110,
+        width: displayWidth(context)/7.8,
+//        width: displayWidth(context)/8,
         height: displayHeight(context) /10,
-        alignment: Alignment.center,
+//        alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
         OutlineButton(
