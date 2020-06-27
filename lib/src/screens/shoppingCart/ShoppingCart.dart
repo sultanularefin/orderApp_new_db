@@ -8755,7 +8755,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               color: Colors.white,
 //              color:Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /10,
+              height: displayHeight(context) /9,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
@@ -8774,7 +8774,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Container(
 //        color: Colors.blueGrey,
         color: Colors.white,
-        height: displayHeight(context) / 20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +  displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
+        height: displayHeight(context) /
+            20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
+            displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
         child: Column(
           children: <Widget>[
             Container(
@@ -8937,7 +8939,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               color: Colors.white,
 //              color:Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /10,
+              height: displayHeight(context) /9,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,

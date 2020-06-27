@@ -1264,6 +1264,18 @@ Widget work1(BuildContext context){
                       () {
                     _totalCount = 0;
                     totalPriceState = 0;
+                    allSelectedFoodGallery=[];
+                    orderFG = new Order(
+                      selectedFoodInOrder: [],
+                      selectedFoodListLength:0,
+                      orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
+                      paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                      ordersCustomer: null,
+                      totalPrice: 0,
+                      page:0,
+                      isCanceled: false,
+                      orderdocId:'',
+                    );
                   }
               );
             }
@@ -1296,6 +1308,18 @@ Widget work1(BuildContext context){
                     _totalCount = 0;
                     totalPriceState = 0;
                     allSelectedFoodGallery=[];
+
+                    orderFG = new Order(
+                      selectedFoodInOrder: [],
+                      selectedFoodListLength:0,
+                      orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
+                      paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                      ordersCustomer: null,
+                      totalPrice: 0,
+                      page:0,
+                      isCanceled: false,
+                      orderdocId:'',
+                    );
                   }
               );
             }
