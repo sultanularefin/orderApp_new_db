@@ -658,7 +658,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                         .padding
                                         .top -  displayHeight(context) / 14,
                                 padding: EdgeInsets.fromLTRB(
-                                    20, 0, 10, 0),
+                                    5, 0, 5, 0),
                                 // FOR CATEGORY SERARCH.
 
                                 child: foodList(_currentCategory,_searchString,
@@ -687,7 +687,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                           MediaQuery
                               .of(context)
                               .padding
-                              .top + displayHeight(context) / 20,
+                              .top,
+//+ displayHeight(context) / 20
 
 //                          color: Color.fromARGB(255, 84, 70, 62),
 //              child:Text('ss'),
@@ -700,7 +701,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                             padding: EdgeInsets.only(
                                 top: 20, right: 20, bottom: 0, left: 0),
 //                        height:100,
-                            height: displayHeight(context) / 13,
+                            height: displayHeight(context) / 14,
                             width: MediaQuery
                                 .of(context)
                                 .size
@@ -773,7 +774,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                 MediaQuery
                                     .of(context)
                                     .padding
-                                    .top - displayHeight(context) / 13,
+                                    .top - displayHeight(context) / 14,
 //displayHeight(context) / 13 IS THE HEIGHT OF THE HORIZONTAL ROW CONTAINING JEDILINE SEARCH AND SHOPPING CART ICON.
 //                          height:800,
 //                          padding:EdgeInsets.symmetric(horizontal: 0,vertical: displayHeight(context)/13),
@@ -1760,8 +1761,8 @@ Widget work1(BuildContext context){
               final int categoryItemsCount = filteredItemsByCategory.length;
               print('categoryItemsCount: $categoryItemsCount');
               return
-                SingleChildScrollView(
-                  child: Column(
+
+                   Column(
                     children: <Widget>[
 
                       Container(
@@ -1816,7 +1817,7 @@ Widget work1(BuildContext context){
                             MediaQuery
                                 .of(context)
                                 .padding
-                                .top - (displayHeight(context) / 13) -
+                                .top - (displayHeight(context) / 14) -
                             (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
                         */
                         child: foodListByCategoryandNoSearch(filteredItemsByCategory,context),
@@ -1828,7 +1829,7 @@ Widget work1(BuildContext context){
 
 
                     ],
-                  ),
+
                 );
             }
             else{
@@ -1908,7 +1909,7 @@ Widget work1(BuildContext context){
 //                            MediaQuery
 //                                .of(context)
 //                                .padding
-//                                .top - (displayHeight(context) / 13) -
+//                                .top - (displayHeight(context) / 14) -
 //                            (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
 
                         child: foodListBySearchString(filteredItems,context),
@@ -1941,8 +1942,8 @@ Widget work1(BuildContext context){
           MediaQuery
               .of(context)
               .padding
-              .top - (displayHeight(context) / 13) -
-          (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
+              .top - (displayHeight(context) / 14) -
+          (displayHeight(context) / 20), /* displayHeight(context) / 20 is the header of category of search*/
       child: GridView.builder(
         itemCount: filteredItemsBySearchString.length,
         gridDelegate:
@@ -2216,8 +2217,10 @@ Widget work1(BuildContext context){
           MediaQuery
               .of(context)
               .padding
-              .top - (displayHeight(context) / 13) -
-          (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
+              .top - (displayHeight(context) / 14) -
+          (displayHeight(context) / 20)-24,
+      /* displayHeight(context) / 20 is the header of category of search || like pizza and /14 is the
+      * container holding the logo*/
       child: GridView.builder(
         itemCount: filteredItemsByCategory.length,
         gridDelegate:
