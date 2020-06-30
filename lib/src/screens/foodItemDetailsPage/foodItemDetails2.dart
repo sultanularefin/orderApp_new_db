@@ -147,7 +147,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //    List<NewIngredient> defaultIngredients = foodItemDetailsbloc.getDefaultIngredients;
     List<NewIngredient> unSelectedIngredients = blocD.unSelectedIngredients;
 
-   // print('unSelectedIngredients: $unSelectedIngredients');
+    // print('unSelectedIngredients: $unSelectedIngredients');
 
 
 
@@ -180,7 +180,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   return Center(child: new LinearProgressIndicator());
                 }
                 else {
-               //   print('snapshot.hasData FDetails: ${snapshot.hasData}');
+                  //   print('snapshot.hasData FDetails: ${snapshot.hasData}');
 
                   final FoodItemWithDocIDViewModel oneFood = snapshot
                       .data;
@@ -289,11 +289,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                 MediaQuery.of(context).padding.top -
                                 kToolbarHeight,
                             child: GestureDetector(
-                                onTap: () {
-                                  print('GestureDetector for Stack working');
-                                  print('no navigation now');
+                              onTap: () {
+                                print('GestureDetector for Stack working');
+                                print('no navigation now');
 
-                                  /*
+                                /*
                                   FocusScopeNode currentFocus = FocusScope.of(
                                       context);
 
@@ -321,35 +321,35 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      List<NewIngredient> emptyIngs = [];
 
 
-                                  // final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+                                // final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //                      final blocD =
 //                          BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
-                                  // SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
+                                // SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
 
-                                 //  print('temp is $temp');
+                                //  print('temp is $temp');
 
 
-                                  /*
+                                /*
 
                                   SelectedFood tempSelectedFood = temp == null? new SelectedFood():
                                   temp /*.selectedFoodInOrder.first*/;
 */
 
 
-                                  // WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
-                                  // WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
-                                  // FROM FOOD ITEM PAGE.
+                                // WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
+                                // WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
+                                // FROM FOOD ITEM PAGE.
 
 
 
 
-                                  // return Navigator.pop(context,tempSelectedFood);
+                                // return Navigator.pop(context,tempSelectedFood);
 
 
 
 
-                                },
+                              },
                               child: Stack(
                                 children: <Widget>[
                                   // todo==>
@@ -361,7 +361,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                      height: _height,
                                       decoration: BoxDecoration(
 //                                        color: Colors.lightGreenAccent,
-                                      color: Colors.white,
+                                        color: Colors.white,
                                         borderRadius: BorderRadius.circular(25),
 //                                        borderRadius: BorderRadius.all(20),
                                       ),
@@ -370,8 +370,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       // Provide an optional curve to make the animation feel smoother.
                                       curve: Curves.fastOutSlowIn,
 //                                      color:Colors.blueAccent,
-                                      height:  displayHeight(context) / 2.6 + addedHeight,
-                                      /* /2.6 IS THE HEIGHT
+                                      height:  displayHeight(context) / 2.2 + addedHeight,
+                                      /* /2.2 IS THE HEIGHT
                                                 OF TOP CONTAINER*/
                                       /*
                                          -
@@ -385,11 +385,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       */
 
 //                                      width:220,
-//                                      height: displayHeight(context) / 2.6,
+//                                      height: displayHeight(context) / 2.2,
                                       //width:displayWidth(context) / 1.5, /* 3.8*/
-                                      width: displayWidth(context)
-                                          - displayWidth(context) /
-                                              3.8 /* this is about the width of yellow side menu */
+                                      width: displayWidth(context) -displayWidth(context)/15 /* -  displayWidth(context) /
+                                          1.2 */ /* greater width of modal details page.*/
+                                          /*- displayWidth(context) /
+                                              3.8 */ /* this is about the width of yellow side menu */
                                           - displayWidth(context) /
                                               26, /* 10% of widht of the device for padding margin.*/
 //                  color:Colors.lightGreenAccent,
@@ -482,7 +483,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                             .of(context)
                                             .padding
                                             .top /*THIS IS SAFE AREA. AT THE TOP.*/ +
-                                        displayHeight(context) / 2.6
+                                        displayHeight(context) / 2.2
                                         :  displayHeight(context)/7.5
                                     /*THIS IS TOP MARGIN */ /*- MediaQuery
                                               .of(context)
@@ -504,13 +505,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //                                      alignment: Alignment.bottomCenter,
-                                    height: displayHeight(context) / 2.6,
+                                    height: displayHeight(context) / 2.2,
                                     //width:displayWidth(context) / 1.5, /* 3.8*/
-                                    width: displayWidth(context)
-                                        - displayWidth(context) /
-                                            3.8 /* this is about the width of yellow side menu */
-                                        - displayWidth(context) /
-                                            26, /* 10% of widht of the device for padding margin.*/
+                                    width: displayWidth(context)/1.07,
 //                  color:Colors.lightGreenAccent,
                                     margin: EdgeInsets.fromLTRB(
                                         12, displayHeight(context)/7.5, 10, 5),
@@ -539,14 +536,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                         */
                                         curve: Neumorphic.DEFAULT_CURVE,
                                         style: NeumorphicStyle(
-                                            shape: NeumorphicShape
-                                                .concave,
-                                            depth: 8,
-                                            lightSource: LightSource
-                                                .topLeft,
-                                            color: Colors.white,
-                                            boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-                                        ),
+                                          shape: NeumorphicShape
+                                              .concave,
+                                          depth: 8,
+                                          lightSource: LightSource
+                                              .topLeft,
+                                          color: Colors.white,
+                                          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+                                          ),
                                         ),
 
 //                    MAX_DEPTH,DEFAULT_CURVE
@@ -561,44 +558,44 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                           crossAxisAlignment: CrossAxisAlignment
                                               .start,
                                           children: <Widget>[
-                                            Container(child: Row(
-                                              mainAxisAlignment: MainAxisAlignment
-                                                  .start,
-                                              children: <Widget>[
-                                                // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                                // , 2ND PART(ROW) HANDLES THE
-                                                // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+
+                                            Container(
+
+                                              color: Colors.redAccent,
+                                              height:displayHeight(context)/30,
+//                                              width: displayWidth(context)*0.57,
+                                              width: displayWidth(context)/1.07,
+                                              // /1.07 is the width of this
+                                              // uppper container.
 
 
-                                                Container(
-                                                    height: displayHeight(
-                                                        context) / 2.6,
-                                                    color: Colors.white,
-//                                                  color: Colors.red,
-                                                    width: displayWidth(
-                                                        context) /
-                                                        5,
-// INCREASE THE DIVIDER TO MAKE IT MORE SAMLLER. I.E. WIDTH
-//                      height: displayHeight(context)*0.50,
-//                                    alignment: Alignment.centerLeft,
+                                              child: Row(
+                                                children: <Widget>[
 
 
-                                                    //ZZZ
-                                                    // Other arguments such as margin, padding etc. (Like `Container`)
-                                                    child: Column(
-                                                      mainAxisAlignment: MainAxisAlignment
-                                                          .center,
-                                                      crossAxisAlignment: CrossAxisAlignment
-                                                          .start,
 
-//        mainAxisSize: MainAxisSize.min,
+                                                  // YELLOW NAME AND PRICE BEGINS HERE.
+                                                  Container(
+
+                                                    decoration: BoxDecoration(
+                                                      color:Color(0xffFFE18E),
+                                                      borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
+//
+                                                    ),
+
+                                                    width: displayWidth(context)/3.1,
+//                                          height: displayHeight(context)/40,
+
+                                                    child:
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                                                       children: <Widget>[
-                                                        //pppp
                                                         Container(
                                                           padding: EdgeInsets
                                                               .fromLTRB(
                                                               10, 0, 0,
-                                                              10),
+                                                              0),
                                                           child:
 
                                                           Text(
@@ -619,8 +616,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                         Container(
                                                           padding: EdgeInsets
                                                               .fromLTRB(
-                                                              10, 0, 0,
-                                                              10),
+                                                              0, 0, displayWidth(context)/30,
+                                                              0),
                                                           child:
 
                                                           Text(
@@ -638,148 +635,224 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                           ),
                                                         ),
 
-                                                        Container(
-                                                          /*
-                                  color:Colors.blue,
-                                width:displayWidth(context)/4.6,
-                                */
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                              0, 0, 0,
-                                                              displayHeight(
-                                                                  context) /
-                                                                  25),
-
-                                                          child: FoodDetailImage(
-                                                              oneFood
-                                                                  .imageURL,
-                                                              oneFood
-                                                                  .itemName),
-                                                        ),
-
-
                                                       ],
-
-                                                    )
-                                                ),
-
-                                                // THIS ROW HAVE 2 PARTS -> 1ST PART (ROW) HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                                                // , 2ND PART(ROW) HANDLES THE
-                                                // DIFFERENT SIZES OF PRODUCTS.
-                                                // ENDS HERE.
+                                                    ),
 
 
-                                                // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
 
-                                                Container(
-                                                  height: displayHeight(
+                                                  ),
+
+                                                  // YELLOW NAME AND PRICE ENDS HERE.
+
+
+
+                                                  // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                                                  // ENDED HERE.
+
+                                                  // BLACK CONTAINER WILL BE DELETED LATER.
+                                                  // BLACK CONTAINER.
+
+
+
+
+
+
+                                                  Container(
+                                                    padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+//                                                      padding::::
+                                                    color:Colors.white,
+//                                                        height: 45,
+                                                    height: displayHeight(context)/27,
+                                                    width: displayWidth(context) /1.80,
+                                                    child: _buildMultiSelectOptions(),
+//                                                      Card(child: _buildMultiSelectOptions()),
+
+                                                    // Text('_buildMultiSelectOptions()')
+
+                                                  ),
+                                                ],
+                                              ),
+
+                                            ),
+
+
+
+
+                                            // 2nd ROW CONTAINING IMAGE CONTAINER
+                                            // AS ONE CHILD AND SIZED COMPONENTS ADN
+                                            // DEFAULT INGREDIENTS IN ANOTHER PLACE.
+                                            Container(
+                                                color:Colors.purple,
+                                                height: displayHeight(
+                                                    context) / 3.2,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment
+                                                      .start,
+                                                  children: <Widget>[
+                                                    // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                                                    // , 2ND PART(ROW) HANDLES THE
+                                                    // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+
+
+                                                    Container(
+                                                        height: displayHeight(
+                                                            context) / 2.6,
+                                                        color: Colors.red,
+//                                                  color: Colors.red,
+                                                        width: displayWidth(
+                                                            context) /
+                                                            3,
+// INCREASE THE DIVIDER TO MAKE IT MORE SAMLLER. I.E. WIDTH
+//                      height: displayHeight(context)*0.50,
+//                                    alignment: Alignment.centerLeft,
+
+
+                                                        //ZZZ
+                                                        // Other arguments such as margin, padding etc. (Like `Container`)
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment
+                                                              .start,
+                                                          crossAxisAlignment: CrossAxisAlignment
+                                                              .start,
+
+//        mainAxisSize: MainAxisSize.min,
+                                                          children: <Widget>[
+                                                            //pppp
+
+
+
+
+
+
+
+                                                            Container(
+
+                                                              padding: EdgeInsets
+                                                                  .fromLTRB(
+                                                                  0, (displayHeight(
+                                                                  context) /
+                                                                  15), 0,
+                                                                  0),
+
+                                                              child: FoodDetailImage(
+                                                                  oneFood
+                                                                      .imageURL,
+                                                                  oneFood
+                                                                      .itemName),
+                                                            ),
+
+
+                                                          ],
+
+                                                        )
+                                                    ),
+
+
+                                                    // SIZED COMPONENTS AND
+                                                    // DEFAULT INGREDIENTS IN ANOTHER PLACE. BEGINS.
+                                                    // HERE.
+
+
+
+                                                    // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
+
+                                                    Container(
+                                                      height: /* displayHeight(
                                                       context) /
-                                                      2.6,
-                                                  width: displayWidth(
-                                                      context) -
-                                                      displayWidth(
-                                                          context) / 3.7 /* about the width of left most
-                              container holding the food Item Image, image name and food item price */
-                                                      - displayWidth(
-                                                          context) /
-                                                          3.8 /* this is about the width of yellow side menu */ +10,// this +10 value just adjustment, foodSize
-                                                  // container width enlargement for scoll...
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .start,
+                                                      2.2 */
+                                                      displayHeight(context)/27 +
+                                                          displayHeight(context) / 7 +
+                                                          displayHeight(context) / 8
+                                                      /** 40 being extra for margin padding.*/,
+
+
+                                                      //      width: displayWidth(context)/1.07,
+                                                      width: displayWidth(context) /1.80,
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment: CrossAxisAlignment
+                                                            .end,
 
 
 //        mainAxisSize: MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      //pppp
+                                                        children: <Widget>[
+                                                          //pppp
 
-                                                      Container(
-                                                        padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-//                                                      padding::::
-                                                        color:Colors.white,
-                                                        height: 65,
-                                                        width: displayWidth(context) /1.80,
-                                                        child: _buildMultiSelectOptions(),
-//                                                      Card(child: _buildMultiSelectOptions()),
 
-                                                        // Text('_buildMultiSelectOptions()')
+                                                          Container(
 
-                                                      ),
-                                                      Container(
-
-                                                          height: displayHeight(context) / 7,
+                                                              height: displayHeight(context) / 7,
 //                                                        width: displayWidth(context) /1.80,
-                                                          child: _buildProductSizes(
-                                                              context,
-                                                              foodSizePrice)
-                                                        //Text('_buildProductSizes('
-                                                        //    'context,'
-                                                        //    'foodSizePrice)'),
-                                                      ),
+                                                              child: _buildProductSizes(
+                                                                  context,
+                                                                  foodSizePrice)
+                                                            //Text('_buildProductSizes('
+                                                            //    'context,'
+                                                            //    'foodSizePrice)'),
+                                                          ),
 
 //                                  Text('ss'),
-                                                      Container(
-                                                          height: displayHeight(context) / 8,
-                                                          width: displayWidth(context) * 0.57,
-                                                          color: Color(0xfff4444aa),
+                                                          Container(
+                                                              height: displayHeight(context) / 8,
+                                                              width: displayWidth(context) * 0.57,
+                                                              color: Color(0xfff4444aa),
 //                                                        alignment: Alignment.center,
-                                                          child: buildDefaultIngredients(
-                                                              context
-                                                          )
-                                                        //Text('buildDefaultIngredients('
-                                                        //    'context'
-                                                        //')'),
+                                                              child: buildDefaultIngredients(
+                                                                  context
+                                                              )
+                                                            //Text('buildDefaultIngredients('
+                                                            //    'context'
+                                                            //')'),
+                                                          ),
+
+                                                          // NEWANIMATEDPOSITIONED HERE BEGINS =><=
+                                                          // MORE INGREDIENTS Row BEGINS HERE.
+
+                                                          // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
+
+                                                        ],
                                                       ),
-
-                                                      // NEWANIMATEDPOSITIONED HERE BEGINS =><=
-                                                      // MORE INGREDIENTS Row BEGINS HERE.
-                                                      Container(
-                                                        width: displayWidth(context) /1.80,
-//                                                      alignment: Alignment.center,
-//                                                      width: displayWidth(context) /2,
-
-                                                        child:
-                                                        AnimatedSwitcher(
-                                                          duration: Duration(milliseconds: 500),
-//
-                                                          child: showPressWhenFinishButton? animatedWidgetPressToFinish():
-                                                          animatedWidgetMoreIngredientsButton(),
-                                                          // Text('showPressWhenFinishButton? animatedWidgetPressToFinish():'
-                                                          //     'animatedWidgetMoreIngredientsButton(),'),
-
-                                                        ),
-                                                        // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH BEGINS HERE.
-
-
-                                                        // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH ENDS HERE.
-                                                        // todo==>
-                                                        // showUnSelectedIngredients displayHeight(context)/7.5
-                                                        // THIS CONTAINER WILL HOLD THE MORE INGREDIENTS OUTLINE BUTTON AND ITEM COUNT BEGINS HERE.
-
-
-                                                        // THIS CONTAINER WILL HOLD THE MORE INGREDIENTS OUTLINE BUTTON AND ITEM COUNT ENDS HERE.
-                                                        // MORE INGREDIENTS ROW ENDS HERE.
-
-                                                      )
-                                                      // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, ENDS HERE:
-
-                                                    ],
-                                                  ),
-                                                ),
+                                                    ),
 
 
 
 
-                                              ],
-                                            )
+                                                  ],
+                                                )
 
                                             ),
 
 
                                             /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
+                                            Container(
+                                              width: displayWidth(context) /1.80,
+//                                                      alignment: Alignment.center,
+//                                                      width: displayWidth(context) /2,
 
+                                              child:
+                                              AnimatedSwitcher(
+                                                duration: Duration(milliseconds: 500),
+//
+                                                child: showPressWhenFinishButton? animatedWidgetPressToFinish():
+                                                animatedWidgetMoreIngredientsButton(),
+                                                // Text('showPressWhenFinishButton? animatedWidgetPressToFinish():'
+                                                //     'animatedWidgetMoreIngredientsButton(),'),
+
+                                              ),
+                                              // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH BEGINS HERE.
+
+
+                                              // THIS CONTAINER WILL HOLD THE STRING PRESS WHEN FINISH ENDS HERE.
+                                              // todo==>
+                                              // showUnSelectedIngredients displayHeight(context)/7.5
+                                              // THIS CONTAINER WILL HOLD THE MORE INGREDIENTS OUTLINE BUTTON AND ITEM COUNT BEGINS HERE.
+
+
+                                              // THIS CONTAINER WILL HOLD THE MORE INGREDIENTS OUTLINE BUTTON AND ITEM COUNT ENDS HERE.
+                                              // MORE INGREDIENTS ROW ENDS HERE.
+
+                                            )
 
                                           ],
                                         )
@@ -984,7 +1057,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
 //          disabledBorderColor: false,
                   borderSide: BorderSide(
-                    color: Color(0xff707070),
+                    color: Color(0xffF83535),
                     style: BorderStyle.solid,
                     width: 3.6,
                   ),
@@ -1000,7 +1073,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     side: BorderSide(
                       color: Color(0xff000000),
                       style: BorderStyle.solid,
-                      width: 2.6,
+                      width: 2.2,
                     ),
                     borderRadius: BorderRadius.circular(35.0),
                   ),
@@ -1019,16 +1092,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         Icon(
                           Icons.add,
                           size: 22.0,
-                          color: Color(0xff707070),
+                          color: Color(0xffF50303),
                           //        color: Color(0xffFFFFFF),
                         ),
                         Text(
-                          'More Ingredients'.toUpperCase(),
+                          'more ingredients',
                           style: TextStyle(
-                              fontWeight: FontWeight
-                                  .bold,
-                              color: Color(0xff707070),
-                              fontSize: 17),
+                            fontWeight: FontWeight
+                                .bold,
+                            color: Color(0xffF50303),
+                            fontSize: 22, fontFamily: 'Itim-Regular',),
                         ),
                       ],
                     ),
@@ -1069,6 +1142,85 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               // WHAT WE NEED IS CURRENT SELECTED FOOD STREAM
               // StreamBuilder<Order>( TO StreamBuilder<Order>(
 
+              Container(
+                width: displayWidth(
+                    context) /4,
+
+                height: displayHeight(context)/25.4,
+//                alignment: Alignment.center,
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child:
+                OutlineButton(
+
+                  clipBehavior: Clip.hardEdge,
+                  splashColor: Color(0xffFEE295),
+//          splashColor: Color(0xff739DFA),
+                  highlightElevation: 12,
+
+                  shape: RoundedRectangleBorder(
+
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
+//          disabledBorderColor: false,
+                  borderSide: BorderSide(
+                    color: Color(0xffF83535),
+                    style: BorderStyle.solid,
+                    width: 3.6,
+                  ),
+
+
+
+                  child:Container(
+                    padding: EdgeInsets.fromLTRB(0,0,0,0),
+
+
+                        child: IconButton(
+
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 0),
+                            icon: Icon(Icons.check_circle_outline,color: Color(0xff85B20A),),
+                            iconSize: 32,
+
+                            tooltip: 'Increase product count by 1 ',
+                            onPressed: () {
+
+                            }
+
+                        ),
+
+
+
+                  ),
+                  onPressed: () {
+//                                                                        logger.i('s  =>   =>   => ','ss');
+
+//                    logger.i('addedHeight: ',addedHeight);
+                    if( addedHeight == 0.0 ){
+                      setState(() {
+                        addedHeight = /* displayHeight(context)/10*/
+                        30.0;
+                        showUnSelectedIngredients = !showUnSelectedIngredients ;
+                        showPressWhenFinishButton = !showPressWhenFinishButton;
+//                          myAnimatedWidget1 = myAnimatedWidget2;
+
+                      });
+                    }else{
+                      setState(() {
+                        addedHeight= 0.0;
+                        showUnSelectedIngredients = !showUnSelectedIngredients;
+                        showPressWhenFinishButton = !showPressWhenFinishButton;
+//                        myAnimatedWidget2 = myAnimatedWidget1();
+                      });
+                    }
+
+                    print(
+                        'xyz');
+
+                  },
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+                ),
+              ),
 
               StreamBuilder<SelectedFood>(
 
@@ -1149,7 +1301,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                               padding: EdgeInsets.symmetric(
                                   horizontal: 0, vertical: 0),
-                              icon: Icon(Icons.add_circle_outline),
+                              icon: Icon(Icons.add_circle_outline,color: Color(0xff85B20A),),
                               iconSize: 32,
 
                               tooltip: 'Increase product count by 1 ',
@@ -1308,9 +1460,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       children: <Widget>[ Center(
                                         child: Icon(
 
-                                          Icons.add_shopping_cart,
-                                          size: 40,
-                                          color: Color(0xff707070),
+                                            Icons.add_shopping_cart,
+                                            size: 40,
+                                            color:
+                                            Color(0xff85B20A)
+//                    Color(0xff707070),
                                         ),
                                       ),
 
@@ -1356,7 +1510,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             IconButton(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 0, vertical: 0),
-                              icon: Icon(Icons.remove_circle_outline),
+                              icon: Icon(Icons.remove_circle_outline, color: Color(0xffF50303)),
 //                                                                            icon: Icon(Icons.remove),
                               iconSize: 32,
                               tooltip: 'Decrease product count by 1',
@@ -1514,7 +1668,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //              stringifiedFoodItemIngredients,
 //
 
-                /*
+              /*
               Text(
 //                unSelectedOneIngredient.ingredientName,
                 unSelectedOneIngredient.ingredientName.length==0?
@@ -1748,51 +1902,51 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     if(len>3)
     {
 
-    for (int i = 0; i < 3; i++) {
-      print('i: $i');
-      String keyTest = foodSizePrice.keys
-          .elementAt(i);
-      dynamic value = foodSizePrice
-          .values.elementAt(i);
+      for (int i = 0; i < 3; i++) {
+        print('i: $i');
+        String keyTest = foodSizePrice.keys
+            .elementAt(i);
+        dynamic value = foodSizePrice
+            .values.elementAt(i);
 //
-      double valuePrice = tryCast<
-          double>(
-          value, fallback: 0.00);
+        double valuePrice = tryCast<
+            double>(
+            value, fallback: 0.00);
 
 
-      listpart1[keyTest] = valuePrice;
-    }
+        listpart1[keyTest] = valuePrice;
+      }
 
 
-    for (int j = 3; j < 6; j++) {
-      print('j: $j');
-      String keyTest2 = foodSizePrice.keys
-          .elementAt(j);
-      dynamic value = foodSizePrice
-          .values.elementAt(j);
+      for (int j = 3; j < 6; j++) {
+        print('j: $j');
+        String keyTest2 = foodSizePrice.keys
+            .elementAt(j);
+        dynamic value = foodSizePrice
+            .values.elementAt(j);
 //
-      double valuePrice2 = tryCast<
-          double>(
-          value, fallback: 0.00);
+        double valuePrice2 = tryCast<
+            double>(
+            value, fallback: 0.00);
 
-      listpart2[keyTest2] = valuePrice2;
-    }
-    for (int j = 6; j < foodSizePrice.length; j++) {
-      print('j: $j');
-      String keyTest2 = foodSizePrice.keys
-          .elementAt(j);
-      dynamic value = foodSizePrice
-          .values.elementAt(j);
+        listpart2[keyTest2] = valuePrice2;
+      }
+      for (int j = 6; j < foodSizePrice.length; j++) {
+        print('j: $j');
+        String keyTest2 = foodSizePrice.keys
+            .elementAt(j);
+        dynamic value = foodSizePrice
+            .values.elementAt(j);
 //
-      double valuePrice2 = tryCast<
-          double>(
-          value, fallback: 0.00);
+        double valuePrice2 = tryCast<
+            double>(
+            value, fallback: 0.00);
 
-      listpart3[keyTest2] = valuePrice2;
+        listpart3[keyTest2] = valuePrice2;
+      }
+      //even
+
     }
-    //even
-
-  }
 
     else{
       for (int i = 0; i < len; i++) {
@@ -1827,90 +1981,90 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //      width: 200,
 
 //      height: 400,
-        color: Colors.white,
+          color: Colors.white,
 
-        child: allPrices.length<=3?
+          child: allPrices.length<=3?
 
-        Container(
-            color: Color(0xffFFFFFF),
+          Container(
+              color: Color(0xffFFFFFF),
 //                                  color:Color(0xffDAD7C3),
 
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
 
-            width: displayWidth(context) * 0.57,
-            child: ListView(
-              padding: const EdgeInsets.all(8),
-              children: <Widget>[
-                Container(
-                  height:55,
+              width: displayWidth(context) * 0.57,
+              child: ListView(
+                padding: const EdgeInsets.all(8),
+                children: <Widget>[
+                  Container(
+                    height:55,
 
-                  child: twins0(listpart1),
-
-
-                ),
+                    child: twins0(listpart1),
 
 
-              ],
-            )
+                  ),
 
-        ):((allPrices.length>=3) &&(allPrices.length<=6))?
-        Container(
-            color: Color(0xffFFFFFF),
+
+                ],
+              )
+
+          ):((allPrices.length>=3) &&(allPrices.length<=6))?
+          Container(
+              color: Color(0xffFFFFFF),
 //                                  color:Color(0xffDAD7C3),
 
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
 
-            width: displayWidth(context) * 0.57,
-            child: ListView(
-              padding: const EdgeInsets.all(8),
-              children: <Widget>[
-                Container(
-                  height:55,
-                  child: twins0(listpart1),
-                ),
-                Container(
-                  height:55,
+              width: displayWidth(context) * 0.57,
+              child: ListView(
+                padding: const EdgeInsets.all(8),
+                children: <Widget>[
+                  Container(
+                    height:55,
+                    child: twins0(listpart1),
+                  ),
+                  Container(
+                    height:55,
 
-                  child: twins0(listpart2),
-                ),
+                    child: twins0(listpart2),
+                  ),
 
-              ],
-            )
+                ],
+              )
 
-        ):
-        Container(
-            color: Color(0xffFFFFFF),
+          ):
+          Container(
+              color: Color(0xffFFFFFF),
 //                                  color:Color(0xffDAD7C3),
 
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
 
-            width: displayWidth(context) * 0.57,
-            child: ListView(
-              padding: const EdgeInsets.all(8),
-              children: <Widget>[
-                Container(
-                  height:50,
+              width: displayWidth(context) * 0.57,
+              child: ListView(
+                padding: const EdgeInsets.all(8),
+                children: <Widget>[
+                  Container(
+                    height:50,
 
-                  child: twins1(listpart1),
+                    child: twins1(listpart1),
 
-                ),
-                Container(
-                  height:55,
-                  child: twins2(listpart2),
-                ),
+                  ),
+                  Container(
+                    height:55,
+                    child: twins2(listpart2),
+                  ),
 
-                Container(
-                  height:50,
-                  child: twins3(listpart3),
-                ),
+                  Container(
+                    height:50,
+                    child: twins3(listpart3),
+                  ),
 
-              ],
-            )
+                ],
+              )
 
-        )
+          )
 
 
         // Todo DefaultItemsStreamBuilder
