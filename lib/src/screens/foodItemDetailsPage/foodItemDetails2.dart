@@ -1365,58 +1365,39 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               Container(
 //                                                                        width:60,
                                 width: displayWidth(
-                                    context) / 13,
-                                height: displayHeight(context) / 25,
+                                    context) / 12,
+                                height: displayHeight(context) / 22,
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
-                                child: OutlineButton(
-                                  onPressed: () {
-                                    print(
-                                        ' method for old Outline button that deals with navigation to Shopping Cart Page');
-                                  },
-//                        color: Color(0xffFEE295),
-//                                clipBehavior: Clip.hardEdge,
-                                  splashColor: Color(0xffFEE295),
-//          splashColor: Color(0xff739DFA),
-                                  highlightElevation: 12,
-//          clipBehavior: Clip.hardEdge,
-//          highlightElevation: 12,
-                                  shape: RoundedRectangleBorder(
-
-                                    borderRadius: BorderRadius.circular(35.0),
-                                  ),
-//          disabledBorderColor: false,
-                                  borderSide: BorderSide(
-                                    color: Color(0xffFEE295),
-                                    style: BorderStyle.solid,
-                                    width: 1.6,
-                                  ),
 
 
-                                  child:
+                                child:Container(
+                                  child: Stack(
+                                      children: <Widget>[ Center(
+                                        child: Icon(
 
-                                  ///SSWW
-
-
-                                  Center(
-                                    child: Stack(
-                                        children: <Widget>[ Center(
-                                          child: Icon(
-
-                                              Icons.add_shopping_cart,
-                                              size: 40,
-                                              color:
-                                              Color(0xff85B20A)
+                                            Icons.add_shopping_cart,
+                                            size: displayHeight(context)/20,
+                                            color:
+                                            Color(0xff85B20A)
 //                    Color(0xff707070),
-                                          ),
                                         ),
 
-                                          Container(
+
+                                      ),
+                                        Container(
+                                          padding: EdgeInsets.fromLTRB(
+                                              10,0,0,25),
+                                          width: 60,
+                                          height: 70,
+
+                                          child: Container(
+
 //                                              color:Colors.red,
-                                            width: 30,
+                                            width: 40,
 
-
+//                                            alignment: Alignment.centerRight,
                                             decoration: new BoxDecoration(
                                               color: Colors.redAccent,
 
@@ -1442,13 +1423,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                             ),
 
                                           ),
+                                        ),
 
-                                        ]
-                                    ),
+
+
+                                      ]
                                   ),
-
                                 ),
                               ),
+
+
+
 
 
                               IconButton(
