@@ -1144,82 +1144,65 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               Container(
                 width: displayWidth(
-                    context) /4,
+                    context) /14,
 
                 height: displayHeight(context)/25.4,
 //                alignment: Alignment.center,
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child:
-                OutlineButton(
-
-                  clipBehavior: Clip.hardEdge,
-                  splashColor: Color(0xffFEE295),
-//          splashColor: Color(0xff739DFA),
-                  highlightElevation: 12,
-
-                  shape: RoundedRectangleBorder(
-
-                    borderRadius: BorderRadius.circular(35.0),
-                  ),
-//          disabledBorderColor: false,
-                  borderSide: BorderSide(
-                    color: Color(0xffF83535),
-                    style: BorderStyle.solid,
-                    width: 3.6,
-                  ),
 
 
 
-                  child:Container(
-                    padding: EdgeInsets.fromLTRB(0,0,0,0),
+
+                child:Container(
+                  padding: EdgeInsets.fromLTRB(0,0,0,0),
 
 
-                        child: IconButton(
+                  child: IconButton(
 
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
-                            icon: Icon(Icons.check_circle_outline,color: Color(0xff85B20A),),
-                            iconSize: 32,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 0, vertical: 0),
+                    icon: Icon(
+                      Icons.check_circle,
+                      color: Color(0xff525FFF)
+                      ,
+                    ),
+                    iconSize: 48,
 
-                            tooltip: 'Increase product count by 1 ',
-                            onPressed: () {
-
-                            }
-
-                        ),
-
-
-
-                  ),
-                  onPressed: () {
+                    tooltip: 'Increase product count by 1 ',
+                    onPressed: () {
 //                                                                        logger.i('s  =>   =>   => ','ss');
 
 //                    logger.i('addedHeight: ',addedHeight);
-                    if( addedHeight == 0.0 ){
-                      setState(() {
-                        addedHeight = /* displayHeight(context)/10*/
-                        30.0;
-                        showUnSelectedIngredients = !showUnSelectedIngredients ;
-                        showPressWhenFinishButton = !showPressWhenFinishButton;
+                      if( addedHeight == 0.0 ){
+                        setState(() {
+                          addedHeight = /* displayHeight(context)/10*/
+                          30.0;
+                          showUnSelectedIngredients = !showUnSelectedIngredients ;
+                          showPressWhenFinishButton = !showPressWhenFinishButton;
 //                          myAnimatedWidget1 = myAnimatedWidget2;
 
-                      });
-                    }else{
-                      setState(() {
-                        addedHeight= 0.0;
-                        showUnSelectedIngredients = !showUnSelectedIngredients;
-                        showPressWhenFinishButton = !showPressWhenFinishButton;
+                        });
+                      }else{
+                        setState(() {
+                          addedHeight= 0.0;
+                          showUnSelectedIngredients = !showUnSelectedIngredients;
+                          showPressWhenFinishButton = !showPressWhenFinishButton;
 //                        myAnimatedWidget2 = myAnimatedWidget1();
-                      });
-                    }
+                        });
+                      }
 
-                    print(
-                        'xyz');
+                      print(
+                          'xyz');
 
-                  },
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    },
+
+                  ),
+
+
 
                 ),
+
+
               ),
 
               StreamBuilder<SelectedFood>(
