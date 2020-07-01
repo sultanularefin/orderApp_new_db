@@ -22,10 +22,10 @@ class FoodDetailImage extends StatelessWidget {
 
       color:Colors.white,
 //      height: displayHeight(context)/4,
-      height:displayWidth(context)/3.5,
-      width:displayWidth(context)/4,
+      height:displayHeight(context)/3.9,
+      width:displayWidth(context)/3.8,
       child:Transform.translate(
-        offset:Offset(-displayWidth(context)/18,0),
+        offset:Offset(-displayWidth(context)/10,0),
 
 //      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
         // -displayWidth(context)/9
@@ -35,8 +35,9 @@ class FoodDetailImage extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.centerLeft,
+              height:displayHeight(context)/4.3,
               width: displayWidth(context)/3.3,
-              height:displayWidth(context)/3.8,
+
 
               // INCREASE THE HEIGHT TO MAKE THE IMAGE CONTAINER MORE SMALLER.
 
@@ -54,8 +55,9 @@ class FoodDetailImage extends StatelessWidget {
                 child:
                 ClipOval(
                   child:CachedNetworkImage(
+                    height:displayHeight(context)/4.3,
                     width: displayWidth(context)/3.3,
-                    height:displayWidth(context)/3.8,
+
                     imageUrl: imageURLBig,
 //                    fit: BoxFit.scaleDown,cover,scaleDown,fill
                     fit: BoxFit.fill,

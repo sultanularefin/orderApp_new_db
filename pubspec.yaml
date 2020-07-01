@@ -106,10 +106,20 @@ flutter:
     - family: GreatVibes-Regular
       fonts:
         - asset: fonts/GreatVibes-Regular.ttf
+          style: italic
     - family: Itim-Regular
       fonts:
         - asset: fonts/Itim-Regular.ttf
-          style: italic
+          style: normal
+    - family: Poppins-ExtraBold
+      fonts:
+        - asset: fonts/Poppins/Poppins-ExtraBold.ttf
+          style: normal
+    - family: PatrickHand-Regular
+      fonts:
+        - asset: fonts/Patrick_Hand/PatrickHand-Regular.ttf
+          style: normal
+
   #    - family: Tangerine
   #      fonts:
   #        - asset: fonts/Tangerine-Bold.ttf
