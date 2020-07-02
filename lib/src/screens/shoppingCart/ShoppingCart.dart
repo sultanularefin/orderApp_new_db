@@ -1539,7 +1539,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color:Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
+                    // clipBehavior: Clip.hardEdge,
                     // splashColor: Color(0xffFC0000),
                     highlightElevation: 12,
                     shape: RoundedRectangleBorder(
@@ -2074,7 +2074,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     color:Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
+                    // clipBehavior: Clip.hardEdge,
                     // splashColor: Color(0xffFC0000),
                     highlightElevation: 12,
                     shape: RoundedRectangleBorder(
@@ -2328,7 +2328,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     color:Color(0xffFFFFFF),
                     // highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
+                    // clipBehavior: Clip.hardEdge,
                     // splashColor: Color(0xffFC0000),
 //                    highlightElevation: 12,
 
@@ -7680,7 +7680,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               height:displayHeight(context)/24,
               child: OutlineButton(
                 color: Color(0xffFC0000),
-                clipBehavior:Clip.hardEdge,
+                // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
@@ -7742,7 +7742,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               height:displayHeight(context)/24,
               child: OutlineButton(
                 color: Colors.green,
-                clipBehavior:Clip.hardEdge,
+                // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
@@ -7828,7 +7828,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               height:displayHeight(context)/24,
               child: OutlineButton(
                 color: Color(0xffFC0000),
-                clipBehavior:Clip.hardEdge,
+                // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
@@ -7886,7 +7886,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               height:displayHeight(context)/24,
               child: OutlineButton(
                 color: Colors.green,
-                clipBehavior:Clip.hardEdge,
+                // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
