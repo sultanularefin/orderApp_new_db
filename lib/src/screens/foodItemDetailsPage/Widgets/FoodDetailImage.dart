@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 
 //LOCAL RESOURCES
@@ -18,59 +18,48 @@ class FoodDetailImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-
-      color:Colors.white,
-//      height: displayHeight(context)/4,
-      height:displayHeight(context)/3.9,
-      width:displayWidth(context)/3.8,
-      child:Transform.translate(
+    return
+      Transform.translate(
         offset:Offset(-displayWidth(context)/10,0),
 
 //      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
         // -displayWidth(context)/9
         child:
-        Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              height:displayHeight(context)/4.3,
-              width: displayWidth(context)/3.3,
 
+        Neumorphic(
+          curve: Neumorphic.DEFAULT_CURVE,
+          style: NeumorphicStyle(
+            shape: NeumorphicShape
+                .concave,
+            depth: 8,
+            lightSource: LightSource.left,
+            boxShape: NeumorphicBoxShape.circle(),
+            color: Colors.white,
+            shadowDarkColor: Colors.orange,
 
-              // INCREASE THE HEIGHT TO MAKE THE IMAGE CONTAINER MORE SMALLER.
+//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+          ),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: Hero(
+              tag: foodItemName,
+              child:
+              ClipOval(
+                child:CachedNetworkImage(
+                  height:displayHeight(context)/4.3,
+                  width: displayWidth(context)/3.3,
 
-              decoration: new BoxDecoration(
-//                color: Colors.orange,
-                color: Colors.white,
-
-                shape: BoxShape.circle,
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Hero(
-                tag: foodItemName,
-                child:
-                ClipOval(
-                  child:CachedNetworkImage(
-                    height:displayHeight(context)/4.3,
-                    width: displayWidth(context)/3.3,
-
-                    imageUrl: imageURLBig,
+                  imageUrl: imageURLBig,
 //                    fit: BoxFit.scaleDown,cover,scaleDown,fill
-                    fit: BoxFit.fill,
+                  fit: BoxFit.fill,
 //
-                    placeholder: (context, url) => new CircularProgressIndicator(),
-                  ),
+                  placeholder: (context, url) => new CircularProgressIndicator(),
                 ),
               ),
             ),
-          ],
+          ),
         ),
-      ),
-    );
+      );
   }
 }
 

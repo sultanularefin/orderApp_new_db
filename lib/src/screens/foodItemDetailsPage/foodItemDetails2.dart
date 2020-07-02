@@ -742,6 +742,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                         ),
 
 //                                  Text('ss'),
+
                                                         Container(
                                                             height: displayHeight(context) / 7,
                                                             width: displayWidth(context) * 0.57,
@@ -2284,7 +2285,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
         Container(
 //          margin: EdgeInsets.fromLTRB(0, 0,5,5),
-          margin: EdgeInsets.fromLTRB(12, 5,12,5),
+          margin: EdgeInsets.fromLTRB(12,2,12,5),
           width: displayWidth(context)/3.6,
           child:
           RaisedButton(
