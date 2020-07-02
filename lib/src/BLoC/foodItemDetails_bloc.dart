@@ -238,7 +238,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    print("at the begin of Constructor [FoodItemDetailsBloc]");
 //    print("oneFoodItem ===> ===> ===> $oneFoodItem");
-   //  print("allIngsScoped _allIngItemsDetailsBlock ===> ===> ===> $_allIngItemsDetailsBlock");
+    //  print("allIngsScoped _allIngItemsDetailsBlock ===> ===> ===> $_allIngItemsDetailsBlock");
 
 
 //    _oneFoodItem = oneFoodItem;
@@ -287,7 +287,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       foodItemName:oneFoodItem.itemName,
       foodItemImageURL: oneFoodItem.imageURL,
       unitPrice: 0, // this value will be set when increment and decreemnt
-        //button pressed from the UI.
+      //button pressed from the UI.
       foodDocumentId: oneFoodItem.documentId,
       quantity:0,
       foodItemSize: 'normal', // to be set from the UI.
@@ -317,7 +317,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     // COUNTER MEASURES SINCE WE INVOKE APPBLOC FROM WELCOME PAGE WHERE THIS CONSTRUCTOR IS CALLED 1.
     // COUNTER MEASURE 01.
 
-   //  print('^^  ^ ^^  oneFoodItem.itemName: ${oneFoodItem.itemName}');
+    //  print('^^  ^ ^^  oneFoodItem.itemName: ${oneFoodItem.itemName}');
     final List<dynamic> foodItemIngredientsList2 = oneFoodItem.itemName==null ? null:oneFoodItem.ingredients;
 
     // COUNTER MEASURE 02.
@@ -585,7 +585,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //      }
 //      else{
 
-    /*
+      /*
       print('tempOrderDecrementOperation.selectedFoodInOrder: ${tempOrderDecrementOperation.selectedFoodInOrder}');
       numberOFSelectedFoods=  tempOrderDecrementOperation.selectedFoodInOrder.length;
       print('tempOrderDecrementOperation.selectedFoodInOrder.length:'
@@ -1190,7 +1190,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   }
 
   // helper method 04 filterSelectedDefaultIngredients
-  filterSelectedDefaultIngredients(List<NewIngredient> allIngList , List<String> listStringIngredients2) {
+  filterSelectedDefaultIngredients(List<NewIngredient> allIngList ,
+      List<String> listStringIngredients2) {
 // foox
 
 //    logger.w("at filterSelectedDefaultIngredients","filterSelectedDefaultIngredients");
@@ -1200,26 +1201,73 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //    print("allIngList: $allIngList");
 
     print("listStringIngredients2: $listStringIngredients2");
-    print('allIngList: $allIngList');
+    print('allIngList.length: ${allIngList.length}');
+
+    allIngList.map((oneElement)=> print('oneElement.ingredientName:'
+        ' ${oneElement.ingredientName}'));
+    var mappedFruits2 = allIngList.map((oneElement)=> '${oneElement.ingredientName==''}').toList();
+    print('mappedFruits2.length: ${mappedFruits2.length}');
+
+
+    var mappedFruits = allIngList.map((oneElement)=> '${oneElement.ingredientName}').toList();
+
+    print('mappedFruits: $mappedFruits');
+    print('mappedFruits: ${mappedFruits.length}');
 
 
 
     List<NewIngredient> default2 =[];
+
 //    List<NewIngredient> y = [];
+    NewIngredient toBeDeleted= NewIngredient(
+        ingredientName: 'None',
+        imageURL: 'None',
+
+        price: 0.001,
+        documentId: 'None',
+        ingredientAmountByUser: -1000
+
+    );
+
     listStringIngredients2.forEach((stringIngredient) {
+
+      /*
       NewIngredient elementExists = allIngList.where(
               (oneItem) => oneItem.ingredientName.trim().toLowerCase()
               == stringIngredient.trim().toLowerCase()).first;
 
+
+      */
+
+      NewIngredient elementExists = allIngList.firstWhere(
+              (oneItem) => oneItem.ingredientName.trim().toLowerCase() == stringIngredient.trim().toLowerCase(),
+          orElse: () => toBeDeleted);
+
+
+
+
+
+
+
+
       print('elementExists: $elementExists');
+
+
+
+
+//      print('elementExists: $elementExists');
       // WITHOUT THE ABOVE PRINT STATEMENT SOME TIMES THE APPLICATION CRUSHES.
 
-      default2.add(elementExists);
+      if(elementExists.ingredientName!='None') {
+        default2.add(elementExists);
+      }
 
     });
 
     _defaultIngItems = default2;
     _defaultIngredientListController.sink.add(default2);
+
+
 
 //    return default2;
 

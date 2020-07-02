@@ -1834,8 +1834,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           .values.elementAt(i);
 //
       double valuePrice = tryCast<
-          double>(
-          value, fallback: 0.0);
+          double>(value, fallback: 0.0);
 
 
       if((valuePrice!=0.0)&&(valuePrice!=0.00)) {
@@ -1847,23 +1846,40 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
     if(allPrices==null){
-      return Container
-        (
-//        height: displayHeight(context) / 6.3,
+      return Container(
+        height: displayHeight(context) / 8,
+//          height:190,
+        width: displayWidth(context) * 0.57,
+
+        color: Color(0xFFffffff),
         alignment: Alignment.center,
-        child: CircularProgressIndicator(),
+
+        // PPPPP
+
+        child:
+        Text('No prices found.'.toLowerCase(),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 30,
+            fontFamily: 'Itim-Regular',
+            color: Colors.white,
+
+          ),
+
+
+        ),
       );
     }
     else {
 
       return GridView.builder(
-        itemCount: len,
+        itemCount: listpart1.length,
         gridDelegate:
         new SliverGridDelegateWithMaxCrossAxisExtent(
 
           //Above to below for 3 not 2 Food Items:
           maxCrossAxisExtent: 200,
-          mainAxisSpacing: 0, // H  direction
+          mainAxisSpacing: 10, // H  direction
           crossAxisSpacing: 0,
           childAspectRatio: 140 / 45, /* (h/vertical)*/
 
@@ -2028,7 +2044,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             print('!snapshot.hasData');
 
-            return
+            return Container(
+              height: displayHeight(context) / 8,
+//          height:190,
+              width: displayWidth(context) * 0.57,
+
+              color: Color(0xFFffffff),
+              alignment: Alignment.center,
+
+              // PPPPP
+
+              child:
               Text('No Ingredients, Please Select 1 or more'.toLowerCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -2039,7 +2065,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 ),
 
 
-              );
+              ),
+            );
           }
 
           else {
@@ -2261,6 +2288,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           width: displayWidth(context)/3.6,
           child:
           RaisedButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             color: Color(0xffFFE18E),
 //          color: Colors.lightGreenAccent,
             elevation: 2.5,
@@ -2308,11 +2336,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             :
 
         Container(
+
 //          margin: EdgeInsets.fromLTRB(0, 0,5,5),
           margin: EdgeInsets.fromLTRB(12, 5,12,5),
           width: displayWidth(context)/3.6,
           child:
           OutlineButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             color: Color(0xffFEE295),
             // clipBehavior:Clip.hardEdge,
 
