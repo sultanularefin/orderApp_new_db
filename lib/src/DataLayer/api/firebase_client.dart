@@ -91,6 +91,38 @@ class FirebaseClient {
 
   }
 
+  Future<QuerySnapshot> fetchAllSauces()async{
+
+    // print ('at here fetchAllIngredients ==================================== *************** ');
+
+    var snapshot = await Firestore.instance.collection("restaurants")
+        .document('USWc8IgrHKdjeDe9Ft4j')
+        .collection('sauces')
+        .getDocuments();
+
+//    var snapshot= Firestore.instance
+//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+//        .getDocuments();
+
+    return snapshot;
+  }
+
+  Future<QuerySnapshot> fetchAllCheesesORjuusto()async{
+
+    // print ('at here fetchAllIngredients ==================================== *************** ');
+
+    var snapshot = await Firestore.instance.collection("restaurants")
+        .document('USWc8IgrHKdjeDe9Ft4j')
+        .collection('juusto')
+        .getDocuments();
+
+//    var snapshot= Firestore.instance
+//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+//        .getDocuments();
+
+    return snapshot;
+  }
+
   Future<QuerySnapshot> fetchAllIngredients()async{
 
    // print ('at here fetchAllIngredients ==================================== *************** ');

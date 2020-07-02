@@ -1,0 +1,67 @@
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//
+
+//import 'package:foodgallery/src/models/IngredientItem.dart';
+
+//CODE FORMAT ANDROID STUDIO CTRL +
+//ALT + I
+//IN WINDOWS
+
+
+//import 'package:flutter/material.dart';
+
+import 'dart:core';
+
+//final String storageBucketURLPredicate_Same =
+//    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
+
+class CheeseItem {
+
+  final String cheeseItemName;
+  final String imageURL;
+  final double price;
+  final String documentId;
+  final int    cheeseItemAmountByUser;
+
+//  String ingredients;
+
+  CheeseItem(
+      {
+        this.cheeseItemName,
+        this.imageURL,
+        this.price,
+        this.documentId,
+        this.cheeseItemAmountByUser,
+      }
+      );
+
+//  WHAT ABOUT:
+
+//  NewIngredient.fromMap(Map<String, dynamic> data)
+//  NewIngredient.fromMap(Map<dynamic, dynamic> data)
+  CheeseItem.fromMap(Map<String, dynamic> data,String docID)
+      :imageURL= data['image'],
+        cheeseItemName= data['name'],
+        price = data['price'].toDouble(),
+        documentId = docID,
+        cheeseItemAmountByUser = 0;
+//
+//
+//  NewIngredient.updateIngredient(NewIngredient oneIngredient)
+//       :imageURL= oneIngredient.imageURL,
+//        ingredientName= oneIngredient.ingredientName,
+//        price = oneIngredient.price,
+//        documentId = oneIngredient.documentId,
+//        ingredientAmountByUser = 0;
+
+
+
+
+
+
+//        ingredientAmountByUser = 1;
+
+//  final DocumentSnapshot document = snapshot.data.documents[index];
+//
+//  document.documentID
+}

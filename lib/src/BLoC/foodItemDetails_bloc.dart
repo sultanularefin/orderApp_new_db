@@ -5,10 +5,12 @@
 //import 'package:zomatoblock/BLoC/location_query_bloc.dart';
 //
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 //import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 //import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 //import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 //import 'package:logger/logger.dart';
@@ -79,6 +81,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   List<NewIngredient> _allIngItemsDetailsBlock =[];
 
+
+
   List<NewIngredient> _defaultIngItems = [];
   List<NewIngredient> _unSelectedIngItems = [];
   List<FoodPropertyMultiSelect> _multiSelectForFood =[];
@@ -147,6 +151,17 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   Stream<List<FoodPropertyMultiSelect>> get getMultiSelectStream => _multiSelectForFoodController.stream;
 
 
+
+  List<CheeseItem> _allCheeseItemsDBloc =[];
+  List<CheeseItem> get getAllCheeseItems => _allCheeseItemsDBloc;
+  final _cheeseItemsController      =  StreamController <List<CheeseItem>>();
+  Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsController.stream;
+
+  List<SauceItem> _allSauceItemsDBloc =[];
+  List<SauceItem> get getAllSauceItems => _allSauceItemsDBloc;
+  final _sauceItemsController      =  StreamController <List<SauceItem>>();
+  Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsController.stream;
+
   // Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream; // currentlyNotUsing.
 
 
@@ -164,7 +179,68 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   */
 
 
+  void getAllCheeseItemsConstructor() async {
 
+
+    var snapshot = await _client.fetchAllCheesesORjuusto();
+    List docList = snapshot.documents;
+
+
+
+    List <CheeseItem> cheeseItems = new List<CheeseItem>();
+    cheeseItems = snapshot.documents.map((documentSnapshot) =>
+        CheeseItem.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+//    print('Ingredient documents are: $documents');
+
+
+    _allCheeseItemsDBloc = cheeseItems;
+
+    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+
+//    return ingItems;
+
+  }
+
+  void getAllSaucesConstructor() async {
+
+
+    var snapshot = await _client.fetchAllSauces();
+    List docList = snapshot.documents;
+
+
+
+    List <SauceItem> sauceItems = new List<SauceItem>();
+    sauceItems = snapshot.documents.map((documentSnapshot) =>
+        SauceItem.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+//    print('Ingredient documents are: $documents');
+
+
+    _allSauceItemsDBloc = sauceItems;
+
+    _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
+//    return ingItems;
+
+  }
 
 
   void getAllIngredients() async {
@@ -217,6 +293,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   // CONSTRUCTOR BEGINS HERE.
   FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped ) {
 
+    getAllSaucesConstructor();
+    getAllCheeseItemsConstructor();
 //    if(allIngsScoped==[]) return;
 
     // print("allIngsScoped: $allIngsScoped ");
@@ -1379,5 +1457,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _defaultIngredientListController.close();
     _unSelectedIngredientListController.close();
     _multiSelectForFoodController.close();
+    _sauceItemsController.close();
+    _cheeseItemsController.close();
   }
 }

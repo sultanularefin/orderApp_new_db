@@ -46,8 +46,8 @@ class FoodDetailImage extends StatelessWidget {
               child:
               ClipOval(
                 child:CachedNetworkImage(
-                  height:displayHeight(context)/4.3,
-                  width: displayWidth(context)/3.3,
+                  height:displayHeight(context)/4.6,
+                  width: displayWidth(context)/2.95,
 
                   imageUrl: imageURLBig,
 //                    fit: BoxFit.scaleDown,cover,scaleDown,fill
