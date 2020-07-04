@@ -2048,7 +2048,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               // PPPPP
 
               child:
-              Text('No Sauce Items, Please Select 1 or more.'.toLowerCase(),
+              Text('looking for sauce items, please wait...'.toLowerCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
@@ -2064,36 +2064,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           else {
 
-            print('snapshot.hasData and else statement at FDetailS2');
+//            print('snapshot.hasData and else statement at FDetailS2');
             List<SauceItem> selectedSauceItems = snapshot.data;
 
-            if( (selectedSauceItems.length ==1)&&
-                (selectedSauceItems[0].sauceItemName.toLowerCase()=='none')){
-
-              return Container(
-//                  height: displayHeight(context) / 10,
-                  height: displayHeight(context) / 14,
-//          height:190,
-                  width: displayWidth(context) /1.50,
-
-                  color: Color(0xFFffffff),
-                  alignment: Alignment.center,
-
-                  // PPPPP
-
-                  child:(
-                      Text('No Sauce items selected, Please Select 1 or more.'.toLowerCase(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'Itim-Regular',
-                          color: Colors.white,
-                        ),
-                      )
-                  )
-              );
-            }
-            else if(selectedSauceItems.length==0){
+            if(selectedSauceItems.length==0){
               return Container(
 //                  height: displayHeight(context) / 10,
                   height: displayHeight(context) / 14,
@@ -2106,7 +2080,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   // PPPPP
 
                   child:(
-                      Text('No sauce items, Please Select 1 or more.'.toLowerCase(),
+                      Text('No sauce items found'.toLowerCase(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
@@ -2386,7 +2360,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               // PPPPP
 
               child:
-              Text('No cheeseItems, Please Select 1 or more.'.toLowerCase(),
+              Text('looking for cheese items, please wait...'.toLowerCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
@@ -2402,36 +2376,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           else {
 
-            print('snapshot.hasData and else statement at FDetailS2');
+
             List<CheeseItem> selectedCheeseItems = snapshot.data;
 
-            if( (selectedCheeseItems.length ==1)&&
-                (selectedCheeseItems[0].cheeseItemName.toLowerCase()=='none')){
-
-              return Container(
-//                  height: displayHeight(context) / 10,
-                  height: displayHeight(context) / 14,
-//          height:190,
-                  width: displayWidth(context) /1.50,
-
-                  color: Color(0xFFffffff),
-                  alignment: Alignment.center,
-
-                  // PPPPP
-
-                  child:(
-                      Text('No Ingredients, Please Select 1 or more.'.toLowerCase(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'Itim-Regular',
-                          color: Colors.white,
-                        ),
-                      )
-                  )
-              );
-            }
-            else if(selectedCheeseItems.length==0){
+            if(selectedCheeseItems.length==0){
               return Container(
 //                  height: displayHeight(context) / 10,
                   height: displayHeight(context) / 14,
@@ -2444,7 +2392,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   // PPPPP
 
                   child:(
-                      Text('No cheese items, Please Select 1 or more.'.toLowerCase(),
+                      Text('No cheese items found.'.toLowerCase(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
