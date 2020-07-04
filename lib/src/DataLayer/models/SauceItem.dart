@@ -36,7 +36,7 @@ class SauceItem {
         this.documentId,
         this.sauceItemAmountByUser,
         this.sl,
-        this.isSelected:false,
+        this.isSelected,
       }
       );
 
@@ -61,7 +61,7 @@ class SauceItem {
         documentId = docID,
         sauceItemAmountByUser = 0,
         sl = data['sl'],
-        isSelected =false;
+        isSelected = false;
 
 
 //  NewIngredient.updateIngredient(NewIngredient oneIngredient)

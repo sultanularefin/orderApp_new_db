@@ -4,6 +4,7 @@
 //import 'package:zomatoblock/BLoC/location_bloc.dart';
 //import 'package:zomatoblock/BLoC/location_query_bloc.dart';
 //
+import 'package:flutter_neumorphic/generated/i18n.dart';
 import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 //import 'package:foodgallery/src/BLoC/identity_bloc.dart';
@@ -271,6 +272,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     sauceItems.forEach((oneSauceItem) {
 
       if(oneSauceItem.sl==1){
+
+        print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
+            ''
+            'condition oneSauceItem.sl==1 is true');
+
         oneSauceItem.isSelected=true;
       }
     }
@@ -1098,6 +1104,30 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   }
+
+  void toggleThisSauceAsSelected(SauceItem oneSauceItem,int index){
+
+    List<SauceItem> allTempSauceItems = _allSauceItemsDBloc;
+
+    allTempSauceItems[index].isSelected= !allTempSauceItems[index].isSelected;
+
+    _allSauceItemsDBloc = allTempSauceItems;
+    _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
+  }
+
+  void toggleThisCheeseAsSelectedCheeseItem(CheeseItem oneCheeseItem,int index){
+
+    List<CheeseItem> allTempCheeseItems = _allCheeseItemsDBloc;
+
+    allTempCheeseItems[index].isSelected= !allTempCheeseItems[index].isSelected;
+
+    _allCheeseItemsDBloc = allTempCheeseItems;
+    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+  }
+
+
 
   void updateDefaultIngredientItems(/*NewIngredient unSelectedOneIngredient,int index*/){
     print('reached here ==> : <==  update Default IngredientItem ');
