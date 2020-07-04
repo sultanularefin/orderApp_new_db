@@ -7392,6 +7392,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway(Order unObsecuredInputandPayment){
 
+    final shoppingCartBloc = BlocProvider.of<
+        ShoppingCartBloc>(context);
+
     print('at animated Un Obscured Card UnSelect Container');
     return
       Column(
@@ -7419,7 +7422,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway
                 child: showFullPaymentType==false ?
 
-                    animatedWidgetShowSelectedPaymentTypeTakeAway(unObsecuredInputandPayment):
+                animatedWidgetShowSelectedPaymentTypeTakeAway(unObsecuredInputandPayment):
                 _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(unObsecuredInputandPayment),
               ),
               )
@@ -7454,13 +7457,89 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
 
-//          printWidget(),
+
+
+
+
+
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+//          Text('ss'),
+//          Text('bb'),
+//          Text('gg'),
+
+    /*
+          Container(
+            height:20,
+//                                                          color:Colors.lightBlueAccent,
+            child: StreamBuilder<List<String>>(
+
+              stream: shoppingCartBloc.getDevicesStream,
+              initialData: shoppingCartBloc.getDevices,
+              builder: (context, snapshot) {
+                if ((snapshot.hasError) || (!snapshot.hasData)) {
+                  return Center(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(''),
+                    ),
+                  );
+                }
+                else {
+
+//                    SelectedFood incrementCurrentFoodProcessing = snapshot.data;
+                  List<String> devicesFromStream = snapshot.data;
+
+                  return ListView.builder(
+
+                    scrollDirection: Axis.horizontal,
+                    itemCount: devicesFromStream.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return OutlineButton(
+                        onPressed: () => testPrint(devicesFromStream[index], context),
+                        child:
+                                        Text(
+                                          '${devicesFromStream[index]}:${portController.text}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+
+                      );
+                    },
+                  );
+
+
+                }
+                },
+                )
+          ),
+
+          */
 
 
         ],
       );
-
-
   }
 
 
@@ -7703,45 +7782,45 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+      Container(
+        margin:EdgeInsets.fromLTRB(0,9,0,9),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+
+
+
             Container(
-              margin:EdgeInsets.fromLTRB(0,9,0,9),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-
-
-
-
-                  Container(
-                    width:displayWidth(context)/4,
-                    height:displayHeight(context)/24,
-                    child: OutlineButton(
-                      color: Color(0xffFC0000),
-                      // clipBehavior:Clip.hardEdge,
+              width:displayWidth(context)/4,
+              height:displayHeight(context)/24,
+              child: OutlineButton(
+                color: Color(0xffFC0000),
+                // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                      borderSide: BorderSide(
-                        color: Color(0xffFC0000), // 0xff54463E
-                        style: BorderStyle.solid,
-                        width:7.6,
-                      ),
-                      shape:RoundedRectangleBorder(
+                borderSide: BorderSide(
+                  color: Color(0xffFC0000), // 0xff54463E
+                  style: BorderStyle.solid,
+                  width:7.6,
+                ),
+                shape:RoundedRectangleBorder(
 
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      child:Container(
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                child:Container(
 
 //              alignment: Alignment.center,
-                        child: Text('Cancel',
-                          style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+                  child: Text('Cancel',
+                    style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
 
-                      ),
-                      onPressed: (){
-                        print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+                ),
+                onPressed: (){
+                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
 
-                        /*
+                  /*
                         cancelPaySelect.page=1;
                         return Navigator.of(context).pop(
                             BlocProvider<ShoppingCartBloc>(
@@ -7754,9 +7833,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),);
                         */
 
-                        final shoppingCartBloc = BlocProvider.of<
-                            ShoppingCartBloc>(context);
-                        shoppingCartBloc.clearSubscription();
+                  final shoppingCartBloc = BlocProvider.of<
+                      ShoppingCartBloc>(context);
+                  shoppingCartBloc.clearSubscription();
 
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
@@ -7764,81 +7843,84 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  shoppingCartBloc.getExpandedSelectedFood;
 
 
-                        cancelPaySelect.isCanceled=true;
-                        return Navigator.pop(context,cancelPaySelect);
+                  cancelPaySelect.isCanceled=true;
+                  return Navigator.pop(context,cancelPaySelect);
 
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
-                      },
-                    ),
-                  ),
+                },
+              ),
+            ),
 
-                  SizedBox(width: displayWidth(context)/12,),
+            SizedBox(width: displayWidth(context)/12,),
 
-                  Container(
-                    width:displayWidth(context)/4,
-                    height:displayHeight(context)/24,
-                    child: OutlineButton(
-                      color: Colors.green,
-                      // clipBehavior:Clip.hardEdge,
+            Container(
+              width:displayWidth(context)/4,
+              height:displayHeight(context)/24,
+              child: OutlineButton(
+                color: Colors.green,
+                // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                      borderSide: BorderSide(
-                        color: Colors.green, // 0xff54463E
-                        style: BorderStyle.solid,
-                        width:7.6,
-                      ),
-                      shape:RoundedRectangleBorder(
+                borderSide: BorderSide(
+                  color: Colors.green, // 0xff54463E
+                  style: BorderStyle.solid,
+                  width:7.6,
+                ),
+                shape:RoundedRectangleBorder(
 
 
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      child:Container(
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                child:Container(
 
 //              alignment: Alignment.center,
 
-                        child: Text('Pay',style: TextStyle(color: Colors.green,
-                          fontSize: 30,fontWeight: FontWeight.bold,),
-                        ),),
-                      onPressed: () async{
+                  child: Text('Pay',style: TextStyle(color: Colors.green,
+                    fontSize: 30,fontWeight: FontWeight.bold,),
+                  ),),
+                onPressed: () async{
 //                  print('on Pressed of Pay');
 //                  return Navigator.pop(context,false);
 
-                        final shoppingCartBloc = BlocProvider.of<
-                            ShoppingCartBloc>(context);
+                  final shoppingCartBloc = BlocProvider.of<
+                      ShoppingCartBloc>(context);
 
 //                        final identityBlocLoginPage =
 //                        BlocProvider.of<IdentityBloc>(context);
 
 
-    Future<List<String>> testDevices =
-    shoppingCartBloc.discoverDevices2('9100');
+                  Future<List<String>> testDevices =
+                  shoppingCartBloc.discoverDevices2('9100');
 
 //                            _handleSignIn();
 
 
-                        testDevices.whenComplete(() {
+                  testDevices.whenComplete(() {
 
-                          print("called when future completes");
+                    print("called when future completes");
 
-                        }
-                        ).then((onValue){
+                  }
+                  ).then((onValue){
 
-                          setState(() {
-                            isDiscovering = false;
-                            found = devices.length;
-                            devices=onValue;
+//                          setState(() {
+//                            isDiscovering = false;
+//                            found = devices.length;
+                    devices=onValue;
 
-                            print('onValue: $onValue');
-                          });
+                    print('onValue: $onValue');
+//                          });
 //
+                    logger.i('isDiscovering: $isDiscovering');
+                    logger.i('found: $found');
+                    logger.i('devices: $devices');
 
-                        }).catchError((onError){
-                          print('some  ERROR **** at onError $onError ***');
+                  }).catchError((onError){
+                    print('some  ERROR **** at onError $onError ***');
 
 
-                        });
+                  });
 
 
 
@@ -7865,12 +7947,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                        await int foundCount=  discover(context);
 
-                        logger.i('isDiscovering: $isDiscovering');
-                        logger.i('found: $found');
-                        logger.i('devices: $devices');
 
 
-                        print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelect.paymentTypeIndex}');
+
+                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelect.paymentTypeIndex}');
 
 
 
@@ -7879,40 +7959,40 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                        // PRINTING CODES WILL BE PUTTER HERE.
+                  // PRINTING CODES WILL BE PUTTER HERE.
 
 
 
 
-                        Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
 
 
 
 
-                        if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
-                          _scaffoldKey.currentState
+                  if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
+                    _scaffoldKey.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
-                              .showSnackBar(
-                              SnackBar(content: Text("someThing went wrong")));
-                          print('something went wrong');
-                        }
-                        else{
-                          print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+                        .showSnackBar(
+                        SnackBar(content: Text("someThing went wrong")));
+                    print('something went wrong');
+                  }
+                  else{
+                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
-                          return Navigator.pop(context,tempOrderWithdocId);
-                        }
-
-                        
+                    return Navigator.pop(context,tempOrderWithdocId);
+                  }
 
 
-                      },
-                    ),
-                  ),
 
 
-                ],
+                },
               ),
+            ),
+
+
+          ],
+        ),
 
 
 
@@ -10131,55 +10211,55 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
   Widget printWidget(){
     return
-          Container(
-            height: displayHeight(context)/30,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: devices.length,
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () => testPrint(devices[index], context),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: 60,
-                        padding: EdgeInsets.only(left: 10),
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.print),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    '${devices[index]}:${portController.text}',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  Text(
-                                    'Click to print a test receipt',
-                                    style: TextStyle(
-                                        color: Colors.grey[700]),
-                                  ),
-                                ],
+      Container(
+        height: displayHeight(context)/30,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: devices.length,
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell(
+              onTap: () => testPrint(devices[index], context),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 60,
+                    padding: EdgeInsets.only(left: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.print),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                '${devices[index]}:${portController.text}',
+                                style: TextStyle(fontSize: 16),
                               ),
-                            ),
-                            Icon(Icons.chevron_right),
-                          ],
+                              Text(
+                                'Click to print a test receipt',
+                                style: TextStyle(
+                                    color: Colors.grey[700]),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Divider(),
-                    ],
+                        Icon(Icons.chevron_right),
+                      ],
+                    ),
                   ),
-                );
-              },
-            ),
+                  Divider(),
+                ],
+              ),
+            );
+          },
+        ),
 
-    );
+      );
   }
 
 

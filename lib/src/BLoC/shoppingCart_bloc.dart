@@ -53,6 +53,8 @@ class ShoppingCartBloc implements Bloc {
   List<PaymentTypeSingleSelect> _paymentType;
   List<SelectedFood> _expandedSelectedFood =[];
   List<SelectedFood> _savedSelectedFood    =[];
+
+
 //  CustomerInformation _oneCustomerInfo;
 
 
@@ -91,6 +93,11 @@ class ShoppingCartBloc implements Bloc {
 
 
 
+
+  List<String> _devices =[];
+  List<String> get getDevices => _devices;
+  final _devicesController = StreamController<List<String>>();
+  Stream  <List<String>> get getDevicesStream => _devicesController.stream;
 
   /*
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
@@ -372,7 +379,7 @@ class ShoppingCartBloc implements Bloc {
 
     logger.e('selectedFoodCheckForList: $selectedFoodCheckForList');
 
-    print('selectedFoodCheckForList[3].quantity => ${selectedFoodCheckForList[3].quantity}');
+//    print('selectedFoodCheckForList[3].quantity => ${selectedFoodCheckForList[3].quantity}');
 
     Set<SelectedFood> selectedFoodCheckForListToSet= selectedFoodCheckForList.toSet();
 
@@ -713,6 +720,8 @@ class ShoppingCartBloc implements Bloc {
   }
 
 
+  /*
+
   Future<List<String>> discoverDevices(String portNumber) async {
 
     List<String> devices = [];
@@ -753,6 +762,8 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
+  */
+
 
 
   @override
@@ -762,6 +773,7 @@ class ShoppingCartBloc implements Bloc {
     _savedSelectedFoodController.close();
     _orderTypeController.close();
     _paymentTypeController.close();
+    _devicesController.close();
 //    _customerInformationController.close();
 //    _multiSelectForFoodController.close();
 
