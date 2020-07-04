@@ -131,7 +131,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   bool showUnSelectedIngredients = false;
   bool showPressWhenFinishButton = false;
-  double addedHeight =0.0;
+
 
 
   @override
@@ -206,6 +206,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      final blocD =
 //                          BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
+
+
                       SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
 
                       print('temp is $temp');
@@ -223,6 +225,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
+                      blocD.clearSubscription();
 
                       return Navigator.pop(context,tempSelectedFood);
 
@@ -1260,6 +1263,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         color:Colors.redAccent,
         highlightColor: Color(0xff525FFF),
         splashColor: Color(0xffB47C00),
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         highlightElevation: 12,
         shape: RoundedRectangleBorder(
           side: BorderSide(
@@ -1296,50 +1300,24 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         onPressed: () {
 //
 
-//            logger.i('addedHeight: ',addedHeight);
+
 
           final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
           blocD.updateDefaultIngredientItems(/*oneSelected,index*/);
-          if( addedHeight == 0.0 ){
-            setState(() {
-              addedHeight = /* displayHeight(context)/10*/
-              30.0;
-              showUnSelectedIngredients = !showUnSelectedIngredients ;
-              showPressWhenFinishButton = !showPressWhenFinishButton;
 
+          setState(() {
 
-
+            showUnSelectedIngredients = !showUnSelectedIngredients;
+            showPressWhenFinishButton = !showPressWhenFinishButton;
 
 
 //                ::::A
 //                          myAnimatedWidget1 = myAnimatedWidget2;
 
-            });
-          }else{
-
-            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//              final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-
-//              final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-            blocD.updateDefaultIngredientItems(/*oneSelected,index*/);
-
-
-            setState(() {
-              addedHeight= 0.0;
-              showUnSelectedIngredients = !showUnSelectedIngredients;
-              showPressWhenFinishButton = !showPressWhenFinishButton;
-//                        myAnimatedWidget2 = myAnimatedWidget1();
-            });
-          }
-          print(
-              'finish button pressed');
-
-        },
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-
-      );
+          });
+        });
 
   }
 
@@ -1352,6 +1330,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         splashColor: Color(0xffFEE295),
 //          splashColor: Color(0xff739DFA),
         highlightElevation: 12,
+
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 //          clipBehavior: Clip.hardEdge,
 //          highlightElevation: 12,
         shape: RoundedRectangleBorder(
@@ -1403,30 +1383,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         onPressed: () {
 //                                                                        logger.i('s  =>   =>   => ','ss');
 
-//                    logger.i('addedHeight: ',addedHeight);
-          if( addedHeight == 0.0 ){
-            setState(() {
-              addedHeight = /* displayHeight(context)/10*/
-              30.0;
-              showUnSelectedIngredients = !showUnSelectedIngredients ;
-              showPressWhenFinishButton = !showPressWhenFinishButton;
-//                          myAnimatedWidget1 = myAnimatedWidget2;
 
-            });
-          }else{
             setState(() {
-              addedHeight= 0.0;
+
               showUnSelectedIngredients = !showUnSelectedIngredients;
               showPressWhenFinishButton = !showPressWhenFinishButton;
 //                        myAnimatedWidget2 = myAnimatedWidget1();
             });
+    print(
+    'xyz');
           }
 
-          print(
-              'xyz');
 
-        },
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+
 
 
       );

@@ -604,7 +604,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     initiateAllMultiSelectOptions();
 
-    _controller.sink.add(thisFood);
+    _controller.sink.add(_thisFoodItem);
   }
 
   // CONSTRUCTOR ENDS HERE.
@@ -1517,6 +1517,43 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
+  void clearSubscription(){
+
+
+
+//    _curretnOrder=null;
+//    _expandedSelectedFood =[];
+//    _orderType =[];
+//    _paymentType =[];
+
+
+//    _orderController.sink.add(_curretnOrder);
+//    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
+//    _orderTypeController.sink.add(_orderType);
+//    _paymentTypeController.sink.add(_paymentType);
+
+
+    _thisFoodItem = null;
+    _currentSelectedFoodDetails = null;
+    _allIngItemsDetailsBlock = [];
+    _defaultIngItems = [];
+    _unSelectedIngItems = [];
+    _multiSelectForFood = [];
+    _allSauceItemsDBloc = [];
+    _allCheeseItemsDBloc = [];
+
+
+    _controller.sink.add(_thisFoodItem);
+    _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
+    _allIngredientListController.sink.add(_allIngItemsDetailsBlock);
+    _defaultIngredientListController.sink.add(_defaultIngItems);
+    _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+    _multiSelectForFoodController.sink.add(_multiSelectForFood);
+    _sauceItemsController.sink.add(_allSauceItemsDBloc);
+    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+  }
+
 
 
 
@@ -1526,7 +1563,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     _controller.close();
     _selectedFoodControllerFoodDetails.close();
-//    _itemSizeController.close();
     _allIngredientListController.close();
     _defaultIngredientListController.close();
     _unSelectedIngredientListController.close();

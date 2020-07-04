@@ -281,7 +281,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               Order z= shoppingCartBloc.getCurrentOrder;
               z.selectedFoodInOrder=backUP;
 
-              shoppingCartBloc.cancelButtonPressed();
+              shoppingCartBloc.clearSubscription();
 
               logger.e('at WillPopScope Quantity: ${z.selectedFoodInOrder[0].quantity}');
 
@@ -7718,7 +7718,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
-                  shoppingCartBloc.cancelButtonPressed();
+                  shoppingCartBloc.clearSubscription();
 
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
@@ -7866,7 +7866,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
-                  shoppingCartBloc.cancelButtonPressed();
+                  shoppingCartBloc.clearSubscription();
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
 //                  shoppingCartBloc.getExpandedSelectedFood;

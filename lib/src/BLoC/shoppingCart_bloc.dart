@@ -450,7 +450,7 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
-  void cancelButtonPressed(){
+  void clearSubscription(){
 
 
     _curretnOrder=null;
