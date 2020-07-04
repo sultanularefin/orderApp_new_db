@@ -2,8 +2,19 @@
 
 //### EXTERNAL PACKAGES
 import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart'; // to be removed later.
+
+
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:logger/logger.dart';
+import 'package:wifi/wifi.dart';
+import 'package:ping_discover_network/ping_discover_network.dart';
+
+
+//printing blue tooth or wifi in same local area network.
+
+//import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 
 
 //### LOCAL DATA RELATED RESOURCES
@@ -28,6 +39,13 @@ class ShoppingCartBloc implements Bloc {
   final _client = FirebaseClient();
 
 
+
+//  PRINTING RELATED objects put here Beginning {.
+
+
+  final FirebaseAuth _auth = FirebaseAuth.instance; // TO BE REMOVE LATER.
+
+//  PRINTING RELATED objects put here } ends .
 //  List<Order> _curretnOrder = [];
 
   Order _curretnOrder ;
@@ -643,6 +661,99 @@ class ShoppingCartBloc implements Bloc {
 
 
   }
+
+
+  Future<List<String>> discoverDevices2(String portNumber) async {
+//    AuthResult result = await _auth.signInWithEmailAndPassword(email:
+//    email, password: password);
+
+    // print('result:  IIIII   >>>>>  $result'  );
+    List<String> devices = [];
+
+//    if (result.user.email != null) {
+//      FirebaseUser fireBaseUserRemote = result.user;
+
+
+
+
+    String ip;
+    try {
+      ip = await Wifi.ip;
+      print('local ip:\t$ip');
+    } catch (e) {
+
+      print('ip error, please check internet');
+      return devices;
+    }
+
+    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
+    int port = 9100;
+    try {
+      port = int.parse(portNumber);
+    } catch (e) {
+      print('port.toString()  please check $e');
+    }
+    print('subnet:\t$subnet, port:\t$port');
+
+
+    final stream = NetworkAnalyzer.discover2(subnet, port);
+
+    stream.listen((NetworkAddress addr) {
+      if (addr.exists) {
+        print('Found device: ${addr.ip}');
+
+        devices.add(addr.ip);
+
+
+      }
+    });
+
+    return devices;
+
+  }
+
+
+  Future<List<String>> discoverDevices(String portNumber) async {
+
+    List<String> devices = [];
+
+    String ip;
+    try {
+      ip = await Wifi.ip;
+      print('local ip:\t$ip');
+    } catch (e) {
+
+      print('ip error, please check internet');
+      return devices;
+    }
+
+    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
+    int port = 9100;
+    try {
+      port = int.parse(portNumber);
+    } catch (e) {
+      print('port.toString()  please check $e');
+    }
+    print('subnet:\t$subnet, port:\t$port');
+
+
+    final stream = NetworkAnalyzer.discover2(subnet, port);
+
+    stream.listen((NetworkAddress addr) {
+      if (addr.exists) {
+        print('Found device: ${addr.ip}');
+
+          devices.add(addr.ip);
+
+
+      }
+    });
+
+    return devices;
+
+  }
+
+
 
   @override
   void dispose() {

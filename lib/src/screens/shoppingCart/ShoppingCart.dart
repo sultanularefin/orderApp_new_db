@@ -4,15 +4,28 @@
 
 // dependency files
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:ping_discover_network/ping_discover_network.dart';
+import 'package:platform_action_sheet/platform_action_sheet.dart';
+
+import 'package:esc_pos_printer/esc_pos_printer.dart';
+import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'package:intl/intl.dart';
+
+
+
+
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 //import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 //import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+
+
 
 import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppingCart.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
@@ -60,9 +73,9 @@ class ShoppingCart extends StatefulWidget {
 class _ShoppingCartState extends State<ShoppingCart> {
 
 
-//  var logger = Logger(
-//    printer: PrettyPrinter(),
-//  );
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -87,6 +100,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
   final houseFlatNumberController = TextEditingController();
   final phoneNumberController     = TextEditingController();
   final etaController             = TextEditingController();
+
+
+  /*
+  * PRINTING RELATED STATE VARIABLES ARE HERE.
+  * */
+
+  PrinterNetworkManager printerManager = PrinterNetworkManager();
+//  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
+//  List<PrinterBluetooth> _devices = [];
+
+  String localIp = '';
+  List<String> devices = [];
+  bool isDiscovering = false;
+  int found = -1;
+  TextEditingController portController = TextEditingController(text: '9100');
+  /*
+  * PRINTING RELATED STATE VARIABLES ENDS HERE.
+  * */
 
   @override
   void dispose() {
@@ -417,7 +448,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //                              alignment: Alignment.bottomCenter,
-                                  height: displayHeight(context) / 1.12,
+                                  height: displayHeight(context) / 1.10,
                                   //width:displayWidth(context) / 1.5, /* 3.8*/
                                   width: displayWidth(context)
                                       - displayWidth(context) /
@@ -7423,6 +7454,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
 
+//          printWidget(),
+
 
         ],
       );
@@ -7665,60 +7698,65 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ' Widget name: '
         'animated Obscured Cancel Pay Button()');
     return
-      Container(
-        margin:EdgeInsets.fromLTRB(0,9,0,9),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
+
 
 
 
 
             Container(
-              width:displayWidth(context)/4,
-              height:displayHeight(context)/24,
-              child: OutlineButton(
-                color: Color(0xffFC0000),
-                // clipBehavior:Clip.hardEdge,
+              margin:EdgeInsets.fromLTRB(0,9,0,9),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+
+
+
+
+                  Container(
+                    width:displayWidth(context)/4,
+                    height:displayHeight(context)/24,
+                    child: OutlineButton(
+                      color: Color(0xffFC0000),
+                      // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                borderSide: BorderSide(
-                  color: Color(0xffFC0000), // 0xff54463E
-                  style: BorderStyle.solid,
-                  width:7.6,
-                ),
-                shape:RoundedRectangleBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xffFC0000), // 0xff54463E
+                        style: BorderStyle.solid,
+                        width:7.6,
+                      ),
+                      shape:RoundedRectangleBorder(
 
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-                child:Container(
+                        borderRadius: BorderRadius.circular(35.0),
+                      ),
+                      child:Container(
 
 //              alignment: Alignment.center,
-                  child: Text('Cancel',
-                    style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+                        child: Text('Cancel',
+                          style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
 
-                ),
-                onPressed: (){
-                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+                      ),
+                      onPressed: (){
+                        print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
 
-                  /*
-                  cancelPaySelect.page=1;
-                  return Navigator.of(context).pop(
-                      BlocProvider<ShoppingCartBloc>(
-                          bloc: ShoppingCartBloc(cancelPaySelect),
-                      child:
-                      BlocProvider<FoodGalleryBloc>(
-                          bloc: FoodGalleryBloc(),
-                          child: FoodGallery2()
-                      )
-                  ),);
-                  */
+                        /*
+                        cancelPaySelect.page=1;
+                        return Navigator.of(context).pop(
+                            BlocProvider<ShoppingCartBloc>(
+                                bloc: ShoppingCartBloc(cancelPaySelect),
+                            child:
+                            BlocProvider<FoodGalleryBloc>(
+                                bloc: FoodGalleryBloc(),
+                                child: FoodGallery2()
+                            )
+                        ),);
+                        */
 
-                  final shoppingCartBloc = BlocProvider.of<
-                      ShoppingCartBloc>(context);
-                  shoppingCartBloc.clearSubscription();
+                        final shoppingCartBloc = BlocProvider.of<
+                            ShoppingCartBloc>(context);
+                        shoppingCartBloc.clearSubscription();
 
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
@@ -7726,79 +7764,160 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  shoppingCartBloc.getExpandedSelectedFood;
 
 
-                  cancelPaySelect.isCanceled=true;
-                  return Navigator.pop(context,cancelPaySelect);
+                        cancelPaySelect.isCanceled=true;
+                        return Navigator.pop(context,cancelPaySelect);
 
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
-                },
-              ),
-            ),
+                      },
+                    ),
+                  ),
 
-            SizedBox(width: displayWidth(context)/12,),
+                  SizedBox(width: displayWidth(context)/12,),
 
-            Container(
-              width:displayWidth(context)/4,
-              height:displayHeight(context)/24,
-              child: OutlineButton(
-                color: Colors.green,
-                // clipBehavior:Clip.hardEdge,
+                  Container(
+                    width:displayWidth(context)/4,
+                    height:displayHeight(context)/24,
+                    child: OutlineButton(
+                      color: Colors.green,
+                      // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                borderSide: BorderSide(
-                  color: Colors.green, // 0xff54463E
-                  style: BorderStyle.solid,
-                  width:7.6,
-                ),
-                shape:RoundedRectangleBorder(
+                      borderSide: BorderSide(
+                        color: Colors.green, // 0xff54463E
+                        style: BorderStyle.solid,
+                        width:7.6,
+                      ),
+                      shape:RoundedRectangleBorder(
 
 
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-                child:Container(
+                        borderRadius: BorderRadius.circular(35.0),
+                      ),
+                      child:Container(
 
 //              alignment: Alignment.center,
 
-                  child: Text('Pay',style: TextStyle(color: Colors.green,
-                    fontSize: 30,fontWeight: FontWeight.bold,),
-                  ),),
-                onPressed: () async{
+                        child: Text('Pay',style: TextStyle(color: Colors.green,
+                          fontSize: 30,fontWeight: FontWeight.bold,),
+                        ),),
+                      onPressed: () async{
 //                  print('on Pressed of Pay');
 //                  return Navigator.pop(context,false);
 
-                  final shoppingCartBloc = BlocProvider.of<
-                      ShoppingCartBloc>(context);
+                        final shoppingCartBloc = BlocProvider.of<
+                            ShoppingCartBloc>(context);
+
+//                        final identityBlocLoginPage =
+//                        BlocProvider.of<IdentityBloc>(context);
 
 
-                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelect.paymentTypeIndex}');
-                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+    Future<List<String>> testDevices =
+    shoppingCartBloc.discoverDevices2('9100');
+
+//                            _handleSignIn();
+
+
+                        testDevices.whenComplete(() {
+
+                          print("called when future completes");
+
+                        }
+                        ).then((onValue){
+
+                          setState(() {
+                            isDiscovering = false;
+                            found = devices.length;
+                            devices=onValue;
+
+                            print('onValue: $onValue');
+                          });
+//
+
+                        }).catchError((onError){
+                          print('some  ERROR **** at onError $onError ***');
+
+
+                        });
 
 
 
 
-                  if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
-                    _scaffoldKey.currentState
+/*
+    final identityBlocLoginPage =
+    BlocProvider.of<IdentityBloc>(context);
+
+
+    Future<AuthResult> userCheck=
+    identityBlocLoginPage.handleSignInFromLoginPage(emailState.trim(),passwordState.trim());
+
+//                            _handleSignIn();
+
+    userCheck.whenComplete(() {
+
+    print("called when future completes");
+
+    }
+    ).then((onValue){
+
+    }
+        */
+
+//                        await int foundCount=  discover(context);
+
+                        logger.i('isDiscovering: $isDiscovering');
+                        logger.i('found: $found');
+                        logger.i('devices: $devices');
+
+
+                        print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelect.paymentTypeIndex}');
+
+
+
+
+
+
+
+
+                        // PRINTING CODES WILL BE PUTTER HERE.
+
+
+
+
+                        Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+
+
+
+
+                        if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
+                          _scaffoldKey.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
-                        .showSnackBar(
-                        SnackBar(content: Text("someThing went wrong")));
-                    print('something went wrong');
-                  }
-                  else{
-                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+                              .showSnackBar(
+                              SnackBar(content: Text("someThing went wrong")));
+                          print('something went wrong');
+                        }
+                        else{
+                          print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
-                    return Navigator.pop(context,tempOrderWithdocId);
-                  }
+                          return Navigator.pop(context,tempOrderWithdocId);
+                        }
+
+                        
 
 
-                },
+                      },
+                    ),
+                  ),
+
+
+                ],
               ),
-            ),
 
 
-          ],
-        ),
+
+
+
       );
   }
 
@@ -9838,6 +9957,230 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+
+
+
+  Future<Ticket> demoReceipt(PaperSize paper) async {
+    final profile = await CapabilityProfile.load();
+    final Ticket ticket = Ticket(paper, profile);
+
+    // Print image
+//    final ByteData data = await rootBundle.load('assets/rabbit_black.jpg');
+//    final Uint8List bytes = data.buffer.asUint8List();
+//    final Image image = decodeImage(bytes);
+//    ticket.image(image);
+
+    ticket.text('GROCERYLY',
+        styles: PosStyles(
+          align: PosAlign.center,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ),
+        linesAfter: 1);
+
+    ticket.text('889  Watson Lane', styles: PosStyles(align: PosAlign.center));
+    ticket.text('New Braunfels, TX', styles: PosStyles(align: PosAlign.center));
+    ticket.text('Tel: 830-221-1234', styles: PosStyles(align: PosAlign.center));
+    ticket.text('Web: www.example.com',
+        styles: PosStyles(align: PosAlign.center), linesAfter: 1);
+
+    ticket.hr();
+    ticket.row([
+      PosColumn(text: 'Qty', width: 1),
+      PosColumn(text: 'Item', width: 7),
+      PosColumn(
+          text: 'Price', width: 2, styles: PosStyles(align: PosAlign.right)),
+      PosColumn(
+          text: 'Total', width: 2, styles: PosStyles(align: PosAlign.right)),
+    ]);
+
+    ticket.row([
+      PosColumn(text: '2', width: 1),
+      PosColumn(text: 'ONION RINGS', width: 7),
+      PosColumn(
+          text: '0.99', width: 2, styles: PosStyles(align: PosAlign.right)),
+      PosColumn(
+          text: '1.98', width: 2, styles: PosStyles(align: PosAlign.right)),
+    ]);
+    ticket.row([
+      PosColumn(text: '1', width: 1),
+      PosColumn(text: 'PIZZA', width: 7),
+      PosColumn(
+          text: '3.45', width: 2, styles: PosStyles(align: PosAlign.right)),
+      PosColumn(
+          text: '3.45', width: 2, styles: PosStyles(align: PosAlign.right)),
+    ]);
+    ticket.row([
+      PosColumn(text: '1', width: 1),
+      PosColumn(text: 'SPRING ROLLS', width: 7),
+      PosColumn(
+          text: '2.99', width: 2, styles: PosStyles(align: PosAlign.right)),
+      PosColumn(
+          text: '2.99', width: 2, styles: PosStyles(align: PosAlign.right)),
+    ]);
+    ticket.row([
+      PosColumn(text: '3', width: 1),
+      PosColumn(text: 'CRUNCHY STICKS', width: 7),
+      PosColumn(
+          text: '0.85', width: 2, styles: PosStyles(align: PosAlign.right)),
+      PosColumn(
+          text: '2.55', width: 2, styles: PosStyles(align: PosAlign.right)),
+    ]);
+    ticket.hr();
+
+    ticket.row([
+      PosColumn(
+          text: 'TOTAL',
+          width: 6,
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+      PosColumn(
+          text: '\$10.97',
+          width: 6,
+          styles: PosStyles(
+            align: PosAlign.right,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+    ]);
+
+    ticket.hr(ch: '=', linesAfter: 1);
+
+    ticket.row([
+      PosColumn(
+          text: 'Cash',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$15.00',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+    ticket.row([
+      PosColumn(
+          text: 'Change',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$4.03',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+
+    ticket.feed(2);
+    ticket.text('Thank you!',
+        styles: PosStyles(align: PosAlign.center, bold: true));
+
+    final now = DateTime.now();
+    final formatter = DateFormat('MM/dd/yyyy H:m');
+    final String timestamp = formatter.format(now);
+    ticket.text(timestamp,
+        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
+
+    // Print QR Code from image
+    // try {
+    //   const String qrData = 'example.com';
+    //   const double qrSize = 200;
+    //   final uiImg = await QrPainter(
+    //     data: qrData,
+    //     version: QrVersions.auto,
+    //     gapless: false,
+    //   ).toImageData(qrSize);
+    //   final dir = await getTemporaryDirectory();
+    //   final pathName = '${dir.path}/qr_tmp.png';
+    //   final qrFile = File(pathName);
+    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
+    //   final img = decodeImage(imgFile.readAsBytesSync());
+
+    //   ticket.image(img);
+    // } catch (e) {
+    //   print(e);
+    // }
+
+    // Print QR Code using native function
+    // ticket.qrcode('example.com');
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+
+  void testPrint(String printerIp, BuildContext ctx) async {
+    final PrinterNetworkManager printerManager = PrinterNetworkManager();
+    printerManager.selectPrinter(printerIp, port: 9100);
+
+    // TODO Don't forget to choose printer's paper size
+    const PaperSize paper = PaperSize.mm80;
+
+    // TEST PRINT
+    // final PosPrintResult res =
+    //     await printerManager.printTicket(await testTicket(paper));
+
+    // DEMO RECEIPT
+    final PosPrintResult res =
+    await printerManager.printTicket(await demoReceipt(paper));
+
+    final snackBar =
+    SnackBar(content: Text(res.msg, textAlign: TextAlign.center));
+    Scaffold.of(ctx).showSnackBar(snackBar);
+  }
+
+//  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
+  Widget printWidget(){
+    return
+          Container(
+            height: displayHeight(context)/30,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: devices.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () => testPrint(devices[index], context),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: 60,
+                        padding: EdgeInsets.only(left: 10),
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.print),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    '${devices[index]}:${portController.text}',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  Text(
+                                    'Click to print a test receipt',
+                                    style: TextStyle(
+                                        color: Colors.grey[700]),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Icon(Icons.chevron_right),
+                          ],
+                        ),
+                      ),
+                      Divider(),
+                    ],
+                  ),
+                );
+              },
+            ),
+
+    );
+  }
 
 
 
