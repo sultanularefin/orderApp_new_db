@@ -97,7 +97,7 @@ class FirebaseClient {
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('USWc8IgrHKdjeDe9Ft4j')
-        .collection('sauces')
+        .collection('sauces').orderBy("sl", descending: false)
         .getDocuments();
 
 //    var snapshot= Firestore.instance
@@ -113,7 +113,7 @@ class FirebaseClient {
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('USWc8IgrHKdjeDe9Ft4j')
-        .collection('juusto')
+        .collection('juusto').orderBy("sl", descending: false)
         .getDocuments();
 
 //    var snapshot= Firestore.instance

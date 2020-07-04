@@ -227,6 +227,8 @@ class FoodGalleryBloc implements Bloc {
 
       final String categoryItemName = doc['name'];
 
+      print('categoryItemName : $categoryItemName');
+
       final String categoryImageURL  = doc['image']==''?
       'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
           :
@@ -237,6 +239,12 @@ class FoodGalleryBloc implements Bloc {
 
       final num categoryRating = doc['rating'];
       final num totalCategoryRating = doc['total_rating'];
+
+
+
+      print('categoryItemName : $categoryItemName,categoryRating :'
+          ' $categoryRating, totalCategoryRating , $totalCategoryRating, categoryImageURL: $categoryImageURL');
+
 
 
       NewCategoryItem oneCategoryItem = new NewCategoryItem(

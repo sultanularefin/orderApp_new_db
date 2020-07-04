@@ -456,7 +456,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //
                                                   ),
 
-                                                  width: displayWidth(context)/3.1,
+
                                                   height:displayHeight(context)/18,
 //                                          height: displayHeight(context)/40,
 
@@ -466,6 +466,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                     children: <Widget>[
                                                       Container(
+                                                        width: displayWidth(context)/3.9,
                                                         padding: EdgeInsets
                                                             .fromLTRB(
                                                             10, 0, 0,
@@ -475,6 +476,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                         Text(
                                                             '${oneFood
                                                                 .itemName}',
+                                                            maxLines: 2,
+                                                            overflow: TextOverflow.ellipsis,
                                                             style: TextStyle(
                                                               fontSize: 24,
                                                               fontWeight: FontWeight.normal,

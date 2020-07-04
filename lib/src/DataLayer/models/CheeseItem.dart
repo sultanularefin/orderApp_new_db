@@ -22,6 +22,8 @@ class CheeseItem {
   final double price;
   final String documentId;
   final int    cheeseItemAmountByUser;
+  final int    sl;
+        bool   isSelected;
 
 //  String ingredients;
 
@@ -29,9 +31,12 @@ class CheeseItem {
       {
         this.cheeseItemName,
         this.imageURL,
-        this.price,
+        this.price:0.0,
         this.documentId,
         this.cheeseItemAmountByUser,
+        this.sl,
+        this.isSelected:false,
+
       }
       );
 
@@ -44,7 +49,9 @@ class CheeseItem {
         cheeseItemName= data['name'],
         price = data['price'].toDouble(),
         documentId = docID,
-        cheeseItemAmountByUser = 0;
+        cheeseItemAmountByUser = 0,
+        sl = data['sl'],
+        isSelected =false;
 //
 //
 //  NewIngredient.updateIngredient(NewIngredient oneIngredient)

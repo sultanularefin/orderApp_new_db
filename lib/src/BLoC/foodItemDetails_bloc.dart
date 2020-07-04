@@ -152,15 +152,37 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
+  // cheese items
   List<CheeseItem> _allCheeseItemsDBloc =[];
   List<CheeseItem> get getAllCheeseItems => _allCheeseItemsDBloc;
   final _cheeseItemsController      =  StreamController <List<CheeseItem>>();
   Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsController.stream;
 
+  // sauce items
   List<SauceItem> _allSauceItemsDBloc =[];
   List<SauceItem> get getAllSauceItems => _allSauceItemsDBloc;
   final _sauceItemsController      =  StreamController <List<SauceItem>>();
   Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsController.stream;
+
+
+  // selected Cheese Items
+
+  /*
+  List<CheeseItem> _allSelectedCheeseItems =[];
+  List<CheeseItem> get getAllSelectedCheeseItems => _allCheeseItemsDBloc;
+  Stream<List<CheeseItem>> get getSelectedCheeseItemsStream => _cheeseItemsController.stream;
+  final _selectedCheeseListController      =  StreamController <List<CheeseItem>>();
+
+  */
+
+  // selected Sauce Items
+
+  /*
+  List<SauceItem> _allSelectedSauceItems =[];
+  List<SauceItem> get getAllSelectedSauceItems => _allSelectedSauceItems;
+  Stream<List<SauceItem>> get getSelectedSauceItemsStream => _selectedSauceListController.stream;
+  final _selectedSauceListController      =  StreamController <List<SauceItem>>();
+  */
 
   // Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream; // currentlyNotUsing.
 
@@ -199,6 +221,18 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     documentSnapshot.documentID
     ).toList();
 
+
+    cheeseItems.forEach((oneCheeseItem) {
+
+
+
+        if(oneCheeseItem.sl==1){
+          oneCheeseItem.isSelected=true;
+        }
+      }
+
+    );
+
 //    print('Ingredient documents are: $documents');
 
 
@@ -233,6 +267,15 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    print('Ingredient documents are: $documents');
 
+
+    sauceItems.forEach((oneSauceItem) {
+
+      if(oneSauceItem.sl==1){
+        oneSauceItem.isSelected=true;
+      }
+    }
+
+    );
 
     _allSauceItemsDBloc = sauceItems;
 
@@ -294,6 +337,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped ) {
 
     getAllSaucesConstructor();
+
     getAllCheeseItemsConstructor();
 //    if(allIngsScoped==[]) return;
 
@@ -1328,7 +1372,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-      print('elementExists: $elementExists');
+//      print('elementExists: $elementExists');
 
 
 
@@ -1459,5 +1503,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _multiSelectForFoodController.close();
     _sauceItemsController.close();
     _cheeseItemsController.close();
+//    _selectedSauceListController.close();
+//    _selectedCheeseListController.close();
   }
 }

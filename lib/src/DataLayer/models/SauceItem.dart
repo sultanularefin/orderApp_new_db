@@ -22,6 +22,9 @@ class SauceItem {
   final double price;
   final String documentId;
   final int    sauceItemAmountByUser;
+  final int    sl;
+        bool   isSelected;
+
 
 //  String ingredients;
 
@@ -29,9 +32,11 @@ class SauceItem {
       {
         this.sauceItemName,
         this.imageURL,
-        this.price,
+        this.price:0.0,
         this.documentId,
         this.sauceItemAmountByUser,
+        this.sl,
+        this.isSelected:false,
       }
       );
 
@@ -54,7 +59,10 @@ class SauceItem {
         sauceItemName = data['name'],
         price = data['price'].toDouble(),
         documentId = docID,
-        sauceItemAmountByUser = 0;
+        sauceItemAmountByUser = 0,
+        sl = data['sl'],
+        isSelected =false;
+
 
 //  NewIngredient.updateIngredient(NewIngredient oneIngredient)
 //       :imageURL= oneIngredient.imageURL,
