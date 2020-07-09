@@ -362,8 +362,8 @@ class ShoppingCartBloc implements Bloc {
 
 
     String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
-    logger.i('payment Button Pressed is payMentProcessing.orderTypeIndex ${payMentProcessing.orderTypeIndex} ::'
-        ' orderBy: $orderBy    ${_curretnOrder.paymentTypeIndex}');
+//    logger.i('payment Button Pressed is payMentProcessing.orderTypeIndex ${payMentProcessing.orderTypeIndex} ::'
+//        ' orderBy: $orderBy    ${_curretnOrder.paymentTypeIndex}');
 
 
 
@@ -382,9 +382,9 @@ class ShoppingCartBloc implements Bloc {
     int length =tempOrder.selectedFoodListLength;
 
 
-    logger.e('tempOrder.selectedFoodListLength ${tempOrder.selectedFoodListLength}');
-
-    logger.e('selectedFoodCheckForList: $selectedFoodCheckForList');
+//    logger.e('tempOrder.selectedFoodListLength ${tempOrder.selectedFoodListLength}');
+//
+//    logger.e('selectedFoodCheckForList: $selectedFoodCheckForList');
 
 //    print('selectedFoodCheckForList[3].quantity => ${selectedFoodCheckForList[3].quantity}');
 
@@ -426,6 +426,7 @@ class ShoppingCartBloc implements Bloc {
 
 
 
+//    print('${selectedFoodCheckForListToSet.}')
 
 
     tempOrder.selectedFoodInOrder = selectedFoodCheckForListToSet.toList();
@@ -490,11 +491,18 @@ class ShoppingCartBloc implements Bloc {
     _orderType =[];
     _paymentType =[];
 
+    _devicesBlueTooth = [];
+
+
+
+
 
     _orderController.sink.add(_curretnOrder);
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
     _orderTypeController.sink.add(_orderType);
     _paymentTypeController.sink.add(_paymentType);
+
+    _devicesController.sink.add(_devicesBlueTooth);
 
 
   }

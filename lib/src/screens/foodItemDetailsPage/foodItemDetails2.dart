@@ -242,7 +242,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                       body: SafeArea(
 
-
                         // smaller container containing all modal FoodItem Details things.
                         child: Container(
                             height: displayHeight(context) -

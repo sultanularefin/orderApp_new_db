@@ -780,7 +780,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         // workTest
                                         Container(
-                                          height:40,
+                                          height:60,
                                           color:Colors.lightBlueAccent,
                                           child: showAvailableDevices(),
                                         ),

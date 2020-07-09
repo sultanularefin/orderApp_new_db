@@ -13,8 +13,10 @@
 //import 'dart:core';
 import 'dart:math';
 
+import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 
 
 class SelectedFood {
@@ -29,6 +31,8 @@ class SelectedFood {
   final double     discount;
   // final String foodItemOrderID;     // random might not be needed.
   List<NewIngredient> selectedIngredients;
+  List<CheeseItem>  selectedCheeseItems;
+  List<SauceItem>   selectedSauceItems;
 
 //  String ingredients;
 //  itemId = await generateItemId(6);
@@ -44,6 +48,8 @@ class SelectedFood {
         this.selectedIngredients,
         this.categoryName,
         this.discount,
+        this.selectedCheeseItems,
+        this.selectedSauceItems,
 
         // this.foodItemOrderID,
       }
