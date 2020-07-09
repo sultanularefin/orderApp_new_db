@@ -7767,6 +7767,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
   }
 
+
+  // work 019thJuly.
   Widget animatedUnObscuredCancelPayButtonTakeAway(Order cancelPaySelect){
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
@@ -7777,21 +7779,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ' Widget name: '
         'animated Obscured Cancel Pay Button()');
     return
-
-
-
-
-
       Container(
         margin:EdgeInsets.fromLTRB(0,9,0,9),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
-
-
-
             Container(
               width:displayWidth(context)/4,
               height:displayHeight(context)/24,
@@ -7959,7 +7952,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                  // PRINTING CODES WILL BE PUTTER HERE.
+                  // PRINTING CODES WILL BE PUTTED HERE.
 
 
 

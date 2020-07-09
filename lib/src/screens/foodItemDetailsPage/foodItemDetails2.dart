@@ -1260,64 +1260,64 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     return
 
       RaisedButton(
-        color:Colors.redAccent,
-        highlightColor: Color(0xff525FFF),
-        splashColor: Color(0xffB47C00),
+          color:Colors.redAccent,
+          highlightColor: Color(0xff525FFF),
+          splashColor: Color(0xffB47C00),
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        highlightElevation: 12,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Color(0xff707070),
-            style: BorderStyle.solid,
+          highlightElevation: 12,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Color(0xff707070),
+              style: BorderStyle.solid,
 //            width: 1,
+            ),
+            borderRadius: BorderRadius.circular(30.0),
           ),
-          borderRadius: BorderRadius.circular(30.0),
-        ),
 
-        child:Container(
+          child:Container(
 
-            width:displayWidth(context)/7,
-            height: displayHeight(context)/28,
+              width:displayWidth(context)/7,
+              height: displayHeight(context)/28,
 
-            child:
-            Container(
+              child:
+              Container(
 
-              padding: EdgeInsets.fromLTRB(2,8,0,0),
-              child:Text(
-                'FINISH'.toLowerCase(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontWeight: FontWeight
-                        .bold,
-                    color: Color(0xffFFFFFF),
-                    fontFamily: 'Itim-Regular',
-                    fontSize: 22),
-              ),
-            )
+                padding: EdgeInsets.fromLTRB(2,8,0,0),
+                child:Text(
+                  'FINISH'.toLowerCase(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight
+                          .bold,
+                      color: Color(0xffFFFFFF),
+                      fontFamily: 'Itim-Regular',
+                      fontSize: 22),
+                ),
+              )
 
 
-        ),
-        onPressed: () {
+          ),
+          onPressed: () {
 //
 
 
 
-          final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-          blocD.updateDefaultIngredientItems(/*oneSelected,index*/);
+            blocD.updateDefaultIngredientItems(/*oneSelected,index*/);
 
-          setState(() {
+            setState(() {
 
-            showUnSelectedIngredients = !showUnSelectedIngredients;
-            showPressWhenFinishButton = !showPressWhenFinishButton;
+              showUnSelectedIngredients = !showUnSelectedIngredients;
+              showPressWhenFinishButton = !showPressWhenFinishButton;
 
 
 //                ::::A
 //                          myAnimatedWidget1 = myAnimatedWidget2;
 
+            });
           });
-        });
 
   }
 
@@ -1327,60 +1327,60 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       OutlineButton(
 
 //        clipBehavior: Clip.hardEdge,
-        splashColor: Color(0xffFEE295),
+          splashColor: Color(0xffFEE295),
 //          splashColor: Color(0xff739DFA),
-        highlightElevation: 12,
+          highlightElevation: 12,
 
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 //          clipBehavior: Clip.hardEdge,
 //          highlightElevation: 12,
-        shape: RoundedRectangleBorder(
+          shape: RoundedRectangleBorder(
 
-          borderRadius: BorderRadius.circular(35.0),
-        ),
-//          disabledBorderColor: false,
-        borderSide: BorderSide(
-          color: Color(0xffF83535),
-          style: BorderStyle.solid,
-          width: 3.6,
-        ),
-
-
-
-        child:Container(
-
-          width:displayWidth(context)/7,
-          height: displayHeight(context)/28,
-          padding: EdgeInsets.fromLTRB(0,0,0,0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment
-                .center,
-            children: <
-                Widget>[
-              //  SizedBox(width: 5,),
-              Container(
-                padding: EdgeInsets.fromLTRB(0,3,0,0),
-                child: Icon(
-                  Icons.add,
-                  size: 25.0,
-                  color: Color(0xffF50303),
-                  //        color: Color(0xffFFFFFF),
-                ),
-              ),
-              Text(
-                'more',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight
-                      .bold,
-                  color: Color(0xffF50303),
-                  fontSize: 22, fontFamily: 'Itim-Regular',),
-              ),
-            ],
+            borderRadius: BorderRadius.circular(35.0),
           ),
-        ),
-        onPressed: () {
+//          disabledBorderColor: false,
+          borderSide: BorderSide(
+            color: Color(0xffF83535),
+            style: BorderStyle.solid,
+            width: 3.6,
+          ),
+
+
+
+          child:Container(
+
+            width:displayWidth(context)/7,
+            height: displayHeight(context)/28,
+            padding: EdgeInsets.fromLTRB(0,0,0,0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment
+                  .center,
+              children: <
+                  Widget>[
+                //  SizedBox(width: 5,),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0,3,0,0),
+                  child: Icon(
+                    Icons.add,
+                    size: 25.0,
+                    color: Color(0xffF50303),
+                    //        color: Color(0xffFFFFFF),
+                  ),
+                ),
+                Text(
+                  'more',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight
+                        .bold,
+                    color: Color(0xffF50303),
+                    fontSize: 22, fontFamily: 'Itim-Regular',),
+                ),
+              ],
+            ),
+          ),
+          onPressed: () {
 //                                                                        logger.i('s  =>   =>   => ','ss');
 
 
@@ -1390,8 +1390,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               showPressWhenFinishButton = !showPressWhenFinishButton;
 //                        myAnimatedWidget2 = myAnimatedWidget1();
             });
-    print(
-    'xyz');
+            print(
+                'xyz');
           }
 
 
@@ -2095,8 +2095,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               return Container(
 //                color: Colors.green,
-                child: GridView.builder(
+                child: ListView.builder(
 
+                  /*
 
                   gridDelegate:
                   new SliverGridDelegateWithMaxCrossAxisExtent(
@@ -2111,7 +2112,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                   ),
 
+                  */
+
                   shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
 
                   itemCount: selectedSauceItems
                       .length,
@@ -2145,11 +2149,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     if(oneSauce.isSelected==false) {
       return
         Container(
+//          color:Colors.lightGreenAccent,
 //            color: Color.fromRGBO(239, 239, 239, 0),
-          color: Colors.white,
+//          color: Colors.white,
           padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-              horizontal: 0, vertical: 0),
+              horizontal: 18, vertical: 0),
           child: GestureDetector(
               onLongPress: () {
                 print(
@@ -2196,16 +2201,21 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     ),
                   ),
 //                              SizedBox(height: 10),
-                  Text(
-
-                    sauceItemName,
-
-                    style: TextStyle(
-                      color: Color(0xff707070),
+                  Container(
+                    width: displayWidth(context) / 9,
+                    child: Text(
+                      sauceItemName,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+
+                      ),
                     ),
                   )
                   ,
@@ -2231,11 +2241,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       return
 
         Container(
+//          color:Colors.lightGreenAccent,
 //            color: Color.fromRGBO(239, 239, 239, 0),
-          color: Colors.white,
+//          color: Colors.white,
           padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-              horizontal: 0, vertical: 0),
+              horizontal: 18, vertical: 0),
           child: GestureDetector(
               onLongPress: () {
                 print('at Long Press: ');
@@ -2297,18 +2308,26 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     ),
                   ),
 //                              SizedBox(height: 10),
-                  Text(
+                  Container(
+                    width: displayWidth(context) / 9,
 
-                    sauceItemName,
+                    child: Text(
 
-                    style: TextStyle(
-                      color: Color(0xff707070),
+                      sauceItemName,
+
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+
+                      style: TextStyle(
+                        color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                      decoration: TextDecoration.underline,
-                      decorationStyle:TextDecorationStyle.double,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                        decorationStyle:TextDecorationStyle.double,
+                      ),
                     ),
                   )
                   ,
@@ -2407,9 +2426,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               return Container(
 //                color: Colors.green,
-                child: GridView.builder(
+                child: ListView.builder(
 
 
+                  /*
                   gridDelegate:
                   new SliverGridDelegateWithMaxCrossAxisExtent(
 
@@ -2423,7 +2443,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                   ),
 
+                  */
                   shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
 
                   itemCount: selectedCheeseItems
                       .length,
@@ -2461,11 +2483,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       return
 
         Container(
+//          color:Colors.lightGreenAccent,
 //            color: Color.fromRGBO(239, 239, 239, 0),
-          color: Colors.white,
+//          color: Colors.white,
           padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-              horizontal: 0, vertical: 0),
+              horizontal: 18, vertical: 0),
           child: GestureDetector(
               onLongPress: () {
                 print(
@@ -2509,16 +2532,22 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     ),
                   ),
 //                              SizedBox(height: 10),
-                  Text(
 
-                    cheeseItemName,
+                  Container(
+                    width: displayWidth(context) / 9,
+                    child: Text(
+                      cheeseItemName,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
 
-                    style: TextStyle(
-                      color: Color(0xff707070),
+                      style: TextStyle(
+                        color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                      ),
                     ),
                   )
                   ,
@@ -2542,11 +2571,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       return
 
         Container(
+//          color:Colors.lightGreenAccent,
 //            color: Color.fromRGBO(239, 239, 239, 0),
-          color: Colors.white,
+//          color: Colors.white,
           padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-              horizontal: 0, vertical: 0),
+              horizontal: 18, vertical: 0),
           child: GestureDetector(
               onLongPress: () {
                 print(
@@ -2606,18 +2636,26 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     ),
                   ),
 //                              SizedBox(height: 10),
-                  Text(
+                  Container(
 
-                    cheeseItemName,
+                    width: displayWidth(context) / 9,
 
-                    style: TextStyle(
-                      color: Color(0xff707070),
+                    child: Text(
+
+                      cheeseItemName,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+
+                      style: TextStyle(
+                        color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                      decoration: TextDecoration.underline,
-                      decorationStyle:TextDecorationStyle.double,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                        decorationStyle:TextDecorationStyle.double,
+                      ),
                     ),
                   ),
 
@@ -2735,9 +2773,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               return Container(
 //                color: Colors.green,
-                child: GridView.builder(
+                child: ListView.builder(
 
 
+                  /*
                   gridDelegate:
                   new SliverGridDelegateWithMaxCrossAxisExtent(
 
@@ -2750,8 +2789,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                   ),
+                  */
 
                   shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
 
                   itemCount: selectedIngredients
                       .length,
@@ -2788,9 +2829,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       Container(
 //            color: Color.fromRGBO(239, 239, 239, 0),
 //            color: Colors.white,
+//        color:Colors.lightGreenAccent,
         padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-            horizontal: 0, vertical: 0),
+            horizontal: 18, vertical: 0),
         child: GestureDetector(
             onLongPress: () {
               print(
@@ -2855,18 +2897,23 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
                 ),
 //                              SizedBox(height: 10),
-                Text(
+                Container(
+                  width: displayWidth(context) / 9,
+                  child: Text(
+                    ingredientName,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
 
-                  ingredientName,
-
-                  style: TextStyle(
-                    color: Color(0xff707070),
+                    style: TextStyle(
+                      color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
 //                    decoration: TextDecoration.underline,
 //                    decorationStyle:TextDecorationStyle.double,
+                    ),
                   ),
                 )
                 ,

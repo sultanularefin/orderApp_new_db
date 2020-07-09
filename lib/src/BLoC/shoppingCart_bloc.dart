@@ -68,7 +68,7 @@ class ShoppingCartBloc implements Bloc {
 
 
 
-  final _orderController = StreamController <Order>();
+  final _orderController = StreamController <Order>.broadcast();
   final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>();
   final _savedSelectedFoodController =  StreamController<List<SelectedFood>>();
   final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
