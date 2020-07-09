@@ -4,6 +4,7 @@
 
 // dependency files
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:platform_action_sheet/platform_action_sheet.dart';
 
-import 'package:esc_pos_printer/esc_pos_printer.dart';
+//import 'package:esc_pos_printer/esc_pos_printer.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:intl/intl.dart';
 
@@ -106,15 +107,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
   * PRINTING RELATED STATE VARIABLES ARE HERE.
   * */
 
-  PrinterNetworkManager printerManager = PrinterNetworkManager();
+//  PrinterNetworkManager printerManager = PrinterNetworkManager();
+
+
+  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
+
 //  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
 //  List<PrinterBluetooth> _devices = [];
 
+  /*
   String localIp = '';
   List<String> devices = [];
   bool isDiscovering = false;
   int found = -1;
   TextEditingController portController = TextEditingController(text: '9100');
+
+  */
   /*
   * PRINTING RELATED STATE VARIABLES ENDS HERE.
   * */
@@ -769,6 +777,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         ),
 
+
+                                        // workTest
+                                        Container(
+                                          height:40,
+                                          color:Colors.lightBlueAccent,
+                                          child: showAvailableDevices(),
+                                        ),
+
+
+
                                       ],
                                     ),
                                   ),
@@ -1314,6 +1332,108 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  Widget showAvailableDevices(/*Order qTimes */) {
+
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+    logger.w('showAvailableDevices I I I I ');
+
+//    return FutureBuilder<List<String>>(
+    return StreamBuilder<List<PrinterBluetooth>>(
+
+//      future: shoppingCartBloc.getDevicesStream,
+      stream: shoppingCartBloc.getDevicesStream,
+      initialData: shoppingCartBloc.getDevices,
+      builder: (context, snapshot) {
+
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+          case ConnectionState.none:
+            return Container(
+//        if ((snapshot.hasError) || (!snapshot.hasData)) {
+//          return Center(
+//            child: Container(
+              alignment: Alignment.center,
+              child: Container(
+                  alignment: Alignment.center,
+                  child: new CircularProgressIndicator(
+                      backgroundColor: Colors.lightGreenAccent)
+              ),
+
+
+            );
+            break;
+          case ConnectionState.active:
+          default:
+            if (snapshot.data == null) {
+              return Container(
+
+
+                child: Text('No Devices'.toLowerCase(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'Itim-Regular',
+                    color: Colors.red,
+
+                  ),
+                ),
+              );
+            }
+            else if(snapshot.hasError){
+              return Container(
+
+
+                child: Text('Some thing went wrong'.toLowerCase(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'Itim-Regular',
+                    color: Colors.red,
+
+                  ),
+                ),
+              );
+            }
+            else {
+//                    SelectedFood incrementCurrentFoodProcessing = snapshot.data;
+              List<PrinterBluetooth> blueToothDevicesFromStream = snapshot.data;
+              print('devicesFromStream $blueToothDevicesFromStream at line # 1392.');
+
+              return ListView.builder(
+
+                scrollDirection: Axis.horizontal,
+                itemCount: blueToothDevicesFromStream.length,
+                itemBuilder: (context,position)=>ListTile(
+                  onTap: (){
+                    //code to print with this device
+
+                    testPrint(blueToothDevicesFromStream[position],context);
+                  },
+                  title: Text(blueToothDevicesFromStream[position].name),
+                  subtitle: Text(blueToothDevicesFromStream[position].address),
+                ),
+
+                /*
+                itemBuilder: (BuildContext context, int index) {
+                  return OutlineButton(
+                    onPressed: () =>
+                        testPrint(blueToothDevicesFromStream[index], context),
+                    child:
+                    Text(
+                      '${devicesFromStream[index]}:${portController.text}',
+                      style: TextStyle(fontSize: 16),
+                    ),
+
+                  );
+                },
+              ;
+                            */
+              );
+      }
+        }
+      },
+    );
+  }
   /*
   Widget _buildQuantityTimesofFood(/*Order qTimes */) {
 //   height: 40,
@@ -7392,8 +7512,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway(Order unObsecuredInputandPayment){
 
-    final shoppingCartBloc = BlocProvider.of<
-        ShoppingCartBloc>(context);
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     print('at animated Un Obscured Card UnSelect Container');
     return
@@ -7490,7 +7609,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //          Text('bb'),
 //          Text('gg'),
 
-    /*
+          /*
           Container(
             height:20,
 //                                                          color:Colors.lightBlueAccent,
@@ -7768,7 +7887,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  // work 019thJuly.
+  // work 01_9thJuly.
   Widget animatedUnObscuredCancelPayButtonTakeAway(Order cancelPaySelect){
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
@@ -7883,6 +8002,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        final identityBlocLoginPage =
 //                        BlocProvider.of<IdentityBloc>(context);
 
+                  /*
 
                   Future<List<String>> testDevices =
                   shoppingCartBloc.discoverDevices2('9100');
@@ -7914,6 +8034,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   });
+
+                  */
 
 
 
@@ -7973,7 +8095,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   else{
                     print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
-                    return Navigator.pop(context,tempOrderWithdocId);
+                    //work 01_paymentButton TakeAway 9thJuly.
+                    logger.w('check device listed or not');
+
+//                    return Navigator.pop(context,tempOrderWithdocId);
                   }
 
 
@@ -10034,8 +10159,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   Future<Ticket> demoReceipt(PaperSize paper) async {
-    final profile = await CapabilityProfile.load();
-    final Ticket ticket = Ticket(paper, profile);
+//    final profile = await CapabilityProfile.load();
+//    final Ticket ticket = Ticket(paper, profile);
+    final Ticket ticket = Ticket(PaperSize.mm80);
 
     // Print image
 //    final ByteData data = await rootBundle.load('assets/rabbit_black.jpg');
@@ -10181,9 +10307,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  void testPrint(String printerIp, BuildContext ctx) async {
-    final PrinterNetworkManager printerManager = PrinterNetworkManager();
-    printerManager.selectPrinter(printerIp, port: 9100);
+
+
+  void testPrint( /*String printerIp */ PrinterBluetooth oneDevice, BuildContext ctx) async {
+//    final PrinterNetworkManager printerManager = PrinterNetworkManager();
+//    printerManager.selectPrinter(printerIp, port: 9100);
+
+    printerManager.selectPrinter(oneDevice);
 
     // TODO Don't forget to choose printer's paper size
     const PaperSize paper = PaperSize.mm80;
@@ -10201,7 +10331,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     Scaffold.of(ctx).showSnackBar(snackBar);
   }
 
+
+
 //  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
+
+/*
   Widget printWidget(){
     return
       Container(
@@ -10254,6 +10388,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       );
   }
+
+  */
 
 
 

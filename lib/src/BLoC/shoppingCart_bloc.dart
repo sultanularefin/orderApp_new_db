@@ -8,8 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart'; // to be removed later.
 
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:logger/logger.dart';
-import 'package:wifi/wifi.dart';
-import 'package:ping_discover_network/ping_discover_network.dart';
+//import 'package:wifi/wifi.dart';
+//import 'package:ping_discover_network/ping_discover_network.dart';
+import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 
 
 //printing blue tooth or wifi in same local area network.
@@ -68,7 +69,7 @@ class ShoppingCartBloc implements Bloc {
 
 
 
-  final _orderController = StreamController <Order>.broadcast();
+  final _orderController = StreamController <Order>();
   final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>();
   final _savedSelectedFoodController =  StreamController<List<SelectedFood>>();
   final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
@@ -92,12 +93,19 @@ class ShoppingCartBloc implements Bloc {
   Stream  <List<SelectedFood>> get getSavedFoodsStream => _savedSelectedFoodController.stream;
 
 
+  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
+  List<PrinterBluetooth> _devicesBlueTooth = [];
+
+//  List<String> _devices =[];
+  List<PrinterBluetooth> get getDevices => _devicesBlueTooth;
+  final _devicesController = StreamController<List<PrinterBluetooth>>();
+  Stream <List<PrinterBluetooth>> get getDevicesStream => _devicesController.stream;
 
 
-  List<String> _devices =[];
-  List<String> get getDevices => _devices;
-  final _devicesController = StreamController<List<String>>();
-  Stream  <List<String>> get getDevicesStream => _devicesController.stream;
+//  List<String> _devices =[];
+//  List<String> get getDevices => _devices;
+//  final _devicesController = StreamController<List<String>>();
+//  Stream <List<String>> get getDevicesStream => _devicesController.stream;
 
   /*
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
@@ -111,8 +119,6 @@ class ShoppingCartBloc implements Bloc {
 
   ShoppingCartBloc(
       /*FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped */
-
-
       Order x
       ) {
 
@@ -186,6 +192,7 @@ class ShoppingCartBloc implements Bloc {
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
 
 
+    discoverDevicesConstructor('9100');
     //    initiateCustomerInformation();
 
     _curretnOrder = x;
@@ -211,7 +218,7 @@ class ShoppingCartBloc implements Bloc {
     List<SelectedFood> multiplied = List.filled(fillingLength, oneSelectedFood);
 
     print('\n \n AFTER ... FILLING');
-    print('X.quantity is: ${fillingLength}');
+    print('X.quantity is: $fillingLength');
     print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
 
     print('multiplied: $multiplied');
@@ -670,6 +677,7 @@ class ShoppingCartBloc implements Bloc {
   }
 
 
+  /*
   Future<List<String>> discoverDevices2(String portNumber) async {
 //    AuthResult result = await _auth.signInWithEmailAndPassword(email:
 //    email, password: password);
@@ -715,7 +723,82 @@ class ShoppingCartBloc implements Bloc {
       }
     });
 
+    _devices=devices;
+    _devicesController.sink.add(_devices);
+
     return devices;
+
+  }
+
+  */
+
+  void discoverDevicesConstructor(String portNumber) async {
+//    AuthResult result = await _auth.signInWithEmailAndPassword(email:
+//    email, password: password);
+
+    // print('result:  IIIII   >>>>>  $result'  );
+    List<String> devices = [];
+
+//    if (result.user.email != null) {
+//      FirebaseUser fireBaseUserRemote = result.user;
+
+
+
+    printerManager.startScan(Duration(seconds: 9));
+    printerManager.scanResults.listen((scannedDevices) {
+//      setState(() {
+//        _devices=scannedDevices;
+//      });
+
+      print('scannedDevices $scannedDevices');
+      _devicesBlueTooth =scannedDevices;
+
+//    bluetoo
+    });
+
+//    _devices=devices;
+    _devicesController.sink.add(_devicesBlueTooth);
+
+    /*
+    String ip;
+    try {
+      ip = await Wifi.ip;
+      print('local ip:\t$ip');
+    } catch (e) {
+
+      print('ip error, please check internet');
+//      return devices;
+    }
+
+
+    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
+    int port = 9100;
+    try {
+      port = int.parse(portNumber);
+    } catch (e) {
+      print('port.toString()  please check $e');
+    }
+
+    print('subnet:\t$subnet, port:\t$port');
+
+
+    final stream = NetworkAnalyzer.discover2(subnet, port);
+
+    stream.listen((NetworkAddress addr) {
+      if (addr.exists) {
+        print('Found device: ${addr.ip}');
+
+        devices.add(addr.ip);
+
+
+      }
+    });
+
+    */
+
+
+
+//    return devices;
 
   }
 

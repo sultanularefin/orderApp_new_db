@@ -2074,8 +2074,8 @@ Widget work1(BuildContext context){
                                 color: Color(0xff707070),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                blurRadius: 30.0,
-                                spreadRadius: 0.7,
+                                blurRadius: 25.0,
+                                spreadRadius: 0.5,
                                 offset: Offset(0, 10)
                             )
                           ],
@@ -2112,8 +2112,8 @@ Widget work1(BuildContext context){
                                           0xffEAB45E),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                      blurRadius: 30.0,
-                                      spreadRadius: 0.7,
+                                      blurRadius: 25.0,
+                                      spreadRadius: 0.5,
                                       offset: Offset(0, 10)
                                   )
                                 ],
@@ -2363,8 +2363,8 @@ Widget work1(BuildContext context){
                                 color: Color(0xff707070),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                blurRadius: 30.0,
-                                spreadRadius: 0.7,
+                                blurRadius: 25.0,
+                                spreadRadius: 0.5,
                                 offset: Offset(0, 10)
                             )
                           ],
@@ -2401,8 +2401,8 @@ Widget work1(BuildContext context){
                                           0xffEAB45E),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                      blurRadius: 30.0,
-                                      spreadRadius: 0.7,
+                                      blurRadius: 25.0,
+                                      spreadRadius: 0.5,
                                       offset: Offset(0, 10)
                                   )
                                 ],

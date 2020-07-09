@@ -2363,73 +2363,113 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         initialData: blocD.getAllCheeseItems,
 
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+              return Container(
+                margin: EdgeInsets.fromLTRB(
+                    0, displayHeight(context) / 2, 0, 0),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
 
-            print('!snapshot.hasData');
+                    children: <Widget>[
 
-            return Container(
-//              height: displayHeight(context) / 10,
-              height: displayHeight(context) / 14,
-//          height:190,
-              width: displayWidth(context) /1.50,
-
-              color: Color(0xFFffffff),
-              alignment: Alignment.center,
-
-              // PPPPP
-
-              child:
-              Text('looking for cheese items, please wait...'.toLowerCase(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontFamily: 'Itim-Regular',
-                  color: Colors.white,
-
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                                backgroundColor: Colors.lightGreenAccent)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                              backgroundColor: Colors.yellow,)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                                backgroundColor: Color(0xffFC0000))
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
+              );
+              break;
+            case ConnectionState.active:
+            default:
+              if (snapshot.data == null) {
+//          if (!snapshot.hasData) {
 
-              ),
-            );
-          }
+                print('!snapshot.hasData');
 
-          else {
-
-
-            List<CheeseItem> selectedCheeseItems = snapshot.data;
-
-            if(selectedCheeseItems.length==0){
-              return Container(
-//                  height: displayHeight(context) / 10,
+                return Container(
+//              height: displayHeight(context) / 10,
                   height: displayHeight(context) / 14,
 //          height:190,
-                  width: displayWidth(context) /1.50,
+                  width: displayWidth(context) / 1.50,
 
-                  color: Color(0xffFFFFFF),
+                  color: Color(0xFFffffff),
                   alignment: Alignment.center,
 
                   // PPPPP
 
-                  child:(
-                      Text('No cheese items found.'.toLowerCase(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'Itim-Regular',
-                          color: Colors.grey,
-                        ),
+                  child:
+                  Text('looking for cheese items, please wait...'.toLowerCase(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontFamily: 'Itim-Regular',
+                      color: Colors.white,
+
+                    ),
+
+
+                  ),
+                );
+              }
+
+              else {
+                List<CheeseItem> selectedCheeseItems = snapshot.data;
+
+                if (selectedCheeseItems.length == 0) {
+                  return Container(
+//                  height: displayHeight(context) / 10,
+                      height: displayHeight(context) / 14,
+//          height:190,
+                      width: displayWidth(context) / 1.50,
+
+                      color: Color(0xffFFFFFF),
+                      alignment: Alignment.center,
+
+                      // PPPPP
+
+                      child: (
+                          Text('No cheese items found.'.toLowerCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontFamily: 'Itim-Regular',
+                              color: Colors.grey,
+                            ),
+                          )
                       )
-                  )
-              );
-            }
-            else{
-
-              return Container(
+                  );
+                }
+                else {
+                  return Container(
 //                color: Colors.green,
-                child: ListView.builder(
+                    child: ListView.builder(
 
 
-                  /*
+                      /*
                   gridDelegate:
                   new SliverGridDelegateWithMaxCrossAxisExtent(
 
@@ -2444,18 +2484,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
 
                   */
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
 
-                  itemCount: selectedCheeseItems
-                      .length,
-                  itemBuilder: (_, int index) {
-                    return oneCheeseItem(selectedCheeseItems[index],
-                        index);
-                  },
-                ),
-              );
-            }
+                      itemCount: selectedCheeseItems
+                          .length,
+                      itemBuilder: (_, int index) {
+                        return oneCheeseItem(selectedCheeseItems[index],
+                            index);
+                      },
+                    ),
+                  );
+                }
+              }
           }
         }
     );
