@@ -14,7 +14,7 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 //import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
-//import 'package:logger/logger.dart';
+import 'package:logger/logger.dart';
 
 //MODELS
 //import 'package:foodgallery/src/DataLayer/itemData.dart';
@@ -53,9 +53,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-//  var logger = Logger(
-//    printer: PrettyPrinter(),
-//  );
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
   final _client = FirebaseClient();
 
@@ -246,6 +246,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
+
+
+
+    logger.w('_allSelectedCheeseItems at getAllCheeseItemsConstructor():'
+        ' $_allSelectedCheeseItems');
 
 //    _selectedSauceListController.sink.add(_allSelectedSauceItems);
 //    _allSelectedCheeseItems =
@@ -1155,6 +1160,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     // selected update.
     _allSelectedCheeseItems = allTempCheeseItems.where((element) => element.isSelected==true).toList();
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+
+
+    logger.w('_allSelectedCheeseItems at toggleThisCheeseAsSelectedCheeseItem():'
+        ' $_allSelectedCheeseItems');
 
   }
 

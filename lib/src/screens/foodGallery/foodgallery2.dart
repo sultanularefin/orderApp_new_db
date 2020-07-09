@@ -449,7 +449,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                           BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
                                               color: Color(0xffFFFFFF),
-                                              blurRadius: 10.0,
+                                              blurRadius: 25.0,
                                               // USER INPUT
                                               offset: Offset(0.0, 2.0))
                                         ],
@@ -2075,7 +2075,7 @@ Widget work1(BuildContext context){
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                 blurRadius: 25.0,
-                                spreadRadius: 0.5,
+                                spreadRadius: 0.10,
                                 offset: Offset(0, 10)
                             )
                           ],
@@ -2113,7 +2113,7 @@ Widget work1(BuildContext context){
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                       blurRadius: 25.0,
-                                      spreadRadius: 0.5,
+                                      spreadRadius: 0.10,
                                       offset: Offset(0, 10)
                                   )
                                 ],
@@ -2364,7 +2364,7 @@ Widget work1(BuildContext context){
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                 blurRadius: 25.0,
-                                spreadRadius: 0.5,
+                                spreadRadius: 0.10,
                                 offset: Offset(0, 10)
                             )
                           ],
@@ -2402,7 +2402,7 @@ Widget work1(BuildContext context){
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                       blurRadius: 25.0,
-                                      spreadRadius: 0.5,
+                                      spreadRadius: 0.10,
                                       offset: Offset(0, 10)
                                   )
                                 ],
@@ -2635,7 +2635,10 @@ Widget work1(BuildContext context){
     (receivedSelectedFood!=null) && (receivedSelectedFood.foodItemName!=null)
     ) {
 
-      print('| | | | | | | |   receivedSelectedFood.quantity: ${receivedSelectedFood.quantity}');
+//      print('| | | | | | | |   receivedSelectedFood.quantity: ${receivedSelectedFood.quantity}');
+
+      print('| | | | | | | |   receivedSelectedFood.selectedSauceItems: ${receivedSelectedFood.selectedSauceItems}');
+      print('| | | | | | | |   receivedSelectedFood.selectedCheeseItems: ${receivedSelectedFood.selectedCheeseItems}');
 
       // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 //       int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
