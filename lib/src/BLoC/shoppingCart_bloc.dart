@@ -93,7 +93,7 @@ class ShoppingCartBloc implements Bloc {
   Stream  <List<SelectedFood>> get getSavedFoodsStream => _savedSelectedFoodController.stream;
 
 
-  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
+  PrinterBluetoothManager onePrinterBluetoothManager = PrinterBluetoothManager();
   List<PrinterBluetooth> _devicesBlueTooth = [];
 
 //  List<String> _devices =[];
@@ -762,11 +762,14 @@ class ShoppingCartBloc implements Bloc {
   * */
 
 
-    printerManager.startScan(Duration(seconds: 9));
-    printerManager.scanResults.listen((scannedDevices) {
+    onePrinterBluetoothManager.startScan(Duration(seconds: 4));
+    onePrinterBluetoothManager.scanResults.listen((scannedDevices) {
 //      setState(() {
 //        _devices=scannedDevices;
 //      });
+
+//    print('${scannedDevices.is}')
+
 
       logger.w('scannedDevices: $scannedDevices');
       _devicesBlueTooth = scannedDevices;
@@ -829,47 +832,32 @@ class ShoppingCartBloc implements Bloc {
 
   //  Future <bool> checkUserinLocalStorage() async {
   Future<List<PrinterBluetooth>> discoverDevicesInitState() async {
-//    AuthResult result = await _auth.signInWithEmailAndPassword(email:
-//    email, password: password);
 
-    // print('result:  IIIII   >>>>>  $result'  );
-//    List<String> devices = [];
-
-//    if (result.user.email != null) {
-//      FirebaseUser fireBaseUserRemote = result.user;
-
-    /*
-  _scanResults.add(<PrinterBluetooth>[]);
-
-    _bluetoothManager.startScan(timeout: timeout);
-
-    _scanResultsSubscription = _bluetoothManager.scanResults.listen((devices) {
-      _scanResults.add(devices.map((d) => PrinterBluetooth(d)).toList());
-    });
-  * */
-
-
-    printerManager.startScan(Duration(seconds: 9));
-    printerManager.scanResults.listen((scannedDevices) {
+    onePrinterBluetoothManager.startScan(Duration(seconds: 4));
+    onePrinterBluetoothManager.scanResults.listen((scannedDevices) {
 //      setState(() {
 //        _devices=scannedDevices;
 //      });
       _devicesBlueTooth = scannedDevices;
 
       logger.w('scannedDevices: $scannedDevices');
+      _devicesController.sink.add(_devicesBlueTooth);
+      return _devicesBlueTooth;
 
 
 //    bluetoo
     }, onDone: () {
       print("Task Done: zzzzz zzzzzz zzzzzzz  zzzzzzzzz zzzzzzz zzzzzzz");
 //      _devicesBlueTooth = scannedDevices;
-      _devicesController.sink.add(_devicesBlueTooth);
+
     }, onError: (error, StackTrace stackTrace) {
       print("Some Error: $stackTrace");
-    },cancelOnError: true);
+    },cancelOnError: false);
+
+   return _devicesBlueTooth;
 
 
-  return _devicesBlueTooth;
+
 
   }
 

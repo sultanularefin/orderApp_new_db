@@ -152,11 +152,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    setDetailForFood();
 //    retrieveIngredientsDefault();
 
-    checkBlueToothDevices();
+//    checkBlueToothDevices();
+
 
     super.initState();
+    printerManager.scanResults.listen((devices) async {
+      // print('UI: Devices found ${devices.length}');
+      setState(() {
+        blueToothDevicesState = devices;
+      });
+    });
   }
 
+
+
+
+  void _startScanDevices() {
+    setState(() {
+      blueToothDevicesState = [];
+    });
+    printerManager.startScan(Duration(seconds: 4));
+  }
+
+  void _stopScanDevices() {
+    printerManager.stopScan();
+  }
 
   // Future<void> return type .  ??
   Future<void> checkBlueToothDevices () async {
@@ -828,7 +848,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   }
               ),
             ),
+
+
           ),
+          ),
+          floatingActionButton: StreamBuilder<bool>(
+            stream: printerManager.isScanningStream,
+            initialData: false,
+            builder: (c, snapshot) {
+              if (snapshot.data) {
+                return FloatingActionButton(
+                  child: Icon(Icons.stop),
+                  onPressed: _stopScanDevices,
+                  backgroundColor: Colors.red,
+                );
+              } else {
+                return FloatingActionButton(
+                  child: Icon(Icons.search),
+                  onPressed: _startScanDevices,
+                );
+              }
+            },
           ),
         )
     );
