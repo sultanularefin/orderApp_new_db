@@ -758,7 +758,7 @@ class ShoppingCartBloc implements Bloc {
 //        _devices=scannedDevices;
 //      });
 
-      logger.w('scannedDevices $scannedDevices');
+      logger.w('scannedDevices: $scannedDevices');
       _devicesBlueTooth =scannedDevices;
 
 //    bluetoo

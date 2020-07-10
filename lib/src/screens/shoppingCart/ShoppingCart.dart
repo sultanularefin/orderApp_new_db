@@ -1364,7 +1364,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             break;
           case ConnectionState.active:
           default:
-            if (snapshot.data == null) {
+            if (!snapshot.data) {
               return Container(
 
 
