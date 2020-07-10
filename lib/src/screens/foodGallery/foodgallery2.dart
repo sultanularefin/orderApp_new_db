@@ -792,12 +792,56 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                 initialData: blocG.allCategories,
 //        initialData: bloc.getAllFoodItems(),
                                 builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                        child: new LinearProgressIndicator());
-                                  }
-                                  else {
-                                    final List allCategories = snapshot.data;
+                                  switch (snapshot.connectionState) {
+                                    case ConnectionState.waiting:
+                                    case ConnectionState.none:
+                                      return Container(
+                                        margin: EdgeInsets.fromLTRB(
+                                            0, displayHeight(context) / 2, 0,
+                                            0),
+                                        child: Center(
+                                          child: Column(
+                                            children: <Widget>[
+
+                                              Center(
+                                                child: Container(
+                                                    alignment: Alignment.center,
+                                                    child: new CircularProgressIndicator(
+                                                        backgroundColor: Colors
+                                                            .lightGreenAccent)
+                                                ),
+                                              ),
+                                              Center(
+                                                child: Container(
+                                                    alignment: Alignment.center,
+                                                    child: new CircularProgressIndicator(
+                                                      backgroundColor: Colors
+                                                          .yellow,)
+                                                ),
+                                              ),
+                                              Center(
+                                                child: Container(
+                                                    alignment: Alignment.center,
+                                                    child: new CircularProgressIndicator(
+                                                        backgroundColor: Colors
+                                                            .redAccent)
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
+                                      );
+                                      break;
+                                    case ConnectionState.active:
+                                    default:
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                            child: new LinearProgressIndicator());
+                                      }
+                                      else {
+                                        final List allCategories = snapshot
+                                            .data;
 //                                  logger.i('allCategories.length:', allCategories.length);
 
 
@@ -807,8 +851,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                  allCategories.add(all);
 //                                  logger.i('allCategories.length after :', allCategories.length);
 
-                                    final int categoryCount = allCategories
-                                        .length;
+                                        final int categoryCount = allCategories
+                                            .length;
 
 
 //                              print('categoryCount in condition 04: ');
@@ -816,25 +860,26 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //                                logger.i("categoryCount in condition 04: $categoryCount");
 
-                                    return (
-                                        new ListView.builder
-                                          (
-                                            itemCount: categoryCount,
+                                        return (
+                                            new ListView.builder
+                                              (
+                                                itemCount: categoryCount,
 
 
-                                            //    itemBuilder: (BuildContext ctxt, int index) {
-                                            itemBuilder: (_, int index) {
+                                                //    itemBuilder: (BuildContext ctxt, int index) {
+                                                itemBuilder: (_, int index) {
 //                                            return (Text('ss'));
 
 
-                                              return _buildCategoryRow(
-                                                  allCategories[index]
-                                                  /*categoryItems[index]*/,
-                                                  index);
-                                            }
+                                                  return _buildCategoryRow(
+                                                      allCategories[index]
+                                                      /*categoryItems[index]*/,
+                                                      index);
+                                                }
+                                            )
                                         )
-                                    )
-                                    ;
+                                        ;
+                                      }
                                   }
                                 }
                             ),
@@ -1738,42 +1783,114 @@ Widget work1(BuildContext context){
 
         builder: (context, snapshot) {
 
-          print('snapshot.hasData FG2 : ${snapshot.hasData}');
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+              return Container(
+                margin: EdgeInsets.fromLTRB(
+                    0, displayHeight(context) / 2, 0, 0),
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
 
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                                backgroundColor: Colors.lightGreenAccent)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                              backgroundColor: Colors.yellow,)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                                backgroundColor: Colors.redAccent)
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
 
-          if (snapshot.hasData) {
+              );
+              break;
+            case ConnectionState.active:
+//          print('snapshot.hasData FG2 : ${snapshot.hasData}');
+
+            default:
+              if (!snapshot.hasData) {
+                return Container(
+                  margin: EdgeInsets.fromLTRB(
+                      0, displayHeight(context) / 2, 0, 0),
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+
+                        Center(
+                          child: Container(
+                              alignment: Alignment.center,
+                              child: Text('....')
+                          ),
+                        ),
+//                    Center(
+//                      child: Container(
+//                          alignment: Alignment.center,
+//                          child: new CircularProgressIndicator(
+//                            backgroundColor: Colors.yellow,)
+//                      ),
+//                    ),
+                        Center(
+                          child: Container(
+                              alignment: Alignment.center,
+                              child: new CircularProgressIndicator(
+                                  backgroundColor: Colors.redAccent)
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                );
+              }
 //          return Center(child:
 //          Text('${messageCount.toString()}')
 //          );
-            print(
-                'searchString  ##################################: $searchString2');
-            print(
-                'categoryString  ##################################: $categoryString');
-            // ..p
+              else {
+                print(
+                    'searchString  ##################################: $searchString2');
+                print(
+                    'categoryString  ##################################: $categoryString');
+                // ..p
 
 
 //          int messageCount = filteredItems.length;
 
-            //..p
-            final List<FoodItemWithDocID> allFoods = snapshot.data;
-
+                //..p
+                final List<FoodItemWithDocID> allFoods = snapshot.data;
 
 
 //          logger.i('categoryString.toLowerCase().trim(): ',categoryString.toLowerCase().trim());
 
 
-            if (searchString2=='') {
+                if (searchString2 == '') {
 //               filteredItemsByCategory;
-               List<FoodItemWithDocID> filteredItemsByCategory = allFoods.where((oneItem) =>
-              oneItem.categoryName.
-              toLowerCase() ==
-                  categoryString.toLowerCase()).toList();
+                  List<FoodItemWithDocID> filteredItemsByCategory = allFoods
+                      .where((oneItem) =>
+                  oneItem.categoryName.
+                  toLowerCase() ==
+                      categoryString.toLowerCase()).toList();
 
 
-              // to do test.
-              // if(searchString2!=null)
+                  // to do test.
+                  // if(searchString2!=null)
 
-              /*
+                  /*
               final List filteredItems = filteredItemsByCategory.where((
                   oneItem) =>
                   oneItem.itemName.toLowerCase().
@@ -1782,46 +1899,45 @@ Widget work1(BuildContext context){
 
               */
 
-              final int categoryItemsCount = filteredItemsByCategory.length;
-              print('categoryItemsCount: $categoryItemsCount');
-              return
+                  final int categoryItemsCount = filteredItemsByCategory.length;
+                  print('categoryItemsCount: $categoryItemsCount');
+                  return
 
-                   Column(
-                    children: <Widget>[
+                    Column(
+                      children: <Widget>[
 
-                      Container(
+                        Container(
 
 
+                          height: displayHeight(context) / 20,
+                          color: Color(0xffffffff),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
 
-                        height: displayHeight(context) / 20,
-                        color: Color(0xffffffff),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-
-                              Spacer(),
-                              CustomPaint(size: Size(0, 19),
-                                painter: LongHeaderPainterBefore(context),
-                              ),
-                              Text('$_currentCategory'.toLowerCase(),
-                                style:
-                                TextStyle(
-
-                                  fontFamily: 'Itim-Regular',
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(0xff000000),
+                                Spacer(),
+                                CustomPaint(size: Size(0, 19),
+                                  painter: LongHeaderPainterBefore(context),
                                 ),
-                              ),
-                              CustomPaint(size: Size(0, 19),
-                                painter: LongHeaderPainterAfter(context),
-                              ),
-                              Spacer(),
-                            ]
-                        ),
-                        /*
+                                Text('$_currentCategory'.toLowerCase(),
+                                  style:
+                                  TextStyle(
+
+                                    fontFamily: 'Itim-Regular',
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.normal,
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(0xff000000),
+                                  ),
+                                ),
+                                CustomPaint(size: Size(0, 19),
+                                  painter: LongHeaderPainterAfter(context),
+                                ),
+                                Spacer(),
+                              ]
+                          ),
+                          /*
                               child:Text('$_currentCategory'.toLowerCase(),
                                 style: GoogleFonts.itim(
                                   textStyle: Theme.of(context).textTheme.display1,
@@ -1834,9 +1950,9 @@ Widget work1(BuildContext context){
                               ),
                               */
 
-                      ),
-                      Container(
-                        /*
+                        ),
+                        Container(
+                          /*
                         height:displayHeight(context) -
                             MediaQuery
                                 .of(context)
@@ -1844,76 +1960,71 @@ Widget work1(BuildContext context){
                                 .top - (displayHeight(context) / 14) -
                             (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
                         */
-                        child: foodListByCategoryandNoSearch(filteredItemsByCategory,context),
-                      ),
+                          child: foodListByCategoryandNoSearch(
+                              filteredItemsByCategory, context),
+                        ),
 
 
+                      ],
 
-
-
-
-                    ],
-
-                );
-            }
-            else{
+                    );
+                }
+                else {
 //              filteredItemsByCategory = allFoods.where((oneItem) =>
 //              oneItem.categoryName.
 //              toLowerCase() ==
 //                  categoryString.toLowerCase()).toList();
 
 
-              // to do test.
-              // if(searchString2!=null)
+                  // to do test.
+                  // if(searchString2!=null)
 
 
-              final List<FoodItemWithDocID> filteredItems = allFoods.where((
-                  oneItem) =>
-                  oneItem.itemName.toLowerCase().
-                  contains(
-                      searchString2.toLowerCase())).toList();
-
+                  final List<FoodItemWithDocID> filteredItems = allFoods.where((
+                      oneItem) =>
+                      oneItem.itemName.toLowerCase().
+                      contains(
+                          searchString2.toLowerCase())).toList();
 
 
 //              final int ItemsCount = filteredItems.length;
 //              print('categoryItemsCount: $categoryItemsCount');
-              return
-                SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Container(
+                  return
+                    SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Container(
 
 
+                            height: displayHeight(context) / 20,
+                            color: Color(0xffffffff),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
 
-                        height: displayHeight(context) / 20,
-                        color: Color(0xffffffff),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
+                                  Spacer(),
+                                  CustomPaint(size: Size(0, 19),
+                                    painter: LongHeaderPainterBefore(context),
+                                  ),
+                                  Text('$searchString2'.toLowerCase(),
+                                    style:
+                                    TextStyle(
 
-                              Spacer(),
-                              CustomPaint(size: Size(0, 19),
-                                painter: LongHeaderPainterBefore(context),
-                              ),
-                              Text('$searchString2'.toLowerCase(),
-                                style:
-                                TextStyle(
-
-                                  fontFamily: 'Itim-Regular',
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.normal,
+                                      fontFamily: 'Itim-Regular',
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
-                                  color: Color(0xff000000),
-                                ),
-                              ),
-                              CustomPaint(size: Size(0, 19),
-                                painter: LongHeaderPainterAfter(context),
-                              ),
-                              Spacer(),
-                            ]
-                        ),
-                        /*
+                                      color: Color(0xff000000),
+                                    ),
+                                  ),
+                                  CustomPaint(size: Size(0, 19),
+                                    painter: LongHeaderPainterAfter(context),
+                                  ),
+                                  Spacer(),
+                                ]
+                            ),
+                            /*
                               child:Text('$_currentCategory'.toLowerCase(),
                                 style: GoogleFonts.itim(
                                   textStyle: Theme.of(context).textTheme.display1,
@@ -1926,9 +2037,9 @@ Widget work1(BuildContext context){
                               ),
                               */
 
-                      ),
+                          ),
 
-                      Container(
+                          Container(
 //                        height:displayHeight(context) -
 //                            MediaQuery
 //                                .of(context)
@@ -1936,23 +2047,24 @@ Widget work1(BuildContext context){
 //                                .top - (displayHeight(context) / 14) -
 //                            (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
 
-                        child: foodListBySearchString(filteredItems,context),
+                            child: foodListBySearchString(
+                                filteredItems, context),
+                          ),
+
+
+                        ],
                       ),
-
-
-                    ],
-                  ),
-                );
-
-            }
-            }
-
-
-          else {
-            return Center(child:
-            Text('No Data')
-            );
+                    );
+                }
+              }
           }
+
+
+//          else {
+//            return Center(child:
+//            Text('No Data')
+//            );
+//          }
         },
       ),
     );
