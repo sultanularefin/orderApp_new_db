@@ -1339,7 +1339,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    return FutureBuilder<List<String>>(
     return StreamBuilder<List<PrinterBluetooth>>(
-
+//      List<PrinterBluetooth>
 //      future: shoppingCartBloc.getDevicesStream,
       stream: shoppingCartBloc.getDevicesStream,
       initialData: shoppingCartBloc.getDevices,
@@ -1356,7 +1356,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: Container(
                   alignment: Alignment.center,
                   child: new CircularProgressIndicator(
-                      backgroundColor: Colors.lightGreenAccent)
+                      backgroundColor: Colors.red)
               ),
 
 
@@ -1364,6 +1364,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             break;
           case ConnectionState.active:
           default:
+            print('at default condition');
           if (!snapshot.hasData) {
               return Container(
 
@@ -1397,7 +1398,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             else {
 //                    SelectedFood incrementCurrentFoodProcessing = snapshot.data;
               List<PrinterBluetooth> blueToothDevicesFromStream = snapshot.data;
-              print('devicesFromStream $blueToothDevicesFromStream at line # 1392.');
+              print('devicesFromStream $blueToothDevicesFromStream at line # 1392. and snapshot.data:'
+                  '${snapshot.data}');
 
               return ListView.builder(
 
