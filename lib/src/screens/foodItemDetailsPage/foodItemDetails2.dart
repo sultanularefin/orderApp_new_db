@@ -56,20 +56,14 @@ class FoodItemDetails2 extends StatefulWidget {
 
   final Widget child;
 //  final FoodItem oneFoodItemData;
-
-
 //  FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
 
 
   FoodItemDetails2({Key key, this.child}) : super(key: key);
-
   @override
   _FoodItemDetailsState createState() => new _FoodItemDetailsState();
 
-
 //  _FoodItemDetailsState createState() => _FoodItemDetailsState();
-
-
 
 }
 
@@ -82,11 +76,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   String _currentSize;
 //  int _itemCount= 0;
-  double initialPriceByQuantityANDSize = 0.0;
-
-
-
-
+  double priceBasedOnCheeseSauceIngredientsSizeState = 0.0;
 
 
 //  color: Color(0xff34720D),
@@ -179,10 +169,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                   double priceByQuantityANDSize = 0.0;
-                  //            initialPriceByQuantityANDSize = oneFood.itemSize;
+                  //            priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemSize;
 
-                  initialPriceByQuantityANDSize = oneFood.itemPrice;
+//                  priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemPrice;
+
+                priceBasedOnCheeseSauceIngredientsSizeState =  oneFood.priceBasedOnCheeseSauceIngredientsSize;
+
                   priceByQuantityANDSize = oneFood.itemPrice;
+
                   _currentSize = oneFood.itemSize;
 
 
@@ -444,6 +438,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                 // YELLOW NAME AND PRICE BEGINS HERE.
                                                 Container(
+                                                  width: displayWidth(context)/3.9 +  displayWidth(context)/8,
+
 
                                                   decoration: BoxDecoration(
                                                     color:Color(0xffFFE18E),
@@ -493,7 +489,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                         child:
 
                                                         Text(
-                                                            '${initialPriceByQuantityANDSize.toStringAsFixed(2)}' +
+                                                            '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
                                                                 '\u20AC',
                                                             style: TextStyle(
                                                               fontSize: 18,
@@ -706,7 +702,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                                     .currentFoodItem.itemName,
                                                                                 foodItemImageURL: blocD
                                                                                     .currentFoodItem.imageURL,
-                                                                                unitPrice: initialPriceByQuantityANDSize,
+                                                                                unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
                                                                                 foodDocumentId: blocD
                                                                                     .currentFoodItem.documentId,
                                                                                 quantity: quantity,
@@ -740,7 +736,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                                     .currentFoodItem.itemName,
                                                                                 foodItemImageURL: blocD
                                                                                     .currentFoodItem.imageURL,
-                                                                                unitPrice: initialPriceByQuantityANDSize,
+                                                                                unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
                                                                                 foodDocumentId: blocD
                                                                                     .currentFoodItem.documentId,
                                                                                 quantity: newQuantity,
@@ -786,9 +782,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                 setState(() {
                                   _itemCount =
                                       _itemCount + 1;
-//                          initialPriceByQuantityANDSize =
+//                          priceBasedOnCheeseSauceIngredientsSizeState =
 //
-//                              initialPriceByQuantityANDSize *
+//                              priceBasedOnCheeseSauceIngredientsSizeState *
 //                                  _itemCount;
                                 });
                                 */
@@ -894,7 +890,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                           .itemName,
                                       foodItemImageURL: foodItemDetailsbloc
                                           .currentFoodItem.imageURL,
-                                      unitPrice: initialPriceByQuantityANDSize,
+                                      unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
                                       foodDocumentId: foodItemDetailsbloc
                                           .currentFoodItem.documentId,
                                       quantity: _itemCount - 1,
@@ -915,7 +911,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                           .itemName,
                                       foodItemImageURL: foodItemDetailsbloc
                                           .currentFoodItem.imageURL,
-                                      unitPrice: initialPriceByQuantityANDSize,
+                                      unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
                                       foodDocumentId: foodItemDetailsbloc
                                           .currentFoodItem.documentId,
                                       quantity: _itemCount - 1,

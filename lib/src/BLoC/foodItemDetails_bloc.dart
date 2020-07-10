@@ -4,6 +4,7 @@
 //import 'package:zomatoblock/BLoC/location_bloc.dart';
 //import 'package:zomatoblock/BLoC/location_query_bloc.dart';
 //
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/generated/i18n.dart';
 import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
@@ -914,8 +915,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _allCheeseItemsDBloc = allTempCheeseItems;
     _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
 
-
-
     // selected update.
     _allSelectedCheeseItems = allTempCheeseItems.where((element) => element.isSelected==true).toList();
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
@@ -1032,9 +1031,85 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
     thisFoodpriceModified.itemSize = sizeKey;
     thisFoodpriceModified.itemPrice =  changedPriceDouble;
+    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = changedPriceDouble;
 
 
     print('changedPriceDouble: $changedPriceDouble');
+
+    _thisFoodItem =thisFoodpriceModified;
+
+    _controller.sink.add(thisFoodpriceModified);
+
+
+
+  }
+
+  // HELPER METHOD tryCast Number (1)
+  double test1(NewIngredient x) {
+
+
+    return x.price ;
+  }
+
+  void setNewPriceByIngredient(List<NewIngredient> defaultIngredients) {
+
+    double addedPrice = defaultIngredients.fold(0, (t, e) => t + e.price);
+
+    FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
+
+    double previousPrice = _thisFoodItem.itemPrice;
+
+//    thisFoodpriceModified.itemPrice
+
+    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedPrice;
+
+
+//    print('changedPriceDouble: $changedPriceDouble');
+
+    _thisFoodItem =thisFoodpriceModified;
+
+    _controller.sink.add(thisFoodpriceModified);
+
+
+
+  }
+
+  void setNewPriceBySelectedCheeseItems(List<CheeseItem> cheeseItems) {
+
+    double addedPrice = cheeseItems.fold(0, (t, e) => t + e.price);
+
+    FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
+
+    double previousPrice = _thisFoodItem.itemPrice;
+
+//    thisFoodpriceModified.itemPrice
+
+    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedPrice;
+
+
+//    print('changedPriceDouble: $changedPriceDouble');
+
+    _thisFoodItem =thisFoodpriceModified;
+
+    _controller.sink.add(thisFoodpriceModified);
+
+
+  }
+
+  void setNewPriceBySelectedSauceItems(List<CheeseItem> sauceItems) {
+
+    double addedPrice = sauceItems.fold(0, (t, e) => t + e.price);
+
+    FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
+
+    double previousPrice = _thisFoodItem.itemPrice;
+
+//    thisFoodpriceModified.itemPrice
+
+    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedPrice;
+
+
+//    print('changedPriceDouble: $changedPriceDouble');
 
     _thisFoodItem =thisFoodpriceModified;
 
