@@ -214,7 +214,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       
                       print('temp.selectedIngredients: ${temp.selectedIngredients}');
                       print('temp.selectedCheeseItems: ${temp.selectedCheeseItems}');
-                      print('temp.selectedSauceItems: ${temp.selectedSauceItems}');
+                      print('temp.selectedSauceItems:  ${temp.selectedSauceItems}');
 
 
 
@@ -2123,8 +2123,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   itemCount: selectedSauceItems
                       .length,
                   itemBuilder: (_, int index) {
-                    return oneSauceItem(selectedSauceItems[index],
-                        index);
+                    return oneSauceItem(selectedSauceItems[index],index);
                   },
                 ),
               );
@@ -2143,8 +2142,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     final dynamic sauceItemImageURL = oneSauce.imageURL == '' ?
     'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
         :
-    storageBucketURLPredicate +
-        Uri.encodeComponent(oneSauce.imageURL)
+    storageBucketURLPredicate + Uri.encodeComponent(oneSauce.imageURL)
 
         + '?alt=media';
 
@@ -2493,8 +2491,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       itemCount: selectedCheeseItems
                           .length,
                       itemBuilder: (_, int index) {
-                        return oneCheeseItem(selectedCheeseItems[index],
-                            index);
+                        return oneCheeseItem(selectedCheeseItems[index],index);
                       },
                     ),
                   );
@@ -2514,25 +2511,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     final dynamic cheeseItemImageURL = oneCheese.imageURL == '' ?
     'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
         :
-    storageBucketURLPredicate +
-        Uri.encodeComponent(oneCheese.imageURL)
-
-        + '?alt=media';
-
-
+    storageBucketURLPredicate + Uri.encodeComponent(oneCheese.imageURL) + '?alt=media';
 
 
     if(oneCheese.isSelected==false)
     {
-      return
-
-        Container(
-//          color:Colors.lightGreenAccent,
-//            color: Color.fromRGBO(239, 239, 239, 0),
-//          color: Colors.white,
-          padding: EdgeInsets.symmetric(
-//                          horizontal: 10.0, vertical: 22.0),
-              horizontal: 18, vertical: 0),
+      return Container(
+          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
           child: GestureDetector(
               onLongPress: () {
                 print(
@@ -2545,7 +2530,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
                 blocD.toggleThisCheeseAsSelectedCheeseItem(oneCheese,index);
-//                blocD.addThisCheeseAsSelectedCheeseItem(oneSauce,index)
               },
 
 
@@ -2557,8 +2541,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                     height: displayHeight(context) / 24,
                     width: displayWidth(context) /16.5,
-//                      width: displayWidth(context) /10,
-//                      height: displayWidth(context) /9,
                     padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
                     child: ClipOval(
@@ -2602,7 +2584,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               onTap: () {
                 print('for future use');
 //                            return Navigator.push(context,
-
               }
           ),
 
@@ -2612,12 +2593,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     else{
 
-      return
+      return Container(
 
-        Container(
-//          color:Colors.lightGreenAccent,
-//            color: Color.fromRGBO(239, 239, 239, 0),
-//          color: Colors.white,
           padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
               horizontal: 18, vertical: 0),
@@ -2666,8 +2643,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                       child: ClipOval(
 
-                        child: CachedNetworkImage(
-                          imageUrl: cheeseItemImageURL,
+                        child: CachedNetworkImage(imageUrl: cheeseItemImageURL,
                           fit: BoxFit.cover,
                           placeholder: (context,
                               url) => new LinearProgressIndicator(),
