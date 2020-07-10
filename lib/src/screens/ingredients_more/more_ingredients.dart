@@ -133,7 +133,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
     // ingItems = snapshot.documents.map((documentSnapshot) => IngredientItem.fromMap
     //(documentSnapshot.data)).toList();
 
-    ingItems = snapshot.documents.map((documentSnapshot) => NewIngredient.fromMap
+    ingItems = snapshot.documents.map((documentSnapshot) => NewIngredient.ingredientConver
       (documentSnapshot.data,documentSnapshot.documentID)
 
     ).toList();
@@ -175,7 +175,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
 //      ).toList();
 
 
-      List<NewIngredient> unSelectedDecremented =  defaultMinus.map((oneIngredient)=>NewIngredient.updateIngredient(
+      List<NewIngredient> unSelectedDecremented =  defaultMinus.map((oneIngredient)=>NewIngredient.updateUnselectedIngredient(
           oneIngredient
       )).toList();
 
@@ -827,7 +827,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
                                                             difference(combinedSelectedIngredientList.toSet()).toList();
 
                                                             List<NewIngredient> unSelectedDecremented =  newUnselected.map
-                                                              ((oneIngredient)=>NewIngredient.updateIngredient(
+                                                              ((oneIngredient)=>NewIngredient.updateUnselectedIngredient(
                                                                 oneIngredient
                                                             )).toList();
 

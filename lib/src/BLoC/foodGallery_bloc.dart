@@ -111,7 +111,7 @@ class FoodGalleryBloc implements Bloc {
 
     List <NewIngredient> ingItems = new List<NewIngredient>();
     ingItems = snapshot.documents.map((documentSnapshot) =>
-        NewIngredient.fromMap
+        NewIngredient.ingredientConvert
           (documentSnapshot.data, documentSnapshot.documentID)
 
     ).toList();

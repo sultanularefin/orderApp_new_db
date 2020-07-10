@@ -22,6 +22,7 @@ class NewIngredient {
   final double price;
   final String documentId;
   final int    ingredientAmountByUser;
+  bool isDefault;
 
 //  String ingredients;
 
@@ -32,6 +33,7 @@ class NewIngredient {
         this.price,
         this.documentId,
         this.ingredientAmountByUser,
+        this.isDefault,
       }
       );
 
@@ -39,20 +41,38 @@ class NewIngredient {
 
 //  NewIngredient.fromMap(Map<String, dynamic> data)
 //  NewIngredient.fromMap(Map<dynamic, dynamic> data)
-  NewIngredient.fromMap(Map<String, dynamic> data,String docID)
+
+  /*
+  // INVOCATION CODE FOODDETAILBLOC LINE # 324.
+  ingItems = snapshot.documents.map((documentSnapshot) =>
+  NewIngredient.fromMap
+  */
+
+  NewIngredient.ingredientConvert(Map<String, dynamic> data,String docID)
       :imageURL= data['image'],
         ingredientName= data['name'],
         price = data['price'].toDouble(),
         documentId = docID,
+        isDefault= false,
         ingredientAmountByUser = 1;
 
 
-  NewIngredient.updateIngredient(NewIngredient oneIngredient)
+  NewIngredient.updateUnselectedIngredient(NewIngredient oneIngredient)
        :imageURL= oneIngredient.imageURL,
         ingredientName= oneIngredient.ingredientName,
         price = oneIngredient.price,
         documentId = oneIngredient.documentId,
-        ingredientAmountByUser = 0;
+        ingredientAmountByUser = 0,
+        isDefault= false;
+
+  // PURPOSE SETTING ISDEFAULT TRUE INORDER TO CALCULATE PRICE UPON NEW INGREDIENT ADD
+  NewIngredient.updateSelectedIngredient(NewIngredient oneIngredient)
+      :imageURL= oneIngredient.imageURL,
+        ingredientName= oneIngredient.ingredientName,
+        price = oneIngredient.price,
+        documentId = oneIngredient.documentId,
+        ingredientAmountByUser = 0,
+        isDefault= true;
 
 
 

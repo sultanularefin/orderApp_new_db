@@ -322,7 +322,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List <NewIngredient> ingItems = new List<NewIngredient>();
     ingItems = snapshot.documents.map((documentSnapshot) =>
-        NewIngredient.fromMap
+        NewIngredient.ingredientConvert
           (documentSnapshot.data, documentSnapshot.documentID)
 
     ).toList();
@@ -343,7 +343,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //    return ingItems;
 
   }
-
 
 
 
@@ -535,7 +534,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
       List<NewIngredient> unSelectedDecremented =
       allIngsScoped.map((oneIngredient) =>
-          NewIngredient.updateIngredient(
+          NewIngredient.updateUnselectedIngredient(
               oneIngredient
           )).toList();
 
@@ -899,8 +898,17 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
+
     _allSelectedSauceItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
     _selectedSauceListController.sink.add(_allSelectedSauceItems);
+
+
+//    void setNewPriceBySelectedCheeseItems(List<CheeseItem> cheeseItems) {
+
+  // --- invocation required for price update
+    setNewPriceBySelectedSauceItems(_allSelectedSauceItems);
+
+
 
 //    _allSelectedCheeseItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
 
@@ -920,6 +928,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
 
 
+
+    setNewPriceBySelectedCheeseItems(_allSelectedCheeseItems);
+
     logger.w('_allSelectedCheeseItems at toggleThisCheeseAsSelectedCheeseItem():'
         ' $_allSelectedCheeseItems');
 
@@ -927,7 +938,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void updateDefaultIngredientItems(/*NewIngredient unSelectedOneIngredient,int index*/){
+  void moreDefaultIngredientItems(/*NewIngredient unSelectedOneIngredient,int index*/){
     print('reached here ==> : <==  update Default IngredientItem ');
 
     List<NewIngredient> allDefaultIngredientItems = _defaultIngItems;
@@ -958,11 +969,16 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     allDefaultIngredientItems.addAll(valueIncrementedUNselectedIngredient);
 
-    _defaultIngItems= allDefaultIngredientItems;
+    _defaultIngItems = allDefaultIngredientItems;
 //    _unSelectedIngItems= allUnselectedbutOneDecremented;
 //   _thisFoodItem =thisFoodpriceModified;
 
     _defaultIngredientListController.sink.add(_defaultIngItems);
+
+    // --- price update invocation.
+
+    setNewPriceByIngredientAdd(_defaultIngItems);
+//    setNewPriceBySelectedIngredientItems();
 
 
     //  NOW ADD PART BEGINS HERE
@@ -1051,17 +1067,25 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     return x.price ;
   }
 
-  void setNewPriceByIngredient(List<NewIngredient> defaultIngredients) {
+  void setNewPriceByIngredientAdd(List<NewIngredient> defaultIngredients) {
 
-    double addedPrice = defaultIngredients.fold(0, (t, e) => t + e.price);
+//    List<NewIngredient> defaultIngredientsLaterAdded = defaultIngredients.map((oneDefaultIngredient))
+
+    List<NewIngredient> defaultIngredientsLaterAdded = defaultIngredients.where((oneDefaultIngredient) =>
+    oneDefaultIngredient.isDefault!=true).toList();
+
+
+    double addedIngredientItemsPrice= defaultIngredientsLaterAdded.fold(0, (t, e) => t + e.price);
+    print('addedIngredientItemsPrice : $addedIngredientItemsPrice');
 
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
 
-    double previousPrice = _thisFoodItem.itemPrice;
+    double previousPrice = _thisFoodItem.priceBasedOnCheeseSauceIngredientsSize;
+    print('previous  price: $previousPrice');
 
 //    thisFoodpriceModified.itemPrice
 
-    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedPrice;
+    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedIngredientItemsPrice;
 
 
 //    print('changedPriceDouble: $changedPriceDouble');
@@ -1069,23 +1093,26 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _thisFoodItem =thisFoodpriceModified;
 
     _controller.sink.add(thisFoodpriceModified);
-
-
 
   }
 
   void setNewPriceBySelectedCheeseItems(List<CheeseItem> cheeseItems) {
 
-    double addedPrice = cheeseItems.fold(0, (t, e) => t + e.price);
+    double addedCheeseItemsPrice = cheeseItems.fold(0, (t, e) => t + e.price);
+    print('addedCheeseItemsPrice : $addedCheeseItemsPrice');
 
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
 
-    double previousPrice = _thisFoodItem.itemPrice;
+    double previousPrice = _thisFoodItem.priceBasedOnCheeseSauceIngredientsSize;
+
+    print('previous CheeseItem price: $previousPrice');
 
 //    thisFoodpriceModified.itemPrice
 
-    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedPrice;
+    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedCheeseItemsPrice;
 
+    print('modified price for new Cheese Item addition or remove: '
+        '${thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize}');
 
 //    print('changedPriceDouble: $changedPriceDouble');
 
@@ -1096,18 +1123,24 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
-  void setNewPriceBySelectedSauceItems(List<CheeseItem> sauceItems) {
+  void setNewPriceBySelectedSauceItems(List<SauceItem> sauceItems) {
 
-    double addedPrice = sauceItems.fold(0, (t, e) => t + e.price);
+    double addedSauceItemsPrice = sauceItems.fold(0, (t, e) => t + e.price);
+
+    print('addedSauceItemsPrice : $addedSauceItemsPrice');
 
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
 
-    double previousPrice = _thisFoodItem.itemPrice;
+    double previousPrice = _thisFoodItem.priceBasedOnCheeseSauceIngredientsSize;
+
+    print('previous Sauce Item price: $previousPrice');
 
 //    thisFoodpriceModified.itemPrice
 
-    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedPrice;
+    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedSauceItemsPrice;
 
+    print('modified price for new SauceItem addition or remove: '
+        '${thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize}');
 
 //    print('changedPriceDouble: $changedPriceDouble');
 
@@ -1290,6 +1323,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     });
 
+    default2.map((oneIngredient) =>
+        NewIngredient.updateSelectedIngredient(
+            oneIngredient
+        )).toList();
+
     _defaultIngItems = default2;
     _defaultIngredientListController.sink.add(default2);
 
@@ -1334,7 +1372,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List<NewIngredient> unSelectedDecremented =
     unSelectedIngredientsFiltered.map((oneIngredient)=>
-        NewIngredient.updateIngredient(
+        NewIngredient.updateUnselectedIngredient(
             oneIngredient
         )).toList();
 
