@@ -211,7 +211,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
 
                       print('temp is $temp');
-                      
+
                       print('temp.selectedIngredients: ${temp.selectedIngredients}');
                       print('temp.selectedCheeseItems: ${temp.selectedCheeseItems}');
                       print('temp.selectedSauceItems: ${temp.selectedSauceItems}');
