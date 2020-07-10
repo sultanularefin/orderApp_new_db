@@ -192,7 +192,7 @@ class ShoppingCartBloc implements Bloc {
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
 
 
-    discoverDevicesConstructor('9100');
+//    discoverDevicesConstructor('9100');
     //    initiateCustomerInformation();
 
     _curretnOrder = x;
@@ -740,16 +740,26 @@ class ShoppingCartBloc implements Bloc {
 
   */
 
+//  Future <bool> checkUserinLocalStorage() async {
   void discoverDevicesConstructor(String portNumber) async {
 //    AuthResult result = await _auth.signInWithEmailAndPassword(email:
 //    email, password: password);
 
     // print('result:  IIIII   >>>>>  $result'  );
-    List<String> devices = [];
+//    List<String> devices = [];
 
 //    if (result.user.email != null) {
 //      FirebaseUser fireBaseUserRemote = result.user;
 
+  /*
+  _scanResults.add(<PrinterBluetooth>[]);
+
+    _bluetoothManager.startScan(timeout: timeout);
+
+    _scanResultsSubscription = _bluetoothManager.scanResults.listen((devices) {
+      _scanResults.add(devices.map((d) => PrinterBluetooth(d)).toList());
+    });
+  * */
 
 
     printerManager.startScan(Duration(seconds: 9));
@@ -759,10 +769,14 @@ class ShoppingCartBloc implements Bloc {
 //      });
 
       logger.w('scannedDevices: $scannedDevices');
-      _devicesBlueTooth =scannedDevices;
+      _devicesBlueTooth = scannedDevices;
       _devicesController.sink.add(_devicesBlueTooth);
 
 //    bluetoo
+    }, onDone: () {
+      print("Task Done zzzzz zzzzzz zzzzzzz zzzzzzz zzzzzz zzzzzzzz zzzzzzzzz zzzzzzz zzzzzzz");
+    }, onError: (error, StackTrace stackTrace) {
+    print("Some Error $stackTrace");
     });
 
 //    _devices=devices;
@@ -808,6 +822,54 @@ class ShoppingCartBloc implements Bloc {
 
 
 //    return devices;
+
+  }
+
+
+
+  //  Future <bool> checkUserinLocalStorage() async {
+  Future<List<PrinterBluetooth>> discoverDevicesInitState() async {
+//    AuthResult result = await _auth.signInWithEmailAndPassword(email:
+//    email, password: password);
+
+    // print('result:  IIIII   >>>>>  $result'  );
+//    List<String> devices = [];
+
+//    if (result.user.email != null) {
+//      FirebaseUser fireBaseUserRemote = result.user;
+
+    /*
+  _scanResults.add(<PrinterBluetooth>[]);
+
+    _bluetoothManager.startScan(timeout: timeout);
+
+    _scanResultsSubscription = _bluetoothManager.scanResults.listen((devices) {
+      _scanResults.add(devices.map((d) => PrinterBluetooth(d)).toList());
+    });
+  * */
+
+
+    printerManager.startScan(Duration(seconds: 9));
+    printerManager.scanResults.listen((scannedDevices) {
+//      setState(() {
+//        _devices=scannedDevices;
+//      });
+      _devicesBlueTooth = scannedDevices;
+
+      logger.w('scannedDevices: $scannedDevices');
+
+
+//    bluetoo
+    }, onDone: () {
+      print("Task Done: zzzzz zzzzzz zzzzzzz  zzzzzzzzz zzzzzzz zzzzzzz");
+//      _devicesBlueTooth = scannedDevices;
+      _devicesController.sink.add(_devicesBlueTooth);
+    }, onError: (error, StackTrace stackTrace) {
+      print("Some Error: $stackTrace");
+    },cancelOnError: true);
+
+
+  return _devicesBlueTooth;
 
   }
 

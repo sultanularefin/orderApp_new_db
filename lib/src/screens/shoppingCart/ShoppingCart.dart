@@ -111,6 +111,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
+  List<PrinterBluetooth> blueToothDevicesState =[];
 
 //  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
 //  List<PrinterBluetooth> _devices = [];
@@ -145,15 +146,42 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  ORG 0xff739DFA 4 0xff739DFA false
 
 
-  /*
+
   @override
   void initState() {
 //    setDetailForFood();
 //    retrieveIngredientsDefault();
+
+    checkBlueToothDevices();
+
     super.initState();
   }
 
-  */
+
+  // Future<void> return type .  ??
+  Future<void> checkBlueToothDevices () async {
+//    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
+
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    List<PrinterBluetooth> tempTestDevices = await shoppingCartBloc
+        .discoverDevicesInitState();
+
+    if (tempTestDevices == null) {
+      print('no devices found from init State Future completed');
+    }
+    else if (tempTestDevices.length == 0) {
+      print('0 devices found from init State Future completed');
+    }
+
+    else {
+      setState(() {
+        blueToothDevicesState = tempTestDevices;
+      });
+    }
+  }
+
+
 /*
   Future<void> _onBackPressed() {
 //    shoppingCartBloc.
@@ -1334,88 +1362,37 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget showAvailableDevices(/*Order qTimes */) {
 
-    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-    logger.w('showAvailableDevices I I I I ');
-
-//    return FutureBuilder<List<String>>(
-    return StreamBuilder<List<PrinterBluetooth>>(
-//      List<PrinterBluetooth>
-//      future: shoppingCartBloc.getDevicesStream,
-      stream: shoppingCartBloc.getDevicesStream,
-      initialData: shoppingCartBloc.getDevices,
-      builder: (context, snapshot) {
-
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-          case ConnectionState.none:
-            return Container(
-//        if ((snapshot.hasError) || (!snapshot.hasData)) {
-//          return Center(
-//            child: Container(
-              alignment: Alignment.center,
-              child: Container(
-                  alignment: Alignment.center,
-                  child: new CircularProgressIndicator(
-                      backgroundColor: Colors.red)
-              ),
 
 
-            );
-            break;
-          case ConnectionState.active:
-          default:
-            print('at default condition');
-          if (!snapshot.hasData) {
-              return Container(
 
-
-                child: Text('No Devices'.toLowerCase(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: 'Itim-Regular',
-                    color: Colors.red,
-
-                  ),
-                ),
-              );
-            }
-            else if(snapshot.hasError){
-              return Container(
-
-
-                child: Text('Some thing went wrong'.toLowerCase(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: 'Itim-Regular',
-                    color: Colors.red,
-
-                  ),
-                ),
-              );
-            }
-            else {
 //                    SelectedFood incrementCurrentFoodProcessing = snapshot.data;
-              List<PrinterBluetooth> blueToothDevicesFromStream = snapshot.data;
-              print('devicesFromStream $blueToothDevicesFromStream at line # 1392. and snapshot.data:'
-                  '${snapshot.data}');
+    List<PrinterBluetooth> blueToothDevicesFromStream = blueToothDevicesState;
 
-              return ListView.builder(
 
-                scrollDirection: Axis.horizontal,
-                itemCount: blueToothDevicesFromStream.length,
-                itemBuilder: (context,position)=>ListTile(
-                  onTap: (){
-                    //code to print with this device
+    if(blueToothDevicesFromStream.length==0){
 
-                    testPrint(blueToothDevicesFromStream[position],context);
-                  },
-                  title: Text(blueToothDevicesFromStream[position].name),
-                  subtitle: Text(blueToothDevicesFromStream[position].address),
-                ),
+      return Container(
+          alignment: Alignment.center,
+          child: new CircularProgressIndicator(
+              backgroundColor: Colors.lightGreenAccent)
+      );
+    }
+    else{
+    return ListView.builder(
 
-                /*
+    scrollDirection: Axis.horizontal,
+    itemCount: blueToothDevicesFromStream.length,
+    itemBuilder: (context,position)=>ListTile(
+    onTap: (){
+    //code to print with this device
+
+    testPrint(blueToothDevicesFromStream[position],context);
+    },
+    title: Text(blueToothDevicesFromStream[position].name),
+    subtitle: Text(blueToothDevicesFromStream[position].address),
+    ),
+
+    /*
                 itemBuilder: (BuildContext context, int index) {
                   return OutlineButton(
                     onPressed: () =>
@@ -1430,12 +1407,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 },
               ;
                             */
-              );
-      }
-        }
-      },
     );
+    }
   }
+
+
   /*
   Widget _buildQuantityTimesofFood(/*Order qTimes */) {
 //   height: 40,
