@@ -83,7 +83,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   List<NewIngredient> _allIngItemsDetailsBlock =[];
 
 
-
   List<NewIngredient> _defaultIngItems = [];
   List<NewIngredient> _unSelectedIngItems = [];
   List<FoodPropertyMultiSelect> _multiSelectForFood =[];
@@ -300,6 +299,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _allSauceItemsDBloc = sauceItems;
 
     _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
 
     _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
 
@@ -725,39 +725,13 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     }
     else{
 
-      // _itemCount= itemCount > 0;
-
-//      if(tempOrderDecrementOperation.selectedFoodInOrder == null){
-//        print(' ** ***  ****  THIS PROBABLY WILL NOT EXECUTE EVER');
-//
-//        numberOFSelectedFoods = 0;
-//      }
-//      else{
-
-      /*
-      print('tempOrderDecrementOperation.selectedFoodInOrder: ${tempOrderDecrementOperation.selectedFoodInOrder}');
-      numberOFSelectedFoods=  tempOrderDecrementOperation.selectedFoodInOrder.length;
-      print('tempOrderDecrementOperation.selectedFoodInOrder.length:'
-          +'${tempOrderDecrementOperation.selectedFoodInOrder.length} ');
-      */
-//      }
-
-//      print('at DEC __ ** __ ** numberOFSelectedFoods: $numberOFSelectedFoods');
-
-//      tempOrderDecrementOperation.selectedFoodInOrder[numberOFSelectedFoods-1].quantity = itemCount-1;
-      //ITEMCOUNT IS --ITEMCOUNT WHEN SENT AS PARAMETER.
       tempSelectedFood.quantity = itemCount-1;
-
-
-//      print('at DEC quantity: ___ * ||'
-//          ' ${tempOrderDecrementOperation.selectedFoodInOrder[numberOFSelectedFoods-1].quantity}');
-
 
       _currentSelectedFoodDetails = tempSelectedFood;
 
       _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
 
-//      notifyListeners();
+
     }
 
 
@@ -777,78 +751,19 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-    // work 01
-
-    /*
-    if( ItemCount == 0 ) {
-
-      print( '>>>> itemCount == 0  <<<< ');
-      logger.e('oneSelectedFoodFD.quantity: ', oneSelectedFoodFD.quantity);
-
-      Order tempOrderIncrementOperation = _currentSelectedFoodDetails;
-
-      tempOrderIncrementOperation.selectedFoodInOrder.add(oneSelectedFoodFD);
-
-      print('length: of // tempOrderIncrementOperation.selectedFoodInOrder:'
-          ' ${tempOrderIncrementOperation.selectedFoodInOrder.length}');
-
-      int lengthOfSelectedItemsLength=  tempOrderIncrementOperation.selectedFoodListLength;
-
-
-      logger.e(' ANY CHANGES IN HERE ? tempOrderIncrementOperation.selectedFoodInOrder[itemCount].quantity: ',
-
-          tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity);
-
-
-      _currentSelectedFoodDetails = tempOrderIncrementOperation;
-
-      _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
-
-    }
-    */
-
     if( initialItemCount == 0 ) {
 
       print( '>>>> initialItemCount == 0  <<<< ');
-//      logger.e('oneSelectedFoodFD.quantity: ', oneSelectedFoodFD.quantity);
 
 
       SelectedFood tempSelectedFood = oneSelectedFoodFD ;
-      //_currentSelectedFoodDetails;
-//      Order tempOrderIncrementOperation = _currentSelectedFoodDetails;
 
-      oneSelectedFoodFD.selectedIngredients=_defaultIngItems;
-
-
-//      tempOrderIncrementOperation.selectedFoodInOrder.add(oneSelectedFoodFD);
-
-//      print('length: of // tempOrderIncrementOperation.selectedFoodInOrder:'
-//          ' ${tempOrderIncrementOperation.selectedFoodInOrder.length}');
-
-//      tempOrderIncrementOperation.selectedFoodListLength = 1;
-
-//      int lengthOfSelectedItemsLength =  tempOrderIncrementOperation.selectedFoodListLength;
-
-//      List x=[1,2,3,4];
-//      print('List(0) $List(0)');
+      // REQUIRED ...
+      oneSelectedFoodFD.selectedIngredients = _defaultIngItems;
+      oneSelectedFoodFD.selectedCheeseItems = _allSelectedCheeseItems;
+      oneSelectedFoodFD.selectedSauceItems  = _allSelectedSauceItems;
 
 
-//      print('lengthOfSelectedItemsLength: $lengthOfSelectedItemsLength');
-
-//      List<SelectedFood> x2 = tempOrderIncrementOperation.selectedFoodInOrder;
-
-//      print('x2: $x2');
-//      print('x2[lengthOfSelectedItemsLength]: ${x2[lengthOfSelectedItemsLength-1]}');
-
-//      print('x2[lengthOfSelectedItemsLength].quantity: ${x2[lengthOfSelectedItemsLength-1].quantity}');
-
-
-      /*
-
-      logger.e(' ANY CHANGES IN HERE ? tempOrderIncrementOperation.selectedFoodInOrder[itemCount].quantity: ',
-
-          tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength].quantity);
-      */
 
 
       _currentSelectedFoodDetails =tempSelectedFood;
@@ -858,55 +773,20 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     }
     else{
 
-//      int numberOFSelectedFoods;
+
 
       SelectedFood tempSelectedFood = _currentSelectedFoodDetails;//oneSelectedFoodFD ;
-//      Order tempOrderIncrementOperation = _currentSelectedFoodDetails;
-
-      /*
-      if(tempOrderIncrementOperation.selectedFoodInOrder.length==0){
-        print(' ** ***  ****  THIS PROBABLY WILL NOT EXECUTE EVER');
-
-        numberOFSelectedFoods= 0;
-      }
-      else{
-        numberOFSelectedFoods =  tempOrderIncrementOperation.selectedFoodInOrder.length;
-      }
-
-      print(' INC __ ** __ ** numberOFSelectedFoods: $numberOFSelectedFoods');
-
-//      logger.e('oneSelectedFoodFD.quantity: ', oneSelectedFoodFD.quantity);
-//      Order constructorOrderFD = _currentSelectedFoodDetails;
-*/
-//      int lengthOfSelectedItemsLength=  tempOrderIncrementOperation.selectedFoodListLength;
-
-//      tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity =
-//          tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity + 1;
 
       tempSelectedFood.quantity = tempSelectedFood.quantity +1;
 
-      // first time was set to 1, thus adding 1 required , please check the _itemCount state.
-
-
-//      print('quantity: * * * '
-//          '${tempOrderIncrementOperation.selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity}');
-
       _currentSelectedFoodDetails = tempSelectedFood;
-
 
       _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
 
 
-
-//      constructorOrderFD.selectedFoodInOrder.add(oneSelectedFoodFD);
-//
-//      _currentSelectedFoodDetails = constructorOrderFD;
-//
-//      _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
-
     }
 
-//    x.selectedFoodInOrder.add(constructorSelectedFoodFD);
+
   }
 
   /*  ABOVE ARE OrderedFoodItem related codes*/
@@ -922,130 +802,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _multiSelectForFood = multiSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
 
-//    initiateAllMultiSelectOptions();
-
     _multiSelectForFoodController.sink.add(_multiSelectForFood);
   }
-
-
-
-  // CONSTRUCTOR ENDS HERE.
-
-  /*
-    else {
-      FoodItemWithDocIDViewModel thisFood = new FoodItemWithDocIDViewModel(
-        itemName: oneFoodItem.itemName,
-        categoryName: oneFoodItem.categoryName,
-        sizedFoodPrices: oneFoodItem.sizedFoodPrices,
-        uploadDate: oneFoodItem.uploadDate,
-        imageURL: oneFoodItem.imageURL,
-        content: oneFoodItem.content,
-        ingredients: oneFoodItem.ingredients,
-        itemId: oneFoodItem.itemId,
-        indicatorValue: oneFoodItem.indicatorValue,
-        isAvailable: oneFoodItem.isAvailable,
-        isHot: oneFoodItem.isHot,
-        uploadedBy: oneFoodItem.uploadedBy,
-        documentId: oneFoodItem.documentId,
-        itemSize: 'normal',
-        itemPrice: normalPriceCasted,
-      );
-
-      _controller.sink.add(thisFood);
-    }
-    */
-
-
-
-//    _currentSize['normal']=changedPrice;
-
-//    _itemSizeController.sink.add(_currentSize);
-
-
-
-
-
-
-  //    if normal is there
-
-  //   String key = foodSizePrice.keys.where((oneKey) =='normal').toString();
-
-
-  // other wise map will return ToDo check values
-
-
-
-
-
-
-  /*
-    logger.i('foodSizePrice: ',foodSizePrice);
-            dynamic normalPrice = foodSizePrice['normal'];
-
-
-            num normalPrice3 = foodSizePrice['normal'];
-
-
-
-
-            print('normalPrice1: $normalPrice ');
-            print('normalPrice2: ${foodSizePrice['normal']} ');
-            print('normalPrice3: $normalPrice3');
-
-            print('euroPrice1: $normalPrice ');
-            double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
-    */
-//    if(oneFoodItem.si)
-//      _currentSize['normal'] =normalPrice;
-
-
-//      _itemSizeController.sink.add(_currentSize);
-
-//    _allFoodsList.add(oneFoodItemWithDocID);
-
-
-
-
-//    getAllFoodItems();
-//    getAllCategories();
-
-//    this.getAllFoodItems();
-//    this.getAllCategories();
-
-/*
-  void getAllIngredients() async {
-
-
-    var snapshot = await _client.fetchAllIngredients();
-    List docList = snapshot.documents;
-
-
-
-    List <NewIngredient> ingItems = new List<NewIngredient>();
-    ingItems = snapshot.documents.map((documentSnapshot) =>
-        NewIngredient.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
-
-    ).toList();
-
-
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
-    ).toList();
-
-    print('documents are: $documents');
-
-
-    _allIngItemsDetailsBlock = ingItems;
-
-    _allIngredientListController.sink.add(ingItems);
-
-    return ingItems;
-
-  }
-
-  */
-
 
 
 
@@ -1128,6 +886,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   void toggleThisSauceAsSelected(SauceItem oneSauceItem,int index){
 
+    print('index: $index');
     List<SauceItem> allTempSauceItems = _allSauceItemsDBloc;
 
     allTempSauceItems[index].isSelected= !allTempSauceItems[index].isSelected;
@@ -1139,8 +898,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-    _allSauceItemsDBloc = allTempSauceItems.where((element) => element.isSelected==true).toList();
-    _selectedSauceListController.sink.add(_allSauceItemsDBloc);
+    _allSelectedSauceItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
+    _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
 //    _allSelectedCheeseItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
 
