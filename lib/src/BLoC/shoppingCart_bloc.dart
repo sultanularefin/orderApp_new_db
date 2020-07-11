@@ -4,6 +4,8 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart'; // to be removed later.
+import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
+import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 
 
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
@@ -112,7 +114,86 @@ class ShoppingCartBloc implements Bloc {
       _customerInformationController.stream;
   */
 
+  Restaurant _thisRestaurant ;
 
+  Restaurant get getCurrentRestaurant => _thisRestaurant;
+  final _restaurantController = StreamController <Restaurant>();
+  Stream<Restaurant> get getCurrentRestaurantsStream => _restaurantController.stream;
+
+
+
+
+
+  Future<void> getRestaurantInformationConstructor() async{
+
+    var snapshot = await _client.fetchRestaurantDataClient();
+
+
+    Map     <String,dynamic> restaurantAddress = snapshot['address'];
+    Map     <String,dynamic> restaurantAttribute = snapshot['attribute'];
+    List    <dynamic> restaurantCousine = snapshot['cousine'];
+    bool    restaurantKidFriendly =  snapshot['kid_friendly'];
+    bool    restaurantReservation = snapshot['reservation'];
+    bool    restaurantRomantic  = snapshot['romantic'];
+    List    <String> restaurantOffday = snapshot['offday'];
+
+    String  restaurantOpen = snapshot['open'];
+
+
+
+    String  restaurantAvatar =snapshot['avatar']==''?
+    'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+        :''
+        + storageBucketURLPredicate +
+        Uri.encodeComponent(snapshot['avatar'])
+        +'?alt=media';
+    // 'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/'
+
+    print('restaurantAvatar: $restaurantAvatar');
+
+
+    String  restaurantContact= snapshot['contact'];
+
+    double  restaurantDeliveryCharge = snapshot['deliveryCharge'];
+    int restaurantDiscount0 =snapshot['discount'];// from string;// need to convert string to double.
+    print('restaurantDiscount0-> $restaurantDiscount0 is : ' is num);
+    print('restaurantDiscount0-> $restaurantDiscount0 is : ' is int);
+    print('restaurantDiscount0-> $restaurantDiscount0 is : ' is double);
+    print('restaurantDiscount0-> $restaurantDiscount0 is : ' is String);
+
+    final double restaurantDiscount = restaurantDiscount0.toDouble();
+//    final double foodItemDiscount = doc['discount'];
+    String  restaurantName =snapshot['name'];
+
+    print('restaurantName: $restaurantName');
+    double  restaurantRating =snapshot['rating'];
+    double  restaurantTotalRating =snapshot['totalRating'];
+
+
+    Restaurant onlyRestaurant = new Restaurant(
+      address:restaurantAddress,
+      attribute: restaurantAttribute,
+      cousine: restaurantCousine,
+      kidFriendly:restaurantKidFriendly, // kid_friendly
+      reservation:restaurantReservation,
+      romantic:restaurantRomantic,
+      offday:restaurantOffday,
+      open: restaurantOpen,
+      avatar: restaurantAvatar,
+      contact: restaurantContact,
+      deliveryCharge: restaurantDeliveryCharge,
+      discount: restaurantDiscount,// from string;// need to convert string to double.
+      name: restaurantName,
+      rating: restaurantRating,
+      totalRating :restaurantTotalRating,
+    );
+
+    _thisRestaurant= onlyRestaurant;
+    _restaurantController.sink.add(_thisRestaurant);
+
+//    _foodItemController.sink.add(_allFoodsList);
+
+  }
 
   // CONSTRUCTOR BEGINS HERE.
 
@@ -152,6 +233,8 @@ class ShoppingCartBloc implements Bloc {
     print('x.paymentTypeIndex: ${x.paymentTypeIndex}');
     int paymentTypeIndex = x.paymentTypeIndex;
     initiateOrderTypeSingleSelectOptions();
+
+    getRestaurantInformationConstructor();
 
     initiatePaymentTypeSingleSelectOptions(paymentTypeIndex);
 
@@ -442,10 +525,17 @@ class ShoppingCartBloc implements Bloc {
 
     if(documentID!=null){
       tempOrder.orderdocId= documentID;
+
       _curretnOrder=null;
       _expandedSelectedFood =[];
       _orderType =[];
       _paymentType =[];
+
+
+      // required to properly show data in the receipt thus don't clear _currentOrder object.
+      _curretnOrder=tempOrder;
+      _orderController.sink.add(_curretnOrder);
+
 
       return tempOrder;
 
@@ -483,6 +573,90 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
+
+  Future<OneOrderFirebase> fetchOrderDataFromFirebase(String orderDocumentId) async {
+
+    var snapshot = await _client.invokeClientForOneOrder(orderDocumentId);
+
+
+
+    Map<String,dynamic>       customerAddress = snapshot['address'];
+    List<Map<String,dynamic>> orderedItems = snapshot['items'];
+    String                    orderBy = snapshot['orderby'];
+    String                    paidStatus = snapshot['p_status'];
+    String                    paidType = snapshot['p_type'];
+    double                    totalPrice = snapshot['price'];
+
+    String                    contact = snapshot['contact'];
+    String                    driverName = snapshot['driver'];
+    DateTime                  endDate = new DateTime.fromMicrosecondsSinceEpoch(snapshot['end']);
+
+    DateTime                  startDate = new DateTime.fromMicrosecondsSinceEpoch(snapshot['start']);
+
+    String                    orderStatus = snapshot['Status'];
+    String                    tableNo = snapshot['table_no'];
+    String                    type = snapshot['type'];
+    String                    documentId = orderDocumentId;
+
+    print('customerAddress: $customerAddress');
+    print('orderedItems: $orderedItems');
+    print('orderBy: $orderBy');
+    print('paidStatus: $paidStatus');
+    print('paidType: $paidType');
+    print('totalPrice: $totalPrice');
+    print('contact: $contact');
+    print('driverName: $driverName');
+    print('endDate: $endDate');
+    print('startDate: $startDate');
+    print('orderStatus: $orderStatus');
+    print('tableNo: $tableNo');
+    print('type: $type');
+    print('documentId: $documentId');
+
+
+    OneOrderFirebase oneOrderForReceiptProduction = new OneOrderFirebase(
+      customerAddress:customerAddress,
+      orderedItems:orderedItems,
+      orderBy:orderBy,
+      paidStatus:paidStatus,
+      paidType:paidType,
+      totalPrice:totalPrice,
+      contact:contact,
+      driverName:driverName,
+      endDate:endDate,
+      startDate:startDate,
+      orderStatus:orderStatus,
+      tableNo:tableNo,
+      type:type,
+
+      documentId:documentId,
+    );
+
+
+
+
+
+    // print('result:  IIIII   >>>>>  $result'  );
+
+
+    /*
+    if ((oneOrderForReceiptProduction.type != null) &&((oneOrderForReceiptProduction.totalPrice !=null))) {
+
+
+
+
+      return oneOrderForReceiptProduction;
+    }
+    else {
+      */
+      return oneOrderForReceiptProduction;
+    }
+
+//    AssertionError(result.user.email);
+//    print('result: ' + result.user.email);
+
+
+
   void clearSubscription(){
 
 
@@ -492,6 +666,9 @@ class ShoppingCartBloc implements Bloc {
     _paymentType =[];
 
     _devicesBlueTooth = [];
+
+    _thisRestaurant= null;
+
 
 
 
@@ -503,6 +680,8 @@ class ShoppingCartBloc implements Bloc {
     _paymentTypeController.sink.add(_paymentType);
 
     _devicesController.sink.add(_devicesBlueTooth);
+
+    _restaurantController.sink.add(_thisRestaurant);
 
 
   }
@@ -916,6 +1095,7 @@ class ShoppingCartBloc implements Bloc {
     _orderTypeController.close();
     _paymentTypeController.close();
     _devicesController.close();
+    _restaurantController.close();
 //    _customerInformationController.close();
 //    _multiSelectForFoodController.close();
 

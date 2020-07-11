@@ -10,6 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
+import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:platform_action_sheet/platform_action_sheet.dart';
 
@@ -80,7 +82,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     printer: PrettyPrinter(),
   );
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyShoppingCartPage = new GlobalKey<ScaffoldState>();
 
 //  String _currentSize;
 //  int _itemCount = 1;
@@ -367,7 +369,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         child:
         Scaffold(
-          key: _scaffoldKey,
+          key: _scaffoldKeyShoppingCartPage,
           backgroundColor: Colors.white.withOpacity(0.05),
 //          backgroundColor: Colors.purpleAccent,
 
@@ -879,7 +881,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  onPressed: _stopScanDevices,
                   onPressed: ()=>{
                     print('debug print in onPressed() of floating action button: before calling _stopScanDevices'),
-                    _stopScanDevices,
+                    _stopScanDevices(),
                   },
                   backgroundColor: Colors.red,
                 );
@@ -888,7 +890,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(Icons.search),
                   onPressed: ()=>{
                     print('debug print in onPressed() of floating action button: before calling _startScanDevices'),
-                    _startScanDevices,
+                    _startScanDevices(),
                   },
 //                  onPressed: _startScanDevices,
                 );
@@ -8189,7 +8191,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
-                    _scaffoldKey.currentState
+                    _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
                         .showSnackBar(
@@ -8359,7 +8361,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
-                    _scaffoldKey.currentState
+                    _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
                         .showSnackBar(
@@ -8368,8 +8370,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   }
                   else{
                     print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+//                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
-                    return Navigator.pop(context,tempOrderWithdocId);
+                    //work 01_paymentButton TakeAway 9thJuly.
+                    logger.w('check device listed or not');
+
+//                    return Navigator.pop(context,tempOrderWithdocId);
+
+//                    return Navigator.pop(context,tempOrderWithdocId);
                   }
 
                   /*
@@ -10279,7 +10287,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  Future<Ticket> demoReceipt(PaperSize paper) async {
+  Future<Ticket> demoReceipt(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderListdocument
+  /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
+
+//    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+//
+//    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
 //    final profile = await CapabilityProfile.load();
 //    final Ticket ticket = Ticket(paper, profile);
     final Ticket ticket = Ticket(PaperSize.mm80);
@@ -10290,7 +10303,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    final Image image = decodeImage(bytes);
 //    ticket.image(image);
 
-    ticket.text('GROCERYLY',
+    ticket.text('${currentRestaurant.name}',
         styles: PosStyles(
           align: PosAlign.center,
           height: PosTextSize.size2,
@@ -10298,10 +10311,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ),
         linesAfter: 1);
 
-    ticket.text('889  Watson Lane', styles: PosStyles(align: PosAlign.center));
-    ticket.text('New Braunfels, TX', styles: PosStyles(align: PosAlign.center));
-    ticket.text('Tel: 830-221-1234', styles: PosStyles(align: PosAlign.center));
-    ticket.text('Web: www.example.com',
+    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
+    ticket.text('${oneOrderListdocument.orderBy}', styles: PosStyles(align: PosAlign.left));
+    ticket.text('${oneOrderListdocument.startDate}', styles: PosStyles(align: PosAlign.left));
+
+    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('${oneOrderListdocument.orderBy}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('${oneOrderListdocument.startDate}', styles: PosStyles(align: PosAlign.right));
+
+
+    ticket.text('',
         styles: PosStyles(align: PosAlign.center), linesAfter: 1);
 
     ticket.hr();
@@ -10431,18 +10450,115 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   void _testPrint(PrinterBluetooth printer) async {
+
     printerManager.selectPrinter(printer);
 
     // TODO Don't forget to choose printer's paper
     const PaperSize paper = PaperSize.mm80;
 
     // TEST PRINT
-    // final PosPrintResult res =
-    // await printerManager.printTicket(await testTicket(paper));
+//     final PosPrintResult res =
+//     await printerManager.printTicket(await testTicket(paper));
 
     // DEMO RECEIPT
+
+    // fetch data from firestore, restaurant name and Order data: begins here.
+
+    print("login button pressed");
+//                            showDialog(
+//                                context: context,
+//                                builder: (BuildContext context) {
+//                                  return Center(child: CircularProgressIndicator(),);
+//                                });
+
+    _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+        new SnackBar(duration: new Duration(seconds: 30), content:
+        new Row(
+          children: <Widget>[
+            new CircularProgressIndicator(),
+            new Text("fetching data for receipt production...",style:TextStyle(
+              color: Colors.white38,
+            ))
+          ],
+        ),
+        )
+    );
+
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+//    final identityBlocLoginPage =
+//    BlocProvider.of<IdentityBloc>(context);
+
+    //    StreamBuilder<Restaurant>(
+//
+//        stream: blocH.getCurrentRestaurantsStream,
+//        initialData: blocH.getCurrentRestaurant,
+
+    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+
+    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+
+    print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
+
+
+
+
+
+
+//    Future<AuthResult> userCheck=
+//    identityBlocLoginPage.handleSignInFromLoginPage(emailState.trim(),passwordState.trim());
+
+
+        Future<OneOrderFirebase> testFirebaseOrderFetch=
+        shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+
+
+//                            _handleSignIn();
+
+    /* await */ testFirebaseOrderFetch.whenComplete(() {
+
+      print("called when future completes");
+
+    }
+    ).then((oneOrderData){
+
+
+      if ((oneOrderData.type != null) &&((oneOrderData.totalPrice !=null))) {
+
+        printTicket(paper,thisRestaurant,oneOrderData);
+      }
+    }).catchError((onError){
+      print('LOGIN ERROR **** at onError $onError ***');
+      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+        new SnackBar(duration: new Duration(seconds: 6), content:Container(
+          child:
+          new Row(
+            children: <Widget>[
+              new CircularProgressIndicator(),
+              new Text("Error: ${onError.message.substring(0,40)}",style:
+              TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                  color:Colors.white)),
+            ],
+          ),
+        )),);
+
+    });
+
+
+
+
+//    StreamBuilder<Restaurant>(
+//
+//        stream: blocH.getCurrentRestaurantsStream,
+//        initialData: blocH.getCurrentRestaurant,
+
+
+  }
+
+  void printTicket(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderdocument) async{
+
     final PosPrintResult res =
-    await printerManager.printTicket(await demoReceipt(paper));
+        await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
 
     showToast(res.msg);
   }

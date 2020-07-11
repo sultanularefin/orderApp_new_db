@@ -141,6 +141,45 @@ class FirebaseClient {
     return snapshot;
   }
 
+
+
+  Future<DocumentSnapshot> fetchRestaurantDataClient() async{
+
+    var snapshot = Firestore.instance
+        .collection('restaurants')
+        .document('USWc8IgrHKdjeDe9Ft4j')
+        .get();
+    /*
+        .then((DocumentSnapshot ds) {
+      // use ds as a snapshot
+    });*/
+    /*
+    var snapshot = await Firestore.instance.collection("restaurants")
+        .document('USWc8IgrHKdjeDe9Ft4j');
+
+//    var snapshot= Firestore.instance
+//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+//        .getDocuments();
+
+    return snapshot;
+
+     */
+    return snapshot;
+  }
+
+  Future<DocumentSnapshot> invokeClientForOneOrder(String orderDocumentId) async{
+
+    var snapshot = Firestore.instance
+        .collection('restaurants')
+        .document('USWc8IgrHKdjeDe9Ft4j').collection('orderList').document(orderDocumentId)
+        .get();
+
+//
+    return snapshot;
+  }
+
+
+
   List <Map<String, dynamic>> /*<OrderedFood>*/ convertedIngredients(List<NewIngredient> si){
 
 //    ingredientName;
@@ -278,8 +317,7 @@ class FirebaseClient {
   }
 
 
-  Future<String> insertOrder(Order currentOrderToFirebase,
-      String orderBy, String paidType)async {
+  Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType)async {
    // print('currentOrderToFirebaseL: $currentOrderToFirebase');
    /*print('currentOrderToFirebase.selectedFoodInOrder: '
         '${currentOrderToFirebase.selectedFoodInOrder}'); */
