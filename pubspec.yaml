@@ -64,8 +64,10 @@ dependencies:
   ping_discover_network: ^0.2.0+1
   wifi: ^0.1.5
   intl: ^0.16.1
+  oktoast: ^2.3.2
   platform_action_sheet: ^0.0.3
   esc_pos_bluetooth: ^0.2.8
+
 
 dev_dependencies:
   flutter_test:

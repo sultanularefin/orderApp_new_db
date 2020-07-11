@@ -16,6 +16,8 @@ import 'package:platform_action_sheet/platform_action_sheet.dart';
 //import 'package:esc_pos_printer/esc_pos_printer.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:intl/intl.dart';
+import 'package:oktoast/oktoast.dart';
+import 'dart:async';
 
 
 
@@ -1422,6 +1424,43 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     scrollDirection: Axis.horizontal,
     itemCount: blueToothDevicesFromStream.length,
+        itemBuilder: (BuildContext context, int index) {
+//          testPrint(blueToothDevicesFromStream[position],context);
+          return InkWell(
+            onTap: () => _testPrint(blueToothDevicesFromStream[index]),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 60,
+                  padding: EdgeInsets.only(left: 10),
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.print),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(blueToothDevicesFromStream[index].name ?? ''),
+                            Text(blueToothDevicesFromStream[index].address),
+                            Text(
+                              'Click to print a test receipt',
+                              style: TextStyle(color: Colors.grey[700]),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Divider(),
+              ],
+            ),
+          );
+        }
+    /*
     itemBuilder: (context,position)=>ListTile(
     onTap: (){
     //code to print with this device
@@ -1431,6 +1470,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     title: Text(blueToothDevicesFromStream[position].name),
     subtitle: Text(blueToothDevicesFromStream[position].address),
     ),
+    */
 
     /*
                 itemBuilder: (BuildContext context, int index) {
@@ -10327,28 +10367,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  void testPrint( /*String printerIp */ PrinterBluetooth oneDevice, BuildContext ctx) async {
-//    final PrinterNetworkManager printerManager = PrinterNetworkManager();
-//    printerManager.selectPrinter(printerIp, port: 9100);
+  void _testPrint(PrinterBluetooth printer) async {
+    printerManager.selectPrinter(printer);
 
-    printerManager.selectPrinter(oneDevice);
-
-    // TODO Don't forget to choose printer's paper size
+    // TODO Don't forget to choose printer's paper
     const PaperSize paper = PaperSize.mm80;
 
     // TEST PRINT
     // final PosPrintResult res =
-    //     await printerManager.printTicket(await testTicket(paper));
+    // await printerManager.printTicket(await testTicket(paper));
 
     // DEMO RECEIPT
     final PosPrintResult res =
     await printerManager.printTicket(await demoReceipt(paper));
 
-    final snackBar =
-    SnackBar(content: Text(res.msg, textAlign: TextAlign.center));
-    Scaffold.of(ctx).showSnackBar(snackBar);
+    showToast(res.msg);
   }
-
 
 
 //  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
