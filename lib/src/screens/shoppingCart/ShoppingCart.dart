@@ -158,6 +158,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     super.initState();
+
+    print('debug print came to init State');
+    print('debug print before invoking printerManager.scanResults.listen((devices) async { ');
     printerManager.scanResults.listen((devices) async {
       // print('UI: Devices found ${devices.length}');
       setState(() {
@@ -170,17 +173,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   void _startScanDevices() {
+    print('debug print inside _startScanDevices() method ');
     setState(() {
       blueToothDevicesState = [];
     });
+    print('debug print blueToothDevicesState set to empty/ []  ');
+    print('debug print before calling  printerManager.startScan(Duration(seconds: 4));  ');
     printerManager.startScan(Duration(seconds: 4));
+    print('debug print after calling  printerManager.startScan(Duration(seconds: 4)); inside _startScanDevices() method   ');
   }
 
   void _stopScanDevices() {
+    print('debug print inside _stopScanDevices() method ');
     printerManager.stopScan();
+    print('debug print inside _stopScanDevices() method and finished calling printerManager.stopScan() method');
   }
 
   // Future<void> return type .  ??
+
+  //  No longer requiered.
+
+  /*
   Future<void> checkBlueToothDevices () async {
 //    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
 
@@ -202,6 +215,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       });
     }
   }
+
+  */
 
 
 /*
@@ -861,13 +876,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
               if (snapshot.data) {
                 return FloatingActionButton(
                   child: Icon(Icons.stop),
-                  onPressed: _stopScanDevices,
+//                  onPressed: _stopScanDevices,
+                  onPressed: ()=>{
+                    print('debug print in onPressed() of floating action button: before calling _stopScanDevices'),
+                    _stopScanDevices,
+                  },
                   backgroundColor: Colors.red,
                 );
               } else {
                 return FloatingActionButton(
                   child: Icon(Icons.search),
-                  onPressed: _startScanDevices,
+                  onPressed: ()=>{
+                    print('debug print in onPressed() of floating action button: before calling _startScanDevices'),
+                    _startScanDevices,
+                  },
+//                  onPressed: _startScanDevices,
                 );
               }
             },
@@ -1404,9 +1427,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget showAvailableDevices(/*Order qTimes */) {
 
-
-
-
 //                    SelectedFood incrementCurrentFoodProcessing = snapshot.data;
     List<PrinterBluetooth> blueToothDevicesFromStream = blueToothDevicesState;
 
@@ -1414,53 +1434,69 @@ class _ShoppingCartState extends State<ShoppingCart> {
     if(blueToothDevicesFromStream.length==0){
 
       return Container(
-          alignment: Alignment.center,
-          child: new CircularProgressIndicator(
-              backgroundColor: Colors.lightGreenAccent)
+        alignment: Alignment.center,
+        child: Text(
+            'press pay button to see printing devices',
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+//                                      textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight
+                  .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+              color: Colors.red,
+            )
+        ),
+
+
+
       );
     }
     else{
-    return ListView.builder(
+      return ListView.builder(
 
-    scrollDirection: Axis.horizontal,
-    itemCount: blueToothDevicesFromStream.length,
-        itemBuilder: (BuildContext context, int index) {
+          scrollDirection: Axis.horizontal,
+          itemCount: blueToothDevicesFromStream.length,
+          itemBuilder: (BuildContext context, int index) {
 //          testPrint(blueToothDevicesFromStream[position],context);
-          return InkWell(
-            onTap: () => _testPrint(blueToothDevicesFromStream[index]),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 60,
-                  padding: EdgeInsets.only(left: 10),
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: <Widget>[
-                      Icon(Icons.print),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(blueToothDevicesFromStream[index].name ?? ''),
-                            Text(blueToothDevicesFromStream[index].address),
-                            Text(
-                              'Click to print a test receipt',
-                              style: TextStyle(color: Colors.grey[700]),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+            return InkWell(
+              onTap: () => _testPrint(blueToothDevicesFromStream[index]),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 60,
+                    padding: EdgeInsets.only(left: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.print),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(blueToothDevicesFromStream[index].name ?? ''),
+                              Text(blueToothDevicesFromStream[index].address),
+                              Text(
+                                'Click to print a test receipt',
+                                style: TextStyle(color: Colors.grey[700]),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Divider(),
-              ],
-            ),
-          );
-        }
-    /*
+                  Divider(),
+                ],
+              ),
+            );
+          }
+        /*
     itemBuilder: (context,position)=>ListTile(
     onTap: (){
     //code to print with this device
@@ -1472,7 +1508,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ),
     */
 
-    /*
+        /*
                 itemBuilder: (BuildContext context, int index) {
                   return OutlineButton(
                     onPressed: () =>
@@ -1487,7 +1523,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 },
               ;
                             */
-    );
+      );
     }
   }
 
@@ -7568,7 +7604,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  Widget animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway(Order unObsecuredInputandPayment){
+  Widget animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway(Order orderObjectTakeAway){
 
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
@@ -7599,8 +7635,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway
                 child: showFullPaymentType==false ?
 
-                animatedWidgetShowSelectedPaymentTypeTakeAway(unObsecuredInputandPayment):
-                _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(unObsecuredInputandPayment),
+                animatedWidgetShowSelectedPaymentTypeTakeAway(orderObjectTakeAway):
+                _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(orderObjectTakeAway),
               ),
               )
             //HHHH
@@ -7626,8 +7662,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               // animatedUnObscuredCancelPayButton
               // animatedObscuredCancelPayButton
               child: showFullPaymentType==false ?
-              animatedUnObscuredCancelPayButtonTakeAway(unObsecuredInputandPayment):
-              animatedObscuredCancelPayButtonTakeAway(unObsecuredInputandPayment)
+              animatedUnObscuredCancelPayButtonTakeAway(orderObjectTakeAway):
+              animatedObscuredCancelPayButtonTakeAway(orderObjectTakeAway)
 
               ,
 
@@ -7946,7 +7982,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   // work 01_9thJuly.
-  Widget animatedUnObscuredCancelPayButtonTakeAway(Order cancelPaySelect){
+  Widget animatedUnObscuredCancelPayButtonTakeAway(Order cancelPaySelectUNObscuredTakeAway){
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -8003,6 +8039,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),);
                         */
 
+                  print('debug print before invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button ');
+                  _stopScanDevices();
+                  print('debug print after invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button');
+
+
+
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
                   shoppingCartBloc.clearSubscription();
@@ -8013,8 +8055,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  shoppingCartBloc.getExpandedSelectedFood;
 
 
-                  cancelPaySelect.isCanceled=true;
-                  return Navigator.pop(context,cancelPaySelect);
+                  cancelPaySelectUNObscuredTakeAway.isCanceled=true;
+                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
 
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
@@ -8123,7 +8165,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelect.paymentTypeIndex}');
+                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAway.paymentTypeIndex}');
 
 
 
@@ -8137,7 +8179,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelectUNObscuredTakeAway);
+
+                  print('debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
+                  _startScanDevices();
+                  print('debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
 
 
@@ -8180,7 +8226,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // animatedUnObscuredCancelPayButton
 // animatedUnObscuredCancelPayButtonDeliveryPhone
-  Widget animatedUnObscuredCancelPayButtonDeliveryPhone(Order cancelPaySelect){
+  Widget animatedUnObscuredCancelPayButtonDeliveryPhone(Order cancelPaySelectUnobscuredDeliveryPhone){
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -8239,14 +8285,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),);
                   */
 
+
+                  print('debug print before invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+                  _stopScanDevices();
+                  print('debug print after invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
+
+
+
+
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
                   shoppingCartBloc.clearSubscription();
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
 //                  shoppingCartBloc.getExpandedSelectedFood;
-                  cancelPaySelect.isCanceled=true;
-                  return Navigator.pop(context,cancelPaySelect);
+                  cancelPaySelectUnobscuredDeliveryPhone.isCanceled=true;
+                  return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
 //                  return Navigator.pop(context,cancelPaySelect);
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
@@ -8288,9 +8342,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
-                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelect.paymentTypeIndex}');
+                  print('debug print before invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+                  _startScanDevices();
+                  print('debug print after invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
-                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
+
+
+                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone.paymentTypeIndex}');
+
+                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelectUnobscuredDeliveryPhone);
+
+
+
 
 
 
