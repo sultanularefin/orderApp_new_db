@@ -95,7 +95,7 @@ class ShoppingCartBloc implements Bloc {
   Stream  <List<SelectedFood>> get getSavedFoodsStream => _savedSelectedFoodController.stream;
 
 
-  PrinterBluetoothManager onePrinterBluetoothManager = PrinterBluetoothManager();
+  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
   List<PrinterBluetooth> _devicesBlueTooth = [];
 
 //  List<String> _devices =[];
@@ -232,7 +232,12 @@ class ShoppingCartBloc implements Bloc {
 
     print('x.paymentTypeIndex: ${x.paymentTypeIndex}');
     int paymentTypeIndex = x.paymentTypeIndex;
+
     initiateOrderTypeSingleSelectOptions();
+
+    //initiate scanner.
+    printerManager.startScan(Duration(seconds: 4));
+//    printerManager.startScan(Duration(seconds: 4));
 
     getRestaurantInformationConstructor();
 
@@ -941,8 +946,8 @@ class ShoppingCartBloc implements Bloc {
   * */
 
 
-    onePrinterBluetoothManager.startScan(Duration(seconds: 4));
-    onePrinterBluetoothManager.scanResults.listen((scannedDevices) {
+    printerManager.startScan(Duration(seconds: 4));
+    printerManager.scanResults.listen((scannedDevices) {
 //      setState(() {
 //        _devices=scannedDevices;
 //      });
@@ -1012,8 +1017,8 @@ class ShoppingCartBloc implements Bloc {
   //  Future <bool> checkUserinLocalStorage() async {
   Future<List<PrinterBluetooth>> discoverDevicesInitState() async {
 
-    onePrinterBluetoothManager.startScan(Duration(seconds: 4));
-    onePrinterBluetoothManager.scanResults.listen((scannedDevices) {
+    printerManager.startScan(Duration(seconds: 4));
+    printerManager.scanResults.listen((scannedDevices) {
 //      setState(() {
 //        _devices=scannedDevices;
 //      });
