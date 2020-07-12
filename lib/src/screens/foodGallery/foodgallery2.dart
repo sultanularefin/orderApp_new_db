@@ -344,8 +344,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                               Container(
                                 height: displayHeight(context) / 14,
-//                                color: Color(0xffFFFFFF),
-                              color:Colors.purpleAccent,
+                                color: Color(0xffFFFFFF),
+//                              color:Colors.purpleAccent,
 
 //                      color: Color.fromARGB(255, 255,255,255),
                                 child: Row(
@@ -370,7 +370,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //                                          width: displayWidth(context) / 13,
                                             height: displayHeight(context) / 15,
-                                            color:Colors.blue,
+//                                            color:Colors.blue,
                                             child: Image.asset('assets/Path2008.png'),
 
                                           ),
@@ -382,7 +382,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //                                          width: displayWidth(context) / 6,
                                             height: displayHeight(context) / 15,
-                                            color:Colors.red,
+//                                            color:Colors.red,
                                             child:
 
 //                                          Container(child: Image.asset('assets/Path2008.png')),

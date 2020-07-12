@@ -115,7 +115,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
-  List<PrinterBluetooth> blueToothDevicesState =[];
+  List<PrinterBluetooth> blueToothDevicesState = [];
+  bool localScanState = false;
 
 //  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
 //  List<PrinterBluetooth> _devices = [];
@@ -872,16 +873,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
           ),
           floatingActionButton: StreamBuilder<bool>(
-            stream: printerManager.isScanningStream,
-            initialData: false,
+            stream: printerManager.isScanningStream, // dEFINED IN HERE: C:\src\flutter\.pub-cache\hosted\
+            // pub.dartlang.org\esc_pos_bluetooth-0.2.8\lib\
+            // src\printer_bluetooth_manager.dart
+            initialData: localScanState,
             builder: (c, snapshot) {
-              if (snapshot.data) {
+              if (snapshot.data==false) {
                 return FloatingActionButton(
                   child: Icon(Icons.stop),
 //                  onPressed: _stopScanDevices,
                   onPressed: ()=>{
                     print('debug print in onPressed() of floating action button: before calling _stopScanDevices'),
                     _stopScanDevices(),
+                  setState(() {
+                  localScanState = !localScanState;
+                  })
+
                   },
                   backgroundColor: Colors.red,
                 );
@@ -891,6 +898,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   onPressed: ()=>{
                     print('debug print in onPressed() of floating action button: before calling _startScanDevices'),
                     _startScanDevices(),
+                    setState(() {
+                      localScanState = !localScanState;
+                    })
                   },
 //                  onPressed: _startScanDevices,
                 );
@@ -4486,7 +4496,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           alignment: Alignment
                               .center,
                           child: Text(
-                              'when you want to receive your Order',
+                              'when you will pick the Order',
+//                              'when you want to receive your order'
                               style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight
@@ -8062,6 +8073,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   cancelPaySelectUNObscuredTakeAway.isCanceled=true;
+
+                  //MIGHT NOT BE NECESSARY.
+                  setState(() {
+                    localScanState = !localScanState;
+                  });
+
+
                   return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
 
 
@@ -8182,17 +8200,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   // PRINTING CODES WILL BE PUTTED HERE.
 
-
-
-
-                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelectUNObscuredTakeAway);
-
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
                   _startScanDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
 
 
+                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelectUNObscuredTakeAway);
+
+
+
+
+
+                  setState(() {
+                    localScanState = !localScanState;
+                  });
 
                   if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
                     _scaffoldKeyShoppingCartPage.currentState
@@ -8306,6 +8328,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
 //                  shoppingCartBloc.getExpandedSelectedFood;
                   cancelPaySelectUnobscuredDeliveryPhone.isCanceled=true;
+
+                  //MIGHT NOT BE NECESSARY.
+                  setState(() {
+                    localScanState = !localScanState;
+                  });
+
+
                   return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
 //                  return Navigator.pop(context,cancelPaySelect);
 
@@ -8348,9 +8377,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
-                  print('debug print before invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+                  print('debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
                   _startScanDevices();
-                  print('debug print after invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
+                  print('debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
+
+
 
 
 
@@ -8362,7 +8393,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
+                  setState(() {
+                    localScanState = !localScanState;
+                  });
 
                   if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
                     _scaffoldKeyShoppingCartPage.currentState
@@ -9721,7 +9754,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       ):
       Container(
-        width: displayWidth(context)/7,
+          width: displayWidth(context)/6,
         height: displayHeight(context) /11,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
