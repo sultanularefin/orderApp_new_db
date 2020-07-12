@@ -1,3 +1,5 @@
+
+
 //food_gallery.dart
 
 
@@ -21,6 +23,31 @@ import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
 import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
 import 'dart:async';
+
+
+/*
+* MODIFICATIONS: for REAL DEVICES.
+1.
+onTap: () =>  _testPrintDummyDevices(blueToothDevicesState[index]),
+
+above to below for real devices.
+
+onTap: () => _testPrint(blueToothDevicesState[index]),
+
+*
+*
+*
+*
+2.
+  void _startScanDummyDevices() {
+  *
+  *
+  * above to below for real devices.
+
+  void _startScanDevices() {
+
+
+* */
 
 
 
@@ -169,7 +196,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('debug print before invoking printerManager.scanResults.listen((devices) async { ');
 
     printerManager.scanResults.listen((devices) async {
-       print('UI: Devices found ${devices.length}');
+      print('UI: Devices found ${devices.length}');
       setState(() {
         blueToothDevicesState = devices;
 //        localScanAvailableState=!localScanAvailableState;
@@ -182,6 +209,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+//  void _startScanDummyDevices() {
   void _startScanDevices() {
     print('debug print inside _startScanDevices() method ');
     setState(() {
@@ -238,6 +266,67 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 
     */
+  }
+
+  void _startScanDummyDevices() {
+    print('debug print inside _startScanDevices() method ');
+
+    /*
+    setState(() {
+      blueToothDevicesState = [];
+    });
+    */
+    print('debug print blueToothDevicesState set to empty/ []  ');
+    print(
+        'debug print before calling  printerManager.startScan(Duration(seconds: 4));  ');
+
+    // temporarily closing (COMMENTING).. july 12. 8:30 pm. for debugging...
+    /* printerManager.startScan(Duration(seconds: 4)); */
+
+    print(
+        'debug print after calling  printerManager.startScan(Duration(seconds: 4));'
+            ' inside _startScanDevices() method   ');
+    // Test devices added.
+
+    /*
+    PaymentTypeSingleSelect Later = new PaymentTypeSingleSelect(
+      borderColor: '0xff739DFA',
+      index: 0,
+      isSelected: false,
+      paymentTypeName: 'Later',
+      iconDataString: 'FontAwesomeIcons.facebook',
+
+      paymentIconName: 'Later',
+    );
+    */
+
+
+    BluetoothDevice _x = new BluetoothDevice();
+    _x.name = 'Restaurant Printer';
+    _x.address = '0F:02:18:51:23:46';
+    _x.type = 3;
+    _x.connected = null;
+
+
+    PrinterBluetooth x = new PrinterBluetooth(_x);
+
+    BluetoothDevice _y = new BluetoothDevice();
+    _y.name = 'JBL Charge 4';
+    _y.address = '98:52:3D:BB:18:26';
+    _y.type = 3;
+    _y.connected = null;
+
+
+    PrinterBluetooth y = new PrinterBluetooth(_y);
+
+    List<PrinterBluetooth> tempBlueToothDevices = new List<PrinterBluetooth>();
+    tempBlueToothDevices.addAll([x, y]);
+
+    setState(() {
+      blueToothDevicesState = tempBlueToothDevices;
+    });
+
+
   }
 
   void _stopScanDevices() {
@@ -1201,8 +1290,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 itemBuilder: (_, int index) {
                   return oneSingleDeliveryType(
-                        allOrderTypesSingleSelect[index],
-                        index);
+                      allOrderTypesSingleSelect[index],
+                      index);
                 },
               ),
             );
@@ -1545,9 +1634,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
             return InkWell(
 
 //              onTap: () => _testPrint(blueToothDevicesFromStream[index]),
-            //PROBLEM CODE, USING WRONG VARIABLE HERE...
+              //PROBLEM CODE, USING WRONG VARIABLE HERE...
+
+              //ORIGINAL.  --1
 
               onTap: () => _testPrint(blueToothDevicesState[index]),
+
+              // DUMMY. --- 2
+//              onTap: () =>  _testPrintDummyDevices(blueToothDevicesState[index]),
+
               child: Column(
                 children: <Widget>[
                   Container(
@@ -1559,10 +1654,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         Icon(Icons.print),
                         SizedBox(width: 10),
 /*                        Text(blueToothDevicesFromStream[index].name ?? ''), */
-                       /*
+                        /*
                         Expanded(
                           */
-                       Container(
+                        Container(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -8279,6 +8374,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
                   _startScanDevices();
+//                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
 
@@ -8465,6 +8561,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
                   _startScanDevices();
+//                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
 
@@ -9844,7 +9941,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       ):
       Container(
-          width: displayWidth(context)/6,
+        width: displayWidth(context)/6,
         height: displayHeight(context) /11,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -10419,7 +10516,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   Future<Ticket> demoReceipt(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderListdocument
-  /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
+      /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
 
 //    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 //
@@ -10587,23 +10684,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // TODO Don't forget to choose printer's paper
     const PaperSize paper = PaperSize.mm80;
 
-    // TEST PRINT
-//     final PosPrintResult res =
-//     await printerManager.printTicket(await testTicket(paper));
-
-    // DEMO RECEIPT
-
-    // fetch data from firestore, restaurant name and Order data: begins here.
-
     print("login button pressed");
-//                            showDialog(
-//                                context: context,
-//                                builder: (BuildContext context) {
-//                                  return Center(child: CircularProgressIndicator(),);
-//                                });
+
 
     _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 30), content:
+        new SnackBar(duration: new Duration(seconds: 6), content:
         new Row(
           children: <Widget>[
             new CircularProgressIndicator(),
@@ -10617,14 +10702,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-//    final identityBlocLoginPage =
-//    BlocProvider.of<IdentityBloc>(context);
-
-    //    StreamBuilder<Restaurant>(
-//
-//        stream: blocH.getCurrentRestaurantsStream,
-//        initialData: blocH.getCurrentRestaurant,
-
     Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 
     Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
@@ -10632,16 +10709,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
 
-
-
-
-
-//    Future<AuthResult> userCheck=
-//    identityBlocLoginPage.handleSignInFromLoginPage(emailState.trim(),passwordState.trim());
-
-
-        Future<OneOrderFirebase> testFirebaseOrderFetch=
-        shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+    Future<OneOrderFirebase> testFirebaseOrderFetch=
+    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
 
 
 //                            _handleSignIn();
@@ -10659,7 +10728,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         printTicket(paper,thisRestaurant,oneOrderData);
       }
     }).catchError((onError){
-      print('LOGIN ERROR **** at onError $onError ***');
+      print('Order data fetch Error $onError ***');
       _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
         new SnackBar(duration: new Duration(seconds: 6), content:Container(
           child:
@@ -10675,23 +10744,130 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
+  }
+
+  void _testPrintDummyDevices(PrinterBluetooth printer) async {
+
+    // NOT REQUIRED SINCE DUMMY...
+
+    /*
+    printerManager.selectPrinter(printer);
+
+    // TODO Don't forget to choose printer's paper
+    const PaperSize paper = PaperSize.mm80;
+
+    */
 
 
+    print("login button pressed");
 
-//    StreamBuilder<Restaurant>(
-//
-//        stream: blocH.getCurrentRestaurantsStream,
-//        initialData: blocH.getCurrentRestaurant,
 
+    _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+        new SnackBar(duration: new Duration(seconds: 6), content:
+        new Row(
+          children: <Widget>[
+            new CircularProgressIndicator(),
+            new Text("fetching data for receipt production...",style:TextStyle(
+              color: Colors.red,
+            ))
+          ],
+        ),
+        )
+    );
+
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+
+    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+
+    print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
+
+
+    Future<OneOrderFirebase> testFirebaseOrderFetch=
+    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+
+
+//                            _handleSignIn();
+
+    /* await */ testFirebaseOrderFetch.whenComplete(() {
+
+      print("called when future completes");
+
+    }
+    ).then((oneOrderData){
+
+
+      if ((oneOrderData.type != null) &&((oneOrderData.totalPrice !=null))) {
+
+        printTicketDummy(/*paper, */thisRestaurant,oneOrderData);
+      }
+    }).catchError((onError){
+      print('Order data fetch Error $onError ***');
+      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+        new SnackBar(duration: new Duration(seconds: 6), content:Container(
+          child:
+          new Row(
+            children: <Widget>[
+              new CircularProgressIndicator(),
+              new Text("Error: ${onError.message.substring(0,40)}",style:
+              TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                  color:Colors.white)),
+            ],
+          ),
+        )),);
+
+    });
 
   }
 
   void printTicket(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderdocument) async{
 
     final PosPrintResult res =
-        await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
+    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
 
     showToast(res.msg);
+  }
+
+  void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant, OneOrderFirebase oneOrderdocument) async{
+
+//    final PosPrintResult res =
+//    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
+
+//    showToast('res.msg  res.msg   res.msg');
+
+    _showMyDialog();
+
+  }
+
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('you are using dummy bluetooth devices.'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('please use real blueTooth devices and also change functions in '
+                    'shopping cart page.'),
+//                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('return shopping Cart page.'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
 

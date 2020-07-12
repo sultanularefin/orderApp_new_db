@@ -33,6 +33,7 @@ class SelectedFood {
   List<NewIngredient> selectedIngredients;
   List<CheeseItem>  selectedCheeseItems;
   List<SauceItem>   selectedSauceItems;
+  double subTotalPrice;
 
 //  String ingredients;
 //  itemId = await generateItemId(6);
@@ -50,6 +51,7 @@ class SelectedFood {
         this.discount,
         this.selectedCheeseItems,
         this.selectedSauceItems,
+        this.subTotalPrice,
 
         // this.foodItemOrderID,
       }

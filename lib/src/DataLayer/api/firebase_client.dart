@@ -169,10 +169,15 @@ class FirebaseClient {
 
   Future<DocumentSnapshot> invokeClientForOneOrder(String orderDocumentId) async{
 
+
+    print('at firebase_client.dart file inside this method: \"invokeClientForOneOrder\"');
+
     var snapshot = Firestore.instance
         .collection('restaurants')
         .document('USWc8IgrHKdjeDe9Ft4j').collection('orderList').document(orderDocumentId)
         .get();
+
+    print('and the snapshot is: $snapshot');
 
 //
     return snapshot;
@@ -305,6 +310,8 @@ class FirebaseClient {
         'defult_sauces':convertedSauceItems(sf[counter].selectedSauceItems),
         'selected_cheeses':convertedCheeseItems(sf[counter].selectedCheeseItems),
         'ingredient':convertedIngredients(sf[counter].selectedIngredients),
+        'name':sf[counter].foodItemName,
+        'subTotal': sf[counter].quantity * sf[counter].unitPrice,
       };
       testFoodItems.add(identifier);
       counter ++;

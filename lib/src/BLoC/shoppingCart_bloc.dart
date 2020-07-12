@@ -584,9 +584,11 @@ class ShoppingCartBloc implements Bloc {
     var snapshot = await _client.invokeClientForOneOrder(orderDocumentId);
 
 
-
+//    List <Map<String, dynamic>>
     Map<String,dynamic>       customerAddress = snapshot['address'];
-    List<Map<String,dynamic>> orderedItems = snapshot['items'];
+//    List <Map<dynamic, dynamic>> orderedItems = snapshot['items'];
+    List<dynamic> orderedItems = snapshot['items'];
+//    List<Map<String, dynamic>>
     String                    orderBy = snapshot['orderby'];
     String                    paidStatus = snapshot['p_status'];
     String                    paidType = snapshot['p_type'];
@@ -594,9 +596,8 @@ class ShoppingCartBloc implements Bloc {
 
     String                    contact = snapshot['contact'];
     String                    driverName = snapshot['driver'];
-    DateTime                  endDate = new DateTime.fromMicrosecondsSinceEpoch(snapshot['end']);
-
-    DateTime                  startDate = new DateTime.fromMicrosecondsSinceEpoch(snapshot['start']);
+    DateTime                  endDate = snapshot['end'].toDate();
+    DateTime                  startDate = snapshot['start'].toDate();
 
     String                    orderStatus = snapshot['Status'];
     String                    tableNo = snapshot['table_no'];
@@ -611,6 +612,18 @@ class ShoppingCartBloc implements Bloc {
     print('totalPrice: $totalPrice');
     print('contact: $contact');
     print('driverName: $driverName');
+    print('snapshot[\'end\'].toDate().toString(): ${snapshot['end'].toDate().toString()}');
+
+//    DateTime d = t.toDate();
+//    print(d.toString()); //2019-12-28 18:48:48.364
+    print('snapshot[\'start\'].toDate().toString()${snapshot['start'].toDate().toString()}');
+
+
+    print('snapshot[\'end\']: ${snapshot['end'].toDate()}');
+
+    print('snapshot[\'start\']${snapshot['start'].toDate()}');
+
+
     print('endDate: $endDate');
     print('startDate: $startDate');
     print('orderStatus: $orderStatus');
@@ -618,9 +631,26 @@ class ShoppingCartBloc implements Bloc {
     print('type: $type');
     print('documentId: $documentId');
 
+    /*
+    orderedItems.forEach((oneFood) {
+      print('oneFood details: ===> ===>${oneFood.quantity} ');
+//       print('oneFood.name: ${oneFood.name}');
+//       print('oneFood.subTota: ${oneFood.subTotal}');
+//       print('oneFood.quantity: ${oneFood.quantity}');
+//         print('oneFood: ${oneFood.foodItemName}');
+      // List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
+
+      print('MOMENT OF TRUTH: ');
+      // print(':::: ::: :: $test');
+      // selectedFoodforDisplay.addAll(test);
+    });
+
+    */
+
 
     OneOrderFirebase oneOrderForReceiptProduction = new OneOrderFirebase(
       customerAddress:customerAddress,
+//      orderedItems:[],
       orderedItems:orderedItems,
       orderBy:orderBy,
       paidStatus:paidStatus,

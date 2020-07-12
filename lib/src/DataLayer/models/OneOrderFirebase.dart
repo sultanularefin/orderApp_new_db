@@ -2,7 +2,7 @@
 class OneOrderFirebase {
 
   Map<String,dynamic>       customerAddress;
-  List<Map<String,dynamic>> orderedItems;
+  List<dynamic>             orderedItems;
   String                    orderBy;
   String                    paidStatus;
   String                    paidType;
