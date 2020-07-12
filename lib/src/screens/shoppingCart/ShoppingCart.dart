@@ -1487,11 +1487,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
       return ListView.builder(
 
           scrollDirection: Axis.horizontal,
-          itemCount: blueToothDevicesFromStream.length,
+          itemCount: blueToothDevicesState.length,
           itemBuilder: (BuildContext context, int index) {
 //          testPrint(blueToothDevicesFromStream[position],context);
             return InkWell(
-              onTap: () => _testPrint(blueToothDevicesFromStream[index]),
+
+//              onTap: () => _testPrint(blueToothDevicesFromStream[index]),
+            //PROBLEM CODE, USING WRONG VARIABLE HERE...
+
+              onTap: () => _testPrint(blueToothDevicesState[index]),
               child: Column(
                 children: <Widget>[
                   Container(
