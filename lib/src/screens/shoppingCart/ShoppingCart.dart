@@ -17,6 +17,7 @@ import 'package:platform_action_sheet/platform_action_sheet.dart';
 
 //import 'package:esc_pos_printer/esc_pos_printer.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
 import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
 import 'dart:async';
@@ -107,6 +108,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   final etaController             = TextEditingController();
 
 
+
+
   /*
   * PRINTING RELATED STATE VARIABLES ARE HERE.
   * */
@@ -185,9 +188,56 @@ class _ShoppingCartState extends State<ShoppingCart> {
       blueToothDevicesState = [];
     });
     print('debug print blueToothDevicesState set to empty/ []  ');
-    print('debug print before calling  printerManager.startScan(Duration(seconds: 4));  ');
+    print(
+        'debug print before calling  printerManager.startScan(Duration(seconds: 4));  ');
+
+    // temporarily closing (COMMENTING).. july 12. 8:30 pm. for debugging...
     printerManager.startScan(Duration(seconds: 4));
-    print('debug print after calling  printerManager.startScan(Duration(seconds: 4)); inside _startScanDevices() method   ');
+
+    print(
+        'debug print after calling  printerManager.startScan(Duration(seconds: 4));'
+            ' inside _startScanDevices() method   ');
+    // Test devices added.
+
+    /*
+    PaymentTypeSingleSelect Later = new PaymentTypeSingleSelect(
+      borderColor: '0xff739DFA',
+      index: 0,
+      isSelected: false,
+      paymentTypeName: 'Later',
+      iconDataString: 'FontAwesomeIcons.facebook',
+
+      paymentIconName: 'Later',
+    );
+    */
+
+    /*
+    BluetoothDevice _x = new BluetoothDevice();
+    _x.name = 'Restaurant Printer';
+    _x.address = '0F:02:18:51:23:46';
+    _x.type = 3;
+    _x.connected = null;
+
+
+    PrinterBluetooth x = new PrinterBluetooth(_x);
+
+    BluetoothDevice _y = new BluetoothDevice();
+    _y.name = 'JBL Charge 4';
+    _y.address = '98:52:3D:BB:18:26';
+    _y.type = 3;
+    _y.connected = null;
+
+
+    PrinterBluetooth y = new PrinterBluetooth(_y);
+
+    List<PrinterBluetooth> tempBlueToothDevices = new List<PrinterBluetooth>();
+    tempBlueToothDevices.addAll([x, y]);
+
+    setState(() {
+      blueToothDevicesState = tempBlueToothDevices;
+    });
+
+    */
   }
 
   void _stopScanDevices() {
@@ -852,7 +902,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         // workTest
                                         Container(
-                                          height:60,
+                                          height:68,
                                           color:Colors.lightBlueAccent,
                                           child: showAvailableDevices(),
                                         ),
@@ -1458,6 +1508,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    SelectedFood incrementCurrentFoodProcessing = snapshot.data;
     List<PrinterBluetooth> blueToothDevicesFromStream = blueToothDevicesState;
 
+    logger.e('blueToothDevicesFromStream: $blueToothDevicesFromStream');
 
     if(blueToothDevicesFromStream.length==0){
 
@@ -1469,9 +1520,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
             maxLines: 2,
 //                                      textAlign: TextAlign.justify,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 21,
               fontWeight: FontWeight
                   .normal,
+              fontFamily: 'Itim-Regular',
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
@@ -1500,13 +1552,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 children: <Widget>[
                   Container(
                     height: 60,
-                    padding: EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: <Widget>[
                         Icon(Icons.print),
                         SizedBox(width: 10),
+/*                        Text(blueToothDevicesFromStream[index].name ?? ''), */
+                       /*
                         Expanded(
+                          */
+                       Container(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -1519,11 +1575,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               ),
                             ],
                           ),
-                        )
+                        ),
+
                       ],
                     ),
                   ),
-                  Divider(),
+//                  Divider(),
                 ],
               ),
             );
