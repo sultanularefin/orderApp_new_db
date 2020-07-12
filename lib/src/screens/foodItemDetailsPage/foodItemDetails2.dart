@@ -157,6 +157,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(child: new LinearProgressIndicator());
+                  // from LinearProgressIndicator() to CircularProgressIndicator();
+                  // checking which function progress indicator is executed from pop from foodDetails page to foodGallery page.
                 }
                 else {
                   //   print('snapshot.hasData FDetails: ${snapshot.hasData}');
@@ -2405,7 +2407,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               if (snapshot.data == null) {
 //          if (!snapshot.hasData) {
 
-                print('!snapshot.hasData');
+                print('snapshot.data == null');
 
                 return Container(
 //              height: displayHeight(context) / 10,
@@ -2515,9 +2517,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
           child: GestureDetector(
-              onLongPress: () {
-                print(
-                    'at Long Press: ');
+
+              onTap: () {
+                print('at onTap: ');
+//                print('at Long Press UP: ');
+                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+                blocD.setThisCheeseAsSelectedCheeseItem(oneCheese,index);
+
               },
 
               onLongPressUp: (){
@@ -2525,7 +2532,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 print('at Long Press UP: ');
                 final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-                blocD.toggleThisCheeseAsSelectedCheeseItem(oneCheese,index);
+                blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
               },
 
 
@@ -2577,10 +2584,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                 ],
               ),
-              onTap: () {
-                print('for future use');
-//                            return Navigator.push(context,
-              }
+
           ),
 
 
@@ -2595,17 +2599,21 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                          horizontal: 10.0, vertical: 22.0),
               horizontal: 18, vertical: 0),
           child: GestureDetector(
-              onLongPress: () {
-                print(
-                    'at Long Press: ');
+              onTap: () {
+                print('at onTap: ');
+//                print('at Long Press UP: ');
+                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+                blocD.setThisCheeseAsSelectedCheeseItem(oneCheese,index);
+
               },
+
               onLongPressUp: (){
 
                 print('at Long Press UP: ');
                 final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-                blocD.toggleThisCheeseAsSelectedCheeseItem(oneCheese,index);
-//                blocD.addThisCheeseAsSelectedCheeseItem(oneSauce,index)
+                blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
               },
 
 
@@ -2677,9 +2685,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                 ],
               ),
-              onTap: () {
-                print('for future use');
-              }
+
           ),
 
         );

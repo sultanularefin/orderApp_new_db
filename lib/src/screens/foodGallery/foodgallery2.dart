@@ -344,7 +344,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                               Container(
                                 height: displayHeight(context) / 14,
-                                color: Color(0xffFFFFFF),
+//                                color: Color(0xffFFFFFF),
+                              color:Colors.purpleAccent,
+
 //                      color: Color.fromARGB(255, 255,255,255),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment
@@ -356,8 +358,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                       height: kToolbarHeight+6,
                                       width: 200,
                                       child:  Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
 
                                           Container(
@@ -367,7 +369,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                                              vertical: 0),
 
 //                                          width: displayWidth(context) / 13,
-                                            height: displayHeight(context) / 21,
+                                            height: displayHeight(context) / 15,
+                                            color:Colors.blue,
                                             child: Image.asset('assets/Path2008.png'),
 
                                           ),
@@ -378,9 +381,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                                 vertical: 0),
 
 //                                          width: displayWidth(context) / 6,
-                                            height: displayHeight(context) / 21,
-                                            child: Row(
-                                              children: <Widget>[
+                                            height: displayHeight(context) / 15,
+                                            color:Colors.red,
+                                            child:
 
 //                                          Container(child: Image.asset('assets/Path2008.png')),
                                                 Container(
@@ -405,8 +408,6 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                                   ),
                                                 ),
 
-                                              ],
-                                            ),
 
                                           ),
 
@@ -421,7 +422,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                           vertical: 0),
 
                                       width: displayWidth(context) / 5,
-                                      height: displayHeight(context) / 21,
+                                      height: displayHeight(context) / 15,
                                       child: Image.asset('assets/Path2008.png'),
 
                                     ),

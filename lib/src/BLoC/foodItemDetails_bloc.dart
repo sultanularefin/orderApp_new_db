@@ -914,7 +914,29 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
-  void toggleThisCheeseAsSelectedCheeseItem(CheeseItem oneCheeseItem,int index){
+  void setThisCheeseAsSelectedCheeseItem(CheeseItem oneCheeseItem,int index){
+
+    List<CheeseItem> allTempCheeseItems = _allCheeseItemsDBloc;
+
+    allTempCheeseItems[index].isSelected= !allTempCheeseItems[index].isSelected;
+
+    _allCheeseItemsDBloc = allTempCheeseItems;
+    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+    // selected update.
+    _allSelectedCheeseItems = allTempCheeseItems.where((element) => element.isSelected==true).toList();
+    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+
+
+
+    setNewPriceBySelectedCheeseItems(_allSelectedCheeseItems);
+
+    logger.w('_allSelectedCheeseItems at toggleThisCheeseAsSelectedCheeseItem():'
+        ' $_allSelectedCheeseItems');
+
+  }
+
+  void removeThisCheeseFROMSelectedCheeseItem(CheeseItem oneCheeseItem,int index){
 
     List<CheeseItem> allTempCheeseItems = _allCheeseItemsDBloc;
 

@@ -1065,6 +1065,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
 //                                                      padding::::
+//              color:Colors.green,
               color:Colors.white,
 //                                            height: 200,
               height: displayHeight(context) /11,
@@ -1114,21 +1115,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
             _currentOrderTypeIndex = selectedOne.index;
 
 
-            return ListView.builder(
-              scrollDirection: Axis.horizontal,
+            return Center(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
 
 //              reverse: true,
 
-              shrinkWrap: false,
+//              shrinkWrap: false,
+                shrinkWrap: true,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
-              itemCount: allOrderTypesSingleSelect.length,
+                itemCount: allOrderTypesSingleSelect.length,
 
-              itemBuilder: (_, int index) {
-                return oneSingleDeliveryType(
-                    allOrderTypesSingleSelect[index],
-                    index);
-              },
+                itemBuilder: (_, int index) {
+                  return oneSingleDeliveryType(
+                        allOrderTypesSingleSelect[index],
+                        index);
+                },
+              ),
             );
           }
         }
@@ -9197,7 +9201,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
 
             Container(
-              padding: EdgeInsets.fromLTRB(displayWidth(context)/6, 20, 0, 5),
+//              padding: EdgeInsets.fromLTRB(displayWidth(context)/6, 20, 0, 5),
 //              alignment:Alignment.center,
 //
 //                                                      padding::::
@@ -9381,7 +9385,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
 
             Container(
-              padding: EdgeInsets.fromLTRB(displayWidth(context)/6, 20, 0, 5),
+//              padding: EdgeInsets.fromLTRB(displayWidth(context)/6, 20, 0, 5),
 //              alignment:Alignment.center,
 //
 //                                                      padding::::
@@ -9642,10 +9646,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       Container(
 
-        width: displayWidth(context)/7,
+        width: displayWidth(context)/6,
         height: displayHeight(context) /11,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
         child:
         InkWell(
           child:Container(
@@ -9720,6 +9725,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         height: displayHeight(context) /11,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
         child:
         InkWell(
           child:Container(
@@ -9999,22 +10005,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
              */
 
 
-            return ListView.builder(
-              scrollDirection: Axis.horizontal,
+            return Center(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
 
 //              reverse: true,
 
-              shrinkWrap: true,
+                shrinkWrap: true,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
-              itemCount: allPaymentTypesSingleSelect.length,
+                itemCount: allPaymentTypesSingleSelect.length,
 
-              itemBuilder: (_, int index) {
-                return oneSinglePaymentType(
-                    allPaymentTypesSingleSelect[index],
-                    index);
-              },
+                itemBuilder: (_, int index) {
+                  return oneSinglePaymentType(
+                      allPaymentTypesSingleSelect[index],
+                      index);
+                },
 
+              ),
             );
           }
         }
