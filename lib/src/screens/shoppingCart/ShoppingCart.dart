@@ -26,6 +26,7 @@ import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
 import 'dart:async';
 
+//  TODO: REdirect to food gallery page after pay button is pressed.
 
 /*
 * MODIFICATIONS: for REAL DEVICES.
@@ -35,6 +36,7 @@ onTap: () =>  _testPrintDummyDevices(blueToothDevicesState[index]),
 above to below for real devices.
 
 onTap: () => _testPrint(blueToothDevicesState[index]),
+* _testPrint(blueToothDevicesFromStream[index])
 
 *
 *
@@ -1703,10 +1705,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ),
                 onPressed: () {
                   print('_testPrintDummyDevices');
-                  _testPrintDummyDevices(blueToothDevicesState[index]);
+//                  _testPrintDummyDevices(blueToothDevicesState[index]);
+                  _testPrint(blueToothDevicesState[index]);
 
               /*
-             onTap: () => _testPrint(blueToothDevicesFromStream[index]),
+             onTap: () => _testPrint(blueToothDevicesState[index]);
                //PROBLEM CODE, USING WRONG VARIABLE HERE...
 
                //ORIGINAL.  --1
@@ -8616,8 +8619,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // PRINTING CODES WILL BE PUTTED HERE.
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
-//                  _startScanDevices();
-                  _startScanDummyDevices();
+                  _startScanDevices();
+//                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
 
@@ -8803,8 +8806,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
-//                  _startScanDevices();
-                  _startScanDummyDevices();
+                  _startScanDevices();
+//                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
 
