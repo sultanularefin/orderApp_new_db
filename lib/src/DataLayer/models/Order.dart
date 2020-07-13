@@ -38,7 +38,7 @@ class Order {
 
   int orderTypeIndex;
   int paymentTypeIndex;
-  CustomerInformation ordersCustomer;
+  CustomerInformation orderingCustomer;
   double totalPrice;
   bool    paymentButtonPressed;
   String  orderdocId;
@@ -65,7 +65,7 @@ class Order {
         this.selectedFoodListLength,
         this.orderTypeIndex,
         this.paymentTypeIndex,
-        this.ordersCustomer,
+        this.orderingCustomer,
         this.totalPrice,
         this.paymentButtonPressed:false,
         this.orderdocId:'',

@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
+import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:platform_action_sheet/platform_action_sheet.dart';
@@ -636,7 +637,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //              int x = 5;
 
-                          CustomerInformation x = oneOrder.ordersCustomer;
+                          CustomerInformation x = oneOrder.orderingCustomer;
 
 //              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
 
@@ -3464,7 +3465,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget unobscureInputandRestforDinningRoom (Order unObsecuredInputandPayment){
 
 
-    CustomerInformation currentUser = unObsecuredInputandPayment.ordersCustomer;
+    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
     // means
     // 1. Row Holding user's information.
     // 2. means holding the inputFields for User Input.
@@ -3653,7 +3654,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   bottom:
                   getNumberOfInputsFilledUpDinningRoom (
-                      unObsecuredInputandPayment.ordersCustomer) >0
+                      unObsecuredInputandPayment.orderingCustomer) >0
                       ?  22:-10,
                   /*
                   0:
@@ -3680,7 +3681,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     // zeroORMoreInputsEmptyDinningRoom
                     child:
                     zeroORMoreInputsEmptyDinningRoom
-                      (unObsecuredInputandPayment.ordersCustomer) == true ?
+                      (unObsecuredInputandPayment.orderingCustomer) == true ?
 
                     // animatedObscuredPaymentSelectContainerTakeAway
                     // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
@@ -4624,7 +4625,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget unobscureInputandRestforTakeAway (Order unObsecuredInputandPayment){
 
 
-    CustomerInformation currentUser = unObsecuredInputandPayment.ordersCustomer;
+    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
     // means
     // 1. Row Holding user's information.
     // 2. means holding the inputFields for User Input.
@@ -4811,7 +4812,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            getNumberOfInputsFilledUp
                   bottom:
                   getNumberOfInputsFilledUpTakeAway (
-                      unObsecuredInputandPayment.ordersCustomer) >0
+                      unObsecuredInputandPayment.orderingCustomer) >0
                       ?  22:-10,
                   /*
                   0:
@@ -4837,7 +4838,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     // zeroORMoreInputsEmptyTakeAway
                     child:
                     zeroORMoreInputsEmptyTakeAway
-                      (unObsecuredInputandPayment.ordersCustomer) == true ?
+                      (unObsecuredInputandPayment.orderingCustomer) == true ?
 
                     // animatedObscuredPaymentSelectContainerTakeAway
                     // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
@@ -5786,7 +5787,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment){
 
 
-    CustomerInformation currentUser = unObsecuredInputandPayment.ordersCustomer;
+    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
     // means
     // 1. Row Holding user's information.
     // 2. means holding the inputFields for User Input.
@@ -5959,13 +5960,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // initial Case.
 //                  height: displayWidth(context)/2.2-displayHeight(context) / 20,
                   bottom: getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer) <= 1?
+                      unObsecuredInputandPayment.orderingCustomer) <= 1?
                   -60:
                   getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer) <= 2?
+                      unObsecuredInputandPayment.orderingCustomer) <= 2?
                   -80:
                   getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer) == 3?
+                      unObsecuredInputandPayment.orderingCustomer) == 3?
 
                   -80:-0,
                   // from top to top distance offset related to Starting (top ) of
@@ -5980,7 +5981,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                animatedUnObscuredTextInputContainer(),
                     child:
                     zeroORMoreInputsEmpty
-                      (unObsecuredInputandPayment.ordersCustomer) == true ?
+                      (unObsecuredInputandPayment.orderingCustomer) == true ?
 
                     animatedObscuredPaymentSelectContainer
                       (unObsecuredInputandPayment):
@@ -6979,7 +6980,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   Widget _buildShoppingCartInputFieldsUNObscuredDinningRoom(Order unObsecuredInputandPayment){
-    CustomerInformation x = unObsecuredInputandPayment.ordersCustomer;
+    CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
     //if(getOneOrdercustomerInfoFieldsNotEmpty(x)!=0){
 
     CustomerInformation currentUser =  x;
@@ -7020,7 +7021,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
   Widget _buildShoppingCartInputFieldsUNObscuredTakeAway(Order unObsecuredInputandPayment){
-    CustomerInformation x = unObsecuredInputandPayment.ordersCustomer;
+    CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
     //if(getOneOrdercustomerInfoFieldsNotEmpty(x)!=0){
 
     CustomerInformation currentUser =  x;
@@ -7065,7 +7066,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 // work 3
   Widget _buildShoppingCartInputFieldsUNObscured(Order unObsecuredInputandPayment){
 
-    CustomerInformation x = unObsecuredInputandPayment.ordersCustomer;
+    CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
     //if(getOneOrdercustomerInfoFieldsNotEmpty(x)!=0){
 
     CustomerInformation currentUser =  x;
@@ -8273,9 +8274,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-
-
-
 
                 Container(
                   width:displayWidth(context)/4,
@@ -10768,6 +10766,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
 //    final profile = await CapabilityProfile.load();
 //    final Ticket ticket = Ticket(paper, profile);
+
+    CustomerInformation reciteOwnerCustomer = oneOrderListdocument.oneCustomer;
+    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
+
     final Ticket ticket = Ticket(PaperSize.mm80);
 
     // Print image
@@ -10781,16 +10783,38 @@ class _ShoppingCartState extends State<ShoppingCart> {
           align: PosAlign.center,
           height: PosTextSize.size2,
           width: PosTextSize.size2,
+//          fontType: 'Itim-Regular',
+
         ),
         linesAfter: 1);
 
-    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
     ticket.text('${oneOrderListdocument.orderBy}', styles: PosStyles(align: PosAlign.left));
-    ticket.text('${oneOrderListdocument.startDate}', styles: PosStyles(align: PosAlign.left));
+    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(align: PosAlign.left));
+    ticket.text('${oneOrderListdocument.orderProductionTime}',styles: PosStyles(align: PosAlign.left));
 
-    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-    ticket.text('${oneOrderListdocument.orderBy}', styles: PosStyles(align: PosAlign.right));
-    ticket.text('${oneOrderListdocument.startDate}', styles: PosStyles(align: PosAlign.right));
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('${reciteOwnerCustomer.address}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('${reciteOwnerCustomer.flatOrHouseNumber}', styles: PosStyles(align: PosAlign.right));
+
+
+    orderedItems.forEach((oneFood) {
+      /* Map<String, dynamic> */
+      //var userX2 = oneFood;
+
+
+//      print('oneFood[\'category\'] ${oneFood['category']}!!');
+
+
+      ticket.text('${oneFood.name}',styles: PosStyles(align: PosAlign.left));
+      ticket.text('${oneFood.quantity}',styles: PosStyles(align: PosAlign.center));
+      ticket.text('${oneFood.oneFoodTypeTotalPrice}', styles: PosStyles(align: PosAlign.right));
+
+    });
+//    orderedItems
+
+
 
 
     ticket.text('',
@@ -10968,7 +10992,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ).then((oneOrderData){
 
 
-      if ((oneOrderData.type != null) &&((oneOrderData.totalPrice !=null))) {
+      if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
         printTicket(paper,thisRestaurant,oneOrderData);
       }
@@ -11043,7 +11067,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ).then((oneOrderData){
 
 
-      if ((oneOrderData.type != null) &&((oneOrderData.totalPrice !=null))) {
+      if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
         printTicketDummy(/*paper, */thisRestaurant,oneOrderData);
       }

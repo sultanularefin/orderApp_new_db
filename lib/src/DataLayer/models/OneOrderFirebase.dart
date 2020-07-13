@@ -1,8 +1,11 @@
 
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
+
 class OneOrderFirebase {
 
-  Map<String,dynamic>       customerAddress;
-  List<dynamic>             orderedItems;
+  CustomerInformation       oneCustomer;
+  List<OrderedItem>         orderedItems;
   String                    orderBy;
   String                    paidStatus;
   String                    paidType;
@@ -11,14 +14,17 @@ class OneOrderFirebase {
   String                    driverName;
   DateTime                  endDate;
   DateTime                  startDate;
+  String                    formattedOrderPlacementDate;
+  String                    formattedOrderPlacementDatesTimeOnly;
   String                    orderStatus;
   String                    tableNo;
-  String                    type;
+  String                    orderType;
   String                    documentId;
+  int                    orderProductionTime;
 
   OneOrderFirebase(
       {
-        this.customerAddress,
+        this.oneCustomer,
         this.orderedItems,
         this.orderBy,
         this.paidStatus,
@@ -28,10 +34,13 @@ class OneOrderFirebase {
         this.driverName,
         this.endDate,
         this.startDate,
+        this.formattedOrderPlacementDate,
+        this.formattedOrderPlacementDatesTimeOnly,
         this.orderStatus,
         this.tableNo,
-        this.type,
+        this.orderType,
         this.documentId,
+        this.orderProductionTime, //  int minutes3 =minutes2.ceil(); // no need to have double
       }
       );
 

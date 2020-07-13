@@ -4,8 +4,11 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart'; // to be removed later.
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
+import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:intl/intl.dart';
 
 
@@ -580,6 +583,48 @@ class ShoppingCartBloc implements Bloc {
   }
 
 
+  List<SauceItem> convertFireStoreSauceItemsToLocalSauceItemsList(List<dynamic> fireStoreSauces){
+    // List<Map<String, dynamic>>
+
+    List<SauceItem> allSauceItems = new List<SauceItem>();
+
+    fireStoreSauces.forEach((oneFireStoreSauce) {
+
+      var oneSauceItem = oneFireStoreSauce;
+
+
+      SauceItem oneTempSauceItem = new SauceItem(
+        sauceItemName: oneSauceItem['name'] ,
+        imageURL: oneSauceItem['image'] ,
+        sauceItemAmountByUser: oneSauceItem['ingredientAmountByUser'] ,
+
+      );
+      allSauceItems.add(oneTempSauceItem);
+
+    });
+
+    return allSauceItems;
+//    return sf.length
+
+  }
+
+  CustomerInformation localCustomerInformationObject(Map<String,dynamic> customerAddress){
+// List<Map<String, dynamic>>
+
+    CustomerInformation oneCustomer = new CustomerInformation(
+      address: customerAddress['state'],
+      flatOrHouseNumber: customerAddress['apartNo'],
+      phoneNumber:customerAddress['phone'],
+//      etaTimeInMinutes: , ETA IS orderProductionTime
+    );
+
+
+
+    return oneCustomer;
+
+  }
+
+
   Future<OneOrderFirebase> fetchOrderDataFromFirebase(String orderDocumentId) async {
 
     var snapshot = await _client.invokeClientForOneOrder(orderDocumentId);
@@ -591,8 +636,8 @@ class ShoppingCartBloc implements Bloc {
     List<dynamic> orderedItems = snapshot['items'];
 //    List<Map<String, dynamic>>
     String                    orderBy = snapshot['orderby'];
-    String                    paidStatus = snapshot['p_status'];
-    String                    paidType = snapshot['p_type'];
+    String                    paidStatus = snapshot['paidStatus'];
+    String                    paidType = snapshot['paidType'];
     double                    totalPrice = snapshot['price'];
 
     String                    contact = snapshot['contact'];
@@ -601,11 +646,21 @@ class ShoppingCartBloc implements Bloc {
     DateTime                  startDate = snapshot['start'].toDate();
 
     String                    orderStatus = snapshot['status'];
-    String                    tableNo = snapshot['table_no'];
-    String                    type = snapshot['type'];
+    String                    tableNo = snapshot['tableNo'];
+    String                    orderType = snapshot['orderType'];
     String                    documentId = orderDocumentId;
+    int                    orderProductionTime= snapshot['orderProductionTime'];
 
-    print('customerAddress: $customerAddress');
+
+    CustomerInformation currentCustomerFromFireStore = localCustomerInformationObject(customerAddress);
+//    new CustomerInformation
+    print('currentCustomerFromFireStore: ${currentCustomerFromFireStore.address}');
+    print('currentCustomerFromFireStore: ${currentCustomerFromFireStore.flatOrHouseNumber}');
+    print('currentCustomerFromFireStore: ${currentCustomerFromFireStore.phoneNumber}');
+    print('currentCustomerFromFireStore: ${currentCustomerFromFireStore.etaTimeInMinutes}');
+
+
+
     print('orderedItems: $orderedItems');
     print('orderBy: $orderBy');
     print('paidStatus: $paidStatus');
@@ -628,11 +683,14 @@ class ShoppingCartBloc implements Bloc {
     print('endDate: $endDate');
     print('startDate: $startDate');
 
-    final now = DateTime.now();
-    final formatter = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_jm();
-    final String timestamp = formatter.format(startDate);
+//    final now = DateTime.now();
+    final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_jm();
+    final String timestamp = formatter1.format(startDate);
 
     print('timestamp: $timestamp');
+    final formatter2 =  DateFormat.jm();
+    final String formattedOrderPlacementDatesTimeOnly = formatter2.format(startDate);
+    print('orderProductionTime: $orderProductionTime');
 //    ticket.text(timestamp,
 //        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
 
@@ -643,35 +701,65 @@ class ShoppingCartBloc implements Bloc {
 //    -> July 10, 1996
 //    -> 5:08 PM
 //    -> 7/10/1996 5:08 PM
-    print('orderStatus: $orderStatus');
+    print('orderStatus: $orderStatus'); // "ready"
     print('tableNo: $tableNo');
-    print('type: $type');
+    print('orderType: $orderType');
     print('documentId: $documentId');
 
+    List<OrderedItem> allOrderedItems= new List<OrderedItem>();
     orderedItems.forEach((oneFood) {
 
-        var oneFoodItem = oneFood;
+      var oneFoodItem = oneFood;
+      print('oneFoodItem[\'quantity\'] ${oneFoodItem['quantity']}!');
+      print('oneFoodItem[\'name\'] ${oneFoodItem['name']}!');
+      print('oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
+//      print('oneFoodItem.category: ${oneFoodItem.category}');
+      print('oneFoodItem[\'category\']: ${oneFoodItem['category']}');
 
-        print('oneFoodItem[\'quantity\'] ${oneFoodItem['quantity']}!');
-        print('oneFoodItem[\'name\'] ${oneFoodItem['name']}!');
-        print('oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
+
+      OrderedItem oneTempOrderedItem= new OrderedItem(
+        category:  oneFoodItem['category'],
+        // defaultSauces:  convertFireStoreSauceItemsToLocalSauceItemsList(oneFoodItem['defaultSauces']),
+        discount:  oneFoodItem['discount'],
+        foodItemImage:  oneFoodItem['foodImage'],
+        // selectedIngredients:  oneFoodItem['ingredients'],
+        // selectedCheeses:oneFoodItem['selectedCheeses'],
+        quantity:  oneFoodItem['quantity'],
+        name:oneFoodItem['name'],
+        oneFoodTypeTotalPrice:oneFoodItem['oneFoodTypeTotalPrice'],
+        unitPrice:oneFoodItem['unitPrice'],
+      );
+
+
+
 
 //        print('oneFoodItem[\'quantity\'] ${oneFoodItem['quantity']}!');
 //        print('oneFoodItem[\'name\'] ${oneFoodItem['name']}!');
 //        print('oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
 
 
+      allOrderedItems.add(oneTempOrderedItem);
 
 
     });
 
 
 
+    /*
+    orderedItems55.forEach((oneFood) {
+      /* Map<String, dynamic> */ var userX2 = oneFood;
+
+      print('oneFood[\'category\'] ${oneFood['category']}!!');
+    });
+    */
+
+
+
 
     OneOrderFirebase oneOrderForReceiptProduction = new OneOrderFirebase(
-      customerAddress:customerAddress,
+      oneCustomer:currentCustomerFromFireStore,
 //      orderedItems:[],
-      orderedItems:orderedItems,
+      orderedItems:allOrderedItems,
       orderBy:orderBy,
       paidStatus:paidStatus,
       paidType:paidType,
@@ -680,10 +768,12 @@ class ShoppingCartBloc implements Bloc {
       driverName:driverName,
       endDate:endDate,
       startDate:startDate,
+      formattedOrderPlacementDate:timestamp,
+      formattedOrderPlacementDatesTimeOnly:formattedOrderPlacementDatesTimeOnly,
       orderStatus:orderStatus,
       tableNo:tableNo,
-      type:type,
-
+      orderType:orderType,
+      orderProductionTime:orderProductionTime,
       documentId:documentId,
     );
 
@@ -704,8 +794,8 @@ class ShoppingCartBloc implements Bloc {
     }
     else {
       */
-      return oneOrderForReceiptProduction;
-    }
+    return oneOrderForReceiptProduction;
+  }
 
 //    AssertionError(result.user.email);
 //    print('result: ' + result.user.email);
@@ -843,7 +933,7 @@ class ShoppingCartBloc implements Bloc {
 
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    tempOrderModifyCustomerInfo.ordersCustomer.address= address;
+    tempOrderModifyCustomerInfo.orderingCustomer.address= address;
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 
@@ -855,7 +945,7 @@ class ShoppingCartBloc implements Bloc {
 
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    tempOrderModifyCustomerInfo.ordersCustomer.flatOrHouseNumber= houseOrFlatNumber;
+    tempOrderModifyCustomerInfo.orderingCustomer.flatOrHouseNumber= houseOrFlatNumber;
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 
@@ -876,7 +966,7 @@ class ShoppingCartBloc implements Bloc {
 
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    tempOrderModifyCustomerInfo.ordersCustomer.phoneNumber = phoneNumber;
+    tempOrderModifyCustomerInfo.orderingCustomer.phoneNumber = phoneNumber;
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 
@@ -896,11 +986,11 @@ class ShoppingCartBloc implements Bloc {
 
 
     double minutes2 = double.parse(minutes);
-    int minutes3 =minutes2.ceil();
+    int minutes3 =minutes2.ceil(); // no need to have double
 
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    tempOrderModifyCustomerInfo.ordersCustomer.etaTimeInMinutes = minutes3;
+    tempOrderModifyCustomerInfo.orderingCustomer.etaTimeInMinutes = minutes3;
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 
@@ -985,7 +1075,7 @@ class ShoppingCartBloc implements Bloc {
 //    if (result.user.email != null) {
 //      FirebaseUser fireBaseUserRemote = result.user;
 
-  /*
+    /*
   _scanResults.add(<PrinterBluetooth>[]);
 
     _bluetoothManager.startScan(timeout: timeout);
@@ -1013,7 +1103,7 @@ class ShoppingCartBloc implements Bloc {
     }, onDone: () {
       print("Task Done zzzzz zzzzzz zzzzzzz zzzzzzz zzzzzz zzzzzzzz zzzzzzzzz zzzzzzz zzzzzzz");
     }, onError: (error, StackTrace stackTrace) {
-    print("Some Error $stackTrace");
+      print("Some Error $stackTrace");
     });
 
 //    _devices=devices;
@@ -1088,7 +1178,7 @@ class ShoppingCartBloc implements Bloc {
       print("Some Error: $stackTrace");
     },cancelOnError: false);
 
-   return _devicesBlueTooth;
+    return _devicesBlueTooth;
 
 
 

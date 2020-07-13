@@ -75,7 +75,7 @@ class FirebaseClient {
 
   Future<QuerySnapshot> fetchFoodItems() async {
 
-   // print ('at here fetchFoodItems ==================================== *************** ');
+    // print ('at here fetchFoodItems ==================================== *************** ');
 
     /*
     var snapshot= Firestore.instance
@@ -127,7 +127,7 @@ class FirebaseClient {
 
   Future<QuerySnapshot> fetchAllIngredients()async{
 
-   // print ('at here fetchAllIngredients ==================================== *************** ');
+    // print ('at here fetchAllIngredients ==================================== *************** ');
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('USWc8IgrHKdjeDe9Ft4j')
@@ -198,7 +198,7 @@ class FirebaseClient {
     int counter=0;
     si.forEach((oneIngredient) {
 
-    //  print('si[counter].imageURL}: ${si[counter].imageURL}');
+      //  print('si[counter].imageURL}: ${si[counter].imageURL}');
       var identifier = {
 
         'type': 0,
@@ -297,19 +297,19 @@ class FirebaseClient {
     int counter=0;
     sf.forEach((oneFood) {
 
-     // print('sf[counter].foodItemImageURL: ${sf[counter].foodItemImageURL}');
+      // print('sf[counter].foodItemImageURL: ${sf[counter].foodItemImageURL}');
       var identifier = {
 
         'category': sf[counter].categoryName,
         'discount': sf[counter].discount,
-        'image': Uri.decodeComponent(sf[counter].foodItemImageURL.replaceAll(
+        'foodImage': Uri.decodeComponent(sf[counter].foodItemImageURL.replaceAll(
             'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'quantity': sf[counter].quantity,
-        'defult_sauces':convertedSauceItems(sf[counter].selectedSauceItems),
-        'selected_cheeses':convertedCheeseItems(sf[counter].selectedCheeseItems),
-        'ingredient':convertedIngredients(sf[counter].selectedIngredients),
+        'defaultSauces':convertedSauceItems(sf[counter].selectedSauceItems),
+        'selectedCheeses':convertedCheeseItems(sf[counter].selectedCheeseItems),
+        'ingredients':convertedIngredients(sf[counter].selectedIngredients),
         'name':sf[counter].foodItemName,
         'oneFoodTypeTotalPrice': sf[counter].quantity * sf[counter].unitPrice,
         'unitPrice':sf[counter].unitPrice,
@@ -326,8 +326,8 @@ class FirebaseClient {
 
 
   Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType)async {
-   // print('currentOrderToFirebaseL: $currentOrderToFirebase');
-   /*print('currentOrderToFirebase.selectedFoodInOrder: '
+    // print('currentOrderToFirebaseL: $currentOrderToFirebase');
+    /*print('currentOrderToFirebase.selectedFoodInOrder: '
         '${currentOrderToFirebase.selectedFoodInOrder}'); */
 
     List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
@@ -346,23 +346,25 @@ class FirebaseClient {
 
     }*/
 //    );
-   // print('map1 $map1');
+    // print('map1 $map1');
 
     String orderDocId='';
-   // print('saving order data using a web service');
+    // print('saving order data using a web service');
 
     DocumentReference document = await Firestore.instance.collection(
         "restaurants").
     document('USWc8IgrHKdjeDe9Ft4j').
+//    collection('orderList').add(switch (<String, dynamic>{
     collection('orderList').add(<String, dynamic>{
 
       'address': {
-        'apartNo': currentOrderToFirebase.ordersCustomer.flatOrHouseNumber,
+        'apartNo': currentOrderToFirebase.orderingCustomer.flatOrHouseNumber,
         'geo': [0, 0],
-        'state': currentOrderToFirebase.ordersCustomer.address,
+        'state': currentOrderToFirebase.orderingCustomer.address,
+        'phone': currentOrderToFirebase.orderingCustomer.phoneNumber,
 
       },
-      'contact': currentOrderToFirebase.ordersCustomer.phoneNumber,
+      'contact': currentOrderToFirebase.orderingCustomer.phoneNumber,
       'driver': 'mhmd',
       'end': FieldValue.serverTimestamp(),
 //      'items': [],
@@ -370,26 +372,29 @@ class FirebaseClient {
 
       'items': convertedFoods(tempSelectedFood),
       'orderby': orderBy,
-      'p_status': paidType != 'Later' ? 'Paid' : 'Unpaid',
-      'p_type': paidType,
+      'paidStatus': paidType != 'Later' ? 'Paid' : 'Unpaid',
+      'paidType': paidType,
       'price': currentOrderToFirebase.totalPrice,
       'start': FieldValue.serverTimestamp(),
+      // time when order is placed in firestore by clicking the pay button
       'status': "ready",
-      'table_no': '33',
-      'type': orderBy == 'Phone' ? 'Phone' : orderBy == 'Delivery'
+      'tableNo': '33',
+      'orderType': orderBy == 'Phone' ? 'Phone' : orderBy == 'Delivery'
           ? 'Delivery'
           : orderBy == 'TakeAway' ? 'TakeAway' : 'DinningRoom',
-      'orderProductionTime': currentOrderToFirebase.ordersCustomer.etaTimeInMinutes,
+      'orderProductionTime': currentOrderToFirebase.orderingCustomer.etaTimeInMinutes,
+
+
 
 
     }).whenComplete(() => print("called when future completes"))
         .then((document) {
-    //  print('Added document with ID: ${document.documentID}');
+      //  print('Added document with ID: ${document.documentID}');
       orderDocId= document.documentID;
 //      return document;
 //                            _handleSignIn();
     }).catchError((onError) {
-   //   print('K   K    K   at onError for Order data push : $onError');
+      //   print('K   K    K   at onError for Order data push : $onError');
       orderDocId= '';
 //      return '';
     });

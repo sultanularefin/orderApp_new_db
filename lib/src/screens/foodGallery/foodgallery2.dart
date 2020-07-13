@@ -169,7 +169,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
     selectedFoodListLength:0,
     orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
     paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-    ordersCustomer: null,
+    orderingCustomer: null,
     totalPrice: 0,
     page:0,
   );
@@ -1211,7 +1211,7 @@ Widget work1(BuildContext context){
 
             orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
             orderFG.totalPrice = totalPriceState;
-            orderFG.ordersCustomer = oneCustomerInfo;
+            orderFG.orderingCustomer = oneCustomerInfo;
             print(
 
                 'add_shopping_cart button pressed');
@@ -1316,7 +1316,7 @@ Widget work1(BuildContext context){
                       selectedFoodListLength:0,
                       orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
                       paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                      ordersCustomer: null,
+                      orderingCustomer: null,
                       totalPrice: 0,
                       page:0,
                       isCanceled: false,
@@ -1360,7 +1360,7 @@ Widget work1(BuildContext context){
                       selectedFoodListLength:0,
                       orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
                       paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                      ordersCustomer: null,
+                      orderingCustomer: null,
                       totalPrice: 0,
                       page:0,
                       isCanceled: false,
