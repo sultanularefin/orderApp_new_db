@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart'; // to be removed later.
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
+import 'package:intl/intl.dart';
 
 
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
@@ -626,26 +627,39 @@ class ShoppingCartBloc implements Bloc {
 
     print('endDate: $endDate');
     print('startDate: $startDate');
+
+    final now = DateTime.now();
+    final formatter = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_jm();
+    final String timestamp = formatter.format(startDate);
+//    ticket.text(timestamp,
+//        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
+
+//    new DateFormat.yMMMMd('en_US')
+//    new DateFormat.jm()
+//    new DateFormat.yMd().add_jm()
+
+//    -> July 10, 1996
+//    -> 5:08 PM
+//    -> 7/10/1996 5:08 PM
     print('orderStatus: $orderStatus');
     print('tableNo: $tableNo');
     print('type: $type');
     print('documentId: $documentId');
 
-    /*
     orderedItems.forEach((oneFood) {
-      print('oneFood details: ===> ===>${oneFood.quantity} ');
-//       print('oneFood.name: ${oneFood.name}');
-//       print('oneFood.subTota: ${oneFood.subTotal}');
-//       print('oneFood.quantity: ${oneFood.quantity}');
-//         print('oneFood: ${oneFood.foodItemName}');
-      // List<SelectedFood> test = makeMoreFoodByQuantity(oneFood);
 
-      print('MOMENT OF TRUTH: ');
-      // print(':::: ::: :: $test');
-      // selectedFoodforDisplay.addAll(test);
+        var oneFoodItem = oneFood;
+
+        print('oneFoodItem[0][\'quantity\'] ${oneFoodItem['quantity']}!');
+        print('oneFoodItem[0][\'name\'] ${oneFoodItem[0]['name']}!');
+        print('oneFoodItem[0][\'oneFoodTypeTotalPrice\'] ${oneFoodItem[0]['oneFoodTypeTotalPrice']}!');
+
+
+
+
     });
 
-    */
+
 
 
     OneOrderFirebase oneOrderForReceiptProduction = new OneOrderFirebase(

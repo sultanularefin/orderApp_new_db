@@ -311,7 +311,8 @@ class FirebaseClient {
         'selected_cheeses':convertedCheeseItems(sf[counter].selectedCheeseItems),
         'ingredient':convertedIngredients(sf[counter].selectedIngredients),
         'name':sf[counter].foodItemName,
-        'subTotal': sf[counter].quantity * sf[counter].unitPrice,
+        'oneFoodTypeTotalPrice': sf[counter].quantity * sf[counter].unitPrice,
+        'unitPrice':sf[counter].unitPrice,
       };
       testFoodItems.add(identifier);
       counter ++;
@@ -378,6 +379,7 @@ class FirebaseClient {
       'type': orderBy == 'Phone' ? 'Phone' : orderBy == 'Delivery'
           ? 'Delivery'
           : orderBy == 'TakeAway' ? 'TakeAway' : 'DinningRoom',
+      'orderProductionTime': currentOrderToFirebase.ordersCustomer.etaTimeInMinutes,
 
 
     }).whenComplete(() => print("called when future completes"))

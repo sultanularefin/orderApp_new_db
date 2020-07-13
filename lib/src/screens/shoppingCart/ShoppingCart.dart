@@ -7,9 +7,10 @@
 // dependency files
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
@@ -992,7 +993,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         // workTest
                                         Container(
                                           height:68,
-                                          color:Colors.lightBlueAccent,
+//                                          color:Colors.lightBlueAccent,
                                           child: showAvailableDevices(),
                                         ),
 
@@ -1603,6 +1604,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       return Container(
         alignment: Alignment.center,
+          child: Text(''),
+        /*
         child: Text(
             'press pay button to see printing devices',
             overflow: TextOverflow.ellipsis,
@@ -1620,6 +1623,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             )
         ),
 
+        */
+
 
 
       );
@@ -1629,55 +1634,89 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           scrollDirection: Axis.horizontal,
           itemCount: blueToothDevicesState.length,
+
           itemBuilder: (BuildContext context, int index) {
 //          testPrint(blueToothDevicesFromStream[position],context);
-            return InkWell(
+            return RaisedButton(
+                padding: EdgeInsets.fromLTRB(0,0,0,0),
 
-//              onTap: () => _testPrint(blueToothDevicesFromStream[index]),
-              //PROBLEM CODE, USING WRONG VARIABLE HERE...
-
-              //ORIGINAL.  --1
-
-              onTap: () => _testPrint(blueToothDevicesState[index]),
-
-              // DUMMY. --- 2
-//              onTap: () =>  _testPrintDummyDevices(blueToothDevicesState[index]),
-
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 60,
-                    padding: EdgeInsets.only(left: 20),
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.print),
-                        SizedBox(width: 10),
-/*                        Text(blueToothDevicesFromStream[index].name ?? ''), */
-                        /*
-                        Expanded(
-                          */
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(blueToothDevicesFromStream[index].name ?? ''),
-                              Text(blueToothDevicesFromStream[index].address),
-                              Text(
-                                'Click to print a test receipt',
-                                style: TextStyle(color: Colors.grey[700]),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                      ],
-                    ),
+//                color:Color(0xffFC0000),
+//                    color:Color(0xffFC0000),
+                // highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                // clipBehavior: Clip.hardEdge,
+                // splashColor: Color(0xffFC0000),
+                highlightElevation: 12,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Color(0xff707070),
+                    style: BorderStyle.solid,
+//            width: 1,
                   ),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+
+
+
+
+              child: Container(
+                margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+
+                padding: EdgeInsets.fromLTRB(0,0,0,0),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 60,
+                      padding: EdgeInsets.only(left: 20),
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.print),
+                          SizedBox(width: 10),
+/*                        Text(blueToothDevicesFromStream[index].name ?? ''), */
+                          /*
+                          Expanded(
+                            */
+                          Container(
+                            width:displayWidth(context)/4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(blueToothDevicesFromStream[index].name ?? ''),
+                                Text(blueToothDevicesFromStream[index].address),
+                                Text(
+                                  'Click to print a test receipt',
+                                  style: TextStyle(color: Colors.grey[700]),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
 //                  Divider(),
-                ],
+                  ],
+                ),
               ),
+                onPressed: () {
+                  print('_testPrintDummyDevices');
+                  _testPrintDummyDevices(blueToothDevicesState[index]);
+
+              /*
+             onTap: () => _testPrint(blueToothDevicesFromStream[index]),
+               //PROBLEM CODE, USING WRONG VARIABLE HERE...
+
+               //ORIGINAL.  --1
+
+             onTap: () => _testPrint(blueToothDevicesState[index]),
+
+               // DUMMY. --- 2
+                 _testPrintDummyDevices(blueToothDevicesState[index]);
+                */
+                }
+
             );
           }
         /*
@@ -4410,6 +4449,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                             keyboardType: TextInputType.number,
+                                            inputFormatters: <TextInputFormatter>[
+                                              WhitelistingTextInputFormatter.digitsOnly
+                                            ],
+
                                             textInputAction: TextInputAction.done,
 //
                                             onSubmitted: (_) => FocusScope.of(context).unfocus(),
@@ -4419,7 +4462,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
                                               border: InputBorder.none,
-                                              hintText: 'Enter when you want your ordered foods',
+//                                              hintText: 'Enter when you want your ordered foods',
+                                              hintText: 'After XX minutes',
                                               hintStyle: TextStyle(
                                                   color: Color(0xffFC0000),
                                                   fontSize: 17),
@@ -5560,7 +5604,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+
                                             keyboardType: TextInputType.number,
+//                                            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                                            inputFormatters: <TextInputFormatter>[
+                                              WhitelistingTextInputFormatter.digitsOnly
+                                            ],
+//inputFormatters: <TextInputFormatter>[
+//    WhitelistingTextInputFormatter.digitsOnly
+//],
                                             textInputAction: TextInputAction.done,
 //
                                             onSubmitted: (_) => FocusScope.of(context).unfocus(),
@@ -5570,7 +5622,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
                                               border: InputBorder.none,
-                                              hintText: 'Enter when you want your ordered foods',
+//                                              hintText: 'Enter when you want your ordered foods',
+                                              hintText: 'After XX minutes',
                                               hintStyle: TextStyle(
                                                   color: Color(0xffFC0000),
                                                   fontSize: 17),
@@ -6743,6 +6796,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                               keyboardType: TextInputType.number,
+                                              inputFormatters: <TextInputFormatter>[
+                                                WhitelistingTextInputFormatter.digitsOnly
+                                              ],
                                               textInputAction: TextInputAction.done,
 //
                                               onSubmitted: (_) => FocusScope.of(context).unfocus(),
@@ -7686,6 +7742,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         // do it in both Container
                         child: TextField(
                           keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            WhitelistingTextInputFormatter.digitsOnly
+                          ],
                           textInputAction: TextInputAction.done,
                           onSubmitted: (_) => FocusScope.of(context).unfocus(),
 
@@ -7801,6 +7860,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //          padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
               color:Colors.white,
+//              color:Colors.lightBlueAccent,
 //                                            height: 200,
 //          height: displayHeight(context) /3,
               width: displayWidth(context)
@@ -7830,6 +7890,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
           Container(
+            height:displayHeight(context)/20,
+//          color:Colors.blue,
+            width: displayWidth(context)
+                - displayWidth(context) / 5,
 
 
 
@@ -7986,14 +8050,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
             /*
     padding: EdgeInsets.fromLTRB(displayWidth(context)/3,
                 0, 0, 0),
+
+
             */
+
+            width: displayWidth(context)
+                - displayWidth(context) / 5,
             child:
             AnimatedSwitcher(
               duration: Duration(milliseconds: 0),
 //
               child: showFullPaymentType==false ?
               animatedUnObscuredCancelPayButtonDeliveryPhone(unObsecuredInputandPayment):
-              animatedObscuredCancelPayButton(unObsecuredInputandPayment)
+              animatedObscuredCancelPayButtonDeliveryPhone(unObsecuredInputandPayment)
 
               ,
 
@@ -8021,7 +8090,99 @@ class _ShoppingCartState extends State<ShoppingCart> {
       AbsorbPointer(
         child: Opacity(
           opacity:0.2,
-          child: Container(
+          child:Container(
+
+            color:Colors.white,
+            margin:EdgeInsets.fromLTRB(0,9,0,9),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+
+
+
+
+                Container(
+                  width:displayWidth(context)/4,
+                  height:displayHeight(context)/24,
+                  child: OutlineButton(
+                    onPressed: (){ print('Cancel Pressed obscured');
+//                    onPressed: _testPrintDummyDe
+//                    return Navigator.pop(context,true);
+                    },
+                    color: Color(0xffFC0000),
+                    // clipBehavior:Clip.hardEdge,
+//            ContinuousRectangleBorder
+//            BeveledRectangleBorder
+//            RoundedRectangleBorder
+                    borderSide: BorderSide(
+                      color: Color(0xffFC0000), // 0xff54463E
+                      style: BorderStyle.solid,
+                      width:7.6,
+                    ),
+                    shape:RoundedRectangleBorder(
+
+                      borderRadius: BorderRadius.circular(35.0),
+                    ),
+                    child:Container(
+
+//              alignment: Alignment.center,
+                      child: Text('Cancel',
+                        style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+
+                    ),
+                  ),
+
+                ),
+
+
+                SizedBox(width: displayWidth(context)/12,),
+                Container(
+                  width:displayWidth(context)/4,
+//                  width:displayWidth(context)/3.1,
+                  height:displayHeight(context)/24,
+                  child: OutlineButton(
+                    onPressed: () async {
+
+                      print('obscure pay');
+
+                    },
+                    color: Colors.green,
+                    // clipBehavior:Clip.hardEdge,
+//            ContinuousRectangleBorder
+//            BeveledRectangleBorder
+//            RoundedRectangleBorder
+                    borderSide: BorderSide(
+                      color: Colors.green, // 0xff54463E
+                      style: BorderStyle.solid,
+                      width:7.6,
+                    ),
+                    shape:RoundedRectangleBorder(
+
+
+                      borderRadius: BorderRadius.circular(35.0),
+                    ),
+                    child:Container(
+
+//              alignment: Alignment.center,
+
+                      child: Text('Pay',style: TextStyle(color: Colors.green,
+                        fontSize: 30,fontWeight: FontWeight.bold,),
+                      ),),
+                  ),
+
+
+
+                ),
+
+
+              ],
+            ),
+          ),
+
+
+          /*
+          Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -8034,7 +8195,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   width:displayWidth(context)/3.1,
                   child: OutlineButton(
                     onPressed: (){ print('Cancel Pressed obscured');
-
+//                    onPressed: _testPrintDummyDe
 //                    return Navigator.pop(context,true);
                     },
                     child: Text('Cancel',style: TextStyle(color: Color(0xffFC0000),fontSize: 30),),
@@ -8050,21 +8211,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
 
 
-                    /*
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    */
 
 
                   ),
 
                 ),
+
+
                 SizedBox(width: displayWidth(context)/12,),
                 Container(
                   width:displayWidth(context)/3.1,
@@ -8094,11 +8247,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ],
             ),
           ),
+          */
         ),
       );
   }
 
-  Widget animatedObscuredCancelPayButton(Order CancelPaySelect){
+  Widget animatedObscuredCancelPayButtonDeliveryPhone(Order CancelPaySelect){
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -8111,11 +8265,101 @@ class _ShoppingCartState extends State<ShoppingCart> {
       AbsorbPointer(
         child: Opacity(
           opacity:0.2,
-          child: Container(
+          child:
+          Container(
+            color: Colors.white,
+            margin:EdgeInsets.fromLTRB(0,9,0,9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+
+
+
+
+                Container(
+                  width:displayWidth(context)/4,
+                  height:displayHeight(context)/24,
+                  child: OutlineButton(
+                    onPressed: (){ print('Cancel Pressed obscured delivery phone obscured');
+//                    onPressed: _testPrintDummyDe
+//                    return Navigator.pop(context,true);
+                    },
+                    color: Color(0xffFC0000),
+                    // clipBehavior:Clip.hardEdge,
+//            ContinuousRectangleBorder
+//            BeveledRectangleBorder
+//            RoundedRectangleBorder
+                    borderSide: BorderSide(
+                      color: Color(0xffFC0000), // 0xff54463E
+                      style: BorderStyle.solid,
+                      width:7.6,
+                    ),
+                    shape:RoundedRectangleBorder(
+
+                      borderRadius: BorderRadius.circular(35.0),
+                    ),
+                    child:Container(
+
+//              alignment: Alignment.center,
+                      child: Text('Cancel',
+                        style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+
+                    ),
+                  ),
+
+                ),
+
+
+                SizedBox(width: displayWidth(context)/12,),
+                Container(
+                  width:displayWidth(context)/4,
+                  height:displayHeight(context)/24,
+                  child: OutlineButton(
+                    onPressed: () async {
+
+                      print('pay button Pressed obscured delivery phone obscured');
+
+                    },
+                    color: Colors.green,
+                    // clipBehavior:Clip.hardEdge,
+//            ContinuousRectangleBorder
+//            BeveledRectangleBorder
+//            RoundedRectangleBorder
+                    borderSide: BorderSide(
+                      color: Colors.green, // 0xff54463E
+                      style: BorderStyle.solid,
+                      width:7.6,
+                    ),
+                    shape:RoundedRectangleBorder(
+
+
+                      borderRadius: BorderRadius.circular(35.0),
+                    ),
+                    child:Container(
+
+//              alignment: Alignment.center,
+
+                      child: Text('Pay',style: TextStyle(color: Colors.green,
+                        fontSize: 30,fontWeight: FontWeight.bold,),
+                      ),),
+                  ),
+
+
+
+                ),
+
+
+              ],
+            ),
+          ),
+
+          /*Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+
                 Container(
                   child: OutlineButton(
                     onPressed: (){ print('Cancel Pressed obsured ...');
@@ -8161,6 +8405,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ],
             ),
           ),
+          */
         ),
       );
   }
@@ -8373,8 +8618,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // PRINTING CODES WILL BE PUTTED HERE.
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
-                  _startScanDevices();
-//                  _startScanDummyDevices();
+//                  _startScanDevices();
+                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
 
@@ -8560,8 +8805,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
-                  _startScanDevices();
-//                  _startScanDummyDevices();
+//                  _startScanDevices();
+                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
 
