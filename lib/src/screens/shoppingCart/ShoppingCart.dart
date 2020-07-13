@@ -10819,7 +10819,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
+/*
     ticket.text('',
         styles: PosStyles(align: PosAlign.center), linesAfter: 1);
 
@@ -10865,8 +10865,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(
           text: '2.55', width: 2, styles: PosStyles(align: PosAlign.right)),
     ]);
+    */
     ticket.hr();
 
+    /*
     ticket.row([
       PosColumn(
           text: 'TOTAL',
@@ -10884,9 +10886,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
             width: PosTextSize.size2,
           )),
     ]);
+    */
 
     ticket.hr(ch: '=', linesAfter: 1);
 
+    /*
     ticket.row([
       PosColumn(
           text: 'Cash',
@@ -10917,6 +10921,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     final String timestamp = formatter.format(now);
     ticket.text(timestamp,
         styles: PosStyles(align: PosAlign.center), linesAfter: 2);
+
+    */
 
     // Print QR Code from image
     // try {
