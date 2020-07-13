@@ -600,7 +600,7 @@ class ShoppingCartBloc implements Bloc {
     DateTime                  endDate = snapshot['end'].toDate();
     DateTime                  startDate = snapshot['start'].toDate();
 
-    String                    orderStatus = snapshot['Status'];
+    String                    orderStatus = snapshot['status'];
     String                    tableNo = snapshot['table_no'];
     String                    type = snapshot['type'];
     String                    documentId = orderDocumentId;
@@ -631,6 +631,8 @@ class ShoppingCartBloc implements Bloc {
     final now = DateTime.now();
     final formatter = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_jm();
     final String timestamp = formatter.format(startDate);
+
+    print('timestamp: $timestamp');
 //    ticket.text(timestamp,
 //        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
 
@@ -650,9 +652,13 @@ class ShoppingCartBloc implements Bloc {
 
         var oneFoodItem = oneFood;
 
-        print('oneFoodItem[0][\'quantity\'] ${oneFoodItem['quantity']}!');
-        print('oneFoodItem[0][\'name\'] ${oneFoodItem[0]['name']}!');
-        print('oneFoodItem[0][\'oneFoodTypeTotalPrice\'] ${oneFoodItem[0]['oneFoodTypeTotalPrice']}!');
+        print('oneFoodItem[\'quantity\'] ${oneFoodItem['quantity']}!');
+        print('oneFoodItem[\'name\'] ${oneFoodItem['name']}!');
+        print('oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
+
+//        print('oneFoodItem[\'quantity\'] ${oneFoodItem['quantity']}!');
+//        print('oneFoodItem[\'name\'] ${oneFoodItem['name']}!');
+//        print('oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
 
 
 
