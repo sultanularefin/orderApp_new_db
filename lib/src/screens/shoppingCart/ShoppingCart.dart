@@ -1705,8 +1705,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ),
                 onPressed: () {
                   print('_testPrintDummyDevices');
-//                  _testPrintDummyDevices(blueToothDevicesState[index]);
-                  _testPrint(blueToothDevicesState[index]);
+                  _testPrintDummyDevices(blueToothDevicesState[index]);
+//                  _testPrint(blueToothDevicesState[index]);
 
               /*
              onTap: () => _testPrint(blueToothDevicesState[index]);
@@ -8619,8 +8619,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // PRINTING CODES WILL BE PUTTED HERE.
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
-                  _startScanDevices();
-//                  _startScanDummyDevices();
+//                  _startScanDevices();
+                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
 
@@ -8806,8 +8806,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
-                  _startScanDevices();
-//                  _startScanDummyDevices();
+//                  _startScanDevices();
+                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
 

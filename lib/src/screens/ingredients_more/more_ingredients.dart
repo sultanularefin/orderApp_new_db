@@ -133,7 +133,7 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
     // ingItems = snapshot.documents.map((documentSnapshot) => IngredientItem.fromMap
     //(documentSnapshot.data)).toList();
 
-    ingItems = snapshot.documents.map((documentSnapshot) => NewIngredient.ingredientConver
+    ingItems = snapshot.documents.map((documentSnapshot) => NewIngredient.ingredientConvert
       (documentSnapshot.data,documentSnapshot.documentID)
 
     ).toList();
