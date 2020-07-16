@@ -11409,7 +11409,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     // ordered food items begins here.
-//    orderedItems.forEach((oneFood) {
+    orderedItems.forEach((oneFood) {
 
 
 //      ticket.text('',styles: PosStyles(align: PosAlign.left));
@@ -11420,25 +11420,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       ticket.row([
-        PosColumn(text: 'oneFood.name', width: 7),
-        PosColumn(text: 'quantity', width: 2),
-        PosColumn(text: 'Price', width: 3, styles: PosStyles(align: PosAlign.right)),
+        PosColumn(text: '${oneFood.name}', width: 7),
+        PosColumn(text: '${oneFood.quantity}', width: 2),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
+            width: 3, styles: PosStyles(align: PosAlign.right)),
       ]);
 
-      ticket.hr();
-      ticket.row([
-        PosColumn(text: 'Qty', width: 1),
-        PosColumn(text: 'Item', width: 7),
-        PosColumn(
-            text: 'Price', width: 2, styles: PosStyles(align: PosAlign.right)),
-        PosColumn(
-            text: 'Total', width: 2, styles: PosStyles(align: PosAlign.right)),
-      ]);
+//      ticket.hr();
+//      ticket.row([
+//        PosColumn(text: 'Qty', width: 1),
+//        PosColumn(text: 'Item', width: 7),
+//        PosColumn(
+//            text: 'Price', width: 2, styles: PosStyles(align: PosAlign.right)),
+//        PosColumn(
+//            text: 'Total', width: 2, styles: PosStyles(align: PosAlign.right)),
+//      ]);
 
       ticket.hr();
       // needed. as per design.
 
-//    });
+    });
 
     //ticket.hr(ch: '=', linesAfter: 1);
 
@@ -11587,8 +11588,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       ticket.row([
-        PosColumn(text: '${oneFood.name}', width: 6),
-        PosColumn(text: '${oneFood.quantity}', width: 1),
+        PosColumn(text: '${oneFood.name}', width: 7),
+        PosColumn(text: '${oneFood.quantity}', width: 2),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
       ]);
 
@@ -11755,8 +11756,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
 //      ticket.hr();
       ticket.row([
-        PosColumn(text: '${oneFood.name}', width: 6),
-        PosColumn(text: '${oneFood.quantity}', width: 1),
+        PosColumn(text: '${oneFood.name}', width: 7),
+        PosColumn(text: '${oneFood.quantity}', width: 2),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
       ]);
 
@@ -11988,8 +11989,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
 //      ticket.hr();
       ticket.row([
-        PosColumn(text: '${oneFood.name}', width: 6),
-        PosColumn(text: '${oneFood.quantity}', width: 1),
+        PosColumn(text: '${oneFood.name}', width: 7),
+        PosColumn(text: '${oneFood.quantity}', width: 2),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
       ]);
 
