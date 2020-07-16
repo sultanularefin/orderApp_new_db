@@ -11,8 +11,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Image;
+//import 'package:image/image.dart';
+import 'package:flutter/services.dart'; // InputFormatters.
+import 'package:image/image.dart' as ImageAliasAnotherSource;
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
@@ -22,9 +25,10 @@ import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 import 'package:platform_action_sheet/platform_action_sheet.dart';
 import 'package:dotted_border/dotted_border.dart';
 
+
 /* classes added */
-import 'dart:convert';
-import 'dart:typed_data';
+//import 'dart:convert';
+//import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/rendering.dart';
@@ -498,34 +502,298 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   */
 
+  /// Creates an image from the given widget by first spinning up a element and render tree,
+  /// then waiting for the given [wait] amount of time and then creating an image via a [RepaintBoundary].
+  ///
+  /// The final image will be of size [imageSize] and the the widget will be layout, ... with the given [logicalSize].
+//  Future<Uint8List> createImageFromWidget(
+  Future<Uint8List> createImageFromWidget(
+      Widget widget,
+      {Duration wait,
+        Size logicalSize,
+        Size imageSize}) async {
+    final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();
+
+    logicalSize ??= ui.window.physicalSize / ui.window.devicePixelRatio;
+    imageSize ??= ui.window.physicalSize;
+
+    assert(logicalSize.aspectRatio == imageSize.aspectRatio);
+
+    final RenderView renderView = RenderView(
+      window: null,
+      child: RenderPositionedBox(alignment: Alignment.center, child: repaintBoundary),
+      configuration: ViewConfiguration(
+        size: logicalSize,
+        devicePixelRatio: 1.0,
+      ),
+    );
+
+    final PipelineOwner pipelineOwner = PipelineOwner();
+    final BuildOwner buildOwner = BuildOwner();
+
+    pipelineOwner.rootNode = renderView;
+    renderView.prepareInitialFrame();
+
+    final RenderObjectToWidgetElement<RenderBox> rootElement = RenderObjectToWidgetAdapter<RenderBox>(
+      container: repaintBoundary,
+      child: widget,
+    ).attachToRenderTree(buildOwner);
+
+    buildOwner.buildScope(rootElement);
+
+    if (wait != null) {
+      await Future.delayed(wait);
+    }
+
+    buildOwner.buildScope(rootElement);
+    buildOwner.finalizeTree();
+
+    pipelineOwner.flushLayout();
+    pipelineOwner.flushCompositingBits();
+    pipelineOwner.flushPaint();
+
+    final ui.Image image = await repaintBoundary.toImage(pixelRatio: imageSize.width / logicalSize.width);
+    final ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+
+//    final Uint8List bytes =  byteData.buffer.asUint8List();
+
+//    final Uint8List bytes = data.buffer.asUint8List();
+//    final Image image = decodeImage(bytes);
+//
+//    final Image oneImage = ImageAliasAnotherSource.decodeImage(bytes);
+    // decodePng(bytes);
+//    decodeImage(bytes)
+
+//    bytesArefins = bytes;
+//    uint8LIstController.sink.add(bytesArefins);
+
+    return
+      byteData.buffer.asUint8List();
+
+//  return;
+  }
 
 
 
+  Widget restaurantName(String name) {
 
-  Widget restaurantName = new  Directionality(
-    textDirection: TextDirection.ltr,
-    child:
-
-//    textDirection: TextDirection.LTR,
-      Text(
-          'FoodItemName'.toLowerCase(),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
+    return Directionality(
+      textDirection:
+      TextDirection.ltr,
+      child: Text('${name.toLowerCase()}',
+          maxLines:1,
+          overflow:TextOverflow.ellipsis,
+          style: TextStyle
+            (
             fontSize: 24,
-            fontWeight: FontWeight.normal,
-//         color: Colors.white
-            color: Colors
-                .black,
+            fontWeight:
+            FontWeight.normal,
+            color: Colors.black,
             fontFamily: 'Itim-Regular',
           )
       ),
+    );
+  }
 
-  );
+  Widget subTotalTotalDeliveryCost(double subtotal, {double deliverCost:2.50}) {
+    Path customPathTotalCost = Path()
+      ..moveTo(200, 120)
+      ..lineTo(0, 120);
+
+    return Directionality(
+
+      textDirection: TextDirection.ltr,
+      child:
+      Container(
+//        color:Colors.green,
+        height: 180,
+
+//        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
+        width: 200,
+        child:
+        DottedBorder(
+          dashPattern: [9, 6,],
+          color: Colors.black,
+          strokeWidth: 3.6,
+          borderType: BorderType.RRect,
+          radius: Radius.circular(35),
+//          strokeCap:StrokeCap.butt,
+//        strokeCap: StrokeCap.round,
+//          strokeCap: StrokeCap.square,
+
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+
+
+              //rounded rectangle border and text conted inside it begins here.
+
+
+              DottedBorder(
+//                dashPattern: [6, 3,2, 3],
+                dashPattern: [9, 6,],
+                customPath: (size) => customPathTotalCost,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+
+                    Container(
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <
+                            Widget>[
+                          //  SizedBox(width: 5,),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                            child: Text(
+                              'SUBTOTAL',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+//                            fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+//                          color: Color(0xffF50303),
+                                fontSize: 22, fontFamily: 'Itim-Regular',),
+                            ),
+                          ),
+                          Text(
+                            'DELIVERY',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+//                          fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+//                        color: Color(0xffF50303),
+                              fontSize: 22, fontFamily: 'Itim-Regular',),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // 1st row ends here.
+
+
+                    Container(
+                      height: 50,
+
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <
+                            Widget>[
+                          //  SizedBox(width: 5,),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                            child: Text(
+                              'paid',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+//                        fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+//                          color: Color(0xffF50303),
+                                fontSize: 22, fontFamily: 'Itim-Regular',),
+                            ),
+                          ),
+                          Text(
+                            'delivery',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+//                      fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+//                        color: Color(0xffF50303),
+                              fontSize: 22, fontFamily: 'Itim-Regular',),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              /*
+              DottedBorder(
+//                dashPattern: [6, 3,2, 3],
+                dashPattern: [9, 6,],
+                customPath: (size) => customPath2,
+                child: Text('abc',style:TextStyle(
+                  color:Colors.indigo,
+                )
+                  ,),
+              ),
+
+              */
+              /*
+              DottedBorder(
+                customPath: (size) => customPath, // PathBuilder
+                color: Colors.indigo,
+                dashPattern: [8, 4],
+                strokeWidth: 2,
+                child: Container(
+                  height: 220,
+                  width: 120,
+                  color: Colors.green.withAlpha(20),
+                ),
+              ),
+
+*/
+
+//              DottedBorder(
+//              child:StrokeCap.Butt),
+
+
+              //2nd row ends here.
+
+
+              Container(
+                height: 50,
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <
+                      Widget>[
+                    //  SizedBox(width: 5,),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                      child: Text(
+                        'paid',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                          color: Color(0xffF50303),
+                          fontSize: 22, fontFamily: 'Itim-Regular',),
+                      ),
+                    ),
+                    Text(
+                      'delivery',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+//                        color: Color(0xffF50303),
+                        fontSize: 22, fontFamily: 'Itim-Regular',),
+                    ),
+                  ],
+                ),
+              ),
+
+              // total ends here.
+
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
 
   @override
   Widget build(BuildContext context) {
+
 
 
 
@@ -11159,104 +11427,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
-    // ordered food items ends here.
-//    orderedItems
-
-
-
-
-
-
-
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'TOTAL',
-          width: 6,
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-      PosColumn(
-          text: '\$10.97',
-          width: 6,
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-    ]);
-    */
-
     ticket.hr(ch: '=', linesAfter: 1);
 
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'Cash',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$15.00',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-    ticket.row([
-      PosColumn(
-          text: 'Change',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$4.03',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-
-    ticket.feed(2);
-    ticket.text('Thank you!',
-        styles: PosStyles(align: PosAlign.center, bold: true));
-
-    final now = DateTime.now();
-    final formatter = DateFormat('MM/dd/yyyy H:m');
-    final String timestamp = formatter.format(now);
-    ticket.text(timestamp,
-        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
-
-    */
-
-    // Print QR Code from image
-    // try {
-    //   const String qrData = 'example.com';
-    //   const double qrSize = 200;
-    //   final uiImg = await QrPainter(
-    //     data: qrData,
-    //     version: QrVersions.auto,
-    //     gapless: false,
-    //   ).toImageData(qrSize);
-    //   final dir = await getTemporaryDirectory();
-    //   final pathName = '${dir.path}/qr_tmp.png';
-    //   final qrFile = File(pathName);
-    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
-    //   final img = decodeImage(imgFile.readAsBytesSync());
-
-    //   ticket.image(img);
-    // } catch (e) {
-    //   print(e);
-    // }
-
-    // Print QR Code using native function
-    // ticket.qrcode('example.com');
 
     ticket.feed(2);
     ticket.cut();
     return ticket;
   }
 
-  // demoReceipt Order Type TakeAway ends here...
 
-  // demoReceipt Order Type Dinning ends here...
-  // OrderType Delivery begins here....
   // # number 2: demoReceipt Order Type DElivery begins here...
+
+
   Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderListdocument
@@ -11274,12 +11456,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
     final Ticket ticket = Ticket(PaperSize.mm80);
 
     // Print image
+    Widget restaurantName2 = restaurantName(currentRestaurant.name);
+    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
 
+    /* await */ restaurantNameBytes.whenComplete(() {
 
+      print("called when future completes");
+
+    }
+    ).then((oneImageInBytes){
+
+      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      ticket.image(image);
+
+    }).catchError((onError){
+      print(' error in getting restaurant name as image');
+    });
 
 
 //    static const IconData print = IconData(0xe8ad, fontFamily: 'MaterialIcons')
 
+    /*
     ticket.text('${currentRestaurant.name}',
         styles: PosStyles(
           align: PosAlign.center,
@@ -11290,6 +11487,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         ),
         linesAfter: 1);
+
+    */
+
+
 
 //    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
     ticket.text('${oneOrderListdocument.orderBy}',
@@ -11359,12 +11560,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     // code for order type and paid status starts here.
 
-    // Print image
 
-//    final ByteData data = await rootBundle.load('assets/flutterlogo.svg');
-//    final Uint8List bytes = data.buffer.asUint8List();
-//    final Image image = decodeImage(bytes);
-//    ticket.image(image);
 
 
 // Print image using alternative commands
@@ -11377,11 +11573,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     orderedItems.forEach((oneFood) {
 
 
-//      ticket.text('',styles: PosStyles(align: PosAlign.left));
-//      ticket.text('${oneFood.quantity}',styles: PosStyles(align: PosAlign.center));
-//      ticket.text('${oneFood.oneFoodTypeTotalPrice}', styles: PosStyles(align: PosAlign.right));
-//
-//      ticket.hr();
       ticket.row([
         PosColumn(text: '${oneFood.name}', width: 6),
         PosColumn(text: '${oneFood.quantity}', width: 1),
@@ -11392,94 +11583,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
-    // ordered food items ends here.
-//    orderedItems
+    // Print image
+    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderListdocument.totalPrice);
 
+    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
 
+    /* await */ totalDeliveryWidgetBytes.whenComplete(() {
 
+      print("called when future completes");
 
+    }
+    ).then((oneImageInBytes){
 
+      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      ticket.image(image);
 
-
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'TOTAL',
-          width: 6,
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-      PosColumn(
-          text: '\$10.97',
-          width: 6,
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-    ]);
-    */
-
-    ticket.hr(ch: '=', linesAfter: 1);
-
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'Cash',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$15.00',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-    ticket.row([
-      PosColumn(
-          text: 'Change',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$4.03',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-
-    ticket.feed(2);
-    ticket.text('Thank you!',
-        styles: PosStyles(align: PosAlign.center, bold: true));
-
-    final now = DateTime.now();
-    final formatter = DateFormat('MM/dd/yyyy H:m');
-    final String timestamp = formatter.format(now);
-    ticket.text(timestamp,
-        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
-
-    */
-
-    // Print QR Code from image
-    // try {
-    //   const String qrData = 'example.com';
-    //   const double qrSize = 200;
-    //   final uiImg = await QrPainter(
-    //     data: qrData,
-    //     version: QrVersions.auto,
-    //     gapless: false,
-    //   ).toImageData(qrSize);
-    //   final dir = await getTemporaryDirectory();
-    //   final pathName = '${dir.path}/qr_tmp.png';
-    //   final qrFile = File(pathName);
-    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
-    //   final img = decodeImage(imgFile.readAsBytesSync());
-
-    //   ticket.image(img);
-    // } catch (e) {
-    //   print(e);
-    // }
-
-    // Print QR Code using native function
-    // ticket.qrcode('example.com');
-
+    }).catchError((onError){
+      print(' error in getting restaurant name as image');
+    });
+    
     ticket.feed(2);
     ticket.cut();
     return ticket;
