@@ -11417,17 +11417,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      ticket.text('${oneFood.oneFoodTypeTotalPrice}', styles: PosStyles(align: PosAlign.right));
 //
 //      ticket.hr();
+
+    /*
       ticket.row([
         PosColumn(text: '${oneFood.name}', width: 7),
         PosColumn(text: '${oneFood.quantity}', width: 2),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
       ]);
 
-      ticket.hr(); // needed. as per design.
+      */
+      ticket.row([
+        PosColumn(text: 'Qty', width: 1),
+        PosColumn(text: 'Item', width: 7),
+        PosColumn(
+            text: 'Price', width: 2, styles: PosStyles(align: PosAlign.right)),
+        PosColumn(
+            text: 'Total', width: 2, styles: PosStyles(align: PosAlign.right)),
+      ]);
+
+      ticket.hr();
+      // needed. as per design.
 
     });
 
-    ticket.hr(ch: '=', linesAfter: 1);
+    //ticket.hr(ch: '=', linesAfter: 1);
 
 
     ticket.feed(2);
