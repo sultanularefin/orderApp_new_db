@@ -24,6 +24,7 @@ class CheeseItem {
   final int    cheeseItemAmountByUser;
   final int    sl;
         bool   isSelected;
+        bool isDefaultSelected;
 
 //  String ingredients;
 
@@ -36,6 +37,7 @@ class CheeseItem {
         this.cheeseItemAmountByUser,
         this.sl,
         this.isSelected:false,
+        this.isDefaultSelected:false,
 
       }
       );

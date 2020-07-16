@@ -175,7 +175,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                  priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemPrice;
 
-                priceBasedOnCheeseSauceIngredientsSizeState =  oneFood.priceBasedOnCheeseSauceIngredientsSize;
+                  priceBasedOnCheeseSauceIngredientsSizeState =  oneFood.priceBasedOnCheeseSauceIngredientsSize;
 
                   priceByQuantityANDSize = oneFood.itemPrice;
 
@@ -2155,19 +2155,28 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                          horizontal: 10.0, vertical: 22.0),
               horizontal: 18, vertical: 0),
           child: GestureDetector(
-              onLongPress: () {
-                print(
-                    'at Long Press: ');
+//              onLongPress: () {
+//                print(
+//                    'at Long Press Sauce Item: ');
+//              },
+              onTap: () {
+                print('for future use');
+                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+//                blocD.setThisSauceFROMSelectedSauceItem(oneSauce,index);
+//                blocD.setThisSauceAsSelectedSauceItem(oneSauceItem, index)
+                blocD.setThisSauceAsSelectedSauceItem(oneSauce,index);
+//                            return Navigator.push(context,
+//
+//                                MaterialPageRoute(builder: (context)
+//                                => FoodItemDetails())
+//                            );
               },
               onLongPressUp: (){
 
                 print(
-                    'at Long Press UP: ');
-
-                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-
-
-                blocD.toggleThisSauceAsSelected(oneSauce,index);
+                    'at Long Press UP Sauce Item Item: nothing will happen already unslected.. ');
+//                blocD.toggleThisSauceAsSelected(oneSauce,index);
 //                blocD.addThisCheeseAsSelectedCheeseItem(oneSauce,index)
 
               },
@@ -2222,14 +2231,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                 ],
               ),
-              onTap: () {
-                print('for future use');
-//                            return Navigator.push(context,
-//
-//                                MaterialPageRoute(builder: (context)
-//                                => FoodItemDetails())
-//                            );
-              }
+
           ),
 
 
@@ -2237,6 +2239,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     }
 
     else{
+      // for condition: oneSauce.isSelected==true
       return
 
         Container(
@@ -2247,101 +2250,103 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                          horizontal: 10.0, vertical: 22.0),
               horizontal: 18, vertical: 0),
           child: GestureDetector(
-              onLongPress: () {
-                print('at Long Press: ');
-              },
-              onLongPressUp: (){
+            onTap: () {
+              print('SauceItem on Tap, '
+                  'nothing will happen since sauce is '
+                  'already selected, press onLong Press: to remove');
 
-                print('at Long Press UP: ');
-                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-
-                blocD.toggleThisSauceAsSelected(oneSauce,index);
-//                blocD.addThisCheeseAsSelectedCheeseItem(oneSauce,index)
-              },
-
-
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-
-                  Neumorphic(
-                    curve: Neumorphic.DEFAULT_CURVE,
-                    style: NeumorphicStyle(
-                      shape: NeumorphicShape
-                          .concave,
-                      depth: 8,
-                      border: NeumorphicBorder(
-                        isEnabled: oneSauce.isSelected,
-                        color: Color(0x33000000),
-                        width: 0.8,
-                      ),
-                      lightSource: LightSource.top,
-                      boxShape: NeumorphicBoxShape.circle(),
-                      color: Colors.white,
-                      shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-                    ),
-                    child:Container(
-
-                      height: displayHeight(context) / 24,
-                      width: displayWidth(context) / 16.5,
-//                      width: displayWidth(context) /10,
-//                      height: displayWidth(context) /9,
-                      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-
-                      child: ClipOval(
-
-                        child: CachedNetworkImage(
-                          imageUrl: sauceItemImageURL,
-                          fit: BoxFit.cover,
-                          placeholder: (context,
-                              url) => new LinearProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Image.network(
-                                  'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
-//
-                        ),
-                      ),
-                    ),
-                  ),
-//                              SizedBox(height: 10),
-                  Container(
-                    width: displayWidth(context) / 9,
-
-                    child: Text(
-
-                      sauceItemName,
-
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-
-                      style: TextStyle(
-                        color: Color(0xff707070),
-//                                    color: Colors.blueGrey[800],
-
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
-                        decorationStyle:TextDecorationStyle.double,
-                      ),
-                    ),
-                  )
-                  ,
-
-
-                ],
-              ),
-              onTap: () {
-                print('for future use');
 //                            return Navigator.push(context,
-//
+
 //                                MaterialPageRoute(builder: (context)
 //                                => FoodItemDetails())
 //                            );
-              }
+            },
+
+            onLongPressUp: (){
+
+              print('at Long Press UP SauceItem: ');
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+              blocD.removeThisSauceFROMSelectedSauceItem(oneSauce,index);
+//                blocD.addThisCheeseAsSelectedCheeseItem(oneSauce,index)
+            },
+
+
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+
+                Neumorphic(
+                  curve: Neumorphic.DEFAULT_CURVE,
+                  style: NeumorphicStyle(
+                    shape: NeumorphicShape
+                        .concave,
+                    depth: 8,
+                    border: NeumorphicBorder(
+                      isEnabled: oneSauce.isSelected,
+                      color: Color(0x33000000),
+                      width: 0.8,
+                    ),
+                    lightSource: LightSource.top,
+                    boxShape: NeumorphicBoxShape.circle(),
+                    color: Colors.white,
+                    shadowDarkColor: Color(0xff525FFF),
+//                        Colors.lightGreenAccent
+
+//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+                  ),
+                  child:Container(
+
+                    height: displayHeight(context) / 24,
+                    width: displayWidth(context) / 16.5,
+//                      width: displayWidth(context) /10,
+//                      height: displayWidth(context) /9,
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+
+                    child: ClipOval(
+
+                      child: CachedNetworkImage(
+                        imageUrl: sauceItemImageURL,
+                        fit: BoxFit.cover,
+                        placeholder: (context,
+                            url) => new LinearProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            Image.network(
+                                'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+//
+                      ),
+                    ),
+                  ),
+                ),
+//                              SizedBox(height: 10),
+                Container(
+                  width: displayWidth(context) / 9,
+
+                  child: Text(
+
+                    sauceItemName,
+
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+
+                    style: TextStyle(
+                      color: Color(0xff707070),
+//                                    color: Colors.blueGrey[800],
+
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      decoration: TextDecoration.underline,
+                      decorationStyle:TextDecorationStyle.double,
+                    ),
+                  ),
+                )
+                ,
+
+
+              ],
+            ),
+
           ),
 
 
@@ -2515,180 +2520,182 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     if(oneCheese.isSelected==false)
     {
       return Container(
-          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
-          child: GestureDetector(
+        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
+        child: GestureDetector(
 
-              onTap: () {
-                print('at onTap: ');
+          onTap: () {
+            print('at onTap: ');
 //                print('at Long Press UP: ');
-                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-                blocD.setThisCheeseAsSelectedCheeseItem(oneCheese,index);
+            blocD.setThisCheeseAsSelectedCheeseItem(oneCheese,index);
 
-              },
+          },
 
-              onLongPressUp: (){
+          onLongPressUp: (){
 
-                print('at Long Press UP: ');
-                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+            print('at Long Press UP: --and nothing will happen since it is not selected,');
 
-                blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
-              },
+          },
 
 
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
 
-                  new Container(
+              new Container(
 
-                    height: displayHeight(context) / 24,
-                    width: displayWidth(context) /16.5,
-                    padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
+                height: displayHeight(context) / 24,
+                width: displayWidth(context) /16.5,
+                padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
-                    child: ClipOval(
+                child: ClipOval(
 
-                      child: CachedNetworkImage(
-                        imageUrl: cheeseItemImageURL,
-                        fit: BoxFit.cover,
-                        placeholder: (context,
-                            url) => new LinearProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            Image.network(
-                                'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+                  child: CachedNetworkImage(
+                    imageUrl: cheeseItemImageURL,
+                    fit: BoxFit.cover,
+                    placeholder: (context,
+                        url) => new LinearProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        Image.network(
+                            'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
 //
-                      ),
-                    ),
                   ),
+                ),
+              ),
 //                              SizedBox(height: 10),
 
-                  Container(
-                    width: displayWidth(context) / 9,
-                    child: Text(
-                      cheeseItemName,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
+              Container(
+                width: displayWidth(context) / 9,
+                child: Text(
+                  cheeseItemName,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
 
-                      style: TextStyle(
-                        color: Color(0xff707070),
+                  style: TextStyle(
+                    color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
-                      ),
-                    ),
-                  )
-                  ,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                ),
+              )
+              ,
 
 
-                ],
-              ),
-
+            ],
           ),
 
+        ),
 
-        );
+
+      );
     }
 
     else{
 
+      // sauce item selected already condition.
+
       return Container(
 
-          padding: EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-              horizontal: 18, vertical: 0),
-          child: GestureDetector(
-              onTap: () {
-                print('at onTap: ');
+            horizontal: 18, vertical: 0),
+        child: GestureDetector(
+          onTap: () {
+            print('at onTap: and nothing will happen since it is selected already. ');
 //                print('at Long Press UP: ');
-                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//
+//            blocD.setThisCheeseAsSelectedCheeseItem(oneCheese,index);
 
-                blocD.setThisCheeseAsSelectedCheeseItem(oneCheese,index);
+          },
 
-              },
-
-              onLongPressUp: (){
-
-                print('at Long Press UP: ');
-                final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-
-                blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
-              },
+          onLongPressUp: (){
 
 
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Neumorphic(
-                    curve: Neumorphic.DEFAULT_CURVE,
-                    style: NeumorphicStyle(
-                      shape: NeumorphicShape
-                          .concave,
-                      border: NeumorphicBorder(
-                        isEnabled: oneCheese.isSelected,
-                        color: Color(0x33000000),
-                        width: 0.8,
-                      ),
-                      depth: 8,
-                      lightSource: LightSource.top,
-                      boxShape: NeumorphicBoxShape.circle(),
-                      color: Colors.white,
-                      shadowDarkColor: Color(0xff525FFF),
+            print('at Long Press UP selected cheese item will be removed..: ');
+//            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//
+//            blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+            blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
+          },
+
+
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Neumorphic(
+                curve: Neumorphic.DEFAULT_CURVE,
+                style: NeumorphicStyle(
+                  shape: NeumorphicShape
+                      .concave,
+                  border: NeumorphicBorder(
+                    isEnabled: oneCheese.isSelected,
+                    color: Color(0x33000000),
+                    width: 0.8,
+                  ),
+                  depth: 8,
+                  lightSource: LightSource.top,
+                  boxShape: NeumorphicBoxShape.circle(),
+                  color: Colors.white,
+                  shadowDarkColor: Color(0xff525FFF),
 //                      Colors.lightGreen,
 
 //          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-                    ),
-                    child:
-                    Container(
-                      height: displayHeight(context) / 24,
-                      width: displayWidth(context) /16.5,
-                      padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
+                ),
+                child:
+                Container(
+                  height: displayHeight(context) / 24,
+                  width: displayWidth(context) /16.5,
+                  padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
-                      child: ClipOval(
+                  child: ClipOval(
 
-                        child: CachedNetworkImage(imageUrl: cheeseItemImageURL,
-                          fit: BoxFit.cover,
-                          placeholder: (context,
-                              url) => new LinearProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Image.network(
-                                  'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+                    child: CachedNetworkImage(imageUrl: cheeseItemImageURL,
+                      fit: BoxFit.cover,
+                      placeholder: (context,
+                          url) => new LinearProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
 //
-                        ),
-                      ),
                     ),
                   ),
+                ),
+              ),
 //                              SizedBox(height: 10),
-                  Container(
+              Container(
 
-                    width: displayWidth(context) / 9,
+                width: displayWidth(context) / 9,
 
-                    child: Text(
+                child: Text(
 
-                      cheeseItemName,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
+                  cheeseItemName,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
 
-                      style: TextStyle(
-                        color: Color(0xff707070),
+                  style: TextStyle(
+                    color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
-
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
-                        decorationStyle:TextDecorationStyle.double,
-                      ),
-                    ),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                    decoration: TextDecoration.underline,
+                    decorationStyle:TextDecorationStyle.double,
                   ),
-
-                ],
+                ),
               ),
 
+            ],
           ),
 
-        );
+        ),
+
+      );
     }
   }
 
@@ -2856,10 +2863,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                          horizontal: 10.0, vertical: 22.0),
             horizontal: 18, vertical: 0),
         child: GestureDetector(
-            onLongPress: () {
-              print(
-                  'at Long Press: ');
-            },
+
             onLongPressUp: (){
 
               print(

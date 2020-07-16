@@ -229,6 +229,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
       if(oneCheeseItem.sl==1){
         oneCheeseItem.isSelected=true;
+        oneCheeseItem.isDefaultSelected=true;
       }
     }
 
@@ -292,6 +293,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
             'condition oneSauceItem.sl==1 is true');
 
         oneSauceItem.isSelected=true;
+        oneSauceItem.isDefaultSelected=true;
       }
     }
 
@@ -881,36 +883,46 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _unSelectedIngItems  = allUnSelectedIngredientItems;
     _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
 
+    setNewPriceforSauceItemCheeseItemIngredientUpdate();
+//    setNewPriceBySelectedSauceItems(_allSelectedSauceItems);
+    // pqr.
+
 
   }
 
-  void toggleThisSauceAsSelected(SauceItem oneSauceItem,int index){
+//  setThisCheeseAsSelectedCheeseItem
+  void setThisSauceAsSelectedSauceItem(SauceItem oneSauceItem,int index){
 
-    print('index: $index');
+//    print('index: $index');
     List<SauceItem> allTempSauceItems = _allSauceItemsDBloc;
 
     allTempSauceItems[index].isSelected= !allTempSauceItems[index].isSelected;
 
-
-
     _allSauceItemsDBloc = allTempSauceItems;
     _sauceItemsController.sink.add(_allSauceItemsDBloc);
-
-
-
 
     _allSelectedSauceItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
     _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
 
-//    void setNewPriceBySelectedCheeseItems(List<CheeseItem> cheeseItems) {
-
-  // --- invocation required for price update
-    setNewPriceBySelectedSauceItems(_allSelectedSauceItems);
+    setNewPriceforSauceItemCheeseItemIngredientUpdate();
+  }
 
 
+  void removeThisSauceFROMSelectedSauceItem(SauceItem oneSauceItem,int index){
 
-//    _allSelectedCheeseItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
+    List<SauceItem> allTempSauceItems = _allSauceItemsDBloc;
+
+    allTempSauceItems[index].isSelected= !allTempSauceItems[index].isSelected;
+
+    _allSauceItemsDBloc = allTempSauceItems;
+    _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
+    // selected update.
+    _allSelectedSauceItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
+    _selectedSauceListController.sink.add(_allSelectedSauceItems);
+
+    setNewPriceforSauceItemCheeseItemIngredientUpdate();
 
   }
 
@@ -927,12 +939,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _allSelectedCheeseItems = allTempCheeseItems.where((element) => element.isSelected==true).toList();
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
 
-
-
-    setNewPriceBySelectedCheeseItems(_allSelectedCheeseItems);
-
-    logger.w('_allSelectedCheeseItems at toggleThisCheeseAsSelectedCheeseItem():'
-        ' $_allSelectedCheeseItems');
+    setNewPriceforSauceItemCheeseItemIngredientUpdate();
 
   }
 
@@ -949,12 +956,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _allSelectedCheeseItems = allTempCheeseItems.where((element) => element.isSelected==true).toList();
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
 
-
-
-    setNewPriceBySelectedCheeseItems(_allSelectedCheeseItems);
-
-    logger.w('_allSelectedCheeseItems at toggleThisCheeseAsSelectedCheeseItem():'
-        ' $_allSelectedCheeseItems');
+    setNewPriceforSauceItemCheeseItemIngredientUpdate();
 
   }
 
@@ -1145,21 +1147,43 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
-  void setNewPriceBySelectedSauceItems(List<SauceItem> sauceItems) {
+  void setNewPriceforSauceItemCheeseItemIngredientUpdate(/*List<SauceItem> sauceItems*/) {
 
-    double addedSauceItemsPrice = sauceItems.fold(0, (t, e) => t + e.price);
+//    _allSelectedCheeseItems = cheeseItems.where((element) =>
+//    (element.isSelected==true && element.isDefaultSelected!=true)).toList();
+
+
+    List<SauceItem> onlyNewSelectedSauceItems = _allSelectedSauceItems.where((element) =>((element.isSelected==true)
+        && (element.isDefaultSelected!=true))).toList();
+
+    List<CheeseItem> onlyNewSelectedCheeseItems = _allSelectedCheeseItems.where((element) =>((element.isSelected==true)
+        && (element.isDefaultSelected!=true))).toList();
+
+    List<NewIngredient> onlyNewSelectedIngredients = _defaultIngItems.where((element) =>((element.isDefault= false)
+        )).toList();
+
+
+
+    double addedSauceItemsPrice = onlyNewSelectedSauceItems.fold(0, (t, e) => t + e.price);
+    double addedCheeseItemsPrice = onlyNewSelectedCheeseItems.fold(0, (t, e) => t + e.price);
+    double addedIngredientsItemsPrice = onlyNewSelectedIngredients.fold(0, (t, e) => t + e.price);
 
     print('addedSauceItemsPrice : $addedSauceItemsPrice');
+    print('addedCheeseItemsPrice : $addedCheeseItemsPrice');
+    print('addedIngredientsItemsPrice : $addedIngredientsItemsPrice');
+
 
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
 
-    double previousPrice = _thisFoodItem.priceBasedOnCheeseSauceIngredientsSize;
+//    double previousPrice = _thisFoodItem.priceBasedOnCheeseSauceIngredientsSize;
+    double previousPrice = _thisFoodItem.itemPrice;
 
-    print('previous Sauce Item price: $previousPrice');
+    print('previous  price: $previousPrice');
 
 //    thisFoodpriceModified.itemPrice
 
-    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedSauceItemsPrice;
+    thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedSauceItemsPrice
+        + addedCheeseItemsPrice + addedIngredientsItemsPrice;
 
     print('modified price for new SauceItem addition or remove: '
         '${thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize}');
@@ -1169,8 +1193,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _thisFoodItem =thisFoodpriceModified;
 
     _controller.sink.add(thisFoodpriceModified);
-
-
 
   }
 

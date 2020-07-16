@@ -24,6 +24,7 @@ class SauceItem {
   final int    sauceItemAmountByUser;
   final int    sl;
         bool   isSelected;
+        bool   isDefaultSelected;
 
 
 //  String ingredients;
@@ -36,7 +37,8 @@ class SauceItem {
         this.documentId,
         this.sauceItemAmountByUser,
         this.sl,
-        this.isSelected,
+        this.isSelected:false,
+        this.isDefaultSelected:false,
       }
       );
 
