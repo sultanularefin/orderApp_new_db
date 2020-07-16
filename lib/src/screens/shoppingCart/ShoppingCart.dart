@@ -11421,8 +11421,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       ticket.row([
         PosColumn(text: 'oneFood.name', width: 7),
-        PosColumn(text: 'oneFood.quantity', width: 2),
-        PosColumn(text: 'oneFood.oneFoodTypeTotalPrice', width: 3, styles: PosStyles(align: PosAlign.right)),
+        PosColumn(text: 'quantity', width: 2),
+        PosColumn(text: 'Price', width: 3, styles: PosStyles(align: PosAlign.right)),
       ]);
 
       ticket.hr();
