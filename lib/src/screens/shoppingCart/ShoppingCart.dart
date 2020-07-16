@@ -20,11 +20,19 @@ import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:platform_action_sheet/platform_action_sheet.dart';
+import 'package:dotted_border/dotted_border.dart';
+
+/* classes added */
+import 'dart:convert';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+
+import 'package:flutter/rendering.dart';
 
 //import 'package:esc_pos_printer/esc_pos_printer.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 import 'package:oktoast/oktoast.dart';
 import 'dart:async';
 
@@ -491,8 +499,36 @@ class _ShoppingCartState extends State<ShoppingCart> {
   */
 
 
+
+
+
+  Widget restaurantName = new  Directionality(
+    textDirection: TextDirection.ltr,
+    child:
+
+//    textDirection: TextDirection.LTR,
+      Text(
+          'FoodItemName'.toLowerCase(),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.normal,
+//         color: Colors.white
+            color: Colors
+                .black,
+            fontFamily: 'Itim-Regular',
+          )
+      ),
+
+  );
+
+
   @override
   Widget build(BuildContext context) {
+
+
+
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
 
@@ -10981,26 +11017,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  textDirection: TextDirection.ltr,
 //  child:
 //  Container(
-  Widget restaurantName = new  Directionality(
-      textDirection: TextDirection.ltr,
-      child:
-      Container(
-//    textDirection: TextDirection.LTR,
-    child: Text(
-        'FoodItemName'.toLowerCase(),
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.normal,
-//         color: Colors.white
-          color: Colors
-              .black,
-          fontFamily: 'Itim-Regular',
-        )
-    ),
-      ),
-  );
+
 
 
 
