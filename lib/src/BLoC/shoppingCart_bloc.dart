@@ -10,6 +10,7 @@ import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:intl/intl.dart';
+import 'package:esc_pos_utils/esc_pos_utils.dart';
 
 
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
@@ -654,10 +655,10 @@ class ShoppingCartBloc implements Bloc {
 
     CustomerInformation currentCustomerFromFireStore = localCustomerInformationObject(customerAddress);
 //    new CustomerInformation
-    print('currentCustomerFromFireStore: ${currentCustomerFromFireStore.address}');
-    print('currentCustomerFromFireStore: ${currentCustomerFromFireStore.flatOrHouseNumber}');
-    print('currentCustomerFromFireStore: ${currentCustomerFromFireStore.phoneNumber}');
-    print('currentCustomerFromFireStore: ${currentCustomerFromFireStore.etaTimeInMinutes}');
+    print('currentCustomerFromFireStore.address: ${currentCustomerFromFireStore.address}');
+    print('currentCustomerFromFireStore.flatOrHouseNumber: ${currentCustomerFromFireStore.flatOrHouseNumber}');
+    print('currentCustomerFromFireStore.phoneNumber: ${currentCustomerFromFireStore.phoneNumber}');
+    print('currentCustomerFromFireStore.etaTimeInMinutes: ${currentCustomerFromFireStore.etaTimeInMinutes}');
 
 
 
@@ -668,6 +669,7 @@ class ShoppingCartBloc implements Bloc {
     print('totalPrice: $totalPrice');
     print('contact: $contact');
     print('driverName: $driverName');
+
     print('snapshot[\'end\'].toDate().toString(): ${snapshot['end'].toDate().toString()}');
 
 //    DateTime d = t.toDate();
@@ -715,6 +717,13 @@ class ShoppingCartBloc implements Bloc {
       print('oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
 //      print('oneFoodItem.category: ${oneFoodItem.category}');
       print('oneFoodItem[\'category\']: ${oneFoodItem['category']}');
+
+
+
+      print('unitPrice: ${oneFoodItem['unitPrice']}');
+      print('unitPrice: ${oneFoodItem['foodImage']}');
+      print('unitPrice: ${oneFoodItem['discount']}');
+      print('unitPrice');
 
 
       OrderedItem oneTempOrderedItem= new OrderedItem(
@@ -1186,49 +1195,7 @@ class ShoppingCartBloc implements Bloc {
   }
 
 
-  /*
 
-  Future<List<String>> discoverDevices(String portNumber) async {
-
-    List<String> devices = [];
-
-    String ip;
-    try {
-      ip = await Wifi.ip;
-      print('local ip:\t$ip');
-    } catch (e) {
-
-      print('ip error, please check internet');
-      return devices;
-    }
-
-    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
-    int port = 9100;
-    try {
-      port = int.parse(portNumber);
-    } catch (e) {
-      print('port.toString()  please check $e');
-    }
-    print('subnet:\t$subnet, port:\t$port');
-
-
-    final stream = NetworkAnalyzer.discover2(subnet, port);
-
-    stream.listen((NetworkAddress addr) {
-      if (addr.exists) {
-        print('Found device: ${addr.ip}');
-
-          devices.add(addr.ip);
-
-
-      }
-    });
-
-    return devices;
-
-  }
-
-  */
 
 
 

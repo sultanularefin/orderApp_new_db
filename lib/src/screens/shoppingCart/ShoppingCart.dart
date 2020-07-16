@@ -5,6 +5,8 @@
 
 
 // dependency files
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
@@ -1607,7 +1609,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       return Container(
         alignment: Alignment.center,
-          child: Text(''),
+        child: Text(''),
         /*
         child: Text(
             'press pay button to see printing devices',
@@ -1662,53 +1664,53 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-              child: Container(
-                margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
 
-                padding: EdgeInsets.fromLTRB(0,0,0,0),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 60,
-                      padding: EdgeInsets.only(left: 20),
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.print),
-                          SizedBox(width: 10),
+                  padding: EdgeInsets.fromLTRB(0,0,0,0),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: 60,
+                        padding: EdgeInsets.only(left: 20),
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.print),
+                            SizedBox(width: 10),
 /*                        Text(blueToothDevicesFromStream[index].name ?? ''), */
-                          /*
+                            /*
                           Expanded(
                             */
-                          Container(
-                            width:displayWidth(context)/4,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(blueToothDevicesFromStream[index].name ?? ''),
-                                Text(blueToothDevicesFromStream[index].address),
-                                Text(
-                                  'Click to print a test receipt',
-                                  style: TextStyle(color: Colors.grey[700]),
-                                ),
-                              ],
+                            Container(
+                              width:displayWidth(context)/4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(blueToothDevicesFromStream[index].name ?? ''),
+                                  Text(blueToothDevicesFromStream[index].address),
+                                  Text(
+                                    'Click to print a test receipt',
+                                    style: TextStyle(color: Colors.grey[700]),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
 
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
 //                  Divider(),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
                 onPressed: () {
                   print('_testPrintDummyDevices');
                   _testPrintDummyDevices(blueToothDevicesState[index]);
 //                  _testPrint(blueToothDevicesState[index]);
 
-              /*
+                  /*
              onTap: () => _testPrint(blueToothDevicesState[index]);
                //PROBLEM CODE, USING WRONG VARIABLE HERE...
 
@@ -10761,196 +10763,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  Future<Ticket> demoReceipt(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderListdocument
-      /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
-
-//    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
-//
-//    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
-//    final profile = await CapabilityProfile.load();
-//    final Ticket ticket = Ticket(paper, profile);
-
-    CustomerInformation reciteOwnerCustomer = oneOrderListdocument.oneCustomer;
-    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-    final Ticket ticket = Ticket(PaperSize.mm80);
-
-    // Print image
-//    final ByteData data = await rootBundle.load('assets/rabbit_black.jpg');
-//    final Uint8List bytes = data.buffer.asUint8List();
-//    final Image image = decodeImage(bytes);
-//    ticket.image(image);
-
-    ticket.text('${currentRestaurant.name}',
-        styles: PosStyles(
-          align: PosAlign.center,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-//          fontType: 'Itim-Regular',
-
-        ),
-        linesAfter: 1);
-
-//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
-    ticket.text('${oneOrderListdocument.orderBy}', styles: PosStyles(align: PosAlign.left));
-    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(align: PosAlign.left));
-    ticket.text('${oneOrderListdocument.orderProductionTime}',styles: PosStyles(align: PosAlign.left));
-
-
-//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-    ticket.text('${reciteOwnerCustomer.address}', styles: PosStyles(align: PosAlign.right));
-    ticket.text('${reciteOwnerCustomer.flatOrHouseNumber}', styles: PosStyles(align: PosAlign.right));
-
-
-    orderedItems.forEach((oneFood) {
-      /* Map<String, dynamic> */
-      //var userX2 = oneFood;
-
-
-//      print('oneFood[\'category\'] ${oneFood['category']}!!');
-
-
-      ticket.text('${oneFood.name}',styles: PosStyles(align: PosAlign.left));
-      ticket.text('${oneFood.quantity}',styles: PosStyles(align: PosAlign.center));
-      ticket.text('${oneFood.oneFoodTypeTotalPrice}', styles: PosStyles(align: PosAlign.right));
-
-    });
-//    orderedItems
-
-
-
-/*
-    ticket.text('',
-        styles: PosStyles(align: PosAlign.center), linesAfter: 1);
-
-    ticket.hr();
-    ticket.row([
-      PosColumn(text: 'Qty', width: 1),
-      PosColumn(text: 'Item', width: 7),
-      PosColumn(
-          text: 'Price', width: 2, styles: PosStyles(align: PosAlign.right)),
-      PosColumn(
-          text: 'Total', width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-
-    ticket.row([
-      PosColumn(text: '2', width: 1),
-      PosColumn(text: 'ONION RINGS', width: 7),
-      PosColumn(
-          text: '0.99', width: 2, styles: PosStyles(align: PosAlign.right)),
-      PosColumn(
-          text: '1.98', width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-    ticket.row([
-      PosColumn(text: '1', width: 1),
-      PosColumn(text: 'PIZZA', width: 7),
-      PosColumn(
-          text: '3.45', width: 2, styles: PosStyles(align: PosAlign.right)),
-      PosColumn(
-          text: '3.45', width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-    ticket.row([
-      PosColumn(text: '1', width: 1),
-      PosColumn(text: 'SPRING ROLLS', width: 7),
-      PosColumn(
-          text: '2.99', width: 2, styles: PosStyles(align: PosAlign.right)),
-      PosColumn(
-          text: '2.99', width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-    ticket.row([
-      PosColumn(text: '3', width: 1),
-      PosColumn(text: 'CRUNCHY STICKS', width: 7),
-      PosColumn(
-          text: '0.85', width: 2, styles: PosStyles(align: PosAlign.right)),
-      PosColumn(
-          text: '2.55', width: 2, styles: PosStyles(align: PosAlign.right)),
-    ]);
-    */
-    ticket.hr();
-
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'TOTAL',
-          width: 6,
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-      PosColumn(
-          text: '\$10.97',
-          width: 6,
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-    ]);
-    */
-
-    ticket.hr(ch: '=', linesAfter: 1);
-
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'Cash',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$15.00',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-    ticket.row([
-      PosColumn(
-          text: 'Change',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$4.03',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-
-    ticket.feed(2);
-    ticket.text('Thank you!',
-        styles: PosStyles(align: PosAlign.center, bold: true));
-
-    final now = DateTime.now();
-    final formatter = DateFormat('MM/dd/yyyy H:m');
-    final String timestamp = formatter.format(now);
-    ticket.text(timestamp,
-        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
-
-    */
-
-    // Print QR Code from image
-    // try {
-    //   const String qrData = 'example.com';
-    //   const double qrSize = 200;
-    //   final uiImg = await QrPainter(
-    //     data: qrData,
-    //     version: QrVersions.auto,
-    //     gapless: false,
-    //   ).toImageData(qrSize);
-    //   final dir = await getTemporaryDirectory();
-    //   final pathName = '${dir.path}/qr_tmp.png';
-    //   final qrFile = File(pathName);
-    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
-    //   final img = decodeImage(imgFile.readAsBytesSync());
-
-    //   ticket.image(img);
-    // } catch (e) {
-    //   print(e);
-    // }
-
-    // Print QR Code using native function
-    // ticket.qrcode('example.com');
-
-    ticket.feed(2);
-    ticket.cut();
-    return ticket;
-  }
 
 
 
@@ -11101,8 +10913,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   void printTicket(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderdocument) async{
 
-    final PosPrintResult res =
-    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
+    // pqr
+//    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+//    demoReceiptOrderTypeDinning
+//    demoReceiptOrderTypeTakeAway
+//    demoReceiptOrderTypePhone
+
+    print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
+
+    final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
+    await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
+        currentRestaurant, oneOrderdocument)):(oneOrderdocument.orderBy.toLowerCase()=='phone')?
+    await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
+        currentRestaurant, oneOrderdocument)):
+    (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
+    await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
+        currentRestaurant, oneOrderdocument)):
+    await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
+        currentRestaurant, oneOrderdocument));
 
     showToast(res.msg);
   }
@@ -11147,6 +10975,1015 @@ class _ShoppingCartState extends State<ShoppingCart> {
       },
     );
   }
+
+  /* PRINTING REcite related codes resides here: */
+
+//  textDirection: TextDirection.ltr,
+//  child:
+//  Container(
+  Widget restaurantName = new  Directionality(
+      textDirection: TextDirection.ltr,
+      child:
+      Container(
+//    textDirection: TextDirection.LTR,
+    child: Text(
+        'FoodItemName'.toLowerCase(),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.normal,
+//         color: Colors.white
+          color: Colors
+              .black,
+          fontFamily: 'Itim-Regular',
+        )
+    ),
+      ),
+  );
+
+
+
+
+  // # number 1: demoReceipt Order Type TakeAway begins here...
+
+  Future<Ticket> demoReceiptOrderTypeTakeAway(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderListdocument
+      /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
+
+//    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+//
+//    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+//    final profile = await CapabilityProfile.load();
+//    final Ticket ticket = Ticket(paper, profile);
+
+    CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
+    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
+
+    final Ticket ticket = Ticket(PaperSize.mm80);
+
+    // Print image
+
+
+
+
+//    static const IconData print = IconData(0xe8ad, fontFamily: 'MaterialIcons')
+
+    ticket.text('${currentRestaurant.name}',
+        styles: PosStyles(
+          align: PosAlign.center,
+          height: PosTextSize.size3,
+          width: PosTextSize.size3, // some kind of h1, h2, h3 etc.
+          fontType:PosFontType.fontB ,
+//          fontType: 'Itim-Regular',
+
+        ),
+        linesAfter: 1);
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
+    ticket.text('${oneOrderListdocument.orderBy}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size4,
+          width: PosTextSize.size4,
+
+        ));
+    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
+      align: PosAlign.left,
+      bold: true,
+      height: PosTextSize.size4,
+      width: PosTextSize.size4,
+    ));
+    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size4,
+          width: PosTextSize.size4,
+        ));
+
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('Address: ${
+        customerForReciteGeneration.address.length==0?
+        'EMPTY': customerForReciteGeneration.address.length>7?
+        customerForReciteGeneration.address.substring(0,7)+'..':
+        customerForReciteGeneration.address
+    }',
+        styles: PosStyles(
+          align: PosAlign.right,
+          height: PosTextSize.size6,
+          width: PosTextSize.size6,
+
+        )
+    );
+
+    ticket.text('Flat #:${
+        customerForReciteGeneration.flatOrHouseNumber.length==0?
+        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+        customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size6,
+      width: PosTextSize.size6,
+
+
+    )
+    );
+    ticket.text('phone #:${
+        customerForReciteGeneration.phoneNumber.length==0?
+        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+        customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size6,
+      width: PosTextSize.size6,
+
+
+    )
+    );
+
+    // code for order type and paid status starts here.
+
+    // Print image
+
+//    final ByteData data = await rootBundle.load('assets/flutterlogo.svg');
+//    final Uint8List bytes = data.buffer.asUint8List();
+//    final Image image = decodeImage(bytes);
+//    ticket.image(image);
+
+
+// Print image using alternative commands
+    // ticket.imageRaster(image);
+    // ticket.imageRaster(image, imageFn: PosImageFn.graphics);
+    // code for order type and paid status ends here
+
+
+    // ordered food items begins here.
+    orderedItems.forEach((oneFood) {
+
+
+//      ticket.text('',styles: PosStyles(align: PosAlign.left));
+//      ticket.text('${oneFood.quantity}',styles: PosStyles(align: PosAlign.center));
+//      ticket.text('${oneFood.oneFoodTypeTotalPrice}', styles: PosStyles(align: PosAlign.right));
+//
+//      ticket.hr();
+      ticket.row([
+        PosColumn(text: '${oneFood.name}', width: 6),
+        PosColumn(text: '${oneFood.quantity}', width: 1),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
+      ]);
+
+      ticket.hr(); // needed. as per design.
+
+    });
+
+    // ordered food items ends here.
+//    orderedItems
+
+
+
+
+
+
+
+    /*
+    ticket.row([
+      PosColumn(
+          text: 'TOTAL',
+          width: 6,
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+      PosColumn(
+          text: '\$10.97',
+          width: 6,
+          styles: PosStyles(
+            align: PosAlign.right,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+    ]);
+    */
+
+    ticket.hr(ch: '=', linesAfter: 1);
+
+    /*
+    ticket.row([
+      PosColumn(
+          text: 'Cash',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$15.00',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+    ticket.row([
+      PosColumn(
+          text: 'Change',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$4.03',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+
+    ticket.feed(2);
+    ticket.text('Thank you!',
+        styles: PosStyles(align: PosAlign.center, bold: true));
+
+    final now = DateTime.now();
+    final formatter = DateFormat('MM/dd/yyyy H:m');
+    final String timestamp = formatter.format(now);
+    ticket.text(timestamp,
+        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
+
+    */
+
+    // Print QR Code from image
+    // try {
+    //   const String qrData = 'example.com';
+    //   const double qrSize = 200;
+    //   final uiImg = await QrPainter(
+    //     data: qrData,
+    //     version: QrVersions.auto,
+    //     gapless: false,
+    //   ).toImageData(qrSize);
+    //   final dir = await getTemporaryDirectory();
+    //   final pathName = '${dir.path}/qr_tmp.png';
+    //   final qrFile = File(pathName);
+    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
+    //   final img = decodeImage(imgFile.readAsBytesSync());
+
+    //   ticket.image(img);
+    // } catch (e) {
+    //   print(e);
+    // }
+
+    // Print QR Code using native function
+    // ticket.qrcode('example.com');
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+  // demoReceipt Order Type TakeAway ends here...
+
+  // demoReceipt Order Type Dinning ends here...
+  // OrderType Delivery begins here....
+  // # number 2: demoReceipt Order Type DElivery begins here...
+  Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderListdocument
+      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+
+//    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+//
+//    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+//    final profile = await CapabilityProfile.load();
+//    final Ticket ticket = Ticket(paper, profile);
+
+    CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
+    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
+
+    final Ticket ticket = Ticket(PaperSize.mm80);
+
+    // Print image
+
+
+
+
+//    static const IconData print = IconData(0xe8ad, fontFamily: 'MaterialIcons')
+
+    ticket.text('${currentRestaurant.name}',
+        styles: PosStyles(
+          align: PosAlign.center,
+          height: PosTextSize.size3,
+          width: PosTextSize.size3, // some kind of h1, h2, h3 etc.
+          fontType:PosFontType.fontB ,
+//          fontType: 'Itim-Regular',
+
+        ),
+        linesAfter: 1);
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
+    ticket.text('${oneOrderListdocument.orderBy}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size4,
+          width: PosTextSize.size4,
+
+        ));
+    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
+      align: PosAlign.left,
+      bold: true,
+      height: PosTextSize.size4,
+      width: PosTextSize.size4,
+    ));
+    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size4,
+          width: PosTextSize.size4,
+        ));
+
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('Address: ${
+        customerForReciteGeneration.address.length==0?
+        'EMPTY': customerForReciteGeneration.address.length>7?
+        customerForReciteGeneration.address.substring(0,7)+'..':
+        customerForReciteGeneration.address
+    }',
+        styles: PosStyles(
+          align: PosAlign.right,
+          height: PosTextSize.size6,
+          width: PosTextSize.size6,
+
+        )
+    );
+
+    ticket.text('Flat #:${
+        customerForReciteGeneration.flatOrHouseNumber.length==0?
+        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+        customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size6,
+      width: PosTextSize.size6,
+
+
+    )
+    );
+    ticket.text('phone #:${
+        customerForReciteGeneration.phoneNumber.length==0?
+        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+        customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size6,
+      width: PosTextSize.size6,
+
+
+    )
+    );
+
+    // code for order type and paid status starts here.
+
+    // Print image
+
+//    final ByteData data = await rootBundle.load('assets/flutterlogo.svg');
+//    final Uint8List bytes = data.buffer.asUint8List();
+//    final Image image = decodeImage(bytes);
+//    ticket.image(image);
+
+
+// Print image using alternative commands
+    // ticket.imageRaster(image);
+    // ticket.imageRaster(image, imageFn: PosImageFn.graphics);
+    // code for order type and paid status ends here
+
+
+    // ordered food items begins here.
+    orderedItems.forEach((oneFood) {
+
+
+//      ticket.text('',styles: PosStyles(align: PosAlign.left));
+//      ticket.text('${oneFood.quantity}',styles: PosStyles(align: PosAlign.center));
+//      ticket.text('${oneFood.oneFoodTypeTotalPrice}', styles: PosStyles(align: PosAlign.right));
+//
+//      ticket.hr();
+      ticket.row([
+        PosColumn(text: '${oneFood.name}', width: 6),
+        PosColumn(text: '${oneFood.quantity}', width: 1),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
+      ]);
+
+      ticket.hr(); // needed. as per design.
+
+    });
+
+    // ordered food items ends here.
+//    orderedItems
+
+
+
+
+
+
+
+    /*
+    ticket.row([
+      PosColumn(
+          text: 'TOTAL',
+          width: 6,
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+      PosColumn(
+          text: '\$10.97',
+          width: 6,
+          styles: PosStyles(
+            align: PosAlign.right,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+    ]);
+    */
+
+    ticket.hr(ch: '=', linesAfter: 1);
+
+    /*
+    ticket.row([
+      PosColumn(
+          text: 'Cash',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$15.00',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+    ticket.row([
+      PosColumn(
+          text: 'Change',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$4.03',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+
+    ticket.feed(2);
+    ticket.text('Thank you!',
+        styles: PosStyles(align: PosAlign.center, bold: true));
+
+    final now = DateTime.now();
+    final formatter = DateFormat('MM/dd/yyyy H:m');
+    final String timestamp = formatter.format(now);
+    ticket.text(timestamp,
+        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
+
+    */
+
+    // Print QR Code from image
+    // try {
+    //   const String qrData = 'example.com';
+    //   const double qrSize = 200;
+    //   final uiImg = await QrPainter(
+    //     data: qrData,
+    //     version: QrVersions.auto,
+    //     gapless: false,
+    //   ).toImageData(qrSize);
+    //   final dir = await getTemporaryDirectory();
+    //   final pathName = '${dir.path}/qr_tmp.png';
+    //   final qrFile = File(pathName);
+    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
+    //   final img = decodeImage(imgFile.readAsBytesSync());
+
+    //   ticket.image(img);
+    // } catch (e) {
+    //   print(e);
+    // }
+
+    // Print QR Code using native function
+    // ticket.qrcode('example.com');
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+
+  // # number 3: demoReceipt Order Type DElivery begins here...
+
+  // demoReceipt Order Type Delivery ends here...
+
+
+
+
+  // demoReceipt Order Type Phone begins here...
+  Future<Ticket> demoReceiptOrderTypePhone(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderListdocument
+      /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
+
+//    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+//
+//    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+//    final profile = await CapabilityProfile.load();
+//    final Ticket ticket = Ticket(paper, profile);
+
+    CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
+    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
+
+    final Ticket ticket = Ticket(PaperSize.mm80);
+
+    // Print image
+
+
+
+
+//    static const IconData print = IconData(0xe8ad, fontFamily: 'MaterialIcons')
+
+    ticket.text('${currentRestaurant.name}',
+        styles: PosStyles(
+          align: PosAlign.center,
+          height: PosTextSize.size3,
+          width: PosTextSize.size3, // some kind of h1, h2, h3 etc.
+          fontType:PosFontType.fontB ,
+//          fontType: 'Itim-Regular',
+
+        ),
+        linesAfter: 1);
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
+    ticket.text('${oneOrderListdocument.orderBy}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size4,
+          width: PosTextSize.size4,
+
+        ));
+    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
+      align: PosAlign.left,
+      bold: true,
+      height: PosTextSize.size4,
+      width: PosTextSize.size4,
+    ));
+    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size4,
+          width: PosTextSize.size4,
+        ));
+
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('Address: ${
+        customerForReciteGeneration.address.length==0?
+        'EMPTY': customerForReciteGeneration.address.length>7?
+        customerForReciteGeneration.address.substring(0,7)+'..':
+        customerForReciteGeneration.address
+    }',
+        styles: PosStyles(
+          align: PosAlign.right,
+          height: PosTextSize.size6,
+          width: PosTextSize.size6,
+
+        )
+    );
+
+    ticket.text('Flat #:${
+        customerForReciteGeneration.flatOrHouseNumber.length==0?
+        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+        customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size6,
+      width: PosTextSize.size6,
+
+
+    )
+    );
+    ticket.text('phone #:${
+        customerForReciteGeneration.phoneNumber.length==0?
+        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+        customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size6,
+      width: PosTextSize.size6,
+
+
+    )
+    );
+
+    // code for order type and paid status starts here.
+
+    // Print image
+
+//    final ByteData data = await rootBundle.load('assets/flutterlogo.svg');
+//    final Uint8List bytes = data.buffer.asUint8List();
+//    final Image image = decodeImage(bytes);
+//    ticket.image(image);
+
+
+// Print image using alternative commands
+    // ticket.imageRaster(image);
+    // ticket.imageRaster(image, imageFn: PosImageFn.graphics);
+    // code for order type and paid status ends here
+
+
+    // ordered food items begins here.
+    orderedItems.forEach((oneFood) {
+
+
+//      ticket.text('',styles: PosStyles(align: PosAlign.left));
+//      ticket.text('${oneFood.quantity}',styles: PosStyles(align: PosAlign.center));
+//      ticket.text('${oneFood.oneFoodTypeTotalPrice}', styles: PosStyles(align: PosAlign.right));
+//
+//      ticket.hr();
+      ticket.row([
+        PosColumn(text: '${oneFood.name}', width: 6),
+        PosColumn(text: '${oneFood.quantity}', width: 1),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
+      ]);
+
+      ticket.hr(); // needed. as per design.
+
+    });
+
+    // ordered food items ends here.
+//    orderedItems
+
+
+
+
+
+
+
+    /*
+    ticket.row([
+      PosColumn(
+          text: 'TOTAL',
+          width: 6,
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+      PosColumn(
+          text: '\$10.97',
+          width: 6,
+          styles: PosStyles(
+            align: PosAlign.right,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+    ]);
+    */
+
+    ticket.hr(ch: '=', linesAfter: 1);
+
+    /*
+    ticket.row([
+      PosColumn(
+          text: 'Cash',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$15.00',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+    ticket.row([
+      PosColumn(
+          text: 'Change',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$4.03',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+
+    ticket.feed(2);
+    ticket.text('Thank you!',
+        styles: PosStyles(align: PosAlign.center, bold: true));
+
+    final now = DateTime.now();
+    final formatter = DateFormat('MM/dd/yyyy H:m');
+    final String timestamp = formatter.format(now);
+    ticket.text(timestamp,
+        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
+
+    */
+
+    // Print QR Code from image
+    // try {
+    //   const String qrData = 'example.com';
+    //   const double qrSize = 200;
+    //   final uiImg = await QrPainter(
+    //     data: qrData,
+    //     version: QrVersions.auto,
+    //     gapless: false,
+    //   ).toImageData(qrSize);
+    //   final dir = await getTemporaryDirectory();
+    //   final pathName = '${dir.path}/qr_tmp.png';
+    //   final qrFile = File(pathName);
+    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
+    //   final img = decodeImage(imgFile.readAsBytesSync());
+
+    //   ticket.image(img);
+    // } catch (e) {
+    //   print(e);
+    // }
+
+    // Print QR Code using native function
+    // ticket.qrcode('example.com');
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+// demoReceipt Order Type Phone ends here...
+
+
+// # number 4: demoReceipt Order Type Dinning begins here...
+
+  Future<Ticket> demoReceiptOrderTypeDinning(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderListdocument
+      /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
+
+//    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+//
+//    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+//    final profile = await CapabilityProfile.load();
+//    final Ticket ticket = Ticket(paper, profile);
+
+    CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
+    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
+
+    final Ticket ticket = Ticket(PaperSize.mm80);
+
+    // Print image
+
+
+
+
+//    static const IconData print = IconData(0xe8ad, fontFamily: 'MaterialIcons')
+
+    ticket.text('${currentRestaurant.name}',
+        styles: PosStyles(
+          align: PosAlign.center,
+          height: PosTextSize.size3,
+          width: PosTextSize.size3, // some kind of h1, h2, h3 etc.
+          fontType:PosFontType.fontB ,
+//          fontType: 'Itim-Regular',
+
+        ),
+        linesAfter: 1);
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.left));
+    ticket.text('${oneOrderListdocument.orderBy}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size4,
+          width: PosTextSize.size4,
+
+        ));
+    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
+      align: PosAlign.left,
+      bold: true,
+      height: PosTextSize.size4,
+      width: PosTextSize.size4,
+    ));
+    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size4,
+          width: PosTextSize.size4,
+        ));
+
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('Address: ${
+        customerForReciteGeneration.address.length==0?
+        'EMPTY': customerForReciteGeneration.address.length>7?
+        customerForReciteGeneration.address.substring(0,7)+'..':
+        customerForReciteGeneration.address
+    }',
+        styles: PosStyles(
+          align: PosAlign.right,
+          height: PosTextSize.size6,
+          width: PosTextSize.size6,
+
+        )
+    );
+
+    ticket.text('Flat #:${
+        customerForReciteGeneration.flatOrHouseNumber.length==0?
+        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+        customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size6,
+      width: PosTextSize.size6,
+
+
+    )
+    );
+    ticket.text('phone #:${
+        customerForReciteGeneration.phoneNumber.length==0?
+        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+        customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size6,
+      width: PosTextSize.size6,
+
+
+    )
+    );
+
+    // code for order type and paid status starts here.
+
+    // Print image
+
+//    final ByteData data = await rootBundle.load('assets/flutterlogo.svg');
+//    final Uint8List bytes = data.buffer.asUint8List();
+//    final Image image = decodeImage(bytes);
+//    ticket.image(image);
+
+
+// Print image using alternative commands
+    // ticket.imageRaster(image);
+    // ticket.imageRaster(image, imageFn: PosImageFn.graphics);
+    // code for order type and paid status ends here
+
+
+    // ordered food items begins here.
+    orderedItems.forEach((oneFood) {
+
+
+//      ticket.text('',styles: PosStyles(align: PosAlign.left));
+//      ticket.text('${oneFood.quantity}',styles: PosStyles(align: PosAlign.center));
+//      ticket.text('${oneFood.oneFoodTypeTotalPrice}', styles: PosStyles(align: PosAlign.right));
+//
+//      ticket.hr();
+      ticket.row([
+        PosColumn(text: '${oneFood.name}', width: 6),
+        PosColumn(text: '${oneFood.quantity}', width: 1),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
+      ]);
+
+      ticket.hr(); // needed. as per design.
+
+    });
+
+    // ordered food items ends here.
+//    orderedItems
+
+
+
+
+
+
+
+    /*
+    ticket.row([
+      PosColumn(
+          text: 'TOTAL',
+          width: 6,
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+      PosColumn(
+          text: '\$10.97',
+          width: 6,
+          styles: PosStyles(
+            align: PosAlign.right,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          )),
+    ]);
+    */
+
+    ticket.hr(ch: '=', linesAfter: 1);
+
+    /*
+    ticket.row([
+      PosColumn(
+          text: 'Cash',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$15.00',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+    ticket.row([
+      PosColumn(
+          text: 'Change',
+          width: 8,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+      PosColumn(
+          text: '\$4.03',
+          width: 4,
+          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
+    ]);
+
+    ticket.feed(2);
+    ticket.text('Thank you!',
+        styles: PosStyles(align: PosAlign.center, bold: true));
+
+    final now = DateTime.now();
+    final formatter = DateFormat('MM/dd/yyyy H:m');
+    final String timestamp = formatter.format(now);
+    ticket.text(timestamp,
+        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
+
+    */
+
+    // Print QR Code from image
+    // try {
+    //   const String qrData = 'example.com';
+    //   const double qrSize = 200;
+    //   final uiImg = await QrPainter(
+    //     data: qrData,
+    //     version: QrVersions.auto,
+    //     gapless: false,
+    //   ).toImageData(qrSize);
+    //   final dir = await getTemporaryDirectory();
+    //   final pathName = '${dir.path}/qr_tmp.png';
+    //   final qrFile = File(pathName);
+    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
+    //   final img = decodeImage(imgFile.readAsBytesSync());
+
+    //   ticket.image(img);
+    // } catch (e) {
+    //   print(e);
+    // }
+
+    // Print QR Code using native function
+    // ticket.qrcode('example.com');
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+
+
+// demoReceipt Order Type TakeAway begins here...
+/*
+
+  Future<List<String>> discoverDevices(String portNumber) async {
+
+    List<String> devices = [];
+
+    String ip;
+    try {
+      ip = await Wifi.ip;
+      print('local ip:\t$ip');
+    } catch (e) {
+
+      print('ip error, please check internet');
+      return devices;
+    }
+
+    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
+    int port = 9100;
+    try {
+      port = int.parse(portNumber);
+    } catch (e) {
+      print('port.toString()  please check $e');
+    }
+    print('subnet:\t$subnet, port:\t$port');
+
+
+    final stream = NetworkAnalyzer.discover2(subnet, port);
+
+    stream.listen((NetworkAddress addr) {
+      if (addr.exists) {
+        print('Found device: ${addr.ip}');
+
+          devices.add(addr.ip);
+
+
+      }
+    });
+
+    return devices;
+
+  }
+
+  */
 
 
 //  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){

@@ -3109,6 +3109,4 @@ class LongHeaderPainterAfterShoppingCartPage extends CustomPainter {
     return false;
   }
 
-
-
 }
