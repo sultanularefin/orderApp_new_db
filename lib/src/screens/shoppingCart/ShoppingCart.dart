@@ -11106,6 +11106,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
     Future<OneOrderFirebase> testFirebaseOrderFetch=
     shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
 
+    Widget restaurantName2 = restaurantName(thisRestaurant.name);
+    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
+    ImageAliasAnotherSource.Image imageRestaurant;
+
+    /* await */ restaurantNameBytes.whenComplete(() {
+
+      print("called when future completes");
+
+    }
+    ).then((oneImageInBytes){
+
+      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      print('calling ticket.image(imageRestaurant); ');
+//      ticket.image(imageRestaurant);
+
+    }).catchError((onError){
+      print(' error in getting restaurant name as image');
+    });
+
 
 //                            _handleSignIn();
 
@@ -11119,7 +11138,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
-        printTicket(paper,thisRestaurant,oneOrderData);
+        printTicket(paper,thisRestaurant,oneOrderData,imageRestaurant);
       }
     }).catchError((onError){
       print('Order data fetch Error $onError ***');
@@ -11215,7 +11234,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
-  void printTicket(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderdocument) async{
+  void printTicket(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderdocument,
+      ImageAliasAnotherSource.Image imageResource) async{
 
     // pqr
 //    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -11227,7 +11247,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
     await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-        currentRestaurant, oneOrderdocument)):(oneOrderdocument.orderBy.toLowerCase()=='phone')?
+        currentRestaurant, oneOrderdocument, imageResource)):(oneOrderdocument.orderBy.toLowerCase()=='phone')?
     await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
         currentRestaurant, oneOrderdocument)):
     (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
@@ -11446,7 +11466,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
       Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument
+      OneOrderFirebase oneOrderListdocument,ImageAliasAnotherSource.Image imageResource2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
 //    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
@@ -11461,23 +11481,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     final Ticket ticket = Ticket(PaperSize.mm80);
 
     // Print image
-    Widget restaurantName2 = restaurantName(currentRestaurant.name);
-    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
 
-    /* await */ restaurantNameBytes.whenComplete(() {
-
-      print("called when future completes");
-
-    }
-    ).then((oneImageInBytes){
-
-      final ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-      print('calling ticket.image(imageRestaurant); ');
-      ticket.image(imageRestaurant);
-
-    }).catchError((onError){
-      print(' error in getting restaurant name as image');
-    });
+    ticket.image(imageResource2);
 
 
 //    static const IconData print = IconData(0xe8ad, fontFamily: 'MaterialIcons')
