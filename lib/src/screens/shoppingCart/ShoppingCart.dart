@@ -8824,28 +8824,40 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState.length}');
 
-                    blueToothDevicesState.forEach((oneBlueToothDevice) {
 
+
+                    int index=0;
+                    for(int i =0;i<blueToothDevicesState.length;i++){
+
+
+                      ++index;
 //                      print('_testPrintDummyDevices');
 //                  _testPrintDummyDevices(blueToothDevicesState[index]);
 
 //                      _x.name = 'Restaurant Printer';
 //                      _x.address = '0F:02:18:51:23:46';
 
-                      print('oneBlueToothDevice.address: ${oneBlueToothDevice.address}');
 
-                      print('oneBlueToothDevice.name: ${oneBlueToothDevice.name}');
-                      if((oneBlueToothDevice.name=='Restaurant Printer')
-                          ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
-                        _testPrint(oneBlueToothDevice);
+                      print('blueToothDevicesState[i].name: ${blueToothDevicesState[i].name}');
+                      print('oneBlueToothDevice[i].address: ${blueToothDevicesState[i].address}');
+                      if((blueToothDevicesState[i].name=='Restaurant Printer') ||
+                          (blueToothDevicesState[i].address == '0F:02:18:51:23:46')){
+                        break;
+                        // _testPrint(oneBlueToothDevice);
 
                       }
+
                       else{
                         return;
                       }
 
-                    });
+                    };
+//                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
+                    //work 01_paymentButton TakeAway 9thJuly.
+                    logger.w('check device listed or not');
+
+                    await _testPrint(blueToothDevicesState[--index]);
 
                     //work 01_paymentButton TakeAway 9thJuly.
                     logger.w('check device listed or not');
@@ -9067,7 +9079,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     //work 01_paymentButton TakeAway 9thJuly.
                     logger.w('check device listed or not');
 
-                    await _testPrint(blueToothDevicesState[index]);
+                    await _testPrint(blueToothDevicesState[--index]);
 
                     return Navigator.pop(context,tempOrderWithdocId);
 
