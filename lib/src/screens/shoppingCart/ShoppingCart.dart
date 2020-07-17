@@ -11331,22 +11331,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
 
         ));
     ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
       align: PosAlign.left,
       bold: true,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
     ));
     ticket.text('${oneOrderListdocument.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
         ));
 
 
@@ -11411,8 +11411,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // ordered food items begins here.
     orderedItems.forEach((oneFood) {
       ticket.row([
-        PosColumn(text: '${oneFood.name}', width: 7,styles: PosStyles(align: PosAlign.left)),
-        PosColumn(text: '${oneFood.quantity}', width: 2,styles: PosStyles(align: PosAlign.center)),
+        PosColumn(text: '${oneFood.name}', width: 7,/*styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}', width: 2,styles: PosStyles(align: PosAlign.right)),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
       ]);
 //      ticket.hr();
@@ -11423,8 +11423,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //ticket.hr(ch: '=', linesAfter: 1);
 
 
-    ticket.feed(2);
-    ticket.cut();
+    /// Skips [n] lines
+    ///
+    /// Similar to [emptyLines] but uses an alternative command
+    /// void feed(int n) {
+//    ticket.feed(2);
+
+    /// Cut the paper
+    ///
+    /// [mode] is used to define the full or partial cut (if supported by the priner)
+//    void cut({PosCutMode mode = PosCutMode.full}) {
+//
+//    }
+
+//    ticket.cut();
     return ticket;
   }
 
@@ -11491,22 +11503,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
 
         ));
     ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
       align: PosAlign.left,
       bold: true,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
     ));
     ticket.text('${oneOrderListdocument.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
         ));
 
 
@@ -11642,22 +11654,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
 
         ));
     ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
       align: PosAlign.left,
       bold: true,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
     ));
     ticket.text('${oneOrderListdocument.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
         ));
 
 
@@ -11772,22 +11784,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
 
         ));
     ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
       align: PosAlign.left,
       bold: true,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
     ));
     ticket.text('${oneOrderListdocument.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
         ));
 
 
