@@ -11084,7 +11084,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     printerManager.selectPrinter(printer);
 
     // TODO Don't forget to choose printer's paper
-    const PaperSize paper = PaperSize.mm80;
+    const PaperSize paper = PaperSize.mm58;
 
     print("login button pressed");
 
@@ -11114,17 +11114,47 @@ class _ShoppingCartState extends State<ShoppingCart> {
     Future<OneOrderFirebase> testFirebaseOrderFetch=
     shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
 
+//    Widget restaurantName2 = restaurantName(thisRestaurant.name);
+//    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
+//
+//    print('restaurantNameBytes: $restaurantNameBytes');
+//
+//
+//
+//
+//    ImageAliasAnotherSource.Image imageRestaurant;
+//
+//    /* await */ restaurantNameBytes.whenComplete(() {
+//
+//      print("restaurantNameBytes.whenComplete called when future completes");
+//
+//    }
+//    ).then((oneImageInBytes){
+//
+//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+//      print('calling ticket.image(imageRestaurant); ');
+////      ticket.image(imageRestaurant);
+//
+//    }).catchError((onError){
+//      print(' error in getting restaurant name as image');
+//    });
+
+//    Future<OneOrderFirebase> testFirebaseOrderFetch=
+//    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+
+
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
-    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
+    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+    Uint8List restaurantNameBytesNotFuture;
 
-    print('restaurantNameBytes: $restaurantNameBytes');
-
-
+    print('restaurantNameBytes: $restaurantNameBytesNotFuture');
 
 
     ImageAliasAnotherSource.Image imageRestaurant;
 
-    /* await */ restaurantNameBytes.whenComplete(() {
+
+
+    /* await */ restaurantNameBytesFuture.whenComplete(() {
 
       print("restaurantNameBytes.whenComplete called when future completes");
 
@@ -11133,7 +11163,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       print('calling ticket.image(imageRestaurant); ');
+      restaurantNameBytesNotFuture = oneImageInBytes;
 //      ticket.image(imageRestaurant);
+
+    }).catchError((onError){
+      print(' error in getting restaurant name as image');
+    });
+
+    // Print image
+    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
+    Uint8List totalCostDeliveryBytes;
+
+    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
+
+    /* await */ totalDeliveryWidgetBytes.whenComplete(() {
+
+      print("called when future completes");
+
+    }
+    ).then((oneImageInBytes){
+
+//      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      totalCostDeliveryBytes = oneImageInBytes;
+      print('before printing total cose for recite of delivery type order');
+//      ticket.image(image);
 
     }).catchError((onError){
       print(' error in getting restaurant name as image');
@@ -11152,7 +11205,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
-        printTicket(paper,thisRestaurant,oneOrderData,imageRestaurant);
+        printTicket(paper,thisRestaurant,oneOrderData/*,imageRestaurant */,restaurantNameBytesNotFuture,
+            totalCostDeliveryBytes);
       }
     }).catchError((onError){
       print('Order data fetch Error $onError ***');
@@ -11181,7 +11235,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     printerManager.selectPrinter(printer);
 
     // TODO Don't forget to choose printer's paper
-    const PaperSize paper = PaperSize.mm80;
+    const PaperSize paper = PaperSize.mm58;
 
     */
 
@@ -11242,6 +11296,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print(' error in getting restaurant name as image');
     });
 
+    // Print image
+    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
+    Uint8List totalCostDeliveryBytes;
+
+    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
+
+    /* await */ totalDeliveryWidgetBytes.whenComplete(() {
+
+      print("called when future completes");
+
+    }
+    ).then((oneImageInBytes){
+
+//      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      totalCostDeliveryBytes = oneImageInBytes;
+      print('before printing total cose for recite of delivery type order');
+//      ticket.image(image);
+
+    }).catchError((onError){
+      print(' error in getting restaurant name as image');
+    });
+
 
 //                            _handleSignIn();
 
@@ -11255,7 +11331,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
-        printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture);
+        printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
+            totalCostDeliveryBytes);
       }
     }).catchError((onError){
       print('Order data fetch Error $onError ***');
@@ -11278,8 +11355,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   void printTicket(PaperSize paper,
       Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderdocument,
-      ImageAliasAnotherSource.Image imageResource) async{
+      OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
+      Uint8List totalCostDeliveryBytes2
+      ) async{
 
     // pqr
 //    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -11291,7 +11369,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
     await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-        currentRestaurant, oneOrderdocument, imageResource)):(oneOrderdocument.orderBy.toLowerCase()=='phone')?
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2)):
+    (oneOrderdocument.orderBy.toLowerCase()=='phone')?
     await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
         currentRestaurant, oneOrderdocument)):
     (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
@@ -11304,7 +11383,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource, Uint8List imageBytes)
+      OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource,
+      Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2)
   async{
 
 //    final PosPrintResult res =
@@ -11314,12 +11394,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    _showMyDialog(imageResource,imageBytes);
+    _showMyDialog(imageResource,restaurantNameImageBytes,totalCostDeliveryBytes2);
 
   }
 
 
-  Future<void> _showMyDialog(ImageAliasAnotherSource.Image oneImage, Uint8List imageBytes2) async {
+  Future<void> _showMyDialog(ImageAliasAnotherSource.Image oneImage,
+      Uint8List imageBytes2,
+      Uint8List totalCostDeliveryBytes3) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -11333,6 +11415,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     'shopping cart page.'),
                 Container
                   (child: Image.memory(imageBytes2)
+                ),
+                Container
+                  (child: Image.memory(totalCostDeliveryBytes3)
                 ),
 //                Text('Would you like to approve of this message?'),
               ],
@@ -11377,7 +11462,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
     List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
 
-    final Ticket ticket = Ticket(PaperSize.mm80);
+    final Ticket ticket = Ticket(PaperSize.mm58);
 
     // Print image
 
@@ -11523,11 +11608,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   // # number 2: demoReceipt Order Type Delivery begins here...
 
-
+//  restaurantNameImageBytes,totalCostDeliveryBytes2
   Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderListdocument,
-      ImageAliasAnotherSource.Image imageResource2
+      /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
+      Uint8List totalCostDeliveryBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
 //    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
@@ -11539,13 +11625,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
     CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
     List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
 
-    final Ticket ticket = Ticket(PaperSize.mm80);
+    final Ticket ticket = Ticket(PaperSize.mm58);
 
     // Print image
 
-    print('imageResource2: $imageResource2');
+//    print('imageResource2: $imageResource2');
+//    restaurantNameImageBytes2
+//    totalCostDeliveryBytes2
 
-    ticket.image(imageResource2);
+//    ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+    final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
+
+    ticket.image(oneImageRestaurant);
+
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+
+
+
+
 
 
 //    static const IconData print = IconData(0xe8ad, fontFamily: 'MaterialIcons')
@@ -11668,25 +11766,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
-    // Print image
-    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderListdocument.totalPrice);
 
-    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
+    ticket.image(oneImageTotalCostDelivery);
+//      ticket.image(imageTotalCostForDelivery);
 
-    /* await */ totalDeliveryWidgetBytes.whenComplete(() {
-
-      print("called when future completes");
-
-    }
-    ).then((oneImageInBytes){
-
-      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-      print('before printing total cose for recite of delivery type order');
-      ticket.image(image);
-
-    }).catchError((onError){
-      print(' error in getting restaurant name as image');
-    });
 
     ticket.feed(2);
     ticket.cut();
@@ -11709,7 +11792,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
     List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
 
-    final Ticket ticket = Ticket(PaperSize.mm80);
+    final Ticket ticket = Ticket(PaperSize.mm58);
 
     // Print image
 
@@ -11855,7 +11938,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
     List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
 
-    final Ticket ticket = Ticket(PaperSize.mm80);
+    final Ticket ticket = Ticket(PaperSize.mm58);
 
     // Print image
 
