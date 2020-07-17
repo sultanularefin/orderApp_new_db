@@ -507,11 +507,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
   ///
   /// The final image will be of size [imageSize] and the the widget will be layout, ... with the given [logicalSize].
 //  Future<Uint8List> createImageFromWidget(
-  Future<Uint8List> createImageFromWidget(
+  Future<Uint8List> createImageFromWidget (
       Widget widget,
-      {Duration wait,
+      {
+        /* Duration wait, */
         Size logicalSize,
         Size imageSize}) async {
+
+    print('at here: $createImageFromWidget');
+
+
     final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();
 
     logicalSize ??= ui.window.physicalSize / ui.window.devicePixelRatio;
@@ -534,16 +539,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
     pipelineOwner.rootNode = renderView;
     renderView.prepareInitialFrame();
 
-    final RenderObjectToWidgetElement<RenderBox> rootElement = RenderObjectToWidgetAdapter<RenderBox>(
+    final RenderObjectToWidgetElement<RenderBox>
+    rootElement = RenderObjectToWidgetAdapter<RenderBox>(
       container: repaintBoundary,
       child: widget,
     ).attachToRenderTree(buildOwner);
 
     buildOwner.buildScope(rootElement);
 
-    if (wait != null) {
-      await Future.delayed(wait);
-    }
+//    if (wait != null) {
+//      await Future.delayed(wait);
+//    }
+//    print('wait ** ** **: $wait');
 
     buildOwner.buildScope(rootElement);
     buildOwner.finalizeTree();
@@ -567,6 +574,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    bytesArefins = bytes;
 //    uint8LIstController.sink.add(bytesArefins);
 
+    print('byteData: $byteData');
     return
       byteData.buffer.asUint8List();
 
@@ -2011,8 +2019,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 onPressed: () {
                   print('_testPrintDummyDevices');
-//                  _testPrintDummyDevices(blueToothDevicesState[index]);
-                  _testPrint(blueToothDevicesState[index]);
+                  _testPrintDummyDevices(blueToothDevicesState[index]);
+//                  _testPrint(blueToothDevicesState[index]);
 
                   /*
              onTap: () => _testPrint(blueToothDevicesState[index]);
@@ -8925,8 +8933,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // PRINTING CODES WILL BE PUTTED HERE.
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
-                  _startScanDevices();
-//                  _startScanDummyDevices();
+//                  _startScanDevices();
+                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
 
@@ -9112,8 +9120,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
-                  _startScanDevices();
-//                  _startScanDummyDevices();
+//                  _startScanDevices();
+                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
 
@@ -11108,11 +11116,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
     final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
+
+    print('restaurantNameBytes: $restaurantNameBytes');
+
+
+
+
     ImageAliasAnotherSource.Image imageRestaurant;
 
     /* await */ restaurantNameBytes.whenComplete(() {
 
-      print("called when future completes");
+      print("restaurantNameBytes.whenComplete called when future completes");
 
     }
     ).then((oneImageInBytes){
@@ -11201,6 +11215,34 @@ class _ShoppingCartState extends State<ShoppingCart> {
     shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
 
 
+    Widget restaurantName2 = restaurantName(thisRestaurant.name);
+    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+    Uint8List restaurantNameBytesNotFuture;
+
+    print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+    ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+    /* await */ restaurantNameBytesFuture.whenComplete(() {
+
+      print("restaurantNameBytes.whenComplete called when future completes");
+
+    }
+    ).then((oneImageInBytes){
+
+      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      print('calling ticket.image(imageRestaurant); ');
+      restaurantNameBytesNotFuture = oneImageInBytes;
+//      ticket.image(imageRestaurant);
+
+    }).catchError((onError){
+      print(' error in getting restaurant name as image');
+    });
+
+
 //                            _handleSignIn();
 
     /* await */ testFirebaseOrderFetch.whenComplete(() {
@@ -11213,7 +11255,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
-        printTicketDummy(/*paper, */thisRestaurant,oneOrderData);
+        printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture);
       }
     }).catchError((onError){
       print('Order data fetch Error $onError ***');
@@ -11234,7 +11276,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
-  void printTicket(PaperSize paper, Restaurant currentRestaurant, OneOrderFirebase oneOrderdocument,
+  void printTicket(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderdocument,
       ImageAliasAnotherSource.Image imageResource) async{
 
     // pqr
@@ -11259,19 +11303,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
     showToast(res.msg);
   }
 
-  void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant, OneOrderFirebase oneOrderdocument) async{
+  void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource, Uint8List imageBytes)
+  async{
 
 //    final PosPrintResult res =
 //    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
 
 //    showToast('res.msg  res.msg   res.msg');
 
-    _showMyDialog();
+
+
+    _showMyDialog(imageResource,imageBytes);
 
   }
 
 
-  Future<void> _showMyDialog() async {
+  Future<void> _showMyDialog(ImageAliasAnotherSource.Image oneImage, Uint8List imageBytes2) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -11283,6 +11331,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
               children: <Widget>[
                 Text('please use real blueTooth devices and also change functions in '
                     'shopping cart page.'),
+                Container
+                  (child: Image.memory(imageBytes2)
+                ),
 //                Text('Would you like to approve of this message?'),
               ],
             ),
@@ -11431,9 +11482,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // ordered food items begins here.
     orderedItems.forEach((oneFood) {
       ticket.row([
+        /*
         PosColumn(text: '${oneFood.name}', width: 7,/*styles: PosStyles(align: PosAlign.left) */),
         PosColumn(text: '${oneFood.quantity}', width: 2,styles: PosStyles(align: PosAlign.right)),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
+
+        */
+
+
+        PosColumn(text: '${oneFood.name}', width: 5 /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}', width: 3 /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4/* styles: PosStyles(align: PosAlign.right) */),
+
       ]);
 //      ticket.hr();
       // needed. as per design.
@@ -11466,7 +11526,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
       Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,ImageAliasAnotherSource.Image imageResource2
+      OneOrderFirebase oneOrderListdocument,
+      ImageAliasAnotherSource.Image imageResource2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
 //    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
@@ -11481,6 +11542,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     final Ticket ticket = Ticket(PaperSize.mm80);
 
     // Print image
+
+    print('imageResource2: $imageResource2');
 
     ticket.image(imageResource2);
 
@@ -11583,13 +11646,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // ordered food items begins here.
     orderedItems.forEach((oneFood) {
 
+
+
       ticket.row([
+
+        PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+        /*
         PosColumn(text: '${oneFood.name}', width: 7,styles: PosStyles(align: PosAlign.left)),
         PosColumn(text: '${oneFood.quantity}', width: 2,styles: PosStyles(align: PosAlign.center)),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
+      */
       ]);
 
-     // ticket.hr(); // needed. as per design.
+
+
+      ticket.hr();
+      // needed. as per design.
 
     });
 
@@ -11723,11 +11798,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // ordered food items begins here.
     orderedItems.forEach((oneFood) {
 
+//      PosColumn(text: '${oneFood.name}', width: 5 /*,styles: PosStyles(align: PosAlign.left) */),
+//      PosColumn(text: '${oneFood.quantity}', width: 3 /*, styles: PosStyles(align: PosAlign.center) */),
+//      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4/* styles: PosStyles(align: PosAlign.right) */),
+
+
       ticket.row([
+
+
+        PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+        /*
         PosColumn(text: '${oneFood.name}', width: 7,styles: PosStyles(align: PosAlign.left)),
         PosColumn(text: '${oneFood.quantity}', width: 2,styles: PosStyles(align: PosAlign.center)),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
+
+      */
       ]);
+
+
       //ticket.hr(); // needed. as per design.
 
     });
@@ -11853,11 +11944,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     orderedItems.forEach((oneFood) {
 
+//      PosColumn(text: '${oneFood.name}', width: 5 /*,styles: PosStyles(align: PosAlign.left) */),
+//      PosColumn(text: '${oneFood.quantity}', width: 3 /*, styles: PosStyles(align: PosAlign.center) */),
+//      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4/* styles: PosStyles(align: PosAlign.right) */),
+
+
       ticket.row([
-        PosColumn(text: '${oneFood.name}', width: 7,styles: PosStyles(align: PosAlign.left)),
-        PosColumn(text: '${oneFood.quantity}', width: 2,styles: PosStyles(align: PosAlign.center)),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+        PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+//
+//        PosColumn(text: '${oneFood.name}', width: 5 /*,styles: PosStyles(align: PosAlign.left) */),
+//        PosColumn(text: '${oneFood.quantity}', width: 3 /*, styles: PosStyles(align: PosAlign.center) */),
+//        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4/* styles: PosStyles(align: PosAlign.right) */),
       ]);
+
+
 
 //      ticket.hr(); // needed. as per design.
 
@@ -11871,6 +11976,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.cut();
     return ticket;
   }
+
+// # number 4: demoReceipt Order Type Dinning ends here...
 
 
 
