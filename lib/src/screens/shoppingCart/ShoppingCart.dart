@@ -236,7 +236,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('debug print inside _startScanDevices() method ');
 
     setState(() {
-     // blueToothDevicesState = [];
+      // blueToothDevicesState = [];
     });
 
     print('debug print blueToothDevicesState set to empty/ []  ');
@@ -8835,10 +8835,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       print('oneBlueToothDevice.address: ${oneBlueToothDevice.address}');
 
                       print('oneBlueToothDevice.name: ${oneBlueToothDevice.name}');
-                    if((oneBlueToothDevice.name=='Restaurant Printer') ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
-                      _testPrint(oneBlueToothDevice);
+                      if((oneBlueToothDevice.name=='Restaurant Printer')
+                          ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
+                        _testPrint(oneBlueToothDevice);
 
-                    }
+                      }
+                      else{
+                        return;
+                      }
 
                     });
 
@@ -9032,8 +9036,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState.length}');
 
-                    blueToothDevicesState.forEach((oneBlueToothDevice) {
+                    int index=0;
+                    for(int i =0;i<blueToothDevicesState.length;i++){
 
+
+                      ++index;
 //                      print('_testPrintDummyDevices');
 //                  _testPrintDummyDevices(blueToothDevicesState[index]);
 
@@ -9041,18 +9048,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      _x.address = '0F:02:18:51:23:46';
 
 
-                      print('oneBlueToothDevice.name: ${oneBlueToothDevice.name}');
-                      print('oneBlueToothDevice.address: ${oneBlueToothDevice.address}');
-                      if((oneBlueToothDevice.name=='Restaurant Printer') ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
-                        _testPrint(oneBlueToothDevice);
+                      print('blueToothDevicesState[i].name: ${blueToothDevicesState[i].name}');
+                      print('oneBlueToothDevice[i].address: ${blueToothDevicesState[i].address}');
+                      if((blueToothDevicesState[i].name=='Restaurant Printer') ||
+                          (blueToothDevicesState[i].address == '0F:02:18:51:23:46')){
+                        break;
+                        // _testPrint(oneBlueToothDevice);
 
                       }
 
-                    });
+                      else{
+                        return;
+                      }
+
+                    };
 //                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
                     //work 01_paymentButton TakeAway 9thJuly.
                     logger.w('check device listed or not');
+
+                    await _testPrint(blueToothDevicesState[index]);
 
                     return Navigator.pop(context,tempOrderWithdocId);
 
@@ -10974,7 +10989,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  void _testPrint(PrinterBluetooth printer) async {
+  Future<bool> _testPrint(PrinterBluetooth printer) async {
 
     printerManager.selectPrinter(printer);
 
@@ -11063,6 +11078,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     }).catchError((onError){
       print(' error in getting restaurant name as image');
+      print('false: means something wrong not printed');
+      //means something wrong not printed
+      return false;
     });
 
     // Print image
@@ -11085,6 +11103,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     }).catchError((onError){
       print(' error in getting restaurant name as image');
+      return false;
     });
 
 
@@ -11097,12 +11116,37 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
     ).then((oneOrderData){
 
+//      if ((oneOrderData.orderType == null) ||((oneOrderData.totalPrice ==null))) {
+//        return false;
+//      }
 
       if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
-        printTicket(paper,thisRestaurant,oneOrderData/*,imageRestaurant */,restaurantNameBytesNotFuture,
+        Future<bool> isPrint =
+        printTicket(
+            paper,
+            thisRestaurant,
+            oneOrderData/*,imageRestaurant */,
+            restaurantNameBytesNotFuture,
             totalCostDeliveryBytes);
+
+//        Future<OneOrderFirebase> testFirebaseOrderFetch=
+
+        isPrint.whenComplete(() {
+
+          print("called when future completes");
+          return true;
+        }
+        ).then((printResult){
+          return true;
+
+        }).catchError((onError) {
+          print('printing not successful');
+          return false;
+        });
+
       }
+
     }).catchError((onError){
       print('Order data fetch Error $onError ***');
       _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
@@ -11117,6 +11161,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ],
           ),
         )),);
+
+      return false;
 
     });
 
@@ -11248,7 +11294,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
-  void printTicket(PaperSize paper,
+  Future <bool> printTicket(PaperSize paper,
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
       Uint8List totalCostDeliveryBytes2
@@ -11274,7 +11320,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
     await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
         currentRestaurant, oneOrderdocument));
 
+
+
+
+    print('res.msg: ${res.msg}');
+
+
     showToast(res.msg);
+
+    if(res.msg=='Success'){
+
+      return true;
+    }
+
+
+    else {
+      return false;
+    }
+
+//    TODO: NEED TO check the res.msg
+    // true means printed.
+
+
+
+
   }
 
   void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
