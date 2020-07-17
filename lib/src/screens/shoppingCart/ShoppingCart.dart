@@ -163,7 +163,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
-  List<PrinterBluetooth> blueToothDevicesState = [];
+//  List<PrinterBluetooth> blueToothDevicesState = [];
 //  bool localScanAvailableState = true; // meant not busy.
 
 //  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
@@ -199,7 +199,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  ORG 0xff739DFA 4 0xff739DFA false
 
 
-
+/*
   @override
   void initState() {
 //    setDetailForFood();
@@ -224,15 +224,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
     super.initState();
   }
 
+  */
+
+
+
 
 
 
 //  void _startScanDummyDevices() {
   void _startScanDevices() {
     print('debug print inside _startScanDevices() method ');
+
     setState(() {
-      blueToothDevicesState = [];
+     // blueToothDevicesState = [];
     });
+
     print('debug print blueToothDevicesState set to empty/ []  ');
     print(
         'debug print before calling  printerManager.startScan(Duration(seconds: 4));  ');
@@ -285,6 +291,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     */
   }
+
 
   void _startScanDummyDevices() {
     print('debug print inside _startScanDevices() method ');
@@ -341,7 +348,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     tempBlueToothDevices.addAll([x, y]);
 
     setState(() {
-      blueToothDevicesState = tempBlueToothDevices;
+      // blueToothDevicesState = tempBlueToothDevices;
     });
 
 
@@ -1311,6 +1318,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         ),
 
 
+                                        /*
                                         // workTest
                                         Container(
                                           height:68,
@@ -1319,6 +1327,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         ),
 
 
+                                        */
 
                                       ],
                                     ),
@@ -1914,163 +1923,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget showAvailableDevices(/*Order qTimes */) {
-
-//                    SelectedFood incrementCurrentFoodProcessing = snapshot.data;
-    List<PrinterBluetooth> blueToothDevicesFromStream = blueToothDevicesState;
-
-    logger.e('blueToothDevicesFromStream: $blueToothDevicesFromStream');
-
-    if(blueToothDevicesFromStream.length==0){
-
-      return Container(
-        alignment: Alignment.center,
-        child: Text(''),
-        /*
-        child: Text(
-            'press pay button to see printing devices',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-//                                      textAlign: TextAlign.justify,
-            style: TextStyle(
-              fontSize: 21,
-              fontWeight: FontWeight
-                  .normal,
-              fontFamily: 'Itim-Regular',
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-              color: Colors.red,
-            )
-        ),
-
-        */
-
-
-
-      );
-    }
-    else{
-      return ListView.builder(
-
-          scrollDirection: Axis.horizontal,
-          itemCount: blueToothDevicesState.length,
-
-          itemBuilder: (BuildContext context, int index) {
-//          testPrint(blueToothDevicesFromStream[position],context);
-            return RaisedButton(
-                padding: EdgeInsets.fromLTRB(0,0,0,0),
-
-//                color:Color(0xffFC0000),
-//                    color:Color(0xffFC0000),
-                // highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                // clipBehavior: Clip.hardEdge,
-                // splashColor: Color(0xffFC0000),
-                highlightElevation: 12,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: Color(0xff707070),
-                    style: BorderStyle.solid,
-//            width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-
-
-
-
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-
-                  padding: EdgeInsets.fromLTRB(0,0,0,0),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: 60,
-                        padding: EdgeInsets.only(left: 20),
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.print),
-                            SizedBox(width: 10),
-/*                        Text(blueToothDevicesFromStream[index].name ?? ''), */
-                            /*
-                          Expanded(
-                            */
-                            Container(
-                              width:displayWidth(context)/4,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(blueToothDevicesFromStream[index].name ?? ''),
-                                  Text(blueToothDevicesFromStream[index].address),
-                                  Text(
-                                    'Click to print a test receipt',
-                                    style: TextStyle(color: Colors.grey[700]),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      ),
-//                  Divider(),
-                    ],
-                  ),
-                ),
-                onPressed: () {
-                  print('_testPrintDummyDevices');
-//                  _testPrintDummyDevices(blueToothDevicesState[index]);
-                  _testPrint(blueToothDevicesState[index]);
-
-                  /*
-             onTap: () => _testPrint(blueToothDevicesState[index]);
-               //PROBLEM CODE, USING WRONG VARIABLE HERE...
-
-               //ORIGINAL.  --1
-
-             onTap: () => _testPrint(blueToothDevicesState[index]),
-
-               // DUMMY. --- 2
-                 _testPrintDummyDevices(blueToothDevicesState[index]);
-                */
-                }
-
-            );
-          }
-        /*
-    itemBuilder: (context,position)=>ListTile(
-    onTap: (){
-    //code to print with this device
-
-    testPrint(blueToothDevicesFromStream[position],context);
-    },
-    title: Text(blueToothDevicesFromStream[position].name),
-    subtitle: Text(blueToothDevicesFromStream[position].address),
-    ),
-    */
-
-        /*
-                itemBuilder: (BuildContext context, int index) {
-                  return OutlineButton(
-                    onPressed: () =>
-                        testPrint(blueToothDevicesFromStream[index], context),
-                    child:
-                    Text(
-                      '${devicesFromStream[index]}:${portController.text}',
-                      style: TextStyle(fontSize: 16),
-                    ),
-
-                  );
-                },
-              ;
-                            */
-      );
-    }
-  }
 
 
   /*
@@ -8968,10 +8820,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   else{
                     print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
+                    List<PrinterBluetooth> blueToothDevicesState = shoppingCartBloc.getDevices;
+
+                    print('blueToothDevicesState.length: ${blueToothDevicesState.length}');
+
+                    blueToothDevicesState.forEach((oneBlueToothDevice) {
+
+//                      print('_testPrintDummyDevices');
+//                  _testPrintDummyDevices(blueToothDevicesState[index]);
+
+//                      _x.name = 'Restaurant Printer';
+//                      _x.address = '0F:02:18:51:23:46';
+
+
+                    if((oneBlueToothDevice.name=='Restaurant Printer') ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
+                      _testPrint(oneBlueToothDevice);
+
+                    }
+
+                    });
+
+
                     //work 01_paymentButton TakeAway 9thJuly.
                     logger.w('check device listed or not');
 
-//                    return Navigator.pop(context,tempOrderWithdocId);
+                    return Navigator.pop(context,tempOrderWithdocId);
                   }
 
 
@@ -9124,21 +8997,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
 
                   print('debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
-                  _startScanDevices();
+
+//                  _startScanDevices();
+
 //                  _startScanDummyDevices();
                   print('debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
-
-
-
-
 
                   print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone.paymentTypeIndex}');
 
                   Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelectUnobscuredDeliveryPhone);
-
-
-
-
 
                   /*
 
@@ -9158,12 +9025,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   }
                   else{
                     print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+
+                    List<PrinterBluetooth> blueToothDevicesState = shoppingCartBloc.getDevices;
+
+                    print('blueToothDevicesState.length: ${blueToothDevicesState.length}');
+
+                    blueToothDevicesState.forEach((oneBlueToothDevice) {
+
+//                      print('_testPrintDummyDevices');
+//                  _testPrintDummyDevices(blueToothDevicesState[index]);
+
+//                      _x.name = 'Restaurant Printer';
+//                      _x.address = '0F:02:18:51:23:46';
+
+
+                      if((oneBlueToothDevice.name=='Restaurant Printer') ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
+                        _testPrint(oneBlueToothDevice);
+
+                      }
+
+                    });
 //                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
                     //work 01_paymentButton TakeAway 9thJuly.
                     logger.w('check device listed or not');
 
-//                    return Navigator.pop(context,tempOrderWithdocId);
+                    return Navigator.pop(context,tempOrderWithdocId);
 
 //                    return Navigator.pop(context,tempOrderWithdocId);
                   }

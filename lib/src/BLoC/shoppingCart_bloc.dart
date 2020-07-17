@@ -101,12 +101,7 @@ class ShoppingCartBloc implements Bloc {
 
 
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
-  List<PrinterBluetooth> _devicesBlueTooth = [];
 
-//  List<String> _devices =[];
-  List<PrinterBluetooth> get getDevices => _devicesBlueTooth;
-  final _devicesController = StreamController<List<PrinterBluetooth>>();
-  Stream <List<PrinterBluetooth>> get getDevicesStream => _devicesController.stream;
 
 
 //  List<String> _devices =[];
@@ -125,7 +120,16 @@ class ShoppingCartBloc implements Bloc {
   final _restaurantController = StreamController <Restaurant>();
   Stream<Restaurant> get getCurrentRestaurantsStream => _restaurantController.stream;
 
+// BLUETOOTH PRINTER DEVICES..
 
+  List<PrinterBluetooth> _devicesBlueTooth = [];
+  //  List<String> _devices =[];
+  List<PrinterBluetooth> get getDevices => _devicesBlueTooth;
+  final _devicesController = StreamController<List<PrinterBluetooth>>();
+  Stream <List<PrinterBluetooth>> get getDevicesStream => _devicesController.stream;
+
+
+  //  List<PrinterBluetooth> blueToothDevicesState = [];
 
 
 
@@ -285,7 +289,7 @@ class ShoppingCartBloc implements Bloc {
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
 
 
-//    discoverDevicesConstructor('9100');
+    discoverDevicesConstructor();
     //    initiateCustomerInformation();
 
     _curretnOrder = x;
@@ -1074,34 +1078,24 @@ class ShoppingCartBloc implements Bloc {
   */
 
 //  Future <bool> checkUserinLocalStorage() async {
-  void discoverDevicesConstructor(String portNumber) async {
-//    AuthResult result = await _auth.signInWithEmailAndPassword(email:
-//    email, password: password);
+  void discoverDevicesConstructor(/*String portNumber*/) async {
 
-    // print('result:  IIIII   >>>>>  $result'  );
-//    List<String> devices = [];
+    printerManager.scanResults.listen((devices) async {
+      print('UI: Devices found ${devices.length}');
 
-//    if (result.user.email != null) {
-//      FirebaseUser fireBaseUserRemote = result.user;
+      _devicesBlueTooth = devices;
+      _devicesController.sink.add(_devicesBlueTooth);
+//        blueToothDevicesState = devices;
+//        localScanAvailableState=!localScanAvailableState;
+
+    });
+
+
+    //OPTION 1..
 
     /*
-  _scanResults.add(<PrinterBluetooth>[]);
-
-    _bluetoothManager.startScan(timeout: timeout);
-
-    _scanResultsSubscription = _bluetoothManager.scanResults.listen((devices) {
-      _scanResults.add(devices.map((d) => PrinterBluetooth(d)).toList());
-    });
-  * */
-
-
     printerManager.startScan(Duration(seconds: 4));
     printerManager.scanResults.listen((scannedDevices) {
-//      setState(() {
-//        _devices=scannedDevices;
-//      });
-
-//    print('${scannedDevices.is}')
 
 
       logger.w('scannedDevices: $scannedDevices');
@@ -1115,49 +1109,8 @@ class ShoppingCartBloc implements Bloc {
       print("Some Error $stackTrace");
     });
 
-//    _devices=devices;
-
-
-    /*
-    String ip;
-    try {
-      ip = await Wifi.ip;
-      print('local ip:\t$ip');
-    } catch (e) {
-
-      print('ip error, please check internet');
-//      return devices;
-    }
-
-
-    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
-    int port = 9100;
-    try {
-      port = int.parse(portNumber);
-    } catch (e) {
-      print('port.toString()  please check $e');
-    }
-
-    print('subnet:\t$subnet, port:\t$port');
-
-
-    final stream = NetworkAnalyzer.discover2(subnet, port);
-
-    stream.listen((NetworkAddress addr) {
-      if (addr.exists) {
-        print('Found device: ${addr.ip}');
-
-        devices.add(addr.ip);
-
-
-      }
-    });
-
     */
 
-
-
-//    return devices;
 
   }
 
