@@ -11331,22 +11331,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size4,
-          width: PosTextSize.size4,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
 
         ));
     ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
       align: PosAlign.left,
       bold: true,
-      height: PosTextSize.size4,
-      width: PosTextSize.size4,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
     ));
     ticket.text('${oneOrderListdocument.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size4,
-          width: PosTextSize.size4,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
         ));
 
 
@@ -11359,8 +11359,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }',
         styles: PosStyles(
           align: PosAlign.right,
-          height: PosTextSize.size6,
-          width: PosTextSize.size6,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
 
         )
     );
@@ -11372,8 +11372,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
 
       align: PosAlign.right,
-      height: PosTextSize.size6,
-      width: PosTextSize.size6,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
 
 
     )
@@ -11385,8 +11385,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         customerForReciteGeneration.phoneNumber}', styles: PosStyles(
 
       align: PosAlign.right,
-      height: PosTextSize.size6,
-      width: PosTextSize.size6,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
 
 
     )
@@ -11450,7 +11450,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  // # number 2: demoReceipt Order Type DElivery begins here...
+  // # number 2: demoReceipt Order Type Delivery begins here...
 
 
   Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
@@ -11480,8 +11480,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
     ).then((oneImageInBytes){
 
-      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-      ticket.image(image);
+      final ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      print('calling ticket.image(imageRestaurant); ');
+      ticket.image(imageRestaurant);
 
     }).catchError((onError){
       print(' error in getting restaurant name as image');
@@ -11511,22 +11512,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size4,
-          width: PosTextSize.size4,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
 
         ));
     ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
       align: PosAlign.left,
       bold: true,
-      height: PosTextSize.size4,
-      width: PosTextSize.size4,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
     ));
     ticket.text('${oneOrderListdocument.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size4,
-          width: PosTextSize.size4,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
         ));
 
 
@@ -11539,8 +11540,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }',
         styles: PosStyles(
           align: PosAlign.right,
-          height: PosTextSize.size6,
-          width: PosTextSize.size6,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
 
         )
     );
@@ -11552,8 +11553,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
 
       align: PosAlign.right,
-      height: PosTextSize.size6,
-      width: PosTextSize.size6,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
 
 
     )
@@ -11565,8 +11566,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         customerForReciteGeneration.phoneNumber}', styles: PosStyles(
 
       align: PosAlign.right,
-      height: PosTextSize.size6,
-      width: PosTextSize.size6,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
 
 
     )
@@ -11669,22 +11670,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size4,
-          width: PosTextSize.size4,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
 
         ));
     ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
       align: PosAlign.left,
       bold: true,
-      height: PosTextSize.size4,
-      width: PosTextSize.size4,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
     ));
     ticket.text('${oneOrderListdocument.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size4,
-          width: PosTextSize.size4,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
         ));
 
 
@@ -11697,8 +11698,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }',
         styles: PosStyles(
           align: PosAlign.right,
-          height: PosTextSize.size6,
-          width: PosTextSize.size6,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
 
         )
     );
@@ -11710,8 +11711,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
 
       align: PosAlign.right,
-      height: PosTextSize.size6,
-      width: PosTextSize.size6,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
 
 
     )
@@ -11723,8 +11724,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         customerForReciteGeneration.phoneNumber}', styles: PosStyles(
 
       align: PosAlign.right,
-      height: PosTextSize.size6,
-      width: PosTextSize.size6,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
 
 
     )
@@ -11902,22 +11903,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size4,
-          width: PosTextSize.size4,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
 
         ));
     ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
       align: PosAlign.left,
       bold: true,
-      height: PosTextSize.size4,
-      width: PosTextSize.size4,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
     ));
     ticket.text('${oneOrderListdocument.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
-          height: PosTextSize.size4,
-          width: PosTextSize.size4,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
         ));
 
 
@@ -11930,8 +11931,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }',
         styles: PosStyles(
           align: PosAlign.right,
-          height: PosTextSize.size6,
-          width: PosTextSize.size6,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
 
         )
     );
@@ -11943,8 +11944,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
 
       align: PosAlign.right,
-      height: PosTextSize.size6,
-      width: PosTextSize.size6,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
 
 
     )
@@ -11956,8 +11957,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         customerForReciteGeneration.phoneNumber}', styles: PosStyles(
 
       align: PosAlign.right,
-      height: PosTextSize.size6,
-      width: PosTextSize.size6,
+      height: PosTextSize.size1,
+      width: PosTextSize.size1,
 
 
     )
@@ -11989,12 +11990,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
 //      ticket.hr();
       ticket.row([
-        PosColumn(text: '${oneFood.name}', width: 7),
-        PosColumn(text: '${oneFood.quantity}', width: 2),
+        PosColumn(text: '${oneFood.name}', width: 7,styles: PosStyles(align: PosAlign.left)),
+        PosColumn(text: '${oneFood.quantity}', width: 2,styles: PosStyles(align: PosAlign.center)),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
       ]);
 
-      ticket.hr(); // needed. as per design.
+//      ticket.hr(); // needed. as per design.
 
     });
 
