@@ -13,6 +13,7 @@
 //import 'dart:core';
 import 'dart:math';
 
+import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
@@ -46,6 +47,7 @@ class Order {
   int page; // page =(0,1) = (0: from FoodGallery Page, 1: from Shopping Cart Page);
 
 
+
   // SINCE WE DON'T NEED TO
   // CALCULATE THIS PRICE IN SHOPPING CART PAGE BUT DO IT IN FOOD GALLERY PAGE,
   //  AND PASS LATER PAGES.
@@ -71,6 +73,7 @@ class Order {
         this.orderdocId:'',
         this.isCanceled:false,
         this.page,
+
 
 
         // this.foodItemOrderID,
