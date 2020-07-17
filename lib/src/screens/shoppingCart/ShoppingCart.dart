@@ -8856,13 +8856,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     //work 01_paymentButton TakeAway 9thJuly.
                     logger.w('check device listed or not');
+                    print('index: $index');
 
-                    await _testPrint(blueToothDevicesState[--index]);
+                    if(index<blueToothDevicesState.length) {
+                      await _testPrint(blueToothDevicesState[--index]);
+                      return Navigator.pop(context,tempOrderWithdocId);
+                    }
 
-                    //work 01_paymentButton TakeAway 9thJuly.
-                    logger.w('check device listed or not');
-
-                    return Navigator.pop(context,tempOrderWithdocId);
+                    if(index>blueToothDevicesState.length){
+                      logger.i('___________ blueTooth device not found _____');
+                      return;
+                    }
                   }
 
 
@@ -9079,9 +9083,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     //work 01_paymentButton TakeAway 9thJuly.
                     logger.w('check device listed or not');
 
-                    await _testPrint(blueToothDevicesState[--index]);
+                    print('index: $index');
 
-                    return Navigator.pop(context,tempOrderWithdocId);
+
+                    if(index<blueToothDevicesState.length) {
+                      await _testPrint(blueToothDevicesState[--index]);
+                      return Navigator.pop(context,tempOrderWithdocId);
+                    }
+
+                    if(index>blueToothDevicesState.length){
+                      logger.i('___________ blueTooth device not found _____');
+                      return;
+                    }
+
+
+
 
 //                    return Navigator.pop(context,tempOrderWithdocId);
                   }
