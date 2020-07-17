@@ -8833,6 +8833,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      _x.address = '0F:02:18:51:23:46';
 
 
+                      print('oneBlueToothDevice.name: ${oneBlueToothDevice.name}');
                     if((oneBlueToothDevice.name=='Restaurant Printer') ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
                       _testPrint(oneBlueToothDevice);
 
