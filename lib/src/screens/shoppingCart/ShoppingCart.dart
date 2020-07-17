@@ -11589,6 +11589,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ).then((oneImageInBytes){
 
       final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      print('before printing total cose for recite of delivery type order');
       ticket.image(image);
 
     }).catchError((onError){
@@ -11601,12 +11602,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  // # number 3: demoReceipt Order Type DElivery begins here...
-
   // demoReceipt Order Type Delivery ends here...
 
 
-
+  // # number 3: demoReceipt Order Type phone begins here...
 
   // demoReceipt Order Type Phone begins here...
   Future<Ticket> demoReceiptOrderTypePhone(PaperSize paper,
@@ -11614,11 +11613,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderListdocument
       /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
 
-//    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
-//
-//    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
-//    final profile = await CapabilityProfile.load();
-//    final Ticket ticket = Ticket(paper, profile);
 
     CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
     List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
@@ -11709,22 +11703,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     )
     );
 
-    // code for order type and paid status starts here.
-
-    // Print image
-
-//    final ByteData data = await rootBundle.load('assets/flutterlogo.svg');
-//    final Uint8List bytes = data.buffer.asUint8List();
-//    final Image image = decodeImage(bytes);
-//    ticket.image(image);
-
-
-// Print image using alternative commands
-    // ticket.imageRaster(image);
-    // ticket.imageRaster(image, imageFn: PosImageFn.graphics);
-    // code for order type and paid status ends here
-
-
     // ordered food items begins here.
     orderedItems.forEach((oneFood) {
 
@@ -11742,88 +11720,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
-
-
-
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'TOTAL',
-          width: 6,
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-      PosColumn(
-          text: '\$10.97',
-          width: 6,
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-    ]);
-    */
-
     ticket.hr(ch: '=', linesAfter: 1);
 
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'Cash',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$15.00',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-    ticket.row([
-      PosColumn(
-          text: 'Change',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$4.03',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-
-    ticket.feed(2);
-    ticket.text('Thank you!',
-        styles: PosStyles(align: PosAlign.center, bold: true));
-
-    final now = DateTime.now();
-    final formatter = DateFormat('MM/dd/yyyy H:m');
-    final String timestamp = formatter.format(now);
-    ticket.text(timestamp,
-        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
-
-    */
-
-    // Print QR Code from image
-    // try {
-    //   const String qrData = 'example.com';
-    //   const double qrSize = 200;
-    //   final uiImg = await QrPainter(
-    //     data: qrData,
-    //     version: QrVersions.auto,
-    //     gapless: false,
-    //   ).toImageData(qrSize);
-    //   final dir = await getTemporaryDirectory();
-    //   final pathName = '${dir.path}/qr_tmp.png';
-    //   final qrFile = File(pathName);
-    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
-    //   final img = decodeImage(imgFile.readAsBytesSync());
-
-    //   ticket.image(img);
-    // } catch (e) {
-    //   print(e);
-    // }
-
-    // Print QR Code using native function
-    // ticket.qrcode('example.com');
 
     ticket.feed(2);
     ticket.cut();
@@ -11935,23 +11833,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     )
     );
 
-    // code for order type and paid status starts here.
 
-    // Print image
-
-//    final ByteData data = await rootBundle.load('assets/flutterlogo.svg');
-//    final Uint8List bytes = data.buffer.asUint8List();
-//    final Image image = decodeImage(bytes);
-//    ticket.image(image);
-
-
-// Print image using alternative commands
-    // ticket.imageRaster(image);
-    // ticket.imageRaster(image, imageFn: PosImageFn.graphics);
-    // code for order type and paid status ends here
-
-
-    // ordered food items begins here.
     orderedItems.forEach((oneFood) {
 
       ticket.row([
@@ -11964,204 +11846,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
-    // ordered food items ends here.
-//    orderedItems
 
+//    ticket.hr(ch: '=', linesAfter: 1);
 
-
-
-
-
-
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'TOTAL',
-          width: 6,
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-      PosColumn(
-          text: '\$10.97',
-          width: 6,
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          )),
-    ]);
-    */
-
-    ticket.hr(ch: '=', linesAfter: 1);
-
-    /*
-    ticket.row([
-      PosColumn(
-          text: 'Cash',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$15.00',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-    ticket.row([
-      PosColumn(
-          text: 'Change',
-          width: 8,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-      PosColumn(
-          text: '\$4.03',
-          width: 4,
-          styles: PosStyles(align: PosAlign.right, width: PosTextSize.size2)),
-    ]);
-
-    ticket.feed(2);
-    ticket.text('Thank you!',
-        styles: PosStyles(align: PosAlign.center, bold: true));
-
-    final now = DateTime.now();
-    final formatter = DateFormat('MM/dd/yyyy H:m');
-    final String timestamp = formatter.format(now);
-    ticket.text(timestamp,
-        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
-
-    */
-
-    // Print QR Code from image
-    // try {
-    //   const String qrData = 'example.com';
-    //   const double qrSize = 200;
-    //   final uiImg = await QrPainter(
-    //     data: qrData,
-    //     version: QrVersions.auto,
-    //     gapless: false,
-    //   ).toImageData(qrSize);
-    //   final dir = await getTemporaryDirectory();
-    //   final pathName = '${dir.path}/qr_tmp.png';
-    //   final qrFile = File(pathName);
-    //   final imgFile = await qrFile.writeAsBytes(uiImg.buffer.asUint8List());
-    //   final img = decodeImage(imgFile.readAsBytesSync());
-
-    //   ticket.image(img);
-    // } catch (e) {
-    //   print(e);
-    // }
-
-    // Print QR Code using native function
-    // ticket.qrcode('example.com');
 
     ticket.feed(2);
     ticket.cut();
     return ticket;
   }
 
-
-
-// demoReceipt Order Type TakeAway begins here...
-/*
-
-  Future<List<String>> discoverDevices(String portNumber) async {
-
-    List<String> devices = [];
-
-    String ip;
-    try {
-      ip = await Wifi.ip;
-      print('local ip:\t$ip');
-    } catch (e) {
-
-      print('ip error, please check internet');
-      return devices;
-    }
-
-    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
-    int port = 9100;
-    try {
-      port = int.parse(portNumber);
-    } catch (e) {
-      print('port.toString()  please check $e');
-    }
-    print('subnet:\t$subnet, port:\t$port');
-
-
-    final stream = NetworkAnalyzer.discover2(subnet, port);
-
-    stream.listen((NetworkAddress addr) {
-      if (addr.exists) {
-        print('Found device: ${addr.ip}');
-
-          devices.add(addr.ip);
-
-
-      }
-    });
-
-    return devices;
-
-  }
-
-  */
-
-
-//  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
-
-/*
-  Widget printWidget(){
-    return
-      Container(
-        height: displayHeight(context)/30,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: devices.length,
-          itemBuilder: (BuildContext context, int index) {
-            return InkWell(
-              onTap: () => testPrint(devices[index], context),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 60,
-                    padding: EdgeInsets.only(left: 10),
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.print),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            mainAxisAlignment:
-                            MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                '${devices[index]}:${portController.text}',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              Text(
-                                'Click to print a test receipt',
-                                style: TextStyle(
-                                    color: Colors.grey[700]),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Icon(Icons.chevron_right),
-                      ],
-                    ),
-                  ),
-                  Divider(),
-                ],
-              ),
-            );
-          },
-        ),
-
-      );
-  }
-
-  */
 
 
 
