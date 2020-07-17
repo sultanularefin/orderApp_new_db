@@ -603,7 +603,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  Widget subTotalTotalDeliveryCost(double subtotal, {double deliverCost:2.50}) {
+  Widget subTotalTotalDeliveryCost(double subtotal, {double deliveryCost:2.50}) {
     Path customPathTotalCost = Path()
       ..moveTo(200, 120)
       ..lineTo(0, 120);
@@ -664,17 +664,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            fontWeight: FontWeight.bold,
                                 color: Colors.grey,
 //                          color: Color(0xffF50303),
-                                fontSize: 22, fontFamily: 'Itim-Regular',),
+                                fontSize: 14, fontFamily: 'Itim-Regular',),
                             ),
                           ),
-                          Text(
-                            'DELIVERY',
+
+                          // qwe
+//                          '${
+//                              (unObsecuredInputandPayment.totalPrice
+//                                  /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
+//                              '\u20AC',
+                          Text( subtotal.toStringAsFixed(2) +'\u20AC',
                             textAlign: TextAlign.center,
                             style: TextStyle(
 //                          fontWeight: FontWeight.bold,
                               color: Colors.grey,
 //                        color: Color(0xffF50303),
-                              fontSize: 22, fontFamily: 'Itim-Regular',),
+                              fontSize: 14, fontFamily: 'Itim-Regular',),
                           ),
                         ],
                       ),
@@ -695,17 +700,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           Container(
                             padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
                             child: Text(
-                              'paid',
+                              'Delivery Cost',
                               textAlign: TextAlign.center,
                               style: TextStyle(
 //                        fontWeight: FontWeight.bold,
                                 color: Colors.grey,
 //                          color: Color(0xffF50303),
-                                fontSize: 22, fontFamily: 'Itim-Regular',),
+                                fontSize: 14, fontFamily: 'Itim-Regular',),
                             ),
                           ),
-                          Text(
-                            'delivery',
+                          Text(deliveryCost.toStringAsFixed(2) +'\u20AC',
                             textAlign: TextAlign.center,
                             style: TextStyle(
 //                      fontWeight: FontWeight.bold,
@@ -766,17 +770,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
                       child: Text(
-                        'paid',
+                        'TOTAL',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                          color: Color(0xffF50303),
-                          fontSize: 22, fontFamily: 'Itim-Regular',),
+                          fontSize: 17, fontFamily: 'Itim-Regular',),
                       ),
                     ),
                     Text(
-                      'delivery',
+                      (deliveryCost + subtotal).toStringAsFixed(2) +'\u20AC',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
