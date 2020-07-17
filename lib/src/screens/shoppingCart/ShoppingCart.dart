@@ -8832,6 +8832,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      _x.name = 'Restaurant Printer';
 //                      _x.address = '0F:02:18:51:23:46';
 
+                      print('oneBlueToothDevice.address: ${oneBlueToothDevice.address}');
 
                       print('oneBlueToothDevice.name: ${oneBlueToothDevice.name}');
                     if((oneBlueToothDevice.name=='Restaurant Printer') ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
@@ -9040,6 +9041,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      _x.address = '0F:02:18:51:23:46';
 
 
+                      print('oneBlueToothDevice.name: ${oneBlueToothDevice.name}');
+                      print('oneBlueToothDevice.address: ${oneBlueToothDevice.address}');
                       if((oneBlueToothDevice.name=='Restaurant Printer') ||(oneBlueToothDevice.address == '0F:02:18:51:23:46')){
                         _testPrint(oneBlueToothDevice);
 
