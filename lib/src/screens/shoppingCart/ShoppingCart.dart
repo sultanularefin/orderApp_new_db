@@ -8851,9 +8851,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       }
 
-                      else{
-                        return;
-                      }
+
 
                     };
 
@@ -9090,7 +9088,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if(blueToothDevicesState.length==0){
                       logger.i('___________ blueTooth device not found _____');
-                      _showMyDialog2('___________ blueTooth device not found _____');
+                      _showMyDialog2('___________ blueTooth device not found _____ delivery phone pay button');
                       return;
                     }
 
@@ -9117,9 +9115,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       }
 
-                      else{
-                        return;
-                      }
+
 
                     };
 
