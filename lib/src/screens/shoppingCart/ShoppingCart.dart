@@ -8818,6 +8818,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else{
+
                     print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
                     List<PrinterBluetooth> blueToothDevicesState = shoppingCartBloc.getDevices;
@@ -8832,17 +8833,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+                    bool found =false;
                     int index=0;
                     for(int i =0;i<blueToothDevicesState.length;i++){
 
 
                       ++index;
 
-                      print('blueToothDevicesState[i].name: ${blueToothDevicesState[i].name}');
-                      print('oneBlueToothDevice[i].address: ${blueToothDevicesState[i].address}');
+                      print('blueToothDevicesState[$i].name: ${blueToothDevicesState[i].name}');
+                      print('oneBlueToothDevice[$i].address: ${blueToothDevicesState[i].address}');
                       if((blueToothDevicesState[i].name=='Restaurant Printer') ||
                           (blueToothDevicesState[i].address == '0F:02:18:51:23:46')){
+                        found =true;
                         break;
+
                         // _testPrint(oneBlueToothDevice);
 
                       }
@@ -8856,16 +8860,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     logger.w('check device listed or not');
                     print('index: $index');
 
-                    if(index<blueToothDevicesState.length) {
-                      await _testPrint(blueToothDevicesState[--index]);
+                    if(found==true) {
+                      await _testPrint(blueToothDevicesState[index]);
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
 
-                    if(index>blueToothDevicesState.length){
+                    else{
                       logger.i('___________ blueTooth device not found _____');
                       _showMyDialog2('___________ blueTooth device not found _____');
                       return;
                     }
+
                   }
 
 
@@ -9091,17 +9096,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+                    bool found =false;
                     int index=0;
                     for(int i =0;i<blueToothDevicesState.length;i++){
 
 
                       ++index;
 
-                      print('blueToothDevicesState[i].name: ${blueToothDevicesState[i].name}');
-                      print('oneBlueToothDevice[i].address: ${blueToothDevicesState[i].address}');
+                      print('blueToothDevicesState[$i].name: ${blueToothDevicesState[i].name}');
+                      print('oneBlueToothDevice[$i].address: ${blueToothDevicesState[i].address}');
                       if((blueToothDevicesState[i].name=='Restaurant Printer') ||
                           (blueToothDevicesState[i].address == '0F:02:18:51:23:46')){
+                        found =true;
                         break;
+
                         // _testPrint(oneBlueToothDevice);
 
                       }
@@ -9115,12 +9123,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     logger.w('check device listed or not');
                     print('index: $index');
 
-                    if(index<blueToothDevicesState.length) {
-                      await _testPrint(blueToothDevicesState[--index]);
+                    if(found==true) {
+                      await _testPrint(blueToothDevicesState[index]);
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
 
-                    if(index>blueToothDevicesState.length){
+                    else{
                       logger.i('___________ blueTooth device not found _____');
                       _showMyDialog2('___________ blueTooth device not found _____');
                       return;
