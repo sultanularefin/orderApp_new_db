@@ -9103,8 +9103,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       ++index;
 
+
                       print('blueToothDevicesState[$i].name: ${blueToothDevicesState[i].name}');
                       print('oneBlueToothDevice[$i].address: ${blueToothDevicesState[i].address}');
+
+
                       if((blueToothDevicesState[i].name=='Restaurant Printer') ||
                           (blueToothDevicesState[i].address == '0F:02:18:51:23:46')){
                         found =true;
