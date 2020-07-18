@@ -34,6 +34,7 @@ class FoodGalleryBloc implements Bloc {
 
   // id ,type ,title <= Location.
 
+  bool _isDisposed = false;
   List<FoodItemWithDocID> _allFoodsList=[];
 
   List<NewCategoryItem> _allCategoryList=[];
@@ -101,8 +102,13 @@ class FoodGalleryBloc implements Bloc {
 
 
 // this code bloc cut paste from foodGallery Bloc:
-  Future<void> getAllIngredients() async {
+  Future<void> getAllIngredientsConstructor() async {
 
+    print('at getAllIngredientsConstructor()');
+
+    if(_isDisposed) {
+      return;
+    }
 
     var snapshot = await _client.fetchAllIngredients();
     List docList = snapshot.documents;
@@ -126,7 +132,7 @@ class FoodGalleryBloc implements Bloc {
 
     _allIngItemsFGBloc = ingItems;
 
-    _allIngredientListController.sink.add(ingItems);
+    _allIngredientListController.sink.add(_allIngItemsFGBloc);
 
 
 //    return ingItems;
@@ -135,7 +141,13 @@ class FoodGalleryBloc implements Bloc {
 
 
 //  Future<List<FoodItemWithDocID>> getAllFoodItems() async {
-  void getAllFoodItems() async {
+  void getAllFoodItemsConstructor() async {
+
+    print('at getAllFoodItemsConstructor()');
+
+    if(_isDisposed) {
+      return;
+    }
 
     var snapshot = await _client.fetchFoodItems();
     List docList = snapshot.documents;
@@ -214,8 +226,13 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-  void getAllCategories() async {
+  void getAllCategoriesConstructor() async {
 
+    print('at getAllCategoriesConstructor()');
+
+    if(_isDisposed) {
+      return;
+    }
 
     var snapshot = await _client.fetchCategoryItems();
     List docList = snapshot.documents;
@@ -284,12 +301,15 @@ class FoodGalleryBloc implements Bloc {
   // CONSTRUCTOR BIGINS HERE..
   FoodGalleryBloc() {
 
+    print('at FoodGalleryBloc()');
     // need to use this when moving to food Item Details page.
-    getAllIngredients();
+    getAllIngredientsConstructor();
 
-    getAllFoodItems();
+    getAllFoodItemsConstructor();
 
-    getAllCategories();
+    getAllCategoriesConstructor();
+
+    print('at FoodGalleryBloc()');
 
 //    getAllIngredients();
     // invoking this here to make the transition in details page faster.
@@ -310,6 +330,7 @@ class FoodGalleryBloc implements Bloc {
     _foodItemController.close();
     _categoriesController.close();
     _allIngredientListController.close();
+    _isDisposed = true;
 //    _allIngredientListController.close();
   }
 }
