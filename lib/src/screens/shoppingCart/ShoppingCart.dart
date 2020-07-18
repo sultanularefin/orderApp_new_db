@@ -8865,6 +8865,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if(index>blueToothDevicesState.length){
                       logger.i('___________ blueTooth device not found _____');
+                      _showMyDialog2('___________ blueTooth device not found _____');
                       return;
                     }
                   }
@@ -8886,6 +8887,36 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       );
   }
+
+
+  Future<void> _showMyDialog2(String message) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('$message'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('$message'),
+
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('return shopping Cart page.'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
 
 // animatedUnObscuredCancelPayButton
@@ -9052,11 +9083,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState.length}');
 
-                    int index=0;
+                    bool found=false;
+                    int index =-1;
                     for(int i =0;i<blueToothDevicesState.length;i++){
 
 
                       ++index;
+
 //                      print('_testPrintDummyDevices');
 //                  _testPrintDummyDevices(blueToothDevicesState[index]);
 
@@ -9068,12 +9101,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       print('oneBlueToothDevice[i].address: ${blueToothDevicesState[i].address}');
                       if((blueToothDevicesState[i].name=='Restaurant Printer') ||
                           (blueToothDevicesState[i].address == '0F:02:18:51:23:46')){
+                        found=true;
                         break;
                         // _testPrint(oneBlueToothDevice);
 
                       }
 
                       else{
+//                        ++index;
                         return;
                       }
 
@@ -9083,15 +9118,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     //work 01_paymentButton TakeAway 9thJuly.
                     logger.w('check device listed or not');
 
-                    print('index: $index');
+//                    print('index: $index');
 
 
-                    if(index<blueToothDevicesState.length) {
-                      await _testPrint(blueToothDevicesState[--index]);
+                    if( /*index<blueToothDevicesState.length */ found == true) {
+                      await _testPrint(blueToothDevicesState[index]);
+                      print('before this method execution line # 9091 ,'
+                          'Navigator.pop(context,tempOrderWithdocId);');
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
 
-                    if(index>blueToothDevicesState.length){
+                    else{
                       logger.i('___________ blueTooth device not found _____');
                       return;
                     }
