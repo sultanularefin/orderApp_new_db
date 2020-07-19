@@ -8829,10 +8829,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       logger.i('___________ blueTooth device not found _____');
 
                       // UNCOMMENT THIS LINE... BELOW  //_showMyDialog2('___________ blueTooth device not found _____');
-//                      _showMyDialog2('___________ blueTooth device not found _____');
+                      _showMyDialog2('___________ blueTooth device not found _____');
 
                       // NEED THIS LINES COMMENTING BEGINNING..
 
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -8844,6 +8845,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
+                      */
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
@@ -8880,9 +8882,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if(found==true) {
                       print('found == true');
-//                      await _testPrint(blueToothDevicesState[index]);
+                      await _testPrint(blueToothDevicesState[index]);
 
-                      _testPrintDummyDevices(blueToothDevicesState[index]);
+//                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
 
                       return Navigator.pop(context,tempOrderWithdocId);
@@ -8890,9 +8892,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     else{
                       logger.i('___________ blueTooth device not found _____');
-//                      _showMyDialog2('___________ blueTooth device not found _____');
+                      _showMyDialog2('___________ blueTooth device not found _____');
 
-                      // UNCOMMENT FROM HERE TO END
+                      // COMMENT FROM HERE TO END
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -8904,6 +8907,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
+                      */
                       // END
                       return;
                     }
@@ -9128,9 +9132,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     if(blueToothDevicesState.length==0){
                       logger.i('___________ blueTooth device not found _____');
 
-                     // _showMyDialog2('___________ blueTooth device not found _____ delivery phone pay button');
+                      _showMyDialog2('___________ blueTooth device not found _____ delivery phone pay button');
 
                       // NEED THIS LINES COMMENTING BEGINNING..
+
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9142,6 +9148,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
+                      */
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
@@ -9181,16 +9188,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if(found==true) {
                       print('found == true');
-//                      await _testPrint(blueToothDevicesState[index]);
-                      _testPrintDummyDevices(blueToothDevicesState[index]);
+                      await _testPrint(blueToothDevicesState[index]);
+//                      _testPrintDummyDevices(blueToothDevicesState[index]);
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
 
                     else{
                       logger.i('___________ blueTooth device not found _____');
-                      //_showMyDialog2('___________ blueTooth device not found _____');
+                      _showMyDialog2('___________ blueTooth device not found _____');
+
 
                       // COMMENT FROM HERE TO END...
+
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9202,6 +9212,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
+                      */
 
                       //END
 
@@ -11869,21 +11880,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
     )
     );
 
-    // code for order type and paid status starts here.
 
-
-
-
-// Print image using alternative commands
-    // ticket.imageRaster(image);
-    // ticket.imageRaster(image, imageFn: PosImageFn.graphics);
-    // code for order type and paid status ends here
-
-
-    // ordered food items begins here.
     orderedItems.forEach((oneFood) {
 
-// sdf
+
 
       ticket.row([
 
@@ -11891,11 +11891,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
         PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
 
-        /*
-        PosColumn(text: '${oneFood.name}', width: 7,styles: PosStyles(align: PosAlign.left)),
-        PosColumn(text: '${oneFood.quantity}', width: 2,styles: PosStyles(align: PosAlign.center)),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 3, styles: PosStyles(align: PosAlign.right)),
-      */
       ]);
 
 
@@ -11907,6 +11902,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     ticket.image(oneImageTotalCostDelivery);
+//    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
 
