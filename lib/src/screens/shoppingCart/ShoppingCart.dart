@@ -11472,6 +11472,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
         print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
+        Future<bool> isPrint =
+        printTicket(
+            paper,
+            thisRestaurant,
+            oneOrderData/*,imageRestaurant */,
+            restaurantNameBytesNotFuture,
+            totalCostDeliveryBytes,paidUnpaidDeliveryTypeWidgetBytes);
+
+//        Future<OneOrderFirebase> testFirebaseOrderFetch=
+
+        isPrint.whenComplete(() {
+
+          print("called when future completes");
+//          return true;
+        }
+        ).then((printResult){
+          print("printResult: $printResult");
+          return true;
+
+        }).catchError((onError) {
+          print('printing not successful: $onError');
+          return false;
+        });
+
       }).catchError((onError){
         print(' error in getting restaurant name as image');
         print('false: means something wrong not printed');
@@ -11482,30 +11506,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //      if ((oneOrderData.orderType != null) ||(oneOrderData.totalPrice !=null)) {
+//      await Future.delayed(Duration(milliseconds: 1000));
 
-      Future<bool> isPrint =
-      printTicket(
-          paper,
-          thisRestaurant,
-          oneOrderData/*,imageRestaurant */,
-          restaurantNameBytesNotFuture,
-          totalCostDeliveryBytes,paidUnpaidDeliveryTypeWidgetBytes);
-
-//        Future<OneOrderFirebase> testFirebaseOrderFetch=
-
-      isPrint.whenComplete(() {
-
-        print("called when future completes");
-//          return true;
-      }
-      ).then((printResult){
-        print("printResult: $printResult");
-        return true;
-
-      }).catchError((onError) {
-        print('printing not successful: $onError');
-        return false;
-      });
 
       // }
       /*
@@ -11672,6 +11674,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
         print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
+        printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
+            totalCostDeliveryBytes,paidUnpaidDeliveryTypeWidgetBytes);
+
       }).catchError((onError){
         print(' error in getting restaurant name as image');
         print('false: means something wrong not printed');
@@ -11680,11 +11685,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       });
 
 
-      if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
-        printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes,paidUnpaidDeliveryTypeWidgetBytes);
-      }
     }).catchError((onError){
       print('Order data fetch Error $onError ***');
       _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
