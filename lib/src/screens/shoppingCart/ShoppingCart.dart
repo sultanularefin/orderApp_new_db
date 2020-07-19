@@ -8859,6 +8859,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('index: $index');
 
                     if(found==true) {
+                      print('found == true');
                       await _testPrint(blueToothDevicesState[index]);
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
@@ -9123,6 +9124,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('index: $index');
 
                     if(found==true) {
+                      print('found == true');
                       await _testPrint(blueToothDevicesState[index]);
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
@@ -11058,7 +11060,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // TODO Don't forget to choose printer's paper
     const PaperSize paper = PaperSize.mm58;
 
-    print("login button pressed");
+    print(" at _testPrint");
 
 
     _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
@@ -11116,7 +11118,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
+
     final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+
     Uint8List restaurantNameBytesNotFuture;
 
     print('restaurantNameBytes: $restaurantNameBytesNotFuture');
@@ -11178,11 +11182,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
     ).then((oneOrderData){
 
+      // TODO: any oneOrderData data validation needs to be done in  corresponding block page.
 //      if ((oneOrderData.orderType == null) ||((oneOrderData.totalPrice ==null))) {
 //        return false;
 //      }
 
-      if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
+
+      print('reached here: $oneOrderData');
+
+//      if ((oneOrderData.orderType != null) ||(oneOrderData.totalPrice !=null)) {
 
         Future<bool> isPrint =
         printTicket(
@@ -11197,9 +11205,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
         isPrint.whenComplete(() {
 
           print("called when future completes");
-          return true;
+//          return true;
         }
         ).then((printResult){
+          print("printResult: $printResult");
           return true;
 
         }).catchError((onError) {
@@ -11207,7 +11216,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
           return false;
         });
 
+     // }
+      /*
+      else{
+        return false;
+//        ALTERNATE FOR THIS:
+//        if ((oneOrderData.orderType == null) || (oneOrderData.totalPrice ==null) || (oneOrderData.totalPrice ==0.0) ){
+//          return false;
+//        }
       }
+      */
+
+
 
     }).catchError((onError){
       print('Order data fetch Error $onError ***');
@@ -11228,6 +11248,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
+    // final return false if true is not return from the above conditioned.
+    return false;
   }
 
   void _testPrintDummyDevices(PrinterBluetooth printer) async {
