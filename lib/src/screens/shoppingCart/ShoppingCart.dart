@@ -8834,7 +8834,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                     bool found =false;
-                    int index=0;
+                    int index=-1;
                     for(int i =0;i<blueToothDevicesState.length;i++){
 
 
@@ -9095,7 +9095,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                     bool found =false;
-                    int index=0;
+                    int index=-1;
                     for(int i =0;i<blueToothDevicesState.length;i++){
 
 
