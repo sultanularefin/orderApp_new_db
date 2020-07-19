@@ -778,10 +778,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
       child:
       Container(
 //        color:Colors.green,
-        height: 180,
+        height: 170,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
-        width: 200,
+        width: 300,
         /*
         decoration: BoxDecoration(
           border: Border.all(
@@ -808,7 +808,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   Container(
-                    height: 50,
+//                    height: 50,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -849,7 +849,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   Container(
-                    height: 50,
+//                    height: 50,
 
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -875,7 +875,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      fontWeight: FontWeight.bold,
                             color: Colors.black,
 //                        color: Color(0xffF50303),
-                            fontSize: 22, fontFamily: 'Itim-Regular',),
+                            fontSize: 14, fontFamily: 'Itim-Regular',),
                         ),
                       ],
                     ),
@@ -916,8 +916,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-              height: 50,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+//              height: 50,
+//              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -943,7 +943,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 22, fontFamily: 'Itim-Regular',),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
                   ),
                 ],
               ),
