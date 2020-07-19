@@ -11212,7 +11212,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           return true;
 
         }).catchError((onError) {
-          print('printing not successful');
+          print('printing not successful: $onError');
           return false;
         });
 
