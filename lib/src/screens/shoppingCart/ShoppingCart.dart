@@ -604,7 +604,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         height: 60,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
-        width: 200,
+        width: 240,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -615,7 +615,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            color:Colors.yellowAccent,
               height: 55,
-              width: 55,
+              width: 40,
 
               decoration: BoxDecoration(
                 border: Border.all(
@@ -641,7 +641,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Icons.pan_tool,
 //        FontAwesomeIcons.bookmark,
                   color: Colors.white,
-                  size: 40,
+                  size: 35,
 
                 ),
               ),
@@ -666,7 +666,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               ),
 
-              width: displayWidth(context) / 3,
+              width: 120,
               height: 50,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Row(
@@ -711,7 +711,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            color:Colors.yellowAccent,
               height: 55,
-              width: 55,
+              width: 40,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -731,7 +731,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                Icons.local_dining,
 //        FontAwesomeIcons.bookmark,
                 color: Colors.white,
-                size: 40,
+                size: 35,
 
               ),
 
@@ -782,6 +782,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 200,
+        /*
         decoration: BoxDecoration(
           border: Border.all(
 
@@ -794,7 +795,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
           borderRadius: BorderRadius.circular(35.0),
 
         ),
+        */
         child:
+
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
