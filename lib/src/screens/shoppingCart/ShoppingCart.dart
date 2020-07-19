@@ -11414,11 +11414,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     if(res.msg=='Success'){
 
+      print('at  Success');
       return true;
     }
 
 
     else {
+
+      print('before returning false from Future <bool> printTicket ');
       return false;
     }
 
@@ -11669,24 +11672,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
 
 
-//    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
-//
-//    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
-//    final profile = await CapabilityProfile.load();
-//    final Ticket ticket = Ticket(paper, profile);
+
+
+
 
     CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
+
     List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
-    // Print image
+    print('paper.value: ${paper.value}');
+    print('currentRestaurant: ${currentRestaurant.name}');
+    print('oneOrderListdocument: $oneOrderListdocument');
+    print('orderedItems: $orderedItems');
+    print('customerForReciteGeneration: $customerForReciteGeneration');
+    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+    print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
 
-//    print('imageResource2: $imageResource2');
-//    restaurantNameImageBytes2
-//    totalCostDeliveryBytes2
 
-//    ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+
     final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
 
     ticket.image(oneImageRestaurant);
