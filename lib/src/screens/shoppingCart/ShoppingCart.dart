@@ -591,6 +591,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  paidStatus
 //  Widget restaurantName(String name) {
   Widget paidUnpaidDeliveryType(OneOrderFirebase oneOrderForReceipt) {
+
+    print('at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}'
+        'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
 //  Widget paidUnpaidDeliveryType =
     return new Directionality(
       textDirection: TextDirection.ltr,
@@ -11458,7 +11461,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
 
-        print("restaurantNameBytes.whenComplete called when future completes");
+        print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
 
       }
       ).then((paidUnpaidDeliveryTypeInBytes){
@@ -11466,6 +11469,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
         print('calling ticket.image(imageRestaurant); ');
         paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
       }).catchError((onError){
@@ -11665,6 +11669,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
         print('calling ticket.image(imageRestaurant); ');
         paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
       }).catchError((onError){
