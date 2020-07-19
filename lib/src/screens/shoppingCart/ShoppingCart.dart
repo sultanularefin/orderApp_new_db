@@ -831,7 +831,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
 //                            fontWeight: FontWeight.bold,
-                              color: Colors.grey,
+                              color: Colors.black,
 //                          color: Color(0xffF50303),
                               fontSize: 14, fontFamily: 'Itim-Regular',),
                           ),
@@ -846,7 +846,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
 //                          fontWeight: FontWeight.bold,
-                            color: Colors.grey,
+                            color: Colors.black,
 //                        color: Color(0xffF50303),
                             fontSize: 14, fontFamily: 'Itim-Regular',),
                         ),
@@ -873,7 +873,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
 //                        fontWeight: FontWeight.bold,
-                              color: Colors.grey,
+                              color: Colors.black,
 //                          color: Color(0xffF50303),
                               fontSize: 14, fontFamily: 'Itim-Regular',),
                           ),
@@ -882,7 +882,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                            color: Colors.grey,
+                            color: Colors.black,
 //                        color: Color(0xffF50303),
                             fontSize: 22, fontFamily: 'Itim-Regular',),
                         ),
@@ -10762,7 +10762,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   child: Icon(
                     getIconForName(orderTypeName),
-                    color: Colors.grey,
+                    color: Colors.black,
                     size: displayWidth(context)/16,
                   ),
                 ),
