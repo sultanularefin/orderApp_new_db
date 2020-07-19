@@ -11501,6 +11501,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderListdocument
       /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
 
+    print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway(');
+
 //    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 //
 //    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
@@ -11663,6 +11665,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
       Uint8List totalCostDeliveryBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
+
+    print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
+
 
 //    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 //
@@ -11836,6 +11841,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderListdocument
       /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
 
+    print('at here: Future<Ticket> demoReceiptOrderTypePhone(');
+
 
     CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
     List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
@@ -11976,6 +11983,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderListdocument
       /*PaperSize paper,Restaurant currentRestaurant  */ ) async {
+
+    print('at here: Future<Ticket> demoReceiptOrderTypeDinning(');
 
 //    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 //
