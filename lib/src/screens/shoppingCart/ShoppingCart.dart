@@ -588,7 +588,157 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  return;
   }
 
+//  paidStatus
+//  Widget restaurantName(String name) {
+  Widget paidUnpaidDeliveryType(OneOrderFirebase oneOrderForReceipt) {
+//  Widget paidUnpaidDeliveryType =
+    return new Directionality(
+      textDirection: TextDirection.ltr,
+      child:
+      Container(
+        color: Colors.blue,
+        width: displayWidth(context) / 1.8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
 
+//            color:Colors.yellow,
+
+//            color:Colors.yellowAccent,
+              height: 55,
+              width: 55,
+
+              decoration: BoxDecoration(
+                border: Border.all(
+
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                  width: 1.0,
+
+                ),
+                shape: BoxShape.circle,
+                color: Colors.black,
+
+
+              ),
+
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 5, 5),
+                child: Icon(
+//        getIconForName(orderTypeName),
+//        IconData:
+
+                  oneOrderForReceipt.paidStatus=='paid'? Icons.thumb_up:
+                  Icons.pan_tool,
+//        FontAwesomeIcons.bookmark,
+                  color: Colors.white,
+                  size: 40,
+
+                ),
+              ),
+
+
+            ),
+
+            //rounded rectangle border and text conted inside it begins here.
+
+
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                  width: 3.6,
+                ),
+//                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(35.0),
+//                    color: Colors.black,
+
+              ),
+
+              width: displayWidth(context) / 3,
+              height: 50,
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <
+                    Widget>[
+                  //  SizedBox(width: 5,),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                    child: Text(
+                      oneOrderForReceipt.paidStatus=='paid'?
+                      'paid':'unpaid',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+//                          color: Color(0xffF50303),
+                        fontSize: 22, fontFamily: 'Itim-Regular',),
+                    ),
+                  ),
+                  Text(
+                    (oneOrderForReceipt.orderBy.toLowerCase()=='delivery')?'Delivery':
+                    (oneOrderForReceipt.orderBy.toLowerCase()=='phone')?
+                    'Phone':(oneOrderForReceipt.orderBy.toLowerCase()=='takeaway')?'TakeAway':'Dinning Room',
+//                    oneOrderForReceipt.orderBy
+//                    'dinning room',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                      fontSize: 22, fontFamily: 'Itim-Regular',),
+                  ),
+                ],
+              ),
+            ),
+
+            Container(
+
+//            color:Colors.yellow,
+
+//            color:Colors.yellowAccent,
+              height: 55,
+              width: 55,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+//                  style: BorderStyle.solid,
+                  width: 1.0,
+                ),
+                shape: BoxShape.circle,
+                color: Colors.black,
+              ),
+
+              child: Icon(
+//        getIconForName(orderTypeName),
+//        IconData:
+                (oneOrderForReceipt.orderBy.toLowerCase()=='delivery')?Icons.motorcycle:
+                (oneOrderForReceipt.orderBy.toLowerCase()=='phone')?
+                Icons.phone_in_talk:(oneOrderForReceipt.orderBy.toLowerCase()=='takeaway')?Icons.business_center:Icons.local_dining,
+//                Icons.local_dining,
+//        FontAwesomeIcons.bookmark,
+                color: Colors.white,
+                size: 40,
+
+              ),
+
+
+            ),
+
+            //rounded rectangle border and text conted inside it ends here.
+
+
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget restaurantName(String name) {
 
@@ -625,113 +775,115 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 200,
+        decoration: BoxDecoration(
+          border: Border.all(
+
+            color: Colors.black,
+            style: BorderStyle.solid,
+            width: 1.0,
+
+          ),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(35.0),
+
+        ),
         child:
-        DottedBorder(
-          dashPattern: [9, 6,],
-          color: Colors.black,
-          strokeWidth: 3.6,
-          borderType: BorderType.RRect,
-          radius: Radius.circular(35),
-//          strokeCap:StrokeCap.butt,
-//        strokeCap: StrokeCap.round,
-//          strokeCap: StrokeCap.square,
-
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
 
 
-              //rounded rectangle border and text conted inside it begins here.
+            //rounded rectangle border and text conted inside it begins here.
 
 
-              DottedBorder(
+            DottedBorder(
 //                dashPattern: [6, 3,2, 3],
-                dashPattern: [9, 6,],
-                customPath: (size) => customPathTotalCost,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
+              dashPattern: [9, 6,],
+              customPath: (size) => customPathTotalCost,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
 
-                    Container(
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <
-                            Widget>[
-                          //  SizedBox(width: 5,),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-                            child: Text(
-                              'SUBTOTAL',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
+                  Container(
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <
+                          Widget>[
+                        //  SizedBox(width: 5,),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                          child: Text(
+                            'SUBTOTAL',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
 //                            fontWeight: FontWeight.bold,
-                                color: Colors.grey,
+                              color: Colors.grey,
 //                          color: Color(0xffF50303),
-                                fontSize: 14, fontFamily: 'Itim-Regular',),
-                            ),
+                              fontSize: 14, fontFamily: 'Itim-Regular',),
                           ),
+                        ),
 
-                          // qwe
+                        // qwe
 //                          '${
 //                              (unObsecuredInputandPayment.totalPrice
 //                                  /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
 //                              '\u20AC',
-                          Text( subtotal.toStringAsFixed(2) +'\u20AC',
+                        Text( subtotal.toStringAsFixed(2) +'\u20AC',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+//                          fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+//                        color: Color(0xffF50303),
+                            fontSize: 14, fontFamily: 'Itim-Regular',),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // 1st row ends here.
+
+
+                  Container(
+                    height: 50,
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <
+                          Widget>[
+                        //  SizedBox(width: 5,),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                          child: Text(
+                            'Delivery Cost',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-//                          fontWeight: FontWeight.bold,
+//                        fontWeight: FontWeight.bold,
                               color: Colors.grey,
-//                        color: Color(0xffF50303),
+//                          color: Color(0xffF50303),
                               fontSize: 14, fontFamily: 'Itim-Regular',),
                           ),
-                        ],
-                      ),
-                    ),
-
-                    // 1st row ends here.
-
-
-                    Container(
-                      height: 50,
-
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <
-                            Widget>[
-                          //  SizedBox(width: 5,),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-                            child: Text(
-                              'Delivery Cost',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-//                        fontWeight: FontWeight.bold,
-                                color: Colors.grey,
-//                          color: Color(0xffF50303),
-                                fontSize: 14, fontFamily: 'Itim-Regular',),
-                            ),
-                          ),
-                          Text(deliveryCost.toStringAsFixed(2) +'\u20AC',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
+                        ),
+                        Text(deliveryCost.toStringAsFixed(2) +'\u20AC',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                              color: Colors.grey,
+                            color: Colors.grey,
 //                        color: Color(0xffF50303),
-                              fontSize: 22, fontFamily: 'Itim-Regular',),
-                          ),
-                        ],
-                      ),
+                            fontSize: 22, fontFamily: 'Itim-Regular',),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+            ),
 
-              /*
+            /*
               DottedBorder(
 //                dashPattern: [6, 3,2, 3],
                 dashPattern: [9, 6,],
@@ -743,7 +895,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ),
 
               */
-              /*
+            /*
               DottedBorder(
                 customPath: (size) => customPath, // PathBuilder
                 color: Colors.indigo,
@@ -762,49 +914,49 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              child:StrokeCap.Butt),
 
 
-              //2nd row ends here.
+            //2nd row ends here.
 
 
-              Container(
-                height: 50,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <
-                      Widget>[
-                    //  SizedBox(width: 5,),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-                      child: Text(
-                        'TOTAL',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-//                          color: Color(0xffF50303),
-                          fontSize: 17, fontFamily: 'Itim-Regular',),
-                      ),
-                    ),
-                    Text(
-                      (deliveryCost + subtotal).toStringAsFixed(2) +'\u20AC',
+            Container(
+              height: 50,
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <
+                    Widget>[
+                  //  SizedBox(width: 5,),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                    child: Text(
+                      'TOTAL',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
-//                        color: Color(0xffF50303),
-                        fontSize: 22, fontFamily: 'Itim-Regular',),
+//                          color: Color(0xffF50303),
+                        fontSize: 17, fontFamily: 'Itim-Regular',),
                     ),
-                  ],
-                ),
+                  ),
+                  Text(
+                    (deliveryCost + subtotal).toStringAsFixed(2) +'\u20AC',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                      fontSize: 22, fontFamily: 'Itim-Regular',),
+                  ),
+                ],
               ),
+            ),
 
-              // total ends here.
+            // total ends here.
 
 
-            ],
-          ),
+          ],
         ),
+
       ),
     );
   }
@@ -8834,7 +8986,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // NEED THIS LINES COMMENTING BEGINNING..
 
-                      /*
+
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -8846,7 +8998,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
-                      */
+
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
@@ -9138,7 +9290,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // NEED THIS LINES COMMENTING BEGINNING..
 
-                      /*
+
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9150,11 +9302,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
-                      */
+
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
-                      
+
                       return;
                     }
 
@@ -11206,6 +11358,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
 
 
+//    Order oneOrderForReceipt
+
+
+
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
 
     final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
@@ -11226,7 +11382,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
     ).then((oneImageInBytes){
 
-      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       print('calling ticket.image(imageRestaurant); ');
       restaurantNameBytesNotFuture = oneImageInBytes;
 //      ticket.image(imageRestaurant);
@@ -11283,33 +11439,68 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       print('reached here: $oneOrderData');
 
+
+      Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
+
+      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+
+//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+//      ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+      /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+
+        print("restaurantNameBytes.whenComplete called when future completes");
+
+      }
+      ).then((paidUnpaidDeliveryTypeInBytes){
+
+//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        print('calling ticket.image(imageRestaurant); ');
+        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+//      ticket.image(imageRestaurant);
+
+      }).catchError((onError){
+        print(' error in getting restaurant name as image');
+        print('false: means something wrong not printed');
+        //means something wrong not printed
+        return false;
+      });
+
+
+
 //      if ((oneOrderData.orderType != null) ||(oneOrderData.totalPrice !=null)) {
 
-        Future<bool> isPrint =
-        printTicket(
-            paper,
-            thisRestaurant,
-            oneOrderData/*,imageRestaurant */,
-            restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes);
+      Future<bool> isPrint =
+      printTicket(
+          paper,
+          thisRestaurant,
+          oneOrderData/*,imageRestaurant */,
+          restaurantNameBytesNotFuture,
+          totalCostDeliveryBytes,paidUnpaidDeliveryTypeWidgetBytes);
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
 
-        isPrint.whenComplete(() {
+      isPrint.whenComplete(() {
 
-          print("called when future completes");
+        print("called when future completes");
 //          return true;
-        }
-        ).then((printResult){
-          print("printResult: $printResult");
-          return true;
+      }
+      ).then((printResult){
+        print("printResult: $printResult");
+        return true;
 
-        }).catchError((onError) {
-          print('printing not successful: $onError');
-          return false;
-        });
+      }).catchError((onError) {
+        print('printing not successful: $onError');
+        return false;
+      });
 
-     // }
+      // }
       /*
       else{
         return false;
@@ -11447,10 +11638,44 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ).then((oneOrderData){
 
 
+
+      Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
+
+      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+
+//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+//      ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+      /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+
+        print("restaurantNameBytes.whenComplete called when future completes");
+
+      }
+      ).then((paidUnpaidDeliveryTypeInBytes){
+
+//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        print('calling ticket.image(imageRestaurant); ');
+        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+//      ticket.image(imageRestaurant);
+
+      }).catchError((onError){
+        print(' error in getting restaurant name as image');
+        print('false: means something wrong not printed');
+        //means something wrong not printed
+        return false;
+      });
+
+
       if ((oneOrderData.orderType != null) &&((oneOrderData.totalPrice !=null))) {
 
         printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes);
+            totalCostDeliveryBytes,paidUnpaidDeliveryTypeWidgetBytes);
       }
     }).catchError((onError){
       print('Order data fetch Error $onError ***');
@@ -11474,7 +11699,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Future <bool> printTicket(PaperSize paper,
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
-      Uint8List totalCostDeliveryBytes2
+      Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes
       ) async{
 
     // pqr
@@ -11487,15 +11712,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
     await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2)):
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
     (oneOrderdocument.orderBy.toLowerCase()=='phone')?
     await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2)):
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
     (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
     await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2)):
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
     await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2));
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes));
+
 
 
 
@@ -11528,7 +11754,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
       OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource,
-      Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2)
+      Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2)
 
   async{
 
@@ -11541,18 +11767,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    _showMyDialog(restaurantNameImageBytes,totalCostDeliveryBytes2);
+    _showMyDialog(restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes2);
 
   }
 
 
   Future<void> _showMyDialog(
       Uint8List restaurantNameImageByte2,
-      Uint8List totalCostDeliveryBytes3) async {
+      Uint8List totalCostDeliveryBytes3,
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
 
 
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
     print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
+    print('paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -11569,6 +11798,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 Container
                   (child: Image.memory(totalCostDeliveryBytes3)
+                ),
+
+                Container
+                  (child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
                 ),
 //                Text('Would you like to approve of this message?'),
               ],
@@ -11643,7 +11876,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderListdocument,
       /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-      Uint8List totalCostDeliveryBytes2
+      Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
     print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
@@ -11762,8 +11995,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
-    ticket.image(oneImageTotalCostDelivery);
+
+    ticket.image(oneImageTotalCostDelivery2);
+
+    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+
+    ticket.image(paidUnpaidDeliveryTypImage);
+
+//    ticket.image(oneImageTotalCostDelivery);
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
@@ -11781,7 +12024,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderListdocument,
       /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-      Uint8List totalCostDeliveryBytes2
+      Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
     print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
@@ -11901,7 +12144,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 
 
-    ticket.image(oneImageTotalCostDelivery);
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
+
+
+    ticket.image(oneImageTotalCostDelivery2);
+
+    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+
+    ticket.image(paidUnpaidDeliveryTypImage);
+
+//    ticket.image(oneImageTotalCostDelivery);
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
@@ -11922,7 +12176,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderListdocument,
       /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-      Uint8List totalCostDeliveryBytes2
+      Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
     print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
@@ -11950,6 +12204,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
 
+//    grayscale(oneImageRestaurant);
     ticket.image(oneImageRestaurant);
 
     final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
@@ -12042,7 +12297,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 
 
-    ticket.image(oneImageTotalCostDelivery);
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
+
+
+    ticket.image(oneImageTotalCostDelivery2);
+
+    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+
+    ticket.image(paidUnpaidDeliveryTypImage);
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
@@ -12061,7 +12325,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant currentRestaurant,
       OneOrderFirebase oneOrderListdocument,
       /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-      Uint8List totalCostDeliveryBytes2
+      Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
     print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
@@ -12180,8 +12444,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
-    ticket.image(oneImageTotalCostDelivery);
+
+    ticket.image(oneImageTotalCostDelivery2);
+
+    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+    ticket.image(paidUnpaidDeliveryTypImage);
+
+//    ticket.image(oneImageTotalCostDelivery);
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
