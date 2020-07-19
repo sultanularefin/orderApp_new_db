@@ -600,7 +600,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
       child:
       Container(
 //        color: Colors.blue,
-        width: displayWidth(context) / 1.8,
+//        width: displayWidth(context) / 1.8,
+        height: 60,
+
+//        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
+        width: 200,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -11910,7 +11914,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
     print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
+    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes2');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
@@ -12058,7 +12062,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
     print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
@@ -12210,7 +12214,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
     print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
@@ -12359,7 +12363,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
     print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
