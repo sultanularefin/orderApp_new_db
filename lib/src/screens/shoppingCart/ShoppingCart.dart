@@ -8830,6 +8830,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // UNCOMMENT THIS LINE... BELOW  //_showMyDialog2('___________ blueTooth device not found _____');
                       _showMyDialog2('___________ blueTooth device not found _____');
+//                      shoppingCartBloc.clearSubscription();
 
                       // NEED THIS LINES COMMENTING BEGINNING..
 
@@ -8887,6 +8888,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
 
+                      shoppingCartBloc.clearSubscription();
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
 
@@ -9190,6 +9192,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       print('found == true');
                       await _testPrint(blueToothDevicesState[index]);
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
+                      shoppingCartBloc.clearSubscription();
+//                      return Navigator.pop(context,tempOrderWithdocId);
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
 
@@ -11249,6 +11253,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       totalCostDeliveryBytes = oneImageInBytes;
+
+
+      _showMyDialog3(totalCostDeliveryBytes);
+      // ssss
       print('before printing total cose for recite of delivery type order');
 //      ticket.image(image);
 
@@ -11562,6 +11570,46 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 Container
                   (child: Image.memory(totalCostDeliveryBytes3)
                 ),
+//                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('return shopping Cart page.'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+  Future<void> _showMyDialog3(
+
+      Uint8List x) async {
+
+
+    print('x: $x');
+//    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('you are using dummy bluetooth devices.'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('please use real blueTooth devices and also change functions in '
+                    'shopping cart page.'),
+                Container
+                  (child: Image.memory(x)
+                ),
+
 //                Text('Would you like to approve of this message?'),
               ],
             ),
