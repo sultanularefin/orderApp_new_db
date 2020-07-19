@@ -11350,7 +11350,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     */
 
 
-    print("login button pressed");
+    print("_testPrintDummyDevices");
 
 
     _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
@@ -11521,7 +11521,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
   void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
       OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource,
       Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2)
+
   async{
+
+    print(' came here: printTicketDummy');
 
 //    final PosPrintResult res =
 //    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
