@@ -8828,6 +8828,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     if(blueToothDevicesState.length==0){
                       logger.i('___________ blueTooth device not found _____');
                       _showMyDialog2('___________ blueTooth device not found _____');
+
+                      BluetoothDevice _x = new BluetoothDevice();
+                      _x.name = 'Restaurant Printer';
+                      _x.address = '0F:02:18:51:23:46';
+                      _x.type = 3;
+                      _x.connected = null;
+
+
+                      PrinterBluetooth x = new PrinterBluetooth(_x);
+                      _testPrintDummyDevices(x);
+
+
                       return;
                     }
 
@@ -9094,6 +9106,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     if(blueToothDevicesState.length==0){
                       logger.i('___________ blueTooth device not found _____');
                       _showMyDialog2('___________ blueTooth device not found _____ delivery phone pay button');
+                      BluetoothDevice _x = new BluetoothDevice();
+                      _x.name = 'Restaurant Printer';
+                      _x.address = '0F:02:18:51:23:46';
+                      _x.type = 3;
+                      _x.connected = null;
+
+
+                      PrinterBluetooth x = new PrinterBluetooth(_x);
+                      _testPrintDummyDevices(x);
                       return;
                     }
 
