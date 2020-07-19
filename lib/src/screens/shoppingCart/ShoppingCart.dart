@@ -807,15 +807,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
             //rounded rectangle border and text conted inside it begins here.
 
 
-            DottedBorder(
-//                dashPattern: [6, 3,2, 3],
-              dashPattern: [9, 6,],
-              customPath: (size) => customPathTotalCost,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-
                   Container(
                     height: 50,
                     child: Row(
@@ -889,9 +880,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
 
             /*
               DottedBorder(
@@ -12015,10 +12003,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
 
-    ticket.image(oneImageTotalCostDelivery2);
+    ticket.image(oneImageTotalCostDelivery);
 
     final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
     ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
@@ -12164,10 +12151,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
+//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
 
-    ticket.image(oneImageTotalCostDelivery2);
+    ticket.image(oneImageTotalCostDelivery);
 
     final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
     ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
@@ -12317,10 +12304,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
+//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
 
-    ticket.image(oneImageTotalCostDelivery2);
+    ticket.image(oneImageTotalCostDelivery);
 
     final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
     ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
@@ -12464,10 +12451,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
+//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
 
-    ticket.image(oneImageTotalCostDelivery2);
+    ticket.image(oneImageTotalCostDelivery);
 
     final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
     ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
