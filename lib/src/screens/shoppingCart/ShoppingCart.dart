@@ -604,7 +604,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         height: 60,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
-        width: 240,
+        width: 300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -666,7 +666,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               ),
 
-              width: 120,
+              width: 200,
               height: 50,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Row(
@@ -685,7 +685,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                          color: Color(0xffF50303),
-                        fontSize: 22, fontFamily: 'Itim-Regular',),
+                        fontSize: 17, fontFamily: 'Itim-Regular',),
                     ),
                   ),
                   Text(
@@ -699,7 +699,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 22, fontFamily: 'Itim-Regular',),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
                   ),
                 ],
               ),
