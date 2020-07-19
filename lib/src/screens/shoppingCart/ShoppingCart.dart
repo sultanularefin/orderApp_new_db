@@ -8860,7 +8860,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if(found==true) {
                       print('found == true');
-                      await _testPrint(blueToothDevicesState[index]);
+//                      await _testPrint(blueToothDevicesState[index]);
+
+                      _testPrintDummyDevices(blueToothDevicesState[index]);
+
+
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
 
@@ -9125,7 +9129,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if(found==true) {
                       print('found == true');
-                      await _testPrint(blueToothDevicesState[index]);
+//                      await _testPrint(blueToothDevicesState[index]);
+                      _testPrintDummyDevices(blueToothDevicesState[index]);
                       return Navigator.pop(context,tempOrderWithdocId);
                     }
 
@@ -11445,14 +11450,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    _showMyDialog(imageResource,restaurantNameImageBytes,totalCostDeliveryBytes2);
+    _showMyDialog(restaurantNameImageBytes,totalCostDeliveryBytes2);
 
   }
 
 
-  Future<void> _showMyDialog(ImageAliasAnotherSource.Image oneImage,
-      Uint8List imageBytes2,
+  Future<void> _showMyDialog(
+      Uint8List restaurantNameImageByte2,
       Uint8List totalCostDeliveryBytes3) async {
+
+
+    print('restaurantNameImageByte2: $restaurantNameImageByte2');
+    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -11465,7 +11474,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 Text('please use real blueTooth devices and also change functions in '
                     'shopping cart page.'),
                 Container
-                  (child: Image.memory(imageBytes2)
+                  (child: Image.memory(restaurantNameImageByte2)
                 ),
                 Container
                   (child: Image.memory(totalCostDeliveryBytes3)
@@ -11686,7 +11695,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('currentRestaurant: ${currentRestaurant.name}');
     print('oneOrderListdocument: $oneOrderListdocument');
     print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration: $customerForReciteGeneration');
+    print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+    print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+    print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+    print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
     print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
 
@@ -11748,7 +11760,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
     ticket.text('Address: ${
-        customerForReciteGeneration.address.length==0?
+        ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
         'EMPTY': customerForReciteGeneration.address.length>7?
         customerForReciteGeneration.address.substring(0,7)+'..':
         customerForReciteGeneration.address
@@ -11762,7 +11774,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
 
     ticket.text('Flat #:${
-        customerForReciteGeneration.flatOrHouseNumber.length==0?
+        ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
         'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
         customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
         customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
@@ -11775,7 +11787,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     )
     );
     ticket.text('phone #:${
-        customerForReciteGeneration.phoneNumber.length==0?
+        ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
         'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
         customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
         customerForReciteGeneration.phoneNumber}', styles: PosStyles(
