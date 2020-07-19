@@ -11468,8 +11468,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
         print('calling ticket.image(imageRestaurant); ');
-        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
+//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
 //      ticket.image(imageRestaurant);
 
         Future<bool> isPrint =
@@ -11478,7 +11478,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             thisRestaurant,
             oneOrderData/*,imageRestaurant */,
             restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes,paidUnpaidDeliveryTypeWidgetBytes);
+            totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
 
@@ -11669,13 +11669,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ).then((paidUnpaidDeliveryTypeInBytes){
 
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-        print('calling ticket.image(imageRestaurant); ');
-        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
+        print('paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
+//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+//        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
         printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes,paidUnpaidDeliveryTypeWidgetBytes);
+            totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
 
       }).catchError((onError){
         print(' error in getting restaurant name as image');
