@@ -11255,7 +11255,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       totalCostDeliveryBytes = oneImageInBytes;
 
 
-      _showMyDialog3(totalCostDeliveryBytes);
+//      _showMyDialog3(totalCostDeliveryBytes);
       // ssss
       print('before printing total cose for recite of delivery type order');
 //      ticket.image(image);
@@ -11665,6 +11665,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
     print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
 
@@ -11802,6 +11803,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
     print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
 
@@ -11942,6 +11944,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
     print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
 
@@ -12080,6 +12083,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
     print('totalCostDeliveryBytes2: $totalCostDeliveryBytes2');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
 

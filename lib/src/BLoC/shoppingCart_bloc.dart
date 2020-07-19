@@ -662,7 +662,7 @@ class ShoppingCartBloc implements Bloc {
     print('currentCustomerFromFireStore.address: ${currentCustomerFromFireStore.address}');
     print('currentCustomerFromFireStore.flatOrHouseNumber: ${currentCustomerFromFireStore.flatOrHouseNumber}');
     print('currentCustomerFromFireStore.phoneNumber: ${currentCustomerFromFireStore.phoneNumber}');
-    print('currentCustomerFromFireStore.etaTimeInMinutes: ${currentCustomerFromFireStore.etaTimeInMinutes}');
+//    print('currentCustomerFromFireStore.etaTimeInMinutes: ${currentCustomerFromFireStore.etaTimeInMinutes}');
 
 
 
