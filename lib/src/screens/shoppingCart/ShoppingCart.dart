@@ -599,7 +599,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       textDirection: TextDirection.ltr,
       child:
       Container(
-        color: Colors.blue,
+//        color: Colors.blue,
         width: displayWidth(context) / 1.8,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
