@@ -590,6 +590,173 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //  paidStatus
 //  Widget restaurantName(String name) {
+
+//  orderInformationAndCustomerInformationWidget
+
+  Widget orderInformationAndCustomerInformationWidget(OneOrderFirebase oneOrderForReceipt) {
+
+    print('at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}'
+        'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
+
+    CustomerInformation customerForReciteGeneration = oneOrderForReceipt.oneCustomer;
+//  Widget paidUnpaidDeliveryType =
+    return new Directionality(
+        textDirection: TextDirection.ltr,
+        child:
+        Container(
+
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black,
+                style: BorderStyle.solid,
+                width: 3.6,
+              ),
+//                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(35.0),
+//                    color: Colors.black,
+
+            ),
+            height: 140,
+
+//        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
+            width: 300,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+              Container(
+
+//            color:Colors.yellow,
+
+//            color:Colors.yellowAccent,
+              height: 140,
+              width: 150,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+
+                  Text(
+                    (oneOrderForReceipt.orderBy.toLowerCase()=='delivery')?'Delivery':
+                    (oneOrderForReceipt.orderBy.toLowerCase()=='phone')?
+                    'Phone':(oneOrderForReceipt.orderBy.toLowerCase()=='takeaway')?'TakeAway':'Dinning Room',
+//                    oneOrderForReceipt.orderBy
+//                    'dinning room',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                  ),
+
+                  // 1 ends here.
+
+
+                  Text(
+                    '${oneOrderForReceipt.formattedOrderPlacementDatesTimeOnly}',
+
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                  ),
+
+
+                  // 2 ends here.
+                  Text('${oneOrderForReceipt.orderProductionTime} min',
+
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                  ),
+
+                  // 3 ends here.
+                ],
+              ),
+            ),
+
+
+          Container(
+
+//            color:Colors.yellow,
+
+//            color:Colors.yellowAccent,
+          height: 140,
+          width: 150,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+
+              Text(
+                  ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
+                  'EMPTY':customerForReciteGeneration.address.length>7?
+                  customerForReciteGeneration.address.substring(0,7)+'..':
+                  customerForReciteGeneration.address,
+
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+//                        color: Color(0xffF50303),
+                  fontSize: 17, fontFamily: 'Itim-Regular',),
+              ),
+
+              // 1 ends here.
+
+
+
+              Text(
+                ((customerForReciteGeneration.flatOrHouseNumber==null) ||(customerForReciteGeneration.flatOrHouseNumber.length==0))?
+                'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+                customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+                customerForReciteGeneration.flatOrHouseNumber,
+
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+//                        color: Color(0xffF50303),
+                  fontSize: 17, fontFamily: 'Itim-Regular',),
+              ),
+
+              Text(
+                ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
+                'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+                customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+                customerForReciteGeneration.phoneNumber,
+
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+//                        color: Color(0xffF50303),
+                  fontSize: 17, fontFamily: 'Itim-Regular',),
+              ),
+
+
+
+              // 3 ends here.
+            ],
+          ),
+        )
+
+    //rounded rectangle border and text conted inside it ends here.
+
+    ],
+    ),
+    ),
+    );
+  }
+
+
   Widget paidUnpaidDeliveryType(OneOrderFirebase oneOrderForReceipt) {
 
     print('at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}'
@@ -807,79 +974,79 @@ class _ShoppingCartState extends State<ShoppingCart> {
             //rounded rectangle border and text conted inside it begins here.
 
 
-                  Container(
+            Container(
 //                    height: 50,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <
-                          Widget>[
-                        //  SizedBox(width: 5,),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-                          child: Text(
-                            'SUBTOTAL',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <
+                    Widget>[
+                  //  SizedBox(width: 5,),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                    child: Text(
+                      'SUBTOTAL',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
 //                            fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                        color: Colors.black,
 //                          color: Color(0xffF50303),
-                              fontSize: 14, fontFamily: 'Itim-Regular',),
-                          ),
-                        ),
+                        fontSize: 14, fontFamily: 'Itim-Regular',),
+                    ),
+                  ),
 
-                        // qwe
+                  // qwe
 //                          '${
 //                              (unObsecuredInputandPayment.totalPrice
 //                                  /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
 //                              '\u20AC',
-                        Text( subtotal.toStringAsFixed(2) +'\u20AC',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
+                  Text( subtotal.toStringAsFixed(2) +'\u20AC',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
 //                          fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                      color: Colors.black,
 //                        color: Color(0xffF50303),
-                            fontSize: 14, fontFamily: 'Itim-Regular',),
-                        ),
-                      ],
-                    ),
+                      fontSize: 14, fontFamily: 'Itim-Regular',),
                   ),
+                ],
+              ),
+            ),
 
-                  // 1st row ends here.
+            // 1st row ends here.
 
 
-                  Container(
+            Container(
 //                    height: 50,
 
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <
-                          Widget>[
-                        //  SizedBox(width: 5,),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-                          child: Text(
-                            'Delivery Cost',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <
+                    Widget>[
+                  //  SizedBox(width: 5,),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+                    child: Text(
+                      'Delivery Cost',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
 //                        fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                        color: Colors.black,
 //                          color: Color(0xffF50303),
-                              fontSize: 14, fontFamily: 'Itim-Regular',),
-                          ),
-                        ),
-                        Text(deliveryCost.toStringAsFixed(2) +'\u20AC',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                            color: Colors.black,
-//                        color: Color(0xffF50303),
-                            fontSize: 14, fontFamily: 'Itim-Regular',),
-                        ),
-                      ],
+                        fontSize: 14, fontFamily: 'Itim-Regular',),
                     ),
                   ),
+                  Text(deliveryCost.toStringAsFixed(2) +'\u20AC',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+//                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                      fontSize: 14, fontFamily: 'Itim-Regular',),
+                  ),
+                ],
+              ),
+            ),
 
             /*
               DottedBorder(
@@ -11469,38 +11636,71 @@ class _ShoppingCartState extends State<ShoppingCart> {
         print('calling ticket.image(imageRestaurant); ');
 //        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
         print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
+
+
+
+//        DDD
+        Widget orderInformationAndCustomerInformationWidget = paidUnpaidDeliveryType(oneOrderData);
+
+        final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+
+        Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+
+//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+//      ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+        /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+
+          print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
+
+        }
+        ).then((paidUnpaidDeliveryTypeInBytes){
+
+//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+          print('calling ticket.image(imageRestaurant); ');
+//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+          print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
+
+
+
+
+//        oneOrderData  ssss ssss
 //      ticket.image(imageRestaurant);
 
-        Future<bool> isPrint =
-        printTicket(
-            paper,
-            thisRestaurant,
-            oneOrderData/*,imageRestaurant */,
-            restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
+          Future<bool> isPrint =
+          printTicket(
+              paper,
+              thisRestaurant,
+              oneOrderData/*,imageRestaurant */,
+              restaurantNameBytesNotFuture,
+              totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
 
-        isPrint.whenComplete(() {
+          isPrint.whenComplete(() {
 
-          print("called when future completes");
+            print("called when future completes");
 //          return true;
-        }
-        ).then((printResult){
-          print("printResult: $printResult");
-          return true;
+          }
+          ).then((printResult){
+            print("printResult: $printResult");
+            return true;
 
-        }).catchError((onError) {
-          print('printing not successful: $onError');
+          }).catchError((onError) {
+            print('printing not successful: $onError');
+            return false;
+          });
+
+        }).catchError((onError){
+          print(' error in getting restaurant name as image');
+          print('false: means something wrong not printed');
+          //means something wrong not printed
           return false;
         });
-
-      }).catchError((onError){
-        print(' error in getting restaurant name as image');
-        print('false: means something wrong not printed');
-        //means something wrong not printed
-        return false;
-      });
 
 
 
@@ -11508,8 +11708,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      await Future.delayed(Duration(milliseconds: 1000));
 
 
-      // }
-      /*
+        // }
+        /*
       else{
         return false;
 //        ALTERNATE FOR THIS:
@@ -11521,34 +11721,34 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    }).catchError((onError){
-      print('Order data fetch Error $onError ***');
-      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 6), content:Container(
-          child:
-          new Row(
-            children: <Widget>[
-              new CircularProgressIndicator(),
-              new Text("Error: ${onError.message.substring(0,40)}",style:
-              TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                  color:Colors.white)),
-            ],
-          ),
-        )),);
+      }).catchError((onError){
+        print('Order data fetch Error $onError ***');
+        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+          new SnackBar(duration: new Duration(seconds: 6), content:Container(
+            child:
+            new Row(
+              children: <Widget>[
+                new CircularProgressIndicator(),
+                new Text("Error: ${onError.message.substring(0,40)}",style:
+                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                    color:Colors.white)),
+              ],
+            ),
+          )),);
 
+        return false;
+
+      });
+
+      // final return false if true is not return from the above conditioned.
       return false;
+    }
 
-    });
+        void _testPrintDummyDevices(PrinterBluetooth printer) async {
 
-    // final return false if true is not return from the above conditioned.
-    return false;
-  }
+      // NOT REQUIRED SINCE DUMMY...
 
-  void _testPrintDummyDevices(PrinterBluetooth printer) async {
-
-    // NOT REQUIRED SINCE DUMMY...
-
-    /*
+      /*
     printerManager.selectPrinter(printer);
 
     // TODO Don't forget to choose printer's paper
@@ -11557,101 +11757,101 @@ class _ShoppingCartState extends State<ShoppingCart> {
     */
 
 
-    print("_testPrintDummyDevices");
+      print("_testPrintDummyDevices");
 
 
-    _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 6), content:
-        new Row(
-          children: <Widget>[
-            new CircularProgressIndicator(),
-            new Text("fetching data for receipt production...",style:TextStyle(
-              color: Colors.red,
-            ))
-          ],
-        ),
-        )
-    );
+      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+          new SnackBar(duration: new Duration(seconds: 6), content:
+          new Row(
+            children: <Widget>[
+              new CircularProgressIndicator(),
+              new Text("fetching data for receipt production...",style:TextStyle(
+                color: Colors.red,
+              ))
+            ],
+          ),
+          )
+      );
 
-    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+      final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+      Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 
-    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+      Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
 
-    print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
-
-
-    Future<OneOrderFirebase> testFirebaseOrderFetch=
-    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+      print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
 
-    Widget restaurantName2 = restaurantName(thisRestaurant.name);
-    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
-    Uint8List restaurantNameBytesNotFuture;
-
-    print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+      Future<OneOrderFirebase> testFirebaseOrderFetch=
+      shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
 
 
-    ImageAliasAnotherSource.Image imageRestaurant;
+      Widget restaurantName2 = restaurantName(thisRestaurant.name);
+      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+      Uint8List restaurantNameBytesNotFuture;
+
+      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+      ImageAliasAnotherSource.Image imageRestaurant;
 
 
 
-    /* await */ restaurantNameBytesFuture.whenComplete(() {
+      /* await */ restaurantNameBytesFuture.whenComplete(() {
 
-      print("restaurantNameBytes.whenComplete called when future completes");
+        print("restaurantNameBytes.whenComplete called when future completes");
 
-    }
-    ).then((oneImageInBytes){
+      }
+      ).then((oneImageInBytes){
 
-      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-      print('calling ticket.image(imageRestaurant); ');
-      restaurantNameBytesNotFuture = oneImageInBytes;
+        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        print('calling ticket.image(imageRestaurant); ');
+        restaurantNameBytesNotFuture = oneImageInBytes;
 //      ticket.image(imageRestaurant);
 
-    }).catchError((onError){
-      print(' error in getting restaurant name as image');
-    });
+      }).catchError((onError){
+        print(' error in getting restaurant name as image');
+      });
 
-    // Print image
-    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
-    Uint8List totalCostDeliveryBytes;
+      // Print image
+      Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
+      Uint8List totalCostDeliveryBytes;
 
-    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
+      final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
 
-    /* await */ totalDeliveryWidgetBytes.whenComplete(() {
+      /* await */ totalDeliveryWidgetBytes.whenComplete(() {
 
-      print("called when future completes");
+        print("called when future completes");
 
-    }
-    ).then((oneImageInBytes){
+      }
+      ).then((oneImageInBytes){
 
 //      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-      totalCostDeliveryBytes = oneImageInBytes;
-      print('before printing total cose for recite of delivery type order');
+        totalCostDeliveryBytes = oneImageInBytes;
+        print('before printing total cose for recite of delivery type order');
 //      ticket.image(image);
 
-    }).catchError((onError){
-      print(' error in getting restaurant name as image');
-    });
+      }).catchError((onError){
+        print(' error in getting restaurant name as image');
+      });
 
 
 //                            _handleSignIn();
 
-    /* await */ testFirebaseOrderFetch.whenComplete(() {
+      /* await */ testFirebaseOrderFetch.whenComplete(() {
 
-      print("called when future completes");
+        print("called when future completes");
 
-    }
-    ).then((oneOrderData){
+      }
+      ).then((oneOrderData){
 
 
 
-      Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
+        Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
 
-      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+        final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
 
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+        Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
 //      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
 
@@ -11660,113 +11860,209 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-      /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+        /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
 
-        print("restaurantNameBytes.whenComplete called when future completes");
+          print("restaurantNameBytes.whenComplete called when future completes");
 
-      }
-      ).then((paidUnpaidDeliveryTypeInBytes){
+        }
+        ).then((paidUnpaidDeliveryTypeInBytes){
 
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-        print('paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
+          print('paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
 //        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
 //        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
-        printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
+          printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
+              totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
+
+        }).catchError((onError){
+          print(' error in getting restaurant name as image');
+          print('false: means something wrong not printed');
+          //means something wrong not printed
+          return false;
+        });
+
+
 
       }).catchError((onError){
-        print(' error in getting restaurant name as image');
-        print('false: means something wrong not printed');
-        //means something wrong not printed
-        return false;
+        print('Order data fetch Error $onError ***');
+        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+          new SnackBar(duration: new Duration(seconds: 6), content:Container(
+            child:
+            new Row(
+              children: <Widget>[
+                new CircularProgressIndicator(),
+                new Text("Error: ${onError.message.substring(0,40)}",style:
+                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                    color:Colors.white)),
+              ],
+            ),
+          )),);
+
       });
 
+    }
 
+    Future <bool> printTicket(PaperSize paper,
+        Restaurant currentRestaurant,
+        OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
+        Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes
+        ) async{
 
-    }).catchError((onError){
-      print('Order data fetch Error $onError ***');
-      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 6), content:Container(
-          child:
-          new Row(
-            children: <Widget>[
-              new CircularProgressIndicator(),
-              new Text("Error: ${onError.message.substring(0,40)}",style:
-              TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                  color:Colors.white)),
-            ],
-          ),
-        )),);
-
-    });
-
-  }
-
-  Future <bool> printTicket(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
-      Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes
-      ) async{
-
-    // pqr
+      // pqr
 //    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //    demoReceiptOrderTypeDinning
 //    demoReceiptOrderTypeTakeAway
 //    demoReceiptOrderTypePhone
 
-    print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
+      print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
 
-    final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
-    await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
-    (oneOrderdocument.orderBy.toLowerCase()=='phone')?
-    await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
-    (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
-    await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
-    await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes));
-
-
+      final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
+      await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
+      (oneOrderdocument.orderBy.toLowerCase()=='phone')?
+      await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
+      (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
+      await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
+      await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes));
 
 
 
-    print('res.msg: ${res.msg}');
 
 
-    showToast(res.msg);
-
-    if(res.msg=='Success'){
-
-      print('at  Success');
-      return true;
-    }
+      print('res.msg: ${res.msg}');
 
 
-    else {
+      showToast(res.msg);
 
-      print('before returning false from Future <bool> printTicket ');
-      return false;
-    }
+      if(res.msg=='Success'){
+
+        print('at  Success');
+        return true;
+      }
+
+
+      else {
+
+        print('before returning false from Future <bool> printTicket ');
+        return false;
+      }
 
 //    TODO: NEED TO check the res.msg
-    // true means printed.
+      // true means printed.
 
 
 
 
-  }
+    }
 
-  void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource,
-      Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2)
+    Future<void> _showMyDialog(
+        Uint8List restaurantNameImageByte2,
+        Uint8List totalCostDeliveryBytes3,
+        Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
 
-  async{
 
-    print(' came here: printTicketDummy');
+      print('restaurantNameImageByte2: $restaurantNameImageByte2');
+      print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
+      print('paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
+
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('you are using dummy bluetooth devices.'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('please use real blueTooth devices and also change functions in '
+                      'shopping cart page.'),
+                  Container
+                    (child: Image.memory(restaurantNameImageByte2)
+                  ),
+                  Container
+                    (child: Image.memory(totalCostDeliveryBytes3)
+                  ),
+
+                  Container
+                    (child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
+                  ),
+//                Text('Would you like to approve of this message?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('return shopping Cart page.'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+
+    Future<void> _showMyDialog3(
+
+        Uint8List x) async {
+
+
+      print('x: $x');
+//    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('you are using dummy bluetooth devices.'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('please use real blueTooth devices and also change functions in '
+                      'shopping cart page.'),
+                  Container
+                    (child: Image.memory(x)
+                  ),
+
+//                Text('Would you like to approve of this message?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('return shopping Cart page.'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    /* PRINTING REcite related codes resides here: */
+
+//  textDirection: TextDirection.ltr,
+//  child:
+//  Container(
+
+
+    
+    void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
+        OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource,
+        Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2)
+
+    async{
+
+      print(' came here: printTicketDummy');
 
 //    final PosPrintResult res =
 //    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
@@ -11775,701 +12071,542 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    _showMyDialog(restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes2);
+      _showMyDialog(restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes2);
 
-  }
-
-
-  Future<void> _showMyDialog(
-      Uint8List restaurantNameImageByte2,
-      Uint8List totalCostDeliveryBytes3,
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
-
-
-    print('restaurantNameImageByte2: $restaurantNameImageByte2');
-    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
-    print('paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
-
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('you are using dummy bluetooth devices.'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('please use real blueTooth devices and also change functions in '
-                    'shopping cart page.'),
-                Container
-                  (child: Image.memory(restaurantNameImageByte2)
-                ),
-                Container
-                  (child: Image.memory(totalCostDeliveryBytes3)
-                ),
-
-                Container
-                  (child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
-                ),
-//                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('return shopping Cart page.'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-
-  Future<void> _showMyDialog3(
-
-      Uint8List x) async {
-
-
-    print('x: $x');
-//    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('you are using dummy bluetooth devices.'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('please use real blueTooth devices and also change functions in '
-                    'shopping cart page.'),
-                Container
-                  (child: Image.memory(x)
-                ),
-
-//                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('return shopping Cart page.'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  /* PRINTING REcite related codes resides here: */
-
-//  textDirection: TextDirection.ltr,
-//  child:
-//  Container(
+    }
 
 
 
 
 
-  // # number 1: demoReceipt Order Type TakeAway begins here...
 
-  Future<Ticket> demoReceiptOrderTypeTakeAway(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,
-      /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-      Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes2
-      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+    // # number 1: demoReceipt Order Type TakeAway begins here...
 
-    print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
+    Future<Ticket> demoReceiptOrderTypeTakeAway(PaperSize paper,
+        Restaurant currentRestaurant,
+        OneOrderFirebase oneOrderListdocument,
+        /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
+        Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+        /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
-
-    CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
-
-    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-    final Ticket ticket = Ticket(PaperSize.mm58);
-
-    print('paper.value: ${paper.value}');
-    print('currentRestaurant: ${currentRestaurant.name}');
-    print('oneOrderListdocument: $oneOrderListdocument');
-    print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
-    print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
-    print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-    print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes2');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
+      print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
 
 
+      CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
 
-    final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
+      List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
 
-    ticket.image(oneImageRestaurant);
+      final Ticket ticket = Ticket(PaperSize.mm58);
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
-
-
-    ticket.text('${oneOrderListdocument.orderBy}',
-        styles: PosStyles(
-          align: PosAlign.left,
-          bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-
-        ));
-    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
-      align: PosAlign.left,
-      bold: true,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-    ));
-    ticket.text('${oneOrderListdocument.orderProductionTime} min',
-        styles: PosStyles(
-          align: PosAlign.left,
-          bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-        ));
-
-
-//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-    ticket.text('Address: ${
-        ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-        'EMPTY': customerForReciteGeneration.address.length>7?
-        customerForReciteGeneration.address.substring(0,7)+'..':
-        customerForReciteGeneration.address
-    }',
-        styles: PosStyles(
-          align: PosAlign.right,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-
-        )
-    );
-
-    ticket.text('Flat #:${
-        ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
-        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-        customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
-        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
-
-      align: PosAlign.right,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-
-
-    )
-    );
-    ticket.text('phone #:${
-        ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-        customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
-        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
-
-      align: PosAlign.right,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-
-
-    )
-    );
-
-
-    orderedItems.forEach((oneFood) {
+      print('paper.value: ${paper.value}');
+      print('currentRestaurant: ${currentRestaurant.name}');
+      print('oneOrderListdocument: $oneOrderListdocument');
+      print('orderedItems: $orderedItems');
+      print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+      print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+      print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+      print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+      print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+      print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes2');
+      print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
 
-      ticket.row([
+      final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
 
-        PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+      ticket.image(oneImageRestaurant);
 
-      ]);
-
-
-
-      ticket.hr();
-      // needed. as per design.
-
-    });
+      final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+      ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
 
 
 
-    ticket.image(oneImageTotalCostDelivery);
-
-    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+      orderedItems.forEach((oneFood) {
 
 
-    ticket.image(paidUnpaidDeliveryTypImage);
+
+        ticket.row([
+
+          PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
+          PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+          PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+        ]);
+
+
+
+        ticket.hr();
+        // needed. as per design.
+
+      });
+
+
+
+      ticket.image(oneImageTotalCostDelivery);
+
+      final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+      ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+
+      ticket.image(paidUnpaidDeliveryTypImage);
 
 //    ticket.image(oneImageTotalCostDelivery);
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
 
-    ticket.feed(2);
-    ticket.cut();
-    return ticket;
-  }
+      ticket.feed(2);
+      ticket.cut();
+      return ticket;
+    }
 
 
-  // # number 2: demoReceipt Order Type Delivery begins here...
+    // # number 2: demoReceipt Order Type Delivery begins here...
 
 //  restaurantNameImageBytes,totalCostDeliveryBytes2
-  Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,
-      /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-      Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
-      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+    Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
+        Restaurant currentRestaurant,
+        OneOrderFirebase oneOrderListdocument,
+        /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
+        Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+        /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
-    print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
-
-
-    CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
-
-    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-    final Ticket ticket = Ticket(PaperSize.mm58);
-
-    print('paper.value: ${paper.value}');
-    print('currentRestaurant: ${currentRestaurant.name}');
-    print('oneOrderListdocument: $oneOrderListdocument');
-    print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
-    print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
-    print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-    print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
+      print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
 
 
+      CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
 
-    final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
+      List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
 
-    ticket.image(oneImageRestaurant);
+      final Ticket ticket = Ticket(PaperSize.mm58);
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+      print('paper.value: ${paper.value}');
+      print('currentRestaurant: ${currentRestaurant.name}');
+      print('oneOrderListdocument: $oneOrderListdocument');
+      print('orderedItems: $orderedItems');
+      print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+      print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+      print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+      print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+      print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+      print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
+      print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
-    ticket.text('${oneOrderListdocument.orderBy}',
-        styles: PosStyles(
-          align: PosAlign.left,
-          bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
 
-        ));
-    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
-      align: PosAlign.left,
-      bold: true,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-    ));
-    ticket.text('${oneOrderListdocument.orderProductionTime} min',
-        styles: PosStyles(
-          align: PosAlign.left,
-          bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-        ));
+      final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
+
+      ticket.image(oneImageRestaurant);
+
+      final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+      ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+
+
+      ticket.text('${oneOrderListdocument.orderBy}',
+          styles: PosStyles(
+            align: PosAlign.left,
+            bold: true,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+
+          ));
+      ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
+        align: PosAlign.left,
+        bold: true,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
+      ));
+      ticket.text('${oneOrderListdocument.orderProductionTime} min',
+          styles: PosStyles(
+            align: PosAlign.left,
+            bold: true,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          ));
 
 
 //    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-    ticket.text('Address: ${
-        ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-        'EMPTY': customerForReciteGeneration.address.length>7?
-        customerForReciteGeneration.address.substring(0,7)+'..':
-        customerForReciteGeneration.address
-    }',
-        styles: PosStyles(
-          align: PosAlign.right,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+      ticket.text('Address: ${
+          ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
+          'EMPTY': customerForReciteGeneration.address.length>7?
+          customerForReciteGeneration.address.substring(0,7)+'..':
+          customerForReciteGeneration.address
+      }',
+          styles: PosStyles(
+            align: PosAlign.right,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
 
-        )
-    );
+          )
+      );
 
-    ticket.text('Flat #:${
-        ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
-        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-        customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
-        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+      ticket.text('Flat #:${
+          ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
+          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+          customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+          customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
 
-      align: PosAlign.right,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-
-
-    )
-    );
-    ticket.text('phone #:${
-        ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-        customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
-        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
-
-      align: PosAlign.right,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
+        align: PosAlign.right,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
 
 
-    )
-    );
+      )
+      );
+      ticket.text('phone #:${
+          ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
+          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+          customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+          customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+        align: PosAlign.right,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
 
 
-    orderedItems.forEach((oneFood) {
+      )
+      );
 
 
-
-      ticket.row([
-
-        PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-      ]);
+      orderedItems.forEach((oneFood) {
 
 
 
-      ticket.hr();
-      // needed. as per design.
+        ticket.row([
 
-    });
+          PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
+          PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+          PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+        ]);
+
+
+
+        ticket.hr();
+        // needed. as per design.
+
+      });
 
 
 //    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
 
-    ticket.image(oneImageTotalCostDelivery);
+      ticket.image(oneImageTotalCostDelivery);
 
-    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+      final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+      ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
 
 
-    ticket.image(paidUnpaidDeliveryTypImage);
+      ticket.image(paidUnpaidDeliveryTypImage);
 
 //    ticket.image(oneImageTotalCostDelivery);
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
 
-    ticket.feed(2);
-    ticket.cut();
-    return ticket;
-  }
+      ticket.feed(2);
+      ticket.cut();
+      return ticket;
+    }
 
 
-  // demoReceipt Order Type Delivery ends here...
+    // demoReceipt Order Type Delivery ends here...
 
 
-  // # number 3: demoReceipt Order Type phone begins here...
+    // # number 3: demoReceipt Order Type phone begins here...
 
-  // demoReceipt Order Type Phone begins here...
-  Future<Ticket> demoReceiptOrderTypePhone(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,
-      /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-      Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
-      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+    // demoReceipt Order Type Phone begins here...
+    Future<Ticket> demoReceiptOrderTypePhone(PaperSize paper,
+        Restaurant currentRestaurant,
+        OneOrderFirebase oneOrderListdocument,
+        /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
+        Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+        /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
-    print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
-
-
-    CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
-
-    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-    final Ticket ticket = Ticket(PaperSize.mm58);
-
-    print('paper.value: ${paper.value}');
-    print('currentRestaurant: ${currentRestaurant.name}');
-    print('oneOrderListdocument: $oneOrderListdocument');
-    print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
-    print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
-    print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-    print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
+      print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
 
 
+      CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
 
-    final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
+      List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
+
+      final Ticket ticket = Ticket(PaperSize.mm58);
+
+      print('paper.value: ${paper.value}');
+      print('currentRestaurant: ${currentRestaurant.name}');
+      print('oneOrderListdocument: $oneOrderListdocument');
+      print('orderedItems: $orderedItems');
+      print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+      print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+      print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+      print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+      print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+      print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
+      print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
+
+
+
+      final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
 
 //    grayscale(oneImageRestaurant);
-    ticket.image(oneImageRestaurant);
+      ticket.image(oneImageRestaurant);
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+      final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+      ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
 
 
-    ticket.text('${oneOrderListdocument.orderBy}',
-        styles: PosStyles(
-          align: PosAlign.left,
-          bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+      ticket.text('${oneOrderListdocument.orderBy}',
+          styles: PosStyles(
+            align: PosAlign.left,
+            bold: true,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
 
-        ));
-    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
-      align: PosAlign.left,
-      bold: true,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-    ));
-    ticket.text('${oneOrderListdocument.orderProductionTime} min',
-        styles: PosStyles(
-          align: PosAlign.left,
-          bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-        ));
+          ));
+      ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
+        align: PosAlign.left,
+        bold: true,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
+      ));
+      ticket.text('${oneOrderListdocument.orderProductionTime} min',
+          styles: PosStyles(
+            align: PosAlign.left,
+            bold: true,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          ));
 
 
 //    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-    ticket.text('Address: ${
-        ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-        'EMPTY': customerForReciteGeneration.address.length>7?
-        customerForReciteGeneration.address.substring(0,7)+'..':
-        customerForReciteGeneration.address
-    }',
-        styles: PosStyles(
-          align: PosAlign.right,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+      ticket.text('Address: ${
+          ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
+          'EMPTY': customerForReciteGeneration.address.length>7?
+          customerForReciteGeneration.address.substring(0,7)+'..':
+          customerForReciteGeneration.address
+      }',
+          styles: PosStyles(
+            align: PosAlign.right,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
 
-        )
-    );
+          )
+      );
 
-    ticket.text('Flat #:${
-        ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
-        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-        customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
-        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+      ticket.text('Flat #:${
+          ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
+          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+          customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+          customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
 
-      align: PosAlign.right,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-
-
-    )
-    );
-    ticket.text('phone #:${
-        ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-        customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
-        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
-
-      align: PosAlign.right,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
+        align: PosAlign.right,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
 
 
-    )
-    );
+      )
+      );
+      ticket.text('phone #:${
+          ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
+          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+          customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+          customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+        align: PosAlign.right,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
 
 
-    orderedItems.forEach((oneFood) {
+      )
+      );
 
 
-
-      ticket.row([
-
-        PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-      ]);
+      orderedItems.forEach((oneFood) {
 
 
 
-      ticket.hr();
-      // needed. as per design.
+        ticket.row([
 
-    });
+          PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
+          PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+          PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+        ]);
+
+
+
+        ticket.hr();
+        // needed. as per design.
+
+      });
 
 
 //    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
 
-    ticket.image(oneImageTotalCostDelivery);
+      ticket.image(oneImageTotalCostDelivery);
 
-    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+      final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+      ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
 
 
-    ticket.image(paidUnpaidDeliveryTypImage);
+      ticket.image(paidUnpaidDeliveryTypImage);
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
 
-    ticket.feed(2);
-    ticket.cut();
-    return ticket;
-  }
+      ticket.feed(2);
+      ticket.cut();
+      return ticket;
+    }
 
 // demoReceipt Order Type Phone ends here...
 
 
 // # number 4: demoReceipt Order Type Dinning begins here...
 
-  Future<Ticket> demoReceiptOrderTypeDinning(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,
-      /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-      Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
-      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+    Future<Ticket> demoReceiptOrderTypeDinning(PaperSize paper,
+        Restaurant currentRestaurant,
+        OneOrderFirebase oneOrderListdocument,
+        /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
+        Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+        /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
-    print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
-
-
-    CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
-
-    List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-    final Ticket ticket = Ticket(PaperSize.mm58);
-
-    print('paper.value: ${paper.value}');
-    print('currentRestaurant: ${currentRestaurant.name}');
-    print('oneOrderListdocument: $oneOrderListdocument');
-    print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
-    print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
-    print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-    print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
+      print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
 
 
+      CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
 
-    final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
+      List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
 
-    ticket.image(oneImageRestaurant);
+      final Ticket ticket = Ticket(PaperSize.mm58);
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+      print('paper.value: ${paper.value}');
+      print('currentRestaurant: ${currentRestaurant.name}');
+      print('oneOrderListdocument: $oneOrderListdocument');
+      print('orderedItems: $orderedItems');
+      print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+      print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+      print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+      print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+      print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+      print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
+      print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
 
 
-    ticket.text('${oneOrderListdocument.orderBy}',
-        styles: PosStyles(
-          align: PosAlign.left,
-          bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
 
-        ));
-    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
-      align: PosAlign.left,
-      bold: true,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-    ));
-    ticket.text('${oneOrderListdocument.orderProductionTime} min',
-        styles: PosStyles(
-          align: PosAlign.left,
-          bold: true,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-        ));
+      final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
+
+      ticket.image(oneImageRestaurant);
+
+      final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+      ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+
+
+      ticket.text('${oneOrderListdocument.orderBy}',
+          styles: PosStyles(
+            align: PosAlign.left,
+            bold: true,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+
+          ));
+      ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
+        align: PosAlign.left,
+        bold: true,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
+      ));
+      ticket.text('${oneOrderListdocument.orderProductionTime} min',
+          styles: PosStyles(
+            align: PosAlign.left,
+            bold: true,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+          ));
 
 
 //    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-    ticket.text('Address: ${
-        ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-        'EMPTY': customerForReciteGeneration.address.length>7?
-        customerForReciteGeneration.address.substring(0,7)+'..':
-        customerForReciteGeneration.address
-    }',
-        styles: PosStyles(
-          align: PosAlign.right,
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
+      ticket.text('Address: ${
+          ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
+          'EMPTY': customerForReciteGeneration.address.length>7?
+          customerForReciteGeneration.address.substring(0,7)+'..':
+          customerForReciteGeneration.address
+      }',
+          styles: PosStyles(
+            align: PosAlign.right,
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
 
-        )
-    );
+          )
+      );
 
-    ticket.text('Flat #:${
-        ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
-        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-        customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
-        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+      ticket.text('Flat #:${
+          ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
+          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+          customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+          customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
 
-      align: PosAlign.right,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
-
-
-    )
-    );
-    ticket.text('phone #:${
-        ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-        'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-        customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
-        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
-
-      align: PosAlign.right,
-      height: PosTextSize.size2,
-      width: PosTextSize.size2,
+        align: PosAlign.right,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
 
 
-    )
-    );
+      )
+      );
+      ticket.text('phone #:${
+          ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
+          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+          customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+          customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+        align: PosAlign.right,
+        height: PosTextSize.size2,
+        width: PosTextSize.size2,
 
 
-    orderedItems.forEach((oneFood) {
+      )
+      );
 
 
-
-      ticket.row([
-
-        PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-      ]);
+      orderedItems.forEach((oneFood) {
 
 
 
-      ticket.hr();
-      // needed. as per design.
+        ticket.row([
 
-    });
+          PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
+          PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+          PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+        ]);
+
+
+
+        ticket.hr();
+        // needed. as per design.
+
+      });
 
 //    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
 
 
-    ticket.image(oneImageTotalCostDelivery);
+      ticket.image(oneImageTotalCostDelivery);
 
-    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+      final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+      ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
 
-    ticket.image(paidUnpaidDeliveryTypImage);
+      ticket.image(paidUnpaidDeliveryTypImage);
 
 //    ticket.image(oneImageTotalCostDelivery);
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
 
-    ticket.feed(2);
-    ticket.cut();
-    return ticket;
-  }
+      ticket.feed(2);
+      ticket.cut();
+      return ticket;
+    }
 
 // # number 4: demoReceipt Order Type Dinning ends here...
 
@@ -12477,7 +12614,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-}
+  }
 
 
 
