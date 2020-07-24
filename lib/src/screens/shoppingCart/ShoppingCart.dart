@@ -9616,7 +9616,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // COMMENT FROM HERE TO END...
 
 
-                      /*
+
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9631,7 +9631,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                      */
+
                       //END
 
 
