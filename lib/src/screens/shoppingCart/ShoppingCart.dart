@@ -688,7 +688,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             /// toDo: multiline. maxlines
             Container(
 
-              margin: EdgeInsets.fromLTRB(0, 20, 0,0),
+              margin: EdgeInsets.fromLTRB(0, 8, 0,0),
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
@@ -701,17 +701,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Container(
                     height:45,
-                    width: 185,
+                    width: 180,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.address == null) ||
                           (customerForReciteGeneration.address.length == 0)) ?
-                      'EMPTY' : customerForReciteGeneration.address.length > 17 ?
-                      customerForReciteGeneration.address.substring(0, 17) + '..' :
+                      'EMPTY' :
                       customerForReciteGeneration.address,
 
                       textAlign: TextAlign.left,
-                      maxLines: 2,
+                      maxLines: 3,
                       style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -727,19 +726,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Container(
                     height:45,
-                    width: 185,
+                    width: 180,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.flatOrHouseNumber == null) ||
                           (customerForReciteGeneration.flatOrHouseNumber.length ==
                               0)) ?
-                      'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
-                          .length > 20 ?
-                      customerForReciteGeneration.flatOrHouseNumber.substring(
-                          0, 20) + '..' :
+                      'EMPTY' :
                       customerForReciteGeneration.flatOrHouseNumber,
 
-                      maxLines: 2,
+                      maxLines:3,
                       textAlign: TextAlign.left,
                       style: TextStyle(
 //                      fontWeight: FontWeight.bold,
@@ -752,18 +748,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Container(
                     height:45,
-                    width: 185,
+                    width: 180,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
 
                       ((customerForReciteGeneration.phoneNumber == null) ||
                           (customerForReciteGeneration.phoneNumber.length == 0)) ?
-                      'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
-                          .length > 20 ?
-                      customerForReciteGeneration.phoneNumber.substring(0, 17) +
-                          '..' :
+                      'EMPTY' :
                       customerForReciteGeneration.phoneNumber,
-                      maxLines: 2,
+                      maxLines: 3,
 
                       textAlign: TextAlign.left,
                       style: TextStyle(
