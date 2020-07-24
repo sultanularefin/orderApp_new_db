@@ -692,7 +692,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 155,
+              height: 162,
               width: 170,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -1310,6 +1310,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         }
                         else {
                           Order oneOrder = snapshot.data;
+
+                          if((oneOrder.paymentButtonPressed==true) && (oneOrder.recitePrinted==false)){
+                            return Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  0, displayHeight(context) / 2, 0, 0),
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                              backgroundColor: Colors
+                                                  .lightGreenAccent)
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'printing recite... please wait.'
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                              backgroundColor: Color(0xffFC0000))
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                            );
+                          }
 
 
 //              int x = 5;
@@ -12405,6 +12440,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //          return true;
           }
           ).then((printResult) {
+
+            if(printResult==true){
+//              toDo: update bloc update oneOrder.recitePrinted by calling a method:
+//              oneOrder.recitePrinted==false;
+            }
             print("printResult: $printResult");
             return true;
           }).catchError((onError) {
