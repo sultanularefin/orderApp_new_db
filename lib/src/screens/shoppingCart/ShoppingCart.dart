@@ -614,7 +614,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
 
         ),
-        height: 140,
+        height: 120,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 300,
@@ -623,11 +623,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
+              margin: EdgeInsets.fromLTRB(0, 15, 0,0),
 
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 140,
+              height: 120,
               width: 150,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -686,21 +687,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             Container(
 
+              margin: EdgeInsets.fromLTRB(0, 20, 0,0),
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 140,
+              height: 120,
               width: 150,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
 
                   Text(
                     ((customerForReciteGeneration.address == null) ||
                         (customerForReciteGeneration.address.length == 0)) ?
-                    'EMPTY' : customerForReciteGeneration.address.length > 7 ?
-                    customerForReciteGeneration.address.substring(0, 7) + '..' :
+                    'EMPTY' : customerForReciteGeneration.address.length > 17 ?
+                    customerForReciteGeneration.address.substring(0, 17) + '..' :
                     customerForReciteGeneration.address,
 
                     textAlign: TextAlign.left,
@@ -719,9 +721,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         (customerForReciteGeneration.flatOrHouseNumber.length ==
                             0)) ?
                     'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
-                        .length > 7 ?
+                        .length > 17 ?
                     customerForReciteGeneration.flatOrHouseNumber.substring(
-                        0, 7) + '..' :
+                        0, 17) + '..' :
                     customerForReciteGeneration.flatOrHouseNumber,
 
                     textAlign: TextAlign.left,
@@ -736,8 +738,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ((customerForReciteGeneration.phoneNumber == null) ||
                         (customerForReciteGeneration.phoneNumber.length == 0)) ?
                     'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
-                        .length > 7 ?
-                    customerForReciteGeneration.phoneNumber.substring(0, 7) +
+                        .length > 17 ?
+                    customerForReciteGeneration.phoneNumber.substring(0, 17) +
                         '..' :
                     customerForReciteGeneration.phoneNumber,
 
