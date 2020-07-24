@@ -9265,6 +9265,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // NEED THIS LINES COMMENTING BEGINNING..
 
 
+                      /*
 
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
@@ -9279,6 +9280,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       _testPrintDummyDevices(x);
 
 
+                      */
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
@@ -9333,6 +9335,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // COMMENT FROM HERE TO END
 
 
+
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9344,6 +9348,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
+
+                      */
 
 
 
@@ -9657,6 +9663,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9671,6 +9678,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+                      */
 
                       //END
 
