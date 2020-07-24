@@ -614,7 +614,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
 
         ),
-        height: 162,
+        height: 170,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 300,
@@ -623,12 +623,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(6, 15, 0,0),
+              padding: EdgeInsets.fromLTRB(6, 15, 0,0),
 
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 162,
+              height: 152,
               width: 105,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -688,12 +688,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
             /// toDo: multiline. maxlines
             Container(
 
-              margin: EdgeInsets.fromLTRB(0, 8, 0,0),
+              padding: EdgeInsets.fromLTRB(0, 8, 0,0),
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 162,
-              width: 170,
+              height: 160,
+              width: 175,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
