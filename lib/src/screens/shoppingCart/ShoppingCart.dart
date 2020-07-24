@@ -619,7 +619,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 300,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
@@ -9225,7 +9225,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // NEED THIS LINES COMMENTING BEGINNING..
 
 
-                      /*
+
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9237,7 +9237,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
-                      */
+
 
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
@@ -9292,7 +9292,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // COMMENT FROM HERE TO END
 
-                      /*
+
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9306,7 +9306,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       _testPrintDummyDevices(x);
 
 
-                      */
+
                       // END
                       return;
                     }
@@ -9326,6 +9326,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Future<void> _showMyDialog2(String message) async {
 
+    logger.e('in showMyDialog2');
     print(' at the beginning of  _showMyDialog2 ....');
 
 
