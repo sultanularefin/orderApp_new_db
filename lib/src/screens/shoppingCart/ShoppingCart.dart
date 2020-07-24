@@ -9609,7 +9609,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     else {
                       logger.i('___________ blueTooth device not found _____');
-//                      _showMyDialog2('___________ blueTooth device not found _____');
+                      _showMyDialog2('___________ blueTooth device not found _____');
 
 
                       // COMMENT FROM HERE TO END...
