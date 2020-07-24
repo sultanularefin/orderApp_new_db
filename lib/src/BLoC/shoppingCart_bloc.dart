@@ -455,6 +455,18 @@ class ShoppingCartBloc implements Bloc {
 
   //PAYMENT FIRESTORE =>
 
+
+  void recitePrinted(Order payMentProcessing,bool status) async{
+
+    payMentProcessing.recitePrinted=status;
+
+    _curretnOrder=payMentProcessing;
+    _orderController.sink.add(_curretnOrder);
+
+
+    return;
+  }
+
   Future<Order> paymentButtonPressed(Order payMentProcessing) async{
 
 

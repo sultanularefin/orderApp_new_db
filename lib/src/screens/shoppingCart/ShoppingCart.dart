@@ -12447,6 +12447,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ).then((printResult) {
 
             if(printResult==true){
+
+//              await
+              shoppingCartBloc
+                  .recitePrinted(oneOrderForReceipt,true);
+//              paymentButtonPressed
 //              toDo: update bloc update oneOrder.recitePrinted by calling a method:
 //              oneOrder.recitePrinted==false;
             }
