@@ -9553,14 +9553,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     for (int i = 0; i < blueToothDevicesState.length; i++) {
                       ++index;
 
-
                       print(
                           'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
                               .name}');
                       print(
                           'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
                               .address}');
-
 
                       if ((blueToothDevicesState[i].name ==
                           'Restaurant Printer') ||
@@ -9576,8 +9574,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     logger.w('check device listed or not');
                     print('index: $index');
+                    print('found == true ${found == true}');
 
                     if (found == true) {
+
                       print('found == true');
                       await _testPrint(blueToothDevicesState[index]);
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
@@ -9593,7 +9593,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // COMMENT FROM HERE TO END...
 
-                      /*
 
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
@@ -9607,7 +9606,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       _testPrintDummyDevices(x);
 
-                      */
+
 
                       //END
 
@@ -12655,7 +12654,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-}
+//}
 
 //  FoodDetailImage
 
