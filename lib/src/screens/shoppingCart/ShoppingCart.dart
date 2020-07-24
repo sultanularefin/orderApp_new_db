@@ -700,7 +700,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 children: <Widget>[
 
                   Container(
-                    height:45,
+                    height:40,
                     width: 180,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
@@ -710,7 +710,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       customerForReciteGeneration.address,
 
                       textAlign: TextAlign.left,
-                      maxLines: 3,
+                      maxLines: 2,
                       style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -725,7 +725,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   Container(
-                    height:45,
+                    height:40,
                     width: 180,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
@@ -735,7 +735,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       'EMPTY' :
                       customerForReciteGeneration.flatOrHouseNumber,
 
-                      maxLines:3,
+                      maxLines:2,
                       textAlign: TextAlign.left,
                       style: TextStyle(
 //                      fontWeight: FontWeight.bold,
@@ -747,7 +747,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
 
                   Container(
-                    height:45,
+                    height:50,
                     width: 180,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
@@ -756,7 +756,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           (customerForReciteGeneration.phoneNumber.length == 0)) ?
                       'EMPTY' :
                       customerForReciteGeneration.phoneNumber,
-                      maxLines: 3,
+                      maxLines: 2,
 
                       textAlign: TextAlign.left,
                       style: TextStyle(
@@ -9292,7 +9292,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // COMMENT FROM HERE TO END
 
-
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9306,6 +9306,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       _testPrintDummyDevices(x);
 
 
+                      */
                       // END
                       return;
                     }
@@ -9544,6 +9545,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // NEED THIS LINES COMMENTING BEGINNING..
 
+                      /*
 
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
@@ -9558,6 +9560,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       _testPrintDummyDevices(x);
 
 
+                      */
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
@@ -9612,6 +9615,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // COMMENT FROM HERE TO END...
 
 
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9626,6 +9630,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+                      */
                       //END
 
 
@@ -12435,23 +12440,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
         return false;
       });
 
-      }).catchError((onError) {
-        print('Order data fetch Error $onError ***');
-        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-          new SnackBar(duration: new Duration(seconds: 6), content: Container(
-            child:
-            new Row(
-              children: <Widget>[
-                new CircularProgressIndicator(),
-                new Text("Error: ${onError.message.substring(0, 40)}", style:
-                TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                    color: Colors.white)),
-              ],
-            ),
-          )),);
+    }).catchError((onError) {
+      print('Order data fetch Error $onError ***');
+      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+        new SnackBar(duration: new Duration(seconds: 6), content: Container(
+          child:
+          new Row(
+            children: <Widget>[
+              new CircularProgressIndicator(),
+              new Text("Error: ${onError.message.substring(0, 40)}", style:
+              TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                  color: Colors.white)),
+            ],
+          ),
+        )),);
 
-        return false;
-      });
+      return false;
+    });
 
 
     // final return false if true is not return from the above conditioned.
