@@ -814,7 +814,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        getIconForName(orderTypeName),
 //        IconData:
 
-                  oneOrderForReceipt.paidStatus == 'paid' ? Icons.thumb_up :
+                  oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ? Icons.thumb_up :
                   Icons.pan_tool,
 //        FontAwesomeIcons.bookmark,
                   color: Colors.white,
