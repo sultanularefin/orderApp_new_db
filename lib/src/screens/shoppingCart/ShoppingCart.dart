@@ -601,31 +601,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
     CustomerInformation customerForReciteGeneration = oneOrderForReceipt.oneCustomer;
 //  Widget paidUnpaidDeliveryType =
     return new Directionality(
-        textDirection: TextDirection.ltr,
-        child:
-        Container(
+      textDirection: TextDirection.ltr,
+      child:
+      Container(
 
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black,
-                style: BorderStyle.solid,
-                width: 3.6,
-              ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            style: BorderStyle.solid,
+            width: 3.6,
+          ),
 //                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(35.0),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(35.0),
 //                    color: Colors.black,
 
-            ),
-            height: 140,
+        ),
+        height: 140,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
-            width: 300,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-              Container(
+        width: 300,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
 
 //            color:Colors.yellow,
 
@@ -683,76 +683,76 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
 
 
-          Container(
+            Container(
 
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-          height: 140,
-          width: 150,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
+              height: 140,
+              width: 150,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
 
-              Text(
-                  ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-                  'EMPTY':customerForReciteGeneration.address.length>7?
-                  customerForReciteGeneration.address.substring(0,7)+'..':
-                  customerForReciteGeneration.address,
+                  Text(
+                    ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
+                    'EMPTY':customerForReciteGeneration.address.length>7?
+                    customerForReciteGeneration.address.substring(0,7)+'..':
+                    customerForReciteGeneration.address,
 
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
 //                        color: Color(0xffF50303),
-                  fontSize: 17, fontFamily: 'Itim-Regular',),
-              ),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                  ),
 
-              // 1 ends here.
+                  // 1 ends here.
 
 
 
-              Text(
-                ((customerForReciteGeneration.flatOrHouseNumber==null) ||(customerForReciteGeneration.flatOrHouseNumber.length==0))?
-                'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-                customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
-                customerForReciteGeneration.flatOrHouseNumber,
+                  Text(
+                    ((customerForReciteGeneration.flatOrHouseNumber==null) ||(customerForReciteGeneration.flatOrHouseNumber.length==0))?
+                    'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+                    customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+                    customerForReciteGeneration.flatOrHouseNumber,
 
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
 //                        color: Color(0xffF50303),
-                  fontSize: 17, fontFamily: 'Itim-Regular',),
-              ),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                  ),
 
-              Text(
-                ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-                'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-                customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
-                customerForReciteGeneration.phoneNumber,
+                  Text(
+                    ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
+                    'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
+                    customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+                    customerForReciteGeneration.phoneNumber,
 
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
 //                        color: Color(0xffF50303),
-                  fontSize: 17, fontFamily: 'Itim-Regular',),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                  ),
+
+
+
+                  // 3 ends here.
+                ],
               ),
+            )
 
+            //rounded rectangle border and text conted inside it ends here.
 
-
-              // 3 ends here.
-            ],
-          ),
-        )
-
-    //rounded rectangle border and text conted inside it ends here.
-
-    ],
-    ),
-    ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -11461,7 +11461,72 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+  Future<void> _showMyDialog(
+      Uint8List restaurantNameImageByte2,
+      Uint8List totalCostDeliveryBytes3,
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
 
+
+    print('restaurantNameImageByte2: $restaurantNameImageByte2');
+    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
+    print('paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('you are using dummy bluetooth devices.'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('please use real blueTooth devices and also change functions in '
+                    'shopping cart page.'),
+                Container
+                  (child: Image.memory(restaurantNameImageByte2)
+                ),
+                Container
+                  (child: Image.memory(totalCostDeliveryBytes3)
+                ),
+
+                Container
+                  (child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
+                ),
+//                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('return shopping Cart page.'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource,
+      Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2)
+
+  async{
+
+    print(' came here: printTicketDummy');
+
+//    final PosPrintResult res =
+//    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
+
+//    showToast('res.msg  res.msg   res.msg');
+
+
+
+    _showMyDialog(restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes2);
+
+  }
 
 
 
@@ -11489,595 +11554,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
         )
     );
 
-    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
-
-    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
-
-    print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
-
-
-    Future<OneOrderFirebase> testFirebaseOrderFetch=
-    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
-
-//    Widget restaurantName2 = restaurantName(thisRestaurant.name);
-//    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
-//
-//    print('restaurantNameBytes: $restaurantNameBytes');
-//
-//
-//
-//
-//    ImageAliasAnotherSource.Image imageRestaurant;
-//
-//    /* await */ restaurantNameBytes.whenComplete(() {
-//
-//      print("restaurantNameBytes.whenComplete called when future completes");
-//
-//    }
-//    ).then((oneImageInBytes){
-//
-//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-//      print('calling ticket.image(imageRestaurant); ');
-////      ticket.image(imageRestaurant);
-//
-//    }).catchError((onError){
-//      print(' error in getting restaurant name as image');
-//    });
-
-//    Future<OneOrderFirebase> testFirebaseOrderFetch=
-//    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
-
-
-//    Order oneOrderForReceipt
-
-
-
-    Widget restaurantName2 = restaurantName(thisRestaurant.name);
-
-    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
-
-    Uint8List restaurantNameBytesNotFuture;
-
-    print('restaurantNameBytes: $restaurantNameBytesNotFuture');
-
-
-    ImageAliasAnotherSource.Image imageRestaurant;
-
-
-
-    /* await */ restaurantNameBytesFuture.whenComplete(() {
-
-      print("restaurantNameBytes.whenComplete called when future completes");
-
-    }
-    ).then((oneImageInBytes){
-
-//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-      print('calling ticket.image(imageRestaurant); ');
-      restaurantNameBytesNotFuture = oneImageInBytes;
-//      ticket.image(imageRestaurant);
-
-    }).catchError((onError){
-      print(' error in getting restaurant name as image');
-      print('false: means something wrong not printed');
-      //means something wrong not printed
-      return false;
-    });
-
-    // Print image
-    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
-    Uint8List totalCostDeliveryBytes;
-
-    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
-
-    /* await */ totalDeliveryWidgetBytes.whenComplete(() {
-
-      print("called when future completes");
-
-    }
-    ).then((oneImageInBytes){
-
-//      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-      totalCostDeliveryBytes = oneImageInBytes;
-
-
-//      _showMyDialog3(totalCostDeliveryBytes);
-      // ssss
-      print('before printing total cose for recite of delivery type order');
-//      ticket.image(image);
-
-    }).catchError((onError){
-      print(' error in getting restaurant name as image');
-      return false;
-    });
-
-
-//                            _handleSignIn();
-
-    /* await */ testFirebaseOrderFetch.whenComplete(() {
-
-      print("called when future completes");
-
-    }
-    ).then((oneOrderData){
-
-      // TODO: any oneOrderData data validation needs to be done in  corresponding block page.
-//      if ((oneOrderData.orderType == null) ||((oneOrderData.totalPrice ==null))) {
-//        return false;
-//      }
-
-
-      print('reached here: $oneOrderData');
-
-
-      Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
-
-      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
-
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes;
-
-//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
-
-
-//      ImageAliasAnotherSource.Image imageRestaurant;
-
-
-
-      /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
-
-        print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
-
-      }
-      ).then((paidUnpaidDeliveryTypeInBytes){
-
-//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-        print('calling ticket.image(imageRestaurant); ');
-//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
-
-
-
-//        DDD
-        Widget orderInformationAndCustomerInformationWidget = paidUnpaidDeliveryType(oneOrderData);
-
-        final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
-
-        Uint8List paidUnpaidDeliveryTypeWidgetBytes;
-
-//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
-
-
-//      ImageAliasAnotherSource.Image imageRestaurant;
-
-
-
-        /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
-
-          print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
-
-        }
-        ).then((paidUnpaidDeliveryTypeInBytes){
-
-//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-          print('calling ticket.image(imageRestaurant); ');
-//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-          print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
-
-
-
-
-//        oneOrderData  ssss ssss
-//      ticket.image(imageRestaurant);
-
-          Future<bool> isPrint =
-          printTicket(
-              paper,
-              thisRestaurant,
-              oneOrderData/*,imageRestaurant */,
-              restaurantNameBytesNotFuture,
-              totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
-
-//        Future<OneOrderFirebase> testFirebaseOrderFetch=
-
-          isPrint.whenComplete(() {
-
-            print("called when future completes");
-//          return true;
-          }
-          ).then((printResult){
-            print("printResult: $printResult");
-            return true;
-
-          }).catchError((onError) {
-            print('printing not successful: $onError');
-            return false;
-          });
-
-        }).catchError((onError){
-          print(' error in getting restaurant name as image');
-          print('false: means something wrong not printed');
-          //means something wrong not printed
-          return false;
-        });
-
-
-
-//      if ((oneOrderData.orderType != null) ||(oneOrderData.totalPrice !=null)) {
-//      await Future.delayed(Duration(milliseconds: 1000));
-
-
-        // }
-        /*
-      else{
-        return false;
-//        ALTERNATE FOR THIS:
-//        if ((oneOrderData.orderType == null) || (oneOrderData.totalPrice ==null) || (oneOrderData.totalPrice ==0.0) ){
-//          return false;
-//        }
-      }
-      */
-
-
-
-      }).catchError((onError){
-        print('Order data fetch Error $onError ***');
-        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-          new SnackBar(duration: new Duration(seconds: 6), content:Container(
-            child:
-            new Row(
-              children: <Widget>[
-                new CircularProgressIndicator(),
-                new Text("Error: ${onError.message.substring(0,40)}",style:
-                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                    color:Colors.white)),
-              ],
-            ),
-          )),);
-
-        return false;
-
-      });
-
-      // final return false if true is not return from the above conditioned.
-      return false;
-    }
-
-        void _testPrintDummyDevices(PrinterBluetooth printer) async {
-
-      // NOT REQUIRED SINCE DUMMY...
-
-      /*
-    printerManager.selectPrinter(printer);
-
-    // TODO Don't forget to choose printer's paper
-    const PaperSize paper = PaperSize.mm58;
-
-    */
-
-
-      print("_testPrintDummyDevices");
-
-
-      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-          new SnackBar(duration: new Duration(seconds: 6), content:
-          new Row(
-            children: <Widget>[
-              new CircularProgressIndicator(),
-              new Text("fetching data for receipt production...",style:TextStyle(
-                color: Colors.red,
-              ))
-            ],
-          ),
-          )
-      );
-
-      final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-      Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
-
-      Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
-
-      print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
-
-
-      Future<OneOrderFirebase> testFirebaseOrderFetch=
-      shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
-
-
-      Widget restaurantName2 = restaurantName(thisRestaurant.name);
-      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
-      Uint8List restaurantNameBytesNotFuture;
-
-      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
-
-
-      ImageAliasAnotherSource.Image imageRestaurant;
-
-
-
-      /* await */ restaurantNameBytesFuture.whenComplete(() {
-
-        print("restaurantNameBytes.whenComplete called when future completes");
-
-      }
-      ).then((oneImageInBytes){
-
-        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-        print('calling ticket.image(imageRestaurant); ');
-        restaurantNameBytesNotFuture = oneImageInBytes;
-//      ticket.image(imageRestaurant);
-
-      }).catchError((onError){
-        print(' error in getting restaurant name as image');
-      });
-
-      // Print image
-      Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
-      Uint8List totalCostDeliveryBytes;
-
-      final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
-
-      /* await */ totalDeliveryWidgetBytes.whenComplete(() {
-
-        print("called when future completes");
-
-      }
-      ).then((oneImageInBytes){
-
-//      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-        totalCostDeliveryBytes = oneImageInBytes;
-        print('before printing total cose for recite of delivery type order');
-//      ticket.image(image);
-
-      }).catchError((onError){
-        print(' error in getting restaurant name as image');
-      });
-
-
-//                            _handleSignIn();
-
-      /* await */ testFirebaseOrderFetch.whenComplete(() {
-
-        print("called when future completes");
-
-      }
-      ).then((oneOrderData){
-
-
-
-        Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
-
-        final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
-
-        Uint8List paidUnpaidDeliveryTypeWidgetBytes;
-
-//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
-
-
-//      ImageAliasAnotherSource.Image imageRestaurant;
-
-
-
-        /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
-
-          print("restaurantNameBytes.whenComplete called when future completes");
-
-        }
-        ).then((paidUnpaidDeliveryTypeInBytes){
-
-//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-          print('paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
-//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-//        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
-//      ticket.image(imageRestaurant);
-
-          printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
-              totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
-
-        }).catchError((onError){
-          print(' error in getting restaurant name as image');
-          print('false: means something wrong not printed');
-          //means something wrong not printed
-          return false;
-        });
-
-
-
-      }).catchError((onError){
-        print('Order data fetch Error $onError ***');
-        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-          new SnackBar(duration: new Duration(seconds: 6), content:Container(
-            child:
-            new Row(
-              children: <Widget>[
-                new CircularProgressIndicator(),
-                new Text("Error: ${onError.message.substring(0,40)}",style:
-                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                    color:Colors.white)),
-              ],
-            ),
-          )),);
-
-      });
-
-    }
-
-    Future <bool> printTicket(PaperSize paper,
-        Restaurant currentRestaurant,
-        OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
-        Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes
-        ) async{
-
-      // pqr
-//    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-//    demoReceiptOrderTypeDinning
-//    demoReceiptOrderTypeTakeAway
-//    demoReceiptOrderTypePhone
-
-      print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
-
-      final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
-      await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
-      (oneOrderdocument.orderBy.toLowerCase()=='phone')?
-      await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
-      (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
-      await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
-      await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes));
-
-
-
-
-
-      print('res.msg: ${res.msg}');
-
-
-      showToast(res.msg);
-
-      if(res.msg=='Success'){
-
-        print('at  Success');
-        return true;
-      }
-
-
-      else {
-
-        print('before returning false from Future <bool> printTicket ');
-        return false;
-      }
-
-//    TODO: NEED TO check the res.msg
-      // true means printed.
-
-
-
-
-    }
-
-    Future<void> _showMyDialog(
-        Uint8List restaurantNameImageByte2,
-        Uint8List totalCostDeliveryBytes3,
-        Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
-
-
-      print('restaurantNameImageByte2: $restaurantNameImageByte2');
-      print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
-      print('paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
-
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('you are using dummy bluetooth devices.'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text('please use real blueTooth devices and also change functions in '
-                      'shopping cart page.'),
-                  Container
-                    (child: Image.memory(restaurantNameImageByte2)
-                  ),
-                  Container
-                    (child: Image.memory(totalCostDeliveryBytes3)
-                  ),
-
-                  Container
-                    (child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
-                  ),
-//                Text('Would you like to approve of this message?'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('return shopping Cart page.'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-
-    Future<void> _showMyDialog3(
-
-        Uint8List x) async {
-
-
-      print('x: $x');
-//    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('you are using dummy bluetooth devices.'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text('please use real blueTooth devices and also change functions in '
-                      'shopping cart page.'),
-                  Container
-                    (child: Image.memory(x)
-                  ),
-
-//                Text('Would you like to approve of this message?'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('return shopping Cart page.'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    /* PRINTING REcite related codes resides here: */
-
-//  textDirection: TextDirection.ltr,
-//  child:
-//  Container(
-
-
-    
-    void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
-        OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource,
-        Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2)
-
-    async{
-
-      print(' came here: printTicketDummy');
-
-//    final PosPrintResult res =
-//    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
-
-//    showToast('res.msg  res.msg   res.msg');
-
-
-
-      _showMyDialog(restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes2);
-
-    }
-
-
-
-
 
 
     // # number 1: demoReceipt Order Type TakeAway begins here...
@@ -12089,7 +11565,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes2
         /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
-      print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
+      print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
 
       CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
@@ -12609,6 +12085,538 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
 
 // # number 4: demoReceipt Order Type Dinning ends here...
+
+
+
+
+    Future <bool> printTicket(PaperSize paper,
+        Restaurant currentRestaurant,
+        OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
+        Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes
+        ) async{
+
+      // pqr
+//    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+//    demoReceiptOrderTypeDinning
+//    demoReceiptOrderTypeTakeAway
+//    demoReceiptOrderTypePhone
+
+      print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
+
+      final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
+      await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
+      (oneOrderdocument.orderBy.toLowerCase()=='phone')?
+      await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
+      (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
+      await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
+      await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes));
+
+
+
+
+
+      print('res.msg: ${res.msg}');
+
+
+      showToast(res.msg);
+
+      if(res.msg=='Success'){
+
+        print('at  Success');
+        return true;
+      }
+
+
+      else {
+
+        print('before returning false from Future <bool> printTicket ');
+        return false;
+      }
+
+//    TODO: NEED TO check the res.msg
+      // true means printed.
+
+
+
+
+    }
+
+
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+
+    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+
+    print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
+
+
+    Future<OneOrderFirebase> testFirebaseOrderFetch=
+    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+
+//    Widget restaurantName2 = restaurantName(thisRestaurant.name);
+//    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
+//
+//    print('restaurantNameBytes: $restaurantNameBytes');
+//
+//
+//
+//
+//    ImageAliasAnotherSource.Image imageRestaurant;
+//
+//    /* await */ restaurantNameBytes.whenComplete(() {
+//
+//      print("restaurantNameBytes.whenComplete called when future completes");
+//
+//    }
+//    ).then((oneImageInBytes){
+//
+//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+//      print('calling ticket.image(imageRestaurant); ');
+////      ticket.image(imageRestaurant);
+//
+//    }).catchError((onError){
+//      print(' error in getting restaurant name as image');
+//    });
+
+//    Future<OneOrderFirebase> testFirebaseOrderFetch=
+//    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+
+
+//    Order oneOrderForReceipt
+
+
+
+    Widget restaurantName2 = restaurantName(thisRestaurant.name);
+
+    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+
+    Uint8List restaurantNameBytesNotFuture;
+
+    print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+    ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+    /* await */ restaurantNameBytesFuture.whenComplete(() {
+
+      print("restaurantNameBytes.whenComplete called when future completes");
+
+    }
+    ).then((oneImageInBytes){
+
+//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      print('calling ticket.image(imageRestaurant); ');
+      restaurantNameBytesNotFuture = oneImageInBytes;
+//      ticket.image(imageRestaurant);
+
+    }).catchError((onError){
+      print(' error in getting restaurant name as image');
+      print('false: means something wrong not printed');
+      //means something wrong not printed
+      return false;
+    });
+
+    // Print image
+    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
+    Uint8List totalCostDeliveryBytes;
+
+    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
+
+    /* await */ totalDeliveryWidgetBytes.whenComplete(() {
+
+      print("called when future completes");
+
+    }
+    ).then((oneImageInBytes){
+
+//      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      totalCostDeliveryBytes = oneImageInBytes;
+
+
+//      _showMyDialog3(totalCostDeliveryBytes);
+      // ssss
+      print('before printing total cose for recite of delivery type order');
+//      ticket.image(image);
+
+    }).catchError((onError){
+      print(' error in getting restaurant name as image');
+      return false;
+    });
+
+
+//                            _handleSignIn();
+
+    /* await */ testFirebaseOrderFetch.whenComplete(() {
+
+      print("called when future completes");
+
+    }
+    ).then((oneOrderData){
+
+      // TODO: any oneOrderData data validation needs to be done in  corresponding block page.
+//      if ((oneOrderData.orderType == null) ||((oneOrderData.totalPrice ==null))) {
+//        return false;
+//      }
+
+
+      print('reached here: $oneOrderData');
+
+
+      Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
+
+      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+
+//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+//      ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+      /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+
+        print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
+
+      }
+      ).then((paidUnpaidDeliveryTypeInBytes){
+
+//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        print('calling ticket.image(imageRestaurant); ');
+//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
+
+
+
+//        DDD
+        Widget orderInformationAndCustomerInformationWidget = paidUnpaidDeliveryType(oneOrderData);
+
+        final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+
+        Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+
+//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+//      ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+        /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+
+          print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
+
+        }
+        ).then((paidUnpaidDeliveryTypeInBytes){
+
+//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+          print('calling ticket.image(imageRestaurant); ');
+//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+          print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
+
+
+
+
+//        oneOrderData  ssss ssss
+//      ticket.image(imageRestaurant);
+
+          Future<bool> isPrint =
+          printTicket(
+              paper,
+              thisRestaurant,
+              oneOrderData/*,imageRestaurant */,
+              restaurantNameBytesNotFuture,
+              totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
+
+//        Future<OneOrderFirebase> testFirebaseOrderFetch=
+
+          isPrint.whenComplete(() {
+
+            print("called when future completes");
+//          return true;
+          }
+          ).then((printResult){
+            print("printResult: $printResult");
+            return true;
+
+          }).catchError((onError) {
+            print('printing not successful: $onError');
+            return false;
+          });
+
+        }).catchError((onError){
+          print(' error in getting restaurant name as image');
+          print('false: means something wrong not printed');
+          //means something wrong not printed
+          return false;
+        });
+
+
+
+//      if ((oneOrderData.orderType != null) ||(oneOrderData.totalPrice !=null)) {
+//      await Future.delayed(Duration(milliseconds: 1000));
+
+
+        // }
+        /*
+      else{
+        return false;
+//        ALTERNATE FOR THIS:
+//        if ((oneOrderData.orderType == null) || (oneOrderData.totalPrice ==null) || (oneOrderData.totalPrice ==0.0) ){
+//          return false;
+//        }
+      }
+      */
+
+
+
+      }).catchError((onError){
+        print('Order data fetch Error $onError ***');
+        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+          new SnackBar(duration: new Duration(seconds: 6), content:Container(
+            child:
+            new Row(
+              children: <Widget>[
+                new CircularProgressIndicator(),
+                new Text("Error: ${onError.message.substring(0,40)}",style:
+                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                    color:Colors.white)),
+              ],
+            ),
+          )),);
+
+        return false;
+
+      });
+
+      // final return false if true is not return from the above conditioned.
+      return false;
+    });
+
+
+
+    void _testPrintDummyDevices(PrinterBluetooth printer) async {
+
+      // NOT REQUIRED SINCE DUMMY...
+
+      /*
+    printerManager.selectPrinter(printer);
+
+    // TODO Don't forget to choose printer's paper
+    const PaperSize paper = PaperSize.mm58;
+
+    */
+
+
+      print("_testPrintDummyDevices");
+
+
+      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+          new SnackBar(duration: new Duration(seconds: 6), content:
+          new Row(
+            children: <Widget>[
+              new CircularProgressIndicator(),
+              new Text("fetching data for receipt production...",style:TextStyle(
+                color: Colors.red,
+              ))
+            ],
+          ),
+          )
+      );
+
+      final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+      Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+
+      Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+
+      print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
+
+
+      Future<OneOrderFirebase> testFirebaseOrderFetch=
+      shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+
+
+      Widget restaurantName2 = restaurantName(thisRestaurant.name);
+      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+      Uint8List restaurantNameBytesNotFuture;
+
+      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+      ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+      /* await */ restaurantNameBytesFuture.whenComplete(() {
+
+        print("restaurantNameBytes.whenComplete called when future completes");
+
+      }
+      ).then((oneImageInBytes){
+
+        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        print('calling ticket.image(imageRestaurant); ');
+        restaurantNameBytesNotFuture = oneImageInBytes;
+//      ticket.image(imageRestaurant);
+
+      }).catchError((onError){
+        print(' error in getting restaurant name as image');
+      });
+
+      // Print image
+      Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
+      Uint8List totalCostDeliveryBytes;
+
+      final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
+
+      /* await */ totalDeliveryWidgetBytes.whenComplete(() {
+
+        print("called when future completes");
+
+      }
+      ).then((oneImageInBytes){
+
+//      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        totalCostDeliveryBytes = oneImageInBytes;
+        print('before printing total cose for recite of delivery type order');
+//      ticket.image(image);
+
+      }).catchError((onError){
+        print(' error in getting restaurant name as image');
+      });
+
+
+//                            _handleSignIn();
+
+      /* await */ testFirebaseOrderFetch.whenComplete(() {
+
+        print("called when future completes");
+
+      }
+      ).then((oneOrderData){
+
+
+
+        Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
+
+        final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+
+        Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+
+//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+//      ImageAliasAnotherSource.Image imageRestaurant;
+
+
+
+        /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+
+          print("restaurantNameBytes.whenComplete called when future completes");
+
+        }
+        ).then((paidUnpaidDeliveryTypeInBytes){
+
+//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+          print('paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
+//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+//        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
+//      ticket.image(imageRestaurant);
+
+          printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
+              totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
+
+        }).catchError((onError){
+          print(' error in getting restaurant name as image');
+          print('false: means something wrong not printed');
+          //means something wrong not printed
+          return false;
+        });
+
+
+
+      }).catchError((onError){
+        print('Order data fetch Error $onError ***');
+        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+          new SnackBar(duration: new Duration(seconds: 6), content:Container(
+            child:
+            new Row(
+              children: <Widget>[
+                new CircularProgressIndicator(),
+                new Text("Error: ${onError.message.substring(0,40)}",style:
+                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                    color:Colors.white)),
+              ],
+            ),
+          )),);
+
+      });
+
+    }
+
+
+
+
+
+
+    Future<void> _showMyDialog3(
+
+        Uint8List x) async {
+
+
+      print('x: $x');
+//    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('you are using dummy bluetooth devices.'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('please use real blueTooth devices and also change functions in '
+                      'shopping cart page.'),
+                  Container
+                    (child: Image.memory(x)
+                  ),
+
+//                Text('Would you like to approve of this message?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('return shopping Cart page.'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    /* PRINTING REcite related codes resides here: */
+
+//  textDirection: TextDirection.ltr,
+//  child:
+//  Container(
+
+
+
+
+
 
 
 
