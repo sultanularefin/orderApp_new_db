@@ -128,31 +128,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
     printer: PrettyPrinter(),
   );
 
-  final GlobalKey<ScaffoldState> _scaffoldKeyShoppingCartPage = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyShoppingCartPage = new GlobalKey<
+      ScaffoldState>();
 
 //  String _currentSize;
 //  int _itemCount = 1;
   int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
-  int _currentPaymentTypeIndex = 2;// PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-  bool showFullOrderType                  = true;
-  bool showUserInputOptionsLikeFirstTime  = true;
-  bool showCustomerInformationHeader      = false;
-  bool showFullPaymentType                = true;
+  int _currentPaymentTypeIndex = 2; // PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+  bool showFullOrderType = true;
+  bool showUserInputOptionsLikeFirstTime = true;
+  bool showCustomerInformationHeader = false;
+  bool showFullPaymentType = true;
 
-  bool showEditingCompleteCustomerAddressInformation   = false;
+  bool showEditingCompleteCustomerAddressInformation = false;
   bool showEditingCompleteCustomerHouseFlatIformation = false;
-  bool showEditingCompleteCustomerPhoneIformation     = false;
-  bool showEditingCompleteCustomerReachoutIformation  = false;
+  bool showEditingCompleteCustomerPhoneIformation = false;
+  bool showEditingCompleteCustomerReachoutIformation = false;
 
 
 //  bool showInputtedCustomerIformation = false;
 
-  final addressController         = TextEditingController();
+  final addressController = TextEditingController();
   final houseFlatNumberController = TextEditingController();
-  final phoneNumberController     = TextEditingController();
-  final etaController             = TextEditingController();
-
-
+  final phoneNumberController = TextEditingController();
+  final etaController = TextEditingController();
 
 
   /*
@@ -163,6 +162,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
+
 //  List<PrinterBluetooth> blueToothDevicesState = [];
 //  bool localScanAvailableState = true; // meant not busy.
 
@@ -189,9 +189,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     houseFlatNumberController.dispose();
     phoneNumberController.dispose();
     etaController.dispose();
-
   }
-
 
 
 //  color: Color(0xff34720D),
@@ -225,10 +223,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   */
-
-
-
-
 
 
 //  void _startScanDummyDevices() {
@@ -350,14 +344,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
     setState(() {
       // blueToothDevicesState = tempBlueToothDevices;
     });
-
-
   }
 
   void _stopScanDevices() {
     print('debug print inside _stopScanDevices() method ');
     printerManager.stopScan();
-    print('debug print inside _stopScanDevices() method and finished calling printerManager.stopScan() method');
+    print(
+        'debug print inside _stopScanDevices() method and finished calling printerManager.stopScan() method');
   }
 
   // Future<void> return type .  ??
@@ -514,13 +507,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
   ///
   /// The final image will be of size [imageSize] and the the widget will be layout, ... with the given [logicalSize].
 //  Future<Uint8List> createImageFromWidget(
-  Future<Uint8List> createImageFromWidget (
-      Widget widget,
+  Future<Uint8List> createImageFromWidget(Widget widget,
       {
         /* Duration wait, */
         Size logicalSize,
         Size imageSize}) async {
-
     print('at here: $createImageFromWidget');
 
 
@@ -533,7 +524,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final RenderView renderView = RenderView(
       window: null,
-      child: RenderPositionedBox(alignment: Alignment.center, child: repaintBoundary),
+      child: RenderPositionedBox(
+          alignment: Alignment.center, child: repaintBoundary),
       configuration: ViewConfiguration(
         size: logicalSize,
         devicePixelRatio: 1.0,
@@ -566,8 +558,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
     pipelineOwner.flushCompositingBits();
     pipelineOwner.flushPaint();
 
-    final ui.Image image = await repaintBoundary.toImage(pixelRatio: imageSize.width / logicalSize.width);
-    final ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final ui.Image image = await repaintBoundary.toImage(
+        pixelRatio: imageSize.width / logicalSize.width);
+    final ByteData byteData = await image.toByteData(
+        format: ui.ImageByteFormat.png);
 
 //    final Uint8List bytes =  byteData.buffer.asUint8List();
 
@@ -593,12 +587,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //  orderInformationAndCustomerInformationWidget
 
-  Widget orderInformationAndCustomerInformationWidget(OneOrderFirebase oneOrderForReceipt) {
+  Widget orderInformationAndCustomerInformationWidget(
+      OneOrderFirebase oneOrderForReceipt) {
+    print(
+        'at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt
+            .orderBy}'
+            'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
 
-    print('at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}'
-        'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
-
-    CustomerInformation customerForReciteGeneration = oneOrderForReceipt.oneCustomer;
+    CustomerInformation customerForReciteGeneration = oneOrderForReceipt
+        .oneCustomer;
 //  Widget paidUnpaidDeliveryType =
     return new Directionality(
       textDirection: TextDirection.ltr,
@@ -638,9 +635,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 children: <Widget>[
 
                   Text(
-                    (oneOrderForReceipt.orderBy.toLowerCase()=='delivery')?'Delivery':
-                    (oneOrderForReceipt.orderBy.toLowerCase()=='phone')?
-                    'Phone':(oneOrderForReceipt.orderBy.toLowerCase()=='takeaway')?'TakeAway':'Dinning Room',
+                    (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
+                        ? 'Delivery'
+                        :
+                    (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+                    'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                        'takeaway') ? 'TakeAway' : 'Dinning Room',
 //                    oneOrderForReceipt.orderBy
 //                    'dinning room',
                     textAlign: TextAlign.left,
@@ -655,7 +655,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   Text(
-                    '${oneOrderForReceipt.formattedOrderPlacementDatesTimeOnly}',
+                    '${oneOrderForReceipt
+                        .formattedOrderPlacementDatesTimeOnly}',
 
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -696,9 +697,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 children: <Widget>[
 
                   Text(
-                    ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-                    'EMPTY':customerForReciteGeneration.address.length>7?
-                    customerForReciteGeneration.address.substring(0,7)+'..':
+                    ((customerForReciteGeneration.address == null) ||
+                        (customerForReciteGeneration.address.length == 0)) ?
+                    'EMPTY' : customerForReciteGeneration.address.length > 7 ?
+                    customerForReciteGeneration.address.substring(0, 7) + '..' :
                     customerForReciteGeneration.address,
 
                     textAlign: TextAlign.left,
@@ -712,11 +714,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // 1 ends here.
 
 
-
                   Text(
-                    ((customerForReciteGeneration.flatOrHouseNumber==null) ||(customerForReciteGeneration.flatOrHouseNumber.length==0))?
-                    'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-                    customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
+                    ((customerForReciteGeneration.flatOrHouseNumber == null) ||
+                        (customerForReciteGeneration.flatOrHouseNumber.length ==
+                            0)) ?
+                    'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
+                        .length > 7 ?
+                    customerForReciteGeneration.flatOrHouseNumber.substring(
+                        0, 7) + '..' :
                     customerForReciteGeneration.flatOrHouseNumber,
 
                     textAlign: TextAlign.left,
@@ -728,9 +733,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
 
                   Text(
-                    ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-                    'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-                    customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
+                    ((customerForReciteGeneration.phoneNumber == null) ||
+                        (customerForReciteGeneration.phoneNumber.length == 0)) ?
+                    'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
+                        .length > 7 ?
+                    customerForReciteGeneration.phoneNumber.substring(0, 7) +
+                        '..' :
                     customerForReciteGeneration.phoneNumber,
 
                     textAlign: TextAlign.left,
@@ -740,7 +748,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        color: Color(0xffF50303),
                       fontSize: 17, fontFamily: 'Itim-Regular',),
                   ),
-
 
 
                   // 3 ends here.
@@ -758,9 +765,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   Widget paidUnpaidDeliveryType(OneOrderFirebase oneOrderForReceipt) {
-
-    print('at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}'
-        'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
+    print(
+        'at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt
+            .orderBy}'
+            'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
 //  Widget paidUnpaidDeliveryType =
     return new Directionality(
       textDirection: TextDirection.ltr,
@@ -804,7 +812,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        getIconForName(orderTypeName),
 //        IconData:
 
-                  oneOrderForReceipt.paidStatus=='paid'? Icons.thumb_up:
+                  oneOrderForReceipt.paidStatus == 'paid' ? Icons.thumb_up :
                   Icons.pan_tool,
 //        FontAwesomeIcons.bookmark,
                   color: Colors.white,
@@ -845,8 +853,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Container(
                     padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
                     child: Text(
-                      oneOrderForReceipt.paidStatus=='paid'?
-                      'paid':'unpaid',
+                      oneOrderForReceipt.paidStatus == 'paid' ?
+                      'paid' : 'unpaid',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -856,9 +864,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
                   ),
                   Text(
-                    (oneOrderForReceipt.orderBy.toLowerCase()=='delivery')?'Delivery':
-                    (oneOrderForReceipt.orderBy.toLowerCase()=='phone')?
-                    'Phone':(oneOrderForReceipt.orderBy.toLowerCase()=='takeaway')?'TakeAway':'Dinning Room',
+                    (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
+                        ? 'Delivery'
+                        :
+                    (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+                    'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                        'takeaway') ? 'TakeAway' : 'Dinning Room',
 //                    oneOrderForReceipt.orderBy
 //                    'dinning room',
                     textAlign: TextAlign.center,
@@ -892,9 +903,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: Icon(
 //        getIconForName(orderTypeName),
 //        IconData:
-                (oneOrderForReceipt.orderBy.toLowerCase()=='delivery')?Icons.motorcycle:
-                (oneOrderForReceipt.orderBy.toLowerCase()=='phone')?
-                Icons.phone_in_talk:(oneOrderForReceipt.orderBy.toLowerCase()=='takeaway')?Icons.business_center:Icons.local_dining,
+                (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ? Icons
+                    .motorcycle :
+                (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+                Icons.phone_in_talk : (oneOrderForReceipt.orderBy
+                    .toLowerCase() == 'takeaway')
+                    ? Icons.business_center
+                    : Icons.local_dining,
 //                Icons.local_dining,
 //        FontAwesomeIcons.bookmark,
                 color: Colors.white,
@@ -915,13 +930,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   Widget restaurantName(String name) {
-
     return Directionality(
       textDirection:
       TextDirection.ltr,
       child: Text('${name.toLowerCase()}',
-          maxLines:1,
-          overflow:TextOverflow.ellipsis,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle
             (
             fontSize: 24,
@@ -934,7 +948,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  Widget subTotalTotalDeliveryCost(double subtotal, {double deliveryCost:2.50}) {
+  Widget subTotalTotalDeliveryCost(double subtotal,
+      {double deliveryCost: 2.50}) {
     Path customPathTotalCost = Path()
       ..moveTo(200, 120)
       ..lineTo(0, 120);
@@ -1000,7 +1015,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              (unObsecuredInputandPayment.totalPrice
 //                                  /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
 //                              '\u20AC',
-                  Text( subtotal.toStringAsFixed(2) +'\u20AC',
+                  Text(subtotal.toStringAsFixed(2) + '\u20AC',
                     textAlign: TextAlign.center,
                     style: TextStyle(
 //                          fontWeight: FontWeight.bold,
@@ -1036,7 +1051,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         fontSize: 14, fontFamily: 'Itim-Regular',),
                     ),
                   ),
-                  Text(deliveryCost.toStringAsFixed(2) +'\u20AC',
+                  Text(deliveryCost.toStringAsFixed(2) + '\u20AC',
                     textAlign: TextAlign.center,
                     style: TextStyle(
 //                      fontWeight: FontWeight.bold,
@@ -1104,7 +1119,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
                   ),
                   Text(
-                    (deliveryCost + subtotal).toStringAsFixed(2) +'\u20AC',
+                    (deliveryCost + subtotal).toStringAsFixed(2) + '\u20AC',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -1129,10 +1144,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
-
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
 
@@ -1156,7 +1167,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
         },
 
 
-
         child:
         Scaffold(
           key: _scaffoldKeyShoppingCartPage,
@@ -1168,22 +1178,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
           body:
           WillPopScope(
             onWillPop: () {
-              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(
+                  context);
               print('at WillPopScope: ');
 
-              List<SelectedFood> backUP =  shoppingCartBloc.getExpandedSelectedFood;
+              List<SelectedFood> backUP = shoppingCartBloc
+                  .getExpandedSelectedFood;
               print('at WillPopScope : $backUP');
 
-              Order z= shoppingCartBloc.getCurrentOrder;
-              z.selectedFoodInOrder=backUP;
+              Order z = shoppingCartBloc.getCurrentOrder;
+              z.selectedFoodInOrder = backUP;
 
               shoppingCartBloc.clearSubscription();
 
-              logger.e('at WillPopScope Quantity: ${z.selectedFoodInOrder[0].quantity}');
+              logger.e('at WillPopScope Quantity: ${z.selectedFoodInOrder[0]
+                  .quantity}');
 
               Navigator.pop(context, z);
               return new Future(() => false);
-            },child:
+            }, child:
           SafeArea(
             child: SingleChildScrollView(
               child:
@@ -1214,7 +1227,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   child: Container(
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
-                                          backgroundColor: Colors.lightGreenAccent)
+                                          backgroundColor: Colors
+                                              .lightGreenAccent)
                                   ),
                                 ),
                                 Center(
@@ -1240,7 +1254,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       case ConnectionState.active:
                       default:
-                        if(snapshot.data ==null) {
+                        if (snapshot.data == null) {
                           return Container(
                             margin: EdgeInsets.fromLTRB(
                                 0, displayHeight(context) / 2, 0, 0),
@@ -1252,7 +1266,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.lightGreenAccent)
+                                            backgroundColor: Colors
+                                                .lightGreenAccent)
                                     ),
                                   ),
                                   Center(
@@ -1295,7 +1310,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           // I am ignoring rest implementation but what i have achieved is you can see.
 
 
-                          logger.e('\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
+                          logger.e(
+                              '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
 
                           return Container(
 //                            height: displayHeight(context) -
@@ -1339,7 +1355,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       lightSource: LightSource
                                           .topLeft,
                                       color: Colors.white,
-                                      boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+                                      boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.all(Radius.circular(15)),
 
                                       ),
                                     ),
@@ -1461,7 +1478,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               0, 0, 0, 0),
 //                                                      padding::::
 //                                          color: Colors.amberAccent,
-                                          color:Colors.white,
+                                          color: Colors.white,
 //                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
                                           height: displayHeight(context) / 4.8,
                                           width: displayWidth(context)
@@ -1474,12 +1491,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           //ssd
 
                                           StreamBuilder<List<SelectedFood>>(
-                                              stream: shoppingCartBloc.getExpandedFoodsStream,
-                                              initialData: shoppingCartBloc.getExpandedSelectedFood,
+                                              stream: shoppingCartBloc
+                                                  .getExpandedFoodsStream,
+                                              initialData: shoppingCartBloc
+                                                  .getExpandedSelectedFood,
 
                                               builder: (context, snapshot) {
                                                 if (snapshot.hasData) {
-                                                  List<SelectedFood> expandedSelectedFoodInOrder = snapshot.data;
+                                                  List<
+                                                      SelectedFood> expandedSelectedFoodInOrder = snapshot
+                                                      .data;
 
 
 //            logger.e(
@@ -1487,11 +1508,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-                                                  if (expandedSelectedFoodInOrder == null) {
+                                                  if (expandedSelectedFoodInOrder ==
+                                                      null) {
                                                     print('Order has no data');
-                                                    print('this will never happen don\'t worry');
+                                                    print(
+                                                        'this will never happen don\'t worry');
 //        return Center(child: new LinearProgressIndicator());
-                                                    return Container(child: Text('expandedSelectedFoodInOrder == Null'));
+                                                    return Container(
+                                                        child: Text(
+                                                            'expandedSelectedFoodInOrder == Null'));
                                                   }
 
                                                   //    VIEW MODEL CHANGE THUS CONDITION CHANGE 1.
@@ -1507,18 +1532,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      int quantity = qTimes.quantity;
 //      int quantity = qTimes.selectedFoodInOrder.length;
 
-                                                    List<SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
+                                                    List<
+                                                        SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
 
 
-
-                                                    logger.e('\n\n AM I EXECUTED TWICE  ;;;'
-                                                        ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
+                                                    logger.e(
+                                                        '\n\n AM I EXECUTED TWICE  ;;;'
+                                                            ' allOrderedFoods.length: ${allOrderedFoods
+                                                            .length} \n\n ');
                                                     return Container(
 //                color: Colors.green,
                                                       color: Color(0xffFFFFFF),
 
                                                       child: ListView.builder(
-                                                        scrollDirection: Axis.horizontal,
+                                                        scrollDirection: Axis
+                                                            .horizontal,
 
                                                         reverse: false,
 
@@ -1526,18 +1554,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
 //          itemCount: quantity,
-                                                        itemCount: allOrderedFoods.length,
+                                                        itemCount: allOrderedFoods
+                                                            .length,
                                                         // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
 
-                                                        itemBuilder: (_, int index) {
+                                                        itemBuilder: (_,
+                                                            int index) {
 //            return Text('ss');
 
                                                           return FoodImageInShoppingCart(
-                                                              allOrderedFoods[index].foodItemImageURL, /*OrderedFoodImageURL,*/
-                                                              allOrderedFoods[index].foodItemName, /*OrderedFoodItemName, */
-                                                              allOrderedFoods[index].selectedIngredients,
-                                                              allOrderedFoods[index].unitPrice,
+                                                              allOrderedFoods[index]
+                                                                  .foodItemImageURL, /*OrderedFoodImageURL,*/
+                                                              allOrderedFoods[index]
+                                                                  .foodItemName, /*OrderedFoodItemName, */
+                                                              allOrderedFoods[index]
+                                                                  .selectedIngredients,
+                                                              allOrderedFoods[index]
+                                                                  .unitPrice,
                                                               index
                                                           );
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
@@ -1555,7 +1589,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 else {
                                                   print('!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
-                                                  return Container(child: Text('Null'));
+                                                  return Container(
+                                                      child: Text('Null'));
                                                 }
                                               }
                                           ),
@@ -1596,7 +1631,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
                                           width: displayWidth(context) / 1.1,
-                                          height: displayHeight(context)/2.2,
+                                          height: displayHeight(context) / 2.2,
 //                                            height: displayWidth(context)/2.2
 //                                          height: displayHeight(context)/2-42,
                                           // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
@@ -1608,11 +1643,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                           //Text('AnimatedSwitcher('),
                                           child: AnimatedSwitcher(
-                                            duration: Duration(milliseconds: 300),
+                                            duration: Duration(
+                                                milliseconds: 300),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                                            child: oneOrder.orderTypeIndex == 0 ?
+                                            child: oneOrder.orderTypeIndex == 0
+                                                ?
                                             _buildShoppingCartInputFieldsUNObscuredTakeAway(
                                                 oneOrder)
                                                 : oneOrder.orderTypeIndex == 1 ?
@@ -1664,7 +1701,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
           ),
           floatingActionButton: StreamBuilder<bool>(
-            stream: printerManager.isScanningStream, // dEFINED IN HERE: C:\src\flutter\.pub-cache\hosted\
+            stream: printerManager.isScanningStream,
+            // dEFINED IN HERE: C:\src\flutter\.pub-cache\hosted\
             // pub.dartlang.org\esc_pos_bluetooth-0.2.8\lib\
             // src\printer_bluetooth_manager.dart
             initialData: false,
@@ -1673,8 +1711,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 return FloatingActionButton(
                   child: Icon(Icons.stop),
 //                  onPressed: _stopScanDevices,
-                  onPressed: ()=>{
-                    print('debug print in onPressed() of floating action button: before calling _stopScanDevices'),
+                  onPressed: () =>
+                  {
+                    print(
+                        'debug print in onPressed() of floating action button: before calling _stopScanDevices'),
                     _stopScanDevices(),
 
                     /*
@@ -1690,8 +1730,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
               } else {
                 return FloatingActionButton(
                   child: Icon(Icons.search),
-                  onPressed: ()=>{
-                    print('debug print in onPressed() of floating action button: before calling _startScanDevices'),
+                  onPressed: () =>
+                  {
+                    print(
+                        'debug print in onPressed() of floating action button: before calling _startScanDevices'),
                     _startScanDevices(),
 
                     /*
@@ -1746,8 +1788,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-
-  Widget test1(Order oneOrder){
+  Widget test1(Order oneOrder) {
 //    final Order oneOrder = snapshot.data;
 //              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
 
@@ -1762,7 +1803,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Container(
         height: displayHeight(context) / 20
             /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */
-            +  displayHeight(context) /11 /* HEIGHT OF MULTI SELECT PORTION */,
+            + displayHeight(context) / 11 /* HEIGHT OF MULTI SELECT PORTION */,
 //        from 7 to /8.5 on june 03
 
         child: Column(
@@ -1823,8 +1864,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                         ]
                     ),
 
@@ -1865,8 +1904,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ////WWWEEEQQQ
 
 
-
-
                 ],
               ),
             ),
@@ -1875,14 +1912,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
 //                                                      padding::::
 //              color:Colors.green,
-              color:Colors.white,
+              color: Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /11,
+              height: displayHeight(context) / 11,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildOrderTypeSingleSelectOption(),
+              child: _buildOrderTypeSingleSelectOption(),
 
             ),
           ],
@@ -1891,12 +1928,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-
-
-
-
-  Widget _buildOrderTypeSingleSelectOption(){
-
+  Widget _buildOrderTypeSingleSelectOption() {
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
 
@@ -1914,13 +1946,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
             return Container(child: Text('Null'));
           }
           else {
-            List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
+            List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot
+                .data;
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
             print('orderTypes: $allOrderTypesSingleSelect');
-            OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect.firstWhere((oneOrderType) =>
-            oneOrderType.isSelected==true);
+            OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect
+                .firstWhere((oneOrderType) =>
+            oneOrderType.isSelected == true);
             _currentOrderTypeIndex = selectedOne.index;
 
 
@@ -1948,13 +1982,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       // M VSM ORG VS TODO. ENDS HERE.
     );
-
   }
 
 
   Widget animatedWidgetShowSelectedOrderType() {
-
-
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     return Container(
@@ -1963,30 +1994,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
           stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
           initialData: shoppingCartbloc.getCurrentOrderType,
 
-          builder: (context, snapshot)
-          {
+          builder: (context, snapshot) {
             if (!snapshot.hasData) {
               print('!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
               return Container(child: Text('Null'));
             }
             else {
-              List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
+              List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot
+                  .data;
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
 //            print('orderTypes: $allOrderTypesSingleSelect');
               OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect
-                  .firstWhere((oneOrderType) => oneOrderType.isSelected == true);
+                  .firstWhere((oneOrderType) =>
+              oneOrderType.isSelected == true);
               _currentOrderTypeIndex = selectedOne.index;
 
 
               String orderTypeName = selectedOne.orderType;
               String orderIconName = selectedOne.orderIconName;
               String borderColor = selectedOne.borderColor;
-              const Color OrderTypeIconColor=Color(0xff070707);
-
-
+              const Color OrderTypeIconColor = Color(0xff070707);
 
 
               return Container(
@@ -2050,8 +2080,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     Container(
 
-                      width: displayWidth(context)/8,
-                      height: displayHeight(context) /10,
+                      width: displayWidth(context) / 8,
+                      height: displayHeight(context) / 10,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
                       child:
@@ -2073,7 +2103,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
 
                         */
-                        child:Container(
+                        child: Container(
 //                        alignment: Alignment.topCenter,
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: Column(
@@ -2090,8 +2120,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
 
-                                width:displayWidth(context)/8.4,
-                                height: displayHeight(context) /15,
+                                width: displayWidth(context) / 8.4,
+                                height: displayHeight(context) / 15,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -2113,7 +2143,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 child: Icon(
                                   getIconForName(orderTypeName),
                                   color: Colors.black,
-                                  size: displayHeight(context) /24,
+                                  size: displayHeight(context) / 24,
 
                                 ),
                               ),
@@ -2124,7 +2154,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 child: Text(
                                   orderTypeName, style:
                                 TextStyle(
-                                    color:Color(0xffFC0000),
+                                    color: Color(0xffFC0000),
 
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
@@ -2134,7 +2164,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
                         ),
                         onTap: () {
-
                           //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
                           //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
@@ -2148,23 +2177,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            showFullOrderType
                             /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
                             showCustomerInformationHeader = false;
-                            showUserInputOptionsLikeFirstTime =true;
+                            showUserInputOptionsLikeFirstTime = true;
                             showFullPaymentType = true; //DEFAULT.
 
                             // JUST LIKE THE FIRST TIME.
-                            showEditingCompleteCustomerAddressInformation   = false;
-                            showEditingCompleteCustomerHouseFlatIformation = false;
-                            showEditingCompleteCustomerPhoneIformation     = false;
-                            showEditingCompleteCustomerReachoutIformation  = false;
+                            showEditingCompleteCustomerAddressInformation =
+                            false;
+                            showEditingCompleteCustomerHouseFlatIformation =
+                            false;
+                            showEditingCompleteCustomerPhoneIformation = false;
+                            showEditingCompleteCustomerReachoutIformation =
+                            false;
                           });
-
-
                         },
                       ),
                       // : Container for 2nd argument of ternary condition ends here.
 
                     )
-
 
 
                     //ZZZZ
@@ -2205,7 +2234,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
   */
 
-  Widget animatedObscuredTextInputContainer(CustomerInformation forObscuredCustomerInputDisplay){
+  Widget animatedObscuredTextInputContainer(
+      CustomerInformation forObscuredCustomerInputDisplay) {
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
 //    ),
@@ -2214,14 +2244,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return
       AbsorbPointer(
         child: Opacity(
-          opacity:0.4,
+          opacity: 0.4,
           child: Container(
 //            Colors.white.withOpacity(0.10),
               padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
-              color:Colors.white,
+              color: Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /4,
+              height: displayHeight(context) / 4,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
@@ -2231,15 +2261,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                       child: _buildShoppingCartInputFields()
                                                   ),
                                                   */
-              child: _buildShoppingCartInputFieldsObscured(forObscuredCustomerInputDisplay)
+              child: _buildShoppingCartInputFieldsObscured(
+                  forObscuredCustomerInputDisplay)
 
 
           ),
         ),
       );
   }
-
-
 
 
   /*
@@ -2398,11 +2427,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //  animatedShowUserAddressDetailsInLineTakeAway
 
-  Widget animatedShowUserAddressDetailsInLineDinningRoom(CustomerInformation currentUserForInline){
-
+  Widget animatedShowUserAddressDetailsInLineDinningRoom(
+      CustomerInformation currentUserForInline) {
     return Container(
       width: displayWidth(context) / 1.1,
-      height: displayHeight(context) / 21 +  displayHeight(context) / 15,
+      height: displayHeight(context) / 21 + displayHeight(context) / 15,
 //      height: displayHeight(context) / 8,
       // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
       // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
@@ -2468,9 +2497,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
 
 
-
-
-
                   //ZZZZ
 
 
@@ -2486,15 +2512,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               height: displayHeight(context) / 15,
 //              color:Colors.amber,
-              color:Colors.white,
-              child:    ListView(
+              color: Colors.white,
+              child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
 
 
                   RaisedButton(
-                    color:Color(0xffFC0000),
+                    color: Color(0xffFC0000),
 //                    color:Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
@@ -2509,12 +2535,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    child: currentUserForInline.etaTimeInMinutes != -1?
+                    child: currentUserForInline.etaTimeInMinutes != -1 ?
                     Container(
-                      color:Color(0xffFC0000),
+                      color: Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                      width:displayWidth(context) /4,
-                      child:  Row(
+                      width: displayWidth(context) / 4,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -2528,7 +2554,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               size: 32.0,
                               color: Colors.black
                           ),
-
 
 
                           // : Container for 2nd argument of ternary condition ends here.
@@ -2556,28 +2581,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
                       ),
-                    ):  Container(
-                      width:displayWidth(context) /4,
+                    ) : Container(
+                      width: displayWidth(context) / 4,
 //                       width:displayWidth(context) /10,
                     )
 
                     // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                     ,
-                    onPressed: ()=>{
+                    onPressed: () =>
+                    {
                       setState(() {
-
                         showEditingCompleteCustomerReachoutIformation =
                         !showEditingCompleteCustomerReachoutIformation;
 
 
-                        etaController.text = currentUserForInline.etaTimeInMinutes.toString();
+                        etaController.text =
+                            currentUserForInline.etaTimeInMinutes.toString();
 
 
 //                      showFullOrderType = !showFullOrderType;
@@ -2615,8 +2639,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        }
 //    );
   }
-  Widget animatedShowUserAddressDetailsInLineTakeAway(CustomerInformation currentUserForInline){
 
+  Widget animatedShowUserAddressDetailsInLineTakeAway(
+      CustomerInformation currentUserForInline) {
 //    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 //
 //    return StreamBuilder(
@@ -2647,12 +2672,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            const Color OrderTypeIconColor=Color(0xff070707);
 
 
-
 //    currentUserForInline
 
     return Container(
       width: displayWidth(context) / 1.1,
-      height: displayHeight(context) / 21 +  displayHeight(context) / 15,
+      height: displayHeight(context) / 21 + displayHeight(context) / 15,
 //      height: displayHeight(context) / 8,
       // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
       // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
@@ -2718,9 +2742,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
 
 
-
-
-
                   //ZZZZ
 
 
@@ -2736,8 +2757,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               height: displayHeight(context) / 15,
 //              color:Colors.amber,
-              color:Colors.white,
-              child:    ListView(
+              color: Colors.white,
+              child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
@@ -3030,7 +3051,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                   */
                   RaisedButton(
-                    color:Color(0xffFC0000),
+                    color: Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
                     // clipBehavior: Clip.hardEdge,
@@ -3044,12 +3065,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    child: currentUserForInline.etaTimeInMinutes != -1?
+                    child: currentUserForInline.etaTimeInMinutes != -1 ?
                     Container(
-                      color:Color(0xffFC0000),
+                      color: Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                      width:displayWidth(context) /4,
-                      child:  Row(
+                      width: displayWidth(context) / 4,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3063,7 +3084,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               size: 32.0,
                               color: Colors.black
                           ),
-
 
 
                           // : Container for 2nd argument of ternary condition ends here.
@@ -3091,28 +3111,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
                       ),
-                    ):  Container(
-                      width:displayWidth(context) /4,
+                    ) : Container(
+                      width: displayWidth(context) / 4,
 //                       width:displayWidth(context) /10,
                     )
 
                     // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                     ,
-                    onPressed: ()=>{
+                    onPressed: () =>
+                    {
                       setState(() {
-
                         showEditingCompleteCustomerReachoutIformation =
                         !showEditingCompleteCustomerReachoutIformation;
 
 
-                        etaController.text = currentUserForInline.etaTimeInMinutes.toString();
+                        etaController.text =
+                            currentUserForInline.etaTimeInMinutes.toString();
 
 
 //                      showFullOrderType = !showFullOrderType;
@@ -3150,10 +3169,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        }
 //    );
   }
+
 //}
 
-  Widget animatedShowUserAddressDetailsInLine(CustomerInformation currentUserForInline) {
-
+  Widget animatedShowUserAddressDetailsInLine(
+      CustomerInformation currentUserForInline) {
 //    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 //
 //    return StreamBuilder(
@@ -3184,13 +3204,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            const Color OrderTypeIconColor=Color(0xff070707);
 
 
-
 //    currentUserForInline
 
     return Container(
 //      color:Colors.pink,
       width: displayWidth(context) / 1.1,
-      height: displayHeight(context) / 21 +  displayHeight(context) / 15,
+      height: displayHeight(context) / 21 + displayHeight(context) / 15,
 //      height: displayHeight(context) / 8,
       // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
       // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
@@ -3256,9 +3275,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
 
 
-
-
-
                   //ZZZZ
 
 
@@ -3274,17 +3290,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               height: displayHeight(context) / 15,
 //              color:Colors.amber,
-              color:Colors.white,
-              child:    ListView(
+              color: Colors.white,
+              child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
                   RaisedButton(
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
 
-                    splashColor:Color(0xffEEF6CE),
+                    splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
-                    color:Color(0xffFFFFFF),
+                    color: Color(0xffFFFFFF),
                     // highlightColor: Colors.lightGreenAccent,
 //                                                                          highlightedBorderColor: Colors.blueAccent,
                     // clipBehavior: Clip.hardEdge,
@@ -3292,16 +3308,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    highlightElevation: 12,
 
 
-
-
-
-                    child: currentUserForInline.address != ''? Container(
-                      color:Color(0xffFFFFFF),
+                    child: currentUserForInline.address != '' ? Container(
+                      color: Color(0xffFFFFFF),
 //                      color:Colors.lightBlueAccent,
-                      width:displayWidth(context) /4.9,
-                      height:displayHeight(
+                      width: displayWidth(context) / 4.9,
+                      height: displayHeight(
                           context) / 15,
-                      child:  Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3311,7 +3324,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           Container(
 
-                            width: displayWidth(context)/34,
+                            width: displayWidth(context) / 34,
 //                             height: displayHeight(context) /28,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
@@ -3319,7 +3332,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             Icon(Icons.location_on,
                                 size: 32.0,
                                 color: Colors.black),
-
 
 
                             //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -3331,14 +3343,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    });
 
 
-
-
                             // : Container for 2nd argument of ternary condition ends here.
 
                           ),
                           Expanded(
                             child: Container(
-                              color:Color(0xffFFFFFF),
+                              color: Color(0xffFFFFFF),
 //                              color:Color(0xffFC0000),
 //                                  height: displayHeight(context) /28,
                               padding: EdgeInsets
@@ -3366,19 +3376,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
-                      ),):  Container(
-                      color:Color(0xffFFFFFF),
+                      ),) : Container(
+                      color: Color(0xffFFFFFF),
 //                      color:Colors.lightBlueAccent,
-                      width:displayWidth(context) /4.9,
-                      height:displayHeight(
+                      width: displayWidth(context) / 4.9,
+                      height: displayHeight(
                           context) / 15,
-                      child:  Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3388,7 +3396,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           Container(
 
-                            width: displayWidth(context)/34,
+                            width: displayWidth(context) / 34,
 //                             height: displayHeight(context) /28,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
@@ -3396,7 +3404,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             Icon(Icons.location_on,
                                 size: 32.0,
                                 color: Colors.black),
-
 
 
                             //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -3408,14 +3415,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    });
 
 
-
-
                             // : Container for 2nd argument of ternary condition ends here.
 
                           ),
                           Expanded(
                             child: Container(
-                              color:Color(0xffFFFFFF),
+                              color: Color(0xffFFFFFF),
 //                              color:Color(0xffFC0000),
 //                                  height: displayHeight(context) /28,
                               padding: EdgeInsets
@@ -3443,18 +3448,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
                       ),),
 
-                    onPressed: ()=>{
+                    onPressed: () =>
+                    {
                       setState(() {
-
-                        showEditingCompleteCustomerAddressInformation = !showEditingCompleteCustomerAddressInformation;
+                        showEditingCompleteCustomerAddressInformation =
+                        !showEditingCompleteCustomerAddressInformation;
                         addressController.text = currentUserForInline.address;
 
 //                      showFullOrderType = !showFullOrderType;
@@ -3463,9 +3467,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                   RaisedButton(
 
-                    splashColor:Color(0xffEEF6CE),
+                    splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
-                    color:Color(0xffFFFFFF),
+                    color: Color(0xffFFFFFF),
 //                    color:Color(0xffFFFFFF),
 //                    color:Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
@@ -3489,13 +3493,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
 
                     */
-                    child: currentUserForInline.flatOrHouseNumber != ''?
+                    child: currentUserForInline.flatOrHouseNumber != '' ?
                     Container(
 //                      color:Colors.brown,
-                      color:Color(0xffFFFFFF),
+                      color: Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
-                      width:displayWidth(context) /5.8,
-                      child:  Row(
+                      width: displayWidth(context) / 5.8,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3509,7 +3513,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               size: 32.0,
                               color: Colors.black
                           ),
-
 
 
                           // : Container for 2nd argument of ternary condition ends here.
@@ -3539,18 +3542,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
-                      ),):  Container(
+                      ),) : Container(
 //                      color:Colors.brown,
-                      color:Color(0xffFFFFFF),
+                      color: Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
-                      width:displayWidth(context) /5.8,
-                      child:  Row(
+                      width: displayWidth(context) / 5.8,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3564,7 +3565,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               size: 32.0,
                               color: Colors.black
                           ),
-
 
 
                           // : Container for 2nd argument of ternary condition ends here.
@@ -3594,22 +3594,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
                       ),)
                     ,
-                    onPressed: ()=>{
+                    onPressed: () =>
+                    {
                       setState(() {
-
                         showEditingCompleteCustomerHouseFlatIformation =
                         !showEditingCompleteCustomerHouseFlatIformation;
 
                         addressController.text = currentUserForInline.address;
-                        houseFlatNumberController.text = currentUserForInline.flatOrHouseNumber;
+                        houseFlatNumberController.text =
+                            currentUserForInline.flatOrHouseNumber;
 
 //                      showFullOrderType = !showFullOrderType;
                       })
@@ -3619,9 +3618,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
                   // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
                   RaisedButton(
-                    splashColor:Color(0xffEEF6CE),
+                    splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
-                    color:Color(0xffFFFFFF),
+                    color: Color(0xffFFFFFF),
                     /*
                     color:Color(0xffFFFFFF),
 //                    color:Color(0xffFC0000),
@@ -3641,13 +3640,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     */
-                    child: currentUserForInline.phoneNumber != ''?
+                    child: currentUserForInline.phoneNumber != '' ?
                     Container(
-                      color:Color(0xffFFFFFF),
+                      color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width:displayWidth(context) /5.5,
+                      width: displayWidth(context) / 5.5,
 
-                      child:  Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3688,18 +3687,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
-                      ),):  Container(
-                      color:Color(0xffFFFFFF),
+                      ),) : Container(
+                      color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width:displayWidth(context) /5.5,
+                      width: displayWidth(context) / 5.5,
 
-                      child:  Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3740,23 +3737,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
                       ),)
                     ,
-                    onPressed: ()=>{
+                    onPressed: () =>
+                    {
                       setState(() {
-
                         showEditingCompleteCustomerPhoneIformation =
                         !showEditingCompleteCustomerPhoneIformation;
 
 
-                        phoneNumberController.text = currentUserForInline.phoneNumber;
-
+                        phoneNumberController.text =
+                            currentUserForInline.phoneNumber;
 
 
 //                      showFullOrderType = !showFullOrderType;
@@ -3764,9 +3759,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     },
                   ),
                   RaisedButton(
-                    splashColor:Color(0xffEEF6CE),
+                    splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
-                    color:Color(0xffFFFFFF),
+                    color: Color(0xffFFFFFF),
 
                     /*
                     color:Color(0xffFFFFFF),
@@ -3790,13 +3785,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     */
 
-                    child: currentUserForInline.etaTimeInMinutes != -1?
+                    child: currentUserForInline.etaTimeInMinutes != -1 ?
                     Container(
-                      color:Color(0xffFFFFFF),
+                      color: Color(0xffFFFFFF),
 //                      color:Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                      width:displayWidth(context) /4,
-                      child:  Row(
+                      width: displayWidth(context) / 4,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3810,7 +3805,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               size: 32.0,
                               color: Colors.black
                           ),
-
 
 
                           // : Container for 2nd argument of ternary condition ends here.
@@ -3838,19 +3832,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
                         ],
                       ),
-                    ):  Container(
-                      color:Color(0xffFFFFFF),
+                    ) : Container(
+                      color: Color(0xffFFFFFF),
 //                      color:Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                      width:displayWidth(context) /4,
-                      child:  Row(
+                      width: displayWidth(context) / 4,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
                         ,
@@ -3864,7 +3856,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               size: 32.0,
                               color: Colors.black
                           ),
-
 
 
                           // : Container for 2nd argument of ternary condition ends here.
@@ -3892,8 +3883,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                           //ZZZZ
 
 
@@ -3903,14 +3892,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                     ,
-                    onPressed: ()=>{
+                    onPressed: () =>
+                    {
                       setState(() {
-
                         showEditingCompleteCustomerReachoutIformation =
                         !showEditingCompleteCustomerReachoutIformation;
 
 
-                        etaController.text = currentUserForInline.etaTimeInMinutes.toString();
+                        etaController.text =
+                            currentUserForInline.etaTimeInMinutes.toString();
 
 
 //                      showFullOrderType = !showFullOrderType;
@@ -3952,17 +3942,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // YYYY
 
-  Widget unobscureInputandRestforDinningRoom (Order unObsecuredInputandPayment){
-
-
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+  Widget unobscureInputandRestforDinningRoom(Order unObsecuredInputandPayment) {
+    CustomerInformation currentUser = unObsecuredInputandPayment
+        .orderingCustomer;
     // means
     // 1. Row Holding user's information.
     // 2. means holding the inputFields for User Input.
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2.2,
+      height: displayHeight(context) / 2.2,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
@@ -4060,8 +4049,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
 
 
-
-
                       ]
                   ),
 
@@ -4102,8 +4089,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ////WWWEEEQQQ
 
 
-
-
               ],
             ),
           ),
@@ -4120,7 +4105,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
 
 
-
           // 2ND CONTAINER HOLDING THE INPUT FIELDS
           // AND THE PAYMENT OPTIONS IN A STACK
           // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
@@ -4129,10 +4113,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
 //            color:Colors.white38,
 //            color:Colors.amber,
-            color:Colors.white,
+            color: Colors.white,
 
 //            height: displayWidth(context)/2.6,
-            height: displayWidth(context)/2.1,
+            height: displayWidth(context) / 2.1,
             child: Stack(
               children: <Widget>[
                 Positioned(
@@ -4143,9 +4127,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            getNumberOfInputsFilledUpDinningRoom
 
                   bottom:
-                  getNumberOfInputsFilledUpDinningRoom (
-                      unObsecuredInputandPayment.orderingCustomer) >0
-                      ?  22:-10,
+                  getNumberOfInputsFilledUpDinningRoom(
+                      unObsecuredInputandPayment.orderingCustomer) > 0
+                      ? 22 : -10,
                   /*
                   0:
                   getNumberOfInputsFilledUp (
@@ -4178,7 +4162,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     // animatedUnObscuredPaymentUnSelectContainer
                     // animatedObscuredPaymentSelectContainerTakeAway and Dinning Room
                     animatedObscuredPaymentSelectContainerTakeAway
-                      (unObsecuredInputandPayment):
+                      (unObsecuredInputandPayment) :
                     animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
                       (unObsecuredInputandPayment),
 
@@ -4211,9 +4195,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            height: displayWidth(context)/2.6,
 //                            height: displayHeight(context) / 3.7,
                         padding: EdgeInsets.fromLTRB(
-                            (displayWidth(context)/1.1)/4,
+                            (displayWidth(context) / 1.1) / 4,
                             15,
-                            (displayWidth(context)/1.1)/4,
+                            (displayWidth(context) / 1.1) / 4,
                             0
 
 //                          horizontal: (displayWidth(context)/1.1)/4,
@@ -4467,7 +4451,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 */
 
 
-
                                 // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
 
                                 // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
@@ -4865,10 +4848,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                showEditingCompleteCustomerReachoutIformation BEGINS HERE.
                                 Container(
 
-                                  child: showEditingCompleteCustomerReachoutIformation ? Container():
+                                  child: showEditingCompleteCustomerReachoutIformation
+                                      ? Container()
+                                      :
                                   Container(
                                     margin: EdgeInsets.fromLTRB(
-                                        0,0,0,15),
+                                        0, 0, 0, 15),
                                     decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                       borderRadius: BorderRadius.circular(25),
@@ -4902,13 +4887,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .center,
                                       children: <Widget>[
                                         Container(
 
 //                                          height: 25,
-                                          height: displayHeight(context)/40,
+                                          height: displayHeight(context) / 40,
                                           width: 5,
                                           margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -4935,18 +4922,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           // do it in both Container
                                           child: TextField(
 
-                                            controller:  etaController,
-
+                                            controller: etaController,
 
 
                                             keyboardType: TextInputType.number,
-                                            inputFormatters: <TextInputFormatter>[
-                                              WhitelistingTextInputFormatter.digitsOnly
+                                            inputFormatters: <
+                                                TextInputFormatter>[
+                                              WhitelistingTextInputFormatter
+                                                  .digitsOnly
                                             ],
 
-                                            textInputAction: TextInputAction.done,
+                                            textInputAction: TextInputAction
+                                                .done,
 //
-                                            onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                                            onSubmitted: (_) =>
+                                                FocusScope.of(context)
+                                                    .unfocus(),
                                             textAlign: TextAlign.center,
                                             decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
@@ -4963,26 +4954,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             ),
 
                                             style: TextStyle(
-                                                color: Color(0xffFC0000), fontSize: 16),
+                                                color: Color(0xffFC0000),
+                                                fontSize: 16),
 
                                             onChanged: (text) {
                                               print("0444: $text");
 
 
                                               print("33: $text");
-                                              final shoppingCartBloc = BlocProvider.of<
+                                              final shoppingCartBloc = BlocProvider
+                                                  .of<
                                                   ShoppingCartBloc>(context);
 
-                                              shoppingCartBloc.setETAForOrder(text);
+                                              shoppingCartBloc.setETAForOrder(
+                                                  text);
                                               setState(() {
                                                 showFullOrderType = false;
 
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                                showCustomerInformationHeader = true;
-                                                showUserInputOptionsLikeFirstTime =false;
-                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                showCustomerInformationHeader =
+                                                true;
+                                                showUserInputOptionsLikeFirstTime =
+                                                false;
+                                                showFullPaymentType =
+                                                true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                               }
 
 
@@ -4997,8 +4994,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   (currentUser.flatOrHouseNumber
                                                       .trim()
                                                       .length) > 0 ||
-                                                  (currentUser.phoneNumber.trim()
-                                                      .length) > 0 ) {
+                                                  (currentUser.phoneNumber
+                                                      .trim()
+                                                      .length) > 0) {
                                                 showEditingCompleteCustomerHouseFlatIformation =
                                                 true;
                                               } else {
@@ -5007,9 +5005,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                  showCustomerInformationHeader = false;
-                                                  showCustomerInformationHeader = true;
-                                                  showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                  showCustomerInformationHeader =
+                                                  true;
+                                                  showUserInputOptionsLikeFirstTime =
+                                                  false;
+                                                  showFullPaymentType =
+                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                                 }
 
                                                 );
@@ -5017,13 +5018,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             },
 
 
-
 //                                            onTap: () {
 //                                              setState(() => showFullOrderType = false);
 //                                            },
                                             onEditingComplete: () {
-
-                                              print('at editing complete of Customer\'s address ETA Time:');
+                                              print(
+                                                  'at editing complete of Customer\'s address ETA Time:');
 //                                              setState(() =>
 //                                              {
 //                                                showEditingCompleteCustomerReachoutIformation =
@@ -5059,7 +5059,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         )
 
 
-
                                       ],
                                     ),
                                   ),
@@ -5090,8 +5089,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            OOOO
 
 
-
-
           //VVVVVV
 
           // PAYMENT RELATED CONTAINER INVOKED FROM HERE:
@@ -5112,17 +5109,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
-  Widget unobscureInputandRestforTakeAway (Order unObsecuredInputandPayment){
-
-
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+  Widget unobscureInputandRestforTakeAway(Order unObsecuredInputandPayment) {
+    CustomerInformation currentUser = unObsecuredInputandPayment
+        .orderingCustomer;
     // means
     // 1. Row Holding user's information.
     // 2. means holding the inputFields for User Input.
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2.2,
+      height: displayHeight(context) / 2.2,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
@@ -5221,8 +5217,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
 
 
-
-
                       ]
                   ),
 
@@ -5263,8 +5257,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ////WWWEEEQQQ
 
 
-
-
               ],
             ),
           ),
@@ -5281,7 +5273,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
 
 
-
           // 2ND CONTAINER HOLDING THE INPUT FIELDS
           // AND THE PAYMENT OPTIONS IN A STACK
           // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
@@ -5290,9 +5281,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
 //            color:Colors.white38,
 //            color:Colors.amber,
-            color:Colors.white,
+            color: Colors.white,
 //            height: displayWidth(context)/2.6,
-            height: displayWidth(context)/2.1,
+            height: displayWidth(context) / 2.1,
             child: Stack(
               children: <Widget>[
                 Positioned(
@@ -5301,9 +5292,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // initial Case.
 //            getNumberOfInputsFilledUp
                   bottom:
-                  getNumberOfInputsFilledUpTakeAway (
-                      unObsecuredInputandPayment.orderingCustomer) >0
-                      ?  22:-10,
+                  getNumberOfInputsFilledUpTakeAway(
+                      unObsecuredInputandPayment.orderingCustomer) > 0
+                      ? 22 : -10,
                   /*
                   0:
                   getNumberOfInputsFilledUp (
@@ -5334,7 +5325,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
                     // animatedUnObscuredPaymentUnSelectContainer
                     animatedObscuredPaymentSelectContainerTakeAway
-                      (unObsecuredInputandPayment):
+                      (unObsecuredInputandPayment) :
                     animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
                       (unObsecuredInputandPayment),
 
@@ -5367,15 +5358,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            height: displayWidth(context)/2.6,
 //                            height: displayHeight(context) / 3.7,
                         padding: EdgeInsets.fromLTRB(
-                            (displayWidth(context)/1.1)/4,
+                            (displayWidth(context) / 1.1) / 4,
                             15,
-                            (displayWidth(context)/1.1)/4,
+                            (displayWidth(context) / 1.1) / 4,
                             0
 
 //                          horizontal: (displayWidth(context)/1.1)/4,
                         ),
 //                        color: Colors.green,
-                        color:Colors.white,
+                        color: Colors.white,
                         child: Center(
 //                    color:Colors.white.withOpacity(0.9),
                             child: Column(
@@ -5623,7 +5614,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 */
 
 
-
                                 // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
 
                                 // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
@@ -6021,10 +6011,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                showEditingCompleteCustomerReachoutIformation BEGINS HERE.
                                 Container(
 
-                                  child: showEditingCompleteCustomerReachoutIformation ? Container():
+                                  child: showEditingCompleteCustomerReachoutIformation
+                                      ? Container()
+                                      :
                                   Container(
                                     margin: EdgeInsets.fromLTRB(
-                                        0,0,0,15),
+                                        0, 0, 0, 15),
                                     decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                       borderRadius: BorderRadius.circular(25),
@@ -6058,13 +6050,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .center,
                                       children: <Widget>[
                                         Container(
 
 //                                          height: 25,
-                                          height: displayHeight(context)/40,
+                                          height: displayHeight(context) / 40,
                                           width: 5,
                                           margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -6091,22 +6085,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           // do it in both Container
                                           child: TextField(
 
-                                            controller:  etaController,
-
-
+                                            controller: etaController,
 
 
                                             keyboardType: TextInputType.number,
 //                                            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                                            inputFormatters: <TextInputFormatter>[
-                                              WhitelistingTextInputFormatter.digitsOnly
+                                            inputFormatters: <
+                                                TextInputFormatter>[
+                                              WhitelistingTextInputFormatter
+                                                  .digitsOnly
                                             ],
 //inputFormatters: <TextInputFormatter>[
 //    WhitelistingTextInputFormatter.digitsOnly
 //],
-                                            textInputAction: TextInputAction.done,
+                                            textInputAction: TextInputAction
+                                                .done,
 //
-                                            onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                                            onSubmitted: (_) =>
+                                                FocusScope.of(context)
+                                                    .unfocus(),
                                             textAlign: TextAlign.center,
                                             decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
@@ -6123,26 +6120,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             ),
 
                                             style: TextStyle(
-                                                color: Color(0xffFC0000), fontSize: 16),
+                                                color: Color(0xffFC0000),
+                                                fontSize: 16),
 
                                             onChanged: (text) {
                                               print("0444: $text");
 
 
                                               print("33: $text");
-                                              final shoppingCartBloc = BlocProvider.of<
+                                              final shoppingCartBloc = BlocProvider
+                                                  .of<
                                                   ShoppingCartBloc>(context);
 
-                                              shoppingCartBloc.setETAForOrder(text);
+                                              shoppingCartBloc.setETAForOrder(
+                                                  text);
                                               setState(() {
                                                 showFullOrderType = false;
 
                                                 // showFullOrderType
                                                 /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                                showCustomerInformationHeader = true;
-                                                showUserInputOptionsLikeFirstTime =false;
-                                                showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                showCustomerInformationHeader =
+                                                true;
+                                                showUserInputOptionsLikeFirstTime =
+                                                false;
+                                                showFullPaymentType =
+                                                true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                               }
 
 
@@ -6157,8 +6160,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   (currentUser.flatOrHouseNumber
                                                       .trim()
                                                       .length) > 0 ||
-                                                  (currentUser.phoneNumber.trim()
-                                                      .length) > 0 ) {
+                                                  (currentUser.phoneNumber
+                                                      .trim()
+                                                      .length) > 0) {
                                                 showEditingCompleteCustomerHouseFlatIformation =
                                                 true;
                                               } else {
@@ -6167,9 +6171,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                  showCustomerInformationHeader = false;
-                                                  showCustomerInformationHeader = true;
-                                                  showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                  showCustomerInformationHeader =
+                                                  true;
+                                                  showUserInputOptionsLikeFirstTime =
+                                                  false;
+                                                  showFullPaymentType =
+                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                                 }
 
                                                 );
@@ -6177,13 +6184,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             },
 
 
-
 //                                            onTap: () {
 //                                              setState(() => showFullOrderType = false);
 //                                            },
                                             onEditingComplete: () {
-
-                                              print('at editing complete of Customer\'s address ETA Time:');
+                                              print(
+                                                  'at editing complete of Customer\'s address ETA Time:');
 //                                              setState(() =>
 //                                              {
 //                                                showEditingCompleteCustomerReachoutIformation =
@@ -6219,7 +6225,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         )
 
 
-
                                       ],
                                     ),
                                   ),
@@ -6250,8 +6255,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            OOOO
 
 
-
-
           //VVVVVV
 
           // PAYMENT RELATED CONTAINER INVOKED FROM HERE:
@@ -6274,17 +6277,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // unobscureInputandRest(
 // unobscureInputandRestDeliveryPhone
-  Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment){
-
-
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+  Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment) {
+    CustomerInformation currentUser = unObsecuredInputandPayment
+        .orderingCustomer;
     // means
     // 1. Row Holding user's information.
     // 2. means holding the inputFields for User Input.
     // 3. If all 4 inputs are there show user the payment
     return Container(
 
-      height: displayHeight(context)/2.2,
+      height: displayHeight(context) / 2.2,
 //        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.1,
 //        height: displayHeight(context) / 2,
@@ -6305,13 +6307,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-              child: (showUserInputOptionsLikeFirstTime == false)?
+              child: (showUserInputOptionsLikeFirstTime == false) ?
 //      unobscureInputandRest(unObsecuredInputandPayment)
 
               animatedShowUserAddressDetailsInLine(currentUser)
 
 
-                  :Container(
+                  : Container(
                 width: displayWidth(context) / 1.1,
                 height: displayHeight(context) / 20,
 //                color:Colors.blue,
@@ -6368,8 +6370,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
 
 
-
-
                           ]
                       ),
 
@@ -6410,8 +6410,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ////WWWEEEQQQ
 
 
-
-
                   ],
                 ),
               ),
@@ -6428,7 +6426,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
 
 
-
           // 2ND CONTAINER HOLDING THE INPUT FIELDS
           // AND THE PAYMENT OPTIONS IN A STACK
           // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
@@ -6439,7 +6436,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            color:Colors.black87,
 //            color:Colors.black87,
 //            height: displayWidth(context)/2.6,
-            height: displayHeight(context)/2.2 - displayHeight(context) / 20-100,
+            height: displayHeight(context) / 2.2 - displayHeight(context) / 20 -
+                100,
 //            height: displayHeight(context)/2 - displayHeight(context) / 20,
             // height: HEIGHT OF PARENT - HEIGHT OF HEADER TEXT FOR USER INPUT..,
             child: Stack(
@@ -6449,16 +6447,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // top:20,//displayHeight(context)/10,
                   // initial Case.
 //                  height: displayWidth(context)/2.2-displayHeight(context) / 20,
-                  bottom: getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.orderingCustomer) <= 1?
-                  -60:
-                  getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.orderingCustomer) <= 2?
-                  -80:
-                  getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.orderingCustomer) == 3?
+                  bottom: getNumberOfInputsFilledUp(
+                      unObsecuredInputandPayment.orderingCustomer) <= 1 ?
+                  -60 :
+                  getNumberOfInputsFilledUp(
+                      unObsecuredInputandPayment.orderingCustomer) <= 2 ?
+                  -80 :
+                  getNumberOfInputsFilledUp(
+                      unObsecuredInputandPayment.orderingCustomer) == 3 ?
 
-                  -80:-0,
+                  -80 : -0,
                   // from top to top distance offset related to Starting (top ) of
                   // orance Container.
 //                  right:0,
@@ -6474,7 +6472,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       (unObsecuredInputandPayment.orderingCustomer) == true ?
 
                     animatedObscuredPaymentSelectContainer
-                      (unObsecuredInputandPayment):
+                      (unObsecuredInputandPayment) :
                     animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
                       (unObsecuredInputandPayment),
 
@@ -6510,15 +6508,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            height: displayWidth(context)/2.6,
 //                            height: displayHeight(context) / 3.7,
                           padding: EdgeInsets.fromLTRB(
-                              (displayWidth(context)/1.1)/4,
+                              (displayWidth(context) / 1.1) / 4,
                               10,
-                              (displayWidth(context)/1.1)/4,
+                              (displayWidth(context) / 1.1) / 4,
                               0
 
 //                          horizontal: (displayWidth(context)/1.1)/4,
                           ),
 //                        color: Colors.green,
-                          color:Color(0xffFFFFFF),
+                          color: Color(0xffFFFFFF),
                           child: Center(
 //                    color:Colors.white.withOpacity(0.9),
                               child: Column(
@@ -6533,11 +6531,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            showEditingCompleteCustomerReachoutIformation
 //                                showEditingCompleteCustomerAddressInformation BEGINS HERE.
                                   Container(
-                                    child: showEditingCompleteCustomerAddressInformation?
-                                    Container():
+                                    child: showEditingCompleteCustomerAddressInformation
+                                        ?
+                                    Container()
+                                        :
                                     Container(
                                       margin: EdgeInsets.fromLTRB(
-                                          0,0,0,15),
+                                          0, 0, 0, 15),
                                       decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                         borderRadius: BorderRadius.circular(25),
@@ -6571,13 +6571,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .center,
                                         children: <Widget>[
                                           Container(
 
 //                                            height: 25,
-                                            height: displayHeight(context)/40,
+                                            height: displayHeight(context) / 40,
                                             width: 5,
                                             margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -6606,8 +6608,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             child: TextField(
                                               controller: addressController,
 
-                                              textInputAction: TextInputAction.next,
-                                              onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                                              textInputAction: TextInputAction
+                                                  .next,
+                                              onSubmitted: (_) =>
+                                                  FocusScope.of(context)
+                                                      .nextFocus(),
 
 
                                               textAlign: TextAlign.center,
@@ -6631,46 +6636,54 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               onChanged: (text) {
                                                 //RRRR
 
-                                                print('at address of unobsecured (deliver loc)');
+                                                print(
+                                                    'at address of unobsecured (deliver loc)');
 
-                                                final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+                                                final shoppingCartBloc = BlocProvider
+                                                    .of<ShoppingCartBloc>(
+                                                    context);
 //
-                                                shoppingCartBloc.setAddressForOrder(text);
-                                                if((text.trim().length) >0){
-                                                  print('at (text.trim().length) >0)');
-                                                  setState(()
-
-                                                  {
+                                                shoppingCartBloc
+                                                    .setAddressForOrder(text);
+                                                if ((text
+                                                    .trim()
+                                                    .length) > 0) {
+                                                  print(
+                                                      'at (text.trim().length) >0)');
+                                                  setState(() {
 //                                          showEditingCompleteCustomerAddressInformation = true ,
                                                     showFullOrderType = false;
 //                                                showFullOrderType = false;
                                                     // showFullOrderType
                                                     /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                  showCustomerInformationHeader = false;
-                                                    showCustomerInformationHeader = true;
-                                                    showUserInputOptionsLikeFirstTime = false;
-                                                    showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                    showCustomerInformationHeader =
+                                                    true;
+                                                    showUserInputOptionsLikeFirstTime =
+                                                    false;
+                                                    showFullPaymentType =
+                                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
                                                   });
                                                 }
                                                 else {
-                                                  setState(()
-
-                                                  {
+                                                  setState(() {
                                                     showFullOrderType = false;
                                                     // showFullOrderType = false;
                                                     // showFullOrderType
                                                     /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                  showCustomerInformationHeader = false;
-                                                    showCustomerInformationHeader = true;
-                                                    showUserInputOptionsLikeFirstTime = false;
-                                                    showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                    showCustomerInformationHeader =
+                                                    true;
+                                                    showUserInputOptionsLikeFirstTime =
+                                                    false;
+                                                    showFullPaymentType =
+                                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                                                showCustomerInformationHeader = true,
 
                                                   });
                                                 }
-
 
 
                                                 /*
@@ -6685,23 +6698,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               },
 
                                               onTap: () {
-
-                                                setState(()
-                                                {
+                                                setState(() {
                                                   showFullOrderType = false;
                                                   // showFullOrderType = false;
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                                  showCustomerInformationHeader = true;
-                                                  showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                  showCustomerInformationHeader =
+                                                  true;
+                                                  showUserInputOptionsLikeFirstTime =
+                                                  false;
+                                                  showFullPaymentType =
+                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
                                                 });
-
                                               },
-
-
 
 
                                               /*
@@ -6735,7 +6746,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                               onEditingComplete: () {
-                                                print('at editing complete of address ');
+                                                print(
+                                                    'at editing complete of address ');
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
                                                 setState(() =>
@@ -6770,7 +6782,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                               style: TextStyle(
-                                                  color: Color(0xffFC0000), fontSize: 16),
+                                                  color: Color(0xffFC0000),
+                                                  fontSize: 16),
                                             ),
 
                                           )
@@ -6785,7 +6798,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   ),
 
 
-
                                   // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
 
                                   // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
@@ -6795,10 +6807,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                   Container(
 
-                                    child: showEditingCompleteCustomerHouseFlatIformation?Container():
+                                    child: showEditingCompleteCustomerHouseFlatIformation
+                                        ? Container()
+                                        :
                                     Container(
                                       margin: EdgeInsets.fromLTRB(
-                                          0,0,0,15),
+                                          0, 0, 0, 15),
                                       decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                         borderRadius: BorderRadius.circular(25),
@@ -6832,13 +6846,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .center,
                                         children: <Widget>[
                                           Container(
 
 //                                            height: 25,
-                                            height: displayHeight(context)/40,
+                                            height: displayHeight(context) / 40,
                                             width: 5,
                                             margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -6867,8 +6883,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               controller: houseFlatNumberController,
 
 
-                                              textInputAction: TextInputAction.next,
-                                              onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                                              textInputAction: TextInputAction
+                                                  .next,
+                                              onSubmitted: (_) =>
+                                                  FocusScope.of(context)
+                                                      .nextFocus(),
                                               textAlign: TextAlign.center,
                                               decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
@@ -6884,38 +6903,43 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               ),
 
                                               onChanged: (text) {
-                                                final shoppingCartBloc = BlocProvider.of<
+                                                final shoppingCartBloc = BlocProvider
+                                                    .of<
                                                     ShoppingCartBloc>(context);
 //
                                                 shoppingCartBloc
-                                                    .setHouseorFlatNumberForOrder(text);
+                                                    .setHouseorFlatNumberForOrder(
+                                                    text);
 
-                                                setState((){
+                                                setState(() {
                                                   showFullOrderType = false;
                                                   // showFullOrderType = false;
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                  showCustomerInformationHeader = true;
-                                                  showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                  showCustomerInformationHeader =
+                                                  true;
+                                                  showUserInputOptionsLikeFirstTime =
+                                                  false;
+                                                  showFullPaymentType =
+                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                                 }
                                                 );
                                                 // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
                                               },
                                               onTap: () {
-
-                                                setState(()
-                                                {
+                                                setState(() {
                                                   showFullOrderType = false;
                                                   // showFullOrderType = false;
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                                  showCustomerInformationHeader = true;
-                                                  showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                  showCustomerInformationHeader =
+                                                  true;
+                                                  showUserInputOptionsLikeFirstTime =
+                                                  false;
+                                                  showFullPaymentType =
+                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
                                                 });
-
                                               },
 
 
@@ -6943,8 +6967,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                               onEditingComplete: () {
-
-                                                print('at editing complete of House or Flat Iformation ');
+                                                print(
+                                                    'at editing complete of House or Flat Iformation ');
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
                                                 setState(() =>
@@ -6980,7 +7004,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                                           */
 
                                               style: TextStyle(
-                                                  color: Color(0xffFC0000), fontSize: 16),
+                                                  color: Color(0xffFC0000),
+                                                  fontSize: 16),
                                             ),
 
                                           )
@@ -7003,10 +7028,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                   Container(
 
-                                    child: showEditingCompleteCustomerPhoneIformation? Container():
+                                    child: showEditingCompleteCustomerPhoneIformation
+                                        ? Container()
+                                        :
                                     Container(
                                       margin: EdgeInsets.fromLTRB(
-                                          0,0,0,15),
+                                          0, 0, 0, 15),
                                       decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                         borderRadius: BorderRadius.circular(25),
@@ -7040,13 +7067,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .center,
                                         children: <Widget>[
                                           Container(
 
 //                                            height: 25,
-                                            height: displayHeight(context)/40,
+                                            height: displayHeight(context) / 40,
                                             width: 5,
                                             margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -7075,8 +7104,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               controller: phoneNumberController,
 
 
-                                              textInputAction: TextInputAction.next,
-                                              onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                                              textInputAction: TextInputAction
+                                                  .next,
+                                              onSubmitted: (_) =>
+                                                  FocusScope.of(context)
+                                                      .nextFocus(),
 
                                               textAlign: TextAlign.center,
                                               decoration: InputDecoration(
@@ -7093,27 +7125,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               ),
 
                                               style: TextStyle(
-                                                  color: Color(0xffFC0000), fontSize: 16),
+                                                  color: Color(0xffFC0000),
+                                                  fontSize: 16),
 
                                               onChanged: (text) {
                                                 print("33: $text");
 
-                                                final shoppingCartBloc = BlocProvider.of<
+                                                final shoppingCartBloc = BlocProvider
+                                                    .of<
                                                     ShoppingCartBloc>(context);
 //
-                                                shoppingCartBloc.setPhoneNumberForOrder(
+                                                shoppingCartBloc
+                                                    .setPhoneNumberForOrder(
                                                     text);
 
-                                                setState((){
+                                                setState(() {
                                                   showFullOrderType
                                                   = false;
                                                   // showFullOrderType = false;
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                                  showCustomerInformationHeader = true;
-                                                  showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                  showCustomerInformationHeader =
+                                                  true;
+                                                  showUserInputOptionsLikeFirstTime =
+                                                  false;
+                                                  showFullPaymentType =
+                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                                 }
                                                 );
                                                 // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
@@ -7139,28 +7177,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                         */
 
                                               onTap: () {
-
-                                                setState(()
-                                                {
+                                                setState(() {
                                                   showFullOrderType
                                                   = false;
                                                   // showFullOrderType = false;
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                                  showCustomerInformationHeader = true;
-                                                  showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                  showCustomerInformationHeader =
+                                                  true;
+                                                  showUserInputOptionsLikeFirstTime =
+                                                  false;
+                                                  showFullPaymentType =
+                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 //                                                showFullOrderType = false,
 
                                                 });
-
                                               },
                                               onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
 
-                                                print('at editing complete of Customer Phone Iformation ');
+                                                print(
+                                                    'at editing complete of Customer Phone Iformation ');
                                                 setState(() =>
                                                 {
                                                   showEditingCompleteCustomerPhoneIformation =
@@ -7212,10 +7251,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                showEditingCompleteCustomerReachoutIformation BEGINS HERE.
                                   Container(
 
-                                    child: showEditingCompleteCustomerReachoutIformation ? Container():
+                                    child: showEditingCompleteCustomerReachoutIformation
+                                        ? Container()
+                                        :
                                     Container(
                                       margin: EdgeInsets.fromLTRB(
-                                          0,0,0,15),
+                                          0, 0, 0, 15),
                                       decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                                         borderRadius: BorderRadius.circular(25),
@@ -7249,13 +7290,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .center,
                                         children: <Widget>[
                                           Container(
 
 //                                            height: 25,
-                                            height: displayHeight(context)/40,
+                                            height: displayHeight(context) / 40,
                                             width: 5,
                                             margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -7282,17 +7325,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             // do it in both Container
                                             child: TextField(
 
-                                              controller:  etaController,
+                                              controller: etaController,
 
 
-
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                WhitelistingTextInputFormatter.digitsOnly
+                                              keyboardType: TextInputType
+                                                  .number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                WhitelistingTextInputFormatter
+                                                    .digitsOnly
                                               ],
-                                              textInputAction: TextInputAction.done,
+                                              textInputAction: TextInputAction
+                                                  .done,
 //
-                                              onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                                              onSubmitted: (_) =>
+                                                  FocusScope.of(context)
+                                                      .unfocus(),
                                               textAlign: TextAlign.center,
                                               decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
@@ -7308,17 +7356,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               ),
 
                                               style: TextStyle(
-                                                  color: Color(0xffFC0000), fontSize: 16),
+                                                  color: Color(0xffFC0000),
+                                                  fontSize: 16),
 
                                               onChanged: (text) {
                                                 print("0444: $text");
 
 
                                                 print("33: $text");
-                                                final shoppingCartBloc = BlocProvider.of<
+                                                final shoppingCartBloc = BlocProvider
+                                                    .of<
                                                     ShoppingCartBloc>(context);
 
-                                                shoppingCartBloc.setETAForOrder(text);
+                                                shoppingCartBloc.setETAForOrder(
+                                                    text);
                                                 setState(() {
                                                   // showFullOrderType = false;
                                                   showFullOrderType
@@ -7327,9 +7378,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   // showFullOrderType
                                                   /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                                  showCustomerInformationHeader = true;
-                                                  showUserInputOptionsLikeFirstTime = false;
-                                                  showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                  showCustomerInformationHeader =
+                                                  true;
+                                                  showUserInputOptionsLikeFirstTime =
+                                                  false;
+                                                  showFullPaymentType =
+                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                                                 }
 
                                                 );
@@ -7340,16 +7394,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 if ((currentUser.address
                                                     .trim()
                                                     .length) > 0 ||
-                                                    (currentUser.flatOrHouseNumber
+                                                    (currentUser
+                                                        .flatOrHouseNumber
                                                         .trim()
                                                         .length) > 0 ||
-                                                    (currentUser.phoneNumber.trim()
-                                                        .length) > 0 ) {
+                                                    (currentUser.phoneNumber
+                                                        .trim()
+                                                        .length) > 0) {
                                                   showEditingCompleteCustomerHouseFlatIformation =
                                                   true;
                                                 } else {
-                                                  setState((){
-
+                                                  setState(() {
                                                     // showFullOrderType = false;
                                                     showFullOrderType
                                                     = false;
@@ -7357,9 +7412,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                     // showFullOrderType
                                                     /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                  showCustomerInformationHeader = false;
-                                                    showCustomerInformationHeader = true;
-                                                    showUserInputOptionsLikeFirstTime = false;
-                                                    showFullPaymentType  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.;
+                                                    showCustomerInformationHeader =
+                                                    true;
+                                                    showUserInputOptionsLikeFirstTime =
+                                                    false;
+                                                    showFullPaymentType =
+                                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.;
                                                   }
 //                                                }
 //                                                showFullOrderType = false
@@ -7370,20 +7428,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               },
 
 
-
 //                                            onTap: () {
 //                                              setState(() => showFullOrderType = false);
 //                                            },
                                               onEditingComplete: () {
-
-                                                print('at editing complete of Customer\'s address ETA Time:');
+                                                print(
+                                                    'at editing complete of Customer\'s address ETA Time:');
                                                 setState(() =>
                                                 {
                                                   showEditingCompleteCustomerReachoutIformation =
                                                   true
                                                 }
                                                 );
-
                                               },
 
 
@@ -7412,7 +7468,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           )
 
 
-
                                         ],
                                       ),
                                     ),
@@ -7420,8 +7475,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                   // showEditingCompleteCustomerReachoutIformation ENDS HERE.
                                   // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
-
-
 
 
                                 ],
@@ -7446,8 +7499,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            OOOO
 
 
-
-
           //VVVVVV
 
           // PAYMENT RELATED CONTAINER INVOKED FROM HERE:
@@ -7469,11 +7520,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget _buildShoppingCartInputFieldsUNObscuredDinningRoom(Order unObsecuredInputandPayment){
+  Widget _buildShoppingCartInputFieldsUNObscuredDinningRoom(
+      Order unObsecuredInputandPayment) {
     CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
     //if(getOneOrdercustomerInfoFieldsNotEmpty(x)!=0){
 
-    CustomerInformation currentUser =  x;
+    CustomerInformation currentUser = x;
 
     print('currentUser.address: ${currentUser.address}');
     print('currentUser.flatOrHouseNumber: ${currentUser.flatOrHouseNumber}');
@@ -7510,11 +7562,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   }
-  Widget _buildShoppingCartInputFieldsUNObscuredTakeAway(Order unObsecuredInputandPayment){
+
+  Widget _buildShoppingCartInputFieldsUNObscuredTakeAway(
+      Order unObsecuredInputandPayment) {
     CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
     //if(getOneOrdercustomerInfoFieldsNotEmpty(x)!=0){
 
-    CustomerInformation currentUser =  x;
+    CustomerInformation currentUser = x;
 
     print('currentUser.address: ${currentUser.address}');
     print('currentUser.flatOrHouseNumber: ${currentUser.flatOrHouseNumber}');
@@ -7550,16 +7604,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
      */
 
 
-
   }
 
 // work 3
-  Widget _buildShoppingCartInputFieldsUNObscured(Order unObsecuredInputandPayment){
-
+  Widget _buildShoppingCartInputFieldsUNObscured(
+      Order unObsecuredInputandPayment) {
     CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
     //if(getOneOrdercustomerInfoFieldsNotEmpty(x)!=0){
 
-    CustomerInformation currentUser =  x;
+    CustomerInformation currentUser = x;
 
     print('currentUser.address: ${currentUser.address}');
     print('currentUser.flatOrHouseNumber: ${currentUser.flatOrHouseNumber}');
@@ -7595,13 +7648,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
      */
 
 
-
-
   }
 
 
-  Widget _buildShoppingCartInputFieldsObscured( CustomerInformation obscuredDisplay){
-
+  Widget _buildShoppingCartInputFieldsObscured(
+      CustomerInformation obscuredDisplay) {
     //    CustomerInformation
 //  final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //
@@ -7617,7 +7668,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        }
 //        else {
 
-    CustomerInformation currentUser =  obscuredDisplay;
+    CustomerInformation currentUser = obscuredDisplay;
     // THIS INFORMATION ABOVE IS NOT USED NOW.
 
     return Center(
@@ -7685,7 +7736,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       Container(
 
 //                        height: 25,
-                        height: displayHeight(context)/40,
+                        height: displayHeight(context) / 40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -7716,7 +7767,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           textAlign: TextAlign.center,
                           textInputAction: TextInputAction.next,
-                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          onSubmitted: (_) =>
+                              FocusScope.of(context).nextFocus(),
                           decoration: InputDecoration(
                             focusColor: Color(0xffFC0000),
 //                                                            fillColor: Color(0xffFC0000),
@@ -7750,7 +7802,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
 //                            showFullOrderType = false;
                             );
@@ -7767,7 +7820,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
 
                             );
@@ -7862,7 +7916,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       Container(
 
 //                        height: 25,
-                        height: displayHeight(context)/40,
+                        height: displayHeight(context) / 40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -7891,7 +7945,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           textAlign: TextAlign.center,
                           textInputAction: TextInputAction.next,
-                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          onSubmitted: (_) =>
+                              FocusScope.of(context).nextFocus(),
                           decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -7912,8 +7967,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 .setHouseorFlatNumberForOrder(
                                 text);
 
-                            setState((){
-
+                            setState(() {
                               // showFullOrderType = false;
                               showFullOrderType
                               = false;
@@ -7924,8 +7978,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
 
-                              showFullPaymentType  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 
 //                              showFullOrderType = false;
@@ -7935,8 +7989,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           onTap: () {
                             setState(() {
-
-
 //                              showFullOrderType = false;
 
                               // showFullOrderType = false;
@@ -7948,7 +8000,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                              showFullOrderType = false;
                             });
@@ -8042,7 +8095,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       Container(
 
 //                        height: 25,
-                        height: displayHeight(context)/40,
+                        height: displayHeight(context) / 40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -8071,7 +8124,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           textAlign: TextAlign.center,
                           textInputAction: TextInputAction.next,
-                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          onSubmitted: (_) =>
+                              FocusScope.of(context).nextFocus(),
                           decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -8101,7 +8155,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               showFullOrderType = false;
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
-                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
 
 
@@ -8116,7 +8171,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showCustomerInformationHeader = true;
                               showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
                             );
                           },
@@ -8206,7 +8262,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       Container(
 
 //                        height: 25,
-                        height: displayHeight(context)/40,
+                        height: displayHeight(context) / 40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
@@ -8264,12 +8320,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 ShoppingCartBloc>(context);
 
                             shoppingCartBloc.setETAForOrder(text);
-                            setState((){ showFullOrderType = false;
+                            setState(() {
+                              showFullOrderType = false;
 
 //                            showCustomerInformationHeader = false;
-                            showCustomerInformationHeader = true;
-                            showFullPaymentType  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                            showUserInputOptionsLikeFirstTime = false;
+                              showCustomerInformationHeader = true;
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showUserInputOptionsLikeFirstTime = false;
                             });
                           },
 
@@ -8279,7 +8337,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              showCustomerInformationHeader = false;
                               showUserInputOptionsLikeFirstTime = false;
                               showCustomerInformationHeader = true;
-                              showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             }
                             );
                           },
@@ -8336,11 +8395,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-
-
-
-  Widget animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway(Order orderObjectTakeAway){
-
+  Widget animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway(
+      Order orderObjectTakeAway) {
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     print('at animated Un Obscured Card UnSelect Container');
@@ -8350,7 +8406,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
 //          padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
-              color:Colors.white,
+              color: Colors.white,
 //              color:Colors.lightBlueAccent,
 //                                            height: 200,
 //          height: displayHeight(context) /3,
@@ -8369,10 +8425,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelected
                 // animatedWidgetShowSelectedPaymentTypeTakeAway
                 // _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway
-                child: showFullPaymentType==false ?
+                child: showFullPaymentType == false ?
 
-                animatedWidgetShowSelectedPaymentTypeTakeAway(orderObjectTakeAway):
-                _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(orderObjectTakeAway),
+                animatedWidgetShowSelectedPaymentTypeTakeAway(
+                    orderObjectTakeAway) :
+                _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(
+                    orderObjectTakeAway),
               ),
               )
             //HHHH
@@ -8381,11 +8439,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
           Container(
-            height:displayHeight(context)/20,
+            height: displayHeight(context) / 20,
 //          color:Colors.blue,
             width: displayWidth(context)
                 - displayWidth(context) / 5,
-
 
 
 //            alignment: Alignment.center,
@@ -8401,18 +8458,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
               // animatedObscuredCancelPayButtonTakeAway
               // animatedUnObscuredCancelPayButton
               // animatedObscuredCancelPayButton
-              child: showFullPaymentType==false ?
-              animatedUnObscuredCancelPayButtonTakeAway(orderObjectTakeAway):
+              child: showFullPaymentType == false ?
+              animatedUnObscuredCancelPayButtonTakeAway(orderObjectTakeAway) :
               animatedObscuredCancelPayButtonTakeAway(orderObjectTakeAway)
 
               ,
 
             ),
           ),
-
-
-
-
 
 
 //          Text('ss'),
@@ -8496,8 +8549,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(Order unObsecuredInputandPayment){
-
+  Widget animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
+      Order unObsecuredInputandPayment) {
     print('at animated Un Obscured Card UnSelect Container');
     return
       Column(
@@ -8505,7 +8558,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
 //          padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
-              color:Colors.white,
+              color: Colors.white,
 //                                            height: 200,
 //          height: displayHeight(context) /3,
               width: displayWidth(context)
@@ -8513,20 +8566,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                            width: displayWidth(context) * 0.57,
 
 
-
               // Work 5.
               child: Container(child:
               AnimatedSwitcher(
                 duration: Duration(milliseconds: 0),
 //
-                child: showFullPaymentType==false ? animatedWidgetShowSelectedPaymentTypeDeliveryPhone(unObsecuredInputandPayment):
-                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
+                child: showFullPaymentType == false
+                    ? animatedWidgetShowSelectedPaymentTypeDeliveryPhone(
+                    unObsecuredInputandPayment)
+                    :
+                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
+                    unObsecuredInputandPayment)
                 ,
 
               ),
-
-
-
 
 
               )
@@ -8551,9 +8604,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
             AnimatedSwitcher(
               duration: Duration(milliseconds: 0),
 //
-              child: showFullPaymentType==false ?
-              animatedUnObscuredCancelPayButtonDeliveryPhone(unObsecuredInputandPayment):
-              animatedObscuredCancelPayButtonDeliveryPhone(unObsecuredInputandPayment)
+              child: showFullPaymentType == false ?
+              animatedUnObscuredCancelPayButtonDeliveryPhone(
+                  unObsecuredInputandPayment) :
+              animatedObscuredCancelPayButtonDeliveryPhone(
+                  unObsecuredInputandPayment)
 
               ,
 
@@ -8563,12 +8618,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         ],
       );
-
-
   }
 
 
-  Widget animatedObscuredCancelPayButtonTakeAway(Order cancelPaySelect){
+  Widget animatedObscuredCancelPayButtonTakeAway(Order cancelPaySelect) {
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -8580,24 +8633,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return
       AbsorbPointer(
         child: Opacity(
-          opacity:0.2,
-          child:Container(
+          opacity: 0.2,
+          child: Container(
 
-            color:Colors.white,
-            margin:EdgeInsets.fromLTRB(0,9,0,9),
+            color: Colors.white,
+            margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
 
 
-
-
                 Container(
-                  width:displayWidth(context)/4,
-                  height:displayHeight(context)/24,
+                  width: displayWidth(context) / 4,
+                  height: displayHeight(context) / 24,
                   child: OutlineButton(
-                    onPressed: (){ print('Cancel Pressed obscured');
+                    onPressed: () {
+                      print('Cancel Pressed obscured');
 //                    onPressed: _testPrintDummyDe
 //                    return Navigator.pop(context,true);
                     },
@@ -8609,17 +8661,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     borderSide: BorderSide(
                       color: Color(0xffFC0000), // 0xff54463E
                       style: BorderStyle.solid,
-                      width:7.6,
+                      width: 7.6,
                     ),
-                    shape:RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
 
                       borderRadius: BorderRadius.circular(35.0),
                     ),
-                    child:Container(
+                    child: Container(
 
 //              alignment: Alignment.center,
                       child: Text('Cancel',
-                        style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+                        style: TextStyle(color: Color(0xffFC0000),
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,),),
 
                     ),
                   ),
@@ -8627,16 +8681,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
 
 
-                SizedBox(width: displayWidth(context)/12,),
+                SizedBox(width: displayWidth(context) / 12,),
                 Container(
-                  width:displayWidth(context)/4,
+                  width: displayWidth(context) / 4,
 //                  width:displayWidth(context)/3.1,
-                  height:displayHeight(context)/24,
+                  height: displayHeight(context) / 24,
                   child: OutlineButton(
                     onPressed: () async {
-
                       print('obscure pay');
-
                     },
                     color: Colors.green,
                     // clipBehavior:Clip.hardEdge,
@@ -8646,22 +8698,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     borderSide: BorderSide(
                       color: Colors.green, // 0xff54463E
                       style: BorderStyle.solid,
-                      width:7.6,
+                      width: 7.6,
                     ),
-                    shape:RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
 
 
                       borderRadius: BorderRadius.circular(35.0),
                     ),
-                    child:Container(
+                    child: Container(
 
 //              alignment: Alignment.center,
 
-                      child: Text('Pay',style: TextStyle(color: Colors.green,
-                        fontSize: 30,fontWeight: FontWeight.bold,),
+                      child: Text('Pay', style: TextStyle(color: Colors.green,
+                        fontSize: 30, fontWeight: FontWeight.bold,),
                       ),),
                   ),
-
 
 
                 ),
@@ -8743,7 +8794,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
   }
 
-  Widget animatedObscuredCancelPayButtonDeliveryPhone(Order CancelPaySelect){
+  Widget animatedObscuredCancelPayButtonDeliveryPhone(Order cancelPaySelect) {
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -8755,21 +8806,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return
       AbsorbPointer(
         child: Opacity(
-          opacity:0.2,
+          opacity: 0.2,
           child:
           Container(
             color: Colors.white,
-            margin:EdgeInsets.fromLTRB(0,9,0,9),
+            margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
 
                 Container(
-                  width:displayWidth(context)/4,
-                  height:displayHeight(context)/24,
+                  width: displayWidth(context) / 4,
+                  height: displayHeight(context) / 24,
                   child: OutlineButton(
-                    onPressed: (){ print('Cancel Pressed obscured delivery phone obscured');
+                    onPressed: () {
+                      print('Cancel Pressed obscured delivery phone obscured');
 //                    onPressed: _testPrintDummyDe
 //                    return Navigator.pop(context,true);
                     },
@@ -8781,17 +8833,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     borderSide: BorderSide(
                       color: Color(0xffFC0000), // 0xff54463E
                       style: BorderStyle.solid,
-                      width:7.6,
+                      width: 7.6,
                     ),
-                    shape:RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
 
                       borderRadius: BorderRadius.circular(35.0),
                     ),
-                    child:Container(
+                    child: Container(
 
 //              alignment: Alignment.center,
                       child: Text('Cancel',
-                        style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+                        style: TextStyle(color: Color(0xffFC0000),
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,),),
 
                     ),
                   ),
@@ -8799,15 +8853,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
 
 
-                SizedBox(width: displayWidth(context)/12,),
+                SizedBox(width: displayWidth(context) / 12,),
                 Container(
-                  width:displayWidth(context)/4,
-                  height:displayHeight(context)/24,
+                  width: displayWidth(context) / 4,
+                  height: displayHeight(context) / 24,
                   child: OutlineButton(
                     onPressed: () async {
-
-                      print('pay button Pressed obscured delivery phone obscured');
-
+                      print(
+                          'pay button Pressed obscured delivery phone obscured');
                     },
                     color: Colors.green,
                     // clipBehavior:Clip.hardEdge,
@@ -8817,22 +8870,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     borderSide: BorderSide(
                       color: Colors.green, // 0xff54463E
                       style: BorderStyle.solid,
-                      width:7.6,
+                      width: 7.6,
                     ),
-                    shape:RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
 
 
                       borderRadius: BorderRadius.circular(35.0),
                     ),
-                    child:Container(
+                    child: Container(
 
 //              alignment: Alignment.center,
 
-                      child: Text('Pay',style: TextStyle(color: Colors.green,
-                        fontSize: 30,fontWeight: FontWeight.bold,),
+                      child: Text('Pay', style: TextStyle(color: Colors.green,
+                        fontSize: 30, fontWeight: FontWeight.bold,),
                       ),),
                   ),
-
 
 
                 ),
@@ -8900,7 +8952,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   // work 01_9thJuly.
-  Widget animatedUnObscuredCancelPayButtonTakeAway(Order cancelPaySelectUNObscuredTakeAway){
+  Widget animatedUnObscuredCancelPayButtonTakeAway(
+      Order cancelPaySelectUNObscuredTakeAway) {
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -8911,14 +8964,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'animated Obscured Cancel Pay Button()');
     return
       Container(
-        margin:EdgeInsets.fromLTRB(0,9,0,9),
+        margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              width:displayWidth(context)/4,
-              height:displayHeight(context)/24,
+              width: displayWidth(context) / 4,
+              height: displayHeight(context) / 24,
               child: OutlineButton(
                 color: Color(0xffFC0000),
                 // clipBehavior:Clip.hardEdge,
@@ -8928,21 +8981,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 borderSide: BorderSide(
                   color: Color(0xffFC0000), // 0xff54463E
                   style: BorderStyle.solid,
-                  width:7.6,
+                  width: 7.6,
                 ),
-                shape:RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
 
                   borderRadius: BorderRadius.circular(35.0),
                 ),
-                child:Container(
+                child: Container(
 
 //              alignment: Alignment.center,
                   child: Text('Cancel',
-                    style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+                    style: TextStyle(color: Color(0xffFC0000),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,),),
 
                 ),
-                onPressed: (){
-                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+                onPressed: () {
+                  print(
+                      'on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
 
                   /*
                         cancelPaySelect.page=1;
@@ -8957,10 +9013,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),);
                         */
 
-                  print('debug print before invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button ');
+                  print(
+                      'debug print before invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button ');
                   _stopScanDevices();
-                  print('debug print after invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button');
-
+                  print(
+                      'debug print after invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button');
 
 
                   final shoppingCartBloc = BlocProvider.of<
@@ -8973,7 +9030,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  shoppingCartBloc.getExpandedSelectedFood;
 
 
-                  cancelPaySelectUNObscuredTakeAway.isCanceled=true;
+                  cancelPaySelectUNObscuredTakeAway.isCanceled = true;
 
                   /*
                   //MIGHT NOT BE NECESSARY.
@@ -8984,8 +9041,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   */
 
 
-
-                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
+                  return Navigator.pop(
+                      context, cancelPaySelectUNObscuredTakeAway);
 
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
@@ -8993,11 +9050,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ),
             ),
 
-            SizedBox(width: displayWidth(context)/12,),
+            SizedBox(width: displayWidth(context) / 12,),
 
             Container(
-              width:displayWidth(context)/4,
-              height:displayHeight(context)/24,
+              width: displayWidth(context) / 4,
+              height: displayHeight(context) / 24,
               child: OutlineButton(
                 color: Colors.green,
                 // clipBehavior:Clip.hardEdge,
@@ -9007,21 +9064,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 borderSide: BorderSide(
                   color: Colors.green, // 0xff54463E
                   style: BorderStyle.solid,
-                  width:7.6,
+                  width: 7.6,
                 ),
-                shape:RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
 
 
                   borderRadius: BorderRadius.circular(35.0),
                 ),
-                child:Container(
+                child: Container(
 
 //              alignment: Alignment.center,
 
-                  child: Text('Pay',style: TextStyle(color: Colors.green,
-                    fontSize: 30,fontWeight: FontWeight.bold,),
+                  child: Text('Pay', style: TextStyle(color: Colors.green,
+                    fontSize: 30, fontWeight: FontWeight.bold,),
                   ),),
-                onPressed: () async{
+                onPressed: () async {
 //                  print('on Pressed of Pay');
 //                  return Navigator.pop(context,false);
 
@@ -9067,8 +9124,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   */
 
 
-
-
 /*
     final identityBlocLoginPage =
     BlocProvider.of<IdentityBloc>(context);
@@ -9092,31 +9147,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        await int foundCount=  discover(context);
 
 
-
-
-                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAway.paymentTypeIndex}');
-
-
-
-
-
-
+                  print(
+                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAway
+                          .paymentTypeIndex}');
 
 
                   // PRINTING CODES WILL BE PUTTED HERE.
 
-                  print('debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
                   _startScanDevices();
 //                  _startScanDummyDevices();
-                  print('debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
+                  print(
+                      'debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
 
-
-                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelectUNObscuredTakeAway);
-
-
-
-
+                  Order tempOrderWithdocId = await shoppingCartBloc
+                      .paymentButtonPressed(cancelPaySelectUNObscuredTakeAway);
 
 
                   /*
@@ -9126,7 +9173,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   */
 
 
-                  if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
+                  if ((tempOrderWithdocId.paymentButtonPressed == true) &&
+                      (tempOrderWithdocId.orderdocId == '')) {
                     _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
@@ -9134,19 +9182,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         SnackBar(content: Text("someThing went wrong")));
                     print('something went wrong');
                   }
-                  else{
+                  else {
+                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId
+                        .orderdocId}');
 
-                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+                    List<
+                        PrinterBluetooth> blueToothDevicesState = shoppingCartBloc
+                        .getDevices;
 
-                    List<PrinterBluetooth> blueToothDevicesState = shoppingCartBloc.getDevices;
+                    print('blueToothDevicesState.length: ${blueToothDevicesState
+                        .length}');
 
-                    print('blueToothDevicesState.length: ${blueToothDevicesState.length}');
-
-                    if(blueToothDevicesState.length==0){
+                    if (blueToothDevicesState.length == 0) {
                       logger.i('___________ blueTooth device not found _____');
 
                       // UNCOMMENT THIS LINE... BELOW  //_showMyDialog2('___________ blueTooth device not found _____');
-                      _showMyDialog2('___________ blueTooth device not found _____');
+                      _showMyDialog2(
+                          '___________ blueTooth device not found _____');
 //                      shoppingCartBloc.clearSubscription();
 
                       // NEED THIS LINES COMMENTING BEGINNING..
@@ -9174,33 +9226,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     }
 
 
-
-                    bool found =false;
-                    int index=-1;
-                    for(int i =0;i<blueToothDevicesState.length;i++){
-
-
+                    bool found = false;
+                    int index = -1;
+                    for (int i = 0; i < blueToothDevicesState.length; i++) {
                       ++index;
 
-                      print('blueToothDevicesState[$i].name: ${blueToothDevicesState[i].name}');
-                      print('oneBlueToothDevice[$i].address: ${blueToothDevicesState[i].address}');
-                      if((blueToothDevicesState[i].name=='Restaurant Printer') ||
-                          (blueToothDevicesState[i].address == '0F:02:18:51:23:46')){
-                        found =true;
+                      print(
+                          'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
+                              .name}');
+                      print(
+                          'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
+                              .address}');
+                      if ((blueToothDevicesState[i].name ==
+                          'Restaurant Printer') ||
+                          (blueToothDevicesState[i].address ==
+                              '0F:02:18:51:23:46')) {
+                        found = true;
                         break;
 
                         // _testPrint(oneBlueToothDevice);
 
                       }
-
-
-
                     };
 
                     logger.w('check device listed or not');
                     print('index: $index');
 
-                    if(found==true) {
+                    if (found == true) {
                       print('found == true');
                       await _testPrint(blueToothDevicesState[index]);
 
@@ -9208,12 +9260,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(context,tempOrderWithdocId);
+                      return Navigator.pop(context, tempOrderWithdocId);
                     }
 
-                    else{
+                    else {
                       logger.i('___________ blueTooth device not found _____');
-                      _showMyDialog2('___________ blueTooth device not found _____');
+                      _showMyDialog2(
+                          '___________ blueTooth device not found _____');
 
                       // COMMENT FROM HERE TO END
 
@@ -9234,12 +9287,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // END
                       return;
                     }
-
                   }
-
-
-
-
                 },
               ),
             ),
@@ -9247,9 +9295,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           ],
         ),
-
-
-
 
 
       );
@@ -9285,10 +9330,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-
 // animatedUnObscuredCancelPayButton
 // animatedUnObscuredCancelPayButtonDeliveryPhone
-  Widget animatedUnObscuredCancelPayButtonDeliveryPhone(Order cancelPaySelectUnobscuredDeliveryPhone){
+  Widget animatedUnObscuredCancelPayButtonDeliveryPhone(
+      Order cancelPaySelectUnobscuredDeliveryPhone) {
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -9299,7 +9344,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'animated Obscured Cancel Pay Button()');
     return
       Container(
-        margin:EdgeInsets.fromLTRB(0,9,0,9),
+        margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -9307,8 +9352,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-              width:displayWidth(context)/4,
-              height:displayHeight(context)/24,
+              width: displayWidth(context) / 4,
+              height: displayHeight(context) / 24,
               child: OutlineButton(
                 color: Color(0xffFC0000),
                 // clipBehavior:Clip.hardEdge,
@@ -9318,21 +9363,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 borderSide: BorderSide(
                   color: Color(0xffFC0000), // 0xff54463E
                   style: BorderStyle.solid,
-                  width:7.6,
+                  width: 7.6,
                 ),
-                shape:RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
 
                   borderRadius: BorderRadius.circular(35.0),
                 ),
-                child:Container(
+                child: Container(
 
 //              alignment: Alignment.center,
                   child: Text('Cancel',
-                    style: TextStyle(color: Color(0xffFC0000),fontSize: 30,fontWeight: FontWeight.bold,),),
+                    style: TextStyle(color: Color(0xffFC0000),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,),),
 
                 ),
-                onPressed: (){
-                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+                onPressed: () {
+                  print(
+                      'on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
 
                   /*
                   cancelPaySelect.page=1;
@@ -9348,11 +9396,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   */
 
 
-                  print('debug print before invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+                  print(
+                      'debug print before invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
                   _stopScanDevices();
-                  print('debug print after invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
-
-
+                  print(
+                      'debug print after invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
 
                   final shoppingCartBloc = BlocProvider.of<
@@ -9361,7 +9409,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
 //                  shoppingCartBloc.getExpandedSelectedFood;
-                  cancelPaySelectUnobscuredDeliveryPhone.isCanceled=true;
+                  cancelPaySelectUnobscuredDeliveryPhone.isCanceled = true;
 
 
                   /*
@@ -9372,9 +9420,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   */
 
 
-
-
-                  return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
+                  return Navigator.pop(
+                      context, cancelPaySelectUnobscuredDeliveryPhone);
 //                  return Navigator.pop(context,cancelPaySelect);
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
@@ -9382,11 +9429,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ),
             ),
 
-            SizedBox(width: displayWidth(context)/12,),
+            SizedBox(width: displayWidth(context) / 12,),
 
             Container(
-              width:displayWidth(context)/4,
-              height:displayHeight(context)/24,
+              width: displayWidth(context) / 4,
+              height: displayHeight(context) / 24,
               child: OutlineButton(
                 color: Colors.green,
                 // clipBehavior:Clip.hardEdge,
@@ -9396,36 +9443,44 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 borderSide: BorderSide(
                   color: Colors.green, // 0xff54463E
                   style: BorderStyle.solid,
-                  width:7.6,
+                  width: 7.6,
                 ),
-                shape:RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
 
 
                   borderRadius: BorderRadius.circular(35.0),
                 ),
-                child:Container(
+                child: Container(
 
 //              alignment: Alignment.center,
 
-                  child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30,fontWeight: FontWeight.bold,),
+                  child: Text('Pay', style: TextStyle(color: Colors.green,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,),
                   ),),
-                onPressed: () async{
+                onPressed: () async {
 //                  print('on Pressed of Pay');
 //                  return Navigator.pop(context,false);
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
-                  print('debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
 
 //                  _startScanDevices();
 
 //                  _startScanDummyDevices();
-                  print('debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
+                  print(
+                      'debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
-                  print('cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone.paymentTypeIndex}');
+                  print(
+                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone
+                          .paymentTypeIndex}');
 
-                  Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelectUnobscuredDeliveryPhone);
+                  Order tempOrderWithdocId = await shoppingCartBloc
+                      .paymentButtonPressed(
+                      cancelPaySelectUnobscuredDeliveryPhone);
 
                   /*
 
@@ -9435,7 +9490,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   */
 
 
-                  if((tempOrderWithdocId.paymentButtonPressed==true)&& (tempOrderWithdocId.orderdocId=='')) {
+                  if ((tempOrderWithdocId.paymentButtonPressed == true) &&
+                      (tempOrderWithdocId.orderdocId == '')) {
                     _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
@@ -9443,19 +9499,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         SnackBar(content: Text("someThing went wrong")));
                     print('something went wrong');
                   }
-                  else{
+                  else {
+                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId
+                        .orderdocId}');
 
+                    List<
+                        PrinterBluetooth> blueToothDevicesState = shoppingCartBloc
+                        .getDevices;
 
-                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+                    print('blueToothDevicesState.length: ${blueToothDevicesState
+                        .length}');
 
-                    List<PrinterBluetooth> blueToothDevicesState = shoppingCartBloc.getDevices;
-
-                    print('blueToothDevicesState.length: ${blueToothDevicesState.length}');
-
-                    if(blueToothDevicesState.length==0){
+                    if (blueToothDevicesState.length == 0) {
                       logger.i('___________ blueTooth device not found _____');
 
-                      _showMyDialog2('___________ blueTooth device not found _____ delivery phone pay button');
+                      _showMyDialog2(
+                          '___________ blueTooth device not found _____ delivery phone pay button');
 
                       // NEED THIS LINES COMMENTING BEGINNING..
 
@@ -9481,45 +9540,45 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     }
 
 
-
-                    bool found =false;
-                    int index=-1;
-                    for(int i =0;i<blueToothDevicesState.length;i++){
-
-
+                    bool found = false;
+                    int index = -1;
+                    for (int i = 0; i < blueToothDevicesState.length; i++) {
                       ++index;
 
 
-                      print('blueToothDevicesState[$i].name: ${blueToothDevicesState[i].name}');
-                      print('oneBlueToothDevice[$i].address: ${blueToothDevicesState[i].address}');
+                      print(
+                          'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
+                              .name}');
+                      print(
+                          'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
+                              .address}');
 
 
-                      if((blueToothDevicesState[i].name=='Restaurant Printer') ||
-                          (blueToothDevicesState[i].address == '0F:02:18:51:23:46')){
-                        found =true;
+                      if ((blueToothDevicesState[i].name ==
+                          'Restaurant Printer') ||
+                          (blueToothDevicesState[i].address ==
+                              '0F:02:18:51:23:46')) {
+                        found = true;
                         break;
 
                         // _testPrint(oneBlueToothDevice);
 
                       }
-
-
-
                     };
 
                     logger.w('check device listed or not');
                     print('index: $index');
 
-                    if(found==true) {
+                    if (found == true) {
                       print('found == true');
                       await _testPrint(blueToothDevicesState[index]);
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
                       shoppingCartBloc.clearSubscription();
 //                      return Navigator.pop(context,tempOrderWithdocId);
-                      return Navigator.pop(context,tempOrderWithdocId);
+                      return Navigator.pop(context, tempOrderWithdocId);
                     }
 
-                    else{
+                    else {
                       logger.i('___________ blueTooth device not found _____');
 //                      _showMyDialog2('___________ blueTooth device not found _____');
 
@@ -9547,8 +9606,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       return;
                     }
-
-
                   }
 
                   /*
@@ -9660,13 +9717,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ],
         ),
       );
-
   }
 
 
-
-
-  Widget animatedWidgetShowSelectedPaymentTypeTakeAway(Order unObsecuredInputandPayment){
+  Widget animatedWidgetShowSelectedPaymentTypeTakeAway(
+      Order unObsecuredInputandPayment) {
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     return Container(
@@ -9676,21 +9731,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
           stream: shoppingCartbloc.getCurrentPaymentTypeSingleSelectStream,
           initialData: shoppingCartbloc.getCurrentPaymentType,
 
-          builder: (context, snapshot)
-          {
+          builder: (context, snapshot) {
             if (!snapshot.hasData) {
               print('!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
               return Container(child: Text('Null'));
             }
             else {
-              List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot.data;
+              List<
+                  PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot
+                  .data;
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
 //            print('orderTypes: $allOrderTypesSingleSelect');
               PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
-                  .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
+                  .firstWhere((onePaymentType) =>
+              onePaymentType.isSelected == true);
 
               _currentPaymentTypeIndex = selectedOne.index;
 
@@ -9700,13 +9757,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
               */
 
 
-
               String orderTypeName = selectedOne.paymentTypeName;
               String orderIconName = selectedOne.paymentIconName;
               String borderColor = selectedOne.borderColor;
-              const Color OrderTypeIconColor=Color(0xff070707);
-
-
+              const Color OrderTypeIconColor = Color(0xff070707);
 
 
               return Container(
@@ -9774,8 +9828,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           Container(
 
 //                            width: 100,
-                            width: displayWidth(context)/8,
-                            height: displayHeight(context) /10,
+                            width: displayWidth(context) / 8,
+                            height: displayHeight(context) / 10,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
                             child:
@@ -9788,13 +9842,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
                                 side: BorderSide(
-                                  color:Color(0xff000000),
+                                  color: Color(0xff000000),
                                   style: BorderStyle.solid,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
 
-                              child:Container(
+                              child: Container(
 //                        alignment: Alignment.topCenter,
                                 padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Column(
@@ -9811,8 +9865,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
 
-                                      width:  90,
-                                      height: displayHeight(context) /14,
+                                      width: 90,
+                                      height: displayHeight(context) / 14,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -9834,7 +9888,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: Icon(
                                         getIconForName(orderTypeName),
                                         color: Colors.black,
-                                        size: displayHeight(context) /34,
+                                        size: displayHeight(context) / 34,
 
                                       ),
                                     ),
@@ -9845,7 +9899,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: Text(
                                         orderTypeName, style:
                                       TextStyle(
-                                          color:Color(0xffFC0000),
+                                          color: Color(0xffFC0000),
 
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
@@ -9855,25 +9909,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 ),
                               ),
                               onPressed: () {
-
                                 //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //                          final ShoppingCartBlock = BlocProvider.of<ShoppingCartBloc>(context);
 //                          ShoppingCartBlock.setPaymentTypeSingleSelectOptionForOrder(selectedOne,4,_currentOrderTypeIndex);
 
                                 setState(() {
-
                                   showFullPaymentType = !showFullPaymentType;
 //                            _currentPaymentTypeIndex= 4;
 //                            showFullOrderType = !showFullOrderType;
                                 });
-
-
                               },
                             ),
                             // : Container for 2nd argument of ternary condition ends here.
 
                           )
-
 
 
                           //ZZZZ
@@ -9908,7 +9957,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           Text(
                               '${
                                   (unObsecuredInputandPayment.totalPrice
-                                      /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
+                                      /* * unObsecuredInputandPayment.totalPrice */)
+                                      .toStringAsFixed(2)} '
                                   '\u20AC',
                               style: TextStyle(
                                 fontSize: 24,
@@ -9938,8 +9988,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //animatedWidgetShowSelectedPaymentTypeDeliveryPhone
 
   // work 4
-  Widget animatedWidgetShowSelectedPaymentTypeDeliveryPhone(Order unObsecuredInputandPayment) {
-
+  Widget animatedWidgetShowSelectedPaymentTypeDeliveryPhone(
+      Order unObsecuredInputandPayment) {
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     // work -3
@@ -9950,34 +10000,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
           stream: shoppingCartbloc.getCurrentPaymentTypeSingleSelectStream,
           initialData: shoppingCartbloc.getCurrentPaymentType,
 
-          builder: (context, snapshot)
-          {
+          builder: (context, snapshot) {
             if (!snapshot.hasData) {
               print('!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
               return Container(child: Text('Null'));
             }
             else {
-              List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot.data;
+              List<
+                  PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot
+                  .data;
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
 //            print('orderTypes: $allOrderTypesSingleSelect');
               PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
-                  .firstWhere((onePaymentType) => onePaymentType.isSelected == true);
+                  .firstWhere((onePaymentType) =>
+              onePaymentType.isSelected == true);
 
               _currentPaymentTypeIndex = selectedOne.index;
 //              logger.e('selectedOne.index',selectedOne.index);
 //              logger.e('selectedOne.isSelected',selectedOne.isSelected);
 
 
-
               String orderTypeName = selectedOne.paymentTypeName;
               String orderIconName = selectedOne.paymentIconName;
               String borderColor = selectedOne.borderColor;
-              const Color OrderTypeIconColor=Color(0xff070707);
-
-
+              const Color OrderTypeIconColor = Color(0xff070707);
 
 
               return Container(
@@ -10047,8 +10096,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           Container(
 
 //                            width: 100,
-                            width: displayWidth(context)/8,
-                            height: displayHeight(context) /10,
+                            width: displayWidth(context) / 8,
+                            height: displayHeight(context) / 10,
 //                    alignment: Alignment.center,
 //                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
                             child:
@@ -10061,13 +10110,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
                                 side: BorderSide(
-                                  color:Color(0xff000000),
+                                  color: Color(0xff000000),
                                   style: BorderStyle.solid,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
 
-                              child:Container(
+                              child: Container(
 //                        alignment: Alignment.topCenter,
                                 padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Column(
@@ -10084,8 +10133,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
 
-                                      width:  90,
-                                      height: displayHeight(context) /14,
+                                      width: 90,
+                                      height: displayHeight(context) / 14,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -10107,7 +10156,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: Icon(
                                         getIconForName(orderTypeName),
                                         color: Colors.black,
-                                        size: displayHeight(context) /30,
+                                        size: displayHeight(context) / 30,
 
                                       ),
                                     ),
@@ -10118,7 +10167,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: Text(
                                         orderTypeName, style:
                                       TextStyle(
-                                          color:Color(0xffFC0000),
+                                          color: Color(0xffFC0000),
 
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
@@ -10128,25 +10177,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 ),
                               ),
                               onPressed: () {
-
                                 //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //                          final ShoppingCartBlock = BlocProvider.of<ShoppingCartBloc>(context);
 //                          ShoppingCartBlock.setPaymentTypeSingleSelectOptionForOrder(selectedOne,4,_currentOrderTypeIndex);
 
                                 setState(() {
-
                                   showFullPaymentType = !showFullPaymentType;
 //                            _currentPaymentTypeIndex= 4;
 //                            showFullOrderType = !showFullOrderType;
                                 });
-
-
                               },
                             ),
                             // : Container for 2nd argument of ternary condition ends here.
 
                           )
-
 
 
                           //ZZZZ
@@ -10182,7 +10226,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           Text(
                               '${
                                   (unObsecuredInputandPayment.totalPrice
-                                      /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
+                                      /* * unObsecuredInputandPayment.totalPrice */)
+                                      .toStringAsFixed(2)} '
                                   '\u20AC',
                               style: TextStyle(
                                 fontSize: 24,
@@ -10207,13 +10252,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(Order unObsecuredInputandPayment){
+  Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(
+      Order unObsecuredInputandPayment) {
     //XYZ
     return
       Container(
 //        color: Colors.blueGrey,
         color: Colors.white,
-        height: displayHeight(context) / 20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +  displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
+        height: displayHeight(context) /
+            20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
+            displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
         child: Column(
           children: <Widget>[
             Container(
@@ -10274,8 +10322,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                         ]
                     ),
 
@@ -10316,8 +10362,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ////WWWEEEQQQ
 
 
-
-
                 ],
               ),
             ),
@@ -10350,7 +10394,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Text(
                       '${
                           (unObsecuredInputandPayment.totalPrice
-                              /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
+                              /* * unObsecuredInputandPayment.totalPrice */)
+                              .toStringAsFixed(2)} '
                           '\u20AC',
                       style: TextStyle(
                         fontSize: 24,
@@ -10376,20 +10421,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
               color: Colors.white,
 //              color:Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /9,
+              height: displayHeight(context) / 9,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildPaymentTypeSingleSelectOption(),
+              child: _buildPaymentTypeSingleSelectOption(),
 
             ),
           ],
         ),
       );
   }
-  Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelected(Order unObsecuredInputandPayment)
-  {
+
+
+  Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
+      Order unObsecuredInputandPayment) {
 //    XYZ
     return
       Container(
@@ -10397,7 +10444,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         color: Colors.white,
         height: displayHeight(context) /
             20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
-            displayHeight(context) /7 /* HEIGHT OF MULTI SELECT PORTION */,
+            displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
         child: Column(
           children: <Widget>[
             Container(
@@ -10458,8 +10505,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-
-
                         ]
                     ),
 
@@ -10500,8 +10545,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ////WWWEEEQQQ
 
 
-
-
                 ],
               ),
             ),
@@ -10534,7 +10577,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Text(
                       '${
                           (unObsecuredInputandPayment.totalPrice
-                              /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
+                              /* * unObsecuredInputandPayment.totalPrice */)
+                              .toStringAsFixed(2)} '
                           '\u20AC',
                       style: TextStyle(
                         fontSize: 24,
@@ -10560,12 +10604,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
               color: Colors.white,
 //              color:Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) /9,
+              height: displayHeight(context) / 9,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
 //                                            width: displayWidth(context) * 0.57,
-              child:  _buildPaymentTypeSingleSelectOption(),
+              child: _buildPaymentTypeSingleSelectOption(),
 
             ),
           ],
@@ -10574,49 +10618,43 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  int getNumberOfInputsFilledUpDinningRoom (CustomerInformation customerInfoFieldsCheck){
-
+  int getNumberOfInputsFilledUpDinningRoom(
+      CustomerInformation customerInfoFieldsCheck) {
     print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
-    int total=0;
-    switch (customerInfoFieldsCheck.address.trim().length) {
-
-      case 0:
-        total =total + 0;
-        break;
-      default:
-        total = total +1;
-
-
-    }
-    switch (customerInfoFieldsCheck.flatOrHouseNumber.trim().length) {
-
+    int total = 0;
+    switch (customerInfoFieldsCheck.address
+        .trim()
+        .length) {
       case 0:
         total = total + 0;
         break;
       default:
-        total = total +1;
-
-
+        total = total + 1;
     }
-    switch (customerInfoFieldsCheck.phoneNumber.trim().length) {
-
+    switch (customerInfoFieldsCheck.flatOrHouseNumber
+        .trim()
+        .length) {
       case 0:
-        total =total + 0;
+        total = total + 0;
         break;
       default:
-        total = total +1;
-
-
+        total = total + 1;
+    }
+    switch (customerInfoFieldsCheck.phoneNumber
+        .trim()
+        .length) {
+      case 0:
+        total = total + 0;
+        break;
+      default:
+        total = total + 1;
     }
     switch (customerInfoFieldsCheck.etaTimeInMinutes) {
-
       case -1:
         total = total + 0;
         break;
       default:
-        total = total +1;
-
-
+        total = total + 1;
     }
 
 
@@ -10632,105 +10670,43 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  int  getNumberOfInputsFilledUpTakeAway(CustomerInformation customerInfoFieldsCheck){
-
+  int getNumberOfInputsFilledUpTakeAway(
+      CustomerInformation customerInfoFieldsCheck) {
     print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
-    int total=0;
-    switch (customerInfoFieldsCheck.address.trim().length) {
-
-      case 0:
-        total =total + 0;
-        break;
-      default:
-        total = total +1;
-
-
-    }
-    switch (customerInfoFieldsCheck.flatOrHouseNumber.trim().length) {
-
+    int total = 0;
+    switch (customerInfoFieldsCheck.address
+        .trim()
+        .length) {
       case 0:
         total = total + 0;
         break;
       default:
-        total = total +1;
-
-
+        total = total + 1;
     }
-    switch (customerInfoFieldsCheck.phoneNumber.trim().length) {
-
+    switch (customerInfoFieldsCheck.flatOrHouseNumber
+        .trim()
+        .length) {
       case 0:
-        total =total + 0;
+        total = total + 0;
         break;
       default:
-        total = total +1;
-
-
+        total = total + 1;
+    }
+    switch (customerInfoFieldsCheck.phoneNumber
+        .trim()
+        .length) {
+      case 0:
+        total = total + 0;
+        break;
+      default:
+        total = total + 1;
     }
     switch (customerInfoFieldsCheck.etaTimeInMinutes) {
-
       case -1:
         total = total + 0;
         break;
       default:
-        total = total +1;
-
-
-    }
-
-
-    print('-----  ||  ** **  **TOTAL : $total');
-    return total;
-
-
-//    else{
-//      return false;
-//      // empty; 3 inputs are not filled.
-//    }
-
-  }
-  int  getNumberOfInputsFilledUp(CustomerInformation customerInfoFieldsCheck){
-
-    print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
-    int total=0;
-    switch (customerInfoFieldsCheck.address.trim().length) {
-
-      case 0:
-        total =total + 0;
-        break;
-      default:
-        total = total +1;
-
-
-    }
-    switch (customerInfoFieldsCheck.flatOrHouseNumber.trim().length) {
-
-      case 0:
-        total = total + 0;
-        break;
-      default:
-        total = total +1;
-
-
-    }
-    switch (customerInfoFieldsCheck.phoneNumber.trim().length) {
-
-      case 0:
-        total =total + 0;
-        break;
-      default:
-        total = total +1;
-
-
-    }
-    switch (customerInfoFieldsCheck.etaTimeInMinutes) {
-
-      case -1:
-        total = total + 0;
-        break;
-      default:
-        total = total +1;
-
-
+        total = total + 1;
     }
 
 
@@ -10745,82 +10721,136 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
+
+  int getNumberOfInputsFilledUp(CustomerInformation customerInfoFieldsCheck) {
+    print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
+    int total = 0;
+    switch (customerInfoFieldsCheck.address
+        .trim()
+        .length) {
+      case 0:
+        total = total + 0;
+        break;
+      default:
+        total = total + 1;
+    }
+    switch (customerInfoFieldsCheck.flatOrHouseNumber
+        .trim()
+        .length) {
+      case 0:
+        total = total + 0;
+        break;
+      default:
+        total = total + 1;
+    }
+    switch (customerInfoFieldsCheck.phoneNumber
+        .trim()
+        .length) {
+      case 0:
+        total = total + 0;
+        break;
+      default:
+        total = total + 1;
+    }
+    switch (customerInfoFieldsCheck.etaTimeInMinutes) {
+      case -1:
+        total = total + 0;
+        break;
+      default:
+        total = total + 1;
+    }
+
+
+    print('-----  ||  ** **  **TOTAL : $total');
+    return total;
+
+
+//    else{
+//      return false;
+//      // empty; 3 inputs are not filled.
+//    }
+
+  }
 
 
   IconData getIconForName(String iconName) {
-
-    print ('iconName at getIconForName: $iconName');
-    switch(iconName) {
-      case 'facebook': {
+    print('iconName at getIconForName: $iconName');
+    switch (iconName) {
+      case 'facebook':
+        {
 //        return FontAwesomeIcons.facebook;
-        return FontAwesomeIcons.facebook;
-      }
-      break;
+          return FontAwesomeIcons.facebook;
+        }
+        break;
 
-      case 'twitter': {
-        return FontAwesomeIcons.twitter;
-      }
-      break;
-      case 'TakeAway': {
-        return Icons.work;
-      }
-      break;
-      case 'Delivery': {
-        return Icons.local_shipping;
-      }
-      break;
-      case 'Phone': {
-        return Icons.phone_in_talk;
-      }
-      break;
-      case 'DinningRoom': {
-        return Icons.fastfood;
-      }
+      case 'twitter':
+        {
+          return FontAwesomeIcons.twitter;
+        }
+        break;
+      case 'TakeAway':
+        {
+          return Icons.work;
+        }
+        break;
+      case 'Delivery':
+        {
+          return Icons.local_shipping;
+        }
+        break;
+      case 'Phone':
+        {
+          return Icons.phone_in_talk;
+        }
+        break;
+      case 'DinningRoom':
+        {
+          return Icons.fastfood;
+        }
 
-      case 'Card': {
-        return FontAwesomeIcons.solidCreditCard;
+      case 'Card':
+        {
+          return FontAwesomeIcons.solidCreditCard;
+        }
+        break;
+      case 'Cash':
+        {
+          return FontAwesomeIcons.moneyBill;
+        }
+        break;
+      case 'Later':
+        {
+          return FontAwesomeIcons.bookmark;
+        }
+        break;
 
-      }
-      break;
-      case 'Cash': {
-        return FontAwesomeIcons.moneyBill;
-      }
-      break;
-      case 'Later': {
-        return FontAwesomeIcons.bookmark;
-      }
-      break;
 
-
-
-
-
-      default: {
-        return FontAwesomeIcons.home;
-      }
+      default:
+        {
+          return FontAwesomeIcons.home;
+        }
     }
   }
 
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
-  Widget oneSingleDeliveryType (OrderTypeSingleSelect x,int index){
-
+  Widget oneSingleDeliveryType(OrderTypeSingleSelect x, int index) {
     String orderTypeName = x.orderType;
     String orderIconName = x.orderIconName;
     String borderColor = x.borderColor;
-    const Color OrderTypeIconColor=Color(0xff070707);
+    const Color OrderTypeIconColor = Color(0xff070707);
     return Container(
-      child:  index == _currentOrderTypeIndex  ?
+      child: index == _currentOrderTypeIndex ?
 
       Container(
 
-        width: displayWidth(context)/6,
-        height: displayHeight(context) /11,
+        width: displayWidth(context) / 6,
+        height: displayHeight(context) / 11,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
         child:
         InkWell(
-          child:Container(
+          child: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
@@ -10828,8 +10858,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 new Container(
 
-                  width:  displayWidth(context)/10.8,
-                  height: displayWidth(context)/10.8,
+                  width: displayWidth(context) / 10.8,
+                  height: displayWidth(context) / 10.8,
 
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -10846,7 +10876,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(
                     getIconForName(orderTypeName),
                     color: Color(0xffFC0000),
-                    size: displayWidth(context)/16,
+                    size: displayWidth(context) / 16,
 
                   ),
 
@@ -10857,7 +10887,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Text(
                     orderTypeName, style:
                   TextStyle(
-                      color:Color(0xffFC0000),
+                      color: Color(0xffFC0000),
 
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
@@ -10867,14 +10897,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
           onTap: () {
-
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-            showEditingCompleteCustomerAddressInformation   = false;
+            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
+                x, index, _currentOrderTypeIndex);
+            showEditingCompleteCustomerAddressInformation = false;
             showEditingCompleteCustomerHouseFlatIformation = false;
-            showEditingCompleteCustomerPhoneIformation     = false;
-            showEditingCompleteCustomerReachoutIformation  = false;
+            showEditingCompleteCustomerPhoneIformation = false;
+            showEditingCompleteCustomerReachoutIformation = false;
 
             // WORK -2
 
@@ -10886,23 +10916,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         // : Container for 2nd argument of ternary condition ends here.
 
-      ):
+      ) :
       Container(
-        width: displayWidth(context)/6,
-        height: displayHeight(context) /11,
+        width: displayWidth(context) / 6,
+        height: displayHeight(context) / 11,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
         child:
         InkWell(
-          child:Container(
+          child: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
               children: <Widget>[
                 new Container(
-                  width:  displayWidth(context)/10.8,
-                  height: displayWidth(context)/10.8,
+                  width: displayWidth(context) / 10.8,
+                  height: displayWidth(context) / 10.8,
                   decoration: BoxDecoration(
                     border: Border.all(
 
@@ -10918,7 +10948,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(
                     getIconForName(orderTypeName),
                     color: Colors.black,
-                    size: displayWidth(context)/16,
+                    size: displayWidth(context) / 16,
                   ),
                 ),
                 Container(
@@ -10927,7 +10957,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Text(
                     orderTypeName, style:
                   TextStyle(
-                      color:Color(0xffFC0000),
+                      color: Color(0xffFC0000),
 
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
@@ -10937,28 +10967,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
           onTap: () {
-
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
+            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
+                x, index, _currentOrderTypeIndex);
 
             setState(() {
-
               showCustomerInformationHeader = true;
-              showUserInputOptionsLikeFirstTime =true;
+              showUserInputOptionsLikeFirstTime = true;
               // MAKEING THEM AS THEY ARE IN THE FIRST TIME:
 
-              showEditingCompleteCustomerAddressInformation   = false;
+              showEditingCompleteCustomerAddressInformation = false;
               showEditingCompleteCustomerHouseFlatIformation = false;
-              showEditingCompleteCustomerPhoneIformation     = false;
-              showEditingCompleteCustomerReachoutIformation  = false;
+              showEditingCompleteCustomerPhoneIformation = false;
+              showEditingCompleteCustomerReachoutIformation = false;
 
 
               // WE ARE oneSingleDeliveryType;
 //            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
             }
             );
-
           },
         ),
       ),
@@ -10969,7 +10997,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 // PAYMENT RELATED WIDGETS ARE HERE  --- below:
 
 
-  Widget animatedObscuredPaymentSelectContainerTakeAway(Order priceandselectedCardFunctionality){
+  Widget animatedObscuredPaymentSelectContainerTakeAway(
+      Order priceandselectedCardFunctionality) {
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -10980,38 +11009,43 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'animated Obscured Card Select Container()');
     return
       Container(
-        height: displayWidth(context)/2.5,
+        height: displayWidth(context) / 2.5,
         child: AbsorbPointer(
           child: Opacity(
-            opacity:0.2,
+            opacity: 0.2,
             child: Container(
                 color: Colors.greenAccent,
                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                 width: displayWidth(context)
-                    - displayWidth(context) /  5,
-                child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(priceandselectedCardFunctionality)
+                    - displayWidth(context) / 5,
+                child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
+                    priceandselectedCardFunctionality)
 
             ),
           ),
         ),
       );
   }
-  Widget animatedObscuredPaymentSelectContainer(Order priceandselectedCardFunctionality){
+
+
+  Widget animatedObscuredPaymentSelectContainer(
+      Order priceandselectedCardFunctionality) {
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
         'animated Obscured Card Select Container()');
     return
       Container(
-        height: displayWidth(context)/2.5,
+        height: displayWidth(context) / 2.5,
         child: AbsorbPointer(
           child: Opacity(
-            opacity:0.2,
+            opacity: 0.2,
             child: Container(
                 color: Colors.white,
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 width: displayWidth(context)
                     - displayWidth(context) / 5,
-                child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(priceandselectedCardFunctionality)
+                child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
+                    priceandselectedCardFunctionality)
             ),
           ),
         ),
@@ -11019,11 +11053,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  bool zeroORMoreInputsEmptyDinningRoom(CustomerInformation customerInfoFieldsCheck){
-
-
-
-    print( ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
+  bool zeroORMoreInputsEmptyDinningRoom(
+      CustomerInformation customerInfoFieldsCheck) {
+    print(
+        ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
     print('customerInfoFieldsCheck '
         ' FH :${customerInfoFieldsCheck.flatOrHouseNumber}'
         ' A :${customerInfoFieldsCheck.address} '
@@ -11041,27 +11074,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        &&
 //        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
 //        &&
-    (customerInfoFieldsCheck.etaTimeInMinutes != -1)
-
-
-    {
+    (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
       print('WILL RETURN FALSE');
       return false;
     }
 
-    else{
+    else {
       print('WILL RETURN TRUE');
       return true; // empty; one or more of the user inputs are.
     }
-
   }
 
 
-  bool zeroORMoreInputsEmptyTakeAway(CustomerInformation customerInfoFieldsCheck){
-
-
-
-    print( ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
+  bool zeroORMoreInputsEmptyTakeAway(
+      CustomerInformation customerInfoFieldsCheck) {
+    print(
+        ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
     print('customerInfoFieldsCheck '
         ' FH :${customerInfoFieldsCheck.flatOrHouseNumber}'
         ' A :${customerInfoFieldsCheck.address} '
@@ -11079,26 +11107,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        &&
 //        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
 //        &&
-    (customerInfoFieldsCheck.etaTimeInMinutes != -1)
-
-
-    {
+    (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
       print('WILL RETURN FALSE');
       return false;
     }
 
-    else{
+    else {
       print('WILL RETURN TRUE');
       return true; // empty; one or more of the user inputs are.
     }
-
   }
 
-  bool zeroORMoreInputsEmpty(CustomerInformation customerInfoFieldsCheck){
-
-
-
-    print( ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
+  bool zeroORMoreInputsEmpty(CustomerInformation customerInfoFieldsCheck) {
+    print(
+        ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
     print('customerInfoFieldsCheck '
         ' FH :${customerInfoFieldsCheck.flatOrHouseNumber}'
         ' A :${customerInfoFieldsCheck.address} '
@@ -11109,33 +11131,35 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    assert(customerInfoFieldsCheck.flatOrHouseNumber.trim().length >0);
 //    assert(customerInfoFieldsCheck.phoneNumber.trim().length >0);
 //    assert(customerInfoFieldsCheck.etaTimeInMinutes != -1);
-    if(
-    (customerInfoFieldsCheck.address.trim().length >0)
+    if (
+    (customerInfoFieldsCheck.address
+        .trim()
+        .length > 0)
         &&
-        (customerInfoFieldsCheck.flatOrHouseNumber.trim().length >0)
+        (customerInfoFieldsCheck.flatOrHouseNumber
+            .trim()
+            .length > 0)
         &&
-        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
+        (customerInfoFieldsCheck.phoneNumber
+            .trim()
+            .length > 0)
         &&
         (customerInfoFieldsCheck.etaTimeInMinutes != -1)
-    )
-
-    {
+    ) {
       print('WILL RETURN FALSE');
       return false;
     }
 
-    else{
+    else {
       print('WILL RETURN TRUE');
       return true; // empty; one or more of the user inputs are.
     }
-
   }
 
 
 // 3926 IS FOR THE UNOBSCURE PART.
 // 4511 is for the OBSCURED PART.
-  Widget _buildPaymentTypeSingleSelectOption(){
-
+  Widget _buildPaymentTypeSingleSelectOption() {
 //    logger.i('at here: _buildPaymentTypeSingleSelectOption');
 //   height: 40,
 //   width: displayWidth(context) * 0.57,
@@ -11154,7 +11178,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             return Container(child: Text('Null'));
           }
           else {
-            List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot.data;
+            List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot
+                .data;
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
@@ -11196,15 +11221,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       // M VSM ORG VS TODO. ENDS HERE.
     );
-
   }
 
 
-
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
-  Widget oneSinglePaymentType (PaymentTypeSingleSelect onePaymentType,int index){
-
-
+  Widget oneSinglePaymentType(PaymentTypeSingleSelect onePaymentType,
+      int index) {
 //    String color1 = x.itemTextColor.replaceAll('#', '0xff');
 
 //    Color c1 = Color(int.parse(color1));
@@ -11218,25 +11240,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    logger.i('isSelected check at Shopping Cart Page: ',x.isSelected);
 
 
-
-
 //    logger.i('_currentPaymentTypeIndex: at line # 4287 $_currentPaymentTypeIndex');
     String paymentTypeName = onePaymentType.paymentTypeName;
     String paymentIconName = onePaymentType.paymentTypeName;
     String borderColor = onePaymentType.borderColor;
-    const Color OrderTypeIconColor=Color(0xff070707);
+    const Color OrderTypeIconColor = Color(0xff070707);
     return Container(
 
 //      height:displayHeight(context)/30,
 //      width:displayWidth(context)/10,
 
-      child:  index == _currentPaymentTypeIndex  ?
+      child: index == _currentPaymentTypeIndex ?
 
       Container(
 
 //        width: 110,
-        width: displayWidth(context)/7.8,
-        height: displayHeight(context) /11,
+        width: displayWidth(context) / 7.8,
+        height: displayHeight(context) / 11,
 //        alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
@@ -11249,13 +11269,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
           shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
             side: BorderSide(
-              color:Color(0xff000000),
+              color: Color(0xff000000),
               style: BorderStyle.solid,
             ),
             borderRadius: BorderRadius.circular(35.0),
           ),
 
-          child:Container(
+          child: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
             child: Column(
@@ -11265,8 +11285,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                  width:  displayWidth(context)/11.5,
-                  height: displayWidth(context)/11.5,
+                  width: displayWidth(context) / 11.5,
+                  height: displayWidth(context) / 11.5,
 //                decoration: new BoxDecoration(
 //                  color: Colors.orange,
 //                  shape: BoxShape.circle,
@@ -11288,7 +11308,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(
                     getIconForName(paymentTypeName),
                     color: Color(0xffFC0000),
-                    size: displayWidth(context)/20,
+                    size: displayWidth(context) / 20,
 
                   ),
 //
@@ -11320,7 +11340,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Text(
                     paymentTypeName, style:
                   TextStyle(
-                      color:Color(0xffFC0000),
+                      color: Color(0xffFC0000),
 
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
@@ -11330,29 +11350,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
           onPressed: () {
-
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
 //    void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newPaymentIndex,int oldPaymentIndex){
-            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(onePaymentType,index,_currentPaymentTypeIndex);
+            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
+                onePaymentType, index, _currentPaymentTypeIndex);
 
             // oneSinglePaymentType
             setState(() {
-              showFullPaymentType= false;
+              showFullPaymentType = false;
             });
-
-
           },
         ),
         // : Container for 2nd argument of ternary condition ends here.
 
-      ):
+      ) :
 
       Container(
 //        width: 110,
-        width: displayWidth(context)/7.8,
+        width: displayWidth(context) / 7.8,
 //        width: displayWidth(context)/8,
-        height: displayHeight(context) /10,
+        height: displayHeight(context) / 10,
 //        alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
         child:
@@ -11363,13 +11381,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
           shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
             side: BorderSide(
-              color:Color(0xff000000),
+              color: Color(0xff000000),
               style: BorderStyle.solid,
             ),
             borderRadius: BorderRadius.circular(35.0),
           ),
 
-          child:Container(
+          child: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
             child: Column(
@@ -11379,8 +11397,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                                width: displayWidth(context) * 0.09,
 //                                height: displayWidth(context) * 0.11,
-                  width:  displayWidth(context)/11.5,
-                  height: displayWidth(context)/11.5,
+                  width: displayWidth(context) / 11.5,
+                  height: displayWidth(context) / 11.5,
                   decoration: BoxDecoration(
                     border: Border.all(
 //                      color: Colors.red[500],
@@ -11398,7 +11416,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Icon(
                     getIconForName(paymentTypeName),
                     color: Colors.grey,
-                    size: displayWidth(context)/20,
+                    size: displayWidth(context) / 20,
                   ),
 //                child: Icon(
 //                  Icons.beach_access,
@@ -11426,7 +11444,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Text(
                     paymentTypeName, style:
                   TextStyle(
-                      color:Color(0xffFC0000),
+                      color: Color(0xffFC0000),
 
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
@@ -11436,22 +11454,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
           onPressed: () {
-
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(onePaymentType,index,_currentPaymentTypeIndex);
+            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
+                onePaymentType, index, _currentPaymentTypeIndex);
 
 
             // oneSinglePaymentType
             setState(() {
               showFullPaymentType = false;
             });
-
-
           },
         ),
-
-
 
 
       ),
@@ -11459,17 +11473,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-
-
-  Future<void> _showMyDialog(
-      Uint8List restaurantNameImageByte2,
+  Future<void> _showMyDialog(Uint8List restaurantNameImageByte2,
       Uint8List totalCostDeliveryBytes3,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
-
-
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
     print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
-    print('paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
+    print(
+        'paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
 
     return showDialog<void>(
       context: context,
@@ -11480,8 +11490,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('please use real blueTooth devices and also change functions in '
-                    'shopping cart page.'),
+                Text(
+                    'please use real blueTooth devices and also change functions in '
+                        'shopping cart page.'),
                 Container
                   (child: Image.memory(restaurantNameImageByte2)
                 ),
@@ -11510,11 +11521,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderdocument,ImageAliasAnotherSource.Image imageResource,
-      Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2)
-
-  async{
-
+      OneOrderFirebase oneOrderdocument,
+      ImageAliasAnotherSource.Image imageResource,
+      Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2,
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
     print(' came here: printTicketDummy');
 
 //    final PosPrintResult res =
@@ -11523,16 +11533,593 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    showToast('res.msg  res.msg   res.msg');
 
 
-
-    _showMyDialog(restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes2);
-
+    _showMyDialog(restaurantNameImageBytes, totalCostDeliveryBytes2,
+        paidUnpaidDeliveryTypeWidgetBytes2);
   }
 
 
+  // # number 1: demoReceipt Order Type TakeAway begins here...
+
+  Future<Ticket> demoReceiptOrderTypeTakeAway(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderListdocument,
+      /*ImageAliasAnotherSource.Image imageResource2, */
+      Uint8List restaurantNameImageBytes2,
+      Uint8List totalCostDeliveryBytes2,
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+    print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
+
+
+    CustomerInformation customerForReciteGeneration = oneOrderListdocument
+        .oneCustomer;
+
+    List<OrderedItem> orderedItems = oneOrderListdocument.orderedItems;
+
+    final Ticket ticket = Ticket(PaperSize.mm58);
+
+    print('paper.value: ${paper.value}');
+    print('currentRestaurant: ${currentRestaurant.name}');
+    print('oneOrderListdocument: $oneOrderListdocument');
+    print('orderedItems: $orderedItems');
+    print('customerForReciteGeneration.address: ${customerForReciteGeneration
+        .address}');
+    print(
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
+            .flatOrHouseNumber}');
+    print(
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
+            .phoneNumber}');
+    print(
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
+            .etaTimeInMinutes}');
+    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes2');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument
+        .orderProductionTime}');
+
+
+    final ImageAliasAnotherSource
+        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+        restaurantNameImageBytes2);
+
+    ticket.image(oneImageRestaurant);
+
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+
+
+    orderedItems.forEach((oneFood) {
+      ticket.row([
+
+        PosColumn(text: '${oneFood.name}',
+          width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}',
+          width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
+          width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+      ]);
+
+
+      ticket.hr();
+      // needed. as per design.
+
+    });
+
+
+    ticket.image(oneImageTotalCostDelivery);
+
+    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+
+    ticket.image(paidUnpaidDeliveryTypImage);
+
+//    ticket.image(oneImageTotalCostDelivery);
+//    oneImageTotalCostDelivery
+//      ticket.image(imageTotalCostForDelivery);
+
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+
+  // # number 2: demoReceipt Order Type Delivery begins here...
+
+//  restaurantNameImageBytes,totalCostDeliveryBytes2
+  Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderListdocument,
+      /*ImageAliasAnotherSource.Image imageResource2, */
+      Uint8List restaurantNameImageBytes2,
+      Uint8List totalCostDeliveryBytes2,
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+    print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
+
+
+    CustomerInformation customerForReciteGeneration = oneOrderListdocument
+        .oneCustomer;
+
+    List<OrderedItem> orderedItems = oneOrderListdocument.orderedItems;
+
+    final Ticket ticket = Ticket(PaperSize.mm58);
+
+    print('paper.value: ${paper.value}');
+    print('currentRestaurant: ${currentRestaurant.name}');
+    print('oneOrderListdocument: $oneOrderListdocument');
+    print('orderedItems: $orderedItems');
+    print('customerForReciteGeneration.address: ${customerForReciteGeneration
+        .address}');
+    print(
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
+            .flatOrHouseNumber}');
+    print(
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
+            .phoneNumber}');
+    print(
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
+            .etaTimeInMinutes}');
+    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument
+        .orderProductionTime}');
+
+
+    final ImageAliasAnotherSource
+        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+        restaurantNameImageBytes2);
+
+    ticket.image(oneImageRestaurant);
+
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+
+
+    ticket.text('${oneOrderListdocument.orderBy}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+
+        ));
+    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ));
+    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ));
+
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('Address: ${
+        ((customerForReciteGeneration.address == null) ||
+            (customerForReciteGeneration.address.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.address.length > 7 ?
+        customerForReciteGeneration.address.substring(0, 7) + '..' :
+        customerForReciteGeneration.address
+    }',
+        styles: PosStyles(
+          align: PosAlign.right,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+
+        )
+    );
+
+    ticket.text('Flat #:${
+        ((customerForReciteGeneration.flatOrHouseNumber == null) ||
+            (customerForReciteGeneration.flatOrHouseNumber.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.flatOrHouseNumber.length > 7 ?
+        customerForReciteGeneration.flatOrHouseNumber.substring(0, 7) + '..' :
+        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
+
+
+    )
+    );
+    ticket.text('phone #:${
+        ((customerForReciteGeneration.phoneNumber == null) ||
+            (customerForReciteGeneration.phoneNumber.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.flatOrHouseNumber.length > 7 ?
+        customerForReciteGeneration.phoneNumber.substring(0, 7) + '..' :
+        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
+
+
+    )
+    );
+
+
+    orderedItems.forEach((oneFood) {
+      ticket.row([
+
+        PosColumn(text: '${oneFood.name}',
+          width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}',
+          width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
+          width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+      ]);
+
+
+      ticket.hr();
+      // needed. as per design.
+
+    });
+
+
+//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
+
+
+    ticket.image(oneImageTotalCostDelivery);
+
+    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+
+    ticket.image(paidUnpaidDeliveryTypImage);
+
+//    ticket.image(oneImageTotalCostDelivery);
+//    oneImageTotalCostDelivery
+//      ticket.image(imageTotalCostForDelivery);
+
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+
+  // demoReceipt Order Type Delivery ends here...
+
+
+  // # number 3: demoReceipt Order Type phone begins here...
+
+  // demoReceipt Order Type Phone begins here...
+  Future<Ticket> demoReceiptOrderTypePhone(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderListdocument,
+      /*ImageAliasAnotherSource.Image imageResource2, */
+      Uint8List restaurantNameImageBytes2,
+      Uint8List totalCostDeliveryBytes2,
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+    print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
+
+
+    CustomerInformation customerForReciteGeneration = oneOrderListdocument
+        .oneCustomer;
+
+    List<OrderedItem> orderedItems = oneOrderListdocument.orderedItems;
+
+    final Ticket ticket = Ticket(PaperSize.mm58);
+
+    print('paper.value: ${paper.value}');
+    print('currentRestaurant: ${currentRestaurant.name}');
+    print('oneOrderListdocument: $oneOrderListdocument');
+    print('orderedItems: $orderedItems');
+    print('customerForReciteGeneration.address: ${customerForReciteGeneration
+        .address}');
+    print(
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
+            .flatOrHouseNumber}');
+    print(
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
+            .phoneNumber}');
+    print(
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
+            .etaTimeInMinutes}');
+    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument
+        .orderProductionTime}');
+
+
+    final ImageAliasAnotherSource
+        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+        restaurantNameImageBytes2);
+
+//    grayscale(oneImageRestaurant);
+    ticket.image(oneImageRestaurant);
+
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+
+
+    ticket.text('${oneOrderListdocument.orderBy}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+
+        ));
+    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ));
+    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ));
+
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('Address: ${
+        ((customerForReciteGeneration.address == null) ||
+            (customerForReciteGeneration.address.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.address.length > 7 ?
+        customerForReciteGeneration.address.substring(0, 7) + '..' :
+        customerForReciteGeneration.address
+    }',
+        styles: PosStyles(
+          align: PosAlign.right,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+
+        )
+    );
+
+    ticket.text('Flat #:${
+        ((customerForReciteGeneration.flatOrHouseNumber == null) ||
+            (customerForReciteGeneration.flatOrHouseNumber.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.flatOrHouseNumber.length > 7 ?
+        customerForReciteGeneration.flatOrHouseNumber.substring(0, 7) + '..' :
+        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
+
+
+    )
+    );
+    ticket.text('phone #:${
+        ((customerForReciteGeneration.phoneNumber == null) ||
+            (customerForReciteGeneration.phoneNumber.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.flatOrHouseNumber.length > 7 ?
+        customerForReciteGeneration.phoneNumber.substring(0, 7) + '..' :
+        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
+
+
+    )
+    );
+
+
+    orderedItems.forEach((oneFood) {
+      ticket.row([
+
+        PosColumn(text: '${oneFood.name}',
+          width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}',
+          width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
+          width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+      ]);
+
+
+      ticket.hr();
+      // needed. as per design.
+
+    });
+
+
+//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
+
+
+    ticket.image(oneImageTotalCostDelivery);
+
+    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+
+    ticket.image(paidUnpaidDeliveryTypImage);
+//    oneImageTotalCostDelivery
+//      ticket.image(imageTotalCostForDelivery);
+
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+// demoReceipt Order Type Phone ends here...
+
+
+// # number 4: demoReceipt Order Type Dinning begins here...
+
+  Future<Ticket> demoReceiptOrderTypeDinning(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderListdocument,
+      /*ImageAliasAnotherSource.Image imageResource2, */
+      Uint8List restaurantNameImageBytes2,
+      Uint8List totalCostDeliveryBytes2,
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+    print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
+
+
+    CustomerInformation customerForReciteGeneration = oneOrderListdocument
+        .oneCustomer;
+
+    List<OrderedItem> orderedItems = oneOrderListdocument.orderedItems;
+
+    final Ticket ticket = Ticket(PaperSize.mm58);
+
+    print('paper.value: ${paper.value}');
+    print('currentRestaurant: ${currentRestaurant.name}');
+    print('oneOrderListdocument: $oneOrderListdocument');
+    print('orderedItems: $orderedItems');
+    print('customerForReciteGeneration.address: ${customerForReciteGeneration
+        .address}');
+    print(
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
+            .flatOrHouseNumber}');
+    print(
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
+            .phoneNumber}');
+    print(
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
+            .etaTimeInMinutes}');
+    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument
+        .orderProductionTime}');
+
+
+    final ImageAliasAnotherSource
+        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+        restaurantNameImageBytes2);
+
+    ticket.image(oneImageRestaurant);
+
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+
+
+    ticket.text('${oneOrderListdocument.orderBy}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+
+        ));
+    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ));
+    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+        styles: PosStyles(
+          align: PosAlign.left,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ));
+
+
+//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
+    ticket.text('Address: ${
+        ((customerForReciteGeneration.address == null) ||
+            (customerForReciteGeneration.address.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.address.length > 7 ?
+        customerForReciteGeneration.address.substring(0, 7) + '..' :
+        customerForReciteGeneration.address
+    }',
+        styles: PosStyles(
+          align: PosAlign.right,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+
+        )
+    );
+
+    ticket.text('Flat #:${
+        ((customerForReciteGeneration.flatOrHouseNumber == null) ||
+            (customerForReciteGeneration.flatOrHouseNumber.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.flatOrHouseNumber.length > 7 ?
+        customerForReciteGeneration.flatOrHouseNumber.substring(0, 7) + '..' :
+        customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
+
+
+    )
+    );
+    ticket.text('phone #:${
+        ((customerForReciteGeneration.phoneNumber == null) ||
+            (customerForReciteGeneration.phoneNumber.length == 0)) ?
+        'EMPTY' : customerForReciteGeneration.flatOrHouseNumber.length > 7 ?
+        customerForReciteGeneration.phoneNumber.substring(0, 7) + '..' :
+        customerForReciteGeneration.phoneNumber}', styles: PosStyles(
+
+      align: PosAlign.right,
+      height: PosTextSize.size2,
+      width: PosTextSize.size2,
+
+
+    )
+    );
+
+
+    orderedItems.forEach((oneFood) {
+      ticket.row([
+
+        PosColumn(text: '${oneFood.name}',
+          width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.quantity}',
+          width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
+          width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+      ]);
+
+
+      ticket.hr();
+      // needed. as per design.
+
+    });
+
+//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
+
+
+    ticket.image(oneImageTotalCostDelivery);
+
+    final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+
+    ticket.image(paidUnpaidDeliveryTypImage);
+
+//    ticket.image(oneImageTotalCostDelivery);
+//    oneImageTotalCostDelivery
+//      ticket.image(imageTotalCostForDelivery);
+
+
+    ticket.feed(2);
+    ticket.cut();
+    return ticket;
+  }
+
+// # number 4: demoReceipt Order Type Dinning ends here...
 
 
   Future<bool> _testPrint(PrinterBluetooth printer) async {
-
     printerManager.selectPrinter(printer);
 
     // TODO Don't forget to choose printer's paper
@@ -11546,7 +12133,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         new Row(
           children: <Widget>[
             new CircularProgressIndicator(),
-            new Text("fetching data for receipt production...",style:TextStyle(
+            new Text(
+                "fetching data for receipt production...", style: TextStyle(
               color: Colors.white38,
             ))
           ],
@@ -11555,546 +12143,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
 
 
-
-    // # number 1: demoReceipt Order Type TakeAway begins here...
-
-    Future<Ticket> demoReceiptOrderTypeTakeAway(PaperSize paper,
-        Restaurant currentRestaurant,
-        OneOrderFirebase oneOrderListdocument,
-        /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-        Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes2
-        /*PaperSize paper,Restaurant currentRestaurant  */) async {
-
-      print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
-
-
-      CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
-
-      List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-      final Ticket ticket = Ticket(PaperSize.mm58);
-
-      print('paper.value: ${paper.value}');
-      print('currentRestaurant: ${currentRestaurant.name}');
-      print('oneOrderListdocument: $oneOrderListdocument');
-      print('orderedItems: $orderedItems');
-      print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
-      print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
-      print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-      print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-      print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-      print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes2');
-      print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
-
-
-
-      final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
-
-      ticket.image(oneImageRestaurant);
-
-      final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-      ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
-
-
-
-      orderedItems.forEach((oneFood) {
-
-
-
-        ticket.row([
-
-          PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
-          PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-          PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-        ]);
-
-
-
-        ticket.hr();
-        // needed. as per design.
-
-      });
-
-
-
-      ticket.image(oneImageTotalCostDelivery);
-
-      final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-      ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
-
-
-      ticket.image(paidUnpaidDeliveryTypImage);
-
-//    ticket.image(oneImageTotalCostDelivery);
-//    oneImageTotalCostDelivery
-//      ticket.image(imageTotalCostForDelivery);
-
-
-      ticket.feed(2);
-      ticket.cut();
-      return ticket;
-    }
-
-
-    // # number 2: demoReceipt Order Type Delivery begins here...
-
-//  restaurantNameImageBytes,totalCostDeliveryBytes2
-    Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
-        Restaurant currentRestaurant,
-        OneOrderFirebase oneOrderListdocument,
-        /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-        Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
-        /*PaperSize paper,Restaurant currentRestaurant  */) async {
-
-      print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
-
-
-      CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
-
-      List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-      final Ticket ticket = Ticket(PaperSize.mm58);
-
-      print('paper.value: ${paper.value}');
-      print('currentRestaurant: ${currentRestaurant.name}');
-      print('oneOrderListdocument: $oneOrderListdocument');
-      print('orderedItems: $orderedItems');
-      print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
-      print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
-      print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-      print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-      print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-      print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-      print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
-
-
-
-      final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
-
-      ticket.image(oneImageRestaurant);
-
-      final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-      ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
-
-
-      ticket.text('${oneOrderListdocument.orderBy}',
-          styles: PosStyles(
-            align: PosAlign.left,
-            bold: true,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-
-          ));
-      ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
-        align: PosAlign.left,
-        bold: true,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-      ));
-      ticket.text('${oneOrderListdocument.orderProductionTime} min',
-          styles: PosStyles(
-            align: PosAlign.left,
-            bold: true,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          ));
-
-
-//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-      ticket.text('Address: ${
-          ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-          'EMPTY': customerForReciteGeneration.address.length>7?
-          customerForReciteGeneration.address.substring(0,7)+'..':
-          customerForReciteGeneration.address
-      }',
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-
-          )
-      );
-
-      ticket.text('Flat #:${
-          ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
-          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-          customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
-          customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
-
-        align: PosAlign.right,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-
-
-      )
-      );
-      ticket.text('phone #:${
-          ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-          customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
-          customerForReciteGeneration.phoneNumber}', styles: PosStyles(
-
-        align: PosAlign.right,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-
-
-      )
-      );
-
-
-      orderedItems.forEach((oneFood) {
-
-
-
-        ticket.row([
-
-          PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
-          PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-          PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-        ]);
-
-
-
-        ticket.hr();
-        // needed. as per design.
-
-      });
-
-
-//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
-
-
-      ticket.image(oneImageTotalCostDelivery);
-
-      final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-      ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
-
-
-      ticket.image(paidUnpaidDeliveryTypImage);
-
-//    ticket.image(oneImageTotalCostDelivery);
-//    oneImageTotalCostDelivery
-//      ticket.image(imageTotalCostForDelivery);
-
-
-      ticket.feed(2);
-      ticket.cut();
-      return ticket;
-    }
-
-
-    // demoReceipt Order Type Delivery ends here...
-
-
-    // # number 3: demoReceipt Order Type phone begins here...
-
-    // demoReceipt Order Type Phone begins here...
-    Future<Ticket> demoReceiptOrderTypePhone(PaperSize paper,
-        Restaurant currentRestaurant,
-        OneOrderFirebase oneOrderListdocument,
-        /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-        Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
-        /*PaperSize paper,Restaurant currentRestaurant  */) async {
-
-      print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
-
-
-      CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
-
-      List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-      final Ticket ticket = Ticket(PaperSize.mm58);
-
-      print('paper.value: ${paper.value}');
-      print('currentRestaurant: ${currentRestaurant.name}');
-      print('oneOrderListdocument: $oneOrderListdocument');
-      print('orderedItems: $orderedItems');
-      print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
-      print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
-      print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-      print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-      print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-      print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-      print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
-
-
-
-      final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
-
-//    grayscale(oneImageRestaurant);
-      ticket.image(oneImageRestaurant);
-
-      final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-      ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
-
-
-      ticket.text('${oneOrderListdocument.orderBy}',
-          styles: PosStyles(
-            align: PosAlign.left,
-            bold: true,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-
-          ));
-      ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
-        align: PosAlign.left,
-        bold: true,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-      ));
-      ticket.text('${oneOrderListdocument.orderProductionTime} min',
-          styles: PosStyles(
-            align: PosAlign.left,
-            bold: true,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          ));
-
-
-//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-      ticket.text('Address: ${
-          ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-          'EMPTY': customerForReciteGeneration.address.length>7?
-          customerForReciteGeneration.address.substring(0,7)+'..':
-          customerForReciteGeneration.address
-      }',
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-
-          )
-      );
-
-      ticket.text('Flat #:${
-          ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
-          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-          customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
-          customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
-
-        align: PosAlign.right,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-
-
-      )
-      );
-      ticket.text('phone #:${
-          ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-          customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
-          customerForReciteGeneration.phoneNumber}', styles: PosStyles(
-
-        align: PosAlign.right,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-
-
-      )
-      );
-
-
-      orderedItems.forEach((oneFood) {
-
-
-
-        ticket.row([
-
-          PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
-          PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-          PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-        ]);
-
-
-
-        ticket.hr();
-        // needed. as per design.
-
-      });
-
-
-//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
-
-
-      ticket.image(oneImageTotalCostDelivery);
-
-      final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-      ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
-
-
-      ticket.image(paidUnpaidDeliveryTypImage);
-//    oneImageTotalCostDelivery
-//      ticket.image(imageTotalCostForDelivery);
-
-
-      ticket.feed(2);
-      ticket.cut();
-      return ticket;
-    }
-
-// demoReceipt Order Type Phone ends here...
-
-
-// # number 4: demoReceipt Order Type Dinning begins here...
-
-    Future<Ticket> demoReceiptOrderTypeDinning(PaperSize paper,
-        Restaurant currentRestaurant,
-        OneOrderFirebase oneOrderListdocument,
-        /*ImageAliasAnotherSource.Image imageResource2, */ Uint8List restaurantNameImageBytes2,
-        Uint8List totalCostDeliveryBytes2, Uint8List paidUnpaidDeliveryTypeWidgetBytes2
-        /*PaperSize paper,Restaurant currentRestaurant  */) async {
-
-      print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
-
-
-      CustomerInformation customerForReciteGeneration = oneOrderListdocument.oneCustomer;
-
-      List<OrderedItem> orderedItems =         oneOrderListdocument.orderedItems;
-
-      final Ticket ticket = Ticket(PaperSize.mm58);
-
-      print('paper.value: ${paper.value}');
-      print('currentRestaurant: ${currentRestaurant.name}');
-      print('oneOrderListdocument: $oneOrderListdocument');
-      print('orderedItems: $orderedItems');
-      print('customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
-      print('customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
-      print('customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-      print('customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-      print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-      print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-      print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument.orderProductionTime}');
-
-
-
-      final ImageAliasAnotherSource.Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameImageBytes2);
-
-      ticket.image(oneImageRestaurant);
-
-      final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-      ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
-
-
-      ticket.text('${oneOrderListdocument.orderBy}',
-          styles: PosStyles(
-            align: PosAlign.left,
-            bold: true,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-
-          ));
-      ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}', styles: PosStyles(
-        align: PosAlign.left,
-        bold: true,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-      ));
-      ticket.text('${oneOrderListdocument.orderProductionTime} min',
-          styles: PosStyles(
-            align: PosAlign.left,
-            bold: true,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-          ));
-
-
-//    ticket.text('${oneOrderListdocument.documentId}', styles: PosStyles(align: PosAlign.right));
-      ticket.text('Address: ${
-          ((customerForReciteGeneration.address==null) || (customerForReciteGeneration.address.length==0))?
-          'EMPTY': customerForReciteGeneration.address.length>7?
-          customerForReciteGeneration.address.substring(0,7)+'..':
-          customerForReciteGeneration.address
-      }',
-          styles: PosStyles(
-            align: PosAlign.right,
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-
-          )
-      );
-
-      ticket.text('Flat #:${
-          ((customerForReciteGeneration.flatOrHouseNumber==null) || (customerForReciteGeneration.flatOrHouseNumber.length==0))?
-          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-          customerForReciteGeneration.flatOrHouseNumber.substring(0,7)+'..':
-          customerForReciteGeneration.flatOrHouseNumber}', styles: PosStyles(
-
-        align: PosAlign.right,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-
-
-      )
-      );
-      ticket.text('phone #:${
-          ((customerForReciteGeneration.phoneNumber==null) ||(customerForReciteGeneration.phoneNumber.length==0))?
-          'EMPTY': customerForReciteGeneration.flatOrHouseNumber.length>7?
-          customerForReciteGeneration.phoneNumber.substring(0,7)+'..':
-          customerForReciteGeneration.phoneNumber}', styles: PosStyles(
-
-        align: PosAlign.right,
-        height: PosTextSize.size2,
-        width: PosTextSize.size2,
-
-
-      )
-      );
-
-
-      orderedItems.forEach((oneFood) {
-
-
-
-        ticket.row([
-
-          PosColumn(text: '${oneFood.name}', width: 5 ,/*,styles: PosStyles(align: PosAlign.left) */),
-          PosColumn(text: '${oneFood.quantity}', width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-          PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}', width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-        ]);
-
-
-
-        ticket.hr();
-        // needed. as per design.
-
-      });
-
-//    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery2 = ImageAliasAnotherSource.grayscale(oneImageTotalCostDelivery);
-
-
-      ticket.image(oneImageTotalCostDelivery);
-
-      final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-      ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
-
-      ticket.image(paidUnpaidDeliveryTypImage);
-
-//    ticket.image(oneImageTotalCostDelivery);
-//    oneImageTotalCostDelivery
-//      ticket.image(imageTotalCostForDelivery);
-
-
-      ticket.feed(2);
-      ticket.cut();
-      return ticket;
-    }
-
-// # number 4: demoReceipt Order Type Dinning ends here...
-
-
-
-
     Future <bool> printTicket(PaperSize paper,
         Restaurant currentRestaurant,
         OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
-        Uint8List totalCostDeliveryBytes2,Uint8List paidUnpaidDeliveryTypeWidgetBytes
-        ) async{
-
+        Uint8List totalCostDeliveryBytes2,
+        Uint8List paidUnpaidDeliveryTypeWidgetBytes) async {
       // pqr
 //    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //    demoReceiptOrderTypeDinning
@@ -12103,20 +12156,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
 
-      final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase()=='delivery')?
+      final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase() ==
+          'delivery') ?
       await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
-      (oneOrderdocument.orderBy.toLowerCase()=='phone')?
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,
+          totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
+      (oneOrderdocument.orderBy.toLowerCase() == 'phone') ?
       await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
-      (oneOrderdocument.orderBy.toLowerCase()=='takeaway')?
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,
+          totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
+      (oneOrderdocument.orderBy.toLowerCase() == 'takeaway') ?
       await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes)):
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,
+          totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
       await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,totalCostDeliveryBytes2,paidUnpaidDeliveryTypeWidgetBytes));
-
-
-
+          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,
+          totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes));
 
 
       print('res.msg: ${res.msg}');
@@ -12124,23 +12179,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       showToast(res.msg);
 
-      if(res.msg=='Success'){
-
+      if (res.msg == 'Success') {
         print('at  Success');
         return true;
       }
 
 
       else {
-
         print('before returning false from Future <bool> printTicket ');
         return false;
       }
 
 //    TODO: NEED TO check the res.msg
       // true means printed.
-
-
 
 
     }
@@ -12150,13 +12201,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 
-    Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+    Order oneOrderForReceipt = shoppingCartBloc.getCurrentOrder;
 
     print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
 
-    Future<OneOrderFirebase> testFirebaseOrderFetch=
-    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+    Future<OneOrderFirebase> testFirebaseOrderFetch =
+    shoppingCartBloc.fetchOrderDataFromFirebase(
+        oneOrderForReceipt.orderdocId.trim());
 
 //    Widget restaurantName2 = restaurantName(thisRestaurant.name);
 //    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
@@ -12190,10 +12242,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    Order oneOrderForReceipt
 
 
-
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
 
-    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(
+        restaurantName2);
 
     Uint8List restaurantNameBytesNotFuture;
 
@@ -12203,20 +12255,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ImageAliasAnotherSource.Image imageRestaurant;
 
 
-
-    /* await */ restaurantNameBytesFuture.whenComplete(() {
-
+    /* await */
+    restaurantNameBytesFuture.whenComplete(() {
       print("restaurantNameBytes.whenComplete called when future completes");
-
     }
-    ).then((oneImageInBytes){
-
+    ).then((oneImageInBytes) {
 //      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       print('calling ticket.image(imageRestaurant); ');
       restaurantNameBytesNotFuture = oneImageInBytes;
 //      ticket.image(imageRestaurant);
 
-    }).catchError((onError){
+    }).catchError((onError) {
       print(' error in getting restaurant name as image');
       print('false: means something wrong not printed');
       //means something wrong not printed
@@ -12224,18 +12273,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 
     // Print image
-    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
+    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(
+        oneOrderForReceipt.totalPrice);
     Uint8List totalCostDeliveryBytes;
 
-    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
+    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(
+        totalDeliveryWidget2);
 
-    /* await */ totalDeliveryWidgetBytes.whenComplete(() {
-
+    /* await */
+    totalDeliveryWidgetBytes.whenComplete(() {
       print("called when future completes");
-
     }
-    ).then((oneImageInBytes){
-
+    ).then((oneImageInBytes) {
 //      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       totalCostDeliveryBytes = oneImageInBytes;
 
@@ -12245,7 +12294,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print('before printing total cose for recite of delivery type order');
 //      ticket.image(image);
 
-    }).catchError((onError){
+    }).catchError((onError) {
       print(' error in getting restaurant name as image');
       return false;
     });
@@ -12253,13 +12302,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                            _handleSignIn();
 
-    /* await */ testFirebaseOrderFetch.whenComplete(() {
-
+    /* await */
+    testFirebaseOrderFetch.whenComplete(() {
       print("called when future completes");
-
     }
-    ).then((oneOrderData){
-
+    ).then((oneOrderData) {
       // TODO: any oneOrderData data validation needs to be done in  corresponding block page.
 //      if ((oneOrderData.orderType == null) ||((oneOrderData.totalPrice ==null))) {
 //        return false;
@@ -12271,7 +12318,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
 
-      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+      final Future<
+          Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
+          paidUnpaidDeliveryType2);
 
       Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
@@ -12281,25 +12330,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      ImageAliasAnotherSource.Image imageRestaurant;
 
 
-
-      /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
-
+      /* await */
+      paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
         print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
-
       }
-      ).then((paidUnpaidDeliveryTypeInBytes){
-
+      ).then((paidUnpaidDeliveryTypeInBytes) {
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
         print('calling ticket.image(imageRestaurant); ');
 //        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
-
+        print(
+            'paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
 
 
 //        DDD
-        Widget orderInformationAndCustomerInformationWidget = paidUnpaidDeliveryType(oneOrderData);
+        Widget orderInformationAndCustomerInformationWidget = paidUnpaidDeliveryType(
+            oneOrderData);
 
-        final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+        final Future<
+            Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
+            paidUnpaidDeliveryType2);
 
         Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
@@ -12309,20 +12358,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      ImageAliasAnotherSource.Image imageRestaurant;
 
 
-
-        /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
-
+        /* await */
+        paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
           print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
-
         }
-        ).then((paidUnpaidDeliveryTypeInBytes){
-
+        ).then((paidUnpaidDeliveryTypeInBytes) {
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
           print('calling ticket.image(imageRestaurant); ');
 //        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-          print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
-
-
+          print(
+              'paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
 
 
 //        oneOrderData  ssss ssss
@@ -12332,33 +12377,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
           printTicket(
               paper,
               thisRestaurant,
-              oneOrderData/*,imageRestaurant */,
+              oneOrderData /*,imageRestaurant */,
               restaurantNameBytesNotFuture,
-              totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
+              totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
 
           isPrint.whenComplete(() {
-
             print("called when future completes");
 //          return true;
           }
-          ).then((printResult){
+          ).then((printResult) {
             print("printResult: $printResult");
             return true;
-
           }).catchError((onError) {
             print('printing not successful: $onError');
             return false;
           });
-
-        }).catchError((onError){
+        }).catchError((onError) {
           print(' error in getting restaurant name as image');
           print('false: means something wrong not printed');
           //means something wrong not printed
           return false;
         });
-
 
 
 //      if ((oneOrderData.orderType != null) ||(oneOrderData.totalPrice !=null)) {
@@ -12377,24 +12418,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
       */
 
 
-
-      }).catchError((onError){
+      }).catchError((onError) {
         print('Order data fetch Error $onError ***');
         _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-          new SnackBar(duration: new Duration(seconds: 6), content:Container(
+          new SnackBar(duration: new Duration(seconds: 6), content: Container(
             child:
             new Row(
               children: <Widget>[
                 new CircularProgressIndicator(),
-                new Text("Error: ${onError.message.substring(0,40)}",style:
-                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                    color:Colors.white)),
+                new Text("Error: ${onError.message.substring(0, 40)}", style:
+                TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                    color: Colors.white)),
               ],
             ),
           )),);
 
         return false;
-
       });
 
       // final return false if true is not return from the above conditioned.
@@ -12402,9 +12441,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 
 
-
     void _testPrintDummyDevices(PrinterBluetooth printer) async {
-
       // NOT REQUIRED SINCE DUMMY...
 
       /*
@@ -12424,7 +12461,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           new Row(
             children: <Widget>[
               new CircularProgressIndicator(),
-              new Text("fetching data for receipt production...",style:TextStyle(
+              new Text(
+                  "fetching data for receipt production...", style: TextStyle(
                 color: Colors.red,
               ))
             ],
@@ -12436,17 +12474,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 
-      Order oneOrderForReceipt  = shoppingCartBloc.getCurrentOrder;
+      Order oneOrderForReceipt = shoppingCartBloc.getCurrentOrder;
 
       print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
 
-      Future<OneOrderFirebase> testFirebaseOrderFetch=
-      shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+      Future<OneOrderFirebase> testFirebaseOrderFetch =
+      shoppingCartBloc.fetchOrderDataFromFirebase(
+          oneOrderForReceipt.orderdocId.trim());
 
 
       Widget restaurantName2 = restaurantName(thisRestaurant.name);
-      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(
+          restaurantName2);
       Uint8List restaurantNameBytesNotFuture;
 
       print('restaurantNameBytes: $restaurantNameBytesNotFuture');
@@ -12455,60 +12495,56 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ImageAliasAnotherSource.Image imageRestaurant;
 
 
-
-      /* await */ restaurantNameBytesFuture.whenComplete(() {
-
+      /* await */
+      restaurantNameBytesFuture.whenComplete(() {
         print("restaurantNameBytes.whenComplete called when future completes");
-
       }
-      ).then((oneImageInBytes){
-
-        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      ).then((oneImageInBytes) {
+        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource
+            .decodeImage(oneImageInBytes);
         print('calling ticket.image(imageRestaurant); ');
         restaurantNameBytesNotFuture = oneImageInBytes;
 //      ticket.image(imageRestaurant);
 
-      }).catchError((onError){
+      }).catchError((onError) {
         print(' error in getting restaurant name as image');
       });
 
       // Print image
-      Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
+      Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(
+          oneOrderForReceipt.totalPrice);
       Uint8List totalCostDeliveryBytes;
 
-      final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(totalDeliveryWidget2);
+      final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(
+          totalDeliveryWidget2);
 
-      /* await */ totalDeliveryWidgetBytes.whenComplete(() {
-
+      /* await */
+      totalDeliveryWidgetBytes.whenComplete(() {
         print("called when future completes");
-
       }
-      ).then((oneImageInBytes){
-
+      ).then((oneImageInBytes) {
 //      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
         totalCostDeliveryBytes = oneImageInBytes;
         print('before printing total cose for recite of delivery type order');
 //      ticket.image(image);
 
-      }).catchError((onError){
+      }).catchError((onError) {
         print(' error in getting restaurant name as image');
       });
 
 
 //                            _handleSignIn();
 
-      /* await */ testFirebaseOrderFetch.whenComplete(() {
-
+      /* await */
+      testFirebaseOrderFetch.whenComplete(() {
         print("called when future completes");
-
       }
-      ).then((oneOrderData){
-
-
-
+      ).then((oneOrderData) {
         Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
 
-        final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(paidUnpaidDeliveryType2);
+        final Future<
+            Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
+            paidUnpaidDeliveryType2);
 
         Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
@@ -12518,61 +12554,48 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      ImageAliasAnotherSource.Image imageRestaurant;
 
 
-
-        /* await */ paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
-
-          print("restaurantNameBytes.whenComplete called when future completes");
-
+        /* await */
+        paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+          print(
+              "restaurantNameBytes.whenComplete called when future completes");
         }
-        ).then((paidUnpaidDeliveryTypeInBytes){
-
+        ).then((paidUnpaidDeliveryTypeInBytes) {
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-          print('paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
+          print(
+              'paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
 //        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
 //        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
-          printTicketDummy(/*paper, */thisRestaurant,oneOrderData,imageRestaurant,restaurantNameBytesNotFuture,
-              totalCostDeliveryBytes,paidUnpaidDeliveryTypeInBytes);
-
-        }).catchError((onError){
+          printTicketDummy(/*paper, */
+              thisRestaurant, oneOrderData, imageRestaurant,
+              restaurantNameBytesNotFuture,
+              totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
+        }).catchError((onError) {
           print(' error in getting restaurant name as image');
           print('false: means something wrong not printed');
           //means something wrong not printed
           return false;
         });
-
-
-
-      }).catchError((onError){
+      }).catchError((onError) {
         print('Order data fetch Error $onError ***');
         _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-          new SnackBar(duration: new Duration(seconds: 6), content:Container(
+          new SnackBar(duration: new Duration(seconds: 6), content: Container(
             child:
             new Row(
               children: <Widget>[
                 new CircularProgressIndicator(),
-                new Text("Error: ${onError.message.substring(0,40)}",style:
-                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                    color:Colors.white)),
+                new Text("Error: ${onError.message.substring(0, 40)}", style:
+                TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                    color: Colors.white)),
               ],
             ),
           )),);
-
       });
-
     }
 
 
-
-
-
-
-    Future<void> _showMyDialog3(
-
-        Uint8List x) async {
-
-
+    Future<void> _showMyDialog3(Uint8List x) async {
       print('x: $x');
 //    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
       return showDialog<void>(
@@ -12584,8 +12607,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text('please use real blueTooth devices and also change functions in '
-                      'shopping cart page.'),
+                  Text(
+                      'please use real blueTooth devices and also change functions in '
+                          'shopping cart page.'),
                   Container
                     (child: Image.memory(x)
                   ),
@@ -12614,19 +12638,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  Container(
 
 
-
-
-
-
-
-
-
-
   }
 
 
-
-
+}
 
 //  FoodDetailImage
 
