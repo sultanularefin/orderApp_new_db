@@ -623,16 +623,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(0, 15, 0,0),
+              margin: EdgeInsets.fromLTRB(6, 15, 0,0),
 
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
               height: 120,
-              width: 150,
+              width: 120,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
 
                   Text(
@@ -649,7 +649,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                      fontSize: 20, fontFamily: 'Itim-Regular',),
                   ),
 
                   // 1 ends here.
@@ -664,7 +664,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                      fontSize: 20, fontFamily: 'Itim-Regular',),
                   ),
 
 
@@ -676,7 +676,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                      fontSize: 20, fontFamily: 'Itim-Regular',),
                   ),
 
                   // 3 ends here.
@@ -692,7 +692,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            color:Colors.yellowAccent,
               height: 120,
-              width: 150,
+              width: 180,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -710,7 +710,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                      fontSize: 20, fontFamily: 'Itim-Regular',),
                   ),
 
                   // 1 ends here.
@@ -721,9 +721,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         (customerForReciteGeneration.flatOrHouseNumber.length ==
                             0)) ?
                     'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
-                        .length > 17 ?
+                        .length > 20 ?
                     customerForReciteGeneration.flatOrHouseNumber.substring(
-                        0, 17) + '..' :
+                        0, 20) + '..' :
                     customerForReciteGeneration.flatOrHouseNumber,
 
                     textAlign: TextAlign.left,
@@ -731,14 +731,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                      fontSize: 20, fontFamily: 'Itim-Regular',),
                   ),
 
                   Text(
                     ((customerForReciteGeneration.phoneNumber == null) ||
                         (customerForReciteGeneration.phoneNumber.length == 0)) ?
                     'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
-                        .length > 17 ?
+                        .length > 20 ?
                     customerForReciteGeneration.phoneNumber.substring(0, 17) +
                         '..' :
                     customerForReciteGeneration.phoneNumber,
@@ -748,7 +748,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                      fontSize: 20, fontFamily: 'Itim-Regular',),
                   ),
 
 
