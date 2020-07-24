@@ -614,7 +614,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
 
         ),
-        height: 120,
+        height: 140,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 300,
@@ -628,7 +628,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 120,
+              height: 140,
               width: 105,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -692,67 +692,77 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 120,
+              height: 140,
               width: 195,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
 
-                  Text(
-                    ((customerForReciteGeneration.address == null) ||
-                        (customerForReciteGeneration.address.length == 0)) ?
-                    'EMPTY' : customerForReciteGeneration.address.length > 17 ?
-                    customerForReciteGeneration.address.substring(0, 17) + '..' :
-                    customerForReciteGeneration.address,
+                  Container(
+                    height:45,
+                    child: Text(
+                      ((customerForReciteGeneration.address == null) ||
+                          (customerForReciteGeneration.address.length == 0)) ?
+                      'EMPTY' : customerForReciteGeneration.address.length > 17 ?
+                      customerForReciteGeneration.address.substring(0, 17) + '..' :
+                      customerForReciteGeneration.address,
 
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                        color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 20, fontFamily: 'Itim-Regular',),
-                    maxLines: 2,
+                        fontSize: 20, fontFamily: 'Itim-Regular',),
+                      maxLines: 2,
+//                      textAlign: TextAlign.left,
+                    ),
                   ),
 
                   // 1 ends here.
 
 
-                  Text(
-                    ((customerForReciteGeneration.flatOrHouseNumber == null) ||
-                        (customerForReciteGeneration.flatOrHouseNumber.length ==
-                            0)) ?
-                    'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
-                        .length > 20 ?
-                    customerForReciteGeneration.flatOrHouseNumber.substring(
-                        0, 20) + '..' :
-                    customerForReciteGeneration.flatOrHouseNumber,
+                  Container(
+                    height:45,
+                    child: Text(
+                      ((customerForReciteGeneration.flatOrHouseNumber == null) ||
+                          (customerForReciteGeneration.flatOrHouseNumber.length ==
+                              0)) ?
+                      'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
+                          .length > 20 ?
+                      customerForReciteGeneration.flatOrHouseNumber.substring(
+                          0, 20) + '..' :
+                      customerForReciteGeneration.flatOrHouseNumber,
 
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                        color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 20, fontFamily: 'Itim-Regular',),
-                    maxLines: 2,
+                        fontSize: 20, fontFamily: 'Itim-Regular',),
+                      maxLines: 2,
+                    ),
                   ),
 
-                  Text(
-                    ((customerForReciteGeneration.phoneNumber == null) ||
-                        (customerForReciteGeneration.phoneNumber.length == 0)) ?
-                    'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
-                        .length > 20 ?
-                    customerForReciteGeneration.phoneNumber.substring(0, 17) +
-                        '..' :
-                    customerForReciteGeneration.phoneNumber,
+                  Container(
+                    height:45,
+                    child: Text(
+                      ((customerForReciteGeneration.phoneNumber == null) ||
+                          (customerForReciteGeneration.phoneNumber.length == 0)) ?
+                      'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
+                          .length > 20 ?
+                      customerForReciteGeneration.phoneNumber.substring(0, 17) +
+                          '..' :
+                      customerForReciteGeneration.phoneNumber,
 
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                        color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 20, fontFamily: 'Itim-Regular',),
-                    maxLines: 2,
+                        fontSize: 20, fontFamily: 'Itim-Regular',),
+                      maxLines: 2,
+                    ),
                   ),
 
 
