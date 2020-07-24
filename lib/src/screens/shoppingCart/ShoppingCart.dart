@@ -629,7 +629,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            color:Colors.yellowAccent,
               height: 120,
-              width: 120,
+              width: 105,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -692,7 +692,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            color:Colors.yellowAccent,
               height: 120,
-              width: 180,
+              width: 195,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -707,7 +707,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+//                      fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
                       fontSize: 20, fontFamily: 'Itim-Regular',),
@@ -728,7 +728,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+//                      fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
                       fontSize: 20, fontFamily: 'Itim-Regular',),
@@ -745,7 +745,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+//                      fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
                       fontSize: 20, fontFamily: 'Itim-Regular',),
