@@ -9193,6 +9193,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
+                    print('blueToothDevicesState.length == 0 ${blueToothDevicesState.length == 0}');
+
+
                     if (blueToothDevicesState.length == 0) {
                       logger.i('___________ blueTooth device not found _____');
 
@@ -9251,6 +9254,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     logger.w('check device listed or not');
                     print('index: $index');
+                    print('value of found: $found');
 
                     if (found == true) {
                       print('found == true');
@@ -9270,7 +9274,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // COMMENT FROM HERE TO END
 
-                      /*
+
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9282,7 +9286,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
-                      */
+
 
                       // END
                       return;
@@ -9302,6 +9306,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   Future<void> _showMyDialog2(String message) async {
+
+    print(' at the beginning of  _showMyDialog2 ....');
+
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -9518,7 +9526,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // NEED THIS LINES COMMENTING BEGINNING..
 
-/*
+
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -9530,7 +9538,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       _testPrintDummyDevices(x);
-                      */
+
 
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
@@ -12439,12 +12447,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // final return false if true is not return from the above conditioned.
       return false;
     });
+  }
 
+  void _testPrintDummyDevices(PrinterBluetooth printer) async {
+    // NOT REQUIRED SINCE DUMMY...
 
-    void _testPrintDummyDevices(PrinterBluetooth printer) async {
-      // NOT REQUIRED SINCE DUMMY...
-
-      /*
+    /*
     printerManager.selectPrinter(printer);
 
     // TODO Don't forget to choose printer's paper
@@ -12453,100 +12461,100 @@ class _ShoppingCartState extends State<ShoppingCart> {
     */
 
 
-      print("_testPrintDummyDevices");
+    print("_testPrintDummyDevices");
 
 
-      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-          new SnackBar(duration: new Duration(seconds: 6), content:
-          new Row(
-            children: <Widget>[
-              new CircularProgressIndicator(),
-              new Text(
-                  "fetching data for receipt production...", style: TextStyle(
-                color: Colors.red,
-              ))
-            ],
-          ),
-          )
-      );
+    _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+        new SnackBar(duration: new Duration(seconds: 6), content:
+        new Row(
+          children: <Widget>[
+            new CircularProgressIndicator(),
+            new Text(
+                "fetching data for receipt production...", style: TextStyle(
+              color: Colors.red,
+            ))
+          ],
+        ),
+        )
+    );
 
-      final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-      Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
+    Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
 
-      Order oneOrderForReceipt = shoppingCartBloc.getCurrentOrder;
+    Order oneOrderForReceipt = shoppingCartBloc.getCurrentOrder;
 
-      print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
-
-
-      Future<OneOrderFirebase> testFirebaseOrderFetch =
-      shoppingCartBloc.fetchOrderDataFromFirebase(
-          oneOrderForReceipt.orderdocId.trim());
+    print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
 
-      Widget restaurantName2 = restaurantName(thisRestaurant.name);
-      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(
-          restaurantName2);
-      Uint8List restaurantNameBytesNotFuture;
-
-      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+    Future<OneOrderFirebase> testFirebaseOrderFetch =
+    shoppingCartBloc.fetchOrderDataFromFirebase(
+        oneOrderForReceipt.orderdocId.trim());
 
 
-      ImageAliasAnotherSource.Image imageRestaurant;
+    Widget restaurantName2 = restaurantName(thisRestaurant.name);
+    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(
+        restaurantName2);
+    Uint8List restaurantNameBytesNotFuture;
+
+    print('restaurantNameBytes: $restaurantNameBytesNotFuture');
 
 
-      /* await */
-      restaurantNameBytesFuture.whenComplete(() {
-        print("restaurantNameBytes.whenComplete called when future completes");
-      }
-      ).then((oneImageInBytes) {
-        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource
-            .decodeImage(oneImageInBytes);
-        print('calling ticket.image(imageRestaurant); ');
-        restaurantNameBytesNotFuture = oneImageInBytes;
+    ImageAliasAnotherSource.Image imageRestaurant;
+
+
+    /* await */
+    restaurantNameBytesFuture.whenComplete(() {
+      print("restaurantNameBytes.whenComplete called when future completes");
+    }
+    ).then((oneImageInBytes) {
+      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource
+          .decodeImage(oneImageInBytes);
+      print('calling ticket.image(imageRestaurant); ');
+      restaurantNameBytesNotFuture = oneImageInBytes;
 //      ticket.image(imageRestaurant);
 
-      }).catchError((onError) {
-        print(' error in getting restaurant name as image');
-      });
+    }).catchError((onError) {
+      print(' error in getting restaurant name as image');
+    });
 
-      // Print image
-      Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(
-          oneOrderForReceipt.totalPrice);
-      Uint8List totalCostDeliveryBytes;
+    // Print image
+    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(
+        oneOrderForReceipt.totalPrice);
+    Uint8List totalCostDeliveryBytes;
 
-      final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(
-          totalDeliveryWidget2);
+    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(
+        totalDeliveryWidget2);
 
-      /* await */
-      totalDeliveryWidgetBytes.whenComplete(() {
-        print("called when future completes");
-      }
-      ).then((oneImageInBytes) {
+    /* await */
+    totalDeliveryWidgetBytes.whenComplete(() {
+      print("called when future completes");
+    }
+    ).then((oneImageInBytes) {
 //      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-        totalCostDeliveryBytes = oneImageInBytes;
-        print('before printing total cose for recite of delivery type order');
+      totalCostDeliveryBytes = oneImageInBytes;
+      print('before printing total cose for recite of delivery type order');
 //      ticket.image(image);
 
-      }).catchError((onError) {
-        print(' error in getting restaurant name as image');
-      });
+    }).catchError((onError) {
+      print(' error in getting restaurant name as image');
+    });
 
 
 //                            _handleSignIn();
 
-      /* await */
-      testFirebaseOrderFetch.whenComplete(() {
-        print("called when future completes");
-      }
-      ).then((oneOrderData) {
-        Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
+    /* await */
+    testFirebaseOrderFetch.whenComplete(() {
+      print("called when future completes");
+    }
+    ).then((oneOrderData) {
+      Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
 
-        final Future<
-            Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
-            paidUnpaidDeliveryType2);
+      final Future<
+          Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
+          paidUnpaidDeliveryType2);
 
-        Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
 //      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
 
@@ -12554,45 +12562,51 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      ImageAliasAnotherSource.Image imageRestaurant;
 
 
-        /* await */
-        paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
-          print(
-              "restaurantNameBytes.whenComplete called when future completes");
-        }
-        ).then((paidUnpaidDeliveryTypeInBytes) {
+      /* await */
+      paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+        print(
+            "restaurantNameBytes.whenComplete called when future completes");
+      }
+      ).then((paidUnpaidDeliveryTypeInBytes) {
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-          print(
-              'paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
+        print(
+            'paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
 //        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
 //        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
-          printTicketDummy(/*paper, */
-              thisRestaurant, oneOrderData, imageRestaurant,
-              restaurantNameBytesNotFuture,
-              totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
-        }).catchError((onError) {
-          print(' error in getting restaurant name as image');
-          print('false: means something wrong not printed');
-          //means something wrong not printed
-          return false;
-        });
+        printTicketDummy(/*paper, */
+            thisRestaurant, oneOrderData, imageRestaurant,
+            restaurantNameBytesNotFuture,
+            totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
       }).catchError((onError) {
-        print('Order data fetch Error $onError ***');
-        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-          new SnackBar(duration: new Duration(seconds: 6), content: Container(
-            child:
-            new Row(
-              children: <Widget>[
-                new CircularProgressIndicator(),
-                new Text("Error: ${onError.message.substring(0, 40)}", style:
-                TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                    color: Colors.white)),
-              ],
-            ),
-          )),);
+        print(' error in getting restaurant name as image');
+        print('false: means something wrong not printed');
+        //means something wrong not printed
+        return false;
       });
-    }
+    }).catchError((onError) {
+      print('Order data fetch Error $onError ***');
+      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+        new SnackBar(duration: new Duration(seconds: 6), content: Container(
+          child:
+          new Row(
+            children: <Widget>[
+              new CircularProgressIndicator(),
+              new Text("Error: ${onError.message.substring(0, 40)}", style:
+              TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                  color: Colors.white)),
+            ],
+          ),
+        )),);
+    });
+  }
+
+
+
+
+
+
 
 
     Future<void> _showMyDialog3(Uint8List x) async {
