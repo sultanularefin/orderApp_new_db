@@ -701,6 +701,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Container(
                     height:45,
+                    width: 185,
+                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.address == null) ||
                           (customerForReciteGeneration.address.length == 0)) ?
@@ -709,12 +711,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       customerForReciteGeneration.address,
 
                       textAlign: TextAlign.left,
+                      maxLines: 2,
                       style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                        color: Color(0xffF50303),
                         fontSize: 20, fontFamily: 'Itim-Regular',),
-                      maxLines: 2,
+//                      maxLines: 2,
 //                      textAlign: TextAlign.left,
                     ),
                   ),
@@ -724,6 +727,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Container(
                     height:45,
+                    width: 185,
+                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.flatOrHouseNumber == null) ||
                           (customerForReciteGeneration.flatOrHouseNumber.length ==
@@ -734,19 +739,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           0, 20) + '..' :
                       customerForReciteGeneration.flatOrHouseNumber,
 
+                      maxLines: 2,
                       textAlign: TextAlign.left,
                       style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                        color: Color(0xffF50303),
                         fontSize: 20, fontFamily: 'Itim-Regular',),
-                      maxLines: 2,
+
                     ),
                   ),
 
                   Container(
                     height:45,
+                    width: 185,
+                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
+
                       ((customerForReciteGeneration.phoneNumber == null) ||
                           (customerForReciteGeneration.phoneNumber.length == 0)) ?
                       'EMPTY' : customerForReciteGeneration.flatOrHouseNumber
@@ -754,6 +763,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       customerForReciteGeneration.phoneNumber.substring(0, 17) +
                           '..' :
                       customerForReciteGeneration.phoneNumber,
+                      maxLines: 2,
 
                       textAlign: TextAlign.left,
                       style: TextStyle(
@@ -761,7 +771,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         color: Colors.black,
 //                        color: Color(0xffF50303),
                         fontSize: 20, fontFamily: 'Itim-Regular',),
-                      maxLines: 2,
+
                     ),
                   ),
 
