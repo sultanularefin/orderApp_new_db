@@ -817,7 +817,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        FontAwesomeIcons.bookmark,
                   color: Colors.white,
                   size: 35,
-
                 ),
               ),
 
@@ -853,7 +852,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Container(
                     padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
                     child: Text(
-                      oneOrderForReceipt.paidStatus == 'paid' ?
+                      oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
                       'paid' : 'unpaid',
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -11481,6 +11480,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   Future<void> _showMyDialog(Uint8List restaurantNameImageByte2,
+      Uint8List orderInformationAndUserInformationTopInBytes,
       Uint8List totalCostDeliveryBytes3,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
@@ -11502,6 +11502,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         'shopping cart page.'),
                 Container
                   (child: Image.memory(restaurantNameImageByte2)
+                ),
+
+                Container
+                  (child: Image.memory(orderInformationAndUserInformationTopInBytes)
                 ),
                 Container
                   (child: Image.memory(totalCostDeliveryBytes3)
@@ -11529,7 +11533,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
       OneOrderFirebase oneOrderdocument,
-      ImageAliasAnotherSource.Image imageResource,
+      ImageAliasAnotherSource.Image imageResource, Uint8List orderInformationAndUserInformationTopInBytes,
       Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
     print(' came here: printTicketDummy');
@@ -11540,7 +11544,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    showToast('res.msg  res.msg   res.msg');
 
 
-    _showMyDialog(restaurantNameImageBytes, totalCostDeliveryBytes2,
+    _showMyDialog(restaurantNameImageBytes,orderInformationAndUserInformationTopInBytes, totalCostDeliveryBytes2,
         paidUnpaidDeliveryTypeWidgetBytes2);
   }
 
@@ -11552,6 +11556,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderListdocument,
       /*ImageAliasAnotherSource.Image imageResource2, */
       Uint8List restaurantNameImageBytes2,
+      Uint8List customerInformationAndOrderInformationBytes,
       Uint8List totalCostDeliveryBytes2,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
@@ -11642,6 +11647,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderListdocument,
       /*ImageAliasAnotherSource.Image imageResource2, */
       Uint8List restaurantNameImageBytes2,
+      Uint8List customerInformationAndOrderInformationBytes,
       Uint8List totalCostDeliveryBytes2,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
@@ -11808,6 +11814,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderListdocument,
       /*ImageAliasAnotherSource.Image imageResource2, */
       Uint8List restaurantNameImageBytes2,
+      Uint8List customerInformationAndOrderInformationBytes,
       Uint8List totalCostDeliveryBytes2,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
@@ -11971,6 +11978,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderListdocument,
       /*ImageAliasAnotherSource.Image imageResource2, */
       Uint8List restaurantNameImageBytes2,
+      Uint8List customerInformationAndOrderInformationBytes,
       Uint8List totalCostDeliveryBytes2,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
@@ -12126,6 +12134,62 @@ class _ShoppingCartState extends State<ShoppingCart> {
 // # number 4: demoReceipt Order Type Dinning ends here...
 
 
+
+  Future <bool> printTicket(PaperSize paper,
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderdocument,Uint8List customerInformationAndOrderInformationBytes,
+      Uint8List restaurantNameImageBytes,
+      Uint8List totalCostDeliveryBytes2,
+      Uint8List paidUnpaidDeliveryTypeWidgetBytes) async {
+    // pqr
+//    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+//    demoReceiptOrderTypeDinning
+//    demoReceiptOrderTypeTakeAway
+//    demoReceiptOrderTypePhone
+
+    print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
+
+    final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase() ==
+        'delivery') ?
+    await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,customerInformationAndOrderInformationBytes,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
+    (oneOrderdocument.orderBy.toLowerCase() == 'phone') ?
+    await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,customerInformationAndOrderInformationBytes,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
+    (oneOrderdocument.orderBy.toLowerCase() == 'takeaway') ?
+    await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,customerInformationAndOrderInformationBytes,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
+    await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
+        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,customerInformationAndOrderInformationBytes,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes));
+
+
+    print('res.msg: ${res.msg}');
+
+
+    showToast(res.msg);
+
+    if (res.msg == 'Success') {
+      print('at  Success');
+      return true;
+    }
+
+
+    else {
+      print('before returning false from Future <bool> printTicket ');
+      return false;
+    }
+
+//    TODO: NEED TO check the res.msg
+    // true means printed.
+
+
+  }
+
+
   Future<bool> _testPrint(PrinterBluetooth printer) async {
     printerManager.selectPrinter(printer);
 
@@ -12150,58 +12214,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
 
 
-    Future <bool> printTicket(PaperSize paper,
-        Restaurant currentRestaurant,
-        OneOrderFirebase oneOrderdocument, Uint8List restaurantNameImageBytes,
-        Uint8List totalCostDeliveryBytes2,
-        Uint8List paidUnpaidDeliveryTypeWidgetBytes) async {
-      // pqr
-//    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-//    demoReceiptOrderTypeDinning
-//    demoReceiptOrderTypeTakeAway
-//    demoReceiptOrderTypePhone
-
-      print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
-
-      final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase() ==
-          'delivery') ?
-      await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,
-          totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
-      (oneOrderdocument.orderBy.toLowerCase() == 'phone') ?
-      await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,
-          totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
-      (oneOrderdocument.orderBy.toLowerCase() == 'takeaway') ?
-      await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,
-          totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
-      await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
-          currentRestaurant, oneOrderdocument, restaurantNameImageBytes,
-          totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes));
-
-
-      print('res.msg: ${res.msg}');
-
-
-      showToast(res.msg);
-
-      if (res.msg == 'Success') {
-        print('at  Success');
-        return true;
-      }
-
-
-      else {
-        print('before returning false from Future <bool> printTicket ');
-        return false;
-      }
-
-//    TODO: NEED TO check the res.msg
-      // true means printed.
-
-
-    }
 
 
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -12217,42 +12229,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
     shoppingCartBloc.fetchOrderDataFromFirebase(
         oneOrderForReceipt.orderdocId.trim());
 
-//    Widget restaurantName2 = restaurantName(thisRestaurant.name);
-//    final Future<Uint8List> restaurantNameBytes = createImageFromWidget(restaurantName2);
-//
-//    print('restaurantNameBytes: $restaurantNameBytes');
-//
-//
-//
-//
-//    ImageAliasAnotherSource.Image imageRestaurant;
-//
-//    /* await */ restaurantNameBytes.whenComplete(() {
-//
-//      print("restaurantNameBytes.whenComplete called when future completes");
-//
-//    }
-//    ).then((oneImageInBytes){
-//
-//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-//      print('calling ticket.image(imageRestaurant); ');
-////      ticket.image(imageRestaurant);
-//
-//    }).catchError((onError){
-//      print(' error in getting restaurant name as image');
-//    });
-
-//    Future<OneOrderFirebase> testFirebaseOrderFetch=
-//    shoppingCartBloc.fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
-
-
-//    Order oneOrderForReceipt
-
-
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
 
-    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(
-        restaurantName2);
+    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
 
     Uint8List restaurantNameBytesNotFuture;
 
@@ -12260,7 +12239,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     ImageAliasAnotherSource.Image imageRestaurant;
-
 
     /* await */
     restaurantNameBytesFuture.whenComplete(() {
@@ -12302,7 +12280,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      ticket.image(image);
 
     }).catchError((onError) {
-      print(' error in getting restaurant name as image');
+      print(' error in getting totalDeliveryWidgetBytes');
       return false;
     });
 
@@ -12350,12 +12328,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //        DDD
-        Widget orderInformationAndCustomerInformationWidget = paidUnpaidDeliveryType(
+//        Widget orderInformationAndCustomerInformationWidget2 = paidUnpaidDeliveryType(
+//            oneOrderData);
+
+        Widget orderInformationAndCustomerInformationWidget2 = orderInformationAndCustomerInformationWidget(
             oneOrderData);
 
+//        Uint8List> paidUnpaidDeliveryTypeFutureWidget1
         final Future<
-            Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
-            paidUnpaidDeliveryType2);
+            Uint8List> orderInformationAndUserInformationTop = createImageFromWidget(
+            orderInformationAndCustomerInformationWidget2);
 
         Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
@@ -12366,15 +12348,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
         /* await */
-        paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
+        orderInformationAndUserInformationTop.whenComplete(() {
           print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
         }
-        ).then((paidUnpaidDeliveryTypeInBytes) {
+        ).then((orderInformationAndUserInformationTopInBytes) {
 //        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-          print('calling ticket.image(imageRestaurant); ');
+          print(
+              'calling ticket.image(orderInformationAndUserInformationTopInBytes);');
 //        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
           print(
-              'paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
+              'orderInformationAndUserInformationTopInBytes: $orderInformationAndUserInformationTopInBytes');
 
 
 //        oneOrderData  ssss ssss
@@ -12385,8 +12368,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
               paper,
               thisRestaurant,
               oneOrderData /*,imageRestaurant */,
+              orderInformationAndUserInformationTopInBytes,
               restaurantNameBytesNotFuture,
-              totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
+              totalCostDeliveryBytes,
+              paidUnpaidDeliveryTypeInBytes);
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
 
@@ -12402,7 +12387,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             return false;
           });
         }).catchError((onError) {
-          print(' error in getting restaurant name as image');
+          print(' error handler for getting paidUnpaidDeliveryTypeFutureWidget1');
           print('false: means something wrong not printed');
           //means something wrong not printed
           return false;
@@ -12424,6 +12409,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       }
       */
 
+      }).catchError((onError) {
+        print(' error in getting paidUnpaidDeliveryTypeInBytes');
+        print('false: means something wrong not printed');
+        //means something wrong not printed
+        return false;
+      });
 
       }).catchError((onError) {
         print('Order data fetch Error $onError ***');
@@ -12443,9 +12434,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
         return false;
       });
 
-      // final return false if true is not return from the above conditioned.
-      return false;
-    });
+
+    // final return false if true is not return from the above conditioned.
+    return false;
+//    });
   }
 
   void _testPrintDummyDevices(PrinterBluetooth printer) async {
@@ -12549,8 +12541,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ).then((oneOrderData) {
       Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
 
-      final Future<
-          Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
+      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
           paidUnpaidDeliveryType2);
 
       Uint8List paidUnpaidDeliveryTypeWidgetBytes;
@@ -12574,10 +12565,60 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
 //      ticket.image(imageRestaurant);
 
-        printTicketDummy(/*paper, */
-            thisRestaurant, oneOrderData, imageRestaurant,
-            restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
+
+
+
+
+//        DDD
+//        Widget orderInformationAndCustomerInformationWidget2 = paidUnpaidDeliveryType(
+//            oneOrderData);
+
+        Widget orderInformationAndCustomerInformationWidget2 = orderInformationAndCustomerInformationWidget(
+            oneOrderData);
+
+//        Uint8List> paidUnpaidDeliveryTypeFutureWidget1
+        final Future<Uint8List> orderInformationAndUserInformationTop = createImageFromWidget(
+            orderInformationAndCustomerInformationWidget2);
+
+        Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+
+
+
+
+
+
+
+
+        /* await */
+        orderInformationAndUserInformationTop.whenComplete(() {
+          print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
+        }
+        ).then((orderInformationAndUserInformationTopInBytes) {
+//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+          print('calling ticket.image(orderInformationAndUserInformationTopInBytes);');
+//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+          print(
+              'orderInformationAndUserInformationTopInBytes: $orderInformationAndUserInformationTopInBytes');
+
+
+//        oneOrderData  ssss ssss
+//      ticket.image(imageRestaurant);
+
+
+
+
+
+
+          printTicketDummy(/*paper, */
+              thisRestaurant, oneOrderData, imageRestaurant,
+              restaurantNameBytesNotFuture,orderInformationAndUserInformationTopInBytes,
+              totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
+        }).catchError((onError) {
+          print(' error in getting restaurant name as image');
+          print('false: means something wrong not printed');
+          //means something wrong not printed
+          return false;
+        });
       }).catchError((onError) {
         print(' error in getting restaurant name as image');
         print('false: means something wrong not printed');
@@ -12608,50 +12649,50 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    Future<void> _showMyDialog3(Uint8List x) async {
-      print('x: $x');
+  Future<void> _showMyDialog3(Uint8List x) async {
+    print('x: $x');
 //    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('you are using dummy bluetooth devices.'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text(
-                      'please use real blueTooth devices and also change functions in '
-                          'shopping cart page.'),
-                  Container
-                    (child: Image.memory(x)
-                  ),
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('you are using dummy bluetooth devices.'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                    'please use real blueTooth devices and also change functions in '
+                        'shopping cart page.'),
+                Container
+                  (child: Image.memory(x)
+                ),
 
 //                Text('Would you like to approve of this message?'),
-                ],
-              ),
+              ],
             ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('return shopping Cart page.'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('return shopping Cart page.'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-    /* PRINTING REcite related codes resides here: */
+/* PRINTING REcite related codes resides here: */
 
 //  textDirection: TextDirection.ltr,
 //  child:
 //  Container(
 
 
-  }
+}
 
 
 //}
