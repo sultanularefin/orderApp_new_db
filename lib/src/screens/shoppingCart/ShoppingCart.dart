@@ -685,6 +685,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
 
 
+            /// toDo: multiline. maxlines
             Container(
 
               margin: EdgeInsets.fromLTRB(0, 20, 0,0),
@@ -711,6 +712,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       color: Colors.black,
 //                        color: Color(0xffF50303),
                       fontSize: 20, fontFamily: 'Itim-Regular',),
+                    maxLines: 2,
                   ),
 
                   // 1 ends here.
@@ -732,6 +734,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       color: Colors.black,
 //                        color: Color(0xffF50303),
                       fontSize: 20, fontFamily: 'Itim-Regular',),
+                    maxLines: 2,
                   ),
 
                   Text(
@@ -749,6 +752,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       color: Colors.black,
 //                        color: Color(0xffF50303),
                       fontSize: 20, fontFamily: 'Itim-Regular',),
+                    maxLines: 2,
                   ),
 
 
