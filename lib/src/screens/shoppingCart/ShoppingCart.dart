@@ -614,7 +614,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
 
         ),
-        height: 140,
+        height: 155,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 300,
@@ -693,15 +693,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            color:Colors.yellowAccent,
               height: 155,
-              width: 185,
+              width: 170,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
 
                   Container(
-                    height:40,
-                    width: 170,
+                    height:49,
+                    width: 160,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.address == null) ||
@@ -725,8 +725,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   Container(
-                    height:40,
-                    width: 170,
+                    height:49,
+                    width: 160,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.flatOrHouseNumber == null) ||
@@ -748,7 +748,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Container(
                     height:50,
-                    width: 170,
+                    width: 160,
                     padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
 
