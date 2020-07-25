@@ -337,7 +337,7 @@ class FirebaseClient {
     Firestore.instance.runTransaction((Transaction tx) async {
       DocumentSnapshot postSnapshot = await tx.get(postRef);
       if (postSnapshot.exists) {
-        await tx.update(postRef, <String, bool>{'recitePrinted': false});
+        await tx.update(postRef, <String, bool>{'recitePrinted': true});
 
 
       }
