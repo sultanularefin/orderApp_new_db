@@ -1062,7 +1062,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   .getExpandedSelectedFood;
               print('at WillPopScope : $backUP');
 
+              print('backUP.length == 0 ${backUP.length == 0}');
+
+
+              if (backUP.length == 0) {
+                 Navigator.pop(context);
+              }
+
+
+
               Order z = shoppingCartBloc.getCurrentOrder;
+
+              print('order z: $z');
               z.selectedFoodInOrder = backUP;
 
               shoppingCartBloc.clearSubscription();
