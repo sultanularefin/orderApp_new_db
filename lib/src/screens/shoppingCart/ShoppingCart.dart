@@ -1087,7 +1087,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     _timer = new Timer(const Duration(seconds: 1), () {
 
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => FoodGallery2()));
+     return Navigator.push(context, MaterialPageRoute(builder: (context) => FoodGallery2()));
     });
     });
   }
@@ -9051,21 +9051,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
                   shoppingCartBloc.clearSubscription();
 
-
-//                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
-//                  List<SelectedFood> expandedFoodReturnTemp= [];
-//                  shoppingCartBloc.getExpandedSelectedFood;
-
-
                   cancelPaySelectUNObscuredTakeAway.isCanceled = true;
-
-                  /*
-                  //MIGHT NOT BE NECESSARY.
-
-                  setState(() {
-                    localScanAvailableState = !localScanAvailableState;
-                  });
-                  */
 
 
                   return Navigator.pop(
