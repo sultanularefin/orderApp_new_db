@@ -1138,8 +1138,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
                                           backgroundColor: Colors.green,
-                                          valueColor:
-                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
+//                                          valueColor:
+//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
 
                                       )
                                   ),
@@ -1149,8 +1149,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
                                         backgroundColor: Colors.yellow,
-                                        valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+//                                        valueColor:
+//                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
                                       )
                                   ),
                                 ),
@@ -1159,8 +1159,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
                                           backgroundColor: Colors.blue,
-                                          valueColor:
-                                          ColorTween(begin: beginColor, end: endColor).animate(controller))
+//                                          valueColor:
+//                                          ColorTween(begin: beginColor, end: endColor).animate(controller))
                                   ),
                                 ),
                                 Center(
@@ -1168,8 +1168,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
                                           backgroundColor: Colors.pink,
-                                          valueColor:
-                                          ColorTween(begin: beginColor, end: endColor).animate(controller))
+//                                          valueColor:
+//                                          ColorTween(begin: beginColor, end: endColor).animate(controller))
                                   ),
                                 ),
                               ],
@@ -1200,8 +1200,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
                                             backgroundColor: Colors.cyanAccent,
-                                            valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+//                                            valueColor:
+//                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
                                         )
                                     ),
                                   ),
@@ -1210,8 +1210,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
                                             backgroundColor: Colors.green,
-                                            valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+//                                            valueColor:
+//                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
                                         )
                                     ),
                                   ),
@@ -1220,8 +1220,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
                                           backgroundColor: Colors.yellow,
-                                            valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+//                                            valueColor:
+//                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
 
                                         )
                                     ),
@@ -1232,8 +1232,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         child: new CircularProgressIndicator(
                                             backgroundColor: Colors.pink,
 
-                                            valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+//                                            valueColor:
+//                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
                                         )
                                     ),
                                   ),
@@ -1266,8 +1266,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           child: new CircularProgressIndicator(
                                               backgroundColor: Colors
                                                   .lightGreenAccent,
-                                              valueColor:
-                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
 
 
                                           )
@@ -1285,8 +1285,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               backgroundColor: Color(
                                                   0xffFC0000),
 
-                                              valueColor:
-                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
                                           )
                                       ),
                                     ),
@@ -11419,7 +11419,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
-    print('paper.value: ${paper.value}');
+    // print('paper.value: ${paper.value}');
     print('currentRestaurant: ${currentRestaurant.name}');
     print('oneOrderListdocument: $oneOrderListdocument');
     print('orderedItems: $orderedItems');
@@ -11510,7 +11510,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
-    print('paper.value: ${paper.value}');
+    // print('paper.value: ${paper.value}');
     print('currentRestaurant: ${currentRestaurant.name}');
     print('oneOrderListdocument: $oneOrderListdocument');
     print('orderedItems: $orderedItems');
@@ -11677,7 +11677,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
-    print('paper.value: ${paper.value}');
+    // print('paper.value: ${paper.value}');
     print('currentRestaurant: ${currentRestaurant.name}');
     print('oneOrderListdocument: $oneOrderListdocument');
     print('orderedItems: $orderedItems');
@@ -11841,7 +11841,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
-    print('paper.value: ${paper.value}');
+    // print('paper.value: ${paper.value}');
     print('currentRestaurant: ${currentRestaurant.name}');
     print('oneOrderListdocument: $oneOrderListdocument');
     print('orderedItems: $orderedItems');
