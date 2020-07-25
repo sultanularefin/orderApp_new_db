@@ -1283,7 +1283,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       case ConnectionState.active:
                       default:
-                        if (snapshot.data == null) {
+                        if (snapshot.hasData == null) {
+                          // TODO : WHICH ONE snapshot.data or snapshot.hasdata
                           return Container(
                             margin: EdgeInsets.fromLTRB(
                                 0, displayHeight(context) / 2, 0, 0),
@@ -1295,8 +1296,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
-                                            backgroundColor: Colors
-                                                .lightGreenAccent)
+                                            backgroundColor: Colors.green)
                                     ),
                                   ),
                                   Center(
@@ -1310,7 +1310,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
-                                            backgroundColor: Color(0xffFC0000))
+                                            backgroundColor: Colors.pink)
                                     ),
                                   ),
                                 ],
@@ -1318,6 +1318,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
 
                           );
+
+                          Timer(Duration(seconds: 3), () {
+                            // 5s over, navigate to a new page
+                            return Navigator.pop(context);
+//                            Navigator.pushNamed(context, MaterialPageRoute(builder: (_) => Screen2()));
+                          });
                         }
                         else {
                           Order oneOrder = snapshot.data;
