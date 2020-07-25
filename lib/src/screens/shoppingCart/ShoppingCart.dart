@@ -1182,11 +1182,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   .quantity}');
 
               Navigator.pop(context, z);*/
-                          Timer(Duration(seconds: 3), () {
-                            // 5s over, navigate to a new page
-                            return Navigator.pop(context);
-//                            Navigator.pushNamed(context, MaterialPageRoute(builder: (_) => Screen2()));
-                          });
+//                          Timer(Duration(seconds: 3), () {
+//                            // 5s over, navigate to a new page
+//                            return Navigator.pop(context);
+////                            Navigator.pushNamed(context, MaterialPageRoute(builder: (_) => Screen2()));
+//                          });
                         }
                         else {
                           Order oneOrder = snapshot.data;
