@@ -1806,16 +1806,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                        return WelcomePage;
 
+                          /*
                           return BlocProvider<IdentityBloc>(
                               bloc: IdentityBloc(),
                               child: WelcomePage()
 
                           );
 
+                          */
 
 
 
-                          /*
+
                           return Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -1853,10 +1855,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               ],
                             ),
                           );
-
-
-
-                          */
 
                         }
                     }
