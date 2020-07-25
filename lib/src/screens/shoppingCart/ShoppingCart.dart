@@ -9593,8 +9593,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       print('docID in dummy Print: $docID');
 //                      print('docID: $docID');
 
-
-
                       //END
 
                       shoppingCartBloc.clearSubscription();
