@@ -34,13 +34,21 @@ class FoodGalleryBloc implements Bloc {
 
   // id ,type ,title <= Location.
 
-  bool _isDisposed = false;
+//  bool _isDisposed = false;
+
+  bool  _isDisposedIngredients = false;
+
+  bool    _isDisposedFoodItems = false;
+
+  bool _isDisposedCategories = false;
+  
+
   List<FoodItemWithDocID> _allFoodsList=[];
 
   List<NewCategoryItem> _allCategoryList=[];
 
   List<NewIngredient> _allIngItemsFGBloc =[];
-  
+
   List<NewIngredient> get getAllIngredientsPublicFGB2 => _allIngItemsFGBloc;
   Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
   final _allIngredientListController = StreamController <List<NewIngredient>> /*.broadcast*/();
@@ -103,120 +111,125 @@ class FoodGalleryBloc implements Bloc {
 
 // this code bloc cut paste from foodGallery Bloc:
   Future<void> getAllIngredientsConstructor() async {
-
     print('at getAllIngredientsConstructor()');
 
-    if(_isDisposed) {
-      return;
-    }
 
-    var snapshot = await _client.fetchAllIngredients();
-    List docList = snapshot.documents;
+    if (_isDisposedIngredients == false) {
+      var snapshot = await _client.fetchAllIngredients();
+      List docList = snapshot.documents;
 
 
+      List <NewIngredient> ingItems = new List<NewIngredient>();
+      ingItems = snapshot.documents.map((documentSnapshot) =>
+          NewIngredient.ingredientConvert
+            (documentSnapshot.data, documentSnapshot.documentID)
 
-    List <NewIngredient> ingItems = new List<NewIngredient>();
-    ingItems = snapshot.documents.map((documentSnapshot) =>
-        NewIngredient.ingredientConvert
-          (documentSnapshot.data, documentSnapshot.documentID)
-
-    ).toList();
-
-
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
-    ).toList();
-
-   // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+      ).toList();
 
 
-    _allIngItemsFGBloc = ingItems;
+      List<String> documents = snapshot.documents.map((documentSnapshot) =>
+      documentSnapshot.documentID
+      ).toList();
 
-    _allIngredientListController.sink.add(_allIngItemsFGBloc);
+      // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+
+
+      _allIngItemsFGBloc = ingItems;
+
+      _allIngredientListController.sink.add(_allIngItemsFGBloc);
 
 
 //    return ingItems;
 
-  }
 
+    }
+    else {
+      return;
+    }
+  }
 
 //  Future<List<FoodItemWithDocID>> getAllFoodItems() async {
   void getAllFoodItemsConstructor() async {
 
     print('at getAllFoodItemsConstructor()');
 
-    if(_isDisposed) {
+//    _isDisposedFoodItems = true;
+    if(_isDisposedFoodItems==true) {
       return;
     }
+    else {
 
-    var snapshot = await _client.fetchFoodItems();
-    List docList = snapshot.documents;
 
-    List<FoodItemWithDocID> tempAllFoodsList= new List<FoodItemWithDocID>();
-    docList.forEach((doc) {
 
-      final String foodItemName = doc['name'];
+      var snapshot = await _client.fetchFoodItems();
+      List docList = snapshot.documents;
+
+      List<FoodItemWithDocID> tempAllFoodsList= new List<FoodItemWithDocID>();
+      docList.forEach((doc) {
+
+        final String foodItemName = doc['name'];
 //      print('foodItemName $foodItemName');
 
-      final String foodItemDocumentID = doc.documentID;
+        final String foodItemDocumentID = doc.documentID;
 //      print('foodItemDocumentID $foodItemDocumentID');
 
-      if(foodItemName =='Junior Juustohampurilainen'){
-        logger.e('Junior Juustohampurilainen found check $foodItemDocumentID');
-      }
+        if(foodItemName =='Junior Juustohampurilainen'){
+          logger.e('Junior Juustohampurilainen found check $foodItemDocumentID');
+        }
 
 
 
-      final String foodImageURL  = doc['image']==''?
-      'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
-          :
-      storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
-          +'?alt=media';
+        final String foodImageURL  = doc['image']==''?
+        'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+            :
+        storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
+            +'?alt=media';
 //      print('doc[\'image\'] ${doc['image']}');
 
 
 
-      final bool foodIsAvailable =  doc['available'];
+        final bool foodIsAvailable =  doc['available'];
 
 
-      final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
+        final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
 
-      final List<dynamic> foodItemIngredientsList =  doc['ingredient'];
+        final List<dynamic> foodItemIngredientsList =  doc['ingredient'];
 //          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
 
 
 //          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
 
-      final String foodCategoryName = doc['category'];
+        final String foodCategoryName = doc['category'];
 //      print('category: $foodCategoryName');
 
 
 
-      final double foodItemDiscount = doc['discount'];
+        final double foodItemDiscount = doc['discount'];
 
 //      print('foodItemDiscount: for $foodItemDocumentID is: $foodItemDiscount');
 
 
-      FoodItemWithDocID oneFoodItemWithDocID = new FoodItemWithDocID(
-        itemName: foodItemName,
-        categoryName: foodCategoryName,
-        imageURL: foodImageURL,
-        sizedFoodPrices: oneFoodSizePriceMap,
-        ingredients: foodItemIngredientsList,
-        isAvailable: foodIsAvailable,
-        documentId: foodItemDocumentID,
-        discount: foodItemDiscount,
+        FoodItemWithDocID oneFoodItemWithDocID = new FoodItemWithDocID(
+          itemName: foodItemName,
+          categoryName: foodCategoryName,
+          imageURL: foodImageURL,
+          sizedFoodPrices: oneFoodSizePriceMap,
+          ingredients: foodItemIngredientsList,
+          isAvailable: foodIsAvailable,
+          documentId: foodItemDocumentID,
+          discount: foodItemDiscount,
+        );
+
+        tempAllFoodsList.add(oneFoodItemWithDocID);
+      }
       );
 
-      tempAllFoodsList.add(oneFoodItemWithDocID);
+      _allFoodsList= tempAllFoodsList;
+
+      _foodItemController.sink.add(_allFoodsList);
+
+
     }
-    );
-
-    _allFoodsList= tempAllFoodsList;
-
-    _foodItemController.sink.add(_allFoodsList);
-
-
   }
 
   //  Future<List<NewCategoryItem>> getAllCategories() async {
@@ -230,53 +243,56 @@ class FoodGalleryBloc implements Bloc {
 
     print('at getAllCategoriesConstructor()');
 
-    if(_isDisposed) {
+    if(_isDisposedCategories == true) {
       return;
     }
 
-    var snapshot = await _client.fetchCategoryItems();
-    List docList = snapshot.documents;
+    else {
 
 
-    List<NewCategoryItem> tempAllCategories = new List<NewCategoryItem>();
+      var snapshot = await _client.fetchCategoryItems();
+      List docList = snapshot.documents;
 
-    docList.forEach((doc) {
 
-      final String categoryItemName = doc['name'];
+      List<NewCategoryItem> tempAllCategories = new List<NewCategoryItem>();
 
-      print('categoryItemName : $categoryItemName');
+      docList.forEach((doc) {
 
-      final String categoryImageURL  = doc['image']==''?
-      'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
-          :
-      storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
-          +'?alt=media';
+        final String categoryItemName = doc['name'];
+
+        print('categoryItemName : $categoryItemName');
+
+        final String categoryImageURL  = doc['image']==''?
+        'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+            :
+        storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
+            +'?alt=media';
 
 //      print('categoryImageURL in food Gallery Bloc: $categoryImageURL');
 
-      final num categoryRating = doc['rating'];
-      final num totalCategoryRating = doc['total_rating'];
+        final num categoryRating = doc['rating'];
+        final num totalCategoryRating = doc['total_rating'];
 
 
 
-      print('categoryItemName : $categoryItemName,categoryRating :'
-          ' $categoryRating, totalCategoryRating , $totalCategoryRating, categoryImageURL: $categoryImageURL');
+        print('categoryItemName : $categoryItemName,categoryRating :'
+            ' $categoryRating, totalCategoryRating , $totalCategoryRating, categoryImageURL: $categoryImageURL');
 
 
 
-      NewCategoryItem oneCategoryItem = new NewCategoryItem(
+        NewCategoryItem oneCategoryItem = new NewCategoryItem(
 
 
-        categoryName: categoryItemName,
-        imageURL: categoryImageURL,
-        rating: categoryRating.toDouble(),
-        totalRating: totalCategoryRating.toDouble(),
+          categoryName: categoryItemName,
+          imageURL: categoryImageURL,
+          rating: categoryRating.toDouble(),
+          totalRating: totalCategoryRating.toDouble(),
 
+        );
+
+        tempAllCategories.add(oneCategoryItem);
+      }
       );
-
-      tempAllCategories.add(oneCategoryItem);
-    }
-    );
 
 //    NewCategoryItem all = new NewCategoryItem(
 //      categoryName: 'All',
@@ -286,12 +302,13 @@ class FoodGalleryBloc implements Bloc {
 //
 //    );
 
-    _allCategoryList= tempAllCategories;
+      _allCategoryList= tempAllCategories;
 
-    _categoriesController.sink.add(_allCategoryList);
-    //    _foodItemController.sink.add(_allCategoryList);
-    //    return _allFoodsList;
+      _categoriesController.sink.add(_allCategoryList);
+      //    _foodItemController.sink.add(_allCategoryList);
+      //    return _allFoodsList;
 
+    }
   }
 
 
@@ -302,12 +319,17 @@ class FoodGalleryBloc implements Bloc {
   FoodGalleryBloc() {
 
     print('at FoodGalleryBloc()');
-    // need to use this when moving to food Item Details page.
+
+
+
     getAllIngredientsConstructor();
 
     getAllFoodItemsConstructor();
 
     getAllCategoriesConstructor();
+
+    // need to use this when moving to food Item Details page.
+
 
     print('at FoodGalleryBloc()');
 
@@ -331,8 +353,13 @@ class FoodGalleryBloc implements Bloc {
     _categoriesController.close();
     _allIngredientListController.close();
 
-    
-    _isDisposed = true;
+
+//    _isDisposedIngredients=
+    _isDisposedIngredients = true;
+    _isDisposedFoodItems = true;
+    _isDisposedCategories = true;
+//    _isDisposed = true;
+
 //    _allIngredientListController.close();
   }
 }
