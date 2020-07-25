@@ -326,15 +326,16 @@ class FirebaseClient {
 
 
   Future<bool> updateOrderCollectionDocumentWithRecitePrintedInformation
-      (String orderDocumentId, bool recitePrinted)async {
+      (String orderDocumentId, bool recitePrinted) async {
 
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
 
-    final DocumentReference postRef =await Firestore.instance.collection(
+    final DocumentReference postRef = Firestore.instance.collection(
         "restaurants").
     document('USWc8IgrHKdjeDe9Ft4j').
     collection('orderList').document(orderDocumentId);
-    Firestore.instance.runTransaction((Transaction tx) async {
+
+   await Firestore.instance.runTransaction((Transaction tx) async {
       DocumentSnapshot postSnapshot = await tx.get(postRef);
       if (postSnapshot.exists) {
         await tx.update(postRef, <String, bool>{'recitePrinted': true});
@@ -347,6 +348,8 @@ class FirebaseClient {
 //      orderDocId= document.documentID;
 
     print('document: at then:  $document');
+
+    
 
     return true;
 
@@ -362,7 +365,7 @@ class FirebaseClient {
     });
 
     // default.
-    return false;
+//    return false;
 
 
 
