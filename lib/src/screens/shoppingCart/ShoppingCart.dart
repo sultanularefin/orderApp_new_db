@@ -9291,7 +9291,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
 
-                      return;
+                      shoppingCartBloc.clearSubscription();
+                      return Navigator.pop(context,tempOrderWithdocId);
+//                      return;
                     }
 
 
@@ -9399,7 +9401,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
             FlatButton(
               child: Text('return shopping Cart page.'),
               onPressed: () {
+
+
                 Navigator.of(context).pop();
+
+
               },
             ),
           ],
@@ -9617,7 +9623,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
 
-                      return;
+                      shoppingCartBloc.clearSubscription();
+                      return Navigator.pop(context,tempOrderWithdocId);
+//                      return;
                     }
 
 
@@ -12466,7 +12474,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 .recitePrinted(oneOrderForReceipt,true);
 
             print('docID: $docID');
-            
+
             }
 
             return true;
