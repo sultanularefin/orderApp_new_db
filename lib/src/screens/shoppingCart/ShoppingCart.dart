@@ -8629,7 +8629,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // COMMENT FROM HERE TO END
 
-
+                      String docID1;
+                      /*
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -8640,15 +8641,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       PrinterBluetooth x = new PrinterBluetooth(_x);
 
 
+
                       _testPrintDummyDevices(x);
 
 //                      print("printResult: $printResult");
-                      String docID1= await shoppingCartBloc
+                      docID1= await shoppingCartBloc
                           .recitePrinted(tempOrderWithdocId,true);
 
                       print('docID1 in dummy Print: $docID1');
 
+ */
 
+                      //  comment END'S HERE.
 
                       if(docID1!=''){
                         print('docID1!=\'\'    ----------');
@@ -8662,7 +8666,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       }
 
 
-                      //  comment END'S HERE.
 //                      return;
                     }
                   }
@@ -8984,10 +8987,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       logger.i('___________ blueTooth device not found _____ printing wasn\'t successfull');
                       _showMyDialog2('___________ blueTooth device not found  printing wasn\'t successfull _____');
 
-
+                      String docID1;
                       // COMMENT FROM HERE TO END...
 
 
+                      /*
 
 
                       BluetoothDevice _x = new BluetoothDevice();
@@ -9004,7 +9008,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //                      print("printResult: $printResult");
-                      String docID= await shoppingCartBloc
+                      docID= await shoppingCartBloc
                           .recitePrinted(tempOrderWithdocId,true);
 
                       print('docID in dummy Print: $docID');
@@ -9012,8 +9016,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       //END
 
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(context,tempOrderWithdocId);
+                       */
+
+                      if(docID1!=''){
+                        print('docID1!=\'\'    ----------');
+                        shoppingCartBloc.clearSubscription();
+                        return Navigator.pop(context,tempOrderWithdocId);
+                      }
+                      else{
+                        print('docID1 == \'\'   ----------');
+                        shoppingCartBloc.clearSubscription();
+                        return Navigator.pop(context,tempOrderWithdocId);
+                      }
+
+//                      shoppingCartBloc.clearSubscription();
+//                      return Navigator.pop(context,tempOrderWithdocId);
 //                      return Navigator.pop(context, tempOrderWithdocId);
 //                      return;
 
