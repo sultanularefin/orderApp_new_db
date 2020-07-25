@@ -1117,10 +1117,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //              print('snapshot.hasData in main build(BuildContext context) : ${snapshot.hasData}');
                     // ---
+                    const Color beginColor = Colors.deepPurple;
+                    const Color endColor = Colors.deepOrange;
+                    AnimationController controller;
 
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:
                       case ConnectionState.none:
+
+                        print('at ConnectionState.none || ConnectionState.waiting ||  ');
                         return Container(
                           margin: EdgeInsets.fromLTRB(
                               0, displayHeight(context) / 2, 0, 0),
@@ -1132,28 +1137,39 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   child: Container(
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
-                                          backgroundColor: Colors.green)
+                                          backgroundColor: Colors.green,
+                                          valueColor:
+                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+                                      )
                                   ),
                                 ),
                                 Center(
                                   child: Container(
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.yellow,)
+                                        backgroundColor: Colors.yellow,
+                                        valueColor:
+                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                      )
                                   ),
                                 ),
                                 Center(
                                   child: Container(
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
-                                          backgroundColor: Colors.blue)
+                                          backgroundColor: Colors.blue,
+                                          valueColor:
+                                          ColorTween(begin: beginColor, end: endColor).animate(controller))
                                   ),
                                 ),
                                 Center(
                                   child: Container(
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
-                                          backgroundColor: Colors.pink)
+                                          backgroundColor: Colors.pink,
+                                          valueColor:
+                                          ColorTween(begin: beginColor, end: endColor).animate(controller))
                                   ),
                                 ),
                               ],
@@ -1166,6 +1182,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       case ConnectionState.active:
                       default:
                         if (snapshot.data == null) {
+
+                          print('at snapshot.data == null  for ConnectionState.active || default ');
 
 
                           // TODO : WHICH ONE snapshot.data or snapshot.hasdata
@@ -1181,28 +1199,42 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.cyanAccent)
+                                            backgroundColor: Colors.cyanAccent,
+                                            valueColor:
+                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                        )
                                     ),
                                   ),
                                   Center(
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.green)
+                                            backgroundColor: Colors.green,
+                                            valueColor:
+                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                        )
                                     ),
                                   ),
                                   Center(
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
-                                          backgroundColor: Colors.yellow,)
+                                          backgroundColor: Colors.yellow,
+                                            valueColor:
+                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+                                        )
                                     ),
                                   ),
                                   Center(
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.pink)
+                                            backgroundColor: Colors.pink,
+
+                                            valueColor:
+                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                        )
                                     ),
                                   ),
                                 ],
@@ -1215,6 +1247,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         }
                         else {
+
+                          print('at snapshot.data == !=null  for ConnectionState.active or default ');
                           Order oneOrder = snapshot.data;
 
                           if ((oneOrder.paymentButtonPressed == true) &&
@@ -1231,7 +1265,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           alignment: Alignment.center,
                                           child: new CircularProgressIndicator(
                                               backgroundColor: Colors
-                                                  .lightGreenAccent)
+                                                  .lightGreenAccent,
+                                              valueColor:
+                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+
+                                          )
                                       ),
                                     ),
                                     Center(
@@ -1244,7 +1283,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           alignment: Alignment.center,
                                           child: new CircularProgressIndicator(
                                               backgroundColor: Color(
-                                                  0xffFC0000))
+                                                  0xffFC0000),
+
+                                              valueColor:
+                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )
                                       ),
                                     ),
                                   ],
@@ -12009,7 +12052,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
         new SnackBar(duration: new Duration(seconds: 6), content:
         new Row(
           children: <Widget>[
-            new CircularProgressIndicator(),
+            new CircularProgressIndicator(
+
+//                valueColor:
+//                ColorTween(begin: beginColor, end: endColor).animate(controller)
+            ),
             new Text(
                 "fetching data for receipt production...", style: TextStyle(
               color: Colors.white38,
