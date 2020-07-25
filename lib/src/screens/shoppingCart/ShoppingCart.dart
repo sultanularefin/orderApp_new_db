@@ -9249,7 +9249,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       String docID= await shoppingCartBloc
                           .recitePrinted(tempOrderWithdocId,true);
 
-                      print('docID: $docID');
+                      print('docID in dummy Print: $docID');
 
 
 
@@ -9590,7 +9590,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       String docID= await shoppingCartBloc
                           .recitePrinted(tempOrderWithdocId,true);
 
-                      print('docID: $docID');
+                      print('docID in dummy Print: $docID');
+//                      print('docID: $docID');
 
 
 
@@ -9601,21 +9602,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      return Navigator.pop(context, tempOrderWithdocId);
 //                      return;
 
-
                     }
                   }
 
-                  /*
 
-                  String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
-
-                  _scaffoldKey.currentState
-//                  Scaffold.of(context)
-//                    ..removeCurrentSnackBar()
-                      .showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
-                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAwayDocID=> $docId');
-
-                  */
 
                 },
               ),
@@ -12290,7 +12280,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               String docID= await shoppingCartBloc
                   .recitePrinted(oneOrderForReceipt,true);
 
-              print('docID: $docID');
+              print('docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
+//              print('docID: $docID');
 
             }
 
