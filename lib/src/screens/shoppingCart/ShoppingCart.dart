@@ -1024,14 +1024,70 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   cusomTtimerTest() {
-//    _timer = new Timer(const Duration(milliseconds: 800), () {
+    _timer = new Timer(const Duration(milliseconds: 800), () {
+      const Color beginColor = Colors.deepPurple;
+      const Color endColor = Colors.deepOrange;
+      AnimationController controller;
 
-    _timer = new Timer(const Duration(seconds: 2), () {
+      return Container(
+        margin: EdgeInsets.fromLTRB(
+            0, displayHeight(context) / 2, 0, 0),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Center(
+                child: Container(
+                    alignment: Alignment.center,
+                    child: new CircularProgressIndicator(
+                        backgroundColor: Colors.cyanAccent,
+                        valueColor:
+                        ColorTween(begin: beginColor, end: endColor).animate(controller)
+                    )
+                ),
+              ),
+              Center(
+                child: Container(
+                    alignment: Alignment.center,
+                    child: new CircularProgressIndicator(
+                        backgroundColor: Colors.green,
+                        valueColor:
+                        ColorTween(begin: beginColor, end: endColor).animate(controller)
+                    )
+                ),
+              ),
+              Center(
+                child: Container(
+                    alignment: Alignment.center,
+                    child: new CircularProgressIndicator(
+                        backgroundColor: Colors.yellow,
+                        valueColor:
+                        ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+                    )
+                ),
+              ),
+              Center(
+                child: Container(
+                    alignment: Alignment.center,
+                    child: new CircularProgressIndicator(
+                        backgroundColor: Colors.pink,
+
+                        valueColor:
+                        ColorTween(begin: beginColor, end: endColor).animate(controller)
+                    )
+                ),
+              ),
+            ],
+          ),
+        ),
+
+      );
+    _timer = new Timer(const Duration(seconds: 1), () {
 
 
       Navigator.push(context, MaterialPageRoute(builder: (context) => FoodGallery2()));
     });
-//    });
+    });
   }
 
 
@@ -1188,62 +1244,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           // TODO : WHICH ONE snapshot.data or snapshot.hasdata
 
-//                          cusomTtimerTest();
-                          return Container(
-                            margin: EdgeInsets.fromLTRB(
-                                0, displayHeight(context) / 2, 0, 0),
-                            child: Center(
-                              child: Column(
-                                children: <Widget>[
-                                  Center(
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.cyanAccent,
-                                            valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                        )
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.green,
-                                            valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                        )
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        child: new CircularProgressIndicator(
-                                          backgroundColor: Colors.yellow,
-                                            valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+                        return  cusomTtimerTest();
 
-                                        )
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.pink,
-
-                                            valueColor:
-                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                        )
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                          );
+                          /*
 
 
+
+                          */
 
                         }
                         else {
