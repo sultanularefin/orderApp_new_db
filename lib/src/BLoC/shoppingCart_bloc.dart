@@ -464,7 +464,7 @@ class ShoppingCartBloc implements Bloc {
 
     // UPDATE DOCUMENT with RECITE PRINTED STATUS:
 
-    Map<String, dynamic> documentUpdateBoolResult = await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
+    bool documentUpdateBoolResult = await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
 
 
 
@@ -496,14 +496,14 @@ class ShoppingCartBloc implements Bloc {
 
 //    logger.i('documentUpdateBoolResult[\'recitePrinted\']: ${documentUpdateBoolResult['recitePrinted']}');
     print('documentID: $documentID');
-    print('_____documentUpdateBoolResult _____: ${documentUpdateBoolResult}');
+    print('_____documentUpdateBoolResult _____: $documentUpdateBoolResult');
 //
 
 //    print('_____documentUpdateBoolResult.recitePrinted _____: ${documentUpdateBoolResult['status']}');
 
 //    print('_____documentUpdateBoolResult _____: ${documentUpdateBoolResult['recitePrinted']}');
 
-    if(documentUpdateBoolResult['recitePrinted']==true){
+    if(documentUpdateBoolResult ==true){
       print('recite print successful: ');
 
       payMentProcessing.recitePrinted = status;

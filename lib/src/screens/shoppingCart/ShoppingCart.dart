@@ -1801,40 +1801,42 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                          return  Navigator.pop(context);
 
 
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
 
-                              
-                              Container(
-                                      alignment: Alignment.center,
-                                      child: new CircularProgressIndicator(
-                                          backgroundColor: Colors.pink,
 
-//                                      valueColor:
-//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                      )
-                                  ),
-                              Container(
-                                  alignment: Alignment.center,
-                                  child: new CircularProgressIndicator(
-                                    backgroundColor: Colors.pink,
+                                Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                            backgroundColor: Colors.pink,
 
 //                                      valueColor:
 //                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                  )
-                              ),
-                              Container(
-                                  alignment: Alignment.center,
-                                  child: new CircularProgressIndicator(
-                                    backgroundColor: Colors.pink,
+                                        )
+                                    ),
+                                Container(
+                                    alignment: Alignment.center,
+                                    child: new CircularProgressIndicator(
+                                      backgroundColor: Colors.pink,
 
 //                                      valueColor:
 //                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                  )
-                              ),
-                            ],
+                                    )
+                                ),
+                                Container(
+                                    alignment: Alignment.center,
+                                    child: new CircularProgressIndicator(
+                                      backgroundColor: Colors.pink,
+
+//                                      valueColor:
+//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                    )
+                                ),
+                              ],
+                            ),
                           );
 
 
@@ -8635,12 +8637,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       if(docID1!=''){
-                        print('docID2!=\'\'----------');
+                        print('docID1!=\'\'    ----------');
                         shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context,tempOrderWithdocId);
                       }
                       else{
-                        print('docID1 == \'\'----------');
+                        print('docID1 == \'\'   ----------');
                         shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context,tempOrderWithdocId);
                       }
@@ -11489,27 +11491,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(" at _testPrint");
 
 
-    _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 6), content:
-        new Row(
-          children: <Widget>[
-            new CircularProgressIndicator(
-
-//                valueColor:
-//                ColorTween(begin: beginColor, end: endColor).animate(controller)
-            ),
-            new Text(
-                "fetching data for receipt production...", style: TextStyle(
-              color: Colors.white38,
-            ))
-          ],
-        ),
-        )
-    );
-
-
-
-
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
@@ -11759,21 +11740,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     print("_testPrintDummyDevices");
-
-
-    _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 6), content:
-        new Row(
-          children: <Widget>[
-            new CircularProgressIndicator(),
-            new Text(
-                "fetching data for receipt production...", style: TextStyle(
-              color: Colors.red,
-            ))
-          ],
-        ),
-        )
-    );
 
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 

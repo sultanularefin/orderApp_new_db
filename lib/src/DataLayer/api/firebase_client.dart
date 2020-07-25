@@ -325,7 +325,8 @@ class FirebaseClient {
   }
 
 
-  Future<Map<String, dynamic>> updateOrderCollectionDocumentWithRecitePrintedInformation
+//  Future<Map<String, dynamic>> updateOrderCollectionDocumentWithRecitePrintedInformation
+  Future<bool> updateOrderCollectionDocumentWithRecitePrintedInformation
       (String orderDocumentId, bool recitePrinted) async {
 
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
@@ -336,7 +337,7 @@ class FirebaseClient {
     collection('orderList').document(orderDocumentId);
 
 
-   var D = await Firestore.instance.runTransaction((Transaction tx) async {
+   await Firestore.instance.runTransaction((Transaction tx) async {
 
       DocumentSnapshot postSnapshot = await tx.get(postRef);
 
@@ -347,6 +348,7 @@ class FirebaseClient {
 
       }else{
         throw ('postSnapshot don\'t exists....');
+        return false;
       }
 
     }).whenComplete(() => print("called when future [update of document with 'recitePrinted' field completes"))
@@ -365,6 +367,9 @@ class FirebaseClient {
 
     });
 
+   return true;
+
+//   TODO: furthre testing required.
 
   }
   Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType)async {
