@@ -349,7 +349,7 @@ class FirebaseClient {
 
     print('document: at then:  $document');
 
-    
+
 
     return true;
 
