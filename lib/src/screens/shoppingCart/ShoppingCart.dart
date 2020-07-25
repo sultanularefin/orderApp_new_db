@@ -1798,9 +1798,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         else{
                           print('condition for !snapshot.hasData');
 //                          toDO: navigate .
-                          return  Navigator.pop(context);
+//                          return  Navigator.pop(context);
 
-                         /*
+
                           return Container(
                             child: Center(
                               child: Container(
@@ -1815,7 +1815,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
                           );
 
-                          */
+
                         }
                     }
                   }
