@@ -1023,7 +1023,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  cusomTtimerTest() {
+  Widget cusomTtimerTest() {
 
     print('-------- .  ...  . at here: ::   ------- cusomTtimerTest');
 //    _timer = new Timer(const Duration(milliseconds: 800), () {
@@ -1182,7 +1182,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:
                       case ConnectionState.none:
-
                         print('at ConnectionState.none || ConnectionState.waiting ||  ');
                         return Container(
                           margin: EdgeInsets.fromLTRB(
@@ -1241,19 +1240,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       case ConnectionState.active:
                       default:
-                        if (snapshot.hasdata) {
-                          if (snapshot.data != Order) {
-                            print(
-                                'at snapshot.data == null  for ConnectionState.active || default ');
-
-
-                            // TODO : WHICH ONE snapshot.data or snapshot.hasdata
-
-
-                            print('before invoking cusomTtimerTest() ');
-                            return cusomTtimerTest();
-                          }
-                          else {
+                        if (snapshot.hasData) {
+                          if (snapshot.data is Order) {
                             print(
                                 'at snapshot.data == !=null  for ConnectionState.active or default ');
                             Order oneOrder = snapshot.data;
@@ -1597,8 +1585,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                             // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
 
-                                                            itemBuilder: (
-                                                                _,
+                                                            itemBuilder: (_,
                                                                 int index) {
 //            return Text('ss');
 
@@ -1745,6 +1732,85 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               );
                             }
                           }
+                          else {
+                            print('at snapshot.data !is Order  ');
+
+
+                            // TODO : WHICH ONE snapshot.data or snapshot.hasData
+
+                            print('before invoking cusomTtimerTest() ');
+                            return Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  0, displayHeight(context) / 2, 0, 0),
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                              backgroundColor: Colors.cyanAccent,
+                                              valueColor:
+                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                              backgroundColor: Colors.green,
+                                              valueColor:
+                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                              backgroundColor: Colors.yellow,
+                                              valueColor:
+                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+                                          )
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                              backgroundColor: Colors.pink,
+
+                                              valueColor:
+                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                            );
+                          }
+                        }
+
+                        else{
+                          print('condition for !snapshot.hasData');
+//                          toDO: navigate .
+                          return Container(
+                            child: Center(
+                              child: Container(
+                                  alignment: Alignment.center,
+                                  child: new CircularProgressIndicator(
+                                      backgroundColor: Colors.pink,
+
+                                      valueColor:
+                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                  )
+                              ),
+                            ),
+                          );
                         }
                     }
                   }
