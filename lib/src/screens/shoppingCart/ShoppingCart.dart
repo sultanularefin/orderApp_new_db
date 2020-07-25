@@ -16,7 +16,9 @@ import 'package:flutter/material.dart' hide Image;
 //import 'package:image/image.dart';
 import 'package:flutter/services.dart'; // InputFormatters.
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
+import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+import 'package:foodgallery/src/welcomePage.dart';
 import 'package:image/image.dart' as ImageAliasAnotherSource;
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -1801,11 +1803,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                          toDO: navigate .
 //                          return  Navigator.pop(context);
 
-                          return BlocProvider<FoodGalleryBloc>(
-                              bloc: FoodGalleryBloc(),
-                              child: FoodGallery2()
+
+//                        return WelcomePage;
+
+                          return BlocProvider<IdentityBloc>(
+                              bloc: IdentityBloc(),
+                              child: WelcomePage()
 
                           );
+
+
+
 
                           /*
                           return Center(
