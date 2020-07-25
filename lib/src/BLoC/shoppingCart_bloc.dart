@@ -600,7 +600,7 @@ class ShoppingCartBloc implements Bloc {
       return tempOrder;
     }
 
-    
+
 
   }
 

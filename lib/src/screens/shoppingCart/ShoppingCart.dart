@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Image;
 //import 'package:image/image.dart';
 import 'package:flutter/services.dart'; // InputFormatters.
+import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 import 'package:image/image.dart' as ImageAliasAnotherSource;
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -155,6 +156,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   bool loadingState = false;
+  Timer _timer;
 
 
   /*
@@ -1021,6 +1023,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  cusomTtimerTest() {
+    _timer = new Timer(const Duration(milliseconds: 800), () {
+
+      _timer = new Timer(const Duration(seconds: 2), () {
+
+        
+        Navigator.push(context, MaterialPageRoute(builder: (context) => FoodGallery2()));
+      });
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -1151,14 +1166,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       case ConnectionState.active:
                       default:
                         if (snapshot.data == null) {
+
+
                           // TODO : WHICH ONE snapshot.data or snapshot.hasdata
+
+                          cusomTtimerTest();
                           return Container(
                             margin: EdgeInsets.fromLTRB(
                                 0, displayHeight(context) / 2, 0, 0),
                             child: Center(
                               child: Column(
                                 children: <Widget>[
-
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                            backgroundColor: Colors.cyanAccent)
+                                    ),
+                                  ),
                                   Center(
                                     child: Container(
                                         alignment: Alignment.center,
@@ -1186,21 +1211,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           );
 
-                          /*
-                          * Order z = shoppingCartBloc.getCurrentOrder;
-              z.selectedFoodInOrder = backUP;
 
-              shoppingCartBloc.clearSubscription();
 
-              logger.e('at WillPopScope Quantity: ${z.selectedFoodInOrder[0]
-                  .quantity}');
-
-              Navigator.pop(context, z);*/
-//                          Timer(Duration(seconds: 3), () {
-//                            // 5s over, navigate to a new page
-//                            return Navigator.pop(context);
-////                            Navigator.pushNamed(context, MaterialPageRoute(builder: (_) => Screen2()));
-//                          });
                         }
                         else {
                           Order oneOrder = snapshot.data;
