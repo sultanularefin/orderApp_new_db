@@ -9676,8 +9676,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       _testPrintDummyDevices(x);
 
-
-
                       */
 
                       //END
