@@ -706,8 +706,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     child: Text(
                       ((customerForReciteGeneration.address == null) ||
                           (customerForReciteGeneration.address.length == 0)) ?
-                      'EMPTY' :customerForReciteGeneration.address.length>20?
-                      customerForReciteGeneration.address.substring(0,17) +'...':
+                      'EMPTY' :customerForReciteGeneration.address.length>30?
+                      customerForReciteGeneration.address.substring(0,27) +'...':
                       customerForReciteGeneration.address,
 
                       textAlign: TextAlign.left,
@@ -735,8 +735,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ((customerForReciteGeneration.flatOrHouseNumber == null) ||
                           (customerForReciteGeneration.flatOrHouseNumber.length ==
                               0)) ?
-                      'EMPTY' :customerForReciteGeneration.flatOrHouseNumber.length>20?
-                      customerForReciteGeneration.flatOrHouseNumber.substring(0,17) +'...':
+                      'EMPTY' :customerForReciteGeneration.flatOrHouseNumber.length>30?
+                      customerForReciteGeneration.flatOrHouseNumber.substring(0,27) +'...':
                       customerForReciteGeneration.flatOrHouseNumber,
 
                       maxLines:2,
@@ -758,8 +758,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       ((customerForReciteGeneration.phoneNumber == null) ||
                           (customerForReciteGeneration.phoneNumber.length == 0)) ?
-                      'EMPTY' :customerForReciteGeneration.phoneNumber.length>20?
-                    customerForReciteGeneration.phoneNumber.substring(0,17) +'...':
+                      'EMPTY' :customerForReciteGeneration.phoneNumber.length>30?
+                    customerForReciteGeneration.phoneNumber.substring(0,27) +'...':
                       customerForReciteGeneration.phoneNumber,
                       maxLines: 2,
 
@@ -9675,7 +9675,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       _testPrintDummyDevices(x);
 
-                      
+
 
                       //END
 
