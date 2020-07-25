@@ -458,10 +458,7 @@ class ShoppingCartBloc implements Bloc {
 
   Future<String> recitePrinted(Order payMentProcessing,bool status) async{
 
-//    payMentProcessing.recitePrinted = status;
 
-//    _curretnOrder=payMentProcessing;
-//    _orderController.sink.add(_curretnOrder);
 
     String documentID = payMentProcessing.orderdocId;
 
@@ -475,6 +472,11 @@ class ShoppingCartBloc implements Bloc {
 
     if(documentID == documentID2){
       print('recite print successful: ');
+
+      payMentProcessing.recitePrinted = status;
+
+    _curretnOrder=payMentProcessing;
+    _orderController.sink.add(_curretnOrder);
       return documentID2;
     }
     else{
