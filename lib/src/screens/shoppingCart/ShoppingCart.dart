@@ -8978,67 +8978,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
-//                        final identityBlocLoginPage =
-//                        BlocProvider.of<IdentityBloc>(context);
-
-                  /*
-
-                  Future<List<String>> testDevices =
-                  shoppingCartBloc.discoverDevices2('9100');
-
-//                            _handleSignIn();
-
-
-                  testDevices.whenComplete(() {
-
-                    print("called when future completes");
-
-                  }
-                  ).then((onValue){
-
-//                          setState(() {
-//                            isDiscovering = false;
-//                            found = devices.length;
-                    devices=onValue;
-
-                    print('onValue: $onValue');
-//                          });
-//
-                    logger.i('isDiscovering: $isDiscovering');
-                    logger.i('found: $found');
-                    logger.i('devices: $devices');
-
-                  }).catchError((onError){
-                    print('some  ERROR **** at onError $onError ***');
-
-
-                  });
-
-                  */
-
-
-/*
-    final identityBlocLoginPage =
-    BlocProvider.of<IdentityBloc>(context);
-
-
-    Future<AuthResult> userCheck=
-    identityBlocLoginPage.handleSignInFromLoginPage(emailState.trim(),passwordState.trim());
-
-//                            _handleSignIn();
-
-    userCheck.whenComplete(() {
-
-    print("called when future completes");
-
-    }
-    ).then((onValue){
-
-    }
-        */
-
-//                        await int foundCount=  discover(context);
-
 
                   print(
                       'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAway
@@ -9049,11 +8988,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   print(
                       'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
-                  _startScanDevices();
-//                  _startScanDummyDevices();
-                  print(
-                      'debug print after invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
-
 
                   Order tempOrderWithdocId = await shoppingCartBloc
                       .paymentButtonPressed(cancelPaySelectUNObscuredTakeAway);
@@ -9127,6 +9061,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                     bool found = false;
+
                     int index = -1;
                     for (int i = 0; i < blueToothDevicesState.length; i++) {
                       ++index;

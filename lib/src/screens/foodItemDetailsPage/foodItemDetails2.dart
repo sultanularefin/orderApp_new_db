@@ -2745,7 +2745,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           else {
 
-            print('snapshot.hasData and else statement at FDetailS2');
+//            print('snapshot.hasData and else statement at FDetailS2');
             List<NewIngredient> selectedIngredients = snapshot.data;
 
             if( (selectedIngredients.length ==1)&&
