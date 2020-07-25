@@ -141,6 +141,7 @@ class FoodGalleryBloc implements Bloc {
 
 //    return ingItems;
 
+      _isDisposedIngredients=true;
 
     }
     else {
@@ -224,10 +225,11 @@ class FoodGalleryBloc implements Bloc {
       }
       );
 
+
       _allFoodsList= tempAllFoodsList;
 
       _foodItemController.sink.add(_allFoodsList);
-
+      _isDisposedFoodItems = true;
 
     }
   }
@@ -307,6 +309,8 @@ class FoodGalleryBloc implements Bloc {
       _categoriesController.sink.add(_allCategoryList);
       //    _foodItemController.sink.add(_allCategoryList);
       //    return _allFoodsList;
+
+      _isDisposedCategories = true;
 
     }
   }
