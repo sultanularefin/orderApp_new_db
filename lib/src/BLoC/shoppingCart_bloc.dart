@@ -456,19 +456,36 @@ class ShoppingCartBloc implements Bloc {
   //PAYMENT FIRESTORE =>
 
 
-  void recitePrinted(Order payMentProcessing,bool status) async{
+  Future<String> recitePrinted(Order payMentProcessing,bool status) async{
 
-    payMentProcessing.recitePrinted=status;
+//    payMentProcessing.recitePrinted = status;
 
-    _curretnOrder=payMentProcessing;
-    _orderController.sink.add(_curretnOrder);
+//    _curretnOrder=payMentProcessing;
+//    _orderController.sink.add(_curretnOrder);
+
+    String documentID = payMentProcessing.orderdocId;
+
+    // UPDATE DOCUMENT with RECITE PRINTED STATUS:
+
+    String documentID2 = await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
 
 
-    return;
+    print('documentID: $documentID');
+    print('documentID2: $documentID2');
+
+    if(documentID == documentID2){
+      print('recite print successful: ');
+      return documentID2;
+    }
+    else{
+
+      print('recite print unSuccessful: ');
+      return '';
+    }
+    return '';
   }
 
   Future<Order> paymentButtonPressed(Order payMentProcessing) async{
-
 
     String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
 //    logger.i('payment Button Pressed is payMentProcessing.orderTypeIndex ${payMentProcessing.orderTypeIndex} ::'

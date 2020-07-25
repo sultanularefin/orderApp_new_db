@@ -325,6 +325,47 @@ class FirebaseClient {
   }
 
 
+  Future<String> updateOrderCollectionDocumentWithRecitePrintedInformation
+      (String orderDocumentId, bool recitePrinted)async {
+
+    print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
+
+    final DocumentReference postRef = Firestore.instance.collection(
+        "restaurants").
+    document('USWc8IgrHKdjeDe9Ft4j').
+    collection('orderList').document(orderDocumentId);
+    Firestore.instance.runTransaction((Transaction tx) async {
+      DocumentSnapshot postSnapshot = await tx.get(postRef);
+      if (postSnapshot.exists) {
+        await tx.update(postRef, <String, bool>{'recitePrinted': false});
+
+
+      }
+    }).whenComplete(() => print("called when future [update of document with 'recitePrinted' field completes"))
+        .then((document) {
+      //  print('Added document with ID: ${document.documentID}');
+//      orderDocId= document.documentID;
+
+    print('document: $document');
+
+    return document;
+
+
+//      return document;
+//                            _handleSignIn();
+    }).catchError((onError) {
+         print('K   K    K   at onError for Order data update with recite printed data : $onError');
+//      orderDocId= '';
+
+      return '';
+//      return '';
+    });
+
+    return '';
+
+
+
+  }
   Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType)async {
     // print('currentOrderToFirebaseL: $currentOrderToFirebase');
     /*print('currentOrderToFirebase.selectedFoodInOrder: '
@@ -383,9 +424,7 @@ class FirebaseClient {
           ? 'Delivery'
           : orderBy == 'TakeAway' ? 'TakeAway' : 'DinningRoom',
       'orderProductionTime': currentOrderToFirebase.orderingCustomer.etaTimeInMinutes,
-
-
-
+      'recitePrinted':false,
 
     }).whenComplete(() => print("called when future completes"))
         .then((document) {

@@ -706,8 +706,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     child: Text(
                       ((customerForReciteGeneration.address == null) ||
                           (customerForReciteGeneration.address.length == 0)) ?
-                      'EMPTY' :customerForReciteGeneration.address.length>30?
-                      customerForReciteGeneration.address.substring(0,27) +'...':
+                      'EMPTY' :customerForReciteGeneration.address.length>39?
+                      customerForReciteGeneration.address.substring(0,35) +'...':
                       customerForReciteGeneration.address,
 
                       textAlign: TextAlign.left,
@@ -735,8 +735,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ((customerForReciteGeneration.flatOrHouseNumber == null) ||
                           (customerForReciteGeneration.flatOrHouseNumber.length ==
                               0)) ?
-                      'EMPTY' :customerForReciteGeneration.flatOrHouseNumber.length>30?
-                      customerForReciteGeneration.flatOrHouseNumber.substring(0,27) +'...':
+                      'EMPTY' :customerForReciteGeneration.flatOrHouseNumber.length>39?
+                      customerForReciteGeneration.flatOrHouseNumber.substring(0,35) +'...':
                       customerForReciteGeneration.flatOrHouseNumber,
 
                       maxLines:2,
@@ -758,8 +758,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       ((customerForReciteGeneration.phoneNumber == null) ||
                           (customerForReciteGeneration.phoneNumber.length == 0)) ?
-                      'EMPTY' :customerForReciteGeneration.phoneNumber.length>30?
-                    customerForReciteGeneration.phoneNumber.substring(0,27) +'...':
+                      'EMPTY' :customerForReciteGeneration.phoneNumber.length>39?
+                    customerForReciteGeneration.phoneNumber.substring(0,35) +'...':
                       customerForReciteGeneration.phoneNumber,
                       maxLines: 2,
 
@@ -1250,8 +1250,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   child: Container(
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
-                                          backgroundColor: Colors
-                                              .lightGreenAccent)
+                                          backgroundColor: Colors.green)
                                   ),
                                 ),
                                 Center(
@@ -1265,7 +1264,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   child: Container(
                                       alignment: Alignment.center,
                                       child: new CircularProgressIndicator(
-                                          backgroundColor: Color(0xffFC0000))
+                                          backgroundColor: Colors.blue)
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                      child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.pink)
                                   ),
                                 ),
                               ],
@@ -12453,18 +12459,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
             print("called when future completes");
 //          return true;
           }
-          ).then((printResult) {
-
+          ).then((printResult) async {
             if(printResult==true){
-
-//              await
-              shoppingCartBloc
-                  .recitePrinted(oneOrderForReceipt,true);
-//              paymentButtonPressed
-//              toDo: update bloc update oneOrder.recitePrinted by calling a method:
-//              oneOrder.recitePrinted==false;
-            }
             print("printResult: $printResult");
+            String docID= await shoppingCartBloc
+                .recitePrinted(oneOrderForReceipt,true);
+
+            print('docID: $docID');
+            
+            }
+
             return true;
           }).catchError((onError) {
             print('printing not successful: $onError');
