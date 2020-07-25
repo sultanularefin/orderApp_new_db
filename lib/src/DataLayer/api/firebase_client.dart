@@ -330,10 +330,11 @@ class FirebaseClient {
 
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
 
-    final DocumentReference postRef =await Firestore.instance.collection(
+    final DocumentReference postRef = Firestore.instance.collection(
         "restaurants").
     document('USWc8IgrHKdjeDe9Ft4j').
     collection('orderList').document(orderDocumentId);
+
     Firestore.instance.runTransaction((Transaction tx) async {
       DocumentSnapshot postSnapshot = await tx.get(postRef);
       if (postSnapshot.exists) {
