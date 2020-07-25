@@ -464,20 +464,20 @@ class ShoppingCartBloc implements Bloc {
 
     // UPDATE DOCUMENT with RECITE PRINTED STATUS:
 
-    String documentID2 = await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
+   bool documentUpdateBoolResult = await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
 
 
     print('documentID: $documentID');
-    print('documentID2: $documentID2');
+    print('documentUpdateBoolResult: $documentUpdateBoolResult');
 
-    if(documentID == documentID2){
+    if(documentUpdateBoolResult==true){
       print('recite print successful: ');
 
       payMentProcessing.recitePrinted = status;
 
     _curretnOrder=payMentProcessing;
     _orderController.sink.add(_curretnOrder);
-      return documentID2;
+      return documentID;
     }
     else{
 

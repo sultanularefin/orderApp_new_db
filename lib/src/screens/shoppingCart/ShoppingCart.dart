@@ -1802,6 +1802,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                           return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
 
                               
@@ -8587,13 +8589,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if (found == true) {
                       print('found == true');
-                      await _testPrint(blueToothDevicesState[index]);
+                     bool printResult= await _testPrint(blueToothDevicesState[index]);
 
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
 
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(context, tempOrderWithdocId);
+                      if(printResult==true) {
+                        print('printResult==true i.e. print successfull');
+                        shoppingCartBloc.clearSubscription();
+                        return Navigator.pop(context, tempOrderWithdocId);
+                      }
+                      else{
+                        print('printResult!=true i.e. print UN successfull');
+                        shoppingCartBloc.clearSubscription();
+                        return Navigator.pop(context, tempOrderWithdocId);
+                      }
                     }
 
                     else {
@@ -8617,17 +8627,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       _testPrintDummyDevices(x);
 
 //                      print("printResult: $printResult");
-                      String docID= await shoppingCartBloc
+                      String docID1= await shoppingCartBloc
                           .recitePrinted(tempOrderWithdocId,true);
 
-                      print('docID in dummy Print: $docID');
+                      print('docID1 in dummy Print: $docID1');
 
 
 
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(context,tempOrderWithdocId);
+                      if(docID1!=''){
+                        print('docID2!=\'\'----------');
+                        shoppingCartBloc.clearSubscription();
+                        return Navigator.pop(context,tempOrderWithdocId);
+                      }
+                      else{
+                        print('docID1 == \'\'----------');
+                        shoppingCartBloc.clearSubscription();
+                        return Navigator.pop(context,tempOrderWithdocId);
+                      }
 
-                      // END
+
+                      //  comment END'S HERE.
 //                      return;
                     }
                   }
@@ -8926,13 +8945,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if (found == true) {
 
-                      print('found == true');
-                      await _testPrint(blueToothDevicesState[index]);
+                        print('found == true');
+                        bool printResult= await _testPrint(blueToothDevicesState[index]);
+
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
-                      shoppingCartBloc.clearSubscription();
-//                      return Navigator.pop(context,tempOrderWithdocId);
-                      return Navigator.pop(context, tempOrderWithdocId);
-                    }
+
+
+                        if(printResult==true) {
+                          print('printResult==true i.e. print successfull');
+                          shoppingCartBloc.clearSubscription();
+                          return Navigator.pop(context, tempOrderWithdocId);
+                        }
+                        else{
+                          print('printResult!=true i.e. print UN successfull');
+                          shoppingCartBloc.clearSubscription();
+                          return Navigator.pop(context, tempOrderWithdocId);
+                        }
+                      }
+
 
                     else {
                       logger.i('___________ blueTooth device not found _____ printing wasn\'t successfull');
@@ -11651,10 +11681,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               print('docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
 //              print('docID: $docID');
-
+              return true;
+            }
+            else{
+              return false;
             }
 
-            return true;
+
           }).catchError((onError) {
             print('printing not successful: $onError');
             return false;

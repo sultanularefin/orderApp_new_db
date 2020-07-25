@@ -325,7 +325,7 @@ class FirebaseClient {
   }
 
 
-  Future<String> updateOrderCollectionDocumentWithRecitePrintedInformation
+  Future<bool> updateOrderCollectionDocumentWithRecitePrintedInformation
       (String orderDocumentId, bool recitePrinted)async {
 
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
@@ -348,7 +348,7 @@ class FirebaseClient {
 
     print('document: at then:  $document');
 
-    return document;
+    return true;
 
 
 //      return document;
@@ -357,11 +357,12 @@ class FirebaseClient {
          print('K   K    K   at onError for Order data update with recite printed data : $onError');
 //      orderDocId= '';
 
-      return '';
+      return false;
 //      return '';
     });
 
-    return '';
+    // default.
+    return false;
 
 
 
