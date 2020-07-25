@@ -325,8 +325,8 @@ class FirebaseClient {
   }
 
 
-  Future<bool> updateOrderCollectionDocumentWithRecitePrintedInformation
-      (String orderDocumentId, bool recitePrinted)async {
+  Future<Map<String, dynamic>> updateOrderCollectionDocumentWithRecitePrintedInformation
+      (String orderDocumentId, bool recitePrinted) async {
 
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
 
@@ -335,35 +335,23 @@ class FirebaseClient {
     document('USWc8IgrHKdjeDe9Ft4j').
     collection('orderList').document(orderDocumentId);
 
-    Firestore.instance.runTransaction((Transaction tx) async {
+//<<<<<<< HEAD
+//    Firestore.instance.runTransaction((Transaction tx) async {
+//=======
+   return await Firestore.instance.runTransaction((Transaction tx) async {
+//>>>>>>> d01c6e67f96519cda3ef0f8ef05bfd78b2c420b3
       DocumentSnapshot postSnapshot = await tx.get(postRef);
+
       if (postSnapshot.exists) {
+        print('postSnapshot.exists....');
         await tx.update(postRef, <String, bool>{'recitePrinted': true});
 
 
       }
-    }).whenComplete(() => print("called when future [update of document with 'recitePrinted' field completes"))
-        .then((document) {
-      //  print('Added document with ID: ${document.documentID}');
-//      orderDocId= document.documentID;
-
-    print('document: at then:  $document');
-
-    return true;
-
-
-//      return document;
-//                            _handleSignIn();
-    }).catchError((onError) {
-         print('K   K    K   at onError for Order data update with recite printed data : $onError');
-//      orderDocId= '';
-
-      return false;
-//      return '';
     });
 
     // default.
-    return false;
+//    return false;
 
 
 
