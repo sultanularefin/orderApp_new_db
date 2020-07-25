@@ -1283,7 +1283,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       case ConnectionState.active:
                       default:
-                        if (snapshot.hasData == null) {
+                        if (snapshot.data == null) {
                           // TODO : WHICH ONE snapshot.data or snapshot.hasdata
                           return Container(
                             margin: EdgeInsets.fromLTRB(
