@@ -1024,6 +1024,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   cusomTtimerTest() {
+
+    print('-------- .  ...  . at here: ::   ------- cusomTtimerTest');
     _timer = new Timer(const Duration(milliseconds: 800), () {
       const Color beginColor = Colors.deepPurple;
       const Color endColor = Colors.deepOrange;
