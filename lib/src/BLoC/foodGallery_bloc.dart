@@ -330,6 +330,8 @@ class FoodGalleryBloc implements Bloc {
     _foodItemController.close();
     _categoriesController.close();
     _allIngredientListController.close();
+
+    
     _isDisposed = true;
 //    _allIngredientListController.close();
   }
