@@ -881,9 +881,6 @@ class ShoppingCartBloc implements Bloc {
 
 
 
-
-
-
     _orderController.sink.add(_curretnOrder);
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
     _orderTypeController.sink.add(_orderType);
