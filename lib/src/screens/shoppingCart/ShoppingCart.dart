@@ -1160,7 +1160,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: new CircularProgressIndicator(
                                           backgroundColor: Colors.blue,
 //                                          valueColor:
-//                                          ColorTween(begin: beginColor, end: endColor).animate(controller))
+//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )
                                   ),
                                 ),
                                 Center(
@@ -1169,7 +1170,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       child: new CircularProgressIndicator(
                                           backgroundColor: Colors.pink,
 //                                          valueColor:
-//                                          ColorTween(begin: beginColor, end: endColor).animate(controller))
+//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )
                                   ),
                                 ),
                               ],
