@@ -330,7 +330,7 @@ class FirebaseClient {
 
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
 
-    final DocumentReference postRef = Firestore.instance.collection(
+    final DocumentReference postRef =await Firestore.instance.collection(
         "restaurants").
     document('USWc8IgrHKdjeDe9Ft4j').
     collection('orderList').document(orderDocumentId);
@@ -346,7 +346,7 @@ class FirebaseClient {
       //  print('Added document with ID: ${document.documentID}');
 //      orderDocId= document.documentID;
 
-    print('document: $document');
+    print('document: at then:  $document');
 
     return document;
 
