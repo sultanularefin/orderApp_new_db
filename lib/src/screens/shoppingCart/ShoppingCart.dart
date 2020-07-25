@@ -1801,19 +1801,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                          return  Navigator.pop(context);
 
 
-                          return Container(
-                            child: Center(
-                              child: Container(
+                          return Column(
+                            children: <Widget>[
+
+                              
+                              Container(
+                                      alignment: Alignment.center,
+                                      child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.pink,
+
+//                                      valueColor:
+//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                      )
+                                  ),
+                              Container(
                                   alignment: Alignment.center,
                                   child: new CircularProgressIndicator(
-                                      backgroundColor: Colors.pink,
+                                    backgroundColor: Colors.pink,
 
 //                                      valueColor:
 //                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
                                   )
                               ),
-                            ),
+                              Container(
+                                  alignment: Alignment.center,
+                                  child: new CircularProgressIndicator(
+                                    backgroundColor: Colors.pink,
+
+//                                      valueColor:
+//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                  )
+                              ),
+                            ],
                           );
+
+
 
 
                         }
