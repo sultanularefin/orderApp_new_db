@@ -502,6 +502,19 @@ class ShoppingCartBloc implements Bloc {
     Order tempOrder= payMentProcessing;
 
     tempOrder.paymentButtonPressed=true;
+
+
+    // loader/ spinner loads from this 2 lines not tested yet.... july 25 2020.
+
+
+    _curretnOrder=tempOrder;
+    _orderController.sink.add(_curretnOrder);
+
+    // loader/ spinner loads from this 2 lines not tested yet.... july 25 2020. ends here.
+
+
+//    _curretnOrder= tempOrder;
+
 //    List<SelectedFood> selectedFoodCheckForList = tempOrder.selectedFoodInOrder;
 
     List<SelectedFood> selectedFoodCheckForList = _expandedSelectedFood;
@@ -587,32 +600,7 @@ class ShoppingCartBloc implements Bloc {
       return tempOrder;
     }
 
-
-
-
-//    _orderController;
-
-//    this.paymentButtonPressed:false,
-//    this.orderdocId:'',
-
-    /*
-    logger.e('Order received, Firestore id: $documentID');
-    */
-
-//    cancelButtonPressed();
-
-//    _curretnOrder=null;
-//    _expandedSelectedFood =[];
-//    _orderType =[];
-//    _paymentType =[];
-//
-//
-//    _orderController.sink.add(_curretnOrder);
-//    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
-//    _orderTypeController.sink.add(_orderType);
-//    _paymentTypeController.sink.add(_paymentType);
-
-//    return documentID;
+    
 
   }
 

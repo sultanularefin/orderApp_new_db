@@ -154,6 +154,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
   final etaController = TextEditingController();
 
 
+  bool loadingState = false;
+
+
   /*
   * PRINTING RELATED STATE VARIABLES ARE HERE.
   * */
@@ -8993,11 +8996,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       .paymentButtonPressed(cancelPaySelectUNObscuredTakeAway);
 
 
+
+
+
+
                   /*
                   setState(() {
-                    localScanAvailableState = !localScanAvailableState;
+                    loadingState =true;
+//                    localScanAvailableState = !localScanAvailableState;
                   });
                   */
+
 
 
                   if ((tempOrderWithdocId.paymentButtonPressed == true) &&
