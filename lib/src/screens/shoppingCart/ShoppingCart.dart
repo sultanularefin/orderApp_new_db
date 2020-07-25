@@ -353,154 +353,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'debug print inside _stopScanDevices() method and finished calling printerManager.stopScan() method');
   }
 
-  // Future<void> return type .  ??
 
-  //  No longer requiered.
-
-  /*
-  Future<void> checkBlueToothDevices () async {
-//    final identityBlockinInitState = BlocProvider.of<IdentityBloc>(context);
-
-    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-    List<PrinterBluetooth> tempTestDevices = await shoppingCartBloc
-        .discoverDevicesInitState();
-
-    if (tempTestDevices == null) {
-      print('no devices found from init State Future completed');
-    }
-    else if (tempTestDevices.length == 0) {
-      print('0 devices found from init State Future completed');
-    }
-
-    else {
-      setState(() {
-        blueToothDevicesState = tempTestDevices;
-      });
-    }
-  }
-
-  */
-
-
-/*
-  Future<void> _onBackPressed() {
-//    shoppingCartBloc.
-//    return StreamBuilder<List<SelectedFood>>(
-//      stream: shoppingCartbloc.getExpandedFoodsStream,
-    List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
-    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-    expandedFoodReturnTemp = shoppingCartBloc.getExpandedSelectedFood;
-
-    return showDialog(
-      context: context,
-      builder: (context) => new AlertDialog(
-        title: new Text('Are you sure?'),
-        content: new Text('Do you want to go to home page'),
-        actions: <Widget>[
-          new GestureDetector(
-            onTap: () => Navigator.of(context).pop(expandedFoodReturnTemp),
-            child: Text("NO"),
-          ),
-          SizedBox(height: 16),
-          new GestureDetector(
-            onTap: () => Navigator.of(context).pop(expandedFoodReturnTemp),
-            child: Text("YES"),
-          ),
-        ],
-      ),
-    ) ??
-        return null;
-  }
-  */
-
-/*
-  Widget _onBackPressed2() async {
-
-    //    shoppingCartBloc.
-//    return StreamBuilder<List<SelectedFood>>(
-//      stream: shoppingCartbloc.getExpandedFoodsStream,
-
-//    List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
-
-    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-    Order backReturnOrder = shoppingCartBloc.getCurrentOrder;
-
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Select some Food, please'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-//                        Text('you haven\'t selected any food yet, please select some food'),
-                Text('You need to select some food item in order to go to the shopping cart page.'),
-              ],
-            ),
-          ),
-
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Go to home page'),
-                onPressed: () {
-                  return Navigator.pop(context,backReturnOrder);
-//                Navigator.of(context).pop(backReturnOrder);
-                },
-              ),
-
-              FlatButton(
-                child: Text('Stay here'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-
-          ],
-        );
-      },
-    );
-
-    /*
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Go to home page'),
-              onPressed: () {
-                return Navigator.pop(context,backReturnOrder);
-//                Navigator.of(context).pop(backReturnOrder);
-              },
-            ),
-
-            FlatButton(
-              child: Text('Stay here'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-    */
-  }
-
-  */
 
   /// Creates an image from the given widget by first spinning up a element and render tree,
   /// then waiting for the given [wait] amount of time and then creating an image via a [RepaintBoundary].
@@ -1319,6 +1172,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           );
 
+                          /*
+                          * Order z = shoppingCartBloc.getCurrentOrder;
+              z.selectedFoodInOrder = backUP;
+
+              shoppingCartBloc.clearSubscription();
+
+              logger.e('at WillPopScope Quantity: ${z.selectedFoodInOrder[0]
+                  .quantity}');
+
+              Navigator.pop(context, z);*/
                           Timer(Duration(seconds: 3), () {
                             // 5s over, navigate to a new page
                             return Navigator.pop(context);
@@ -8964,58 +8827,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           ),
 
-          /*Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
 
-                Container(
-                  child: OutlineButton(
-                    onPressed: (){ print('Cancel Pressed obsured ...');
-
-//                    return Navigator.pop(context,true);
-                    },
-                    child: Text('Cancel',style: TextStyle(color: Color(0xffFC0000),fontSize: 30),),
-                    shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(
-                        color:Color(0xffFC0000),
-                        style: BorderStyle.solid,
-                        width:7.6,
-                      ),
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                  ),
-
-                ),
-                SizedBox(width: displayWidth(context)/12,),
-                Container(
-                  child: OutlineButton(
-                    onPressed: (){
-
-                      print('on Pressed of Pay obscured');
-//                      return Navigator.pop(context,false);
-
-
-                    },
-                    child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
-                    shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(
-                        color:Colors.green,
-                        style: BorderStyle.solid,
-                        width:7.6,
-                      ),
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                  ),
-
-                ),
-              ],
-            ),
-          ),
-          */
         ),
       );
   }
@@ -9723,97 +9535,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 },
               ),
             ),
-            /*
-            Container(
-              child: OutlineButton(
-                onPressed: (){
-                  print('on Pressed of Cancel animatedUnObscuredCancelPayButtonDeliveryPhone');
 
-                  /*
-                  cancelPaySelect.page=1;
-                  return Navigator.of(context).pop(
-                    BlocProvider<ShoppingCartBloc>(
-                        bloc: ShoppingCartBloc(cancelPaySelect),
-                        child:
-                        BlocProvider<FoodGalleryBloc>(
-                            bloc: FoodGalleryBloc(),
-                            child: FoodGallery2()
-
-                        )
-                    ),);
-                  */
-//                  shoppingCartBloc.cancelButtonPressed();
-
-
-                  final shoppingCartBloc = BlocProvider.of<
-                      ShoppingCartBloc>(context);
-                  shoppingCartBloc.cancelButtonPressed();
-
-
-
-                  return Navigator.pop(context,true);
-                },
-                child: Text('Cancel',style: TextStyle(color: Color(0xffFC0000),fontSize: 30),),
-                shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                  side: BorderSide(
-                    color: Color(0xffFC0000),
-                    style: BorderStyle.solid,
-                    width: 3.6,
-                  ),
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-              ),
-
-            ),
-            SizedBox(width: displayWidth(context)/12,),
-            Container(
-              child: OutlineButton(
-                onPressed: () async{
-
-
-
-                  final shoppingCartBloc = BlocProvider.of<
-                      ShoppingCartBloc>(context);
-
-                  String docId = await shoppingCartBloc.paymentButtonPressed(cancelPaySelect);
-
-//                  print('on Pressed of Pay of animatedUnObscuredCancelPayButtonTakeAway DocID=> $docId');
-
-                  _scaffoldKey.currentState
-//                  Scaffold.of(context)
-//                    ..removeCurrentSnackBar()
-                    ..showSnackBar(SnackBar(content: Text("Order document Id : $docId")));
-
-                  print('docId: $docId');
-                  /*
-                  if(docId !=null)
-                  {
-                    return Navigator.pop(context,false);
-                  }
-
-                   */
-
-                  //   return Navigator.pop(context,false);
-
-                  //   print('on Pressed of Pay');
-                  //   return Navigator.pop(context,false);
-                },
-                child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
-                shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                  side: BorderSide(
-                    color:Colors.green,
-                    style: BorderStyle.solid,
-                    width: 3.6,
-                  ),
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-              ),
-
-            ),
-
-            */
           ],
         ),
       );
