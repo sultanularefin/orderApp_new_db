@@ -8358,6 +8358,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //              alignment: Alignment.center,
 
+                    // PAY OBSCURED DELIVERY PHONE...
                       child: Text('Pay', style: TextStyle(color: Colors.green,
                         fontSize: 30, fontWeight: FontWeight.bold,),
                       ),),
@@ -8487,6 +8488,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //              alignment: Alignment.center,
 
+                // PAY UNOBSCURED DINNING TAKEAWAY.
                   child: Text('Pay', style: TextStyle(color: Colors.green,
                     fontSize: 30, fontWeight: FontWeight.bold,),
                   ),),
@@ -8574,15 +8576,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
+//                      docID1= await shoppingCartBloc
+//                          .recitePrinted(tempOrderWithdocId,true);
 
-//                      shoppingCartBloc.clearSubscriptionPayment();
+//                      cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+                     shoppingCartBloc.clearSubscriptionPayment();
 
 
 //                      final shoppingCartBloc = BlocProvider.of<
 //                          ShoppingCartBloc>(context);
 //                      shoppingCartBloc.clearSubscription();
 
-//                      cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+//
 
 
                       return Navigator.pop(
@@ -8638,12 +8643,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                        return Navigator.pop(
 //                            context, cancelPaySelectUNObscuredTakeAway);
+                        shoppingCartBloc.clearSubscriptionPayment();
                         return Navigator.pop(context, cancelPaySelectUNObscuredTakeAwayDinning);
                       }
                       else{
                         print('printResult!=true i.e. print UN successfull');
 //                        shoppingCartBloc.clearSubscriptionPayment();
 //                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+                        shoppingCartBloc.clearSubscriptionPayment();
                         return Navigator.pop(context, cancelPaySelectUNObscuredTakeAwayDinning);
                       }
                     }
@@ -8686,7 +8693,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
 
 //                  shoppingCartBloc.clearSubscriptionPayment();
-
+                    shoppingCartBloc.clearSubscriptionPayment();
                   return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
                   }
                   else{
@@ -8694,7 +8701,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  shoppingCartBloc.clearSubscription();
 //                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
 //                  shoppingCartBloc.clearSubscriptionPayment();
-
+                    shoppingCartBloc.clearSubscriptionPayment();
                   return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
 
                   }

@@ -898,8 +898,8 @@ class ShoppingCartBloc implements Bloc {
 
 //    _curretnOrder=null;
     _expandedSelectedFood =[];
-    _orderType =[];
-    _paymentType =[];
+//    _orderType =[];
+//    _paymentType =[];
 
 //    _devicesBlueTooth = [];
 
@@ -909,8 +909,9 @@ class ShoppingCartBloc implements Bloc {
 
 //    _orderController.sink.add(_curretnOrder);
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
-    _orderTypeController.sink.add(_orderType);
-    _paymentTypeController.sink.add(_paymentType);
+
+//    _orderTypeController.sink.add(_orderType);
+//    _paymentTypeController.sink.add(_paymentType);
 
 //    _devicesController.sink.add(_devicesBlueTooth);
 
