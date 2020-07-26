@@ -475,7 +475,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
 
         ),
-        height: 110,
+        height: 120,
         width: 300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start, // previously it was little bit middle ... with center..
@@ -658,7 +658,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Container(
 //        color: Colors.blue,
 //        width: displayWidth(context) / 1.8,
-        height: 60,
+        height: 50,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 300,
@@ -671,7 +671,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 55,
+//              height: 55,
               width: 40,
 
               decoration: BoxDecoration(
@@ -679,7 +679,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   color: Colors.black,
                   style: BorderStyle.solid,
-                  width: 1.0,
+//                  width: 1.0,
 
                 ),
                 shape: BoxShape.circle,
@@ -688,8 +688,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               ),
 
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 5, 5),
+
                 child: Icon(
 //        getIconForName(orderTypeName),
 //        IconData:
@@ -698,9 +697,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Icons.pan_tool,
 //        FontAwesomeIcons.bookmark,
                   color: Colors.white,
-                  size: 35,
+//                  size: 35,
                 ),
-              ),
+
 
 
             ),
@@ -723,8 +722,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ),
 
               width: 200,
-              height: 50,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+//              height: 50,
+//              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -732,7 +731,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Widget>[
                   //  SizedBox(width: 5,),
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+//                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
                     child: Text(
                       oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
                       'paid' : 'unpaid',
@@ -769,13 +768,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 55,
-              width: 40,
+//              height: 55,
+//              width: 40,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
 //                  style: BorderStyle.solid,
-                  width: 1.0,
+//                  width: 1.0,
                 ),
                 shape: BoxShape.circle,
                 color: Colors.black,
@@ -794,7 +793,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                Icons.local_dining,
 //        FontAwesomeIcons.bookmark,
                 color: Colors.white,
-                size: 35,
+//                size: 35,
 
               ),
 
