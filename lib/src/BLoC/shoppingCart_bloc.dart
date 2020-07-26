@@ -60,7 +60,8 @@ class ShoppingCartBloc implements Bloc {
   List<OrderTypeSingleSelect>   _orderType;
   List<PaymentTypeSingleSelect> _paymentType;
   List<SelectedFood> _expandedSelectedFood =[];
-  List<SelectedFood> _savedSelectedFood    =[];
+
+//  List<SelectedFood> _savedSelectedFood    =[];
 
 
 //  CustomerInformation _oneCustomerInfo;
@@ -71,14 +72,19 @@ class ShoppingCartBloc implements Bloc {
   List<OrderTypeSingleSelect> get getCurrentOrderType => _orderType;
   List<PaymentTypeSingleSelect> get getCurrentPaymentType => _paymentType;
   List<SelectedFood> get getExpandedSelectedFood => _expandedSelectedFood;
-  List<SelectedFood> get getSavedSelectedFood => _savedSelectedFood;
+
+//  List<SelectedFood> get getSavedSelectedFood => _savedSelectedFood;
+
 //  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
 
 
 
   final _orderController = StreamController <Order>();
-  final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>();
-  final _savedSelectedFoodController =  StreamController<List<SelectedFood>>();
+
+  final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>.broadcast();
+
+//  final _savedSelectedFoodController =  StreamController<List<SelectedFood>>();
+
   final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
   final _paymentTypeController = StreamController <List<PaymentTypeSingleSelect>>.broadcast();
 
@@ -97,7 +103,7 @@ class ShoppingCartBloc implements Bloc {
   Stream  <List<PaymentTypeSingleSelect>> get getCurrentPaymentTypeSingleSelectStream =>
       _paymentTypeController.stream;
 
-  Stream  <List<SelectedFood>> get getSavedFoodsStream => _savedSelectedFoodController.stream;
+//  Stream  <List<SelectedFood>> get getSavedFoodsStream => _savedSelectedFoodController.stream;
 
 
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
@@ -256,8 +262,8 @@ class ShoppingCartBloc implements Bloc {
     List<SelectedFood> allOrderedFoods = x.selectedFoodInOrder;
 
 
-    _savedSelectedFood = allOrderedFoods;
-    _savedSelectedFoodController.sink.add(_savedSelectedFood);
+//    _savedSelectedFood = allOrderedFoods;
+//    _savedSelectedFoodController.sink.add(_savedSelectedFood);
 
 
     List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>();
@@ -1234,7 +1240,7 @@ class ShoppingCartBloc implements Bloc {
   void dispose() {
     _orderController.close();
     _expandedSelectedFoodController.close();
-    _savedSelectedFoodController.close();
+//    _savedSelectedFoodController.close();
     _orderTypeController.close();
     _paymentTypeController.close();
     _devicesController.close();
