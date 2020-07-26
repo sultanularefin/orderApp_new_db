@@ -476,8 +476,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         ),
         height: 110,
-
-        margin: EdgeInsets.fromLTRB(9, 6, 0, 0),
         width: 300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start, // previously it was little bit middle ... with center..
@@ -487,6 +485,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              padding: EdgeInsets.fromLTRB(6, 15, 0,0),
 //
 //              height: 152,
+              padding:EdgeInsets.fromLTRB(9, 6, 0, 0),
               width: 105,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -545,6 +544,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             /// toDo: multiline. maxlines
             Container(
+              padding:EdgeInsets.fromLTRB(9, 6, 0, 0),
 
 //              padding: EdgeInsets.fromLTRB(0, 8, 0,0),
 //            color:Colors.yellow,
