@@ -8453,8 +8453,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       else {
                         logger.i(
                             '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-                        _showMyDialog2(
-                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+//                        _showMyDialog2(
+//                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
 
 
                         shoppingCartBloc.clearSubscription();
@@ -8747,8 +8747,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         logger.i(
                             '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-                        _showMyDialog2(
-                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+//                        _showMyDialog2(
+//                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
 
 
                         shoppingCartBloc.clearSubscription();
