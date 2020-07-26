@@ -1273,7 +1273,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       ),
                                       Center(
                                         child: Text(
-                                            'printing recite... please wait.'
+                                            'printing recite... please wait.',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 34,
+                                              fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                              color: Colors.redAccent,
+                                              fontFamily: 'Itim-Regular',
+
+                                            )
                                         ),
                                       ),
                                       Center(
@@ -1815,44 +1825,45 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           */
 
+                          return Container(
+                            margin: EdgeInsets.fromLTRB(
+                                0, displayHeight(context) / 2, 0, 0),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
 
 
-
-                          return Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-
-
-                                Container(
-                                        alignment: Alignment.center,
-                                        child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.pink,
-
-//                                      valueColor:
-//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                        )
-                                    ),
-                                Container(
-                                    alignment: Alignment.center,
-                                    child: new CircularProgressIndicator(
-                                      backgroundColor: Colors.pink,
+                                  Container(
+                                      alignment: Alignment.center,
+                                      child: new CircularProgressIndicator(
+                                        backgroundColor: Colors.pink,
 
 //                                      valueColor:
 //                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                    )
-                                ),
-                                Container(
-                                    alignment: Alignment.center,
-                                    child: new CircularProgressIndicator(
-                                      backgroundColor: Colors.pink,
+                                      )
+                                  ),
+                                  Container(
+                                      alignment: Alignment.center,
+                                      child: new CircularProgressIndicator(
+                                        backgroundColor: Colors.pink,
 
 //                                      valueColor:
 //                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                    )
-                                ),
-                              ],
+                                      )
+                                  ),
+                                  Container(
+                                      alignment: Alignment.center,
+                                      child: new CircularProgressIndicator(
+                                        backgroundColor: Colors.pink,
+
+//                                      valueColor:
+//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                      )
+                                  ),
+                                ],
+                              ),
                             ),
                           );
 
@@ -8515,8 +8526,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                  if ((tempOrderWithdocId.paymentButtonPressed == true) &&
-                      (tempOrderWithdocId.orderdocId == '')) {
+                  if ((cancelPaySelectUNObscuredTakeAway.paymentButtonPressed == true) &&
+                      (cancelPaySelectUNObscuredTakeAway.orderdocId == '')) {
                     _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
@@ -8525,7 +8536,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId
+                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAway
                         .orderdocId}');
 
                     List<
@@ -8570,7 +8581,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(context,tempOrderWithdocId);
+                      return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
 //                      return;
                     }
 
@@ -8605,7 +8616,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if (found == true) {
                       print('found == true');
-                     bool printResult= await _testPrint(blueToothDevicesState[index]);
+                      bool printResult= await _testPrint(blueToothDevicesState[index]);
 
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
@@ -8613,12 +8624,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       if(printResult==true) {
                         print('printResult==true i.e. print successfull');
                         shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context, tempOrderWithdocId);
+                        return Navigator.pop(context, cancelPaySelectUNObscuredTakeAway);
                       }
                       else{
                         print('printResult!=true i.e. print UN successfull');
                         shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context, tempOrderWithdocId);
+                        return Navigator.pop(context, cancelPaySelectUNObscuredTakeAway);
                       }
                     }
 
@@ -8657,12 +8668,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       if(docID1!=''){
                         print('docID1!=\'\'    ----------');
                         shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context,tempOrderWithdocId);
+                        return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
                       }
                       else{
                         print('docID1 == \'\'   ----------');
                         shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context,tempOrderWithdocId);
+                        return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
                       }
 
 
@@ -8724,10 +8735,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 // animatedUnObscuredCancelPayButtonDeliveryPhone
   Widget animatedUnObscuredCancelPayButtonDeliveryPhone(
       Order cancelPaySelectUnobscuredDeliveryPhone) {
-//  Widget animatedObscuredTextInputContainer(){
-//    child:  AbsorbPointer(
-//        child: _buildShoppingCartInputFields()
-//    ),
+
 
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
@@ -8868,6 +8876,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone
                           .paymentTypeIndex}');
 
+                  // let's not use this order returned use the one from the bloc:
+                  // Order tempOrderWithdocId
                   Order tempOrderWithdocId = await shoppingCartBloc
                       .paymentButtonPressed(
                       cancelPaySelectUnobscuredDeliveryPhone);
@@ -8880,8 +8890,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   */
 
 
-                  if ((tempOrderWithdocId.paymentButtonPressed == true) &&
-                      (tempOrderWithdocId.orderdocId == '')) {
+                  if ((cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed == true) &&
+                      (cancelPaySelectUnobscuredDeliveryPhone.orderdocId == '')) {
                     _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
@@ -8890,7 +8900,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    print('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId
+                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
                         .orderdocId}');
 
                     List<
@@ -8928,8 +8938,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
 
+                      logger.i('__ __ ${cancelPaySelectUnobscuredDeliveryPhone.recitePrinted}');
+                      logger.i('-- ___ ${cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed}');
                       shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(context,tempOrderWithdocId);
+                      print('shopping Cart : shoppingCartBloc.clearSubscription() called... ');
+
+
+                      return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
 //                      return;
                     }
 
@@ -8964,23 +8979,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     if (found == true) {
 
-                        print('found == true');
-                        bool printResult= await _testPrint(blueToothDevicesState[index]);
+                      print('found == true');
+                      bool printResult= await _testPrint(blueToothDevicesState[index]);
 
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
 
-                        if(printResult==true) {
-                          print('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(context, tempOrderWithdocId);
-                        }
-                        else{
-                          print('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(context, tempOrderWithdocId);
-                        }
+                      if(printResult==true) {
+                        print('printResult==true i.e. print successfull');
+                        shoppingCartBloc.clearSubscription();
+                        return Navigator.pop(context, cancelPaySelectUnobscuredDeliveryPhone);
                       }
+                      else{
+                        print('printResult!=true i.e. print UN successfull');
+                        shoppingCartBloc.clearSubscription();
+                        return Navigator.pop(context, cancelPaySelectUnobscuredDeliveryPhone);
+                      }
+                    }
 
 
                     else {
@@ -9009,7 +9024,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                      print("printResult: $printResult");
                       docID= await shoppingCartBloc
-                          .recitePrinted(tempOrderWithdocId,true);
+                          .recitePrinted(cancelPaySelectUnobscuredDeliveryPhone,true);
 
                       print('docID in dummy Print: $docID');
 //                      print('docID: $docID');
@@ -9021,12 +9036,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       if(docID1!=''){
                         print('docID1!=\'\'    ----------');
                         shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context,tempOrderWithdocId);
+                        return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
                       }
                       else{
                         print('docID1 == \'\'   ----------');
                         shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context,tempOrderWithdocId);
+                        return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
                       }
 
 //                      shoppingCartBloc.clearSubscription();
