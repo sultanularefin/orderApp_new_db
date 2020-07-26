@@ -6,13 +6,13 @@
 ### July 26:
 
 ```dart
+
+
 onPressed: () async {
 
                   // TAkEAWAY AND DINNING  Recite Print. ....
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
-
-
                   print(
                       'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning
                           .paymentTypeIndex}');
@@ -42,8 +42,8 @@ onPressed: () async {
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
-			
-			 if (blueToothDevicesState.length == 0) {
+
+                    if (blueToothDevicesState.length == 0) {
                       logger.i('___________ blueTooth device not found _____');
 
 //                      _showMyDialog2(
@@ -57,8 +57,8 @@ onPressed: () async {
                           context, cancelPaySelectUNObscuredTakeAwayDinning);
 
                     }
-		    
-		     else {
+
+                    else {
                       bool found = false;
                       int index = -1;
                       for (int i = 0; i < blueToothDevicesState.length; i++) {
@@ -82,8 +82,8 @@ onPressed: () async {
 
                         }
                       };
-		      
-		          logger.w('check device listed or not');
+
+                      logger.w('check device listed or not');
                       print('index: $index');
                       print('found == true ${found == true}');
 
@@ -109,7 +109,7 @@ onPressed: () async {
                         }
                       }
                       else {
-    logger.i(
+                        logger.i(
                             '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
                         _showMyDialog2(
                             '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
@@ -125,3 +125,5 @@ onPressed: () async {
 
                 },
 
+
+```
