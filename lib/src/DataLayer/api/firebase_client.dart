@@ -6,6 +6,7 @@
 import 'dart:async';
 //import 'dart:convert' show json;
 
+import 'package:flutter/foundation.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
@@ -325,10 +326,9 @@ class FirebaseClient {
   }
 
 
-//  Future<Map<String, dynamic>> updateOrderCollectionDocumentWithRecitePrintedInformation
-  Future<bool> updateOrderCollectionDocumentWithRecitePrintedInformation
-      (String orderDocumentId, bool recitePrinted) async {
-
+  Future<DocumentSnapshot> updateOrderCollectionDocumentWithRecitePrintedInformation
+//  Future<bool> updateOrderCollectionDocumentWithRecitePrintedInformation
+      (String orderDocumentId, String status) async {
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
 
     final DocumentReference postRef = Firestore.instance.collection(
@@ -337,41 +337,58 @@ class FirebaseClient {
     collection('orderList').document(orderDocumentId);
 
 
-   await Firestore.instance.runTransaction((Transaction tx) async {
+    Future<Map<String, dynamic>> test=    Firestore.instance.runTransaction((Transaction tx) async {
 
       DocumentSnapshot postSnapshot = await tx.get(postRef);
 
       if (postSnapshot.exists) {
         print('postSnapshot.exists....');
-        await tx.update(postRef, <String, bool>{'recitePrinted': true});
+        await tx.update(postRef, <String, String>{'recitePrinted': status});
 
 
+//        return true;
       }else{
+
+        return null;
         throw ('postSnapshot don\'t exists....');
-        return false;
+
       }
-
-    }).whenComplete(() => print("called when future [update of document with 'recitePrinted' field completes"))
-        .then((document) {
-
-    print('document: at then:  $document');
-    print('document[\'recitePrinted\']: at then:  ${document['recitePrinted']}');
-
-    return true;
-    ;
-    }).catchError((onError) {
-    print('K   K    K   at onError for Order data update with recite printed data : $onError');
-//      orderDocId= '';
-
-    return false;
 
     });
 
-   return true;
 
-//   TODO: furthre testing required.
+   return test.whenComplete(() => print("update complete let\'s download the data")
+   ).then((document) {
 
+
+     var snapshot = Firestore.instance.collection(
+         "restaurants").
+     document('USWc8IgrHKdjeDe9Ft4j').
+     collection('orderList').document(orderDocumentId)
+         .get();
+//     print('async result [document] for runTransaction in order : $document');
+//     return true;
+     print('snapshot: $snapshot');
+
+     return snapshot;
+
+//                            _handleSignIn();
+   }).catchError((onError) {
+     print('..... transaction not successfull.... : $onError');
+
+     return null;
+     throw ('postSnapshot don\'t exists....');
+//     return false;
+//     orderDocId= '';
+//      return '';
+   });
+
+//    print('will this method return null');
+//    return null;
+//    return null;
   }
+
+
   Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType)async {
     // print('currentOrderToFirebaseL: $currentOrderToFirebase');
     /*print('currentOrderToFirebase.selectedFoodInOrder: '
@@ -430,7 +447,7 @@ class FirebaseClient {
           ? 'Delivery'
           : orderBy == 'TakeAway' ? 'TakeAway' : 'DinningRoom',
       'orderProductionTime': currentOrderToFirebase.orderingCustomer.etaTimeInMinutes,
-      'recitePrinted':false,
+      'recitePrinted':'false',
 
     }).whenComplete(() => print("called when future completes"))
         .then((document) {

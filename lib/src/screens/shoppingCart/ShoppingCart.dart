@@ -1185,7 +1185,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:
                       case ConnectionState.none:
-                        print('at ConnectionState.none || ConnectionState.waiting ||  ');
+                        print(
+                            'at ConnectionState.none || ConnectionState.waiting ||  ');
                         return Container(
                           margin: EdgeInsets.fromLTRB(
                               0, displayHeight(context) / 2, 0, 0),
@@ -1243,13 +1244,69 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       case ConnectionState.active:
                       default:
+                        if (snapshot.data is Order) {
+                          print(
+                              'at snapshot.data == !=null  for ConnectionState.active or default ');
 
-                            Order oneOrder = snapshot.data;
-
+                          Order oneOrder = snapshot.data;
 //              int x = 5;
+                          if (oneOrder.paymentButtonPressed == true) {
+                            return Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  0, displayHeight(context) / 2, 0, 0),
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
 
-                              CustomerInformation x = oneOrder
-                                  .orderingCustomer;
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                            backgroundColor: Colors
+                                                .lightGreenAccent,
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+
+                                          )
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Text(
+                                          'printing recite... please wait.',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 34,
+                                            fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                            color: Colors.redAccent,
+                                            fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                            backgroundColor: Color(
+                                                0xffFC0000),
+
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                            );
+                          }
+                          else {
+                            CustomerInformation x = oneOrder
+                                .orderingCustomer;
 
 //              logger.e(' oneOrder.paymentTypeIndex: ${oneOrder.paymentTypeIndex}');
 
@@ -1259,14 +1316,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //                      backgroundColor: Colors.white,
-                              // this is the main reason of transparency at next screen.
-                              // I am ignoring rest implementation but what i have achieved is you can see.
+                            // this is the main reason of transparency at next screen.
+                            // I am ignoring rest implementation but what i have achieved is you can see.
 
 
-                              logger.e(
-                                  '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
+                            logger.e(
+                                '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
 
-                              return Container(
+                            return Container(
 //                            height: displayHeight(context) -
 //                                MediaQuery
 //                                    .of(context)
@@ -1275,208 +1332,209 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                kToolbarHeight,
 //                            backgroundColor: Colors.white.withOpacity(0.05),
 //                          backgroundColor: Colors.white.withOpacity(0.05),
-                                height: displayHeight(context),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
+                              height: displayHeight(context),
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
 
 
 //                              alignment: Alignment.bottomCenter,
-                                      height: displayHeight(context) /
-                                          1.10,
-                                      //width:displayWidth(context) / 1.5, /* 3.8*/
-                                      width: displayWidth(context)
-                                          - displayWidth(context) /
-                                              5 /* this is about the width of yellow side menu */
-                                      ,
+                                    height: displayHeight(context) /
+                                        1.10,
+                                    //width:displayWidth(context) / 1.5, /* 3.8*/
+                                    width: displayWidth(context)
+                                        - displayWidth(context) /
+                                            5 /* this is about the width of yellow side menu */
+                                    ,
 //                  color:Colors.lightGreenAccent,
-                                      margin: EdgeInsets.fromLTRB(
-                                          12, displayHeight(context) / 16,
-                                          10, 0),
+                                    margin: EdgeInsets.fromLTRB(
+                                        12, displayHeight(context) / 16,
+                                        10, 0),
 
 
-                                      child: Neumorphic(
-                                        // State of Neumorphic (may be convex, flat & emboss)
+                                    child: Neumorphic(
+                                      // State of Neumorphic (may be convex, flat & emboss)
 
 //                                      NeumorphicStyle
 //                                      NeumorphicBoxShape
 //                                      boxShape:
 
-                                        curve: Neumorphic.DEFAULT_CURVE,
-                                        style: NeumorphicStyle(
-                                          shape: NeumorphicShape
-                                              .concave,
-                                          depth: 8,
-                                          lightSource: LightSource
-                                              .topLeft,
-                                          color: Colors.white,
-                                          boxShape: NeumorphicBoxShape
-                                              .roundRect(
-                                            BorderRadius.all(
-                                                Radius.circular(15)),
+                                      curve: Neumorphic.DEFAULT_CURVE,
+                                      style: NeumorphicStyle(
+                                        shape: NeumorphicShape
+                                            .concave,
+                                        depth: 8,
+                                        lightSource: LightSource
+                                            .topLeft,
+                                        color: Colors.white,
+                                        boxShape: NeumorphicBoxShape
+                                            .roundRect(
+                                          BorderRadius.all(
+                                              Radius.circular(15)),
 
-                                          ),
                                         ),
+                                      ),
 
 
-                                        // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
+                                      // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
 
 
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .start,
-                                          crossAxisAlignment: CrossAxisAlignment
-                                              .start,
-                                          children: <Widget>[
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .start,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .start,
+                                        children: <Widget>[
 
 //                                          /WWW??
 
 
-                                            // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
+                                          // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
 
 
-                                            Container(
-                                              width: displayWidth(
-                                                  context) / 1.1,
-                                              height: displayHeight(
-                                                  context) / 20,
-                                              color: Color(0xffffffff),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .start
-                                                ,
-                                                crossAxisAlignment: CrossAxisAlignment
-                                                    .center,
-                                                children: <Widget>[
+                                          Container(
+                                            width: displayWidth(
+                                                context) / 1.1,
+                                            height: displayHeight(
+                                                context) / 20,
+                                            color: Color(0xffffffff),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment
+                                                  .start
+                                              ,
+                                              crossAxisAlignment: CrossAxisAlignment
+                                                  .center,
+                                              children: <Widget>[
 
 
-                                                  Container(
-                                                    width: displayWidth(
-                                                        context) /
-                                                        1.5,
-                                                    height: displayHeight(
-                                                        context) / 20,
-                                                    color: Color(
-                                                        0xffffffff),
+                                                Container(
+                                                  width: displayWidth(
+                                                      context) /
+                                                      1.5,
+                                                  height: displayHeight(
+                                                      context) / 20,
+                                                  color: Color(
+                                                      0xffffffff),
 
-                                                    child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start
-                                                        ,
-                                                        crossAxisAlignment: CrossAxisAlignment
-                                                            .center,
-                                                        children: <
-                                                            Widget>[
+                                                  child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .start
+                                                      ,
+                                                      crossAxisAlignment: CrossAxisAlignment
+                                                          .center,
+                                                      children: <
+                                                          Widget>[
 
-                                                          Container(
-                                                            margin: EdgeInsets
-                                                                .fromLTRB(
-                                                                20, 0, 10,
-                                                                0),
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: Text(
-                                                                'Shopping Cart',
-                                                                style: TextStyle(
-                                                                  fontSize: 30,
-                                                                  fontWeight: FontWeight
-                                                                      .normal,
+                                                        Container(
+                                                          margin: EdgeInsets
+                                                              .fromLTRB(
+                                                              20, 0, 10,
+                                                              0),
+                                                          alignment: Alignment
+                                                              .center,
+                                                          child: Text(
+                                                              'Shopping Cart',
+                                                              style: TextStyle(
+                                                                fontSize: 30,
+                                                                fontWeight: FontWeight
+                                                                    .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                                                  color: Color(
-                                                                      0xff000000),
-                                                                )
-                                                            ),
+                                                                color: Color(
+                                                                    0xff000000),
+                                                              )
                                                           ),
+                                                        ),
 
-                                                          CustomPaint(
-                                                            size: Size(
-                                                                0, 19),
-                                                            painter: LongHeaderPainterAfterShoppingCartPage(
-                                                                context),
-                                                          ),
+                                                        CustomPaint(
+                                                          size: Size(
+                                                              0, 19),
+                                                          painter: LongHeaderPainterAfterShoppingCartPage(
+                                                              context),
+                                                        ),
 
 
-                                                        ]
-                                                    ),
-
+                                                      ]
                                                   ),
 
-                                                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                                                  Container(
+                                                ),
+
+                                                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                                                Container(
 //                                                  alignment: Alignment.center,
-                                                    padding: EdgeInsets
-                                                        .fromLTRB(
-                                                        0, 2, 0, 0),
-                                                    width: displayWidth(
-                                                        context) /
-                                                        16,
+                                                  padding: EdgeInsets
+                                                      .fromLTRB(
+                                                      0, 2, 0, 0),
+                                                  width: displayWidth(
+                                                      context) /
+                                                      16,
 //                                                height: displayHeight(context)/20,
-                                                    color: Color(
-                                                        0xffffffff),
+                                                  color: Color(
+                                                      0xffffffff),
 //                                                    child:Row(
 //                                                      mainAxisAlignment: MainAxisAlignment.end,
 //                                                      children: <Widget>[
-                                                    child: Container(
-                                                      padding: EdgeInsets
-                                                          .fromLTRB(
-                                                          0, 0, 200, 0),
-                                                      child: Icon(
+                                                  child: Container(
+                                                    padding: EdgeInsets
+                                                        .fromLTRB(
+                                                        0, 0, 200, 0),
+                                                    child: Icon(
 
-                                                        Icons
-                                                            .add_shopping_cart,
-                                                        size: 30,
-                                                        color: Color(
-                                                            0xff54463E),
-                                                      ),
+                                                      Icons
+                                                          .add_shopping_cart,
+                                                      size: 30,
+                                                      color: Color(
+                                                          0xff54463E),
                                                     ),
-
-
                                                   ),
 
 
-                                                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                                                ),
 
 
-                                                ],
-                                              ),
+                                                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+
+
+                                              ],
                                             ),
+                                          ),
 
-                                            Container(
-                                              padding: EdgeInsets
-                                                  .fromLTRB(
-                                                  0, 0, 0, 0),
+                                          Container(
+                                            padding: EdgeInsets
+                                                .fromLTRB(
+                                                0, 0, 0, 0),
 //                                                      padding::::
 //                                          color: Colors.amberAccent,
-                                              color: Colors.white,
+                                            color: Colors.white,
 //                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
-                                              height: displayHeight(
-                                                  context) /
-                                                  4.8,
-                                              width: displayWidth(context)
-                                                  -
-                                                  displayWidth(context) /
-                                                      5, /* this is about the width of yellow side menu */
+                                            height: displayHeight(
+                                                context) /
+                                                4.8,
+                                            width: displayWidth(context)
+                                                -
+                                                displayWidth(context) /
+                                                    5, /* this is about the width of yellow side menu */
 
 //                                            width: displayWidth(context) * 0.57,
-                                              child:
+                                            child:
 
-                                              //ssd
+                                            //ssd
 
-                                              StreamBuilder<
-                                                  List<SelectedFood>>(
-                                                  stream: shoppingCartBloc
-                                                      .getExpandedFoodsStream,
-                                                  initialData: shoppingCartBloc
-                                                      .getExpandedSelectedFood,
+                                            StreamBuilder<
+                                                List<SelectedFood>>(
+                                                stream: shoppingCartBloc
+                                                    .getExpandedFoodsStream,
+                                                initialData: shoppingCartBloc
+                                                    .getExpandedSelectedFood,
 
-                                                  builder: (context,
-                                                      snapshot) {
-                                                    if (snapshot
-                                                        .hasData) {
-                                                      List<SelectedFood> expandedSelectedFoodInOrder = snapshot
-                                                          .data;
+                                                builder: (context,
+                                                    snapshot) {
+                                                  if (snapshot
+                                                      .hasData) {
+                                                    List<
+                                                        SelectedFood> expandedSelectedFoodInOrder = snapshot
+                                                        .data;
 
 
 //            logger.e(
@@ -1484,20 +1542,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    final foodItemDetailsbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-                                                      if (expandedSelectedFoodInOrder ==
-                                                          null) {
-                                                        print(
-                                                            'Order has no data');
-                                                        print(
-                                                            'this will never happen don\'t worry');
+                                                    if (expandedSelectedFoodInOrder ==
+                                                        null) {
+                                                      print(
+                                                          'Order has no data');
+                                                      print(
+                                                          'this will never happen don\'t worry');
 //        return Center(child: new LinearProgressIndicator());
-                                                        return Container(
-                                                            child: Text(
-                                                                'expandedSelectedFoodInOrder == Null'));
-                                                      }
+                                                      return Container(
+                                                          child: Text(
+                                                              'expandedSelectedFoodInOrder == Null'));
+                                                    }
 
-                                                      //    VIEW MODEL CHANGE THUS CONDITION CHANGE 1.
-                                                      /*
+                                                    //    VIEW MODEL CHANGE THUS CONDITION CHANGE 1.
+                                                    /*
     if ((qTimes.foodItemName == '') && (qTimes.quantity == 0)) {
       print('Order has no data');
       print('this will never happen don\'t worry');
@@ -1505,166 +1563,166 @@ class _ShoppingCartState extends State<ShoppingCart> {
       return Container(child: Text('Null'));
     }
     */
-                                                      else {
+                                                    else {
 //      int quantity = qTimes.quantity;
 //      int quantity = qTimes.selectedFoodInOrder.length;
 
-                                                        List<
-                                                            SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
+                                                      List<
+                                                          SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
 
 
-                                                        logger.e(
-                                                            '\n\n AM I EXECUTED TWICE  ;;;'
-                                                                ' allOrderedFoods.length: ${allOrderedFoods
-                                                                .length} \n\n ');
-                                                        return Container(
+                                                      logger.e(
+                                                          '\n\n AM I EXECUTED TWICE  ;;;'
+                                                              ' allOrderedFoods.length: ${allOrderedFoods
+                                                              .length} \n\n ');
+                                                      return Container(
 //                color: Colors.green,
-                                                          color: Color(
-                                                              0xffFFFFFF),
+                                                        color: Color(
+                                                            0xffFFFFFF),
 
-                                                          child: ListView
-                                                              .builder(
-                                                            scrollDirection: Axis
-                                                                .horizontal,
+                                                        child: ListView
+                                                            .builder(
+                                                          scrollDirection: Axis
+                                                              .horizontal,
 
-                                                            reverse: false,
+                                                          reverse: false,
 
-                                                            shrinkWrap: false,
+                                                          shrinkWrap: false,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
 //          itemCount: quantity,
-                                                            itemCount: allOrderedFoods
-                                                                .length,
-                                                            // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+                                                          itemCount: allOrderedFoods
+                                                              .length,
+                                                          // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
 
-                                                            itemBuilder: (_,
-                                                                int index) {
+                                                          itemBuilder: (_,
+                                                              int index) {
 //            return Text('ss');
 
-                                                              return FoodImageInShoppingCart(
-                                                                  allOrderedFoods[index]
-                                                                      .foodItemImageURL, /*OrderedFoodImageURL,*/
-                                                                  allOrderedFoods[index]
-                                                                      .foodItemName, /*OrderedFoodItemName, */
-                                                                  allOrderedFoods[index]
-                                                                      .selectedIngredients,
-                                                                  allOrderedFoods[index]
-                                                                      .unitPrice,
-                                                                  index
-                                                              );
+                                                            return FoodImageInShoppingCart(
+                                                                allOrderedFoods[index]
+                                                                    .foodItemImageURL, /*OrderedFoodImageURL,*/
+                                                                allOrderedFoods[index]
+                                                                    .foodItemName, /*OrderedFoodItemName, */
+                                                                allOrderedFoods[index]
+                                                                    .selectedIngredients,
+                                                                allOrderedFoods[index]
+                                                                    .unitPrice,
+                                                                index
+                                                            );
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
 //            index);
 
 
-                                                            },
-                                                          ),
+                                                          },
+                                                        ),
 
 
-                                                          // M VSM ORG VS TODO. ENDS HERE.
-                                                        );
-                                                      }
-                                                    }
-                                                    else {
-                                                      print(
-                                                          '!snapshot.hasData');
-//        return Center(child: new LinearProgressIndicator());
-                                                      return Container(
-                                                          child: Text(
-                                                              'Null'));
+                                                        // M VSM ORG VS TODO. ENDS HERE.
+                                                      );
                                                     }
                                                   }
-                                              ),
-                                              //ssd
+                                                  else {
+                                                    print(
+                                                        '!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+                                                    return Container(
+                                                        child: Text(
+                                                            'Null'));
+                                                  }
+                                                }
                                             ),
+                                            //ssd
+                                          ),
 
 
-                                            // work 1
-                                            Container(
+                                          // work 1
+                                          Container(
 //                                        width: displayWidth(context) /1.8,
-                                              width: displayWidth(
-                                                  context) / 1.1,
-                                              child:
-                                              AnimatedSwitcher(
-                                                duration: Duration(
-                                                    milliseconds: 1000),
+                                            width: displayWidth(
+                                                context) / 1.1,
+                                            child:
+                                            AnimatedSwitcher(
+                                              duration: Duration(
+                                                  milliseconds: 1000),
 //
-                                                child: showFullOrderType
-                                                    ?
-                                                animatedWidgetShowFullOrderType()
-                                                    : /*1 */
-                                                animatedWidgetShowSelectedOrderType(), /* 2*/
-                                                // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
-                                                // 2 => height: displayHeight(context) / 9,
-
-                                              ),
-
+                                              child: showFullOrderType
+                                                  ?
+                                              animatedWidgetShowFullOrderType()
+                                                  : /*1 */
+                                              animatedWidgetShowSelectedOrderType(), /* 2*/
+                                              // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
+                                              // 2 => height: displayHeight(context) / 9,
 
                                             ),
 
 
-                                            /*
+                                          ),
+
+
+                                          /*
                                             * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
 
 
-                                            // work 2
-                                            Container(
+                                          // work 2
+                                          Container(
 //                                          color: Colors.red,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
-                                              width: displayWidth(
-                                                  context) / 1.1,
-                                              height: displayHeight(
-                                                  context) /
-                                                  2.2,
+                                            width: displayWidth(
+                                                context) / 1.1,
+                                            height: displayHeight(
+                                                context) /
+                                                2.2,
 //                                            height: displayWidth(context)/2.2
 //                                          height: displayHeight(context)/2-42,
-                                              // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
-                                              // A CERTAIN PORTION OF OF THE CONTAINER
-                                              // WITH YELLOW ACCENT BG COLOR IS
-                                              // THERE WHEN THE CHILD WIDGETS ARE NOT
-                                              // BIG ENOGH LIKE , AS BIG AS displayHeight(context)/2.5,
+                                            // THIS HEIGHT SHOULDN'T BE GIVEN OTHERWISE
+                                            // A CERTAIN PORTION OF OF THE CONTAINER
+                                            // WITH YELLOW ACCENT BG COLOR IS
+                                            // THERE WHEN THE CHILD WIDGETS ARE NOT
+                                            // BIG ENOGH LIKE , AS BIG AS displayHeight(context)/2.5,
 
 
-                                              //Text('AnimatedSwitcher('),
-                                              child: AnimatedSwitcher(
-                                                duration: Duration(
-                                                    milliseconds: 300),
+                                            //Text('AnimatedSwitcher('),
+                                            child: AnimatedSwitcher(
+                                              duration: Duration(
+                                                  milliseconds: 300),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                                                child: oneOrder
-                                                    .orderTypeIndex ==
-                                                    0
-                                                    ?
-                                                _buildShoppingCartInputFieldsUNObscuredTakeAway(
-                                                    oneOrder)
-                                                    : oneOrder
-                                                    .orderTypeIndex == 1
-                                                    ?
-                                                _buildShoppingCartInputFieldsUNObscured(
-                                                    oneOrder)
-                                                    : oneOrder
-                                                    .orderTypeIndex == 2
-                                                    ?
-                                                _buildShoppingCartInputFieldsUNObscured(
-                                                    oneOrder)
-                                                    :
-                                                //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
-                                                // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
+                                              child: oneOrder
+                                                  .orderTypeIndex ==
+                                                  0
+                                                  ?
+                                              _buildShoppingCartInputFieldsUNObscuredTakeAway(
+                                                  oneOrder)
+                                                  : oneOrder
+                                                  .orderTypeIndex == 1
+                                                  ?
+                                              _buildShoppingCartInputFieldsUNObscured(
+                                                  oneOrder)
+                                                  : oneOrder
+                                                  .orderTypeIndex == 2
+                                                  ?
+                                              _buildShoppingCartInputFieldsUNObscured(
+                                                  oneOrder)
+                                                  :
+                                              //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
+                                              // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
 //                                        _buildShoppingCartInputFieldsUNObscuredTakeAway(oneOrder)
-                                                _buildShoppingCartInputFieldsUNObscuredDinningRoom(
-                                                    oneOrder),
+                                              _buildShoppingCartInputFieldsUNObscuredDinningRoom(
+                                                  oneOrder),
 //                                        animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
-
-
-                                              ),
 
 
                                             ),
 
 
-                                            /*
+                                          ),
+
+
+                                          /*
                                         // workTest
                                         Container(
                                           height:68,
@@ -1675,15 +1733,59 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                         */
 
-                                          ],
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
 
-                              );
-                            }
+                            );
+                          }
+                        }
+
+                        else {
+                          print('sanp shot.data !is Order');
+                          return Container(
+                            margin: EdgeInsets.fromLTRB(
+                                0, displayHeight(context) / 2, 0, 0),
+                            child: Center(
+                              child: Column(
+                                children: <Widget>[
+
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                          backgroundColor: Colors
+                                              .lightGreenAccent,
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+
+                                        )
+                                    ),
+                                  ),
+
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                          backgroundColor: Color(
+                                              0xffFC0000),
+
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                        )
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                          );
+                        }
+                    }
 //                          }
 
 //                    }
@@ -7945,7 +8047,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   height: displayHeight(context) / 24,
                   child: OutlineButton(
                     onPressed: () {
-                      print('Cancel Pressed obscured');
+                      print('Cancel Pressed obscured animatedObscuredCancelPayButtonTakeAwayDinning');
 //                    onPressed: _testPrintDummyDe
 //                    return Navigator.pop(context,true);
                     },
@@ -8177,7 +8279,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //              alignment: Alignment.center,
 
-                    // PAY OBSCURED DELIVERY PHONE...
+                      // PAY OBSCURED DELIVERY PHONE...
                       child: Text('Pay', style: TextStyle(color: Colors.green,
                         fontSize: 30, fontWeight: FontWeight.bold,),
                       ),),
@@ -8207,7 +8309,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
-        'animated Obscured Cancel Pay Button()');
+        'animatedUnObscuredCancelPayButtonTakeAwayDinning()');
     return
       Container(
         margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
@@ -8307,14 +8409,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //              alignment: Alignment.center,
 
-                // PAY UNOBSCURED DINNING TAKEAWAY.
+                  // PAY UNOBSCURED DINNING TAKEAWAY.
                   child: Text('Pay', style: TextStyle(color: Colors.green,
                     fontSize: 30, fontWeight: FontWeight.bold,),
                   ),),
                 onPressed: () async {
-//                  print('on Pressed of Pay');
-//                  return Navigator.pop(context,false);
 
+                  // TAkEAWAY AND DINNING DUMMY PRINT ....
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
@@ -8333,12 +8434,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       .paymentButtonPressed(cancelPaySelectUNObscuredTakeAwayDinning);
 
 
-                  /*
-                  setState(() {
-                    loadingState =true;
-//                    localScanAvailableState = !localScanAvailableState;
-                  });
-                  */
 
 
 
@@ -8362,173 +8457,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    print('blueToothDevicesState.length == 0 ${blueToothDevicesState.length == 0}');
+
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
+
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
+
+                    _testPrintDummyDevices(x);
+
+                    shoppingCartBloc.clearSubscription();
 
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
+                    print('Unboscured takeAway || '
+                        'DinningRoom Dummy print--- returning to FoodGallery Page');
+                    return Navigator.pop(
+                        context, cancelPaySelectUNObscuredTakeAwayDinning);
 
-                      // UNCOMMENT THIS LINE... BELOW  //_showMyDialog2('___________ blueTooth device not found _____');
-                      _showMyDialog2(
-                          '___________ blueTooth device not found _____');
-//                      shoppingCartBloc.clearSubscription();
-
-                      // NEED THIS LINES COMMENTING BEGINNING..
-
-
-
-
-                      BluetoothDevice _x = new BluetoothDevice();
-                      _x.name = 'Restaurant Printer';
-                      _x.address = '0F:02:18:51:23:46';
-                      _x.type = 3;
-                      _x.connected = null;
-
-
-                      PrinterBluetooth x = new PrinterBluetooth(_x);
-
-
-                      _testPrintDummyDevices(x);
-
-
-
-
-                      // NEED THIS LINES COMMENTING ENDS HERE..
-
-//                      docID1= await shoppingCartBloc
-//                          .recitePrinted(tempOrderWithdocId,true);
-
-//                      cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-//                     shoppingCartBloc.clearSubscriptionPayment();
-
-
-//                      final shoppingCartBloc = BlocProvider.of<
-//                          ShoppingCartBloc>(context);
-                      shoppingCartBloc.clearSubscription();
-
-//
-
-
-                      return Navigator.pop(
-                          context, cancelPaySelectUNObscuredTakeAwayDinning);
-
-
-
-//                      return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
-//                      return;
-                    }
-
-
-                    bool found = false;
-
-                    int index = -1;
-                    for (int i = 0; i < blueToothDevicesState.length; i++) {
-                      ++index;
-
-                      print(
-                          'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                              .name}');
-                      print(
-                          'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                              .address}');
-                      if ((blueToothDevicesState[i].name ==
-                          'Restaurant Printer') ||
-                          (blueToothDevicesState[i].address ==
-                              '0F:02:18:51:23:46')) {
-                        found = true;
-                        break;
-
-                        // _testPrint(oneBlueToothDevice);
-
-                      }
-                    };
-
-                    logger.w('check device listed or not');
-                    print('index: $index');
-                    print('value of found: $found');
-
-                    if (found == true) {
-                      print('found == true');
-                      bool printResult= await _testPrint(blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
-
-
-                      if(printResult==true) {
-                        print('printResult==true i.e. print successfull');
-                        shoppingCartBloc.clearSubscriptionPayment();
-//                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-
-
-//                        return Navigator.pop(
-//                            context, cancelPaySelectUNObscuredTakeAway);
-//                        shoppingCartBloc.clearSubscriptionPayment();
-                        return Navigator.pop(context, cancelPaySelectUNObscuredTakeAwayDinning);
-                      }
-                      else{
-                        print('printResult!=true i.e. print UN successfull');
-                        shoppingCartBloc.clearSubscriptionPayment();
-//                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-//                        shoppingCartBloc.clearSubscriptionPayment();
-                        return Navigator.pop(context, cancelPaySelectUNObscuredTakeAwayDinning);
-                      }
-                    }
-
-                    else {
-                      logger.i('___________ blueTooth device not found  printing wasn\'t successfull _____');
-                      _showMyDialog2(
-                          '___________ blueTooth device not found   printing wasn\'t successfull_____');
-
-                      // COMMENT FROM HERE TO END
-
-                      String docID1;
-
-                      BluetoothDevice _x = new BluetoothDevice();
-                      _x.name = 'Restaurant Printer';
-                      _x.address = '0F:02:18:51:23:46';
-                      _x.type = 3;
-                      _x.connected = null;
-
-
-                      PrinterBluetooth x = new PrinterBluetooth(_x);
-
-
-
-                      _testPrintDummyDevices(x);
-
-//                      print("printResult: $printResult");
-                      docID1= await shoppingCartBloc
-                          .recitePrinted(tempOrderWithdocId,true);
-
-                      print('docID1 in dummy Print: $docID1');
-
-
-
-                  //  comment END'S HERE.
-
-                  if(docID1!=''){
-                  print('docID1 !=  \'\'    ----------');
-//                  shoppingCartBloc.clearSubscription();
-//                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-
-                  shoppingCartBloc.clearSubscriptionPayment();
-//                    shoppingCartBloc.clearSubscriptionPayment();
-                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
-                  }
-                  else{
-                  print('docID1 ==  \'\'   ----------');
-//                  shoppingCartBloc.clearSubscription();
-//                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-//                  shoppingCartBloc.clearSubscriptionPayment();
-                    shoppingCartBloc.clearSubscriptionPayment();
-                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
 
                   }
 
-
-//                      return;
-                }
-                }
                 },
               ),
             ),
@@ -8706,8 +8656,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     fontWeight: FontWeight.bold,),
                   ),),
                 onPressed: () async {
-//                  print('on Pressed of Pay');
-//                  return Navigator.pop(context,false);
+
+                  // DUMMY PRINT DELIVERY PHONE ......
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
@@ -8715,9 +8665,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   print(
                       'debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
 
-//                  _startScanDevices();
 
-//                  _startScanDummyDevices();
+
                   print(
                       'debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
@@ -8730,13 +8679,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   Order tempOrderWithdocId = await shoppingCartBloc
                       .paymentButtonPressed(
                       cancelPaySelectUnobscuredDeliveryPhone);
-
-                  /*
-
-                  setState(() {
-                    localScanAvailableState = !localScanAvailableState;
-                  });
-                  */
 
 
                   if ((cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed == true) &&
@@ -8759,150 +8701,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
-
-                      _showMyDialog2(
-                          '___________ blueTooth device not found _____ delivery phone pay button');
-
-                      // NEED THIS LINES COMMENTING BEGINNING..
 
 
-
-                      BluetoothDevice _x = new BluetoothDevice();
-                      _x.name = 'Restaurant Printer';
-                      _x.address = '0F:02:18:51:23:46';
-                      _x.type = 3;
-                      _x.connected = null;
-
-
-                      PrinterBluetooth x = new PrinterBluetooth(_x);
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                      _testPrintDummyDevices(x);
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
 
 
+                    _testPrintDummyDevices(x);
 
+                    shoppingCartBloc.clearSubscription();
 
-                      // NEED THIS LINES COMMENTING ENDS HERE..
+                    print('shopping Cart : shoppingCartBloc.clearSubscription() called... delivery Phone ');
 
+                    return Navigator.pop(
+                        context, cancelPaySelectUnobscuredDeliveryPhone);
 
-                      logger.i('__ __ ${cancelPaySelectUnobscuredDeliveryPhone.recitePrinted}');
-                      logger.i('-- ___ ${cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed}');
-                      shoppingCartBloc.clearSubscription();
-//                      shoppingCartBloc.clearSubscriptionPayment();
-                      print('shopping Cart : shoppingCartBloc.clearSubscription() called... ');
-
-
-                      return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
-//                      return;
-                    }
-
-
-                    bool found = false;
-                    int index = -1;
-                    for (int i = 0; i < blueToothDevicesState.length; i++) {
-                      ++index;
-
-                      print(
-                          'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                              .name}');
-                      print(
-                          'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                              .address}');
-
-                      if ((blueToothDevicesState[i].name ==
-                          'Restaurant Printer') ||
-                          (blueToothDevicesState[i].address ==
-                              '0F:02:18:51:23:46')) {
-                        found = true;
-                        break;
-
-                        // _testPrint(oneBlueToothDevice);
-
-                      }
-                    };
-
-                    logger.w('check device listed or not');
-                    print('index: $index');
-                    print('found == true ${found == true}');
-
-                    if (found == true) {
-
-                      print('found == true');
-                      bool printResult= await _testPrint(blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
-
-
-                      if(printResult==true) {
-                        print('printResult==true i.e. print successfull');
-                        shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context, cancelPaySelectUnobscuredDeliveryPhone);
-                      }
-                      else{
-                        print('printResult!=true i.e. print UN successfull');
-                        shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context, cancelPaySelectUnobscuredDeliveryPhone);
-                      }
-                    }
-
-
-                    else {
-                      logger.i('___________ blueTooth device not found _____ printing wasn\'t successfull');
-                      _showMyDialog2('___________ blueTooth device not found  printing wasn\'t successfull _____');
-
-                      String docID1;
-                      // COMMENT FROM HERE TO END...
-
-
-
-
-
-                      BluetoothDevice _x = new BluetoothDevice();
-                      _x.name = 'Restaurant Printer';
-                      _x.address = '0F:02:18:51:23:46';
-                      _x.type = 3;
-                      _x.connected = null;
-
-
-                      PrinterBluetooth x = new PrinterBluetooth(_x);
-
-
-                      _testPrintDummyDevices(x);
-
-
-//                      print("printResult: $printResult");
-                      docID1= await shoppingCartBloc
-                          .recitePrinted(cancelPaySelectUnobscuredDeliveryPhone,true);
-
-                      print('docID in dummy Print: $docID1');
-//                      print('docID: $docID');
-
-                      //END
-
-
-
-                      if(docID1!=''){
-                        print('docID1!=\'\'    ----------');
-                        shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
-                      }
-                      else{
-                        print('docID1 == \'\'   ----------');
-                        shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
-                      }
-
-//                      shoppingCartBloc.clearSubscription();
-//                      return Navigator.pop(context,tempOrderWithdocId);
-//                      return Navigator.pop(context, tempOrderWithdocId);
-//                      return;
-
-                    }
                   }
-
-
 
                 },
               ),
@@ -11553,17 +11373,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ).then((printResult) async {
             if(printResult==true){
               print("printResult: $printResult");
-              String docID= await shoppingCartBloc
-                  .recitePrinted(oneOrderForReceipt,true);
+              Future<String> docID= shoppingCartBloc
+                  .recitePrinted(oneOrderForReceipt.orderdocId,'Done');
 
-              print('docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
-//              print('docID: $docID');
-              return true;
+
+//              --
+
+
+              docID.whenComplete(() => print('printing completed..')).then((value){
+                print('docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
+                return true;
+              }).catchError((onError){
+                return false;
+
+
+              });
+//            --
+              return false;
             }
             else{
               return false;
             }
-
 
           }).catchError((onError) {
             print('printing not successful: $onError');
@@ -11645,6 +11475,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
+
+//    Future<OneOrderFirebase> testFirebaseOrderFetch =
+//    shoppingCartBloc.fetchOrderDataFromFirebase(
+//        oneOrderForReceipt.orderdocId.trim());
+
+
+    TODO: // something wrong maybe here. docID needs to be processed...
+
+    Future<String> docID = shoppingCartBloc
+        .recitePrinted(oneOrderForReceipt.orderdocId,'dummyPrint');
+
+//                    recitePrinted
+
+    print('docID1 in dummy Print: $docID');
 
     Future<OneOrderFirebase> testFirebaseOrderFetch =
     shoppingCartBloc.fetchOrderDataFromFirebase(

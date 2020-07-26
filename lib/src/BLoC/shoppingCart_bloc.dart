@@ -4,6 +4,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart'; // to be removed later.
+import 'package:flutter/material.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
@@ -462,68 +463,26 @@ class ShoppingCartBloc implements Bloc {
   //PAYMENT FIRESTORE =>
 
 
-  Future<String> recitePrinted(Order payMentProcessing,bool status) async{
+
+//  Future<OneOrderFirebase> fetchOrderDataFromFirebase(String orderDocumentId) async {
+  Future<String> recitePrinted(String orderDocumentID,String status) async{
+
+    String documentID = orderDocumentID;
+
+
+    var updateResult =
+    await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
+
+    print('updateResult is null: $updateResult');
 
 
 
-    String documentID = payMentProcessing.orderdocId;
+    String                    recitePrintedString = updateResult['recitePrinted'];
 
-    // UPDATE DOCUMENT with RECITE PRINTED STATUS:
+    print('recitePrintedString: $recitePrintedString');
 
-    bool documentUpdateBoolResult = await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
+    return recitePrintedString;
 
-
-
-    /*
-    .whenComplete(() =>
-    {
-
-    print("called when future completes")
-//     return true;
-    })
-        .then((document) {
-    //  print('Added document with ID: ${document.documentID}');
-//     orderDocId= document.documentID;
-//      return document;
-
-    print('async result [document] for runTransaction in order : $document');
-    return true;
-//                            _handleSignIn();
-    }).catchError((onError) {
-    print('..... transaction not successfull.... : $onError');
-
-    return false;
-//     orderDocId= '';
-//      return '';
-    });
-
-
-    */
-
-//    logger.i('documentUpdateBoolResult[\'recitePrinted\']: ${documentUpdateBoolResult['recitePrinted']}');
-    print('documentID: $documentID');
-    print('_____documentUpdateBoolResult _____: $documentUpdateBoolResult');
-//
-
-//    print('_____documentUpdateBoolResult.recitePrinted _____: ${documentUpdateBoolResult['status']}');
-
-//    print('_____documentUpdateBoolResult _____: ${documentUpdateBoolResult['recitePrinted']}');
-
-    if(documentUpdateBoolResult ==true){
-      print('recite print successful: ');
-
-      payMentProcessing.recitePrinted = status;
-
-    _curretnOrder=payMentProcessing;
-    _orderController.sink.add(_curretnOrder);
-      return documentID;
-    }
-    else{
-
-      print('recite print unSuccessful: ');
-      return '';
-    }
-    return '';
   }
 
   Future<Order> paymentButtonPressed(Order payMentProcessing) async{
