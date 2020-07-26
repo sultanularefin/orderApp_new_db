@@ -8581,6 +8581,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       shoppingCartBloc.clearSubscription();
+
+
+//                      final shoppingCartBloc = BlocProvider.of<
+//                          ShoppingCartBloc>(context);
+//                      shoppingCartBloc.clearSubscription();
+
+                      cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+
+
+                      return Navigator.pop(
+                          context, cancelPaySelectUNObscuredTakeAway);
+
+
+
                       return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
 //                      return;
                     }
@@ -8624,11 +8638,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       if(printResult==true) {
                         print('printResult==true i.e. print successfull');
                         shoppingCartBloc.clearSubscription();
+                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+
+
+//                        return Navigator.pop(
+//                            context, cancelPaySelectUNObscuredTakeAway);
                         return Navigator.pop(context, cancelPaySelectUNObscuredTakeAway);
                       }
                       else{
                         print('printResult!=true i.e. print UN successfull');
                         shoppingCartBloc.clearSubscription();
+                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
                         return Navigator.pop(context, cancelPaySelectUNObscuredTakeAway);
                       }
                     }
@@ -8641,7 +8661,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // COMMENT FROM HERE TO END
 
                       String docID1;
-                      /*
+
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
                       _x.address = '0F:02:18:51:23:46';
@@ -8661,25 +8681,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       print('docID1 in dummy Print: $docID1');
 
- */
 
-                      //  comment END'S HERE.
 
-                      if(docID1!=''){
-                        print('docID1!=\'\'    ----------');
-                        shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
-                      }
-                      else{
-                        print('docID1 == \'\'   ----------');
-                        shoppingCartBloc.clearSubscription();
-                        return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
-                      }
+                  //  comment END'S HERE.
+
+                  if(docID1!=''){
+                  print('docID1 !=  \'\'    ----------');
+                  shoppingCartBloc.clearSubscription();
+                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
+                  }
+                  else{
+                  print('docID1 ==  \'\'   ----------');
+                  shoppingCartBloc.clearSubscription();
+                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
+                  }
 
 
 //                      return;
-                    }
-                  }
+                }
+                }
                 },
               ),
             ),
