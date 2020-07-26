@@ -475,22 +475,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
 
         ),
-        height: 170,
+//        height: 170,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
-        width: 300,
+//        width: 300,
         child: Row(
-//          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start, // previously it was little bit middle ... with center..
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.fromLTRB(6, 15, 0,0),
-
-//            color:Colors.yellow,
-
-//            color:Colors.yellowAccent,
-              height: 152,
-              width: 105,
+//              padding: EdgeInsets.fromLTRB(6, 15, 0,0),
+//
+//              height: 152,
+//              width: 105,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -549,25 +546,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
             /// toDo: multiline. maxlines
             Container(
 
-              padding: EdgeInsets.fromLTRB(0, 8, 0,0),
+//              padding: EdgeInsets.fromLTRB(0, 8, 0,0),
 //            color:Colors.yellow,
 
 //            color:Colors.yellowAccent,
-              height: 160,
-              width: 175,
+//              height: 160,
+//              width: 175,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
 
                   Container(
-                    height:49,
-                    width: 160,
-                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
+//                    height:49,
+//                    width: 160,
+//                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.address == null) ||
                           (customerForReciteGeneration.address.length == 0)) ?
-                      'EMPTY' :customerForReciteGeneration.address.length>39?
+                      '' :customerForReciteGeneration.address.length>39?
                       customerForReciteGeneration.address.substring(0,35) +'...':
                       customerForReciteGeneration.address,
 
@@ -577,7 +574,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                        color: Color(0xffF50303),
-                        fontSize: 20, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',),
 //                      maxLines: 2,
 //                      textAlign: TextAlign.left,
                     ),
@@ -589,14 +586,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 ////              stringifiedFoodItemIngredients.substring(0,12)+'...':
 
                   Container(
-                    height:49,
-                    width: 160,
-                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
+//                    height:49,
+//                    width: 160,
+//                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.flatOrHouseNumber == null) ||
                           (customerForReciteGeneration.flatOrHouseNumber.length ==
                               0)) ?
-                      'EMPTY' :customerForReciteGeneration.flatOrHouseNumber.length>39?
+                      '' :customerForReciteGeneration.flatOrHouseNumber.length>39?
                       customerForReciteGeneration.flatOrHouseNumber.substring(0,35) +'...':
                       customerForReciteGeneration.flatOrHouseNumber,
 
@@ -606,20 +603,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                        color: Color(0xffF50303),
-                        fontSize: 20, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',),
 
                     ),
                   ),
 
                   Container(
-                    height:50,
-                    width: 160,
-                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
+//                    height:50,
+//                    width: 160,
+//                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
 
                       ((customerForReciteGeneration.phoneNumber == null) ||
                           (customerForReciteGeneration.phoneNumber.length == 0)) ?
-                      'EMPTY' :customerForReciteGeneration.phoneNumber.length>39?
+                      '' :customerForReciteGeneration.phoneNumber.length>39?
                       customerForReciteGeneration.phoneNumber.substring(0,35) +'...':
                       customerForReciteGeneration.phoneNumber,
                       maxLines: 2,
@@ -629,7 +626,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                        color: Color(0xffF50303),
-                        fontSize: 20, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',),
 
                     ),
                   ),
@@ -8352,12 +8349,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),),
                 onPressed: () async {
 
-                  // TAkEAWAY AND DINNING  Recite Print. ....
+                  // TAkEAWAY AND DINNING DUMMY PRINT ....
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
+
+
                   print(
                       'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning
                           .paymentTypeIndex}');
+
+
+                  // PRINTING CODES WILL BE PUTTED HERE.
+
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
+
                   Order tempOrderWithdocId = await shoppingCartBloc
                       .paymentButtonPressed(cancelPaySelectUNObscuredTakeAwayDinning);
 
@@ -8375,7 +8381,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
+                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
                         .orderdocId}');
 
                     List<
@@ -8385,87 +8391,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
 
-//                      _showMyDialog2(
-//                          '___________ blueTooth device not found _____ TakeAway || Dinning pay button');
-
-                      print(
-                          'at here... __________ blueTooth device not found _____ TakeAway || Dinning pay button');
-
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUNObscuredTakeAwayDinning);
-
-                    }
-
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
-
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
-
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUNObscuredTakeAwayDinning);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUNObscuredTakeAwayDinning);
-                        }
-                      }
-                      else {
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-//                        _showMyDialog2(
-//                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
+
+                    _testPrintDummyDevices(x);
+
+                    shoppingCartBloc.clearSubscription();
 
 
-                        shoppingCartBloc.clearSubscription();
-                        print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
-                        return Navigator.pop(
-                            context, cancelPaySelectUNObscuredTakeAwayDinning);
-                      }
-                    }
+                    print('Unboscured takeAway || '
+                        'DinningRoom Dummy print--- returning to FoodGallery Page');
+                    return Navigator.pop(
+                        context, cancelPaySelectUNObscuredTakeAwayDinning);
+
+
                   }
 
                 },
+
               ),
             ),
 
