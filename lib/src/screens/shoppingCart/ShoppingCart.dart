@@ -10596,28 +10596,44 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   // # number 1: demoReceipt Order Type TakeAway begins here...
 
-  Future<Ticket> demoReceiptOrderTypeTakeAway(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,
+
+  // INVOKER ARGUMENTS MATCHING TEST:::
+  /*
+  printTicket(
+      paper,
+      thisRestaurant,
+      oneOrderData /*,imageRestaurant */,
+      orderInformationAndUserInformationTopInBytes,
+      restaurantNameBytesNotFuture,
+      totalCostDeliveryBytes,
+      paidUnpaidDeliveryTypeInBytes);
+
+  */
+
+
+  Future<Ticket> demoReceiptOrderTypeTakeAway(
+      PaperSize paper,
+      Restaurant thisRestaurant3, // not required but just for printing...
+      OneOrderFirebase oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
       /*ImageAliasAnotherSource.Image imageResource2, */
-      Uint8List restaurantNameImageBytes2,
-      Uint8List customerInformationAndOrderInformationBytes,
-      Uint8List totalCostDeliveryBytes2,
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+      Uint8List orderInformationAndUserInformationTopInBytes3,
+      Uint8List restaurantNameBytesNotFuture3, // FOR restaurant Name in diffrent font as image only
+      Uint8List totalCostDeliveryBytes3,
+      Uint8List paidUnpaidDeliveryTypeInBytes3
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
 
-    CustomerInformation customerForReciteGeneration = oneOrderListdocument
+    CustomerInformation customerForReciteGeneration = oneOrderData3
         .oneCustomer;
 
-    List<OrderedItem> orderedItems = oneOrderListdocument.orderedItems;
+    List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
     // print('paper.value: ${paper.value}');
-    print('currentRestaurant: ${currentRestaurant.name}');
-    print('oneOrderListdocument: $oneOrderListdocument');
+    print('currentRestaurant: ${thisRestaurant3.name}');
+    print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
     print('customerForReciteGeneration.address: ${customerForReciteGeneration
         .address}');
@@ -10630,20 +10646,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes2');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument
+    print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
+    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
 
+    //1...
     final ImageAliasAnotherSource
         .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameImageBytes2);
+        restaurantNameBytesNotFuture3);
 
     ticket.image(oneImageRestaurant);
 
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+    ticket.feed(2);
+
+
+    //2...
+    final ImageAliasAnotherSource
+        .Image customerInformationDeliveryStatus = ImageAliasAnotherSource.decodeImage(
+        orderInformationAndUserInformationTopInBytes3);
+
+    ticket.image(customerInformationDeliveryStatus);
+
+    ticket.feed(2);
+    //3...
 
 
     orderedItems.forEach((oneFood) {
@@ -10663,12 +10690,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
+    ticket.feed(2);
+
+    //4...
+
+    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
 
 
     ticket.image(oneImageTotalCostDelivery);
 
+    ticket.feed(2);
+
+    //5...
+
     final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeInBytes3);
 
 
     ticket.image(paidUnpaidDeliveryTypImage);
@@ -10677,38 +10714,57 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    oneImageTotalCostDelivery
 //      ticket.image(imageTotalCostForDelivery);
 
-
     ticket.feed(2);
+
+
+    //... end of story...
+
     ticket.cut();
     return ticket;
   }
 
 
+
+
+  // INVOKER ARGUMENTS MATCHING TEST:::
+  /*
+  printTicket(
+      paper,
+      thisRestaurant,
+      oneOrderData /*,imageRestaurant */,
+      orderInformationAndUserInformationTopInBytes,
+      restaurantNameBytesNotFuture,
+      totalCostDeliveryBytes,
+      paidUnpaidDeliveryTypeInBytes);
+
+  */
+
   // # number 2: demoReceipt Order Type Delivery begins here...
 
 //  restaurantNameImageBytes,totalCostDeliveryBytes2
-  Future<Ticket> demoReceiptOrderTypeDelivery(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,
+  Future<Ticket> demoReceiptOrderTypeDelivery(
+      PaperSize paper,
+      Restaurant thisRestaurant3,
+      OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
-      Uint8List restaurantNameImageBytes2,
-      Uint8List customerInformationAndOrderInformationBytes,
-      Uint8List totalCostDeliveryBytes2,
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+      Uint8List orderInformationAndUserInformationTopInBytes3,
+      Uint8List restaurantNameBytesNotFuture3,
+      Uint8List totalCostDeliveryBytes3,
+      Uint8List paidUnpaidDeliveryTypeInBytes3
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
 
 
-    CustomerInformation customerForReciteGeneration = oneOrderListdocument
+    CustomerInformation customerForReciteGeneration = oneOrderData3
         .oneCustomer;
 
-    List<OrderedItem> orderedItems = oneOrderListdocument.orderedItems;
+    List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
     // print('paper.value: ${paper.value}');
-    print('currentRestaurant: ${currentRestaurant.name}');
-    print('oneOrderListdocument: $oneOrderListdocument');
+    print('currentRestaurant: ${thisRestaurant3.name}');
+    print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
     print('customerForReciteGeneration.address: ${customerForReciteGeneration
         .address}');
@@ -10721,23 +10777,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument
+    print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes3');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
 
     final ImageAliasAnotherSource
         .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameImageBytes2);
+        restaurantNameBytesNotFuture3);
 
     ticket.image(oneImageRestaurant);
 
     final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
 
 
-    ticket.text('${oneOrderListdocument.orderBy}',
+    ticket.text('${oneOrderData3.orderBy}',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
@@ -10745,14 +10801,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: PosTextSize.size2,
 
         ));
-    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}',
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
           height: PosTextSize.size2,
           width: PosTextSize.size2,
         ));
-    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+    ticket.text('${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
@@ -10832,7 +10888,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageTotalCostDelivery);
 
     final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeInBytes3);
 
 
     ticket.image(paidUnpaidDeliveryTypImage);
@@ -10850,32 +10906,46 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   // demoReceipt Order Type Delivery ends here...
 
+  // INVOKER ARGUMENTS MATCHING TEST:::
+  /*
+  printTicket(
+      paper,
+      thisRestaurant,
+      oneOrderData /*,imageRestaurant */,
+      orderInformationAndUserInformationTopInBytes,
+      restaurantNameBytesNotFuture,
+      totalCostDeliveryBytes,
+      paidUnpaidDeliveryTypeInBytes);
+
+  */
 
   // # number 3: demoReceipt Order Type phone begins here...
 
   // demoReceipt Order Type Phone begins here...
-  Future<Ticket> demoReceiptOrderTypePhone(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,
+  Future<Ticket> demoReceiptOrderTypePhone(
+      PaperSize paper,
+      Restaurant thisRestaurant3,
+      OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
-      Uint8List restaurantNameImageBytes2,
-      Uint8List customerInformationAndOrderInformationBytes,
-      Uint8List totalCostDeliveryBytes2,
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+      Uint8List orderInformationAndUserInformationTopInBytes3,
+      Uint8List restaurantNameBytesNotFuture3,
+
+      Uint8List totalCostDeliveryBytes3,
+      Uint8List paidUnpaidDeliveryTypeInBytes3
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
 
 
-    CustomerInformation customerForReciteGeneration = oneOrderListdocument
+    CustomerInformation customerForReciteGeneration = oneOrderData3
         .oneCustomer;
 
-    List<OrderedItem> orderedItems = oneOrderListdocument.orderedItems;
+    List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
     // print('paper.value: ${paper.value}');
-    print('currentRestaurant: ${currentRestaurant.name}');
-    print('oneOrderListdocument: $oneOrderListdocument');
+    print('currentRestaurant: ${thisRestaurant3.name}');
+    print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
     print('customerForReciteGeneration.address: ${customerForReciteGeneration
         .address}');
@@ -10888,24 +10958,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument
+    print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes3');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
 
     final ImageAliasAnotherSource
         .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameImageBytes2);
+        restaurantNameBytesNotFuture3);
 
 //    grayscale(oneImageRestaurant);
     ticket.image(oneImageRestaurant);
 
     final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
 
 
-    ticket.text('${oneOrderListdocument.orderBy}',
+    ticket.text('${oneOrderData3.orderBy}',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
@@ -10913,14 +10983,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: PosTextSize.size2,
 
         ));
-    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}',
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
           height: PosTextSize.size2,
           width: PosTextSize.size2,
         ));
-    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+    ticket.text('${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
@@ -11000,7 +11070,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageTotalCostDelivery);
 
     final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeInBytes3);
 
 
     ticket.image(paidUnpaidDeliveryTypImage);
@@ -11015,31 +11085,44 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // demoReceipt Order Type Phone ends here...
 
+  // INVOKER ARGUMENTS MATCHING TEST:::
+  /*
+  printTicket(
+      paper,
+      thisRestaurant,
+      oneOrderData /*,imageRestaurant */,
+      orderInformationAndUserInformationTopInBytes,
+      restaurantNameBytesNotFuture,
+      totalCostDeliveryBytes,
+      paidUnpaidDeliveryTypeInBytes);
+
+  */
 
 // # number 4: demoReceipt Order Type Dinning begins here...
 
-  Future<Ticket> demoReceiptOrderTypeDinning(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderListdocument,
+  Future<Ticket> demoReceiptOrderTypeDinning(
+      PaperSize paper,
+      Restaurant thisRestaurant3,
+      OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
-      Uint8List restaurantNameImageBytes2,
-      Uint8List customerInformationAndOrderInformationBytes,
-      Uint8List totalCostDeliveryBytes2,
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes2
+      Uint8List orderInformationAndUserInformationTopInBytes3,
+      Uint8List restaurantNameBytesNotFuture3,
+      Uint8List totalCostDeliveryBytes3,
+      Uint8List paidUnpaidDeliveryTypeInBytes3
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeDelivery');
 
 
-    CustomerInformation customerForReciteGeneration = oneOrderListdocument
+    CustomerInformation customerForReciteGeneration = oneOrderData3
         .oneCustomer;
 
-    List<OrderedItem> orderedItems = oneOrderListdocument.orderedItems;
+    List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
     final Ticket ticket = Ticket(PaperSize.mm58);
 
     // print('paper.value: ${paper.value}');
-    print('currentRestaurant: ${currentRestaurant.name}');
-    print('oneOrderListdocument: $oneOrderListdocument');
+    print('currentRestaurant: ${thisRestaurant3.name}');
+    print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
     print('customerForReciteGeneration.address: ${customerForReciteGeneration
         .address}');
@@ -11052,23 +11135,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameImageBytes2');
-    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes2');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderListdocument
+    print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
+    print('totalCostDeliveryBytes2:____ $totalCostDeliveryBytes3');
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
 
     final ImageAliasAnotherSource
         .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameImageBytes2);
+        restaurantNameBytesNotFuture3);
 
     ticket.image(oneImageRestaurant);
 
     final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes2);
+    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
 
 
-    ticket.text('${oneOrderListdocument.orderBy}',
+    ticket.text('${oneOrderData3.orderBy}',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
@@ -11076,14 +11159,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: PosTextSize.size2,
 
         ));
-    ticket.text('${oneOrderListdocument.formattedOrderPlacementDatesTimeOnly}',
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
           height: PosTextSize.size2,
           width: PosTextSize.size2,
         ));
-    ticket.text('${oneOrderListdocument.orderProductionTime} min',
+    ticket.text('${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           align: PosAlign.left,
           bold: true,
@@ -11162,7 +11245,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageTotalCostDelivery);
 
     final ImageAliasAnotherSource.Image paidUnpaidDeliveryTypImage =
-    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeWidgetBytes2);
+    ImageAliasAnotherSource.decodeImage(paidUnpaidDeliveryTypeInBytes3);
 
     ticket.image(paidUnpaidDeliveryTypImage);
 
@@ -11178,49 +11261,69 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // # number 4: demoReceipt Order Type Dinning ends here...
 
+  // INVOKER ARGUMENTS MATCHING TEST:::
+  /*
+  printTicket(
+      paper,
+      thisRestaurant,
+      oneOrderData /*,imageRestaurant */,
+      orderInformationAndUserInformationTopInBytes,
+      restaurantNameBytesNotFuture,
+      totalCostDeliveryBytes,
+      paidUnpaidDeliveryTypeInBytes);
+
+  */
 
 
-  Future <bool> printTicket(PaperSize paper,
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderdocument,Uint8List customerInformationAndOrderInformationBytes,
-      Uint8List restaurantNameImageBytes,
+
+  Future <bool> printTicket2(
+      PaperSize paper,
+      Restaurant thisRestaurant2,
+      OneOrderFirebase oneOrderData2,
+      Uint8List orderInformationAndUserInformationTopInBytes2,
+      Uint8List restaurantNameBytesNotFuture2,
       Uint8List totalCostDeliveryBytes2,
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes) async {
+      Uint8List paidUnpaidDeliveryTypeInBytes2) async {
     // pqr
 //    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //    demoReceiptOrderTypeDinning
 //    demoReceiptOrderTypeTakeAway
 //    demoReceiptOrderTypePhone
 
-    print('oneOrderdocument.orderBy: ${oneOrderdocument.orderBy}');
+    print('oneOrderdocument.orderBy: ${oneOrderData2.orderBy}');
 
-    final PosPrintResult res = (oneOrderdocument.orderBy.toLowerCase() ==
+    final PosPrintResult res = (oneOrderData2.orderBy.toLowerCase() ==
         'delivery') ?
     await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,customerInformationAndOrderInformationBytes,
-        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
-    (oneOrderdocument.orderBy.toLowerCase() == 'phone') ?
+        thisRestaurant2, oneOrderData2,orderInformationAndUserInformationTopInBytes2, restaurantNameBytesNotFuture2,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2)) :
+    (oneOrderData2.orderBy.toLowerCase() == 'phone') ?
     await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,customerInformationAndOrderInformationBytes,
-        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
-    (oneOrderdocument.orderBy.toLowerCase() == 'takeaway') ?
+        thisRestaurant2, oneOrderData2,orderInformationAndUserInformationTopInBytes2, restaurantNameBytesNotFuture2,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2)) :
+    (oneOrderData2.orderBy.toLowerCase() == 'takeaway') ?
     await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,customerInformationAndOrderInformationBytes,
-        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes)) :
+        thisRestaurant2, oneOrderData2,orderInformationAndUserInformationTopInBytes2, restaurantNameBytesNotFuture2,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2)) :
     await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
-        currentRestaurant, oneOrderdocument, restaurantNameImageBytes,customerInformationAndOrderInformationBytes,
-        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeWidgetBytes));
+        thisRestaurant2, oneOrderData2,orderInformationAndUserInformationTopInBytes2, restaurantNameBytesNotFuture2,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2));
 
 
+    logger.i('----- res : $res');
     print('res.msg: ${res.msg}');
+    String response2 = res.msg;
 
 
-    showToast(res.msg);
+     // showToast(res.msg);
 
-    if (res.msg == 'Success') {
-      print('at  Success');
+    logger.i('this never executes .. TODO...');
+    if (response2== 'Success') {
+      print('at Success');
+      print('-----check above condition\'s.... -----');
       return true;
     }
+
 
 
     else {
@@ -11304,7 +11407,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //      _showMyDialog3(totalCostDeliveryBytes);
       // ssss
-      print('before printing total cose for recite of delivery type order');
+      print('before printing total cost for recite of delivery type order');
 //      ticket.image(image);
 
     }).catchError((onError) {
@@ -11392,7 +11495,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      ticket.image(imageRestaurant);
 
           Future<bool> isPrint =
-          printTicket(
+          printTicket2(
               paper,
               thisRestaurant,
               oneOrderData /*,imageRestaurant */,
@@ -11493,13 +11596,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   void _testPrintDummyDevices(PrinterBluetooth printer) async {
     // NOT REQUIRED SINCE DUMMY...
 
-    /*
-    printerManager.selectPrinter(printer);
 
-    // TODO Don't forget to choose printer's paper
-    const PaperSize paper = PaperSize.mm58;
-
-    */
 
 
     print("_testPrintDummyDevices");
