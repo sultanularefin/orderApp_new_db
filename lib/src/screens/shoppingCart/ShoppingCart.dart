@@ -1243,68 +1243,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       case ConnectionState.active:
                       default:
-                        if (snapshot.hasData) {
-                          if (snapshot.data is Order) {
-                            print(
-                                'at snapshot.data == !=null  for ConnectionState.active or default ');
+
                             Order oneOrder = snapshot.data;
 
-                            if ((oneOrder.paymentButtonPressed == true) &&
-                                (oneOrder.recitePrinted == false)) {
-                              return Container(
-                                margin: EdgeInsets.fromLTRB(
-                                    0, displayHeight(context) / 2, 0, 0),
-                                child: Center(
-                                  child: Column(
-                                    children: <Widget>[
-
-                                      Center(
-                                        child: Container(
-                                            alignment: Alignment.center,
-                                            child: new CircularProgressIndicator(
-                                              backgroundColor: Colors
-                                                  .lightGreenAccent,
-//                                              valueColor:
-//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-
-
-                                            )
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                            'printing recite... please wait.',
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 34,
-                                              fontWeight: FontWeight.normal,
-//                                                      color: Colors.white
-                                              color: Colors.redAccent,
-                                              fontFamily: 'Itim-Regular',
-
-                                            )
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                            alignment: Alignment.center,
-                                            child: new CircularProgressIndicator(
-                                              backgroundColor: Color(
-                                                  0xffFC0000),
-
-//                                              valueColor:
-//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                            )
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                              );
-                            }
-                            else {
 //              int x = 5;
 
                               CustomerInformation x = oneOrder
@@ -1744,129 +1685,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               );
                             }
                           }
-                          else {
-                            print('at snapshot.data !is Order  ');
 
-
-                            // TODO : WHICH ONE snapshot.data or snapshot.hasData
-
-                            print('before invoking cusomTtimerTest() ');
-                            return Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  0, displayHeight(context) / 2, 0, 0),
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                              backgroundColor: Colors.cyanAccent,
-                                              valueColor:
-                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                          )
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                              backgroundColor: Colors.green,
-                                              valueColor:
-                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                          )
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                              backgroundColor: Colors.yellow,
-                                              valueColor:
-                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-
-                                          )
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                              backgroundColor: Colors.pink,
-
-                                              valueColor:
-                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                          )
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                            );
-                          }
-                        }
-
-                        else{
-                          print('condition for !snapshot.hasData');
-//                          toDO: navigate .
-//                          return  Navigator.pop(context);
-
-
-//                        return WelcomePage;
-
-                          /*
-                          return BlocProvider<IdentityBloc>(
-                              bloc: IdentityBloc(),
-                              child: WelcomePage()
-
-                          );
-
-                          */
-
-                          return Container(
-                            margin: EdgeInsets.fromLTRB(
-                                0, displayHeight(context) / 2, 0, 0),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-
-
-                                  Container(
-                                      alignment: Alignment.center,
-                                      child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.pink,
-
-//                                      valueColor:
-//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                      )
-                                  ),
-                                  Container(
-                                      alignment: Alignment.center,
-                                      child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.pink,
-
-//                                      valueColor:
-//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                      )
-                                  ),
-                                  Container(
-                                      alignment: Alignment.center,
-                                      child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.pink,
-
-//                                      valueColor:
-//                                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                      )
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-
-                        }
                     }
                   }
               ),
@@ -8580,12 +8399,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                          .recitePrinted(tempOrderWithdocId,true);
 
 //                      cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-                     shoppingCartBloc.clearSubscriptionPayment();
+//                     shoppingCartBloc.clearSubscriptionPayment();
 
 
 //                      final shoppingCartBloc = BlocProvider.of<
 //                          ShoppingCartBloc>(context);
-//                      shoppingCartBloc.clearSubscription();
+                      shoppingCartBloc.clearSubscription();
 
 //
 
@@ -8595,7 +8414,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                      return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
+//                      return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
 //                      return;
                     }
 
@@ -8637,20 +8456,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       if(printResult==true) {
                         print('printResult==true i.e. print successfull');
-//                        shoppingCartBloc.clearSubscriptionPayment();
+                        shoppingCartBloc.clearSubscriptionPayment();
 //                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
 
 
 //                        return Navigator.pop(
 //                            context, cancelPaySelectUNObscuredTakeAway);
-                        shoppingCartBloc.clearSubscriptionPayment();
+//                        shoppingCartBloc.clearSubscriptionPayment();
                         return Navigator.pop(context, cancelPaySelectUNObscuredTakeAwayDinning);
                       }
                       else{
                         print('printResult!=true i.e. print UN successfull');
-//                        shoppingCartBloc.clearSubscriptionPayment();
-//                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
                         shoppingCartBloc.clearSubscriptionPayment();
+//                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+//                        shoppingCartBloc.clearSubscriptionPayment();
                         return Navigator.pop(context, cancelPaySelectUNObscuredTakeAwayDinning);
                       }
                     }
@@ -8692,8 +8511,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  shoppingCartBloc.clearSubscription();
 //                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
 
-//                  shoppingCartBloc.clearSubscriptionPayment();
-                    shoppingCartBloc.clearSubscriptionPayment();
+                  shoppingCartBloc.clearSubscriptionPayment();
+//                    shoppingCartBloc.clearSubscriptionPayment();
                   return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
                   }
                   else{
@@ -8970,7 +8789,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       logger.i('__ __ ${cancelPaySelectUnobscuredDeliveryPhone.recitePrinted}');
                       logger.i('-- ___ ${cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed}');
-//                      shoppingCartBloc.clearSubscription();
+                      shoppingCartBloc.clearSubscription();
 //                      shoppingCartBloc.clearSubscriptionPayment();
                       print('shopping Cart : shoppingCartBloc.clearSubscription() called... ');
 
@@ -9018,12 +8837,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       if(printResult==true) {
                         print('printResult==true i.e. print successfull');
-//                        shoppingCartBloc.clearSubscription();
+                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context, cancelPaySelectUnobscuredDeliveryPhone);
                       }
                       else{
                         print('printResult!=true i.e. print UN successfull');
-//                        shoppingCartBloc.clearSubscription();
+                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context, cancelPaySelectUnobscuredDeliveryPhone);
                       }
                     }
@@ -9066,12 +8885,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       if(docID1!=''){
                         print('docID1!=\'\'    ----------');
-//                        shoppingCartBloc.clearSubscription();
+                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
                       }
                       else{
                         print('docID1 == \'\'   ----------');
-//                        shoppingCartBloc.clearSubscription();
+                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
                       }
 

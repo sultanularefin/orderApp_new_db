@@ -81,7 +81,7 @@ class ShoppingCartBloc implements Bloc {
 
   final _orderController = StreamController <Order>();
 
-  final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>.broadcast();
+  final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>/*.broadcast*/();
 
 //  final _savedSelectedFoodController =  StreamController<List<SelectedFood>>();
 
@@ -902,24 +902,24 @@ class ShoppingCartBloc implements Bloc {
   void clearSubscriptionPayment(){
 
 
-//    _curretnOrder=null;
+    _curretnOrder=null;
     _expandedSelectedFood =[];
-//    _orderType =[];
-//    _paymentType =[];
+    _orderType =[];
+    _paymentType =[];
 
-//    _devicesBlueTooth = [];
+    _devicesBlueTooth = [];
 
     _thisRestaurant= null;
 
 
 
-//    _orderController.sink.add(_curretnOrder);
+    _orderController.sink.add(_curretnOrder);
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
 
-//    _orderTypeController.sink.add(_orderType);
-//    _paymentTypeController.sink.add(_paymentType);
+    _orderTypeController.sink.add(_orderType);
+    _paymentTypeController.sink.add(_paymentType);
 
-//    _devicesController.sink.add(_devicesBlueTooth);
+    _devicesController.sink.add(_devicesBlueTooth);
 
     _restaurantController.sink.add(_thisRestaurant);
 
