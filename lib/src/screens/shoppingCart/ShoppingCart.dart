@@ -475,9 +475,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
 
         ),
-        height: 90,
+        height: 110,
 
-        margin: EdgeInsets.fromLTRB(3, 6, 0, 0),
+        margin: EdgeInsets.fromLTRB(9, 6, 0, 0),
         width: 300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start, // previously it was little bit middle ... with center..
