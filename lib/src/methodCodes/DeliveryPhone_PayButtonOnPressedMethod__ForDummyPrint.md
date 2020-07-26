@@ -37,14 +37,12 @@
                   if ((cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed == true) &&
                       (cancelPaySelectUnobscuredDeliveryPhone.orderdocId == '')) {
                     _scaffoldKeyShoppingCartPage.currentState
-//                  Scaffold.of(context)
-//                    ..removeCurrentSnackBar()
                         .showSnackBar(
                         SnackBar(content: Text("someThing went wrong")));
                     print('something went wrong');
                   }
                   else {
-                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
+                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
                         .orderdocId}');
 
                     List<

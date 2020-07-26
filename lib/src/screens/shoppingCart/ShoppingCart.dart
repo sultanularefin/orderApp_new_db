@@ -1246,11 +1246,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       default:
                         if (snapshot.data is Order) {
                           print(
-                              'at snapshot.data == !=null  for ConnectionState.active or default ');
+                              'at snapshot.data is Order for ConnectionState.active or default ');
 
                           Order oneOrder = snapshot.data;
 //              int x = 5;
                           if (oneOrder.paymentButtonPressed == true) {
+
+                            print('....payment button pressed.....');
                             return Container(
                               margin: EdgeInsets.fromLTRB(
                                   0, displayHeight(context) / 2, 0, 0),
@@ -8107,6 +8109,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //              alignment: Alignment.center,
 
+                      //OBSCURE PAY
+
                       child: Text('Pay', style: TextStyle(color: Colors.green,
                         fontSize: 30, fontWeight: FontWeight.bold,),
                       ),),
@@ -8121,73 +8125,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
 
-          /*
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-
-
-
-
-                Container(
-                  width:displayWidth(context)/3.1,
-                  child: OutlineButton(
-                    onPressed: (){ print('Cancel Pressed obscured');
-//                    onPressed: _testPrintDummyDe
-//                    return Navigator.pop(context,true);
-                    },
-                    child: Text('Cancel',style: TextStyle(color: Color(0xffFC0000),fontSize: 30),),
-
-                    shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(
-                        color:Color(0xffFC0000),
-                        style: BorderStyle.solid,
-                        width:7.6,
-                      ),
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-
-
-
-
-                  ),
-
-                ),
-
-
-                SizedBox(width: displayWidth(context)/12,),
-                Container(
-                  width:displayWidth(context)/3.1,
-                  child: OutlineButton(
-                    onPressed: () async {
-
-                      print('obscure pay');
-
-                    },
-                    child: Text('Pay',style: TextStyle(color: Colors.green,fontSize: 30),),
-                    shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(
-                        color:Colors.green,
-                        style: BorderStyle.solid,
-                        width:7.6,
-                      ),
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                  ),
-
-
-
-                ),
-
-
-              ],
-            ),
-          ),
-          */
         ),
       );
   }
@@ -8415,21 +8352,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),),
                 onPressed: () async {
 
-                  // TAkEAWAY AND DINNING DUMMY PRINT ....
+                  // TAkEAWAY AND DINNING  Recite Print. ....
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
-
-
                   print(
                       'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning
                           .paymentTypeIndex}');
-
-
-                  // PRINTING CODES WILL BE PUTTED HERE.
-
-                  print(
-                      'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
-
                   Order tempOrderWithdocId = await shoppingCartBloc
                       .paymentButtonPressed(cancelPaySelectUNObscuredTakeAwayDinning);
 
@@ -8447,7 +8375,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
+                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
                         .orderdocId}');
 
                     List<
@@ -8457,26 +8385,84 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
+                    if (blueToothDevicesState.length == 0) {
+                      logger.i('___________ blueTooth device not found _____');
 
-                    BluetoothDevice _x = new BluetoothDevice();
-                    _x.name = 'Restaurant Printer';
-                    _x.address = '0F:02:18:51:23:46';
-                    _x.type = 3;
-                    _x.connected = null;
+//                      _showMyDialog2(
+//                          '___________ blueTooth device not found _____ TakeAway || Dinning pay button');
 
-                    PrinterBluetooth x = new PrinterBluetooth(_x);
+                      print(
+                          'at here... __________ blueTooth device not found _____ TakeAway || Dinning pay button');
 
-                    _testPrintDummyDevices(x);
+                      shoppingCartBloc.clearSubscription();
+                      return Navigator.pop(
+                          context, cancelPaySelectUNObscuredTakeAwayDinning);
 
-                    shoppingCartBloc.clearSubscription();
+                    }
+
+                    else {
+                      bool found = false;
+                      int index = -1;
+                      for (int i = 0; i < blueToothDevicesState.length; i++) {
+                        ++index;
+
+                        print(
+                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
+                                .name}');
+                        print(
+                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
+                                .address}');
+
+                        if ((blueToothDevicesState[i].name ==
+                            'Restaurant Printer') ||
+                            (blueToothDevicesState[i].address ==
+                                '0F:02:18:51:23:46')) {
+                          found = true;
+                          break;
+
+                          // _testPrint(oneBlueToothDevice);
+
+                        }
+                      };
+
+                      logger.w('check device listed or not');
+                      print('index: $index');
+                      print('found == true ${found == true}');
+
+                      if (found == true) {
+                        print('found == true');
+                        bool printResult = await _testPrint(
+                            blueToothDevicesState[index]);
+
+//                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
 
-                    print('Unboscured takeAway || '
-                        'DinningRoom Dummy print--- returning to FoodGallery Page');
-                    return Navigator.pop(
-                        context, cancelPaySelectUNObscuredTakeAwayDinning);
+                        if (printResult == true) {
+                          logger.i('printResult==true i.e. print successfull');
+                          shoppingCartBloc.clearSubscription();
+                          return Navigator.pop(
+                              context, cancelPaySelectUNObscuredTakeAwayDinning);
+                        }
+                        else {
+                          logger.i('printResult!=true i.e. print UN successfull');
+                          shoppingCartBloc.clearSubscription();
+                          return Navigator.pop(
+                              context, cancelPaySelectUNObscuredTakeAwayDinning);
+                        }
+                      }
+                      else {
+                        logger.i(
+                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
+                        _showMyDialog2(
+                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
 
 
+                        shoppingCartBloc.clearSubscription();
+                        print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
+                        return Navigator.pop(
+                            context, cancelPaySelectUNObscuredTakeAwayDinning);
+                      }
+                    }
                   }
 
                 },
@@ -8514,7 +8500,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('return shopping Cart page.'),
+              child: Text('return Home page.'),
               onPressed: () {
 
 
@@ -8695,17 +8681,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     if (blueToothDevicesState.length == 0) {
                       logger.i('___________ blueTooth device not found _____');
 
-                      _showMyDialog2(
-                          '___________ blueTooth device not found _____ delivery phone pay button');
+//                      _showMyDialog2(
+//                          '___________ blueTooth device not found _____ delivery phone pay button');
 
                       print(
                           'at here... __________ blueTooth device not found _____ delivery phone pay button');
 
-
+                      shoppingCartBloc.clearSubscription();
                       return Navigator.pop(
                           context, cancelPaySelectUnobscuredDeliveryPhone);
 
-                    } else {
+                    }
+
+                    else {
                       bool found = false;
                       int index = -1;
                       for (int i = 0; i < blueToothDevicesState.length; i++) {
@@ -8742,13 +8730,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                         if (printResult == true) {
-                          print('printResult==true i.e. print successfull');
+                          logger.i('printResult==true i.e. print successfull');
                           shoppingCartBloc.clearSubscription();
                           return Navigator.pop(
                               context, cancelPaySelectUnobscuredDeliveryPhone);
                         }
                         else {
-                          print('printResult!=true i.e. print UN successfull');
+                          logger.i('printResult!=true i.e. print UN successfull');
                           shoppingCartBloc.clearSubscription();
                           return Navigator.pop(
                               context, cancelPaySelectUnobscuredDeliveryPhone);
@@ -8756,12 +8744,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       }
                       else {
 
-//
-//                        logger.i(
-//                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-//                        _showMyDialog2(
-//                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
-//
+
+                        logger.i(
+                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
+                        _showMyDialog2(
+                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+
 
                         shoppingCartBloc.clearSubscription();
                         print('going to food Gallery page  Restaurant Printer not found');
