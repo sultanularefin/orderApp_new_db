@@ -8580,14 +8580,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
 
-                      shoppingCartBloc.clearSubscription();
+                      shoppingCartBloc.clearSubscriptionPayment();
 
 
 //                      final shoppingCartBloc = BlocProvider.of<
 //                          ShoppingCartBloc>(context);
 //                      shoppingCartBloc.clearSubscription();
 
-                      cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+//                      cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
 
 
                       return Navigator.pop(
@@ -8687,14 +8687,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   if(docID1!=''){
                   print('docID1 !=  \'\'    ----------');
-                  shoppingCartBloc.clearSubscription();
-                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+//                  shoppingCartBloc.clearSubscription();
+//                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+                  shoppingCartBloc.clearSubscriptionPayment();
                   return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
                   }
                   else{
                   print('docID1 ==  \'\'   ----------');
-                  shoppingCartBloc.clearSubscription();
-                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+//                  shoppingCartBloc.clearSubscription();
+//                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+                  shoppingCartBloc.clearSubscriptionPayment();
                   return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
                   }
 
@@ -8962,7 +8964,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       logger.i('__ __ ${cancelPaySelectUnobscuredDeliveryPhone.recitePrinted}');
                       logger.i('-- ___ ${cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed}');
-                      shoppingCartBloc.clearSubscription();
+//                      shoppingCartBloc.clearSubscription();
+                      shoppingCartBloc.clearSubscriptionPayment();
                       print('shopping Cart : shoppingCartBloc.clearSubscription() called... ');
 
 

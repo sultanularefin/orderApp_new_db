@@ -893,6 +893,32 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
+  void clearSubscriptionPayment(){
+
+
+//    _curretnOrder=null;
+    _expandedSelectedFood =[];
+    _orderType =[];
+    _paymentType =[];
+
+    _devicesBlueTooth = [];
+
+    _thisRestaurant= null;
+
+
+
+//    _orderController.sink.add(_curretnOrder);
+    _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
+    _orderTypeController.sink.add(_orderType);
+    _paymentTypeController.sink.add(_paymentType);
+
+    _devicesController.sink.add(_devicesBlueTooth);
+
+    _restaurantController.sink.add(_thisRestaurant);
+
+
+  }
+
   
 
 
