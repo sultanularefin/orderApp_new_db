@@ -1534,8 +1534,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                       snapshot) {
                                                     if (snapshot
                                                         .hasData) {
-                                                      List<
-                                                          SelectedFood> expandedSelectedFoodInOrder = snapshot
+                                                      List<SelectedFood> expandedSelectedFoodInOrder = snapshot
                                                           .data;
 
 
@@ -4337,9 +4336,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
                     // animatedUnObscuredPaymentUnSelectContainer
                     // animatedObscuredPaymentSelectContainerTakeAway and Dinning Room
-                    animatedObscuredPaymentSelectContainerTakeAway
+                    animatedObscuredPaymentSelectContainerTakeAwayDinning
                       (unObsecuredInputandPayment) :
-                    animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
+                    animatedUnObscuredPaymentTypeUnSelectedContainerTakeAwayDinning
                       (unObsecuredInputandPayment),
 
 
@@ -5500,9 +5499,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     // animatedObscuredPaymentSelectContainerTakeAway
                     // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
                     // animatedUnObscuredPaymentUnSelectContainer
-                    animatedObscuredPaymentSelectContainerTakeAway
+                    animatedObscuredPaymentSelectContainerTakeAwayDinning
                       (unObsecuredInputandPayment) :
-                    animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
+                    animatedUnObscuredPaymentTypeUnSelectedContainerTakeAwayDinning
                       (unObsecuredInputandPayment),
 
 
@@ -7873,7 +7872,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway(
+  Widget animatedUnObscuredPaymentTypeUnSelectedContainerTakeAwayDinning(
       Order orderObjectTakeAway) {
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
@@ -7937,8 +7936,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               // animatedUnObscuredCancelPayButton
               // animatedObscuredCancelPayButton
               child: showFullPaymentType == false ?
-              animatedUnObscuredCancelPayButtonTakeAway(orderObjectTakeAway) :
-              animatedObscuredCancelPayButtonTakeAway(orderObjectTakeAway)
+              animatedUnObscuredCancelPayButtonTakeAwayDinning(orderObjectTakeAway) :
+              animatedObscuredCancelPayButtonTakeAwayDinning(orderObjectTakeAway)
 
               ,
 
@@ -8099,7 +8098,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedObscuredCancelPayButtonTakeAway(Order cancelPaySelect) {
+  Widget animatedObscuredCancelPayButtonTakeAwayDinning(Order cancelPaySelect) {
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -8379,8 +8378,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   // work 01_9thJuly.
-  Widget animatedUnObscuredCancelPayButtonTakeAway(
-      Order cancelPaySelectUNObscuredTakeAway) {
+  Widget animatedUnObscuredCancelPayButtonTakeAwayDinning(
+      Order cancelPaySelectUNObscuredTakeAwayDinning) {
     //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(
 //        child: _buildShoppingCartInputFields()
@@ -8451,11 +8450,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ShoppingCartBloc>(context);
                   shoppingCartBloc.clearSubscription();
 
-                  cancelPaySelectUNObscuredTakeAway.isCanceled = true;
+                  cancelPaySelectUNObscuredTakeAwayDinning.isCanceled = true;
 
 
                   return Navigator.pop(
-                      context, cancelPaySelectUNObscuredTakeAway);
+                      context, cancelPaySelectUNObscuredTakeAwayDinning);
 
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
@@ -8500,7 +8499,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                   print(
-                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAway
+                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning
                           .paymentTypeIndex}');
 
 
@@ -8510,11 +8509,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
                   Order tempOrderWithdocId = await shoppingCartBloc
-                      .paymentButtonPressed(cancelPaySelectUNObscuredTakeAway);
-
-
-
-
+                      .paymentButtonPressed(cancelPaySelectUNObscuredTakeAwayDinning);
 
 
                   /*
@@ -8526,8 +8521,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                  if ((cancelPaySelectUNObscuredTakeAway.paymentButtonPressed == true) &&
-                      (cancelPaySelectUNObscuredTakeAway.orderdocId == '')) {
+                  if ((cancelPaySelectUNObscuredTakeAwayDinning.paymentButtonPressed == true) &&
+                      (cancelPaySelectUNObscuredTakeAwayDinning.orderdocId == '')) {
                     _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
@@ -8536,7 +8531,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAway
+                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
                         .orderdocId}');
 
                     List<
@@ -8560,7 +8555,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // NEED THIS LINES COMMENTING BEGINNING..
 
 
-                      /*
+
 
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
@@ -8575,12 +8570,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       _testPrintDummyDevices(x);
 
 
-                      */
+
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
 
-                      shoppingCartBloc.clearSubscriptionPayment();
+//                      shoppingCartBloc.clearSubscriptionPayment();
 
 
 //                      final shoppingCartBloc = BlocProvider.of<
@@ -8591,11 +8586,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       return Navigator.pop(
-                          context, cancelPaySelectUNObscuredTakeAway);
+                          context, cancelPaySelectUNObscuredTakeAwayDinning);
 
 
 
-                      return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
+                      return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
 //                      return;
                     }
 
@@ -8637,19 +8632,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       if(printResult==true) {
                         print('printResult==true i.e. print successfull');
-                        shoppingCartBloc.clearSubscription();
-                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+//                        shoppingCartBloc.clearSubscriptionPayment();
+//                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
 
 
 //                        return Navigator.pop(
 //                            context, cancelPaySelectUNObscuredTakeAway);
-                        return Navigator.pop(context, cancelPaySelectUNObscuredTakeAway);
+                        return Navigator.pop(context, cancelPaySelectUNObscuredTakeAwayDinning);
                       }
                       else{
                         print('printResult!=true i.e. print UN successfull');
-                        shoppingCartBloc.clearSubscription();
-                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-                        return Navigator.pop(context, cancelPaySelectUNObscuredTakeAway);
+//                        shoppingCartBloc.clearSubscriptionPayment();
+//                        cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
+                        return Navigator.pop(context, cancelPaySelectUNObscuredTakeAwayDinning);
                       }
                     }
 
@@ -8689,15 +8684,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   print('docID1 !=  \'\'    ----------');
 //                  shoppingCartBloc.clearSubscription();
 //                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-                  shoppingCartBloc.clearSubscriptionPayment();
-                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
+
+//                  shoppingCartBloc.clearSubscriptionPayment();
+
+                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
                   }
                   else{
                   print('docID1 ==  \'\'   ----------');
 //                  shoppingCartBloc.clearSubscription();
 //                  cancelPaySelectUNObscuredTakeAway.recitePrinted = true;
-                  shoppingCartBloc.clearSubscriptionPayment();
-                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAway);
+//                  shoppingCartBloc.clearSubscriptionPayment();
+
+                  return Navigator.pop(context,cancelPaySelectUNObscuredTakeAwayDinning);
+
                   }
 
 
@@ -8942,7 +8941,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // NEED THIS LINES COMMENTING BEGINNING..
 
-                      /*
+
 
                       BluetoothDevice _x = new BluetoothDevice();
                       _x.name = 'Restaurant Printer';
@@ -8957,7 +8956,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       _testPrintDummyDevices(x);
 
 
-                      */
+
 
                       // NEED THIS LINES COMMENTING ENDS HERE..
 
@@ -8965,7 +8964,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       logger.i('__ __ ${cancelPaySelectUnobscuredDeliveryPhone.recitePrinted}');
                       logger.i('-- ___ ${cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed}');
 //                      shoppingCartBloc.clearSubscription();
-                      shoppingCartBloc.clearSubscriptionPayment();
+//                      shoppingCartBloc.clearSubscriptionPayment();
                       print('shopping Cart : shoppingCartBloc.clearSubscription() called... ');
 
 
@@ -9012,12 +9011,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       if(printResult==true) {
                         print('printResult==true i.e. print successfull');
-                        shoppingCartBloc.clearSubscription();
+//                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context, cancelPaySelectUnobscuredDeliveryPhone);
                       }
                       else{
                         print('printResult!=true i.e. print UN successfull');
-                        shoppingCartBloc.clearSubscription();
+//                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context, cancelPaySelectUnobscuredDeliveryPhone);
                       }
                     }
@@ -9031,7 +9030,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // COMMENT FROM HERE TO END...
 
 
-                      /*
+
 
 
                       BluetoothDevice _x = new BluetoothDevice();
@@ -9048,24 +9047,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 //                      print("printResult: $printResult");
-                      docID= await shoppingCartBloc
+                      docID1= await shoppingCartBloc
                           .recitePrinted(cancelPaySelectUnobscuredDeliveryPhone,true);
 
-                      print('docID in dummy Print: $docID');
+                      print('docID in dummy Print: $docID1');
 //                      print('docID: $docID');
 
                       //END
 
-                       */
+
 
                       if(docID1!=''){
                         print('docID1!=\'\'    ----------');
-                        shoppingCartBloc.clearSubscription();
+//                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
                       }
                       else{
                         print('docID1 == \'\'   ----------');
-                        shoppingCartBloc.clearSubscription();
+//                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(context,cancelPaySelectUnobscuredDeliveryPhone);
                       }
 
@@ -10366,7 +10365,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 // PAYMENT RELATED WIDGETS ARE HERE  --- below:
 
 
-  Widget animatedObscuredPaymentSelectContainerTakeAway(
+  Widget animatedObscuredPaymentSelectContainerTakeAwayDinning(
       Order priceandselectedCardFunctionality) {
 //  Widget animatedObscuredTextInputContainer(){
 //    child:  AbsorbPointer(

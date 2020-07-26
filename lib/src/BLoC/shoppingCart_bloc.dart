@@ -901,7 +901,7 @@ class ShoppingCartBloc implements Bloc {
     _orderType =[];
     _paymentType =[];
 
-    _devicesBlueTooth = [];
+//    _devicesBlueTooth = [];
 
     _thisRestaurant= null;
 
@@ -912,7 +912,7 @@ class ShoppingCartBloc implements Bloc {
     _orderTypeController.sink.add(_orderType);
     _paymentTypeController.sink.add(_paymentType);
 
-    _devicesController.sink.add(_devicesBlueTooth);
+//    _devicesController.sink.add(_devicesBlueTooth);
 
     _restaurantController.sink.add(_thisRestaurant);
 
