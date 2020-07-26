@@ -830,42 +830,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget subTotalTotalDeliveryCost(double subtotal,
       {double deliveryCost: 2.50}) {
+
+    /*
     Path customPathTotalCost = Path()
       ..moveTo(200, 120)
       ..lineTo(0, 120);
+    */
 
     return Directionality(
 
       textDirection: TextDirection.ltr,
       child:
       Container(
-//        color:Colors.green,
-        height: 170,
+
+        height: 90,
 
 //        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
         width: 300,
-        /*
-        decoration: BoxDecoration(
-          border: Border.all(
 
-            color: Colors.black,
-            style: BorderStyle.solid,
-            width: 1.0,
-
-          ),
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(35.0),
-
-        ),
-        */
         child:
 
         Column(
+//          mainAxisAlignment: MainAxisAlignment.spaceAround,
+//          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
-
             //rounded rectangle border and text conted inside it begins here.
 
 
@@ -878,7 +868,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Widget>[
                   //  SizedBox(width: 5,),
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+//                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
                     child: Text(
                       'SUBTOTAL',
                       textAlign: TextAlign.center,
@@ -920,7 +910,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Widget>[
                   //  SizedBox(width: 5,),
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+//                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
                     child: Text(
                       'Delivery Cost',
                       textAlign: TextAlign.center,
@@ -987,7 +977,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Widget>[
                   //  SizedBox(width: 5,),
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+//                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
                     child: Text(
                       'TOTAL',
                       textAlign: TextAlign.center,
