@@ -475,10 +475,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
 
         ),
-//        height: 170,
+        height: 90,
 
-//        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
-//        width: 300,
+        margin: EdgeInsets.fromLTRB(3, 6, 0, 0),
+        width: 300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start, // previously it was little bit middle ... with center..
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -487,7 +487,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              padding: EdgeInsets.fromLTRB(6, 15, 0,0),
 //
 //              height: 152,
-//              width: 105,
+              width: 105,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -551,7 +551,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            color:Colors.yellowAccent,
 //              height: 160,
-//              width: 175,
+              width: 175,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
