@@ -10242,12 +10242,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Uint8List  orderInformationForReciteWidgetBytes3,
       Uint8List customerInformationOnlyBytes3,
       Uint8List totalCostDeliveryBytes3,
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
+      /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */) async {
 
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
     print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
-    print(
-        'paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
+//    print(
+//        'paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
 
 
     final ImageAliasAnotherSource
@@ -10352,9 +10352,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
                         Container
                           (
-                            width: 200,
-//                            height:80,
-                            child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
+
+                          toDo --july28
+
                         ),
 
                         Container(
@@ -10435,7 +10435,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Uint8List customerInformationOnlyBytes2,
       Uint8List restaurantNameImageBytes,
       Uint8List totalCostDeliveryBytes2,
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
+      /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */
+      ) async {
     print(' came here: printTicketDummy');
 
 //    final PosPrintResult res =
@@ -10451,7 +10452,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         orderInformationForReciteWidgetBytes2,
         customerInformationOnlyBytes2,
         totalCostDeliveryBytes2,
-        paidUnpaidDeliveryTypeWidgetBytes2
+        /*paidUnpaidDeliveryTypeWidgetBytes2 */
     );
   }
 
@@ -11708,7 +11709,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 customerInformationOnlyBytes,
                 restaurantNameBytesNotFuture,
                 totalCostDeliveryBytes,
-                paidUnpaidDeliveryTypeInBytes);
+                /*paidUnpaidDeliveryTypeInBytes */
+            );
           }).catchError((onError) {
             print(' error in getting restaurant name as image--44');
             print('false: means something wrong not printed');
