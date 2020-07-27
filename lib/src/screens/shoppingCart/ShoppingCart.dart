@@ -676,8 +676,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                  :
              'assets/icons8hand100.png',
                 color: Colors.black,
-                width: 30,
-                height:30,
+                width: 50,
+                height:50,
 
               ),
 
@@ -743,21 +743,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
               Image.asset(
                 'assets/icons8cyclingmountainbike100.png',
-                width: 30,
-                height:30,) :
+                color: Colors.black,
+                width: 50,
+                height:50,) :
               (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
               Image.asset(
                   'assets/icons8ringingphone100.png',
-                  width: 30,
-                  height:30) : (oneOrderForReceipt.orderBy
+                  color: Colors.black,
+                  width: 50,
+                  height:50) : (oneOrderForReceipt.orderBy
                   .toLowerCase() == 'takeaway')
                   ? Image.asset(
                 'assets/icons8openparcel100.png',
-                width: 30,
-                height:30,)
+                color: Colors.black,
+                width: 50,
+                height:50,
+              )
                   : Image.asset('assets/icons8restauranttable100.png',
-                width: 30,
-                height:30,),
+                color: Colors.black,
+                width: 50,
+                height:50,),
 
             ),
 
