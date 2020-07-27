@@ -10350,11 +10350,43 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           ),
                         ),
-                        Container
-                          (
+                        Row(
+                          children: <Widget>[
 
-                          toDo --july28
 
+                            Text(
+                              oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
+                              'paid' : 'unpaid',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+//                          color: Color(0xffF50303),
+                                fontSize: 20, fontFamily: 'Itim-Regular',),
+                            ),
+
+                            SizedBox(width: 50),
+
+                            Text(
+                              (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
+                                  ? 'Delivery'
+                                  :
+                              (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+                              'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                                  'takeaway') ? 'TakeAway' : 'Dinning Room',
+//                    oneOrderForReceipt.orderBy
+//                    'dinning room',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+//                        color: Color(0xffF50303),
+                                fontSize: 20, fontFamily: 'Itim-Regular',),
+                            ),
+
+                            
+
+                          ],
                         ),
 
                         Container(
