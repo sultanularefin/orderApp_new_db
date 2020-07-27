@@ -448,7 +448,70 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //  orderInformationAndCustomerInformationWidget
 
-  Widget orderInformationAndCustomerInformationWidget(
+  Widget orderInformationForReciteWidget(OneOrderFirebase oneOrderForReceipt){
+
+    print('at orderInformationForReciteWidget');
+    return  new Directionality(
+        textDirection: TextDirection.ltr,
+        child:
+       Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
+                  ? 'Delivery'
+                  :
+              (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+              'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                  'takeaway') ? 'TakeAway' : 'Dinning Room',
+//                    oneOrderForReceipt.orderBy
+//                    'dinning room',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+
+            // 1 ends here.
+
+
+            Text(
+              '${oneOrderForReceipt
+                  .formattedOrderPlacementDatesTimeOnly}',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+
+
+            // 2 ends here.
+            Text('${oneOrderForReceipt.orderProductionTime} min',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+
+            // 3 ends here.
+          ],
+
+      ),
+    );
+
+  }
+
+
+  Widget customerInformationOnlyWidget(
       OneOrderFirebase oneOrderForReceipt) {
     print(
         'at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt
@@ -461,106 +524,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return new Directionality(
       textDirection: TextDirection.ltr,
       child:
-      Container(
-
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black,
-            style: BorderStyle.solid,
-            width: 3.6,
-          ),
-//                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(35.0),
-//                    color: Colors.black,
-
-        ),
-        height: 120,
-        width: 300,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start, // previously it was little bit middle ... with center..
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-//              padding: EdgeInsets.fromLTRB(6, 15, 0,0),
-//
-//              height: 152,
-              padding:EdgeInsets.fromLTRB(9, 6, 0, 0),
-              width: 105,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-
-                  Text(
-                    (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
-                        ? 'Delivery'
-                        :
-                    (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-                    'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                        'takeaway') ? 'TakeAway' : 'Dinning Room',
-//                    oneOrderForReceipt.orderBy
-//                    'dinning room',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-//                        color: Color(0xffF50303),
-                      fontSize: 20, fontFamily: 'Itim-Regular',),
-                  ),
-
-                  // 1 ends here.
-
-
-                  Text(
-                    '${oneOrderForReceipt
-                        .formattedOrderPlacementDatesTimeOnly}',
-
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-//                        color: Color(0xffF50303),
-                      fontSize: 20, fontFamily: 'Itim-Regular',),
-                  ),
-
-
-                  // 2 ends here.
-                  Text('${oneOrderForReceipt.orderProductionTime} min',
-
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-//                        color: Color(0xffF50303),
-                      fontSize: 20, fontFamily: 'Itim-Regular',),
-                  ),
-
-                  // 3 ends here.
-                ],
-              ),
-            ),
-
-
-            /// toDo: multiline. maxlines
-            Container(
-              padding:EdgeInsets.fromLTRB(9, 6, 0, 0),
-
-//              padding: EdgeInsets.fromLTRB(0, 8, 0,0),
-//            color:Colors.yellow,
-
-//            color:Colors.yellowAccent,
-//              height: 160,
-              width: 175,
-              child: Column(
+                       /// toDo: multiline. maxlines
+             Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
 
                   Container(
-//                    height:49,
-//                    width: 160,
-//                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.address == null) ||
                           (customerForReciteGeneration.address.length == 0)) ?
@@ -571,24 +541,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       textAlign: TextAlign.left,
                       maxLines: 2,
                       style: TextStyle(
-//                      fontWeight: FontWeight.bold,
+
                         color: Colors.black,
-//                        color: Color(0xffF50303),
+
                         fontSize: 18, fontFamily: 'Itim-Regular',),
-//                      maxLines: 2,
-//                      textAlign: TextAlign.left,
+
                     ),
                   ),
 
-                  // 1 ends here.
-
-//                    .length>12?
-////              stringifiedFoodItemIngredients.substring(0,12)+'...':
-
                   Container(
-//                    height:49,
-//                    width: 160,
-//                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
                       ((customerForReciteGeneration.flatOrHouseNumber == null) ||
                           (customerForReciteGeneration.flatOrHouseNumber.length ==
@@ -600,18 +561,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       maxLines:2,
                       textAlign: TextAlign.left,
                       style: TextStyle(
-//                      fontWeight: FontWeight.bold,
+
                         color: Colors.black,
-//                        color: Color(0xffF50303),
+
                         fontSize: 18, fontFamily: 'Itim-Regular',),
 
                     ),
                   ),
 
                   Container(
-//                    height:50,
-//                    width: 160,
-//                    padding:EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
 
                       ((customerForReciteGeneration.phoneNumber == null) ||
@@ -623,9 +581,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       textAlign: TextAlign.left,
                       style: TextStyle(
-//                      fontWeight: FontWeight.bold,
+
                         color: Colors.black,
-//                        color: Color(0xffF50303),
+
                         fontSize: 18, fontFamily: 'Itim-Regular',),
 
                     ),
@@ -635,14 +593,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   // 3 ends here.
                 ],
               ),
-            )
-
-            //rounded rectangle border and text conted inside it ends here.
-
-          ],
-        ),
-      ),
     );
+
   }
 
 
@@ -675,14 +627,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
              'assets/icons8facebooklike100.png'
                  :
              'assets/icons8hand100.png',
-                color: Colors.black,
+//                color: Colors.black,
                 width: 50,
                 height:50,
 
               ),
 
 
+
             Container(
+              width: 200,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -696,28 +650,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               ),
 
-              width: 200,
-//              height: 50,
-//              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <
                     Widget>[
-                  //  SizedBox(width: 5,),
-                  Container(
-//                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-                    child: Text(
-                      oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
-                      'paid' : 'unpaid',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Text(
+                    oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
+                    'paid' : 'unpaid',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
 //                          color: Color(0xffF50303),
-                        fontSize: 17, fontFamily: 'Itim-Regular',),
-                    ),
+                      fontSize: 17, fontFamily: 'Itim-Regular',),
                   ),
+
                   Text(
                     (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
                         ? 'Delivery'
@@ -739,6 +689,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
 
             Container(
+              color: Colors.black,
+              width: 50,
+              height:50,
 
               child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
               Image.asset(
@@ -8551,15 +8504,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     fontWeight: FontWeight.bold,),
                   ),),
 
+
                 onPressed: () async {
+
+                  // DUMMY PRINT DELIVERY PHONE ......
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
-                  // Delivery Phone Recite Print.
                   print(
-                      'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: '
-                          '${cancelPaySelectUnobscuredDeliveryPhone
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+
+
+
+                  print(
+                      'debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
+
+                  print(
+                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone
                           .paymentTypeIndex}');
 
                   // let's not use this order returned use the one from the bloc:
@@ -8577,95 +8539,37 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i(
-                        'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
-                            .orderdocId}');
+                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
+                        .orderdocId}');
 
-                    List<PrinterBluetooth> blueToothDevicesState
-                    = shoppingCartBloc.getDevices;
+                    List<
+                        PrinterBluetooth> blueToothDevicesState = shoppingCartBloc
+                        .getDevices;
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
-
-//                      _showMyDialog2(
-//                          '___________ blueTooth device not found _____ delivery phone pay button');
-
-                      print(
-                          'at here... __________ blueTooth device not found _____ delivery phone pay button');
-
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUnobscuredDeliveryPhone);
-
-                    }
-
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
-
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
 
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                      }
-                      else {
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-//                        _showMyDialog2(
-//                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
 
 
-                        shoppingCartBloc.clearSubscription();
-                        print('going to food Gallery page  Restaurant Printer not found');
-                        return Navigator.pop(
-                            context, cancelPaySelectUnobscuredDeliveryPhone);
-                      }
-                    }
+                    _testPrintDummyDevices(x);
+
+                    shoppingCartBloc.clearSubscription();
+
+                    print('shopping Cart : shoppingCartBloc.clearSubscription() called... delivery Phone ');
+
+                    return Navigator.pop(
+                        context, cancelPaySelectUnobscuredDeliveryPhone);
+
                   }
 
                 },
@@ -10432,10 +10336,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Future<void> _showMyDialog(Uint8List restaurantNameImageByte2,
-      Uint8List orderInformationAndUserInformationTopInBytes,
+  Future<void> _showMyDialog(
+
+
+      Uint8List restaurantNameImageByte2,
+//      Uint8List orderInformationAndUserInformationTopInBytes,
+      Uint8List  orderInformationForReciteWidgetBytes3,
+      Uint8List customerInformationOnlyBytes3,
       Uint8List totalCostDeliveryBytes3,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
+
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
     print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
     print(
@@ -10443,8 +10353,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     final ImageAliasAnotherSource
-        .Image orderInformationAndUserInformationTopInBytesTest = ImageAliasAnotherSource.decodeImage(
-        orderInformationAndUserInformationTopInBytes);
+        .Image orderInformationForReciteWidgetBytes3InBytesTest = ImageAliasAnotherSource.decodeImage(
+        orderInformationForReciteWidgetBytes3);
+
+
+    final ImageAliasAnotherSource
+        .Image customerInformationOnlyBytes3InBytesTest = ImageAliasAnotherSource.decodeImage(
+        customerInformationOnlyBytes3);
 
 
     return showDialog<void>(
@@ -10464,8 +10379,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
 
 
-                Container
-                  (child: Image.memory(orderInformationAndUserInformationTopInBytes)
+                Row(
+                  children: <Widget>[
+                    Container
+                      (child: Image.memory(orderInformationForReciteWidgetBytes3)
+                    ),
+                    Container
+                      (child: Image.memory(customerInformationOnlyBytes3)
+                    ),
+                  ],
                 ),
 
                 /*
@@ -10506,10 +10428,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  void printTicketDummy2(/*PaperSize paper, */ Restaurant currentRestaurant,
+  /* invoker -->
+
+              printTicketDummy2(
+              /*paper, */
+                thisRestaurant,
+                oneOrderData,
+                imageRestaurant,
+                restaurantNameBytesNotFuture,
+                // orderInformationAndUserInformationTopInBytes,
+                Uint8List orderInformationForReciteWidgetBytes2,
+                Uint8List customerInformationOnlyBytes2,
+                totalCostDeliveryBytes,
+                paidUnpaidDeliveryTypeInBytes);
+          }).catchError((onError) {
+
+  * */
+  void printTicketDummy2(/*PaperSize paper, */
+      Restaurant currentRestaurant,
       OneOrderFirebase oneOrderdocument,
-      ImageAliasAnotherSource.Image imageResource, Uint8List orderInformationAndUserInformationTopInBytes,
-      Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2,
+      ImageAliasAnotherSource.Image imageResource,
+//      Uint8List orderInformationAndUserInformationTopInBytes,
+      Uint8List orderInformationForReciteWidgetBytes2,
+      Uint8List customerInformationOnlyBytes2,
+      Uint8List restaurantNameImageBytes,
+      Uint8List totalCostDeliveryBytes2,
       Uint8List paidUnpaidDeliveryTypeWidgetBytes2) async {
     print(' came here: printTicketDummy');
 
@@ -10519,8 +10462,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    showToast('res.msg  res.msg   res.msg');
 
 
-    _showMyDialog(restaurantNameImageBytes,orderInformationAndUserInformationTopInBytes, totalCostDeliveryBytes2,
-        paidUnpaidDeliveryTypeWidgetBytes2);
+    _showMyDialog(
+        restaurantNameImageBytes,
+//        orderInformationAndUserInformationTopInBytes,
+        orderInformationForReciteWidgetBytes2,
+        customerInformationOnlyBytes2,
+        totalCostDeliveryBytes2,
+        paidUnpaidDeliveryTypeWidgetBytes2
+    );
   }
 
 
@@ -10546,7 +10495,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant thisRestaurant3, // not required but just for printing...
       OneOrderFirebase oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
       /*ImageAliasAnotherSource.Image imageResource2, */
-      Uint8List orderInformationAndUserInformationTopInBytes3,
+      /* Uint8List orderInformationAndUserInformationTopInBytes3, */
+      Uint8List orderInformationForReciteWidgetBytes3,
+      Uint8List customerInformationOnlyBytes3,
       Uint8List restaurantNameBytesNotFuture3, // FOR restaurant Name in diffrent font as image only
       Uint8List totalCostDeliveryBytes3,
       Uint8List paidUnpaidDeliveryTypeInBytes3
@@ -10604,7 +10555,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //2...
     final ImageAliasAnotherSource
         .Image customerInformationDeliveryStatus = ImageAliasAnotherSource.decodeImage(
-        orderInformationAndUserInformationTopInBytes3);
+        orderInformationForReciteWidgetBytes3);
 
     ticket.image(customerInformationDeliveryStatus);
 
@@ -10686,7 +10637,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant thisRestaurant3,
       OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
-      Uint8List orderInformationAndUserInformationTopInBytes3,
+      /*Uint8List orderInformationAndUserInformationTopInBytes3,*/
+      Uint8List orderInformationForReciteWidgetBytes3,
+      Uint8List customerInformationOnlyBytes3,
+
       Uint8List restaurantNameBytesNotFuture3,
       Uint8List totalCostDeliveryBytes3,
       Uint8List paidUnpaidDeliveryTypeInBytes3
@@ -10866,7 +10820,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant thisRestaurant3,
       OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
-      Uint8List orderInformationAndUserInformationTopInBytes3,
+      /*Uint8List orderInformationAndUserInformationTopInBytes3, */
+      Uint8List orderInformationForReciteWidgetBytes3,
+      Uint8List customerInformationOnlyBytes3,
       Uint8List restaurantNameBytesNotFuture3,
 
       Uint8List totalCostDeliveryBytes3,
@@ -11044,7 +11000,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant thisRestaurant3,
       OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
-      Uint8List orderInformationAndUserInformationTopInBytes3,
+      /* Uint8List orderInformationAndUserInformationTopInBytes3, */
+      Uint8List orderInformationForReciteWidgetBytes3,
+      Uint8List customerInformationOnlyBytes3,
       Uint8List restaurantNameBytesNotFuture3,
       Uint8List totalCostDeliveryBytes3,
       Uint8List paidUnpaidDeliveryTypeInBytes3
@@ -11219,7 +11177,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PaperSize paper,
       Restaurant thisRestaurant2,
       OneOrderFirebase oneOrderData2,
-      Uint8List orderInformationAndUserInformationTopInBytes2,
+//      Uint8List orderInformationAndUserInformationTopInBytes2,
+       Uint8List orderInformationForReciteWidgetBytes2,
+       Uint8List customerInformationOnlyBytes2,
       Uint8List restaurantNameBytesNotFuture2,
       Uint8List totalCostDeliveryBytes2,
       Uint8List paidUnpaidDeliveryTypeInBytes2) async {
@@ -11233,20 +11193,50 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final PosPrintResult res = (oneOrderData2.orderBy.toLowerCase() ==
         'delivery') ?
-    await printerManager.printTicket(await demoReceiptOrderTypeDelivery(paper,
-        thisRestaurant2, oneOrderData2,orderInformationAndUserInformationTopInBytes2, restaurantNameBytesNotFuture2,
-        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2)) :
+    await printerManager.printTicket(await demoReceiptOrderTypeDelivery(
+        paper,
+        thisRestaurant2,
+        oneOrderData2,
+        orderInformationForReciteWidgetBytes2,
+        customerInformationOnlyBytes2,
+        /*orderInformationAndUserInformationTopInBytes2, */
+        restaurantNameBytesNotFuture2,
+        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2
+    )) :
     (oneOrderData2.orderBy.toLowerCase() == 'phone') ?
-    await printerManager.printTicket(await demoReceiptOrderTypePhone(paper,
-        thisRestaurant2, oneOrderData2,orderInformationAndUserInformationTopInBytes2, restaurantNameBytesNotFuture2,
-        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2)) :
+    await printerManager.printTicket(await demoReceiptOrderTypePhone(
+        paper,
+        thisRestaurant2,
+        oneOrderData2,
+        /*orderInformationAndUserInformationTopInBytes2, */
+        orderInformationForReciteWidgetBytes2,
+        customerInformationOnlyBytes2,
+        restaurantNameBytesNotFuture2,
+        totalCostDeliveryBytes2,
+        paidUnpaidDeliveryTypeInBytes2)) :
     (oneOrderData2.orderBy.toLowerCase() == 'takeaway') ?
-    await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(paper,
-        thisRestaurant2, oneOrderData2,orderInformationAndUserInformationTopInBytes2, restaurantNameBytesNotFuture2,
-        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2)) :
-    await printerManager.printTicket(await demoReceiptOrderTypeDinning(paper,
-        thisRestaurant2, oneOrderData2,orderInformationAndUserInformationTopInBytes2, restaurantNameBytesNotFuture2,
-        totalCostDeliveryBytes2, paidUnpaidDeliveryTypeInBytes2));
+    await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(
+        paper,
+        thisRestaurant2,
+        oneOrderData2,
+        /*orderInformationAndUserInformationTopInBytes2, */
+        orderInformationForReciteWidgetBytes2,
+        customerInformationOnlyBytes2,
+        restaurantNameBytesNotFuture2,
+        totalCostDeliveryBytes2,
+        paidUnpaidDeliveryTypeInBytes2
+    )) :
+    await printerManager.printTicket(
+        await demoReceiptOrderTypeDinning(
+        paper,
+        thisRestaurant2,
+            oneOrderData2,
+            /*orderInformationAndUserInformationTopInBytes2,*/
+            orderInformationForReciteWidgetBytes2,
+            customerInformationOnlyBytes2,
+            restaurantNameBytesNotFuture2,
+        totalCostDeliveryBytes2,
+            paidUnpaidDeliveryTypeInBytes2));
 
 
     logger.i('----- res : $res');
@@ -11362,10 +11352,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print("called when future completes");
     }
     ).then((oneOrderData) {
-      // TODO: any oneOrderData data validation needs to be done in  corresponding block page.
-//      if ((oneOrderData.orderType == null) ||((oneOrderData.totalPrice ==null))) {
-//        return false;
-//      }
+
 
 
       print('reached here: $oneOrderData');
@@ -11397,89 +11384,101 @@ class _ShoppingCartState extends State<ShoppingCart> {
             'paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeInBytes');
 
 
-//        DDD
-//        Widget orderInformationAndCustomerInformationWidget2 = paidUnpaidDeliveryType(
-//            oneOrderData);
 
-        Widget orderInformationAndCustomerInformationWidget2 = orderInformationAndCustomerInformationWidget(
+//        Widget orderInformationAndCustomerInformationWidget2 = orderInformationAndCustomerInformationWidget(
+
+        Widget orderInformationForReciteOnly = orderInformationForReciteWidget(
             oneOrderData);
 
-//        Uint8List> paidUnpaidDeliveryTypeFutureWidget1
+        Widget customerInformationOnly = customerInformationOnlyWidget(
+            oneOrderData);
+
         final Future<
-            Uint8List> orderInformationAndUserInformationTop = createImageFromWidget(
-            orderInformationAndCustomerInformationWidget2);
+            Uint8List> orderInformationForReciteWidgetFutureBytes = createImageFromWidget(
+            orderInformationForReciteOnly);
+
+
+        final Future<Uint8List> customerInformationOnlyFutureBytes = createImageFromWidget(
+            customerInformationOnly);
 
         Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
-//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
 
-
-//      ImageAliasAnotherSource.Image imageRestaurant;
 
 
         /* await */
-        orderInformationAndUserInformationTop.whenComplete(() {
-          print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
+        orderInformationForReciteWidgetFutureBytes.whenComplete(() {
+
         }
-        ).then((orderInformationAndUserInformationTopInBytes) {
-//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        ).then((orderInformationForReciteWidgetBytes) {
           print(
-              'calling ticket.image(orderInformationAndUserInformationTopInBytes);');
-//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-          print(
-              'orderInformationAndUserInformationTopInBytes: $orderInformationAndUserInformationTopInBytes');
+              'orderInformationForReciteWidgetBytes: $orderInformationForReciteWidgetBytes');
 
 
-//        oneOrderData  ssss ssss
-//      ticket.image(imageRestaurant);
+          customerInformationOnlyFutureBytes.whenComplete(() {
 
-          Future<bool> isPrint =
-          printTicket2(
-              paper,
-              thisRestaurant,
-              oneOrderData /*,imageRestaurant */,
-              orderInformationAndUserInformationTopInBytes,
-              restaurantNameBytesNotFuture,
-              totalCostDeliveryBytes,
-              paidUnpaidDeliveryTypeInBytes);
+          }
+          ).then((customerInformationOnlyBytes) {
+            print(
+                'orderInformationForReciteWidgetBytes: $customerInformationOnlyBytes');
+
+
+            Future<bool> isPrint =
+            printTicket2(
+                paper,
+                thisRestaurant,
+                oneOrderData /*,imageRestaurant */,
+//              orderInformationAndUserInformationTopInBytes,
+                orderInformationForReciteWidgetBytes,
+                customerInformationOnlyBytes,
+                restaurantNameBytesNotFuture,
+                totalCostDeliveryBytes,
+                paidUnpaidDeliveryTypeInBytes);
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
 
-          isPrint.whenComplete(() {
-            print("called when future completes");
+            isPrint.whenComplete(() {
+              print("called when future completes");
 //          return true;
-          }
-          ).then((printResult) async {
-            if(printResult==true){
-              print("printResult: $printResult");
-              Future<String> docID= shoppingCartBloc
-                  .recitePrinted(oneOrderForReceipt.orderdocId,'Done');
+            }
+            ).then((printResult) async {
+              if (printResult == true) {
+                print("printResult: $printResult");
+                Future<String> docID = shoppingCartBloc
+                    .recitePrinted(oneOrderForReceipt.orderdocId, 'Done');
 
 
 //              --
 
 
-              docID.whenComplete(() => print('printing completed..')).then((value){
-                print('docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
-                return true;
-              }).catchError((onError){
-                return false;
-
-
-              });
+                docID.whenComplete(() => print('printing completed..')).then((
+                    value) {
+                  print(
+                      'docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
+                  return true;
+                }).catchError((onError) {
+                  return false;
+                });
 //            --
+                return false;
+              }
+              else {
+                return false;
+              }
+            }).catchError((onError) {
+              print('printing not successful: $onError');
               return false;
-            }
-            else{
-              return false;
-            }
-
-          }).catchError((onError) {
-            print('printing not successful: $onError');
+            });
+          })
+              .catchError((onError) {
+            print(
+                ' error handler for gettingorderInformationForReciteWidgetBytes');
+            print('false: means something wrong not printed');
+            //means something wrong not printed
             return false;
           });
         }).catchError((onError) {
-          print(' error handler for getting paidUnpaidDeliveryTypeFutureWidget1');
+          print(' error handler for getting orderInformationForReciteWidgetBytes');
           print('false: means something wrong not printed');
           //means something wrong not printed
           return false;
@@ -11535,9 +11534,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
   void _testPrintDummyDevices(PrinterBluetooth printer) async {
     // NOT REQUIRED SINCE DUMMY...
 
-
-
-
     print("_testPrintDummyDevices");
 
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -11548,156 +11544,134 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
-
 //    Future<OneOrderFirebase> testFirebaseOrderFetch =
 //    shoppingCartBloc.fetchOrderDataFromFirebase(
 //        oneOrderForReceipt.orderdocId.trim());
 
-
     TODO: // something wrong maybe here. docID needs to be processed...
 
-    Future<String> docID = shoppingCartBloc
-        .recitePrinted(oneOrderForReceipt.orderdocId,'dummyPrint');
+    Future<String> docID = shoppingCartBloc.recitePrinted(
+        oneOrderForReceipt.orderdocId, 'dummyPrint');
 
 //                    recitePrinted
 
     print('docID1 in dummy Print: $docID');
 
-    Future<OneOrderFirebase> testFirebaseOrderFetch =
-    shoppingCartBloc.fetchOrderDataFromFirebase(
-        oneOrderForReceipt.orderdocId.trim());
-
+    Future<OneOrderFirebase> testFirebaseOrderFetch = shoppingCartBloc
+        .fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
 
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
-    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(
-        restaurantName2);
+    final Future<Uint8List> restaurantNameBytesFuture =
+    createImageFromWidget(restaurantName2);
     Uint8List restaurantNameBytesNotFuture;
 
     print('restaurantNameBytes: $restaurantNameBytesNotFuture');
 
-
     ImageAliasAnotherSource.Image imageRestaurant;
-
 
     /* await */
     restaurantNameBytesFuture.whenComplete(() {
       print("restaurantNameBytes.whenComplete called when future completes");
-    }
-    ).then((oneImageInBytes) {
-      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource
-          .decodeImage(oneImageInBytes);
+    }).then((oneImageInBytes) {
+      ImageAliasAnotherSource.Image imageRestaurant =
+      ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       print('calling ticket.image(imageRestaurant); ');
       restaurantNameBytesNotFuture = oneImageInBytes;
 //      ticket.image(imageRestaurant);
-
     }).catchError((onError) {
       print(' error in getting restaurant name as image');
     });
 
     // Print image
-    Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(
-        oneOrderForReceipt.totalPrice);
+    Widget totalDeliveryWidget2 =
+    subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
     Uint8List totalCostDeliveryBytes;
 
-    final Future<Uint8List> totalDeliveryWidgetBytes = createImageFromWidget(
-        totalDeliveryWidget2);
+    final Future<Uint8List> totalDeliveryWidgetBytes =
+    createImageFromWidget(totalDeliveryWidget2);
 
     /* await */
     totalDeliveryWidgetBytes.whenComplete(() {
       print("called when future completes");
-    }
-    ).then((oneImageInBytes) {
+    }).then((oneImageInBytes) {
 //      final ImageAliasAnotherSource.Image image = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       totalCostDeliveryBytes = oneImageInBytes;
       print('before printing total cose for recite of delivery type order');
 //      ticket.image(image);
-
     }).catchError((onError) {
       print(' error in getting restaurant name as image');
     });
-
 
 //                            _handleSignIn();
 
     /* await */
     testFirebaseOrderFetch.whenComplete(() {
       print("called when future completes");
-    }
-    ).then((oneOrderData) {
+    }).then((oneOrderData) {
       Widget paidUnpaidDeliveryType2 = paidUnpaidDeliveryType(oneOrderData);
 
-      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 = createImageFromWidget(
-          paidUnpaidDeliveryType2);
+      final Future<Uint8List> paidUnpaidDeliveryTypeFutureWidget1 =
+      createImageFromWidget(paidUnpaidDeliveryType2);
 
       Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
-//      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
 
-
-//      ImageAliasAnotherSource.Image imageRestaurant;
-
-
-      /* await */
       paidUnpaidDeliveryTypeFutureWidget1.whenComplete(() {
-        print(
-            "restaurantNameBytes.whenComplete called when future completes");
-      }
-      ).then((paidUnpaidDeliveryTypeInBytes) {
-//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-        print(
-            'paidUnpaidDeliveryTypeInBytes: $paidUnpaidDeliveryTypeInBytes ');
-//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
-//        print('paidUnpaidDeliveryTypeWidgetBytes: $paidUnpaidDeliveryTypeWidgetBytes');
-//      ticket.image(imageRestaurant);
+        print("restaurantNameBytes.whenComplete called when future completes");
+      }).then((paidUnpaidDeliveryTypeInBytes) {
 
+        Widget orderInformationForReciteOnly =
+        orderInformationForReciteWidget(oneOrderData);
 
+        Widget customerInformationOnly =
+        customerInformationOnlyWidget(oneOrderData);
 
+        final Future<Uint8List> orderInformationForReciteWidgetFutureBytes =
+        createImageFromWidget(orderInformationForReciteOnly);
 
-
-//        DDD
-//        Widget orderInformationAndCustomerInformationWidget2 = paidUnpaidDeliveryType(
-//            oneOrderData);
-
-        Widget orderInformationAndCustomerInformationWidget2 = orderInformationAndCustomerInformationWidget(
-            oneOrderData);
-
-//        Uint8List> paidUnpaidDeliveryTypeFutureWidget1
-        final Future<Uint8List> orderInformationAndUserInformationTop = createImageFromWidget(
-            orderInformationAndCustomerInformationWidget2);
+        final Future<Uint8List> customerInformationOnlyFutureBytes =
+        createImageFromWidget(customerInformationOnly);
 
         Uint8List paidUnpaidDeliveryTypeWidgetBytes;
 
-
-
-
-
-
-
-
         /* await */
-        orderInformationAndUserInformationTop.whenComplete(() {
-          print("paidUnpaidDeliveryTypeFutureWidget1.whenComplete");
-        }
-        ).then((orderInformationAndUserInformationTopInBytes) {
-//        ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-          print('calling ticket.image(orderInformationAndUserInformationTopInBytes);');
-//        paidUnpaidDeliveryTypeWidgetBytes = paidUnpaidDeliveryTypeInBytes;
+        orderInformationForReciteWidgetFutureBytes
+            .whenComplete(() {})
+            .then((orderInformationForReciteWidgetBytes) {
           print(
-              'orderInformationAndUserInformationTopInBytes: $orderInformationAndUserInformationTopInBytes');
+              'orderInformationForReciteWidgetBytes: $orderInformationForReciteWidgetBytes');
+
+          customerInformationOnlyFutureBytes
+              .whenComplete(() {})
+              .then((customerInformationOnlyBytes) {
+            print(
+                'orderInformationForReciteWidgetBytes: $customerInformationOnlyBytes');
 
 
-//        oneOrderData  ssss ssss
-//      ticket.image(imageRestaurant);
 
-
-
-
-
-
-          printTicketDummy2(/*paper, */
-              thisRestaurant, oneOrderData, imageRestaurant,
-              restaurantNameBytesNotFuture,orderInformationAndUserInformationTopInBytes,
-              totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
+            printTicketDummy2(
+              /*paper, */
+                thisRestaurant,
+                oneOrderData,
+                imageRestaurant,
+                // orderInformationAndUserInformationTopInBytes,
+                orderInformationForReciteWidgetBytes,
+                customerInformationOnlyBytes,
+                restaurantNameBytesNotFuture,
+                totalCostDeliveryBytes,
+                paidUnpaidDeliveryTypeInBytes);
+          }).catchError((onError) {
+            print(' error in getting restaurant name as image');
+            print('false: means something wrong not printed');
+            //means something wrong not printed
+            return false;
+          });
+          }).catchError((onError) {
+          print(' error in getting restaurant name as image');
+          print('false: means something wrong not printed');
+          //means something wrong not printed
+          return false;
+          });
         }).catchError((onError) {
           print(' error in getting restaurant name as image');
           print('false: means something wrong not printed');
@@ -11705,27 +11679,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
           return false;
         });
       }).catchError((onError) {
-        print(' error in getting restaurant name as image');
-        print('false: means something wrong not printed');
-        //means something wrong not printed
-        return false;
+        print('Order data fetch Error $onError ***');
+        _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+          new SnackBar(
+              duration: new Duration(seconds: 6),
+              content: Container(
+                child: new Row(
+                  children: <Widget>[
+                    new CircularProgressIndicator(),
+                    new Text("Error: ${onError.message.substring(0, 40)}",
+                        style: TextStyle(
+                          /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                            color: Colors.white)),
+                  ],
+                ),
+              )),
+        );
       });
-    }).catchError((onError) {
-      print('Order data fetch Error $onError ***');
-      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 6), content: Container(
-          child:
-          new Row(
-            children: <Widget>[
-              new CircularProgressIndicator(),
-              new Text("Error: ${onError.message.substring(0, 40)}", style:
-              TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                  color: Colors.white)),
-            ],
-          ),
-        )),);
-    });
-  }
+    }
 
 
 
@@ -11734,7 +11705,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  Future<void> _showMyDialog3(Uint8List x) async {
+
+        Future<void> _showMyDialog3(Uint8List x) async {
     print('x: $x');
 //    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
     return showDialog<void>(
