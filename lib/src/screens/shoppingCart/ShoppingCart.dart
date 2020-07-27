@@ -454,57 +454,60 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return  new Directionality(
       textDirection: TextDirection.ltr,
       child:
-      Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
-                ? 'Delivery'
-                :
-            (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-            'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                'takeaway') ? 'TakeAway' : 'DinningRoom',
+      Container(
+        height:100,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
+                  ? 'Delivery'
+                  :
+              (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+              'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                  'takeaway') ? 'TakeAway' : 'DinningRoom',
 //                    oneOrderForReceipt.orderBy
 //                    'dinningRoom',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
 //                        color: Color(0xffF50303),
-              fontSize: 20, fontFamily: 'Itim-Regular',),
-          ),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
 
-          // 1 ends here.
+            // 1 ends here.
 
 
-          Text(
-            '${oneOrderForReceipt
-                .formattedOrderPlacementDatesTimeOnly}',
+            Text(
+              '${oneOrderForReceipt
+                  .formattedOrderPlacementDatesTimeOnly}',
 
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
 //                        color: Color(0xffF50303),
-              fontSize: 20, fontFamily: 'Itim-Regular',),
-          ),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
 
 
-          // 2 ends here.
-          Text('${oneOrderForReceipt.orderProductionTime} min',
+            // 2 ends here.
+            Text('${oneOrderForReceipt.orderProductionTime} min',
 
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
 //                        color: Color(0xffF50303),
-              fontSize: 20, fontFamily: 'Itim-Regular',),
-          ),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
 
-          // 3 ends here.
-        ],
+            // 3 ends here.
+          ],
 
+        ),
       ),
     );
 
@@ -661,6 +664,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       textDirection: TextDirection.ltr,
       child:
       Container(
+
 
         height: 90,
 
@@ -8155,6 +8159,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Text('Pay', style: TextStyle(color: Colors.green,
                     fontSize: 30, fontWeight: FontWeight.bold,),
                   ),),
+
+
+
 
 
                 onPressed: () async {
