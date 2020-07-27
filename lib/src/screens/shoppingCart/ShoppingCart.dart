@@ -10804,8 +10804,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 5,),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
     ]);
 
 
@@ -11054,8 +11053,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 5,),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
     ]);
 
 
@@ -11307,8 +11305,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 5,),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
     ]);
 
 
@@ -11545,8 +11542,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 5,),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
     ]);
 
 
