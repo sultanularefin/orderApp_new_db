@@ -672,12 +672,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                 :
 //             'assets/icons8hand100.png',
 
-             'assets/Path2008.png'
+             'assets/icons8facebooklike100.png'
                  :
-             'assets/Path2008.png',
+             'assets/icons8hand100.png',
                 color: Colors.black,
-                width: 45,
-                height:45,
+                width: 30,
+                height:30,
 
               ),
 
