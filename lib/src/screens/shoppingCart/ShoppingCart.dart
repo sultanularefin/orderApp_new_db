@@ -8157,15 +8157,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),),
 
 
-
                 onPressed: () async {
 
-                  // TAkEAWAY AND DINNING  Recite Print. ....
+                  // TAkEAWAY AND DINNING DUMMY PRINT ....
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
+
+
                   print(
                       'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning
                           .paymentTypeIndex}');
+
+
+                  // PRINTING CODES WILL BE PUTTED HERE.
+
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
+
                   Order tempOrderWithdocId = await shoppingCartBloc
                       .paymentButtonPressed(cancelPaySelectUNObscuredTakeAwayDinning);
 
@@ -8183,7 +8191,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
+                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
                         .orderdocId}');
 
                     List<
@@ -8193,84 +8201,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
 
-//                      _showMyDialog2(
-//                          '___________ blueTooth device not found _____ TakeAway || Dinning pay button');
-
-                      print(
-                          'at here... __________ blueTooth device not found _____ TakeAway || Dinning pay button');
-
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUNObscuredTakeAwayDinning);
-
-                    }
-
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
-
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
-
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUNObscuredTakeAwayDinning);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUNObscuredTakeAwayDinning);
-                        }
-                      }
-                      else {
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-                        _showMyDialog2(
-                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
+
+                    _testPrintDummyDevices(x);
+
+                    shoppingCartBloc.clearSubscription();
 
 
-                        shoppingCartBloc.clearSubscription();
-                        print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
-                        return Navigator.pop(
-                            context, cancelPaySelectUNObscuredTakeAwayDinning);
-                      }
-                    }
+                    print('Unboscured takeAway || '
+                        'DinningRoom Dummy print--- returning to FoodGallery Page');
+                    return Navigator.pop(
+                        context, cancelPaySelectUNObscuredTakeAwayDinning);
+
+
                   }
 
                 },
@@ -10732,7 +10683,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageRestaurant);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //2...
@@ -10742,7 +10693,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(orderInformationForReciteWidgetTakeAway3);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //3...
@@ -10765,7 +10716,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
-    ticket.feed(2);
+//    ticket.feed(2);
 
     //4...
 
@@ -10776,6 +10727,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageTotalCostDelivery);
 
     ticket.feed(2);
+    // found not required..
 
     //5... PAID OR UNPAID...
 
@@ -10792,18 +10744,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.row([
 
 
+      PosColumn(text: '',
+        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
       'paid' : 'unpaid'}',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
       PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
           ? 'Delivery'
           :
       (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 5,),
+        width: 4,),
+      PosColumn(text: '',
+        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
 
@@ -10824,7 +10779,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.hr();
     // needed. as per design.
 
-    ticket.feed(2);
+    ticket.feed(1);
 
 
     ticket.cut();
@@ -10971,7 +10926,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageRestaurant);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //2.1 ...
@@ -10981,7 +10936,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(orderInformationForReciteWidgetDeliver3);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //2.2 ...
@@ -10991,7 +10946,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(customerInformationOnlyBytes3Delivery3);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //3...
@@ -11014,7 +10969,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
-    ticket.feed(2);
+//    ticket.feed(2);
 
     //4...
 
@@ -11024,7 +10979,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageTotalCostDelivery);
 
-    ticket.feed(2);
+//    ticket.feed(2);
+    // found not required..
 
     //5... PAID OR UNPAID...
 
@@ -11041,18 +10997,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.row([
 
 
+      PosColumn(text: '',
+        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
       'paid' : 'unpaid'}',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
       PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
           ? 'Delivery'
           :
       (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 5,),
+        width: 4,),
+      PosColumn(text: '',
+        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
 
@@ -11073,7 +11032,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.hr();
     // needed. as per design.
 
-    ticket.feed(2);
+    ticket.feed(1);
 
 
     ticket.cut();
@@ -11223,7 +11182,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageRestaurant);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //2.1 ...
@@ -11233,7 +11192,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(orderInformationForReciteWidgetPhone3);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //2.2 ...
@@ -11243,7 +11202,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(customerInformationOnlyBytes3Phone3);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //3...
@@ -11266,7 +11225,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
-    ticket.feed(2);
+//    ticket.feed(2);
 
     //4...
 
@@ -11276,7 +11235,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageTotalCostDelivery);
 
-    ticket.feed(2);
+//    ticket.feed(2);
+    // found not required..
+
+//    ticket.feed(2);
 
     //5... PAID OR UNPAID...
 
@@ -11293,18 +11255,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.row([
 
 
+      PosColumn(text: '',
+        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
       'paid' : 'unpaid'}',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
       PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
           ? 'Delivery'
           :
       (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 5,),
+        width: 4,),
+      PosColumn(text: '',
+        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
 
@@ -11325,7 +11290,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.hr();
     // needed. as per design.
 
-    ticket.feed(2);
+    ticket.feed(1);
 
 
     ticket.cut();
@@ -11480,7 +11445,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(orderInformationForReciteWidgetDinningRoom3);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //3...
@@ -11503,7 +11468,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
-    ticket.feed(2);
+//    ticket.feed(2);
 
     //4...
 
@@ -11513,7 +11478,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageTotalCostDelivery);
 
-    ticket.feed(2);
+//    ticket.feed(2);
+    // found not required..
+
+//    ticket.feed(2);
 
     //5... PAID OR UNPAID...
 
@@ -11530,18 +11498,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.row([
 
 
+      PosColumn(text: '',
+        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
       'paid' : 'unpaid'}',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
       PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
           ? 'Delivery'
           :
       (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 5,),
+        width: 4,),
+      PosColumn(text: '',
+        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
 
@@ -11562,7 +11533,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.hr();
     // needed. as per design.
 
-    ticket.feed(2);
+    ticket.feed(1);
 
 
     ticket.cut();
