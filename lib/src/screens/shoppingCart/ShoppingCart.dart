@@ -10287,24 +10287,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
           title: Text('you are using dummy bluetooth devices.'),
           content: SingleChildScrollView(
             child: ListBody(
+//              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                     'please use real blueTooth devices and also change functions in '
                         'shopping cart page.'),
                 Container
-                  (child: Image.memory(restaurantNameImageByte2)
+                  (
+                    color:Colors.green,
+                    width: 500,
+                    height:40,
+                    child: Image.memory(restaurantNameImageByte2)
                 ),
 
 
-                Row(
-                  children: <Widget>[
-                    Container
-                      (child: Image.memory(orderInformationForReciteWidgetBytes3)
+                Center(
+                  child: Container(
+
+                    color:Colors.red,
+                    //sss
+                    width: 500,
+                    height:200,
+                    child: Row(
+
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container
+                          (child: Image.memory(orderInformationForReciteWidgetBytes3)
+                        ),
+                        Container
+                          (child: Image.memory(customerInformationOnlyBytes3)
+                        ),
+                      ],
                     ),
-                    Container
-                      (child: Image.memory(customerInformationOnlyBytes3)
-                    ),
-                  ],
+                  ),
                 ),
 
 
@@ -10312,29 +10329,39 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                 Container
-                  (child: Image.memory(totalCostDeliveryBytes3)
+                  (
+                    child: Image.memory(totalCostDeliveryBytes3)
                 ),
 
                 Row(
                   children: <Widget>[
-                    Image.asset(
-                      oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
-                      'assets/icons8facebooklike100.png'
-                          :
-                      'assets/icons8hand100.png',
+                    Container(
+                      color:Colors.red,
+                      //sss
+                      width: 70,
+                      height:70,
+                      child: Image.asset(
+                        oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
+                        'assets/icons8facebooklike100.png'
+                            :
+                        'assets/icons8hand100.png',
 //                color: Colors.black,
-                      width: 50,
-                      height:50,
+                        width: 50,
+                        height:50,
 
+                      ),
                     ),
                     Container
-                      (child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
+                      (
+                        width: 200,
+                        height:50,
+                        child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
                     ),
 
                     Container(
                       color: Colors.black,
-                      width: 50,
-                      height:50,
+                      width: 70,
+                      height:70,
 
                       child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
                       Image.asset(
