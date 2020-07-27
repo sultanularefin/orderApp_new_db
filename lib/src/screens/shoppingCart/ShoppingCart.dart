@@ -10803,7 +10803,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       PosColumn(text: '',
-        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
       'paid' : 'unpaid'}',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
@@ -10816,7 +10816,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 4,),
       PosColumn(text: '',
-        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
 
@@ -11056,7 +11056,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       PosColumn(text: '',
-        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
       'paid' : 'unpaid'}',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
@@ -11069,7 +11069,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 4,),
       PosColumn(text: '',
-        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
 
@@ -11314,7 +11314,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       PosColumn(text: '',
-        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
       'paid' : 'unpaid'}',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
@@ -11327,7 +11327,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 4,),
       PosColumn(text: '',
-        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
 
@@ -11557,7 +11557,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       PosColumn(text: '',
-        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
       'paid' : 'unpaid'}',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
@@ -11570,7 +11570,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 4,),
       PosColumn(text: '',
-        width: 1, /*, styles: PosStyles(align: PosAlign.center) */),
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
 
