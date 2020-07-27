@@ -528,17 +528,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
         oneOrderForReceipt.orderBy.toLowerCase() == 'DinningRoom'.toLowerCase()) {
       return new Directionality(
           textDirection: TextDirection.ltr,
-          child: Text('phone || address empty...',
+          child: Container(
+            height:50,
+            child: Text('phone || address empty...',
 
 
-            textAlign: TextAlign.left,
-            maxLines: 2,
-            style: TextStyle(
+              textAlign: TextAlign.left,
+              maxLines: 2,
+              style: TextStyle(
 
-              color: Colors.black,
+                color: Colors.black,
 
-              fontSize: 18, fontFamily: 'Itim-Regular',),
+                fontSize: 18, fontFamily: 'Itim-Regular',),
 
+            ),
           )
       );
     }
@@ -553,76 +556,84 @@ class _ShoppingCartState extends State<ShoppingCart> {
         child:
 
         /// toDo: multiline. maxlines
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+        Container(
+          height:160,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
 
-            Container(
-              child: Text(
-                ((customerForReciteGeneration.address == null) ||
-                    (customerForReciteGeneration.address.length == 0)) ?
-                '' : customerForReciteGeneration.address.length > 39 ?
-                customerForReciteGeneration.address.substring(0, 35) + '...' :
-                customerForReciteGeneration.address,
+              Container(
+                height:50,
+                child: Text(
+                  ((customerForReciteGeneration.address == null) ||
+                      (customerForReciteGeneration.address.length == 0)) ?
+                  '' : customerForReciteGeneration.address.length > 39 ?
+                  customerForReciteGeneration.address.substring(0, 35) + '...' :
+                  customerForReciteGeneration.address,
 
-                textAlign: TextAlign.left,
-                maxLines: 2,
-                style: TextStyle(
+                  textAlign: TextAlign.left,
+                  maxLines: 2,
+                  style: TextStyle(
 
-                  color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
 
-                  fontSize: 18, fontFamily: 'Itim-Regular',),
+                    fontSize: 18, fontFamily: 'Itim-Regular',),
 
+                ),
               ),
-            ),
 
-            Container(
-              child: Text(
-                ((customerForReciteGeneration.flatOrHouseNumber == null) ||
-                    (customerForReciteGeneration.flatOrHouseNumber.length ==
-                        0)) ?
-                '' : customerForReciteGeneration.flatOrHouseNumber.length > 39 ?
-                customerForReciteGeneration.flatOrHouseNumber.substring(0, 35) +
-                    '...' :
-                customerForReciteGeneration.flatOrHouseNumber,
+              Container(
+                height:50,
+                child: Text(
+                  ((customerForReciteGeneration.flatOrHouseNumber == null) ||
+                      (customerForReciteGeneration.flatOrHouseNumber.length ==
+                          0)) ?
+                  '' : customerForReciteGeneration.flatOrHouseNumber.length > 39 ?
+                  customerForReciteGeneration.flatOrHouseNumber.substring(0, 35) +
+                      '...' :
+                  customerForReciteGeneration.flatOrHouseNumber,
 
-                maxLines: 2,
-                textAlign: TextAlign.left,
-                style: TextStyle(
+                  maxLines: 2,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
 
-                  color: Colors.black,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
 
-                  fontSize: 18, fontFamily: 'Itim-Regular',),
+                    fontSize: 18, fontFamily: 'Itim-Regular',),
 
+                ),
               ),
-            ),
 
-            Container(
-              child: Text(
+              Container(
+                height:50,
+                child: Text(
 
-                ((customerForReciteGeneration.phoneNumber == null) ||
-                    (customerForReciteGeneration.phoneNumber.length == 0)) ?
-                '' : customerForReciteGeneration.phoneNumber.length > 39
-                    ?
-                customerForReciteGeneration.phoneNumber.substring(0, 35) + '...'
-                    :
-                customerForReciteGeneration.phoneNumber,
-                maxLines: 2,
+                  ((customerForReciteGeneration.phoneNumber == null) ||
+                      (customerForReciteGeneration.phoneNumber.length == 0)) ?
+                  '' : customerForReciteGeneration.phoneNumber.length > 39
+                      ?
+                  customerForReciteGeneration.phoneNumber.substring(0, 35) + '...'
+                      :
+                  customerForReciteGeneration.phoneNumber,
+                  maxLines: 2,
 
-                textAlign: TextAlign.left,
-                style: TextStyle(
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
 
-                  color: Colors.black,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
 
-                  fontSize: 18, fontFamily: 'Itim-Regular',),
+                    fontSize: 18, fontFamily: 'Itim-Regular',),
 
+                ),
               ),
-            ),
 
-
-            // 3 ends here.
-          ],
+              // 3 ends here.
+            ],
+          ),
         ),
       );
     }
@@ -653,37 +664,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget subTotalTotalDeliveryCost(double subtotal,
       {double deliveryCost: 2.50}) {
 
-    /*
-    Path customPathTotalCost = Path()
-      ..moveTo(200, 120)
-      ..lineTo(0, 120);
-    */
 
     return Directionality(
 
       textDirection: TextDirection.ltr,
       child:
       Container(
-
-
-        height: 90,
-
-//        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
+        height: 130,
         width: 300,
 
         child:
 
         Column(
-//          mainAxisAlignment: MainAxisAlignment.spaceAround,
-//          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            //rounded rectangle border and text conted inside it begins here.
-
-
             Container(
-//                    height: 50,
+              height: 40,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -699,7 +696,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                          color: Color(0xffF50303),
-                        fontSize: 14, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',),
                     ),
                   ),
 
@@ -714,7 +711,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                          fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 14, fontFamily: 'Itim-Regular',),
+                      fontSize: 18, fontFamily: 'Itim-Regular',),
                   ),
                 ],
               ),
@@ -724,7 +721,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-//                    height: 50,
+                    height: 40,
 
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -741,7 +738,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                          color: Color(0xffF50303),
-                        fontSize: 14, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',),
                     ),
                   ),
                   Text(deliveryCost.toStringAsFixed(2) + '\u20AC',
@@ -750,49 +747,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 14, fontFamily: 'Itim-Regular',),
+                      fontSize: 18, fontFamily: 'Itim-Regular',),
                   ),
                 ],
               ),
             ),
 
-            /*
-              DottedBorder(
-//                dashPattern: [6, 3,2, 3],
-                dashPattern: [9, 6,],
-                customPath: (size) => customPath2,
-                child: Text('abc',style:TextStyle(
-                  color:Colors.indigo,
-                )
-                  ,),
-              ),
-
-              */
-            /*
-              DottedBorder(
-                customPath: (size) => customPath, // PathBuilder
-                color: Colors.indigo,
-                dashPattern: [8, 4],
-                strokeWidth: 2,
-                child: Container(
-                  height: 220,
-                  width: 120,
-                  color: Colors.green.withAlpha(20),
-                ),
-              ),
-
-*/
-
-//              DottedBorder(
-//              child:StrokeCap.Butt),
-
-
-            //2nd row ends here.
-
 
             Container(
-//              height: 50,
-//              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              height: 40,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -808,7 +771,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                          color: Color(0xffF50303),
-                        fontSize: 17, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',),
                     ),
                   ),
                   Text(
@@ -818,14 +781,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 17, fontFamily: 'Itim-Regular',),
+                      fontSize: 18, fontFamily: 'Itim-Regular',),
                   ),
                 ],
               ),
             ),
-
-            // total ends here.
-
 
           ],
         ),
@@ -10733,8 +10693,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     //1...
     final ImageAliasAnotherSource
-        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameBytesNotFuture3);
+        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
 
 //    final ImageAliasAnotherSource
 //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
@@ -10774,6 +10733,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
+
 //    ticket.feed(2);
 
     //4...
@@ -10784,7 +10744,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageTotalCostDelivery);
 
-    ticket.feed(2);
+//    ticket.feed(2);
     // found not required..
 
     //5... PAID OR UNPAID...
@@ -10876,8 +10836,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Uint8List totalCostDeliveryBytes3,
       /*Uint8List paidUnpaidDeliveryTypeInBytes3*/
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
-
-
 
 
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
@@ -11493,7 +11451,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageRestaurant);
 
-    ticket.feed(2);
+//    ticket.feed(2);
 
 
     //2...
