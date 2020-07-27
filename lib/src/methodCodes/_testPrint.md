@@ -74,7 +74,7 @@
 
 //      _showMyDialog3(totalCostDeliveryBytes);
       // ssss
-      print('before printing total cose for recite of delivery type order');
+      print('before printing total cost for recite of delivery type order');
 //      ticket.image(image);
 
     }).catchError((onError) {

@@ -689,16 +689,36 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ),
 
 
-                child: Icon(
+              child: Image.asset(
 //        getIconForName(orderTypeName),
 //        IconData:
 
-                  oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ? Icons.thumb_up :
-                  Icons.pan_tool,
+                oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ? 'assets/reciteIcons/icons8-facebook-like-100.png' :
+                'assets/reciteIcons/icons8-hand-100.png',
 //        FontAwesomeIcons.bookmark,
-                  color: Colors.white,
+                color: Colors.white,
 //                  size: 35,
-                ),
+              ),
+
+              /*
+              Image.asset(
+//        getIconForName(orderTypeName),
+//        IconData:
+                  (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
+                  'assets/reciteIcons/icons8-cycling-mountain-bike-100.png' :
+                  (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+                  'assets/reciteIcons/icons8-ringing-phone-100.png' : (oneOrderForReceipt.orderBy
+                      .toLowerCase() == 'takeaway')
+                      ? 'assets/reciteIcons/icons8-open-parcel-100.png'
+                      : 'assets/reciteIcons/icons8-restaurant-table-100.png'
+//                Icons.local_dining,
+//        FontAwesomeIcons.bookmark,
+//                color: Colors.white,
+//                size: 35,
+
+              ),
+
+              */
 
 
 
@@ -780,19 +800,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 color: Colors.black,
               ),
 
-              child: Icon(
+              // child:Image.asset('assets/images/as.png',
+              child: Image.asset(
 //        getIconForName(orderTypeName),
 //        IconData:
-                (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ? Icons
-                    .motorcycle :
-                (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-                Icons.phone_in_talk : (oneOrderForReceipt.orderBy
-                    .toLowerCase() == 'takeaway')
-                    ? Icons.business_center
-                    : Icons.local_dining,
+                  (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
+                  'assets/reciteIcons/icons8-cycling-mountain-bike-100.png' :
+                  (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+                  'assets/reciteIcons/icons8-ringing-phone-100.png' : (oneOrderForReceipt.orderBy
+                      .toLowerCase() == 'takeaway')
+                      ? 'assets/reciteIcons/icons8-open-parcel-100.png'
+                      : 'assets/reciteIcons/icons8-restaurant-table-100.png'
 //                Icons.local_dining,
 //        FontAwesomeIcons.bookmark,
-                color: Colors.white,
+//                color: Colors.white,
 //                size: 35,
 
               ),
@@ -853,8 +874,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         Column(
 //          mainAxisAlignment: MainAxisAlignment.spaceAround,
 //          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             //rounded rectangle border and text conted inside it begins here.
 
@@ -862,7 +883,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
 //                    height: 50,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <
                     Widget>[
@@ -904,7 +925,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    height: 50,
 
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <
                     Widget>[
@@ -971,7 +992,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              height: 50,
 //              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <
                     Widget>[
@@ -8336,7 +8357,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child: Text('Pay', style: TextStyle(color: Colors.green,
                     fontSize: 30, fontWeight: FontWeight.bold,),
                   ),),
-                
+
                 onPressed: () async {
 
                   // TAkEAWAY AND DINNING  Recite Print. ....
@@ -10521,6 +10542,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
 
+
+    final ImageAliasAnotherSource
+        .Image orderInformationAndUserInformationTopInBytesTest = ImageAliasAnotherSource.decodeImage(
+        orderInformationAndUserInformationTopInBytes);
+
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -10537,9 +10564,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   (child: Image.memory(restaurantNameImageByte2)
                 ),
 
+
                 Container
                   (child: Image.memory(orderInformationAndUserInformationTopInBytes)
                 ),
+
+                /*
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.green,
+                      image: DecorationImage(
+                          image: orderInformationAndUserInformationTopInBytesTest.image // <--- .image added here
+                      )
+                  ),)
+                  ,
+
+                */
+
+
+
                 Container
                   (child: Image.memory(totalCostDeliveryBytes3)
                 ),
@@ -10564,7 +10607,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  void printTicketDummy(/*PaperSize paper, */ Restaurant currentRestaurant,
+  void printTicketDummy2(/*PaperSize paper, */ Restaurant currentRestaurant,
       OneOrderFirebase oneOrderdocument,
       ImageAliasAnotherSource.Image imageResource, Uint8List orderInformationAndUserInformationTopInBytes,
       Uint8List restaurantNameImageBytes, Uint8List totalCostDeliveryBytes2,
@@ -10640,10 +10683,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
         .orderProductionTime}');
 
 
+
+//    Container
+//      (child: Image.memory(orderInformationAndUserInformationTopInBytes)
+//    ),
+
+
     //1...
     final ImageAliasAnotherSource
         .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
         restaurantNameBytesNotFuture3);
+
+//    final ImageAliasAnotherSource
+//        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
 
     ticket.image(oneImageRestaurant);
 
@@ -11303,7 +11355,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     String response2 = res.msg;
 
 
-     // showToast(res.msg);
+    // showToast(res.msg);
 
     logger.i('this never executes .. TODO...');
     if (response2== 'Success') {
@@ -11743,7 +11795,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-          printTicketDummy(/*paper, */
+          printTicketDummy2(/*paper, */
               thisRestaurant, oneOrderData, imageRestaurant,
               restaurantNameBytesNotFuture,orderInformationAndUserInformationTopInBytes,
               totalCostDeliveryBytes, paidUnpaidDeliveryTypeInBytes);
