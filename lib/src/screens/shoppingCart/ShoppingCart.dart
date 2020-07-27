@@ -464,9 +464,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   :
               (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
               'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                  'takeaway') ? 'TakeAway' : 'Dinning Room',
+                  'takeaway') ? 'TakeAway' : 'DinningRoom',
 //                    oneOrderForReceipt.orderBy
-//                    'dinning room',
+//                    'dinningRoom',
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -522,7 +522,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}');
 
     if (oneOrderForReceipt.orderBy.toLowerCase() == 'TakeAway'.toLowerCase() ||
-        oneOrderForReceipt.orderBy.toLowerCase() == 'Dinning Room'.toLowerCase()) {
+        oneOrderForReceipt.orderBy.toLowerCase() == 'DinningRoom'.toLowerCase()) {
       return new Directionality(
           textDirection: TextDirection.ltr,
           child: Text('phone || address empty...',
@@ -10285,7 +10285,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               child: (
                   oneOrderForReceipt.orderBy.toLowerCase() != 'TakeAway' ||
-                  oneOrderForReceipt.orderBy.toLowerCase() != 'Dinning Room'
+                  oneOrderForReceipt.orderBy.toLowerCase() != 'DinningRoom'
               ) ?
 
 
@@ -10373,9 +10373,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   :
                               (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
                               'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                                  'takeaway') ? 'TakeAway' : 'Dinning Room',
+                                  'takeaway') ? 'TakeAway' : 'DinningRoom',
 //                    oneOrderForReceipt.orderBy
-//                    'dinning room',
+//                    'dinningRoom',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -10684,7 +10684,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           :
       (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
       'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
-          'takeaway') ? 'TakeAway' : 'Dinning Room'}',
+          'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 5,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
