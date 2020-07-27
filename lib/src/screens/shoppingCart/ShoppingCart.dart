@@ -667,28 +667,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
            Image.asset(
-//        getIconForName(orderTypeName),
-//        IconData:
-
-//                oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
-//                'assets/reciteIcons/icons8-facebook-like-100.png'
-//                    :
-//                'assets/reciteIcons/icons8hand100.png',
-
-
              oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
-             'assets/reciteIcons/icons8facebooklike100.png'
+//             'assets/icons8facebooklike100.png'
+//                 :
+//             'assets/icons8hand100.png',
+
+             'assets/Path2008.png'
                  :
-             'assets/reciteIcons/icons8hand100.png',
-
-
-//        FontAwesomeIcons.bookmark,
+             'assets/Path2008.png',
                 color: Colors.black,
-                width: 35,
-                height:35,
-//                  size: 35,
+                width: 45,
+                height:45,
+
               ),
-            Text('s'),
+
 
             Container(
               decoration: BoxDecoration(
@@ -709,7 +701,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <
                     Widget>[
                   //  SizedBox(width: 5,),
@@ -750,51 +742,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
               Image.asset(
-                'assets/Path2008.png',
+                'assets/icons8cyclingmountainbike100.png',
                 width: 30,
                 height:30,) :
               (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
               Image.asset(
-                  'assets/Path2008.png',
+                  'assets/icons8ringingphone100.png',
                   width: 30,
                   height:30) : (oneOrderForReceipt.orderBy
                   .toLowerCase() == 'takeaway')
                   ? Image.asset(
-                'assets/Path2008.png',
+                'assets/icons8openparcel100.png',
                 width: 30,
                 height:30,)
-                  : Image.asset('assets/Path2008.png',
-                width: 30,
-                height:30,),
-
-            ),
-
-            /*
-            Container(
-
-              child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
-              Image.asset(
-                'assets/reciteIcons/icons8-cycling-mountain-bike-100.png',
-                width: 30,
-                height:30,) :
-              (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-              Image.asset(
-                  'assets/reciteIcons/icons8-ringing-phone-100.png',
-                  width: 30,
-                  height:30) : (oneOrderForReceipt.orderBy
-                  .toLowerCase() == 'takeaway')
-                  ? Image.asset(
-                'assets/reciteIcons/icons8-open-parcel-100.png',
-                width: 30,
-                height:30,)
-                  : Image.asset('assets/reciteIcons/icons8-restaurant-table-100.png',
+                  : Image.asset('assets/icons8restauranttable100.png',
                 width: 30,
                 height:30,),
 
             ),
 
 
-            */
 
             //rounded rectangle border and text conted inside it ends here.
 
