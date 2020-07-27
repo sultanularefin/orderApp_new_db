@@ -607,56 +607,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return new Directionality(
       textDirection: TextDirection.ltr,
       child:
-      Container(
-//        color: Colors.blue,
-//        width: displayWidth(context) / 1.8,
-        height: 50,
-
-//        margin: EdgeInsets.fromLTRB(0, 6, 0, 0),
-        width: 300,
-        child: Row(
+      Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-           Image.asset(
-             oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
-//             'assets/icons8facebooklike100.png'
-//                 :
-//             'assets/icons8hand100.png',
-
-             'assets/icons8facebooklike100.png'
-                 :
-             'assets/icons8hand100.png',
-//                color: Colors.black,
-                width: 50,
-                height:50,
-
-              ),
 
 
 
-            Container(
-              width: 200,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-                  style: BorderStyle.solid,
-                  width: 3.6,
-                ),
-//                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(35.0),
-//                    color: Colors.black,
-
-              ),
-
-
-
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <
-                    Widget>[
                   Text(
                     oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
                     'paid' : 'unpaid',
@@ -686,47 +643,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                 ],
               ),
-            ),
 
-            Container(
-              color: Colors.black,
-              width: 50,
-              height:50,
-
-              child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
-              Image.asset(
-                'assets/icons8cyclingmountainbike100.png',
-                color: Colors.black,
-                width: 50,
-                height:50,) :
-              (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-              Image.asset(
-                  'assets/icons8ringingphone100.png',
-                  color: Colors.black,
-                  width: 50,
-                  height:50) : (oneOrderForReceipt.orderBy
-                  .toLowerCase() == 'takeaway')
-                  ? Image.asset(
-                'assets/icons8openparcel100.png',
-                color: Colors.black,
-                width: 50,
-                height:50,
-              )
-                  : Image.asset('assets/icons8restauranttable100.png',
-                color: Colors.black,
-                width: 50,
-                height:50,),
-
-            ),
-
-
-
-            //rounded rectangle border and text conted inside it ends here.
-
-
-          ],
-        ),
-      ),
     );
   }
 
@@ -10339,8 +10256,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Future<void> _showMyDialog(
 
 
+      OneOrderFirebase oneOrderForReceipt,
       Uint8List restaurantNameImageByte2,
-//      Uint8List orderInformationAndUserInformationTopInBytes,
       Uint8List  orderInformationForReciteWidgetBytes3,
       Uint8List customerInformationOnlyBytes3,
       Uint8List totalCostDeliveryBytes3,
@@ -10390,17 +10307,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ],
                 ),
 
-                /*
-              Container(
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      image: DecorationImage(
-                          image: orderInformationAndUserInformationTopInBytesTest.image // <--- .image added here
-                      )
-                  ),)
-                  ,
 
-                */
 
 
 
@@ -10408,8 +10315,55 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   (child: Image.memory(totalCostDeliveryBytes3)
                 ),
 
-                Container
-                  (child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
+                Row(
+                  children: <Widget>[
+                    Image.asset(
+                      oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
+                      'assets/icons8facebooklike100.png'
+                          :
+                      'assets/icons8hand100.png',
+//                color: Colors.black,
+                      width: 50,
+                      height:50,
+
+                    ),
+                    Container
+                      (child: Image.memory(paidUnpaidDeliveryTypeWidgetBytes2)
+                    ),
+
+                    Container(
+                      color: Colors.black,
+                      width: 50,
+                      height:50,
+
+                      child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
+                      Image.asset(
+                        'assets/icons8cyclingmountainbike100.png',
+                        color: Colors.black,
+                        width: 50,
+                        height:50,) :
+                      (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+                      Image.asset(
+                          'assets/icons8ringingphone100.png',
+                          color: Colors.black,
+                          width: 50,
+                          height:50) : (oneOrderForReceipt.orderBy
+                          .toLowerCase() == 'takeaway')
+                          ? Image.asset(
+                        'assets/icons8openparcel100.png',
+                        color: Colors.black,
+                        width: 50,
+                        height:50,
+                      )
+                          : Image.asset('assets/icons8restauranttable100.png',
+                        color: Colors.black,
+                        width: 50,
+                        height:50,),
+
+                    ),
+
+
+                  ],
                 ),
 //                Text('Would you like to approve of this message?'),
               ],
@@ -10463,6 +10417,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     _showMyDialog(
+      oneOrderdocument,
         restaurantNameImageBytes,
 //        orderInformationAndUserInformationTopInBytes,
         orderInformationForReciteWidgetBytes2,
