@@ -11549,12 +11549,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(handsdataBytesImage,align: PosAlign.center);
 
 
-
-
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
-
 
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
@@ -11573,7 +11570,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
-
 
 
     // 7 image::
