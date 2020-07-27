@@ -666,66 +666,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-
-//            color:Colors.yellow,
-
-//            color:Colors.yellowAccent,
-//              height: 55,
-              width: 40,
-
-              decoration: BoxDecoration(
-                border: Border.all(
-
-                  color: Colors.black,
-                  style: BorderStyle.solid,
-//                  width: 1.0,
-
-                ),
-                shape: BoxShape.circle,
-                color: Colors.black,
-
-
-              ),
-
-
-              child: Image.asset(
+           Image.asset(
 //        getIconForName(orderTypeName),
 //        IconData:
 
-                oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ? 'assets/reciteIcons/icons8-facebook-like-100.png' :
-                'assets/reciteIcons/icons8-hand-100.png',
+//                oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
+//                'assets/reciteIcons/icons8-facebook-like-100.png'
+//                    :
+//                'assets/reciteIcons/icons8hand100.png',
+
+
+             oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
+             'assets/reciteIcons/icons8facebooklike100.png'
+                 :
+             'assets/reciteIcons/icons8hand100.png',
+
+
 //        FontAwesomeIcons.bookmark,
-                color: Colors.white,
+                color: Colors.black,
+                width: 35,
+                height:35,
 //                  size: 35,
               ),
-
-              /*
-              Image.asset(
-//        getIconForName(orderTypeName),
-//        IconData:
-                  (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
-                  'assets/reciteIcons/icons8-cycling-mountain-bike-100.png' :
-                  (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-                  'assets/reciteIcons/icons8-ringing-phone-100.png' : (oneOrderForReceipt.orderBy
-                      .toLowerCase() == 'takeaway')
-                      ? 'assets/reciteIcons/icons8-open-parcel-100.png'
-                      : 'assets/reciteIcons/icons8-restaurant-table-100.png'
-//                Icons.local_dining,
-//        FontAwesomeIcons.bookmark,
-//                color: Colors.white,
-//                size: 35,
-
-              ),
-
-              */
-
-
-
-            ),
-
-            //rounded rectangle border and text conted inside it begins here.
-
+            Text('s'),
 
             Container(
               decoration: BoxDecoration(
@@ -785,41 +748,53 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             Container(
 
-//            color:Colors.yellow,
-
-//            color:Colors.yellowAccent,
-//              height: 55,
-//              width: 40,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-//                  style: BorderStyle.solid,
-//                  width: 1.0,
-                ),
-                shape: BoxShape.circle,
-                color: Colors.black,
-              ),
-
-              // child:Image.asset('assets/images/as.png',
-              child: Image.asset(
-//        getIconForName(orderTypeName),
-//        IconData:
-                  (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
-                  'assets/reciteIcons/icons8-cycling-mountain-bike-100.png' :
-                  (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-                  'assets/reciteIcons/icons8-ringing-phone-100.png' : (oneOrderForReceipt.orderBy
-                      .toLowerCase() == 'takeaway')
-                      ? 'assets/reciteIcons/icons8-open-parcel-100.png'
-                      : 'assets/reciteIcons/icons8-restaurant-table-100.png'
-//                Icons.local_dining,
-//        FontAwesomeIcons.bookmark,
-//                color: Colors.white,
-//                size: 35,
-
-              ),
-
+              child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
+              Image.asset(
+                'assets/Path2008.png',
+                width: 30,
+                height:30,) :
+              (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+              Image.asset(
+                  'assets/Path2008.png',
+                  width: 30,
+                  height:30) : (oneOrderForReceipt.orderBy
+                  .toLowerCase() == 'takeaway')
+                  ? Image.asset(
+                'assets/Path2008.png',
+                width: 30,
+                height:30,)
+                  : Image.asset('assets/Path2008.png',
+                width: 30,
+                height:30,),
 
             ),
+
+            /*
+            Container(
+
+              child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
+              Image.asset(
+                'assets/reciteIcons/icons8-cycling-mountain-bike-100.png',
+                width: 30,
+                height:30,) :
+              (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
+              Image.asset(
+                  'assets/reciteIcons/icons8-ringing-phone-100.png',
+                  width: 30,
+                  height:30) : (oneOrderForReceipt.orderBy
+                  .toLowerCase() == 'takeaway')
+                  ? Image.asset(
+                'assets/reciteIcons/icons8-open-parcel-100.png',
+                width: 30,
+                height:30,)
+                  : Image.asset('assets/reciteIcons/icons8-restaurant-table-100.png',
+                width: 30,
+                height:30,),
+
+            ),
+
+
+            */
 
             //rounded rectangle border and text conted inside it ends here.
 
@@ -883,7 +858,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
 //                    height: 50,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <
                     Widget>[
@@ -925,7 +900,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    height: 50,
 
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <
                     Widget>[
@@ -992,7 +967,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              height: 50,
 //              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <
                     Widget>[
@@ -8743,7 +8718,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
       child: StreamBuilder(
           stream: shoppingCartbloc.getCurrentPaymentTypeSingleSelectStream,
           initialData: shoppingCartbloc.getCurrentPaymentType,
-
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               print('!snapshot.hasData');
