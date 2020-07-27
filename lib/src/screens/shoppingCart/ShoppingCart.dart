@@ -11500,7 +11500,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           }
           ).then((customerInformationOnlyBytes) {
             print(
-                'orderInformationForReciteWidgetBytes: $customerInformationOnlyBytes');
+                'customerInformationOnlyBytes: $customerInformationOnlyBytes');
 
 
             Future<bool> isPrint =
@@ -11727,7 +11727,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               .whenComplete(() {})
               .then((customerInformationOnlyBytes) {
             print(
-                'orderInformationForReciteWidgetBytes: $customerInformationOnlyBytes');
+                'customerInformationOnlyBytes -----DummyPrint---: $customerInformationOnlyBytes');
 
 
 
