@@ -10506,7 +10506,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8facebooklike100.png');
+    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
     final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
@@ -10514,7 +10514,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata = await rootBundle.load('assets/icons8hand100.png');
+    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image handsdataBytesImage
@@ -10526,7 +10526,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData = await rootBundle.load('assets/icons8cyclingmountainbike100.png');
+    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image deliveryDataBytesImage
@@ -10534,7 +10534,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 4 => phonedataBytesImage
-    final ByteData phonedata = await rootBundle.load('assets/icons8ringingphone100.png');
+    final ByteData phonedata = await rootBundle.load('assets/orderBYicons/icons8-ringing-phone-100.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage
@@ -10542,7 +10542,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData = await rootBundle.load('assets/icons8openparcel100.png');
+    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image takeAwayDataBytesImage
@@ -10550,7 +10550,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData = await rootBundle.load('assets/icons8restauranttable100.png');
+    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
@@ -10814,7 +10814,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8facebooklike100.png');
+    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
     final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
@@ -10822,7 +10822,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata = await rootBundle.load('assets/icons8hand100.png');
+    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image handsdataBytesImage
@@ -10834,7 +10834,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData = await rootBundle.load('assets/icons8cyclingmountainbike100.png');
+    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image deliveryDataBytesImage
@@ -10842,7 +10842,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 4 => phonedataBytesImage
-    final ByteData phonedata = await rootBundle.load('assets/icons8ringingphone100.png');
+    final ByteData phonedata = await rootBundle.load('assets/orderBYicons/icons8-ringing-phone-100.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage
@@ -10850,7 +10850,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData = await rootBundle.load('assets/icons8openparcel100.png');
+    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image takeAwayDataBytesImage
@@ -10858,7 +10858,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData = await rootBundle.load('assets/icons8restauranttable100.png');
+    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
@@ -11189,7 +11189,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8facebooklike100.png');
+    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
     final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
@@ -11197,7 +11197,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata = await rootBundle.load('assets/icons8hand100.png');
+    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image handsdataBytesImage
@@ -11209,7 +11209,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData = await rootBundle.load('assets/icons8cyclingmountainbike100.png');
+    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image deliveryDataBytesImage
@@ -11217,7 +11217,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 4 => phonedataBytesImage
-    final ByteData phonedata = await rootBundle.load('assets/icons8ringingphone100.png');
+    final ByteData phonedata = await rootBundle.load('assets/orderBYicons/icons8-ringing-phone-100.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage
@@ -11225,7 +11225,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData = await rootBundle.load('assets/icons8openparcel100.png');
+    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image takeAwayDataBytesImage
@@ -11233,7 +11233,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData = await rootBundle.load('assets/icons8restauranttable100.png');
+    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
@@ -11529,7 +11529,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8facebooklike100.png');
+    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
     final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
@@ -11537,7 +11537,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata = await rootBundle.load('assets/icons8hand100.png');
+    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image handsdataBytesImage
@@ -11549,7 +11549,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData = await rootBundle.load('assets/icons8cyclingmountainbike100.png');
+    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image deliveryDataBytesImage
@@ -11557,7 +11557,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 4 => phonedataBytesImage
-    final ByteData phonedata = await rootBundle.load('assets/icons8ringingphone100.png');
+    final ByteData phonedata = await rootBundle.load('assets/orderBYicons/icons8-ringing-phone-100.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage
@@ -11565,7 +11565,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData = await rootBundle.load('assets/icons8openparcel100.png');
+    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image takeAwayDataBytesImage
@@ -11573,7 +11573,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData = await rootBundle.load('assets/icons8restauranttable100.png');
+    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image dinningRoomDataBytesImage

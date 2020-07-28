@@ -102,6 +102,10 @@ flutter:
      - assets/unpaid_cash_card/card.png
      - assets/unpaid_cash_card/cash.png
      - assets/unpaid_cash_card/unpaid.png
+     - assets/icons8-facebook-like-64.png
+     - assets/icons8-facebook-like-80.png
+     - assets/icons8-hand-64.png
+
      #     - assets/icons8atv100.png
      #     - assets/icons8bigparcel100.png
      #     - assets/icons8cyclingmountainbike100.png
