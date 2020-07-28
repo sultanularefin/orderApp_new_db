@@ -6302,7 +6302,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                               keyboardType: TextInputType.phone,
                                               inputFormatters: <TextInputFormatter>[
-                                                WhitelistingTextInputFormatter.digitsOnly,],
+                                                LengthLimitingTextInputFormatter(16),
+                                                WhitelistingTextInputFormatter.digitsOnly,
+                                                WhitelistingTextInputFormatter(RegExp("[+]"))
+                                              ],
 
                                               controller: phoneNumberController,
 
@@ -7281,7 +7284,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         child: TextField(
                           keyboardType: TextInputType.phone,
                           inputFormatters: <TextInputFormatter>[
-                            WhitelistingTextInputFormatter.digitsOnly
+                            LengthLimitingTextInputFormatter(16),
+                            WhitelistingTextInputFormatter.digitsOnly,
+                            WhitelistingTextInputFormatter(RegExp("[+]"))
                           ],
 
                           textAlign: TextAlign.center,
