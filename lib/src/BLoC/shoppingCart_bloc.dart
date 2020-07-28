@@ -745,6 +745,8 @@ class ShoppingCartBloc implements Bloc {
       print('unitPrice: ${oneFoodItem['foodImage']}');
       print('unitPrice: ${oneFoodItem['discount']}');
       print('unitPrice');
+      print('foodItemSize: ${oneFoodItem['foodItemSize']}');
+
 
 
       OrderedItem oneTempOrderedItem= new OrderedItem(
@@ -758,8 +760,8 @@ class ShoppingCartBloc implements Bloc {
         name:oneFoodItem['name'],
         oneFoodTypeTotalPrice:oneFoodItem['oneFoodTypeTotalPrice'],
         unitPrice:oneFoodItem['unitPrice'],
+        foodItemSize: oneFoodItem['foodItemSize'],
       );
-
 
 
 

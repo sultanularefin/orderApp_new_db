@@ -28,6 +28,7 @@ class OrderedItem {
   List<CheeseItem>    selectedCheeses;
   double              oneFoodTypeTotalPrice;
   double              unitPrice;
+  String              foodItemSize;
 
   /*
   int selectedFoodListLength;
@@ -61,6 +62,7 @@ class OrderedItem {
         this.name,
         this.oneFoodTypeTotalPrice,
         this.unitPrice,
+        this.foodItemSize,
 
         // this.foodItemOrderID,
       }

@@ -314,6 +314,7 @@ class FirebaseClient {
         'name':sf[counter].foodItemName,
         'oneFoodTypeTotalPrice': sf[counter].quantity * sf[counter].unitPrice,
         'unitPrice':sf[counter].unitPrice,
+        'foodItemSize':sf[counter].foodItemSize,
       };
       testFoodItems.add(identifier);
       counter ++;

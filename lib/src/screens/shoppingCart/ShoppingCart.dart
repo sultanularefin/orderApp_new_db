@@ -10625,7 +10625,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageRestaurant);
 
-//    ticket.feed(2);
+    ticket.feed(1);
 
 
     //2...
@@ -10659,12 +10659,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: 4,styles: PosStyles(bold:true) ),
       PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
           width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
           width: 4, styles: PosStyles(bold:true)),
 
     ]);
+    ticket.feed(1);
 
-    ticket.hr();
+//    ticket.hr();
 
 //    ticket.feed(2);
 
@@ -10676,11 +10677,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
         PosColumn(text: '${oneFood.name}',
-          width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+          width: 9, /*,styles: PosStyles(align: PosAlign.left) */),
         PosColumn(text: '${oneFood.quantity}',
           width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
-          width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+      ]);
+
+      ticket.row([
+        PosColumn(text: '${oneFood.foodItemSize}',
+          width: 9, /* styles: PosStyles(align: PosAlign.right) */),
+      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
+        width: 3, /* styles: PosStyles(align: PosAlign.right) */),
+
 
       ]);
 
@@ -11035,11 +11043,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
         PosColumn(text: '${oneFood.name}',
-          width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+          width: 9, /*,styles: PosStyles(align: PosAlign.left) */),
         PosColumn(text: '${oneFood.quantity}',
           width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      ]);
+
+      ticket.row([
+
+        PosColumn(text: '${oneFood.foodItemSize}',
+          width: 9, /* styles: PosStyles(align: PosAlign.right) */),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
-          width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+          width: 3, /* styles: PosStyles(align: PosAlign.right) */),
+
 
       ]);
 
@@ -11402,11 +11419,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
         PosColumn(text: '${oneFood.name}',
-          width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+          width: 9, /*,styles: PosStyles(align: PosAlign.left) */),
         PosColumn(text: '${oneFood.quantity}',
           width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      ]);
+
+      ticket.row([
+
+        PosColumn(text: '${oneFood.foodItemSize}',
+          width: 9, /* styles: PosStyles(align: PosAlign.right) */),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
-          width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+          width: 3, /* styles: PosStyles(align: PosAlign.right) */),
+
 
       ]);
 
@@ -11673,7 +11699,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: 4,styles: PosStyles(bold:true) ),
       PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
           width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
           width: 4, styles: PosStyles(bold:true)),
 
     ]);
@@ -11702,11 +11728,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
         PosColumn(text: '${oneFood.name}',
-          width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+          width: 9, /*,styles: PosStyles(align: PosAlign.left) */),
         PosColumn(text: '${oneFood.quantity}',
           width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      ]);
+
+      ticket.row([
+
+        PosColumn(text: '${oneFood.foodItemSize}',
+          width: 9, /* styles: PosStyles(align: PosAlign.right) */),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice}',
-          width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+          width: 3, /* styles: PosStyles(align: PosAlign.right) */),
+
 
       ]);
 
