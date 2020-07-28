@@ -10638,6 +10638,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     */
 
+    /*
     ticket.row([
 
       PosColumn(text: 'order type',
@@ -10648,6 +10649,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 4, /* styles: PosStyles(align: PosAlign.right) */),
 
     ]);
+    */
 
     ticket.row([
 
@@ -10708,7 +10710,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: 'SUBTOTAL',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-
       PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
         width: 4,),
       PosColumn(text: '',
@@ -10719,7 +10720,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     // Price 3  Total
     ticket.row([
-
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
@@ -10729,7 +10729,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 4,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
     ]);
 
 //    ticket.hr();
@@ -10952,6 +10951,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     */
 
 
+    /*
     ticket.row([
 
       PosColumn(text: 'order type',
@@ -10963,6 +10963,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ]);
 
+    */
+
     ticket.row([
 
       PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
@@ -10971,7 +10973,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: 4,styles: PosStyles(bold:true) ),
       PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
           width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
           width: 4, styles: PosStyles(bold:true)),
 
     ]);
@@ -10995,27 +10997,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    ticket.row([
 
-      PosColumn(text: 'street name',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: 'flat number',
-        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'phone number',
-        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-    ]);
 
     ticket.row([
 
       PosColumn(text: '${customerForReciteGeneration.address}',
-          width: 4,styles: PosStyles(bold:true) ),
+          width: 8,styles: PosStyles(bold:true) ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
           width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
-          width: 4, styles: PosStyles(bold:true)),
+
 
     ]);
+
+    ticket.text('phone: ${customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(bold: true));
+//    PosColumn(text: '',
+//        width: 4, styles: PosStyles(bold:true)),
 
 //    ticket.feed(2);
 
@@ -11323,16 +11320,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     */
 
 
-    ticket.row([
 
-      PosColumn(text: 'order type',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: 'ordering time',
-        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'production Time',
-        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-    ]);
 
     ticket.row([
 
@@ -11342,7 +11330,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: 4,styles: PosStyles(bold:true) ),
       PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
           width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
           width: 4, styles: PosStyles(bold:true)),
 
     ]);
@@ -11366,27 +11354,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    ticket.row([
 
-      PosColumn(text: 'street name',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: 'flat number',
-        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'phone number',
-        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-    ]);
 
     ticket.row([
 
       PosColumn(text: '${customerForReciteGeneration.address}',
-          width: 4,styles: PosStyles(bold:true) ),
+          width: 8,styles: PosStyles(bold:true) ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
           width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
-          width: 4, styles: PosStyles(bold:true)),
+
 
     ]);
+
+    ticket.text('phone: ${customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(bold: true));
+
+//    PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
+//        width: 4, styles: PosStyles(bold:true)),
 
 //    ticket.feed(2);
 
@@ -11662,16 +11646,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
-    ticket.row([
-
-      PosColumn(text: 'order type',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: 'ordering time',
-        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'production Time',
-        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-    ]);
 
     ticket.row([
 
