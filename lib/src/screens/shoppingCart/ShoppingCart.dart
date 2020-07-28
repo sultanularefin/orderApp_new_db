@@ -11009,8 +11009,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ]);
 
-    ticket.text('phone: ${customerForReciteGeneration.phoneNumber}',
-        styles: PosStyles(bold: true));
+    ticket.row([
+
+      PosColumn(text: 'phone:',
+          width: 4,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
+          width: 8, styles: PosStyles(bold:true)),
+
+
+    ]);
+
+//    ticket.text('phone: ${customerForReciteGeneration.phoneNumber}',
+//        styles: PosStyles(bold: true));
 //    PosColumn(text: '',
 //        width: 4, styles: PosStyles(bold:true)),
 
@@ -11365,9 +11375,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     ]);
+    ticket.row([
 
-    ticket.text('phone: ${customerForReciteGeneration.phoneNumber}',
-        styles: PosStyles(bold: true));
+      PosColumn(text: 'phone:',
+          width: 4,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
+          width: 8, styles: PosStyles(bold:true)),
+
+
+    ]);
+
+
 
 //    PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
 //        width: 4, styles: PosStyles(bold:true)),
