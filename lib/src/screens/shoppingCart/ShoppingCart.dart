@@ -8161,8 +8161,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     if (blueToothDevicesState.length == 0) {
                       logger.i('___________ blueTooth device not found _____');
 
-//                      _showMyDialog2(
-//                          '___________ blueTooth device not found _____ TakeAway || Dinning pay button');
+                     await _showMyDialog2(
+                          '___________ blueTooth device not found _____ TakeAway || Dinning pay button');
 
                       print(
                           'at here... __________ blueTooth device not found _____ TakeAway || Dinning pay button');
@@ -8226,7 +8226,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       else {
                         logger.i(
                             '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-                        _showMyDialog2(
+                        await _showMyDialog2(
                             '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
 
 
@@ -8239,12 +8239,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   }
 
                 },
-
-
-
-
-
-
 
               ),
             ),
@@ -8467,8 +8461,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     if (blueToothDevicesState.length == 0) {
                       logger.i('___________ blueTooth device not found _____');
 
-//                      _showMyDialog2(
-//                          '___________ blueTooth device not found _____ delivery phone pay button');
+                      await _showMyDialog2(
+                          '___________ blueTooth device not found _____ delivery phone pay button');
 
                       print(
                           'at here... __________ blueTooth device not found _____ delivery phone pay button');
@@ -8536,8 +8530,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         logger.i(
                             '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-                        _showMyDialog2(
-                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+
+                       await
+                       _showMyDialog2('___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
 
 
                         shoppingCartBloc.clearSubscription();
@@ -8550,9 +8545,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 },
 
-
-
-
+                
                 // ---
               ),
             ),
@@ -10322,7 +10315,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Uint8List restaurantNameImageByte2,
       Uint8List  orderInformationForReciteWidgetBytes3,
       Uint8List customerInformationOnlyBytes3,
+
       Uint8List totalCostDeliveryBytes3,
+
       /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */) async {
 
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
@@ -10596,7 +10591,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Uint8List orderInformationForReciteWidgetBytes3,
       Uint8List customerInformationOnlyBytes3,
       Uint8List restaurantNameBytesNotFuture3, // FOR restaurant Name in diffrent font as image only
-      Uint8List totalCostDeliveryBytes3,
+      /*Uint8List totalCostDeliveryBytes3,*/
       /* Uint8List paidUnpaidDeliveryTypeInBytes3 */
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
@@ -10625,7 +10620,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
-    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+//    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
@@ -10738,13 +10733,50 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    ticket.feed(2);
 
-    //4...
+    //4... TAKEAWAY...
 
+    /*
     final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
     ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
 
 
     ticket.image(oneImageTotalCostDelivery);
+
+    */
+
+    // Price 1 subtotal
+    ticket.row([
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'SUBTOTAL',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+    ]);
+
+
+    // Price 3  Total
+    ticket.row([
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}', styles:PosStyles(bold: true)  ,
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+    ]);
+
+//    ticket.hr();
+
 
 //    ticket.feed(2);
     // found not required..
@@ -10835,7 +10867,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Uint8List customerInformationOnlyBytes3,
 
       Uint8List restaurantNameBytesNotFuture3,
-      Uint8List totalCostDeliveryBytes3,
+      /* Uint8List totalCostDeliveryBytes3, */
       /*Uint8List paidUnpaidDeliveryTypeInBytes3*/
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
@@ -10866,7 +10898,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
-    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+//    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
@@ -10989,13 +11021,66 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 //    ticket.feed(2);
 
-    //4...
+    //4... DELIVERY...
 
+
+    /*
     final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
     ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
 
 
     ticket.image(oneImageTotalCostDelivery);
+
+    */
+
+    // Price 1 subtotal
+    ticket.row([
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'SUBTOTAL',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+    ]);
+
+
+    ticket.row([
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'DELIVERY',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${00.toStringAsFixed(2)}',
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+    ]);
+
+        ticket.hr();
+
+    // Price 3  Total
+    ticket.row([
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}', styles:PosStyles(bold: true)  ,
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+    ]);
+
+
 
 //    ticket.feed(2);
     // found not required..
@@ -11090,7 +11175,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Uint8List customerInformationOnlyBytes3,
       Uint8List restaurantNameBytesNotFuture3,
 
-      Uint8List totalCostDeliveryBytes3,
+      /* Uint8List totalCostDeliveryBytes3, */
       /*Uint8List paidUnpaidDeliveryTypeInBytes3*/
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
@@ -11122,7 +11207,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
-    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+//    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
@@ -11245,13 +11330,36 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 //    ticket.feed(2);
 
-    //4...
+    //4... PHONE...ORDER...
 
+    /*
     final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
     ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
 
 
     ticket.image(oneImageTotalCostDelivery);
+
+    */
+
+
+    ticket.hr();
+
+    // Price 3  Total
+    ticket.row([
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}', styles:PosStyles(bold: true)  ,
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+    ]);
+
+
 
 //    ticket.feed(2);
     // found not required..
@@ -11343,7 +11451,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Uint8List orderInformationForReciteWidgetBytes3,
       Uint8List customerInformationOnlyBytes3,
       Uint8List restaurantNameBytesNotFuture3,
-      Uint8List totalCostDeliveryBytes3,
+
+      /* Uint8List totalCostDeliveryBytes3, */
+
       /*Uint8List paidUnpaidDeliveryTypeInBytes3*/
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
 
@@ -11375,7 +11485,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
     print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
-    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+//    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
 
@@ -11488,13 +11598,57 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 //    ticket.feed(2);
 
-    //4...
+    //4... dinningRoom...
 
+
+
+//    /xyxyz
+
+
+    /*
     final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
     ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
 
 
     ticket.image(oneImageTotalCostDelivery);
+    */
+
+// Price 1 subtotal
+
+    ticket.row([
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'SUBTOTAL',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+    ]);
+
+
+
+
+    // Price 3  Total
+    ticket.row([
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}', styles:PosStyles(bold: true)  ,
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+    ]);
+
+//    ticket.hr();
+
 
 //    ticket.feed(2);
     // found not required..
@@ -11609,7 +11763,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           customerInformationOnlyBytes2,
           /*orderInformationAndUserInformationTopInBytes2, */
           restaurantNameBytesNotFuture2,
-          totalCostDeliveryBytes2,
+         /* totalCostDeliveryBytes2 ,*/
           /* paidUnpaidDeliveryTypeInBytes2 */
         )) :
     (oneOrderData2.orderBy.toLowerCase() == 'phone') ?
@@ -11621,7 +11775,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       orderInformationForReciteWidgetBytes2,
       customerInformationOnlyBytes2,
       restaurantNameBytesNotFuture2,
-      totalCostDeliveryBytes2,
+      /* totalCostDeliveryBytes2,*/
       /*paidUnpaidDeliveryTypeInBytes2 */
     )) :
     (oneOrderData2.orderBy.toLowerCase() == 'takeaway') ?
@@ -11633,7 +11787,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       orderInformationForReciteWidgetBytes2,
       customerInformationOnlyBytes2,
       restaurantNameBytesNotFuture2,
-      totalCostDeliveryBytes2,
+      /* totalCostDeliveryBytes2, */
       /* paidUnpaidDeliveryTypeInBytes2 */
     )) :
     await printerManager.printTicket(
@@ -11645,7 +11799,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           orderInformationForReciteWidgetBytes2,
           customerInformationOnlyBytes2,
           restaurantNameBytesNotFuture2,
-          totalCostDeliveryBytes2,
+          /* totalCostDeliveryBytes2, */
           /*paidUnpaidDeliveryTypeInBytes2 */
         ));
 
