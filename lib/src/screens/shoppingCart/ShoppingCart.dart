@@ -8122,15 +8122,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
                 onPressed: () async {
 
-                  // TAkEAWAY AND DINNING  Recite Print. ....
+                  // TAkEAWAY AND DINNING DUMMY PRINT ....
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
+
+
                   print(
                       'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning
                           .paymentTypeIndex}');
+
+
+                  // PRINTING CODES WILL BE PUTTED HERE.
+
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
+
                   Order tempOrderWithdocId = await shoppingCartBloc
                       .paymentButtonPressed(cancelPaySelectUNObscuredTakeAwayDinning);
 
@@ -8148,7 +8156,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
+                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
                         .orderdocId}');
 
                     List<
@@ -8158,87 +8166,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
 
-                      await _showMyDialog2(
-                          '___________ blueTooth device not found _____ TakeAway || Dinning pay button');
-
-                      print(
-                          'at here... __________ blueTooth device not found _____ TakeAway || Dinning pay button');
-
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUNObscuredTakeAwayDinning);
-
-                    }
-
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
-
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
-
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUNObscuredTakeAwayDinning);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUNObscuredTakeAwayDinning);
-                        }
-                      }
-                      else {
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-                        await _showMyDialog2(
-                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
+
+                    _testPrintDummyDevices(x);
+
+                    shoppingCartBloc.clearSubscription();
 
 
-                        shoppingCartBloc.clearSubscription();
-                        print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
-                        return Navigator.pop(
-                            context, cancelPaySelectUNObscuredTakeAwayDinning);
-                      }
-                    }
+                    print('Unboscured takeAway || '
+                        'DinningRoom Dummy print--- returning to FoodGallery Page');
+                    return Navigator.pop(
+                        context, cancelPaySelectUNObscuredTakeAwayDinning);
+
+
                   }
 
                 },
+
 
               ),
             ),
@@ -8420,17 +8372,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+
                 onPressed: () async {
 
-                  // Delivery Phone Recite Print.
+                  // DUMMY PRINT DELIVERY PHONE ......
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+
+
 
                   print(
-                      'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: '
-                          '${cancelPaySelectUnobscuredDeliveryPhone
+                      'debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
+
+                  print(
+                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone
                           .paymentTypeIndex}');
 
                   // let's not use this order returned use the one from the bloc:
@@ -8448,98 +8407,37 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i(
-                        'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
-                            .orderdocId}');
+                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
+                        .orderdocId}');
 
-                    List<PrinterBluetooth> blueToothDevicesState
-                    = shoppingCartBloc.getDevices;
+                    List<
+                        PrinterBluetooth> blueToothDevicesState = shoppingCartBloc
+                        .getDevices;
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
-
-                      await _showMyDialog2(
-                          '___________ blueTooth device not found _____ delivery phone pay button');
-
-                      print(
-                          'at here... __________ blueTooth device not found _____ delivery phone pay button');
-
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUnobscuredDeliveryPhone);
-
-                    }
-
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
-
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
 
 
-
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
-
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                      }
-                      else {
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-
-                        await
-                        _showMyDialog2('___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
 
 
-                        shoppingCartBloc.clearSubscription();
-                        print('going to food Gallery page  Restaurant Printer not found');
-                        return Navigator.pop(
-                            context, cancelPaySelectUnobscuredDeliveryPhone);
-                      }
-                    }
+                    _testPrintDummyDevices(x);
+
+                    shoppingCartBloc.clearSubscription();
+
+                    print('shopping Cart : shoppingCartBloc.clearSubscription() called... delivery Phone ');
+
+                    return Navigator.pop(
+                        context, cancelPaySelectUnobscuredDeliveryPhone);
+
                   }
 
                 },
