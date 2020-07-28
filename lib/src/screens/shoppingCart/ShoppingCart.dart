@@ -6304,7 +6304,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               inputFormatters: <TextInputFormatter>[
                                                 LengthLimitingTextInputFormatter(16),
                                                 WhitelistingTextInputFormatter.digitsOnly,
-                                                WhitelistingTextInputFormatter(RegExp("[+]"))
+//                                                WhitelistingTextInputFormatter(RegExp("[+]"))
                                               ],
 
                                               controller: phoneNumberController,
@@ -7286,7 +7286,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           inputFormatters: <TextInputFormatter>[
                             LengthLimitingTextInputFormatter(16),
                             WhitelistingTextInputFormatter.digitsOnly,
-                            WhitelistingTextInputFormatter(RegExp("[+]"))
+//                            WhitelistingTextInputFormatter(RegExp("[+]"))
                           ],
 
                           textAlign: TextAlign.center,
