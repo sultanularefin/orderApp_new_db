@@ -94,20 +94,27 @@ flutter:
   assets:
      - assets/flutterlogo.svg
      - assets/Group520.png
-     - assets/icons8atv100.png
-     - assets/icons8bigparcel100.png
-     - assets/icons8cyclingmountainbike100.png
-     - assets/icons8delivery96.png
-     - assets/icons8facebooklike100.png
-     - assets/icons8hand100.png
-     - assets/icons8openparcel100.png
-     - assets/icons8phone100.png
-     - assets/icons8restaurantbuilding100.png
-     - assets/icons8restauranttable100.png
-     - assets/icons8ringingphone100.png
-     - assets/icons8speakerphone100.png
-     - assets/icons8waiter100.png
      - assets/Path2008.png
+     - assets/orderBYicons/delivery.png
+     - assets/orderBYicons/diningroom.png
+     - assets/orderBYicons/icons8-ringing-phone-100.png
+     - assets/orderBYicons/takeaway.png
+     - assets/unpaid_cash_card/card.png
+     - assets/unpaid_cash_card/cash.png
+     - assets/unpaid_cash_card/unpaid.png
+     #     - assets/icons8atv100.png
+     #     - assets/icons8bigparcel100.png
+     #     - assets/icons8cyclingmountainbike100.png
+     #     - assets/icons8delivery96.png
+     #     - assets/icons8facebooklike100.png
+     #     - assets/icons8hand100.png
+     #     - assets/icons8openparcel100.png
+     #     - assets/icons8phone100.png
+     #     - assets/icons8restaurantbuilding100.png
+     #     - assets/icons8restauranttable100.png
+     #     - assets/icons8ringingphone100.png
+     #     - assets/icons8speakerphone100.png
+     #     - assets/icons8waiter100.png
 
 
 

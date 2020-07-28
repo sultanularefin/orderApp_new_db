@@ -10278,10 +10278,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         width: 70,
                         height:70,
                         child: Image.asset(
-                          oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
-                          'assets/icons8facebooklike100.png'
-                              :
-                          'assets/icons8hand100.png',
+                          oneOrderForReceipt.paidType.toLowerCase() == 'card' ?
+                          'assets/unpaid_cash_card/card.png'
+                              :oneOrderForReceipt.paidType.toLowerCase() == 'cash'?
+                          'assets/unpaid_cash_card/cash.png':'assets/unpaid_cash_card/unpaid.png',
+
 //                color: Colors.black,
                           width: 50,
                           height:50,
@@ -10293,8 +10294,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                           Text(
-                            oneOrderForReceipt.paidStatus.toLowerCase() == 'paid' ?
-                            'paid' : 'unpaid',
+                            oneOrderForReceipt.paidType.toLowerCase() == 'card' ?
+                            'card'
+                                :oneOrderForReceipt.paidType.toLowerCase() == 'cash'?
+                            'cash':'unpaid',
+
+//                            oneOrderForReceipt.paidType.toLowerCase() == 'paid' ?
+//                            'paid' : 'unpaid',
+
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -10334,24 +10341,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
                         Image.asset(
-                          'assets/icons8cyclingmountainbike100.png',
+                          'assets/orderBYicons/delivery.png',
                           color: Colors.black,
                           width: 50,
                           height:50,) :
                         (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
                         Image.asset(
-                            'assets/icons8ringingphone100.png',
+                            'assets/orderBYicons/icons8-ringing-phone-100.png',
                             color: Colors.black,
                             width: 50,
                             height:50) : (oneOrderForReceipt.orderBy
                             .toLowerCase() == 'takeaway')
                             ? Image.asset(
-                          'assets/icons8openparcel100.png',
+                          'assets/orderBYicons/takeaway.png',
                           color: Colors.black,
                           width: 50,
                           height:50,
                         )
-                            : Image.asset('assets/icons8restauranttable100.png',
+                            : Image.asset('assets/orderBYicons/diningroom.png',
                           color: Colors.black,
                           width: 50,
                           height:50,),
