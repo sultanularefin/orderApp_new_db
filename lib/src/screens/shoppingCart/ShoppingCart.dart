@@ -10685,7 +10685,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
         PosColumn(text: '${oneFood.foodItemSize}',
           width: 9, /* styles: PosStyles(align: PosAlign.right) */),
-      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice }'+ '\u20AC',
+      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
         width: 3, /* styles: PosStyles(align: PosAlign.right) */),
 
 
@@ -11058,7 +11058,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         PosColumn(text: '${oneFood.foodItemSize}',
           width: 9, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice }'+ '\u20AC',
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
           width: 3, /* styles: PosStyles(align: PosAlign.right) */),
 
 
@@ -11438,7 +11438,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         PosColumn(text: '${oneFood.foodItemSize}',
           width: 9, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice }'+ '\u20AC',
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
           width: 3, /* styles: PosStyles(align: PosAlign.right) */),
 
 
@@ -11753,7 +11753,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         PosColumn(text: '${oneFood.foodItemSize}',
           width: 9, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice }'+ '\u20AC',
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
           width: 3, /* styles: PosStyles(align: PosAlign.right) */),
 
 
