@@ -6303,8 +6303,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               keyboardType: TextInputType.phone,
                                               inputFormatters: <TextInputFormatter>[
                                                 LengthLimitingTextInputFormatter(16),
-//                                                WhitelistingTextInputFormatter.digitsOnly,
-                                                WhitelistingTextInputFormatter(RegExp("+[0-9]"))
+                                                WhitelistingTextInputFormatter.digitsOnly,
+//                                                WhitelistingTextInputFormatter(RegExp("+[0-9]"))
 //                                                WhitelistingTextInputFormatter(RegExp("[+]"))
                                               ],
 
@@ -7286,8 +7286,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           keyboardType: TextInputType.phone,
                           inputFormatters: <TextInputFormatter>[
                             LengthLimitingTextInputFormatter(16),
-//                            WhitelistingTextInputFormatter.digitsOnly,
-                            WhitelistingTextInputFormatter(RegExp("[0-9]"))
+                            WhitelistingTextInputFormatter.digitsOnly,
+//                            WhitelistingTextInputFormatter(RegExp("[0-9]"))
 //                            WhitelistingTextInputFormatter(RegExp("[+]"))
                           ],
 
