@@ -721,7 +721,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-                    height: 40,
+              height: 40,
 
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -8161,7 +8161,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     if (blueToothDevicesState.length == 0) {
                       logger.i('___________ blueTooth device not found _____');
 
-                     await _showMyDialog2(
+                      await _showMyDialog2(
                           '___________ blueTooth device not found _____ TakeAway || Dinning pay button');
 
                       print(
@@ -8530,8 +8530,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         logger.i(
                             '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
 
-                       await
-                       _showMyDialog2('___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                        await
+                        _showMyDialog2('___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
 
 
                         shoppingCartBloc.clearSubscription();
@@ -10312,15 +10312,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       OneOrderFirebase oneOrderForReceipt,
       Uint8List restaurantNameImageByte2,
+      /*
       Uint8List  orderInformationForReciteWidgetBytes3,
       Uint8List customerInformationOnlyBytes3,
 
-      Uint8List totalCostDeliveryBytes3,
+      Uint8List totalCostDeliveryBytes3, */
 
       /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */) async {
 
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
-    print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3');
+    /* print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3'); */
 //    print(
 //        'paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
 
@@ -10356,51 +10357,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     child: Image.memory(restaurantNameImageByte2)
                 ),
 
-                Container(
-
-                  child: (
-                      oneOrderForReceipt.orderBy.toLowerCase() != 'TakeAway' ||
-                          oneOrderForReceipt.orderBy.toLowerCase() != 'DinningRoom'
-                  ) ?
-
-
-                  Center(
-
-
-                    child: Row(
-
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container
-                          (child: Image.memory(orderInformationForReciteWidgetBytes3)
-                        ),
-                        Container
-                          (child: Image.memory(customerInformationOnlyBytes3)
-                        ),
-                      ],
-                    ),
-
-                  ):
-                  Center(
-                      child:
-                      Container
-                        (
-                          child: Image.memory(orderInformationForReciteWidgetBytes3)
-                      )
-                  ),
-
-
+                Container
+                  (
+                    child:
+                    orderInformationForReciteWidget(oneOrderForReceipt)
                 ),
-
-
-
-
-
 
                 Container
                   (
-                    child: Image.memory(totalCostDeliveryBytes3)
+                    child: customerInformationOnlyWidget(oneOrderForReceipt)
                 ),
 
 
@@ -10538,10 +10503,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderdocument,
       ImageAliasAnotherSource.Image imageResource,
 //      Uint8List orderInformationAndUserInformationTopInBytes,
+      /*
       Uint8List orderInformationForReciteWidgetBytes2,
-      Uint8List customerInformationOnlyBytes2,
+      Uint8List customerInformationOnlyBytes2, */
       Uint8List restaurantNameImageBytes,
-      Uint8List totalCostDeliveryBytes2,
+      /* Uint8List totalCostDeliveryBytes2,*/
       /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */
       ) async {
     print(' came here: printTicketDummy');
@@ -10556,9 +10522,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
       oneOrderdocument,
       restaurantNameImageBytes,
 //        orderInformationAndUserInformationTopInBytes,
+      /*
       orderInformationForReciteWidgetBytes2,
       customerInformationOnlyBytes2,
+
       totalCostDeliveryBytes2,
+
+     */
       /*paidUnpaidDeliveryTypeWidgetBytes2 */
     );
   }
@@ -11160,7 +11130,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ]);
 
-        ticket.hr();
+    ticket.hr();
 
     // Price 3  Total
     ticket.row([
@@ -11753,11 +11723,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
       (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
           =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 4,styles: PosStyles(bold:true) ),
+          width: 4,styles: PosStyles(bold:true) ),
       PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
-        width: 4, styles: PosStyles(bold:true)),
+          width: 4, styles: PosStyles(bold:true)),
       PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
-        width: 4, styles: PosStyles(bold:true)),
+          width: 4, styles: PosStyles(bold:true)),
 
     ]);
 
@@ -11966,7 +11936,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           customerInformationOnlyBytes2, */
           /*orderInformationAndUserInformationTopInBytes2, */
           restaurantNameBytesNotFuture2,
-         /* totalCostDeliveryBytes2 ,*/
+          /* totalCostDeliveryBytes2 ,*/
           /* paidUnpaidDeliveryTypeInBytes2 */
         )) :
     (oneOrderData2.orderBy.toLowerCase() == 'phone') ?
@@ -11987,7 +11957,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       thisRestaurant2,
       oneOrderData2,
       /*orderInformationAndUserInformationTopInBytes2, */
-     /* orderInformationForReciteWidgetBytes2,
+      /* orderInformationForReciteWidgetBytes2,
       customerInformationOnlyBytes2, */
       restaurantNameBytesNotFuture2,
       /* totalCostDeliveryBytes2, */
@@ -12162,7 +12132,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             'orderInformationForReciteWidgetBytes: $orderInformationForReciteWidgetBytes');
 
 */
-        /*
+      /*
         customerInformationOnlyFutureBytes.whenComplete(() {
 
         }
@@ -12172,56 +12142,56 @@ class _ShoppingCartState extends State<ShoppingCart> {
           */
 
 
-          Future<bool> isPrint =
-          printTicket2(
-            paper,
-            thisRestaurant,
-            oneOrderData /*,imageRestaurant */,
+      Future<bool> isPrint =
+      printTicket2(
+        paper,
+        thisRestaurant,
+        oneOrderData /*,imageRestaurant */,
 //              orderInformationAndUserInformationTopInBytes,
 
-            /*
+        /*
             orderInformationForReciteWidgetBytes,
             customerInformationOnlyBytes, */
-            restaurantNameBytesNotFuture,
-            /* totalCostDeliveryBytes, */
-            /*paidUnpaidDeliveryTypeInBytes*/
-          );
+        restaurantNameBytesNotFuture,
+        /* totalCostDeliveryBytes, */
+        /*paidUnpaidDeliveryTypeInBytes*/
+      );
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
 
-          isPrint.whenComplete(() {
-            print("called when future completes");
+      isPrint.whenComplete(() {
+        print("called when future completes");
 //          return true;
-          }
-          ).then((printResult) async {
-            if (printResult == true) {
-              print("printResult: $printResult");
-              Future<String> docID = shoppingCartBloc
-                  .recitePrinted(oneOrderForReceipt.orderdocId, 'Done');
+      }
+      ).then((printResult) async {
+        if (printResult == true) {
+          print("printResult: $printResult");
+          Future<String> docID = shoppingCartBloc
+              .recitePrinted(oneOrderForReceipt.orderdocId, 'Done');
 
 
 //              --
 
 
-              docID.whenComplete(() => print('printing completed..')).then((
-                  value) {
-                print(
-                    'docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
-                return true;
-              }).catchError((onError) {
-                return false;
-              });
-//            --
-              return false;
-            }
-            else {
-              return false;
-            }
+          docID.whenComplete(() => print('printing completed..')).then((
+              value) {
+            print(
+                'docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
+            return true;
           }).catchError((onError) {
-            print('printing not successful: $onError');
             return false;
           });
-          /*
+//            --
+          return false;
+        }
+        else {
+          return false;
+        }
+      }).catchError((onError) {
+        print('printing not successful: $onError');
+        return false;
+      });
+      /*
 
         })
             .catchError((onError) {
@@ -12232,7 +12202,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           return false;
         });
         */
-          /*
+      /*
       }).catchError((onError) {
         print(' error handler for getting order Information ForReciteWidgetBytes');
         print('false: means something wrong not printed');
@@ -12333,6 +12303,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print(' error in getting restaurant name as image--22');
     });
 
+    /*
     // Print image
     Widget totalDeliveryWidget2 =
     subTotalTotalDeliveryCost(oneOrderForReceipt.totalPrice);
@@ -12352,6 +12323,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }).catchError((onError) {
       print(' error in getting restaurant name as image--33');
     });
+
+    */
 
 //                            _handleSignIn();
 
@@ -12373,6 +12346,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        print("restaurantNameBytes.whenComplete called when future completes");
 //      }).then((paidUnpaidDeliveryTypeInBytes) {
 
+      /*
+
       Widget orderInformationForReciteOnly =
       orderInformationForReciteWidget(oneOrderData);
 
@@ -12382,6 +12357,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       createImageFromWidget(orderInformationForReciteOnly);
 
 
+
       Widget customerInformationOnly =
       customerInformationOnlyWidget(oneOrderData);
       final Future<Uint8List> customerInformationOnlyFutureBytes =
@@ -12389,10 +12365,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+      */
+      /* Uint8List paidUnpaidDeliveryTypeWidgetBytes; */
 
       /* await */
-      orderInformationForReciteWidgetFutureBytes
+      /* orderInformationForReciteWidgetFutureBytes
           .whenComplete(() {})
           .then((orderInformationForReciteWidgetBytes) {
         print(
@@ -12402,34 +12379,39 @@ class _ShoppingCartState extends State<ShoppingCart> {
             .whenComplete(() {})
             .then((customerInformationOnlyBytes) {
           print(
-              'customerInformationOnlyBytes -----DummyPrint---: $customerInformationOnlyBytes');
+              'customerInformationOnlyBytes -----DummyPrint---: '
+                  '$customerInformationOnlyBytes');
+          */
 
 
 
-          printTicketDummy2(
-            /*paper, */
-            thisRestaurant,
-            oneOrderData,
-            imageRestaurant,
-            // orderInformationAndUserInformationTopInBytes,
+      printTicketDummy2(
+        /*paper, */
+        thisRestaurant,
+        oneOrderData,
+        imageRestaurant,
+        // orderInformationAndUserInformationTopInBytes,
+        /*
             orderInformationForReciteWidgetBytes,
-            customerInformationOnlyBytes,
-            restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes,
-            /*paidUnpaidDeliveryTypeInBytes */
-          );
-        }).catchError((onError) {
+            customerInformationOnlyBytes,*/
+        restaurantNameBytesNotFuture,
+        /*totalCostDeliveryBytes, */
+        /*paidUnpaidDeliveryTypeInBytes */
+      );
+
+      /*  }).catchError((onError) {
           print(' error in getting restaurant name as image--44');
           print('false: means something wrong not printed');
           //means something wrong not printed
           return false;
         });
-      }).catchError((onError) {
+    */
+      /* }).catchError((onError) {
         print(' error in getting restaurant name as image--55');
         print('false: means something wrong not printed');
         //means something wrong not printed
         return false;
-      });
+      }); */
 //        }).catchError((onError) {
 //          print(' error in getting restaurant name as image--66');
 //          print('false: means something wrong not printed');
