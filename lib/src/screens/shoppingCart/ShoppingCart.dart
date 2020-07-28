@@ -6299,6 +6299,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                                             // do it in both Container
                                             child: TextField(
+
+                                              keyboardType: TextInputType.phone,
+                                              inputFormatters: <TextInputFormatter>[
+                                                WhitelistingTextInputFormatter.digitsOnly,],
+
                                               controller: phoneNumberController,
 
 
@@ -6355,25 +6360,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
                                               },
 
-                                              /*
-                                                        onTap: () {
-                                                          if ((currentUser.address
-                                                              .trim()
-                                                              .length) > 0 ||
-                                                              (currentUser.flatOrHouseNumber
-                                                                  .trim()
-                                                                  .length) > 0 ||
-                                                              (currentUser.etaTimeInMinutes !=-1
-                                                                  )) {
-                                                            showEditingCompleteCustomerHouseFlatIformation =
-                                                            true;
-                                                          } else {
-                                                            setState(() =>
-                                                            showFullOrderType = false);
-                                                          }
-                                                        },
-                                                        */
-
                                               onTap: () {
                                                 setState(() {
                                                   showFullOrderType
@@ -6403,39 +6389,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                   showEditingCompleteCustomerPhoneIformation =
                                                   true
 //                                          showInputtedCustomerIformation= true,
-
                                                 }
-
                                                 );
                                               },
 
-/*
-                                                                          onSubmitted: (String value) async {
-                                                                            await showDialog<void>(
-                                                                              context: context,
-                                                                              builder: (BuildContext context) {
-                                                                                return AlertDialog(
-                                                                                  title: const Text('Thanks!'),
-                                                                                  content: Text ('You typed "$value".'),
-                                                                                  actions: <Widget>[
-                                                                                    FlatButton(
-                                                                                      onPressed: () { Navigator.pop(context); },
-                                                                                      child: const Text('OK'),
-                                                                                    ),
-                                                                                  ],
-                                                                                );
-                                                                              },
-                                                                            );
-                                                                          },
-                                                                            */
                                             ),
 
                                           )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
                                         ],
                                       ),
                                     ),
@@ -7319,6 +7279,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                         // do it in both Container
                         child: TextField(
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: <TextInputFormatter>[
+                            WhitelistingTextInputFormatter.digitsOnly
+                          ],
 
                           textAlign: TextAlign.center,
                           textInputAction: TextInputAction.next,
@@ -7374,32 +7338,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             }
                             );
                           },
-                          /*
 
-                                                            onEditingComplete: (){
-                                                              logger.i('onEditingComplete  of condition 4');
-                                                              print('called onEditing complete');
-                                                              setState(() => _searchString = "");
-                                                            },
-
-                                                            onSubmitted: (String value) async {
-                                                              await showDialog<void>(
-                                                                context: context,
-                                                                builder: (BuildContext context) {
-                                                                  return AlertDialog(
-                                                                    title: const Text('Thanks!'),
-                                                                    content: Text ('You typed "$value".'),
-                                                                    actions: <Widget>[
-                                                                      FlatButton(
-                                                                        onPressed: () { Navigator.pop(context); },
-                                                                        child: const Text('OK'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              );
-                                                            },
-                                                              */
                         ),
 
                       )
