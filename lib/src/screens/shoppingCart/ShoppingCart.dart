@@ -10595,6 +10595,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
+    ticket.feed(1);
+
 //    ticket.feed(2);
 
     //4... TAKEAWAY...
@@ -10643,7 +10645,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // found not required..
 
     //5... PAID OR UNPAID...
-
+    ticket.feed(1);
 
     oneOrderData3.paidStatus.toLowerCase() == 'paid'?
     ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
@@ -10688,8 +10690,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
 
 
-
-    ticket.hr();
     // needed. as per design.
 
     ticket.feed(1);
@@ -10838,6 +10838,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.image(oneImageRestaurant);
 
+    ticket.feed(1);
+
 //    ticket.feed(2);
 
 
@@ -10883,7 +10885,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ]);
 
-    ticket.hr();
+    ticket.feed(1);
+
+//    ticket.hr();
 
 //    ticket.feed(2);
 
@@ -10917,9 +10921,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.row([
 
       PosColumn(text: 'phone:',
-          width: 4,styles: PosStyles(bold:true) ),
+          width: 8,styles: PosStyles(bold:true) ),
       PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
-          width: 8, styles: PosStyles(bold:true)),
+          width: 4, styles: PosStyles(bold:true)),
 
 
     ]);
@@ -10932,7 +10936,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    ticket.feed(2);
 
 
-    ticket.hr();
+    ticket.feed(1);
+//    ticket.hr();
     //3...
 
 
@@ -10962,6 +10967,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
+
+    ticket.feed(1);
 //    ticket.feed(2);
 
     //4... DELIVERY...
@@ -11258,8 +11265,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: 4, styles: PosStyles(bold:true)),
 
     ]);
+    ticket.feed(1);
 
-    ticket.hr();
+//    ticket.hr();
 
 //    ticket.feed(2);
 
@@ -11298,6 +11306,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     ]);
+    ticket.feed(1);
 
 
 
@@ -11307,7 +11316,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    ticket.feed(2);
 
 
-    ticket.hr();
+//    ticket.hr();
 
     //3...
 
@@ -11338,6 +11347,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
+
+    ticket.feed(1);
 //    ticket.feed(2);
 
     //4... PHONE...ORDER...
@@ -11352,7 +11363,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     */
 
 
-    ticket.hr();
+//    ticket.hr();
 
     // Price 3  Total
     ticket.row([
@@ -11368,6 +11379,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
+
+    ticket.feed(1);
 
 
 
@@ -11423,7 +11436,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    ticket.hr();
+//    ticket.hr();
     // needed. as per design.
 
     ticket.feed(1);
@@ -11582,6 +11595,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //DDDDDDDD
 
 
+    ticket.feed(1);
 
 
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
@@ -11620,6 +11634,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     //3...
 
+    ticket.feed(1);
 
     orderedItems.forEach((oneFood) {
       ticket.row([
@@ -11647,6 +11662,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       // needed. as per design.
 
     });
+    ticket.feed(1);
 //    ticket.feed(2);
 
     //4... dinningRoom...
@@ -11697,6 +11713,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
     ]);
+
+    ticket.feed(1);
 
 //    ticket.hr();
 
@@ -11749,21 +11767,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    ticket.hr();
+    ticket.feed(1);
+
     // needed. as per design.
 
     ticket.feed(1);
 
-
     ticket.cut();
     return ticket;
-
-
-
-
-
-
-
 
     //--4
   }
