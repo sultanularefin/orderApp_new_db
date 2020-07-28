@@ -8511,7 +8511,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
-
                         if (printResult == true) {
                           logger.i('printResult==true i.e. print successfull');
                           shoppingCartBloc.clearSubscription();
@@ -8545,7 +8544,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 },
 
-                
+
                 // ---
               ),
             ),
@@ -10588,9 +10587,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
       /*ImageAliasAnotherSource.Image imageResource2, */
       /* Uint8List orderInformationAndUserInformationTopInBytes3, */
-      Uint8List orderInformationForReciteWidgetBytes3,
-      Uint8List customerInformationOnlyBytes3,
-      Uint8List restaurantNameBytesNotFuture3, // FOR restaurant Name in diffrent font as image only
+
+      /* Uint8List orderInformationForReciteWidgetBytes3, */
+
+      /* Uint8List customerInformationOnlyBytes3,*/
+
+      Uint8List restaurantNameBytesNotFuture3,
+      // FOR restaurant Name in diffrent font as image only
       /*Uint8List totalCostDeliveryBytes3,*/
       /* Uint8List paidUnpaidDeliveryTypeInBytes3 */
       /*PaperSize paper,Restaurant currentRestaurant  */) async {
@@ -10701,11 +10704,40 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //2...
+    /*
     final ImageAliasAnotherSource
         .Image orderInformationForReciteWidgetTakeAway3 = ImageAliasAnotherSource.decodeImage(
         orderInformationForReciteWidgetBytes3);
 
     ticket.image(orderInformationForReciteWidgetTakeAway3);
+
+    */
+
+    ticket.row([
+
+      PosColumn(text: 'order type',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: 'ordering time',
+        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'production Time',
+        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+    ]);
+
+    ticket.row([
+
+      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
+      (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
+          =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
+          width: 4,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
+          width: 4, styles: PosStyles(bold:true)),
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
+          width: 4, styles: PosStyles(bold:true)),
+
+    ]);
+
+    ticket.hr();
 
 //    ticket.feed(2);
 
@@ -10863,8 +10895,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
       /*Uint8List orderInformationAndUserInformationTopInBytes3,*/
-      Uint8List orderInformationForReciteWidgetBytes3,
-      Uint8List customerInformationOnlyBytes3,
+
+      /* Uint8List orderInformationForReciteWidgetBytes3, */
+      /* Uint8List customerInformationOnlyBytes3, */
 
       Uint8List restaurantNameBytesNotFuture3,
       /* Uint8List totalCostDeliveryBytes3, */
@@ -10979,26 +11012,90 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    ticket.feed(2);
 
 
+
+//    ticket.feed(2);
+
+
     //2.1 ...
+    /*
     final ImageAliasAnotherSource
-        .Image orderInformationForReciteWidgetDeliver3 = ImageAliasAnotherSource.decodeImage(
+        .Image orderInformationForReciteWidgetPhone3 = ImageAliasAnotherSource.decodeImage(
         orderInformationForReciteWidgetBytes3);
 
-    ticket.image(orderInformationForReciteWidgetDeliver3);
+    ticket.image(orderInformationForReciteWidgetPhone3);
+
+    */
+
+
+    ticket.row([
+
+      PosColumn(text: 'order type',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: 'ordering time',
+        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'production Time',
+        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+    ]);
+
+    ticket.row([
+
+      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
+      (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
+          =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
+          width: 4,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
+          width: 4, styles: PosStyles(bold:true)),
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
+          width: 4, styles: PosStyles(bold:true)),
+
+    ]);
+
+    ticket.hr();
 
 //    ticket.feed(2);
 
 
     //2.2 ...
+
+    /*
     final ImageAliasAnotherSource
-        .Image customerInformationOnlyBytes3Delivery3 = ImageAliasAnotherSource.decodeImage(
+        .Image customerInformationOnlyBytes3Phone3 = ImageAliasAnotherSource.decodeImage(
         customerInformationOnlyBytes3);
 
-    ticket.image(customerInformationOnlyBytes3Delivery3);
+    ticket.image(customerInformationOnlyBytes3Phone3);
+
+    */
+
+
+
+
+    ticket.row([
+
+      PosColumn(text: 'street name',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: 'flat number',
+        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'phone number',
+        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+    ]);
+
+    ticket.row([
+
+      PosColumn(text: '${customerForReciteGeneration.address}',
+          width: 4,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
+          width: 4, styles: PosStyles(bold:true)),
+      PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
+          width: 4, styles: PosStyles(bold:true)),
+
+    ]);
 
 //    ticket.feed(2);
 
 
+    ticket.hr();
     //3...
 
 
@@ -11171,8 +11268,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
       /*Uint8List orderInformationAndUserInformationTopInBytes3, */
-      Uint8List orderInformationForReciteWidgetBytes3,
-      Uint8List customerInformationOnlyBytes3,
+
+      /* Uint8List orderInformationForReciteWidgetBytes3, */
+      /* Uint8List customerInformationOnlyBytes3, */
+
       Uint8List restaurantNameBytesNotFuture3,
 
       /* Uint8List totalCostDeliveryBytes3, */
@@ -11288,25 +11387,86 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    ticket.feed(2);
 
 
-    //2.1 ...
+    //2.1 ... phone
+    /*
     final ImageAliasAnotherSource
         .Image orderInformationForReciteWidgetPhone3 = ImageAliasAnotherSource.decodeImage(
         orderInformationForReciteWidgetBytes3);
 
     ticket.image(orderInformationForReciteWidgetPhone3);
 
+    */
+
+
+    ticket.row([
+
+      PosColumn(text: 'order type',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: 'ordering time',
+        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'production Time',
+        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+    ]);
+
+    ticket.row([
+
+      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
+      (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
+          =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
+          width: 4,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
+          width: 4, styles: PosStyles(bold:true)),
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
+          width: 4, styles: PosStyles(bold:true)),
+
+    ]);
+
+    ticket.hr();
+
 //    ticket.feed(2);
 
 
     //2.2 ...
+
+    /*
     final ImageAliasAnotherSource
         .Image customerInformationOnlyBytes3Phone3 = ImageAliasAnotherSource.decodeImage(
         customerInformationOnlyBytes3);
 
     ticket.image(customerInformationOnlyBytes3Phone3);
 
+    */
+
+
+
+
+    ticket.row([
+
+      PosColumn(text: 'street name',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: 'flat number',
+        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'phone number',
+        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+    ]);
+
+    ticket.row([
+
+      PosColumn(text: '${customerForReciteGeneration.address}',
+          width: 4,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
+          width: 4, styles: PosStyles(bold:true)),
+      PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
+          width: 4, styles: PosStyles(bold:true)),
+
+    ]);
+
 //    ticket.feed(2);
 
+
+    ticket.hr();
 
     //3...
 
@@ -11448,8 +11608,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       OneOrderFirebase oneOrderData3,
       /*ImageAliasAnotherSource.Image imageResource2, */
       /* Uint8List orderInformationAndUserInformationTopInBytes3, */
-      Uint8List orderInformationForReciteWidgetBytes3,
-      Uint8List customerInformationOnlyBytes3,
+
+      /* Uint8List orderInformationForReciteWidgetBytes3, */
+      /* Uint8List customerInformationOnlyBytes3, */
       Uint8List restaurantNameBytesNotFuture3,
 
       /* Uint8List totalCostDeliveryBytes3, */
@@ -11566,12 +11727,53 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    ticket.feed(2);
 
 
-    //2...
+    //2... print orderInformation.... DinningRoom ---->
+
+    //DDDDDDDD
+
+
+
+
+    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
+        .orderProductionTime}');
+
+    ticket.row([
+
+      PosColumn(text: 'order type',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: 'ordering time',
+        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: 'production Time',
+        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
+
+    ]);
+
+    ticket.row([
+
+      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
+      (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
+          =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        width: 4,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
+        width: 4, styles: PosStyles(bold:true)),
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min}',
+        width: 4, styles: PosStyles(bold:true)),
+
+    ]);
+
+    /*
+
     final ImageAliasAnotherSource
         .Image orderInformationForReciteWidgetDinningRoom3 = ImageAliasAnotherSource.decodeImage(
         orderInformationForReciteWidgetBytes3);
 
     ticket.image(orderInformationForReciteWidgetDinningRoom3);
+
+    */
+
+
+
+
 
 //    ticket.feed(2);
 
@@ -11739,10 +11941,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant thisRestaurant2,
       OneOrderFirebase oneOrderData2,
 //      Uint8List orderInformationAndUserInformationTopInBytes2,
-      Uint8List orderInformationForReciteWidgetBytes2,
-      Uint8List customerInformationOnlyBytes2,
+
+      /*Uint8List orderInformationForReciteWidgetBytes2,
+      Uint8List customerInformationOnlyBytes2, */
       Uint8List restaurantNameBytesNotFuture2,
-      Uint8List totalCostDeliveryBytes2,
+      /*Uint8List totalCostDeliveryBytes2,*/
       /*Uint8List paidUnpaidDeliveryTypeInBytes2 */) async {
     // pqr
 //    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
@@ -11759,8 +11962,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           paper,
           thisRestaurant2,
           oneOrderData2,
-          orderInformationForReciteWidgetBytes2,
-          customerInformationOnlyBytes2,
+          /* orderInformationForReciteWidgetBytes2,
+          customerInformationOnlyBytes2, */
           /*orderInformationAndUserInformationTopInBytes2, */
           restaurantNameBytesNotFuture2,
          /* totalCostDeliveryBytes2 ,*/
@@ -11771,9 +11974,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       paper,
       thisRestaurant2,
       oneOrderData2,
-      /*orderInformationAndUserInformationTopInBytes2, */
-      orderInformationForReciteWidgetBytes2,
-      customerInformationOnlyBytes2,
+      /* orderInformationAndUserInformationTopInBytes2, */
+      /* orderInformationForReciteWidgetBytes2,
+      customerInformationOnlyBytes2, */
       restaurantNameBytesNotFuture2,
       /* totalCostDeliveryBytes2,*/
       /*paidUnpaidDeliveryTypeInBytes2 */
@@ -11784,8 +11987,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       thisRestaurant2,
       oneOrderData2,
       /*orderInformationAndUserInformationTopInBytes2, */
-      orderInformationForReciteWidgetBytes2,
-      customerInformationOnlyBytes2,
+     /* orderInformationForReciteWidgetBytes2,
+      customerInformationOnlyBytes2, */
       restaurantNameBytesNotFuture2,
       /* totalCostDeliveryBytes2, */
       /* paidUnpaidDeliveryTypeInBytes2 */
@@ -11796,8 +11999,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           thisRestaurant2,
           oneOrderData2,
           /*orderInformationAndUserInformationTopInBytes2,*/
-          orderInformationForReciteWidgetBytes2,
-          customerInformationOnlyBytes2,
+          /*orderInformationForReciteWidgetBytes2,
+          customerInformationOnlyBytes2,*/
           restaurantNameBytesNotFuture2,
           /* totalCostDeliveryBytes2, */
           /*paidUnpaidDeliveryTypeInBytes2 */
@@ -11882,6 +12085,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       return false;
     });
 
+    /*
     // Print image
     Widget totalDeliveryWidget2 = subTotalTotalDeliveryCost(
         oneOrderForReceipt.totalPrice);
@@ -11908,12 +12112,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print(' error in getting totalDeliveryWidgetBytes');
       return false;
     });
+    */
+
 
 
 //                            _handleSignIn();
 
     /* await */
-    testFirebaseOrderFetch.whenComplete(() {
+    testFirebaseOrderFetch.whenComplete(()
+    {
       print("called when future completes");
     }
     ).then((oneOrderData) {
@@ -11925,6 +12132,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+      /*
       Widget orderInformationForReciteOnly = orderInformationForReciteWidget(
           oneOrderData);
 
@@ -11938,11 +12146,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       final Future<Uint8List> customerInformationOnlyFutureBytes = createImageFromWidget(
           customerInformationOnly);
+      */
 
-      Uint8List paidUnpaidDeliveryTypeWidgetBytes;
+      /* Uint8List paidUnpaidDeliveryTypeWidgetBytes; */
 
 
-
+/*
 
       /* await */
       orderInformationForReciteWidgetFutureBytes.whenComplete(() {
@@ -11952,13 +12161,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
         print(
             'orderInformationForReciteWidgetBytes: $orderInformationForReciteWidgetBytes');
 
-
+*/
+        /*
         customerInformationOnlyFutureBytes.whenComplete(() {
 
         }
         ).then((customerInformationOnlyBytes) {
           print(
               'customerInformationOnlyBytes: $customerInformationOnlyBytes');
+          */
 
 
           Future<bool> isPrint =
@@ -11967,10 +12178,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
             thisRestaurant,
             oneOrderData /*,imageRestaurant */,
 //              orderInformationAndUserInformationTopInBytes,
+
+            /*
             orderInformationForReciteWidgetBytes,
-            customerInformationOnlyBytes,
+            customerInformationOnlyBytes, */
             restaurantNameBytesNotFuture,
-            totalCostDeliveryBytes,
+            /* totalCostDeliveryBytes, */
             /*paidUnpaidDeliveryTypeInBytes*/
           );
 
@@ -12008,20 +12221,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
             print('printing not successful: $onError');
             return false;
           });
+          /*
+
         })
             .catchError((onError) {
           print(
-              ' error handler for gettingorderInformationForReciteWidgetBytes');
+              ' error handler for gettin customerInformationOnlyBytes ForReciteWidgetBytes');
           print('false: means something wrong not printed');
           //means something wrong not printed
           return false;
         });
+        */
+          /*
       }).catchError((onError) {
-        print(' error handler for getting orderInformationForReciteWidgetBytes');
+        print(' error handler for getting order Information ForReciteWidgetBytes');
         print('false: means something wrong not printed');
         //means something wrong not printed
         return false;
-      });
+      }); */
 
 
 //      if ((oneOrderData.orderType != null) ||(oneOrderData.totalPrice !=null)) {
