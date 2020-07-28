@@ -10326,9 +10326,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        'paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
 
 
-    final ImageAliasAnotherSource
-        .Image orderInformationForReciteWidgetBytes3InBytesTest = ImageAliasAnotherSource.decodeImage(
-        orderInformationForReciteWidgetBytes3);
+//    final ImageAliasAnotherSource
+//        .Image orderInformationForReciteWidgetBytes3InBytesTest = ImageAliasAnotherSource.decodeImage(
+//        orderInformationForReciteWidgetBytes3);
 
 
 //    final ImageAliasAnotherSource
