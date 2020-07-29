@@ -10927,13 +10927,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
       customerForReciteGeneration.address.substring(0, 18) + '_ _' :
       customerForReciteGeneration.address}',
           width: 9,styles: PosStyles(
-    height: PosTextSize.size1,
-    width: PosTextSize.size1,
-    ) ),
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold:true,
+          ) ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
           width: 3, styles: PosStyles(
             height: PosTextSize.size1,
             width: PosTextSize.size1,
+            bold:true,
           )),
 
 
@@ -10944,7 +10946,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
-//          bold:true,
+          bold:true,
           align: PosAlign.center,
         ));
 
