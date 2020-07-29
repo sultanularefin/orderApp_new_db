@@ -172,6 +172,14 @@ class FoodGalleryBloc implements Bloc {
       docList.forEach((doc) {
 
         final String foodItemName = doc['name'];
+
+        if('foodItemName'.toLowerCase()=='opra'){
+
+          logger.i('---------------------------- found opra');
+          logger.i('opra food item found');
+        }
+
+
 //      print('foodItemName $foodItemName');
 
         final String foodItemDocumentID = doc.documentID;

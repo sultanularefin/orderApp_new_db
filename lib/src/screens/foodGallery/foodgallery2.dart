@@ -1950,6 +1950,8 @@ Widget work1(BuildContext context){
                     );
                 }
                 else {
+
+                  //searchString2 != ''
 //              filteredItemsByCategory = allFoods.where((oneItem) =>
 //              oneItem.categoryName.
 //              toLowerCase() ==
@@ -2051,7 +2053,9 @@ Widget work1(BuildContext context){
   }
 
 
-  Widget foodListBySearchString(List<FoodItemWithDocID> filteredItemsBySearchString,BuildContext context)  {
+  Widget foodListBySearchString(
+      List<FoodItemWithDocID> filteredItemsBySearchString,
+      BuildContext context)  {
 
     return Container(
       height: displayHeight(context) -
@@ -2102,9 +2106,14 @@ Widget work1(BuildContext context){
 
           final dynamic euroPrice = foodSizePrice['normal'];
 
+          print('name: $foodItemName and euroPrice $euroPrice at 2109 ');
+
 //                num euroPrice2 = tryCast(euroPrice);
           double euroPrice2 = tryCast<double>(
               euroPrice, fallback: 0.00);
+
+          print('name: $foodItemName and euroPrice2 $euroPrice2 at 2115 ');
+
 
 
           String euroPrice3 = euroPrice2.toStringAsFixed(2);

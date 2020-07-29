@@ -10979,11 +10979,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +' euro' }',
             width: 6),
 
-
-
-
       ]);
-
 
       ticket.hr();
       // needed. as per design. when one food Item is printed then an hr added.
