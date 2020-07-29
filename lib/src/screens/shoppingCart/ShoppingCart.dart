@@ -10442,7 +10442,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
+    print('restaurantNameBytesNotFuture3: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
@@ -10757,7 +10757,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
+    print('restaurantNameBytesNotFuture3 line # 10760: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
@@ -11156,7 +11156,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
+    print('restaurantNameBytesNotFuture3 line# 11159: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
@@ -11506,7 +11506,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2: $restaurantNameBytesNotFuture3');
+    print('restaurantNameImageBytes2 line # 11509: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
@@ -12186,6 +12186,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       print('calling ticket.image(imageRestaurant); ');
       restaurantNameBytesNotFuture = oneImageInBytes;
+
+      print('restaurantNameBytesNotFuture: $restaurantNameBytesNotFuture');
 //      ticket.image(imageRestaurant);
     }).catchError((onError) {
       print(' error in getting restaurant name as image--22');
