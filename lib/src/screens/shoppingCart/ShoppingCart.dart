@@ -10491,6 +10491,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  /*
+    Future<Ticket> demoReceiptOrderTypeDelivery(
+      PaperSize paper,
+      Restaurant thisRestaurant3,
+      OneOrderFirebase oneOrderData3,
+      Uint8List restaurantNameBytesNotFuture3,
+      ) async {
+
+  */
   // # number 1: demoReceipt Order Type TakeAway begins here...
 
 
@@ -10526,7 +10535,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print(
         'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
             .etaTimeInMinutes}');
-    print('restaurantNameBytesNotFuture3: $restaurantNameBytesNotFuture3');
+    print('restaurantNameBytesNotFuture3---takeAway---> : $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
     print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
         .orderProductionTime}');
@@ -10613,7 +10622,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: 4, styles: PosStyles(bold:true)),
 
     ]);
-    ticket.feed(1);
+    ticket.feed(2);
 
     //3...
 
@@ -10660,7 +10669,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //4... TAKEAWAY...
-    ticket.feed(1);
+    ticket.feed(2);
 
 
     // Price 1 subtotal takeAway..
@@ -10886,20 +10895,40 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     //2.2 ... customer information for delivery order type...
 
+    /*
+
+     Container(
+                height:50,
+                child: Text(
+                  ((customerForReciteGeneration.address == null) ||
+                      (customerForReciteGeneration.address.length == 0)) ?
+                  '----' : customerForReciteGeneration.address.length > 39 ?
+                  customerForReciteGeneration.address.substring(0, 35) + '...' :
+                  customerForReciteGeneration.address,
+
+                  textAlign: TextAlign.left,
+                  maxLines: 2,
+                  style: TextStyle(
+
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+
+                    fontSize: 18, fontFamily: 'Itim-Regular',),
+
+                ),
+              ),
+
+    */
     ticket.row([
 
-      PosColumn(text: '${customerForReciteGeneration.address}',
-          width: 8,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${((customerForReciteGeneration.address == null) ||
+          (customerForReciteGeneration.address.length == 0)) ?
+      '----' : customerForReciteGeneration.address.length > 8 ?
+      customerForReciteGeneration.address.substring(0, 6) + '..' :
+      customerForReciteGeneration.address}',
+          width: 5,styles: PosStyles(bold:true) ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
-          width: 4, styles: PosStyles(bold:true)),
-
-
-    ]);
-
-    ticket.row([
-
-      PosColumn(text: 'phone:',
-          width: 8,styles: PosStyles(bold:true) ),
+          width: 3, styles: PosStyles(bold:true)),
       PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
           width: 4, styles: PosStyles(bold:true)),
 
@@ -10907,7 +10936,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ]);
 
 
-    ticket.feed(1);
+
+    ticket.feed(2);
 
 
     //3...
@@ -10942,7 +10972,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
-    ticket.feed(1);
+    ticket.feed(2);
 //    ticket.feed(2);
 
     //4... DELIVERY...
@@ -11211,7 +11241,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ]);
 
-    ticket.feed(1);
+    ticket.feed(2);
 
 
     //3... order list for phone order...
@@ -11242,7 +11272,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     });
 
-    ticket.feed(1);
+    ticket.feed(2);
 
 
     //4... PHONE...ORDER...
@@ -11462,7 +11492,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     //3... dinning order type....
 
-    ticket.feed(1);
+    ticket.feed(2);
 
     orderedItems.forEach((oneFood) {
       ticket.row([
@@ -11492,7 +11522,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     });
 
 
-    ticket.feed(1);
+    ticket.feed(2);
 //    ticket.feed(2);
 
     //4... dinningRoom...
@@ -11600,6 +11630,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ) async {
     // pqr
 
+
+    print('restaurantNameBytesNotFuture2:: $restaurantNameBytesNotFuture2');
 
     print('oneOrderdocument.orderBy: ${oneOrderData2.orderBy}');
 
