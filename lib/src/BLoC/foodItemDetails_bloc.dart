@@ -202,116 +202,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   */
 
 
-  void getAllCheeseItemsConstructor() async {
 
 
-    var snapshot = await _client.fetchAllCheesesORjuusto();
-    List docList = snapshot.documents;
-
-
-
-    List <CheeseItem> cheeseItems = new List<CheeseItem>();
-    cheeseItems = snapshot.documents.map((documentSnapshot) =>
-        CheeseItem.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
-
-    ).toList();
-
-
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
-    ).toList();
-
-
-    cheeseItems.forEach((oneCheeseItem) {
-
-
-
-      if(oneCheeseItem.sl==1){
-        oneCheeseItem.isSelected=true;
-        oneCheeseItem.isDefaultSelected=true;
-      }
-    }
-
-    );
-
-//    print('Ingredient documents are: $documents');
-
-
-    _allCheeseItemsDBloc = cheeseItems;
-
-    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
-
-
-//    return ingItems;
-
-
-    _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
-
-
-
-    logger.w('_allSelectedCheeseItems at getAllCheeseItemsConstructor():'
-        ' $_allSelectedCheeseItems');
-
-//    _selectedSauceListController.sink.add(_allSelectedSauceItems);
-//    _allSelectedCheeseItems =
-    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
-
-
-
-  }
-
-  void getAllSaucesConstructor() async {
-
-
-    var snapshot = await _client.fetchAllSauces();
-    List docList = snapshot.documents;
-
-
-
-    List <SauceItem> sauceItems = new List<SauceItem>();
-    sauceItems = snapshot.documents.map((documentSnapshot) =>
-        SauceItem.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
-
-    ).toList();
-
-
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
-    ).toList();
-
-//    print('Ingredient documents are: $documents');
-
-
-    sauceItems.forEach((oneSauceItem) {
-
-      if(oneSauceItem.sl==1){
-
-        print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
-            ''
-            'condition oneSauceItem.sl==1 is true');
-
-        oneSauceItem.isSelected=true;
-        oneSauceItem.isDefaultSelected=true;
-      }
-    }
-
-    );
-
-    _allSauceItemsDBloc = sauceItems;
-
-    _sauceItemsController.sink.add(_allSauceItemsDBloc);
-
-
-    _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
-
-    _selectedSauceListController.sink.add(_allSelectedSauceItems);
-
-
-//    return ingItems;
-
-  }
 
 
   void getAllIngredients() async {
@@ -360,71 +252,144 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
-  // CONSTRUCTOR BEGINS HERE.
-  FoodItemDetailsBloc(FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped ) {
 
-    getAllSaucesConstructor();
-
-    getAllCheeseItemsConstructor();
-//    if(allIngsScoped==[]) return;
-
-    // print("allIngsScoped: $allIngsScoped ");
-
-    // I THOUTHT THIS _allIngItemsDetailsBlock WILL CONTAIN DATA SINCE I SET THEM FROM FOODGALLERY PAGE BEFORE CALLING THE
-    // CONSTRUCTOR
-    /*
-     print("_allIngItemsDetailsBlock: $_allIngItemsDetailsBlock");
-    allIngsScoped= _allIngItemsDetailsBlock;
-
-    BUT THEY SHOW [].
-     */
-
-
-
-
-//    print(' 1 means from Food Gallery Page to Food Item Details Page');
-//    print(' which IS NORMAL');
-
-//    print("at the begin of Constructor [FoodItemDetailsBloc]");
-//    print("oneFoodItem ===> ===> ===> $oneFoodItem");
-    //  print("allIngsScoped _allIngItemsDetailsBlock ===> ===> ===> $_allIngItemsDetailsBlock");
-
-
-//    _oneFoodItem = oneFoodItem;
-
-
-    //  logger.w(" allIngsScoped: ", allIngsScoped);
-
-    //  print(" allIngsScoped: $allIngsScoped ");
-
-    /* Ordered Food Related codes starts here. */
-
+  void initiateSauces(List<SauceItem> sauceItems0) async {
 
     /*
-    CustomerInformation oneCustomerInfo = new CustomerInformation(
-      address: '',
-      flatOrHouseNumber: '',
-      phoneNumber: '',
-      etaTimeInMinutes: -1,
-//        CustomerInformation currentUser = _oneCustomerInfo;
-//    currentUser.address = address;
-//
 
-    );
-
-    Order constructorOrderFD = new Order(
-      selectedFoodInOrder: [],
-      selectedFoodListLength:0,
-      orderTypeIndex: 0,
-      paymentTypeIndex: 4,
-      ordersCustomer: oneCustomerInfo,
-    );
-
-
-    _currentSelectedFoodDetails = constructorOrderFD;
-
-    _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
+    var snapshot = await _client.fetchAllSauces();
+    List docList = snapshot.documents;
     */
+
+
+
+    List <SauceItem> sauceItems = sauceItems0;
+
+
+
+
+    /*
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+    */
+
+//    print('Ingredient documents are: $documents');
+
+
+    sauceItems.forEach((oneSauceItem) {
+
+      if(oneSauceItem.sl==1){
+
+        print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
+            ''
+            'condition oneSauceItem.sl==1 is true');
+
+        oneSauceItem.isSelected=true;
+        oneSauceItem.isDefaultSelected=true;
+      }
+    }
+
+    );
+
+    _allSauceItemsDBloc = sauceItems;
+
+    _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
+
+    _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
+
+    _selectedSauceListController.sink.add(_allSelectedSauceItems);
+
+
+//    return ingItems;
+
+  }
+
+
+
+  void initiateCheeseItems(List<CheeseItem> cheeseItems0 ) async {
+
+
+    /*
+    var snapshot = await _client.fetchAllCheesesORjuusto();
+    List docList = snapshot.documents;
+    */
+
+
+
+
+    List <CheeseItem> cheeseItems = cheeseItems0;
+    /*
+    cheeseItems = snapshot.documents.map((documentSnapshot) =>
+        CheeseItem.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+    */
+
+
+    cheeseItems.forEach((oneCheeseItem) {
+
+
+
+      if(oneCheeseItem.sl==1){
+        oneCheeseItem.isSelected=true;
+        oneCheeseItem.isDefaultSelected=true;
+      }
+    }
+
+    );
+
+//    print('Ingredient documents are: $documents');
+
+
+    _allCheeseItemsDBloc = cheeseItems;
+
+    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+
+//    return ingItems;
+
+
+    _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
+
+
+
+    logger.w('_allSelectedCheeseItems at initiateCheeseItems():'
+        ' $_allSelectedCheeseItems');
+
+//    _selectedSauceListController.sink.add(_allSelectedSauceItems);
+//    _allSelectedCheeseItems =
+    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+
+
+
+  }
+
+  // CONSTRUCTOR BEGINS HERE.
+  FoodItemDetailsBloc(
+      FoodItemWithDocID oneFoodItem,
+      List<NewIngredient> allIngsScoped ,
+      List<CheeseItem> tempCheeseItems,
+      List<SauceItem> tempSauceItems) {
+
+//    oneFoodItem,
+//    tempIngs,
+  
+
+
+    initiateSauces(tempSauceItems);
+
+    initiateCheeseItems(tempCheeseItems);
+
 
     /* Ordered Food Related codes ends here. */
 
@@ -457,14 +422,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List<String> ingredientStringsForWhereInClause;
 
 
-
-    //    oneFoodItem, List<NewIngredient> allIngsScoped
-
-//    if(oneFoodItem==null){
-//      foodItemIngredientsList2=null;
-//
-//    }
-
     // COUNTER MEASURES SINCE WE INVOKE APPBLOC FROM WELCOME PAGE WHERE THIS CONSTRUCTOR IS CALLED 1.
     // COUNTER MEASURE 01.
 
@@ -475,21 +432,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List<String> listStringIngredients = oneFoodItem.itemName==null ?null:dynamicListFilteredToStringList(
         foodItemIngredientsList2);
 
-
-//    logger.e(' I  I   I  I  any error until this line executed ** ');
-//    print('listStringIngredients: $listStringIngredients');
-//      logger.w('listStringIngredients at foodItem Details Block line # 160',
-//          listStringIngredients);
-
-
-//    List<NewIngredient> allIngsScoped = getAllIngredients();
-
-
-    // DDD todo
-
-//    print('allIng_s : $allIngsScoped');
-
-    // COUNTER MEASURE 03. && (listStringIngredients!=null)
 
     // SHORT CIRCUIT WORKING HERE.
     if ((listStringIngredients!=null) && (listStringIngredients.length != 0)) {
@@ -524,11 +466,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       ingItems.add(c1);
       */
 
-//      _allIngItemsDetailsBlock = ingItems;
-
-//      _allIngredientListController.sink.add(ingItems);
-
-//      _unSelectedIngredientListController
 
       _defaultIngItems = ingItems;
       _defaultIngredientListController.sink.add(_defaultIngItems);
@@ -559,37 +496,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     // COUNTER MEASURE 04.
     dynamic normalPrice = oneFoodItem.itemName==null ? 0 :foodSizePrice['normal'];
-
-
-
-//    dynamic normalPrice = foodSizePrice['normal'];
-//    if (!normalPrice ) {
-//      print('price is is null');
-//    }
-
-    /*
-    logger.e('normalPrice: $normalPrice');
-
-    if (normalPrice is double) {
-      print('price double at foodItemDetails bloc');
-    }
-
-
-    else if (normalPrice is num) {
-      print('price num at foodItemDetails bloc');
-    }
-
-
-    else if (normalPrice is int) {
-      print('price int at foodItemDetails bloc');
-    }
-
-    else {
-      print('normalPrice is dynamic: ${normalPrice is dynamic}');
-      print('price dynamic at foodItemDetails bloc');
-    }
-    */
-
 
 
     double normalPriceCasted = tryCast<double>(normalPrice, fallback: 0.00);

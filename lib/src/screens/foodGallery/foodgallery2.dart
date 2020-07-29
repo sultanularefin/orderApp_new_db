@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 //import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
+import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 
 
 // MODEL'S IMPORT BEGINS HERE.
@@ -358,8 +360,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                       height: kToolbarHeight+6,
                                       width: 200,
                                       child:  Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
 
                                           Container(
@@ -386,27 +388,27 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                             child:
 
 //                                          Container(child: Image.asset('assets/Path2008.png')),
-                                                Container(
-                                                  padding:EdgeInsets.fromLTRB(0,1,0,0),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: <Widget>[
-                                                      Text(
-                                                        'Jediline',
-                                                        textAlign: TextAlign.left,
-                                                        style: TextStyle(fontSize: 30,
-                                                            color: Color(0xff07D607),
-                                                            fontFamily: 'Itim-Regular'),
-                                                      ),
-                                                      Text(
-                                                        'Online Orders',
-                                                        textAlign: TextAlign.left,
-                                                        style: TextStyle(fontSize: 16.42,color: Color(0xff07D607)),
-                                                      ),
-                                                    ],
+                                            Container(
+                                              padding:EdgeInsets.fromLTRB(0,1,0,0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                    'Jediline',
+                                                    textAlign: TextAlign.left,
+                                                    style: TextStyle(fontSize: 30,
+                                                        color: Color(0xff07D607),
+                                                        fontFamily: 'Itim-Regular'),
                                                   ),
-                                                ),
+                                                  Text(
+                                                    'Online Orders',
+                                                    textAlign: TextAlign.left,
+                                                    style: TextStyle(fontSize: 16.42,color: Color(0xff07D607)),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
 
 
                                           ),
@@ -1178,34 +1180,6 @@ Widget work1(BuildContext context){
 
             );
 
-            /*
-      CustomerInformation oneCustomerInfo = new CustomerInformation(
-        address:'',
-        flatOrHouseNumber:'',
-        phoneNumber:'',
-        etaTimeInMinutes:-1,
-//        CustomerInformation currentUser = _oneCustomerInfo;
-//    currentUser.address = address;
-//
-
-      );
-      */
-
-            /*
-      Order x = new Order(
-        foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
-        foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
-        unitPrice:initialPriceByQuantityANDSize ,
-        foodDocumentId: foodItemDetailsbloc.currentFoodItem.documentId,
-        quantity: _itemCount,
-        foodItemSize: _currentSize,
-        ingredients: foodItemDetailsbloc.getDefaultIngredients,
-        orderTypeIndex: 0,
-        paymentTypeIndex: 4,
-        ordersCustomer:oneCustomerInfo,
-      );
-
-      */
 
             orderFG.selectedFoodInOrder = allSelectedFoodGallery;
 
@@ -1219,13 +1193,8 @@ Widget work1(BuildContext context){
             logger.e('orderFG.selectedFoodInOrder ${orderFG.selectedFoodInOrder}');
             print('allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity} ');
 
-            //          Navigator.of(context).push(
 
-//          return
-//          List<SelectedFood> expandedFoodReturnTemp= [];
-//                  shoppingCartBloc.getExpandedSelectedFood;
-            // expandedFoodReturnTemp
-            // isCancelButtonPressed
+
             final Order orderWithDocumentId = await Navigator.of(context).push(
 
               PageRouteBuilder(
@@ -1242,17 +1211,8 @@ Widget work1(BuildContext context){
 
                     ),
                 // fUTURE USE -- ANIMATION TRANSITION CODE.
-                /*
-                                    transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
-                                      return FadeTransition(
-                                        opacity: animation,
-                                        child: RotationTransition(
-                                          turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-                                          child: child,
-                                        ),
-                                      );
-                                    }
-                                    */
+
+
               ),
             );
 
@@ -1292,9 +1252,6 @@ Widget work1(BuildContext context){
 //                        int _totalCount = 0;
                 allSelectedFoodGallery = orderWithDocumentId.selectedFoodInOrder;
 
-//                        double totalPriceState = 0;
-//                    _totalCount = 0;
-//                    totalPriceState = 0;
               }
               );
 
@@ -2688,6 +2645,11 @@ Widget work1(BuildContext context){
 
     List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
 
+    List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
+    List<SauceItem>  tempSauceItems = blocG.getAllSauceItemsFoodGallery;
+
+
+
 //    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
 //                                    blocD.getAllIngredients();
@@ -2728,10 +2690,17 @@ Widget work1(BuildContext context){
 
          */
 
-        BlocProvider<FoodItemDetailsBloc>(
+
+//        tempCheeseItems
+//          tempSauceItems
+
+          BlocProvider<FoodItemDetailsBloc>(
           bloc: FoodItemDetailsBloc(
               oneFoodItem,
-              tempIngs),
+              tempIngs,
+              tempCheeseItems,
+              tempSauceItems
+          ),
 
 
           child: FoodItemDetails2()

@@ -2,6 +2,7 @@
 // BLOC
 //    import 'package:foodgallery/src/Bloc/
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 
@@ -9,6 +10,7 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 //import 'package:foodgallery/src/DataLayer/itemData.dart';
 //    import 'package:foodgallery/src/DataLayer/FoodItem.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 //import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
 import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
 //import 'package:zomatoblock/DataLayer/location.dart';
@@ -55,6 +57,26 @@ class FoodGalleryBloc implements Bloc {
 
 
 
+
+
+  // cheese items
+  List<CheeseItem> _allCheeseItemsFoodGalleryBloc =[];
+  List<CheeseItem> get getAllCheeseItemsFoodGallery => _allCheeseItemsFoodGalleryBloc;
+  final _cheeseItemsControllerFoodGallery      =  StreamController <List<CheeseItem>>();
+  Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsControllerFoodGallery.stream;
+
+  // sauce items
+  List<SauceItem> _allSauceItemsFoodGalleryBloc =[];
+  List<SauceItem> get getAllSauceItemsFoodGallery => _allSauceItemsFoodGalleryBloc;
+  final _sauceItemsControllerFoodGallery      =  StreamController <List<SauceItem>>();
+  Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsControllerFoodGallery.stream;
+
+
+
+
+
+
+
 //    List<NewCategoryItem>_allCategoryList=[];
   final _client = FirebaseClient();
 
@@ -80,11 +102,7 @@ class FoodGalleryBloc implements Bloc {
 
   // 2
 
-  // getter that get's the stream with _locationController.stream;
 
-  // CALLED LIKE THIS: stream: BlocProvider.of<LocationBloc>(context).locationStream,
-
-//    Stream<List<Restaurant>> get stream => _controller.stream;
 
 
   Stream<List<FoodItemWithDocID>> get foodItemsStream => _foodItemController.stream;
@@ -92,21 +110,6 @@ class FoodGalleryBloc implements Bloc {
   Stream<List<NewCategoryItem>> get categoryItemsStream => _categoriesController.stream;
 
 
-
-
-
-  // 3
-  // CALLED LIKE THIS:
-
-  //  lib/UI/location_screen.dart:119:            locationBloc.selectLocation(location);
-  //  lib/UI/location_screen.dart:131:            locationBloc.selectLocation(location);
-
-  /*
-  void selectLocation(Location location) {
-    _location = location;
-    _locationController.sink.add(location);
-  }
-  */
 
 
 // this code bloc cut paste from foodGallery Bloc:
@@ -316,7 +319,142 @@ class FoodGalleryBloc implements Bloc {
   }
 
 
+  void getAllSaucesConstructor() async {
 
+
+    var snapshot = await _client.fetchAllSauces();
+    List docList = snapshot.documents;
+
+
+
+    List <SauceItem> sauceItems = new List<SauceItem>();
+    sauceItems = snapshot.documents.map((documentSnapshot) =>
+        SauceItem.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+//    print('Ingredient documents are: $documents');
+
+
+    /*
+    sauceItems.forEach((oneSauceItem) {
+
+      if(oneSauceItem.sl==1){
+
+        print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
+            ''
+            'condition oneSauceItem.sl==1 is true');
+
+        oneSauceItem.isSelected=true;
+        oneSauceItem.isDefaultSelected=true;
+      }
+    }
+
+    );
+    */
+
+
+
+
+
+
+    _allSauceItemsFoodGalleryBloc = sauceItems;
+    _sauceItemsControllerFoodGallery.sink.add(_allSauceItemsFoodGalleryBloc);
+
+
+
+    /*
+    _allSauceItemsDBloc = sauceItems;
+
+    _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
+
+    _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
+
+    _selectedSauceListController.sink.add(_allSelectedSauceItems);
+
+    */
+
+
+//    return ingItems;
+
+  }
+
+
+  void getAllCheeseItemsConstructor() async {
+
+
+    var snapshot = await _client.fetchAllCheesesORjuusto();
+    List docList = snapshot.documents;
+
+
+
+    List <CheeseItem> cheeseItems = new List<CheeseItem>();
+    cheeseItems = snapshot.documents.map((documentSnapshot) =>
+        CheeseItem.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+
+    /*
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+
+    cheeseItems.forEach((oneCheeseItem) {
+
+
+
+      if(oneCheeseItem.sl==1){
+        oneCheeseItem.isSelected=true;
+        oneCheeseItem.isDefaultSelected=true;
+      }
+    }
+
+    );
+    */
+
+//    print('Ingredient documents are: $documents');
+
+
+
+    _allCheeseItemsFoodGalleryBloc  = cheeseItems;
+    _cheeseItemsControllerFoodGallery.sink.add(_allCheeseItemsFoodGalleryBloc);
+
+
+//    _allCheeseItemsDBloc = cheeseItems;
+
+//    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+
+//    return ingItems;
+
+
+    /*
+    _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
+
+
+
+    logger.w('_allSelectedCheeseItems at getAllCheeseItemsConstructor():'
+        ' $_allSelectedCheeseItems');
+
+//    _selectedSauceListController.sink.add(_allSelectedSauceItems);
+//    _allSelectedCheeseItems =
+    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+
+
+
+    */
+  }
 
 
   // CONSTRUCTOR BIGINS HERE..
@@ -331,6 +469,10 @@ class FoodGalleryBloc implements Bloc {
     getAllFoodItemsConstructor();
 
     getAllCategoriesConstructor();
+
+    getAllSaucesConstructor();
+
+    getAllCheeseItemsConstructor();
 
     // need to use this when moving to food Item Details page.
 
@@ -357,11 +499,17 @@ class FoodGalleryBloc implements Bloc {
     _categoriesController.close();
     _allIngredientListController.close();
 
+    _cheeseItemsControllerFoodGallery.close();
+    _sauceItemsControllerFoodGallery.close();
+
 
 //    _isDisposedIngredients=
     _isDisposedIngredients = true;
     _isDisposedFoodItems = true;
     _isDisposedCategories = true;
+
+
+
 //    _isDisposed = true;
 
 //    _allIngredientListController.close();
