@@ -175,11 +175,7 @@ class FoodGalleryBloc implements Bloc {
 
         print('foodItemName: $foodItemName');
 
-        if('foodItemName'.toLowerCase()=='opra'){
 
-          logger.i('---------------------------- found opra');
-          logger.i('opra food item found');
-        }
 
 
 //      print('foodItemName $foodItemName');
@@ -189,6 +185,13 @@ class FoodGalleryBloc implements Bloc {
 
         if(foodItemName =='Junior Juustohampurilainen'){
           logger.e('Junior Juustohampurilainen found check $foodItemDocumentID');
+        }
+
+        if('foodItemName'.toLowerCase()=='3.opra'){
+
+          logger.i('---------------------------- found opra');
+          logger.i('opra food item found');
+          print(' foodItemDocumentID---> $foodItemDocumentID');
         }
 
 
