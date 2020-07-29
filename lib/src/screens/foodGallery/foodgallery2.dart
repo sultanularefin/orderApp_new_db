@@ -184,7 +184,29 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 
-  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
+  double tryCast<num>(dynamic x, {num fallback }) {
+
+//    print(" at tryCast");
+//    print('x: $x');
+
+    bool status = x is num;
+
+//    print('status : x is num $status');
+//    print('status : x is dynamic ${x is dynamic}');
+//    print('status : x is int ${x is int}');
+    if(status) {
+      return x.toDouble() ;
+    }
+
+    if(x is int) {return x.toDouble();}
+    else if(x is double) {return x.toDouble();}
+
+
+    else return 0.0;
+  }
+
+
+//  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
 
 
   var logger = Logger(
@@ -2407,8 +2429,7 @@ Widget work1(BuildContext context){
           print('name: $foodItemName and euroPrice $euroPrice at 2401 ');
 
 //                num euroPrice2 = tryCast(euroPrice);
-          double euroPrice2 = tryCast<double>(
-              euroPrice, fallback: 0.00);
+          double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.0);
 
           print('name: $foodItemName and euroPrice2 $euroPrice2 at 2413 ');
 

@@ -173,7 +173,7 @@ class FoodGalleryBloc implements Bloc {
 
         final String foodItemName = doc['name'];
 
-        print('foodItemName: $foodItemName');
+
 
 
 
@@ -182,6 +182,10 @@ class FoodGalleryBloc implements Bloc {
 
         final String foodItemDocumentID = doc.documentID;
 //      print('foodItemDocumentID $foodItemDocumentID');
+
+
+
+        print('foodItemName: $foodItemName  and docID: $foodItemDocumentID');
 
         if(foodItemName =='Junior Juustohampurilainen'){
           logger.e('Junior Juustohampurilainen found check $foodItemDocumentID');

@@ -1816,9 +1816,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           .elementAt(i);
       dynamic value = foodSizePrice
           .values.elementAt(i);
+
+
 //
-      double valuePrice = tryCast<
-          double>(value, fallback: 0.0);
+      double valuePrice = tryCast<double>(value, fallback: 0.0);
 
 
       if((valuePrice!=0.0)&&(valuePrice!=0.00)) {
