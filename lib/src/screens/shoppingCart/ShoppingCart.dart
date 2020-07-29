@@ -10640,9 +10640,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
         PosColumn(text: '${oneFood.foodItemSize}',
           width: 6, /* styles: PosStyles(align: PosAlign.right) */),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +' euro' }',
-          width: 6),
+            width: 6),
 
-      /*
+        /*
       PosColumn(text: '',
       width: 2,styles: PosStyles(codeTable: PosCodeTable.westEur)),
         */
@@ -10926,9 +10926,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
       '----' : customerForReciteGeneration.address.length > 21 ?
       customerForReciteGeneration.address.substring(0, 18) + '_ _' :
       customerForReciteGeneration.address}',
-          width: 9,styles: PosStyles(bold:true) ),
+          width: 9,styles: PosStyles(
+    height: PosTextSize.size1,
+    width: PosTextSize.size1,
+    ) ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
-          width: 3, styles: PosStyles(bold:true)),
+          width: 3, styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+          )),
 
 
 
@@ -10936,9 +10942,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.text('${customerForReciteGeneration.phoneNumber}',
         styles: PosStyles(
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-            bold:true,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+//          bold:true,
           align: PosAlign.center,
         ));
 
@@ -11109,7 +11115,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant thisRestaurant3,
       OneOrderFirebase oneOrderData3,
       Uint8List restaurantNameBytesNotFuture3,
-    ) async {
+      ) async {
 
 
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
@@ -11217,11 +11223,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
       (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
           =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
-          width: 4,styles: PosStyles(bold:true) ),
+          width: 4,styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+          ) ),
       PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
-          width: 4, styles: PosStyles(bold:true)),
+          width: 4, styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+          )),
       PosColumn(text: '${oneOrderData3.orderProductionTime} min',
-          width: 4, styles: PosStyles(bold:true)),
+          width: 4, styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+          )),
 
     ]);
     ticket.feed(1);
@@ -11238,10 +11253,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
           (customerForReciteGeneration.address.length == 0)) ?
       '----' : customerForReciteGeneration.address.length > 21 ?
       customerForReciteGeneration.address.substring(0, 18) + '_ _' :
-      customerForReciteGeneration.address}',
-          width: 9,styles: PosStyles(bold:true) ),
+      customerForReciteGeneration.address
+      },',
+          width: 9,styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+          )
+      ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
-          width: 3, styles: PosStyles(bold:true)),
+          width: 3, styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+          )),
 
 
 
@@ -11249,9 +11272,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.text('${customerForReciteGeneration.phoneNumber}',
         styles: PosStyles(
-          height: PosTextSize.size2,
-          width: PosTextSize.size2,
-          bold:true,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+//          bold:true,
           align: PosAlign.center,
         ));
 
@@ -11378,7 +11401,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Restaurant thisRestaurant3,
       OneOrderFirebase oneOrderData3,
       Uint8List restaurantNameBytesNotFuture3,
-  ) async {
+      ) async {
 
     //--4
 
@@ -11816,17 +11839,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
             return false;
           }
 
+        }).catchError((onError) {
+          print('printing not successful: $onError');
+          return false;
+        });
+
       }).catchError((onError) {
-        print('printing not successful: $onError');
+        print(' error in getting restaurant name as image---1');
+        print('false: means something wrong not printed');
+        //means something wrong not printed
         return false;
       });
-
-    }).catchError((onError) {
-      print(' error in getting restaurant name as image---1');
-      print('false: means something wrong not printed');
-      //means something wrong not printed
-      return false;
-    });
 
 
 
