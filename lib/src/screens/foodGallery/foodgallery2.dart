@@ -2397,11 +2397,21 @@ Widget work1(BuildContext context){
 
 //            final List<dynamic> foodItemIngredientsList =  document['ingredient'];
 //                print('foodSizePrice __________________________${foodSizePrice['normal']}');
+
           final dynamic euroPrice = foodSizePrice['normal'];
+
+
+
+//          final dynamic euroPrice = foodSizePrice['normal'];
+
+          print('name: $foodItemName and euroPrice $euroPrice at 2401 ');
 
 //                num euroPrice2 = tryCast(euroPrice);
           double euroPrice2 = tryCast<double>(
               euroPrice, fallback: 0.00);
+
+          print('name: $foodItemName and euroPrice2 $euroPrice2 at 2413 ');
+
 //                String euroPrice3= num.toString();
 //                print('euroPrice2 :$euroPrice2');
 

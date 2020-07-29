@@ -173,6 +173,8 @@ class FoodGalleryBloc implements Bloc {
 
         final String foodItemName = doc['name'];
 
+        print('foodItemName: $foodItemName');
+
         if('foodItemName'.toLowerCase()=='opra'){
 
           logger.i('---------------------------- found opra');
