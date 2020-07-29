@@ -10923,17 +10923,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       PosColumn(text: '${((customerForReciteGeneration.address == null) ||
           (customerForReciteGeneration.address.length == 0)) ?
-      '----' : customerForReciteGeneration.address.length > 18 ?
-      customerForReciteGeneration.address.substring(0, 15) + '_ _' :
+      '----' : customerForReciteGeneration.address.length > 21 ?
+      customerForReciteGeneration.address.substring(0, 18) + '_ _' :
       customerForReciteGeneration.address}',
-          width: 5,styles: PosStyles(bold:true) ),
+          width: 9,styles: PosStyles(bold:true) ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
           width: 3, styles: PosStyles(bold:true)),
-      PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
-          width: 4, styles: PosStyles(bold:true)),
+
 
 
     ]);
+
+    ticket.text('${customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+            bold:true,
+          align: PosAlign.center,
+        ));
+
+//    ticket.text(text: '${customerForReciteGeneration.phoneNumber}',
+//        width: 4, styles: PosStyles(bold:true),
 
 
 
@@ -11224,22 +11234,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.row([
 
-      PosColumn(text: '${customerForReciteGeneration.address}',
-          width: 8,styles: PosStyles(bold:true) ),
+      PosColumn(text: '${((customerForReciteGeneration.address == null) ||
+          (customerForReciteGeneration.address.length == 0)) ?
+      '----' : customerForReciteGeneration.address.length > 21 ?
+      customerForReciteGeneration.address.substring(0, 18) + '_ _' :
+      customerForReciteGeneration.address}',
+          width: 9,styles: PosStyles(bold:true) ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
-          width: 4, styles: PosStyles(bold:true)),
+          width: 3, styles: PosStyles(bold:true)),
 
-
-    ]);
-    ticket.row([
-
-      PosColumn(text: 'phone:',
-          width: 4,styles: PosStyles(bold:true) ),
-      PosColumn(text: '${customerForReciteGeneration.phoneNumber}',
-          width: 8, styles: PosStyles(bold:true)),
 
 
     ]);
+
+    ticket.text('${customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold:true,
+          align: PosAlign.center,
+        ));
 
     ticket.feed(2);
 
@@ -11891,7 +11905,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }).catchError((onError) {
       print(' error in getting restaurant name as image--22');
     });
-    
+
 //                            _handleSignIn();
 
     /* await */
