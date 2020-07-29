@@ -10629,13 +10629,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       ticket.row([
         PosColumn(text: '${oneFood.foodItemSize}',
-          width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) }',
-          width: 6),
+          width: 5, /* styles: PosStyles(align: PosAlign.right) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'Euro' }',
+          width: 5),
+
+      PosColumn(text: '€',
+      width: 2,styles: PosStyles(codeTable: PosCodeTable.westEur)),
+
+
+
 
 
       ]);
 
+      //      €
       /*
       PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
         width: 6, /* styles: PosStyles(align: PosAlign.right) */),
@@ -10919,23 +10926,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         PosColumn(text: '${oneFood.foodItemSize}',
           width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) }',
-          width: 6),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'Euro' }',
+            width: 6),
 
 
 
 
       ]);
-
-      /*
-      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
-        width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-      */
-
-      /*
-      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
-        width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-      */
 
 
       ticket.hr();
@@ -11233,16 +11230,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         PosColumn(text: '${oneFood.foodItemSize}',
           width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) }',
-          width: 6),
-        
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'Euro' }',
+            width: 6),
+
       ]);
-
-      /*
-      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
-        width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-      */
-
 
       ticket.hr();
       // needed. as per design.
@@ -11486,15 +11477,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
         PosColumn(text: '${oneFood.foodItemSize}',
           width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) }',
-          width: 6),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'Euro' }',
+            width: 6),
 
 
       ]);
-      /*
-      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
-        width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-      */
 
 
       ticket.hr();
@@ -11723,8 +11710,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
       //means something wrong not printed
       return false;
     });
-
-
 
 
 
