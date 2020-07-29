@@ -10629,12 +10629,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       ticket.row([
         PosColumn(text: '${oneFood.foodItemSize}',
-          width: 5, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'Euro' }',
-          width: 5),
+          width: 6, /* styles: PosStyles(align: PosAlign.right) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'€' }',
+          width: 6),
 
-      PosColumn(text: '€',
+      /*
+      PosColumn(text: '',
       width: 2,styles: PosStyles(codeTable: PosCodeTable.westEur)),
+        */
 
 
 
@@ -10668,7 +10670,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: 'SUBTOTAL',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2) + '\u20AC'}',
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2) + '€'}',
         width: 4,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
@@ -10683,7 +10685,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '\u20AC'}', styles:PosStyles(bold: true)  ,
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '€'}', styles:PosStyles(bold: true)  ,
         width: 4,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
@@ -10954,7 +10956,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: 'SUBTOTAL',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '\u20AC'}',
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '€'}',
         width: 4,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
@@ -10969,7 +10971,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: 'DELIVERY',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${00.toStringAsFixed(2)+ '\u20AC'}',
+      PosColumn(text: '${00.toStringAsFixed(2)+ '€'}',
         width: 4,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
@@ -10986,7 +10988,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '\u20AC'}',
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '€'}',
         styles:PosStyles(bold: true)  ,
         width: 4,),
       PosColumn(text: '',
@@ -11255,7 +11257,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '\u20AC'}', styles:PosStyles(bold: true)  ,
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '€'}', styles:PosStyles(bold: true)  ,
         width: 4,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
@@ -11505,7 +11507,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: 'SUBTOTAL',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '\u20AC'}',
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '€'}',
         width: 4,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
@@ -11523,7 +11525,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '\u20AC'}', styles:PosStyles(bold: true)  ,
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ '€'}', styles:PosStyles(bold: true)  ,
         width: 4,),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
