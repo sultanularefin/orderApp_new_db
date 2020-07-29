@@ -1670,7 +1670,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             alignment: Alignment
                                 .center,
                             child: Text(
-                                'Choose Order Type',
+                                'choose order type',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight
@@ -1878,7 +1878,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               alignment: Alignment
                                   .center,
                               child: Text(
-                                  'Choose Order Type',
+                                  'choose order type',
                                   style: TextStyle(
                                     fontSize: 30,
                                     fontWeight: FontWeight
@@ -3018,35 +3018,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               height: displayHeight(context) / 21,
 //              color:Colors.purple,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-
+              child:
 
                   Container(
                     width: displayWidth(context) /
-                        1.5,
+                        1.3,
                     height: displayHeight(
                         context) / 21,
                     color: Color(0xffffffff),
 
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
+                    child:
 
                           Container(
                             margin: EdgeInsets
                                 .fromLTRB(
-                                20, 0, 10, 0),
-                            alignment: Alignment
-                                .center,
+                                10, 0, 10, 0),
+                            alignment: Alignment.centerLeft,
                             child: Text(
-                                'Client phone and estimated time in minutes:',
+                                'client\'s phone and duration in minutes:',
+                                maxLines: 1,
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight
@@ -3060,14 +3050,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
                           ),
 
+
+                          /*
                           CustomPaint(
                             size: Size(0, 19),
                             painter: LongPainterForPhone(
                                 context),
                           ),
+                          */
 
-                        ]
-                    ),
 
                   ),
                   // THE ABOVE PART DEALS WITH LINES AND TEXT,
@@ -3076,9 +3067,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   //ZZZZ
 
-
-                ],
-              ),
             ),
             // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
 
