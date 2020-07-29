@@ -2128,13 +2128,13 @@ Widget work1(BuildContext context){
 
           final dynamic euroPrice = foodSizePrice['normal'];
 
-          print('name: $foodItemName and euroPrice $euroPrice at 2109 ');
+          //          print('name: $foodItemName and euroPrice $euroPrice at 2109 ');
 
-//                num euroPrice2 = tryCast(euroPrice);
+          //                num euroPrice2 = tryCast(euroPrice);
           double euroPrice2 = tryCast<double>(
               euroPrice, fallback: 0.00);
 
-          print('name: $foodItemName and euroPrice2 $euroPrice2 at 2115 ');
+          //          print('name: $foodItemName and euroPrice2 $euroPrice2 at 2115 ');
 
 
 
@@ -2426,12 +2426,12 @@ Widget work1(BuildContext context){
 
 //          final dynamic euroPrice = foodSizePrice['normal'];
 
-          print('name: $foodItemName and euroPrice $euroPrice at 2401 ');
+//          print('name: $foodItemName and euroPrice $euroPrice at 2401 ');
 
 //                num euroPrice2 = tryCast(euroPrice);
           double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.0);
 
-          print('name: $foodItemName and euroPrice2 $euroPrice2 at 2413 ');
+//          print('name: $foodItemName and euroPrice2 $euroPrice2 at 2413 ');
 
 //                String euroPrice3= num.toString();
 //                print('euroPrice2 :$euroPrice2');

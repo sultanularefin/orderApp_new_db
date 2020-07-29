@@ -184,6 +184,7 @@ class FoodGalleryBloc implements Bloc {
 //      print('foodItemDocumentID $foodItemDocumentID');
 
 
+        /*
 
         print('foodItemName: $foodItemName  and docID: $foodItemDocumentID');
 
@@ -197,6 +198,7 @@ class FoodGalleryBloc implements Bloc {
           logger.i('opra food item found');
           print(' foodItemDocumentID---> $foodItemDocumentID');
         }
+        */
 
 
 
