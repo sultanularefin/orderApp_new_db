@@ -10387,36 +10387,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
   // # number 1: demoReceipt Order Type TakeAway begins here...
 
 
-  // INVOKER ARGUMENTS MATCHING TEST:::
-  /*
-  printTicket(
-      paper,
-      thisRestaurant,
-      oneOrderData /*,imageRestaurant */,
-      orderInformationAndUserInformationTopInBytes,
-      restaurantNameBytesNotFuture,
-      totalCostDeliveryBytes,
-      paidUnpaidDeliveryTypeInBytes);
-
-  */
-
-
   Future<Ticket> demoReceiptOrderTypeTakeAway(
       PaperSize paper,
       Restaurant thisRestaurant3, // not required but just for printing...
       OneOrderFirebase oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
-      /*ImageAliasAnotherSource.Image imageResource2, */
-      /* Uint8List orderInformationAndUserInformationTopInBytes3, */
-
-      /* Uint8List orderInformationForReciteWidgetBytes3, */
-
-      /* Uint8List customerInformationOnlyBytes3,*/
-
       Uint8List restaurantNameBytesNotFuture3,
-      // FOR restaurant Name in diffrent font as image only
-      /*Uint8List totalCostDeliveryBytes3,*/
-      /* Uint8List paidUnpaidDeliveryTypeInBytes3 */
-      /*PaperSize paper,Restaurant currentRestaurant  */) async {
+
+      ) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
 
@@ -10502,14 +10479,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
 
 
-//    ticket.image(faceBookLikedataBytesImage);
-
-    // Print image using alternative commands
-    // ticket.imageRaster(image);
-    // ticket.imageRaster(image, imageFn: PosImageFn.graphics);
-
-
-
 
     //1...
     final ImageAliasAnotherSource
@@ -10524,27 +10493,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //2...
-    /*
-    final ImageAliasAnotherSource
-        .Image orderInformationForReciteWidgetTakeAway3 = ImageAliasAnotherSource.decodeImage(
-        orderInformationForReciteWidgetBytes3);
-
-    ticket.image(orderInformationForReciteWidgetTakeAway3);
-
-    */
-
-    /*
-    ticket.row([
-
-      PosColumn(text: 'order type',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: 'ordering time',
-        width: 4, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'production Time',
-        width: 4, /* styles: PosStyles(align: PosAlign.right) */),
-
-    ]);
-    */
 
     ticket.row([
 
@@ -10560,13 +10508,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ]);
     ticket.feed(1);
 
-//    ticket.hr();
-
-//    ticket.feed(2);
-
-
     //3...
-
 
     orderedItems.forEach((oneFood) {
       ticket.row([
@@ -10595,18 +10537,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.feed(1);
 
-//    ticket.feed(2);
 
     //4... TAKEAWAY...
 
-    /*
-    final ImageAliasAnotherSource.Image oneImageTotalCostDelivery =
-    ImageAliasAnotherSource.decodeImage(totalCostDeliveryBytes3);
-
-
-    ticket.image(oneImageTotalCostDelivery);
-
-    */
 
     // Price 1 subtotal
     ticket.row([
@@ -10637,10 +10570,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ]);
 
 //    ticket.hr();
-
-
-//    ticket.feed(2);
-    // found not required..
 
     //5... PAID OR UNPAID...
     ticket.feed(1);
