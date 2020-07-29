@@ -10923,8 +10923,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       PosColumn(text: '${((customerForReciteGeneration.address == null) ||
           (customerForReciteGeneration.address.length == 0)) ?
-      '----' : customerForReciteGeneration.address.length > 8 ?
-      customerForReciteGeneration.address.substring(0, 6) + '..' :
+      '----' : customerForReciteGeneration.address.length > 18 ?
+      customerForReciteGeneration.address.substring(0, 15) + '_ _' :
       customerForReciteGeneration.address}',
           width: 5,styles: PosStyles(bold:true) ),
       PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
