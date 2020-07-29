@@ -187,7 +187,7 @@ class FoodGalleryBloc implements Bloc {
           logger.e('Junior Juustohampurilainen found check $foodItemDocumentID');
         }
 
-        if('foodItemName'.toLowerCase()=='3.opra'){
+        if('foodItemName'.toLowerCase()=='3.Opra'.toLowerCase()){
 
           logger.i('---------------------------- found opra');
           logger.i('opra food item found');
