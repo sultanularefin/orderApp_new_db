@@ -11826,10 +11826,3 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 }
 
-
-
-
-
-
-
-
