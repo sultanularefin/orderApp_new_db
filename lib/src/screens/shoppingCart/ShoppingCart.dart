@@ -11717,33 +11717,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     shoppingCartBloc.fetchOrderDataFromFirebase(
         oneOrderForReceipt.orderdocId.trim());
 
-    Widget restaurantName2 = restaurantName(thisRestaurant.name);
 
-    final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
-
-    Uint8List restaurantNameBytesNotFuture;
-
-    print('restaurantNameBytes: $restaurantNameBytesNotFuture');
-
-
-    ImageAliasAnotherSource.Image imageRestaurant;
-
-    /* await */
-    restaurantNameBytesFuture.whenComplete(() {
-      print("restaurantNameBytes.whenComplete called when future completes");
-    }
-    ).then((oneImageInBytes) {
-//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
-      print('calling ticket.image(imageRestaurant); ');
-      restaurantNameBytesNotFuture = oneImageInBytes;
-//      ticket.image(imageRestaurant);
-
-    }).catchError((onError) {
-      print(' error in getting restaurant name as image---1');
-      print('false: means something wrong not printed');
-      //means something wrong not printed
-      return false;
-    });
 
 
 
@@ -11756,59 +11730,89 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
     ).then((oneOrderData) {
 
+      Widget restaurantName2 = restaurantName(thisRestaurant.name);
+
+      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+
+      Uint8List restaurantNameBytesNotFuture;
+
+      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
 
 
-      print('reached here: $oneOrderData');
+      ImageAliasAnotherSource.Image imageRestaurant;
+
+      /* await */
+      restaurantNameBytesFuture.whenComplete(() {
+        print("restaurantNameBytes.whenComplete called when future completes");
+      }
+      ).then((oneImageInBytes) {
+//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        print('calling ticket.image(imageRestaurant); ');
+        restaurantNameBytesNotFuture = oneImageInBytes;
+
+        print('oneImageInBytes: $oneImageInBytes');
+//      ticket.image(imageRestaurant);
+
+
+        print('reached here: $oneOrderData');
 
 
 
 
 
 
-      Future<bool> isPrint =
-      printTicket2(
-        paper,
-        thisRestaurant,
-        oneOrderData /*,imageRestaurant */,
+        Future<bool> isPrint =
+        printTicket2(
+          paper,
+          thisRestaurant,
+          oneOrderData /*,imageRestaurant */,
 
-        restaurantNameBytesNotFuture,
+          restaurantNameBytesNotFuture,
 
-      );
+        );
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
 
-      isPrint.whenComplete(() {
-        print("called when future completes");
+        isPrint.whenComplete(() {
+          print("called when future completes");
 //          return true;
-      }
-      ).then((printResult) async {
-        if (printResult == true) {
-          print("printResult: $printResult");
-          Future<String> docID = shoppingCartBloc
-              .recitePrinted(oneOrderForReceipt.orderdocId, 'Done');
+        }
+        ).then((printResult) async {
+          if (printResult == true) {
+            print("printResult: $printResult");
+            Future<String> docID = shoppingCartBloc
+                .recitePrinted(oneOrderForReceipt.orderdocId, 'Done');
 
 
 //              --
 
 
-          docID.whenComplete(() => print('printing completed..')).then((
-              value) {
-            print(
-                'docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
-            return true;
-          }).catchError((onError) {
-            return false;
-          });
+            docID.whenComplete(() => print('printing completed..')).then((
+                value) {
+              print(
+                  'docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
+              return true;
+            }).catchError((onError) {
+              return false;
+            });
 //            --
-          return false;
-        }
-        else {
-          return false;
-        }
+            return false;
+          }
+          else {
+            return false;
+          }
+
       }).catchError((onError) {
         print('printing not successful: $onError');
         return false;
       });
+
+    }).catchError((onError) {
+      print(' error in getting restaurant name as image---1');
+      print('false: means something wrong not printed');
+      //means something wrong not printed
+      return false;
+    });
 
 
 
@@ -11887,9 +11891,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }).catchError((onError) {
       print(' error in getting restaurant name as image--22');
     });
-
-
-
+    
 //                            _handleSignIn();
 
     /* await */
