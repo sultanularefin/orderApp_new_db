@@ -5,7 +5,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart'; // to be removed later.
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
@@ -604,9 +606,70 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
+  List<NewIngredient> convertFireStoreIngredientItemsToLocalNewIngredientItemsList(List<dynamic>
+  fireStoreNewIngredients){
+
+    // List<Map<String, dynamic>>
+
+    print('--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : ');
+
+    List<NewIngredient> allIngredientItems = new List<NewIngredient>();
+
+    fireStoreNewIngredients.forEach((oneFireStoreSauce) {
+
+      var oneNewIngredient = oneFireStoreSauce;
+
+
+      NewIngredient oneTempNewIngredient = new NewIngredient(
+        ingredientName: oneFireStoreSauce['name'] ,
+        imageURL: oneFireStoreSauce['image'] ,
+        ingredientAmountByUser: oneFireStoreSauce['ingredientAmountByUser'] ,
+          isDefault:oneFireStoreSauce['isDefault'],
+        price:oneFireStoreSauce['price'],
+
+      );
+      allIngredientItems.add(oneTempNewIngredient);
+
+    });
+
+    return allIngredientItems;
+//    return sf.length
+  }
+
+//  convertFireStoreCheeseItemsToLocalCheeseItemsList(oneFoodItem['selectedCheeses']),
+
+  List<CheeseItem> convertFireStoreCheeseItemsToLocalCheeseItemsList(List<dynamic> fireStoreCheeseItems){
+
+    // List<Map<String, dynamic>>
+
+    print('--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : ');
+
+    List<CheeseItem> allCheeseItems = new List<CheeseItem>();
+
+    fireStoreCheeseItems.forEach((oneFireStoreCheese) {
+
+      var oneCheeseItem = oneFireStoreCheese;
+
+
+      CheeseItem oneTempCheeseItem = new CheeseItem(
+        cheeseItemName: oneCheeseItem['name'] ,
+        imageURL: oneCheeseItem['image'] ,
+        cheeseItemAmountByUser: oneCheeseItem['ingredientAmountByUser'] ,
+        price: oneCheeseItem['price'] ,
+
+      );
+      allCheeseItems.add(oneTempCheeseItem);
+
+    });
+
+    return allCheeseItems;
+//    return sf.length
+  }
 
   List<SauceItem> convertFireStoreSauceItemsToLocalSauceItemsList(List<dynamic> fireStoreSauces){
     // List<Map<String, dynamic>>
+
+    print('--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : ');
 
     List<SauceItem> allSauceItems = new List<SauceItem>();
 
@@ -751,11 +814,14 @@ class ShoppingCartBloc implements Bloc {
 
       OrderedItem oneTempOrderedItem= new OrderedItem(
         category:  oneFoodItem['category'],
-        // defaultSauces:  convertFireStoreSauceItemsToLocalSauceItemsList(oneFoodItem['defaultSauces']),
+
+        defaultSauces:  convertFireStoreSauceItemsToLocalSauceItemsList(oneFoodItem['defaultSauces']),
+        selectedIngredients:  convertFireStoreIngredientItemsToLocalNewIngredientItemsList(oneFoodItem['ingredients']),
+        selectedCheeses: convertFireStoreCheeseItemsToLocalCheeseItemsList(oneFoodItem['selectedCheeses']),
+
         discount:  oneFoodItem['discount'],
         foodItemImage:  oneFoodItem['foodImage'],
-        // selectedIngredients:  oneFoodItem['ingredients'],
-        // selectedCheeses:oneFoodItem['selectedCheeses'],
+
         quantity:  oneFoodItem['quantity'],
         name:oneFoodItem['name'],
         oneFoodTypeTotalPrice:oneFoodItem['oneFoodTypeTotalPrice'],

@@ -11471,9 +11471,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget displayOneFoodInformation(OrderedItem oneFood, int index){
     print('index: : : : $index');
 
-    List<NewIngredient> extraIngredient   = oneFood.selectedIngredients.where((e) => e.isDefault != true).toList();
-        List<SauceItem> extraSauces       = oneFood.defaultSauces.where((e) => e.isDefaultSelected != true).toList();
-    List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses.where((e) => e.isDefaultSelected != true).toList();
+    List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+    List<SauceItem>     extraSauces       = oneFood.defaultSauces;
+    List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+
+
+    print('extraIngredient: $extraIngredient');
+
+    print('extraSauces: $extraSauces');
+
+    print('extraCheeseItems: $extraCheeseItems');
+
+    List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+    List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => e.isDefaultSelected != true).toList();
+    List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
 
 
     /*
@@ -11486,7 +11497,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return Container(
 
       height:240,
-      width: 620,
+      width: 920,
 
       child: Column(
         children: <Widget>[
@@ -11566,20 +11577,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        extraCheeseItems
           Container(
               width: 220,
-              height:100,
-                        child: showExtraIngredients(extraIngredient)),
+              height:200,
+                        child: showExtraIngredients(onlyExtraIngredient)),
 
 
           Container(
               width: 220,
-              height:100,
-                        child: showExtraCheeseItems(extraCheeseItems)
+              height:200,
+                        child: showExtraCheeseItems(onlyExtraCheeseItems)
           ),
 
           Container(
               width: 220,
-              height:100,
-                        child: showExtraSauces(extraSauces)
+              height:200,
+                        child: showExtraSauces(onlyExtraSauces)
           ),
 
 
