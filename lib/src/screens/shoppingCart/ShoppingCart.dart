@@ -11336,8 +11336,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ),
       ),
 
+         
 
-      */
+
+
+
+
 
     Divider(
     height:20,
