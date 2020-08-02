@@ -11268,88 +11268,105 @@ class _ShoppingCartState extends State<ShoppingCart> {
       child: Column(
         children: <Widget>[
 
-          Text('s'),
-          Text('B'),
-          /*
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
 
-                Text(
-                  '${oneFood.name}',
+        Container(
+        height: 100,
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
 
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+            Text(
+              '${oneFood.name}',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
 //                        color: Color(0xffF50303),
-                    fontSize: 20, fontFamily: 'Itim-Regular',),
-                ),
-                Text(
-                  'X${oneFood.quantity}',
-
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-//                        color: Color(0xffF50303),
-                    fontSize: 20, fontFamily: 'Itim-Regular',),
-                ),
-
-              ],
+                fontSize: 20, fontFamily: 'Itim-Regular',),
             ),
-          ),
+            Text(
+              'X${oneFood.quantity}',
 
-
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-
-                Text(
-                  '${oneFood.foodItemSize}',
-
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
 //                        color: Color(0xffF50303),
-                    fontSize: 20, fontFamily: 'Itim-Regular',),
-                ),
-                Text(
-                  '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
-
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-//                        color: Color(0xffF50303),
-                    fontSize: 20, fontFamily: 'Itim-Regular',),
-                ),
-
-              ],
+                fontSize: 20, fontFamily: 'Itim-Regular',),
             ),
-          ),
 
-
-          */
-
-          Divider(
-            height:20,
-            thickness:5,
-            color:Colors.black,
-          ),
-
-
-        ],
+          ],
+        ),
       ),
+
+
+      Container(
+        height: 100,
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+            Text(
+              '${oneFood.foodItemSize}',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+            Text(
+              '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+
+          ],
+        ),
+      ),
+
+
+      */
+
+    Divider(
+    height:20,
+    thickness:5,
+      color:Colors.black,
+    ),
+
+
+    ],
+    ),
     );
   }
 
 
+
+  Widget processFoodForRecite(List<OrderedItem> orderedItems){
+
+    return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      reverse: false,
+      shrinkWrap: false,
+      itemCount: orderedItems.length,
+
+      itemBuilder: (_,int index) {
+        return displayOneFoodInformation(orderedItems[index], index);
+      },
+    );
+  }
 
 
 
@@ -11529,18 +11546,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                orderedItems.map((e) => null)
 
-                ListView.builder(
 
-                  scrollDirection: Axis.vertical,
-                  reverse: false,
-                  shrinkWrap: false,
-                  itemCount: orderedItems.length,
 
-                  itemBuilder: (_,int index) {
-                    return displayOneFoodInformation(orderedItems[index], index);
-                  },
-                ),
-                //processFoodForRecite(orderedItems),
+
+                processFoodForRecite(orderedItems),
 
 
 
