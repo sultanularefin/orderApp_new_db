@@ -3096,7 +3096,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Container(
                       color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width: displayWidth(context) / 5.5,
+                      width: displayWidth(context) / 3,
 
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
@@ -3146,7 +3146,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),) : Container(
                       color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width: displayWidth(context) / 5.5,
+                      width: displayWidth(context) / 3,
 
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
@@ -3220,7 +3220,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       color: Color(0xffFFFFFF),
 //                      color:Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                      width: displayWidth(context) / 4,
+                      width: displayWidth(context) / 3.5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
