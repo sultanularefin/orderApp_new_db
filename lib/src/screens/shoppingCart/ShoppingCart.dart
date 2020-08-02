@@ -11470,10 +11470,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget displayOneFoodInformation(OrderedItem oneFood, int index){
     print('index: : : : $index');
+
+    List<NewIngredient> extraIngredient = oneFood.selectedIngredients.map((e) => e.isDefault != true).toList();
+        List<SauceItem> extraSauces = oneFood.selectedIngredients.map((e) => e.isDefault != true).toList();
+    List<CheeseItem> extraCheeseItems = oneFood.selectedIngredients.map((e) => e.isDefault != true).toList();
+
+    
     return Container(
 
       height:240,
-      width: 220,
+      width: 620,
 
       child: Column(
         children: <Widget>[
@@ -11551,7 +11557,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
               width: 220,
               height:100,
-                        child: showExtraIngredients(oneFood.selectedIngredients)
+                        child: showExtraIngredients()),
           ),
 
           Container(
