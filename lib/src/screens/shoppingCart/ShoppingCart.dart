@@ -11265,89 +11265,94 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget displayOneFoodInformation(OrderedItem oneFood, int index){
     print('index: : : : $index');
     return Container(
+
+      height:240,
+      width: 220,
+
       child: Column(
         children: <Widget>[
 
 
-        Container(
-        height: 100,
-        width: 220,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
+          Container(
+            height: 100,
+            width: 220,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
 
-            Text(
-              '${oneFood.name}',
+                Text(
+                  '${oneFood.name}',
 
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
-            ),
-            Text(
-              'X${oneFood.quantity}',
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+                Text(
+                  'X${oneFood.quantity}',
 
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
-            ),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
 
-          ],
-        ),
+              ],
+            ),
+          ),
+
+
+          Container(
+            height: 100,
+            width: 220,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+
+                Text(
+                  '${oneFood.foodItemSize}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+                Text(
+                  '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+
+              ],
+            ),
+          ),
+
+
+
+
+          Divider(
+            height:20,
+//            width: 220,
+            thickness:5,
+            color:Colors.black,
+          ),
+
+
+        ],
       ),
-
-
-      Container(
-        height: 100,
-        width: 220,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-
-            Text(
-              '${oneFood.foodItemSize}',
-
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-//                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
-            ),
-            Text(
-              '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
-
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-//                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
-            ),
-
-          ],
-        ),
-      ),
-
-
-      */
-
-    Divider(
-    height:20,
-    thickness:5,
-      color:Colors.black,
-    ),
-
-
-    ],
-    ),
     );
   }
 
@@ -11549,7 +11554,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                processFoodForRecite(orderedItems),
+                Container(
+                    width: 220,
+                    height:580,
+                    child: processFoodForRecite(orderedItems)
+                ),
 
 
 
