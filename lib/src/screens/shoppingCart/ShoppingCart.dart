@@ -11261,6 +11261,98 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+
+  Widget displayOneFoodInformation(OrderedItem oneFood, int index){
+    print('index: : : : $index');
+    return Container(
+      child: Column(
+        children: <Widget>[
+
+          Text('s'),
+          Text('B'),
+          /*
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+
+                Text(
+                  '${oneFood.name}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+                Text(
+                  'X${oneFood.quantity}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+
+              ],
+            ),
+          ),
+
+
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+
+                Text(
+                  '${oneFood.foodItemSize}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+                Text(
+                  '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+
+              ],
+            ),
+          ),
+
+
+          */
+
+          Divider(
+            height:20,
+            thickness:5,
+            color:Colors.black,
+          ),
+
+
+        ],
+      ),
+    );
+  }
+
+
+
+
+
   Future<void> dummyPrintDialog(
 
       OneOrderFirebase oneOrderForReceipt,
@@ -11289,20 +11381,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
             child: ListBody(
 //              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                    'please use real blueTooth devices and also change functions in '
-                        'shopping cart page.'),
                 Container
                   (
-                    color:Colors.green,
+//                    color:Colors.green,
                     width: 200,
                     height:40,
                     child: Image.memory(restaurantNameImageByte2)
                 ),
 
                 Divider(
-                  height:30,
-                  thickness:10,
+                  height:10,
+                  thickness:5,
                   color:Colors.black,
                 ),
 
@@ -11339,30 +11428,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                /*
-            ticket.row([
-
-              PosColumn(text: '${((customerForReciteGeneration.address == null) ||
-                  (customerForReciteGeneration.address.length == 0)) ?
-              '----' : customerForReciteGeneration.address.length > 21 ?
-              customerForReciteGeneration.address.substring(0, 18) + '_ _' :
-              customerForReciteGeneration.address}',
-                  width: 9,styles: PosStyles(
-                    height: PosTextSize.size1,
-                    width: PosTextSize.size1,
-                    bold:true,
-                  ) ),
-              PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
-                  width: 3, styles: PosStyles(
-                    height: PosTextSize.size1,
-                    width: PosTextSize.size1,
-                    bold:true,
-                  )),
 
 
-
-            ]);
-              */
 
                 // ADDRESS: BEGINS HERE.
 
@@ -11416,6 +11483,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 // PHONE: BEGINS HERE.
 
 
+
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -11459,91 +11527,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 //  ORDEREDITEMS BEGINS HERE..
 
-                orderedItems.forEach((oneFood) {
+//                orderedItems.map((e) => null)
 
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
+                ListView.builder(
 
-                            Text(
-                              '${oneFood.name}',
+                  scrollDirection: Axis.vertical,
+                  reverse: false,
+                  shrinkWrap: false,
+                  itemCount: orderedItems.length,
 
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-//                        color: Color(0xffF50303),
-                                fontSize: 20, fontFamily: 'Itim-Regular',),
-                            ),
-                            Text(
-                              'X${oneFood.quantity}',
-
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-//                        color: Color(0xffF50303),
-                                fontSize: 20, fontFamily: 'Itim-Regular',),
-                            ),
-
-                          ],
-                        ),
-                      ),
+                  itemBuilder: (_,int index) {
+                    return displayOneFoodInformation(orderedItems[index], index);
+                  },
+                ),
+                //processFoodForRecite(orderedItems),
 
 
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-
-                            Text(
-                              '${oneFood.foodItemSize}',
-
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-//                        color: Color(0xffF50303),
-                                fontSize: 20, fontFamily: 'Itim-Regular',),
-                            ),
-                            Text(
-                              '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
-
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-//                        color: Color(0xffF50303),
-                                fontSize: 20, fontFamily: 'Itim-Regular',),
-                            ),
-
-                          ],
-                        ),
-                      ),
-
-                      Divider(
-                        height:20,
-                        thickness:5,
-                        color:Colors.black,
-                      ),
-
-
-                    ],
-                  );
-
-
-
-
-
-//        ticket.hr();
-                  // needed. as per design. when one food Item is printed then an hr added.
-
-                }),
 
                 //  ORDEREDITEMS endS HERE..
 
@@ -11562,16 +11561,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                Container
-                  (
-                    child:
-                    orderInformationForReciteWidget(oneOrderForReceipt)
-                ),
 
-                Container
-                  (
-                    child: customerInformationOnlyWidget(oneOrderForReceipt)
-                ),
 
 
                 Container(
