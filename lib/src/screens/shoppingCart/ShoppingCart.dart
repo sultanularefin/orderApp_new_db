@@ -3020,38 +3020,38 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //              color:Colors.purple,
               child:
 
-                  Container(
-                    width: displayWidth(context) /
-                        1.3,
-                    height: displayHeight(
-                        context) / 21,
-                    color: Color(0xffffffff),
+              Container(
+                width: displayWidth(context) /
+                    1.3,
+                height: displayHeight(
+                    context) / 21,
+                color: Color(0xffffffff),
 
-                    child:
+                child:
 
-                          Container(
-                            margin: EdgeInsets
-                                .fromLTRB(
-                                10, 0, 10, 0),
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                                'client\'s phone and duration in minutes:',
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight
-                                      .normal,
+                Container(
+                  margin: EdgeInsets
+                      .fromLTRB(
+                      10, 0, 10, 0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                      'client\'s phone and duration in minutes:',
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight
+                            .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
+                        color: Color(
+                            0xff000000),
+                      )
+                  ),
+                ),
 
 
-                          /*
+                /*
                           CustomPaint(
                             size: Size(0, 19),
                             painter: LongPainterForPhone(
@@ -3060,12 +3060,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           */
 
 
-                  ),
-                  // THE ABOVE PART DEALS WITH LINES AND TEXT,
-                  // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
+              ),
+              // THE ABOVE PART DEALS WITH LINES AND TEXT,
+              // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
 
 
-                  //ZZZZ
+              //ZZZZ
 
             ),
             // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
@@ -10888,9 +10888,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    assert(customerInfoFieldsCheck.etaTimeInMinutes != -1);
     if (
 
-        (customerInfoFieldsCheck.phoneNumber
-            .trim()
-            .length > 0)
+    (customerInfoFieldsCheck.phoneNumber
+        .trim()
+        .length > 0)
         &&
         (customerInfoFieldsCheck.etaTimeInMinutes != -1)
     ) {
@@ -11263,31 +11263,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Future<void> dummyPrintDialog(
 
-
       OneOrderFirebase oneOrderForReceipt,
       Uint8List restaurantNameImageByte2,
-      /*
-      Uint8List  orderInformationForReciteWidgetBytes3,
-      Uint8List customerInformationOnlyBytes3,
-
-      Uint8List totalCostDeliveryBytes3, */
-
-      /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */) async {
+      ) async {
 
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
-    /* print('totalCostDeliveryBytes3: $totalCostDeliveryBytes3'); */
-//    print(
-//        'paidUnpaidDeliveryTypeWidgetBytes2:$paidUnpaidDeliveryTypeWidgetBytes2');
+
+    CustomerInformation customerForReciteGeneration = oneOrderForReceipt
+        .oneCustomer;
+
+    List<OrderedItem> orderedItems = oneOrderForReceipt.orderedItems;
 
 
-//    final ImageAliasAnotherSource
-//        .Image orderInformationForReciteWidgetBytes3InBytesTest = ImageAliasAnotherSource.decodeImage(
-//        orderInformationForReciteWidgetBytes3);
 
 
-//    final ImageAliasAnotherSource
-//        .Image customerInformationOnlyBytes3InBytesTest = ImageAliasAnotherSource.decodeImage(
-//        customerInformationOnlyBytes3);
 
 
     return showDialog<void>(
@@ -11310,6 +11299,268 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     height:40,
                     child: Image.memory(restaurantNameImageByte2)
                 ),
+
+                Divider(
+                  height:30,
+                  thickness:10,
+                  color:Colors.black,
+                ),
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        '${oneOrderForReceipt
+                            .formattedOrderPlacementDatesTimeOnly}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+
+                      // 2 ends here.
+                      Text('${oneOrderForReceipt.orderProductionTime} min',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+                    ],
+                  ),
+                ),
+
+
+
+                /*
+            ticket.row([
+
+              PosColumn(text: '${((customerForReciteGeneration.address == null) ||
+                  (customerForReciteGeneration.address.length == 0)) ?
+              '----' : customerForReciteGeneration.address.length > 21 ?
+              customerForReciteGeneration.address.substring(0, 18) + '_ _' :
+              customerForReciteGeneration.address}',
+                  width: 9,styles: PosStyles(
+                    height: PosTextSize.size1,
+                    width: PosTextSize.size1,
+                    bold:true,
+                  ) ),
+              PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
+                  width: 3, styles: PosStyles(
+                    height: PosTextSize.size1,
+                    width: PosTextSize.size1,
+                    bold:true,
+                  )),
+
+
+
+            ]);
+              */
+
+                // ADDRESS: BEGINS HERE.
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+
+                      Text(
+                        'address: ',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+                      Text(
+                        '${((customerForReciteGeneration.address == null) ||
+                            (customerForReciteGeneration.address.length == 0)) ?
+                        '----' : customerForReciteGeneration.address.length > 21 ?
+                        customerForReciteGeneration.address.substring(0, 18) + '_ _' :
+                        customerForReciteGeneration.address}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+
+                      // 2 ends here.
+                      Text('${customerForReciteGeneration.flatOrHouseNumber}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // ADDRESS: ENDS HERE.
+
+                // PHONE: BEGINS HERE.
+
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+
+                      Text(
+                        'phone: ',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+                      Text(
+                        '${customerForReciteGeneration.phoneNumber}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+
+                    ],
+                  ),
+                ),
+
+                // PHONE: ENDS HERE.
+
+
+                Divider(
+                  height:30,
+                  thickness:10,
+                  color:Colors.black,
+                ),
+
+
+                //  ORDEREDITEMS BEGINS HERE..
+
+                orderedItems.forEach((oneFood) {
+
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+
+                            Text(
+                              '${oneFood.name}',
+
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+//                        color: Color(0xffF50303),
+                                fontSize: 20, fontFamily: 'Itim-Regular',),
+                            ),
+                            Text(
+                              'X${oneFood.quantity}',
+
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+//                        color: Color(0xffF50303),
+                                fontSize: 20, fontFamily: 'Itim-Regular',),
+                            ),
+
+                          ],
+                        ),
+                      ),
+
+
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+
+                            Text(
+                              '${oneFood.foodItemSize}',
+
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+//                        color: Color(0xffF50303),
+                                fontSize: 20, fontFamily: 'Itim-Regular',),
+                            ),
+                            Text(
+                              '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+//                        color: Color(0xffF50303),
+                                fontSize: 20, fontFamily: 'Itim-Regular',),
+                            ),
+
+                          ],
+                        ),
+                      ),
+
+                      Divider(
+                        height:20,
+                        thickness:5,
+                        color:Colors.black,
+                      ),
+
+
+                    ],
+                  );
+
+
+
+
+
+//        ticket.hr();
+                  // needed. as per design. when one food Item is printed then an hr added.
+
+                }),
+
+                //  ORDEREDITEMS endS HERE..
+
+                Divider(
+                  height:40,
+                  thickness:20,
+                  color:Colors.black,
+                ),
+
+
+
+
+
+
+
+
+
 
                 Container
                   (
@@ -11965,6 +12216,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //3...
 
 
+    //    List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
     orderedItems.forEach((oneFood) {
       ticket.row([
 
