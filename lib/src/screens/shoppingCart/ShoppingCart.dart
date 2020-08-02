@@ -11471,10 +11471,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget displayOneFoodInformation(OrderedItem oneFood, int index){
     print('index: : : : $index');
 
-    List<NewIngredient> extraIngredient = oneFood.selectedIngredients.map((e) => e.isDefault != true).toList();
-        List<SauceItem> extraSauces = oneFood.selectedIngredients.map((e) => e.isDefault != true).toList();
-    List<CheeseItem> extraCheeseItems = oneFood.selectedIngredients.map((e) => e.isDefault != true).toList();
+    List<NewIngredient> extraIngredient   = oneFood.selectedIngredients.where((e) => e.isDefault != true).toList();
+        List<SauceItem> extraSauces       = oneFood.defaultSauces.where((e) => e.isDefaultSelected != true).toList();
+    List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses.where((e) => e.isDefaultSelected != true).toList();
 
+
+    /*
+    List<NewIngredient> defaultIngredientsLaterAdded
+    = defaultIngredients.where((oneDefaultIngredient) =>
+    oneDefaultIngredient.isDefault!=true).toList();
+
+    */
     
     return Container(
 
@@ -11554,22 +11561,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+//        extraIngredient
+//        extraSauces
+//        extraCheeseItems
           Container(
               width: 220,
               height:100,
-                        child: showExtraIngredients()),
+                        child: showExtraIngredients(extraIngredient)),
+
+
+          Container(
+              width: 220,
+              height:100,
+                        child: showExtraCheeseItems(extraCheeseItems)
           ),
 
           Container(
               width: 220,
               height:100,
-                        child: showExtraCheeseItems(oneFood.selectedCheeses)
-          ),
-
-          Container(
-              width: 220,
-              height:100,
-                        child: showExtraSauces(oneFood.defaultSauces)
+                        child: showExtraSauces(extraSauces)
           ),
 
 

@@ -1001,7 +1001,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    List<NewIngredient> defaultIngredientsLaterAdded = defaultIngredients.map((oneDefaultIngredient))
 
-    List<NewIngredient> defaultIngredientsLaterAdded = defaultIngredients.where((oneDefaultIngredient) =>
+    List<NewIngredient> defaultIngredientsLaterAdded
+    = defaultIngredients.where((oneDefaultIngredient) =>
     oneDefaultIngredient.isDefault!=true).toList();
 
 
