@@ -17,6 +17,9 @@ import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/services.dart'; // InputFormatters.
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 import 'package:foodgallery/src/welcomePage.dart';
 import 'package:image/image.dart' as ImageAliasAnotherSource;
@@ -11260,7 +11263,210 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
+//  showExtraIngredients(oneFood.selectedIngredients)
+//  showExtraCheeseItems(oneFood.selectedCheeses)
+//  showExtraSauces(oneFood.defaultSauces)
 
+  Widget showExtraIngredients(List <NewIngredient> reciteIngrdients){
+
+    return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      reverse: false,
+      shrinkWrap: false,
+      itemCount: reciteIngrdients.length,
+
+
+      itemBuilder: (_,int index) {
+        return displayOneExtraIngredientInRecite(reciteIngrdients[index], index);
+      },
+
+    );
+
+  }
+  Widget showExtraCheeseItems(List<CheeseItem> reciteCheeseItems){
+    return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      reverse: false,
+      shrinkWrap: false,
+      itemCount: reciteCheeseItems.length,
+
+      itemBuilder: (_,int index) {
+        return displayOneExtraCheeseItemInRecite(reciteCheeseItems[index], index);
+      },
+    );
+  }
+  Widget showExtraSauces(List<SauceItem> reciteSauceItems){
+    return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      reverse: false,
+      shrinkWrap: false,
+      itemCount: reciteSauceItems.length,
+
+      itemBuilder: (_,int index) {
+        return displayOneExtraSauceItemInRecite(reciteSauceItems[index], index);
+      },
+    );
+  }
+
+  Widget displayOneExtraIngredientInRecite(NewIngredient oneIngredientForRecite, int index){
+
+    if(oneIngredientForRecite.isDefault==false) {
+      return Container(
+        height: 40,
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+            Text(
+              '+Ingredient: ',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+            Text(
+              '${oneIngredientForRecite.ingredientName} ',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+            Text(
+              '  +${oneIngredientForRecite.price.toStringAsFixed(2)}',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+
+          ],
+        ),
+      );
+    }
+    else return Container(
+        height: 0,
+        width: 0
+    );
+  }
+
+  Widget displayOneExtraSauceItemInRecite(SauceItem oneSauceItemForRecite, int index){
+
+    if(oneSauceItemForRecite.isDefaultSelected !=true) {
+      return Container(
+        height: 40,
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+            Text(
+              '+SauceItem: ',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+            Text(
+              '${oneSauceItemForRecite.sauceItemName} ',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+            Text(
+              '  +${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+
+          ],
+        ),
+      );
+    }
+    else return Container(
+        height: 0,
+        width: 0
+    );
+  }
+
+
+  Widget displayOneExtraCheeseItemInRecite(CheeseItem oneCheeseItemForRecite, int index){
+
+    if(oneCheeseItemForRecite.isDefaultSelected !=true) {
+      return Container(
+        height: 40,
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+            Text(
+              '+Ingredient: ',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+            Text(
+              '${oneCheeseItemForRecite.cheeseItemName} ',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+            Text(
+              '  +${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+
+          ],
+        ),
+      );
+    }
+    else return Container(
+        height: 0,
+        width: 0
+    );
+  }
 
   Widget displayOneFoodInformation(OrderedItem oneFood, int index){
     print('index: : : : $index');
@@ -11341,7 +11547,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
 
-         
+
+          Container(
+              width: 220,
+              height:100,
+                        child: showExtraIngredients(oneFood.selectedIngredients)
+          ),
+
+          Container(
+              width: 220,
+              height:100,
+                        child: showExtraCheeseItems(oneFood.selectedCheeses)
+          ),
+
+          Container(
+              width: 220,
+              height:100,
+                        child: showExtraSauces(oneFood.defaultSauces)
+          ),
+
+
+
+
+
 
 
 
@@ -11574,16 +11802,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   thickness:20,
                   color:Colors.black,
                 ),
-
-
-
-
-
-
-
-
-
-
 
 
 
