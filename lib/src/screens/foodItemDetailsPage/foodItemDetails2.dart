@@ -224,6 +224,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       // FROM FOOD ITEM PAGE.
 
 
+                      print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
                       blocD.clearSubscription();
 
                       return Navigator.pop(context,tempSelectedFood);
