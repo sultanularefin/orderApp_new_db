@@ -283,7 +283,7 @@ class FirebaseClient {
             'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
-        'ingredientAmountByUser': sauceItems[counter].sauceItemAmountByUser ,// +1, // 1 is added since by default it is zero
+        'sauceItemAmountByUser': sauceItems[counter].sauceItemAmountByUser,// +1, // 1 is added since by default it is zero
         'price':sauceItems[counter].price,
         'isDefaultSelected':sauceItems[counter].isDefaultSelected,
 

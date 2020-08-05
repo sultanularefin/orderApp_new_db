@@ -843,6 +843,13 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     setNewPriceforSauceItemCheeseItemIngredientUpdate();
+
+
+    SelectedFood tempSelectedFood = _currentSelectedFoodDetails;//oneSelectedFoodFD ;
+
+    tempSelectedFood.selectedSauceItems= _allSelectedSauceItems;
+    _currentSelectedFoodDetails = tempSelectedFood;
+    _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
   }
 
 
@@ -865,6 +872,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   void setThisCheeseAsSelectedCheeseItem(CheeseItem oneCheeseItem,int index){
 
+    // todo -- update selected cheese item in BBBB
+
+
+
     List<CheeseItem> allTempCheeseItems = _allCheeseItemsDBloc;
 
     allTempCheeseItems[index].isSelected= !allTempCheeseItems[index].isSelected;
@@ -877,6 +888,20 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
 
     setNewPriceforSauceItemCheeseItemIngredientUpdate();
+
+
+    SelectedFood tempSelectedFood = _currentSelectedFoodDetails;//oneSelectedFoodFD ;
+
+    tempSelectedFood.selectedCheeseItems= _allSelectedCheeseItems;
+    _currentSelectedFoodDetails = tempSelectedFood;
+    _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
+
+//    selectedCheeseItems : _allSelectedCheeseItems,
+//    selectedSauceItems:   _allSelectedSauceItems,
+//    );
+//
+//    _currentSelectedFoodDetails = selectedFoodInConstructor;
+//
 
   }
 
