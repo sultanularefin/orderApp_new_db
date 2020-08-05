@@ -12615,9 +12615,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.row([
 
 
-      PosColumn(text: '${oneOrderData3
-          .orderProductionTime}',
-        width: 5, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
+        width: 5, styles: PosStyles(bold:true,
+    align: PosAlign.left) ),
       PosColumn(text: '',
         width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
 
@@ -12640,7 +12640,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 3 ... address: .... + flat
 
 
-    ticket.text('address: ${((customerForReciteGeneration.address == null) ||
+    ticket.text('address:  ${((customerForReciteGeneration.address == null) ||
     (customerForReciteGeneration.address.length == 0)) ?
     '----' : customerForReciteGeneration.address.length > 21 ?
     customerForReciteGeneration.address.substring(0, 18) + '...' :
@@ -12654,7 +12654,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
 
     // 4 ... phone: phone
-    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
+    ticket.text('phone:  ${((customerForReciteGeneration.phoneNumber == null) ||
         (customerForReciteGeneration.phoneNumber.length == 0)) ?
     '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
     customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
@@ -12706,7 +12706,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
         PosColumn(text: '${oneFood.name}',
-          width: 5, /*, styles: PosStyles(align: PosAlign.center) */),
+          width: 5, styles: PosStyles(align: PosAlign.left,
+      ) ),
         PosColumn(text: '',
           width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
 
@@ -12721,7 +12722,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       ticket.row([
         PosColumn(text: '${oneFood.foodItemSize}',
-          width: 5, /*, styles: PosStyles(align: PosAlign.center) */),
+          width: 5,  styles: PosStyles(align: PosAlign.left) ),
         PosColumn(text: '',
           width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
         PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
@@ -12749,7 +12750,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 )),
 
             PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-              width: 3, /*,styles: PosStyles(align: PosAlign.left) */),
+              width: 3,styles: PosStyles(align: PosAlign.right)),
 
 
           ]);
@@ -12773,7 +12774,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 )),
 
             PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-              width: 3, /*,styles: PosStyles(align: PosAlign.left) */),
+              width: 3,styles: PosStyles(align: PosAlign.right) ),
 
 
           ]);
@@ -12797,7 +12798,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 )),
 
             PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-              width: 3, /*,styles: PosStyles(align: PosAlign.left) */),
+              width: 3,styles: PosStyles(align: PosAlign.right)),
 
 
           ]);
@@ -12846,7 +12847,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    ticket.hr();
 
-    ticket.hr(ch:'-',len:null,linesAfter:1);
+    ticket.hr(ch:'-',len:null,linesAfter:0);
 
 
     // Price 3  Total
