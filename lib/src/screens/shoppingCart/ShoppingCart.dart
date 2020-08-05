@@ -12450,8 +12450,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             width: PosTextSize.size1,
             bold:true,
           )),
-
-
+      
 
     ]);
 
