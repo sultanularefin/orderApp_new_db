@@ -12623,7 +12623,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       PosColumn(text: '${oneOrderData3.orderProductionTime} min',
         width: 5, styles: PosStyles(
-
+            bold:true,
             align: PosAlign.right,
           )),
 
