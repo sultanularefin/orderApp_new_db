@@ -726,14 +726,15 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     ingredientAmountByUser}');
 
     NewIngredient c1 = new NewIngredient(
-        ingredientName: unSelectedOneIngredient
-            .ingredientName,
-        imageURL: unSelectedOneIngredient.imageURL,
+      ingredientName: unSelectedOneIngredient
+          .ingredientName,
+      imageURL: unSelectedOneIngredient.imageURL,
 
-        price: unSelectedOneIngredient.price,
-        documentId: unSelectedOneIngredient.documentId,
-        ingredientAmountByUser: unSelectedOneIngredient
-            .ingredientAmountByUser + 1
+      price: unSelectedOneIngredient.price,
+      documentId: unSelectedOneIngredient.documentId,
+      ingredientAmountByUser: unSelectedOneIngredient
+          .ingredientAmountByUser + 1,
+      isDefault: false,
     );
 
 
@@ -937,7 +938,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
         price: unSelectedOneIngredient.price,
         documentId: unSelectedOneIngredient.documentId,
         ingredientAmountByUser: unSelectedOneIngredient
-            .ingredientAmountByUser - 1
+            .ingredientAmountByUser - 1,
+      isDefault: false,
     );
 
 
@@ -1294,9 +1296,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     });
 
     default2.map((oneIngredient) =>
-        /*NewIngredient.updateSelectedIngredient */(
-            oneIngredient.isDefault= true
-        )).toList();
+    /*NewIngredient.updateSelectedIngredient */(
+        oneIngredient.isDefault= true
+    )).toList();
 
 
     default2.forEach((oneIng) {
