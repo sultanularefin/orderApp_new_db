@@ -224,12 +224,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       // FROM FOOD ITEM PAGE.
 
 
-
+                      print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
                       blocD.clearSubscription();
 
                       return Navigator.pop(context,tempSelectedFood);
-
-
 
 
                     },
@@ -1306,7 +1304,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-            blocD.moreDefaultIngredientItems(/*oneSelected,index*/);
+            blocD.finishMoreDefaultIngredientItems(/*oneSelected,index*/);
 
             setState(() {
 

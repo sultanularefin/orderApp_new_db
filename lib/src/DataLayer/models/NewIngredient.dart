@@ -66,6 +66,7 @@ class NewIngredient {
         isDefault= false;
 
   // PURPOSE SETTING ISDEFAULT TRUE INORDER TO CALCULATE PRICE UPON NEW INGREDIENT ADD
+  /*
   NewIngredient.updateSelectedIngredient(NewIngredient oneIngredient)
       :imageURL= oneIngredient.imageURL,
         ingredientName= oneIngredient.ingredientName,
@@ -73,6 +74,8 @@ class NewIngredient {
         documentId = oneIngredient.documentId,
         ingredientAmountByUser = 0,
         isDefault= true;
+
+  */
 
 
 

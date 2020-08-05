@@ -160,7 +160,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsController.stream;
 
   // sauce items
-  List<SauceItem> _allSauceItemsDBloc =[];
+  List<SauceItem> _allSauceItemsDBloc = [];
   List<SauceItem> get getAllSauceItems => _allSauceItemsDBloc;
   final _sauceItemsController      =  StreamController <List<SauceItem>>();
   Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsController.stream;
@@ -262,8 +262,30 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     */
 
 
+//    List<NewIngredient> unSelectedDecremented =
+//    allIngsScoped.map((oneIngredient) =>
+//        NewIngredient.updateUnselectedIngredient(
+//            oneIngredient
+//        )).toList();
 
-    List <SauceItem> sauceItems = sauceItems0;
+
+//    List <SauceItem> sauceItems = sauceItems0.map((oneSauce) => (oneSauce.isDefaultSelected=false)).toList();
+
+
+
+
+    sauceItems0.map((oneSauce) =>
+    /*NewIngredient.updateSelectedIngredient */(
+        oneSauce.isDefaultSelected = false
+    )).toList();
+
+    sauceItems0.map((oneSauce) =>
+    /*NewIngredient.updateSelectedIngredient */(
+        oneSauce.isSelected = false
+    )).toList();
+
+    List <SauceItem> sauceItems= sauceItems0;
+
 
 
 
@@ -319,6 +341,16 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
+    cheeseItems0.map((oneSauce) =>
+    /*NewIngredient.updateSelectedIngredient */(
+        oneSauce.isDefaultSelected = false
+    )).toList();
+
+    cheeseItems0.map((oneSauce) =>
+    /*NewIngredient.updateSelectedIngredient */(
+        oneSauce.isSelected = false
+    )).toList();
+
 
     List <CheeseItem> cheeseItems = cheeseItems0;
     /*
@@ -337,8 +369,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     cheeseItems.forEach((oneCheeseItem) {
-
-
 
       if(oneCheeseItem.sl==1){
         oneCheeseItem.isSelected=true;
@@ -383,7 +413,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    oneFoodItem,
 //    tempIngs,
-  
+
 
 
     initiateSauces(tempSauceItems);
@@ -726,14 +756,15 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     ingredientAmountByUser}');
 
     NewIngredient c1 = new NewIngredient(
-        ingredientName: unSelectedOneIngredient
-            .ingredientName,
-        imageURL: unSelectedOneIngredient.imageURL,
+      ingredientName: unSelectedOneIngredient
+          .ingredientName,
+      imageURL: unSelectedOneIngredient.imageURL,
 
-        price: unSelectedOneIngredient.price,
-        documentId: unSelectedOneIngredient.documentId,
-        ingredientAmountByUser: unSelectedOneIngredient
-            .ingredientAmountByUser + 1
+      price: unSelectedOneIngredient.price,
+      documentId: unSelectedOneIngredient.documentId,
+      ingredientAmountByUser: unSelectedOneIngredient
+          .ingredientAmountByUser + 1,
+      isDefault: false,
     );
 
 
@@ -807,7 +838,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _allSauceItemsDBloc = allTempSauceItems;
     _sauceItemsController.sink.add(_allSauceItemsDBloc);
 
-    _allSelectedSauceItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
+    _allSelectedSauceItems = allTempSauceItems.where((element) => ((element.isSelected==true) || (element.isDefaultSelected ==true))).toList();
     _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
 
@@ -842,7 +873,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
 
     // selected update.
-    _allSelectedCheeseItems = allTempCheeseItems.where((element) => element.isSelected==true).toList();
+    _allSelectedCheeseItems = allTempCheeseItems.where((element) => ((element.isSelected == true)|| (element.isDefaultSelected ==true))).toList();
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
 
     setNewPriceforSauceItemCheeseItemIngredientUpdate();
@@ -868,7 +899,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void moreDefaultIngredientItems(/*NewIngredient unSelectedOneIngredient,int index*/){
+  void finishMoreDefaultIngredientItems(/*NewIngredient unSelectedOneIngredient,int index*/){
     print('reached here ==> : <==  update Default IngredientItem ');
 
     List<NewIngredient> allDefaultIngredientItems = _defaultIngItems;
@@ -907,18 +938,17 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     // --- price update invocation.
 
-    setNewPriceByIngredientAdd(_defaultIngItems);
-//    setNewPriceBySelectedIngredientItems();
+//    setNewPriceByIngredientAdd(_defaultIngItems);
 
+    setNewPriceforSauceItemCheeseItemIngredientUpdate();
+//    setNewPriceBySelectedIngredientItems();
 
     //  NOW ADD PART BEGINS HERE
 
     List<NewIngredient> allUnSelectedIngredientItems = valueUnChangedUNselectedIngredient;
 
-
     _unSelectedIngItems  = allUnSelectedIngredientItems;
     _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
-
 
   }
 
@@ -938,7 +968,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
         price: unSelectedOneIngredient.price,
         documentId: unSelectedOneIngredient.documentId,
         ingredientAmountByUser: unSelectedOneIngredient
-            .ingredientAmountByUser - 1
+            .ingredientAmountByUser - 1,
+      isDefault: false,
     );
 
 
@@ -1066,8 +1097,27 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List<CheeseItem> onlyNewSelectedCheeseItems = _allSelectedCheeseItems.where((element) =>((element.isSelected==true)
         && (element.isDefaultSelected!=true))).toList();
 
-    List<NewIngredient> onlyNewSelectedIngredients = _defaultIngItems.where((element) =>((element.isDefault= false)
-        )).toList();
+    List<NewIngredient> onlyNewSelectedIngredients = _defaultIngItems.where(
+            (element) =>((element.isDefault == false))).toList();
+
+    logger.i('_defaultIngItems: $_defaultIngItems');
+
+
+
+    _defaultIngItems.forEach((oneIng) {
+
+
+      print('element.isDefault ingredient check:::: ${oneIng.isDefault}');
+      print('oneIng.name: ${oneIng.ingredientName}');
+      print('oneIng.price: ${oneIng.price}');
+
+
+    }
+    );
+
+
+
+    logger.i('onlyNewSelectedIngredients: $onlyNewSelectedIngredients');
 
 
 
@@ -1078,6 +1128,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     print('addedSauceItemsPrice : $addedSauceItemsPrice');
     print('addedCheeseItemsPrice : $addedCheeseItemsPrice');
     print('addedIngredientsItemsPrice : $addedIngredientsItemsPrice');
+
+    logger.e('addedIngredientsItemsPrice : $addedIngredientsItemsPrice');
 
 
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
@@ -1275,9 +1327,24 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     });
 
     default2.map((oneIngredient) =>
-        NewIngredient.updateSelectedIngredient(
-            oneIngredient
-        )).toList();
+    /*NewIngredient.updateSelectedIngredient */(
+        oneIngredient.isDefault= true
+    )).toList();
+
+
+    default2.forEach((oneIng) {
+
+
+      print('NewIngredient.updateSelectedIngredient check:::: oneIng.isDefault ${oneIng.isDefault}');
+      print('oneIng.name: ${oneIng.ingredientName}');
+      print('oneIng.price: ${oneIng.price}');
+
+
+    }
+    );
+
+
+
 
     _defaultIngItems = default2;
     _defaultIngredientListController.sink.add(default2);
@@ -1382,6 +1449,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   void clearSubscription(){
 
+    print('calling clear Subscription method.... for /in food Details bloc ');
 
 
 //    _curretnOrder=null;
@@ -1402,8 +1470,15 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _defaultIngItems = [];
     _unSelectedIngItems = [];
     _multiSelectForFood = [];
+
     _allSauceItemsDBloc = [];
     _allCheeseItemsDBloc = [];
+
+    print('_allSelectedCheeseItems = [];');
+    print('_allSelectedSauceItems = [];');
+
+    _allSelectedCheeseItems = [];
+    _allSelectedSauceItems = [];
 
 
     _controller.sink.add(_thisFoodItem);
@@ -1412,8 +1487,12 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _defaultIngredientListController.sink.add(_defaultIngItems);
     _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
     _multiSelectForFoodController.sink.add(_multiSelectForFood);
+
     _sauceItemsController.sink.add(_allSauceItemsDBloc);
     _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+    _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
   }
 
@@ -1432,6 +1511,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _multiSelectForFoodController.close();
     _sauceItemsController.close();
     _cheeseItemsController.close();
+
     _selectedSauceListController.close();
     _selectedCheeseListController.close();
   }

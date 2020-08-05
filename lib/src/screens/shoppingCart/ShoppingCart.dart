@@ -11269,6 +11269,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget showExtraIngredients(List <NewIngredient> reciteIngrdients){
 
+    print('reciteIngrdients.length: ${reciteIngrdients.length}');
     return ListView.builder(
 
       scrollDirection: Axis.vertical,
@@ -11285,6 +11286,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
   Widget showExtraCheeseItems(List<CheeseItem> reciteCheeseItems){
+    print('reciteCheeseItems.length: ${reciteCheeseItems.length}');
     return ListView.builder(
 
       scrollDirection: Axis.vertical,
@@ -11298,6 +11300,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
   Widget showExtraSauces(List<SauceItem> reciteSauceItems){
+    print('reciteSauceItems.length: ${reciteSauceItems.length}');
     return ListView.builder(
 
       scrollDirection: Axis.vertical,
@@ -11312,6 +11315,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   Widget displayOneExtraIngredientInRecite(NewIngredient oneIngredientForRecite, int index){
+
+    print('oneIngredientForRecite.ingredientName: ${oneIngredientForRecite.ingredientName}');
 
     if(oneIngredientForRecite.isDefault==false) {
       return Container(
@@ -11364,6 +11369,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   Widget displayOneExtraSauceItemInRecite(SauceItem oneSauceItemForRecite, int index){
+
+    print('oneSauceItemForRecite.ingredientName: ${oneSauceItemForRecite.sauceItemName}');
 
     if(oneSauceItemForRecite.isDefaultSelected !=true) {
       return Container(
@@ -11418,6 +11425,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget displayOneExtraCheeseItemInRecite(CheeseItem oneCheeseItemForRecite, int index){
 
+    print('oneCheeseItemForRecite.ingredientName: ${oneCheeseItemForRecite.cheeseItemName}');
     if(oneCheeseItemForRecite.isDefaultSelected !=true) {
       return Container(
         height: 40,
@@ -11487,17 +11495,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
     List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
 
 
+    print('onlyExtraIngredient: $onlyExtraIngredient');
+
+    print('onlyExtraSauces: $onlyExtraSauces');
+
+    print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
     /*
     List<NewIngredient> defaultIngredientsLaterAdded
     = defaultIngredients.where((oneDefaultIngredient) =>
     oneDefaultIngredient.isDefault!=true).toList();
 
     */
-    
+
     return Container(
 
-      height:240,
-      width: 920,
+      height:940,
+      width: 220,
 
       child: Column(
         children: <Widget>[
@@ -11572,35 +11587,39 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-//        extraIngredient
-//        extraSauces
-//        extraCheeseItems
           Container(
-              width: 220,
-              height:200,
-                        child: showExtraIngredients(onlyExtraIngredient)),
+            height:700,
+            color:Colors.redAccent,
+            padding:const EdgeInsets.all(3),
+            child:ListView(
+              children: <Widget>[
+                Container(
+                    width: 320,
+                    height:210,
+                    color:Colors.blue,
+                    child: showExtraIngredients(onlyExtraIngredient)),
 
 
-          Container(
-              width: 220,
-              height:200,
-                        child: showExtraCheeseItems(onlyExtraCheeseItems)
+                /*
+                Container(
+                    width: 320,
+                    height:210,
+                    color:Colors.orange,
+                    child: showExtraCheeseItems(onlyExtraCheeseItems)
+                ),
+
+                Container(
+                    width: 320,
+
+                    height:210,
+                    color:Colors.deepPurpleAccent,
+                    child: showExtraSauces(onlyExtraSauces)
+                ),
+
+                */
+              ],
+            )
           ),
-
-          Container(
-              width: 220,
-              height:200,
-                        child: showExtraSauces(onlyExtraSauces)
-          ),
-
-
-
-
-
-
-
-
-
 
 
           Divider(

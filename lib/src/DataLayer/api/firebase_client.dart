@@ -209,6 +209,8 @@ class FirebaseClient {
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'ingredientAmountByUser': si[counter].ingredientAmountByUser,
+        'price':si[counter].price,
+        'isDefault':si[counter].isDefault,
 
       };
       testIngredients.add(identifier);
@@ -221,29 +223,28 @@ class FirebaseClient {
 
   }
 
-  List <Map<String, dynamic>> /*<OrderedFood>*/ convertedCheeseItems(List<CheeseItem> si){
+  List <Map<String, dynamic>> /*<OrderedFood>*/ convertedCheeseItems(List<CheeseItem> cheeseItems){
 
-//    ingredientName;
-//    imageURL;
-//    price;
-//    documentId;
-//    ingredientAmountByUser
-
+  print('cheeseItems.length: ${cheeseItems.length}');
 
     List<Map<String, dynamic>> testCheeseItems = new List<Map<String, dynamic>>();
     int counter=0;
-    si.forEach((oneIngredient) {
+  cheeseItems.forEach((oneCheeseItem) {
+
+      print('selected check: ${cheeseItems[counter].cheeseItemName} === ${cheeseItems[counter].isDefaultSelected}');
 
       //  print('si[counter].imageURL}: ${si[counter].imageURL}');
       var identifier = {
 
         'type': 0,
-        'name': si[counter].cheeseItemName,
-        'image': Uri.decodeComponent(si[counter].imageURL.replaceAll(
+        'name': cheeseItems[counter].cheeseItemName,
+        'image': Uri.decodeComponent(cheeseItems[counter].imageURL.replaceAll(
             'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
-        'ingredientAmountByUser': si[counter].cheeseItemAmountByUser,
+        'cheeseItemAmountByUser': cheeseItems[counter].cheeseItemAmountByUser,
+        'price':cheeseItems[counter].price,
+        'isDefaultSelected':cheeseItems[counter].isDefaultSelected,
 
       };
       testCheeseItems.add(identifier);
@@ -256,7 +257,7 @@ class FirebaseClient {
 
   }
 
-  List <Map<String, dynamic>> /*<OrderedFood>*/ convertedSauceItems(List<SauceItem> si){
+  List <Map<String, dynamic>> /*<OrderedFood>*/ convertedSauceItems(List<SauceItem> sauceItems){
 
 //    ingredientName;
 //    imageURL;
@@ -264,21 +265,27 @@ class FirebaseClient {
 //    documentId;
 //    ingredientAmountByUser
 
+    print('sauceItems.length: ${sauceItems.length}');
+
 
     List<Map<String, dynamic>> testIngredients = new List<Map<String, dynamic>>();
     int counter=0;
-    si.forEach((oneIngredient) {
+    sauceItems.forEach((oneIngredient) {
+
+      print('selected check: ${sauceItems[counter].sauceItemName} === ${sauceItems[counter].isDefaultSelected}');
 
       //  print('si[counter].imageURL}: ${si[counter].imageURL}');
       var identifier = {
 
         'type': 0,
-        'name': si[counter].sauceItemName,
-        'image': Uri.decodeComponent(si[counter].imageURL.replaceAll(
+        'name': sauceItems[counter].sauceItemName,
+        'image': Uri.decodeComponent(sauceItems[counter].imageURL.replaceAll(
             'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
-        'ingredientAmountByUser': si[counter].sauceItemAmountByUser,
+        'ingredientAmountByUser': sauceItems[counter].sauceItemAmountByUser ,// +1, // 1 is added since by default it is zero
+        'price':sauceItems[counter].price,
+        'isDefaultSelected':sauceItems[counter].isDefaultSelected,
 
       };
       testIngredients.add(identifier);
@@ -308,7 +315,7 @@ class FirebaseClient {
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'quantity': sf[counter].quantity,
-        'defaultSauces':convertedSauceItems(sf[counter].selectedSauceItems),
+        'selectedSauces':convertedSauceItems(sf[counter].selectedSauceItems),
         'selectedCheeses':convertedCheeseItems(sf[counter].selectedCheeseItems),
         'ingredients':convertedIngredients(sf[counter].selectedIngredients),
         'name':sf[counter].foodItemName,
