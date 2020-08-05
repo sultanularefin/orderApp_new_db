@@ -383,7 +383,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    oneFoodItem,
 //    tempIngs,
-  
+
 
 
     initiateSauces(tempSauceItems);
@@ -1065,8 +1065,26 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List<CheeseItem> onlyNewSelectedCheeseItems = _allSelectedCheeseItems.where((element) =>((element.isSelected==true)
         && (element.isDefaultSelected!=true))).toList();
 
-    List<NewIngredient> onlyNewSelectedIngredients = _defaultIngItems.where((element) =>((element.isDefault= false)
-        )).toList();
+    List<NewIngredient> onlyNewSelectedIngredients = _defaultIngItems.where((element) =>((element.isDefault == false))).toList();
+
+    logger.i('_defaultIngItems: $_defaultIngItems');
+
+
+
+    _defaultIngItems.forEach((oneIng) {
+
+
+      print('element.isDefault ingredient check:::: ${oneIng.isDefault}');
+      print('oneIng.name: ${oneIng.ingredientName}');
+      print('oneIng.price: ${oneIng.price}');
+
+
+    }
+    );
+
+
+
+    logger.i('onlyNewSelectedIngredients: $onlyNewSelectedIngredients');
 
 
 
@@ -1077,6 +1095,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     print('addedSauceItemsPrice : $addedSauceItemsPrice');
     print('addedCheeseItemsPrice : $addedCheeseItemsPrice');
     print('addedIngredientsItemsPrice : $addedIngredientsItemsPrice');
+
+    logger.e('addedIngredientsItemsPrice : $addedIngredientsItemsPrice');
 
 
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
@@ -1274,9 +1294,24 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     });
 
     default2.map((oneIngredient) =>
-        NewIngredient.updateSelectedIngredient(
-            oneIngredient
+        /*NewIngredient.updateSelectedIngredient */(
+            oneIngredient.isDefault= true
         )).toList();
+
+
+    default2.forEach((oneIng) {
+
+
+      print('NewIngredient.updateSelectedIngredient check:::: oneIng.isDefault ${oneIng.isDefault}');
+      print('oneIng.name: ${oneIng.ingredientName}');
+      print('oneIng.price: ${oneIng.price}');
+
+
+    }
+    );
+
+
+
 
     _defaultIngItems = default2;
     _defaultIngredientListController.sink.add(default2);
