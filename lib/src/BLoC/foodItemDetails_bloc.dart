@@ -808,7 +808,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _allSauceItemsDBloc = allTempSauceItems;
     _sauceItemsController.sink.add(_allSauceItemsDBloc);
 
-    _allSelectedSauceItems = allTempSauceItems.where((element) => element.isSelected==true).toList();
+    _allSelectedSauceItems = allTempSauceItems.where((element) => ((element.isSelected==true) || (element.isDefaultSelected ==true))).toList();
     _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
 
@@ -843,7 +843,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
 
     // selected update.
-    _allSelectedCheeseItems = allTempCheeseItems.where((element) => element.isSelected==true).toList();
+    _allSelectedCheeseItems = allTempCheeseItems.where((element) => ((element.isSelected == true)|| (element.isDefaultSelected ==true))).toList();
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
 
     setNewPriceforSauceItemCheeseItemIngredientUpdate();
@@ -1440,6 +1440,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _multiSelectForFood = [];
     _allSauceItemsDBloc = [];
     _allCheeseItemsDBloc = [];
+    _allSelectedCheeseItems = [];
+    _allSelectedSauceItems = [];
 
 
     _controller.sink.add(_thisFoodItem);
@@ -1450,6 +1452,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _multiSelectForFoodController.sink.add(_multiSelectForFood);
     _sauceItemsController.sink.add(_allSauceItemsDBloc);
     _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+    _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
   }
 
