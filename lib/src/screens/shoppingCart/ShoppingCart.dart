@@ -9341,24 +9341,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
                 onPressed: () async {
 
-                  // DUMMY PRINT DELIVERY PHONE ......
+                  // Delivery Phone Recite Print.
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
-                  print(
-                      'debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
-
-
 
                   print(
-                      'debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
-
-                  print(
-                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone
+                      'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: '
+                          '${cancelPaySelectUnobscuredDeliveryPhone
                           .paymentTypeIndex}');
 
                   // let's not use this order returned use the one from the bloc:
@@ -9376,37 +9369,99 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
-                        .orderdocId}');
+                    logger.i(
+                        'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
+                            .orderdocId}');
 
-                    List<
-                        PrinterBluetooth> blueToothDevicesState = shoppingCartBloc
-                        .getDevices;
+                    List<PrinterBluetooth> blueToothDevicesState
+                    = shoppingCartBloc.getDevices;
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
+                    if (blueToothDevicesState.length == 0) {
+                      logger.i('___________ blueTooth device not found _____');
+
+                      await _showMyDialog2(
+                          '___________ blueTooth device not found _____ delivery phone pay button');
+
+                      print(
+                          'at here... __________ blueTooth device not found _____ delivery phone pay button');
+
+                      shoppingCartBloc.clearSubscription();
+                      return Navigator.pop(
+                          context, cancelPaySelectUnobscuredDeliveryPhone);
+
+                    }
+
+                    else {
+                      bool found = false;
+                      int index = -1;
+                      for (int i = 0; i < blueToothDevicesState.length; i++) {
+                        ++index;
+
+                        print(
+                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
+                                .name}');
+                        print(
+                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
+                                .address}');
+
+                        if ((blueToothDevicesState[i].name ==
+                            'Restaurant Printer') ||
+                            (blueToothDevicesState[i].address ==
+                                '0F:02:18:51:23:46')) {
+                          found = true;
+                          break;
+
+                          // _testPrint(oneBlueToothDevice);
+
+                        }
+                      };
 
 
-                    BluetoothDevice _x = new BluetoothDevice();
-                    _x.name = 'Restaurant Printer';
-                    _x.address = '0F:02:18:51:23:46';
-                    _x.type = 3;
-                    _x.connected = null;
+
+                      logger.w('check device listed or not');
+                      print('index: $index');
+                      print('found == true ${found == true}');
+
+                      if (found == true) {
+                        print('found == true');
+                        bool printResult = await _testPrint(
+                            blueToothDevicesState[index]);
+
+//                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
 
-                    PrinterBluetooth x = new PrinterBluetooth(_x);
+                        if (printResult == true) {
+                          logger.i('printResult==true i.e. print successfull');
+                          shoppingCartBloc.clearSubscription();
+                          return Navigator.pop(
+                              context, cancelPaySelectUnobscuredDeliveryPhone);
+                        }
+                        else {
+                          logger.i('printResult!=true i.e. print UN successfull');
+                          shoppingCartBloc.clearSubscription();
+                          return Navigator.pop(
+                              context, cancelPaySelectUnobscuredDeliveryPhone);
+                        }
+                      }
+                      else {
 
 
-                    _testPrintDummyDevices(x);
+                        logger.i(
+                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
 
-                    shoppingCartBloc.clearSubscription();
+                        await
+                        _showMyDialog2('___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
 
-                    print('shopping Cart : shoppingCartBloc.clearSubscription() called... delivery Phone ');
 
-                    return Navigator.pop(
-                        context, cancelPaySelectUnobscuredDeliveryPhone);
-
+                        shoppingCartBloc.clearSubscription();
+                        print('going to food Gallery page  Restaurant Printer not found');
+                        return Navigator.pop(
+                            context, cancelPaySelectUnobscuredDeliveryPhone);
+                      }
+                    }
                   }
 
                 },
@@ -11518,7 +11573,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('index: : : : $index');
 
     List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
-    List<SauceItem>     extraSauces       = oneFood.defaultSauces;
+    List<SauceItem>     extraSauces       = oneFood.selectedSauces;
     List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
 
 
@@ -12542,7 +12597,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     //  printing begins::: //1.... starts...
 
-    //1...
+    //1... RESTAURANT NAME DONE...
     final ImageAliasAnotherSource
         .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
         restaurantNameBytesNotFuture3);
@@ -12553,76 +12608,40 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
+    ticket.hr(ch:'=',len:null,linesAfter:0);
+
+
+    // 2... order time and production time in min.
+    ticket.row([
+
+
+      PosColumn(text: '${oneOrderData3
+          .orderProductionTime}',
+        width: 5, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
+        width: 5,),
+
+
+    ]);
+
+
+
+
 
     //    ticket.feed(2);
 
 
-
-    ticket.row([
-
-      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
-      (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
-          =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
-          width: 4,styles: PosStyles(bold:true) ),
-      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
-          width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
-          width: 4, styles: PosStyles(bold:true)),
-
-    ]);
-
-    ticket.feed(1);
+    // 3 ... address: .... + flat
 
 
-    //2.2 ... customer information for delivery order type...
-
-    /*
-
-     Container(
-                height:50,
-                child: Text(
-                  ((customerForReciteGeneration.address == null) ||
-                      (customerForReciteGeneration.address.length == 0)) ?
-                  '----' : customerForReciteGeneration.address.length > 39 ?
-                  customerForReciteGeneration.address.substring(0, 35) + '...' :
-                  customerForReciteGeneration.address,
-
-                  textAlign: TextAlign.left,
-                  maxLines: 2,
-                  style: TextStyle(
-
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-
-                    fontSize: 18, fontFamily: 'Itim-Regular',),
-
-                ),
-              ),
-
-    */
-    ticket.row([
-
-      PosColumn(text: '${((customerForReciteGeneration.address == null) ||
-          (customerForReciteGeneration.address.length == 0)) ?
-      '----' : customerForReciteGeneration.address.length > 21 ?
-      customerForReciteGeneration.address.substring(0, 18) + '_ _' :
-      customerForReciteGeneration.address}',
-          width: 9,styles: PosStyles(
-            height: PosTextSize.size1,
-            width: PosTextSize.size1,
-            bold:true,
-          ) ),
-      PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
-          width: 3, styles: PosStyles(
-            height: PosTextSize.size1,
-            width: PosTextSize.size1,
-            bold:true,
-          )),
-      
-
-    ]);
-
-    ticket.text('${customerForReciteGeneration.phoneNumber}',
+    ticket.text('address: ${((customerForReciteGeneration.address == null) ||
+    (customerForReciteGeneration.address.length == 0)) ?
+    '----' : customerForReciteGeneration.address.length > 21 ?
+    customerForReciteGeneration.address.substring(0, 18) + '...' :
+    customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
@@ -12630,104 +12649,176 @@ class _ShoppingCartState extends State<ShoppingCart> {
           align: PosAlign.center,
         ));
 
-//    ticket.text(text: '${customerForReciteGeneration.phoneNumber}',
-//        width: 4, styles: PosStyles(bold:true),
+    // 4 ... phone: phone
+    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
+        (customerForReciteGeneration.phoneNumber.length == 0)) ?
+    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
+    customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.center,
+        ));
 
 
+    ticket.feed(1);
+    ticket.hr(ch:'-',len:null,linesAfter:0);
 
-    ticket.feed(2);
+    // 5... processFoodForRecite
 
 
-    //3...
-
-
-    //    List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
     orderedItems.forEach((oneFood) {
+
+
+
+
+      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+//      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+//      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+
+      print('extraIngredient: $extraIngredient');
+
+//      print('extraSauces: $extraSauces');
+//      print('extraCheeseItems: $extraCheeseItems');
+
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+      print('onlyExtraIngredient: $onlyExtraIngredient');
+
+//      print('onlyExtraSauces: $onlyExtraSauces');
+//      print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
+
+      // 5.... (name and quantity) + (size and price )
       ticket.row([
+
 
         PosColumn(text: '${oneFood.name}',
-          width: 9, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.quantity}',
-          width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+          width: 5, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+        PosColumn(text: 'X${oneFood.quantity}',
+          width: 5,),
 
 
       ]);
 
       ticket.row([
-
         PosColumn(text: '${oneFood.foodItemSize}',
-          width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +' euro' }',
-            width: 6),
-
+          width: 5, /*, styles: PosStyles(align: PosAlign.center) */),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+          width: 5,),
       ]);
 
-      ticket.hr();
+      // 5.2 --- extra ingredients...
+
+      if(onlyExtraIngredient.length>0) {
+        onlyExtraIngredient.forEach((oneIngredientForRecite) {
+          ticket.row([
+
+            PosColumn(text: '+Ingred: ',
+              width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+            PosColumn(text: '${((oneIngredientForRecite.ingredientName == null) ||
+          (oneIngredientForRecite.ingredientName.length == 0)) ?
+          '----' : oneIngredientForRecite.ingredientName.length > 18 ?
+          oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
+          oneIngredientForRecite.ingredientName}',
+              width: 7,),
+
+            PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+              width: 3, /*,styles: PosStyles(align: PosAlign.left) */),
+
+
+          ]);
+        });
+      }
       // needed. as per design. when one food Item is printed then an hr added.
 
+      ticket.hr(ch:'-',len:null,linesAfter:1);
+//      ticket.feed(1);
     });
 
-    ticket.feed(2);
-//    ticket.feed(2);
 
-    //4... DELIVERY...
+    ticket.feed(1);
+
 
 
     // Price 1 subtotal
     ticket.row([
 
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'SUBTOTAL',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ ' euro'}',
-        width: 4,),
+      PosColumn(text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        width: 5,),
+
 
     ]);
 
 
     ticket.row([
 
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'DELIVERY',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${00.toStringAsFixed(2)+ ' euro'}',
-        width: 4,),
+      PosColumn(text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${00.toStringAsFixed(2)}',
+        width: 5,),
+
 
     ]);
 
-    ticket.hr();
+//    ticket.hr();
+
+    ticket.hr(ch:'-',len:null,linesAfter:1);
+
+    ticket.row([
+
+
+      PosColumn(text: 'TOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${00.toStringAsFixed(2)}',
+        width: 5,),
+
+
+    ]);
 
     // Price 3  Total
     ticket.row([
 
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ ' euro'}',
-        styles:PosStyles(bold: true)  ,
-        width: 4,),
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        styles:PosStyles(bold: true)  ,
+        width: 5,),
 
     ]);
 
-
-
-//    ticket.feed(2);
-    // found not required..
-
-    //5... PAID OR UNPAID...
     ticket.feed(1);
+
+
 
 
     oneOrderData3.paidStatus.toLowerCase() == 'paid'?
@@ -12776,7 +12867,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // needed. as per design.
 
     ticket.feed(1); // for holding or touching the recite by finger... space..
-
 
     ticket.cut();
     return ticket;

@@ -20,7 +20,7 @@ import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 class OrderedItem {
   String              name;
   String              category;
-  List<SauceItem>     defaultSauces;
+  List<SauceItem>     selectedSauces;
   double                 discount;
   String              foodItemImage;
   List<NewIngredient> selectedIngredients;
@@ -53,7 +53,7 @@ class OrderedItem {
   OrderedItem(
       {
         this.category,
-        this.defaultSauces,
+        this.selectedSauces,
         this.discount,
         this.foodItemImage,
         this.selectedIngredients,

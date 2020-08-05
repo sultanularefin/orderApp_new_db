@@ -870,7 +870,7 @@ class ShoppingCartBloc implements Bloc {
       OrderedItem oneTempOrderedItem= new OrderedItem(
         category:  oneFoodItem['category'],
 
-        defaultSauces:  defaultSauces,
+        selectedSauces:  defaultSauces,
         selectedIngredients: selectedIngredients,
         selectedCheeses: selectedCheeses,
 
