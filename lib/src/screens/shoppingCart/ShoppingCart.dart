@@ -11323,7 +11323,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         height: 40,
         width: 220,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
 
@@ -11384,7 +11384,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         height: 40,
         width: 220,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
 
@@ -11446,7 +11446,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         height: 40,
         width: 220,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
 
