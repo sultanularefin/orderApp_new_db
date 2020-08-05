@@ -209,6 +209,8 @@ class FirebaseClient {
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'ingredientAmountByUser': si[counter].ingredientAmountByUser,
+        'price':si[counter].price,
+        'isDefault':si[counter].isDefault,
 
       };
       testIngredients.add(identifier);
@@ -244,6 +246,8 @@ class FirebaseClient {
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'ingredientAmountByUser': si[counter].cheeseItemAmountByUser,
+        'price':si[counter].price,
+        'isDefaultSelected':si[counter].isDefaultSelected,
 
       };
       testCheeseItems.add(identifier);
@@ -278,7 +282,9 @@ class FirebaseClient {
             'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
-        'ingredientAmountByUser': si[counter].sauceItemAmountByUser,
+        'ingredientAmountByUser': si[counter].sauceItemAmountByUser ,// +1, // 1 is added since by default it is zero
+        'price':si[counter].price,
+        'isDefaultSelected':si[counter].isDefaultSelected,
 
       };
       testIngredients.add(identifier);
