@@ -12758,15 +12758,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       // extra cheeseItems...
       if(onlyExtraSauces.length>0) {
-        onlyExtraIngredient.forEach((oneSauceItemForRecite) {
+        onlyExtraSauces.forEach((oneSauceItemForRecite) {
           ticket.row([
 
 
-            PosColumn(text: '${((oneSauceItemForRecite.ingredientName == null) ||
-                (oneSauceItemForRecite.ingredientName.length == 0)) ?
-            '----' : oneSauceItemForRecite.ingredientName.length > 18 ?
-            oneSauceItemForRecite.ingredientName.substring(0, 15) + '...' :
-            oneSauceItemForRecite.ingredientName}',
+            PosColumn(text: '${((oneSauceItemForRecite.sauceItemName == null) ||
+                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+            '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+            oneSauceItemForRecite.sauceItemName}',
                 width: 9,styles: PosStyles(
 
                   align: PosAlign.left,
@@ -12782,15 +12782,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       // extra sauceItems...
       if(onlyExtraCheeseItems.length>0) {
-        onlyExtraIngredient.forEach((oneCheeseItemForRecite) {
+        onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
           ticket.row([
 
 
-            PosColumn(text: '${((oneCheeseItemForRecite.ingredientName == null) ||
-                (oneCheeseItemForRecite.ingredientName.length == 0)) ?
-            '----' : oneCheeseItemForRecite.ingredientName.length > 18 ?
-            oneCheeseItemForRecite.ingredientName.substring(0, 15) + '...' :
-            oneCheeseItemForRecite.ingredientName}',
+            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
                 width: 9,styles: PosStyles(
 
                   align: PosAlign.left,
@@ -13079,7 +13079,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
             width: PosTextSize.size1,
           )
       ),
-      PosColumn(text: '${customerForReciteGeneration.flatOrHouseNumber}',
+      PosColumn(text: '${((customerForReciteGeneration.phoneNumber == null) ||
+          (customerForReciteGeneration.phoneNumber.length == 0)) ?
+      '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+      customerForReciteGeneration.phoneNumber.substring(0, 18) + '_ _' :
+      customerForReciteGeneration.phoneNumber
+      }',
           width: 3, styles: PosStyles(
             height: PosTextSize.size1,
             width: PosTextSize.size1,
