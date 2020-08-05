@@ -11328,7 +11328,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: <Widget>[
 
             Text(
-              '+Ingredient: ',
+              '+Ingre.: ',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11337,15 +11337,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        color: Color(0xffF50303),
                 fontSize: 20, fontFamily: 'Itim-Regular',),
             ),
+
+            Text('${((oneIngredientForRecite.ingredientName == null) ||
+      (oneIngredientForRecite.ingredientName.length == 0)) ?
+      '----' : oneIngredientForRecite.ingredientName.length > 18 ?
+      oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
+      oneIngredientForRecite.ingredientName}',
+            /*
             Text(
-              '${oneIngredientForRecite.ingredientName} ',
+              '${oneIngredientForRecite.ingredientName}', */
 
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 17, fontFamily: 'Itim-Regular',),
             ),
             Text(
               '  +${oneIngredientForRecite.price.toStringAsFixed(2)}',
@@ -11391,8 +11398,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        color: Color(0xffF50303),
                 fontSize: 20, fontFamily: 'Itim-Regular',),
             ),
-            Text(
+
+        Text('${((oneSauceItemForRecite.sauceItemName == null) ||
+            (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+        '---' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+        oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+        oneSauceItemForRecite.sauceItemName}',
+          /*
+          Text(
               '${oneSauceItemForRecite.sauceItemName} ',
+              */
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11436,7 +11451,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: <Widget>[
 
             Text(
-              '+Ingredient: ',
+              '+cheese: ',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11445,16 +11460,39 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        color: Color(0xffF50303),
                 fontSize: 20, fontFamily: 'Itim-Regular',),
             ),
+        Text('${((oneCheeseItemForRecite.cheeseItemName == null) ||
+            (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+        '---' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+        oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+        oneCheeseItemForRecite.cheeseItemName}',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+
+            /*
+
+            Text('${((oneIngredientForRecite.ingredientName == null) ||
+      (oneIngredientForRecite.ingredientName.length == 0)) ?
+      '----' : oneIngredientForRecite.ingredientName.length > 18 ?
+      oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
+      oneIngredientForRecite.ingredientName}',
+            /*
             Text(
-              '${oneCheeseItemForRecite.cheeseItemName} ',
+              '${oneIngredientForRecite.ingredientName}', */
 
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 17, fontFamily: 'Itim-Regular',),
             ),
+
+            */
             Text(
               '  +${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
 
@@ -11594,20 +11632,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
             child:ListView(
               children: <Widget>[
                 Container(
-                    width: 320,
+                    width: 340,
                     height:210,
                     color:Colors.blue,
                     child: showExtraIngredients(onlyExtraIngredient)),
 
 
-                /*
+
+                Divider(
+                  height:10,
+//            width: 220,
+                  thickness:5,
+                  color:Colors.black,
+                ),
                 Container(
-                    width: 320,
+                    width: 340,
                     height:210,
                     color:Colors.orange,
                     child: showExtraCheeseItems(onlyExtraCheeseItems)
                 ),
 
+                Divider(
+                  height:10,
+//            width: 220,
+                  thickness:5,
+                  color:Colors.black,
+                ),
                 Container(
                     width: 320,
 
@@ -11616,7 +11666,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     child: showExtraSauces(onlyExtraSauces)
                 ),
 
-                */
+
               ],
             )
           ),
@@ -11844,10 +11894,109 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 //  ORDEREDITEMS endS HERE..
 
                 Divider(
-                  height:40,
-                  thickness:20,
+                  height:30,
+                  thickness:8,
                   color:Colors.black,
                 ),
+
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+
+                      Text(
+                        'SUBTOTAL: ',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 26, fontFamily: 'Itim-Regular',),
+                      ),
+                      Text(
+                        '${oneOrderForReceipt.totalPrice.toStringAsFixed(2)}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+
+                    ],
+                  ),
+                ),
+
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+
+                      Text(
+                        'DELIVERY: ',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 26, fontFamily: 'Itim-Regular',),
+                      ),
+                      Text(
+                        '${1.6.toStringAsFixed(2)}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+
+                    ],
+                  ),
+                ),
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+
+                      Text(
+                        'TOTAL: ',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 30, fontFamily: 'Itim-Regular',),
+                      ),
+                      Text(
+                        '${(oneOrderForReceipt.totalPrice +1.6).toStringAsFixed(2)}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+
+                    ],
+                  ),
+                ),
+
+
+
+
 
 
 
@@ -13491,7 +13640,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: new Row(
                 children: <Widget>[
                   new CircularProgressIndicator(),
-                  new Text("Error: ${onError.message.substring(0, 40)}",
+                  new Text("Error: $onError",
                       style: TextStyle(
                         /*fontSize: 10,*/ fontWeight: FontWeight.w500,
                           color: Colors.white)),

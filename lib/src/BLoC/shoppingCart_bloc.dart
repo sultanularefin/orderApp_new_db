@@ -475,7 +475,7 @@ class ShoppingCartBloc implements Bloc {
     var updateResult =
     await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
 
-    print('updateResult is null: $updateResult');
+    print('updateResult is:: :: $updateResult');
 
 
 
@@ -609,6 +609,8 @@ class ShoppingCartBloc implements Bloc {
   List<NewIngredient> convertFireStoreIngredientItemsToLocalNewIngredientItemsList(List<dynamic>
   fireStoreNewIngredients){
 
+    print('at convertFireStoreIngredientItemsToLocalNewIngredientItemsList');
+
     // List<Map<String, dynamic>>
 
 //    print('--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : ');
@@ -655,12 +657,14 @@ class ShoppingCartBloc implements Bloc {
 
   List<CheeseItem> convertFireStoreCheeseItemsToLocalCheeseItemsList(List<dynamic> fireStoreCheeseItems){
 
+
     // List<Map<String, dynamic>>
 
-//    print('--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : ');
+    print('--   ::      :: at here: convertFireStoreCheeseItemsToLocalCheeseItemsList -------- : : ');
 
     List<CheeseItem> allCheeseItems = new List<CheeseItem>();
 
+    int cheeseItemCount= 0;
     fireStoreCheeseItems.forEach((oneFireStoreCheese) {
 
       var oneCheeseItem = oneFireStoreCheese;
@@ -669,16 +673,16 @@ class ShoppingCartBloc implements Bloc {
       CheeseItem oneTempCheeseItem = new CheeseItem(
         cheeseItemName: oneCheeseItem['name'] ,
         imageURL: oneCheeseItem['image'] ,
-        cheeseItemAmountByUser: oneCheeseItem['ingredientAmountByUser'] ,
+        cheeseItemAmountByUser: oneCheeseItem['cheeseItemAmountByUser'] ,
         price: oneCheeseItem['price'] ,
         isDefaultSelected:  oneCheeseItem['isDefaultSelected'],
 
       );
 
-      print('--   ::      :: at here: convertFireStoreIngredientItemsToLocalNewIngredientItemsList -------- : :'
-          ' for ingredient: ${oneTempCheeseItem.cheeseItemName} ');
+      print('--   ::      :: at here: convertFireStoreCheeseItemsToLocalCheeseItemsList -------- : :'
+          ' for cheeseItem: ${oneTempCheeseItem.cheeseItemName} ');
 
-      print('name: ${oneTempCheeseItem.cheeseItemName} '
+      print('CheeseItem_name: ${oneTempCheeseItem.cheeseItemName} '
           'imageURL: ${oneTempCheeseItem.imageURL} price: ${oneTempCheeseItem.price},'
           ' cheeseItemAmountByUser: ${oneTempCheeseItem.cheeseItemAmountByUser} isDefaultSelected: '
           '${oneTempCheeseItem.isDefaultSelected}');
@@ -686,8 +690,11 @@ class ShoppingCartBloc implements Bloc {
 
       allCheeseItems.add(oneTempCheeseItem);
 
+      cheeseItemCount = cheeseItemCount +1;
+
     });
 
+    logger.i('cheeseItemCount: $cheeseItemCount');
     return allCheeseItems;
 //    return sf.length
   }
@@ -695,6 +702,7 @@ class ShoppingCartBloc implements Bloc {
   List<SauceItem> convertFireStoreSauceItemsToLocalSauceItemsList(List<dynamic> fireStoreSauces){
     // List<Map<String, dynamic>>
 
+    print('at convertFireStoreSauceItemsToLocalSauceItemsList');
 
     List<SauceItem> allSauceItems = new List<SauceItem>();
 
@@ -707,7 +715,7 @@ class ShoppingCartBloc implements Bloc {
       SauceItem oneTempSauceItem = new SauceItem(
         sauceItemName: oneSauceItem['name'] ,
         imageURL: oneSauceItem['image'] ,
-        sauceItemAmountByUser: oneSauceItem['ingredientAmountByUser'] ,
+        sauceItemAmountByUser: oneSauceItem['sauceItemAmountByUser'] ,
         price: oneSauceItem['price'],
         isDefaultSelected: oneSauceItem['isDefaultSelected'],
 
@@ -715,7 +723,7 @@ class ShoppingCartBloc implements Bloc {
 
       print('--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : for sauce: ${oneSauceItem['name']} ');
 
-      print('name: ${oneTempSauceItem.sauceItemName} '
+      print('sauceItemName: ${oneTempSauceItem.sauceItemName} '
           'imageURL: ${oneTempSauceItem.imageURL} price: ${oneTempSauceItem.price},'
           ' sauceItemAmountByUser: ${oneTempSauceItem.sauceItemAmountByUser} VV isDefaultSelected: '
           '${oneTempSauceItem.isDefaultSelected}');
@@ -850,10 +858,14 @@ class ShoppingCartBloc implements Bloc {
       print('unitPrice');
       print('foodItemSize: ${oneFoodItem['foodItemSize']}');
 
-      List<SauceItem>     defaultSauces = convertFireStoreSauceItemsToLocalSauceItemsList(oneFoodItem['defaultSauces']);
+      List<SauceItem>     defaultSauces = convertFireStoreSauceItemsToLocalSauceItemsList(oneFoodItem['selectedSauces']);
       List<NewIngredient> selectedIngredients = convertFireStoreIngredientItemsToLocalNewIngredientItemsList(oneFoodItem['ingredients']);
       List<CheeseItem>    selectedCheeses = convertFireStoreCheeseItemsToLocalCheeseItemsList(oneFoodItem['selectedCheeses']);
 
+
+      print('defaultSauces : $defaultSauces ');
+      print('selectedIngredients : $selectedIngredients ');
+      print('selectedCheeses : $selectedCheeses ');
 
       OrderedItem oneTempOrderedItem= new OrderedItem(
         category:  oneFoodItem['category'],
