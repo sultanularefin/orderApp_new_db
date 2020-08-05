@@ -841,7 +841,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _allSelectedSauceItems = allTempSauceItems.where((element) => ((element.isSelected==true) || (element.isDefaultSelected ==true))).toList();
     _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
-
     setNewPriceforSauceItemCheeseItemIngredientUpdate();
 
 
