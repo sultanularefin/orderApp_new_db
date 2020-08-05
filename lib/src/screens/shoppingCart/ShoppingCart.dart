@@ -12612,6 +12612,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     // 2... order time and production time in min.
+    /*
     ticket.row([
 
 
@@ -12628,7 +12629,20 @@ class _ShoppingCartState extends State<ShoppingCart> {
           )),
 
 
-    ]);
+    ]); */
+
+    // ALTER NATE.... OF ABOVE
+
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}              ${oneOrderData3.orderProductionTime} min',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+
 
 
 
