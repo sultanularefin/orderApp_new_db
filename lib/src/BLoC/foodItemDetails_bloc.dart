@@ -868,7 +868,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void moreDefaultIngredientItems(/*NewIngredient unSelectedOneIngredient,int index*/){
+  void finishMoreDefaultIngredientItems(/*NewIngredient unSelectedOneIngredient,int index*/){
     print('reached here ==> : <==  update Default IngredientItem ');
 
     List<NewIngredient> allDefaultIngredientItems = _defaultIngItems;
@@ -907,18 +907,17 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     // --- price update invocation.
 
-    setNewPriceByIngredientAdd(_defaultIngItems);
-//    setNewPriceBySelectedIngredientItems();
+//    setNewPriceByIngredientAdd(_defaultIngItems);
 
+    setNewPriceforSauceItemCheeseItemIngredientUpdate();
+//    setNewPriceBySelectedIngredientItems();
 
     //  NOW ADD PART BEGINS HERE
 
     List<NewIngredient> allUnSelectedIngredientItems = valueUnChangedUNselectedIngredient;
 
-
     _unSelectedIngItems  = allUnSelectedIngredientItems;
     _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
-
 
   }
 

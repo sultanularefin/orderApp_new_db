@@ -11587,34 +11587,39 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-//        extraIngredient
-//        extraSauces
-//        extraCheeseItems
           Container(
-              width: 220,
-              height:210,
-              color:Colors.blue,
-              child: showExtraIngredients(onlyExtraIngredient)),
+            height:700,
+            color:Colors.redAccent,
+            padding:const EdgeInsets.all(3),
+            child:ListView(
+              children: <Widget>[
+                Container(
+                    width: 320,
+                    height:210,
+                    color:Colors.blue,
+                    child: showExtraIngredients(onlyExtraIngredient)),
 
 
-          Container(
-              width: 220,
-              height:210,
-              color:Colors.orange,
-              child: showExtraCheeseItems(onlyExtraCheeseItems)
+                /*
+                Container(
+                    width: 320,
+                    height:210,
+                    color:Colors.orange,
+                    child: showExtraCheeseItems(onlyExtraCheeseItems)
+                ),
+
+                Container(
+                    width: 320,
+
+                    height:210,
+                    color:Colors.deepPurpleAccent,
+                    child: showExtraSauces(onlyExtraSauces)
+                ),
+
+                */
+              ],
+            )
           ),
-
-          Container(
-              width: 220,
-
-              height:210,
-              color:Colors.deepPurpleAccent,
-              child: showExtraSauces(onlyExtraSauces)
-          ),
-
-
-
-
 
 
           Divider(

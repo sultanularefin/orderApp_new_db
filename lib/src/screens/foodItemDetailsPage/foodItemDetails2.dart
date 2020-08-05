@@ -1306,7 +1306,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-            blocD.moreDefaultIngredientItems(/*oneSelected,index*/);
+            blocD.finishMoreDefaultIngredientItems(/*oneSelected,index*/);
 
             setState(() {
 
