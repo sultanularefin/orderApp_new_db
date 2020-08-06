@@ -654,7 +654,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           overflow: TextOverflow.ellipsis,
           style: TextStyle
             (
-            fontSize: 24,
+            fontSize: 29,
             fontWeight:
             FontWeight.normal,
             color: Colors.black,
@@ -12135,7 +12135,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           height:50,) :
                         (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
                         Image.asset(
-                            'assets/orderBYicons/icons8-ringing-phone-100.png',
+                            'assets/phone.png',
                             color: Colors.black,
                             width: 50,
                             height:50) : (oneOrderForReceipt.orderBy
@@ -12308,7 +12308,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 4 => phonedataBytesImage
-    final ByteData phonedata = await rootBundle.load('assets/orderBYicons/icons8-ringing-phone-100.png');
+    final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage
@@ -12332,113 +12332,269 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    //1...
-    final ImageAliasAnotherSource
-        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
 
-//    final ImageAliasAnotherSource
-//        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
+
+    //0.... printing codes starts here..
+
+
+    //  printing begins::: //1.... starts...
+
+    //1... RESTAURANT NAME DONE...
+    final ImageAliasAnotherSource
+        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+        restaurantNameBytesNotFuture3);
+
+    //    final ImageAliasAnotherSource
+    //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
 
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
+    ticket.hr(ch:'=',len:null,linesAfter:0);
+
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'           '
+        +'${oneOrderData3.orderProductionTime} min',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+    //    ticket.feed(2);
 
 
-    //2...
+    // FOR TAKEAWAY NOT NECESSARY..
+    /*
+    // 3 ... address: .... + flat
 
-    ticket.row([
 
-      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
-      (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
-          =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
-          width: 4,styles: PosStyles(bold:true) ),
-      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
-          width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
-          width: 4, styles: PosStyles(bold:true)),
+    ticket.text('address:  ${((customerForReciteGeneration.address == null) ||
+        (customerForReciteGeneration.address.length == 0)) ?
+    '----' : customerForReciteGeneration.address.length > 21 ?
+    customerForReciteGeneration.address.substring(0, 18) + '...' :
+    customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
 
-    ]);
-    ticket.feed(2);
+    // 4 ... phone: phone
+    ticket.text('phone:  ${((customerForReciteGeneration.phoneNumber == null) ||
+        (customerForReciteGeneration.phoneNumber.length == 0)) ?
+    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
+    customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        ));
 
-    //3...
+    */
+
+
+    ticket.feed(1);
+    ticket.hr(ch:'.',len:null,linesAfter:1);
+
+    // 5... processFoodForRecite
+
 
     orderedItems.forEach((oneFood) {
+
+
+      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+
+//      print('extraIngredient: $extraIngredient');
+
+//      print('extraSauces: $extraSauces');
+//      print('extraCheeseItems: $extraCheeseItems');
+
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+
+      List<SauceItem> onlyExtraSauces       =
+      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+      List<CheeseItem>    onlyExtraCheeseItems  =
+      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+      print('onlyExtraIngredient: $onlyExtraIngredient');
+
+      print('onlyExtraSauces: $onlyExtraSauces');
+      print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
+
+      // 5.... (name and quantity) + (size and price )
       ticket.row([
 
+
         PosColumn(text: '${oneFood.name}',
-          width: 9, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.quantity}',
-          width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+            width: 5, styles: PosStyles(align: PosAlign.left,
+            ) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+        PosColumn(text: 'X${oneFood.quantity}',
+            width: 5,styles: PosStyles(
+
+              align: PosAlign.right,
+            )),
+
 
       ]);
 
       ticket.row([
         PosColumn(text: '${oneFood.foodItemSize}',
-          width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +' euro' }',
-            width: 6),
+            width: 5,  styles: PosStyles(align: PosAlign.left) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+            width: 5,styles: PosStyles(
 
-        /*
-      PosColumn(text: '',
-      width: 2,styles: PosStyles(codeTable: PosCodeTable.westEur)),
-        */
-
-
-
-
-
+              align: PosAlign.right,
+            )),
       ]);
 
-      //       euro
-      /*
-      PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +'\u20AC' }',
-        width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-      */
+      // 5.2 --- extra ingredients...
+
+      if(onlyExtraIngredient.length>0) {
+        onlyExtraIngredient.forEach((oneIngredientForRecite) {
+          ticket.row([
 
 
-      ticket.hr();
-      // needed. as per design.
+            PosColumn(text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                (oneIngredientForRecite.ingredientName.length == 0)) ?
+            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
+            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
+            oneIngredientForRecite.ingredientName}',
+                width: 9,styles: PosStyles(
 
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left)),
+
+
+          ]);
+        });
+      }
+
+      // extra cheeseItems...
+      if(onlyExtraSauces.length>0) {
+        onlyExtraSauces.forEach((oneSauceItemForRecite) {
+          ticket.row([
+
+
+            PosColumn(text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+            '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+            oneSauceItemForRecite.sauceItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left) ),
+
+
+          ]);
+        });
+      }
+
+      // extra sauceItems...
+      if(onlyExtraCheeseItems.length>0) {
+        onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
+          ticket.row([
+
+
+            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left)),
+
+
+          ]);
+        });
+      }
+
+
+      // needed. as per design. when one food Item is printed then an hr added.
+      ticket.feed(1);
+      ticket.hr(ch:'_',len:null,linesAfter:1);
+//      ticket.feed(1);
     });
 
 
 
 
-    //4... TAKEAWAY...
-    ticket.feed(2);
-
-
-    // Price 1 subtotal takeAway..
+    // Price 1 subtotal
     ticket.row([
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: 'SUBTOTAL',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2) + ' euro'}',
-        width: 4,),
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}\€',
+          width: 5,styles:PosStyles(align: PosAlign.right)),
 
     ]);
 
 
-    // Price 3  Total takeAway...
+
+    // for takeaway and delivery not necessary.
+    /*
     ticket.row([
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ ' euro'}', styles:PosStyles(bold: true)  ,
-        width: 4,),
+
+      PosColumn(text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${00.toStringAsFixed(2)}\€',
+          width: 5,styles:PosStyles(align: PosAlign.right)),
+
     ]);
+
+    */
 
 //    ticket.hr();
 
-    //5... PAID OR UNPAID...
+    ticket.hr(ch:'_',len:null,linesAfter:0);
+
+
+    // Price 3  Total
+    ticket.row([
+
+
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}\€',
+        styles:PosStyles(bold: true,align: PosAlign.right)  ,
+        width: 5,),
+
+    ]);
 
     ticket.feed(1);
 
@@ -12450,7 +12606,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    // 6 Text "paid || Unpaid && Space "OrderBY"
+    //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
 
@@ -12485,14 +12641,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
     ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
 
-
+//    ticket.hr();
     // needed. as per design.
 
-    ticket.feed(1); // for touching the recite.. space..
+    ticket.feed(1); // for holding or touching the recite by finger... space..
 
     ticket.cut();
     return ticket;
-  }
+
+
+    }
 
 
 
@@ -12572,7 +12730,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 4 => phonedataBytesImage
-    final ByteData phonedata = await rootBundle.load('assets/orderBYicons/icons8-ringing-phone-100.png');
+    final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage
@@ -12610,30 +12768,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
     ticket.hr(ch:'=',len:null,linesAfter:0);
 
-
-    // 2... order time and production time in min.
-    /*
-    ticket.row([
-
-
-      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
-        width: 5, styles: PosStyles(bold:true,
-    align: PosAlign.left) ),
-      PosColumn(text: '',
-        width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
-        width: 5, styles: PosStyles(
-            bold:true,
-            align: PosAlign.right,
-          )),
-
-
-    ]); */
-
-    // ALTER NATE.... OF ABOVE
-
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}              ${oneOrderData3.orderProductionTime} min',
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'           '
+        +'${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
@@ -12641,12 +12777,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
           align: PosAlign.left,
         )
     );
-
-
-
-
-
-
 
     //    ticket.feed(2);
 
@@ -12682,14 +12812,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     ticket.feed(1);
-    ticket.hr(ch:'-',len:null,linesAfter:0);
+    ticket.hr(ch:'.',len:null,linesAfter:1);
 
     // 5... processFoodForRecite
 
 
     orderedItems.forEach((oneFood) {
-
-
 
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
@@ -12753,18 +12881,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ticket.row([
 
 
-            PosColumn(text: '${((oneIngredientForRecite.ingredientName == null) ||
+            PosColumn(text: '+${((oneIngredientForRecite.ingredientName == null) ||
           (oneIngredientForRecite.ingredientName.length == 0)) ?
           '----' : oneIngredientForRecite.ingredientName.length > 18 ?
           oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
           oneIngredientForRecite.ingredientName}',
               width: 9,styles: PosStyles(
 
-                  align: PosAlign.left,
+                  align: PosAlign.right,
                 )),
 
             PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-              width: 3,styles: PosStyles(align: PosAlign.right)),
+              width: 3,styles: PosStyles(align: PosAlign.left)),
 
 
           ]);
@@ -12777,18 +12905,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ticket.row([
 
 
-            PosColumn(text: '${((oneSauceItemForRecite.sauceItemName == null) ||
+            PosColumn(text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
                 (oneSauceItemForRecite.sauceItemName.length == 0)) ?
             '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
             oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
             oneSauceItemForRecite.sauceItemName}',
                 width: 9,styles: PosStyles(
 
-                  align: PosAlign.left,
+                  align: PosAlign.right,
                 )),
 
             PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-              width: 3,styles: PosStyles(align: PosAlign.right) ),
+              width: 3,styles: PosStyles(align: PosAlign.left) ),
 
 
           ]);
@@ -12808,11 +12936,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
             oneCheeseItemForRecite.cheeseItemName}',
                 width: 9,styles: PosStyles(
 
-                  align: PosAlign.left,
+                  align: PosAlign.right,
                 )),
 
             PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-              width: 3,styles: PosStyles(align: PosAlign.right)),
+              width: 3,styles: PosStyles(align: PosAlign.left)),
 
 
           ]);
@@ -12821,27 +12949,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       // needed. as per design. when one food Item is printed then an hr added.
-
-      ticket.hr(ch:'-',len:null,linesAfter:1);
+      ticket.feed(1);
+      ticket.hr(ch:'_',len:null,linesAfter:1);
 //      ticket.feed(1);
     });
 
-
-    ticket.feed(1);
 
 
 
     // Price 1 subtotal
     ticket.row([
-
-
       PosColumn(text: 'SUBTOTAL',
         width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}\€',
         width: 5,styles:PosStyles(align: PosAlign.right)),
-
 
     ]);
 
@@ -12853,15 +12976,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${00.toStringAsFixed(2)}',
+      PosColumn(text: '${00.toStringAsFixed(2)}\€',
         width: 5,styles:PosStyles(align: PosAlign.right)),
-
 
     ]);
 
 //    ticket.hr();
 
-    ticket.hr(ch:'-',len:null,linesAfter:0);
+    ticket.hr(ch:'_',len:null,linesAfter:0);
 
 
     // Price 3  Total
@@ -12875,15 +12997,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}\€',
         styles:PosStyles(bold: true,align: PosAlign.right)  ,
         width: 5,),
 
     ]);
 
     ticket.feed(1);
-
-
 
 
     oneOrderData3.paidStatus.toLowerCase() == 'paid'?
@@ -13014,7 +13134,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 4 => phonedataBytesImage
-    final ByteData phonedata = await rootBundle.load('assets/orderBYicons/icons8-ringing-phone-100.png');
+    final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage
@@ -13038,144 +13158,263 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    //1...
+
+
+    //  printing begins::: //1.... starts...
+
+    //1... RESTAURANT NAME DONE...
     final ImageAliasAnotherSource
         .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
         restaurantNameBytesNotFuture3);
 
+    //    final ImageAliasAnotherSource
+    //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
 
     ticket.image(oneImageRestaurant);
 
-    ticket.feed(1); // space after.. restaurant name...
-
-
-    //2.1 ... phone
-
-
-    ticket.row([
-
-      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
-      (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
-          =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
-          width: 4,styles: PosStyles(
-            height: PosTextSize.size1,
-            width: PosTextSize.size1,
-          ) ),
-      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
-          width: 4, styles: PosStyles(
-            height: PosTextSize.size1,
-            width: PosTextSize.size1,
-          )),
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
-          width: 4, styles: PosStyles(
-            height: PosTextSize.size1,
-            width: PosTextSize.size1,
-          )),
-
-    ]);
     ticket.feed(1);
+    ticket.hr(ch:'=',len:null,linesAfter:0);
 
-
-
-    //2.2 ... customer details for phone order type...
-
-
-
-    ticket.row([
-
-      PosColumn(text: '${((customerForReciteGeneration.address == null) ||
-          (customerForReciteGeneration.address.length == 0)) ?
-      '----' : customerForReciteGeneration.address.length > 21 ?
-      customerForReciteGeneration.address.substring(0, 18) + '_ _' :
-      customerForReciteGeneration.address
-      },',
-          width: 9,styles: PosStyles(
-            height: PosTextSize.size1,
-            width: PosTextSize.size1,
-          )
-      ),
-      PosColumn(text: '${((customerForReciteGeneration.phoneNumber == null) ||
-          (customerForReciteGeneration.phoneNumber.length == 0)) ?
-      '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
-      customerForReciteGeneration.phoneNumber.substring(0, 18) + '_ _' :
-      customerForReciteGeneration.phoneNumber
-      }',
-          width: 3, styles: PosStyles(
-            height: PosTextSize.size1,
-            width: PosTextSize.size1,
-          )),
-
-
-
-    ]);
-
-    ticket.text('${customerForReciteGeneration.phoneNumber}',
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'           '
+        +'${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
-//          bold:true,
-          align: PosAlign.center,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+    //    ticket.feed(2);
+
+
+    // 3 ... address: .... + flat
+
+    // FOR PHONE ORDER NOT NECESSARY...
+    /*
+
+    ticket.text('address:  ${((customerForReciteGeneration.address == null) ||
+        (customerForReciteGeneration.address.length == 0)) ?
+    '----' : customerForReciteGeneration.address.length > 21 ?
+    customerForReciteGeneration.address.substring(0, 18) + '...' :
+    customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+    */
+
+    // 4 ... phone: phone
+    ticket.text('phone:  ${((customerForReciteGeneration.phoneNumber == null) ||
+        (customerForReciteGeneration.phoneNumber.length == 0)) ?
+    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
+    customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
         ));
 
-    ticket.feed(2);
 
+    ticket.feed(1);
+    ticket.hr(ch:'.',len:null,linesAfter:1);
 
-    //3... order list for phone order...
+    // 5... processFoodForRecite
 
 
     orderedItems.forEach((oneFood) {
+
+
+      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+
+//      print('extraIngredient: $extraIngredient');
+
+//      print('extraSauces: $extraSauces');
+//      print('extraCheeseItems: $extraCheeseItems');
+
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+
+      List<SauceItem> onlyExtraSauces       =
+      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+      List<CheeseItem>    onlyExtraCheeseItems  =
+      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+      print('onlyExtraIngredient: $onlyExtraIngredient');
+
+      print('onlyExtraSauces: $onlyExtraSauces');
+      print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
+
+      // 5.... (name and quantity) + (size and price )
       ticket.row([
+
 
         PosColumn(text: '${oneFood.name}',
-          width: 9, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.quantity}',
-          width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+            width: 5, styles: PosStyles(align: PosAlign.left,
+            ) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+        PosColumn(text: 'X${oneFood.quantity}',
+            width: 5,styles: PosStyles(
+
+              align: PosAlign.right,
+            )),
 
 
       ]);
 
       ticket.row([
-
         PosColumn(text: '${oneFood.foodItemSize}',
-          width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +' euro' }',
-            width: 6),
+            width: 5,  styles: PosStyles(align: PosAlign.left) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+            width: 5,styles: PosStyles(
 
+              align: PosAlign.right,
+            )),
       ]);
 
-      ticket.hr();
-      // needed. as per design.
+      // 5.2 --- extra ingredients...
 
+      if(onlyExtraIngredient.length>0) {
+        onlyExtraIngredient.forEach((oneIngredientForRecite) {
+          ticket.row([
+
+
+            PosColumn(text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                (oneIngredientForRecite.ingredientName.length == 0)) ?
+            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
+            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
+            oneIngredientForRecite.ingredientName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left)),
+
+
+          ]);
+        });
+      }
+
+      // extra cheeseItems...
+      if(onlyExtraSauces.length>0) {
+        onlyExtraSauces.forEach((oneSauceItemForRecite) {
+          ticket.row([
+
+
+            PosColumn(text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+            '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+            oneSauceItemForRecite.sauceItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left) ),
+
+
+          ]);
+        });
+      }
+
+      // extra sauceItems...
+      if(onlyExtraCheeseItems.length>0) {
+        onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
+          ticket.row([
+
+
+            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left)),
+
+
+          ]);
+        });
+      }
+
+
+      // needed. as per design. when one food Item is printed then an hr added.
+      ticket.feed(1);
+      ticket.hr(ch:'_',len:null,linesAfter:1);
+//      ticket.feed(1);
     });
 
-    ticket.feed(2);
 
 
-    //4... PHONE...ORDER...
-    // TODO: DELIVERY COST FOR PHONE ORDER NOT ADDED
+
+    // Price 1 subtotal
+    ticket.row([
+      PosColumn(text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}\€',
+          width: 5,styles:PosStyles(align: PosAlign.right)),
+
+    ]);
+
+
+    ticket.row([
+
+
+      PosColumn(text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${00.toStringAsFixed(2)}\€',
+          width: 5,styles:PosStyles(align: PosAlign.right)),
+
+    ]);
+
+//    ticket.hr();
+
+    ticket.hr(ch:'_',len:null,linesAfter:0);
 
 
     // Price 3  Total
     ticket.row([
 
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ ' euro'}', styles:PosStyles(bold: true)  ,
-        width: 4,),
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}\€',
+        styles:PosStyles(bold: true,align: PosAlign.right)  ,
+        width: 5,),
 
     ]);
 
     ticket.feed(1);
-
-
-
-
-    //5... PAID OR UNPAID... icon + text + icon....
 
 
     oneOrderData3.paidStatus.toLowerCase() == 'paid'?
@@ -13220,9 +13459,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
     ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
 
+//    ticket.hr();
+    // needed. as per design.
 
-    ticket.feed(1); // space for holding the recite with finger phone order......
-
+    ticket.feed(1); // for holding or touching the recite by finger... space..
 
     ticket.cut();
     return ticket;
@@ -13306,7 +13546,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     //differentImages 4 => phonedataBytesImage
-    final ByteData phonedata = await rootBundle.load('assets/orderBYicons/icons8-ringing-phone-100.png');
+    final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage
@@ -13330,117 +13570,272 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    //1...
+
+
+
+    //0.... printing codes starts here..
+
+
+    //  printing begins::: //1.... starts...
+
+    //1... RESTAURANT NAME DONE...
     final ImageAliasAnotherSource
         .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
         restaurantNameBytesNotFuture3);
 
+    //    final ImageAliasAnotherSource
+    //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
 
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    // space after restaurant name...
+    ticket.hr(ch:'=',len:null,linesAfter:0);
+
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'           '
+        +'${oneOrderData3.orderProductionTime} min',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+    //    ticket.feed(2);
 
 
-    //2... print orderInformation.... DinningRoom ---->
+    // FOR TAKEAWAY NOT NECESSARY..
+    /*
+    // 3 ... address: .... + flat
 
 
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
-        .orderProductionTime}');
+    ticket.text('address:  ${((customerForReciteGeneration.address == null) ||
+        (customerForReciteGeneration.address.length == 0)) ?
+    '----' : customerForReciteGeneration.address.length > 21 ?
+    customerForReciteGeneration.address.substring(0, 18) + '...' :
+    customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+    // 4 ... phone: phone
+    ticket.text('phone:  ${((customerForReciteGeneration.phoneNumber == null) ||
+        (customerForReciteGeneration.phoneNumber.length == 0)) ?
+    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
+    customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        ));
+
+    */
 
 
-    ticket.row([
+    ticket.feed(1);
+    ticket.hr(ch:'.',len:null,linesAfter:1);
 
-      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')? 'Delivery':
-      (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase()
-          =='takeaway') ? 'TakeAway' : 'DinningRoom'}',
-          width: 4,styles: PosStyles(bold:true) ),
-      PosColumn(text: '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
-          width: 4, styles: PosStyles(bold:true)),
-      PosColumn(text: '${oneOrderData3.orderProductionTime} min',
-          width: 4, styles: PosStyles(bold:true)),
+    // 5... processFoodForRecite
 
-    ]);
-
-
-//    ticket.feed(2);
-
-
-    //3... dinning order type....
-
-    ticket.feed(2);
 
     orderedItems.forEach((oneFood) {
+
+
+      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+
+//      print('extraIngredient: $extraIngredient');
+
+//      print('extraSauces: $extraSauces');
+//      print('extraCheeseItems: $extraCheeseItems');
+
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+
+      List<SauceItem> onlyExtraSauces       =
+      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+      List<CheeseItem>    onlyExtraCheeseItems  =
+      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+      print('onlyExtraIngredient: $onlyExtraIngredient');
+
+      print('onlyExtraSauces: $onlyExtraSauces');
+      print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
+
+      // 5.... (name and quantity) + (size and price )
       ticket.row([
+
 
         PosColumn(text: '${oneFood.name}',
-          width: 9, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.quantity}',
-          width: 3, /*, styles: PosStyles(align: PosAlign.center) */),
+            width: 5, styles: PosStyles(align: PosAlign.left,
+            ) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+        PosColumn(text: 'X${oneFood.quantity}',
+            width: 5,styles: PosStyles(
+
+              align: PosAlign.right,
+            )),
 
 
       ]);
 
       ticket.row([
-
         PosColumn(text: '${oneFood.foodItemSize}',
-          width: 6, /* styles: PosStyles(align: PosAlign.right) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(1) +' euro' }',
-            width: 6),
+            width: 5,  styles: PosStyles(align: PosAlign.left) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+            width: 5,styles: PosStyles(
 
-
+              align: PosAlign.right,
+            )),
       ]);
 
+      // 5.2 --- extra ingredients...
 
-      ticket.hr();
-      // needed. as per design.
+      if(onlyExtraIngredient.length>0) {
+        onlyExtraIngredient.forEach((oneIngredientForRecite) {
+          ticket.row([
 
+
+            PosColumn(text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                (oneIngredientForRecite.ingredientName.length == 0)) ?
+            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
+            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
+            oneIngredientForRecite.ingredientName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left)),
+
+
+          ]);
+        });
+      }
+
+      // extra cheeseItems...
+      if(onlyExtraSauces.length>0) {
+        onlyExtraSauces.forEach((oneSauceItemForRecite) {
+          ticket.row([
+
+
+            PosColumn(text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+            '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+            oneSauceItemForRecite.sauceItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left) ),
+
+
+          ]);
+        });
+      }
+
+      // extra sauceItems...
+      if(onlyExtraCheeseItems.length>0) {
+        onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
+          ticket.row([
+
+
+            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.right,
+                )),
+
+            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.left)),
+
+
+          ]);
+        });
+      }
+
+
+      // needed. as per design. when one food Item is printed then an hr added.
+      ticket.feed(1);
+      ticket.hr(ch:'_',len:null,linesAfter:1);
+//      ticket.feed(1);
     });
 
 
-    ticket.feed(2);
-//    ticket.feed(2);
-
-    //4... dinningRoom...
 
 
-// Price 1 subtotal
-
+    // Price 1 subtotal
     ticket.row([
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: 'SUBTOTAL',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ ' euro'}',
-        width: 4,),
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}\€',
+          width: 5,styles:PosStyles(align: PosAlign.right)),
 
     ]);
 
 
+
+    // for takeaway and delivery not necessary.
+    /*
+    ticket.row([
+
+
+      PosColumn(text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${00.toStringAsFixed(2)}\€',
+          width: 5,styles:PosStyles(align: PosAlign.right)),
+
+    ]);
+
+    */
+
+//    ticket.hr();
+
+    ticket.hr(ch:'_',len:null,linesAfter:0);
 
 
     // Price 3  Total
     ticket.row([
 
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)+ ' euro'}', styles:PosStyles(bold: true)  ,
-        width: 4,),
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}\€',
+        styles:PosStyles(bold: true,align: PosAlign.right)  ,
+        width: 5,),
 
     ]);
 
     ticket.feed(1);
-
-    //5... PAID OR UNPAID... of dinning room => Icon + Text + icon...
 
 
     oneOrderData3.paidStatus.toLowerCase() == 'paid'?
@@ -13448,9 +13843,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(handsdataBytesImage,align: PosAlign.center);
 
 
+
+
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
+
 
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
@@ -13471,6 +13869,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ]);
 
 
+
     // 7 image::
     // orderBy: 'Delivery: TakeAway: DinningRoom: phone
     oneOrderData3.orderBy.toLowerCase() == 'delivery'?
@@ -13481,17 +13880,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
     ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
 
-
-
-    ticket.feed(1); // space for holding the recite by finger dinning order...
-
+//    ticket.hr();
     // needed. as per design.
 
+    ticket.feed(1); // for holding or touching the recite by finger... space..
 
     ticket.cut();
     return ticket;
 
-    //--4
+
+
   }
 
 // # number 4: demoReceipt Order Type Dinning ends here...
