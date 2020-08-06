@@ -11264,7 +11264,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  showExtraCheeseItems(oneFood.selectedCheeses)
 //  showExtraSauces(oneFood.defaultSauces)
 
-  Widget showExtraIngredients(List <NewIngredient> reciteIngrdients){
+  Widget showExtraIngredients(List <NewIngredient> reciteIngrdients,int quantity){
 
     print('reciteIngrdients.length: ${reciteIngrdients.length}');
     return ListView.builder(
@@ -11276,13 +11276,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       itemBuilder: (_,int index) {
-        return displayOneExtraIngredientInRecite(reciteIngrdients[index], index);
+        return displayOneExtraIngredientInRecite(reciteIngrdients[index], index,quantity);
       },
 
     );
 
   }
-  Widget showExtraCheeseItems(List<CheeseItem> reciteCheeseItems){
+  Widget showExtraCheeseItems(List<CheeseItem> reciteCheeseItems,int quantity){
     print('reciteCheeseItems.length: ${reciteCheeseItems.length}');
     return ListView.builder(
 
@@ -11292,11 +11292,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
       itemCount: reciteCheeseItems.length,
 
       itemBuilder: (_,int index) {
-        return displayOneExtraCheeseItemInRecite(reciteCheeseItems[index], index);
+        return displayOneExtraCheeseItemInRecite(reciteCheeseItems[index], index,quantity);
       },
     );
   }
-  Widget showExtraSauces(List<SauceItem> reciteSauceItems){
+  Widget showExtraSauces(List<SauceItem> reciteSauceItems,int quantity){
     print('reciteSauceItems.length: ${reciteSauceItems.length}');
     return ListView.builder(
 
@@ -11306,12 +11306,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       itemCount: reciteSauceItems.length,
 
       itemBuilder: (_,int index) {
-        return displayOneExtraSauceItemInRecite(reciteSauceItems[index], index);
+        return displayOneExtraSauceItemInRecite(reciteSauceItems[index], index,quantity);
       },
     );
   }
 
-  Widget displayOneExtraIngredientInRecite(NewIngredient oneIngredientForRecite, int index){
+  Widget displayOneExtraIngredientInRecite(NewIngredient oneIngredientForRecite, int index,int quantity){
 
     print('oneIngredientForRecite.ingredientName: ${oneIngredientForRecite.ingredientName}');
 
@@ -11325,7 +11325,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: <Widget>[
 
             Text(
-              '+Ingre.: ',
+//              '+SauceItem: $quantity'+'X',
+              '+Ingre.: $quantity'+'X',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11352,7 +11353,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 fontSize: 17, fontFamily: 'Itim-Regular',),
             ),
             Text(
-              '  +${oneIngredientForRecite.price.toStringAsFixed(2)}',
+              '  +${(oneIngredientForRecite.price *quantity).toStringAsFixed(2)}',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11372,7 +11373,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  Widget displayOneExtraSauceItemInRecite(SauceItem oneSauceItemForRecite, int index){
+  Widget displayOneExtraSauceItemInRecite(SauceItem oneSauceItemForRecite, int index,int quantity){
 
     print('oneSauceItemForRecite.ingredientName: ${oneSauceItemForRecite.sauceItemName}');
 
@@ -11386,7 +11387,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: <Widget>[
 
             Text(
-              '+SauceItem: ',
+              '+SauceItem: $quantity'+'X',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11414,7 +11415,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 fontSize: 20, fontFamily: 'Itim-Regular',),
             ),
             Text(
-              '  +${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+              '  +${(oneSauceItemForRecite.price * quantity).toStringAsFixed(2)}',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11435,7 +11436,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget displayOneExtraCheeseItemInRecite(CheeseItem oneCheeseItemForRecite, int index){
+  Widget displayOneExtraCheeseItemInRecite(CheeseItem oneCheeseItemForRecite, int index,int quantity){
 
     print('oneCheeseItemForRecite.ingredientName: ${oneCheeseItemForRecite.cheeseItemName}');
     if(oneCheeseItemForRecite.isDefaultSelected !=true) {
@@ -11448,7 +11449,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: <Widget>[
 
             Text(
-              '+cheese: ',
+              '+cheese: $quantity'+'X',
+//              '+Ingre.: $quantity'+'X',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11491,7 +11493,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             */
             Text(
-              '  +${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+              '  +${(oneCheeseItemForRecite.price * quantity).toStringAsFixed(2)}',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11633,7 +11635,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     width: 350,
                     height:210,
                     color:Colors.blue,
-                    child: showExtraIngredients(onlyExtraIngredient)),
+                    child: showExtraIngredients(onlyExtraIngredient,oneFood.quantity)),
 
 
 
@@ -11647,7 +11649,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     width: 350,
                     height:210,
                     color:Colors.orange,
-                    child: showExtraCheeseItems(onlyExtraCheeseItems)
+                    child: showExtraCheeseItems(onlyExtraCheeseItems,oneFood.quantity)
                 ),
 
                 Divider(
@@ -11661,7 +11663,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     height:210,
                     color:Colors.deepPurpleAccent,
-                    child: showExtraSauces(onlyExtraSauces)
+                    child: showExtraSauces(onlyExtraSauces,oneFood.quantity)
                 ),
 
 
