@@ -12225,9 +12225,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  String sanitize(String nameInput){
+  String sanitize(String nameInput) {
+//    String nameInput2 = nameInput.replaceAll(new RegExp(r'e'), 'é');
+//
+//    print(nameInput2);
 
-    return nameInput;
+    String nameInput3 = nameInput.replaceAll(new RegExp(r"'"), "\'");
+
+    print(nameInput3);
+
+    return nameInput3;
   }
 
   /*
@@ -12438,7 +12445,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
 
-        PosColumn(text: '${oneFood.name.toString()}',
+        PosColumn(text: '${sanitize(oneFood.name)}',
             width: 5, styles: PosStyles(align: PosAlign.left,
             ) ),
         PosColumn(text: '',
@@ -12850,7 +12857,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
 
-        PosColumn(text: '${oneFood.name.toString()}',
+        PosColumn(text: '${sanitize(oneFood.name)}',
           width: 5, styles: PosStyles(align: PosAlign.left,
       ) ),
         PosColumn(text: '',
@@ -13261,7 +13268,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
 
-        PosColumn(text: '${oneFood.name.toString()}',
+        PosColumn(text: '${sanitize(oneFood.name)}',
             width: 5, styles: PosStyles(align: PosAlign.left,
             ) ),
         PosColumn(text: '',
@@ -13677,7 +13684,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
 
-        PosColumn(text: '${oneFood.name.toString()}',
+        PosColumn(text: '${sanitize(oneFood.name)}',
             width: 5, styles: PosStyles(align: PosAlign.left,
             ) ),
         PosColumn(text: '',
