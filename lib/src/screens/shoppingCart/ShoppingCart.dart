@@ -11547,7 +11547,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return Container(
 
       height:940,
-      width: 220,
+      width: 350,
 
       child: Column(
         children: <Widget>[
@@ -11555,7 +11555,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           Container(
             height: 100,
-            width: 220,
+            width: 350,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -11589,7 +11589,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           Container(
             height: 100,
-            width: 220,
+            width: 350,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -11626,11 +11626,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
             height:700,
             color:Colors.redAccent,
-            padding:const EdgeInsets.all(3),
+            padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 0),
             child:ListView(
               children: <Widget>[
                 Container(
-                    width: 340,
+                    width: 350,
                     height:210,
                     color:Colors.blue,
                     child: showExtraIngredients(onlyExtraIngredient)),
@@ -11644,7 +11644,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   color:Colors.black,
                 ),
                 Container(
-                    width: 340,
+                    width: 350,
                     height:210,
                     color:Colors.orange,
                     child: showExtraCheeseItems(onlyExtraCheeseItems)
@@ -11657,7 +11657,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   color:Colors.black,
                 ),
                 Container(
-                    width: 320,
+                    width: 350,
 
                     height:210,
                     color:Colors.deepPurpleAccent,
@@ -11882,7 +11882,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                 Container(
-                    width: 220,
+                    width: 350,
                     height:580,
                     child: processFoodForRecite(orderedItems)
                 ),
