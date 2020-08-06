@@ -628,7 +628,7 @@ class ShoppingCartBloc implements Bloc {
         imageURL: oneFireStoreSauce['image'] ,
         ingredientAmountByUser: oneFireStoreSauce['ingredientAmountByUser'] ,
           isDefault:oneFireStoreSauce['isDefault'],
-        price:oneFireStoreSauce['price'],
+        price:oneFireStoreSauce['ingredientPrice'],
 //          isDefault: oneFireStoreSauce['isDefault'],
 
       );
@@ -674,7 +674,7 @@ class ShoppingCartBloc implements Bloc {
         cheeseItemName: oneCheeseItem['name'] ,
         imageURL: oneCheeseItem['image'] ,
         cheeseItemAmountByUser: oneCheeseItem['cheeseItemAmountByUser'] ,
-        price: oneCheeseItem['price'] ,
+        price: oneCheeseItem['cheeseItemPrice'] ,
         isDefaultSelected:  oneCheeseItem['isDefaultSelected'],
 
       );
@@ -716,7 +716,7 @@ class ShoppingCartBloc implements Bloc {
         sauceItemName: oneSauceItem['name'] ,
         imageURL: oneSauceItem['image'] ,
         sauceItemAmountByUser: oneSauceItem['sauceItemAmountByUser'] ,
-        price: oneSauceItem['price'],
+        price: oneSauceItem['sauceItemPrice'],
         isDefaultSelected: oneSauceItem['isDefaultSelected'],
 
       );

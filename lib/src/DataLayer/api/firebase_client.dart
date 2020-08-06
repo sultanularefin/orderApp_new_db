@@ -209,7 +209,7 @@ class FirebaseClient {
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'ingredientAmountByUser': si[counter].ingredientAmountByUser,
-        'price':si[counter].price,
+        'ingredientPrice':si[counter].price,
         'isDefault':si[counter].isDefault,
 
       };
@@ -243,7 +243,7 @@ class FirebaseClient {
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'cheeseItemAmountByUser': cheeseItems[counter].cheeseItemAmountByUser,
-        'price':cheeseItems[counter].price,
+        'cheeseItemPrice':cheeseItems[counter].price,
         'isDefaultSelected':cheeseItems[counter].isDefaultSelected,
 
       };
@@ -284,7 +284,7 @@ class FirebaseClient {
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'sauceItemAmountByUser': sauceItems[counter].sauceItemAmountByUser,// +1, // 1 is added since by default it is zero
-        'price':sauceItems[counter].price,
+        'sauceItemPrice':sauceItems[counter].price,
         'isDefaultSelected':sauceItems[counter].isDefaultSelected,
 
       };
