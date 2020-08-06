@@ -11618,7 +11618,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               children: <Widget>[
 
                 Text(
-                  '${oneFood.name}',
+                  '${oneFood.name.toString()}',
 
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -12225,6 +12225,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  String sanitize(String nameInput){
+
+    return nameInput;
+  }
+
   /*
     Future<Ticket> demoReceiptOrderTypeDelivery(
       PaperSize paper,
@@ -12433,7 +12438,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
 
-        PosColumn(text: '${oneFood.name}',
+        PosColumn(text: '${oneFood.name.toString()}',
             width: 5, styles: PosStyles(align: PosAlign.left,
             ) ),
         PosColumn(text: '',
@@ -12845,7 +12850,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
 
-        PosColumn(text: '${oneFood.name}',
+        PosColumn(text: '${oneFood.name.toString()}',
           width: 5, styles: PosStyles(align: PosAlign.left,
       ) ),
         PosColumn(text: '',
@@ -13256,7 +13261,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
 
-        PosColumn(text: '${oneFood.name}',
+        PosColumn(text: '${oneFood.name.toString()}',
             width: 5, styles: PosStyles(align: PosAlign.left,
             ) ),
         PosColumn(text: '',
@@ -13672,7 +13677,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ticket.row([
 
 
-        PosColumn(text: '${oneFood.name}',
+        PosColumn(text: '${oneFood.name.toString()}',
             width: 5, styles: PosStyles(align: PosAlign.left,
             ) ),
         PosColumn(text: '',
