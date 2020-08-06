@@ -214,6 +214,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       print('temp.selectedSauceItems:  ${temp.selectedSauceItems}');
 
 
+                      print('temp.unitPrice:  ${temp.unitPrice}');
+                      print('temp.unitPriceWithoutCheeseIngredientSauces: '
+                          ' ${temp.unitPriceWithoutCheeseIngredientSauces}');
+                      print('temp.quantity:  ${temp.quantity}');
+
+                      print('temp.foodItemSize:  ${temp.foodItemSize}');
+                      print('temp.subTotalPrice:  ${temp.subTotalPrice}');
+
+
+
+
 
                       SelectedFood tempSelectedFood = (temp == null)? new SelectedFood():
                       temp /*.selectedFoodInOrder.first*/;

@@ -320,6 +320,8 @@ class ShoppingCartBloc implements Bloc {
     oneSelectedFood.quantity = 1;
     print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
     print('oneSelectedFood.foodItemName is: ${oneSelectedFood.foodItemName}');
+    logger.i('oneSelectedFood.unitPrice is: ${oneSelectedFood.unitPrice}');
+    logger.i('oneSelectedFood.subTotalPrice is:${oneSelectedFood.subTotalPrice}');
 
     List<SelectedFood> multiplied = List.filled(fillingLength, oneSelectedFood);
 

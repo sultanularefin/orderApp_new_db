@@ -11979,6 +11979,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        color: Color(0xffF50303),
                           fontSize: 30, fontFamily: 'Itim-Regular',),
                       ),
+
+                      // TODO: PROBLEM CODE NEEDS CHECKING....
                       Text(
                         '${(oneOrderForReceipt.totalPrice +1.6).toStringAsFixed(2)}',
 
