@@ -24,6 +24,7 @@ class SelectedFood {
   final String  foodItemName;      // one of foodItems> collection.
   final String  foodItemImageURL;
   final double  unitPrice;
+  final double  unitPriceWithoutCheeseIngredientSauces;
   final String  foodDocumentId;
   int           quantity;
   final String  foodItemSize;
@@ -43,6 +44,7 @@ class SelectedFood {
         this.foodItemName,
         this.foodItemImageURL,
         this.unitPrice,
+        this.unitPriceWithoutCheeseIngredientSauces,
         this.foodDocumentId,
         this.quantity,
         this.foodItemSize,

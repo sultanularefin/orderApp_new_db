@@ -432,6 +432,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       foodItemImageURL: oneFoodItem.imageURL,
       unitPrice: 0, // this value will be set when increment and decreemnt
       //button pressed from the UI.
+      unitPriceWithoutCheeseIngredientSauces:0,
       foodDocumentId: oneFoodItem.documentId,
       quantity:0,
       foodItemSize: 'normal', // to be set from the UI.
@@ -1031,7 +1032,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
     thisFoodpriceModified.itemSize = sizeKey;
-    thisFoodpriceModified.itemPrice =  changedPriceDouble;
+    thisFoodpriceModified.itemPriceBasedOnSize =  changedPriceDouble;
     thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = changedPriceDouble;
 
 
@@ -1159,7 +1160,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     FoodItemWithDocIDViewModel thisFoodpriceModified = _thisFoodItem;
 
 //    double previousPrice = _thisFoodItem.priceBasedOnCheeseSauceIngredientsSize;
-    double previousPrice = _thisFoodItem.itemPrice;
+    double previousPrice = _thisFoodItem.itemPriceBasedOnSize;
 
     print('previous  price: $previousPrice');
 

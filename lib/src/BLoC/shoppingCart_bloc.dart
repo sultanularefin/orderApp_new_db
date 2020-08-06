@@ -855,7 +855,8 @@ class ShoppingCartBloc implements Bloc {
       print('unitPrice: ${oneFoodItem['unitPrice']}');
       print('unitPrice: ${oneFoodItem['foodImage']}');
       print('unitPrice: ${oneFoodItem['discount']}');
-      print('unitPrice');
+      print('unitPriceWithoutCheeseIngredientSauces: ${oneFoodItem['unitPriceWithoutCheeseIngredientSauces']}');
+//      print('unitPrice');
       print('foodItemSize: ${oneFoodItem['foodItemSize']}');
 
       List<SauceItem>     defaultSauces = convertFireStoreSauceItemsToLocalSauceItemsList(oneFoodItem['selectedSauces']);
@@ -881,6 +882,7 @@ class ShoppingCartBloc implements Bloc {
         name:oneFoodItem['name'],
         oneFoodTypeTotalPrice:oneFoodItem['oneFoodTypeTotalPrice'],
         unitPrice:oneFoodItem['unitPrice'],
+        unitPriceWithoutCheeseIngredientSauces: oneFoodItem['unitPriceWithoutCheeseIngredientSauces'],
         foodItemSize: oneFoodItem['foodItemSize'],
       );
 

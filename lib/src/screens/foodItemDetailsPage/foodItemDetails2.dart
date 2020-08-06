@@ -76,6 +76,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   String _currentSize;
 //  int _itemCount= 0;
+  double priceBySize = 0.0;
   double priceBasedOnCheeseSauceIngredientsSizeState = 0.0;
 
 
@@ -170,14 +171,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       .sizedFoodPrices;
 
 
-                  double priceByQuantityANDSize = 0.0;
+
                   //            priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemSize;
 
 //                  priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemPrice;
 
                   priceBasedOnCheeseSauceIngredientsSizeState =  oneFood.priceBasedOnCheeseSauceIngredientsSize;
 
-                  priceByQuantityANDSize = oneFood.itemPrice;
+                  priceBySize = oneFood.itemPriceBasedOnSize;
 
                   _currentSize = oneFood.itemSize;
 
@@ -703,6 +704,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                                 foodItemImageURL: blocD
                                                                                     .currentFoodItem.imageURL,
                                                                                 unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
+                                                                                unitPriceWithoutCheeseIngredientSauces: priceBySize,
                                                                                 foodDocumentId: blocD
                                                                                     .currentFoodItem.documentId,
                                                                                 quantity: quantity,
@@ -737,6 +739,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                                 foodItemImageURL: blocD
                                                                                     .currentFoodItem.imageURL,
                                                                                 unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
+//                                                                                unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
+                                                                                unitPriceWithoutCheeseIngredientSauces: priceBySize,
                                                                                 foodDocumentId: blocD
                                                                                     .currentFoodItem.documentId,
                                                                                 quantity: newQuantity,

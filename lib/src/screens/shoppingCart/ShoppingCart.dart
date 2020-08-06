@@ -9341,15 +9341,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 onPressed: () async {
 
-                  // Delivery Phone Recite Print.
+                  // DUMMY PRINT DELIVERY PHONE ......
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+
+
 
                   print(
-                      'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: '
-                          '${cancelPaySelectUnobscuredDeliveryPhone
+                      'debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
+
+                  print(
+                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone
                           .paymentTypeIndex}');
 
                   // let's not use this order returned use the one from the bloc:
@@ -9367,99 +9373,37 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i(
-                        'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
-                            .orderdocId}');
+                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
+                        .orderdocId}');
 
-                    List<PrinterBluetooth> blueToothDevicesState
-                    = shoppingCartBloc.getDevices;
+                    List<
+                        PrinterBluetooth> blueToothDevicesState = shoppingCartBloc
+                        .getDevices;
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
-
-                      await _showMyDialog2(
-                          '___________ blueTooth device not found _____ delivery phone pay button');
-
-                      print(
-                          'at here... __________ blueTooth device not found _____ delivery phone pay button');
-
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUnobscuredDeliveryPhone);
-
-                    }
-
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
-
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
 
 
-
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                      }
-                      else {
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
 
 
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
+                    _testPrintDummyDevices(x);
 
-                        await
-                        _showMyDialog2('___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                    shoppingCartBloc.clearSubscription();
 
+                    print('shopping Cart : shoppingCartBloc.clearSubscription() called... delivery Phone ');
 
-                        shoppingCartBloc.clearSubscription();
-                        print('going to food Gallery page  Restaurant Printer not found');
-                        return Navigator.pop(
-                            context, cancelPaySelectUnobscuredDeliveryPhone);
-                      }
-                    }
+                    return Navigator.pop(
+                        context, cancelPaySelectUnobscuredDeliveryPhone);
+
                   }
 
                 },
@@ -11662,7 +11606,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     fontSize: 20, fontFamily: 'Itim-Regular',),
                 ),
                 Text(
-                  '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+                  '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+                  // '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
 
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -12465,7 +12410,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             width: 5,  styles: PosStyles(align: PosAlign.left) ),
         PosColumn(text: '',
           width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
             width: 5,styles: PosStyles(
 
               align: PosAlign.right,
@@ -12877,7 +12822,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: 5,  styles: PosStyles(align: PosAlign.left) ),
         PosColumn(text: '',
           width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
           width: 5,styles: PosStyles(
 
               align: PosAlign.right,
@@ -13288,7 +13233,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             width: 5,  styles: PosStyles(align: PosAlign.left) ),
         PosColumn(text: '',
           width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
             width: 5,styles: PosStyles(
 
               align: PosAlign.right,
@@ -13704,7 +13649,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             width: 5,  styles: PosStyles(align: PosAlign.left) ),
         PosColumn(text: '',
           width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.oneFoodTypeTotalPrice.toStringAsFixed(2)}',
+        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
             width: 5,styles: PosStyles(
 
               align: PosAlign.right,
