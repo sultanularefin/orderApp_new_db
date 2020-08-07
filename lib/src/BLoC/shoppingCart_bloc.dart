@@ -596,7 +596,8 @@ class ShoppingCartBloc implements Bloc {
 
     List<NewCategoryItem> tempCategoryForCategorisingOrderedFoods = _allCategories;
 
-    tempForCategorising.sort((a,b)=>checkRating(a.categoryName,b.categoryName,tempCategoryForCategorisingOrderedFoods));
+    tempForCategorising.sort((a,b)=>checkRating(a.categoryName,b.categoryName,
+        tempCategoryForCategorisingOrderedFoods));
 
 
     List<String> numbers = ['two', 'three', 'four'];
@@ -607,6 +608,9 @@ class ShoppingCartBloc implements Bloc {
 
 //    categoryName
 //    _allCategories
+
+
+    tempOrder.selectedFoodInOrder = tempForCategorising;
 
 
 
