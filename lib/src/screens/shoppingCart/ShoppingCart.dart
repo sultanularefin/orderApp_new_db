@@ -12850,7 +12850,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 5... processFoodForRecite
 
 
+    Set<String> categories;
+
+//    List<String> categories = [];
     orderedItems.forEach((oneFood) {
+
+
+      if(categories.contains(oneFood.category)==false) {
+        ticket.text('${oneFood.category.toString()} Category',
+            styles: PosStyles(
+              height: PosTextSize.size1,
+              width: PosTextSize.size1,
+              bold: true,
+              align: PosAlign.center,
+            )
+        );
+      }
+
+      categories.add(oneFood.category);
+
 
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
@@ -12875,14 +12893,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
 
-      ticket.text('${oneFood.category.toString()} Category',
-          styles: PosStyles(
-            height: PosTextSize.size1,
-            width: PosTextSize.size1,
-            bold:true,
-            align: PosAlign.center,
-          )
-      );
+
 
 
       // 5.... (name and quantity) + (size and price )
