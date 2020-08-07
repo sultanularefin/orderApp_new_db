@@ -9461,6 +9461,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               const Color OrderTypeIconColor = Color(0xff070707);
 
 
+              print('unObsecuredInputandPayment.totalPrice: ${unObsecuredInputandPayment.totalPrice}');
+
               return Container(
                 child: Column(
                   children: <Widget>[
