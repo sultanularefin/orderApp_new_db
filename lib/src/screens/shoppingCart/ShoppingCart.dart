@@ -12819,6 +12819,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
 
+      ticket.text('${oneFood.category.toString()} Category',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold:true,
+            align: PosAlign.center,
+          )
+      );
+
 
       // 5.... (name and quantity) + (size and price )
       ticket.row([
