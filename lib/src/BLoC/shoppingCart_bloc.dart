@@ -505,6 +505,8 @@ class ShoppingCartBloc implements Bloc {
 //    numbers.sort((a, b) => a.length.compareTo(b.length));
     return firstCategory.rating.compareTo(secondCategory.rating);
 
+//    return firstCategory.rating > secondCategory.rating;
+
   }
   Future<Order> paymentButtonPressed(Order payMentProcessing) async{
 
@@ -594,23 +596,29 @@ class ShoppingCartBloc implements Bloc {
 
     // group by category will be done here...
 
-    List<NewCategoryItem> tempCategoryForCategorisingOrderedFoods = _allCategories;
+//    List<NewCategoryItem> tempCategoryForCategorisingOrderedFoods = _allCategories;
 
     tempForCategorising.sort((a,b)=>checkRating(a.categoryName,b.categoryName,
-        tempCategoryForCategorisingOrderedFoods));
+        _allCategories));
+
+    List<SelectedFood> tempForCategorising2 =  new List.from(tempForCategorising.reversed);
+    /* List<String> numbers2 */
 
 
     List<String> numbers = ['two', 'three', 'four'];
 // Sort from shortest to longest.
     numbers.sort((a, b) => a.length.compareTo(b.length));
-    print(numbers);  // [two, four, three]
+    List<String> numbers2 = numbers.reversed;
+//    myList.reversed
+    print('numbers: $numbers');  // [two, four, three]
+    print('numbers2: $numbers2');
 
 
 //    categoryName
 //    _allCategories
 
 
-    tempOrder.selectedFoodInOrder = tempForCategorising;
+    tempOrder.selectedFoodInOrder = tempForCategorising2;
 
 
 
