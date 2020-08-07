@@ -12385,7 +12385,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
     ticket.hr(ch:'=',len:null,linesAfter:0);
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                '
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
         +'${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           height: PosTextSize.size1,
@@ -12398,12 +12398,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //    ticket.feed(2);
 
 
-    // FOR TAKEAWAY NOT NECESSARY..
-    /*
     // 3 ... address: .... + flat
 
+    /*
 
-    ticket.text('address:  ${((customerForReciteGeneration.address == null) ||
+    ticket.text('address: ${((customerForReciteGeneration.address == null) ||
         (customerForReciteGeneration.address.length == 0)) ?
     '----' : customerForReciteGeneration.address.length > 21 ?
     customerForReciteGeneration.address.substring(0, 18) + '...' :
@@ -12417,7 +12416,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
 
     // 4 ... phone: phone
-    ticket.text('phone:  ${((customerForReciteGeneration.phoneNumber == null) ||
+    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
         (customerForReciteGeneration.phoneNumber.length == 0)) ?
     '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
     customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
@@ -12429,16 +12428,34 @@ class _ShoppingCartState extends State<ShoppingCart> {
           align: PosAlign.left,
         ));
 
-    */
-
 
     ticket.feed(1);
+
+    */
     ticket.hr(ch:'.',len:null,linesAfter:1);
 
     // 5... processFoodForRecite
 
 
+    Set<String> categories;
+
+//    List<String> categories = [];
     orderedItems.forEach((oneFood) {
+
+
+      if(categories.contains(oneFood.category)==false) {
+        ticket.text('${oneFood.category.toString()} Category',
+            styles: PosStyles(
+              height: PosTextSize.size1,
+              width: PosTextSize.size1,
+              bold: true,
+              align: PosAlign.center,
+            )
+        );
+      }
+
+      categories.add(oneFood.category);
+
 
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
@@ -12461,6 +12478,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
 
 
 
@@ -12585,14 +12604,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right)),
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
 
     ]);
 
-
-
-    // for takeaway and delivery not necessary.
     /*
+
     ticket.row([
 
 
@@ -12601,10 +12618,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${00.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right)),
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
 
     ]);
-
     */
 
 //    ticket.hr();
@@ -12624,7 +12640,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-        styles:PosStyles(bold: true,align: PosAlign.right)  ,
+        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
         width: 5,),
 
     ]);
@@ -12683,7 +12699,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return ticket;
 
 
-    }
+
+  }
 
 
 
@@ -13211,8 +13228,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
-
     //  printing begins::: //1.... starts...
 
     //1... RESTAURANT NAME DONE...
@@ -13228,7 +13243,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
     ticket.hr(ch:'=',len:null,linesAfter:0);
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'           '
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
         +'${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           height: PosTextSize.size1,
@@ -13243,10 +13258,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     // 3 ... address: .... + flat
 
-    // FOR PHONE ORDER NOT NECESSARY...
-    /*
 
-    ticket.text('address:  ${((customerForReciteGeneration.address == null) ||
+    /*
+    ticket.text('address: ${((customerForReciteGeneration.address == null) ||
         (customerForReciteGeneration.address.length == 0)) ?
     '----' : customerForReciteGeneration.address.length > 21 ?
     customerForReciteGeneration.address.substring(0, 18) + '...' :
@@ -13258,11 +13272,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
           align: PosAlign.left,
         )
     );
-
     */
 
     // 4 ... phone: phone
-    ticket.text('phone:  ${((customerForReciteGeneration.phoneNumber == null) ||
+    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
         (customerForReciteGeneration.phoneNumber.length == 0)) ?
     '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
     customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
@@ -13281,7 +13294,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 5... processFoodForRecite
 
 
+    Set<String> categories;
+
+//    List<String> categories = [];
     orderedItems.forEach((oneFood) {
+
+
+      if(categories.contains(oneFood.category)==false) {
+        ticket.text('${oneFood.category.toString()} Category',
+            styles: PosStyles(
+              height: PosTextSize.size1,
+              width: PosTextSize.size1,
+              bold: true,
+              align: PosAlign.center,
+            )
+        );
+      }
+
+      categories.add(oneFood.category);
+
 
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
@@ -13304,6 +13335,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
 
 
 
@@ -13428,11 +13461,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right)),
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
 
     ]);
 
 
+    /*
     ticket.row([
 
 
@@ -13441,9 +13475,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${00.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right)),
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
 
     ]);
+
+    */
 
 //    ticket.hr();
 
@@ -13462,7 +13498,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-        styles:PosStyles(bold: true,align: PosAlign.right)  ,
+        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
         width: 5,),
 
     ]);
@@ -13519,7 +13555,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.cut();
     return ticket;
-
 
   }
 
@@ -13626,8 +13661,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    //0.... printing codes starts here..
-
 
     //  printing begins::: //1.... starts...
 
@@ -13644,7 +13677,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
     ticket.hr(ch:'=',len:null,linesAfter:0);
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'           '
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
         +'${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           height: PosTextSize.size1,
@@ -13657,12 +13690,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //    ticket.feed(2);
 
 
-    // FOR TAKEAWAY NOT NECESSARY..
-    /*
     // 3 ... address: .... + flat
 
+    /*
 
-    ticket.text('address:  ${((customerForReciteGeneration.address == null) ||
+    ticket.text('address: ${((customerForReciteGeneration.address == null) ||
         (customerForReciteGeneration.address.length == 0)) ?
     '----' : customerForReciteGeneration.address.length > 21 ?
     customerForReciteGeneration.address.substring(0, 18) + '...' :
@@ -13676,7 +13708,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
 
     // 4 ... phone: phone
-    ticket.text('phone:  ${((customerForReciteGeneration.phoneNumber == null) ||
+    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
         (customerForReciteGeneration.phoneNumber.length == 0)) ?
     '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
     customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
@@ -13688,16 +13720,34 @@ class _ShoppingCartState extends State<ShoppingCart> {
           align: PosAlign.left,
         ));
 
-    */
-
 
     ticket.feed(1);
+
+    */
     ticket.hr(ch:'.',len:null,linesAfter:1);
 
     // 5... processFoodForRecite
 
 
+    Set<String> categories;
+
+//    List<String> categories = [];
     orderedItems.forEach((oneFood) {
+
+
+      if(categories.contains(oneFood.category)==false) {
+        ticket.text('${oneFood.category.toString()} Category',
+            styles: PosStyles(
+              height: PosTextSize.size1,
+              width: PosTextSize.size1,
+              bold: true,
+              align: PosAlign.center,
+            )
+        );
+      }
+
+      categories.add(oneFood.category);
+
 
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
@@ -13720,6 +13770,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
 
 
 
@@ -13844,14 +13896,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
       PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right)),
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
 
     ]);
 
-
-
-    // for takeaway and delivery not necessary.
     /*
+
     ticket.row([
 
 
@@ -13859,11 +13909,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${00.toStringAsFixed(2)}\€',
-          width: 5,styles:PosStyles(align: PosAlign.right)),
+      PosColumn(text: '${00.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
 
     ]);
-
     */
 
 //    ticket.hr();
@@ -13883,7 +13932,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-        styles:PosStyles(bold: true,align: PosAlign.right)  ,
+        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
         width: 5,),
 
     ]);
