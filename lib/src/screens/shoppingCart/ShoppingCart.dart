@@ -11605,6 +11605,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     */
 
+    Set<String> categories;
+
+//    List<String> categories = [];
+
+
     return Container(
 
       height:940,
@@ -12437,7 +12442,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 5... processFoodForRecite
 
 
-    Set<String> categories;
+    Set<String> categories ={};
 
 //    List<String> categories = [];
     orderedItems.forEach((oneFood) {
@@ -12867,7 +12872,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 5... processFoodForRecite
 
 
-    Set<String> categories;
+    Set<String> categories ={};
 
 //    List<String> categories = [];
     orderedItems.forEach((oneFood) {
@@ -13294,7 +13299,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 5... processFoodForRecite
 
 
-    Set<String> categories;
+    Set<String> categories ={};
 
 //    List<String> categories = [];
     orderedItems.forEach((oneFood) {
@@ -13729,7 +13734,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // 5... processFoodForRecite
 
 
-    Set<String> categories;
+    Set<String> categories ={};
 
 //    List<String> categories = [];
     orderedItems.forEach((oneFood) {
