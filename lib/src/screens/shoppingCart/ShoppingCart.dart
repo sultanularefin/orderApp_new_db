@@ -12437,7 +12437,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
 
     */
-    ticket.hr(ch:'.',len:null,linesAfter:1);
+    ticket.hr(ch:'.',len:null,linesAfter:0);
 
     // 5... processFoodForRecite
 
@@ -12461,7 +12461,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       categories.add(oneFood.category);
 
-
+      ticket.feed(1);
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
       List<SauceItem>     extraSauces       = oneFood.selectedSauces;
@@ -12867,7 +12867,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     ticket.feed(1);
-    ticket.hr(ch:'.',len:null,linesAfter:1);
+    ticket.hr(ch:'.',len:null,linesAfter:0);
 
     // 5... processFoodForRecite
 
@@ -12892,6 +12892,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       categories.add(oneFood.category);
 
 
+      ticket.feed(1);
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
       List<SauceItem>     extraSauces       = oneFood.selectedSauces;
@@ -13294,7 +13295,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     ticket.feed(1);
-    ticket.hr(ch:'.',len:null,linesAfter:1);
+    ticket.hr(ch:'.',len:null,linesAfter:0);
 
     // 5... processFoodForRecite
 
@@ -13317,6 +13318,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       }
 
       categories.add(oneFood.category);
+      ticket.feed(1);
 
 
 
@@ -13729,7 +13731,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
 
     */
-    ticket.hr(ch:'.',len:null,linesAfter:1);
+    ticket.hr(ch:'.',len:null,linesAfter:0);
 
     // 5... processFoodForRecite
 
@@ -13753,7 +13755,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       categories.add(oneFood.category);
 
-
+      ticket.feed(1);
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
       List<SauceItem>     extraSauces       = oneFood.selectedSauces;
