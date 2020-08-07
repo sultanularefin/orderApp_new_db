@@ -12388,7 +12388,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch:'=',len:null,linesAfter:0);
+    ticket.hr(ch:'=',len:null,linesAfter:1);
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
         +'${oneOrderData3.orderProductionTime} min',
@@ -12773,9 +12773,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-
-
-
     //differentImages 3 =>  deliveryDataBytesImage
     final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
@@ -12821,7 +12818,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch:'=',len:null,linesAfter:0);
+    ticket.hr(ch:'=',len:null,linesAfter:1);
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
         +'${oneOrderData3.orderProductionTime} min',
@@ -13247,7 +13244,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch:'=',len:null,linesAfter:0);
+    ticket.hr(ch:'=',len:null,linesAfter:1);
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
         +'${oneOrderData3.orderProductionTime} min',
@@ -13682,7 +13679,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch:'=',len:null,linesAfter:0);
+    ticket.hr(ch:'=',len:null,linesAfter:1);
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
         +'${oneOrderData3.orderProductionTime} min',
