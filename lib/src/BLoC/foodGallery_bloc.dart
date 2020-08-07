@@ -12,7 +12,7 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 //import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
-import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
+import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 //import 'package:zomatoblock/DataLayer/location.dart';
 
 import 'package:logger/logger.dart';

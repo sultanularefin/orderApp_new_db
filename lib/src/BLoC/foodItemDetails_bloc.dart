@@ -23,7 +23,7 @@ import 'package:logger/logger.dart';
 
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 //import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
-//import 'package:foodgallery/src/DataLayer/newCategory.dart';
+//import 'package:foodgallery/src/DataLayer/NewCategoryItem.dart';
 //import 'package:zomatoblock/DataLayer/location.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
 

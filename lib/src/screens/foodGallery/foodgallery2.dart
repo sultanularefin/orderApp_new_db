@@ -55,7 +55,7 @@ import 'package:foodgallery/src/welcomePage.dart';
 //import '../../DataLayer/itemData.dart';
 //import '../../DataLayer/FoodItem.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
-import 'package:foodgallery/src/DataLayer/models/newCategory.dart';
+import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 
 // Blocks
 

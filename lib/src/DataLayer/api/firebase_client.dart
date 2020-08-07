@@ -27,7 +27,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 //import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
 //    ''file:
-///C:/Users/Taxi/Programs/foodgallery/lib/src/DataLayer/models/newCategory.dart'tegory.dart';
+///C:/Users/Taxi/Programs/foodgallery/lib/src/DataLayer/models/NewCategoryItem.dart'tegory.dart';
 
 
 
