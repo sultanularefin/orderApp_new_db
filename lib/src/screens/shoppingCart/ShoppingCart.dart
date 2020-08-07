@@ -9461,6 +9461,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               const Color OrderTypeIconColor = Color(0xff070707);
 
 
+              print('unObsecuredInputandPayment.totalPrice: ${unObsecuredInputandPayment.totalPrice}');
+
               return Container(
                 child: Column(
                   children: <Widget>[
@@ -11608,7 +11610,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     fontSize: 20, fontFamily: 'Itim-Regular',),
                 ),
                 Text(
-                  '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+                  '${(oneFood.unitPriceWithoutCheeseIngredientSauces * oneFood.quantity).toStringAsFixed(2)}',
                   // '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
 
                   textAlign: TextAlign.left,
