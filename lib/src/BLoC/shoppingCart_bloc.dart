@@ -605,13 +605,7 @@ class ShoppingCartBloc implements Bloc {
     /* List<String> numbers2 */
 
 
-    List<String> numbers = ['two', 'three', 'four'];
-// Sort from shortest to longest.
-    numbers.sort((a, b) => a.length.compareTo(b.length));
-    List<String> numbers2 = numbers.reversed;
-//    myList.reversed
-    print('numbers: $numbers');  // [two, four, three]
-    print('numbers2: $numbers2');
+
 
 
 //    categoryName
