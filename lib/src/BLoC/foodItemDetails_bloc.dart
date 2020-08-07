@@ -69,17 +69,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   // can also use var _oneFoodItem = new FoodItemWithDocID() ;
 //  FoodItemWithDocID _oneFoodItem = new FoodItemWithDocID() ;
   FoodItemWithDocIDViewModel _thisFoodItem ;
-//  String _currentSize = 'normal';
-
-//  var _currentSize = new Map<String ,double>(); // currentlyNotUsing.
-
-//  Map<String,Dynamic>
 
   FoodItemWithDocIDViewModel get currentFoodItem => _thisFoodItem;
 
-//  _thisFoodItem =thisFoodpriceModified;
-//
-//  _controller.sink.add(thisFoodpriceModified);
+
 
   List<NewIngredient> _allIngItemsDetailsBlock =[];
 
@@ -89,6 +82,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   List<FoodPropertyMultiSelect> _multiSelectForFood =[];
 //  Order _currentSelectedFoodDetails ;
   SelectedFood _currentSelectedFoodDetails;
+
+
 
 
 //  List <NewIngredient> ingItems = new List<NewIngredient>();
@@ -705,6 +700,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
+
       _currentSelectedFoodDetails =tempSelectedFood;
 
       _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
@@ -1083,6 +1079,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
+  /*
   void setNewPriceBySelectedCheeseItems(List<CheeseItem> cheeseItems) {
 
     double addedCheeseItemsPrice = cheeseItems.fold(0, (t, e) => t + e.price);
@@ -1109,6 +1106,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   }
+
+  */
 
   void setNewPriceforSauceItemCheeseItemIngredientUpdate(/*List<SauceItem> sauceItems*/) {
 
@@ -1169,7 +1168,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize = previousPrice + addedSauceItemsPrice
         + addedCheeseItemsPrice + addedIngredientsItemsPrice;
 
-    print('modified price for new SauceItem addition or remove: '
+    print('modified price for new SauceItem cheeseItem addition or remove: '
         '${thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize}');
 
 //    print('changedPriceDouble: $changedPriceDouble');
@@ -1177,6 +1176,24 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _thisFoodItem =thisFoodpriceModified;
 
     _controller.sink.add(thisFoodpriceModified);
+
+
+
+
+    print( '>>>> initialItemCount == 0  <<<< ');
+
+
+    SelectedFood tempSelectedFood = _currentSelectedFoodDetails ;
+
+    // REQUIRED ...
+    tempSelectedFood.selectedIngredients  = _defaultIngItems;
+    tempSelectedFood.selectedCheeseItems  = _allSelectedCheeseItems;
+    tempSelectedFood.selectedSauceItems   = _allSelectedSauceItems;
+    tempSelectedFood.unitPrice            = thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize;
+
+    _currentSelectedFoodDetails = tempSelectedFood;
+
+    _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
 
   }
 

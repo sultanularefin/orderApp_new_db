@@ -624,43 +624,24 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                   );
                                                                 }
                                                                 else {
-//                    logger.e('snapshot.hasData: ${snapshot.hasData} getCurrentSelectedFoodStream');
-//                    Order incrementCurrentFoodProcessing = snapshot.data;
 
                                                                   SelectedFood incrementCurrentFoodProcessing = snapshot.data;
 
 
-//                    int lengthOfSelectedItemsLength = incrementOrderProcessing.selectedFoodListLength;
-//                    logger.e('lengthOfSelectedItemsLength: $lengthOfSelectedItemsLength');
-
                                                                   int itemCountNew;
 
 
-//                    print('incrementOrderProcessing.selectedFoodInOrder.isEmpty:'
-//                        ' ${incrementOrderProcessing.selectedFoodInOrder.isEmpty}');
                                                                   print('incrementCurrentFoodProcessing==null ${incrementCurrentFoodProcessing==null}');
 
 
-//                    if( incrementOrderProcessing.selectedFoodInOrder.isEmpty) {
-//                      itemCountNew=0;
-//
-//                    }
                                                                   if(incrementCurrentFoodProcessing==null){
                                                                     itemCountNew=0;
                                                                   }
                                                                   else {
-//                      itemCountNew = incrementOrderProcessing
-////                          .selectedFoodInOrder[lengthOfSelectedItemsLength-1]
-////                          .quantity;
                                                                     itemCountNew = incrementCurrentFoodProcessing.quantity;
                                                                   }
 
-
-
-//                    logger.e('itemCountNew: $itemCountNew');
                                                                   return Container(
-//                        color: Colors.indigoAccent,
-//                          color: Colors.yellowAccent,
                                                                     margin: EdgeInsets.symmetric(
                                                                         horizontal: 0,
                                                                         vertical: 0),

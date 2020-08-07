@@ -23,7 +23,7 @@ class SelectedFood {
 
   final String  foodItemName;      // one of foodItems> collection.
   final String  foodItemImageURL;
-  final double  unitPrice;
+  double  unitPrice;
   final double  unitPriceWithoutCheeseIngredientSauces;
   final String  foodDocumentId;
   int           quantity;
