@@ -12443,7 +12443,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     orderedItems.forEach((oneFood) {
 
 
-      if(categories.contains(oneFood.category)==false) {
+      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
         ticket.text('${oneFood.category.toString()} Category',
             styles: PosStyles(
               height: PosTextSize.size1,
@@ -12873,7 +12873,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     orderedItems.forEach((oneFood) {
 
 
-      if(categories.contains(oneFood.category)==false) {
+      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
         ticket.text('${oneFood.category.toString()} Category',
             styles: PosStyles(
               height: PosTextSize.size1,
@@ -13300,7 +13300,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     orderedItems.forEach((oneFood) {
 
 
-      if(categories.contains(oneFood.category)==false) {
+      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
         ticket.text('${oneFood.category.toString()} Category',
             styles: PosStyles(
               height: PosTextSize.size1,
@@ -13735,7 +13735,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     orderedItems.forEach((oneFood) {
 
 
-      if(categories.contains(oneFood.category)==false) {
+      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
         ticket.text('${oneFood.category.toString()} Category',
             styles: PosStyles(
               height: PosTextSize.size1,
