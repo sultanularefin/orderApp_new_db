@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide Image;
 //import 'package:image/image.dart';
 import 'package:flutter/services.dart'; // InputFormatters.
+import 'package:flutter/widgets.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
@@ -11558,7 +11559,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
           Container(
-            height: 100,
+            height: 50,
+            width: 350,
+            alignment: Alignment.center,
+            child: Text(
+              '${oneFood.category.toString()} Category',
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+//                        color: Color(0xffF50303),
+                fontSize: 20, fontFamily: 'Itim-Regular',),
+            ),
+          ),
+          Container(
+            height: 50,
             width: 350,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -11592,7 +11608,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
           Container(
-            height: 100,
+            height: 50,
             width: 350,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
