@@ -91,7 +91,10 @@ class FoodGallery2 extends StatefulWidget {
 
 class _FoodGalleryState extends State<FoodGallery2> {
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery = new GlobalKey<ScaffoldState>();
+//  final GlobalKey<ScaffoldState> scaffoldKeyClientHome = GlobalKey<ScaffoldState>();
+  final SnackBar snackBar = const SnackBar(content: Text('Menu button pressed'));
+
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 //  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -340,11 +343,125 @@ class _FoodGalleryState extends State<FoodGallery2> {
       },
       child:
       Scaffold(
-        key: _scaffoldKey,
+        key: _scaffoldKeyFoodGallery,
 //          backgroundColor: Colors.purpleAccent,
 
 //      resizeToAvoidBottomPadding: false ,
         // appBar: AppBar(title: Text('Food Gallery')),
+
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: SizedBox(
+            height: kToolbarHeight+6,
+            width: 230,
+            child: Container(
+
+              margin: EdgeInsets.symmetric(
+                  horizontal: 0,
+                  vertical: 0),
+
+              width: displayWidth(context) / 5,
+              height: displayHeight(context) / 21,
+              child: Row(
+                children: <Widget>[
+
+                  Container(child: Image.asset('assets/Path2008.png')),
+                  Container(
+                    padding:EdgeInsets.symmetric(horizontal: 5,vertical: 1),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Jediline',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 31,color: Color(0xff727C8E)),
+                        ),
+                        Text(
+                          'ONLINE ORDERS',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 16.42,color: Color(0xff727C8E)),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                ],
+              ),
+
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.menu),
+              tooltip: 'Icons.menu',
+              onPressed: () {
+
+
+                /*
+              Order orderFG = new Order(
+                selectedFoodInOrder: [],
+                selectedFoodListLength:0,
+                orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
+                paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                ordersCustomer: null,
+                totalPrice: 0,
+                page:0,
+              );
+
+              List<SelectedFood> allSelectedFoodGallery = [];
+
+              CustomerInformation oneCustomerInfo = new CustomerInformation(
+                address: '',
+                flatOrHouseNumber: '',
+                phoneNumber: '',
+                etaTimeInMinutes: -1,
+              );
+              */
+
+//              orderFG.selectedFoodInOrder = allSelectedFoodGallery;
+//              orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
+//              orderFG.totalPrice= 10.0;
+//              orderFG.ordersCustomer = oneCustomerInfo;
+//              print('add_shopping_cart button pressed');
+
+                /*
+               Navigator.of(context).push(
+
+                PageRouteBuilder(
+                  opaque: false,
+                  transitionDuration: Duration(
+                      milliseconds: 900),
+                  pageBuilder: (_, __, ___) =>
+                      BlocProvider<FoodGalleryBloc>(
+                          bloc: FoodGalleryBloc(),
+                          child: FoodGallerySearch()
+
+                      )
+
+                      ),
+
+
+              );
+               */
+
+                //print('isCancelButtonPressed: $isCancelButtonPressed');
+
+
+//    return BlocProvider<ClientShoppingBloc>(
+//        bloc: ClientShoppingBloc(orderFG),
+//        child: ClientShoppingCart()
+//
+//    );
+                _scaffoldKeyFoodGallery.currentState.showSnackBar(snackBar);
+
+
+
+              },
+              color: Color(0xff727C8E),
+            ),
+          ],
+        ),
         body:
         SafeArea(
           child: SingleChildScrollView(
