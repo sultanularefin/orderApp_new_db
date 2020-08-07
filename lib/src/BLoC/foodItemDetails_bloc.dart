@@ -1190,6 +1190,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     tempSelectedFood.selectedCheeseItems  = _allSelectedCheeseItems;
     tempSelectedFood.selectedSauceItems   = _allSelectedSauceItems;
     tempSelectedFood.unitPrice            = thisFoodpriceModified.priceBasedOnCheeseSauceIngredientsSize;
+    tempSelectedFood.unitPriceWithoutCheeseIngredientSauces = thisFoodpriceModified.itemPriceBasedOnSize;
 
     _currentSelectedFoodDetails = tempSelectedFood;
 
