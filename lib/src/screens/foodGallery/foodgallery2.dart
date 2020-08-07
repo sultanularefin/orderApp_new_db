@@ -1203,6 +1203,12 @@ Widget work1(BuildContext context){
             );
 
 
+            final blocG = BlocProvider.of<FoodGalleryBloc>(context);
+            List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.allCategories;
+
+//            List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.getAllIngredientsPublicFGB2;
+
+
             orderFG.selectedFoodInOrder = allSelectedFoodGallery;
 
             orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
@@ -1217,6 +1223,7 @@ Widget work1(BuildContext context){
 
 
 
+
             final Order orderWithDocumentId = await Navigator.of(context).push(
 
               PageRouteBuilder(
@@ -1226,7 +1233,7 @@ Widget work1(BuildContext context){
                 pageBuilder: (_, __, ___) =>
                     BlocProvider<ShoppingCartBloc>(
                       bloc: ShoppingCartBloc(
-                          orderFG),
+                          orderFG,allCategoriesForShoppingCartPage),
 
 
                       child: ShoppingCart(),
@@ -2678,7 +2685,7 @@ Widget work1(BuildContext context){
     }
 
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-
+//    blocG.allCategories
 
 //    final blocG =
 //        BlocProvider2.of(context).getFoodGalleryBlockObject;

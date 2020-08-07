@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart'; // to be removed later.
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
@@ -113,10 +114,10 @@ class ShoppingCartBloc implements Bloc {
 
 
 
-//  List<String> _devices =[];
-//  List<String> get getDevices => _devices;
-//  final _devicesController = StreamController<List<String>>();
-//  Stream <List<String>> get getDevicesStream => _devicesController.stream;
+  List<NewCategoryItem> _allCategories =[];
+  List<NewCategoryItem> get getAllCategories => _allCategories;
+  final _categoriesController = StreamController<List<NewCategoryItem>>();
+  Stream <List<NewCategoryItem>> get getCategoryItemsStream => _categoriesController.stream;
 
   /*
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
@@ -218,7 +219,7 @@ class ShoppingCartBloc implements Bloc {
 
   ShoppingCartBloc(
       /*FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped */
-      Order x
+      Order x,List<NewCategoryItem> allCategories
       ) {
 
     /*
@@ -304,6 +305,12 @@ class ShoppingCartBloc implements Bloc {
     _curretnOrder = x;
     _orderController.sink.add(x);
 //    }
+
+
+  // put categoryitems here..
+
+    _allCategories=allCategories;
+    _categoriesController.sink.add(_allCategories);
 
   }
 // CONSTRUCTOR ENDS HERE.
@@ -489,6 +496,16 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
+
+  int checkRating(String oneCategoryString, String secondCategoryString, List<NewCategoryItem> allCats){
+
+    NewCategoryItem firstCategory = allCats.where((element) => element.categoryName == oneCategoryString).first;
+    NewCategoryItem secondCategory = allCats.where((element) => element.categoryName == secondCategoryString).first;
+
+//    numbers.sort((a, b) => a.length.compareTo(b.length));
+    return firstCategory.rating.compareTo(secondCategory.rating);
+
+  }
   Future<Order> paymentButtonPressed(Order payMentProcessing) async{
 
     String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
@@ -561,10 +578,6 @@ class ShoppingCartBloc implements Bloc {
       oneFood.quantity= oneFood.quantity-1; //initially 1 that was incremented in the previous forEach loop.
       print('oneFood.quantity SS: ${oneFood.quantity}');
 
-
-
-
-
     });
 
 
@@ -573,6 +586,27 @@ class ShoppingCartBloc implements Bloc {
 
 
     tempOrder.selectedFoodInOrder = selectedFoodCheckForListToSet.toList();
+
+
+    List<SelectedFood> tempForCategorising=  tempOrder.selectedFoodInOrder;
+
+    // todo sorting by categories ....
+
+    // group by category will be done here...
+
+    List<NewCategoryItem> tempCategoryForCategorisingOrderedFoods = _allCategories;
+
+    tempForCategorising.sort((a,b)=>checkRating(a.categoryName,b.categoryName,tempCategoryForCategorisingOrderedFoods));
+
+
+    List<String> numbers = ['two', 'three', 'four'];
+// Sort from shortest to longest.
+    numbers.sort((a, b) => a.length.compareTo(b.length));
+    print(numbers);  // [two, four, three]
+
+
+//    categoryName
+//    _allCategories
 
 
 
@@ -970,6 +1004,7 @@ class ShoppingCartBloc implements Bloc {
     _devicesBlueTooth = [];
 
     _thisRestaurant= null;
+    _allCategories=[];
 
 
 
@@ -981,10 +1016,12 @@ class ShoppingCartBloc implements Bloc {
     _devicesController.sink.add(_devicesBlueTooth);
 
     _restaurantController.sink.add(_thisRestaurant);
+    _categoriesController.sink.add(_allCategories);
 
 
   }
 
+  /*
   void clearSubscriptionPayment(){
 
 
@@ -1012,6 +1049,8 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
+
+  */
   
 
 
@@ -1331,6 +1370,7 @@ class ShoppingCartBloc implements Bloc {
     _paymentTypeController.close();
     _devicesController.close();
     _restaurantController.close();
+    _categoriesController.close();
 //    _customerInformationController.close();
 //    _multiSelectForFoodController.close();
 
