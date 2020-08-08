@@ -873,8 +873,8 @@ class ShoppingCartBloc implements Bloc {
     print('timestamp2: $timestamp2');
 
     final formatter3 =  DateFormat.jm();
-
     final formatter4 =  DateFormat.Hm();
+
     final String formattedOrderPlacementDatesTimeOnly = formatter2.format(startDate);
 
     final String formattedOrderPlacementDatesTimeOnly2 = formatter4.format(startDate);
@@ -882,20 +882,21 @@ class ShoppingCartBloc implements Bloc {
     print('formattedOrderPlacementDatesTimeOnly2: $formattedOrderPlacementDatesTimeOnly2');
     print('formattedOrderPlacementDatesTimeOnly: $formattedOrderPlacementDatesTimeOnly');
 
-
     print('orderProductionTime: $orderProductionTime');
 
+    //    ticket.text(timestamp,
+    //        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
 
-//    ticket.text(timestamp,
-//        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
+    //    new DateFormat.yMMMMd('en_US')
+    //    new DateFormat.jm()
+    //    new DateFormat.yMd().add_jm()
 
-//    new DateFormat.yMMMMd('en_US')
-//    new DateFormat.jm()
-//    new DateFormat.yMd().add_jm()
+    //    -> July 10, 1996
+    //    -> 5:08 PM
+    //    -> 7/10/1996 5:08 PM
 
-//    -> July 10, 1996
-//    -> 5:08 PM
-//    -> 7/10/1996 5:08 PM
+
+
     print('orderStatus: $orderStatus'); // "ready"
     print('tableNo: $tableNo');
     print('orderType: $orderType');
