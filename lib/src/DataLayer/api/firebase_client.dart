@@ -449,6 +449,7 @@ class FirebaseClient {
       'paidType': paidType,
       'price': currentOrderToFirebase.totalPrice,
       'tax': (14/100)*(currentOrderToFirebase.totalPrice),
+      'priceWithTax':(currentOrderToFirebase.totalPrice +(14/100)*(currentOrderToFirebase.totalPrice)),
       'start': FieldValue.serverTimestamp(),
       // time when order is placed in firestore by clicking the pay button
       'status': "ready",
