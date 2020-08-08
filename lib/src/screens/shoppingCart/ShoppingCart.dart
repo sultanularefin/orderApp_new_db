@@ -12102,7 +12102,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // TODO: PROBLEM CODE NEEDS CHECKING....
                       Text(
-                        '${(oneOrderForReceipt.priceWithTax).toStringAsFixed(2)}',
+                        '${(oneOrderForReceipt.priceWithTaxAndDelivery).toStringAsFixed(2)}',
 
                         textAlign: TextAlign.left,
                         style: TextStyle(
