@@ -449,10 +449,10 @@ class FirebaseClient {
       'paidType': paidType,
       'price': currentOrderToFirebase.totalPrice,
       'tax': (14/100)*(currentOrderToFirebase.totalPrice),
-      'priceWithTaxAndDelivery?':orderBy == 'Phone' ? (currentOrderToFirebase.totalPrice +(14/100)*(currentOrderToFirebase.totalPrice)) : orderBy == 'Delivery'
-          ? (currentOrderToFirebase.totalPrice +(14/100)*(currentOrderToFirebase.totalPrice) +2.50)
-          : orderBy == 'TakeAway' ? (currentOrderToFirebase.totalPrice +(14/100)*(currentOrderToFirebase.totalPrice))
-        : (currentOrderToFirebase.totalPrice +(14/100)*(currentOrderToFirebase.totalPrice)) ,
+      'priceWithDelivery?':orderBy == 'Phone' ? (currentOrderToFirebase.totalPrice) : orderBy == 'Delivery'
+          ? (currentOrderToFirebase.totalPrice + 2.50)
+          : orderBy == 'TakeAway' ? (currentOrderToFirebase.totalPrice )
+        : (currentOrderToFirebase.totalPrice) ,
 
       'start': FieldValue.serverTimestamp(),
       // time when order is placed in firestore by clicking the pay button

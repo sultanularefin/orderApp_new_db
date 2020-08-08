@@ -827,7 +827,7 @@ class ShoppingCartBloc implements Bloc {
     int                    orderProductionTime = snapshot['orderProductionTime'];
     double                 deliveryCost2 = snapshot['deliveryCost?'];
     double                 tax = snapshot['tax'];
-    double                 priceWithTaxAndDelivery2 = snapshot['priceWithTaxAndDelivery?'];
+    double                 priceWithDelivery2 = snapshot['priceWithDelivery?'];
 
 
     CustomerInformation currentCustomerFromFireStore = localCustomerInformationObject(customerAddress);
@@ -993,7 +993,7 @@ class ShoppingCartBloc implements Bloc {
       orderProductionTime:orderProductionTime,
       deliveryCost: deliveryCost2,
       tax:          tax,
-      priceWithTaxAndDelivery: priceWithTaxAndDelivery2,
+      priceWithDelivery: priceWithDelivery2,
       documentId:documentId,
     );
 

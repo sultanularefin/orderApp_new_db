@@ -11859,7 +11859,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   child:
 
                   // 2 ends here.
-                  Text('Order No: Cloud Function generated..',
+                  Text('Order No: from F.S. Cloud Function',
 
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -12165,7 +12165,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // TODO: PROBLEM CODE NEEDS CHECKING....
                       Text(
-                        '${(oneOrderForReceipt.priceWithTaxAndDelivery).toStringAsFixed(2)}',
+                        '${(oneOrderForReceipt.priceWithDelivery).toStringAsFixed(2)}',
 
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -12924,7 +12924,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
     ticket.hr(ch:'=',len:null,linesAfter:0);
 
-    ticket.text('Order No: Cloud Function generated..',
+    ticket.text('Order No: from F.S. Cloud Function',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
@@ -12939,7 +12939,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDate}' + '                '
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' + '                '
 
         +'${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
@@ -12950,7 +12950,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         )
     );
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
+    ticket.text('date: ${oneOrderData3.formattedOrderPlacementDate}',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
@@ -12959,9 +12959,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         )
     );
 
-   ticket.feed(1);
-
-
+//    ticket.feed(1);
     // 3 ... address: .... + flat
 
 
@@ -13069,7 +13067,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           width: 5,  styles: PosStyles(align: PosAlign.left) ),
         PosColumn(text: '',
           width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+        PosColumn(text: '${(oneFood.unitPriceWithoutCheeseIngredientSauces * oneFood.quantity).toStringAsFixed(2)}',
           width: 5,styles: PosStyles(
 
               align: PosAlign.right,
@@ -13191,7 +13189,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.tax.toStringAsFixed(2)}',
+      PosColumn(text: '14%',
           width: 5,styles:PosStyles(align: PosAlign.right)),
 
     ]);
@@ -13214,7 +13212,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
 
-      PosColumn(text: '${oneOrderData3.priceWithTaxAndDelivery.toStringAsFixed(2)}',
+      PosColumn(text: '${oneOrderData3.priceWithDelivery.toStringAsFixed(2)}',
         styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
         width: 5,),
 
@@ -13268,7 +13266,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    ticket.hr();
     // needed. as per design.
 
-    ticket.feed(1); // for holding or touching the recite by finger... space..
+    ticket.feed(1); // for holding or touching the recite by finger... space.
 
     ticket.cut();
     return ticket;

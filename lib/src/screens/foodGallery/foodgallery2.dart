@@ -399,7 +399,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                   // image and string JEDILINE BEGINS HERE.
                   SizedBox(
-                    height: kToolbarHeight, // 6 for spacing padding at top for .
+                    height: kToolbarHeight + 6, // 6 for spacing padding at top for .
                     width: 200,
                     child:  Row(
                       mainAxisAlignment: MainAxisAlignment.start,
