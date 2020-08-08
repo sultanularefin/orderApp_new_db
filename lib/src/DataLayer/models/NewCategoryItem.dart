@@ -3,18 +3,20 @@
 class NewCategoryItem {
 
   String categoryName;
-  String imageURL;
-  double rating;
-  double totalRating;
+  int squenceNo;
+//  String imageURL;
+//  double rating;
+//  double totalRating;
 //  String ingredients;
 
   NewCategoryItem(
       {
 
         this.categoryName,
-        this.imageURL,
-        this.rating,
-        this.totalRating,
+        this.squenceNo,
+//        this.imageURL,
+//        this.rating,
+//        this.totalRating,
       }
       );
 }

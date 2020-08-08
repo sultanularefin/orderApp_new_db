@@ -503,7 +503,7 @@ class ShoppingCartBloc implements Bloc {
     NewCategoryItem secondCategory = allCats.where((element) => element.categoryName == secondCategoryString).first;
 
 //    numbers.sort((a, b) => a.length.compareTo(b.length));
-    return firstCategory.rating.compareTo(secondCategory.rating);
+    return firstCategory.squenceNo.compareTo(secondCategory.squenceNo);
 
 //    return firstCategory.rating > secondCategory.rating;
 

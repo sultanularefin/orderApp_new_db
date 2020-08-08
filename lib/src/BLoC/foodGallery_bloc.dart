@@ -43,7 +43,7 @@ class FoodGalleryBloc implements Bloc {
   bool    _isDisposedFoodItems = false;
 
   bool _isDisposedCategories = false;
-  
+
 
   List<FoodItemWithDocID> _allFoodsList=[];
 
@@ -286,31 +286,41 @@ class FoodGalleryBloc implements Bloc {
 
         print('categoryItemName : $categoryItemName');
 
+
+        /*
         final String categoryImageURL  = doc['image']==''?
         'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
             :
         storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
             +'?alt=media';
 
+        */
+
+
+
 //      print('categoryImageURL in food Gallery Bloc: $categoryImageURL');
 
-        final num categoryRating = doc['rating'];
-        final num totalCategoryRating = doc['total_rating'];
+        final num sequenceNo0 = doc['squence_no'];
+//        final num totalCategoryRating = doc['total_rating'];
 
 
+        /*
 
         print('categoryItemName : $categoryItemName,categoryRating :'
             ' $categoryRating, totalCategoryRating , $totalCategoryRating, categoryImageURL: $categoryImageURL');
 
 
+        */
 
         NewCategoryItem oneCategoryItem = new NewCategoryItem(
 
 
           categoryName: categoryItemName,
-          imageURL: categoryImageURL,
-          rating: categoryRating.toDouble(),
-          totalRating: totalCategoryRating.toDouble(),
+          squenceNo: sequenceNo0.toInt(),
+
+//          imageURL: categoryImageURL,
+//          rating: categoryRating.toDouble(),
+//          totalRating: totalCategoryRating.toDouble(),
 
         );
 

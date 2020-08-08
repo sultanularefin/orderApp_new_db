@@ -120,12 +120,12 @@ class _MoreIngredientsPageState extends State<MoreIngredients> {
   static Future <List> retrieveIngredients2() async {
     List<NewIngredient> ingItems = new List<NewIngredient>();
     var snapshot = await Firestore.instance.collection("restaurants").document('kebab_bank')
-        .collection('ingredients')
+        .collection('inagedients')
         .getDocuments();
 
 //    firestore
 //        .collection("restaurants").document('kebab_bank')
-//        .collection('ingredients').
+//        .collection('inagedients').
 
     List docList = snapshot.documents;
 //    print('doc List at more Ingredient page (init State) :  ******************* <================ : $docList');

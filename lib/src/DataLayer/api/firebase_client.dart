@@ -86,7 +86,7 @@ class FirebaseClient {
 
 
     var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').collection('foodItems').orderBy('sl',descending: false)
+        .collection("restaurants").document('kebab_bank').collection('foodItems').orderBy('squence_no',/*descending: false*/)
         .getDocuments();
 
 //    orderBy('_timeStampUTC', descending: true)
@@ -132,7 +132,7 @@ class FirebaseClient {
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection('ingredients')
+        .collection('inagedients')
         .getDocuments();
 
 //    var snapshot= Firestore.instance
@@ -492,7 +492,7 @@ class FirebaseClient {
 
     var snapshot= Firestore.instance
         .collection("restaurants").document('kebab_bank').
-    collection('categories').orderBy("rating", descending: true)
+    collection('categories').orderBy("squence_no", /*descending: false*/)
         .getDocuments();
 
     return snapshot;
