@@ -11260,6 +11260,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
+
+
+
+
+// DUMMY RECITE RELATED PRINT CODES ARE HERE ==> LINE # 11264 ==>
+
 //  showExtraIngredients(oneFood.selectedIngredients)
 //  showExtraCheeseItems(oneFood.selectedCheeses)
 //  showExtraSauces(oneFood.defaultSauces)
@@ -12753,7 +12759,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  // # number 2: demoReceipt Order Type Delivery begins here...
+// # number 2: demoReceipt Order Type Delivery begins here...
 
 //  restaurantNameImageBytes,totalCostDeliveryBytes2
   Future<Ticket> demoReceiptOrderTypeDelivery(
@@ -12856,12 +12862,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
 
-    ticket.image(oneImageRestaurant);
 
+    ticket.image(oneImageRestaurant);
     ticket.feed(1);
+    ticket.hr(ch:'=',len:null,linesAfter:0);
+
+    ticket.text('Order No: Cloud Function generated..',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold: true,
+          align: PosAlign.center,
+        )
+    );
+
     ticket.hr(ch:'=',len:null,linesAfter:1);
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
+//    Order No: Cloud Function generated..
+
+
+
+    ticket.text('${oneOrderData3.formattedOrderPlacementDate}' + '                '
+
         +'${oneOrderData3.orderProductionTime} min',
         styles: PosStyles(
           height: PosTextSize.size1,
@@ -12871,7 +12893,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
         )
     );
 
-    //    ticket.feed(2);
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+   ticket.feed(1);
 
 
     // 3 ... address: .... + flat
@@ -13090,10 +13121,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
       PosColumn(text: '',
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${00.toStringAsFixed(2)}',
+      PosColumn(text: '${oneOrderData3.deliveryCost.toStringAsFixed(2)}',
         width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
 
     ]);
+
+
+    ticket.row([
+
+
+      PosColumn(text: 'ALV',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.tax.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right)),
+
+    ]);
+
+
 
 //    ticket.hr();
 
@@ -13111,7 +13157,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
 
 
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+      PosColumn(text: '${oneOrderData3.priceWithTaxAndDelivery.toStringAsFixed(2)}',
         styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
         width: 5,),
 
