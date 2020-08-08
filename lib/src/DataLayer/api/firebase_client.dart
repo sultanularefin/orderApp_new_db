@@ -80,13 +80,13 @@ class FirebaseClient {
 
     /*
     var snapshot= Firestore.instance
-        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems').limit(65)
+        .collection("restaurants").document('kebab_bank').collection('foodItems').limit(65)
         .getDocuments();
     */
 
 
     var snapshot= Firestore.instance
-        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems').orderBy('sl',descending: false)
+        .collection("restaurants").document('kebab_bank').collection('foodItems').orderBy('sl',descending: false)
         .getDocuments();
 
 //    orderBy('_timeStampUTC', descending: true)
@@ -99,12 +99,12 @@ class FirebaseClient {
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
     var snapshot = await Firestore.instance.collection("restaurants")
-        .document('USWc8IgrHKdjeDe9Ft4j')
+        .document('kebab_bank')
         .collection('sauces').orderBy("sl", descending: false)
         .getDocuments();
 
 //    var snapshot= Firestore.instance
-//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+//        .collection("restaurants").document('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -115,12 +115,12 @@ class FirebaseClient {
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
     var snapshot = await Firestore.instance.collection("restaurants")
-        .document('USWc8IgrHKdjeDe9Ft4j')
+        .document('kebab_bank')
         .collection('juusto').orderBy("sl", descending: false)
         .getDocuments();
 
 //    var snapshot= Firestore.instance
-//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+//        .collection("restaurants").document('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -131,12 +131,12 @@ class FirebaseClient {
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
     var snapshot = await Firestore.instance.collection("restaurants")
-        .document('USWc8IgrHKdjeDe9Ft4j')
+        .document('kebab_bank')
         .collection('ingredients')
         .getDocuments();
 
 //    var snapshot= Firestore.instance
-//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+//        .collection("restaurants").document('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -148,7 +148,7 @@ class FirebaseClient {
 
     var snapshot = Firestore.instance
         .collection('restaurants')
-        .document('USWc8IgrHKdjeDe9Ft4j')
+        .document('kebab_bank')
         .get();
     /*
         .then((DocumentSnapshot ds) {
@@ -156,10 +156,10 @@ class FirebaseClient {
     });*/
     /*
     var snapshot = await Firestore.instance.collection("restaurants")
-        .document('USWc8IgrHKdjeDe9Ft4j');
+        .document('kebab_bank');
 
 //    var snapshot= Firestore.instance
-//        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').collection('foodItems')
+//        .collection("restaurants").document('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -175,7 +175,7 @@ class FirebaseClient {
 
     var snapshot = Firestore.instance
         .collection('restaurants')
-        .document('USWc8IgrHKdjeDe9Ft4j').collection('orderList').document(orderDocumentId)
+        .document('kebab_bank').collection('orderList').document(orderDocumentId)
         .get();
 
     print('and the snapshot is: $snapshot');
@@ -342,7 +342,7 @@ class FirebaseClient {
 
     final DocumentReference postRef = Firestore.instance.collection(
         "restaurants").
-    document('USWc8IgrHKdjeDe9Ft4j').
+    document('kebab_bank').
     collection('orderList').document(orderDocumentId);
 
 
@@ -372,7 +372,7 @@ class FirebaseClient {
 
      var snapshot = Firestore.instance.collection(
          "restaurants").
-     document('USWc8IgrHKdjeDe9Ft4j').
+     document('kebab_bank').
      collection('orderList').document(orderDocumentId)
          .get();
 //     print('async result [document] for runTransaction in order : $document');
@@ -426,7 +426,7 @@ class FirebaseClient {
 
     DocumentReference document = await Firestore.instance.collection(
         "restaurants").
-    document('USWc8IgrHKdjeDe9Ft4j').
+    document('kebab_bank').
 //    collection('orderList').add(switch (<String, dynamic>{
     collection('orderList').add(<String, dynamic>{
 
@@ -491,7 +491,7 @@ class FirebaseClient {
     //print ('at here fetchCategories ==================================== *************** ');
 
     var snapshot= Firestore.instance
-        .collection("restaurants").document('USWc8IgrHKdjeDe9Ft4j').
+        .collection("restaurants").document('kebab_bank').
     collection('categories').orderBy("rating", descending: true)
         .getDocuments();
 
