@@ -9403,13 +9403,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     return Navigator.pop(
                         context, cancelPaySelectUnobscuredDeliveryPhone);
-
                   }
-
                 },
-
-
-
                 // ---
               ),
             ),

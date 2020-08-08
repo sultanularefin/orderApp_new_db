@@ -863,10 +863,26 @@ class ShoppingCartBloc implements Bloc {
     final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_jm();
     final String timestamp = formatter1.format(startDate);
 
+    final formatter2 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_Hm();
+    final String timestamp2 = formatter1.format(startDate);
+
     print('timestamp: $timestamp');
-    final formatter2 =  DateFormat.jm();
+    print('timestamp2: $timestamp2');
+
+    final formatter3 =  DateFormat.jm();
+
+    final formatter4 =  DateFormat.Hm();
     final String formattedOrderPlacementDatesTimeOnly = formatter2.format(startDate);
+
+    final String formattedOrderPlacementDatesTimeOnly2 = formatter4.format(startDate);
+
+    print('formattedOrderPlacementDatesTimeOnly2: $formattedOrderPlacementDatesTimeOnly2');
+    print('formattedOrderPlacementDatesTimeOnly: $formattedOrderPlacementDatesTimeOnly');
+
+
     print('orderProductionTime: $orderProductionTime');
+
+
 //    ticket.text(timestamp,
 //        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
 
