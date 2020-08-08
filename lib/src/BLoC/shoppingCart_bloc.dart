@@ -824,7 +824,9 @@ class ShoppingCartBloc implements Bloc {
     String                    tableNo = snapshot['tableNo'];
     String                    orderType = snapshot['orderType'];
     String                    documentId = orderDocumentId;
-    int                    orderProductionTime= snapshot['orderProductionTime'];
+    int                    orderProductionTime = snapshot['orderProductionTime'];
+    double                 deliveryCost2 = snapshot['deliveryCost?'];
+    double                 tax = snapshot['tax'];
 
 
     CustomerInformation currentCustomerFromFireStore = localCustomerInformationObject(customerAddress);
@@ -860,7 +862,7 @@ class ShoppingCartBloc implements Bloc {
     print('startDate: $startDate');
 
 //    final now = DateTime.now();
-    final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_jm();
+    final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US');
     final String timestamp = formatter1.format(startDate);
 
     final formatter2 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_Hm();
@@ -982,11 +984,13 @@ class ShoppingCartBloc implements Bloc {
       endDate:endDate,
       startDate:startDate,
       formattedOrderPlacementDate:timestamp,
-      formattedOrderPlacementDatesTimeOnly:formattedOrderPlacementDatesTimeOnly,
+      formattedOrderPlacementDatesTimeOnly:formattedOrderPlacementDatesTimeOnly2,
       orderStatus:orderStatus,
       tableNo:tableNo,
       orderType:orderType,
       orderProductionTime:orderProductionTime,
+      deliveryCost: deliveryCost2,
+      tax:          tax,
       documentId:documentId,
     );
 

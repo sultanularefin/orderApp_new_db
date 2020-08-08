@@ -448,6 +448,7 @@ class FirebaseClient {
       'paidStatus': paidType != 'Later' ? 'Paid' : 'Unpaid',
       'paidType': paidType,
       'price': currentOrderToFirebase.totalPrice,
+      'tax': (14/100)*(currentOrderToFirebase.totalPrice),
       'start': FieldValue.serverTimestamp(),
       // time when order is placed in firestore by clicking the pay button
       'status': "ready",
@@ -457,6 +458,9 @@ class FirebaseClient {
           : orderBy == 'TakeAway' ? 'TakeAway' : 'DinningRoom',
       'orderProductionTime': currentOrderToFirebase.orderingCustomer.etaTimeInMinutes,
       'recitePrinted':'false',
+      'deliveryCost?':orderBy == 'Phone' ? 0.00 : orderBy == 'Delivery'
+          ? 2.50
+          : orderBy == 'TakeAway' ? 0.00 : 0.00,
 
     }).whenComplete(() => print("called when future completes"))
         .then((document) {

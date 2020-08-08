@@ -165,6 +165,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
   bool loadingState = false;
   Timer _timer;
 
+  // Set<String> categories ={}; // for Recite dummy Print
+
 
   /*
   * PRINTING RELATED STATE VARIABLES ARE HERE.
@@ -11309,6 +11311,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
+
+
   Widget displayOneExtraIngredientInRecite(NewIngredient oneIngredientForRecite, int index,int quantity){
 
     print('oneIngredientForRecite.ingredientName: ${oneIngredientForRecite.ingredientName}');
@@ -11544,7 +11548,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     */
 
-    Set<String> categories;
+
+
+
+
+
+
+
+
+//    List<String> categories = [];
+//    orderedItems.forEach((oneFood) {
+//
+//
+//      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
+//        ticket.text('${oneFood.category.toString()}',
+//            styles: PosStyles(
+//              height: PosTextSize.size1,
+//              width: PosTextSize.size1,
+//              bold: true,
+//              align: PosAlign.center,
+//            )
+//        );
+//      }
+//
+//      categories.add(oneFood.category);
 
 //    List<String> categories = [];
 
@@ -11563,7 +11590,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             width: 350,
             alignment: Alignment.center,
             child: Text(
-              '${oneFood.category.toString()} Category',
+              '${oneFood.category.toString()}',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -11764,6 +11791,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   color:Colors.black,
                 ),
 
+
+                Container(
+                  child:
+
+                  // 2 ends here.
+                  Text('Order No: Cloud Function generated..',
+
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                      fontSize: 20, fontFamily: 'Itim-Regular',),
+                  ),
+
+                ),
+
+                Divider(
+                  height:10,
+                  thickness:5,
+                  color:Colors.black,
+                ),
+
+
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -11795,6 +11846,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                 ),
 
+                Container(
+                  child:
+
+                      // 2 ends here.
+                      Text('${oneOrderForReceipt.formattedOrderPlacementDate}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+
+                ),
+
+
+                SizedBox(
+                  height: 10,
+                ),
 
 
 
@@ -11967,7 +12038,38 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           fontSize: 26, fontFamily: 'Itim-Regular',),
                       ),
                       Text(
-                        '${1.6.toStringAsFixed(2)}',
+                        '${oneOrderForReceipt.deliveryCost.toStringAsFixed(2)}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                      ),
+
+                    ],
+                  ),
+                ),
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+
+                      Text(
+                        'ALV: ',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 26, fontFamily: 'Itim-Regular',),
+                      ),
+                      Text(
+                        '${oneOrderForReceipt.tax.toStringAsFixed(2)}',
 
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -12388,7 +12490,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
-        ticket.text('${oneFood.category.toString()} Category',
+        ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
@@ -12815,7 +12917,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
-        ticket.text('${oneFood.category.toString()} Category',
+        ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
@@ -13243,7 +13345,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
-        ticket.text('${oneFood.category.toString()} Category',
+        ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
@@ -13679,7 +13781,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
       if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
-        ticket.text('${oneFood.category.toString()} Category',
+        ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
