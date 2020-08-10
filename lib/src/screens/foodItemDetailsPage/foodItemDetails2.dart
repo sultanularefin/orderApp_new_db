@@ -1876,6 +1876,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     Color c1 = Color(int.parse(color1));
 
     String itemName = x.itemName;
+    String itemImage2 = x.itemImage;
 
 
     return Container(
@@ -1905,7 +1906,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           child:Container(
 
 
-            child: Text(
+            child: Image.asset(itemImage2)
+
+            /*Text(
               itemName.toUpperCase(), style:
             TextStyle(
                 color:Colors.white,
@@ -1913,6 +1916,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 fontWeight: FontWeight.bold,
                 fontSize: 18),
             ),
+
+            */
           ),
           onPressed: () {
 
@@ -1956,7 +1961,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           child: Container(
 
-            child: Text(
+            child: Image.asset(itemImage2)
+
+                /*
+            Text(
 
               itemName.toUpperCase(), style:
             TextStyle(
@@ -1965,6 +1973,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 fontWeight: FontWeight.bold,
                 fontSize: 20),
             ),
+
+            */
           ),
           onPressed: () {
 

@@ -107,6 +107,12 @@ flutter:
      - assets/icons8-hand-64.png
      - assets/phone.png
      - assets/history.png
+     - assets/multiselectImages/multiSelectAssetM.png
+     - assets/multiselectImages/multiSelectAssetVSM.png
+     - assets/multiselectImages/multiSelectAssetVS.png
+     - assets/multiselectImages/multiSelectAssetORG.png
+
+
 
      #     - assets/icons8atv100.png
      #     - assets/icons8bigparcel100.png

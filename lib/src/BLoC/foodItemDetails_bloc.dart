@@ -573,14 +573,21 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       index: 4,
       isSelected: false,
       itemName: 'ORG',
+      itemImage:'assets/multiselectImages/multiSelectAssetORG.png',
       itemTextColor: '0xff739DFA',
     );
+
+//    assets/multiselectImages/multiSelectAssetM.png
+//    assets/multiselectImages/multiSelectAssetVSM.png
+//    assets/multiselectImages/multiSelectAssetVS.png
+//    assets/multiselectImages/multiSelectAssetORG.png
 
     FoodPropertyMultiSelect _vs = new FoodPropertyMultiSelect(
       borderColor: '0xff95CB04',
       index: 3,
       isSelected: false,
       itemName: 'VS',
+      itemImage:'assets/multiselectImages/multiSelectAssetVS.png',
       itemTextColor: '0xff95CB04',
     );
 
@@ -591,6 +598,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       index: 2,
       isSelected: false,
       itemName: 'VSM',
+      itemImage:'assets/multiselectImages/multiSelectAssetVSM.png',
       itemTextColor: '0xff34720D',
     );
 
@@ -600,6 +608,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       index: 1,
       isSelected: false,
       itemName: 'M',
+      itemImage:'assets/multiselectImages/multiSelectAssetM.png',
       itemTextColor: '0xffB47C00',
     );
 
