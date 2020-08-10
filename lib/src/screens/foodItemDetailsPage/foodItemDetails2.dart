@@ -530,6 +530,110 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                           ),
 
+                        // multiselect portion... begins here.
+                                          Container(
+
+                                            color: Colors.white,
+                                            height:displayHeight(context)/18,
+
+                                            width: displayWidth(context)/2.4 ,
+                                            child:
+                                            // YELLOW NAME AND PRICE BEGINS HERE.
+                                            Container(
+                                              alignment:Alignment.centerRight,
+                                              width: displayWidth(context)/2.4 /*+  displayWidth(context)/8 */,
+
+
+                                              decoration: BoxDecoration(
+                                                color:Color(0xffFFE18E),
+                                                borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
+//
+                                              ),
+
+
+                                              height:displayHeight(context)/18,
+//                                          height: displayHeight(context)/40,
+
+                                              child:
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                                                children: <Widget>[
+                                                  Container(
+                                                    width: displayWidth(context)/3.9,
+                                                    padding: EdgeInsets
+                                                        .fromLTRB(
+                                                        10, 0, 0,
+                                                        0),
+                                                    child:
+
+                                                    Text(
+                                                        '${oneFood
+                                                            .itemName}',
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 24,
+                                                          fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                                          color: Colors
+                                                              .black,
+                                                          fontFamily: 'Itim-Regular',
+
+                                                        )
+                                                    ),
+                                                  ),
+
+                                                  Container(
+                                                    padding: EdgeInsets
+                                                        .fromLTRB(
+                                                        0, 4, displayWidth(context)/40,
+                                                        0),
+                                                    child:
+
+                                                    Text(
+                                                        '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
+                                                            '\u20AC',
+                                                        style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight: FontWeight
+                                                              .normal,
+//                                                      color: Colors.white
+                                                          color: Colors
+                                                              .black,
+                                                          fontFamily: 'Itim-Regular',
+
+                                                        )
+                                                    ),
+                                                  ),
+
+                                                ],
+                                              ),
+
+
+
+                                            ),
+
+                                          ),
+                                          // multiselect portion...ends here.
+
+                                          /*
+                                          *  Container(
+                                                  padding: EdgeInsets.fromLTRB(0, 5, displayWidth(context)/40, 5),
+//                                                      padding::::
+                                                  color:Colors.white,
+                                                  width: displayWidth(context) /2.1,
+//                                                        height: 45,
+                                                  height: displayHeight(context)/27,
+//                                                  width: displayWidth(context) /1.80,
+                                                  child: _buildMultiSelectOptions(),
+//                                                      Card(child: _buildMultiSelectOptions()),
+
+                                                  // Text('_buildMultiSelectOptions()')
+
+                                                ),
+                                          * */
+
 
 
 
