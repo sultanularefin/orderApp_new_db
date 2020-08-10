@@ -175,9 +175,6 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-
-
-
 //      print('foodItemName $foodItemName');
 
         final String foodItemDocumentID = doc.documentID;
@@ -212,6 +209,8 @@ class FoodGalleryBloc implements Bloc {
 
 
         final bool foodIsAvailable =  doc['available'];
+
+        print('foodIsAvailable: $foodIsAvailable');
 
 
         final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];

@@ -161,7 +161,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
   String _searchString = '';
-  String _currentCategory = "pizza";
+  String _currentCategory = "pizzat";
   String _firstTimeCategoryString = "";
 
 //  this can be defined in Shopping cart page like old way

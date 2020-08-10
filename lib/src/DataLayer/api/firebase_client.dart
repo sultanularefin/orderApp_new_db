@@ -86,7 +86,7 @@ class FirebaseClient {
 
 
     var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').collection('foodItems').orderBy('squence_no',/*descending: false*/)
+        .collection("restaurants").document('kebab_bank').collection('fooditems').orderBy('sequence_no',/*descending: false*/)
         .getDocuments();
 
 //    orderBy('_timeStampUTC', descending: true)
