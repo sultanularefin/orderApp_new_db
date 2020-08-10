@@ -293,11 +293,13 @@ class FoodGalleryBloc implements Bloc {
 
       docList.forEach((doc) {
 
-        final String categoryItemName = doc.documentID;
+//
 
-        final String categoryItemName2 = doc['name'];
+        final String categoryItemName = doc['name'];
 
         print('categoryItemName : $categoryItemName');
+
+        final String documentID = doc.documentID;
 
 
         /*
@@ -330,6 +332,7 @@ class FoodGalleryBloc implements Bloc {
 
           categoryName: categoryItemName,
           squenceNo: sequenceNo0.toInt(),
+            documentID:documentID,
 
 //          imageURL: categoryImageURL,
 //          rating: categoryRating.toDouble(),
