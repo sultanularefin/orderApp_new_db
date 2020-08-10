@@ -293,7 +293,9 @@ class FoodGalleryBloc implements Bloc {
 
       docList.forEach((doc) {
 
-        final String categoryItemName = doc['name'];
+        final String categoryItemName = doc.documentID;
+
+        final String categoryItemName2 = doc['name'];
 
         print('categoryItemName : $categoryItemName');
 

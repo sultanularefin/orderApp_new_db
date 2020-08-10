@@ -959,6 +959,11 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 //    final DocumentSnapshot document = snapshot.data.documents[index];
 //    final String categoryName = document['name'];
+
+    logger.i('category Name in _buildCategoryRow: $categoryName');
+
+
+
     if (_currentCategory.toLowerCase() == categoryName.toLowerCase()) {
       return
 
