@@ -532,26 +532,41 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                         // multiselect portion... begins here.
                                           Container(
+                                            alignment: Alignment.centerRight,
 
-                                            color: Colors.white,
+                                            color: Colors.lightBlue,
                                             height:displayHeight(context)/18,
 
-                                            width: displayWidth(context)/2.4 ,
+                                            width: displayWidth(context) /1.07 ,
                                             child:
                                             // YELLOW NAME AND PRICE BEGINS HERE.
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+
                                               Container(
-                                                padding: EdgeInsets.fromLTRB(0, 5, displayWidth(context)/40, 5),
-//                                                      padding::::
-                                                color:Colors.white,
+                                                color:Colors.green,
                                                 width: displayWidth(context) /2.1,
-//                                                        height: 45,
-                                                height: displayHeight(context)/27,
+                                                height: displayHeight(context)/20,
+
+                                              )
+                                                  ,
+                                                  Container(
+
+                                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+//                                                      padding::::
+                                                    color:Colors.white,
+                                                    width: displayWidth(context) /2.2,
+                                                    height: displayHeight(context)/20,
 //                                                  width: displayWidth(context) /1.80,
-                                                child: _buildMultiSelectOptions(),
+                                                    child: _buildMultiSelectOptions(),
 //                                                      Card(child: _buildMultiSelectOptions()),
 
-                                                // Text('_buildMultiSelectOptions()')
+                                                    // Text('_buildMultiSelectOptions()')
 
+                                                  ),
+                                                ],
                                               ),
 
 
@@ -1890,7 +1905,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         width:displayWidth(context)/11,
         height:displayHeight(context)/48,
 
-        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
         child:
         RaisedButton(
           color: c1,
@@ -1902,7 +1917,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               color:c1,
               style: BorderStyle.solid,
             ),
-            borderRadius: BorderRadius.circular(35.0),
+            borderRadius: BorderRadius.circular(10.0),
           ),
 
           child:Container(
@@ -1941,7 +1956,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         width:displayWidth(context)/11,
         height:displayHeight(context)/48,
 
-        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: OutlineButton(
 
 //          clipBehavior: Clip.hardEdge,
@@ -1952,13 +1967,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           shape: RoundedRectangleBorder(
 
-            borderRadius: BorderRadius.circular(35.0),
+            borderRadius: BorderRadius.circular(10.0),
           ),
 
           borderSide: BorderSide(
-            color: c1,
+//            color: Colors(0x707070),
+            color:Color(0xff707070),
             style: BorderStyle.solid,
-            width: 3.6,
+            width: 1.6,
           ),
 
           child: Container(
