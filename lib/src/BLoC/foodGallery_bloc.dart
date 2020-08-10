@@ -209,24 +209,31 @@ class FoodGalleryBloc implements Bloc {
 
 
         final bool foodIsAvailable =  doc['available'];
+        final int sequenceNo =  doc['sequence_no'];
 
         print('foodIsAvailable: $foodIsAvailable');
 
 
         final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
 
-        final List<dynamic> foodItemIngredientsList =  doc['ingredient'];
+        final List<dynamic> foodItemIngredientsList =  doc['ingredients'];
 //          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
 
 
 //          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
 
         final String foodCategoryName = doc['category'];
+
+
 //      print('category: $foodCategoryName');
 
+        final String defaultJuusto = doc['default_juusto'];
+
+        final String defaultKastike = doc['default_kastike'];
 
 
-        final double foodItemDiscount = doc['discount'];
+
+//        final double foodItemDiscount = doc['discount'];
 
 //      print('foodItemDiscount: for $foodItemDocumentID is: $foodItemDiscount');
 
@@ -239,7 +246,10 @@ class FoodGalleryBloc implements Bloc {
           ingredients: foodItemIngredientsList,
           isAvailable: foodIsAvailable,
           documentId: foodItemDocumentID,
-          discount: foodItemDiscount,
+//          discount: foodItemDiscount,
+          defaultJuusto:defaultJuusto,
+          defaultKastike:defaultKastike,
+          sequenceNo: sequenceNo,
         );
 
         tempAllFoodsList.add(oneFoodItemWithDocID);

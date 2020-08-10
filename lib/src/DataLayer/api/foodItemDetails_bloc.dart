@@ -433,7 +433,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       foodItemSize: 'normal', // to be set from the UI.
       selectedIngredients:_defaultIngItems,
       categoryName:oneFoodItem.categoryName,
-      discount:oneFoodItem.discount,
+//      discount:oneFoodItem.discount,
       selectedCheeseItems : _allSelectedCheeseItems,
       selectedSauceItems:   _allSelectedSauceItems,
     );

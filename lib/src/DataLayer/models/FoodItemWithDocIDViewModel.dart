@@ -25,7 +25,7 @@ class FoodItemWithDocIDViewModel {
   String documentId;
   String itemSize;        // initially Normal;
   double itemPriceBasedOnSize;       // double price of Normal initially.
-  double discount;
+//  double discount;
   double priceBasedOnCheeseSauceIngredientsSize;
 
   FoodItemWithDocIDViewModel(
@@ -43,7 +43,7 @@ class FoodItemWithDocIDViewModel {
         this.isHot,
         this.uploadedBy,
         this.documentId,
-        this.discount,
+//        this.discount,
         this.itemSize,
         this.itemPriceBasedOnSize,
         this.priceBasedOnCheeseSauceIngredientsSize,
@@ -65,7 +65,7 @@ class FoodItemWithDocIDViewModel {
         isHot = data.isHot,
         uploadedBy = data.uploadedBy,
         documentId = data.documentId,
-        discount = data.discount,
+//        discount = data.discount,
         itemSize = size,
         itemPriceBasedOnSize = price,
         priceBasedOnCheeseSauceIngredientsSize = price;

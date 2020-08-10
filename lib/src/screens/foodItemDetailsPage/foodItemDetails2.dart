@@ -45,7 +45,7 @@ import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 // Blocks
 
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+import 'file:///C:/Users/Taxi/Programs/kebabBank/lib/src/DataLayer/api/foodItemDetails_bloc.dart';
 
 final Firestore firestore = Firestore();
 
@@ -703,8 +703,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                                 foodItemSize: _currentSize,
                                                                                 categoryName:blocD
                                                                                     .currentFoodItem.categoryName,
-                                                                                discount:blocD
-                                                                                    .currentFoodItem.discount,
+//                                                                                discount:blocD
+//                                                                                    .currentFoodItem.discount,
                                                                                 // index or int value not good enought since size may vary best on Food Types .
                                                                               );
 
@@ -739,8 +739,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                                                 foodItemSize: _currentSize,
                                                                                 categoryName:blocD
                                                                                     .currentFoodItem.categoryName,
-                                                                                discount:blocD
-                                                                                    .currentFoodItem.discount,
+//                                                                                discount:blocD
+//                                                                                    .currentFoodItem.discount,
                                                                                 // index or int value not good enought since size may vary best on Food Types .
                                                                               );
 

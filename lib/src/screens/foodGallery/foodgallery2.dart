@@ -63,7 +63,7 @@ import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/foodItems_query_bloc.dart';
-import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+import 'file:///C:/Users/Taxi/Programs/kebabBank/lib/src/DataLayer/api/foodItemDetails_bloc.dart';
 
 //import './../../shared/category_Constants.dart' as Constants;
 
@@ -1800,8 +1800,10 @@ Widget work1(BuildContext context){
             case ConnectionState.waiting:
             case ConnectionState.none:
               return Container(
-                margin: EdgeInsets.fromLTRB(
+
+                  margin: EdgeInsets.fromLTRB(
                     0, displayHeight(context) / 2, 0, 0),
+
                 child: Center(
                   child: Column(
                     children: <Widget>[
@@ -2115,8 +2117,8 @@ Widget work1(BuildContext context){
               .isAvailable;
           final String foodCategoryName = filteredItemsBySearchString[index]
               .categoryName;
-          final double discount = filteredItemsBySearchString[index]
-              .discount;
+//          final double discount = filteredItemsBySearchString[index]
+//              .discount;
 
 
           final dynamic euroPrice = foodSizePrice['normal'];
@@ -2147,7 +2149,7 @@ Widget work1(BuildContext context){
 //              itemId:foodItemId,
 //              isHot: foodIsHot,
               isAvailable: foodIsAvailable,
-              discount: discount
+//              discount: discount
 
           );
 
@@ -2409,8 +2411,8 @@ Widget work1(BuildContext context){
               .isAvailable;
           final String foodCategoryName = filteredItemsByCategory[index]
               .categoryName;
-          final double discount = filteredItemsByCategory[index]
-              .discount;
+//          final double discount = filteredItemsByCategory[index]
+//              .discount;
 
 //            final Map<String,dynamic> foodSizePrice = document['size'];
 
@@ -2449,7 +2451,7 @@ Widget work1(BuildContext context){
 //              itemId:foodItemId,
 //              isHot: foodIsHot,
               isAvailable: foodIsAvailable,
-              discount: discount
+//              discount: discount
 
           );
 
@@ -2470,6 +2472,7 @@ Widget work1(BuildContext context){
               // `opacity` is alpha channel of this color as a double, with 0.0 being
               //  ///   transparent and 1.0 being fully opaque.
                 color: Color(0xffFFFFFF),
+//            color:Colors.lightGreenAccent,
                 padding: EdgeInsets.symmetric(
                     horizontal: 4.0, vertical: 16.0),
                 child: InkWell(

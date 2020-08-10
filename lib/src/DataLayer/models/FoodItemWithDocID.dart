@@ -24,7 +24,10 @@ class FoodItemWithDocID {
   bool isHot;
   String uploadedBy;
   String documentId;
-  double discount;
+//  double discount;
+  String defaultJuusto;
+  String defaultKastike;
+  int sequenceNo;
 
   FoodItemWithDocID(
       {
@@ -42,7 +45,11 @@ class FoodItemWithDocID {
         this.isHot,
         this.uploadedBy,
         this.documentId,
-        this.discount,
+//        this.discount,
+        this.defaultJuusto,
+        this.defaultKastike,
+        this.sequenceNo,
+
       }
       );
 
@@ -60,8 +67,8 @@ class FoodItemWithDocID {
         isAvailable = data.isAvailable,
         isHot = data.isHot,
         uploadedBy = data.uploadedBy,
-        documentId = data.documentId,
-        discount = data.discount;
+        documentId = data.documentId;
+//        discount = data.discount;
 //        itemSize = size,
 //        itemPrice = price;
 }
