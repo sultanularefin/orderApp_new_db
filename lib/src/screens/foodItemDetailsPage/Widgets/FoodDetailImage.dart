@@ -30,13 +30,17 @@ class FoodDetailImage extends StatelessWidget {
               tag: foodItemName,
 
               child:
-              new CircleAvatar(
-
-                backgroundImage: new NetworkImage(imageURLBig) ,radius: 250,
-//                  minRadius:300,
-//                maxRadius: 320,
-
-              ),
+              Container(
+                  width: 190.0,
+                  height: 190.0,
+                  decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: new DecorationImage(
+                          fit: BoxFit.fill,
+                          image: new NetworkImage(
+                              imageURLBig)
+                      )
+                  )),
 
             )
 
