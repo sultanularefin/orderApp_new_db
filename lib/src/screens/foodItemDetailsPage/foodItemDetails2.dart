@@ -45,7 +45,7 @@ import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 // Blocks
 
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-import 'file:///C:/Users/Taxi/Programs/kebabBank/lib/src/DataLayer/api/foodItemDetails_bloc.dart';
+import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 
 final Firestore firestore = Firestore();
 
