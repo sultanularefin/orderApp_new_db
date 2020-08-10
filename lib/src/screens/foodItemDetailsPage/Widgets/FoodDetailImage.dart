@@ -19,47 +19,31 @@ class FoodDetailImage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return
+
       Transform.translate(
-        offset:Offset(-displayWidth(context)/10,0),
-
-//      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
-        // -displayWidth(context)/9
+        offset:Offset(-displayWidth(context)/16,0),//(-20,0)
         child:
+        Container(
+//            alignment: Alignment.centerLeft,
 
-        Neumorphic(
-          curve: Neumorphic.DEFAULT_CURVE,
-          style: NeumorphicStyle(
-            shape: NeumorphicShape
-                .concave,
-            depth: 8,
-            lightSource: LightSource.left,
-            boxShape: NeumorphicBoxShape.circle(),
-            color: Colors.white,
-            shadowDarkColor: Colors.orange,
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-          ),
-          child: Container(
-            alignment: Alignment.centerLeft,
             child: Hero(
               tag: foodItemName,
-              child:
-              ClipOval(
-                child:CachedNetworkImage(
-                  height:displayHeight(context)/4.6,
-                  width: displayWidth(context)/2.95,
 
-                  imageUrl: imageURLBig,
-//                    fit: BoxFit.scaleDown,cover,scaleDown,fill
-                  fit: BoxFit.fill,
-//
-                  placeholder: (context, url) => new CircularProgressIndicator(),
-                ),
+              child:
+              new CircleAvatar(
+
+                backgroundImage: new NetworkImage(imageURLBig) ,radius: 250,
+//                  minRadius:300,
+//                maxRadius: 320,
+
               ),
-            ),
-          ),
+
+            )
+
+
         ),
       );
+
   }
 }
 
