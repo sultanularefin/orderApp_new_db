@@ -441,13 +441,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                             // uppper container.
 
 
-                                            child: Row(
-
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: <Widget>[
-
-
-
+                                            child:
                                                 // YELLOW NAME AND PRICE BEGINS HERE.
                                                 Container(
                                                   width: displayWidth(context)/3.9 +  displayWidth(context)/8,
@@ -532,28 +526,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                 // BLACK CONTAINER WILL BE DELETED LATER.
                                                 // BLACK CONTAINER.
-
-
-
-
-
-
-                                                Container(
-                                                  padding: EdgeInsets.fromLTRB(0, 5, displayWidth(context)/40, 5),
-//                                                      padding::::
-                                                  color:Colors.white,
-                                                  width: displayWidth(context) /2.1,
-//                                                        height: 45,
-                                                  height: displayHeight(context)/27,
-//                                                  width: displayWidth(context) /1.80,
-                                                  child: _buildMultiSelectOptions(),
-//                                                      Card(child: _buildMultiSelectOptions()),
-
-                                                  // Text('_buildMultiSelectOptions()')
-
-                                                ),
-                                              ],
-                                            ),
+                                            
 
                                           ),
 
