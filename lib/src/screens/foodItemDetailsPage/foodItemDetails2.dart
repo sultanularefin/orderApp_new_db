@@ -444,7 +444,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                             child:
                                                 // YELLOW NAME AND PRICE BEGINS HERE.
                                                 Container(
-                                                  width: displayWidth(context)/3.9 +  displayWidth(context)/8,
+                                                  width: displayWidth(context)/3.9 /*+  displayWidth(context)/8 */,
 
 
                                                   decoration: BoxDecoration(
@@ -526,7 +526,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                 // BLACK CONTAINER WILL BE DELETED LATER.
                                                 // BLACK CONTAINER.
-                                            
+
 
                                           ),
 
