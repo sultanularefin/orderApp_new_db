@@ -300,7 +300,7 @@ class FoodGalleryBloc implements Bloc {
 
 //      print('categoryImageURL in food Gallery Bloc: $categoryImageURL');
 
-        final num sequenceNo0 = doc['squence_no'];
+        final num sequenceNo0 = doc['sequence_no'];
 //        final num totalCategoryRating = doc['total_rating'];
 
 
