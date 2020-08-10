@@ -1786,50 +1786,8 @@ Widget work1(BuildContext context){
 //    final foodGalleryBloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
     final foodGalleryBloc = BlocProvider.of<FoodGalleryBloc>(context);
 
-/*
-    List<NewIngredient> testIngs = bloc.allIngredients;
-
-
-    print('testIngs in foodgallery2: $testIngs');
-
-
-    if ((testIngs) == null || (testIngs.length == 0)) {
-      return Container
-        (
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(),
-      );
-    }
-
-    else {
-      */
-
-
     return Container(
-//        height: displayHeight(context) + MediaQuery
-//          .of(context)
-//          .padding
-//          .bottom +
-//      MediaQuery
-//          .of(context)
-//          .padding
-//          .top ,
-//      -
-//      MediaQuery
-//          .of(context)
-//          .padding
-//          .top - MediaQuery
-//          .of(context)
-//          .padding
-//          .bottom
 
-      /*
-      height: displayHeight(context) -
-          MediaQuery
-              .of(context)
-              .padding
-              .top,
-      */
       child: StreamBuilder<List<FoodItemWithDocID>>(
 
         stream: foodGalleryBloc.foodItemsStream,
@@ -1992,29 +1950,11 @@ Widget work1(BuildContext context){
                                 Spacer(),
                               ]
                           ),
-                          /*
-                              child:Text('$_currentCategory'.toLowerCase(),
-                                style: GoogleFonts.itim(
-                                  textStyle: Theme.of(context).textTheme.display1,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(0xff000000),
-                                ),
 
-                              ),
-                              */
 
                         ),
                         Container(
-                          /*
-                        height:displayHeight(context) -
-                            MediaQuery
-                                .of(context)
-                                .padding
-                                .top - (displayHeight(context) / 14) -
-                            (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
-                        */
+
                           child: foodListByCategoryandNoSearch(
                               filteredItemsByCategory, context),
                         ),
@@ -2147,7 +2087,7 @@ Widget work1(BuildContext context){
           //Above to below for 3 not 2 Food Items:
           maxCrossAxisExtent: 240,
           mainAxisSpacing: 0, // H  direction
-          crossAxisSpacing: 5,
+//          crossAxisSpacing: 5,
           childAspectRatio: 140 / 180,
 
 
@@ -2433,7 +2373,7 @@ Widget work1(BuildContext context){
           //Above to below for 3 not 2 Food Items:
           maxCrossAxisExtent: 240,
           mainAxisSpacing: 0, // H  direction
-          crossAxisSpacing: 5,
+//          crossAxisSpacing: 5, // horizontal padding error check image snpashot for details in august 10.
           childAspectRatio: 140 / 180,
 
 
