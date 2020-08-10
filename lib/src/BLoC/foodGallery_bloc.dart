@@ -225,7 +225,9 @@ class FoodGalleryBloc implements Bloc {
         final String foodCategoryName = doc['category'];
 
 
-//      print('category: $foodCategoryName');
+
+
+      print('category: $foodCategoryName');
 
         final String defaultJuusto = doc['default_juusto'];
 

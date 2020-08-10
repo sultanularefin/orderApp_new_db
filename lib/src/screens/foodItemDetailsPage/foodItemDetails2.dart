@@ -757,33 +757,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       QUANTITY IS MORE THAN ONE.
                                       */,oldQuantity);
                                                                             }
-
-
-                                                                            /*
-                                print(
-                                    'Add button pressed  related to _itemCount');
-
-
-
-
-                                if (_itemCount == 0) {
-
-                                } else {
-                                  foodItemDetailsbloc
-                                      .incrementOneSelectedFoodForOrder(
-                                      oneSelectedFoodFD, _itemCount);
-                                }
-
-
-                                setState(() {
-                                  _itemCount =
-                                      _itemCount + 1;
-//                          priceBasedOnCheeseSauceIngredientsSizeState =
-//
-//                              priceBasedOnCheeseSauceIngredientsSizeState *
-//                                  _itemCount;
-                                });
-                                */
                                                                           },
                                                                           color: Color(0xff707070),
                                                                         ),
