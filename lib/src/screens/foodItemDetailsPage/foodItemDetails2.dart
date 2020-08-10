@@ -386,7 +386,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 /*                                  Positioned(
                           /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE BEGINS HERE. */
                                       child:*/ Container(
-                                    height: displayHeight(context) / 2.1,
+//                                    height: displayHeight(context) / 2.1,
+                                    height: displayHeight(context) -
+                                        MediaQuery.of(context).padding.top -
+                                        MediaQuery.of(context).padding.bottom,
+
+
                                     // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
                                     width: displayWidth(context)/1.03,
 //                  color:Colors.lightGreen,
