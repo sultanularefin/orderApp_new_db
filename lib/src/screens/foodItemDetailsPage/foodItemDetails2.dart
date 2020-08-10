@@ -436,7 +436,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                             color: Colors.white,
                                             height:displayHeight(context)/18,
 //                                              width: displayWidth(context)*0.57,
-                                            width: displayWidth(context)/1.03,
+                                            width: displayWidth(context)/2.4 ,
                                             // /1.07 is the width of this
                                             // uppper container.
 
