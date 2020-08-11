@@ -273,6 +273,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSauces) async {
 
+    print('sauceItems0: $sauceItems0 length: ${sauceItems0.length}');
+
+    print('defaultSauces: $defaultSauces length: ${defaultSauces.length}');
+
+
 
 
     sauceItems0.map((oneSauce) =>
@@ -329,6 +334,12 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   void initiateCheeseItems(List<CheeseItem> cheeseItems0,List<String>defaultCheeses ) async {
+
+
+    print('cheeseItems0: $cheeseItems0 length: ${cheeseItems0.length}');
+
+    print('defaultCheeses: $defaultCheeses length: ${defaultCheeses.length}');
+
 
 
     cheeseItems0.map((oneSauce) =>
