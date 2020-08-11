@@ -294,7 +294,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     if(defaultSaucesString!=null) {
-      print('??? ??? ??? ??? defaultSaucesString != null: ${defaultSaucesString != null}');
+      print('??? ??? ??? ???  defaultSaucesString.length ==0 : ${defaultSaucesString.length == 0}');
       List<
           SauceItem> allSauceItemsDefaultIncluded = filterSelectedKastikesSauces(
           sauceItems,
@@ -318,12 +318,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       });
 
       _allSauceItemsDBloc = sauceItems;
-
       _sauceItemsController.sink.add(_allSauceItemsDBloc);
 
 
       _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
-
       _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
 
@@ -331,7 +329,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     else{
 
-      print('???? ????      ???? ????   defaultSaucesString == null: ${defaultSaucesString == null}');
+      print('???? ????      ???? ????   defaultSaucesString.length == 0: ${defaultSaucesString.length == 0}');
 
 
       _allSauceItemsDBloc = sauceItems;
@@ -382,8 +380,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List <CheeseItem> cheeseItems = cheeseItems0;
 
-    if(defaultCheesesString!=null) {
-      print('??? ???  ???? defaultCheesesString!=null: ${defaultCheesesString!=null}');
+    if(defaultCheesesString.length !=0) {
+      print('??? ???  ???? defaultCheesesString.length !=0: ${defaultCheesesString.length !=0}');
 
       List<
           CheeseItem> allCheeseItemsDefaultIncluded = filterSelectedJuustoOrCheeses(
@@ -426,7 +424,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
     }
     else{
-      print(' ????      ???? defaultCheesesString == null: ${defaultCheesesString == null}');
+      print(' ????      ???? defaultCheesesString.length ==0: ${defaultCheesesString.length ==0}');
       _allCheeseItemsDBloc = cheeseItems;
       _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
 
