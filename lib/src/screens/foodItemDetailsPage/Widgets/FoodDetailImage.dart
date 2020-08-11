@@ -24,27 +24,23 @@ class FoodDetailImage extends StatelessWidget {
         offset:Offset(-displayWidth(context)/16,0),//(-20,0)
         child:
         Container(
-//            alignment: Alignment.centerLeft,
-
-            child: Hero(
-              tag: foodItemName,
-
-              child:
-              Container(
-                  width: 190.0,
-                  height: 190.0,
-                  decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: new DecorationImage(
-                          fit: BoxFit.fill,
-                          image: new NetworkImage(
-                              imageURLBig)
-                      )
-                  )),
-
-            )
-
-
+//              alignment: Alignment.centerLeft,
+          child: Hero(
+            tag: foodItemName,
+            child:
+            ClipOval(
+              child:CachedNetworkImage(
+                width: displayWidth(context)/2.1,
+                height:displayWidth(context)/1.7,
+                imageUrl: imageURLBig,
+//                    fit: BoxFit.scaleDown,cover,scaleDown,fill
+//                    fit: BoxFit.fill,
+                fit:BoxFit.cover,
+//
+                placeholder: (context, url) => new CircularProgressIndicator(),
+              ),
+            ),
+          ),
         ),
       );
 
