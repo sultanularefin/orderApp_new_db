@@ -15,7 +15,7 @@ import 'dart:core';
 //final String storageBucketURLPredicate_Same =
 //    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
 
-class SauceItem {
+class SauceItem implements Comparable {
 
   final String sauceItemName;
   final String imageURL;
@@ -41,6 +41,27 @@ class SauceItem {
         this.isDefaultSelected:false,
       }
       );
+
+  @override
+  int compareTo(other) {
+    if (this.isDefaultSelected == null || other == null) {
+      return null;
+    }
+
+    if (this.isDefaultSelected == false && other.isDefaultSelected == true) {
+      return 1;
+    }
+
+    if (this.isDefaultSelected == true && other.isDefaultSelected == false) {
+      return -1;
+    }
+
+    if (this.isDefaultSelected == other.isDefaultSelected) {
+      return 0;
+    }
+
+    return null;
+  }
 
 
 

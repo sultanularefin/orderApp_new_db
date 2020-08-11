@@ -346,8 +346,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
           sauceItems,
           defaultSaucesString);
 
-      allSauceItemsDefaultIncluded.sort((a,b)=> (a.isDefaultSelected == b.isDefaultSelected) ? 0 :
-      (a.isDefaultSelected == false)? -1 : 1);
+      allSauceItemsDefaultIncluded.sort((a, b) => a.compareTo(b));
+
+//      allSauceItemsDefaultIncluded.sort((a,b)=> (a.isDefaultSelected == b.isDefaultSelected) ? 0 :
+//      (a.isDefaultSelected == false)? -1 : 1);
 
 
 //      allSauceItemsDefaultIncluded.sort((a,b)=> a.sauceItemName.length.compareTo(b.sauceItemName.length));
@@ -372,7 +374,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
         }
       });
 
-      _allSauceItemsDBloc = sauceItems;
+      _allSauceItemsDBloc = allSauceItemsDefaultIncluded;
       _sauceItemsController.sink.add(_allSauceItemsDBloc);
 
 
@@ -449,9 +451,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //GGGGGG
 
-      allCheeseItemsDefaultIncluded.sort((a, b) =>
-          checkIsDefault(a, b,
-          ));
+      allCheeseItemsDefaultIncluded.sort((a, b) => a.compareTo(b));
+
+//      allCheeseItemsDefaultIncluded.sort((a, b) =>
+//          checkIsDefault(a, b,
+//          ));
 
 
       allCheeseItemsDefaultIncluded.forEach((oneCheeseItem) {
