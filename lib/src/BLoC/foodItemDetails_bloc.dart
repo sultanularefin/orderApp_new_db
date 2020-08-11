@@ -248,25 +248,71 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   }
 
 
-  int checkIsDefault(bool oneItemisDefaultSelected, bool secondItemisDefaultSelected /*, List<NewCategoryItem> allCats */){
+  int checkIsDefaultSauce(SauceItem oneItem, SauceItem secondItem ){
 
-//    NewCategoryItem firstCategory = allCats.where((element) => element.categoryName == oneCategoryString).first;
-//    NewCategoryItem secondCategory = allCats.where((element) => element.categoryName == secondCategoryString).first;
 
-//    numbers.sort((a, b) => a.length.compareTo(b.length));
-    if ((oneItemisDefaultSelected == true ) && (secondItemisDefaultSelected==true))
-      return 0;
-    else if ((oneItemisDefaultSelected == true ) && (secondItemisDefaultSelected!=true))
+
+    print('oneItemisDefaultSelectedSauce:    ${oneItem.isDefaultSelected}');
+
+    print('secondItemisDefaultSelectedSauce: ${secondItem.isDefaultSelected}');
+
+    print('========================done ==============================');
+
+    int x = oneItem.isDefaultSelected     == true ? 1 : 0;
+    int y = secondItem.isDefaultSelected  == true ? 1 : 0 ;
+
+
+
+    /*
+
+
+    if ((oneItem.isDefaultSelected == true ) && (secondItem.isDefaultSelected!=true))
+      return 3;
+
+
+    else return 0;
+
+    */
+    print('x.compareTo(y): ${x.compareTo(y)}');
+
+    return x.compareTo(y);
+
+
+
+  }
+
+
+  int checkIsDefault(CheeseItem oneItem, CheeseItem secondItem ){
+
+
+
+    print('oneItemisDefaultSelected:    ${oneItem.isDefaultSelected}');
+
+    print('secondItemisDefaultSelected: ${secondItem.isDefaultSelected}');
+
+    print('========================done ==============================');
+
+
+    int x = oneItem.isDefaultSelected     == true ? 1 : 0;
+    int y = secondItem.isDefaultSelected  == true ? 1 : 0 ;
+
+
+
+
+    /*
+    if ((oneItem.isDefaultSelected == true ) && (secondItem.isDefaultSelected!=true))
       return 1;
 
-    else if ((oneItemisDefaultSelected == false ) && (secondItemisDefaultSelected ==true))
-      return -1;
+//    else if ((oneItem.isDefaultSelected == false ) && (secondItem.isDefaultSelected ==true))
+//      return -1;
 
-  else return 0;
+  else return -1;
 
-//    return oneItemisDefaultSelected.compareTo(secondItemisDefaultSelected);
+  */
 
-//    return firstCategory.rating > secondCategory.rating;
+    print('x.compareTo(y): ${x.compareTo(y)}');
+    return x.compareTo(y);
+
 
   }
 
@@ -300,20 +346,29 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
           sauceItems,
           defaultSaucesString);
 
-      allSauceItemsDefaultIncluded.sort((a,b)=>checkIsDefault(a.isDefaultSelected,b.isDefaultSelected,
-      ));
+      allSauceItemsDefaultIncluded.sort((a,b)=> (a.isDefaultSelected == b.isDefaultSelected) ? 0 :
+      (a.isDefaultSelected == false)? -1 : 1);
+
+
+//      allSauceItemsDefaultIncluded.sort((a,b)=> a.sauceItemName.length.compareTo(b.sauceItemName.length));
+
+
+
+
+//      tempForCategorising.sort((a,b)=>checkRating(a.categoryName,b.categoryName, _allCategories));
 
 
       allSauceItemsDefaultIncluded.forEach((oneSauceItem) {
 
         if(oneSauceItem.isDefaultSelected){
+          oneSauceItem.isSelected=true;
+          oneSauceItem.isDefaultSelected=true;
 
           print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
               ''
-              'condition oneSauceItem.sl==1 is true');
+              'condition oneSauceItem.isDefaultSelected is ${oneSauceItem.isDefaultSelected}');
 
-          oneSauceItem.isSelected=true;
-          oneSauceItem.isDefaultSelected=true;
+
         }
       });
 
@@ -322,6 +377,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
       _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
+
+      print('VVV   VVV   VVV   VVV _allSelectedSauceItems.length: ${_allSelectedSauceItems.length}');
       _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
 
@@ -337,6 +394,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
       _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
+      print('VVV   VVV   VVV  VVV    _allSelectedSauceItems.length: ${_allSelectedSauceItems.length}');
       _selectedSauceListController.sink.add(_allSelectedSauceItems);
 
 
@@ -392,7 +450,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //GGGGGG
 
       allCheeseItemsDefaultIncluded.sort((a, b) =>
-          checkIsDefault(a.isDefaultSelected, b.isDefaultSelected,
+          checkIsDefault(a, b,
           ));
 
 
@@ -421,6 +479,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
           allCheeseItemsDefaultIncluded.where((element) => element.isSelected ==
               true).toList();
 
+      print('WWW   WWWW   WWWW   WWWW_allSelectedCheeseItems.length: ${_allSelectedCheeseItems.length}');
+
       _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
     }
     else{
@@ -430,6 +490,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
       _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
+      print('WWW    WWWW  WWWW    WWWW_allSelectedCheeseItems.length: ${_allSelectedCheeseItems.length}');
       _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
     }
 
@@ -451,30 +512,30 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  logger.i('oneFoodItem.itemName: ${oneFoodItem.itemName}');
-  print('|||| ||||| |||||| oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
-  print('YYY YYYY YYYY YYYY YYYY YY oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
+    logger.i('oneFoodItem.itemName: ${oneFoodItem.itemName}');
+    print('|||| ||||| |||||| oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
+    print('YYY YYYY YYYY YYYY YYYY YY oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
 
 
-  print('||| |||| |||| ||| ||||| oneFoodItem.defaultKastike : ${oneFoodItem.defaultKastike}');
-  print('YYY YYY YYYYY YYYYY YYYYY oneFoodItem.defaultJuustoe : ${oneFoodItem.defaultJuusto}');
+    print('||| |||| |||| ||| ||||| oneFoodItem.defaultKastike : ${oneFoodItem.defaultKastike}');
+    print('YYY YYY YYYYY YYYYY YYYYY oneFoodItem.defaultJuustoe : ${oneFoodItem.defaultJuusto}');
 
 
-  List<String> cheesesStrings2 =
-  oneFoodItem.defaultJuusto.where((e) => ((e != null) && (e != ''))).toList();
+    List<String> cheesesStrings2 =
+    oneFoodItem.defaultJuusto.where((e) => ((e != null) && (e != ''))).toList();
 
-  List<String> saucesStrings2 =
-  oneFoodItem.defaultKastike.where((e) => ((e != null) && (e != ''))).toList();
+    List<String> saucesStrings2 =
+    oneFoodItem.defaultKastike.where((e) => ((e != null) && (e != ''))).toList();
 
-  print('cheesesStrings2: $cheesesStrings2');
+    print('cheesesStrings2: $cheesesStrings2');
 
-  print('saucesStrings2: $saucesStrings2');
+    print('saucesStrings2: $saucesStrings2');
 
-  print('cheesesStrings2.length : ${cheesesStrings2.length}');
-  print('saucesStrings2.length : ${saucesStrings2.length}');
+    print('cheesesStrings2.length : ${cheesesStrings2.length}');
+    print('saucesStrings2.length : ${saucesStrings2.length}');
 
 
-  initiateSauces(tempSauceItems,saucesStrings2);
+    initiateSauces(tempSauceItems,saucesStrings2);
 
     initiateCheeseItems(tempCheeseItems,cheesesStrings2);
 
@@ -1054,14 +1115,14 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     NewIngredient c1 = new NewIngredient(
-        ingredientName: unSelectedOneIngredient
-            .ingredientName,
-        imageURL: unSelectedOneIngredient.imageURL,
+      ingredientName: unSelectedOneIngredient
+          .ingredientName,
+      imageURL: unSelectedOneIngredient.imageURL,
 
-        price: unSelectedOneIngredient.price,
-        documentId: unSelectedOneIngredient.documentId,
-        ingredientAmountByUser: unSelectedOneIngredient
-            .ingredientAmountByUser - 1,
+      price: unSelectedOneIngredient.price,
+      documentId: unSelectedOneIngredient.documentId,
+      ingredientAmountByUser: unSelectedOneIngredient
+          .ingredientAmountByUser - 1,
       isDefault: false,
     );
 
@@ -1478,7 +1539,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List <CheeseItem> allCheeseItemsDefaultIncluded = allCheeses.map(
             (oneItem) =>
-                checkThisCheeseItemInDefatultStringCheeseItems(
+            checkThisCheeseItemInDefatultStringCheeseItems(
                 oneItem,defaultCheeseORJuusoItems)
     ).toList();
 
@@ -1488,7 +1549,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   List<SauceItem> filterSelectedKastikesSauces (
-  List <SauceItem> /* List<NewIngredient> */ allSauces , List<String> defaultSauceORKastikeItems
+      List <SauceItem> /* List<NewIngredient> */ allSauces , List<String> defaultSauceORKastikeItems
       ) {
 
     List <SauceItem> allUnSelected;
