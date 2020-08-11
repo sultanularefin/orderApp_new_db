@@ -842,45 +842,45 @@ class _FoodGalleryState extends State<FoodGallery2> {
                         color: Color(0xffFFE18E),
 
                         child: Row(
-                      children: [
+                          children: [
 
-                        Container(
-                          color: Color(0xffFFE18E),
-                          padding: EdgeInsets
-                              .fromLTRB(
-                              10, 0, 10,
-                              0),
-                          child: Image.asset(
-                            'assets/unpaid_cash_card/unpaid.png',
+                            Container(
+                              color: Color(0xffFFE18E),
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  10, 0, 10,
+                                  0),
+                              child: Image.asset(
+                                'assets/unpaid_cash_card/unpaid.png',
 //                color: Colors.black,
-                            width: 50,
-                            height:50,
+                                width: 50,
+                                height:50,
 
-                          ),
-                        ),
+                              ),
+                            ),
 
 
 
-                        Container(
+                            Container(
 
 //                          width: displayWidth(context)/3.9,
-                          padding: EdgeInsets
-                              .fromLTRB(
-                              10, 0, 0,
-                              0),
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  10, 0, 0,
+                                  0),
 
-                          child: Text('unpaid'.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'Itim-Regular',
-                              color: Color(0xff707070),
-                            ),
-                          ),
-                        )
+                              child: Text('unpaid'.toUpperCase(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'Itim-Regular',
+                                  color: Color(0xff707070),
+                                ),
+                              ),
+                            )
 
-                      ],
-                    )),
+                          ],
+                        )),
                     onTap: () {
                       // Update the state of the app
                       // ...
@@ -892,40 +892,40 @@ class _FoodGalleryState extends State<FoodGallery2> {
                     title: Container(
                         color: Color(0xffFFE18E),
                         child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets
-                              .fromLTRB(
-                              10, 0, 10,
-                              0),
-                          child: Image.asset(
-                            'assets/history.png',
+                          children: [
+                            Container(
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  10, 0, 10,
+                                  0),
+                              child: Image.asset(
+                                'assets/history.png',
 //                color: Colors.black,
-                            width: 47,
-                            height:47,
+                                width: 47,
+                                height:47,
 
-                          ),
-                        ),
-
-                        Container(
-//                          width: displayWidth(context)/3.9,
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                10, 0, 0,
-                                0),
-
-                          child: Text('history'.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'Itim-Regular',
-                              color: Color(0xff707070),
+                              ),
                             ),
-                          ),
-                        )
+
+                            Container(
+//                          width: displayWidth(context)/3.9,
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  10, 0, 0,
+                                  0),
+
+                              child: Text('history'.toUpperCase(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'Itim-Regular',
+                                  color: Color(0xff707070),
+                                ),
+                              ),
+                            )
 //                      Text('history'),
-                      ],
-                    )),
+                          ],
+                        )),
                     onTap: () {
                       // Update the state of the app
                       // ...
@@ -1807,7 +1807,7 @@ Widget work1(BuildContext context){
             case ConnectionState.none:
               return Container(
 
-                  margin: EdgeInsets.fromLTRB(
+                margin: EdgeInsets.fromLTRB(
                     0, displayHeight(context) / 2, 0, 0),
 
                 child: Center(
@@ -2144,17 +2144,17 @@ Widget work1(BuildContext context){
           FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
 
-              itemName: foodItemName,
-              categoryName: foodCategoryName,
-              imageURL: foodImageURL,
-              sizedFoodPrices: foodSizePrice,
+            itemName: foodItemName,
+            categoryName: foodCategoryName,
+            imageURL: foodImageURL,
+            sizedFoodPrices: foodSizePrice,
 
 //              priceinEuro: euroPrice,
-              ingredients: foodItemIngredientsList,
+            ingredients: foodItemIngredientsList,
 
 //              itemId:foodItemId,
 //              isHot: foodIsHot,
-              isAvailable: foodIsAvailable,
+            isAvailable: foodIsAvailable,
 //              discount: discount
 
           );
@@ -2443,21 +2443,50 @@ Widget work1(BuildContext context){
 
           String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
+          String documentID = filteredItemsByCategory[index].documentId;
+
+
+          List<String> juustoORCheeses = filteredItemsByCategory[index].defaultJuusto;
+          List<String> kastikeORSauces = filteredItemsByCategory[index].defaultKastike;
+          int sequenceNo = filteredItemsByCategory[index].sequenceNo;
+
           FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
 
-              itemName: foodItemName,
-              categoryName: foodCategoryName,
-              imageURL: foodImageURL,
-              sizedFoodPrices: foodSizePrice,
 
-//              priceinEuro: euroPrice,
-              ingredients: foodItemIngredientsList,
+            /*
+            this.itemName,
+            this.categoryName,
+            this.sizedFoodPrices,
+            this.uploadDate,
+            this.imageURL,
+            this.content,
+            this.ingredients,
+            this.itemId,
+            this.indicatorValue,
+            this.isAvailable,
+            this.isHot,
+            this.uploadedBy,
+            this.documentId,
+            this.defaultJuusto,
+            this.defaultKastike,
+            this.sequenceNo,
+              */
 
-//              itemId:foodItemId,
-//              isHot: foodIsHot,
-              isAvailable: foodIsAvailable,
-//              discount: discount
+
+
+            itemName: foodItemName,
+            categoryName: foodCategoryName,
+            sizedFoodPrices: foodSizePrice,
+            imageURL: foodImageURL,
+
+            ingredients: foodItemIngredientsList,
+
+            isAvailable: foodIsAvailable,
+            documentId:documentID,
+            defaultJuusto:juustoORCheeses,
+            defaultKastike:kastikeORSauces,
+            sequenceNo:sequenceNo,
 
           );
 

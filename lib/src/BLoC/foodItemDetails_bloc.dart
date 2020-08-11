@@ -408,6 +408,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //    tempIngs,
 
 
+//    FoodItemWithDocID
+
+
+
   logger.i('oneFoodItem.itemName: ${oneFoodItem.itemName}');
   logger.e('oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
   logger.w('oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
