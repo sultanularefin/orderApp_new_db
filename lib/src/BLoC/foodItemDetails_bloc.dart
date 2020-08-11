@@ -454,10 +454,17 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   logger.i('oneFoodItem.itemName: ${oneFoodItem.itemName}');
-//  logger.e('oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
-//  logger.w('oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
+  print('|||| ||||| |||||| oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
+  print('YYY YYYY YYYY YYYY YYYY YY oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
 
-    initiateSauces(tempSauceItems,oneFoodItem.defaultKastike);
+
+  print('||| |||| |||| ||| ||||| oneFoodItem.defaultKastike : ${oneFoodItem.defaultKastike}');
+  print('YYY YYY YYYYY YYYYY YYYYY oneFoodItem.defaultJuustoe : ${oneFoodItem.defaultJuusto}');
+
+
+
+
+  initiateSauces(tempSauceItems,oneFoodItem.defaultKastike);
 
     initiateCheeseItems(tempCheeseItems,oneFoodItem.defaultJuusto);
 
