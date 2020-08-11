@@ -462,11 +462,23 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   print('YYY YYY YYYYY YYYYY YYYYY oneFoodItem.defaultJuustoe : ${oneFoodItem.defaultJuusto}');
 
 
+  List<String> cheesesStrings2 =
+  oneFoodItem.defaultJuusto.where((e) => ((e != null) && (e != ''))).toList();
+
+  List<String> saucesStrings2 =
+  oneFoodItem.defaultKastike.where((e) => ((e != null) && (e != ''))).toList();
+
+  print('cheesesStrings2: $cheesesStrings2');
+
+  print('saucesStrings2: $saucesStrings2');
+
+  print('cheesesStrings2.length : ${cheesesStrings2.length}');
+  print('saucesStrings2.length : ${saucesStrings2.length}');
 
 
-  initiateSauces(tempSauceItems,oneFoodItem.defaultKastike);
+  initiateSauces(tempSauceItems,saucesStrings2);
 
-    initiateCheeseItems(tempCheeseItems,oneFoodItem.defaultJuusto);
+    initiateCheeseItems(tempCheeseItems,cheesesStrings2);
 
 
     /* Ordered Food Related codes ends here. */
