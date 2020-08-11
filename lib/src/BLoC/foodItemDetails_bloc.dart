@@ -1554,15 +1554,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List <SauceItem> allUnSelected;
 
-    /*
-    List <SauceItem> unSelectedSaucesFiltered = allSauces.where(
-            (oneItem) => oneItem.sauceItemName.trim().toLowerCase() !=
-            checkThisSauceItemInDefatultStringSauceItems(
-                oneItem,defaultSauceORKastikeItems
-            )
-    ).toList();
-
-    */
 
     List <SauceItem> allSauceItemsDefaultIncluded = allSauces.map(
             (oneItem) =>
@@ -1671,14 +1662,12 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   // HELPER METHOD 07 checkThisIngredientInDefatultStringIngredient
 
-  SauceItem checkThisSauceItemInDefatultStringSauceItems(SauceItem x, List<String> defaultSauceKastikeItemString) {
+  SauceItem checkThisSauceItemInDefatultStringSauceItems(SauceItem x,
+      List<String> defaultSauceKastikeItemString) {
 
-//    print('ingredientsString: $ingredientsString');
-//    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
+    logger.i('x.sauceItemName => ${x.sauceItemName} defaultSauceKastikeItemString[0] => '
+        '${defaultSauceKastikeItemString[0]} ');
 
-//    List<String> foodIngredients =ingredientsString;
-
-//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
 
 
     String elementExists = defaultSauceKastikeItemString.firstWhere(
