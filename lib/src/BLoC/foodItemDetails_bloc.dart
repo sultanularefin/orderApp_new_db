@@ -294,7 +294,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     if(defaultSaucesString!=null) {
-      print('defaultSaucesString != null: ${defaultSaucesString != null}');
+      print('??? ??? ??? ??? defaultSaucesString != null: ${defaultSaucesString != null}');
       List<
           SauceItem> allSauceItemsDefaultIncluded = filterSelectedKastikesSauces(
           sauceItems,
@@ -331,7 +331,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     else{
 
-      print('defaultSaucesString == null: ${defaultSaucesString == null}');
+      print('???? ????      ???? ????   defaultSaucesString == null: ${defaultSaucesString == null}');
 
 
       _allSauceItemsDBloc = sauceItems;
@@ -383,7 +383,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List <CheeseItem> cheeseItems = cheeseItems0;
 
     if(defaultCheesesString!=null) {
-      print('defaultCheesesString!=null: ${defaultCheesesString!=null}');
+      print('??? ???  ???? defaultCheesesString!=null: ${defaultCheesesString!=null}');
 
       List<
           CheeseItem> allCheeseItemsDefaultIncluded = filterSelectedJuustoOrCheeses(
@@ -426,7 +426,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
     }
     else{
-      print('defaultCheesesString == null: ${defaultCheesesString == null}');
+      print(' ????      ???? defaultCheesesString == null: ${defaultCheesesString == null}');
       _allCheeseItemsDBloc = cheeseItems;
       _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
 
