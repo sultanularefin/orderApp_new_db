@@ -35,7 +35,8 @@ class FoodDetailImage extends StatelessWidget {
                 imageUrl: imageURLBig,
 //                    fit: BoxFit.scaleDown,cover,scaleDown,fill
 //                    fit: BoxFit.fill,
-                fit:BoxFit.cover,
+                fit: BoxFit.contain,
+//                fit:BoxFit.cover, contain
 //
                 placeholder: (context, url) => new CircularProgressIndicator(),
               ),
