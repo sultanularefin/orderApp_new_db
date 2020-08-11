@@ -229,9 +229,20 @@ class FoodGalleryBloc implements Bloc {
 
       print('category: $foodCategoryName');
 
-        final String defaultJuusto = doc['default_juusto'];
+        String defaultJuusto = doc['default_juusto'];
 
-        final String defaultKastike = doc['default_kastike'];
+        String defaultKastike = doc['default_kastike'];
+
+
+        List<String> defaultJuusto2 = new List<String>() ;
+        defaultJuusto2.add(defaultJuusto);
+
+        List<String> defaultKastike2= new List<String>();
+        defaultKastike2.add(defaultKastike);
+
+
+        print('foodItemName: $foodItemName  and docID: $foodItemDocumentID and '
+            'defaultJuusto $defaultJuusto and defaultKastike: $defaultKastike');
 
 
 
@@ -249,8 +260,8 @@ class FoodGalleryBloc implements Bloc {
           isAvailable: foodIsAvailable,
           documentId: foodItemDocumentID,
 //          discount: foodItemDiscount,
-          defaultJuusto:defaultJuusto,
-          defaultKastike:defaultKastike,
+          defaultJuusto:defaultJuusto2,
+          defaultKastike:defaultKastike2,
           sequenceNo: sequenceNo,
         );
 
@@ -364,10 +375,10 @@ class FoodGalleryBloc implements Bloc {
   }
 
 
-  void getAllSaucesConstructor() async {
+  void getAllKastikeSaucesConstructor() async {
 
 
-    var snapshot = await _client.fetchAllSauces();
+    var snapshot = await _client.fetchAllKastikeORSauces();
     List docList = snapshot.documents;
 
 
@@ -432,7 +443,7 @@ class FoodGalleryBloc implements Bloc {
   }
 
 
-  void getAllCheeseItemsConstructor() async {
+  void getAllCheeseItemsJuustoConstructor() async {
 
 
     var snapshot = await _client.fetchAllCheesesORjuusto();
@@ -515,9 +526,9 @@ class FoodGalleryBloc implements Bloc {
 
     getAllCategoriesConstructor();
 
-    getAllSaucesConstructor();
+    getAllKastikeSaucesConstructor();
 
-    getAllCheeseItemsConstructor();
+    getAllCheeseItemsJuustoConstructor();
 
     // need to use this when moving to food Item Details page.
 

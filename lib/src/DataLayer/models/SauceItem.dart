@@ -22,7 +22,7 @@ class SauceItem {
   final double price;
   final String documentId;
   final int    sauceItemAmountByUser;
-  final int    sl;
+//  final int    sl;
         bool   isSelected;
         bool   isDefaultSelected;
 
@@ -36,7 +36,7 @@ class SauceItem {
         this.price:0.0,
         this.documentId,
         this.sauceItemAmountByUser,
-        this.sl,
+//        this.sl,
         this.isSelected:false,
         this.isDefaultSelected:false,
       }
@@ -62,7 +62,7 @@ class SauceItem {
         price = data['price'].toDouble(),
         documentId = docID,
         sauceItemAmountByUser = 0,
-        sl = data['sl'],
+//        sl = data['sl'],
         isSelected = false;
 
 

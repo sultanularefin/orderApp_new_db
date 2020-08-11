@@ -94,13 +94,13 @@ class FirebaseClient {
 
   }
 
-  Future<QuerySnapshot> fetchAllSauces()async{
+  Future<QuerySnapshot> fetchAllKastikeORSauces()async{
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection('sauces').orderBy("sl", descending: false)
+        .collection('kastike')/*.orderBy("sl", descending: false) */
         .getDocuments();
 
 //    var snapshot= Firestore.instance
@@ -116,7 +116,7 @@ class FirebaseClient {
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection('juusto').orderBy("sl", descending: false)
+        .collection('Juusto')/*.orderBy("sl", descending: false)*/
         .getDocuments();
 
 //    var snapshot= Firestore.instance

@@ -248,24 +248,30 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   }
 
 
-  void initiateSauces(List<SauceItem> sauceItems0) async {
+  int checkIsDefault(bool oneItemisDefaultSelected, bool secondItemisDefaultSelected /*, List<NewCategoryItem> allCats */){
 
-    /*
+//    NewCategoryItem firstCategory = allCats.where((element) => element.categoryName == oneCategoryString).first;
+//    NewCategoryItem secondCategory = allCats.where((element) => element.categoryName == secondCategoryString).first;
 
-    var snapshot = await _client.fetchAllSauces();
-    List docList = snapshot.documents;
-    */
+//    numbers.sort((a, b) => a.length.compareTo(b.length));
+    if ((oneItemisDefaultSelected == true ) && (secondItemisDefaultSelected==true))
+      return 0;
+    else if ((oneItemisDefaultSelected == true ) && (secondItemisDefaultSelected!=true))
+      return 1;
+
+    else if ((oneItemisDefaultSelected == false ) && (secondItemisDefaultSelected ==true))
+      return -1;
+
+  else return 0;
+
+//    return oneItemisDefaultSelected.compareTo(secondItemisDefaultSelected);
+
+//    return firstCategory.rating > secondCategory.rating;
+
+  }
 
 
-//    List<NewIngredient> unSelectedDecremented =
-//    allIngsScoped.map((oneIngredient) =>
-//        NewIngredient.updateUnselectedIngredient(
-//            oneIngredient
-//        )).toList();
-
-
-//    List <SauceItem> sauceItems = sauceItems0.map((oneSauce) => (oneSauce.isDefaultSelected=false)).toList();
-
+  void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSauces) async {
 
 
 
@@ -282,22 +288,18 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List <SauceItem> sauceItems= sauceItems0;
 
 
+    List<SauceItem> allSauceItemsDefaultIncluded = filterSelectedKastikesSauces(sauceItems,
+        defaultSauces);
+
+//GGGGGG
+
+    allSauceItemsDefaultIncluded.sort((a,b)=>checkIsDefault(a.isDefaultSelected,b.isDefaultSelected,
+       ));
 
 
+    allSauceItemsDefaultIncluded.forEach((oneSauceItem) {
 
-    /*
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
-    ).toList();
-
-    */
-
-//    print('Ingredient documents are: $documents');
-
-
-    sauceItems.forEach((oneSauceItem) {
-
-      if(oneSauceItem.sl==1){
+      if(oneSauceItem.isDefaultSelected){
 
         print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
             ''
@@ -326,14 +328,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void initiateCheeseItems(List<CheeseItem> cheeseItems0 ) async {
-
-
-    /*
-    var snapshot = await _client.fetchAllCheesesORjuusto();
-    List docList = snapshot.documents;
-    */
-
+  void initiateCheeseItems(List<CheeseItem> cheeseItems0,List<String>defaultCheeses ) async {
 
 
     cheeseItems0.map((oneSauce) =>
@@ -348,53 +343,45 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     List <CheeseItem> cheeseItems = cheeseItems0;
-    /*
-    cheeseItems = snapshot.documents.map((documentSnapshot) =>
-        CheeseItem.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
 
-    ).toList();
+    List<CheeseItem> allCheeseItemsDefaultIncluded = filterSelectedJuustoOrCheeses(cheeseItems,
+        defaultCheeses);
 
 
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
-    ).toList();
-
-    */
 
 
-    cheeseItems.forEach((oneCheeseItem) {
 
-      if(oneCheeseItem.sl==1){
+//GGGGGG
+
+    allCheeseItemsDefaultIncluded.sort((a,b)=>checkIsDefault(a.isDefaultSelected,b.isDefaultSelected,
+    ));
+
+
+    allCheeseItemsDefaultIncluded.forEach((oneCheeseItem) {
+
+      if(oneCheeseItem.isDefaultSelected){
+
         oneCheeseItem.isSelected=true;
         oneCheeseItem.isDefaultSelected=true;
+
+
+        print('oneSauceItem.cheeseItemName: ${oneCheeseItem.cheeseItemName} and '
+            ''
+            'condition oneCheeseItem.isSelected == true ${oneCheeseItem.isSelected == true}');
+
       }
     }
 
     );
 
-//    print('Ingredient documents are: $documents');
+    _allCheeseItemsDBloc = allCheeseItemsDefaultIncluded;
+
+    _sauceItemsController.sink.add(_allSauceItemsDBloc);
 
 
-    _allCheeseItemsDBloc = cheeseItems;
+    _allSelectedCheeseItems = allCheeseItemsDefaultIncluded.where((element) => element.isSelected==true).toList();
 
-    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
-
-
-//    return ingItems;
-
-
-    _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
-
-
-
-    logger.w('_allSelectedCheeseItems at initiateCheeseItems():'
-        ' $_allSelectedCheeseItems');
-
-//    _selectedSauceListController.sink.add(_allSelectedSauceItems);
-//    _allSelectedCheeseItems =
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
-
 
 
   }
@@ -411,9 +398,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-    initiateSauces(tempSauceItems);
+    initiateSauces(tempSauceItems,oneFoodItem.defaultKastike);
 
-    initiateCheeseItems(tempCheeseItems);
+    initiateCheeseItems(tempCheeseItems,oneFoodItem.defaultJuusto);
 
 
     /* Ordered Food Related codes ends here. */
@@ -1401,13 +1388,56 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _defaultIngItems = default2;
     _defaultIngredientListController.sink.add(default2);
 
+  }
 
 
-//    return default2;
 
-//    logger.i('_defaultIngItems: ',_defaultIngItems);
+  List<CheeseItem> filterSelectedJuustoOrCheeses (
+      List <CheeseItem> /* List<NewIngredient> */ allCheeses , List<String> defaultCheeseORJuusoItems
+      ) {
+
+    List <CheeseItem> allUnSelected;
+
+
+
+    List <CheeseItem> allCheeseItemsDefaultIncluded = allCheeses.map(
+            (oneItem) =>
+                checkThisCheeseItemInDefatultStringCheeseItems(
+                oneItem,defaultCheeseORJuusoItems)
+    ).toList();
+
+    return allCheeseItemsDefaultIncluded;
 
   }
+
+
+  List<SauceItem> filterSelectedKastikesSauces (
+  List <SauceItem> /* List<NewIngredient> */ allSauces , List<String> defaultSauceORKastikeItems
+      ) {
+
+    List <SauceItem> allUnSelected;
+
+    /*
+    List <SauceItem> unSelectedSaucesFiltered = allSauces.where(
+            (oneItem) => oneItem.sauceItemName.trim().toLowerCase() !=
+            checkThisSauceItemInDefatultStringSauceItems(
+                oneItem,defaultSauceORKastikeItems
+            )
+    ).toList();
+
+    */
+
+    List <SauceItem> allSauceItemsDefaultIncluded = allSauces.map(
+            (oneItem) =>
+            checkThisSauceItemInDefatultStringSauceItems(
+                oneItem,defaultSauceORKastikeItems)
+    ).toList();
+
+    return allSauceItemsDefaultIncluded;
+
+  }
+
+
 
   // #### helper method 05 filterUnSelectedIngredients
   //
@@ -1475,6 +1505,59 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
+  // HELPER METHOD 08 checkThisIngredientInDefatultStringIngredient
+
+  CheeseItem checkThisCheeseItemInDefatultStringCheeseItems(CheeseItem x, List<String> defaultCheeseJuustoItemString) {
+
+//    print('ingredientsString: $ingredientsString');
+//    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
+
+//    List<String> foodIngredients =ingredientsString;
+
+//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
+
+
+    String elementExists = defaultCheeseJuustoItemString.firstWhere(
+            (oneItem) => oneItem.toLowerCase().trim() == x.cheeseItemName.toLowerCase().trim(),
+        orElse: () => '');
+
+    if(elementExists!=''){
+
+      x.isDefaultSelected=true;
+      return x;
+    }
+
+//    print('elementExists: Line # 612:  $elementExists');
+
+    return x;
+  }
+
+  // HELPER METHOD 07 checkThisIngredientInDefatultStringIngredient
+
+  SauceItem checkThisSauceItemInDefatultStringSauceItems(SauceItem x, List<String> defaultSauceKastikeItemString) {
+
+//    print('ingredientsString: $ingredientsString');
+//    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
+
+//    List<String> foodIngredients =ingredientsString;
+
+//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
+
+
+    String elementExists = defaultSauceKastikeItemString.firstWhere(
+            (oneItem) => oneItem.toLowerCase().trim() == x.sauceItemName.toLowerCase().trim(),
+        orElse: () => '');
+
+    if(elementExists!=''){
+
+      x.isDefaultSelected=true;
+      return x;
+    }
+
+//    print('elementExists: Line # 612:  $elementExists');
+
+    return x;
+  }
 
 
   // HELPER METHOD 06 checkThisIngredientInDefatultStringIngredient

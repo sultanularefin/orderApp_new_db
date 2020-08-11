@@ -25,8 +25,8 @@ class FoodItemWithDocID {
   String uploadedBy;
   String documentId;
 //  double discount;
-  String defaultJuusto;
-  String defaultKastike;
+  List<String> defaultJuusto;
+  List<String> defaultKastike;
   int sequenceNo;
 
   FoodItemWithDocID(

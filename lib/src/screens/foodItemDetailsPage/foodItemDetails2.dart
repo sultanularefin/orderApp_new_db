@@ -628,9 +628,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                           // DEFAULT INGREDIENTS IN ANOTHER PLACE.
                                           Container(
                                               color:Colors.deepPurpleAccent,
+                                              width: displayWidth(context) /2.29 + displayWidth(context) /1.91,
 //                                              height: displayHeight(context) / 7 +
 //                                                  displayHeight(context) / 6.6
 //                                                  + displayHeight(context) / 8,
+
 
                                               height: displayHeight(context) / 1.5,
 
@@ -646,7 +648,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                                   Container(
 //                                                    width: displayWidth(context)/4,
-                                                    width: displayWidth(context)/2.3,
+                                                    width: displayWidth(context)/2.29,
+//                                                    width: displayWidth(context)/3.29,
                                                     color:Colors.blue,
                                                     child: Column(
                                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -665,7 +668,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                               0),
 
                                                           child:
-                                                              /*
+                                                          /*
                                                           Neumorphic(
                                                             // State of Neumorphic (may be convex, flat & emboss)
 
@@ -691,12 +694,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
                                                             ),
                                                             child:*/
-                                                              FoodDetailImage(
+                                                          FoodDetailImage(
                                                               oneFood
                                                                   .imageURL,
                                                               oneFood
                                                                   .itemName),
-                                                          ),
+                                                        ),
                                                         //),
 
                                                         Container(
@@ -722,12 +725,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                                   // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
 
                                                   Container(
-//                                                    color:Colors.redAccent,
+                                                    color:Colors.yellowAccent,
                                                     height: displayHeight(context) / 7 +
                                                         displayHeight(context) / 6.6
                                                         + displayHeight(context) / 8,
 
-                                                    width: displayWidth(context) /1.39,
+                                                    width:displayWidth(context) /1.91,
+//                                                    width: displayWidth(context) /1.49,
 //                                                    width: displayWidth(context) /1.80,
                                                     //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
                                                     child: Column(
@@ -2918,33 +2922,37 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             },
 
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
+            child:
+            Neumorphic(
+              curve: Neumorphic.DEFAULT_CURVE,
+              style: NeumorphicStyle(
+                shape: NeumorphicShape
+                    .concave,
+                depth: 8,
+                border: NeumorphicBorder(
+                  isEnabled: false,
+//                  color: Colors.white,
+                  width: 0.8,
 
-                Neumorphic(
-                  curve: Neumorphic.DEFAULT_CURVE,
-                  style: NeumorphicStyle(
-                    shape: NeumorphicShape
-                        .concave,
-                    depth: 8,
-                    border: NeumorphicBorder(
-                      isEnabled: false,
-                      color: Color(0x33000000),
-                      width: 0.8,
-                    ),
-                    lightSource: LightSource.top,
-                    boxShape: NeumorphicBoxShape.circle(),
-                    color: Colors.white,
-                    shadowDarkColor: Color(0xff525FFF),
+                ),
+                lightSource: LightSource.top,
+                boxShape: NeumorphicBoxShape.roundRect(
+                    BorderRadius.all(Radius.circular(15))
+                ),
+
+                color: Colors.deepOrangeAccent,
+                shadowDarkColor: Color(0xff525FFF),
 //                        Colors.lightGreenAccent
 
 //          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-                  ),
-                  child:Container(
+              ),
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
 
-                    height: displayHeight(context) / 24,
-                    width: displayWidth(context) /16.5,
+                    height: displayHeight(context) / 20,
+                    width: displayWidth(context) /10.5,
 //                      width: displayWidth(context) /10,
 //                      height: displayWidth(context) /9,
                     padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
@@ -2952,6 +2960,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     child: ClipOval(
 
                       child: CachedNetworkImage(
+//                        color: Colors.deepOrangeAccent,
+//                        colorBlendMode: BlendMode.overlay ,
                         imageUrl: ingredientImageURL,
                         fit: BoxFit.cover,
                         placeholder: (context,
@@ -2963,31 +2973,32 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       ),
                     ),
                   ),
-                ),
-//                              SizedBox(height: 10),
-                Container(
-                  width: displayWidth(context) / 9,
-                  child: Text(
-                    ingredientName,
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
 
-                    style: TextStyle(
-                      color: Color(0xff707070),
+//                              SizedBox(height: 10),
+                  Container(
+                    width: displayWidth(context) / 9,
+                    child: Text(
+                      ingredientName,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+
+                      style: TextStyle(
+                        color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
 //                    decoration: TextDecoration.underline,
 //                    decorationStyle:TextDecorationStyle.double,
+                      ),
                     ),
-                  ),
-                )
-                ,
+                  )
+                  ,
 
 
-              ],
+                ],
+              ),
             ),
             onTap: () {
               print('for future use');
