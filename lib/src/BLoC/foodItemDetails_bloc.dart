@@ -409,6 +409,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   logger.i('oneFoodItem.itemName: ${oneFoodItem.itemName}');
+  logger.e('oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
+  logger.w('oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
 
     initiateSauces(tempSauceItems,oneFoodItem.defaultKastike);
 

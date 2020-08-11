@@ -241,6 +241,10 @@ class FoodGalleryBloc implements Bloc {
         defaultKastike2.add(defaultKastike);
 
 
+        logger.e('defaultKastike2.length: ${defaultKastike2.length}');
+        logger.w('defaultJuusto2.length: ${defaultJuusto2.length}');
+
+
         print('foodItemName: $foodItemName  and docID: $foodItemDocumentID and '
             'defaultJuusto $defaultJuusto and defaultKastike: $defaultKastike');
 
