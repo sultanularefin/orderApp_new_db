@@ -408,6 +408,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //    tempIngs,
 
 
+  logger.i('oneFoodItem.itemName: ${oneFoodItem.itemName}');
 
     initiateSauces(tempSauceItems,oneFoodItem.defaultKastike);
 
