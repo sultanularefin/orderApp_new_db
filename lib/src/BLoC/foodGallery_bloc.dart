@@ -247,6 +247,9 @@ class FoodGalleryBloc implements Bloc {
 
         print('foodItemName: $foodItemName  and docID: $foodItemDocumentID and '
             'defaultJuusto $defaultJuusto and defaultKastike: $defaultKastike');
+        if(foodItemName.toLowerCase()=='pita'){
+          print('--------------------------pita found-==================');
+        }
 
 
 

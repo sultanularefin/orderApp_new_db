@@ -271,11 +271,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   }
 
 
-  void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSauces) async {
+  void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSaucesString) async {
 
     print('sauceItems0: $sauceItems0 length: ${sauceItems0.length}');
 
-    print('defaultSauces: $defaultSauces length: ${defaultSauces.length}');
+//    print('defaultSauces: $defaultSaucesString length: ${defaultSaucesString.length}');
 
 
 
@@ -290,41 +290,68 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
         oneSauce.isSelected = false
     )).toList();
 
-    List <SauceItem> sauceItems= sauceItems0;
+    List <SauceItem> sauceItems = sauceItems0;
 
 
-    List<SauceItem> allSauceItemsDefaultIncluded = filterSelectedKastikesSauces(sauceItems,
-        defaultSauces);
+    if(defaultSaucesString!=null) {
+      print('defaultSaucesString != null: ${defaultSaucesString != null}');
+      List<
+          SauceItem> allSauceItemsDefaultIncluded = filterSelectedKastikesSauces(
+          sauceItems,
+          defaultSaucesString);
+
+      allSauceItemsDefaultIncluded.sort((a,b)=>checkIsDefault(a.isDefaultSelected,b.isDefaultSelected,
+      ));
+
+
+      allSauceItemsDefaultIncluded.forEach((oneSauceItem) {
+
+        if(oneSauceItem.isDefaultSelected){
+
+          print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
+              ''
+              'condition oneSauceItem.sl==1 is true');
+
+          oneSauceItem.isSelected=true;
+          oneSauceItem.isDefaultSelected=true;
+        }
+      });
+
+      _allSauceItemsDBloc = sauceItems;
+
+      _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
+
+      _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
+
+      _selectedSauceListController.sink.add(_allSelectedSauceItems);
+
+
+    }
+
+    else{
+
+      print('defaultSaucesString == null: ${defaultSaucesString == null}');
+
+
+      _allSauceItemsDBloc = sauceItems;
+      _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
+
+      _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
+      _selectedSauceListController.sink.add(_allSelectedSauceItems);
+
+
+    }
 
 //GGGGGG
 
-    allSauceItemsDefaultIncluded.sort((a,b)=>checkIsDefault(a.isDefaultSelected,b.isDefaultSelected,
-       ));
 
 
-    allSauceItemsDefaultIncluded.forEach((oneSauceItem) {
-
-      if(oneSauceItem.isDefaultSelected){
-
-        print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
-            ''
-            'condition oneSauceItem.sl==1 is true');
-
-        oneSauceItem.isSelected=true;
-        oneSauceItem.isDefaultSelected=true;
-      }
-    }
-
-    );
-
-    _allSauceItemsDBloc = sauceItems;
-
-    _sauceItemsController.sink.add(_allSauceItemsDBloc);
 
 
-    _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
 
-    _selectedSauceListController.sink.add(_allSelectedSauceItems);
+
 
 
 //    return ingItems;
@@ -333,12 +360,12 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void initiateCheeseItems(List<CheeseItem> cheeseItems0,List<String>defaultCheeses ) async {
+  void initiateCheeseItems(List<CheeseItem> cheeseItems0,List<String>defaultCheesesString ) async {
 
 
     print('cheeseItems0: $cheeseItems0 length: ${cheeseItems0.length}');
 
-    print('defaultCheeses: $defaultCheeses length: ${defaultCheeses.length}');
+//    print('defaultCheeses: $defaultCheeses length: ${defaultCheeses.length}');
 
 
 
@@ -355,44 +382,58 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List <CheeseItem> cheeseItems = cheeseItems0;
 
-    List<CheeseItem> allCheeseItemsDefaultIncluded = filterSelectedJuustoOrCheeses(cheeseItems,
-        defaultCheeses);
+    if(defaultCheesesString!=null) {
+      print('defaultCheesesString!=null: ${defaultCheesesString!=null}');
 
-
-
+      List<
+          CheeseItem> allCheeseItemsDefaultIncluded = filterSelectedJuustoOrCheeses(
+          cheeseItems,
+          defaultCheesesString);
 
 
 //GGGGGG
 
-    allCheeseItemsDefaultIncluded.sort((a,b)=>checkIsDefault(a.isDefaultSelected,b.isDefaultSelected,
-    ));
+      allCheeseItemsDefaultIncluded.sort((a, b) =>
+          checkIsDefault(a.isDefaultSelected, b.isDefaultSelected,
+          ));
 
 
-    allCheeseItemsDefaultIncluded.forEach((oneCheeseItem) {
-
-      if(oneCheeseItem.isDefaultSelected){
-
-        oneCheeseItem.isSelected=true;
-        oneCheeseItem.isDefaultSelected=true;
+      allCheeseItemsDefaultIncluded.forEach((oneCheeseItem) {
+        if (oneCheeseItem.isDefaultSelected) {
+          oneCheeseItem.isSelected = true;
+          oneCheeseItem.isDefaultSelected = true;
 
 
-        print('oneSauceItem.cheeseItemName: ${oneCheeseItem.cheeseItemName} and '
-            ''
-            'condition oneCheeseItem.isSelected == true ${oneCheeseItem.isSelected == true}');
-
+          print('oneSauceItem.cheeseItemName: ${oneCheeseItem
+              .cheeseItemName} and '
+              ''
+              'condition oneCheeseItem.isSelected == true ${oneCheeseItem
+              .isSelected == true}');
+        }
       }
+
+      );
+
+      _allCheeseItemsDBloc = allCheeseItemsDefaultIncluded;
+
+      _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+
+      _allSelectedCheeseItems =
+          allCheeseItemsDefaultIncluded.where((element) => element.isSelected ==
+              true).toList();
+
+      _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
     }
-
-    );
-
-    _allCheeseItemsDBloc = allCheeseItemsDefaultIncluded;
-
-    _sauceItemsController.sink.add(_allSauceItemsDBloc);
+    else{
+      print('defaultCheesesString == null: ${defaultCheesesString == null}');
+      _allCheeseItemsDBloc = cheeseItems;
+      _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
 
 
-    _allSelectedCheeseItems = allCheeseItemsDefaultIncluded.where((element) => element.isSelected==true).toList();
-
-    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+      _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
+      _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+    }
 
 
   }
@@ -413,8 +454,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   logger.i('oneFoodItem.itemName: ${oneFoodItem.itemName}');
-  logger.e('oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
-  logger.w('oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
+//  logger.e('oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
+//  logger.w('oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
 
     initiateSauces(tempSauceItems,oneFoodItem.defaultKastike);
 
