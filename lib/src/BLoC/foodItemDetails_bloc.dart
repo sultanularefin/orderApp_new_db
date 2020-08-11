@@ -1680,7 +1680,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     if(elementExists!=''){
 
+
       x.isDefaultSelected=true;
+
+      print('elementExists!='' &&  x.sauceItemName  => ${x.sauceItemName}');
       return x;
     }
 
