@@ -268,19 +268,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               },
                               child:
 
-                                  Container(
+                              Container(
 
-                                    // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-                                    width: displayWidth(context)/1.03,
+                                // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
+                                width: displayWidth(context)/1.03,
 
-                                    child:
-                                    AnimatedSwitcher(
-                                        duration: Duration(
-                                            milliseconds: 1000),
+                                child:
+                                AnimatedSwitcher(
+                                    duration: Duration(
+                                        milliseconds: 1000),
 //
-                                        child: showUnSelectedIngredients
-                                            ?otherView() :initialView(oneFood,foodSizePrice)
-                                    ),),
+                                    child: showUnSelectedIngredients
+                                        ?otherView(oneFood) :initialView(oneFood,foodSizePrice)
+                                ),),
 //
 
 
@@ -299,79 +299,286 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     }
   }
 
-  Widget otherView(){
+  Widget otherView(FoodItemWithDocIDViewModel oneFood){
 
+//    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-
     return Container(
-      color:Colors.white,
+//      color:Colors.white,
+//      height: displayHeight(context) / 2.1,
+//                                  color:Colors.yellow,
+//                                    duration: Duration(seconds: 1),
+        height: displayHeight(context) -
+            MediaQuery.of(context).padding.top -
+            MediaQuery.of(context).padding.bottom,
 
-      height: displayHeight(context) -
-          MediaQuery.of(context).padding.top -
-          MediaQuery.of(context).padding.bottom,
 
-      width: displayWidth(context)/1.03,
+        // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
+        width: displayWidth(context)/1.03,
+//                  color:Colors.lightGreen,
+        margin: EdgeInsets.fromLTRB(
+            12, displayHeight(context)/16, 10, 5),
 
-      margin: EdgeInsets.fromLTRB(
-          12, 0, 0, 0),
-      padding: EdgeInsets.fromLTRB(
-          0, 24, 0, 20),
+        decoration:
+        new BoxDecoration(
+          borderRadius: new BorderRadius
+              .circular(
+              10.0),
+//                                    color: Colors.purple,
+          color: Colors.white,
+        ),
 
-      child:StreamBuilder(
-        stream: blocD.getUnSelectedIngredientItemsStream,
-        initialData: blocD.unSelectedIngredients,
 
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: new LinearProgressIndicator());
-          }
-          else {
+        child:
+        Neumorphic(
+          curve: Neumorphic.DEFAULT_CURVE,
+          style: NeumorphicStyle(
+            shape: NeumorphicShape
+                .concave,
+            depth: 8,
+            lightSource: LightSource
+                .topLeft,
+            color: Colors.white,
+            boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(5)),
+            ),
+          ),
 
-            List<NewIngredient> unSelectedIngredients = snapshot.data;
-            return GridView.builder(
-              itemCount: unSelectedIngredients
-                  .length,
-              itemBuilder: (_, int index) {
-                return _buildOneUNSelected
-                  (
-                    unSelectedIngredients[index],
-                    index/*, unSelectedIngredients*/
-                );
-              },
-              gridDelegate:
-//                                            new SliverGridDelegateWithFixedCrossAxisCount(
-//                                              crossAxisCount: 3,
-              new SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 180,
+//                    MAX_DEPTH,DEFAULT_CURVE
 
-                mainAxisSpacing: 0,
-                // H  direction
-                crossAxisSpacing: 0,
+//
+//                      BorderRadius.circular(25),
+//                  border: Border.all(
 
-                ///childAspectRatio:
-                /// The ratio of the cross-axis to the main-axis extent of each child.
-                /// H/V
-                childAspectRatio: 300 / 340,
-//                                  ///childAspectRatio:
-//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
-//                                  /// H/V
-                // horizontal / vertical
-//                                              childAspectRatio: 280/360,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment
+                .start,
+            crossAxisAlignment: CrossAxisAlignment
+                .start,
+            children: <Widget>[
+
+              Container(
+
+//                                            color: Colors.redAccent,
+                color: Colors.white,
+                height:displayHeight(context)/18,
+//                                              width: displayWidth(context)*0.57,
+                width: displayWidth(context)/2.4 ,
+                // /1.07 is the width of this
+                // uppper container.
+
+
+                child:
+                // YELLOW NAME AND PRICE BEGINS HERE.
+                Container(
+                  width: displayWidth(context)/3.9 /*+  displayWidth(context)/8 */,
+
+
+                  decoration: BoxDecoration(
+                    color:Color(0xffFFE18E),
+                    borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
+//
+                  ),
+
+
+                  height:displayHeight(context)/18,
+//                                          height: displayHeight(context)/40,
+
+                  child:
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    children: <Widget>[
+                      Container(
+                        width: displayWidth(context)/3.9,
+                        padding: EdgeInsets
+                            .fromLTRB(
+                            10, 0, 0,
+                            0),
+                        child:
+
+                        Text(
+                            '${oneFood
+                                .itemName}',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                              color: Colors
+                                  .black,
+                              fontFamily: 'Itim-Regular',
+
+                            )
+                        ),
+                      ),
+
+                      Container(
+                        padding: EdgeInsets
+                            .fromLTRB(
+                            0, 4, displayWidth(context)/40,
+                            0),
+                        child:
+
+                        Text(
+                            '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
+                                '\u20AC',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight
+                                  .normal,
+//                                                      color: Colors.white
+                              color: Colors
+                                  .black,
+                              fontFamily: 'Itim-Regular',
+
+                            )
+                        ),
+                      ),
+
+                    ],
+                  ),
+
+
+
+                ),
+
+                // YELLOW NAME AND PRICE ENDS HERE.
+
+
+
+                // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                // ENDED HERE.
+
+                // BLACK CONTAINER WILL BE DELETED LATER.
+                // BLACK CONTAINER.
+
 
               ),
 
+              // multiselect portion... begins here.
+              Container(
+//                                            alignment: Alignment.centerRight,
 
-              controller: new ScrollController(
-                  keepScrollOffset: false),
+//                                            color: Colors.lightBlue,
+                height:displayHeight(context)/18,
 
-              shrinkWrap: false,
+                width: displayWidth(context) /1.07 ,
+                child:
+                // YELLOW NAME AND PRICE BEGINS HERE.
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+
+                    Container(
+//                                                  color:Colors.green,
+                      width: displayWidth(context) /2.1,
+                      height: displayHeight(context)/20,
+
+                    )
+                    ,
+                    Container(
+
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+//                                                      padding::::
+                      color:Colors.white,
+                      width: displayWidth(context) /2.2,
+                      height: displayHeight(context)/20,
+//                                                  width: displayWidth(context) /1.80,
+                      child: _buildMultiSelectOptions(),
+//                                                      Card(child: _buildMultiSelectOptions()),
+
+                      // Text('_buildMultiSelectOptions()')
+
+                    ),
+                  ],
+                ),
 
 
-            );
-          }
-        },
-      ),
+              ),
+              // multiselect portion...ends here.
+
+
+//          ;;;;;;;
+
+
+
+              Container(
+                color:Colors.white,
+
+                height: displayHeight(context) -
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.bottom,
+
+                width: displayWidth(context)/1.03,
+
+                margin: EdgeInsets.fromLTRB(
+                    12, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(
+                    0, 24, 0, 20),
+
+                child:StreamBuilder(
+                  stream: blocD.getUnSelectedIngredientItemsStream,
+                  initialData: blocD.unSelectedIngredients,
+
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(child: new LinearProgressIndicator());
+                    }
+                    else {
+
+                      List<NewIngredient> unSelectedIngredients = snapshot.data;
+                      return GridView.builder(
+                        itemCount: unSelectedIngredients
+                            .length,
+                        itemBuilder: (_, int index) {
+                          return _buildOneUNSelected
+                            (
+                              unSelectedIngredients[index],
+                              index/*, unSelectedIngredients*/
+                          );
+                        },
+                        gridDelegate:
+//                                            new SliverGridDelegateWithFixedCrossAxisCount(
+//                                              crossAxisCount: 3,
+                        new SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 180,
+
+                          mainAxisSpacing: 0,
+                          // H  direction
+                          crossAxisSpacing: 0,
+
+                          ///childAspectRatio:
+                          /// The ratio of the cross-axis to the main-axis extent of each child.
+                          /// H/V
+                          childAspectRatio: 300 / 340,
+//                                  ///childAspectRatio:
+//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
+//                                  /// H/V
+                          // horizontal / vertical
+//                                              childAspectRatio: 280/360,
+
+                        ),
+
+
+                        controller: new ScrollController(
+                            keepScrollOffset: false),
+
+                        shrinkWrap: false,
+
+
+                      );
+                    }
+                  },
+                ),
+
+              ),
+            ],
+          ),
+        )
+
 
     );
   }
@@ -380,7 +587,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   Widget initialView(FoodItemWithDocIDViewModel oneFood,Map<String, dynamic> foodSizePrice){
 
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-    
+
     return Container(
 //      color:Colors.white,
 //      height: displayHeight(context) / 2.1,
