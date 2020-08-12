@@ -266,158 +266,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                               },
-                              child: Stack(
-                                children: <Widget>[
-                                  // todo==>
-                                  // showUnSelectedIngredients displayHeight(context)/16
-                                  AnimatedPositioned(
-                                    child: AnimatedContainer(
-                                      // Use the properties stored in the State class.
-//                                      width: _width,
-//                                      height: _height,
-                                      decoration: BoxDecoration(
-//                                        color: Colors.lightGreen,
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(25),
-//                                        borderRadius: BorderRadius.all(20),
-                                      ),
-                                      // Define how long the animation should take.
-                                      duration: Duration(seconds: 1),
-                                      // Provide an optional curve to make the animation feel smoother.
-                                      curve: Curves.fastOutSlowIn,
-//                                      color:Colors.blueAccent,
-                                      /*
-                                      height:  displayHeight(context) / 2.2,
-                                      OLD HEIGHT */
-
-                                      height: displayHeight(context) -
-                                          MediaQuery.of(context).padding.top -
-                                          MediaQuery.of(context).padding.bottom,
-
-                                      width: displayWidth(context)/1.03,
-
-                                      margin: EdgeInsets.fromLTRB(
-                                          12, 0, 0, 0),
-                                      padding: EdgeInsets.fromLTRB(
-                                          0, 24, 0, 20),
-
-
-
-                                      // REFERENCE WIDTH AND MARGIN FROM THE BELOW CONTAINER.
-                                      // TOP LEVEL CONTAINER.
-                                      /*
-                                        width: displayWidth(context)
-                                            - displayWidth(context) /
-                                                3.8 /* this is about the width of yellow side menu */
-                                            - displayWidth(context) /
-                                                26, /* 10% of widht of the device for padding margin.*/
-//                  color:Colors.lightGreen,
-
-                                      */
-
-                                      //sssssss
-//                                    child: GridView.builder(
-                                      child:StreamBuilder(
-                                        stream: blocD.getUnSelectedIngredientItemsStream,
-                                        initialData: blocD.unSelectedIngredients,
-
-                                        builder: (context, snapshot) {
-                                          if (!snapshot.hasData) {
-                                            return Center(child: new LinearProgressIndicator());
-                                          }
-                                          else {
-
-                                            List<NewIngredient> unSelectedIngredients = snapshot.data;
-                                            return GridView.builder(
-                                              itemCount: unSelectedIngredients
-                                                  .length,
-                                              itemBuilder: (_, int index) {
-                                                return _buildOneUNSelected
-                                                  (
-                                                    unSelectedIngredients[index],
-                                                    index/*, unSelectedIngredients*/
-                                                );
-                                              },
-                                              gridDelegate:
-//                                            new SliverGridDelegateWithFixedCrossAxisCount(
-//                                              crossAxisCount: 3,
-                                              new SliverGridDelegateWithMaxCrossAxisExtent(
-                                                maxCrossAxisExtent: 180,
-
-                                                mainAxisSpacing: 0,
-                                                // H  direction
-                                                crossAxisSpacing: 0,
-
-                                                ///childAspectRatio:
-                                                /// The ratio of the cross-axis to the main-axis extent of each child.
-                                                /// H/V
-                                                childAspectRatio: 300 / 340,
-//                                  ///childAspectRatio:
-//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
-//                                  /// H/V
-                                                // horizontal / vertical
-//                                              childAspectRatio: 280/360,
-
-                                              ),
-
-
-                                              controller: new ScrollController(
-                                                  keepScrollOffset: false),
-
-                                              shrinkWrap: false,
-
-
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    duration: Duration(milliseconds: 500),
-                                    top: showUnSelectedIngredients
-                                        ? displayHeight(context)/16
-                                        /*THIS IS TOP MARGIN */ - MediaQuery
-                                            .of(context)
-                                            .padding
-                                            .top /*THIS IS SAFE AREA. AT THE TOP.*/ +
-                                        displayHeight(context) / 2.1
-                                        :  displayHeight(context)/16
-                                    /*THIS IS TOP MARGIN */ /*- MediaQuery
-                                              .of(context)
-                                              .padding
-                                              .top + 5 */ /*5 is adjustment value at top*/,
-//                left: 150,
-
-//            right:10,
-
-                                  ),
-/*                                  Positioned(
-                          /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE BEGINS HERE. */
-                                      child:*/
-
-/*
-
-Container(
-//                                        width: displayWidth(context) /1.8,
-                                            width: displayWidth(
-                                                context) / 1.1,
-                                            child:
-                                            AnimatedSwitcher(
-                                              duration: Duration(
-                                                  milliseconds: 1000),
-//
-                                              child: showFullOrderType
-                                                  ?
-                                              animatedWidgetShowFullOrderType()
-                                                  : /*1 */
-                                              animatedWidgetShowSelectedOrderType(), /* 2*/
-                                              // 1 => displayHeight(context) / 20 + displayHeight(context) / 7
-                                              // 2 => height: displayHeight(context) / 9,
-
-                                            ),
-
-
-                                          ),
- */
+                              child:
 
                                   Container(
 
@@ -430,12 +279,12 @@ Container(
                                             milliseconds: 1000),
 //
                                         child: showUnSelectedIngredients
-                                            ?initialView(oneFood,foodSizePrice) :otherView()
+                                            ?otherView() :initialView(oneFood,foodSizePrice)
                                     ),),
 //
 
-                                ],
-                              ),
+
+
                             )
 
 
@@ -451,8 +300,79 @@ Container(
   }
 
   Widget otherView(){
+
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+
     return Container(
-      child: Text('ss'),
+      color:Colors.white,
+
+      height: displayHeight(context) -
+          MediaQuery.of(context).padding.top -
+          MediaQuery.of(context).padding.bottom,
+
+      width: displayWidth(context)/1.03,
+
+      margin: EdgeInsets.fromLTRB(
+          12, 0, 0, 0),
+      padding: EdgeInsets.fromLTRB(
+          0, 24, 0, 20),
+
+      child:StreamBuilder(
+        stream: blocD.getUnSelectedIngredientItemsStream,
+        initialData: blocD.unSelectedIngredients,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: new LinearProgressIndicator());
+          }
+          else {
+
+            List<NewIngredient> unSelectedIngredients = snapshot.data;
+            return GridView.builder(
+              itemCount: unSelectedIngredients
+                  .length,
+              itemBuilder: (_, int index) {
+                return _buildOneUNSelected
+                  (
+                    unSelectedIngredients[index],
+                    index/*, unSelectedIngredients*/
+                );
+              },
+              gridDelegate:
+//                                            new SliverGridDelegateWithFixedCrossAxisCount(
+//                                              crossAxisCount: 3,
+              new SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 180,
+
+                mainAxisSpacing: 0,
+                // H  direction
+                crossAxisSpacing: 0,
+
+                ///childAspectRatio:
+                /// The ratio of the cross-axis to the main-axis extent of each child.
+                /// H/V
+                childAspectRatio: 300 / 340,
+//                                  ///childAspectRatio:
+//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
+//                                  /// H/V
+                // horizontal / vertical
+//                                              childAspectRatio: 280/360,
+
+              ),
+
+
+              controller: new ScrollController(
+                  keepScrollOffset: false),
+
+              shrinkWrap: false,
+
+
+            );
+          }
+        },
+      ),
+
     );
   }
 
@@ -462,6 +382,7 @@ Container(
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
     
     return Container(
+//      color:Colors.white,
 //      height: displayHeight(context) / 2.1,
 //                                  color:Colors.yellow,
 //                                    duration: Duration(seconds: 1),
