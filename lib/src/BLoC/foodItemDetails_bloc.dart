@@ -151,13 +151,13 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   // cheese items
   List<CheeseItem> _allCheeseItemsDBloc =[];
   List<CheeseItem> get getAllCheeseItems => _allCheeseItemsDBloc;
-  final _cheeseItemsController      =  StreamController <List<CheeseItem>>();
+  final _cheeseItemsController      =  StreamController <List<CheeseItem>>.broadcast();
   Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsController.stream;
 
   // sauce items
   List<SauceItem> _allSauceItemsDBloc = [];
   List<SauceItem> get getAllSauceItems => _allSauceItemsDBloc;
-  final _sauceItemsController      =  StreamController <List<SauceItem>>();
+  final _sauceItemsController      =  StreamController <List<SauceItem>>.broadcast();
   Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsController.stream;
 
 
