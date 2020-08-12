@@ -506,6 +506,216 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
+
+//              smallIMage and others in a row begins here=>
+
+
+
+
+              // 2nd ROW CONTAINING IMAGE CONTAINER
+              // AS ONE CHILD AND SIZED COMPONENTS ADN
+              // DEFAULT INGREDIENTS IN ANOTHER PLACE.
+              Container(
+//                                            color:Colors.deepPurpleAccent,
+                  height: displayHeight(context) / 7 +
+                      displayHeight(context) / 6.6,
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment
+                        .start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                      // , 2ND PART(ROW) HANDLES THE
+                      // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+
+
+                      Container(
+                        height: displayHeight(context) / 7 +
+                            displayHeight(context) / 6.6,
+                        padding: EdgeInsets
+                            .fromLTRB(
+                            0, 0, 0,
+                            0),
+
+                        child: FoodDetailImageSmaller(
+                            oneFood
+                                .imageURL,
+                            oneFood
+                                .itemName),
+                      ),
+
+
+                      // SIZED COMPONENTS AND
+                      // DEFAULT INGREDIENTS IN ANOTHER PLACE. BEGINS.
+                      // HERE.
+
+                      // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
+
+                      Container(
+//                                                    color:Colors.redAccent,
+                        height: displayHeight(context) / 7 +
+                            displayHeight(context) / 6.6,
+
+                        width: displayWidth(context) /1.39,
+//                                                    width: displayWidth(context) /1.80,
+                        //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .end,
+                          children: <Widget>[
+                            //pppp
+
+
+                            _buildOneSizeForOtherView(_currentSize,
+                                priceBasedOnCheeseSauceIngredientsSizeState),
+
+
+                            animatedWidgetPressToFinish(),
+                            
+                            ],),),
+
+
+
+
+                      Container(
+//                                                    color:Colors.redAccent,
+                        height: displayHeight(context) / 7 +
+                            displayHeight(context) / 6.6,
+
+                        width: displayWidth(context) /1.39,
+//                                                    width: displayWidth(context) /1.80,
+                        //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .end,
+                          children: <Widget>[
+                            //pppp
+                      Container(
+                          margin: EdgeInsets
+                              .fromLTRB(
+                              0, 0, 0, 0),
+                          alignment: Alignment
+                              .center,
+                          child: Text('selected ingredients'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'Itim-Regular',
+                              color: Color(0xff707070),
+                            ),
+                          )
+                      ),
+
+                            Container(
+//                                                            height: displayHeight(context) / 10,
+                                height: displayHeight(context) / 13,
+                                width: displayWidth(context) /1.50,
+//                                                            width: displayWidth(context) * 0.57,
+//                                                            color: Color(0xfff4444aa),
+//                                                            color:Colors.lightBlueAccent,
+//                                                        alignment: Alignment.center,
+                                child: selectedIngredientsNameOnly(context)
+                              //Text('buildDefaultIngredients('
+                              //    'context'
+                              //')'),
+                            ),
+
+                            // 'CHEESE BEGINS HERE.
+
+                                    Container(
+                                        margin: EdgeInsets
+                                            .fromLTRB(
+                                            0, 0, 0, 0),
+                                        alignment: Alignment
+                                            .center,
+                                        child: Text('CHEESE'.toUpperCase(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: 'Itim-Regular',
+                                            color: Color(0xff707070),
+                                          ),
+                                        )
+                                    ),
+
+
+
+                            Container(
+//                                                            height: displayHeight(context) / 10,
+                                height: displayHeight(context) / 14,
+                                width: displayWidth(context) /1.50,
+//                                                            width: displayWidth(context) * 0.57,
+//                                                            color: Color(0xfff4444aa),
+//                                                            color:Colors.lightBlueAccent,
+//                                                        alignment: Alignment.center,
+                                child: buildCheeseItemsNameOnly(
+                                    context
+                                )
+                              //Text('buildDefaultIngredients('
+                              //    'context'
+                              //')'),
+                            ),
+
+
+
+
+                                    Container(
+                                        margin: EdgeInsets
+                                            .fromLTRB(
+                                            0, 0, 0, 0),
+                                        alignment: Alignment
+                                            .center,
+                                        child: Text('SAUCES'.toUpperCase(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: 'Itim-Regular',
+                                            color: Color(0xff707070),
+                                          ),
+                                        )
+                                    ),
+
+                                 
+
+                            Container(
+//                                                            height: displayHeight(context) / 10,
+                                height: displayHeight(context) / 14,
+                                width: displayWidth(context) /1.50,
+//                                                            width: displayWidth(context) * 0.57,
+//                                                            color: Colors.purpleAccent,
+//                                                            color:Colors.lightBlueAccent,
+//                                                        alignment: Alignment.center,
+                                child: buildSauceItemsNameOnly(
+                                    context
+                                )
+                              //Text('buildDefaultIngredients('
+                              //    'context'
+                              //')'),
+                            ),
+
+                          ],
+                        ),
+                      ),
+
+
+
+
+                    ],
+                  )
+
+              ),
+
+
+              /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
+
+
+              //smallImage and other's in a row ends here ==>
+
               Container(
                 color:Colors.white,
 
@@ -579,317 +789,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-//              smallIMage and others in a row begins here=>
-
-
-
-
-              // 2nd ROW CONTAINING IMAGE CONTAINER
-              // AS ONE CHILD AND SIZED COMPONENTS ADN
-              // DEFAULT INGREDIENTS IN ANOTHER PLACE.
-              Container(
-//                                            color:Colors.deepPurpleAccent,
-                  height: displayHeight(context) / 7 +
-                      displayHeight(context) / 6.6
-                      + displayHeight(context) / 8,
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                      // , 2ND PART(ROW) HANDLES THE
-                      // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
-
-
-                      Container(
-
-                        padding: EdgeInsets
-                            .fromLTRB(
-                            0, 0, 0,
-                            0),
-
-                        child: FoodDetailImageSmaller(
-                            oneFood
-                                .imageURL,
-                            oneFood
-                                .itemName),
-                      ),
-
-
-                      // SIZED COMPONENTS AND
-                      // DEFAULT INGREDIENTS IN ANOTHER PLACE. BEGINS.
-                      // HERE.
-
-                      // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
-
-                      Container(
-//                                                    color:Colors.redAccent,
-                        height: displayHeight(context) / 7 +
-                            displayHeight(context) / 6.6
-                            + displayHeight(context) / 8,
-
-                        width: displayWidth(context) /1.39,
-//                                                    width: displayWidth(context) /1.80,
-                        //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .end,
-                          children: <Widget>[
-                            //pppp
-
-
-                            Container(
-//                                                          color:Colors.green,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-//                                                                  color: Colors.blueAccent,
-
-
-                                    height: displayHeight(context) / 9.8,
-//                                                        width: displayWidth(context) /1.80,
-                                    width: displayWidth(context) /40,
-
-
-                                  ),
-                                  Container(
-//                                                                  color: Colors.pink,
-
-//                                      padding: EdgeInsets.fromLTRB(0, 10, displayWidth(context)/40, 5),
-//                                      height: displayHeight(context) / 8.8,
-//                                                        width: displayWidth(context) /1.80,
-                                    width: displayWidth(context) /1.70,
-                                    child: _buildOneSizeForOtherView(_currentSize,
-                                        priceBasedOnCheeseSauceIngredientsSizeState),
-                                    //Text('_buildProductSizes('
-                                    //    'context,'
-                                    //    'foodSizePrice)'),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-//                                  Text('ss'),
-
-                            Container(
-                              width: displayWidth(context) /
-                                  1.5,
-                              height: displayHeight(
-                                  context) / 40,
-                              color: Color(0xffffffff),
-
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .start
-                                  ,
-                                  crossAxisAlignment: CrossAxisAlignment
-                                      .center,
-                                  children: <Widget>[
-
-                                    Container(
-                                        margin: EdgeInsets
-                                            .fromLTRB(
-                                            0, 0, 0, 0),
-                                        alignment: Alignment
-                                            .center,
-                                        child: Text('Default'.toUpperCase(),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: 'Itim-Regular',
-                                            color: Color(0xff707070),
-                                          ),
-                                        )
-                                    ),
-
-                                    CustomPaint(
-                                      size: Size(0, 19),
-                                      painter: LongHeaderPainterAfterShoppingCartPage(
-                                          context),
-                                    ),
-
-
-                                  ]
-                              ),
-
-                            ),
-
-                            /*
-                                                        Container(
-                                                            height: displayHeight(context) / 25,
-//          height:190,
-//                                                            width: displayWidth(context) * 6,
-                                                            width: displayWidth(context) /1.50,
-                                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-
-                                                            color: Color(0xFFffffff),
-                                                            alignment: Alignment.centerLeft,
-
-                                                            // PPPPP
-
-                                                            child:(
-
-                                                            )
-                                                        ),
-                                                        */
-                            Container(
-//                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 13,
-                                width: displayWidth(context) /1.50,
-//                                                            width: displayWidth(context) * 0.57,
-//                                                            color: Color(0xfff4444aa),
-//                                                            color:Colors.lightBlueAccent,
-//                                                        alignment: Alignment.center,
-                                child: buildDefaultIngredients(context)
-                              //Text('buildDefaultIngredients('
-                              //    'context'
-                              //')'),
-                            ),
-
-                            // 'CHEESE BEGINS HERE.
-                            Container(
-                              width: displayWidth(context) /
-                                  1.5,
-                              height: displayHeight(
-                                  context) / 40,
-                              color: Color(0xffffffff),
-
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .start
-                                  ,
-                                  crossAxisAlignment: CrossAxisAlignment
-                                      .center,
-                                  children: <Widget>[
-
-                                    Container(
-                                        margin: EdgeInsets
-                                            .fromLTRB(
-                                            0, 0, 0, 0),
-                                        alignment: Alignment
-                                            .center,
-                                        child: Text('CHEESE'.toUpperCase(),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: 'Itim-Regular',
-                                            color: Color(0xff707070),
-                                          ),
-                                        )
-                                    ),
-
-                                    CustomPaint(
-                                      size: Size(0, 19),
-                                      painter: LongHeaderPainterAfterShoppingCartPage(
-                                          context),
-                                    ),
-
-
-                                  ]
-                              ),
-
-                            ),
-
-                            Container(
-//                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 14,
-                                width: displayWidth(context) /1.50,
-//                                                            width: displayWidth(context) * 0.57,
-//                                                            color: Color(0xfff4444aa),
-//                                                            color:Colors.lightBlueAccent,
-//                                                        alignment: Alignment.center,
-                                child: buildCheeseItems(
-                                    context
-                                )
-                              //Text('buildDefaultIngredients('
-                              //    'context'
-                              //')'),
-                            ),
-
-
-
-                            Container(
-                              width: displayWidth(context) /
-                                  1.5,
-                              height: displayHeight(
-                                  context) / 40,
-                              color: Color(0xffffffff),
-
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .start
-                                  ,
-                                  crossAxisAlignment: CrossAxisAlignment
-                                      .center,
-                                  children: <Widget>[
-
-                                    Container(
-                                        margin: EdgeInsets
-                                            .fromLTRB(
-                                            0, 0, 0, 0),
-                                        alignment: Alignment
-                                            .center,
-                                        child: Text('SAUCES'.toUpperCase(),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: 'Itim-Regular',
-                                            color: Color(0xff707070),
-                                          ),
-                                        )
-                                    ),
-
-                                    CustomPaint(
-                                      size: Size(0, 19),
-                                      painter: LongHeaderPainterAfterShoppingCartPage(
-                                          context),
-                                    ),
-
-
-                                  ]
-                              ),
-
-                            ),
-
-                            Container(
-//                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 14,
-                                width: displayWidth(context) /1.50,
-//                                                            width: displayWidth(context) * 0.57,
-//                                                            color: Colors.purpleAccent,
-//                                                            color:Colors.lightBlueAccent,
-//                                                        alignment: Alignment.center,
-                                child: buildSauceItems(
-                                    context
-                                )
-                              //Text('buildDefaultIngredients('
-                              //    'context'
-                              //')'),
-                            ),
-
-                          ],
-                        ),
-                      ),
-
-
-
-
-                    ],
-                  )
-
-              ),
-
-
-              /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
-
-
-              //smallImage and other's in a row ends here ==>
 
 
             ],
@@ -2582,6 +2481,218 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   //now now
   /* DEAFULT INGREDIENT ITEMS BUILD STARTS HERE.*/
 
+
+
+  Widget buildSauceItemsNameOnly(BuildContext context /*,List<NewIngredient> defaltIngs*/){
+
+
+//    defaultIngredients
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+
+    return  StreamBuilder<List<SauceItem>>(
+        stream: blocD.getSauceItemsStream,
+        initialData: blocD.getAllSauceItems,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+
+            print('!snapshot.hasData');
+
+            return Container(
+//              height: displayHeight(context) / 13,
+              height: displayHeight(context) / 14,
+//          height:190,
+              width: displayWidth(context) /1.50,
+
+              color: Color(0xFFffffff),
+              alignment: Alignment.center,
+
+              // PPPPP
+
+              child:
+              Text('looking for sauce items, please wait...'.toLowerCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontFamily: 'Itim-Regular',
+                  color: Colors.white,
+
+                ),
+
+
+              ),
+            );
+          }
+
+          else {
+
+//            print('snapshot.hasData and else statement at FDetailS2');
+            List<SauceItem> selectedSauceItems = snapshot.data;
+
+            if(selectedSauceItems.length==0){
+              return Container(
+//                  height: displayHeight(context) / 13,
+                  height: displayHeight(context) / 14,
+//          height:190,
+                  width: displayWidth(context) /1.50,
+
+                  color: Color(0xffFFFFFF),
+                  alignment: Alignment.center,
+
+                  // PPPPP
+
+                  child:(
+                      Text('No sauce items found'.toLowerCase(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: 'Itim-Regular',
+                          color: Colors.grey,
+                        ),
+                      )
+                  )
+              );
+            }
+            else{
+
+              return Container(
+//                color: Colors.green,
+                child: ListView.builder(
+
+                  /*
+
+                  gridDelegate:
+                  new SliverGridDelegateWithMaxCrossAxisExtent(
+
+
+                    maxCrossAxisExtent: 160,
+                    mainAxisSpacing: 8, // Vertical  direction
+                    crossAxisSpacing: 5,
+                    childAspectRatio: 160 / 180,
+                    // H/V
+
+
+                  ),
+
+                  */
+
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+
+                  itemCount: selectedSauceItems
+                      .length,
+                  itemBuilder: (_, int index) {
+                    return oneSauceItemNameOnly(selectedSauceItems[index],index);
+                  },
+                ),
+              );
+            }
+          }
+        }
+    );
+  }
+
+
+  Widget oneSauceItemNameOnly(SauceItem oneSauce,int index) {
+    final String sauceItemName = oneSauce.sauceItemName;
+
+
+
+
+
+
+      // for condition: oneSauce.isSelected==true
+      return
+
+        Container(
+//          color:Colors.lightGreenAccent,
+//            color: Color.fromRGBO(239, 239, 239, 0),
+//          color: Colors.white,
+          padding: EdgeInsets.symmetric(
+//                          horizontal: 10.0, vertical: 22.0),
+              horizontal: 18, vertical: 0),
+          child: GestureDetector(
+            onTap: () {
+              print('SauceItem on Tap, '
+                  'nothing will happen since sauce is '
+                  'already selected, press onLong Press: to remove');
+
+//                            return Navigator.push(context,
+
+//                                MaterialPageRoute(builder: (context)
+//                                => FoodItemDetails())
+//                            );
+            },
+
+            onLongPressUp: () {
+              print('at Long Press UP SauceItem: ');
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+              blocD.removeThisSauceFROMSelectedSauceItem(oneSauce, index);
+//                blocD.addThisCheeseAsSelectedCheeseItem(oneSauce,index)
+            },
+
+            child:
+            Neumorphic(
+              curve: Neumorphic.DEFAULT_CURVE,
+              style: NeumorphicStyle(
+                shape: NeumorphicShape
+                    .concave,
+                depth: 8,
+                border: NeumorphicBorder(
+                  isEnabled: false,
+//                  color: Colors.white,
+                  width: 0.8,
+
+                ),
+                lightSource: LightSource.top,
+                boxShape: NeumorphicBoxShape.roundRect(
+                    BorderRadius.all(Radius.circular(5))
+                ),
+
+                color: Color(0xffFCF5E4),
+                shadowDarkColor: Color(0xff525FFF),
+//                        Colors.lightGreenAccent
+
+//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+              ),
+
+
+              child:
+                  Container(
+                    width: displayWidth(context) / 9,
+
+                    child: Text(
+
+                      sauceItemName,
+
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+
+                      style: TextStyle(
+                        color: Color(0xff707070),
+//                                    color: Colors.blueGrey[800],
+
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                        decorationStyle: TextDecorationStyle.double,
+                      ),
+                    ),
+                  )
+
+              ),
+
+            ),
+
+        );
+
+  }
+
+
+
 //  buildCheeseItems
 
   Widget buildSauceItems(BuildContext context /*,List<NewIngredient> defaltIngs*/){
@@ -2952,6 +3063,242 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     }
   }
+
+
+  Widget buildCheeseItemsNameOnly(BuildContext context /*,List<NewIngredient> defaltIngs*/){
+
+
+//    defaultIngredients
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+
+    return  StreamBuilder<List<CheeseItem>>(
+        stream: blocD.getCheeseItemsStream,
+        initialData: blocD.getAllCheeseItems,
+
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+              return Container(
+                margin: EdgeInsets.fromLTRB(
+                    0, displayHeight(context) / 2, 0, 0),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                    children: <Widget>[
+
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                                backgroundColor: Colors.lightGreenAccent)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                              backgroundColor: Colors.yellow,)
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: new CircularProgressIndicator(
+                                backgroundColor: Color(0xffFC0000))
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              );
+              break;
+            case ConnectionState.active:
+            default:
+              if (snapshot.data == null) {
+//          if (!snapshot.hasData) {
+
+                print('snapshot.data == null');
+
+                return Container(
+//              height: displayHeight(context) / 13,
+                  height: displayHeight(context) / 14,
+//          height:190,
+                  width: displayWidth(context) / 1.50,
+
+                  color: Color(0xFFffffff),
+                  alignment: Alignment.center,
+
+                  // PPPPP
+
+                  child:
+                  Text('looking for cheese items, please wait...'.toLowerCase(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontFamily: 'Itim-Regular',
+                      color: Colors.white,
+
+                    ),
+
+
+                  ),
+                );
+              }
+
+              else {
+                List<CheeseItem> selectedCheeseItems = snapshot.data;
+
+                if (selectedCheeseItems.length == 0) {
+                  return Container(
+//                  height: displayHeight(context) / 13,
+                      height: displayHeight(context) / 14,
+//          height:190,
+                      width: displayWidth(context) / 1.50,
+
+                      color: Color(0xffFFFFFF),
+                      alignment: Alignment.center,
+
+                      // PPPPP
+
+                      child: (
+                          Text('No cheese items found.'.toLowerCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontFamily: 'Itim-Regular',
+                              color: Colors.grey,
+                            ),
+                          )
+                      )
+                  );
+                }
+                else {
+                  return Container(
+//                color: Colors.green,
+                    child: ListView.builder(
+
+
+                      /*
+                  gridDelegate:
+                  new SliverGridDelegateWithMaxCrossAxisExtent(
+
+
+                    maxCrossAxisExtent: 160,
+                    mainAxisSpacing: 8, // Vertical  direction
+                    crossAxisSpacing: 5,
+                    childAspectRatio: 160 / 180,
+                    // H/V
+
+
+                  ),
+
+                  */
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+
+                      itemCount: selectedCheeseItems
+                          .length,
+                      itemBuilder: (_, int index) {
+                        return oneCheeseItemNameOnly(selectedCheeseItems[index],index);
+                      },
+                    ),
+                  );
+                }
+              }
+          }
+        }
+    );
+  }
+
+
+
+  Widget oneCheeseItemNameOnly(CheeseItem oneCheese,int index){
+    final String cheeseItemName = oneCheese.cheeseItemName;
+
+
+    final dynamic cheeseItemImageURL = oneCheese.imageURL == '' ?
+    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
+        :
+    storageBucketURLPredicate + Uri.encodeComponent(oneCheese.imageURL) + '?alt=media';
+
+
+
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
+        child: GestureDetector(
+
+          onTap: () {
+            print('at onTap: ');
+//                print('at Long Press UP: ');
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+            blocD.setThisCheeseAsSelectedCheeseItem(oneCheese,index);
+
+          },
+
+          onLongPressUp: (){
+
+            print('at Long Press UP: --and nothing will happen since it is not selected,');
+
+          },
+
+          child:
+          Neumorphic(
+            curve: Neumorphic.DEFAULT_CURVE,
+            style: NeumorphicStyle(
+              shape: NeumorphicShape
+                  .concave,
+              depth: 8,
+              border: NeumorphicBorder(
+                isEnabled: false,
+                color: Colors.grey,
+
+                width: 0.8,
+
+              ),
+              lightSource: LightSource.top,
+              boxShape: NeumorphicBoxShape.roundRect(
+                  BorderRadius.all(Radius.circular(5))
+              ),
+
+              color: Colors.white,
+              shadowDarkColor: Color(0xff525FFF),
+//                        Colors.lightGreenAccent
+
+//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+            ),
+
+            child:
+
+
+                Container(
+                  width: displayWidth(context) / 9,
+                  child: Text(
+                    cheeseItemName,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+
+                    style: TextStyle(
+                      color: Color(0xff707070),
+//                                    color: Colors.blueGrey[800],
+
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                  ),
+                )
+          ),
+        ),
+
+      );
+  }
+
 
 
   Widget buildCheeseItems(BuildContext context /*,List<NewIngredient> defaltIngs*/){
@@ -3334,6 +3681,144 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   }
 
 
+  Widget selectedIngredientsNameOnly(BuildContext context /*,List<NewIngredient> defaltIngs*/){
+
+
+//    defaultIngredients
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+
+    return StreamBuilder(
+        stream: blocD.getDefaultIngredientItemsStream,
+        initialData: blocD.getDefaultIngredients,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+
+            print('!snapshot.hasData');
+
+            return Container(
+//              height: displayHeight(context) / 13,
+              height: displayHeight(context) / 14,
+//          height:190,
+              width: displayWidth(context) /1.50,
+
+              color: Color(0xFFffffff),
+              alignment: Alignment.center,
+
+              // PPPPP
+
+              child:
+              Text('No Ingredients, Please Select 1 or more.'.toLowerCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontFamily: 'Itim-Regular',
+                  color: Colors.white,
+
+                ),
+
+
+              ),
+            );
+          }
+
+          else {
+
+//            print('snapshot.hasData and else statement at FDetailS2');
+            List<NewIngredient> selectedIngredients = snapshot.data;
+
+            if( (selectedIngredients.length ==1)&&
+                (selectedIngredients[0].ingredientName.toLowerCase()=='none')){
+
+              return Container(
+//                  height: displayHeight(context) / 13,
+                  height: displayHeight(context) / 14,
+//          height:190,
+                  width: displayWidth(context) /1.50,
+
+                  color: Color(0xFFffffff),
+                  alignment: Alignment.center,
+
+                  // PPPPP
+
+                  child:(
+                      Text('No Ingredients, Please Select 1 or more.'.toLowerCase(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: 'Itim-Regular',
+                          color: Colors.white,
+                        ),
+                      )
+                  )
+              );
+            }
+            else if(selectedIngredients.length==0){
+              return Container(
+//                  height: displayHeight(context) / 13,
+                  height: displayHeight(context) / 14,
+//          height:190,
+                  width: displayWidth(context) /1.50,
+
+                  color: Color(0xffFFFFFF),
+                  alignment: Alignment.center,
+
+                  // PPPPP
+
+                  child:(
+                      Text('No Ingredients, Please Select 1 or more.'.toLowerCase(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: 'Itim-Regular',
+                          color: Colors.grey,
+                        ),
+                      )
+                  )
+              );
+            }
+            else{
+
+              return Container(
+//                color: Colors.green,
+                child: ListView.builder(
+
+
+                  /*
+                  gridDelegate:
+                  new SliverGridDelegateWithMaxCrossAxisExtent(
+
+
+                    maxCrossAxisExtent: 160,
+                    mainAxisSpacing: 8, // Vertical  direction
+                    crossAxisSpacing: 5,
+                    childAspectRatio: 160 / 180,
+                    // H/V
+
+
+                  ),
+                  */
+
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+
+                  itemCount: selectedIngredients
+                      .length,
+                  itemBuilder: (_, int index) {
+                    return oneDefaultIngredientNameOnly(selectedIngredients[index],
+                        index);
+                  },
+                ),
+              );
+            }
+          }
+        }
+    );
+  }
+
+
+
 
   Widget buildDefaultIngredients(BuildContext context /*,List<NewIngredient> defaltIngs*/){
 
@@ -3470,6 +3955,96 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         }
     );
   }
+
+
+
+  Widget oneDefaultIngredientNameOnly(NewIngredient oneIngredient,int index){
+    final String ingredientName = oneIngredient.ingredientName;
+
+
+    final dynamic ingredientImageURL = oneIngredient.imageURL == '' ?
+    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
+        :
+    storageBucketURLPredicate +
+        Uri.encodeComponent(oneIngredient.imageURL)
+
+        + '?alt=media';
+
+    return
+      Container(
+//            color: Color.fromRGBO(239, 239, 239, 0),
+//            color: Colors.white,
+//        color:Colors.lightGreenAccent,
+        padding: EdgeInsets.symmetric(
+//                          horizontal: 10.0, vertical: 22.0),
+            horizontal: 18, vertical: 0),
+        child: GestureDetector(
+
+            onLongPressUp: (){
+
+              print(
+                  'at Long Press UP: ');
+
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+
+              blocD.removeThisDefaultIngredientItem(oneIngredient,index);
+
+            },
+
+            child:
+            Neumorphic(
+              curve: Neumorphic.DEFAULT_CURVE,
+              style: NeumorphicStyle(
+                shape: NeumorphicShape
+                    .concave,
+                depth: 8,
+                border: NeumorphicBorder(
+                  isEnabled: false,
+//                  color: Colors.white,
+                  width: 0.8,
+
+                ),
+                lightSource: LightSource.top,
+                boxShape: NeumorphicBoxShape.roundRect(
+                    BorderRadius.all(Radius.circular(5))
+                ),
+
+                color: Color(0xffFCF5E4),
+                shadowDarkColor: Color(0xff525FFF),
+//                        Colors.lightGreenAccent
+
+//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
+              ),
+              child:
+                  Container(
+                    width: displayWidth(context) / 9,
+                    child: Text(
+                      ingredientName,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+
+                      style: TextStyle(
+                        color: Color(0xff707070),
+//                                    color: Colors.blueGrey[800],
+
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+//                    decoration: TextDecoration.underline,
+//                    decorationStyle:TextDecorationStyle.double,
+                      ),
+                    ),
+                  )
+
+            ),
+            onTap: () {
+              print('for future use');
+            }
+        ),
+      );
+  }
+
 
 
 
