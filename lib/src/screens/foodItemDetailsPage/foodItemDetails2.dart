@@ -22,6 +22,7 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 //import 'package:neumorphic/neumorphic.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
+import 'package:foodgallery/src/screens/foodItemDetailsPage/Widgets/FoodDetailImageSmaller.dart';
 
 //sizeConstantsList
 
@@ -602,19 +603,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
 
 
-                    Container(
+                      Container(
 
-                                padding: EdgeInsets
-                                    .fromLTRB(
-                                    0, 0, 0,
-                                    0),
+                        padding: EdgeInsets
+                            .fromLTRB(
+                            0, 0, 0,
+                            0),
 
-                                child: FoodDetailImage(
-                                    oneFood
-                                        .imageURL,
-                                    oneFood
-                                        .itemName),
-                              ),
+                        child: FoodDetailImageSmaller(
+                            oneFood
+                                .imageURL,
+                            oneFood
+                                .itemName),
+                      ),
 
 
                       // SIZED COMPONENTS AND
@@ -663,9 +664,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                      padding: EdgeInsets.fromLTRB(0, 10, displayWidth(context)/40, 5),
 //                                      height: displayHeight(context) / 8.8,
 //                                                        width: displayWidth(context) /1.80,
-                                      width: displayWidth(context) /1.70,
-                                      child: _buildOneSizeForOtherView(_currentSize,
-                                          priceBasedOnCheeseSauceIngredientsSizeState),
+                                    width: displayWidth(context) /1.70,
+                                    child: _buildOneSizeForOtherView(_currentSize,
+                                        priceBasedOnCheeseSauceIngredientsSizeState),
                                     //Text('_buildProductSizes('
                                     //    'context,'
                                     //    'foodSizePrice)'),
@@ -3606,59 +3607,59 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   Widget _buildOneSizeForOtherView(String oneSize, double onePriceForSize){
 
     return
-    Container(
+      Container(
 //          margin: EdgeInsets.fromLTRB(0, 0,5,5),
-      margin: EdgeInsets.fromLTRB(12,2,12,5),
+        margin: EdgeInsets.fromLTRB(12,2,12,5),
 //          padding: EdgeInsets.fromLTRB(12,2,12,5),
-      width: displayWidth(context)/3.6,
-      child:
-      RaisedButton(
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        color: Color(0xffFFE18E),
+        width: displayWidth(context)/3.6,
+        child:
+        RaisedButton(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+          color: Color(0xffFFE18E),
 //          color: Colors.lightGreen,
-        elevation: 2.5,
-        shape: RoundedRectangleBorder(
+          elevation: 2.5,
+          shape: RoundedRectangleBorder(
 //          borderRadius: BorderRadius.circular(15.0),
-          side: BorderSide(
-            color: Color(0xffF7F0EC),
-            style: BorderStyle.solid,
+            side: BorderSide(
+              color: Color(0xffF7F0EC),
+              style: BorderStyle.solid,
 
+            ),
+            borderRadius: BorderRadius.circular(35.0),
           ),
-          borderRadius: BorderRadius.circular(35.0),
-        ),
 
-        child:Container(
+          child:Container(
 
 //              alignment: Alignment.center,
-          child: Text(
-            oneSize.toUpperCase(), style:
-          TextStyle(
-              color:Color(0xff54463E),
+            child: Text(
+              oneSize.toUpperCase(), style:
+            TextStyle(
+                color:Color(0xff54463E),
 
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Poppins-ExtraBold',
-              fontSize: 13),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins-ExtraBold',
+                fontSize: 13),
+            ),
           ),
-        ),
-        onPressed: () {
+          onPressed: () {
 
 //              logger.i('onePriceForSize: ',onePriceForSize);
 
-          final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-          blocD.setNewSizePlusPrice(oneSize);
-
-
-
-        },
+            blocD.setNewSizePlusPrice(oneSize);
 
 
 
-      ),
-    );
+          },
+
+
+
+        ),
+      );
   }
 
-  
+
   Widget _buildOneSize(String oneSize,double onePriceForSize, int index) {
 
     return Container(
