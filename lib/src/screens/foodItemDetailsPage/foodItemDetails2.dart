@@ -1061,8 +1061,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             // DEFAULT INGREDIENTS IN ANOTHER PLACE.
             Container(
 
-                                              color:Colors.deepPurpleAccent,
-                width: displayWidth(context) /2.29 + displayWidth(context) /1.91,
+//                                              color:Colors.deepPurpleAccent,
+                width: displayWidth(context) /2.49 + displayWidth(context) /1.91,
 //                                              height: displayHeight(context) / 7 +
 //                                                  displayHeight(context) / 6.6
 //                                                  + displayHeight(context) / 8,
@@ -1082,7 +1082,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                     Container(
 //                                                    width: displayWidth(context)/4,
-                      width: displayWidth(context)/2.29,
+                      width: displayWidth(context)/2.49,
 //                                                    width: displayWidth(context)/3.29,
 //                                                    color:Colors.blue,
                       child: Column(
