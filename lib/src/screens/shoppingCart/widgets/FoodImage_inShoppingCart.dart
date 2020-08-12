@@ -16,7 +16,6 @@ import 'package:logger/logger.dart';
 class FoodImageInShoppingCart extends StatelessWidget {
 
 
-
   final String imageURLBig;
   final String foodItemName;
   final List<NewIngredient> selectedIngredients;
@@ -80,12 +79,17 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
 //      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
                     // -displayWidth(context)/9
+
+                    /*
                     child: Transform.translate(
                       offset: Offset(-displayWidth(context) / 49, 0),
                       // offset (-x,y) =(-50,0) =
-                      child:
+
+                      */
+                    child:
 
 
+                    /*
                       Stack(
                         alignment: Alignment.topLeft,
                         children: [
@@ -101,10 +105,29 @@ class FoodImageInShoppingCart extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                           ),
-                          Container(
-                            alignment: Alignment.topLeft,
 
-                            child:
+                          */
+                    Container(
+                      alignment: Alignment.topLeft,
+
+                      child:
+
+                      ClipOval(
+                        clipper: MyClipper11(),
+                        child:CachedNetworkImage(
+                          height:displayHeight(context)/4.6,
+//                  width: displayWidth(context)/2.95,
+
+                          imageUrl: imageURLBig,
+//                    fit: BoxFit.scaleDown,cover,scaleDown,fill
+                          fit: BoxFit.fill,
+//
+                          placeholder: (context, url) => new CircularProgressIndicator(),
+                        ),
+                      ),
+
+                      /*
+
                             ClipOval(
                               child: CachedNetworkImage(
                                 width: displayWidth(context) / 3,
@@ -118,36 +141,42 @@ class FoodImageInShoppingCart extends StatelessWidget {
                               ),
                             ),
 
-                          ),
-                        ],
-                      ),
+                            */
+
                     ),
 
+                    /*
+                        ],
+                      ),
+
+           */
                   ),
-
-                  Container(
-//                    color:Colors.redAccent,
-                    color: Color(0xffF4F6CE),
-
-                    width: 70,
-                    alignment: Alignment.topLeft,
-                    child:Text(price.toStringAsFixed(2)+
-                        '\u20AC',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight
-                              .bold,
-//                                                      color: Colors.white
-                          color: Color(0xff707070),
-
-                        )),
-                  )
-//                    ),
-
-
                 ],
               ),
             ),
+
+            Container(
+//                    color:Colors.redAccent,
+              color: Color(0xffF4F6CE),
+
+              width: 70,
+              alignment: Alignment.topLeft,
+              child:Text(price.toStringAsFixed(2)+
+                  '\u20AC',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight
+                        .bold,
+//                                                      color: Colors.white
+                    color: Color(0xff707070),
+
+                  )),
+            ),
+//                    ),
+
+
+
+
 
 
 //            stringifiedFoodItemIngredients
@@ -537,4 +566,22 @@ class TriangleClipper extends CustomClipper<Path> {
   }
   @override
   bool shouldReclip(TriangleClipper oldClipper) => false;
+}
+
+
+class  MyClipper11 extends CustomClipper<Rect> {
+
+  @override
+  Rect getClip(Size size) {
+//    return Rect.fromLTWH(left, top, width, height)
+//  GOOD OPTION 1
+//    return Rect.fromLTWH(-220, 0, 550, 550);
+
+//    return Rect.fromCenter(center: Offset(0, 0),width:190,height:190);
+//  GOOD OPTION 2
+    return Rect.fromCircle(center: Offset(0, 170),radius:140);
+
+  }
+  @override
+  bool shouldReclip(oldClipper) => false;
 }

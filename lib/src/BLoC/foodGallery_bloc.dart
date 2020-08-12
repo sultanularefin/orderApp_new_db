@@ -1,6 +1,8 @@
 
 // BLOC
 //    import 'package:foodgallery/src/Bloc/
+//import 'dart:html';
+
 import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
@@ -43,6 +45,8 @@ class FoodGalleryBloc implements Bloc {
   bool    _isDisposedFoodItems = false;
 
   bool _isDisposedCategories = false;
+
+  bool _isDisposedExtraIngredients = false;
 
 
   List<FoodItemWithDocID> _allFoodsList=[];
@@ -152,6 +156,75 @@ class FoodGalleryBloc implements Bloc {
     }
   }
 
+
+
+
+// this code bloc cut paste from foodGallery Bloc:
+  Future<void> getAllExtraIngredientsConstructor() async {
+
+    List<String> categories =
+    [
+      'jauheliha_kebab_vartaat'
+    'salaatit_kasvis',
+    'pizza',
+    'lasten_menu',
+    'kebab',
+    'juomat'
+    ];
+    print('at getAllExtraIngredientsConstructor()');
+
+
+
+    if (_isDisposedExtraIngredients == false) {
+
+//      categories.forEach((doc) {
+
+        var snapshot = await _client.fetchAllExtraIngredients('jauheliha_kebab_vartaat');
+        List docList = snapshot.documents;
+
+
+        List <NewIngredient> ingItems = new List<NewIngredient>();
+        ingItems = snapshot.documents.map((documentSnapshot) =>
+            NewIngredient.ingredientConvert
+              (documentSnapshot.data, documentSnapshot.documentID)
+
+        ).toList();
+
+
+        List<String> documents = snapshot.documents.map((documentSnapshot) =>
+        documentSnapshot.documentID).toList();
+
+        // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+
+
+        _allIngItemsFGBloc = ingItems;
+
+        _allIngredientListController.sink.add(_allIngItemsFGBloc);
+
+
+//    return ingItems;
+
+
+
+
+
+
+
+        _isDisposedExtraIngredients=true;
+
+
+
+
+    }
+    else {
+//      _isDisposedExtraIngredients == Element.true
+    return;
+    }
+  }
+
+
+
+
 //  Future<List<FoodItemWithDocID>> getAllFoodItems() async {
   void getAllFoodItemsConstructor() async {
 
@@ -213,12 +286,9 @@ class FoodGalleryBloc implements Bloc {
 
         print('foodIsAvailable: $foodIsAvailable');
 
-
         final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
-
         final List<dynamic> foodItemIngredientsList =  doc['ingredients'];
 //          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
-
 
 //          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
 
@@ -250,8 +320,6 @@ class FoodGalleryBloc implements Bloc {
         if(foodItemName.toLowerCase()=='pita'){
           print('--------------------------pita found-==================');
         }
-
-
 
 //        final double foodItemDiscount = doc['discount'];
 
@@ -346,7 +414,6 @@ class FoodGalleryBloc implements Bloc {
         */
 
         NewCategoryItem oneCategoryItem = new NewCategoryItem(
-
 
           categoryName: categoryItemName,
           squenceNo: sequenceNo0.toInt(),
@@ -529,6 +596,10 @@ class FoodGalleryBloc implements Bloc {
 
     getAllIngredientsConstructor();
 
+//    getAllExtraIngredientsConstructor();
+
+
+
     getAllFoodItemsConstructor();
 
     getAllCategoriesConstructor();
@@ -570,6 +641,7 @@ class FoodGalleryBloc implements Bloc {
     _isDisposedIngredients = true;
     _isDisposedFoodItems = true;
     _isDisposedCategories = true;
+    _isDisposedExtraIngredients = true;
 
 
 

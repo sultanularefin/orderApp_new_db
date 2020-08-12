@@ -1169,7 +1169,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                       context) /
                                                       1.5,
                                                   height: displayHeight(
-                                                      context) / 20,
+                                                      context) / 30,
                                                   color: Color(
                                                       0xffffffff),
 
@@ -1192,7 +1192,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                           child: Text(
                                                               'Shopping Cart',
                                                               style: TextStyle(
-                                                                fontSize: 30,
+                                                                fontSize: 24,
                                                                 fontWeight: FontWeight
                                                                     .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',

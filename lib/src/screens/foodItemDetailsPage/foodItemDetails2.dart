@@ -310,9 +310,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //      height: displayHeight(context) / 2.1,
 //                                  color:Colors.yellow,
 //                                    duration: Duration(seconds: 1),
+      /*
         height: displayHeight(context) -
             MediaQuery.of(context).padding.top -
             MediaQuery.of(context).padding.bottom,
+        */
+
+        height: displayHeight(context) / 7 +
+            displayHeight(context) / 6.6 +
+            displayHeight(context)/2.5 +
+            50 +
+            displayHeight(context)/18 +
+            displayHeight(context)/18,
 
 
         // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
@@ -456,6 +465,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 // BLACK CONTAINER.
 
 
+
               ),
 
               // multiselect portion... begins here.
@@ -486,7 +496,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                      padding::::
                       color:Colors.white,
                       width: displayWidth(context) /2.2,
-                      height: displayHeight(context)/20,
+                      height: displayHeight(context)/17,
 //                                                  width: displayWidth(context) /1.80,
                       child: _buildMultiSelectOptions(),
 //                                                      Card(child: _buildMultiSelectOptions()),
@@ -521,6 +531,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   height: displayHeight(context) / 7 +
                       displayHeight(context) / 6.6,
 
+//                displayHeight(context)/2.5
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment
                         .start,
@@ -566,9 +577,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment
-                              .start,
-                          crossAxisAlignment: CrossAxisAlignment
                               .center,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .start,
                           children: <Widget>[
                             //pppp
 
@@ -597,17 +608,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment
-                              .start,
+                              .center,
                           crossAxisAlignment: CrossAxisAlignment
-                              .end,
+                              .start,
                           children: <Widget>[
                             //pppp
                             Container(
-                                margin: EdgeInsets
+                                padding: EdgeInsets
                                     .fromLTRB(
-                                    0, 0, 0, 0),
-                                alignment: Alignment
-                                    .center,
+                                    10, 3, 0, 3),
+//                                alignment: Alignment
+//                                    .center,
                                 child: Text('selected ingredients'.toUpperCase(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -622,10 +633,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                            height: displayHeight(context) / 10,
                                 height: displayHeight(context) / 23,
                                 width: displayWidth(context) /2.39,
-//                                                            width: displayWidth(context) * 0.57,
-//                                                            color: Color(0xfff4444aa),
-//                                                            color:Colors.lightBlueAccent,
-//                                                        alignment: Alignment.center,
                                 child: selectedIngredientsNameOnly(context)
                               //Text('buildDefaultIngredients('
                               //    'context'
@@ -635,11 +642,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             // 'CHEESE BEGINS HERE.
 
                             Container(
-                                margin: EdgeInsets
+                                padding: EdgeInsets
                                     .fromLTRB(
-                                    0, 0, 0, 0),
-                                alignment: Alignment
-                                    .center,
+                                    10, 0, 0, 0),
+//                                alignment: Alignment
+//                                    .center,
                                 child: Text('CHEESE'.toUpperCase(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -675,11 +682,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                             Container(
-                                margin: EdgeInsets
+                                padding: EdgeInsets
                                     .fromLTRB(
-                                    0, 0, 0, 0),
-                                alignment: Alignment
-                                    .center,
+                                    10, 0, 0, 0),
+//                                alignment: Alignment
+//                                    .center,
                                 child: Text('SAUCES'.toUpperCase(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -729,10 +736,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               Container(
                 color:Colors.white,
 
-                height: displayHeight(context) -
+                height: displayHeight(context)/2.5,
+                /*-
                     MediaQuery.of(context).padding.top -
                     MediaQuery.of(context).padding.bottom,
-
+*/
                 width: displayWidth(context)/1.03,
 
                 margin: EdgeInsets.fromLTRB(
@@ -1702,11 +1710,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   }
 
 
-  Widget animatedWidgetPressToFinish(){
-    return
 
+
+  /*
+  Widget moreIngredientsButton(){
+
+
+    ///sdfsdfsdf
+    return
       RaisedButton(
-          color:Colors.redAccent,
+
+          color:Color(0xffFCF5E4),
           highlightColor: Color(0xff525FFF),
           splashColor: Color(0xffB47C00),
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -1717,32 +1731,128 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               style: BorderStyle.solid,
 //            width: 1,
             ),
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(5.0),
           ),
 
           child:Container(
 
-              width:displayWidth(context)/7,
-              height: displayHeight(context)/28,
+            width:displayWidth(context)/3,
 
-              child:
-              Container(
+            height: displayHeight(context)/24,
+            padding: EdgeInsets.fromLTRB(0,0,0,0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment
+                  .center,
+              children: <
+                  Widget>[
+                //  SizedBox(width: 5,),
 
-                padding: EdgeInsets.fromLTRB(2,8,0,0),
-                child:Text(
-                  'FINISH'.toLowerCase(),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0,3,0,0),
+                  child: Icon(
+                    Icons.add,
+                    size: 25.0,
+//                    color: Color(0xffF50303),
+                    color: Colors.black,
+                    //        color: Color(0xffFFFFFF),
+                  ),
+                ),
+
+                Text(
+                  'more Ingredients'.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontWeight: FontWeight
-                          .bold,
-                      color: Color(0xffFFFFFF),
-                      fontFamily: 'Itim-Regular',
-                      fontSize: 22),
+                    fontWeight: FontWeight
+                        .bold,
+//                    color: Color(0xffF50303),
+                    color: Colors.black,
+                    fontSize: 22, fontFamily: 'Itim-Regular',),
                 ),
-              )
-
-
+              ],
+            ),
           ),
+          onPressed: () {
+//                                                                        logger.i('s  =>   =>   => ','ss');
+
+
+            setState(() {
+
+              // toggle..
+              showUnSelectedIngredients = !showUnSelectedIngredients;
+              showPressWhenFinishButton = !showPressWhenFinishButton;
+//                        myAnimatedWidget2 = myAnimatedWidget1();
+            });
+            print(
+                'xyz');
+          }
+
+      );
+  }
+
+  */
+
+  Widget animatedWidgetPressToFinish(){
+
+
+       return RaisedButton(
+
+          color:Color(0xffFCF5E4),
+          highlightColor: Color(0xff525FFF),
+          splashColor: Color(0xffB47C00),
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+          highlightElevation: 12,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Color(0xff707070),
+              style: BorderStyle.solid,
+//            width: 1,
+            ),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+
+          child:Container(
+
+            width:displayWidth(context)/4.5,
+
+            height: displayHeight(context)/24,
+            padding: EdgeInsets.fromLTRB(0,0,0,0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment
+                  .center,
+              children: <
+                  Widget>[
+                //  SizedBox(width: 5,),
+
+            /*
+                Container(
+                  padding: EdgeInsets.fromLTRB(0,3,0,0),
+                  child: Icon(
+                    Icons.add,
+                    size: 25.0,
+//                    color: Color(0xffF50303),
+                    color: Colors.black,
+                    //        color: Color(0xffFFFFFF),
+                  ),
+                ),
+
+                */
+
+                Text(
+                  'press to continue'.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight
+                        .bold,
+//                    color: Color(0xffF50303),
+                    color: Colors.black,
+                    fontSize: 18, fontFamily: 'Itim-Regular',),
+                ),
+              ],
+            ),
+          ),
+
           onPressed: () {
 //
 
@@ -1762,8 +1872,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                ::::A
 //                          myAnimatedWidget1 = myAnimatedWidget2;
 
-            });
-          });
+            }
+            );
+          }
+          );
 
   }
 
@@ -1903,13 +2015,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           }
 
-
-
-
-
-
       );
   }
+
   Widget moreIngredientsButton(){
 
 
