@@ -20,10 +20,6 @@ class FoodDetailImage extends StatelessWidget {
 
     return
 
-//      Transform.translate(
-//        offset:Offset(-displayWidth(context)/16,0),//(-20,0)
-//        child:
-
       Container(
 //              alignment: Alignment.centerLeft,
         child: Hero(
@@ -33,10 +29,8 @@ class FoodDetailImage extends StatelessWidget {
             clipper: MyClipper22(),
             child:
             CachedNetworkImage(
-//              width: displayWidth(context)/2.1,
-//              height:displayHeight(context)/1.2,
+
               imageUrl: imageURLBig,
-//                    fit: BoxFit.scaleDown,cover,scaleDown,fill
                     fit: BoxFit.fill,
 
               /*

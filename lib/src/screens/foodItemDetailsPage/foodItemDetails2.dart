@@ -507,6 +507,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
+            SizedBox(height: 50,),
 //              smallIMage and others in a row begins here=>
 
 
@@ -531,6 +532,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                       Container(
+                        color:Colors.red,
+                        width:displayWidth(context) /4,
                         height: displayHeight(context) / 7 +
                             displayHeight(context) / 6.6,
                         padding: EdgeInsets
@@ -553,18 +556,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
 
                       Container(
+                        color:Colors.blue,
 //                                                    color:Colors.redAccent,
                         height: displayHeight(context) / 7 +
                             displayHeight(context) / 6.6,
 
-                        width: displayWidth(context) /1.39,
+                        width: displayWidth(context) /3.99,
 //                                                    width: displayWidth(context) /1.80,
                         //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment
                               .start,
                           crossAxisAlignment: CrossAxisAlignment
-                              .end,
+                              .center,
                           children: <Widget>[
                             //pppp
 
@@ -575,17 +579,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                             animatedWidgetPressToFinish(),
                             
-                            ],),),
-
-
+                            ],
+                        ),
+                      ),
 
 
                       Container(
+
+                        color:Colors.lightGreenAccent,
+
 //                                                    color:Colors.redAccent,
                         height: displayHeight(context) / 7 +
                             displayHeight(context) / 6.6,
 
-                        width: displayWidth(context) /1.39,
+                        width: displayWidth(context) /2.39,
 //                                                    width: displayWidth(context) /1.80,
                         //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
                         child: Column(
@@ -613,8 +620,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                             Container(
 //                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 13,
-                                width: displayWidth(context) /1.50,
+                                height: displayHeight(context) / 23,
+                                width: displayWidth(context) /2.39,
 //                                                            width: displayWidth(context) * 0.57,
 //                                                            color: Color(0xfff4444aa),
 //                                                            color:Colors.lightBlueAccent,
@@ -645,21 +652,24 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
+
                             Container(
 //                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 14,
-                                width: displayWidth(context) /1.50,
+                                height: displayHeight(context) / 23,
+                                width: displayWidth(context) /2.39,
 //                                                            width: displayWidth(context) * 0.57,
 //                                                            color: Color(0xfff4444aa),
 //                                                            color:Colors.lightBlueAccent,
 //                                                        alignment: Alignment.center,
-                                child: buildCheeseItemsNameOnly(
+                                child: buildSelectedCheeseItemsNameOnly(
                                     context
                                 )
                               //Text('buildDefaultIngredients('
                               //    'context'
                               //')'),
                             ),
+
+
 
 
 
@@ -684,13 +694,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                             Container(
 //                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 14,
-                                width: displayWidth(context) /1.50,
+                                height: displayHeight(context) / 23,
+                                width: displayWidth(context) /2.39,
 //                                                            width: displayWidth(context) * 0.57,
 //                                                            color: Colors.purpleAccent,
 //                                                            color:Colors.lightBlueAccent,
 //                                                        alignment: Alignment.center,
-                                child: buildSauceItemsNameOnly(
+                                child: buildSelectedSauceItemsNameOnly(
                                     context
                                 )
                               //Text('buildDefaultIngredients('
@@ -2483,7 +2493,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-  Widget buildSauceItemsNameOnly(BuildContext context /*,List<NewIngredient> defaltIngs*/){
+  Widget buildSelectedSauceItemsNameOnly(BuildContext context /*,List<NewIngredient> defaltIngs*/){
 
 
 //    defaultIngredients
@@ -2491,8 +2501,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
     return  StreamBuilder<List<SauceItem>>(
-        stream: blocD.getSauceItemsStream,
-        initialData: blocD.getAllSauceItems,
+        stream: blocD.getSelectedSauceItemsStream,
+        initialData: blocD.getAllSelectedSauceItems,
 
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -2501,9 +2511,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             return Container(
 //              height: displayHeight(context) / 13,
-              height: displayHeight(context) / 14,
+              height: displayHeight(context) / 24,
 //          height:190,
-              width: displayWidth(context) /1.50,
+              width: displayWidth(context) /2.39,
+//              width: displayWidth(context) /1.50,
 
               color: Color(0xFFffffff),
               alignment: Alignment.center,
@@ -2533,9 +2544,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             if(selectedSauceItems.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 14,
+                  height: displayHeight(context) / 24,
 //          height:190,
-                  width: displayWidth(context) /1.50,
+//                  width: displayWidth(context) /1.50,
+                  width: displayWidth(context) /2.39,
 
                   color: Color(0xffFFFFFF),
                   alignment: Alignment.center,
@@ -2598,10 +2610,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     final String sauceItemName = oneSauce.sauceItemName;
 
 
-
-
-
-
       // for condition: oneSauce.isSelected==true
       return
 
@@ -2634,32 +2642,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             },
 
             child:
-            Neumorphic(
-              curve: Neumorphic.DEFAULT_CURVE,
-              style: NeumorphicStyle(
-                shape: NeumorphicShape
-                    .concave,
-                depth: 8,
-                border: NeumorphicBorder(
-                  isEnabled: false,
-//                  color: Colors.white,
-                  width: 0.8,
-
-                ),
-                lightSource: LightSource.top,
-                boxShape: NeumorphicBoxShape.roundRect(
-                    BorderRadius.all(Radius.circular(5))
-                ),
-
-                color: Color(0xffFCF5E4),
-                shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-              ),
-
-
-              child:
                   Container(
                     width: displayWidth(context) / 9,
 
@@ -2677,15 +2659,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                         fontWeight: FontWeight.normal,
                         fontSize: 14,
-                        decoration: TextDecoration.underline,
-                        decorationStyle: TextDecorationStyle.double,
+//                        decoration: TextDecoration.underline,
+//                        decorationStyle: TextDecorationStyle.double,
                       ),
                     ),
                   )
 
               ),
-
-            ),
 
         );
 
@@ -3065,7 +3045,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   }
 
 
-  Widget buildCheeseItemsNameOnly(BuildContext context /*,List<NewIngredient> defaltIngs*/){
+  Widget buildSelectedCheeseItemsNameOnly(BuildContext context /*,List<NewIngredient> defaltIngs*/){
 
 
 //    defaultIngredients
@@ -3073,9 +3053,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
     return  StreamBuilder<List<CheeseItem>>(
-        stream: blocD.getCheeseItemsStream,
-        initialData: blocD.getAllCheeseItems,
-
+        stream: blocD.getSelectedCheeseItemsStream,
+        initialData: blocD.getAllSelectedCheeseItems,
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -3126,7 +3105,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                 return Container(
 //              height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 14,
+                  height: displayHeight(context) / 24,
 //          height:190,
                   width: displayWidth(context) / 1.50,
 
@@ -3156,7 +3135,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 if (selectedCheeseItems.length == 0) {
                   return Container(
 //                  height: displayHeight(context) / 13,
-                      height: displayHeight(context) / 14,
+                      height: displayHeight(context) / 24,
 //          height:190,
                       width: displayWidth(context) / 1.50,
 
@@ -3221,12 +3200,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     final String cheeseItemName = oneCheese.cheeseItemName;
 
 
-    final dynamic cheeseItemImageURL = oneCheese.imageURL == '' ?
-    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
-        :
-    storageBucketURLPredicate + Uri.encodeComponent(oneCheese.imageURL) + '?alt=media';
-
-
 
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
@@ -3246,32 +3219,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             print('at Long Press UP: --and nothing will happen since it is not selected,');
 
           },
-
-          child:
-          Neumorphic(
-            curve: Neumorphic.DEFAULT_CURVE,
-            style: NeumorphicStyle(
-              shape: NeumorphicShape
-                  .concave,
-              depth: 8,
-              border: NeumorphicBorder(
-                isEnabled: false,
-                color: Colors.grey,
-
-                width: 0.8,
-
-              ),
-              lightSource: LightSource.top,
-              boxShape: NeumorphicBoxShape.roundRect(
-                  BorderRadius.all(Radius.circular(5))
-              ),
-
-              color: Colors.white,
-              shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-            ),
 
             child:
 
@@ -3294,7 +3241,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
                 )
           ),
-        ),
+
 
       );
   }
@@ -3699,7 +3646,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             return Container(
 //              height: displayHeight(context) / 13,
-              height: displayHeight(context) / 14,
+              height: displayHeight(context) / 24,
 //          height:190,
               width: displayWidth(context) /1.50,
 
@@ -3733,7 +3680,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               return Container(
 //                  height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 14,
+                  height: displayHeight(context) / 24,
 //          height:190,
                   width: displayWidth(context) /1.50,
 
@@ -3757,7 +3704,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             else if(selectedIngredients.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 14,
+                  height: displayHeight(context) / 24,
 //          height:190,
                   width: displayWidth(context) /1.50,
 
@@ -3784,21 +3731,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                color: Colors.green,
                 child: ListView.builder(
 
-
-                  /*
-                  gridDelegate:
-                  new SliverGridDelegateWithMaxCrossAxisExtent(
-
-
-                    maxCrossAxisExtent: 160,
-                    mainAxisSpacing: 8, // Vertical  direction
-                    crossAxisSpacing: 5,
-                    childAspectRatio: 160 / 180,
-                    // H/V
-
-
-                  ),
-                  */
 
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -3972,9 +3904,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     return
       Container(
-//            color: Color.fromRGBO(239, 239, 239, 0),
-//            color: Colors.white,
-//        color:Colors.lightGreenAccent,
+
         padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
             horizontal: 18, vertical: 0),
@@ -3987,36 +3917,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-
               blocD.removeThisDefaultIngredientItem(oneIngredient,index);
 
             },
-
             child:
-            Neumorphic(
-              curve: Neumorphic.DEFAULT_CURVE,
-              style: NeumorphicStyle(
-                shape: NeumorphicShape
-                    .concave,
-                depth: 8,
-                border: NeumorphicBorder(
-                  isEnabled: false,
-//                  color: Colors.white,
-                  width: 0.8,
 
-                ),
-                lightSource: LightSource.top,
-                boxShape: NeumorphicBoxShape.roundRect(
-                    BorderRadius.all(Radius.circular(5))
-                ),
-
-                color: Color(0xffFCF5E4),
-                shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-              ),
-              child:
                   Container(
                     width: displayWidth(context) / 9,
                     child: Text(
@@ -4035,9 +3940,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                    decorationStyle:TextDecorationStyle.double,
                       ),
                     ),
-                  )
+                  ),
 
-            ),
+
             onTap: () {
               print('for future use');
             }
@@ -4184,9 +4089,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     return
       Container(
 //          margin: EdgeInsets.fromLTRB(0, 0,5,5),
-        margin: EdgeInsets.fromLTRB(12,2,12,5),
+        margin: EdgeInsets.fromLTRB(4,3,4,5),
 //          padding: EdgeInsets.fromLTRB(12,2,12,5),
-        width: displayWidth(context)/3.6,
+        width: displayWidth(context)/5,
         child:
         RaisedButton(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -4216,18 +4121,20 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 fontSize: 13),
             ),
           ),
+
           onPressed: () {
 
 //              logger.i('onePriceForSize: ',onePriceForSize);
 
+          print('no action but you pressed the selected size');
+            /*
             final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
             blocD.setNewSizePlusPrice(oneSize);
 
-
+            */
 
           },
-
 
 
         ),

@@ -19,35 +19,21 @@ class FoodDetailImageSmaller extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return
-      Transform.translate(
-        offset:Offset(-displayWidth(context)/10,0),
 
-//      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
-        // -displayWidth(context)/9
-        child:
 
-        Neumorphic(
-          curve: Neumorphic.DEFAULT_CURVE,
-          style: NeumorphicStyle(
-            shape: NeumorphicShape
-                .concave,
-            depth: 8,
-            lightSource: LightSource.left,
-            boxShape: NeumorphicBoxShape.circle(),
-            color: Colors.white,
-            shadowDarkColor: Colors.orange,
 
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-          ),
-          child: Container(
-            alignment: Alignment.centerLeft,
+      Container(
+
+
+
             child: Hero(
               tag: foodItemName,
               child:
               ClipOval(
+              clipper: MyClipper11(),
                 child:CachedNetworkImage(
                   height:displayHeight(context)/4.6,
-                  width: displayWidth(context)/2.95,
+//                  width: displayWidth(context)/2.95,
 
                   imageUrl: imageURLBig,
 //                    fit: BoxFit.scaleDown,cover,scaleDown,fill
@@ -57,9 +43,26 @@ class FoodDetailImageSmaller extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ),
       );
+
   }
 }
+
+class  MyClipper11 extends CustomClipper<Rect> {
+
+  @override
+  Rect getClip(Size size) {
+//    return Rect.fromLTWH(left, top, width, height)
+//  GOOD OPTION 1
+//    return Rect.fromLTWH(-220, 0, 550, 550);
+
+//    return Rect.fromCenter(center: Offset(0, 0),width:190,height:190);
+//  GOOD OPTION 2
+    return Rect.fromCircle(center: Offset(0, 170),radius:140);
+
+  }
+  @override
+  bool shouldReclip(oldClipper) => false;
+}
+
 

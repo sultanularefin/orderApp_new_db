@@ -128,7 +128,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   final _unSelectedIngredientListController   =  StreamController <List<NewIngredient>>();
-  final _defaultIngredientListController      =  StreamController <List<NewIngredient>>();
+  final _defaultIngredientListController      =  StreamController <List<NewIngredient>>.broadcast();
 
   final _multiSelectForFoodController      =  StreamController <List<FoodPropertyMultiSelect>>();
 
@@ -166,8 +166,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   List<CheeseItem> _allSelectedCheeseItems =[];
   List<CheeseItem> get getAllSelectedCheeseItems => _allSelectedCheeseItems;
-  Stream<List<CheeseItem>> get getSelectedCheeseItemsStream => _cheeseItemsController.stream;
-  final _selectedCheeseListController      =  StreamController <List<CheeseItem>>();
+  final _selectedCheeseListController      =  StreamController <List<CheeseItem>>.broadcast();
+  Stream<List<CheeseItem>> get getSelectedCheeseItemsStream => _selectedCheeseListController.stream;
+
 
 
 
@@ -176,8 +177,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   List<SauceItem> _allSelectedSauceItems =[];
   List<SauceItem> get getAllSelectedSauceItems => _allSelectedSauceItems;
+  final _selectedSauceListController      =  StreamController <List<SauceItem>>.broadcast();
   Stream<List<SauceItem>> get getSelectedSauceItemsStream => _selectedSauceListController.stream;
-  final _selectedSauceListController      =  StreamController <List<SauceItem>>();
+
 
 
   // Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream; // currentlyNotUsing.
