@@ -159,68 +159,6 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-// this code bloc cut paste from foodGallery Bloc:
-  Future<void> getAllExtraIngredientsConstructor() async {
-
-    List<String> categories =
-    [
-      'jauheliha_kebab_vartaat'
-    'salaatit_kasvis',
-    'pizza',
-    'lasten_menu',
-    'kebab',
-    'juomat'
-    ];
-    print('at getAllExtraIngredientsConstructor()');
-
-
-
-    if (_isDisposedExtraIngredients == false) {
-
-//      categories.forEach((doc) {
-
-        var snapshot = await _client.fetchAllExtraIngredients('jauheliha_kebab_vartaat');
-        List docList = snapshot.documents;
-
-
-        List <NewIngredient> ingItems = new List<NewIngredient>();
-        ingItems = snapshot.documents.map((documentSnapshot) =>
-            NewIngredient.ingredientConvert
-              (documentSnapshot.data, documentSnapshot.documentID)
-
-        ).toList();
-
-
-        List<String> documents = snapshot.documents.map((documentSnapshot) =>
-        documentSnapshot.documentID).toList();
-
-        // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
-
-
-        _allIngItemsFGBloc = ingItems;
-
-        _allIngredientListController.sink.add(_allIngItemsFGBloc);
-
-
-//    return ingItems;
-
-
-
-
-
-
-
-        _isDisposedExtraIngredients=true;
-
-
-
-
-    }
-    else {
-//      _isDisposedExtraIngredients == Element.true
-    return;
-    }
-  }
 
 
 
@@ -596,7 +534,7 @@ class FoodGalleryBloc implements Bloc {
 
     getAllIngredientsConstructor();
 
-//    getAllExtraIngredientsConstructor();
+    getAllExtraIngredientsConstructor();
 
 
 

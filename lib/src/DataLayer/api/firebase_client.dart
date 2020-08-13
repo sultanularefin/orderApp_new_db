@@ -150,7 +150,7 @@ class FirebaseClient {
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection('inagedients')
+        .collection(categoryName+'_extra_ingredients')
         .getDocuments();
 
 //    var snapshot= Firestore.instance
