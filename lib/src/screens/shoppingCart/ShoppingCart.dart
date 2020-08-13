@@ -1266,8 +1266,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             color: Colors.white,
 //                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
                                             height: displayHeight(context)/5.4,
-                                            width: displayWidth(context) /4.5,
-                                            /* this is about the width of yellow side menu */
+
+                                              width: displayWidth(context)
+                                                  - displayWidth(context) /
+                                                      5, /* this is about the width of yellow side menu */
 
 //                                            width: displayWidth(context) * 0.57,
                                             child:
