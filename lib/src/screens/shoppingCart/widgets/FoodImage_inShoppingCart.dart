@@ -23,11 +23,7 @@ class FoodImageInShoppingCart extends StatelessWidget {
   final int index;
 
 //  OrderedFoodImageURL,OrderedFoodItemName,selectedIngredients,price
-  FoodImageInShoppingCart(this.imageURLBig,
-      this.foodItemName,
-      this.selectedIngredients,
-      this.price,
-      this.index,);
+  FoodImageInShoppingCart(this.imageURLBig, this.foodItemName, this.selectedIngredients, this.price, this.index);
 
   @override
   Widget build(BuildContext context) {
