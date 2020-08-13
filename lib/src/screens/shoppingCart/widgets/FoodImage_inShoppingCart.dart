@@ -100,10 +100,12 @@ class FoodImageInShoppingCart extends StatelessWidget {
 //              color:Colors.redAccent,
             color: Color(0xffF4F6CE),
 
-            width: 130,
-            alignment: Alignment.centerLeft,
+            width: 160,
+//            alignment: Alignment.centerLeft,
             child: foodItemName.length > 18 ?
             Text('${foodItemName.substring(0, 16)}' + '...',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
                 style: TextStyle(
                   fontSize: 23,
                   fontWeight: FontWeight
@@ -111,8 +113,11 @@ class FoodImageInShoppingCart extends StatelessWidget {
 //                                                      color: Colors.white
                   color: Color(0xff707070),
 
-                )) :
+                )
+            ) :
             Text('$foodItemName',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
                 style: TextStyle(
                   fontSize: 23,
                   fontWeight: FontWeight
@@ -120,7 +125,9 @@ class FoodImageInShoppingCart extends StatelessWidget {
 //                                                      color: Colors.white
                   color: Color(0xff707070),
 
-                )),
+
+                )
+            ),
 
           ),
 
@@ -131,7 +138,7 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
             margin: EdgeInsets.fromLTRB(
                 0, 10, 0, 0),
-            width: 130,
+            width: 160,
             height: 20,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,

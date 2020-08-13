@@ -70,6 +70,7 @@ dependencies:
   esc_pos_bluetooth: ^0.2.8
   dotted_border: ^1.0.5
   characters: ^1.0.0
+  flutter_datetime_picker: ^1.4.0
 
 
 dev_dependencies:
