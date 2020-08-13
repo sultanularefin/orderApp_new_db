@@ -5421,65 +5421,85 @@ class _ShoppingCartState extends State<ShoppingCart> {
           // BEGINS HERE.
 
           Container(
-//            color:Colors.white38,
-//            color:Colors.amber,
             color: Colors.white,
 //            height: displayWidth(context)/2.6,
             height: displayWidth(context) / 2.1,
-            child: Stack(
-              children: <Widget>[
-                Positioned(
+            child: Row(
+              children: [
+
+                FlatButton(
+                    onPressed: () {
+                      DatePicker.showPicker(context, showTitleActions: true, onChanged: (date) {
+                        print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
+                      }, onConfirm: (date) {
+                        print('confirm $date');
+                      }, pickerModel: CustomPicker(currentTime: DateTime.now()), locale: LocaleType.en);
+                    },
+                    child: Text(
+                      'show custom time picker,\nyou can custom picker model like this',
+                      style: TextStyle(color: Colors.blue),
+                    )),
+
+                Container(
+//            color:Colors.white38,
+//            color:Colors.amber,
+                  color: Colors.white,
+//            height: displayWidth(context)/2.6,
+                  height: displayWidth(context) / 2.1,
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
 //                  left:0,
-                  // top:20,//displayHeight(context)/10,
-                  // initial Case.
+                        // top:20,//displayHeight(context)/10,
+                        // initial Case.
 //            getNumberOfInputsFilledUp
-                  bottom:
-                  getNumberOfInputsFilledUpTakeAway(
-                      unObsecuredInputandPayment.orderingCustomer) > 0
-                      ? 22 : -10,
-                  /*
-                  0:
-                  getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer) <= 2?
+                        bottom:
+                        getNumberOfInputsFilledUpTakeAway(
+                            unObsecuredInputandPayment.orderingCustomer) > 0
+                            ? 22 : -10,
+                        /*
+                        0:
+                        getNumberOfInputsFilledUp (
+                            unObsecuredInputandPayment.ordersCustomer) <= 2?
 
-                  0:
-                  getNumberOfInputsFilledUp (
-                      unObsecuredInputandPayment.ordersCustomer) == 3?
-                  */
+                        0:
+                        getNumberOfInputsFilledUp (
+                            unObsecuredInputandPayment.ordersCustomer) == 3?
+                        */
 
-                  // from top to top distance offset related to Starting (top ) of
-                  // orance Container.
+                        // from top to top distance offset related to Starting (top ) of
+                        // orance Container.
 //                  right:0,
 //                  bottom:0,
-                  child:
-                  AnimatedSwitcher(
-                    duration: Duration(milliseconds: 500),
+                        child:
+                        AnimatedSwitcher(
+                          duration: Duration(milliseconds: 500),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                    // zeroORMoreInputsEmpty
-                    // zeroORMoreInputsEmptyTakeAway
-                    child:
-                    zeroORMoreInputsEmptyTakeAway
-                      (unObsecuredInputandPayment.orderingCustomer) == true ?
+                          // zeroORMoreInputsEmpty
+                          // zeroORMoreInputsEmptyTakeAway
+                          child:
+                          zeroORMoreInputsEmptyTakeAway
+                            (unObsecuredInputandPayment.orderingCustomer) == true ?
 
-                    // animatedObscuredPaymentSelectContainerTakeAway
-                    // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
-                    // animatedUnObscuredPaymentUnSelectContainer
-                    animatedObscuredPaymentSelectContainerTakeAwayDinning
-                      (unObsecuredInputandPayment) :
-                    animatedUnObscuredPaymentTypeUnSelectedContainerTakeAwayDinning
-                      (unObsecuredInputandPayment),
+                          // animatedObscuredPaymentSelectContainerTakeAway
+                          // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
+                          // animatedUnObscuredPaymentUnSelectContainer
+                          animatedObscuredPaymentSelectContainerTakeAwayDinning
+                            (unObsecuredInputandPayment) :
+                          animatedUnObscuredPaymentTypeUnSelectedContainerTakeAwayDinning
+                            (unObsecuredInputandPayment),
 
 
-                  ),
-                  // ),
+                        ),
+                        // ),
 
-                ),
-                AnimatedPositioned(
-                  duration: Duration(milliseconds: 500),
-                  top:
-                  0,
+                      ),
+                      AnimatedPositioned(
+                        duration: Duration(milliseconds: 500),
+                        top:
+                        0,
 //                  displayHeight(context)/4,
 //                  getNumberOfInputsFilledUp (
 //                      unObsecuredInputandPayment.ordersCustomer) ==4?
@@ -5487,222 +5507,222 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                  displayWidth(context)/2.6 - displayWidth(context)/2,
 
-                  // bottom 0 means full of green Container content shown.
+                        // bottom 0 means full of green Container content shown.
 
-                  child:
-                  Container(
+                        child:
+                        Container(
 //                        alignment:Alignment.topCenter,0
 
 
-                    // QQQ RoDo height
+                          // QQQ RoDo height
 //                      height: displayWidth(context)/2.6,
-                      child: Container(
+                            child: Container(
 //                            height: displayWidth(context)/2.6,
 //                            height: displayHeight(context) / 3.7,
-                        padding: EdgeInsets.fromLTRB(
-                            (displayWidth(context) / 1.1) / 4,
-                            15,
-                            (displayWidth(context) / 1.1) / 4,
-                            0
+                              padding: EdgeInsets.fromLTRB(
+                                  (displayWidth(context) / 1.1) / 4,
+                                  15,
+                                  (displayWidth(context) / 1.1) / 4,
+                                  0
 
 //                          horizontal: (displayWidth(context)/1.1)/4,
-                        ),
+                              ),
 //                        color: Colors.green,
-                        color: Colors.white,
-                        child: Center(
+                              color: Colors.white,
+                              child: Center(
 //                    color:Colors.white.withOpacity(0.9),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
 
 
 
-                                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
+                                      // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
 
-                                // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
+                                      // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
 
 //                                showEditingCompleteCustomerReachoutIformation BEGINS HERE.
-                                Container(
+                                      Container(
 
-                                  child: showEditingCompleteCustomerReachoutIformation
-                                      ? Container()
-                                      :
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(
-                                        0, 0, 0, 15),
-                                    decoration: BoxDecoration(
+                                        child: showEditingCompleteCustomerReachoutIformation
+                                            ? Container()
+                                            :
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              0, 0, 0, 15),
+                                          decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                                      borderRadius: BorderRadius.circular(25),
-                                      border: Border.all(
+                                            borderRadius: BorderRadius.circular(25),
+                                            border: Border.all(
 
-                                        color: Color(0xffBCBCBD),
-                                        style: BorderStyle.solid,
-                                        width: 2.0,
+                                              color: Color(0xffBCBCBD),
+                                              style: BorderStyle.solid,
+                                              width: 2.0,
 
 
-                                      ),
+                                            ),
 
-                                      boxShadow: [
-                                        BoxShadow(
+                                            boxShadow: [
+                                              BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                                  color: Color(0xffFFFFFF),
+                                                  blurRadius: 10.0,
+                                                  offset: Offset(0.0, 2.0))
+                                            ],
+
+
                                             color: Color(0xffFFFFFF),
-                                            blurRadius: 10.0,
-                                            offset: Offset(0.0, 2.0))
-                                      ],
-
-
-                                      color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                                    ),
+                                          ),
 
 //                                  color: Color(0xffFFFFFF),
-                                    width: displayWidth(context) / 2.5,
-                                    height: displayHeight(context) / 24,
-                                    padding: EdgeInsets.only(
-                                        left: 4, top: 3, bottom: 3, right: 3),
-                                    child: Row(
+                                          width: displayWidth(context) / 2.5,
+                                          height: displayHeight(context) / 24,
+                                          padding: EdgeInsets.only(
+                                              left: 4, top: 3, bottom: 3, right: 3),
+                                          child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceAround,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      children: <Widget>[
-                                        Container(
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .spaceAround,
+                                            crossAxisAlignment: CrossAxisAlignment
+                                                .center,
+                                            children: <Widget>[
+                                              Container(
 
 //                                          height: 25,
-                                          height: displayHeight(context) / 40,
-                                          width: 5,
-                                          margin: EdgeInsets.only(left: 0),
+                                                height: displayHeight(context) / 40,
+                                                width: 5,
+                                                margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                          child: Icon(
+                                                child: Icon(
 //                                          Icons.add_shopping_cart,
-                                            Icons.watch_later,
-                                            size: 28,
-                                            color: Color(0xffBCBCBD),
-                                          ),
+                                                  Icons.watch_later,
+                                                  size: 28,
+                                                  color: Color(0xffBCBCBD),
+                                                ),
 
 
-                                        ),
+                                              ),
 
-                                        Container(
+                                              Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                                          alignment: Alignment.center,
-                                          width: displayWidth(context) / 4,
+                                                alignment: Alignment.center,
+                                                width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                                          // do it in both Container
-                                          child: TextField(
+                                                // do it in both Container
+                                                child: TextField(
 
-                                            controller: etaController,
+                                                  controller: etaController,
 
 
-                                            keyboardType: TextInputType.number,
+                                                  keyboardType: TextInputType.number,
 //                                            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                                            inputFormatters: <
-                                                TextInputFormatter>[
-                                              WhitelistingTextInputFormatter
-                                                  .digitsOnly
-                                            ],
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
+                                                    WhitelistingTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
 //inputFormatters: <TextInputFormatter>[
 //    WhitelistingTextInputFormatter.digitsOnly
 //],
-                                            textInputAction: TextInputAction
-                                                .done,
+                                                  textInputAction: TextInputAction
+                                                      .done,
 //
-                                            onSubmitted: (_) =>
-                                                FocusScope.of(context)
-                                                    .unfocus(),
-                                            textAlign: TextAlign.center,
-                                            decoration: InputDecoration(
+                                                  onSubmitted: (_) =>
+                                                      FocusScope.of(context)
+                                                          .unfocus(),
+                                                  textAlign: TextAlign.center,
+                                                  decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                                              border: InputBorder.none,
+                                                    border: InputBorder.none,
 //                                              hintText: 'Enter when you want your ordered foods',
-                                              hintText: 'After XX minutes',
-                                              hintStyle: TextStyle(
-                                                  color: Color(0xffFC0000),
-                                                  fontSize: 17),
+                                                    hintText: 'After XX minutes',
+                                                    hintStyle: TextStyle(
+                                                        color: Color(0xffFC0000),
+                                                        fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                                            ),
+                                                  ),
 
-                                            style: TextStyle(
-                                                color: Color(0xffFC0000),
-                                                fontSize: 16),
+                                                  style: TextStyle(
+                                                      color: Color(0xffFC0000),
+                                                      fontSize: 16),
 
-                                            onChanged: (text) {
-                                              print("0444: $text");
+                                                  onChanged: (text) {
+                                                    print("0444: $text");
 
 
-                                              print("33: $text");
-                                              final shoppingCartBloc = BlocProvider
-                                                  .of<
-                                                  ShoppingCartBloc>(context);
+                                                    print("33: $text");
+                                                    final shoppingCartBloc = BlocProvider
+                                                        .of<
+                                                        ShoppingCartBloc>(context);
 
-                                              shoppingCartBloc.setETAForOrder(
-                                                  text);
-                                              setState(() {
-                                                showFullOrderType = false;
+                                                    shoppingCartBloc.setETAForOrder(
+                                                        text);
+                                                    setState(() {
+                                                      showFullOrderType = false;
 
-                                                // showFullOrderType
-                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                      // showFullOrderType
+                                                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                                showCustomerInformationHeader =
-                                                true;
-                                                showUserInputOptionsLikeFirstTime =
-                                                false;
-                                                showFullPaymentType =
-                                                true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                                              }
+                                                      showCustomerInformationHeader =
+                                                      true;
+                                                      showUserInputOptionsLikeFirstTime =
+                                                      false;
+                                                      showFullPaymentType =
+                                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                    }
 
 
-                                              );
-                                            },
+                                                    );
+                                                  },
 
 
-                                            onTap: () {
-                                              if ((currentUser.address
-                                                  .trim()
-                                                  .length) > 0 ||
-                                                  (currentUser.flatOrHouseNumber
-                                                      .trim()
-                                                      .length) > 0 ||
-                                                  (currentUser.phoneNumber
-                                                      .trim()
-                                                      .length) > 0) {
-                                                showEditingCompleteCustomerHouseFlatIformation =
-                                                true;
-                                              } else {
-                                                setState(() {
-                                                  showFullOrderType = false;
-                                                  // showFullOrderType
-                                                  /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                                  onTap: () {
+                                                    if ((currentUser.address
+                                                        .trim()
+                                                        .length) > 0 ||
+                                                        (currentUser.flatOrHouseNumber
+                                                            .trim()
+                                                            .length) > 0 ||
+                                                        (currentUser.phoneNumber
+                                                            .trim()
+                                                            .length) > 0) {
+                                                      showEditingCompleteCustomerHouseFlatIformation =
+                                                      true;
+                                                    } else {
+                                                      setState(() {
+                                                        showFullOrderType = false;
+                                                        // showFullOrderType
+                                                        /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                  showCustomerInformationHeader = false;
-                                                  showCustomerInformationHeader =
-                                                  true;
-                                                  showUserInputOptionsLikeFirstTime =
-                                                  false;
-                                                  showFullPaymentType =
-                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                                                }
+                                                        showCustomerInformationHeader =
+                                                        true;
+                                                        showUserInputOptionsLikeFirstTime =
+                                                        false;
+                                                        showFullPaymentType =
+                                                        true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                                      }
 
-                                                );
-                                              }
-                                            },
+                                                      );
+                                                    }
+                                                  },
 
 
 //                                            onTap: () {
 //                                              setState(() => showFullOrderType = false);
 //                                            },
-                                            onEditingComplete: () {
-                                              print(
-                                                  'at editing complete of Customer\'s address ETA Time:');
+                                                  onEditingComplete: () {
+                                                    print(
+                                                        'at editing complete of Customer\'s address ETA Time:');
 //                                              setState(() =>
 //                                              {
 //                                                showEditingCompleteCustomerReachoutIformation =
@@ -5710,31 +5730,34 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                              }
 //                                              );
 
-                                            },
+                                                  },
 
 
+                                                ),
+
+                                              )
+
+
+                                            ],
                                           ),
+                                        ),
+                                      ),
 
-                                        )
-
-
-                                      ],
-                                    ),
-                                  ),
-                                ),
-
-                                // showEditingCompleteCustomerReachoutIformation ENDS HERE.
-                                // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+                                      // showEditingCompleteCustomerReachoutIformation ENDS HERE.
+                                      // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
 
 
-                              ],
+                                    ],
+                                  )
+                              ),
                             )
+
                         ),
+
                       )
-
+                    ],
                   ),
-
-                )
+                ),
               ],
             ),
           ),
@@ -14488,3 +14511,67 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 }
 
+
+class CustomPicker extends CommonPickerModel {
+  String digits(int value, int length) {
+    return '$value'.padLeft(length, "0");
+  }
+
+  CustomPicker({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
+    this.currentTime = currentTime ?? DateTime.now();
+    this.setLeftIndex(this.currentTime.hour);
+    this.setMiddleIndex(this.currentTime.minute);
+    this.setRightIndex(this.currentTime.second);
+  }
+
+  @override
+  String leftStringAtIndex(int index) {
+    if (index >= 0 && index < 24) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String middleStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String rightStringAtIndex(int index) {
+    if (index >= 0 && index < 60) {
+      return this.digits(index, 2);
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  String leftDivider() {
+    return "|";
+  }
+
+  @override
+  String rightDivider() {
+    return "|";
+  }
+
+  @override
+  List<int> layoutProportions() {
+    return [1, 2, 1];
+  }
+
+  @override
+  DateTime finalTime() {
+    return currentTime.isUtc
+        ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
+        this.currentLeftIndex(), this.currentMiddleIndex(), this.currentRightIndex())
+        : DateTime(currentTime.year, currentTime.month, currentTime.day, this.currentLeftIndex(),
+        this.currentMiddleIndex(), this.currentRightIndex());
+  }
+}
