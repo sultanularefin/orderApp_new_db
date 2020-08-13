@@ -1308,8 +1308,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                                       logger.e(
                                                           '\n\n AM I EXECUTED TWICE  ;;;'
-                                                              ' allOrderedFoods.length: ${allOrderedFoods
-                                                              .length} \n\n ');
+                                                              ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
                                                       return Container(
 //                color: Colors.green,
                                                         color: Color(
@@ -1317,31 +1316,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                                         child: ListView
                                                             .builder(
-                                                          scrollDirection: Axis
-                                                              .horizontal,
+                                                          scrollDirection: Axis.horizontal,
 
                                                           reverse: false,
-
                                                           shrinkWrap: false,
-
-                                                          itemCount: allOrderedFoods
-                                                              .length,
+                                                          itemCount: allOrderedFoods.length,
                                                           // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
 
-                                                          itemBuilder: (_,
-                                                              int index) {
+                                                          itemBuilder: (_, int index) {
 //            return Text('ss');
 
                                                             return FoodImageInShoppingCart(
-                                                                allOrderedFoods[index]
-                                                                    .foodItemImageURL, /*OrderedFoodImageURL,*/
-                                                                allOrderedFoods[index]
-                                                                    .foodItemName, /*OrderedFoodItemName, */
-                                                                allOrderedFoods[index]
-                                                                    .selectedIngredients,
-                                                                allOrderedFoods[index]
-                                                                    .unitPrice,
+                                                                allOrderedFoods[index].foodItemImageURL, /*OrderedFoodImageURL,*/
+                                                                allOrderedFoods[index].foodItemName, /*OrderedFoodItemName, */
+                                                                allOrderedFoods[index].selectedIngredients,
+                                                                allOrderedFoods[index].unitPrice,
                                                                 index
                                                             );
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],

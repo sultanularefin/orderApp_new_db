@@ -23,17 +23,14 @@ class FoodImageInShoppingCart extends StatelessWidget {
   final int index;
 
 //  OrderedFoodImageURL,OrderedFoodItemName,selectedIngredients,price
-  FoodImageInShoppingCart(
-      this.imageURLBig,
+  FoodImageInShoppingCart(this.imageURLBig,
       this.foodItemName,
       this.selectedIngredients,
       this.price,
-      this.index,
-      );
+      this.index,);
 
   @override
   Widget build(BuildContext context) {
-
     var logger = Logger(
       printer: PrettyPrinter(),
     );
@@ -43,129 +40,133 @@ class FoodImageInShoppingCart extends StatelessWidget {
 
 //    final List<String, dynamic> foodSizePrice = oneFood
 //        .sizedFoodPrices;
-    if(index==0) {
+//    if(index==0) {
 
-      print('index ==0 in shopping cart');
-      return Container(
-        color: Color(0xffF4F6CE),
-        height: displayHeight(context)/5.4,
-        width:displayWidth(context)/4.5,
-        margin: EdgeInsets.fromLTRB(
-            0,  0, 12, 0),
+    print('index = $index in shopping cart');
+    return Container(
+      color: Color(0xffF4F6CE),
+      height: displayHeight(context) / 5.4,
+      width: displayWidth(context) / 4.5,
+      margin: EdgeInsets.fromLTRB(
+          0, 0, 12, 0),
 
-        child: Column(
+      child: Column(
 
-          children: <Widget>[
-            Container(
+        children: <Widget>[
+          Container(
 //              color:Colors.blue,
-              width:displayWidth(context)/4.5,
-              child:Row(
-                children: <Widget>[
-                  Container(
-                    width:110,
+            width: displayWidth(context) / 4.5,
+            child: Row(
+              children: <Widget>[
+                Container(
+                  width: 110,
 //                    height: 170,
 //                    color: Colors.purpleAccent,
-                    color: Color(0xffF4F6CE),
-                    padding: EdgeInsets.fromLTRB(
-                        0, 0, 0, 0),
+                  color: Color(0xffF4F6CE),
+                  padding: EdgeInsets.fromLTRB(
+                      0, 0, 0, 0),
 
-                    child:
-                      ClipOval(
-                        clipper: MyClipper11(),
-                        child:CachedNetworkImage(
-                          height:displayHeight(context)/8,
+                  child:
+                  ClipOval(
+                    clipper: MyClipper11(),
+                    child: CachedNetworkImage(
+                      height: displayHeight(context) / 8,
 //                  width: displayWidth(context)/2.95,
 
-                          imageUrl: imageURLBig,
+                      imageUrl: imageURLBig,
 //                    fit: BoxFit.scaleDown,cover,scaleDown,fill
-                          fit: BoxFit.fill,
+                      fit: BoxFit.fill,
 //
-                          placeholder: (context, url) => new CircularProgressIndicator(),
-                        ),
-                      ),
-
+                      placeholder: (context,
+                          url) => new CircularProgressIndicator(),
+                    ),
                   ),
 
-                  Container(
-                    color: Color(0xffF4F6CE),
-                    child:Text(price.toStringAsFixed(2)+
-                        '\u20AC',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight
-                              .bold,
+                ),
+
+                Container(
+                  color: Color(0xffF4F6CE),
+                  child: Text(price.toStringAsFixed(2) +
+                      '\u20AC',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight
+                            .bold,
 //                                                      color: Colors.white
-                          color: Color(0xff707070),
+                        color: Color(0xff707070),
 
-                        )),
-                  ),
-                ],
-              ),
+                      )),
+                ),
+              ],
             ),
-            Container(
+          ),
+          Container(
 //              color:Colors.redAccent,
-              color: Color(0xffF4F6CE),
+            color: Color(0xffF4F6CE),
 
-              width: 130,
-              alignment: Alignment.centerLeft,
-              child:foodItemName.length >18?
-              Text('${foodItemName.substring(0, 16)}'+ '...' ,
-                  style: TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight
-                        .bold,
+            width: 130,
+            alignment: Alignment.centerLeft,
+            child: foodItemName.length > 18 ?
+            Text('${foodItemName.substring(0, 16)}' + '...',
+                style: TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight
+                      .bold,
 //                                                      color: Colors.white
-                    color: Color(0xff707070),
+                  color: Color(0xff707070),
 
-                  )):
-              Text('$foodItemName',
-                  style: TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight
-                        .bold,
+                )) :
+            Text('$foodItemName',
+                style: TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight
+                      .bold,
 //                                                      color: Colors.white
-                    color: Color(0xff707070),
+                  color: Color(0xff707070),
 
-                  )),
+                )),
 
-            ),
+          ),
 
-            Container(
+          Container(
 
 //              color: Colors.green,
-              color: Color(0xffF4F6CE),
+            color: Color(0xffF4F6CE),
 
-              margin: EdgeInsets.fromLTRB(
-                  0, 10, 0, 0),
-              width: 130,
-              height: 20,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
+            margin: EdgeInsets.fromLTRB(
+                0, 10, 0, 0),
+            width: 130,
+            height: 20,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
 
-                reverse: false,
+              reverse: false,
 
-                shrinkWrap: false,
-                itemCount: selectedIngredients.length,
+              shrinkWrap: false,
+              itemCount: selectedIngredients.length,
 
-                itemBuilder: (_, int index) {
-                  return Text('${selectedIngredients[index].ingredientName}'+ ', ',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight
-                          .bold,
+              itemBuilder: (_, int index) {
+                return Text(
+                  '${selectedIngredients[index].ingredientName}' + ', ',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight
+                        .bold,
 //                                                      color: Colors.white
-                      color: Color(0xff707070),
-                    ),
-                  );
-                },
-              ),
-            )
+                    color: Color(0xff707070),
+                  ),
+                );
+              },
+            ),
+          )
 
-          ],
+        ],
 
-        ),
-      );
-    }
+      ),
+    );
+
+
+    /*
     else{
 
       print('index !=0 in shopping cart  $index');
@@ -408,6 +409,10 @@ class FoodImageInShoppingCart extends StatelessWidget {
         ),
       );
     }
+
+
+    */
+
   }
 }
 
