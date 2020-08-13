@@ -169,10 +169,11 @@ class FoodGalleryBloc implements Bloc {
   }
 
 
-  // this code bloc cut paste from foodGallery Bloc:
-  Future<void> getAllExtraIngredientsConstructor() async {
 
-    /*
+
+  // HELPER METHOD FOR TEST TO BE MODIFIED....  AUGUST 14 2020.....
+  bool checkThisExtraIngredientForSomeCategory(NewIngredient x) {
+
     List<String> categories =
     [
       'jauheliha_kebab_vartaat'
@@ -182,6 +183,53 @@ class FoodGalleryBloc implements Bloc {
       'kebab',
       'juomat'
     ];
+
+
+    List<String> stringList = List<String>.from(x.extraIngredientOf);
+
+//    print('ingredientsString: $ingredientsString');
+//    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
+
+//    List<String> foodIngredients =ingredientsString;
+
+//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
+
+    /*
+
+    String elementExists = allIngredients.firstWhere(
+            (oneItem) => oneItem.toLowerCase() == inputString.toLowerCase(),
+        orElse: () => '');
+
+    print('elementExists: $elementExists');
+
+    return elementExists;
+
+    */
+
+
+//    categories[3]= 'lasten_menu';
+
+
+    String elementExists = stringList.firstWhere(
+            (oneItem) => oneItem.toLowerCase().trim() == categories[3].toLowerCase().trim(),
+        orElse: () => '');
+
+    if(elementExists!=''){
+
+      return true;
+
+    }
+
+//    print('elementExists: Line # 612:  $elementExists');
+
+    return false;
+  }
+
+  // this code bloc cut paste from foodGallery Bloc:
+  Future<void> getAllExtraIngredientsConstructor() async {
+
+    /*
+
 
     */
     print('at getAllExtraIngredientsConstructor()');
@@ -210,6 +258,28 @@ class FoodGalleryBloc implements Bloc {
       // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
+      List<NewIngredient> ingredientTest =
+      ingItems.where((e) => checkThisExtraIngredientForSomeCategory(e)).toList();
+
+
+      print('ingredientTest.length ==> --> ==> ${ingredientTest.length}');
+
+
+      Set<String> subgroups ={};
+
+//    List<String> categories = [];
+      ingredientTest.forEach((oneExtraIngredient) {
+        subgroups.add(oneExtraIngredient.subgroup.trim());
+      });
+
+      print('subgroups.length => ${subgroups.length}:  >               >               >');
+
+
+      subgroups.forEach((oneGroupString) {
+        print('oneGroupString: $oneGroupString');
+      });
+
+      
       _allExtraIngredients = ingItems;
 //      _allIngItemsFGBloc = ingItems;
 
@@ -306,7 +376,7 @@ class FoodGalleryBloc implements Bloc {
         final bool foodIsAvailable =  doc['available'];
         final int sequenceNo =  doc['sequence_no'];
 
-        print('foodIsAvailable: $foodIsAvailable');
+//        print('foodIsAvailable: $foodIsAvailable');
 
         final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
         final List<dynamic> foodItemIngredientsList =  doc['ingredients'];
@@ -319,7 +389,7 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-      print('category: $foodCategoryName');
+//      print('category: $foodCategoryName');
 
         String defaultJuusto = doc['default_juusto'];
 
@@ -333,12 +403,15 @@ class FoodGalleryBloc implements Bloc {
         defaultKastike2.add(defaultKastike);
 
 
-        logger.e('defaultKastike2.length: ${defaultKastike2.length}');
-        logger.w('defaultJuusto2.length: ${defaultJuusto2.length}');
+//        logger.e('defaultKastike2.length: ${defaultKastike2.length}');
+//        logger.w('defaultJuusto2.length: ${defaultJuusto2.length}');
 
 
+        /*
         print('foodItemName: $foodItemName  and docID: $foodItemDocumentID and '
             'defaultJuusto $defaultJuusto and defaultKastike: $defaultKastike');
+
+        */
         if(foodItemName.toLowerCase()=='pita'){
           print('--------------------------pita found-==================');
         }

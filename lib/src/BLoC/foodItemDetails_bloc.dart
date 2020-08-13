@@ -1671,8 +1671,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   SauceItem checkThisSauceItemInDefatultStringSauceItems(SauceItem x,
       List<String> defaultSauceKastikeItemString) {
 
+    /*
     logger.i('x.sauceItemName => ${x.sauceItemName} defaultSauceKastikeItemString[0] => '
         '${defaultSauceKastikeItemString[0]} ');
+
+    */
 
 
 
