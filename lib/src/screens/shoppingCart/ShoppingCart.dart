@@ -5434,10 +5434,88 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         print('confirm $date');
                       }, pickerModel: CustomPicker(currentTime: DateTime.now()), locale: LocaleType.en);
                     },
-                    child: Text(
-                      'show custom time picker,\nyou can custom picker model like this',
-                      style: TextStyle(color: Colors.blue),
-                    )),
+                    child:
+
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(
+                          0, 0, 0, 0 /*15*/),
+                      decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+
+                          color: Color(0xffBCBCBD),
+                          style: BorderStyle.solid,
+                          width: 2.0,
+
+
+                        ),
+
+                        boxShadow: [
+                          BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                              color: Color(0xffFFFFFF),
+                              blurRadius: 10.0,
+                              offset: Offset(0.0, 2.0))
+                        ],
+
+
+                        color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                      ),
+
+//                                  color: Color(0xffFFFFFF),
+                      width: displayWidth(context) / 3.5,
+                      height: displayHeight(context) / 24,
+                      padding: EdgeInsets.only(
+                          left: 4, top: 3, bottom: 3, right: 3),
+                      child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment
+                            .spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment
+                            .center,
+                        children: <Widget>[
+                          Container(
+
+//                                          height: 25,
+                            height: displayHeight(context) / 40,
+                            width: 5,
+                            margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                            child: Icon(
+//                                          Icons.add_shopping_cart,
+                              Icons.watch_later,
+                              size: 28,
+                              color: Color(0xffBCBCBD),
+                            ),
+
+
+                          ),
+
+                          Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                            alignment: Alignment.center,
+                            width: displayWidth(context) / 5,
+//                                        color:Colors.purpleAccent,
+                            // do it in both Container
+                            child: Text('choose Time'),
+
+                          )
+
+
+                        ],
+                      ),
+                    ),
+
+                ),
 
                 Container(
 //            color:Colors.white38,
