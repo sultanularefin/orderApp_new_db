@@ -44,78 +44,36 @@ class FoodImageInShoppingCart extends StatelessWidget {
 //    final List<String, dynamic> foodSizePrice = oneFood
 //        .sizedFoodPrices;
     if(index==0) {
+
+      print('index ==0 in shopping cart');
       return Container(
         color: Color(0xffF4F6CE),
-//      height: displayHeight(context)/4,
-        height: displayWidth(context) / 3,
-        width:displayWidth(context)/5,
+        height: displayHeight(context)/5.4,
+        width:displayWidth(context)/4.5,
         margin: EdgeInsets.fromLTRB(
             0,  0, 12, 0),
-
-//        margin: EdgeInsets.fromLTRB(
-//            displayWidth(context)/17, 0, 12, 0),
-//      padding: EdgeInsets.fromLTRB(
-//          0, 12, 12, 5),
-
 
         child: Column(
 
           children: <Widget>[
             Container(
+//              color:Colors.blue,
+              width:displayWidth(context)/4.5,
               child:Row(
                 children: <Widget>[
-
-
                   Container(
-                    width:90,
-                    height: 170,
-//                  width:displayWidth(context) / 15,
-//                    color:Colors.purpleAccent,
-//                    color: Colors
+                    width:110,
+//                    height: 170,
+//                    color: Colors.purpleAccent,
                     color: Color(0xffF4F6CE),
                     padding: EdgeInsets.fromLTRB(
-                        0, 12, 0, 12),
-                    //  child: Card(
+                        0, 0, 0, 0),
 
-//      INCREAS THE DIVIDER TO MOVE THE IMAGE TO THE RIGHT
-                    // -displayWidth(context)/9
-
-                    /*
-                    child: Transform.translate(
-                      offset: Offset(-displayWidth(context) / 49, 0),
-                      // offset (-x,y) =(-50,0) =
-
-                      */
                     child:
-
-
-                    /*
-                      Stack(
-                        alignment: Alignment.topLeft,
-                        children: [
-                          Container(
-                            alignment: Alignment.topLeft,
-                            width: displayWidth(context) / 3,
-                            height: displayWidth(context) / 3.5,
-
-                            // INCREASE THE HEIGHT TO MAKE THE IMAGE CONTAINER MORE SMALLER.
-
-                            decoration: new BoxDecoration(
-                              color: Colors.orange,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-
-                          */
-                    Container(
-                      alignment: Alignment.topLeft,
-
-                      child:
-
                       ClipOval(
                         clipper: MyClipper11(),
                         child:CachedNetworkImage(
-                          height:displayHeight(context)/4.6,
+                          height:displayHeight(context)/8,
 //                  width: displayWidth(context)/2.95,
 
                           imageUrl: imageURLBig,
@@ -126,64 +84,24 @@ class FoodImageInShoppingCart extends StatelessWidget {
                         ),
                       ),
 
-                      /*
+                  ),
 
-                            ClipOval(
-                              child: CachedNetworkImage(
-                                width: displayWidth(context) / 3,
-                                height: displayWidth(context) / 3.5,
-                                imageUrl: imageURLBig,
-//                    fit: BoxFit.scaleDown,cover,scaleDown,fill
-                                fit: BoxFit.fill,
-//
-                                placeholder: (context,
-                                    url) => new CircularProgressIndicator(),
-                              ),
-                            ),
+                  Container(
+                    color: Color(0xffF4F6CE),
+                    child:Text(price.toStringAsFixed(2)+
+                        '\u20AC',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight
+                              .bold,
+//                                                      color: Colors.white
+                          color: Color(0xff707070),
 
-                            */
-
-                    ),
-
-                    /*
-                        ],
-                      ),
-
-           */
+                        )),
                   ),
                 ],
               ),
             ),
-
-            Container(
-//                    color:Colors.redAccent,
-              color: Color(0xffF4F6CE),
-
-              width: 70,
-              alignment: Alignment.topLeft,
-              child:Text(price.toStringAsFixed(2)+
-                  '\u20AC',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight
-                        .bold,
-//                                                      color: Colors.white
-                    color: Color(0xff707070),
-
-                  )),
-            ),
-//                    ),
-
-
-
-
-
-
-//            stringifiedFoodItemIngredients
-//                .length > 12 ?
-//            stringifiedFoodItemIngredients
-//                .substring(0, 12) + '...' :
-//            stringifiedFoodItemIngredients,
             Container(
 //              color:Colors.redAccent,
               color: Color(0xffF4F6CE),
@@ -193,7 +111,7 @@ class FoodImageInShoppingCart extends StatelessWidget {
               child:foodItemName.length >18?
               Text('${foodItemName.substring(0, 16)}'+ '...' ,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 23,
                     fontWeight: FontWeight
                         .bold,
 //                                                      color: Colors.white
@@ -202,22 +120,14 @@ class FoodImageInShoppingCart extends StatelessWidget {
                   )):
               Text('$foodItemName',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 23,
                     fontWeight: FontWeight
                         .bold,
 //                                                      color: Colors.white
                     color: Color(0xff707070),
 
                   )),
-              /*Text('$foodItemName',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight
-                        .bold,
-//                                                      color: Colors.white
-                    color: Color(0xff707070),
 
-                  ))*/
             ),
 
             Container(
@@ -229,15 +139,12 @@ class FoodImageInShoppingCart extends StatelessWidget {
                   0, 10, 0, 0),
               width: 130,
               height: 20,
-//              alignment: Alignment.centerLeft,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
 
                 reverse: false,
 
                 shrinkWrap: false,
-//        final String foodItemName =          filteredItems[index].itemName;
-//        final String foodImageURL =          filteredItems[index].imageURL;
                 itemCount: selectedIngredients.length,
 
                 itemBuilder: (_, int index) {
@@ -250,67 +157,19 @@ class FoodImageInShoppingCart extends StatelessWidget {
                       color: Color(0xff707070),
                     ),
                   );
-//          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
-//            index);
                 },
               ),
-              /*
-              child: GridView.builder(
-                gridDelegate:
-                new SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-//                new SliverGridDelegateWithMaxCrossAxisExtent(
-
-                  //Above to below for 3 not 2 Food Items:
-//                  maxCrossAxisExtent: 120,
-                  mainAxisSpacing: 0, // H  direction
-                  crossAxisSpacing: 0,
-                  childAspectRatio: 40 / 140,
-                  ///childAspectRatio:
-//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
-//                                  /// H/V
-                  // horizontal / vertical
-//                                              childAspectRatio: 280/360,
-
-
-                ),
-                scrollDirection: Axis.horizontal,
-                reverse: false,
-
-                shrinkWrap: false,
-//        final String foodItemName =          filteredItems[index].itemName;
-//        final String foodImageURL =          filteredItems[index].imageURL;
-                itemCount: selectedIngredients.length,
-
-                itemBuilder: (_, int index) {
-                  return Text('${selectedIngredients[index].ingredientName}'+ ', ',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight
-                          .bold,
-//                                                      color: Colors.white
-                      color: Color(0xff707070),
-                    ),);
-//          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
-//            index);
-                },
-              ),
-              */
-
-
-
             )
-
-
-
 
           ],
 
         ),
       );
     }
-
     else{
+
+      print('index !=0 in shopping cart  $index');
+      
       return Container(
 //        color: Color(0xFFffffff),
         color: Color(0xffF4F6CE),
@@ -579,7 +438,25 @@ class  MyClipper11 extends CustomClipper<Rect> {
 
 //    return Rect.fromCenter(center: Offset(0, 0),width:190,height:190);
 //  GOOD OPTION 2
-    return Rect.fromCircle(center: Offset(0, 170),radius:140);
+    return Rect.fromCircle(center: Offset(30, 70),radius:70);
+
+  }
+  @override
+  bool shouldReclip(oldClipper) => false;
+}
+
+
+class  MyClipper12 extends CustomClipper<Rect> {
+
+  @override
+  Rect getClip(Size size) {
+//    return Rect.fromLTWH(left, top, width, height)
+//  GOOD OPTION 1
+//    return Rect.fromLTWH(-220, 0, 550, 550);
+
+//    return Rect.fromCenter(center: Offset(0, 0),width:190,height:190);
+//  GOOD OPTION 2
+    return Rect.fromCircle(center: Offset(30, 70),radius:70);
 
   }
   @override
