@@ -144,13 +144,13 @@ class FirebaseClient {
 
 
 
-  Future<QuerySnapshot> fetchAllExtraIngredients(String categoryName)async{
+  Future<QuerySnapshot> fetchAllExtraIngredients()async{
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection(categoryName+'_extra_ingredients')
+        .collection('extraIngredients2')
         .getDocuments();
 
 //    var snapshot= Firestore.instance

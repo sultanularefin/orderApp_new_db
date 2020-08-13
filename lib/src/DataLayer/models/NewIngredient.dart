@@ -17,12 +17,15 @@ import 'dart:core';
 
 class NewIngredient {
 
-  final String ingredientName;
-  final String imageURL;
-  final double price;
-  final String documentId;
-  final int    ingredientAmountByUser;
+  String ingredientName;
+  String imageURL;
+  double price;
+  String documentId;
+  int    ingredientAmountByUser;
   bool isDefault;
+  List<dynamic> extraIngredientOf;
+  int sequenceNo;
+  String subgroup;
 
 //  String ingredients;
 
@@ -34,6 +37,9 @@ class NewIngredient {
         this.documentId,
         this.ingredientAmountByUser,
         this.isDefault,
+        this.extraIngredientOf,
+        this.sequenceNo,
+        this.subgroup,
       }
       );
 
@@ -55,6 +61,21 @@ class NewIngredient {
         documentId = docID,
         isDefault= false,
         ingredientAmountByUser = 1;
+//        extraIngredientOf= data['extraIngredientOf'],
+//        sequenceNo = data['sequenceNo'] ,
+//        subgroup= data['subgroup'];
+
+
+  NewIngredient.ingredientConvertExtra(Map<String, dynamic> data,String docID)
+      :imageURL= data['image'],
+        ingredientName= data['name'],
+        price = data['price'].toDouble(),
+        documentId = docID,
+        isDefault= false,
+        ingredientAmountByUser = 1,
+        extraIngredientOf= data['extraIngredientOf'],
+        sequenceNo = data['sequenceNo'] ,
+        subgroup= data['subgroup'];
 
 
   NewIngredient.updateUnselectedIngredient(NewIngredient oneIngredient)

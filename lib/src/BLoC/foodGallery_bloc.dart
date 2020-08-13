@@ -62,6 +62,16 @@ class FoodGalleryBloc implements Bloc {
 
 
 
+  List<NewIngredient> _allExtraIngredients =[];
+
+  List<NewIngredient> get getAllExtraIngredients => _allExtraIngredients;
+  Stream<List<NewIngredient>> get getExtraIngredientItemsStream => _allExtraIngredientItemsController.stream;
+  final _allExtraIngredientItemsController = StreamController <List<NewIngredient>> /*.broadcast*/();
+
+
+
+
+
 
   // cheese items
   List<CheeseItem> _allCheeseItemsFoodGalleryBloc =[];
@@ -162,6 +172,7 @@ class FoodGalleryBloc implements Bloc {
   // this code bloc cut paste from foodGallery Bloc:
   Future<void> getAllExtraIngredientsConstructor() async {
 
+    /*
     List<String> categories =
     [
       'jauheliha_kebab_vartaat'
@@ -171,6 +182,8 @@ class FoodGalleryBloc implements Bloc {
       'kebab',
       'juomat'
     ];
+
+    */
     print('at getAllExtraIngredientsConstructor()');
 
 
@@ -179,13 +192,13 @@ class FoodGalleryBloc implements Bloc {
 
 //      categories.forEach((doc) {
 
-      var snapshot = await _client.fetchAllExtraIngredients('jauheliha_kebab_vartaat');
+      var snapshot = await _client.fetchAllExtraIngredients();
       List docList = snapshot.documents;
 
 
       List <NewIngredient> ingItems = new List<NewIngredient>();
       ingItems = snapshot.documents.map((documentSnapshot) =>
-          NewIngredient.ingredientConvert
+          NewIngredient.ingredientConvertExtra
             (documentSnapshot.data, documentSnapshot.documentID)
 
       ).toList();
@@ -197,9 +210,12 @@ class FoodGalleryBloc implements Bloc {
       // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
-      _allIngItemsFGBloc = ingItems;
+      _allExtraIngredients = ingItems;
+//      _allIngItemsFGBloc = ingItems;
 
-      _allIngredientListController.sink.add(_allIngItemsFGBloc);
+      _allExtraIngredientItemsController.sink.add(_allExtraIngredients);
+
+//      _allIngredientListController.sink.add(_allIngItemsFGBloc);
 
 
 //    return ingItems;
@@ -641,6 +657,7 @@ class FoodGalleryBloc implements Bloc {
 
     _cheeseItemsControllerFoodGallery.close();
     _sauceItemsControllerFoodGallery.close();
+    _allExtraIngredientItemsController.close();
 
 
 //    _isDisposedIngredients=
