@@ -177,15 +177,33 @@ class FoodGalleryBloc implements Bloc {
     List<String> categories =
     [
       'jauheliha_kebab_vartaat'
-          'salaatit_kasvis',
-      'pizza',
+//          'salaatti_kasvis',=> done
+//      'pizza', => done
       'lasten_menu',
-      'kebab',
+//      'kebab',=> done
       'juomat'
     ];
 
 
+
     List<String> stringList = List<String>.from(x.extraIngredientOf);
+
+
+
+    print('x.ingredientName ${x.ingredientName}  x.subgroup.: ${x.subgroup}');
+//    print('---------------');
+//    stringList.forEach((oneGroup) {
+//      print('oneGroup: $oneGroup');
+//    });
+//
+//
+//    print('---------------');
+
+    if(stringList.contains('kastike'.toLowerCase().trim())){
+
+      print('contains /???');
+      print('x.ingredientName: ${x.ingredientName}');
+    };
 
 //    print('ingredientsString: $ingredientsString');
 //    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
@@ -211,10 +229,12 @@ class FoodGalleryBloc implements Bloc {
 
 
     String elementExists = stringList.firstWhere(
-            (oneItem) => oneItem.toLowerCase().trim() == categories[3].toLowerCase().trim(),
+            (oneItem) => oneItem.toLowerCase().trim() == 'jauheliha_kebab_vartaat'.toLowerCase().trim(),
         orElse: () => '');
 
     if(elementExists!=''){
+
+      print('elementExists: $elementExists');
 
       return true;
 
@@ -258,17 +278,17 @@ class FoodGalleryBloc implements Bloc {
       // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
-      List<NewIngredient> ingredientTest =
+      List<NewIngredient> ingredientsOfCategory =
       ingItems.where((e) => checkThisExtraIngredientForSomeCategory(e)).toList();
 
 
-      print('ingredientTest.length ==> --> ==> ${ingredientTest.length}');
+      print('ingredientTest.length ==> --> ==> ${ingredientsOfCategory.length}');
 
 
       Set<String> subgroups ={};
 
 //    List<String> categories = [];
-      ingredientTest.forEach((oneExtraIngredient) {
+      ingredientsOfCategory.forEach((oneExtraIngredient) {
         subgroups.add(oneExtraIngredient.subgroup.trim());
       });
 
@@ -279,7 +299,7 @@ class FoodGalleryBloc implements Bloc {
         print('oneGroupString: $oneGroupString');
       });
 
-      
+
       _allExtraIngredients = ingItems;
 //      _allIngItemsFGBloc = ingItems;
 
