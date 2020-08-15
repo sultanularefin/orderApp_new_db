@@ -772,7 +772,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                           if (categoryWiseSubGroups.length != 0) {
-                            return _buildSubGroups(categoryWiseSubGroups,unselectedOnly);
+                            return _buildSubGroups(categoryWiseSubGroups);
                           }
 
                           else {
@@ -2255,18 +2255,47 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     );
   }
 
+  int calculateHeightBySize(int length){
+
+
+    if(length<=5){
+      return 1;
+    }
+    else if ((length >5) && (length <=10) ){
+      return 2;
+    }
+    else if  ((length >10) && (length <=15) ){
+      return 3;
+    }
+    else return 4;
+
+  }
+
   Widget _buildOneSubGroup(String  subGroup, List<NewIngredient> unSelectedOnly,int lengthForHeight,int index) {
+
+
 
 
     print('unSelectedOnly.length: ${unSelectedOnly.length}');
 
-    List<NewIngredient> withCertainSubgropus = unSelectedOnly
-        .where((e) =>
-    (e.subgroup
-        .toLowerCase()
-        .trim() == subGroup
-        .toLowerCase()
-        .trim())).toList();
+//    _defaultIngItems.forEach((oneIng) {
+//
+//
+//      print('element.isDefault ingredient check:::: ${oneIng.isDefault}');
+//      print('oneIng.name: ${oneIng.ingredientName}');
+//      print('oneIng.price: ${oneIng.price}');
+//
+//
+//    }
+    unSelectedOnly.forEach((oneIng) {
+      print('oneIng name => : ${oneIng.ingredientName} \n');
+
+    }
+    );
+
+    List<NewIngredient> withCertainSubgropus = unSelectedOnly.where((e) =>
+    (e.subgroup.toLowerCase().trim()
+        == subGroup.toLowerCase().trim())).toList();
 
 
     print('/ ?  /   ?   / ?   /   ?   /   ? ');
@@ -2281,10 +2310,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
     return Container(
-      height: ((displayHeight(context)/1.5)/lengthForHeight),
+      height: (((displayHeight(context)/1.5)/lengthForHeight) * calculateHeightBySize(withCertainSubgropus.length)),
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
           Container(
@@ -2312,7 +2341,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           Container(
 
-            height: ((displayHeight(context)/2)/lengthForHeight),
+            height: (((displayHeight(context)/2)/lengthForHeight) * calculateHeightBySize(withCertainSubgropus.length)),
 
 
             child: GridView.builder(
@@ -2361,50 +2390,42 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   }
 
-  Widget _buildSubGroups(List<String>  categoryWiseSubGroups, List<NewIngredient> unSelectedOnly) {
+  Widget _buildSubGroups(List<String>  categoryWiseSubGroups) {
 
-
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
     print('categoryWiseSubGroups.length: ${categoryWiseSubGroups.length}');
+    return StreamBuilder(
+        stream: blocD.getUnSelectedIngredientItemsStream,
+        initialData: blocD.unSelectedIngredients,
 
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      reverse: true,
-      shrinkWrap: false,
-      itemCount: categoryWiseSubGroups.length,
-
-      itemBuilder: (_, int index) {
-        return _buildOneSubGroup(categoryWiseSubGroups[index],unSelectedOnly,categoryWiseSubGroups.length, index);
-      },
-    );
-//ssssssQQQQQQ
-
+        builder: (context, snapshot)
+        {
+          if (!snapshot.hasData) {
+            return Center(child: new LinearProgressIndicator());
+          }
+          else {
+            List<NewIngredient> unSelectedIngredients = snapshot.data;
 
 
+            print('-------- unSelectedIngredients.length: ${unSelectedIngredients.length} ------------');
 
 
-//     return categoryWiseSubGroups.forEach((oneSubGroup) {
-//        List<NewIngredient> withCertainSubgropus = new List<NewIngredient>();
-//         withCertainSubgropus = unSelectedOnly
-//            .where((e) =>
-//        (e.subgroup
-//            .toLowerCase()
-//            .trim == oneSubGroup
-//            .toLowerCase()
-//            .trim)).toList();
-//
-//
-//
-//
-//
-//      });
+            return ListView.builder(
 
-//      categoryWiseSubGroups.forEach
-//
-//
-//      NewIngredient unSelectedOneIngredient, int index
-//
-//      categoryWiseSubGroups,unselectedOnly
+              scrollDirection: Axis.vertical,
+              reverse: true,
+              shrinkWrap: false,
+              itemCount: categoryWiseSubGroups.length,
+
+              itemBuilder: (_, int index) {
+                return _buildOneSubGroup(
+                    categoryWiseSubGroups[index],unSelectedIngredients, categoryWiseSubGroups.length,
+                    index);
+              },
+            );
+          }
+        });
 
 
   }

@@ -1021,12 +1021,15 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   void incrementThisIngredientItem(NewIngredient unSelectedOneIngredient,int index){
 
     print('reached here: incrementThisIngredientItem ');
+    print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
 
 //                          NewIngredient c1 = oneUnselectedIngredient;
 
 
     print('modified ingredientAmountByUser at begin: ${_unSelectedIngItems[index].
     ingredientAmountByUser}');
+
+
 
     NewIngredient c1 = new NewIngredient(
       ingredientName: unSelectedOneIngredient
@@ -1037,21 +1040,29 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       documentId: unSelectedOneIngredient.documentId,
       ingredientAmountByUser: unSelectedOneIngredient
           .ingredientAmountByUser + 1,
+
+      extraIngredientOf: unSelectedOneIngredient.extraIngredientOf,
+      sequenceNo : unSelectedOneIngredient.sequenceNo,
+      subgroup: unSelectedOneIngredient.subgroup,
+
+
       isDefault: false,
     );
 
 
 
-    List<NewIngredient> allUnselectedbutOneDecremented = _unSelectedIngItems;
-    print('_unSelectedIngItems.length: ${allUnselectedbutOneDecremented.length}');
+    List<NewIngredient> tempUnSelectedAll = _unSelectedIngItems;
 
-    allUnselectedbutOneDecremented[index] = c1;
+    print('_unSelectedIngItems.length: ${tempUnSelectedAll.length}');
+
+    tempUnSelectedAll[index] = c1;
 
 
-    _unSelectedIngItems= allUnselectedbutOneDecremented;
+    _unSelectedIngItems = tempUnSelectedAll;
+
     print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
-    print('modified ingredientAmountByUser at end: ${_unSelectedIngItems[index].
-    ingredientAmountByUser}');
+    print('modified ingredientAmountByUser at end: ${_unSelectedIngItems[index].ingredientAmountByUser}');
+
 
 
 //   _thisFoodItem =thisFoodpriceModified;
