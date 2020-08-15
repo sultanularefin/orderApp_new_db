@@ -176,13 +176,15 @@ class FoodGalleryBloc implements Bloc {
 
     List<String> categories =
     [
-      'jauheliha_kebab_vartaat'
+//      'jauheliha_kebab_vartaat' => done
 //          'salaatti_kasvis',=> done
 //      'pizza', => done
       'lasten_menu',
 //      'kebab',=> done
       'juomat'
     ];
+
+    logger.e('for lasten_menu');
 
 
 
@@ -229,7 +231,7 @@ class FoodGalleryBloc implements Bloc {
 
 
     String elementExists = stringList.firstWhere(
-            (oneItem) => oneItem.toLowerCase().trim() == 'jauheliha_kebab_vartaat'.toLowerCase().trim(),
+            (oneItem) => oneItem.toLowerCase().trim() == 'lasten_menu'.toLowerCase().trim(),
         orElse: () => '');
 
     if(elementExists!=''){
@@ -288,7 +290,14 @@ class FoodGalleryBloc implements Bloc {
       Set<String> subgroups ={};
 
 //    List<String> categories = [];
+
+
+
       ingredientsOfCategory.forEach((oneExtraIngredient) {
+        
+        print('oneExtraIngredient.subgroup: ${oneExtraIngredient.subgroup} oneExtraIngredient.ingredientName:'
+            ' ${oneExtraIngredient.ingredientName}');
+
         subgroups.add(oneExtraIngredient.subgroup.trim());
       });
 
