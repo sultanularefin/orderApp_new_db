@@ -80,6 +80,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   double priceBySize = 0.0;
   double priceBasedOnCheeseSauceIngredientsSizeState = 0.0;
 
+  List<String> allSubGroups1 = new List<String>();
+
 
 //  color: Color(0xff34720D),
 //  VS 0xffFEE295 3 0xffFEE295 false
@@ -87,16 +89,36 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-  /*
+
 
   @override
   void initState() {
 
-//    setDetailForFood();
-//    retrieveIngredientsDefault();
+    setallSubgroups();
+
     super.initState();
   }
-  */
+
+
+  Future<void> setallSubgroups() async {
+
+    debugPrint("Entering in retrieveIngredients1");
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+    List<String> allSubGroups2 = blocD.getAllSubGroups;
+
+    print('done: ');
+
+    setState(()
+    {
+      allSubGroups1=allSubGroups2;
+
+    }
+    );
+  }
+
+
+
 
 
 
@@ -133,8 +155,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //    logger.e('blocD: $blocD');
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
+    /*
 
     List<NewIngredient> unSelectedIngredients = blocD.unSelectedIngredients;
+
+//    stream: blocD.getCategoryWiseSubgroupsStream,
+//    initialData: blocD.getAllSubGroups,
 
 
 
@@ -148,6 +174,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     else {
 
 
+      */
       return Container(
 
           child: StreamBuilder<FoodItemWithDocIDViewModel>(
@@ -280,7 +307,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                         milliseconds: 1000),
 //
                                     child: showUnSelectedIngredients
-                                        ?otherView(oneFood,unSelectedIngredients) :initialView(oneFood,foodSizePrice)
+                                        ?otherView(oneFood,/*unSelectedIngredients*/) :initialView(oneFood,foodSizePrice)
                                 ),),
 //
 
@@ -297,10 +324,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               }
           )
       );
-    }
+//    }
   }
 
-  Widget otherView(FoodItemWithDocIDViewModel oneFood,List<NewIngredient> unselectedOnly){
+  Widget otherView(FoodItemWithDocIDViewModel oneFood,/*List<NewIngredient> unselectedOnly */){
 
 //    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
@@ -771,13 +798,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                           List<String> categoryWiseSubGroups = snapshot.data;
 
 
-                          if (categoryWiseSubGroups.length != 0) {
-                            return _buildSubGroups(categoryWiseSubGroups);
-                          }
+//                          if (categoryWiseSubGroups.length != 0) {
+                            return _buildSubGroups();
+//                          }
 
-                          else {
-                            return Container(child: Text('no extra ingredients'),);
-                          }
+//                          else {
+//                            return Container(child: Text('no extra ingredients'),);
+//                          }
                         }
                       }
 
@@ -2390,11 +2417,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   }
 
-  Widget _buildSubGroups(List<String>  categoryWiseSubGroups) {
+  Widget _buildSubGroups() {
 
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-    print('categoryWiseSubGroups.length: ${categoryWiseSubGroups.length}');
+//    print('categoryWiseSubGroups.length: ${categoryWiseSubGroups.length}');
     return StreamBuilder(
         stream: blocD.getUnSelectedIngredientItemsStream,
         initialData: blocD.unSelectedIngredients,
@@ -2416,11 +2443,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               scrollDirection: Axis.vertical,
               reverse: true,
               shrinkWrap: false,
-              itemCount: categoryWiseSubGroups.length,
+              itemCount: allSubGroups1.length,
 
               itemBuilder: (_, int index) {
                 return _buildOneSubGroup(
-                    categoryWiseSubGroups[index],unSelectedIngredients, categoryWiseSubGroups.length,
+                    allSubGroups1[index],unSelectedIngredients, allSubGroups1.length,
                     index);
               },
             );
