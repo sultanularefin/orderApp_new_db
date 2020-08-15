@@ -2281,17 +2281,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
     return Container(
-      height: ((displayHeight(context)/2.5)/lengthForHeight),
+      height: ((displayHeight(context)/1.5)/lengthForHeight),
       child: Column(
-          mainAxisAlignment: MainAxisAlignment
-              .start,
-          crossAxisAlignment: CrossAxisAlignment
-              .start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
           Container(
 
-            height: 25,
+//            color:Colors.red,
+            height: 40,
             padding:EdgeInsets.fromLTRB(0, 8, 0, 8),
             child: Text(
 
@@ -2301,7 +2300,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
 
-                  fontSize: 14,
+                  fontSize: 20,
                   fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
                   color: Colors.grey,
@@ -2313,7 +2312,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           Container(
 
-            height: ((displayHeight(context)/2.5)/lengthForHeight)-25,
+            height: ((displayHeight(context)/2)/lengthForHeight),
 
 
             child: GridView.builder(
