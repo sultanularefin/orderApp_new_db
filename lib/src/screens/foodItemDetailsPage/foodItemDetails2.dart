@@ -175,155 +175,155 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
       */
-      return Container(
+    return Container(
 
-          child: StreamBuilder<FoodItemWithDocIDViewModel>(
-
-
-              stream: blocD.currentFoodItemsStream,
-              initialData: blocD.currentFoodItem,
-
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(child: new LinearProgressIndicator());
-                  // from LinearProgressIndicator() to CircularProgressIndicator();
-                  // checking which function progress indicator is executed from pop from foodDetails page to foodGallery page.
-                }
-                else {
-                  //   print('snapshot.hasData FDetails: ${snapshot.hasData}');
-
-                  final FoodItemWithDocIDViewModel oneFood = snapshot
-                      .data;
-
-                  final Map<String, dynamic> foodSizePrice = oneFood
-                      .sizedFoodPrices;
+        child: StreamBuilder<FoodItemWithDocIDViewModel>(
 
 
+            stream: blocD.currentFoodItemsStream,
+            initialData: blocD.currentFoodItem,
 
-                  //            priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemSize;
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: new LinearProgressIndicator());
+                // from LinearProgressIndicator() to CircularProgressIndicator();
+                // checking which function progress indicator is executed from pop from foodDetails page to foodGallery page.
+              }
+              else {
+                //   print('snapshot.hasData FDetails: ${snapshot.hasData}');
+
+                final FoodItemWithDocIDViewModel oneFood = snapshot
+                    .data;
+
+                final Map<String, dynamic> foodSizePrice = oneFood
+                    .sizedFoodPrices;
+
+
+
+                //            priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemSize;
 
 //                  priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemPrice;
 
-                  priceBasedOnCheeseSauceIngredientsSizeState =  oneFood.priceBasedOnCheeseSauceIngredientsSize;
+                priceBasedOnCheeseSauceIngredientsSizeState =  oneFood.priceBasedOnCheeseSauceIngredientsSize;
 
-                  priceBySize = oneFood.itemPriceBasedOnSize;
+                priceBySize = oneFood.itemPriceBasedOnSize;
 
-                  _currentSize = oneFood.itemSize;
+                _currentSize = oneFood.itemSize;
 
 
-                  return GestureDetector(
-                    onTap: () {
-                      print('s');
-                      print('navigating to FoodGallery 2 again with block');
+                return GestureDetector(
+                  onTap: () {
+                    print('s');
+                    print('navigating to FoodGallery 2 again with block');
 
-                      FocusScopeNode currentFocus = FocusScope.of(
-                          context);
+                    FocusScopeNode currentFocus = FocusScope.of(
+                        context);
 
-                      if (!currentFocus.hasPrimaryFocus) {
-                        currentFocus.unfocus();
+                    if (!currentFocus.hasPrimaryFocus) {
+                      currentFocus.unfocus();
 //                  Navigator.pop(context);
 
-                      }
+                    }
 
 
 
-                      final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+                    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //                      final blocD =
 //                          BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
 
 
-                      SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
+                    SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
 
-                      print('temp is $temp');
+                    print('temp is $temp');
 
-                      print('temp.selectedIngredients: ${temp.selectedIngredients}');
-                      print('temp.selectedCheeseItems: ${temp.selectedCheeseItems}');
-                      print('temp.selectedSauceItems:  ${temp.selectedSauceItems}');
-
-
-                      print('temp.unitPrice:  ${temp.unitPrice}');
-                      print('temp.unitPriceWithoutCheeseIngredientSauces: '
-                          ' ${temp.unitPriceWithoutCheeseIngredientSauces}');
-                      print('temp.quantity:  ${temp.quantity}');
-
-                      print('temp.foodItemSize:  ${temp.foodItemSize}');
-                      print('temp.subTotalPrice:  ${temp.subTotalPrice}');
+                    print('temp.selectedIngredients: ${temp.selectedIngredients}');
+                    print('temp.selectedCheeseItems: ${temp.selectedCheeseItems}');
+                    print('temp.selectedSauceItems:  ${temp.selectedSauceItems}');
 
 
+                    print('temp.unitPrice:  ${temp.unitPrice}');
+                    print('temp.unitPriceWithoutCheeseIngredientSauces: '
+                        ' ${temp.unitPriceWithoutCheeseIngredientSauces}');
+                    print('temp.quantity:  ${temp.quantity}');
+
+                    print('temp.foodItemSize:  ${temp.foodItemSize}');
+                    print('temp.subTotalPrice:  ${temp.subTotalPrice}');
 
 
 
-                      SelectedFood tempSelectedFood = (temp == null)? new SelectedFood():
-                      temp /*.selectedFoodInOrder.first*/;
+
+
+                    SelectedFood tempSelectedFood = (temp == null)? new SelectedFood():
+                    temp /*.selectedFoodInOrder.first*/;
 
 
 
-                      // WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
-                      // WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
-                      // FROM FOOD ITEM PAGE.
+                    // WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
+                    // WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
+                    // FROM FOOD ITEM PAGE.
 
 
-                      print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
-                      blocD.clearSubscription();
+                    print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
+                    blocD.clearSubscription();
 
-                      return Navigator.pop(context,tempSelectedFood);
+                    return Navigator.pop(context,tempSelectedFood);
 
 
-                    },
-                    child:
-                    Scaffold(
+                  },
+                  child:
+                  Scaffold(
 
-                      backgroundColor: Colors.white.withOpacity(0.05),
-                      // this is the main reason of transparency at next screen.
-                      // I am ignoring rest implementation but what i have achieved is you can see.
+                    backgroundColor: Colors.white.withOpacity(0.05),
+                    // this is the main reason of transparency at next screen.
+                    // I am ignoring rest implementation but what i have achieved is you can see.
 
-                      body: SafeArea(
+                    body: SafeArea(
 
-                        // smaller container containing all modal FoodItem Details things.
-                        child: Container(
-                            height: displayHeight(context) -
-                                MediaQuery.of(context).padding.top -
-                                MediaQuery.of(context).padding.bottom,
+                      // smaller container containing all modal FoodItem Details things.
+                      child: Container(
+                          height: displayHeight(context) -
+                              MediaQuery.of(context).padding.top -
+                              MediaQuery.of(context).padding.bottom,
 //                            kToolbarHeight
 
-                            child: GestureDetector(
-                              onTap: () {
-                                print('GestureDetector for Stack working');
-                                print('no navigation now');
+                          child: GestureDetector(
+                            onTap: () {
+                              print('GestureDetector for Stack working');
+                              print('no navigation now');
 
 
-                              },
+                            },
+                            child:
+
+                            Container(
+
+                              // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
+                              width: displayWidth(context)/1.03,
+
                               child:
-
-                              Container(
-
-                                // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-                                width: displayWidth(context)/1.03,
-
-                                child:
-                                AnimatedSwitcher(
-                                    duration: Duration(
-                                        milliseconds: 1000),
+                              AnimatedSwitcher(
+                                  duration: Duration(
+                                      milliseconds: 1000),
 //
-                                    child: showUnSelectedIngredients
-                                        ?otherView(oneFood,/*unSelectedIngredients*/) :initialView(oneFood,foodSizePrice)
-                                ),),
+                                  child: showUnSelectedIngredients
+                                      ?otherView(oneFood,/*unSelectedIngredients*/) :initialView(oneFood,foodSizePrice)
+                              ),),
 //
 
 
 
-                            )
+                          )
 
 
-                        ),
                       ),
                     ),
-                  );
-                }
+                  ),
+                );
               }
-          )
-      );
+            }
+        )
+    );
 //    }
   }
 
@@ -783,40 +783,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       0, 24, 0, 20),
 
 
-                  child:StreamBuilder<List<String>>(
-                      stream: blocD.getCategoryWiseSubgroupsStream,
-                      initialData: blocD.getAllSubGroups,
+                  child:_buildSubGroups(),
+                  //        }
 
-                      // hormuz...........
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return Center(child: new LinearProgressIndicator());
-                        }
-                        else {
-//    List<NewIngredient> unSelectedIngredients = unselectedOnly;
-
-                          List<String> categoryWiseSubGroups = snapshot.data;
-
-
-//                          if (categoryWiseSubGroups.length != 0) {
-                            return _buildSubGroups();
-//                          }
-
-//                          else {
-//                            return Container(child: Text('no extra ingredients'),);
-//                          }
-                        }
-                      }
-
-
-
-
-
-                  ),
-
+                  //        else {
+                  //          return Container(child: Text('no extra ingredients'),);
+                  //        }
 
                 ),
-
+                
               ]
           ),
         )
