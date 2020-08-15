@@ -84,6 +84,9 @@ class NewIngredient {
         price = oneIngredient.price,
         documentId = oneIngredient.documentId,
         ingredientAmountByUser = 0,
+        extraIngredientOf= oneIngredient.extraIngredientOf,
+        sequenceNo = oneIngredient.sequenceNo,
+        subgroup= oneIngredient.subgroup,
         isDefault= false;
 
   // PURPOSE SETTING ISDEFAULT TRUE INORDER TO CALCULATE PRICE UPON NEW INGREDIENT ADD

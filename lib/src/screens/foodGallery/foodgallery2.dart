@@ -64,7 +64,7 @@ import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/foodItems_query_bloc.dart';
-import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
+//import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 
 //import './../../shared/category_Constants.dart' as Constants;
 
@@ -937,12 +937,6 @@ class _FoodGalleryState extends State<FoodGallery2> {
               ),
             ),
           ),
-
-
-
-
-
-
 
 
 
@@ -2722,6 +2716,7 @@ Widget work1(BuildContext context){
 
     List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
     List<SauceItem>  tempSauceItems = blocG.getAllSauceItemsFoodGallery;
+    List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
 
 
 
@@ -2774,7 +2769,9 @@ Widget work1(BuildContext context){
               oneFoodItem,
               tempIngs,
               tempCheeseItems,
-              tempSauceItems
+              tempSauceItems,
+              allExtraIngredients
+
           ),
 
 

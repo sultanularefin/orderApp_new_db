@@ -182,6 +182,15 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
+
+  List<String> _allSubgroups =[];
+  List<String> get getAllSubGroups => _allSubgroups;
+  final _categoryWiseSubGroupsController      =  StreamController <List<String>>.broadcast();
+  Stream <List<String>> get getCategoryWiseSubgroupsStream => _categoryWiseSubGroupsController.stream;
+
+
+
+
   // Stream<Map<String,double>> get CurrentItemSizePlusPrice => _itemSizeController.stream; // currentlyNotUsing.
 
 
@@ -503,12 +512,96 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
+
+
+
+  // HELPER METHOD FOR TEST TO BE MODIFIED....  AUGUST 14 2020.....
+  bool checkThisExtraIngredientForSomeCategory(NewIngredient x,String categroyName) {
+
+//    List<String> categories =
+//    [
+//      'jauheliha_kebab_vartaat' => done
+//          'salaatti_kasvis',=> done
+//      'pizza', => done
+//      'lasten_menu', => done
+//      'kebab',=> done
+//      'juomat'
+//    ];
+
+//    logger.e('for lasten_menu');
+
+
+
+    List<String> stringList = List<String>.from(x.extraIngredientOf);
+
+
+
+    print('x.ingredientName ${x.ingredientName}  x.subgroup.: ${x.subgroup}');
+//    print('---------------');
+//    stringList.forEach((oneGroup) {
+//      print('oneGroup: $oneGroup');
+//    });
+//
+//
+//    print('---------------');
+
+    /*
+    if(stringList.contains('kastike'.toLowerCase().trim())){
+
+      print('contains /???');
+      print('x.ingredientName: ${x.ingredientName}');
+    };
+    */
+
+//    print('ingredientsString: $ingredientsString');
+//    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
+
+//    List<String> foodIngredients =ingredientsString;
+
+//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
+
+    /*
+
+    String elementExists = allIngredients.firstWhere(
+            (oneItem) => oneItem.toLowerCase() == inputString.toLowerCase(),
+        orElse: () => '');
+
+    print('elementExists: $elementExists');
+
+    return elementExists;
+
+    */
+
+
+//    categories[3]= 'lasten_menu';
+
+
+    String elementExists = stringList.firstWhere(
+            (oneItem) => oneItem.toLowerCase().trim() == categroyName.toLowerCase().trim(),
+        orElse: () => '');
+
+    if(elementExists!=''){
+
+      print('elementExists: $elementExists');
+
+      return true;
+
+    }
+
+//    print('elementExists: Line # 612:  $elementExists');
+
+    return false;
+  }
+
+
   // CONSTRUCTOR BEGINS HERE.
   FoodItemDetailsBloc(
       FoodItemWithDocID oneFoodItem,
       List<NewIngredient> allIngsScoped ,
       List<CheeseItem> tempCheeseItems,
-      List<SauceItem> tempSauceItems) {
+      List<SauceItem> tempSauceItems,
+      List<NewIngredient> allExtraIngredients,
+      ) {
 
 //    oneFoodItem,
 //    tempIngs,
@@ -544,6 +637,47 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     initiateSauces(tempSauceItems,saucesStrings2);
 
     initiateCheeseItems(tempCheeseItems,cheesesStrings2);
+
+
+
+
+      List<NewIngredient> ingredientsOfCategory =
+      allExtraIngredients.where((e) => checkThisExtraIngredientForSomeCategory(e,oneFoodItem.categoryName)).toList();
+
+
+      print('ingredientTest.length ==> --> ==> ${ingredientsOfCategory.length}');
+
+
+      Set<String> subgroups ={};
+
+//    List<String> categories = [];
+
+
+
+      ingredientsOfCategory.forEach((oneExtraIngredient) {
+
+        print('oneExtraIngredient.subgroup: ${oneExtraIngredient.subgroup} oneExtraIngredient.ingredientName:'
+            ' ${oneExtraIngredient.ingredientName}');
+
+        subgroups.add(oneExtraIngredient.subgroup.trim());
+      });
+
+      print('subgroups.length => ${subgroups.length}:  >               >               >');
+
+
+      subgroups.forEach((oneGroupString) {
+        print('oneGroupString: $oneGroupString');
+      });
+
+
+      List<String> convertedSubgroups = subgroups.toList();
+
+      logger.w('convertedSubgroups.length: ${convertedSubgroups.length}');
+
+      _allSubgroups = convertedSubgroups ;
+    _categoryWiseSubGroupsController.sink.add(_allSubgroups);
+
+
 
 
     /* Ordered Food Related codes ends here. */
@@ -589,12 +723,13 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
         foodItemIngredientsList2);
 
 
+    // ingredientsOfCategory
     // SHORT CIRCUIT WORKING HERE.
-    if ((listStringIngredients!=null) && (listStringIngredients.length != 0)) {
-      filterSelectedDefaultIngredients(allIngsScoped,
+    if ((listStringIngredients != null) && (listStringIngredients.length != 0)) {
+      filterSelectedDefaultIngredients(ingredientsOfCategory,
           listStringIngredients); // only default<NewIngredient>
 
-      filterUnSelectedIngredients(allIngsScoped,
+      filterUnSelectedIngredients(ingredientsOfCategory,
           listStringIngredients); // only default<NewIngredient>
 
 
@@ -627,8 +762,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       _defaultIngredientListController.sink.add(_defaultIngItems);
 
 
+//      ingredientsOfCategory  ???
+//      allIngsScoped  ??? important .
       List<NewIngredient> unSelectedDecremented =
-      allIngsScoped.map((oneIngredient) =>
+      ingredientsOfCategory.map((oneIngredient) =>
           NewIngredient.updateUnselectedIngredient(
               oneIngredient
           )).toList();
@@ -640,7 +777,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       _unSelectedIngItems = unSelectedDecremented;
 
 
-      _unSelectedIngredientListController.sink.add(unSelectedDecremented);
+      _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
 
 //      return ingItems;
 
@@ -1364,14 +1501,24 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   List<String> dynamicListFilteredToStringList(List<dynamic> dlist) {
 
     List<String> stringList = List<String>.from(dlist);
+
+    logger.i('stringList.length: ${stringList.length}');
+
+
+    return stringList;
+    /*
     return stringList.where((oneItem) =>oneItem.toString().toLowerCase()
         ==
         isIngredientExist(oneItem.toString().trim().toLowerCase())).toList();
+
+    */
 
   }
 
   // HELPER METHOD  isIngredientExist ==> NUMBER 3
 
+
+  /*
 
   String isIngredientExist(String inputString) {
     List<String> allIngredients = [
@@ -1433,6 +1580,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //    searchString2.toLowerCase())).toList();
   }
 
+
+  */
+
+
   // helper method 04 filterSelectedDefaultIngredients
   filterSelectedDefaultIngredients(List<NewIngredient> allIngList ,
       List<String> listStringIngredients2) {
@@ -1445,10 +1596,13 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //    print("allIngList: $allIngList");
 
     print("listStringIngredients2: $listStringIngredients2");
+
     print('allIngList.length: ${allIngList.length}');
 
-    allIngList.map((oneElement)=> print('oneElement.ingredientName:'
-        ' ${oneElement.ingredientName}'));
+//    allIngList.map((oneElement)=> print('oneElement.ingredientName:'
+//        ' ${oneElement.ingredientName}'));
+
+
     var mappedFruits2 = allIngList.map((oneElement)=> '${oneElement.ingredientName==''}').toList();
     print('mappedFruits2.length: ${mappedFruits2.length}');
 
@@ -1508,6 +1662,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     });
 
+    print('default2.length: ${default2.length}');
+
     default2.map((oneIngredient) =>
     /*NewIngredient.updateSelectedIngredient */(
         oneIngredient.isDefault= true
@@ -1546,8 +1702,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List <CheeseItem> allCheeseItemsDefaultIncluded = allCheeses.map(
             (oneItem) =>
             checkThisCheeseItemInDefatultStringCheeseItems(
-                oneItem,defaultCheeseORJuusoItems)
-    ).toList();
+                oneItem,defaultCheeseORJuusoItems)).toList();
 
     return allCheeseItemsDefaultIncluded;
 
@@ -1752,6 +1907,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     _allSelectedCheeseItems = [];
     _allSelectedSauceItems = [];
+    _allSubgroups=[];
 
 
     _controller.sink.add(_thisFoodItem);
@@ -1766,6 +1922,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
     _selectedSauceListController.sink.add(_allSelectedSauceItems);
+    _categoryWiseSubGroupsController.sink.add(_allSubgroups);
 
   }
 
@@ -1787,5 +1944,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     _selectedSauceListController.close();
     _selectedCheeseListController.close();
+    _categoryWiseSubGroupsController.close();
   }
 }

@@ -53,8 +53,9 @@ class FoodGalleryBloc implements Bloc {
 
   List<NewCategoryItem> _allCategoryList=[];
 
-  List<NewIngredient> _allIngItemsFGBloc =[];
 
+  
+  List<NewIngredient> _allIngItemsFGBloc =[];
   List<NewIngredient> get getAllIngredientsPublicFGB2 => _allIngItemsFGBloc;
   Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
   final _allIngredientListController = StreamController <List<NewIngredient>> /*.broadcast*/();
@@ -280,33 +281,7 @@ class FoodGalleryBloc implements Bloc {
       // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
-      List<NewIngredient> ingredientsOfCategory =
-      ingItems.where((e) => checkThisExtraIngredientForSomeCategory(e)).toList();
 
-
-      print('ingredientTest.length ==> --> ==> ${ingredientsOfCategory.length}');
-
-
-      Set<String> subgroups ={};
-
-//    List<String> categories = [];
-
-
-
-      ingredientsOfCategory.forEach((oneExtraIngredient) {
-        
-        print('oneExtraIngredient.subgroup: ${oneExtraIngredient.subgroup} oneExtraIngredient.ingredientName:'
-            ' ${oneExtraIngredient.ingredientName}');
-
-        subgroups.add(oneExtraIngredient.subgroup.trim());
-      });
-
-      print('subgroups.length => ${subgroups.length}:  >               >               >');
-
-
-      subgroups.forEach((oneGroupString) {
-        print('oneGroupString: $oneGroupString');
-      });
 
 
       _allExtraIngredients = ingItems;
@@ -721,8 +696,6 @@ class FoodGalleryBloc implements Bloc {
     getAllIngredientsConstructor();
 
     getAllExtraIngredientsConstructor();
-
-
 
     getAllFoodItemsConstructor();
 

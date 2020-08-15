@@ -280,7 +280,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                         milliseconds: 1000),
 //
                                     child: showUnSelectedIngredients
-                                        ?otherView(oneFood) :initialView(oneFood,foodSizePrice)
+                                        ?otherView(oneFood,unSelectedIngredients) :initialView(oneFood,foodSizePrice)
                                 ),),
 //
 
@@ -300,7 +300,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     }
   }
 
-  Widget otherView(FoodItemWithDocIDViewModel oneFood){
+  Widget otherView(FoodItemWithDocIDViewModel oneFood,List<NewIngredient> unselectedOnly){
 
 //    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
@@ -361,155 +361,155 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                  border: Border.all(
 
           child: Column(
-            mainAxisAlignment: MainAxisAlignment
-                .start,
-            crossAxisAlignment: CrossAxisAlignment
-                .start,
-            children: <Widget>[
+              mainAxisAlignment: MainAxisAlignment
+                  .start,
+              crossAxisAlignment: CrossAxisAlignment
+                  .start,
+              children: <Widget>[
 
-              Container(
+                Container(
 
 //                                            color: Colors.redAccent,
-                color: Colors.white,
-                height:displayHeight(context)/18,
-//                                              width: displayWidth(context)*0.57,
-                width: displayWidth(context)/2.4 ,
-                // /1.07 is the width of this
-                // uppper container.
-
-
-                child:
-                // YELLOW NAME AND PRICE BEGINS HERE.
-                Container(
-                  width: displayWidth(context)/3.9 /*+  displayWidth(context)/8 */,
-
-
-                  decoration: BoxDecoration(
-                    color:Color(0xffFFE18E),
-                    borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
-//
-                  ),
-
-
+                  color: Colors.white,
                   height:displayHeight(context)/18,
-//                                          height: displayHeight(context)/40,
+//                                              width: displayWidth(context)*0.57,
+                  width: displayWidth(context)/2.4 ,
+                  // /1.07 is the width of this
+                  // uppper container.
+
 
                   child:
+                  // YELLOW NAME AND PRICE BEGINS HERE.
+                  Container(
+                    width: displayWidth(context)/3.9 /*+  displayWidth(context)/8 */,
+
+
+                    decoration: BoxDecoration(
+                      color:Color(0xffFFE18E),
+                      borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
+//
+                    ),
+
+
+                    height:displayHeight(context)/18,
+//                                          height: displayHeight(context)/40,
+
+                    child:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                      children: <Widget>[
+                        Container(
+                          width: displayWidth(context)/3.9,
+                          padding: EdgeInsets
+                              .fromLTRB(
+                              10, 0, 0,
+                              0),
+                          child:
+
+                          Text(
+                              '${oneFood
+                                  .itemName}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                color: Colors
+                                    .black,
+                                fontFamily: 'Itim-Regular',
+
+                              )
+                          ),
+                        ),
+
+                        Container(
+                          padding: EdgeInsets
+                              .fromLTRB(
+                              0, 4, displayWidth(context)/40,
+                              0),
+                          child:
+
+                          Text(
+                              '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
+                                  '\u20AC',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight
+                                    .normal,
+//                                                      color: Colors.white
+                                color: Colors
+                                    .black,
+                                fontFamily: 'Itim-Regular',
+
+                              )
+                          ),
+                        ),
+
+                      ],
+                    ),
+
+
+
+                  ),
+
+                  // YELLOW NAME AND PRICE ENDS HERE.
+
+
+
+                  // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
+                  // ENDED HERE.
+
+                  // BLACK CONTAINER WILL BE DELETED LATER.
+                  // BLACK CONTAINER.
+
+
+
+                ),
+
+                // multiselect portion... begins here.
+                Container(
+//                                            alignment: Alignment.centerRight,
+
+//                                            color: Colors.lightBlue,
+                  height:displayHeight(context)/18,
+
+                  width: displayWidth(context) /1.07 ,
+                  child:
+                  // YELLOW NAME AND PRICE BEGINS HERE.
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                    children: <Widget>[
-                      Container(
-                        width: displayWidth(context)/3.9,
-                        padding: EdgeInsets
-                            .fromLTRB(
-                            10, 0, 0,
-                            0),
-                        child:
-
-                        Text(
-                            '${oneFood
-                                .itemName}',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.normal,
-//                                                      color: Colors.white
-                              color: Colors
-                                  .black,
-                              fontFamily: 'Itim-Regular',
-
-                            )
-                        ),
-                      ),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
 
                       Container(
-                        padding: EdgeInsets
-                            .fromLTRB(
-                            0, 4, displayWidth(context)/40,
-                            0),
-                        child:
+//                                                  color:Colors.green,
+                        width: displayWidth(context) /2.1,
+                        height: displayHeight(context)/20,
 
-                        Text(
-                            '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
-                                '\u20AC',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight
-                                  .normal,
-//                                                      color: Colors.white
-                              color: Colors
-                                  .black,
-                              fontFamily: 'Itim-Regular',
+                      )
+                      ,
+                      Container(
 
-                            )
-                        ),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+//                                                      padding::::
+                        color:Colors.white,
+                        width: displayWidth(context) /2.2,
+                        height: displayHeight(context)/17,
+//                                                  width: displayWidth(context) /1.80,
+                        child: _buildMultiSelectOptions(),
+//                                                      Card(child: _buildMultiSelectOptions()),
+
+                        // Text('_buildMultiSelectOptions()')
+
                       ),
-
                     ],
                   ),
 
 
-
                 ),
-
-                // YELLOW NAME AND PRICE ENDS HERE.
-
-
-
-                // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-                // ENDED HERE.
-
-                // BLACK CONTAINER WILL BE DELETED LATER.
-                // BLACK CONTAINER.
-
-
-
-              ),
-
-              // multiselect portion... begins here.
-              Container(
-//                                            alignment: Alignment.centerRight,
-
-//                                            color: Colors.lightBlue,
-                height:displayHeight(context)/18,
-
-                width: displayWidth(context) /1.07 ,
-                child:
-                // YELLOW NAME AND PRICE BEGINS HERE.
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-
-                    Container(
-//                                                  color:Colors.green,
-                      width: displayWidth(context) /2.1,
-                      height: displayHeight(context)/20,
-
-                    )
-                    ,
-                    Container(
-
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-//                                                      padding::::
-                      color:Colors.white,
-                      width: displayWidth(context) /2.2,
-                      height: displayHeight(context)/17,
-//                                                  width: displayWidth(context) /1.80,
-                      child: _buildMultiSelectOptions(),
-//                                                      Card(child: _buildMultiSelectOptions()),
-
-                      // Text('_buildMultiSelectOptions()')
-
-                    ),
-                  ],
-                ),
-
-
-              ),
-              // multiselect portion...ends here.
+                // multiselect portion...ends here.
 
 
 //          ;;;;;;;
@@ -517,299 +517,280 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-              SizedBox(height: 50,),
+                SizedBox(height: 50,),
 //              smallIMage and others in a row begins here=>
 
 
 
 
-              // 2nd ROW CONTAINING IMAGE CONTAINER
-              // AS ONE CHILD AND SIZED COMPONENTS ADN
-              // DEFAULT INGREDIENTS IN ANOTHER PLACE.
-              Container(
+                // 2nd ROW CONTAINING IMAGE CONTAINER
+                // AS ONE CHILD AND SIZED COMPONENTS ADN
+                // DEFAULT INGREDIENTS IN ANOTHER PLACE.
+                Container(
 //                                            color:Colors.deepPurpleAccent,
-                  height: displayHeight(context) / 7 +
-                      displayHeight(context) / 6.6,
+                    height: displayHeight(context) / 7 +
+                        displayHeight(context) / 6.6,
 
 //                displayHeight(context)/2.5
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
-                      // , 2ND PART(ROW) HANDLES THE
-                      // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
+                        // , 2ND PART(ROW) HANDLES THE
+                        // DIFFERENT SIZES OF PRODUCTS. BEGINS HERE.
 
 
-                      Container(
-                        color:Colors.red,
-                        width:displayWidth(context) /4,
-                        height: displayHeight(context) / 7 +
-                            displayHeight(context) / 6.6,
-                        padding: EdgeInsets
-                            .fromLTRB(
-                            0, 0, 0,
-                            0),
+                        Container(
+                          color:Colors.red,
+                          width:displayWidth(context) /4,
+                          height: displayHeight(context) / 7 +
+                              displayHeight(context) / 6.6,
+                          padding: EdgeInsets
+                              .fromLTRB(
+                              0, 0, 0,
+                              0),
 
-                        child: FoodDetailImageSmaller(
-                            oneFood
-                                .imageURL,
-                            oneFood
-                                .itemName),
-                      ),
-
-
-                      // SIZED COMPONENTS AND
-                      // DEFAULT INGREDIENTS IN ANOTHER PLACE. BEGINS.
-                      // HERE.
-
-                      // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
-
-                      Container(
-                        color:Colors.blue,
-//                                                    color:Colors.redAccent,
-                        height: displayHeight(context) / 7 +
-                            displayHeight(context) / 6.6,
-
-                        width: displayWidth(context) /3.99,
-//                                                    width: displayWidth(context) /1.80,
-                        //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment
-                              .center,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .start,
-                          children: <Widget>[
-                            //pppp
-
-
-                            _buildOneSizeForOtherView(_currentSize,
-                                priceBasedOnCheeseSauceIngredientsSizeState),
-
-
-                            animatedWidgetPressToFinish(),
-
-                          ],
+                          child: FoodDetailImageSmaller(
+                              oneFood
+                                  .imageURL,
+                              oneFood
+                                  .itemName),
                         ),
-                      ),
 
 
-                      Container(
+                        // SIZED COMPONENTS AND
+                        // DEFAULT INGREDIENTS IN ANOTHER PLACE. BEGINS.
+                        // HERE.
 
-                        color:Colors.lightGreenAccent,
+                        // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
+
+                        Container(
+                          color:Colors.blue,
+//                                                    color:Colors.redAccent,
+                          height: displayHeight(context) / 7 +
+                              displayHeight(context) / 6.6,
+
+                          width: displayWidth(context) /3.99,
+//                                                    width: displayWidth(context) /1.80,
+                          //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment
+                                .center,
+                            crossAxisAlignment: CrossAxisAlignment
+                                .start,
+                            children: <Widget>[
+                              //pppp
+
+
+                              _buildOneSizeForOtherView(_currentSize,
+                                  priceBasedOnCheeseSauceIngredientsSizeState),
+
+
+                              animatedWidgetPressToFinish(),
+
+                            ],
+                          ),
+                        ),
+
+
+                        Container(
+
+                          color:Colors.lightGreenAccent,
 
 //                                                    color:Colors.redAccent,
-                        height: displayHeight(context) / 7 +
-                            displayHeight(context) / 6.6,
+                          height: displayHeight(context) / 7 +
+                              displayHeight(context) / 6.6,
 
-                        width: displayWidth(context) /2.39,
+                          width: displayWidth(context) /2.39,
 //                                                    width: displayWidth(context) /1.80,
-                        //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment
-                              .center,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .start,
-                          children: <Widget>[
-                            //pppp
-                            Container(
-                                padding: EdgeInsets
-                                    .fromLTRB(
-                                    10, 3, 0, 3),
+                          //  width: displayWidth(context) /1.80, aLSO MULITISELECT WIDTH 1.80
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment
+                                .center,
+                            crossAxisAlignment: CrossAxisAlignment
+                                .start,
+                            children: <Widget>[
+                              //pppp
+                              Container(
+                                  padding: EdgeInsets
+                                      .fromLTRB(
+                                      10, 3, 0, 3),
 //                                alignment: Alignment
 //                                    .center,
-                                child: Text('selected ingredients'.toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: 'Itim-Regular',
-                                    color: Color(0xff707070),
-                                  ),
-                                )
-                            ),
+                                  child: Text('selected ingredients'.toUpperCase(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'Itim-Regular',
+                                      color: Color(0xff707070),
+                                    ),
+                                  )
+                              ),
 
-                            Container(
+                              Container(
 //                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 23,
-                                width: displayWidth(context) /2.39,
-                                child: selectedIngredientsNameOnly(context)
-                              //Text('buildDefaultIngredients('
-                              //    'context'
-                              //')'),
-                            ),
+                                  height: displayHeight(context) / 23,
+                                  width: displayWidth(context) /2.39,
+                                  child: selectedIngredientsNameOnly(context)
+                                //Text('buildDefaultIngredients('
+                                //    'context'
+                                //')'),
+                              ),
 
-                            // 'CHEESE BEGINS HERE.
+                              // 'CHEESE BEGINS HERE.
 
-                            Container(
-                                padding: EdgeInsets
-                                    .fromLTRB(
-                                    10, 0, 0, 0),
+                              Container(
+                                  padding: EdgeInsets
+                                      .fromLTRB(
+                                      10, 0, 0, 0),
 //                                alignment: Alignment
 //                                    .center,
-                                child: Text('CHEESE'.toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: 'Itim-Regular',
-                                    color: Color(0xff707070),
-                                  ),
-                                )
-                            ),
+                                  child: Text('CHEESE'.toUpperCase(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'Itim-Regular',
+                                      color: Color(0xff707070),
+                                    ),
+                                  )
+                              ),
 
 
 
 
-                            Container(
+                              Container(
 //                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 23,
-                                width: displayWidth(context) /2.39,
+                                  height: displayHeight(context) / 23,
+                                  width: displayWidth(context) /2.39,
 //                                                            width: displayWidth(context) * 0.57,
 //                                                            color: Color(0xfff4444aa),
 //                                                            color:Colors.lightBlueAccent,
 //                                                        alignment: Alignment.center,
-                                child: buildSelectedCheeseItemsNameOnly(
-                                    context
-                                )
-                              //Text('buildDefaultIngredients('
-                              //    'context'
-                              //')'),
-                            ),
+                                  child: buildSelectedCheeseItemsNameOnly(
+                                      context
+                                  )
+                                //Text('buildDefaultIngredients('
+                                //    'context'
+                                //')'),
+                              ),
 
 
 
 
 
 
-                            Container(
-                                padding: EdgeInsets
-                                    .fromLTRB(
-                                    10, 0, 0, 0),
+                              Container(
+                                  padding: EdgeInsets
+                                      .fromLTRB(
+                                      10, 0, 0, 0),
 //                                alignment: Alignment
 //                                    .center,
-                                child: Text('SAUCES'.toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: 'Itim-Regular',
-                                    color: Color(0xff707070),
-                                  ),
-                                )
-                            ),
+                                  child: Text('SAUCES'.toUpperCase(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'Itim-Regular',
+                                      color: Color(0xff707070),
+                                    ),
+                                  )
+                              ),
 
 
 
-                            Container(
+                              Container(
 //                                                            height: displayHeight(context) / 10,
-                                height: displayHeight(context) / 23,
-                                width: displayWidth(context) /2.39,
+                                  height: displayHeight(context) / 23,
+                                  width: displayWidth(context) /2.39,
 //                                                            width: displayWidth(context) * 0.57,
 //                                                            color: Colors.purpleAccent,
 //                                                            color:Colors.lightBlueAccent,
 //                                                        alignment: Alignment.center,
-                                child: buildSelectedSauceItemsNameOnly(
-                                    context
-                                )
-                              //Text('buildDefaultIngredients('
-                              //    'context'
-                              //')'),
-                            ),
+                                  child: buildSelectedSauceItemsNameOnly(
+                                      context
+                                  )
+                                //Text('buildDefaultIngredients('
+                                //    'context'
+                                //')'),
+                              ),
 
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
 
 
 
 
-                    ],
-                  )
+                      ],
+                    )
 
-              ),
-
-
-              /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
+                ),
 
 
-              //smallImage and other's in a row ends here ==>
+                /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
 
-              Container(
-                color:Colors.white,
 
-                height: displayHeight(context)/2.5,
-                /*-
+                //smallImage and other's in a row ends here ==>
+
+
+
+
+//              ark
+
+
+
+                Container(
+                  color:Colors.white,
+
+                  height: displayHeight(context)/2.5,
+                  /*-
                     MediaQuery.of(context).padding.top -
                     MediaQuery.of(context).padding.bottom,
 */
-                width: displayWidth(context)/1.03,
+                  width: displayWidth(context)/1.03,
 
-                margin: EdgeInsets.fromLTRB(
-                    12, 0, 0, 0),
-                padding: EdgeInsets.fromLTRB(
-                    0, 24, 0, 20),
-
-                child:StreamBuilder(
-                  stream: blocD.getUnSelectedIngredientItemsStream,
-                  initialData: blocD.unSelectedIngredients,
-
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return Center(child: new LinearProgressIndicator());
-                    }
-                    else {
-
-                      List<NewIngredient> unSelectedIngredients = snapshot.data;
-                      return GridView.builder(
-                        itemCount: unSelectedIngredients
-                            .length,
-                        itemBuilder: (_, int index) {
-                          return _buildOneUNSelected
-                            (
-                              unSelectedIngredients[index],
-                              index/*, unSelectedIngredients*/
-                          );
-                        },
-                        gridDelegate:
-//                                            new SliverGridDelegateWithFixedCrossAxisCount(
-//                                              crossAxisCount: 3,
-                        new SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 180,
-
-                          mainAxisSpacing: 0,
-                          // H  direction
-                          crossAxisSpacing: 0,
-
-                          ///childAspectRatio:
-                          /// The ratio of the cross-axis to the main-axis extent of each child.
-                          /// H/V
-                          childAspectRatio: 300 / 340,
-//                                  ///childAspectRatio:
-//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
-//                                  /// H/V
-                          // horizontal / vertical
-//                                              childAspectRatio: 280/360,
-
-                        ),
+                  margin: EdgeInsets.fromLTRB(
+                      12, 0, 0, 0),
+                  padding: EdgeInsets.fromLTRB(
+                      0, 24, 0, 20),
 
 
-                        controller: new ScrollController(
-                            keepScrollOffset: false),
+                  child:StreamBuilder<List<String>>(
+                      stream: blocD.getCategoryWiseSubgroupsStream,
+                      initialData: blocD.getAllSubGroups,
 
-                        shrinkWrap: false,
+                      // hormuz...........
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(child: new LinearProgressIndicator());
+                        }
+                        else {
+//    List<NewIngredient> unSelectedIngredients = unselectedOnly;
+
+                          List<String> categoryWiseSubGroups = snapshot.data;
 
 
-                      );
-                    }
-                  },
+                          if (categoryWiseSubGroups.length != 0) {
+                            return _buildSubGroups(categoryWiseSubGroups,unselectedOnly);
+                          }
+
+                          else {
+                            return Container(child: Text('no extra ingredients'),);
+                          }
+                        }
+                      }
+
+
+
+
+
+                  ),
+
+
                 ),
 
-              ),
-
-
-
-
-
-            ],
+              ]
           ),
         )
 
@@ -1795,37 +1776,37 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   Widget animatedWidgetPressToFinish(){
 
 
-       return RaisedButton(
+    return RaisedButton(
 
-          color:Color(0xffFCF5E4),
-          highlightColor: Color(0xff525FFF),
-          splashColor: Color(0xffB47C00),
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          highlightElevation: 12,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: Color(0xff707070),
-              style: BorderStyle.solid,
+        color:Color(0xffFCF5E4),
+        highlightColor: Color(0xff525FFF),
+        splashColor: Color(0xffB47C00),
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+        highlightElevation: 12,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Color(0xff707070),
+            style: BorderStyle.solid,
 //            width: 1,
-            ),
-            borderRadius: BorderRadius.circular(5.0),
           ),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
 
-          child:Container(
+        child:Container(
 
-            width:displayWidth(context)/4.5,
+          width:displayWidth(context)/4.5,
 
-            height: displayHeight(context)/24,
-            padding: EdgeInsets.fromLTRB(0,0,0,0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment
-                  .center,
-              children: <
-                  Widget>[
-                //  SizedBox(width: 5,),
+          height: displayHeight(context)/24,
+          padding: EdgeInsets.fromLTRB(0,0,0,0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment
+                .center,
+            children: <
+                Widget>[
+              //  SizedBox(width: 5,),
 
-            /*
+              /*
                 Container(
                   padding: EdgeInsets.fromLTRB(0,3,0,0),
                   child: Icon(
@@ -1839,43 +1820,43 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                 */
 
-                Text(
-                  'press to continue'.toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight
-                        .bold,
+              Text(
+                'press to continue'.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight
+                      .bold,
 //                    color: Color(0xffF50303),
-                    color: Colors.black,
-                    fontSize: 18, fontFamily: 'Itim-Regular',),
-                ),
-              ],
-            ),
+                  color: Colors.black,
+                  fontSize: 18, fontFamily: 'Itim-Regular',),
+              ),
+            ],
           ),
+        ),
 
-          onPressed: () {
+        onPressed: () {
 //
 
 
 
-            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+          final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-            blocD.finishMoreDefaultIngredientItems(/*oneSelected,index*/);
+          blocD.finishMoreDefaultIngredientItems(/*oneSelected,index*/);
 
-            setState(() {
+          setState(() {
 
-              showUnSelectedIngredients = !showUnSelectedIngredients;
-              showPressWhenFinishButton = !showPressWhenFinishButton;
+            showUnSelectedIngredients = !showUnSelectedIngredients;
+            showPressWhenFinishButton = !showPressWhenFinishButton;
 
 
 //                ::::A
 //                          myAnimatedWidget1 = myAnimatedWidget2;
 
-            }
-            );
           }
           );
+        }
+    );
 
   }
 
@@ -2272,6 +2253,161 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         ],
       ),
     );
+  }
+
+  Widget _buildOneSubGroup(String  subGroup, List<NewIngredient> unSelectedOnly,int lengthForHeight,int index) {
+
+
+    print('unSelectedOnly.length: ${unSelectedOnly.length}');
+
+    List<NewIngredient> withCertainSubgropus = unSelectedOnly
+        .where((e) =>
+    (e.subgroup
+        .toLowerCase()
+        .trim() == subGroup
+        .toLowerCase()
+        .trim())).toList();
+
+
+    print('/ ?  /   ?   / ?   /   ?   /   ? ');
+
+
+
+    print('subGroup: $subGroup');
+    print('withCertainSubgropus.length: ${withCertainSubgropus.length}');
+
+
+
+
+
+    return Container(
+      height: ((displayHeight(context)/2.5)/lengthForHeight),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment
+              .start,
+          crossAxisAlignment: CrossAxisAlignment
+              .start,
+
+        children: [
+          Container(
+
+            height: 25,
+            padding:EdgeInsets.fromLTRB(0, 8, 0, 8),
+            child: Text(
+
+                subGroup.toUpperCase(),
+                textAlign: TextAlign.left,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                  color: Colors.grey,
+                  fontFamily: 'Itim-Regular',
+
+                )
+            ),
+          ),
+
+          Container(
+
+            height: ((displayHeight(context)/2.5)/lengthForHeight)-25,
+
+
+            child: GridView.builder(
+              itemCount: withCertainSubgropus.length,
+              itemBuilder: (_, int index) {
+                return _buildOneUNSelected
+                  (
+                    withCertainSubgropus[index],
+                    index/*, unSelectedIngredients*/
+                );
+              },
+              gridDelegate:
+//                                            new SliverGridDelegateWithFixedCrossAxisCount(
+//                                              crossAxisCount: 3,
+              new SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 180,
+
+                mainAxisSpacing: 0,
+                // H  direction
+                crossAxisSpacing: 0,
+
+                ///childAspectRatio:
+                /// The ratio of the cross-axis to the main-axis extent of each child.
+                /// H/V
+                childAspectRatio: 300 / 340,
+//                                  ///childAspectRatio:
+//                                  /// The ratio of the cross-axis to the main-axis extent of each child.
+//                                  /// H/V
+                // horizontal / vertical
+//                                              childAspectRatio: 280/360,
+
+              ),
+
+
+              controller: new ScrollController(
+                  keepScrollOffset: false),
+
+              shrinkWrap: false,
+
+
+            ),
+          ),
+        ],
+      ),
+    );
+
+  }
+
+  Widget _buildSubGroups(List<String>  categoryWiseSubGroups, List<NewIngredient> unSelectedOnly) {
+
+
+
+    print('categoryWiseSubGroups.length: ${categoryWiseSubGroups.length}');
+
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      reverse: true,
+      shrinkWrap: false,
+      itemCount: categoryWiseSubGroups.length,
+
+      itemBuilder: (_, int index) {
+        return _buildOneSubGroup(categoryWiseSubGroups[index],unSelectedOnly,categoryWiseSubGroups.length, index);
+      },
+    );
+//ssssssQQQQQQ
+
+
+
+
+
+//     return categoryWiseSubGroups.forEach((oneSubGroup) {
+//        List<NewIngredient> withCertainSubgropus = new List<NewIngredient>();
+//         withCertainSubgropus = unSelectedOnly
+//            .where((e) =>
+//        (e.subgroup
+//            .toLowerCase()
+//            .trim == oneSubGroup
+//            .toLowerCase()
+//            .trim)).toList();
+//
+//
+//
+//
+//
+//      });
+
+//      categoryWiseSubGroups.forEach
+//
+//
+//      NewIngredient unSelectedOneIngredient, int index
+//
+//      categoryWiseSubGroups,unselectedOnly
+
+
   }
 
   Widget _buildOneUNSelected(NewIngredient unSelectedOneIngredient, int index
