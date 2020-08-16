@@ -66,25 +66,7 @@ class _FoodGalleryState extends State<HistoryPage> {
   _FoodGalleryState(/*{firestore} */);
 
 
-  String _searchString = '';
-  String _currentCategory = "pizza";
-  String _firstTimeCategoryString = "";
-
-//  this can be defined in Shopping cart page like old way
-  int _totalCount = 0;
-  List<SelectedFood> allSelectedFoodGallery = [];
-  double totalPriceState = 0;
-
-  Order orderFG = new Order(
-    selectedFoodInOrder: [],
-    selectedFoodListLength:0,
-    orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-    paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-    orderingCustomer: null,
-    totalPrice: 0,
-    page:0,
-  );
-
+  String _currentPageHeader = 'HISTORY';
 
   double tryCast<num>(dynamic x, {num fallback }) {
     bool status = x is num;
@@ -379,7 +361,7 @@ class _FoodGalleryState extends State<HistoryPage> {
 //                      color:Colors.red,
                       width: displayWidth(context)-40,
                       height: displayHeight(context) + kToolbarHeight + 10,
-                      child: allHistoryList(_currentCategory,_searchString, context),
+                      child: allHistoryList(_currentPageHeader, context),
 
                     ),
 
@@ -395,302 +377,6 @@ class _FoodGalleryState extends State<HistoryPage> {
     );
   }
 
-
-
-
-  Widget shoppingCartWidget(BuildContext context){
-
-    return Container(
-      width: displayWidth(
-          context) / 13,
-      height: displayHeight(context) / 25,
-      alignment: Alignment.center,
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-
-      child: OutlineButton(
-        onPressed: () async {
-          if (_totalCount == 0) {
-            return showDialog<void>(
-              context: context,
-              barrierDismissible: true, // user must tap button!
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Select some Food, please'),
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: <Widget>[
-//                        Text('you haven\'t selected any food yet, please select some food'),
-                        Text('You need to select some food item in order to go to the shopping cart page.'),
-                      ],
-                    ),
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text('Agree'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          }
-          else {
-            print(
-                ' method for old Outline button that deals with navigation to Shopping Cart Page');
-
-
-            CustomerInformation oneCustomerInfo = new CustomerInformation(
-              address: '',
-              flatOrHouseNumber: '',
-              phoneNumber: '',
-              etaTimeInMinutes: -1,
-
-            );
-
-
-
-            final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-            List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.allCategories;
-
-            orderFG.selectedFoodInOrder = allSelectedFoodGallery;
-
-            orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
-            orderFG.totalPrice = totalPriceState;
-            orderFG.orderingCustomer = oneCustomerInfo;
-            print(
-
-                'add_shopping_cart button pressed');
-
-            logger.e('orderFG.selectedFoodInOrder ${orderFG.selectedFoodInOrder}');
-            print('allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity} ');
-
-            final Order orderWithDocumentId = await Navigator.of(context).push(
-
-              PageRouteBuilder(
-                opaque: false,
-                transitionDuration: Duration(
-                    milliseconds: 900),
-                pageBuilder: (_, __, ___) =>
-                    BlocProvider<ShoppingCartBloc>(
-                      bloc: ShoppingCartBloc(
-                          orderFG,allCategoriesForShoppingCartPage),
-
-
-                      child: ShoppingCart(),
-
-                    ),
-              ),
-            );
-
-
-
-            if(orderWithDocumentId==null) {
-              setState(() {
-                _totalCount = 0;
-                totalPriceState = 0;
-                allSelectedFoodGallery = [];
-                orderFG = new Order(
-                  selectedFoodInOrder: [],
-                  selectedFoodListLength: 0,
-                  orderTypeIndex: 0,
-                  // phone, takeaway, delivery, dinning.
-                  paymentTypeIndex: 2,
-                  //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                  orderingCustomer: null,
-                  totalPrice: 0,
-                  page: 0,
-                  isCanceled: false,
-                  orderdocId: '',
-
-                );
-              });
-            }
-            else if ((orderWithDocumentId.isCanceled != true) && (orderWithDocumentId.orderdocId=='')) {
-              print('//   //    //    // THIS ELSE IS FOR BACK BUTTON =>');
-              print('orderWithDocumentId.selectedFoodInOrder: ${orderWithDocumentId.selectedFoodInOrder}');
-              print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
-              print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
-
-              print('_totalCount: $_totalCount');
-              print('totalPriceState: $totalPriceState');
-
-              setState((){
-//                        int _totalCount = 0;
-                allSelectedFoodGallery = orderWithDocumentId.selectedFoodInOrder;
-
-              }
-              );
-
-              Scaffold.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON"),
-                    duration: Duration(milliseconds: 8000),
-                  ),);
-//      setState(() => _reloadRequired = true);
-
-
-            }
-
-            else if ((orderWithDocumentId.paymentButtonPressed) &&
-                (orderWithDocumentId.orderdocId != '')) {
-
-              logger.e("Order received, id: ${orderWithDocumentId.orderdocId}");
-              Scaffold.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text(
-                    "Order received, id: ${orderWithDocumentId.orderdocId}"),
-                    duration: Duration(milliseconds: 8000)
-                )
-                );
-
-
-              setState(
-                      () {
-                    _totalCount = 0;
-                    totalPriceState = 0;
-                    allSelectedFoodGallery=[];
-                    orderFG = new Order(
-                      selectedFoodInOrder: [],
-                      selectedFoodListLength:0,
-                      orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-                      paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                      orderingCustomer: null,
-                      totalPrice: 0,
-                      page:0,
-                      isCanceled: false,
-                      orderdocId:'',
-                    );
-                  }
-              );
-            }
-
-
-            else if (orderWithDocumentId.isCanceled == true) {
-
-//              Order Cancelled by user.
-              print("Order Cancelled by user,");
-              print("orderWithDocumentId.paymentButtonPressed: ${orderWithDocumentId.paymentButtonPressed}");
-              print("orderWithDocumentId.orderdocId == '': ${orderWithDocumentId.orderdocId}");
-
-              Scaffold.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text(
-                    "Order Cancelled by user: ")));
-
-
-              setState(
-                      () {
-
-                    _totalCount = 0;
-                    totalPriceState = 0;
-                    allSelectedFoodGallery=[];
-
-                    orderFG = new Order(
-                      selectedFoodInOrder: [],
-                      selectedFoodListLength:0,
-                      orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-                      paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                      orderingCustomer: null,
-                      totalPrice: 0,
-                      page:0,
-                      isCanceled: false,
-                      orderdocId:'',
-                    );
-                  }
-              );
-            }
-
-            else{
-              print('why this condition executed.');
-              logger.e('why this condition executed.');
-            }
-
-
-          }
-        },
-//                        color: Color(0xffFEE295),
-        clipBehavior: Clip.hardEdge,
-        splashColor: Color(0xffFEE295),
-//          splashColor: Color(0xff739DFA),
-        highlightElevation: 12,
-//          clipBehavior: Clip.hardEdge,
-//          highlightElevation: 12,
-        shape: RoundedRectangleBorder(
-
-          borderRadius: BorderRadius.circular(35.0),
-        ),
-//          disabledBorderColor: false,
-        borderSide: BorderSide(
-          color: Color(0xffFEE295),
-          style: BorderStyle.solid,
-          width: 3.6,
-        ),
-
-
-        child:
-
-        ///SSWW
-
-
-        Center(
-          child: Stack(
-              children: <Widget>[ Center(
-                child: Icon(
-
-                  Icons.add_shopping_cart,
-                  size: displayWidth(context)/19,
-                  color: Color(0xff707070),
-                ),
-              ),
-
-                Container(
-//                                              color:Colors.red,
-                  width: displayWidth(context)/25,
-
-
-                  decoration: new BoxDecoration(
-                    color: Colors.redAccent,
-
-                    border: new Border.all(
-                        color: Colors.green,
-                        width: 1.0,
-                        style: BorderStyle.solid
-                    ),
-                    shape: BoxShape.circle,
-
-                  ),
-
-                  alignment: Alignment.center,
-                  child: Text(
-                    _totalCount.toString(),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight
-                          .normal,
-                      fontSize: 20,
-                    ),
-                  ),
-
-                ),
-
-              ]
-          ),
-        ),
-
-      ),
-    );
-
-
-
-
-  }
-
-
-// ALL FOODLIST CLASS RELATED FUNCTIONS ARE BLOW UNTIL CLASS STARTS THAT WE CAN PUT IN ANOTHER FILE.
-// IF WE WANT, START'S HERE:
 
 
 
@@ -742,7 +428,7 @@ class _FoodGalleryState extends State<HistoryPage> {
   }
 
 
-  Widget allHistoryList(String categoryString,String searchString2,BuildContext context)  {
+  Widget allHistoryList(String pageHeaderString,BuildContext context)  {
 
     final blocH = BlocProvider.of<HistoryBloc>(context);
 
@@ -828,10 +514,8 @@ class _FoodGalleryState extends State<HistoryPage> {
               }
 
               else {
-                print(
-                    'searchString  ##################################: $searchString2');
-                print(
-                    'categoryString  ##################################: $categoryString');
+
+                print('categoryString  ##################################: $pageHeaderString');
 
                 final List<OneOrderFirebase> allFoods = snapshot.data;
 
@@ -860,11 +544,12 @@ class _FoodGalleryState extends State<HistoryPage> {
                                 CustomPaint(size: Size(0, 19),
                                   painter: LongHeaderPainterBefore(context),
                                 ),
-                                Text('$_currentCategory'.toLowerCase(),
+                                Text('$_currentPageHeader'.toUpperCase(),
                                   style:
                                   TextStyle(
 
-                                    fontFamily: 'Itim-Regular',
+                                    // fontFamily: 'Itim-Regular',
+                                    // fontFamily: 'Poppins-ExtraBold',
                                     fontSize: 30,
                                     fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
@@ -990,14 +675,6 @@ class _FoodGalleryState extends State<HistoryPage> {
 
 
 
-          // MIGHT BE NEEDED....... LATER...........
-
-          /*
-          String stringifiedFoodItemIngredients = listTitleCase(
-              foodItemIngredientsList);
-          */
-
-
           return
             Container(
 
@@ -1007,8 +684,7 @@ class _FoodGalleryState extends State<HistoryPage> {
                     horizontal: 4.0, vertical: 16.0),
                 child: InkWell(
                   child: Column(
-//                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                      crossAxisAlignment: CrossAxisAlignment.end,
+
                     children: <Widget>[
                       new Container(child:
                       new Container(
@@ -1019,7 +695,8 @@ class _FoodGalleryState extends State<HistoryPage> {
                           boxShadow: [
                             BoxShadow(
 
-                                color: Color(0xff707070),
+//                                color: Color(0xff707070),
+                                color: Color(0xffEAB45E),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                 blurRadius: 25.0,
@@ -1042,17 +719,14 @@ class _FoodGalleryState extends State<HistoryPage> {
                               heroSize, child) {
                             return Opacity(
                               opacity: 0.5, child: Container(
-                              width: displayWidth(context) /
-                                  7,
-                              height: displayWidth(context) /
-                                  7,
+                              width: displayWidth(context) / 7,
+                              height: displayWidth(context) / 7,
                               decoration: new BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
 
-                                      color: Color(
-                                          0xffEAB45E),
+                                      color: Color(0xffEAB45E),
 
                                       blurRadius: 25.0,
                                       spreadRadius: 0.10,
@@ -1095,19 +769,10 @@ class _FoodGalleryState extends State<HistoryPage> {
                                       112, 112, 112, 1),
                                   fontSize: 15),
                             ),
-//                                    SizedBox(width: 10),
-
-
-//                      formattedOrderPlacementDatesTimeOnly: formattedOrderPlacementDatesTimeOnly2,
-//                      formattedOrderPlacementDate: formattedOrderPlacementDate2,
-
 
                       Container(
-//                                        height: displayHeight(context) / 61,
 
                           child: Text(
-//                                'stringifiedFoodItemIngredients',
-
 
                             formattedOrderPlacementDate2 + ' ' + formattedOrderPlacementDatesTimeOnly2,
 
@@ -1159,8 +824,7 @@ class _FoodGalleryState extends State<HistoryPage> {
     List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
 
 
-    final SelectedFood receivedSelectedFood = await
-    Navigator.of(context).push(
+    return Navigator.of(context).push(
 
 
       PageRouteBuilder(
@@ -1168,11 +832,7 @@ class _FoodGalleryState extends State<HistoryPage> {
         transitionDuration: Duration(
             milliseconds: 900),
         pageBuilder: (_, __, ___) =>
-
-//        tempCheeseItems
-//          tempSauceItems
-
-        BlocProvider<HistoryDetailsBloc>(
+            BlocProvider<HistoryDetailsBloc>(
           bloc: HistoryDetailsBloc(
             oneFirebaseOrderItem,
           ),
@@ -1183,54 +843,10 @@ class _FoodGalleryState extends State<HistoryPage> {
       ),
     );
 
-
-
-    if(
-    (receivedSelectedFood!=null) && (receivedSelectedFood.foodItemName!=null)
-    ) {
-
-//      print('| | | | | | | |   receivedSelectedFood.quantity: ${receivedSelectedFood.quantity}');
-
-      print('| | | | | | | |   receivedSelectedFood.selectedSauceItems: ${receivedSelectedFood.selectedSauceItems}');
-      print('| | | | | | | |   receivedSelectedFood.selectedCheeseItems: ${receivedSelectedFood.selectedCheeseItems}');
-
-
-      int currentFoodItemQuantity = receivedSelectedFood.quantity;
-      double unitPricecurrentFood = receivedSelectedFood.unitPrice;
-
-
-
-      Scaffold.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text("selected ${receivedSelectedFood.quantity} items")));
-//      setState(() => _reloadRequired = true);
-
-      setState(
-              ()
-          {
-            _totalCount = _totalCount + receivedSelectedFood.quantity;
-            allSelectedFoodGallery.add(receivedSelectedFood);
-            totalPriceState =
-                totalPriceState + currentFoodItemQuantity * unitPricecurrentFood;
-
-          }
-      );
-
-      // bloc 1.
-
-
-    }
-    else{
-      Scaffold.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text("selected 0 items")));
-    }
-
   }
 
 // HELPER METHOD tryCast Number (1)
   int test1(SelectedFood x) {
-
 
     return x.quantity ;
   }
