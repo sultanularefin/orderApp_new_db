@@ -955,7 +955,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                   Container(
 
-                    color:Colors.green,
+//                    color:Colors.green,
                     width: displayWidth(context) /2.1,
                     height:displayHeight(context)/18,
 //                    height: displayHeight(context)/20,
@@ -985,7 +985,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                            alignment: Alignment.centerRight,
 
 //                                            color: Colors.lightBlue,
-              height:displayHeight(context)/16,
+              height:displayHeight(context)/15,
 
               width: displayWidth(context) /1.07 ,
               child:
@@ -1006,7 +1006,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                     padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
 //                                                      padding::::
-                    color:Colors.redAccent,
+//                    color:Colors.redAccent,
                     width: displayWidth(context) /2,
 //                    height: displayHeight(context)/20,
 
@@ -1099,7 +1099,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                    width: displayWidth(context)/4,
                       width: displayWidth(context)/2.49,
 //                                                    width: displayWidth(context)/3.29,
-                                                    color:Colors.blue,
+//                      color:Colors.blue,
                       child:
                       Container(
                         height:displayHeight(context)/2.1,
@@ -1133,10 +1133,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     // 2ND ROW, FOR FOR OTHER ITEMS, WILL BE A COLUMN ARRAY, BEGINS HERE:
 
                     Container(
-//                                                    color:Colors.yellowAccent,
+//                      color:Colors.purpleAccent,
+                      height:displayHeight(context)/2.1,
+
+                      /*
                       height: displayHeight(context) / 7 +
                           displayHeight(context) / 6.6
                           + displayHeight(context) / 8,
+                      */
 
                       width:displayWidth(context) /1.91,
 //                                                    width: displayWidth(context) /1.49,
@@ -1154,26 +1158,26 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                                  Text('ss'),
 
-                          SizedBox(height: 40,),
+//                          SizedBox(height: 40,),
                           Container(
                             width: displayWidth(context) /
-                                1.5,
+                                1.6,
                             height: displayHeight(
                                 context) / 40,
-                            color: Color(0xffffffff),
+//                            color:Colors.lightGreenAccent,
+
+//                            color: Color(0xffffffff),
 
                             child: Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .start
+                                mainAxisAlignment: MainAxisAlignment.start
                                 ,
-                                crossAxisAlignment: CrossAxisAlignment
-                                    .center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
 
                                   Container(
                                       margin: EdgeInsets
                                           .fromLTRB(
-                                          0, 0, 0, 0),
+                                          15, 0, 0, 0),
                                       alignment: Alignment
                                           .center,
                                       child: Text('INGREDIENTS'.toUpperCase(),
@@ -1187,12 +1191,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       )
                                   ),
 
+                                  /*
                                   CustomPaint(
                                     size: Size(0, 19),
                                     painter: LongHeaderPainterAfterShoppingCartPage(
                                         context),
                                   ),
 
+                                  */
 
                                 ]
                             ),
@@ -1201,24 +1207,38 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                           Container(
+                            child: Column(
+                              children: [
+                                Container(
 //                                                            height: displayHeight(context) / 13,
-                              height: displayHeight(context) / 13,
-                              width: displayWidth(context) /1.50,
+                                    height: displayHeight(context) / 13,
+                                    width: displayWidth(context) /1.50,
 //                                                            width: displayWidth(context) * 0.57,
 //                                                            color: Color(0xfff4444aa),
 //                                                            color:Colors.lightBlueAccent,
 //                                                        alignment: Alignment.center,
-                              child: buildDefaultIngredients(context)
-                            //Text('buildDefaultIngredients('
-                            //    'context'
-                            //')'),
+                                    child: buildDefaultIngredients(context)
+                                  //Text('buildDefaultIngredients('
+                                  //    'context'
+                                  //')'),
+                                ),
+
+                                Container(
+//
+                                  height: displayHeight(context) / 20,
+                                  width: displayWidth(context) /1.50,
+//
+
+                                ),
+                              ],
+                            ),
                           ),
 
-                          SizedBox(height: 40,),
+//                          SizedBox(height: 40,),
                           // 'CHEESE BEGINS HERE.
                           Container(
                             width: displayWidth(context) /
-                                1.5,
+                                1.4,
                             height: displayHeight(
                                 context) / 40,
                             color: Color(0xffffffff),
@@ -1234,7 +1254,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   Container(
                                       margin: EdgeInsets
                                           .fromLTRB(
-                                          0, 0, 0, 0),
+                                          15, 0, 0, 0),
                                       alignment: Alignment
                                           .center,
                                       child: Text('CHEESE'.toUpperCase(),
@@ -1248,12 +1268,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       )
                                   ),
 
+                                  /*
                                   CustomPaint(
                                     size: Size(0, 19),
                                     painter: LongHeaderPainterAfterShoppingCartPage(
                                         context),
                                   ),
 
+                                  */
 
                                 ]
                             ),
@@ -1261,33 +1283,37 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                           ),
 
                           Container(
-//                                                            height: displayHeight(context) / 13,
-//                                                            height: displayHeight(context) / 14,
-//                                                            width: displayWidth(context) /1.50,
+                            child: Column(
+                              children: [
+                                Container(
+                                    height: displayHeight(context) / 13,
+                                    width: displayWidth(context) /1.50,
 
-                              height: displayHeight(context) / 13,
-                              width: displayWidth(context) /1.50,
-//                                                            width: displayWidth(context) * 0.57,
-//                                                            color: Color(0xfff4444aa),
-//                                                            color:Colors.lightBlueAccent,
-//                                                        alignment: Alignment.center,
-                              child: buildCheeseItems(
-                                  context
-                              )
-                            //Text('buildDefaultIngredients('
-                            //    'context'
-                            //')'),
+                                    child: buildCheeseItems(
+                                        context
+                                    )
+
+                                ),
+
+                                Container(
+                                  height: displayHeight(context) / 20,
+                                  width: displayWidth(context) /1.50,
+                                ),
+                              ],
+                            ),
                           ),
 
 
-                          SizedBox(height: 40,),
+//                          SizedBox(height: 40,),
 
                           Container(
+
                             width: displayWidth(context) /
-                                1.5,
+                                1.6,
                             height: displayHeight(
                                 context) / 40,
-                            color: Color(0xffffffff),
+//                            color: Color(0xffffffff),
+//                            color:Colors.blue,
 
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment
@@ -1300,7 +1326,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   Container(
                                       margin: EdgeInsets
                                           .fromLTRB(
-                                          0, 0, 0, 0),
+                                          15, 0, 0, 0),
                                       alignment: Alignment
                                           .center,
                                       child: Text('SAUCES'.toUpperCase(),
@@ -1314,12 +1340,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       )
                                   ),
 
+                                  /*
                                   CustomPaint(
                                     size: Size(0, 19),
                                     painter: LongHeaderPainterAfterShoppingCartPage(
                                         context),
                                   ),
 
+                                  */
 
                                 ]
                             ),
@@ -1327,22 +1355,26 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                           ),
 
                           Container(
-//                                                            height: displayHeight(context) / 13,
-//                                                            height: displayHeight(context) / 14,
-//                                                            width: displayWidth(context) /1.50,
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: displayHeight(context) / 13,
+                                  width: displayWidth(context) /1.50,
 
-                              height: displayHeight(context) / 13,
-                              width: displayWidth(context) /1.50,
-//                                                            width: displayWidth(context) * 0.57,
-//                                                            color: Colors.purpleAccent,
-//                                                            color:Colors.lightBlueAccent,
-//                                                        alignment: Alignment.center,
-                              child: buildSauceItems(
-                                  context
-                              )
-                            //Text('buildDefaultIngredients('
-                            //    'context'
-                            //')'),
+                                  child: buildSauceItems(
+                                      context
+                                  ),
+
+
+
+                                ),
+
+                                Container(
+                                  height: displayHeight(context) / 20,
+                                  width: displayWidth(context) /1.50,
+                                ),
+                              ],
+                            ),
                           ),
 
                         ],
@@ -2902,16 +2934,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       Container(
         width:displayWidth(context)/14,
 //        height:displayHeight(context)/48,
-        height:displayHeight(context)/40,
+        height:displayHeight(context)/30,
 
         margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
         child:
         RaisedButton(
           color: c1,
-
+          padding: EdgeInsets.all(0),
           elevation: 2.5,
           shape: RoundedRectangleBorder(
-
             side: BorderSide(
               color:c1,
               style: BorderStyle.solid,
@@ -2920,24 +2951,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           ),
 
           child:Container(
-
-
               child: Image.asset(
                 itemImage2,
-                width: 33,
-                height:33,
+                width: 43,
+                height:43,
               )
-
-            /*Text(
-              itemName.toUpperCase(), style:
-            TextStyle(
-                color:Colors.white,
-
-                fontWeight: FontWeight.bold,
-                fontSize: 18),
-            ),
-
-            */
           ),
           onPressed: () {
 
@@ -2957,49 +2975,29 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
       Container(
         width:displayWidth(context)/14,
-        height:displayHeight(context)/40,
+        height:displayHeight(context)/30,
 
         margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
         child: OutlineButton(
-
-//          clipBehavior: Clip.hardEdge,
+          padding: EdgeInsets.all(0),
           splashColor: c1,
-
           highlightElevation: 12,
-
-
           shape: RoundedRectangleBorder(
-
             borderRadius: BorderRadius.circular(10.0),
           ),
 
           borderSide: BorderSide(
-//            color: Colors(0x707070),
             color:Color(0xff707070),
             style: BorderStyle.solid,
             width: 1.6,
           ),
 
           child: Container(
-
               child: Image.asset(
                 itemImage2,
-                width: 33,
-                height:33,
+                width: 43,
+                height:43,
               )
-
-            /*
-            Text(
-
-              itemName.toUpperCase(), style:
-            TextStyle(
-                color: c1,
-
-                fontWeight: FontWeight.bold,
-                fontSize: 20),
-            ),
-
-            */
           ),
           onPressed: () {
 
@@ -3008,7 +3006,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             blocD.setMultiSelectOptionForFood(x,index);
           },
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
 
         ),
       ),
@@ -3470,29 +3468,26 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     if(oneSauce.isSelected==false) {
       return
         Container(
-//          color:Colors.lightGreenAccent,
-//            color: Color.fromRGBO(239, 239, 239, 0),
-//          color: Colors.white,
-          padding: EdgeInsets.symmetric(
-//                          horizontal: 10.0, vertical: 22.0),
+
+          decoration: BoxDecoration(
+            color:Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+//
+          ),
+
+
+          margin: EdgeInsets.symmetric(
               horizontal: 18, vertical: 0),
+
+
           child: GestureDetector(
-//              onLongPress: () {
-//                print(
-//                    'at Long Press Sauce Item: ');
-//              },
+
             onTap: () {
               print('for future use');
               final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-//                blocD.setThisSauceFROMSelectedSauceItem(oneSauce,index);
-//                blocD.setThisSauceAsSelectedSauceItem(oneSauceItem, index)
               blocD.setThisSauceAsSelectedSauceItem(oneSauce,index);
-//                            return Navigator.push(context,
-//
-//                                MaterialPageRoute(builder: (context)
-//                                => FoodItemDetails())
-//                            );
+
             },
             onLongPressUp: (){
 
@@ -3503,86 +3498,63 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             },
 
-            child:
-            Neumorphic(
-              curve: Neumorphic.DEFAULT_CURVE,
-              style: NeumorphicStyle(
-                shape: NeumorphicShape
-                    .concave,
-                depth: 8,
-                border: NeumorphicBorder(
-                  isEnabled: false,
-                  color: Colors.grey,
 
-                  width: 0.8,
-
-                ),
-                lightSource: LightSource.top,
-                boxShape: NeumorphicBoxShape.roundRect(
-                    BorderRadius.all(Radius.circular(5))
-                ),
-
-                color: Colors.white,
-                shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-              ),
-
-              child: Column(
+            child: Column(
 
 
 //            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
 
-                  new Container(
+                new Container(
 
-                    height: displayHeight(context) / 24,
-                    width: displayWidth(context) / 16.5,
-//                      width: displayWidth(context) /10,
-//                      height: displayWidth(context) /9,
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
 
-                    child: ClipOval(
 
-                      child: CachedNetworkImage(
-                        imageUrl: sauceItemImageURL,
-                        fit: BoxFit.cover,
-                        placeholder: (context,
-                            url) => new LinearProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            Image.network(
-                                'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                  height: displayHeight(context) / 18,
+                  width: displayWidth(context) / 10.5,
+
+
+
+                  child: ClipOval(
+
+                    child: CachedNetworkImage(
+                      imageUrl: sauceItemImageURL,
+                      fit: BoxFit.cover,
+                      placeholder: (context,
+                          url) => new LinearProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
 //
-                      ),
                     ),
                   ),
+                ),
 //                              SizedBox(height: 10),
-                  Container(
-                    width: displayWidth(context) / 9,
-                    child: Text(
-                      sauceItemName,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Color(0xff707070),
+                Container(
+                  width: displayWidth(context) / 9,
+                  child: Text(
+                    sauceItemName,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
 
-                      ),
                     ),
-                  )
-                  ,
+                  ),
+                )
+                ,
 
 
-                ],
-              ),
-
+              ],
             ),
+
           ),
 
         );
@@ -3596,9 +3568,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //          color:Colors.lightGreenAccent,
 //            color: Color.fromRGBO(239, 239, 239, 0),
 //          color: Colors.white,
-          padding: EdgeInsets.symmetric(
-//                          horizontal: 10.0, vertical: 22.0),
+
+          decoration: BoxDecoration(
+//            color:Colors.white,
+            color: Color(0xffFCF5E4),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+//
+          ),
+
+
+          margin: EdgeInsets.symmetric(
               horizontal: 18, vertical: 0),
+
           child: GestureDetector(
             onTap: () {
               print('SauceItem on Tap, '
@@ -3621,91 +3602,70 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                blocD.addThisCheeseAsSelectedCheeseItem(oneSauce,index)
             },
 
-            child:
-            Neumorphic(
-              curve: Neumorphic.DEFAULT_CURVE,
-              style: NeumorphicStyle(
-                shape: NeumorphicShape
-                    .concave,
-                depth: 8,
-                border: NeumorphicBorder(
-                  isEnabled: false,
-//                  color: Colors.white,
-                  width: 0.8,
-
-                ),
-                lightSource: LightSource.top,
-                boxShape: NeumorphicBoxShape.roundRect(
-                    BorderRadius.all(Radius.circular(5))
-                ),
-
-                color: Color(0xffFCF5E4),
-                shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-              ),
 
 
 
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
 
-                  Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
 
-                    height: displayHeight(context) / 20,
-                    width: displayWidth(context) / 10.5,
-//                      width: displayWidth(context) /10,
-//                      height: displayWidth(context) /9,
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                new Container(
 
-                    child: ClipOval(
 
-                      child: CachedNetworkImage(
-                        imageUrl: sauceItemImageURL,
-                        fit: BoxFit.cover,
-                        placeholder: (context,
-                            url) => new LinearProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            Image.network(
-                                'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                  height: displayHeight(context) / 18,
+                  width: displayWidth(context) / 10.5,
+
+                  child: ClipOval(
+
+                    child: CachedNetworkImage(
+                      imageUrl: sauceItemImageURL,
+                      fit: BoxFit.cover,
+                      placeholder: (context,
+                          url) => new LinearProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
 //
-                      ),
                     ),
                   ),
+                ),
 
 //                              SizedBox(height: 10),
-                  Container(
-                    width: displayWidth(context) / 9,
+                Container(
+                  width: displayWidth(context) / 9,
 
-                    child: Text(
+                  child: Text(
 
-                      sauceItemName,
+                    sauceItemName,
 
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
 
-                      style: TextStyle(
-                        color: Color(0xff707070),
+                    style: TextStyle(
+//                        color: Color(0xff707070),
+                      color:Colors.black,
 //                                    color: Colors.blueGrey[800],
 
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
-                        decorationStyle:TextDecorationStyle.double,
-                      ),
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      decoration: TextDecoration.underline,
+                      decorationStyle:TextDecorationStyle.double,
                     ),
-                  )
-                  ,
+                  ),
+                )
+                ,
 
 
-                ],
-              ),
-
+              ],
             ),
+
           ),
+
 
         );
 
@@ -4081,7 +4041,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     if(oneCheese.isSelected==false)
     {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
+        decoration: BoxDecoration(
+          color:Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+//
+        ),
+
+
+        margin: EdgeInsets.symmetric(
+            horizontal: 18, vertical: 0),
+//        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
         child: GestureDetector(
 
           onTap: () {
@@ -4099,84 +4068,58 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           },
 
-          child:
-          Neumorphic(
-            curve: Neumorphic.DEFAULT_CURVE,
-            style: NeumorphicStyle(
-              shape: NeumorphicShape
-                  .concave,
-              depth: 8,
-              border: NeumorphicBorder(
-                isEnabled: false,
-                color: Colors.grey,
 
-                width: 0.8,
-
-              ),
-              lightSource: LightSource.top,
-              boxShape: NeumorphicBoxShape.roundRect(
-                  BorderRadius.all(Radius.circular(5))
-              ),
-
-              color: Colors.white,
-              shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-            ),
-
-            child: Column(
+          child: Column(
 
 
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
 
-                new Container(
+              new Container(
 
-                  height: displayHeight(context) / 20,
-                  width: displayWidth(context) /10.5,
-                  padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
+                height: displayHeight(context) / 20,
+                width: displayWidth(context) /10.5,
+                padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
-                  child: ClipOval(
+                child: ClipOval(
 
-                    child: CachedNetworkImage(
-                      imageUrl: cheeseItemImageURL,
-                      fit: BoxFit.cover,
-                      placeholder: (context,
-                          url) => new LinearProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          Image.network(
-                              'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+                  child: CachedNetworkImage(
+                    imageUrl: cheeseItemImageURL,
+                    fit: BoxFit.cover,
+                    placeholder: (context,
+                        url) => new LinearProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        Image.network(
+                            'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
 //
-                    ),
                   ),
                 ),
+              ),
 //                              SizedBox(height: 10),
 
-                Container(
-                  width: displayWidth(context) / 9,
-                  child: Text(
-                    cheeseItemName,
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
+              Container(
+                width: displayWidth(context) / 9,
+                child: Text(
+                  cheeseItemName,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
 
-                    style: TextStyle(
-                      color: Color(0xff707070),
+                  style: TextStyle(
+                    color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                    ),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
                   ),
-                )
-                ,
+                ),
+              )
+              ,
 
 
-              ],
-            ),
-
+            ],
           ),
+
         ),
 
       );
@@ -4188,9 +4131,22 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
       return Container(
 
+        decoration: BoxDecoration(
+          color:Color(0xffFCF5E4),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+//
+        ),
+
+
+        margin: EdgeInsets.symmetric(
+            horizontal: 18, vertical: 0),
+
+        /*
         padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
             horizontal: 18, vertical: 0),
+
+        */
         child: GestureDetector(
           onTap: () {
             print('at onTap: and nothing will happen since it is selected already. ');
@@ -4660,28 +4616,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     return
       Container(
 
-//        save save save
-
-//        style: NeumorphicStyle(
-//          shape: NeumorphicShape
-//              .concave,
-//          depth: 8,
-//          border: NeumorphicBorder(
-//            isEnabled: false,
-//                  color: Colors.white,
-//            width: 0.8,
-//
-//          ),
-//          lightSource: LightSource.top,
-//          boxShape: NeumorphicBoxShape.roundRect(
-//              BorderRadius.all(Radius.circular(5))
-//          ),
-//
-//          color: Color(0xffFCF5E4),
-//          shadowDarkColor: Color(0xff525FFF),
-// ),
-
-
         decoration: BoxDecoration(
           color:Color(0xffFCF5E4),
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -4690,7 +4624,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
         margin: EdgeInsets.symmetric(
-//                          horizontal: 10.0, vertical: 22.0),
             horizontal: 18, vertical: 0),
         child: GestureDetector(
 
