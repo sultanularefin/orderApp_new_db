@@ -26,6 +26,7 @@ class NewIngredient {
   List<dynamic> extraIngredientOf;
   int sequenceNo;
   String subgroup;
+  int tempIndex; // for incrementing and decrementing view data field only
 
 //  String ingredients;
 
@@ -40,6 +41,7 @@ class NewIngredient {
         this.extraIngredientOf,
         this.sequenceNo,
         this.subgroup,
+        this.tempIndex:0,
       }
       );
 
@@ -60,7 +62,9 @@ class NewIngredient {
         price = data['price'].toDouble(),
         documentId = docID,
         isDefault= false,
+        tempIndex=0,
         ingredientAmountByUser = 1;
+
 //        extraIngredientOf= data['extraIngredientOf'],
 //        sequenceNo = data['sequenceNo'] ,
 //        subgroup= data['subgroup'];

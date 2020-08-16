@@ -641,40 +641,42 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-      List<NewIngredient> ingredientsOfCategory =
-      allExtraIngredients.where((e) => checkThisExtraIngredientForSomeCategory(e,oneFoodItem.categoryName)).toList();
+    List<NewIngredient> ingredientsOfCategory =
+    allExtraIngredients.where((e) => checkThisExtraIngredientForSomeCategory(e,oneFoodItem.categoryName)).toList();
 
 
-      print('ingredientTest.length ==> --> ==> ${ingredientsOfCategory.length}');
+    print('ingredientTest.length ==> --> ==> ${ingredientsOfCategory.length}');
 
 
-      Set<String> subgroups ={};
+    Set<String> subgroups ={};
 
 //    List<String> categories = [];
 
 
 
-      ingredientsOfCategory.forEach((oneExtraIngredient) {
+    int tempIndex=0;
+    ingredientsOfCategory.forEach((oneExtraIngredient) {
 
-        print('oneExtraIngredient.subgroup: ${oneExtraIngredient.subgroup} oneExtraIngredient.ingredientName:'
-            ' ${oneExtraIngredient.ingredientName}');
+      print('oneExtraIngredient.subgroup: ${oneExtraIngredient.subgroup} oneExtraIngredient.ingredientName:'
+          ' ${oneExtraIngredient.ingredientName}');
 
-        subgroups.add(oneExtraIngredient.subgroup.trim());
-      });
+      subgroups.add(oneExtraIngredient.subgroup.trim());
+      oneExtraIngredient.tempIndex = ++tempIndex;
+    });
 
-      print('subgroups.length => ${subgroups.length}:  >               >               >');
-
-
-      subgroups.forEach((oneGroupString) {
-        print('oneGroupString: $oneGroupString');
-      });
+    print('subgroups.length => ${subgroups.length}:  >               >               >');
 
 
-      List<String> convertedSubgroups = subgroups.toList();
+    subgroups.forEach((oneGroupString) {
+      print('oneGroupString: $oneGroupString');
+    });
 
-      logger.w('convertedSubgroups.length: ${convertedSubgroups.length}');
 
-      _allSubgroups = convertedSubgroups ;
+    List<String> convertedSubgroups = subgroups.toList();
+
+    logger.w('convertedSubgroups.length: ${convertedSubgroups.length}');
+
+    _allSubgroups = convertedSubgroups ;
     _categoryWiseSubGroupsController.sink.add(_allSubgroups);
 
 
@@ -1018,7 +1020,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void incrementThisIngredientItem(NewIngredient unSelectedOneIngredient,int index){
+  void incrementThisIngredientItem(NewIngredient thisIngredient,int index,int tempIndex2){
 
     print('reached here: incrementThisIngredientItem ');
     print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
@@ -1026,24 +1028,25 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //                          NewIngredient c1 = oneUnselectedIngredient;
 
 
-    print('modified ingredientAmountByUser at begin: ${_unSelectedIngItems[index].
-    ingredientAmountByUser}');
+//    print('modified ingredientAmountByUser at begin: ${_unSelectedIngItems[tempIndex].
+//    ingredientAmountByUser}');
 
 
 
     NewIngredient c1 = new NewIngredient(
-      ingredientName: unSelectedOneIngredient
+      ingredientName: thisIngredient
           .ingredientName,
-      imageURL: unSelectedOneIngredient.imageURL,
+      imageURL: thisIngredient.imageURL,
 
-      price: unSelectedOneIngredient.price,
-      documentId: unSelectedOneIngredient.documentId,
-      ingredientAmountByUser: unSelectedOneIngredient
+      price: thisIngredient.price,
+      documentId: thisIngredient.documentId,
+      ingredientAmountByUser: thisIngredient
           .ingredientAmountByUser + 1,
 
-      extraIngredientOf: unSelectedOneIngredient.extraIngredientOf,
-      sequenceNo : unSelectedOneIngredient.sequenceNo,
-      subgroup: unSelectedOneIngredient.subgroup,
+      extraIngredientOf: thisIngredient.extraIngredientOf,
+      sequenceNo : thisIngredient.sequenceNo,
+      subgroup: thisIngredient.subgroup,
+      tempIndex: tempIndex2,
 
 
       isDefault: false,
@@ -1053,25 +1056,63 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List<NewIngredient> tempUnSelectedAll = _unSelectedIngItems;
 
+//    tempUnSelectedAll.where((element) => ((element.tempIndex ==
+//        tempIndex2))).toList();
+
+//    tempUnSelectedAll.where(......)
+
+//    _allSelectedSauceItems = allTempSauceItems.where((element) => ((element.isSelected==true) || (element.isDefaultSelected ==true))).toList();
+
+
     print('_unSelectedIngItems.length: ${tempUnSelectedAll.length}');
 
-    tempUnSelectedAll[index] = c1;
+    /*
+    NewIngredient toBeDeleted= NewIngredient(
+        ingredientName: 'None',
+        imageURL: 'None',
+
+        price: 0.001,
+        documentId: 'None',
+        ingredientAmountByUser: -1000
+
+    );
 
 
-    _unSelectedIngItems = tempUnSelectedAll;
 
-    print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
-    print('modified ingredientAmountByUser at end: ${_unSelectedIngItems[index].ingredientAmountByUser}');
+
+    NewIngredient elementExists = tempUnSelectedAll.firstWhere(
+            (oneItem) => oneItem.tempIndex ==
+                tempIndex2,
+        orElse: () => toBeDeleted);
+
+    */
+
+
+
+
+    tempUnSelectedAll.removeAt(tempIndex2);
+
+    tempUnSelectedAll.insert(tempIndex2, c1);
+
+
+//    if(elementExists.ingredientName!='None') {
+
+//      tempUnSelectedAll[tempIndex] = c1;
+
+
+      _unSelectedIngItems = tempUnSelectedAll;
+
+      print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
+      print('modified ingredientAmountByUser at end: ${_unSelectedIngItems[tempIndex2].ingredientAmountByUser}');
 
 
 
 //   _thisFoodItem =thisFoodpriceModified;
 
-    _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+      _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+//    }
 
-//    notifyListeners();
 
-    //THIS LINE MIGHT NOT BE NECESSARY.
   }
 
 

@@ -791,7 +791,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   //        }
 
                 ),
-                
+
               ]
           ),
         )
@@ -2587,7 +2587,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                      final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //                      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-                      blocD.incrementThisIngredientItem(unSelectedOneIngredient,index);
+                      blocD.incrementThisIngredientItem(unSelectedOneIngredient,index,unSelectedOneIngredient.tempIndex);
 
 
 //                      setState(() {
