@@ -930,6 +930,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                         )),
                     onTap: () {
 
+
+
                       Navigator.of(context).push(
 
                         PageRouteBuilder(
@@ -945,6 +947,52 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                         ),
                       );
+
+
+
+                      /*
+                      PageRouteBuilder(
+                        opaque: false,
+                        transitionDuration: Duration(
+                            milliseconds: 900),
+                        pageBuilder: (_, __, ___) =>
+
+
+
+//        tempCheeseItems
+//          tempSauceItems
+
+                        BlocProvider<FoodItemDetailsBloc>(
+                          bloc: FoodItemDetailsBloc(
+                              oneFoodItem,
+                              tempIngs,
+                              tempCheeseItems,
+                              tempSauceItems,
+                              allExtraIngredients
+
+                          ),
+
+
+                          child: FoodItemDetails2()
+
+                          ,),
+
+
+                        // fUTURE USE -- ANIMATION TRANSITION CODE.
+                        /*
+                                  transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
+                                    return FadeTransition(
+                                      opacity: animation,
+                                      child: RotationTransition(
+                                        turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+                                        child: child,
+                                      ),
+                                    );
+                                  }
+                                  */
+                      ),
+                      */
+
 
                     },
                   ),
@@ -2644,23 +2692,7 @@ Widget work1(BuildContext context){
         transitionDuration: Duration(
             milliseconds: 900),
         pageBuilder: (_, __, ___) =>
-        /*
-            BlocProvider2 /*<FoodItemDetailsBloc>*/(
-              /* thisAllIngredients2:allIngredients,*/
-              /*bloc: FoodItemDetailsBloc(
-                                                  oneFoodItem,
-                                                  allIngredients), */
 
-                bloc2: AppBloc(
-                    oneFoodItem, tempIngs
-                  /*allIngredients,*/ /*fromWhichPage:1*/),
-
-
-                child: FoodItemDetails2()
-
-            ),
-
-         */
 
 
 //        tempCheeseItems

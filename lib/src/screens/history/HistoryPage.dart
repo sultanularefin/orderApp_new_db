@@ -58,7 +58,7 @@ class HistoryPage extends StatefulWidget {
 
 class _FoodGalleryState extends State<HistoryPage> {
 
-  final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyHistoryPage = new GlobalKey<ScaffoldState>();
   final SnackBar snackBar = const SnackBar(content: Text('Menu button pressed'));
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -90,8 +90,6 @@ class _FoodGalleryState extends State<HistoryPage> {
 
     final blocG = BlocProvider.of<HistoryBloc>(context);
 
-
-
 // FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
     return GestureDetector(
       onTap: () {
@@ -102,257 +100,28 @@ class _FoodGalleryState extends State<HistoryPage> {
         }
       },
       child:
-      SafeArea(
-        child:
-        Scaffold(
-          key: _scaffoldKeyFoodGallery,
+      Scaffold(
+        backgroundColor: Colors.white.withOpacity(0.05),
+        // this is the main reason of transparency at next screen.
+        // I am ignoring rest implementation but what i have achieved is you can see.
 
-          /*
-          appBar: AppBar(
-//          backgroundColor: Colors.deepOrange,
-
-            toolbarHeight: 85,
-            elevation: 0,
-            titleSpacing: 0,
-            shadowColor: Colors.white,
-            backgroundColor: Color(0xffFFE18E),
-
-
-
-            title:
-            Container(
-              height: displayHeight(context) / 14,
-              width: displayWidth(context) - MediaQuery
-                  .of(context)
-                  .size
-                  .width / 3.8,
-
-              color: Color(0xffFFFFFF),
-
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .spaceAround,
-                children: <Widget>[
-
-                  SizedBox(
-                    height: kToolbarHeight + 6, // 6 for spacing padding at top for .
-                    width: 200,
-                    child:  Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-
-                        Container(
-
-                          height: displayHeight(context) / 15,
-//                                            color:Colors.blue,
-                          child: Image.asset('assets/Path2008.png'),
-
-                        ),
-                        Container(
-
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 0,
-                              vertical: 0),
-
-//                                          width: displayWidth(context) / 6,
-                          height: displayHeight(context) / 15,
-//                                            color:Colors.red,
-                          child:
-
-//                                          Container(child: Image.asset('assets/Path2008.png')),
-                          Container(
-                            padding:EdgeInsets.fromLTRB(0,1,0,0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'Jediline',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(fontSize: 30,
-                                      color: Color(0xff07D607),
-                                      fontFamily: 'Itim-Regular'),
-                                ),
-                                Text(
-                                  'Online Orders',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(fontSize: 16.42,color: Color(0xff07D607)),
-                                ),
-                              ],
-                            ),
-                          ),
-
-
-                        ),
-
-                      ],
-                    ),
-                  ),
-
-
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: 0),
-                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 3,
-
-
-                      ),
-
-                      boxShadow: [
-                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 25.0,
-                            // USER INPUT
-                            offset: Offset(0.0, 2.0))
-                      ],
-
-
-                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                    ),
-                    // USER INPUT
-
-
-//                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 3.3,
-                    height: displayHeight(context) / 27,
-                    padding: EdgeInsets.only(
-                        left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisAlignment: MainAxisAlignment
-                          .spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment
-                          .center,
-                      children: <Widget>[
-                        Container(
-
-                          height:displayWidth(context)/34,
-//                                          height: 25,
-                          width: 5,
-                          margin: EdgeInsets.only(left: 0,right:15,bottom: 5),
-
-
-                          // work 1
-                          child: Icon(
-//                                          Icons.add_shopping_cart,
-                            Icons.search,
-//                                            size: 28,
-                            size: displayWidth(context)/24,
-                            color: Color(0xffBCBCBD),
-                          ),
-
-
-                        ),
-
-                        Container(
-
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4.7,
-//                                        color:Colors.purpleAccent,
-                          // do it in both Container
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-//
-                            ),
-                            onChanged: (text) {
-//                                              logger.i('on onChanged of condition 4');
-
-                              setState(() =>
-                              _searchString = text);
-                              print(
-                                  "First text field from Condition 04: $text");
-                            },
-                            onTap: () {
-                              print('condition 4');
-//                                              logger.i('on Tap of condition 4');
-                              setState(() {
-                                _firstTimeCategoryString =
-                                'PIZZA';
-                              });
-                            },
-
-                            onEditingComplete: () {
-//                                              logger.i('onEditingComplete  of condition 4');
-                              print(
-                                  'called onEditing complete');
-                              setState(() =>
-                              _searchString = "");
-                            },
-
-                            onSubmitted: (String value) async {
-                              await showDialog<void>(
-                                context: context,
-                                builder: (
-                                    BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text(
-                                        'Thanks!'),
-                                    content: Text(
-                                        'You typed "$value".'),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        onPressed: () {
-                                          Navigator.pop(
-                                              context);
-                                        },
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                          ),
-
-                        )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                      ],
-                    ),
-                  ),
-
-
-                  Container(
-
-
-
-                    child: shoppingCartWidget(context), // CLASS TO WIDGET SINCE I NEED TO INVOKE THE
-
-                  ),
-                ],
-              ),
-            ),
-
-          ),
-
-
-
-          */
-
-
-          body:
-          SingleChildScrollView(
-            child: Container(
+        key: _scaffoldKeyHistoryPage,
+        body:
+        SafeArea(
+          child: Container(
 //              color:Colors.lightGreenAccent,
-                child:
+              height: displayHeight(context) -
+                  MediaQuery.of(context).padding.top -
+                  MediaQuery.of(context).padding.bottom,
+//                            kToolbarHeight
 
-                Row(
+              child:
+
+
+              Container(
+                // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
+                width: displayWidth(context)/1.03,
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
 
@@ -360,20 +129,26 @@ class _FoodGalleryState extends State<HistoryPage> {
                     Container(
 //                      color:Colors.red,
                       width: displayWidth(context)-40,
-                      height: displayHeight(context) + kToolbarHeight + 10,
+//                        height: displayHeight(context) + kToolbarHeight + 10,
+                      height: displayHeight(context)/1.5,
+                      /*-
+                            MediaQuery.of(context).padding.top -
+                            MediaQuery.of(context).padding.bottom-kToolbarHeight,
+*/
                       child: allHistoryList(_currentPageHeader, context),
 
                     ),
 
 
                   ]
-                  ,)
+                  ,),
+              )
 
-            ),
           ),
-
         ),
+
       ),
+
     );
   }
 
@@ -435,9 +210,9 @@ class _FoodGalleryState extends State<HistoryPage> {
     return Container(
 
       child:
-        StreamBuilder<List<OneOrderFirebase>>(
-          stream: blocH.getFirebaseOrderListStream,
-          initialData: blocH.getAllFirebaseOrderList,
+      StreamBuilder<List<OneOrderFirebase>>(
+        stream: blocH.getFirebaseOrderListStream,
+        initialData: blocH.getAllFirebaseOrderList,
 
         builder: (context, snapshot) {
 
@@ -522,60 +297,60 @@ class _FoodGalleryState extends State<HistoryPage> {
 
 
 
-                  final int categoryItemsCount = allFoods.length;
-                  print('categoryItemsCount: $categoryItemsCount');
+                final int categoryItemsCount = allFoods.length;
+                print('categoryItemsCount: $categoryItemsCount');
 
 
-                  return
-                    Column(
-                      children: <Widget>[
+                return
+                  Column(
+                    children: <Widget>[
 
-                        Container(
+                      Container(
 
 
-                          height: displayHeight(context) / 20,
-                          color: Color(0xffffffff),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
+                        height: displayHeight(context) / 20,
+                        color: Color(0xffffffff),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
 
-                                Spacer(),
-                                CustomPaint(size: Size(0, 19),
-                                  painter: LongHeaderPainterBefore(context),
-                                ),
-                                Text('$_currentPageHeader'.toUpperCase(),
-                                  style:
-                                  TextStyle(
+                              Spacer(),
+                              CustomPaint(size: Size(0, 19),
+                                painter: LongHeaderPainterBefore(context),
+                              ),
+                              Text('$_currentPageHeader'.toUpperCase(),
+                                style:
+                                TextStyle(
 
-                                    // fontFamily: 'Itim-Regular',
-                                    // fontFamily: 'Poppins-ExtraBold',
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.normal,
+                                  // fontFamily: 'Itim-Regular',
+                                  // fontFamily: 'Poppins-ExtraBold',
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(0xff000000),
-                                  ),
+                                  color: Color(0xff000000),
                                 ),
-                                CustomPaint(size: Size(0, 19),
-                                  painter: LongHeaderPainterAfter(context),
-                                ),
-                                Spacer(),
-                              ]
-                          ),
-
-
-                        ),
-                        Container(
-
-                          child: fireBaseOrderListNoSearch(
-                              allFoods, context),
+                              ),
+                              CustomPaint(size: Size(0, 19),
+                                painter: LongHeaderPainterAfter(context),
+                              ),
+                              Spacer(),
+                            ]
                         ),
 
 
-                      ],
+                      ),
+                      Container(
 
-                    );
-                }
+                        child: fireBaseOrderListNoSearch(
+                            allFoods, context),
+                      ),
+
+
+                    ],
+
+                  );
+              }
 
 
           }
@@ -654,9 +429,9 @@ class _FoodGalleryState extends State<HistoryPage> {
 
           String itemImage2 = (orderBy2.toLowerCase() == 'delivery') ?
           'assets/orderBYicons/delivery.png' :
-            (orderBy2.toLowerCase() == 'phone') ?
-                'assets/phone.png': (orderBy2.toLowerCase() == 'takeaway')
-                ? 'assets/orderBYicons/takeaway.png'
+          (orderBy2.toLowerCase() == 'phone') ?
+          'assets/phone.png': (orderBy2.toLowerCase() == 'takeaway')
+              ? 'assets/orderBYicons/takeaway.png'
               : 'assets/orderBYicons/diningroom.png';
 
 
@@ -710,10 +485,10 @@ class _FoodGalleryState extends State<HistoryPage> {
                           child:
                           ClipOval(
                             child: Image.asset(
-                            itemImage2,
-                            width: 43,
-                            height:43,
-                          ),
+                              itemImage2,
+                              width: 43,
+                              height:43,
+                            ),
                           ),
                           placeholderBuilder: (context,
                               heroSize, child) {
@@ -758,17 +533,17 @@ class _FoodGalleryState extends State<HistoryPage> {
 
 
 
-                            Text(
+                      Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                              paidStatus2,
-                              style: TextStyle(
-                                  fontWeight: FontWeight
-                                      .w600,
+                        paidStatus2,
+                        style: TextStyle(
+                            fontWeight: FontWeight
+                                .w600,
 //                                          color: Colors.blue,
-                                  color: Color.fromRGBO(
-                                      112, 112, 112, 1),
-                                  fontSize: 15),
-                            ),
+                            color: Color.fromRGBO(
+                                112, 112, 112, 1),
+                            fontSize: 15),
+                      ),
 
                       Container(
 
@@ -833,12 +608,12 @@ class _FoodGalleryState extends State<HistoryPage> {
             milliseconds: 900),
         pageBuilder: (_, __, ___) =>
             BlocProvider<HistoryDetailsBloc>(
-          bloc: HistoryDetailsBloc(
-            oneFirebaseOrderItem,
-          ),
-          child: HistoryDetailsPage()
+              bloc: HistoryDetailsBloc(
+                oneFirebaseOrderItem,
+              ),
+              child: HistoryDetailsPage()
 
-          ,),
+              ,),
 
       ),
     );

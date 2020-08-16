@@ -151,34 +151,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   @override
   Widget build(BuildContext context) {
 
-//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//    logger.e('blocD: $blocD');
+
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-    /*
-
-    List<NewIngredient> unSelectedIngredients = blocD.unSelectedIngredients;
-
-//    stream: blocD.getCategoryWiseSubgroupsStream,
-//    initialData: blocD.getAllSubGroups,
-
-
-
-    if (unSelectedIngredients == null) {
-      return Container
-        (
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(),
-      );
-    }
-    else {
-
-
-      */
     return Container(
-
         child: StreamBuilder<FoodItemWithDocIDViewModel>(
-
 
             stream: blocD.currentFoodItemsStream,
             initialData: blocD.currentFoodItem,
@@ -186,9 +163,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(child: new LinearProgressIndicator());
-                // from LinearProgressIndicator() to CircularProgressIndicator();
-                // checking which function progress indicator is executed from pop from foodDetails page to foodGallery page.
-              }
+           }
               else {
                 //   print('snapshot.hasData FDetails: ${snapshot.hasData}');
 
@@ -199,10 +174,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     .sizedFoodPrices;
 
 
-
-                //            priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemSize;
-
-//                  priceBasedOnCheeseSauceIngredientsSizeState = oneFood.itemPrice;
 
                 priceBasedOnCheeseSauceIngredientsSizeState =  oneFood.priceBasedOnCheeseSauceIngredientsSize;
 
@@ -257,11 +228,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     SelectedFood tempSelectedFood = (temp == null)? new SelectedFood():
                     temp /*.selectedFoodInOrder.first*/;
 
-
-
-                    // WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
-                    // WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
-                    // FROM FOOD ITEM PAGE.
 
 
                     print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
