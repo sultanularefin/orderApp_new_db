@@ -104,45 +104,30 @@ class _FoodGalleryState extends State<HistoryPage> {
         backgroundColor: Colors.white.withOpacity(0.05),
         // this is the main reason of transparency at next screen.
         // I am ignoring rest implementation but what i have achieved is you can see.
-
         key: _scaffoldKeyHistoryPage,
         body:
         SafeArea(
           child: Container(
-//              color:Colors.lightGreenAccent,
-              height: displayHeight(context) -
-                  MediaQuery.of(context).padding.top -
-                  MediaQuery.of(context).padding.bottom,
+            color:Colors.lightGreenAccent,
+            height: displayHeight(context) -
+                MediaQuery.of(context).padding.top -
+                MediaQuery.of(context).padding.bottom -kToolbarHeight,
+            margin: EdgeInsets.fromLTRB(
+                0, displayHeight(context)/16, 10, 20),
 //                            kToolbarHeight
-
-              child:
-
-
-              Container(
-                // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-                width: displayWidth(context)/1.03,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-
-//                #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
-                    Container(
-//                      color:Colors.red,
-                      width: displayWidth(context)-40,
+            child:
+            Container(
+              color:Colors.red,
+              width: displayWidth(context)/1.03,
 //                        height: displayHeight(context) + kToolbarHeight + 10,
-                      height: displayHeight(context)/1.5,
-                      /*-
-                            MediaQuery.of(context).padding.top -
-                            MediaQuery.of(context).padding.bottom-kToolbarHeight,
+              height: displayHeight(context)/1.5,
+              /*
 */
-                      child: allHistoryList(_currentPageHeader, context),
+              child: allHistoryList(_currentPageHeader, context),
 
-                    ),
+            ),
 
 
-                  ]
-                  ,),
-              )
 
           ),
         ),
