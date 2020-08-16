@@ -1069,22 +1069,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                       child:
                       Container(
                         height:displayHeight(context)/2.1,
-
-//                                                          color: Colors.red,
-
-
+//                       color: Colors.red,
                         padding: EdgeInsets
                             .fromLTRB(
                             0, 0, 0,
                             0),
 
                         child:
-
                         FoodDetailImage(
-                            oneFood
-                                .imageURL,
-                            oneFood
-                                .itemName),
+                            oneFood.imageURL,
+                            oneFood.itemName),
 
                         //),
 

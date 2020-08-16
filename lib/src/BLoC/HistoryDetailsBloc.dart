@@ -26,8 +26,6 @@ import 'dart:async';
 
 class HistoryDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
-
-
   var logger = Logger(
     printer: PrettyPrinter(),
   );
@@ -35,21 +33,12 @@ class HistoryDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   final _client = FirebaseClient();
 
 
-
   // selected Sauce Items
 
-
-  List<SauceItem> _allSelectedSauceItems =[];
-  List<SauceItem> get getAllSelectedSauceItems => _allSelectedSauceItems;
-  final _selectedSauceListController      =  StreamController <List<SauceItem>>.broadcast();
-  Stream<List<SauceItem>> get getSelectedSauceItemsStream => _selectedSauceListController.stream;
-
-
-  List<String> _allSubgroups =[];
-  List<String> get getAllSubGroups => _allSubgroups;
-  final _categoryWiseSubGroupsController      =  StreamController <List<String>>.broadcast();
-  Stream <List<String>> get getCategoryWiseSubgroupsStream => _categoryWiseSubGroupsController.stream;
-
+  OneOrderFirebase _curretnFireBaseOrder ;
+  OneOrderFirebase get getCurrentFireBaseOrder => _curretnFireBaseOrder;
+  final _oneFireBaseOrderController = StreamController <OneOrderFirebase>();
+  Stream<OneOrderFirebase> get getCurrentOrderStream => _oneFireBaseOrderController.stream;
 
 
   void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSaucesString) async {
@@ -57,8 +46,6 @@ class HistoryDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     print('sauceItems0: $sauceItems0 length: ${sauceItems0.length}');
 
 //    print('defaultSauces: $defaultSaucesString length: ${defaultSaucesString.length}');
-
-
 
 
     sauceItems0.map((oneSauce) =>
@@ -74,45 +61,20 @@ class HistoryDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List <SauceItem> sauceItems = sauceItems0;
 
 
-
-
-
-
-
 //    return ingItems;
 
   }
 
-
-
-
-
-
   // CONSTRUCTOR BEGINS HERE.
   HistoryDetailsBloc(
-      OneOrderFirebase oneFoodItem,
+      OneOrderFirebase oneFireBaseOrder,
       ) {
 
-//    oneFoodItem,
-//    tempIngs,
+    logger.i('oneFoodItem.itemName: ${oneFireBaseOrder.documentId}');
 
+    _curretnFireBaseOrder= oneFireBaseOrder;
+    _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 
-//    FoodItemWithDocID
-
-
-
-    logger.i('oneFoodItem.itemName: ${oneFoodItem.documentId}');
-
-
-
-
-
-
-
-
-    initiateAllMultiSelectOptions();
-
-//    _controller.sink.add(_thisFoodItem);
   }
 
   // CONSTRUCTOR ENDS HERE.
@@ -129,11 +91,6 @@ class HistoryDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       itemImage:'assets/multiselectImages/multiSelectAssetORG.png',
       itemTextColor: '0xff739DFA',
     );
-
-//    assets/multiselectImages/multiSelectAssetM.png
-//    assets/multiselectImages/multiSelectAssetVSM.png
-//    assets/multiselectImages/multiSelectAssetVS.png
-//    assets/multiselectImages/multiSelectAssetORG.png
 
     FoodPropertyMultiSelect _vs = new FoodPropertyMultiSelect(
       borderColor: '0xff95CB04',
@@ -170,20 +127,7 @@ class HistoryDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     multiSelectArray.addAll([_org,_vs,_vsm,_m]);
 
-//    _multiSelectForFood = multiSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
-
-
-//    initiateAllMultiSelectOptions();
-
-//    _multiSelectForFoodController.sink.add(_multiSelectForFood);
-
   }
-
-
-
-
-
-
 
 
   // HELPER METHOD tryCast Number (1)
@@ -213,18 +157,8 @@ class HistoryDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   @override
   void dispose() {
 
-//    _controller.close();
-//    _selectedFoodControllerFoodDetails.close();
-//    _allIngredientListController.close();
-//    _defaultIngredientListController.close();
-//    _unSelectedIngredientListController.close();
-//    _multiSelectForFoodController.close();
-//    _sauceItemsController.close();
-//    _cheeseItemsController.close();
-//
-//    _selectedSauceListController.close();
-//    _selectedCheeseListController.close();
-//    _categoryWiseSubGroupsController.close();
+    _oneFireBaseOrderController.close();
+
   }
 }
 

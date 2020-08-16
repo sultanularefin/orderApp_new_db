@@ -538,7 +538,7 @@ class _FoodGalleryState extends State<HistoryPage> {
                         ),
 
                         child: Hero(
-                          tag: orderType2,
+                          tag: formattedOrderPlacementDatesTimeOnly2,
                           child:
                           ClipOval(
                             child: Image.asset(
