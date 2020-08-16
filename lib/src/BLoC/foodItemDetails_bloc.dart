@@ -1020,7 +1020,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void incrementThisIngredientItem(NewIngredient thisIngredient,int index,int tempIndex2){
+  void incrementThisIngredientItem(NewIngredient thisIngredient){
 
     print('reached here: incrementThisIngredientItem ');
     print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
@@ -1046,7 +1046,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       extraIngredientOf: thisIngredient.extraIngredientOf,
       sequenceNo : thisIngredient.sequenceNo,
       subgroup: thisIngredient.subgroup,
-      tempIndex: tempIndex2,
+//      tempIndex: tempIndex2,
 
 
       isDefault: false,
@@ -1056,54 +1056,25 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List<NewIngredient> tempUnSelectedAll = _unSelectedIngItems;
 
-//    tempUnSelectedAll.where((element) => ((element.tempIndex ==
-//        tempIndex2))).toList();
-
-//    tempUnSelectedAll.where(......)
-
-//    _allSelectedSauceItems = allTempSauceItems.where((element) => ((element.isSelected==true) || (element.isDefaultSelected ==true))).toList();
 
 
-    print('_unSelectedIngItems.length: ${tempUnSelectedAll.length}');
-
-    /*
-    NewIngredient toBeDeleted= NewIngredient(
-        ingredientName: 'None',
-        imageURL: 'None',
-
-        price: 0.001,
-        documentId: 'None',
-        ingredientAmountByUser: -1000
-
-    );
+    int index22 = tempUnSelectedAll.
+    indexWhere((note) => note.ingredientName.toLowerCase().trim()== thisIngredient.ingredientName);
 
 
+    print('index22 : :: $index22');
+
+    print('----_unSelectedIngItems[index22].ingredientName: ${_unSelectedIngItems[index22].ingredientName}');
 
 
-    NewIngredient elementExists = tempUnSelectedAll.firstWhere(
-            (oneItem) => oneItem.tempIndex ==
-                tempIndex2,
-        orElse: () => toBeDeleted);
+    tempUnSelectedAll.removeAt(index22);
 
-    */
-
-
-
-
-    tempUnSelectedAll.removeAt(tempIndex2);
-
-    tempUnSelectedAll.insert(tempIndex2, c1);
-
-
-//    if(elementExists.ingredientName!='None') {
-
-//      tempUnSelectedAll[tempIndex] = c1;
-
+    tempUnSelectedAll.insert(index22, c1);
 
       _unSelectedIngItems = tempUnSelectedAll;
 
       print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
-      print('modified ingredientAmountByUser at end: ${_unSelectedIngItems[tempIndex2].ingredientAmountByUser}');
+//      print('modified ingredientAmountByUser at end: ${_unSelectedIngItems[tempIndex2].ingredientAmountByUser}');
 
 
 
@@ -1302,7 +1273,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   }
 
 
-  void decrementThisIngredientItem(NewIngredient unSelectedOneIngredient,int index){
+  void decrementThisIngredientItem(NewIngredient thisIngredient,int index){
 
     print('reached here: decrementThisIngredientItem ');
 
@@ -1310,23 +1281,52 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     NewIngredient c1 = new NewIngredient(
-      ingredientName: unSelectedOneIngredient
+      ingredientName: thisIngredient
           .ingredientName,
-      imageURL: unSelectedOneIngredient.imageURL,
+      imageURL: thisIngredient.imageURL,
 
-      price: unSelectedOneIngredient.price,
-      documentId: unSelectedOneIngredient.documentId,
-      ingredientAmountByUser: unSelectedOneIngredient
+      price: thisIngredient.price,
+      documentId: thisIngredient.documentId,
+      ingredientAmountByUser: thisIngredient
           .ingredientAmountByUser - 1,
       isDefault: false,
+
+      extraIngredientOf: thisIngredient.extraIngredientOf,
+      sequenceNo : thisIngredient.sequenceNo,
+      subgroup: thisIngredient.subgroup,
+
+
+
     );
 
 
 
-
-
     List<NewIngredient> allUnselectedbutOneDecremented = _unSelectedIngItems;
-    allUnselectedbutOneDecremented[index] = c1;
+
+
+//    List<NewIngredient> tempUnSelectedAll = _unSelectedIngItems;
+
+
+
+    int index22 = allUnselectedbutOneDecremented.
+    indexWhere((note) => note.ingredientName.toLowerCase().trim()== thisIngredient.ingredientName);
+
+
+    print('index22 : :: $index22');
+
+    print('----_unSelectedIngItems[index22].ingredientName: ${_unSelectedIngItems[index22].ingredientName}');
+
+
+   allUnselectedbutOneDecremented.removeAt(index22);
+
+   allUnselectedbutOneDecremented.insert(index22, c1);
+
+
+
+//   sssss
+
+
+//    allUnselectedbutOneDecremented[index] = c1;
 
     _unSelectedIngItems= allUnselectedbutOneDecremented;
 //   _thisFoodItem =thisFoodpriceModified;
