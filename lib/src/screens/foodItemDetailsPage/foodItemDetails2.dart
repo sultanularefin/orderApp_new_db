@@ -864,86 +864,108 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               color: Colors.white,
               height:displayHeight(context)/18,
 //                                              width: displayWidth(context)*0.57,
-              width: displayWidth(context)/2.4 ,
+//              width: displayWidth(context)/2.4 ,
+              width: displayWidth(context)/1.07,
               // /1.07 is the width of this
               // uppper container.
 
 
               child:
               // YELLOW NAME AND PRICE BEGINS HERE.
-              Container(
-                width: displayWidth(context)/3.9 /*+  displayWidth(context)/8 */,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: displayWidth(context)/2.8 /*+  displayWidth(context)/8 */, /*3.9 */
 
 
-                decoration: BoxDecoration(
-                  color:Color(0xffFFE18E),
-                  borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
+                    decoration: BoxDecoration(
+                      color:Color(0xffFFE18E),
+                      borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
 //
-                ),
+                    ),
 
 
-                height:displayHeight(context)/18,
+                    height:displayHeight(context)/18,
 //                                          height: displayHeight(context)/40,
 
-                child:
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                  children: <Widget>[
-                    Container(
-                      width: displayWidth(context)/3.9,
-                      padding: EdgeInsets
-                          .fromLTRB(
-                          10, 0, 0,
-                          0),
-                      child:
+                      children: <Widget>[
+                        Container(
+                          width: displayWidth(context)/3.9,
+                          padding: EdgeInsets
+                              .fromLTRB(
+                              10, 0, 0,
+                              0),
+                          child:
 
-                      Text(
-                          '${oneFood
-                              .itemName}',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.normal,
+                          Text(
+                              '${oneFood
+                                  .itemName}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
-                            color: Colors
-                                .black,
-                            fontFamily: 'Itim-Regular',
+                                color: Colors
+                                    .black,
+                                fontFamily: 'Itim-Regular',
 
-                          )
-                      ),
+                              )
+                          ),
+                        ),
+
+                        Container(
+                          padding: EdgeInsets
+                              .fromLTRB(
+                              0, 4, displayWidth(context)/40,
+                              0),
+                          child:
+
+                          Text(
+                              '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
+                                  '\u20AC',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight
+                                    .normal,
+//                                                      color: Colors.white
+                                color: Colors
+                                    .black,
+                                fontFamily: 'Itim-Regular',
+
+                              )
+                          ),
+                        ),
+
+                      ],
                     ),
 
-                    Container(
-                      padding: EdgeInsets
-                          .fromLTRB(
-                          0, 4, displayWidth(context)/40,
-                          0),
-                      child:
 
-                      Text(
-                          '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
-                              '\u20AC',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight
-                                .normal,
-//                                                      color: Colors.white
-                            color: Colors
-                                .black,
-                            fontFamily: 'Itim-Regular',
 
-                          )
-                      ),
-                    ),
-
-                  ],
-                ),
+                  ),
 
 
 
+
+                  Container(
+
+                    color:Colors.green,
+                    width: displayWidth(context) /2.1,
+                    height:displayHeight(context)/18,
+//                    height: displayHeight(context)/20,
+
+                  )
+
+                ],
               ),
+
+
 
               // YELLOW NAME AND PRICE ENDS HERE.
 
@@ -963,7 +985,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                            alignment: Alignment.centerRight,
 
 //                                            color: Colors.lightBlue,
-              height:displayHeight(context)/18,
+              height:displayHeight(context)/16,
 
               width: displayWidth(context) /1.07 ,
               child:
@@ -975,22 +997,22 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                   Container(
 //                                                  color:Colors.green,
-                    width: displayWidth(context) /2.1,
-                    height: displayHeight(context)/20,
+                    width: displayWidth(context) /2.9,
+                    height: displayHeight(context)/16,
 
                   )
                   ,
                   Container(
 
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
 //                                                      padding::::
-                    color:Colors.white,
-                    width: displayWidth(context) /2.2,
+                    color:Colors.redAccent,
+                    width: displayWidth(context) /2,
 //                    height: displayHeight(context)/20,
 
-                    height: displayHeight(context)/17,
+                    height: displayHeight(context)/16,
 //                                                  width: displayWidth(context) /1.80,
-                    child: _buildMultiSelectOptions(),
+                    child: _buildMultiSelectOptionsPrimary(),
 //                                                      Card(child: _buildMultiSelectOptions()),
 
                     // Text('_buildMultiSelectOptions()')
@@ -1005,11 +1027,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-            SizedBox(height:40),
+            SizedBox(height:10),
 
             Container(
 //              color: Colors.lightBlue,
-              height:displayHeight(context)/18,
+              height:displayHeight(context)/8,
 
               width: displayWidth(context) /1.07 ,
 
@@ -1061,7 +1083,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                  + displayHeight(context) / 8,
 
 
-                height: displayHeight(context) / 1.6,
+                height: displayHeight(context) / 1.9,
 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment
@@ -1077,10 +1099,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                    width: displayWidth(context)/4,
                       width: displayWidth(context)/2.49,
 //                                                    width: displayWidth(context)/3.29,
-//                                                    color:Colors.blue,
+                                                    color:Colors.blue,
                       child:
                       Container(
-                        height:displayHeight(context)/1.8,
+                        height:displayHeight(context)/2.1,
 
 //                                                          color: Colors.red,
 
@@ -1177,24 +1199,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                           ),
 
-                          /*
-                                                        Container(
-                                                            height: displayHeight(context) / 25,
-//          height:190,
-//                                                            width: displayWidth(context) * 6,
-                                                            width: displayWidth(context) /1.50,
-                                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
 
-                                                            color: Color(0xFFffffff),
-                                                            alignment: Alignment.centerLeft,
-
-                                                            // PPPPP
-
-                                                            child:(
-
-                                                            )
-                                                        ),
-                                                        */
                           Container(
 //                                                            height: displayHeight(context) / 13,
                               height: displayHeight(context) / 13,
@@ -2680,6 +2685,52 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     );
   }
 
+  Widget _buildMultiSelectOptionsPrimary(){
+//   height: 40,
+//   width: displayWidth(context) /2.5,
+
+
+//    BlocProvider.of<FoodItemDetailsBloc>
+    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+//    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+    return StreamBuilder(
+        stream: blocD.getMultiSelectStream,
+        initialData:blocD.getMultiSelectForFood,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+            return Text('multiSelect option ! found.');
+          }
+          else {
+            List<FoodPropertyMultiSelect> foodItemPropertyOptions = snapshot.data;
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+
+              reverse: true,
+
+              shrinkWrap: false,
+//        final String foodItemName =          filteredItems[index].itemName;
+//        final String foodImageURL =          filteredItems[index].imageURL;
+              itemCount: foodItemPropertyOptions.length,
+
+              itemBuilder: (_, int index) {
+                return oneMultiSelectInDetailsPageInitialView(foodItemPropertyOptions[index],
+                    index);
+              },
+            );
+          }
+        }
+
+      // M VSM ORG VS TODO. ENDS HERE.
+    );
+
+  }
+
+
   Widget _buildMultiSelectOptions(){
 //   height: 40,
 //   width: displayWidth(context) /2.5,
@@ -2713,7 +2764,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               itemCount: foodItemPropertyOptions.length,
 
               itemBuilder: (_, int index) {
-                return oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
+                return oneMultiSelectInDetailsPage3(foodItemPropertyOptions[index],
                     index);
               },
             );
@@ -2831,7 +2882,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   }
 
 
-  Widget oneMultiSelectInDetailsPage (FoodPropertyMultiSelect x,int index){
+
+  Widget oneMultiSelectInDetailsPageInitialView (FoodPropertyMultiSelect x,int index){
 
 
     String color1 = x.itemTextColor.replaceAll('#', '0xff');
@@ -2848,10 +2900,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
       child:  x.isSelected == true  ?
       Container(
-        width:displayWidth(context)/11,
-        height:displayHeight(context)/48,
+        width:displayWidth(context)/14,
+//        height:displayHeight(context)/48,
+        height:displayHeight(context)/40,
 
-        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
         child:
         RaisedButton(
           color: c1,
@@ -2869,7 +2922,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           child:Container(
 
 
-              child: Image.asset(itemImage2)
+              child: Image.asset(
+                itemImage2,
+                width: 33,
+                height:33,
+              )
 
             /*Text(
               itemName.toUpperCase(), style:
@@ -2899,8 +2956,145 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           :
 
       Container(
-        width:displayWidth(context)/11,
-        height:displayHeight(context)/48,
+        width:displayWidth(context)/14,
+        height:displayHeight(context)/40,
+
+        margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
+        child: OutlineButton(
+
+//          clipBehavior: Clip.hardEdge,
+          splashColor: c1,
+
+          highlightElevation: 12,
+
+
+          shape: RoundedRectangleBorder(
+
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+
+          borderSide: BorderSide(
+//            color: Colors(0x707070),
+            color:Color(0xff707070),
+            style: BorderStyle.solid,
+            width: 1.6,
+          ),
+
+          child: Container(
+
+              child: Image.asset(
+                itemImage2,
+                width: 33,
+                height:33,
+              )
+
+            /*
+            Text(
+
+              itemName.toUpperCase(), style:
+            TextStyle(
+                color: c1,
+
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+            ),
+
+            */
+          ),
+          onPressed: () {
+
+            print('$itemName pressed');
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+            blocD.setMultiSelectOptionForFood(x,index);
+          },
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+        ),
+      ),
+
+
+
+
+    );
+  }
+
+
+  Widget oneMultiSelectInDetailsPage3 (FoodPropertyMultiSelect x,int index){
+
+
+    String color1 = x.itemTextColor.replaceAll('#', '0xff');
+
+    Color c1 = Color(int.parse(color1));
+
+    String itemName = x.itemName;
+    String itemImage2 = x.itemImage;
+
+
+    return Container(
+
+
+
+      child:  x.isSelected == true  ?
+      Container(
+        width:displayWidth(context)/14,
+//        height:displayHeight(context)/48,
+        height:displayHeight(context)/70,
+
+        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        child:
+        RaisedButton(
+          color: c1,
+
+          elevation: 2.5,
+          shape: RoundedRectangleBorder(
+
+            side: BorderSide(
+              color:c1,
+              style: BorderStyle.solid,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+
+          child:Container(
+
+
+              child: Image.asset(
+                itemImage2,
+                width: 45,
+                height:45,
+              )
+
+            /*Text(
+              itemName.toUpperCase(), style:
+            TextStyle(
+                color:Colors.white,
+
+                fontWeight: FontWeight.bold,
+                fontSize: 18),
+            ),
+
+            */
+          ),
+          onPressed: () {
+
+
+            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+            blocD.setMultiSelectOptionForFood(x,index);
+
+          },
+
+
+
+        ),
+      )
+
+
+          :
+
+      Container(
+        width:displayWidth(context)/14,
+        height:displayHeight(context)/70,
 
         margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: OutlineButton(
@@ -2925,7 +3119,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           child: Container(
 
-              child: Image.asset(itemImage2)
+              child: Image.asset(
+                itemImage2,
+                width: 45,
+                height:45,
+              )
 
             /*
             Text(
@@ -4234,10 +4432,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   Widget buildDefaultIngredients(BuildContext context /*,List<NewIngredient> defaltIngs*/){
 
-
 //    defaultIngredients
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-
 
     return StreamBuilder(
         stream: blocD.getDefaultIngredientItemsStream,
@@ -4460,12 +4656,40 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
+
     return
       Container(
-//            color: Color.fromRGBO(239, 239, 239, 0),
-//            color: Colors.white,
-//        color:Colors.lightGreenAccent,
-        padding: EdgeInsets.symmetric(
+
+//        save save save
+
+//        style: NeumorphicStyle(
+//          shape: NeumorphicShape
+//              .concave,
+//          depth: 8,
+//          border: NeumorphicBorder(
+//            isEnabled: false,
+//                  color: Colors.white,
+//            width: 0.8,
+//
+//          ),
+//          lightSource: LightSource.top,
+//          boxShape: NeumorphicBoxShape.roundRect(
+//              BorderRadius.all(Radius.circular(5))
+//          ),
+//
+//          color: Color(0xffFCF5E4),
+//          shadowDarkColor: Color(0xff525FFF),
+// ),
+
+
+        decoration: BoxDecoration(
+          color:Color(0xffFCF5E4),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+//
+        ),
+
+
+        margin: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
             horizontal: 18, vertical: 0),
         child: GestureDetector(
@@ -4482,96 +4706,73 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             },
 
-            child:
-            Neumorphic(
-              curve: Neumorphic.DEFAULT_CURVE,
-              style: NeumorphicStyle(
-                shape: NeumorphicShape
-                    .concave,
-                depth: 8,
-                border: NeumorphicBorder(
-                  isEnabled: false,
-//                  color: Colors.white,
-                  width: 0.8,
 
-                ),
-                lightSource: LightSource.top,
-                boxShape: NeumorphicBoxShape.roundRect(
-                    BorderRadius.all(Radius.circular(5))
-                ),
+            child:Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
 
-                color: Color(0xffFCF5E4),
-                shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
-
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-              ),
-              child:Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-
-                    height: displayHeight(context) / 20,
-                    width: displayWidth(context) /10.5,
+                  height: displayHeight(context) / 18,
+                  width: displayWidth(context) /10.5,
 //                      width: displayWidth(context) /10,
 //                      height: displayWidth(context) /9,
-                    padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
+                  padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
-                    child: ClipOval(
+                  child: ClipOval(
 
-                      child: CachedNetworkImage(
+                    child: CachedNetworkImage(
 //                        color: Colors.deepOrangeAccent,
 //                        colorBlendMode: BlendMode.overlay ,
-                        imageUrl: ingredientImageURL,
-                        fit: BoxFit.cover,
-                        placeholder: (context,
-                            url) => new LinearProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            Image.network(
-                                'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+                      imageUrl: ingredientImageURL,
+                      fit: BoxFit.cover,
+                      placeholder: (context,
+                          url) => new LinearProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
 //
-                      ),
                     ),
                   ),
+                ),
 
 //                              SizedBox(height: 10),
-                  Container(
-                    width: displayWidth(context) / 9,
-                    child: Text(
-                      ingredientName,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
+                Container(
+                  width: displayWidth(context) / 9,
+                  child: Text(
+                    ingredientName,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
 
-                      style: TextStyle(
-                        color: Color(0xff707070),
+                    style: TextStyle(
+                      color: Colors.black,
 //                                    color: Colors.blueGrey[800],
 
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
 //                    decoration: TextDecoration.underline,
 //                    decorationStyle:TextDecorationStyle.double,
-                      ),
                     ),
-                  )
-                  ,
+                  ),
+                )
 
 
-                ],
-              ),
+
+              ],
             ),
             onTap: () {
               print('for future use');
-//                            return Navigator.push(context,
-//
-//                                MaterialPageRoute(builder: (context)
-//                                => FoodItemDetails())
-//                            );
+
             }
         ),
 
 
       );
+
+
+
+
   }
 
 
@@ -4672,7 +4873,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               child: Text(
                 oneSize.toUpperCase(), style:
               TextStyle(
-                  color:Color(0xff54463E),
+//                  color:Color(0xff54463E),
+                  color:Colors.black,
 
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Poppins-ExtraBold',

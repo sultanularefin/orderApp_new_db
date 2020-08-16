@@ -21,6 +21,7 @@ class FoodDetailImage extends StatelessWidget {
     return
 
       Container(
+//        color:Colors.blue,
 //              alignment: Alignment.centerLeft,
         child: Hero(
           tag: foodItemName,
@@ -29,7 +30,6 @@ class FoodDetailImage extends StatelessWidget {
             clipper: MyClipper22(),
             child:
             CachedNetworkImage(
-
               imageUrl: imageURLBig,
                     fit: BoxFit.fill,
 
@@ -103,7 +103,9 @@ class  MyClipper22 extends CustomClipper<Rect> {
 
 //    return Rect.fromCenter(center: Offset(0, 0),width:190,height:190);
 //  GOOD OPTION 2
-    return Rect.fromCircle(center: Offset(0, 330),radius:300);
+//    return Rect.fromCircle(center: Offset(0, 330),radius:300);
+
+    return Rect.fromCircle(center: Offset(50, 270),radius:240);
 
   }
   @override
