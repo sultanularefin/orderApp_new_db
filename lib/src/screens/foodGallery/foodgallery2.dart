@@ -941,7 +941,6 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                 bloc: HistoryBloc(),
                                 child: HistoryPage(),
                               ),
-                          // fUTURE USE -- ANIMATION TRANSITION CODE.
 
 
                         ),

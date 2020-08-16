@@ -315,12 +315,6 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-
-
-
-
-
-
 //  Future<List<FoodItemWithDocID>> getAllFoodItems() async {
   void getAllFoodItemsConstructor() async {
 
@@ -331,8 +325,6 @@ class FoodGalleryBloc implements Bloc {
       return;
     }
     else {
-
-
 
       var snapshot = await _client.fetchFoodItems();
       List docList = snapshot.documents;
@@ -348,24 +340,6 @@ class FoodGalleryBloc implements Bloc {
 
         final String foodItemDocumentID = doc.documentID;
 //      print('foodItemDocumentID $foodItemDocumentID');
-
-
-        /*
-
-        print('foodItemName: $foodItemName  and docID: $foodItemDocumentID');
-
-        if(foodItemName =='Junior Juustohampurilainen'){
-          logger.e('Junior Juustohampurilainen found check $foodItemDocumentID');
-        }
-
-        if('foodItemName'.toLowerCase()=='3.Opra'.toLowerCase()){
-
-          logger.i('---------------------------- found opra');
-          logger.i('opra food item found');
-          print(' foodItemDocumentID---> $foodItemDocumentID');
-        }
-        */
-
 
 
         final String foodImageURL  = doc['image']==''?

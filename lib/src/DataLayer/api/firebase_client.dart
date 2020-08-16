@@ -74,6 +74,22 @@ class FirebaseClient {
   List<FoodItemWithDocID> _allFoodsList = [];
 
 
+//  var snapshot = await _client.fetchOrderListItems();
+
+
+
+  Future<QuerySnapshot> fetchOrderListItems() async {
+
+    var snapshot= Firestore.instance
+        .collection("restaurants").document('kebab_bank').collection('orderList').orderBy('end',descending: true)
+        .getDocuments();
+
+//    orderBy('_timeStampUTC', descending: true)
+    return snapshot;
+
+  }
+
+
   Future<QuerySnapshot> fetchFoodItems() async {
 
     // print ('at here fetchFoodItems ==================================== *************** ');

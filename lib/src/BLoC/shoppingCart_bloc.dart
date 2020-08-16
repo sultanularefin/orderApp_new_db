@@ -14,7 +14,7 @@ import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:intl/intl.dart';
-import 'package:esc_pos_utils/esc_pos_utils.dart';
+
 
 
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
