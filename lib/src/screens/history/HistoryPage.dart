@@ -108,7 +108,8 @@ class _FoodGalleryState extends State<HistoryPage> {
         body:
         SafeArea(
           child: Container(
-            color:Colors.lightGreenAccent,
+//            color:Colors.lightGreenAccent,
+            color:Colors.white,
             height: displayHeight(context) -
                 MediaQuery.of(context).padding.top -
                 MediaQuery.of(context).padding.bottom -kToolbarHeight,
@@ -117,10 +118,11 @@ class _FoodGalleryState extends State<HistoryPage> {
 //                            kToolbarHeight
             child:
             Container(
-              color:Colors.red,
+//              color:Colors.red,
+              color:Colors.white,
               width: displayWidth(context)/1.03,
 //                        height: displayHeight(context) + kToolbarHeight + 10,
-              height: displayHeight(context)/1.5,
+              height: displayHeight(context)/2.1,
               /*
 */
               child: allHistoryList(_currentPageHeader, context),
@@ -280,18 +282,14 @@ class _FoodGalleryState extends State<HistoryPage> {
                 final List<OneOrderFirebase> allFoods = snapshot.data;
 
 
-
-
                 final int categoryItemsCount = allFoods.length;
                 print('categoryItemsCount: $categoryItemsCount');
-
 
                 return
                   Column(
                     children: <Widget>[
 
                       Container(
-
 
                         height: displayHeight(context) / 20,
                         color: Color(0xffffffff),
@@ -326,9 +324,9 @@ class _FoodGalleryState extends State<HistoryPage> {
 
                       ),
                       Container(
+                        height: displayHeight(context)/2.1-displayHeight(context) / 20,
 
-                        child: fireBaseOrderListNoSearch(
-                            allFoods, context),
+                        child: fireBaseOrderListNoSearch(allFoods, context),
                       ),
 
 
@@ -370,17 +368,20 @@ class _FoodGalleryState extends State<HistoryPage> {
                         ),
                       ),
   * */
-  Widget fireBaseOrderListNoSearch(List<OneOrderFirebase> filteredItemsByCategory,BuildContext context)  {
+  Widget fireBaseOrderListNoSearch(
+      List<OneOrderFirebase> filteredItemsByCategory,
+      BuildContext context)  {
 
     return Container(
-      height: displayHeight(context) -
-          MediaQuery
-              .of(context)
-              .padding
-              .top -MediaQuery
-          .of(context)
-          .padding
-          .bottom,
+      height:displayHeight(context)/2.1-displayHeight(context) / 20,
+//      height: displayHeight(context) -
+//          MediaQuery
+//              .of(context)
+//              .padding
+//              .top -MediaQuery
+//          .of(context)
+//          .padding
+//          .bottom,
 
       child: GridView.builder(
         itemCount: filteredItemsByCategory.length,
@@ -452,19 +453,16 @@ class _FoodGalleryState extends State<HistoryPage> {
                         height: displayWidth(context) / 7,
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
+                            color: Color(0xffFCF5E4),
+                            border: new Border.all(
+                                color: Colors.yellow,
+                                width: 1.0,
+                                style: BorderStyle.solid
+                            ),
+//                            shape: BoxShape.circle,
 
-//                                color: Color(0xff707070),
-                                color: Color(0xffEAB45E),
-// adobe xd color
-//                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                blurRadius: 25.0,
-                                spreadRadius: 0.10,
-                                offset: Offset(0, 10)
-                            )
-                          ],
-                        ),
+                          ),
+
                         child: Hero(
                           tag: orderType2,
                           child:
@@ -473,6 +471,10 @@ class _FoodGalleryState extends State<HistoryPage> {
                               itemImage2,
                               width: 43,
                               height:43,
+//                              fit: BoxFit.cover,
+//                              fit: BoxFit.fill,
+//                              fit: BoxFit.contain,
+                            fit:BoxFit.fitWidth,
                             ),
                           ),
                           placeholderBuilder: (context,
@@ -517,10 +519,25 @@ class _FoodGalleryState extends State<HistoryPage> {
 //                              SizedBox(height: 10),
 
 
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(
+                            0, 0, 0, 6),
+                        child: Text(
+                          '${orderBy2.toUpperCase()}',
+                          style: TextStyle(
+                              fontWeight: FontWeight
+                                  .w600,
+//                                          color: Colors.blue,
+                              color: Color.fromRGBO(
+                                  112, 112, 112, 1),
+                              fontSize: 15),
+                        ),
+                      ),
 
                       Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                        paidStatus2,
+                        '${paidStatus2.toUpperCase()}',
+
                         style: TextStyle(
                             fontWeight: FontWeight
                                 .w600,
