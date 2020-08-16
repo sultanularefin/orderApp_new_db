@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 //import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 //import 'package:foodgallery/src/identity/signup.dart';
-//import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+//import 'package:foodgallery/src/screens/foodGallery/UNPaidPage.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';

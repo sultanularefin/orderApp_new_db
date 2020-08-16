@@ -12,7 +12,7 @@ import 'package:foodgallery/src/welcomePage.dart';
 //import 'package:foodgallery/src/screens/foodGallery/food_gallery.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
-//import 'src/screens/foodGallery/foodgallery2.dart';
+//import 'src/screens/foodGallery/UNPaidPage.dart';
 
 //import 'src/welcomePage.dart';
 
