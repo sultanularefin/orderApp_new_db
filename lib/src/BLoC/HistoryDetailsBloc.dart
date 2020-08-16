@@ -91,10 +91,6 @@ class HistoryDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   // CONSTRUCTOR BEGINS HERE.
   HistoryDetailsBloc(
       OneOrderFirebase oneFoodItem,
-//      List<NewIngredient> allIngsScoped ,
-//      List<CheeseItem> tempCheeseItems,
-//      List<SauceItem> tempSauceItems,
-//      List<NewIngredient> allExtraIngredients,
       ) {
 
 //    oneFoodItem,

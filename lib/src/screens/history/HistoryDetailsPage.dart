@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/HistoryDetailsBloc.dart';
 
 
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
@@ -14,6 +15,7 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 
 
 //sizeConstantsList
@@ -113,16 +115,16 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
   Widget build(BuildContext context) {
 
 
-    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+    final blocHD = BlocProvider.of<HistoryDetailsBloc>(context);
 
 
     return Container(
 
-        child: StreamBuilder<FoodItemWithDocIDViewModel>(
+        child: StreamBuilder<OneOrderFirebase>(
 
 
-            stream: blocD.currentFoodItemsStream,
-            initialData: blocD.currentFoodItem,
+            stream:       blocHD.currentFoodItemsStream,
+            initialData:  blocHD.currentFoodItem,
 
             builder: (context, snapshot) {
               if (!snapshot.hasData) {

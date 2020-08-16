@@ -13,6 +13,7 @@ import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
+import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 //import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 
@@ -420,18 +421,91 @@ class _FoodGalleryState extends State<HistoryPage> {
               ? 'assets/orderBYicons/takeaway.png'
               : 'assets/orderBYicons/diningroom.png';
 
-
           String documentID = filteredItemsByCategory[index].documentId;
 
+          CustomerInformation       oneCustomer2 = filteredItemsByCategory[index].oneCustomer;
+          List<OrderedItem> orderedItems2 = filteredItemsByCategory[index].orderedItems;
 
 
+          String paidType2= filteredItemsByCategory[index].paidType;
+          double                    totalPrice2 = filteredItemsByCategory[index].totalPrice;
 
-          OneOrderFirebase oneFoodItem = new  OneOrderFirebase(
+          String                    contact2 = filteredItemsByCategory[index].contact;
+
+          String driverName2 = filteredItemsByCategory[index].driverName;
+
+
+          DateTime                  endDate2 = filteredItemsByCategory[index].endDate;
+          DateTime                  startDate2 = filteredItemsByCategory[index].startDate;
+
+
+//          String         formattedOrderPlacementDate2 = filteredItemsByCategory[index].formattedOrderPlacementDate;
+//          String           formattedOrderPlacementDatesTimeOnly2 = filteredItemsByCategory[index].formattedOrderPlacementDatesTimeOnly;
+
+
+          String                    orderStatus2 = filteredItemsByCategory[index].orderStatus;
+              String                    tableNo2 = filteredItemsByCategory[index].tableNo;
+
+
+          String                    documentId2 = filteredItemsByCategory[index].documentId;
+          double                    deliveryCost2 = filteredItemsByCategory[index].deliveryCost;
+          double                    tax2 = filteredItemsByCategory[index].tax;
+
+          double                    priceWithDelivery2 = filteredItemsByCategory[index].priceWithDelivery;
+          int                       orderProductionTime2 = filteredItemsByCategory[index].orderProductionTime;
+          OneOrderFirebase oneOrderFirebaseTemp = new  OneOrderFirebase(
 
             formattedOrderPlacementDatesTimeOnly: formattedOrderPlacementDatesTimeOnly2,
             formattedOrderPlacementDate: formattedOrderPlacementDate2,
             orderType: orderType2,
             paidStatus: paidStatus2,
+            oneCustomer:oneCustomer2,
+            orderedItems: orderedItems2,
+            orderBy:orderBy2,
+            paidType: paidType2,
+            totalPrice: totalPrice2,
+            contact: contact2,
+            driverName: driverName2,
+
+              endDate:endDate2,
+              startDate:startDate2,
+              orderStatus:orderStatus2,
+              tableNo: tableNo2,
+              documentId:documentId2,
+              deliveryCost:deliveryCost2,
+              tax:tax2,
+              priceWithDelivery:priceWithDelivery2,
+              orderProductionTime:orderProductionTime2,
+
+//              CustomerInformation       oneCustomer;
+//          List<OrderedItem>         orderedItems;
+//          String                    orderBy;
+//              String                    paidStatus;
+//              String                    paidType;
+
+//              double                    totalPrice;
+
+//              String                    contact;
+//          String                    driverName;
+
+//          DateTime                  endDate;
+//          DateTime                  startDate;
+
+//          String                    formattedOrderPlacementDate;
+//          String                    formattedOrderPlacementDatesTimeOnly;
+
+//          String                    orderStatus;
+//              String                    tableNo;
+//              String                    orderType;
+
+//              String                    documentId;
+//              double                    deliveryCost;
+//          double                    tax; // 14% upon total Cost.
+
+//          double                    priceWithDelivery;
+//          int                       orderProductionTime;
+
+
           );
 
 
@@ -453,15 +527,15 @@ class _FoodGalleryState extends State<HistoryPage> {
                         height: displayWidth(context) / 7,
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
-                            color: Color(0xffFCF5E4),
-                            border: new Border.all(
-                                color: Colors.yellow,
-                                width: 1.0,
-                                style: BorderStyle.solid
-                            ),
+                          color: Color(0xffFCF5E4),
+                          border: new Border.all(
+                              color: Colors.yellow,
+                              width: 1.0,
+                              style: BorderStyle.solid
+                          ),
 //                            shape: BoxShape.circle,
 
-                          ),
+                        ),
 
                         child: Hero(
                           tag: orderType2,
@@ -474,7 +548,7 @@ class _FoodGalleryState extends State<HistoryPage> {
 //                              fit: BoxFit.cover,
 //                              fit: BoxFit.fill,
 //                              fit: BoxFit.contain,
-                            fit:BoxFit.fitWidth,
+                              fit:BoxFit.fitWidth,
                             ),
                           ),
                           placeholderBuilder: (context,
@@ -568,7 +642,7 @@ class _FoodGalleryState extends State<HistoryPage> {
                   ),
                   onTap: () {
                     _navigateAndDisplaySelection(
-                        context, oneFoodItem);
+                        context, oneOrderFirebaseTemp);
                   },
 
 
@@ -591,15 +665,6 @@ class _FoodGalleryState extends State<HistoryPage> {
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
     }
-
-    final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-
-    List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
-
-    List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
-    List<SauceItem>  tempSauceItems = blocG.getAllSauceItemsFoodGallery;
-    List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
-
 
     return Navigator.of(context).push(
 
