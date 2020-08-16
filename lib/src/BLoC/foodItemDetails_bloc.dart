@@ -130,7 +130,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   final _unSelectedIngredientListController   =  StreamController <List<NewIngredient>>();
   final _defaultIngredientListController      =  StreamController <List<NewIngredient>>.broadcast();
 
-  final _multiSelectForFoodController      =  StreamController <List<FoodPropertyMultiSelect>>();
+  final _multiSelectForFoodController      =  StreamController <List<FoodPropertyMultiSelect>>.broadcast();
 
 
 //  final _foodItemController = StreamController <List<FoodItemWithDocID>>();
