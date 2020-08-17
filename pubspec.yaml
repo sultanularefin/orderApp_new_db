@@ -71,6 +71,7 @@ dependencies:
   dotted_border: ^1.0.5
   characters: ^1.0.0
   flutter_datetime_picker: ^1.4.0
+  qr_flutter: ^3.2.0
 
 
 dev_dependencies:

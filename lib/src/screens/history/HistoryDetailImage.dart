@@ -15,14 +15,15 @@ class HistoryDetailImage extends StatelessWidget {
   final double totalPrice3;
   final DateTime startDate3;
 
-//  DateTime
 
-//  oneFireBaseOrder.formattedOrderPlacementDatesTimeOnly2,
-//  oneFireBaseOrder.orderBy
-  HistoryDetailImage(this.formattedOrderPlacementDatesTimeOnly3, this.orderBy3,
-      this.startDate3, this.totalPrice3);
+  HistoryDetailImage
+      (
+      this.formattedOrderPlacementDatesTimeOnly3,
+      this.orderBy3,
+      this.startDate3,
+      this.totalPrice3
+      );
 
-//  startDate2.toString()+'__$totalPrice2',
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +37,8 @@ class HistoryDetailImage extends StatelessWidget {
 
     return
       Container(
-        width: displayWidth(context) / 6,
-        height: displayHeight(context) / 11,
+        width: displayWidth(context) / 8,
+        height: displayHeight(context) / 14,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
@@ -73,24 +74,12 @@ class HistoryDetailImage extends StatelessWidget {
 
 //                              fit: BoxFit.cover,
 //                              fit: BoxFit.fill,
-                fit: BoxFit.contain,
+//                fit: BoxFit.contain,
 //            fit:BoxFit.fitWidth,
 
 //            fit: BoxFit.fill,
 //             placeholder: (context, url) => new CircularProgressIndicator(),
               ),
-
-
-
-
-
-
-
-
-
-
-
-
 
 
               /*

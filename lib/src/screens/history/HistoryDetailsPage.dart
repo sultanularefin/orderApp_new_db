@@ -8,7 +8,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/HistoryDetailsBloc.dart';
+import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 
 //import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
@@ -17,6 +19,8 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
+import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:foodgallery/src/screens/history/HistoryDetailImage.dart';
 
 
@@ -208,6 +212,9 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
   Widget initialView(OneOrderFirebase oneFireBaseOrder){
 
+    List<OrderedItem> orderedItems = oneFireBaseOrder.orderedItems;
+
+
 
     return Container(
 
@@ -260,8 +267,8 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
           children: <Widget>[
 
             Container(
-              color: Colors.blue,
-              height:displayHeight(context)/8,
+//              color: Colors.blue,
+              height:displayHeight(context)/11,
               width: displayWidth(context)/1.07,
 
               child:
@@ -299,7 +306,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 29,
+                                fontSize: 20,
 //                                fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
                                 color: Colors.black,
@@ -323,9 +330,9 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
                   Container(
 
-                    color:Colors.green,
+//                    color:Colors.green,
                     width: displayWidth(context) /2.5,
-                    height:displayHeight(context)/8,
+                    height:displayHeight(context)/11,
                     child:displayCustomerInformationWidget(oneFireBaseOrder.oneCustomer),
 //                    height: displayHeight(context)/20,
 
@@ -338,8 +345,8 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
             Divider(
               height:10,
-              thickness:5,
-              color:Colors.black,
+              thickness:1,
+              color:Colors.grey,
             ),
 
 
@@ -350,53 +357,345 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
                 width: displayWidth(context) /2.49 + displayWidth(context) /1.91,
 
-                height: displayHeight(context) / 1.9,
+                height: displayHeight(context) / 1.6,
 
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
 
                     Container(
 //                                                    width: displayWidth(context)/4,
-                      width: displayWidth(context)/2.49,
+                      width: displayWidth(context)/3,
 //                                                    width: displayWidth(context)/3.29,
-                      color:Colors.blue,
+//                      color:Colors.blue,
                       child:
-                      Container(
-                        height:displayHeight(context)/2.1,
-                        width: displayWidth(context)/2.99,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+
+
+                        children: [
+                          Container(
+                            height:displayHeight(context)/6.5,
+                            width: displayWidth(context)/3.59,
 //                        color: Colors.red,
+//                            color:Colors.blue,
 
 
-                        padding: EdgeInsets
-                            .fromLTRB(
-                            0, 0, 0,
-                            0),
+                            padding: EdgeInsets
+                                .fromLTRB(
+                                0, 0, 0,
+                                0),
 
 //                          child: Text('FoodImageURL')
 
-                        child:
-                        HistoryDetailImage(
-                          oneFireBaseOrder.formattedOrderPlacementDatesTimeOnly,
-                          oneFireBaseOrder.orderBy,
-                          oneFireBaseOrder.startDate,
-                          oneFireBaseOrder.totalPrice,
+                            child:
+                            HistoryDetailImage(
+                              oneFireBaseOrder.formattedOrderPlacementDatesTimeOnly,
+                              oneFireBaseOrder.orderBy,
+                              oneFireBaseOrder.startDate,
+                              oneFireBaseOrder.totalPrice,
 
 //
-                        ),
+                            ),
 //                          formattedOrderPlacementDatesTimeOnly2
 //),
 
+                          ),
+
+
+                          Container(
+                            height:displayHeight(context)/4,
+                            width: displayWidth(context)/2.99,
+//                        color: Colors.red,
+
+
+                            padding: EdgeInsets
+                                .fromLTRB(
+                                20, 0, 20,
+                                0),
+
+//                          child: Text('FoodImageURL')
+
+                            child:
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+
+                              children: [
+
+                                Text(
+                                    '${oneFireBaseOrder.formattedOrderPlacementDatesTimeOnly}',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                      color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                    )
+                                ),
+
+                                Text(
+                                    '${oneFireBaseOrder.orderProductionTime}:00 min',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                      color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                    )
+                                ),
+
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+
+                                      Text(
+                                          'SUBTOTAL',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color:Colors.grey,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+
+
+                                      Text(
+                                          '${oneFireBaseOrder.totalPrice.toStringAsFixed(2)}'+'\u20AC',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color:Colors.grey,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+
+
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+
+                                      Text(
+                                          'DELIVERY',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color:Colors.grey,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+
+
+                                      Text(
+                                          '${oneFireBaseOrder.deliveryCost.toStringAsFixed(2)}'+'\u20AC',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color:Colors.grey,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+
+
+
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+
+                                      Text(
+                                          'ALV',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+//                                fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+
+
+                                      Text(
+                                          '14%',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+//                                fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                Divider(
+                                  height:5,
+                                  thickness:1,
+                                  color:Colors.grey,
+                                ),
+
+
+
+
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+
+                                      Text(
+                                          'TOTAL',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+
+
+                                      Text(
+                                          '${oneFireBaseOrder.priceWithDelivery.toStringAsFixed(2)}'+'\u20AC',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                Container(
+                                  child: Row(
+
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+
+                                      Text(
+                                          '${oneFireBaseOrder.paidStatus}',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+
+
+                                      Text(
+                                          '${oneFireBaseOrder.paidType}',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              ],
+                            ),
+//                          formattedOrderPlacementDatesTimeOnly2
+//),
+
+                          ),
+
+
+
+                        ],
                       ),
+                    ),
+
+                    VerticalDivider(
+//                      height:10,
+                      width:10,
+                      thickness:1,
+                      color:Colors.grey,
                     ),
 
 
 
                     Container(
 //                      color:Colors.purpleAccent,
-                      height:displayHeight(context)/2.1,
+                      height:displayHeight(context)/1.7,
 
 
 
@@ -408,177 +707,19 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                         crossAxisAlignment: CrossAxisAlignment
                             .end,
                         children: <Widget>[
-//pppp
 
 
-
-//                                  Text('ss'),
-
-//                          SizedBox(height: 40,),
-                          Container(
-                            width: displayWidth(context) /
-                                1.6,
-                            height: displayHeight(
-                                context) / 40,
-
-
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start
-                                ,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-
-                                  Container(
-                                      margin: EdgeInsets
-                                          .fromLTRB(
-                                          15, 0, 0, 0),
-                                      alignment: Alignment
-                                          .center,
-                                      child: Text('INGREDIENTS'.toUpperCase(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22,
-                                          fontFamily: 'Itim-Regular',
-                                          color: Color(0xff707070),
-                                        ),
-                                      )
-                                  ),
-
-                                ]
-                            ),
-
-                          ),
-
-
-
-
-//                          SizedBox(height: 40,),
-// 'CHEESE BEGINS HERE.
-                          Container(
-                            width: displayWidth(context) /
-                                1.4,
-                            height: displayHeight(
-                                context) / 40,
-                            color: Color(0xffffffff),
-
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-
-                                  Container(
-                                      margin: EdgeInsets
-                                          .fromLTRB(
-                                          15, 0, 0, 0),
-                                      alignment: Alignment
-                                          .center,
-                                      child: Text('CHEESE'.toUpperCase(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22,
-                                          fontFamily: 'Itim-Regular',
-                                          color: Color(0xff707070),
-                                        ),
-                                      )
-                                  ),
-
-                                ]
-                            ),
-
-                          ),
 
                           Container(
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: displayHeight(context) / 13,
-                                  width: displayWidth(context) /1.50,
-
-                                  child: Text('buildCheeseItems(context)'),
-
-                                ),
-
-                                Container(
-                                  height: displayHeight(context) / 20,
-                                  width: displayWidth(context) /1.50,
-                                ),
-                              ],
-                            ),
+                              width: 550,
+                              height:displayHeight(context)/1.7,
+                              child: processFoodForHistoryDetailsPage(orderedItems)
                           ),
 
-
-//                          SizedBox(height: 40,),
-
-                          Container(
-
-                            width: displayWidth(context) /
-                                1.6,
-                            height: displayHeight(
-                                context) / 40,
-//                            color: Color(0xffffffff),
-//                            color:Colors.blue,
-
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .start
-                                ,
-                                crossAxisAlignment: CrossAxisAlignment
-                                    .center,
-                                children: <Widget>[
-
-                                  Container(
-                                      margin: EdgeInsets
-                                          .fromLTRB(
-                                          15, 0, 0, 0),
-                                      alignment: Alignment
-                                          .center,
-                                      child: Text('SAUCES'.toUpperCase(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22,
-                                          fontFamily: 'Itim-Regular',
-                                          color: Color(0xff707070),
-                                        ),
-                                      )
-                                  ),
-
-/*
-                                  CustomPaint(
-                                    size: Size(0, 19),
-                                    painter: LongHeaderPainterAfterShoppingCartPage(
-                                        context),
-                                  ),
-
-                                  */
-
-                                ]
-                            ),
-
-                          ),
-
-                          Container(
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: displayHeight(context) / 13,
-                                  width: displayWidth(context) /1.50,
-
-                                  child: Text('buildSauceItems(context)'),
+//                          FFFFF
 
 
 
-                                ),
-
-                                Container(
-                                  height: displayHeight(context) / 20,
-                                  width: displayWidth(context) /1.50,
-                                ),
-                              ],
-                            ),
-                          ),
 
                         ],
                       ),
@@ -594,6 +735,68 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
 
 
+            Center(
+              child: OutlineButton(
+                padding: EdgeInsets.all(0),
+                splashColor: Colors.lightBlueAccent,
+                highlightElevation: 12,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+
+                borderSide: BorderSide(
+                  color:Color(0xff707070),
+                  style: BorderStyle.solid,
+                  width: 1.6,
+                ),
+
+                child: Container(
+
+                  child:
+                  Column(
+                    children: [
+                      Container(
+                        width: 150,
+                        height:150,
+                        child: QrImage(
+                          data: "1234567890",
+                          version: QrVersions.auto,
+                          size: 200.0,
+                        ),
+                      ),
+
+                      Text(
+                        'check order',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 23,
+//                          fontFamily: 'Itim-Regular',
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+                onPressed: () {
+
+                  print('-------------- ---------- pressed');
+
+                },
+
+
+              ),
+            ),
+
+
+
+
+
+
+
 
 
 /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
@@ -605,7 +808,321 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
     );
   }
 
+
+  Widget displayOneFoodInformation(OrderedItem oneFood, int index){
+    print('index: : : : $index');
+
+    List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+    List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+    List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+
+
+    print('extraIngredient: $extraIngredient');
+
+    print('extraSauces: $extraSauces');
+
+    print('extraCheeseItems: $extraCheeseItems');
+
+    List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+    List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => e.isDefaultSelected != true).toList();
+    List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+
+    print('onlyExtraIngredient: $onlyExtraIngredient');
+
+    print('onlyExtraSauces: $onlyExtraSauces');
+
+    print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
+    return Container(
+
+      height:145,
+      width: 550,
+      padding:EdgeInsets.symmetric(vertical:8,horizontal: 6),
+
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+
+          Container(
+            color:Colors.amber,
+            height: 30,
+            width: 550,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+
+                Text(
+                  '${oneFood.name.toString()}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20,
+//                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                Text(
+                  'X${oneFood.quantity}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+                /*
+        Text(
+                  '${oneFood.foodItemSize}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+
+                */
+                Text(
+                  '${(oneFood.oneFoodTypeTotalPrice * oneFood.quantity).toStringAsFixed(2)}',
+                  // '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                ),
+
+              ],
+            ),
+          ),
+
+          Container(
+              height: 30,
+              width: 550,
+              child: showExtraIngredients(onlyExtraIngredient,oneFood.quantity)
+          ),
+
+//                Text('||'),
+          Container(
+              height: 30,
+              width: 550,
+              child: showExtraCheeseItems(onlyExtraCheeseItems,oneFood.quantity)
+          ),
+
+//                Text('||'),
+          Container(
+              height: 30,
+              width: 550,
+              child: showExtraSauces(onlyExtraSauces,oneFood.quantity)
+          ),
+
+          Divider(
+            height:5,
+            thickness:1,
+            color:Colors.grey,
+          ),
+
+        ],
+      ),
+    );
+  }
+
+
+
+  Widget processFoodForHistoryDetailsPage(List<OrderedItem> orderedItems){
+
+    return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      reverse: false,
+      shrinkWrap: false,
+      itemCount: orderedItems.length,
+
+      itemBuilder: (_,int index) {
+        return displayOneFoodInformation(orderedItems[index], index);
+      },
+    );
+  }
+
+
+
+  Widget displayOneExtraIngredientInRecite(NewIngredient oneIngredientForHistoryDetailsPage, int index,int quantity){
+
+    print('oneIngredientForRecite.ingredientName: ${oneIngredientForHistoryDetailsPage.ingredientName}');
+
+    if(oneIngredientForHistoryDetailsPage.isDefault==false) {
+
+      print(' oneIngredientForHistoryDetailsPage.isDefault==false  : ${oneIngredientForHistoryDetailsPage.isDefault==false} ==> '
+          'oneIngredientForHistoryDetailsPage.ingredientName => ${oneIngredientForHistoryDetailsPage.ingredientName}');
+      return
+
+        Container(
+          padding:EdgeInsets.symmetric(vertical:0,horizontal: 6),
+          child: Text('${((oneIngredientForHistoryDetailsPage.ingredientName == null) ||
+              (oneIngredientForHistoryDetailsPage.ingredientName.length == 0)) ?
+          '----' : oneIngredientForHistoryDetailsPage.ingredientName.length > 18 ?
+          oneIngredientForHistoryDetailsPage.ingredientName.substring(0, 15) + '...' :
+          oneIngredientForHistoryDetailsPage.ingredientName}, ',
+            /*
+              Text(
+                '${oneIngredientForRecite.ingredientName}', */
+
+            textAlign: TextAlign.left,
+            style: TextStyle(
+//                fontWeight: FontWeight.bold,
+              color: Colors.black,
+//                        color: Color(0xffF50303),
+              fontSize: 17,
+//                fontFamily: 'Itim-Regular',
+            ),
+
+
+
+          ),
+        );
+    }
+    else return Text('Null');
+  }
+
+  Widget displayOneExtraSauceItemInRecite(SauceItem oneSauceItemForHistoryDetailsPage, int index,int quantity){
+
+    print('oneSauceItemForRecite.ingredientName: ${oneSauceItemForHistoryDetailsPage.sauceItemName}');
+
+    if(oneSauceItemForHistoryDetailsPage.isDefaultSelected !=true) {
+      return
+
+        Container(
+          padding:EdgeInsets.symmetric(vertical:0,horizontal: 6),
+          child: Text('${((oneSauceItemForHistoryDetailsPage.sauceItemName == null) ||
+              (oneSauceItemForHistoryDetailsPage.sauceItemName.length == 0)) ?
+          '---' : oneSauceItemForHistoryDetailsPage.sauceItemName.length > 18 ?
+          oneSauceItemForHistoryDetailsPage.sauceItemName.substring(0, 15) + '...' :
+          oneSauceItemForHistoryDetailsPage.sauceItemName}, ',
+            /*
+            Text(
+                '${oneSauceItemForRecite.sauceItemName} ',
+                */
+
+            textAlign: TextAlign.left,
+            style: TextStyle(
+//              fontWeight: FontWeight.bold,
+              color: Colors.black,
+//                        color: Color(0xffF50303),
+              fontSize: 20,
+//              fontFamily: 'Itim-Regular',
+            ),
+
+          ),
+        );
+    }
+    else return Text('Null');
+  }
+
+
+  Widget displayOneExtraCheeseItemInRecite(CheeseItem oneCheeseItemForHistoryDetailsPage, int index,int quantity){
+
+    print('oneCheeseItemForRecite.ingredientName: ${oneCheeseItemForHistoryDetailsPage.cheeseItemName}');
+    if(oneCheeseItemForHistoryDetailsPage.isDefaultSelected !=true) {
+      return
+        Container(
+
+          padding:EdgeInsets.symmetric(vertical:0,horizontal: 6),
+          child: Text('${((oneCheeseItemForHistoryDetailsPage.cheeseItemName == null) ||
+              (oneCheeseItemForHistoryDetailsPage.cheeseItemName.length == 0)) ?
+          '---' : oneCheeseItemForHistoryDetailsPage.cheeseItemName.length > 18 ?
+          oneCheeseItemForHistoryDetailsPage.cheeseItemName.substring(0, 15) + '...' :
+          oneCheeseItemForHistoryDetailsPage.cheeseItemName}, ',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+//              fontWeight: FontWeight.bold,
+              color: Colors.black,
+//                        color: Color(0xffF50303),
+              fontSize: 20,
+//              fontFamily: 'Itim-Regular',
+            ),
+
+          ),
+        );
+    }
+    else return Text('Null');
+  }
+
+// DUMMY RECITE RELATED PRINT CODES ARE HERE ==> LINE # 11264 ==>
+
+//  showExtraIngredients(oneFood.selectedIngredients)
+//  showExtraCheeseItems(oneFood.selectedCheeses)
+//  showExtraSauces(oneFood.defaultSauces)
+
+  Widget showExtraIngredients(List <NewIngredient> historyDetailPageIngrdients,int quantity){
+
+    print('reciteIngrdients.length: ${historyDetailPageIngrdients.length}');
+    return ListView.builder(
+
+      scrollDirection: Axis.horizontal,
+//      scrollDirection: Axis.vertical,
+      reverse: false,
+      shrinkWrap: false,
+      itemCount: historyDetailPageIngrdients.length,
+
+
+      itemBuilder: (_,int index) {
+        return displayOneExtraIngredientInRecite(historyDetailPageIngrdients[index], index,quantity);
+      },
+
+    );
+
+  }
+
+
+  Widget showExtraCheeseItems(List<CheeseItem> historyDetailPageCheeseItems,int quantity){
+    print('reciteCheeseItems.length: ${historyDetailPageCheeseItems.length}');
+    return ListView.builder(
+
+      scrollDirection: Axis.horizontal,
+      reverse: false,
+      shrinkWrap: false,
+      itemCount: historyDetailPageCheeseItems.length,
+
+      itemBuilder: (_,int index) {
+        return displayOneExtraCheeseItemInRecite(historyDetailPageCheeseItems[index], index,quantity);
+      },
+    );
+  }
+
+  Widget showExtraSauces(List<SauceItem> historyDetailPageSauceItems,int quantity){
+    print('reciteSauceItems.length: ${historyDetailPageSauceItems.length}');
+    return ListView.builder(
+
+      scrollDirection: Axis.horizontal,
+      reverse: false,
+      shrinkWrap: false,
+      itemCount: historyDetailPageSauceItems.length,
+
+      itemBuilder: (_,int index) {
+        return displayOneExtraSauceItemInRecite(historyDetailPageSauceItems[index], index,quantity);
+      },
+    );
+  }
+
+
+
+
+
   Widget displayCustomerInformationWidget(CustomerInformation customerForHistoryDetailsPage){
+
+
+
+    print('customerForHistoryDetailsPage.address:  ===  ===>  ${customerForHistoryDetailsPage.address} |  |  |  |  |  |  |  |');
 
     return
 
@@ -616,8 +1133,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
       Column(
         children: [
 
-          ((customerForHistoryDetailsPage.address != null) ||
-              (customerForHistoryDetailsPage.address.length != 0)) ?
+          ((customerForHistoryDetailsPage.address!='')) ?
 
           Container(
             margin:EdgeInsets.fromLTRB(15,15,5,10),
@@ -729,6 +1245,9 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
           ):
           Container(
+//            alignment: Alignment.center,
+
+            margin:EdgeInsets.fromLTRB(15,15,5,10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
