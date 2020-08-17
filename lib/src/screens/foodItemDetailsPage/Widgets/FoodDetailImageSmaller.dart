@@ -58,7 +58,9 @@ class  MyClipper11 extends CustomClipper<Rect> {
 
 //    return Rect.fromCenter(center: Offset(0, 0),width:190,height:190);
 //  GOOD OPTION 2
-    return Rect.fromCircle(center: Offset(0, 170),radius:140);
+    return Rect.fromCircle(center: Offset(50, 100),radius:90);
+//    return Rect.fromCircle(center: Offset(50, 120),radius:110);
+
 
   }
   @override
