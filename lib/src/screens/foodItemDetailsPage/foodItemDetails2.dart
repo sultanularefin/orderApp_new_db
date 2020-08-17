@@ -163,7 +163,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(child: new LinearProgressIndicator());
-           }
+              }
               else {
                 //   print('snapshot.hasData FDetails: ${snapshot.hasData}');
 
@@ -354,135 +354,108 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                  border: Border.all(
 
           child: Column(
-              mainAxisAlignment: MainAxisAlignment
-                  .start,
-              crossAxisAlignment: CrossAxisAlignment
-                  .start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
 
                 Container(
 
 //                                            color: Colors.redAccent,
                   color: Colors.white,
-                  height:displayHeight(context)/18,
+                  height:displayHeight(context)/14,
 //                                              width: displayWidth(context)*0.57,
-                  width: displayWidth(context)/2.4 ,
+//                  width: displayWidth(context)/2.4 ,
+                  width: displayWidth(context)/1.03,
+
+//                  RRRR HHHHH
                   // /1.07 is the width of this
                   // uppper container.
 
 
                   child:
                   // YELLOW NAME AND PRICE BEGINS HERE.
-                  Container(
-                    width: displayWidth(context)/3.9 /*+  displayWidth(context)/8 */,
-
-
-                    decoration: BoxDecoration(
-                      color:Color(0xffFFE18E),
-                      borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
-//
-                    ),
-
-
-                    height:displayHeight(context)/18,
-//                                          height: displayHeight(context)/40,
-
-                    child:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                      children: <Widget>[
-                        Container(
-                          width: displayWidth(context)/3.9,
-                          padding: EdgeInsets
-                              .fromLTRB(
-                              10, 0, 0,
-                              0),
-                          child:
-
-                          Text(
-                              '${oneFood
-                                  .itemName}',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.normal,
-//                                                      color: Colors.white
-                                color: Colors
-                                    .black,
-                                fontFamily: 'Itim-Regular',
-
-                              )
-                          ),
-                        ),
-
-                        Container(
-                          padding: EdgeInsets
-                              .fromLTRB(
-                              0, 4, displayWidth(context)/40,
-                              0),
-                          child:
-
-                          Text(
-                              '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
-                                  '\u20AC',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight
-                                    .normal,
-//                                                      color: Colors.white
-                                color: Colors
-                                    .black,
-                                fontFamily: 'Itim-Regular',
-
-                              )
-                          ),
-                        ),
-
-                      ],
-                    ),
-
-
-
-                  ),
-
-                  // YELLOW NAME AND PRICE ENDS HERE.
-
-
-
-                  // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-                  // ENDED HERE.
-
-                  // BLACK CONTAINER WILL BE DELETED LATER.
-                  // BLACK CONTAINER.
-
-
-
-                ),
-
-                // multiselect portion... begins here.
-                Container(
-//                                            alignment: Alignment.centerRight,
-
-//                                            color: Colors.lightBlue,
-                  height:displayHeight(context)/18,
-
-                  width: displayWidth(context) /1.07 ,
-                  child:
-                  // YELLOW NAME AND PRICE BEGINS HERE.
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
 
                       Container(
-//                                                  color:Colors.green,
-                        width: displayWidth(context) /2.1,
-                        height: displayHeight(context)/20,
+                        width: displayWidth(context)/2.4 /*+  displayWidth(context)/8 */,
 
-                      )
-                      ,
+
+                        decoration: BoxDecoration(
+                          color:Color(0xffFFE18E),
+                          borderRadius: BorderRadius.only(bottomRight:  Radius.circular(60)),
+//
+                        ),
+
+
+                        height:displayHeight(context)/14,
+//                                          height: displayHeight(context)/40,
+
+                        child:
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: <Widget>[
+                            Container(
+                              width: displayWidth(context)/3.9,
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  10, 0, 0,
+                                  0),
+                              child:
+
+                              Text(
+                                  '${oneFood
+                                      .itemName}',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                    color: Colors
+                                        .black,
+                                    fontFamily: 'Itim-Regular',
+
+                                  )
+                              ),
+                            ),
+
+                            Container(
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  0, 4, displayWidth(context)/40,
+                                  0),
+                              child:
+
+                              Text(
+                                  '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
+                                      '\u20AC',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight
+                                        .normal,
+//                                                      color: Colors.white
+                                    color: Colors
+                                        .black,
+                                    fontFamily: 'Itim-Regular',
+
+                                  )
+                              ),
+                            ),
+
+                          ],
+                        ),
+
+
+
+                      ),
+
+
+
+
+                      // multiselect portion... begins here.
+
                       Container(
 
                         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -497,12 +470,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         // Text('_buildMultiSelectOptions()')
 
                       ),
+
+
+
+                      // multiselect portion...ends here.
+
+
                     ],
                   ),
 
 
+
                 ),
-                // multiselect portion...ends here.
+
 
 
 //          ;;;;;;;
