@@ -11,27 +11,45 @@ class HistoryDetailImage extends StatelessWidget {
 
 
 
-  final String formattedOrderPlacementDatesTimeOnly2;
-  final String orderBy2;
+  final String formattedOrderPlacementDatesTimeOnly3;
+  final String orderBy3;
+  double totalPrice3;
+  DateTime startDate3;
+//  DateTime
 
 //  oneFireBaseOrder.formattedOrderPlacementDatesTimeOnly2,
 //  oneFireBaseOrder.orderBy
-  HistoryDetailImage(this.formattedOrderPlacementDatesTimeOnly2,this.orderBy2);
+  HistoryDetailImage(this.formattedOrderPlacementDatesTimeOnly3,this.orderBy3,this.startDate3,this.totalPrice3);
+
+//  startDate2.toString()+'__$totalPrice2',
 
   @override
   Widget build(BuildContext context) {
 
-    String itemImage2 = (orderBy2.toLowerCase() == 'delivery') ?
+    print('formattedOrderPlacementDatesTimeOnly2: $formattedOrderPlacementDatesTimeOnly3');
+
+    print('orderBy2: $orderBy3');
+
+    print('startDate3: ${startDate3.toString()}');
+
+    print('totalPrice3: $totalPrice3');
+    
+
+
+
+    String itemImage2 = (orderBy3.toLowerCase() == 'delivery') ?
     'assets/orderBYicons/delivery.png' :
-    (orderBy2.toLowerCase() == 'phone') ?
-    'assets/phone.png': (orderBy2.toLowerCase() == 'takeaway')
+    (orderBy3.toLowerCase() == 'phone') ?
+    'assets/phone.png': (orderBy3.toLowerCase() == 'takeaway')
         ? 'assets/orderBYicons/takeaway.png'
         : 'assets/orderBYicons/diningroom.png';
     return
 
       Container(
         child: Hero(
-          tag: formattedOrderPlacementDatesTimeOnly2,
+//          tag: formattedOrderPlacementDatesTimeOnly3,
+          tag: startDate3.toString()+'__$totalPrice3',
+
           child:
           Image.asset(
             itemImage2,

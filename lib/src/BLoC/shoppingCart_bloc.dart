@@ -113,7 +113,6 @@ class ShoppingCartBloc implements Bloc {
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
 
 
-
   List<NewCategoryItem> _allCategories =[];
   List<NewCategoryItem> get getAllCategories => _allCategories;
   final _categoriesController = StreamController<List<NewCategoryItem>>();

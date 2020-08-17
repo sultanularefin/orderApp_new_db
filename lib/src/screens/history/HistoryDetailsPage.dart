@@ -492,7 +492,12 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                         child:
                         HistoryDetailImage(
                             oneFireBaseOrder.formattedOrderPlacementDatesTimeOnly,
-                            oneFireBaseOrder.orderBy),
+                            oneFireBaseOrder.orderBy,
+                            oneFireBaseOrder.startDate,
+                          oneFireBaseOrder.totalPrice,
+
+//
+                        ),
 //                          formattedOrderPlacementDatesTimeOnly2
                         //),
 
