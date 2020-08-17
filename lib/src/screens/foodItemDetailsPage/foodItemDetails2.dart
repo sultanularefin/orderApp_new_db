@@ -951,7 +951,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                            alignment: Alignment.centerRight,
 
 //                                            color: Colors.lightBlue,
-              height:displayHeight(context)/15,
+              height:displayHeight(context)/16,
 
               width: displayWidth(context) /1.07 ,
               child:
@@ -964,19 +964,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   Container(
 //                                                  color:Colors.green,
                     width: displayWidth(context) /2.9,
-                    height: displayHeight(context)/16,
+                    height: displayHeight(context)/17,
 
                   )
                   ,
                   Container(
 
-                    padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
 //                                                      padding::::
 //                    color:Colors.redAccent,
                     width: displayWidth(context) /2,
 //                    height: displayHeight(context)/20,
 
-                    height: displayHeight(context)/16,
+                    height: displayHeight(context)/17,
 //                                                  width: displayWidth(context) /1.80,
                     child: _buildMultiSelectOptionsPrimary(),
 //                                                      Card(child: _buildMultiSelectOptions()),
@@ -996,7 +996,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             SizedBox(height:10),
 
             Container(
-//              color: Colors.lightBlue,
+              color: Colors.lightBlue,
               height:displayHeight(context)/8,
 
               width: displayWidth(context) /1.07 ,
@@ -1171,7 +1171,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               children: [
                                 Container(
 //                                                            height: displayHeight(context) / 13,
-                                    height: displayHeight(context) / 13,
+                                    height: displayHeight(context) / 10,
                                     width: displayWidth(context) /1.50,
 //                                                            width: displayWidth(context) * 0.57,
 //                                                            color: Color(0xfff4444aa),
@@ -1185,7 +1185,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                                 Container(
 //
-                                  height: displayHeight(context) / 20,
+                                  height: displayHeight(context) / 35,
                                   width: displayWidth(context) /1.50,
 //
 
@@ -1318,7 +1318,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             child: Column(
                               children: [
                                 Container(
-                                  height: displayHeight(context) / 13,
+                                  height: displayHeight(context) / 10,
                                   width: displayWidth(context) /1.50,
 
                                   child: buildSauceItems(
@@ -1330,7 +1330,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                 ),
 
                                 Container(
-                                  height: displayHeight(context) / 20,
+                                  height: displayHeight(context) / 23,
                                   width: displayWidth(context) /1.50,
                                 ),
                               ],
@@ -3240,12 +3240,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     return
 
       Container(
+
 //          color:Colors.lightGreenAccent,
 //            color: Color.fromRGBO(239, 239, 239, 0),
 //          color: Colors.white,
         padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-            horizontal: 18, vertical: 0),
+            horizontal: 10, vertical: 0),
         child: GestureDetector(
             onTap: () {
               print('SauceItem on Tap, '
@@ -3319,7 +3320,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             return Container(
 //              height: displayHeight(context) / 13,
-              height: displayHeight(context) / 14,
+              height: displayHeight(context) / 10,
 //          height:190,
               width: displayWidth(context) /1.50,
 
@@ -3351,7 +3352,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             if(selectedSauceItems.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 14,
+                  height: displayHeight(context) / 10,
 //          height:190,
                   width: displayWidth(context) /1.50,
 
@@ -3428,16 +3429,24 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     if(oneSauce.isSelected==false) {
       return
         Container(
+          width: displayWidth(context) / 8,
+
 
           decoration: BoxDecoration(
+            border: Border.all(
+//                    color: Colors.black,
+              color: Colors.grey,
+              style: BorderStyle.solid,
+              width: 1.0,
+
+            ),
             color:Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(5)),
-//
           ),
 
 
           margin: EdgeInsets.symmetric(
-              horizontal: 18, vertical: 0),
+              horizontal: 10, vertical: 0),
 
 
           child: GestureDetector(
@@ -3463,18 +3472,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 //            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
 
                 new Container(
 
 
-
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                  height: displayHeight(context) / 18,
-                  width: displayWidth(context) / 10.5,
-
+                  padding: EdgeInsets.only(top: 5),
+                  height: displayHeight(context) / 15,
+                  width: displayWidth(context) / 9,
 
 
                   child: ClipOval(
@@ -3493,6 +3500,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 ),
 //                              SizedBox(height: 10),
                 Container(
+                  padding: EdgeInsets.only(top: 5),
                   width: displayWidth(context) / 9,
                   child: Text(
                     sauceItemName,
@@ -3500,7 +3508,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: Color(0xff707070),
+                      color: Colors.black,
 //                                    color: Colors.blueGrey[800],
 
                       fontWeight: FontWeight.normal,
@@ -3525,6 +3533,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       return
 
         Container(
+          width: displayWidth(context) / 8,
 //          color:Colors.lightGreenAccent,
 //            color: Color.fromRGBO(239, 239, 239, 0),
 //          color: Colors.white,
@@ -3538,7 +3547,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
           margin: EdgeInsets.symmetric(
-              horizontal: 18, vertical: 0),
+              horizontal: 10, vertical: 0),
 
           child: GestureDetector(
             onTap: () {
@@ -3567,7 +3576,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
 
@@ -3575,9 +3584,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                  height: displayHeight(context) / 18,
-                  width: displayWidth(context) / 10.5,
+                  padding: EdgeInsets.only(top: 5),
+                  height: displayHeight(context) / 15,
+                  width: displayWidth(context) / 9,
 
                   child: ClipOval(
 
@@ -3596,6 +3605,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                              SizedBox(height: 10),
                 Container(
+                  padding: EdgeInsets.only(top: 5),
                   width: displayWidth(context) / 9,
 
                   child: Text(
@@ -4009,7 +4019,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
         margin: EdgeInsets.symmetric(
-            horizontal: 18, vertical: 0),
+            horizontal: 10, vertical: 0),
 //        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
         child: GestureDetector(
 
@@ -4038,7 +4048,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               new Container(
 
                 height: displayHeight(context) / 20,
-                width: displayWidth(context) /10.5,
+                width: displayWidth(context) / 9,
                 padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
                 child: ClipOval(
@@ -4099,12 +4109,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
         margin: EdgeInsets.symmetric(
-            horizontal: 18, vertical: 0),
+            horizontal: 10, vertical: 0),
 
         /*
         padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-            horizontal: 18, vertical: 0),
+            horizontal: 10, vertical: 0),
 
         */
         child: GestureDetector(
@@ -4162,7 +4172,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                 Container(
                   height: displayHeight(context) / 20,
-                  width: displayWidth(context) /10.5,
+                  width: displayWidth(context) / 9,
                   padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
                   child: ClipOval(
@@ -4362,7 +4372,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             return Container(
 //              height: displayHeight(context) / 13,
-              height: displayHeight(context) / 14,
+              height: displayHeight(context) / 10,
 //          height:190,
               width: displayWidth(context) /1.50,
 
@@ -4401,7 +4411,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               return Container(
 //                  height: displayHeight(context) / 13,
-                height: displayHeight(context) / 14,
+                height: displayHeight(context) / 10,
 //          height:190,
                 width: displayWidth(context) /1.50,
 
@@ -4429,7 +4439,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             else if(selectedIngredients.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                height: displayHeight(context) / 14,
+                height: displayHeight(context) / 10,
 //          height:190,
                 width: displayWidth(context) /1.50,
 
@@ -4511,7 +4521,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
         padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
-            horizontal: 18, vertical: 0),
+            horizontal: 10, vertical: 0),
         child: GestureDetector(
 
             onLongPressUp: (){
@@ -4576,6 +4586,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     return
       Container(
 
+        width: displayWidth(context) / 8,
         decoration: BoxDecoration(
           color:Color(0xffFCF5E4),
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -4584,7 +4595,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
         margin: EdgeInsets.symmetric(
-            horizontal: 18, vertical: 0),
+            horizontal: 10, vertical: 0),
         child: GestureDetector(
 
             onLongPressUp: (){
@@ -4601,16 +4612,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
             child:Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
+                  padding: EdgeInsets.only(top: 5),
+                  height: displayHeight(context) / 15,
 
-                  height: displayHeight(context) / 18,
-                  width: displayWidth(context) /10.5,
+//                  height: displayHeight(context) / 18,
+
+                  width: displayWidth(context) / 9,
 //                      width: displayWidth(context) /10,
 //                      height: displayWidth(context) /9,
-                  padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
+//                  padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
                   child: ClipOval(
 
@@ -4631,6 +4645,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                              SizedBox(height: 10),
                 Container(
+                  padding: EdgeInsets.only(top: 5),
                   width: displayWidth(context) / 9,
                   child: Text(
                     ingredientName,
