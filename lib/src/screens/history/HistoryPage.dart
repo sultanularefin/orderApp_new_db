@@ -537,7 +537,8 @@ class _FoodGalleryState extends State<HistoryPage> {
 
                         ),
 
-                        child: Hero(
+                        child:
+                        Hero(
                           tag: startDate2.toString()+'__$totalPrice2',
                           child:
                           ClipOval(

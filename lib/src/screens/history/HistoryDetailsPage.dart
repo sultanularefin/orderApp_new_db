@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/HistoryDetailsBloc.dart';
+import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 
 
 //import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart';
@@ -59,7 +60,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 //
 //  List<String> allSubGroups1 = new List<String>();
 
-  /*
+/*
 
   @override
   void initState() {
@@ -142,9 +143,9 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                       currentFocus.unfocus();
                     }
 
-                    // WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
-                    // WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
-                    // FROM FOOD ITEM PAGE.
+// WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
+// WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
+// FROM FOOD ITEM PAGE.
 
 
                     print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
@@ -158,12 +159,12 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                   Scaffold(
 
                     backgroundColor: Colors.white.withOpacity(0.05),
-                    // this is the main reason of transparency at next screen.
-                    // I am ignoring rest implementation but what i have achieved is you can see.
+// this is the main reason of transparency at next screen.
+// I am ignoring rest implementation but what i have achieved is you can see.
 
                     body: SafeArea(
 
-                      // smaller container containing all modal FoodItem Details things.
+// smaller container containing all modal FoodItem Details things.
                       child: Container(
                           height: displayHeight(context) -
                               MediaQuery.of(context).padding.top -
@@ -181,7 +182,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
                             Container(
 
-                              // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
+// FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
                                 width: displayWidth(context)/1.03,
 
                                 child:
@@ -207,24 +208,19 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
   Widget initialView(OneOrderFirebase oneFireBaseOrder){
 
-//    final blocHD = BlocProvider.of<HistoryDetailsBloc>(context);
-//    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
     return Container(
-//      color:Colors.white,
-//      height: displayHeight(context) / 2.1,
-//                                  color:Colors.yellow,
-//                                    duration: Duration(seconds: 1),
+
       height: displayHeight(context) -
           MediaQuery.of(context).padding.top -
           MediaQuery.of(context).padding.bottom,
 
 
-      // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
+// FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
       width: displayWidth(context)/1.03,
 //                  color:Colors.lightGreen,
       margin: EdgeInsets.fromLTRB(
-          12, displayHeight(context)/16, 10, 5),
+          0, displayHeight(context)/16, 0, 5),
 
       decoration:
       new BoxDecoration(
@@ -264,22 +260,15 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
           children: <Widget>[
 
             Container(
-
-//                                            color: Colors.redAccent,
-              color: Colors.white,
-              height:displayHeight(context)/18,
-//                                              width: displayWidth(context)*0.57,
-//              width: displayWidth(context)/2.4 ,
+              color: Colors.blue,
+              height:displayHeight(context)/8,
               width: displayWidth(context)/1.07,
-              // /1.07 is the width of this
-              // uppper container.
-
 
               child:
-              // YELLOW NAME AND PRICE BEGINS HERE.
+// YELLOW NAME AND PRICE BEGINS HERE.
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: displayWidth(context)/2.8 /*+  displayWidth(context)/8 */, /*3.9 */
@@ -302,50 +291,25 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                       children: <Widget>[
                         Container(
                           width: displayWidth(context)/3.9,
-                          padding: EdgeInsets
-                              .fromLTRB(
-                              10, 0, 0,
-                              0),
+                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                           child:
 
                           Text(
-                              '${oneFireBaseOrder.orderBy}',
+                              '${oneFireBaseOrder.orderBy.toLowerCase()}',
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.normal,
+                                fontSize: 29,
+//                                fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
-                                color: Colors
-                                    .black,
-                                fontFamily: 'Itim-Regular',
+                                color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
 
                               )
                           ),
                         ),
 
-                        Container(
-                          padding: EdgeInsets
-                              .fromLTRB(
-                              0, 4, displayWidth(context)/40,
-                              0),
-                          child:
 
-                          Text(
-                              '${oneFireBaseOrder.totalPrice.toStringAsFixed(2)}' +
-                                  '\u20AC',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight
-                                    .normal,
-//                                                      color: Colors.white
-                                color: Colors
-                                    .black,
-                                fontFamily: 'Itim-Regular',
-
-                              )
-                          ),
-                        ),
 
                       ],
                     ),
@@ -359,9 +323,10 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
                   Container(
 
-//                    color:Colors.green,
-                    width: displayWidth(context) /2.1,
-                    height:displayHeight(context)/18,
+                    color:Colors.green,
+                    width: displayWidth(context) /2.5,
+                    height:displayHeight(context)/8,
+                    child:displayCustomerInformationWidget(oneFireBaseOrder.oneCustomer),
 //                    height: displayHeight(context)/20,
 
                   )
@@ -371,92 +336,15 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
             ),
 
-            // multiselect portion... begins here.
-            Container(
-//                                            alignment: Alignment.centerRight,
-
-//                                            color: Colors.lightBlue,
-              height:displayHeight(context)/15,
-
-              width: displayWidth(context) /1.07 ,
-              child:
-              // YELLOW NAME AND PRICE BEGINS HERE.
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-
-                  Container(
-//                                                  color:Colors.green,
-                    width: displayWidth(context) /2.9,
-                    height: displayHeight(context)/16,
-
-                  )
-                  ,
-                  Container(
-
-                    padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-//                                                      padding::::
-//                    color:Colors.redAccent,
-                    width: displayWidth(context) /2,
-//                    height: displayHeight(context)/20,
-
-                    height: displayHeight(context)/16,
-//                                                  width: displayWidth(context) /1.80,
-                    child: Text('_buildMultiSelectOptionsPrimary()'),
-//                                                      Card(child: _buildMultiSelectOptions()),
-
-                    // Text('_buildMultiSelectOptions()')
-
-                  ),
-                ],
-              ),
-
-
+            Divider(
+              height:10,
+              thickness:5,
+              color:Colors.black,
             ),
-            // multiselect portion...ends here.
 
 
 
             SizedBox(height:10),
-
-            Container(
-//              color: Colors.lightBlue,
-              height:displayHeight(context)/8,
-
-              width: displayWidth(context) /1.07 ,
-
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-
-                  Container(
-//                                                  color:Colors.green,
-                    width: displayWidth(context) /2.9,
-                    height: displayHeight(context)/20,
-
-                  ),
-                  Container(
-//                                                          color:Colors.green,
-                    child:
-
-                    Container(
-//                                                                  color: Colors.pink,
-
-                      padding: EdgeInsets.fromLTRB(0, 10, displayWidth(context)/40, 5),
-                      height: displayHeight(context) / 8.8,
-//                                                        width: displayWidth(context) /1.80,
-                      width: displayWidth(context) /1.70,
-                      child: Text('_buildProductSizes(context, foodSizePrice)'),
-
-                    ),
-
-                  ),
-                ],
-              ),
-            ),
-
 
             Container(
 
@@ -474,32 +362,32 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 //                                                    width: displayWidth(context)/4,
                       width: displayWidth(context)/2.49,
 //                                                    width: displayWidth(context)/3.29,
-//                      color:Colors.blue,
+                      color:Colors.blue,
                       child:
                       Container(
-                          height:displayHeight(context)/2.1,
+                        height:displayHeight(context)/2.1,
+                        width: displayWidth(context)/2.99,
+//                        color: Colors.red,
 
-//                                                          color: Colors.red,
 
-
-                          padding: EdgeInsets
-                              .fromLTRB(
-                              0, 0, 0,
-                              0),
+                        padding: EdgeInsets
+                            .fromLTRB(
+                            0, 0, 0,
+                            0),
 
 //                          child: Text('FoodImageURL')
 
                         child:
                         HistoryDetailImage(
-                            oneFireBaseOrder.formattedOrderPlacementDatesTimeOnly,
-                            oneFireBaseOrder.orderBy,
-                            oneFireBaseOrder.startDate,
+                          oneFireBaseOrder.formattedOrderPlacementDatesTimeOnly,
+                          oneFireBaseOrder.orderBy,
+                          oneFireBaseOrder.startDate,
                           oneFireBaseOrder.totalPrice,
 
 //
                         ),
 //                          formattedOrderPlacementDatesTimeOnly2
-                        //),
+//),
 
                       ),
                     ),
@@ -520,7 +408,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                         crossAxisAlignment: CrossAxisAlignment
                             .end,
                         children: <Widget>[
-                          //pppp
+//pppp
 
 
 
@@ -550,7 +438,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 20,
+                                          fontSize: 22,
                                           fontFamily: 'Itim-Regular',
                                           color: Color(0xff707070),
                                         ),
@@ -566,7 +454,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
 
 //                          SizedBox(height: 40,),
-                          // 'CHEESE BEGINS HERE.
+// 'CHEESE BEGINS HERE.
                           Container(
                             width: displayWidth(context) /
                                 1.4,
@@ -589,7 +477,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 20,
+                                          fontSize: 22,
                                           fontFamily: 'Itim-Regular',
                                           color: Color(0xff707070),
                                         ),
@@ -650,14 +538,14 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 20,
+                                          fontSize: 22,
                                           fontFamily: 'Itim-Regular',
                                           color: Color(0xff707070),
                                         ),
                                       )
                                   ),
 
-                                  /*
+/*
                                   CustomPaint(
                                     size: Size(0, 19),
                                     painter: LongHeaderPainterAfterShoppingCartPage(
@@ -708,13 +596,177 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
 
 
-            /*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
+/*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
 
           ],
         ),
 
       ),
     );
+  }
+
+  Widget displayCustomerInformationWidget(CustomerInformation customerForHistoryDetailsPage){
+
+    return
+
+
+
+// ADDRESS: BEGINS HERE.
+
+      Column(
+        children: [
+
+          ((customerForHistoryDetailsPage.address != null) ||
+              (customerForHistoryDetailsPage.address.length != 0)) ?
+
+          Container(
+            margin:EdgeInsets.fromLTRB(15,15,5,10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+
+
+                Row(
+                  children: [
+                    Text('address: ',
+
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+//                        color: Color(0xffF50303),
+                        fontSize: 22,
+//                        fontFamily: 'Itim-Regular',
+                      ),
+                    ),
+
+                    Text(
+                      '${((customerForHistoryDetailsPage.address == null) ||
+                          (customerForHistoryDetailsPage.address.length == 0)) ?
+                      '----' : customerForHistoryDetailsPage.address.length > 21 ?
+                      customerForHistoryDetailsPage.address.substring(0, 18) + '_ _' :
+                      customerForHistoryDetailsPage.address}',
+
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+//                        color: Color(0xffF50303),
+                        fontSize: 22,
+//                        fontFamily: 'Itim-Regular',
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Text('Flat: ',
+
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+//                        color: Color(0xffF50303),
+                        fontSize: 22,
+//      fontFamily: 'Itim-Regular',
+                      ),
+                    ),
+
+// 2 ends here.
+                    Text('${customerForHistoryDetailsPage.flatOrHouseNumber}',
+
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+//                        color: Color(0xffF50303),
+                        fontSize: 22,
+//                    fontFamily: 'Itim-Regular',
+                      ),
+                    ),
+                  ],
+                ),
+
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+
+                      Text(
+                        'phone: ',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 22,
+//                          fontFamily: 'Itim-Regular',
+                        ),
+                      ),
+                      Text(
+                        '${customerForHistoryDetailsPage.phoneNumber}',
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                        color: Color(0xffF50303),
+                          fontSize: 22,
+//                          fontFamily: 'Itim-Regular',
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+          ):
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+
+                Text(
+                  'phone: ',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 22,
+//                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                Text(
+                  '${customerForHistoryDetailsPage.phoneNumber}',
+
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+//                        color: Color(0xffF50303),
+                    fontSize: 22,
+//                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+
+// PHONE: ENDS HERE.
+        ],
+      );
+
   }
 
 
@@ -751,14 +803,14 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 //          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 //          clipBehavior: Clip.hardEdge,
 //          highlightElevation: 12,
-          /*
+/*
           shape: RoundedRectangleBorder(
 
             borderRadius: BorderRadius.circular(5.0),
           ),
  */
 //          disabledBorderColor: false,
-          /*
+/*
           borderSide: BorderSide(
             color: Color(0xffF83535),
             style: BorderStyle.solid,
@@ -779,7 +831,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                   .center,
               children: <
                   Widget>[
-                //  SizedBox(width: 5,),
+//  SizedBox(width: 5,),
 
 
 
@@ -841,9 +893,9 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
 
 
-            // WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
-            // WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
-            // FROM FOOD ITEM PAGE.
+// WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
+// WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
+// FROM FOOD ITEM PAGE.
 
 
             print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
@@ -887,14 +939,14 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 //          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
 //          clipBehavior: Clip.hardEdge,
 //          highlightElevation: 12,
-          /*
+/*
           shape: RoundedRectangleBorder(
 
             borderRadius: BorderRadius.circular(5.0),
           ),
  */
 //          disabledBorderColor: false,
-          /*
+/*
           borderSide: BorderSide(
             color: Color(0xffF83535),
             style: BorderStyle.solid,
@@ -917,7 +969,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                   .center,
               children: <
                   Widget>[
-                //  SizedBox(width: 5,),
+//  SizedBox(width: 5,),
 
                 Container(
                   padding: EdgeInsets.fromLTRB(0,3,0,0),
@@ -926,7 +978,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
                     size: 25.0,
 //                    color: Color(0xffF50303),
                     color: Colors.black,
-                    //        color: Color(0xffFFFFFF),
+//        color: Color(0xffFFFFFF),
                   ),
                 ),
 
@@ -949,7 +1001,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
             setState(() {
 
-              // toggle..
+// toggle..
               showUnSelectedIngredients = !showUnSelectedIngredients;
               showPressWhenFinishButton = !showPressWhenFinishButton;
 //                        myAnimatedWidget2 = myAnimatedWidget1();
@@ -985,7 +1037,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
         children: <
             Widget>[
 
-          // MORE INGREDIENTS row BEGINS HERE.
+// MORE INGREDIENTS row BEGINS HERE.
           Container(
 
 
@@ -1025,7 +1077,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
         children: <
             Widget>[
 
-          // MORE INGREDIENTS row BEGINS HERE.
+// MORE INGREDIENTS row BEGINS HERE.
           Container(
 
 
@@ -1047,7 +1099,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
 
   Widget _buildOneUNSelected(NewIngredient unSelectedOneIngredient, int index
-      /*,
+/*,
       List<NewIngredient> allUnSelected */
       ) {
 
@@ -1112,7 +1164,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
 //              height:45,
 //              alignment: Alignment.center,
-              // pp ToDOPPP
+// pp ToDOPPP
 
               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child:
@@ -1124,7 +1176,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 //              stringifiedFoodItemIngredients,
 //
 
-              /*
+/*
               Text(
 //                unSelectedOneIngredient.ingredientName,
                 unSelectedOneIngredient.ingredientName.length==0?
@@ -1156,7 +1208,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
             ),
 
 
-            // PROBLEM CONTAINER WITH ROW. INCREMENT DECREMENT FUNCTIONALITY. -- BELOW.
+// PROBLEM CONTAINER WITH ROW. INCREMENT DECREMENT FUNCTIONALITY. -- BELOW.
             Container(
               margin:EdgeInsets.symmetric(
                   horizontal: 0,
@@ -1167,8 +1219,8 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 //                                              height: displayHeight(context) *0.11,
               height:displayHeight(context) /35,
               width: displayWidth(context) /6.9,
-              // same as the heidth of increment decrement button. // 45
-              // later changed height to 40.
+// same as the heidth of increment decrement button. // 45
+// later changed height to 40.
               decoration: BoxDecoration(
 //                                              color: Colors.black54,
                 color:Color(0xffFFFFFF),
@@ -1241,7 +1293,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 //                      if(currentAmount>=2)
 //                      City c1 = new City()..name = 'Blum'..state = 'SC';
 
-                        /*
+/*
                           NewIngredient c1 = new NewIngredient(
                               ingredientName: unSelectedOneIngredient
                                   .ingredientName,
@@ -1264,7 +1316,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 //              final locationBloc = BlocProvider.of<>(context);
                         blocD.decrementThisIngredientItem(unSelectedOneIngredient,index);
 
-                        /*
+/*
                           setState(() {
                             // _ingredientlistUnSelected = allUnSelected;
                           });
@@ -1286,7 +1338,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
 
               ),
             ),
-            // PROBLEM CONTAINER WITH ROW. INCREMENT DECREMENT FUNCTIONALITY. -- ABOVE.
+// PROBLEM CONTAINER WITH ROW. INCREMENT DECREMENT FUNCTIONALITY. -- ABOVE.
 
           ],
         )
@@ -1303,7 +1355,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
     Map<String, dynamic> listpart1 = new Map<String, dynamic>();
 //    Map<String, dynamic> listpart2 = new Map<String, dynamic>();
 //    Map<String, dynamic> listpart3 = new Map<String, dynamic>();
-    // odd
+// odd
 
     int len = foodSizePrice.length;
     print('len: $len');
@@ -1341,7 +1393,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
         color: Color(0xFFffffff),
         alignment: Alignment.center,
 
-        // PPPPP
+// PPPPP
 
         child:
         Text('No prices found.'.toLowerCase(),
@@ -1360,14 +1412,14 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
     else {
 
       return
-        /*Directionality(
+/*Directionality(
         textDirection: TextDirection.rtl,
         child:  */GridView.builder(
         itemCount: listpart1.length,
         gridDelegate:
         new SliverGridDelegateWithMaxCrossAxisExtent(
 
-          //Above to below for 3 not 2 Food Items:
+//Above to below for 3 not 2 Food Items:
           maxCrossAxisExtent: 200,
           mainAxisSpacing: 10, // H  direction
           crossAxisSpacing: 20,
@@ -1396,7 +1448,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
       );
 
 
-      // Todo DefaultItemsStreamBuilder
+// Todo DefaultItemsStreamBuilder
 
 
     }
@@ -1708,7 +1760,7 @@ class _FoodItemDetailsState extends State<HistoryDetailsPage> {
           OutlineButton(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             color: Color(0xffFEE295),
-            // clipBehavior:Clip.hardEdge,
+// clipBehavior:Clip.hardEdge,
 
             borderSide: BorderSide(
               color: Color(0xff53453D), // 0xff54463E
