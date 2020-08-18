@@ -548,7 +548,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                         Container(
-//                          color:Colors.red,
+                          color:Colors.red,
                           width:displayWidth(context) /5.4,
 
                           padding: EdgeInsets
