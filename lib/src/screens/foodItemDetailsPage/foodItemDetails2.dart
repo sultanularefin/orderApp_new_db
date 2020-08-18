@@ -2340,7 +2340,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               new SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 160,
                 crossAxisSpacing: 23,
-                childAspectRatio: 140 / 150,
+                childAspectRatio: 140 / 130,
 mainAxisSpacing: 5,
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
@@ -2477,11 +2477,12 @@ mainAxisSpacing: 5,
 
             Container(
 // TO Be
+              padding: EdgeInsets.only(top: 5),
 //          height:45, // same as the heidth of increment decrement button.
               width: displayWidth(context) /6.5,
               height: displayHeight(context) /55,
 //              color:Colors.purple,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+//              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child:
 
               Text(unSelectedOneIngredient.ingredientName,
@@ -2504,6 +2505,8 @@ mainAxisSpacing: 5,
 
             // PROBLEM CONTAINER WITH ROW. INCREMENT DECREMENT FUNCTIONALITY. -- BELOW.
             Container(
+              padding: EdgeInsets.only(top: 5),
+//              color:Colors.deepOrangeAccent,
               margin:EdgeInsets.symmetric(
                   horizontal: 0,
                   vertical: 0
@@ -2511,10 +2514,12 @@ mainAxisSpacing: 5,
 
 
 //                                              height: displayHeight(context) *0.11,
-              height:displayHeight(context) /35,
-              width: displayWidth(context) /6.9,
+              height:displayHeight(context) /42,
+              width: displayWidth(context) /5.9,
               // same as the heidth of increment decrement button. // 45
               // later changed height to 40.
+
+    /*
               decoration: BoxDecoration(
 //                                              color: Colors.black54,
                 color:Color(0xffFFFFFF),
@@ -2523,6 +2528,7 @@ mainAxisSpacing: 5,
               ),
 
 
+*/
 //                                            color:Color(0xffC27FFF),
 
               child:
@@ -2532,7 +2538,7 @@ mainAxisSpacing: 5,
                 children: <Widget>[
 
                   IconButton(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 1),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     icon: Icon(Icons.add),
                     iconSize: 30,
 
@@ -2561,12 +2567,15 @@ mainAxisSpacing: 5,
 
 //      double.parse(doc['priceinEuro'])
 //          .toStringAsFixed(2);
-                  Text(
-                    currentAmount.toString(),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 16,
+                  Container(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Text(
+                      currentAmount.toString(),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
 
@@ -2574,7 +2583,7 @@ mainAxisSpacing: 5,
 
 
                   IconButton(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 1),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     icon: Icon(Icons.remove),
                     iconSize: 30,
 
