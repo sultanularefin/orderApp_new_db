@@ -50,9 +50,9 @@ class UnPaidBloc implements Bloc {
 
   // OneOrderFirebase items
   List<OneOrderFirebase> _allOneOrderFirebaseHistoryBloc =[];
-  List<OneOrderFirebase> get getAllFirebaseOrderList => _allOneOrderFirebaseHistoryBloc;
+  List<OneOrderFirebase> get getAllFirebaseUnPaidOrderList => _allOneOrderFirebaseHistoryBloc;
   final _firebaseOrderListController      =  StreamController <List<OneOrderFirebase>>();
-  Stream<List<OneOrderFirebase>> get getFirebaseOrderListStream => _firebaseOrderListController.stream;
+  Stream<List<OneOrderFirebase>> get getFirebaseUnPaidOrderListStream => _firebaseOrderListController.stream;
 
   final _client = FirebaseClient();
 

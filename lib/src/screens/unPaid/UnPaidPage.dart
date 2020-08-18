@@ -8,6 +8,7 @@ import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
+import 'package:foodgallery/src/BLoC/unPaid_bloc.dart';
 
 // BLOC'S IMPORT BEGIN HERE:
 //import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
@@ -61,7 +62,7 @@ class UnPaidPage extends StatefulWidget {
 
 class _UnPaidPageState extends State<UnPaidPage> {
 
-  final GlobalKey<ScaffoldState> _scaffoldKeyHistoryPage = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyUnPaidPage = new GlobalKey<ScaffoldState>();
   final SnackBar snackBar = const SnackBar(content: Text('Menu button pressed'));
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -91,7 +92,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
   @override
   Widget build(BuildContext context) {
 
-    final blocG = BlocProvider.of<HistoryBloc>(context);
+    final blocUB = BlocProvider.of<UnPaidBloc>(context);
 
 // FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
     return GestureDetector(
@@ -107,7 +108,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
         backgroundColor: Colors.white.withOpacity(0.05),
         // this is the main reason of transparency at next screen.
         // I am ignoring rest implementation but what i have achieved is you can see.
-        key: _scaffoldKeyHistoryPage,
+        key: _scaffoldKeyUnPaidPage,
         body:
         SafeArea(
           child: Container(
@@ -128,7 +129,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
               height: displayHeight(context)/2.1,
               /*
 */
-              child: allHistoryList(_currentPageHeader, context),
+              child: allUnPaidList(_currentPageHeader, context),
 
             ),
 
@@ -193,16 +194,17 @@ class _UnPaidPageState extends State<UnPaidPage> {
   }
 
 
-  Widget allHistoryList(String pageHeaderString,BuildContext context)  {
+  Widget allUnPaidList(String pageHeaderString,BuildContext context)  {
 
-    final blocH = BlocProvider.of<HistoryBloc>(context);
+//    final blocH = BlocProvider.of<HistoryBloc>(context);
+    final blocUB = BlocProvider.of<UnPaidBloc>(context);
 
     return Container(
 
       child:
       StreamBuilder<List<OneOrderFirebase>>(
-        stream: blocH.getFirebaseOrderListStream,
-        initialData: blocH.getAllFirebaseOrderList,
+        stream: blocUB.getFirebaseUnPaidOrderListStream,
+        initialData: blocUB.getAllFirebaseUnPaidOrderList,
 
         builder: (context, snapshot) {
 
@@ -335,7 +337,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
                             MediaQuery.of(context).padding.bottom  -displayHeight(context) / 6
                         /* /20 being title text height..*/,
 
-                        child: fireBaseOrderList(allFoods, context),
+                        child: fireBaseUnPaidOrderList(allFoods, context),
                       ),
 
 
@@ -377,7 +379,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
                         ),
                       ),
   * */
-  Widget fireBaseOrderList(
+  Widget fireBaseUnPaidOrderList(
       List<OneOrderFirebase> filteredItemsByCategory,
       BuildContext context)  {
 
@@ -658,7 +660,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
                     ],
                   ),
                   onTap: () {
-                    _navigateAndDisplaySelection(
+                    _navigateAndDisplayOnePaidSelection(
                         context, oneOrderFirebaseTemp);
                   },
 
@@ -674,7 +676,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
 
 
 
-  _navigateAndDisplaySelection(BuildContext context,OneOrderFirebase oneFirebaseOrderItem) async {
+  _navigateAndDisplayOnePaidSelection(BuildContext context,OneOrderFirebase oneFirebaseOrderItem) async {
 
 
     FocusScopeNode currentFocus = FocusScope.of(context);
