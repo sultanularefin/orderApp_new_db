@@ -9,6 +9,7 @@ import 'package:foodgallery/src/BLoC/history_bloc.dart';
 //import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
+import 'package:foodgallery/src/BLoC/unPaid_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
@@ -32,7 +33,10 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:foodgallery/src/screens/history/HistoryPage.dart';
+//import 'package:foodgallery/src/screens/history/HistoryPage.dart';
+import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
+import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
 
@@ -839,15 +843,13 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
                   ),
+
                   ListTile(
                     title: Container(
                         color: Color(0xffFFE18E),
-
                         child: Row(
                           children: [
-
                             Container(
-                              color: Color(0xffFFE18E),
                               padding: EdgeInsets
                                   .fromLTRB(
                                   10, 0, 10,
@@ -855,16 +857,13 @@ class _FoodGalleryState extends State<FoodGallery2> {
                               child: Image.asset(
                                 'assets/unpaid_cash_card/unpaid.png',
 //                color: Colors.black,
-                                width: 50,
-                                height:50,
+                                width: 47,
+                                height:47,
 
                               ),
                             ),
 
-
-
                             Container(
-
 //                          width: displayWidth(context)/3.9,
                               padding: EdgeInsets
                                   .fromLTRB(
@@ -880,16 +879,35 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                 ),
                               ),
                             )
-
+//                      Text('history'),
                           ],
                         )),
                     onTap: () {
-                      // Update the state of the app
-                      // ...
-                      // Then close the drawer
-                      Navigator.pop(context);
+
+
+
+                      Navigator.of(context).push(
+
+                        PageRouteBuilder(
+                          opaque: false,
+                          transitionDuration: Duration(
+                              milliseconds: 900),
+                          pageBuilder: (_, __, ___) =>
+                              BlocProvider<UnPaidBloc>(
+                                bloc: UnPaidBloc(),
+                                child: UnPaidPage(),
+                              ),
+
+
+                        ),
+                      );
+
+
                     },
                   ),
+
+
+
                   ListTile(
                     title: Container(
                         color: Color(0xffFFE18E),
@@ -949,53 +967,11 @@ class _FoodGalleryState extends State<FoodGallery2> {
                       );
 
 
-
-                      /*
-                      PageRouteBuilder(
-                        opaque: false,
-                        transitionDuration: Duration(
-                            milliseconds: 900),
-                        pageBuilder: (_, __, ___) =>
-
-
-
-//        tempCheeseItems
-//          tempSauceItems
-
-                        BlocProvider<FoodItemDetailsBloc>(
-                          bloc: FoodItemDetailsBloc(
-                              oneFoodItem,
-                              tempIngs,
-                              tempCheeseItems,
-                              tempSauceItems,
-                              allExtraIngredients
-
-                          ),
-
-
-                          child: FoodItemDetails2()
-
-                          ,),
-
-
-                        // fUTURE USE -- ANIMATION TRANSITION CODE.
-                        /*
-                                  transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
-                                    return FadeTransition(
-                                      opacity: animation,
-                                      child: RotationTransition(
-                                        turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-                                        child: child,
-                                      ),
-                                    );
-                                  }
-                                  */
-                      ),
-                      */
-
-
                     },
                   ),
+
+
+
                 ],
               ),
             ),

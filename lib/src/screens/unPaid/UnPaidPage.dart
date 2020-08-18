@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/HistoryDetailsBloc.dart';
+import 'package:foodgallery/src/BLoC/UnPaidDetailsBloc.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
@@ -28,6 +29,7 @@ import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:foodgallery/src/screens/history/HistoryDetailsPage.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
+import 'package:foodgallery/src/screens/unPaid/UnpaidDetailsPage.dart';
 
 import 'package:logger/logger.dart';
 
@@ -46,28 +48,28 @@ import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 //import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 
 
-class HistoryPage extends StatefulWidget {
+class UnPaidPage extends StatefulWidget {
 
   final Widget child;
 
 
-  HistoryPage({Key key, this.child}) : super(key: key);
-  _HistoryPageState createState() => _HistoryPageState();
+  UnPaidPage({Key key, this.child}) : super(key: key);
+  _UnPaidPageState createState() => _UnPaidPageState();
 
 }
 
 
-class _HistoryPageState extends State<HistoryPage> {
+class _UnPaidPageState extends State<UnPaidPage> {
 
   final GlobalKey<ScaffoldState> _scaffoldKeyHistoryPage = new GlobalKey<ScaffoldState>();
   final SnackBar snackBar = const SnackBar(content: Text('Menu button pressed'));
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
-  _HistoryPageState(/*{firestore} */);
+  _UnPaidPageState(/*{firestore} */);
 
 
-  String _currentPageHeader = 'HISTORY';
+  String _currentPageHeader = 'UNPAID';
 
   double tryCast<num>(dynamic x, {num fallback }) {
     bool status = x is num;
@@ -689,11 +691,11 @@ class _HistoryPageState extends State<HistoryPage> {
         transitionDuration: Duration(
             milliseconds: 900),
         pageBuilder: (_, __, ___) =>
-            BlocProvider<HistoryDetailsBloc>(
-              bloc: HistoryDetailsBloc(
+            BlocProvider<UnPaidDetailsBloc>(
+              bloc: UnPaidDetailsBloc(
                 oneFirebaseOrderItem,
               ),
-              child: HistoryDetailsPage()
+              child: UnpaidDetailsPage()
 
               ,),
 
