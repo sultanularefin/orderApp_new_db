@@ -220,6 +220,7 @@ class ShoppingCartBloc implements Bloc {
       /*FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped */
       Order x,List<NewCategoryItem> allCategories
       ) {
+    discoverDevicesConstructor();
 
     /*
     if(x.page==1){
@@ -298,7 +299,7 @@ class ShoppingCartBloc implements Bloc {
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
 
 
-    discoverDevicesConstructor();
+
     //    initiateCustomerInformation();
 
     _curretnOrder = x;

@@ -9463,8 +9463,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
                             .orderdocId}');
 
-                    List<PrinterBluetooth> blueToothDevicesState
-                    = shoppingCartBloc.getDevices;
+                    List<PrinterBluetooth> blueToothDevicesState = shoppingCartBloc.getDevices;
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
