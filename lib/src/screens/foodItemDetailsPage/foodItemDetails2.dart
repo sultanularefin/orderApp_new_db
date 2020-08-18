@@ -300,22 +300,19 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
     return Container(
-//      color:Colors.white,
-//      height: displayHeight(context) / 2.1,
-//                                  color:Colors.yellow,
-//                                    duration: Duration(seconds: 1),
-      /*
+
+
         height: displayHeight(context) -
             MediaQuery.of(context).padding.top -
             MediaQuery.of(context).padding.bottom,
-        */
 
-        height: displayHeight(context) / 7 +
-            displayHeight(context) / 6.6 +
-            displayHeight(context)/2.5 +
-            50 +
-            displayHeight(context)/18 +
-            displayHeight(context)/18,
+
+//        height: displayHeight(context) / 7 +
+//            displayHeight(context) / 6.6 +
+//            displayHeight(context)/2.5 +
+//            50 +
+//            displayHeight(context)/18 +
+//            displayHeight(context)/18,
 
 
         // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
@@ -323,6 +320,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                  color:Colors.lightGreen,
         margin: EdgeInsets.fromLTRB(
             12, displayHeight(context)/16, 10, 5),
+
+        //      color:Colors.white,
+//      height: displayHeight(context) / 2.1,
+//                                  color:Colors.yellow,
+//                                    duration: Duration(seconds: 1),
+
+
+
+
+
 
         decoration:
         new BoxDecoration(
@@ -618,16 +625,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                    color:Colors.orange,
                                       padding: EdgeInsets.fromLTRB(
                                           10, 3, 0, 3),
-//                                alignment: Alignment
-//                                    .center,
-                                      child: Text('selected ingredients'.toUpperCase(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontFamily: 'Itim-Regular',
-                                          color: Color(0xff707070),
-                                        ),
-                                      )
+                                      alignment: Alignment.centerLeft,                                      child: Text('DEFAULT'.toUpperCase(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'Itim-Regular',
+//                                          color: Color(0xff707070),
+                                      color: Colors.black,
+                                    ),
+                                  )
                                   ),
 
 
@@ -666,7 +672,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontFamily: 'Itim-Regular',
-                                              color: Color(0xff707070),
+//                                              color: Color(0xff707070),
+                                              color: Colors.black,
                                             ),
                                           )
                                       ),
@@ -705,7 +712,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontFamily: 'Itim-Regular',
-                                              color: Color(0xff707070),
+//                                              color: Color(0xff707070),
+                                              color: Colors.black,
                                             ),
                                           )
                                       ),
@@ -780,7 +788,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 Container(
 //                  color:Colors.indigoAccent,
 
-                  height: displayHeight(context)/1.7,
+                  height: displayHeight(context)/1.5,
                   /*-
                     MediaQuery.of(context).padding.top -
                     MediaQuery.of(context).padding.bottom,
@@ -1040,7 +1048,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             SizedBox(height:10),
 
             Container(
-              color: Colors.lightBlue,
+//              color: Colors.lightBlue,
               height:displayHeight(context)/8,
 
               width: displayWidth(context) /1.07 ,
@@ -1051,29 +1059,29 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 children: [
 
                   Container(
-                                                  color:Colors.green,
+//                                                  color:Colors.green,
                     width: displayWidth(context) /3.9,
                     height: displayHeight(context)/20,
 
                   ),
 
 
-                    Container(
+                  Container(
 //                                                                  color: Colors.pink,
 
-                        padding: EdgeInsets.fromLTRB(0, 10, displayWidth(context)/40, 5),
-                        height: displayHeight(context) / 8.8,
+                      padding: EdgeInsets.fromLTRB(0, 10, displayWidth(context)/40, 5),
+                      height: displayHeight(context) / 8.8,
 //                                                        width: displayWidth(context) /1.80,
-                        width:
-                        displayWidth(context) /1.07-
-                            displayWidth(context) /3.9,
-                        child: _buildProductSizes(
-                            context,
-                            foodSizePrice)
-                      //Text('_buildProductSizes('
-                      //    'context,'
-                      //    'foodSizePrice)'),
-                    ),
+                      width:
+                      displayWidth(context) /1.07-
+                          displayWidth(context) /3.9,
+                      child: _buildProductSizes(
+                          context,
+                          foodSizePrice)
+                    //Text('_buildProductSizes('
+                    //    'context,'
+                    //    'foodSizePrice)'),
+                  ),
 
 
                 ],
@@ -1395,15 +1403,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
             Container(
-              width: displayWidth(context)/1.07,
+              width: displayWidth(context)/1.03,
 //                height: 45,
 //              height: displayHeight(context) / 19,
 //              margin:EdgeInsets.fromLTRB(10, 0, 0, 10),
 //              color:Colors.lightGreenAccent,
-
+//VVVVV
 //                                            color:Color(0xffC27FFF)
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
 
                 children: [
@@ -1456,7 +1466,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                            color:Color(0xffC27FFF),
                               child:
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
 
@@ -1468,249 +1478,234 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                                            width: 3,
 //                                                                          ),
                                   // WORK 1
-
-                                  IconButton(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    icon: Icon(Icons.remove_circle_outline, color: Color(0xffF50303)),
-//                                                                            icon: Icon(Icons.remove),
-                                    iconSize: 48,
-                                    tooltip: 'Decrease product count by 1',
-                                    onPressed: () {
-                                      final foodItemDetailsbloc = BlocProvider.of<
-                                          FoodItemDetailsBloc>(context);
-                                      print(
-                                          'Decrease button pressed related to _itemCount');
-                                      if (itemCountNew >= 1) {
-//                                if (itemCountNew == 1) {
-                                        print(
-                                            'itemCountNew== $itemCountNew');
-
-                                        /*
-                                          SelectedFood oneSelectedFoodFD = new SelectedFood(
-                                            foodItemName: foodItemDetailsbloc
-                                                .currentFoodItem
-                                                .itemName,
-                                            foodItemImageURL: foodItemDetailsbloc
-                                                .currentFoodItem.imageURL,
-                                            unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
-                                            foodDocumentId: foodItemDetailsbloc
-                                                .currentFoodItem.documentId,
-                                            quantity: _itemCount - 1,
-                                            foodItemSize: _currentSize,
-                                            // index or int value not good enought since size may vary best on Food Types .
-                                          );
-                                          */
-                                        foodItemDetailsbloc
-                                            .decrementOneSelectedFoodForOrder(itemCountNew);
-
-                                        /*
-                                        else {
-                                          /*
-                                          // WHEN _itemCount not 1-1 = zero. but getter than 0(zero).
-                                          SelectedFood oneSelectedFoodFD = new SelectedFood(
-                                            foodItemName: foodItemDetailsbloc
-                                                .currentFoodItem
-                                                .itemName,
-                                            foodItemImageURL: foodItemDetailsbloc
-                                                .currentFoodItem.imageURL,
-                                            unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
-                                            foodDocumentId: foodItemDetailsbloc
-                                                .currentFoodItem.documentId,
-                                            quantity: _itemCount - 1,
-                                            foodItemSize: _currentSize,
-                                            // index or int value not good enough since size may vary based on Food Types .
-                                          );
-                                          */
-                                          foodItemDetailsbloc
-                                              .decrementOneSelectedFoodForOrder(
-                                              oneSelectedFoodFD, _itemCount - 1);
-                                              */
-
-//                                }
-
-                                      }
-                                    },
-//                              size: 24,
-                                    color: Color(0xff707070),
-                                  ),
-
-
-
+//TTTTT
                                   Container(
-//                                                                        width:60,
                                     width: displayWidth(
                                         context) / 12,
                                     height: displayHeight(context) / 22,
-                                    alignment: Alignment.center,
-                                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
-
-
-                                    child:Container(
-                                      child: Stack(
-                                          children: <Widget>[ Center(
-                                            child: Icon(
-
-                                                Icons.add_shopping_cart,
-                                                size: displayHeight(context)/20,
-                                                color:
-                                                Color(0xff85B20A)
-//                    Color(0xff707070),
-                                            ),
-
-
-                                          ),
-                                            Container(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  10,0,0,25),
-                                              width: 60,
-                                              height: 70,
-
-                                              child: Container(
-
-//                                              color:Colors.red,
-                                                width: 40,
-
-//                                            alignment: Alignment.centerRight,
-                                                decoration: new BoxDecoration(
-                                                  color: Colors.redAccent,
-
-                                                  border: new Border.all(
-                                                      color: Colors.green,
-                                                      width: 1.0,
-                                                      style: BorderStyle.solid
-                                                  ),
-                                                  shape: BoxShape.circle,
-
-                                                ),
-
-                                                alignment: Alignment.center,
-                                                child: Text(
-
-                                                  itemCountNew.toString(),
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight
-                                                        .normal,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-
-                                              ),
-                                            ),
-
-
-
-                                          ]
+                                    child:
+                                    OutlineButton(
+                                      padding: EdgeInsets.all(0),
+                                      splashColor: Colors.indigoAccent,
+                                      highlightElevation: 12,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(0.0),
                                       ),
+
+                                      borderSide: BorderSide(
+                                        color: Colors.grey,
+//                                        color:Color(0xff707070),
+                                        style: BorderStyle.solid,
+                                        width: 1.6,
+                                      ),
+
+                                      child: Icon(Icons.delete,
+                                        color: Color(0xffF50303),
+                                        size:48 ,
+                                      ),
+//                                                                            icon: Icon(Icons.remove),
+//                                      iconSize: 48,
+//                                      tooltip: 'Decrease product count by 1',
+                                      onPressed: () {
+                                        final foodItemDetailsbloc = BlocProvider.of<
+                                            FoodItemDetailsBloc>(context);
+                                        print(
+                                            'Decrease button pressed related to _itemCount');
+                                        if (itemCountNew >= 1) {
+//                                if (itemCountNew == 1) {
+                                          print(
+                                              'itemCountNew== $itemCountNew');
+
+                                          foodItemDetailsbloc
+                                              .decrementOneSelectedFoodForOrder(itemCountNew);
+
+                                        }
+                                      },
+//                              size: 24,
+                                      color: Colors.grey,
+//                                      color: Color(0xff707070),
                                     ),
                                   ),
 
 
+                                  Container(
+//
+//                                                                        width:60,
+                                    width: displayWidth(
+                                        context) / 12,
+                                    height: displayHeight(context) / 20,
 
-                                  IconButton(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+//                    color: Colors.black,
+                                        color: Colors.grey,
+                                        style: BorderStyle.solid,
+                                        width: 1.0,
 
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 0, vertical: 0),
-                                    icon: Icon(Icons.add_circle_outline,color: Color(0xff85B20A),),
-                                    iconSize: 48,
+                                      ),
+                                      color:Colors.white,
+                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
 
-                                    tooltip: 'Increase product count by 1 ',
-                                    onPressed: () {
+                                      itemCountNew.toString(),
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 30,
+//                                        fontWeight: FontWeight.bold,
+//                                        fontFamily: 'Poppins-ExtraBold',
+                                      ),
+                                    ),
+
+
+                                  ),
+
+
+
+
+
+
+
+
+                                  Container(
+
+                                    width: displayWidth(
+                                        context) / 12,
+                                    height: displayHeight(context) / 22,
+
+
+
+                                    child:OutlineButton(
+                                      padding: EdgeInsets.all(0),
+                                      splashColor: Colors.indigoAccent,
+                                      highlightElevation: 12,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(0.0),
+                                      ),
+
+                                      borderSide: BorderSide(
+                                        color: Colors.grey,
+//                                        color:Color(0xff707070),
+                                        style: BorderStyle.solid,
+                                        width: 1.6,
+                                      ),
+
+
+                                      /*
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+//                    color: Colors.black,
+                                        color: Colors.grey,
+                                        style: BorderStyle.solid,
+                                        width: 1.0,
+
+                                      ),
+                                      color:Colors.white,
+                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    ),
+
+
+                                    */
+
+                                      child: Icon(Icons.add,
+                                        color: Color(0xff85B20A),
+                                        size: 48,
+                                      ),
+//                                      iconSize: 48,
+
+//                                      tooltip: 'Increase product count by 1 ',
+                                      onPressed: () {
 //                            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
 
 //                              incrementOrderProcessing.selectedFoodInOrder.isEmpty
 
-                                      SelectedFood incrementCurrentFoodProcessing = snapshot.data;
+                                        SelectedFood incrementCurrentFoodProcessing = snapshot.data;
 //                              Order incrementOrderProcessing = snapshot.data;
 //                              int lengthOfSelectedItemsLength = incrementOrderProcessing.selectedFoodListLength;
 
-                                      if(incrementCurrentFoodProcessing.quantity == 0){
-                                        print(' JJJJ at lengthOfSelectedItemsLength  == 0 ');
+                                        if(incrementCurrentFoodProcessing.quantity == 0){
+                                          print(' JJJJ at lengthOfSelectedItemsLength  == 0 ');
 
-                                        print('itemCountNew JJJJ $itemCountNew');
+                                          print('itemCountNew JJJJ $itemCountNew');
 
-                                        int initialItemCount = 0;
+                                          int initialItemCount = 0;
 
-                                        int quantity =1;
-                                        // INITIAL CASE FIRST ITEM FROM ENTERING THIS PAGE FROM FOOD GALLERY PAGE.
-                                        SelectedFood oneSelectedFoodFD = new SelectedFood(
-                                          foodItemName: blocD
-                                              .currentFoodItem.itemName,
-                                          foodItemImageURL: blocD
-                                              .currentFoodItem.imageURL,
-                                          unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
-                                          unitPriceWithoutCheeseIngredientSauces: priceBySize,
-                                          foodDocumentId: blocD
-                                              .currentFoodItem.documentId,
-                                          quantity: quantity,
-                                          foodItemSize: _currentSize,
-                                          categoryName:blocD
-                                              .currentFoodItem.categoryName,
+                                          int quantity =1;
+                                          // INITIAL CASE FIRST ITEM FROM ENTERING THIS PAGE FROM FOOD GALLERY PAGE.
+                                          SelectedFood oneSelectedFoodFD = new SelectedFood(
+                                            foodItemName: blocD
+                                                .currentFoodItem.itemName,
+                                            foodItemImageURL: blocD
+                                                .currentFoodItem.imageURL,
+                                            unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
+                                            unitPriceWithoutCheeseIngredientSauces: priceBySize,
+                                            foodDocumentId: blocD
+                                                .currentFoodItem.documentId,
+                                            quantity: quantity,
+                                            foodItemSize: _currentSize,
+                                            categoryName:blocD
+                                                .currentFoodItem.categoryName,
 //                                                                                discount:blocD
 //                                                                                    .currentFoodItem.discount,
-                                          // index or int value not good enought since size may vary best on Food Types .
-                                        );
+                                            // index or int value not good enought since size may vary best on Food Types .
+                                          );
 
-                                        blocD
-                                            .incrementOneSelectedFoodForOrder(
-                                            oneSelectedFoodFD, initialItemCount);
-                                      }
-                                      else{
-                                        print(' at else RRRRR');
+                                          blocD
+                                              .incrementOneSelectedFoodForOrder(
+                                              oneSelectedFoodFD, initialItemCount);
+                                        }
+                                        else{
+                                          print(' at else RRRRR');
 
 //                                itemCountNew = incrementOrderProcessing
 //                                    .selectedFoodInOrder[lengthOfSelectedItemsLength-1]
 //                                    .quantity;
 
-                                        int oldQuantity = incrementCurrentFoodProcessing.quantity;
+                                          int oldQuantity = incrementCurrentFoodProcessing.quantity;
 //                                int oldQuantity = incrementOrderProcessing.
 //                                selectedFoodInOrder[lengthOfSelectedItemsLength-1].quantity;
 
-                                        int newQuantity = oldQuantity + 1;
+                                          int newQuantity = oldQuantity + 1;
 
-                                        SelectedFood oneSelectedFoodFD = new SelectedFood(
-                                          foodItemName: blocD
-                                              .currentFoodItem.itemName,
-                                          foodItemImageURL: blocD
-                                              .currentFoodItem.imageURL,
-                                          unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
+                                          SelectedFood oneSelectedFoodFD = new SelectedFood(
+                                            foodItemName: blocD
+                                                .currentFoodItem.itemName,
+                                            foodItemImageURL: blocD
+                                                .currentFoodItem.imageURL,
+                                            unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
 //                                                                                unitPrice: priceBasedOnCheeseSauceIngredientsSizeState,
-                                          unitPriceWithoutCheeseIngredientSauces: priceBySize,
-                                          foodDocumentId: blocD
-                                              .currentFoodItem.documentId,
-                                          quantity: newQuantity,
-                                          foodItemSize: _currentSize,
-                                          categoryName:blocD
-                                              .currentFoodItem.categoryName,
+                                            unitPriceWithoutCheeseIngredientSauces: priceBySize,
+                                            foodDocumentId: blocD
+                                                .currentFoodItem.documentId,
+                                            quantity: newQuantity,
+                                            foodItemSize: _currentSize,
+                                            categoryName:blocD
+                                                .currentFoodItem.categoryName,
 //                                                                                discount:blocD
 //                                                                                    .currentFoodItem.discount,
-                                          // index or int value not good enought since size may vary best on Food Types .
-                                        );
+                                            // index or int value not good enought since size may vary best on Food Types .
+                                          );
 
 
-                                        //incrementCurrentFoodProcessing.quantity= newQuantity;
+                                          //incrementCurrentFoodProcessing.quantity= newQuantity;
 
-                                        // TODO TODO TODO.
-                                        // TO DO SOME CODES CAN BE OMITTED HERE, LIKE WE DON'T NEED TO PASS THIS PARAMETER OR
-                                        // NEITHER NEED TO RECREATE IT ABOVE, WE NEED TO PASS BUT NOT CREATE IT ABOVE.
-                                        blocD
-                                            .incrementOneSelectedFoodForOrder(oneSelectedFoodFD /*
-                                            THIS oneSelectedFoodFD WILL NOT BE USED WHEN SAME ITEM IS INCREMENTED AND
+                                          // TODO TODO TODO.
+                                          // TO DO SOME CODES CAN BE OMITTED HERE, LIKE WE DON'T NEED TO PASS THIS PARAMETER OR
+                                          // NEITHER NEED TO RECREATE IT ABOVE, WE NEED TO PASS BUT NOT CREATE IT ABOVE.
+                                          blocD
+                                              .incrementOneSelectedFoodForOrder(oneSelectedFoodFD /*
+                                              THIS oneSelectedFoodFD WILL NOT BE USED WHEN SAME ITEM IS INCREMENTED AND
 
-                                            QUANTITY IS MORE THAN ONE.
-                                            */,oldQuantity);
-                                      }
-                                    },
-                                    color: Color(0xff707070),
+                                              QUANTITY IS MORE THAN ONE.
+                                              */,oldQuantity);
+                                        }
+                                      },
+                                      color: Color(0xff707070),
+                                    ),
                                   ),
-
-
-//SSSSS
-
-
-
 
 
                                 ],
@@ -1930,36 +1925,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           ),
 
 
-
-//        clipBehavior: Clip.hardEdge,
-//          splashColor: Color(0xffFEE295),
-//          splashColor: Color(0xff739DFA),
-//          highlightElevation: 12,
-
-//          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-//          clipBehavior: Clip.hardEdge,
-//          highlightElevation: 12,
-          /*
-          shape: RoundedRectangleBorder(
-
-            borderRadius: BorderRadius.circular(5.0),
-          ),
- */
-//          disabledBorderColor: false,
-          /*
-          borderSide: BorderSide(
-            color: Color(0xffF83535),
-            style: BorderStyle.solid,
-            width: 3.6,
-          ),
-
-          */
-
-
-
           child:Container(
 
-            width:displayWidth(context)/3,
+            width:displayWidth(context)/4,
 
             height: displayHeight(context)/24,
             padding: EdgeInsets.fromLTRB(0,0,0,0),
@@ -1981,7 +1949,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         .bold,
 //                    color: Color(0xffF50303),
                     color: Colors.white,
-                    fontSize: 22, fontFamily: 'Itim-Regular',),
+                    fontSize: 18, fontFamily: 'Itim-Regular',),
                 ),
               ],
             ),
@@ -2069,37 +2037,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             borderRadius: BorderRadius.circular(5.0),
           ),
 
-
-
-//        clipBehavior: Clip.hardEdge,
-//          splashColor: Color(0xffFEE295),
-//          splashColor: Color(0xff739DFA),
-//          highlightElevation: 12,
-
-//          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-//          clipBehavior: Clip.hardEdge,
-//          highlightElevation: 12,
-          /*
-          shape: RoundedRectangleBorder(
-
-            borderRadius: BorderRadius.circular(5.0),
-          ),
- */
-//          disabledBorderColor: false,
-          /*
-          borderSide: BorderSide(
-            color: Color(0xffF83535),
-            style: BorderStyle.solid,
-            width: 3.6,
-          ),
-
-          */
-
-
-
           child:Container(
 
-            width:displayWidth(context)/3.5,
+//            width:displayWidth(context)/3.5,
+            width:displayWidth(context)/4,
 
             height: displayHeight(context)/24,
             padding: EdgeInsets.fromLTRB(0,0,0,0),
@@ -2111,6 +2052,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   Widget>[
                 //  SizedBox(width: 5,),
 
+                /*
                 Container(
                   padding: EdgeInsets.fromLTRB(0,3,0,0),
                   child: Icon(
@@ -2122,6 +2064,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
                 ),
 
+                */
                 Text(
                   'more Ingredients'.toUpperCase(),
                   textAlign: TextAlign.center,
@@ -2180,7 +2123,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           // MORE INGREDIENTS row BEGINS HERE.
           Container(
 
-
+            width:displayWidth(context)/4,
 //            child: moreIngredientsButton(),
 
             child: continueShoppingButton(),
@@ -2203,26 +2146,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 //    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-    return    Container(
-      width:displayWidth(
-          context) /
-          3,
+    return
+      Container(
+//            width:displayWidth(context)/3.5,
+        width:displayWidth(context)/4,
 
-//        color:Colors.black54,
-//      color:Colors.white,
-      color:Colors.blue,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <
-            Widget>[
-
-          // MORE INGREDIENTS row BEGINS HERE.
-          Container(
-
-
-            child: moreIngredientsButton(),
-            /*AnimatedSwitcher(
+        child: moreIngredientsButton(),
+        /*AnimatedSwitcher(
               duration: Duration(milliseconds: 500),
 //
               child: showPressWhenFinishButton? animatedWidgetPressToFinish():
@@ -2236,10 +2166,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-          ),
+      );
 
 
-          /*
+    /*
           Container(
             width: displayWidth(
                 context) /14,
@@ -2299,9 +2229,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           */
 
-        ],
-      ),
-    );
+
   }
 
   int calculateHeightBySize(int length){
@@ -2359,6 +2287,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
     return Container(
+//      color:Colors.blue,
       height: (((displayHeight(context)/1.5)/lengthForHeight) * calculateHeightBySize(withCertainSubgropus.length)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -2381,8 +2310,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   fontSize: 20,
                   fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
-                  color: Colors.grey,
-                  fontFamily: 'Itim-Regular',
+//                  color: Colors.grey,
+                  color:Color(0xff707070),
+//                  fontFamily: 'Itim-Regular',
+                  fontFamily: 'Poppins-ExtraBold',
 
                 )
             ),
@@ -2390,32 +2321,27 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           Container(
 
-            height: (((displayHeight(context)/2)/lengthForHeight) * calculateHeightBySize(withCertainSubgropus.length)),
-
+//            color:Colors.purple,
+            height:  (((displayHeight(context)/2)/lengthForHeight)
+                *  calculateHeightBySize(withCertainSubgropus.length)
+             ),
 
             child: GridView.builder(
               itemCount: withCertainSubgropus.length,
               itemBuilder: (_, int index) {
                 return _buildOneUNSelected
                   (
-                    withCertainSubgropus[index],
-                    index/*, unSelectedIngredients*/
+                    withCertainSubgropus[index], index/*, unSelectedIngredients*/
                 );
               },
               gridDelegate:
 //                                            new SliverGridDelegateWithFixedCrossAxisCount(
 //                                              crossAxisCount: 3,
               new SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 180,
-
-                mainAxisSpacing: 0,
-                // H  direction
-                crossAxisSpacing: 0,
-
-                ///childAspectRatio:
-                /// The ratio of the cross-axis to the main-axis extent of each child.
-                /// H/V
-                childAspectRatio: 300 / 340,
+                maxCrossAxisExtent: 160,
+                crossAxisSpacing: 23,
+                childAspectRatio: 140 / 150,
+mainAxisSpacing: 5,
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
 //                                  /// H/V
@@ -2425,8 +2351,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               ),
 
 
-              controller: new ScrollController(
-                  keepScrollOffset: false),
+              controller: new ScrollController(keepScrollOffset: false),
 
               shrinkWrap: false,
 
@@ -2484,12 +2409,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       List<NewIngredient> allUnSelected */
       ) {
 
-//    print('index : $index');
-
-//    print('unSelectedOneIngredient: ${unSelectedOneIngredient.ingredientName}');
-//
-//    logger.i("unSelectedOneIngredient: ",unSelectedOneIngredient.ingredientAmountByUser);
-
 
     int currentAmount = unSelectedOneIngredient.ingredientAmountByUser;
 
@@ -2503,22 +2422,41 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
     return Container(
-        color: Color.fromRGBO(239, 239, 239, 0),
+//      color:Colors.yellow,
+
+      /*
         padding: EdgeInsets.symmetric(
-//                          horizontal: 10.0, vertical: 22.0),
-            horizontal: 2.0, vertical: 2.0),
+            horizontal: 2.0,
+            vertical: 2.0
+        ),
+
+        */
+//        height: displayHeight(context) / 7,
+//        width: displayWidth(context) / 8,
+//        color:Colors.red,
+        decoration: BoxDecoration(
+          border: Border.all(
+//                    color: Colors.black,
+            color: Colors.grey,
+            style: BorderStyle.solid,
+            width: 1.0,
+          ),
+          color:Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+        ),
 
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+
           children: <Widget>[
 //                              SizedBox(height: 10),
 
             Container(
 
-              width: displayWidth(context) /9,
-              height: displayWidth(context) /8.8,
-              padding:EdgeInsets.symmetric(vertical: 2,horizontal: 0),
-//                                    height: displayWidth(context) * 0.19,
+              padding: EdgeInsets.only(top: 5),
+              height: displayHeight(context) / 20,
+              width: displayWidth(context) / 11,
 
               child: ClipOval(
 
@@ -2541,48 +2479,23 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 // TO Be
 //          height:45, // same as the heidth of increment decrement button.
               width: displayWidth(context) /6.5,
-              height: displayHeight(context) /36,
-
-//              height:45,
-//              alignment: Alignment.center,
-              // pp ToDOPPP
-
+              height: displayHeight(context) /55,
+//              color:Colors.purple,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child:
 
-
-//              stringifiedFoodItemIngredients.length==0?
-//              'EMPTY':  stringifiedFoodItemIngredients.length>12?
-//              stringifiedFoodItemIngredients.substring(0,12)+'...':
-//              stringifiedFoodItemIngredients,
-//
-
-              /*
-              Text(
-//                unSelectedOneIngredient.ingredientName,
-                unSelectedOneIngredient.ingredientName.length==0?
-                'EMPTY':  unSelectedOneIngredient.ingredientName.length>10?
-                unSelectedOneIngredient.ingredientName.substring(0,10)+'...':
-                unSelectedOneIngredient.ingredientName,
-                style: TextStyle(
-                  color:Color(0xff707070),
-//                                    color: Colors.blueGrey[800],
-
-                  fontWeight: FontWeight.normal,
-                  fontSize: 17,
-                ),
-
-              ),
-              */
               Text(unSelectedOneIngredient.ingredientName,
                 textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color:Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.bold,
 
                   fontSize: 14,
+
                 ),
 
               ),
@@ -3220,14 +3133,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             if(selectedSauceItems.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 24,
+                height: displayHeight(context) / 24,
 //          height:190,
 //                  width: displayWidth(context) /1.50,
-                  width: displayWidth(context) /2.39,
+                width: displayWidth(context) /2.39,
 
-                  color: Color(0xffFFFFFF),
+                color: Color(0xffFFFFFF),
 
-                  /*
+                /*
                   alignment: Alignment.center,
 
                   // PPPPP
@@ -3438,13 +3351,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             if(selectedSauceItems.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 10,
+                height: displayHeight(context) / 10,
 //          height:190,
-                  width: displayWidth(context) /1.50,
+                width: displayWidth(context) /1.50,
 
-                  color: Color(0xffFFFFFF),
+                color: Color(0xffFFFFFF),
 
-                  /*
+                /*
                   alignment: Alignment.center,
 
                   // PPPPP
@@ -3590,7 +3503,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 ),
 //                              SizedBox(height: 10),
                 Container(
-                  color:Colors.blue,
+//                  color:Colors.blue,
                   padding: EdgeInsets.only(top: 5),
                   width: displayWidth(context) / 9,
                   child: Text(
@@ -3598,7 +3511,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                    maxLines: 2,
 //                    textAlign: TextAlign.center,
 //                    overflow: TextOverflow.ellipsis,
-
 
                     sauceItemName,
                     maxLines: 2,
@@ -4632,37 +4544,37 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                          horizontal: 10.0, vertical: 22.0),
             horizontal: 0, vertical: 0),
 
-            child:
+        child:
 
-            Container(
-              width: displayWidth(context) / 7,
-              child:
+        Container(
+          width: displayWidth(context) / 7,
+          child:
 
-                Row(
-                  children: [
-                    MyBullet(),
-                    Text(' '),
-                    Text(ingredientName,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
+          Row(
+            children: [
+              MyBullet(),
+              Text(' '),
+              Text(ingredientName,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
 
-                      style: TextStyle(
-                        color: Color(0xff707070),
+                style: TextStyle(
+                  color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
 
-                        fontWeight: FontWeight.normal,
-                        fontSize: 18,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
 //                    decoration: TextDecoration.underline,
 //                    decorationStyle:TextDecorationStyle.double,
-                      ),
-                    ),
-                  ],
                 ),
+              ),
+            ],
+          ),
 
-            ),
+        ),
 
-        );
+      );
 
   }
 
