@@ -1002,8 +1002,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             Container(
 //                                            alignment: Alignment.centerRight,
 
-//                                            color: Colors.lightBlue,
-              height:displayHeight(context)/16,
+//               color: Colors.lightBlue,
+              height:displayHeight(context)/20,
 
               width: displayWidth(context) /1.07 ,
               child:
@@ -1016,21 +1016,23 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   Container(
 //                                                  color:Colors.green,
                     width: displayWidth(context) /2.9,
-                    height: displayHeight(context)/17,
+                    height: displayHeight(context)/20,
 
                   )
                   ,
                   Container(
 
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+//                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 3, 0, 2),
+
 //                                                      padding::::
 //                    color:Colors.redAccent,
                     width: displayWidth(context) /2,
 //                    height: displayHeight(context)/20,
 
-                    height: displayHeight(context)/17,
+                    height: displayHeight(context)/23,
 //                                                  width: displayWidth(context) /1.80,
-                    child: _buildMultiSelectOptionsPrimary(),
+                    child: _buildMultiSelectOptionsInitialView(),
 //                                                      Card(child: _buildMultiSelectOptions()),
 
                     // Text('_buildMultiSelectOptions()')
@@ -2649,7 +2651,7 @@ mainAxisSpacing: 5,
     );
   }
 
-  Widget _buildMultiSelectOptionsPrimary(){
+  Widget _buildMultiSelectOptionsInitialView(){
 //   height: 40,
 //   width: displayWidth(context) /2.5,
 
@@ -2675,8 +2677,9 @@ mainAxisSpacing: 5,
               scrollDirection: Axis.horizontal,
 
               reverse: true,
+              shrinkWrap:true,
 
-              shrinkWrap: false,
+//              shrinkWrap: false,
 //        final String foodItemName =          filteredItems[index].itemName;
 //        final String foodImageURL =          filteredItems[index].imageURL;
               itemCount: foodItemPropertyOptions.length,
@@ -2866,7 +2869,7 @@ mainAxisSpacing: 5,
       Container(
         width:displayWidth(context)/14,
 //        height:displayHeight(context)/48,
-        height:displayHeight(context)/30,
+        height:displayHeight(context)/25,
 
         margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
         child:
