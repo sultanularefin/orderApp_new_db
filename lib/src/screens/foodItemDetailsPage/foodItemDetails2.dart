@@ -1418,16 +1418,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //VVVVV
 //                                            color:Color(0xffC27FFF)
               child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
-
                 children: [
-
                   animatedWidgetMoreIngredientsButton(),
-
-
                   Container(
 //                                                          color:Colors.lightBlueAccent,
                     child: StreamBuilder<SelectedFood>(

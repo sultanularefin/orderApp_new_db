@@ -36,9 +36,9 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   // selected Sauce Items
 
   OneOrderFirebase _curretnFireBaseOrder ;
-  OneOrderFirebase get getCurrentFireBaseOrder => _curretnFireBaseOrder;
+  OneOrderFirebase get getCurrentUnPaidFireBaseOrder => _curretnFireBaseOrder;
   final _oneFireBaseOrderController = StreamController <OneOrderFirebase>();
-  Stream<OneOrderFirebase> get getCurrentOrderStream => _oneFireBaseOrderController.stream;
+  Stream<OneOrderFirebase> get getCurrentUnPaidOrderStream => _oneFireBaseOrderController.stream;
 
 
   void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSaucesString) async {

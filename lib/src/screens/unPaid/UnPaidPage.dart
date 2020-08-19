@@ -538,10 +538,17 @@ class _UnPaidPageState extends State<UnPaidPage> {
                   child: Column(
 
                     children: <Widget>[
-                      new Container(child:
+
+
+
+
+                      
+
+//                      hero animation.. image container begins here.
+
                       new Container(
-                        width: displayWidth(context) / 7,
-                        height: displayWidth(context) / 7,
+                        width: displayWidth(context) /  6,
+                        height: displayWidth(context) / 6,
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
                           color: Color(0xffFCF5E4),
@@ -555,61 +562,70 @@ class _UnPaidPageState extends State<UnPaidPage> {
                         ),
 
                         child:
-                        Hero(
-                          tag: startDate2.toString()+'__$totalPrice2',
-                          child:
-                          ClipOval(
-                            child: Image.asset(
-                              itemImage2,
-//                              width: 43,
-//                              height:43,
-//                              fit: BoxFit.cover,
-//                              fit: BoxFit.fill,
-//                              fit: BoxFit.contain,
-//                              fit:BoxFit.fitWidth,
-                            ),
-                          ),
-                          placeholderBuilder: (context,
-                              heroSize, child) {
-                            return Opacity(
-                              opacity: 0.5, child: Container(
-                              width: displayWidth(context) / 7,
-                              height: displayWidth(context) / 7,
-                              decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
+                        ClipOval(
+                          child: Hero(
+                            tag: startDate2.toString()+'__$totalPrice2',
 
-                                      color: Color(0xffEAB45E),
+                            child:
+                            Container(
+//                            color:Colors.pinkAccent,
 
-                                      blurRadius: 25.0,
-                                      spreadRadius: 0.10,
-                                      offset: Offset(0, 10)
-                                  )
-                                ],
+                              padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
+
+                              child: Image.asset(
+                                itemImage2,
+                                fit: BoxFit.contain,
                               ),
-                              child:
-                              ClipOval(
-                                child: Image.asset(
-                                  itemImage2,
-//                                  width: 43,
-//                                  height:43,
-                                  fit: BoxFit.contain,
+
+                            ),
+                            placeholderBuilder: (context,
+                                heroSize, child) {
+                              return Opacity(
+                                opacity: 0.5, child: Container(
+                                width: displayWidth(context) /  6,
+                                height: displayWidth(context) / 6,
+                                decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xffEAB45E),
+                                        blurRadius: 25.0,
+                                        spreadRadius: 0.10,
+                                        offset: Offset(0, 10)
+                                    )
+                                  ],
+                                ),
+                                child:
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(20,20,20,20),//
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      itemImage2,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                            );
-                          },
-
-                          //Placeholder Image.network(foodImageURL),
+                              );
+                            },
+                          ),
                         ),
 
                       ),
 
-                        padding: const EdgeInsets.fromLTRB(
-                            0, 0, 0, 6),
-                      ),
+
+
+
+//                      hero animation.. image container ends here.
+
+
+
+
+
 //                              SizedBox(height: 10),
+
+
+
 
 
                       Container(
