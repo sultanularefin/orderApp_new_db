@@ -266,7 +266,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             Container(
 
                               // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-                              width: displayWidth(context)/1.03,
+                              width: displayWidth(context)/1.01,
 
                               child:
                               AnimatedSwitcher(
@@ -316,10 +316,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
         // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-        width: displayWidth(context)/1.03,
+        width: displayWidth(context)/1.01,
 //                  color:Colors.lightGreen,
         margin: EdgeInsets.fromLTRB(
-            12, displayHeight(context)/16, 10, 5),
+            0, displayHeight(context)/16, 10, 5),
 
         //      color:Colors.white,
 //      height: displayHeight(context) / 2.1,
@@ -373,7 +373,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   height:displayHeight(context)/18,
 //                                              width: displayWidth(context)*0.57,
 //                  width: displayWidth(context)/2.4 ,
-                  width: displayWidth(context)/1.03,
+                  width: displayWidth(context)/1.01,
 
 //                  RRRR HHHHH
                   // /1.07 is the width of this
@@ -503,7 +503,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                     Container(
                       width: displayWidth(context)/2.4 /*+  displayWidth(context)/8 */,
-                      height: displayHeight(context)/25,
+                      height: displayHeight(context)/29,
                     ),
 
                     Container(
@@ -512,8 +512,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                                      padding::::
 //                        color:Colors.white,
 //                      color:Colors.blue,
-                      width: displayWidth(context) /2,
-                      height: displayHeight(context)/25,
+                      width: displayWidth(context) /1.9,
+                      height: displayHeight(context)/29,
 //                                                  width: displayWidth(context) /1.80,
                       child: _buildMultiSelectOptions(),
 //                                                      Card(child: _buildMultiSelectOptions()),
@@ -545,8 +545,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 //                displayHeight(context)/2.5
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment
-                          .start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         // THIS ROW HAVE 2 PARTS -> 1ST PART HANDLES THE IMAGES, SOME HEADING TEXT(PRICE AND NAME)
@@ -564,10 +563,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               0),
 
                           child: FoodDetailImageSmaller(
-                              oneFood
-                                  .imageURL,
-                              oneFood
-                                  .itemName),
+                              oneFood.imageURL,
+                              oneFood.itemName),
                         ),
 
 
@@ -657,9 +654,14 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               // 'CHEESE BEGINS HERE.
 
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+
                                 children: [
 
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                           padding: EdgeInsets
@@ -699,6 +701,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+
                                     children: [
 
                                       Container(
@@ -784,7 +789,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //              ark
 
 
-
+//UNSELECTED INGREDIENTS BEGINS HERE..
                 Container(
 //                  color:Colors.indigoAccent,
 
@@ -793,7 +798,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     MediaQuery.of(context).padding.top -
                     MediaQuery.of(context).padding.bottom,
 */
-                  width: displayWidth(context)/1.03,
+                  width: displayWidth(context)/1.01,
 
                   margin: EdgeInsets.fromLTRB(
                       12, 0, 0, 0),
@@ -834,10 +839,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
       // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-      width: displayWidth(context)/1.03,
+      width: displayWidth(context)/1.01,
 //                  color:Colors.lightGreen,
       margin: EdgeInsets.fromLTRB(
-          12, displayHeight(context)/16, 10, 5),
+          0, displayHeight(context)/16, 10, 5),
 
       decoration:
       new BoxDecoration(
@@ -1003,7 +1008,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                            alignment: Alignment.centerRight,
 
 //               color: Colors.lightBlue,
-              height:displayHeight(context)/20,
+              height:displayHeight(context)/24,
 
               width: displayWidth(context) /1.07 ,
               child:
@@ -1016,7 +1021,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   Container(
 //                                                  color:Colors.green,
                     width: displayWidth(context) /2.9,
-                    height: displayHeight(context)/20,
+                    height: displayHeight(context)/24,
 
                   )
                   ,
@@ -1030,7 +1035,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     width: displayWidth(context) /2,
 //                    height: displayHeight(context)/20,
 
-                    height: displayHeight(context)/23,
+                    height: displayHeight(context)/22,
 //                                                  width: displayWidth(context) /1.80,
                     child: _buildMultiSelectOptionsInitialView(),
 //                                                      Card(child: _buildMultiSelectOptions()),
@@ -1225,7 +1230,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                               children: [
                                 Container(
 //                                                            height: displayHeight(context) / 13,
-                                    height: displayHeight(context) / 9,
+                                    height: displayHeight(context) / 11,
                                     width: displayWidth(context) /1.50,
 //                                                            width: displayWidth(context) * 0.57,
 //                                                            color: Color(0xfff4444aa),
@@ -1372,7 +1377,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             child: Column(
                               children: [
                                 Container(
-                                  height: displayHeight(context) / 9,
+                                  height: displayHeight(context) / 11,
                                   width: displayWidth(context) /1.50,
 
                                   child: buildSauceItems(
@@ -1405,7 +1410,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
             Container(
-              width: displayWidth(context)/1.03,
+              width: displayWidth(context)/1.01,
 //                height: 45,
 //              height: displayHeight(context) / 19,
 //              margin:EdgeInsets.fromLTRB(10, 0, 0, 10),
@@ -1829,6 +1834,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         splashColor: Color(0xffB47C00),
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         highlightElevation: 12,
+        /*
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: Color(0xff707070),
@@ -1838,6 +1844,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           borderRadius: BorderRadius.circular(5.0),
         ),
 
+        */
         child:Container(
 
           width:displayWidth(context)/3.8,
@@ -1917,6 +1924,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           splashColor: Color(0xffB47C00),
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           highlightElevation: 12,
+
+          /*
           shape: RoundedRectangleBorder(
             side: BorderSide(
               color: Color(0xff707070),
@@ -1927,6 +1936,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           ),
 
 
+          */
           child:Container(
 
             width:displayWidth(context)/4,
@@ -2030,6 +2040,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           splashColor: Color(0xffB47C00),
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           highlightElevation: 12,
+          /*
           shape: RoundedRectangleBorder(
             side: BorderSide(
               color: Color(0xff707070),
@@ -2038,6 +2049,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             ),
             borderRadius: BorderRadius.circular(5.0),
           ),
+          */
 
           child:Container(
 
@@ -2296,72 +2308,83 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          Container(
+        Container(
 
 //            color:Colors.red,
-            height: 40,
-            padding:EdgeInsets.fromLTRB(0, 8, 0, 8),
-            child: Text(
+        height: 40,
+        padding:EdgeInsets.fromLTRB(0, 8, 0, 8),
+        child: Text(
 
-                subGroup.toUpperCase(),
-                textAlign: TextAlign.left,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+            subGroup.toUpperCase(),
+            textAlign: TextAlign.left,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
 
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal,
+              fontSize: 20,
+              fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
 //                  color: Colors.grey,
-                  color:Color(0xff707070),
+              color:Color(0xff707070),
 //                  fontFamily: 'Itim-Regular',
-                  fontFamily: 'Poppins-ExtraBold',
+              fontFamily: 'Poppins-ExtraBold',
 
-                )
+            )
+        ),
+      ),
+
+      Container(
+
+//        color:Colors.purple,
+
+        height: (calculateHeightBySize(withCertainSubgropus.length)==1)?
+        ((displayHeight(context)/2)/lengthForHeight):
+        (calculateHeightBySize(withCertainSubgropus.length)==2)?
+        ((((displayHeight(context)/2)/lengthForHeight)+15)*2):
+        (calculateHeightBySize(withCertainSubgropus.length)==3)?
+        ((((displayHeight(context)/2)/lengthForHeight)+15)*3):
+        ((((displayHeight(context)/2)/lengthForHeight)+15)*4),
+
+        /*
+            height:  (
+                *  (calculateHeightBySize(withCertainSubgropus.length) +25)
             ),
-          ),
 
-          Container(
-
-//            color:Colors.purple,
-            height:  (((displayHeight(context)/2)/lengthForHeight)
-                *  calculateHeightBySize(withCertainSubgropus.length)
-             ),
-
-            child: GridView.builder(
-              itemCount: withCertainSubgropus.length,
-              itemBuilder: (_, int index) {
-                return _buildOneUNSelected
-                  (
-                    withCertainSubgropus[index], index/*, unSelectedIngredients*/
-                );
-              },
-              gridDelegate:
+    */
+        child: GridView.builder(
+        itemCount: withCertainSubgropus.length,
+        itemBuilder: (_, int index) {
+          return _buildOneUNSelected
+            (
+              withCertainSubgropus[index], index/*, unSelectedIngredients*/
+          );
+        },
+        gridDelegate:
 //                                            new SliverGridDelegateWithFixedCrossAxisCount(
 //                                              crossAxisCount: 3,
-              new SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 160,
-                crossAxisSpacing: 23,
-                childAspectRatio: 140 / 130,
-mainAxisSpacing: 5,
+        new SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 160,
+          crossAxisSpacing: 23,
+          childAspectRatio: 140 / 125,
+          mainAxisSpacing: 23,
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
 //                                  /// H/V
-                // horizontal / vertical
+          // horizontal / vertical
 //                                              childAspectRatio: 280/360,
 
-              ),
+        ),
 
 
-              controller: new ScrollController(keepScrollOffset: false),
+        controller: new ScrollController(keepScrollOffset: false),
 
-              shrinkWrap: false,
+        shrinkWrap: false,
 
 
-            ),
-          ),
-        ],
       ),
+    ),
+    ],
+    ),
     );
 
   }
@@ -2390,7 +2413,7 @@ mainAxisSpacing: 5,
             return ListView.builder(
 
               scrollDirection: Axis.vertical,
-              reverse: true,
+//              reverse: true,
               shrinkWrap: false,
               itemCount: allSubGroups1.length,
 
@@ -2458,7 +2481,7 @@ mainAxisSpacing: 5,
 
               padding: EdgeInsets.only(top: 5),
               height: displayHeight(context) / 20,
-              width: displayWidth(context) / 11,
+              width: displayWidth(context) / 12,
 
               child: ClipOval(
 
@@ -2521,7 +2544,7 @@ mainAxisSpacing: 5,
               // same as the heidth of increment decrement button. // 45
               // later changed height to 40.
 
-    /*
+              /*
               decoration: BoxDecoration(
 //                                              color: Colors.black54,
                 color:Color(0xffFFFFFF),
@@ -2731,7 +2754,7 @@ mainAxisSpacing: 5,
               itemCount: foodItemPropertyOptions.length,
 
               itemBuilder: (_, int index) {
-                return oneMultiSelectInDetailsPage3(foodItemPropertyOptions[index],
+                return oneMultiSelectInDetailsPageOtherView(foodItemPropertyOptions[index],
                     index);
               },
             );
@@ -2953,7 +2976,7 @@ mainAxisSpacing: 5,
   }
 
 
-  Widget oneMultiSelectInDetailsPage3 (FoodPropertyMultiSelect x,int index){
+  Widget oneMultiSelectInDetailsPageOtherView (FoodPropertyMultiSelect x,int index){
 
 
     String color1 = x.itemTextColor.replaceAll('#', '0xff');
@@ -2970,9 +2993,9 @@ mainAxisSpacing: 5,
 
       child:  x.isSelected == true  ?
       Container(
-        width:displayWidth(context)/14,
+        width:displayWidth(context)/15,
 //        height:displayHeight(context)/48,
-        height:displayHeight(context)/20,
+        height:displayHeight(context)/29,
 
         margin: EdgeInsets.fromLTRB(15, 0, 20, 0),
         child:
@@ -2994,8 +3017,8 @@ mainAxisSpacing: 5,
 
               child: Image.asset(
                 itemImage2,
-                width: 40,
-                height:40,
+                width: 35,
+                height:35,
               )
 
             /*Text(
@@ -3026,8 +3049,8 @@ mainAxisSpacing: 5,
           :
 
       Container(
-        width:displayWidth(context)/14,
-        height:displayHeight(context)/20,
+        width:displayWidth(context)/15,
+        height:displayHeight(context)/29,
 
         margin: EdgeInsets.fromLTRB(15, 0, 20, 0),
         child: OutlineButton(
@@ -3054,8 +3077,8 @@ mainAxisSpacing: 5,
 
               child: Image.asset(
                 itemImage2,
-                width: 40,
-                height:40,
+                width:  35,
+                height: 35,
               )
 
             /*
@@ -3248,7 +3271,7 @@ mainAxisSpacing: 5,
 
             child:
             Container(
-              width: displayWidth(context) / 9,
+              width: displayWidth(context) / 8,
 
               /*
               child: Text(
@@ -3331,7 +3354,7 @@ mainAxisSpacing: 5,
 
             return Container(
 //              height: displayHeight(context) / 13,
-              height: displayHeight(context) / 10,
+              height: displayHeight(context) / 11,
 //          height:190,
               width: displayWidth(context) /1.50,
 
@@ -3363,7 +3386,7 @@ mainAxisSpacing: 5,
             if(selectedSauceItems.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                height: displayHeight(context) / 10,
+                height: displayHeight(context) / 11,
 //          height:190,
                 width: displayWidth(context) /1.50,
 
@@ -3445,6 +3468,7 @@ mainAxisSpacing: 5,
       return
         Container(
           width: displayWidth(context) / 8,
+          height:displayHeight(context) / 11,
 
 
           decoration: BoxDecoration(
@@ -3494,9 +3518,12 @@ mainAxisSpacing: 5,
                 new Container(
 
 
+
+
+
                   padding: EdgeInsets.only(top: 5),
-                  height: displayHeight(context) / 15,
-                  width: displayWidth(context) / 9,
+                  height: displayHeight(context) / 16,
+                  width: displayWidth(context) / 10,
 
 
                   child: ClipOval(
@@ -3517,7 +3544,7 @@ mainAxisSpacing: 5,
                 Container(
 //                  color:Colors.blue,
                   padding: EdgeInsets.only(top: 5),
-                  width: displayWidth(context) / 9,
+                  width: displayWidth(context) / 8,
                   child: Text(
 
 //                    maxLines: 2,
@@ -3554,6 +3581,7 @@ mainAxisSpacing: 5,
 
         Container(
           width: displayWidth(context) / 8,
+          height:displayHeight(context) / 11,
 //          color:Colors.lightGreenAccent,
 //            color: Color.fromRGBO(239, 239, 239, 0),
 //          color: Colors.white,
@@ -3605,8 +3633,8 @@ mainAxisSpacing: 5,
 
 
                   padding: EdgeInsets.only(top: 5),
-                  height: displayHeight(context) / 15,
-                  width: displayWidth(context) / 9,
+                  height: displayHeight(context) / 16,
+                  width: displayWidth(context) / 10,
 
                   child: ClipOval(
 
@@ -3626,13 +3654,13 @@ mainAxisSpacing: 5,
 //                              SizedBox(height: 10),
                 Container(
                   padding: EdgeInsets.only(top: 5),
-                  width: displayWidth(context) / 9,
+                  width: displayWidth(context) / 8,
 
                   child: Text(
 
                     sauceItemName,
 
-                    maxLines: 2,
+                    maxLines: 1,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
 
@@ -3842,7 +3870,7 @@ mainAxisSpacing: 5,
 
 
           Container(
-            width: displayWidth(context) / 9,
+            width: displayWidth(context) / 8,
             child:
 
             Row(
@@ -4081,7 +4109,7 @@ mainAxisSpacing: 5,
               new Container(
 
                 height: displayHeight(context) / 20,
-                width: displayWidth(context) / 9,
+                width: displayWidth(context) / 8,
                 padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
                 child: ClipOval(
@@ -4101,7 +4129,7 @@ mainAxisSpacing: 5,
 //                              SizedBox(height: 10),
 
               Container(
-                width: displayWidth(context) / 9,
+                width: displayWidth(context) / 8,
                 child: Text(
                   cheeseItemName,
                   maxLines: 2,
@@ -4205,7 +4233,7 @@ mainAxisSpacing: 5,
 
                 Container(
                   height: displayHeight(context) / 20,
-                  width: displayWidth(context) / 9,
+                  width: displayWidth(context) / 8,
                   padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
                   child: ClipOval(
@@ -4225,7 +4253,7 @@ mainAxisSpacing: 5,
 //                              SizedBox(height: 10),
                 Container(
 
-                  width: displayWidth(context) / 9,
+                  width: displayWidth(context) / 8,
 
                   child: Text(
 
@@ -4405,7 +4433,7 @@ mainAxisSpacing: 5,
 
             return Container(
 //              height: displayHeight(context) / 13,
-              height: displayHeight(context) / 9,
+              height: displayHeight(context) / 11,
 //          height:190,
               width: displayWidth(context) /1.50,
 
@@ -4444,7 +4472,7 @@ mainAxisSpacing: 5,
 
               return Container(
 //                  height: displayHeight(context) / 13,
-                height: displayHeight(context) / 9,
+                height: displayHeight(context) / 11,
 //          height:190,
                 width: displayWidth(context) /1.50,
 
@@ -4472,7 +4500,7 @@ mainAxisSpacing: 5,
             else if(selectedIngredients.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                height: displayHeight(context) / 9,
+                height: displayHeight(context) / 11,
 //          height:190,
                 width: displayWidth(context) /1.50,
 
@@ -4559,7 +4587,7 @@ mainAxisSpacing: 5,
         child:
 
         Container(
-          width: displayWidth(context) / 7,
+          width: displayWidth(context) / 8,
           child:
 
           Row(
@@ -4612,6 +4640,7 @@ mainAxisSpacing: 5,
     return
       Container(
 
+        height: displayHeight(context) / 11,
         width: displayWidth(context) / 8,
         decoration: BoxDecoration(
           color:Color(0xffFCF5E4),
@@ -4643,11 +4672,11 @@ mainAxisSpacing: 5,
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.only(top: 5),
-                  height: displayHeight(context) / 15,
+                  height: displayHeight(context) / 16,
 
 //                  height: displayHeight(context) / 18,
 
-                  width: displayWidth(context) / 9,
+                  width: displayWidth(context) / 10,
 //                      width: displayWidth(context) /10,
 //                      height: displayWidth(context) /9,
 //                  padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
@@ -4672,10 +4701,10 @@ mainAxisSpacing: 5,
 //                              SizedBox(height: 10),
                 Container(
                   padding: EdgeInsets.only(top: 5),
-                  width: displayWidth(context) / 9,
+                  width: displayWidth(context) / 8,
                   child: Text(
                     ingredientName,
-                    maxLines: 2,
+                    maxLines: 1,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
 
