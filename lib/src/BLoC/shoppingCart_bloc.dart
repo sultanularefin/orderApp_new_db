@@ -648,6 +648,147 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
+
+  Future<Order> paymentButtonPressedLater() async{
+
+    Order payMentProcessing=_curretnOrder;
+
+    String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
+//    logger.i('payment Button Pressed is payMentProcessing.orderTypeIndex ${payMentProcessing.orderTypeIndex} ::'
+//        ' orderBy: $orderBy    ${_curretnOrder.paymentTypeIndex}');
+
+
+
+
+    String paidType0 =  _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
+
+    // where should i put cancelButtonPressed();
+//
+    // payMentProcessing
+    Order tempOrder= payMentProcessing;
+
+    tempOrder.paymentButtonPressed=true;
+
+
+    // loader/ spinner loads from this 2 lines not tested yet.... july 25 2020.
+
+
+    _curretnOrder=tempOrder;
+    _orderController.sink.add(_curretnOrder);
+
+    // loader/ spinner loads from this 2 lines not tested yet.... july 25 2020. ends here.
+
+
+//    _curretnOrder= tempOrder;
+
+//    List<SelectedFood> selectedFoodCheckForList = tempOrder.selectedFoodInOrder;
+
+    List<SelectedFood> selectedFoodCheckForList = _expandedSelectedFood;
+    int length =tempOrder.selectedFoodListLength;
+
+
+//    logger.e('tempOrder.selectedFoodListLength ${tempOrder.selectedFoodListLength}');
+//
+//    logger.e('selectedFoodCheckForList: $selectedFoodCheckForList');
+
+//    print('selectedFoodCheckForList[3].quantity => ${selectedFoodCheckForList[3].quantity}');
+
+    Set<SelectedFood> selectedFoodCheckForListToSet= selectedFoodCheckForList.toSet();
+
+    int lengthOfNotDuplicateFoods= selectedFoodCheckForListToSet.length;
+
+//    unDuplicatedSelectedFoods
+//
+
+    selectedFoodCheckForListToSet.forEach((oneFood) {
+
+
+      for(int i=0;i<selectedFoodCheckForList.length;i++){
+        if(oneFood==selectedFoodCheckForList[i]){
+          oneFood.quantity= oneFood.quantity +1;
+        }
+      }
+
+//      print('oneFood details: ===> ===> ');
+//      print('oneFood: ${oneFood.foodItemName}');
+//      logger.i('oneFood.quantity: ${oneFood.quantity}');
+//         print('oneFood: ${oneFood.foodItemName}');
+
+
+
+    });
+
+    selectedFoodCheckForListToSet.forEach((oneFood) {
+
+      oneFood.quantity= oneFood.quantity-1; //initially 1 that was incremented in the previous forEach loop.
+      print('oneFood.quantity SS: ${oneFood.quantity}');
+
+    });
+
+
+
+//    print('${selectedFoodCheckForListToSet.}')
+
+
+    tempOrder.selectedFoodInOrder = selectedFoodCheckForListToSet.toList();
+
+
+    List<SelectedFood> tempForCategorising=  tempOrder.selectedFoodInOrder;
+
+    // todo sorting by categories ....
+
+    // group by category will be done here...
+
+//    List<NewCategoryItem> tempCategoryForCategorisingOrderedFoods = _allCategories;
+
+    tempForCategorising.sort((a,b)=>checkRating(a.categoryName,b.categoryName,
+        _allCategories));
+
+    List<SelectedFood> tempForCategorising2 =  new List.from(tempForCategorising.reversed);
+    /* List<String> numbers2 */
+
+
+
+
+
+//    categoryName
+//    _allCategories
+
+
+    tempOrder.selectedFoodInOrder = tempForCategorising2;
+
+
+
+
+
+    String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0);
+
+
+    print('documentID: $documentID');
+
+    if(documentID!=null){
+      tempOrder.orderdocId= documentID;
+
+      _curretnOrder=null;
+      _expandedSelectedFood =[];
+      _orderType =[];
+      _paymentType =[];
+
+
+      // required to properly show data in the receipt thus don't clear _currentOrder object.
+      _curretnOrder=tempOrder;
+      _orderController.sink.add(_curretnOrder);
+
+
+      return tempOrder;
+
+    }
+    else{
+      return tempOrder;
+    }
+  }
+
+
   List<NewIngredient> convertFireStoreIngredientItemsToLocalNewIngredientItemsList(List<dynamic>
   fireStoreNewIngredients){
 

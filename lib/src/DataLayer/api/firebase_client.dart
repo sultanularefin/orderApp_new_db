@@ -249,6 +249,16 @@ class FirebaseClient {
     int counter=0;
     si.forEach((oneIngredient) {
 
+      print('--------------------------------------');
+      print('si[counter].ingredientName}: ${si[counter].ingredientName}');
+      print('si[counter].imageURL}: ${si[counter].imageURL}');
+
+      print('--------------------------------------');
+
+
+//      print('si[counter].imageURL}: ${si[counter].imageURL}');
+//      print('si[counter].imageURL}: ${si[counter].imageURL}');
+
       //  print('si[counter].imageURL}: ${si[counter].imageURL}');
       var identifier = {
 

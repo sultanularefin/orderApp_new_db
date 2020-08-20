@@ -9014,7 +9014,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  // work 01_9thJuly.
+
   Widget animatedUnObscuredCancelPayButtonTakeAwayDinning(
       Order cancelPaySelectUNObscuredTakeAwayDinning) {
     //  Widget animatedObscuredTextInputContainer(){
@@ -9759,6 +9759,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //                          final ShoppingCartBlock = BlocProvider.of<ShoppingCartBloc>(context);
 //                          ShoppingCartBlock.setPaymentTypeSingleSelectOptionForOrder(selectedOne,4,_currentOrderTypeIndex);
+
+
+//                              JJJJJ
 
                                 setState(() {
                                   showFullPaymentType = !showFullPaymentType;
@@ -11188,7 +11191,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      width:displayWidth(context)/10,
 
       child: index == _currentPaymentTypeIndex ?
-
+//000
       Container(
 
 //        width: 110,
@@ -11286,17 +11289,92 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ],
             ),
           ),
-          onPressed: () {
+          onPressed: () async {
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
 //    void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newPaymentIndex,int oldPaymentIndex){
+
+//99999999
             shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
                 onePaymentType, index, _currentPaymentTypeIndex);
 
+            // work 0 august 20...
+            logger.e('index: $index');
+            print('YY YY  $index  YY   YY    ');
+            if(index==0){
+//              0 means later option...
+
+            print(' 0 means later option...');
+
+
+
+              // TAkEAWAY AND DINNING  Recite Print. ....
+              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+              print('later button pressed....:');
+
+              Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressedLater();
+
+
+
+
+
+              if (tempOrderWithdocId.orderdocId == '') {
+                _scaffoldKeyShoppingCartPage.currentState
+//                  Scaffold.of(context)
+//                    ..removeCurrentSnackBar()
+                    .showSnackBar(
+                    SnackBar(content: Text("someThing went wrong")));
+                print('something went wrong');
+              }
+              else {
+                logger.i('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+
+
+                    shoppingCartBloc.clearSubscription();
+                    print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
+
+//                pushNamedAndRemoveUntil
+//                Navigator.of(context).pushAndRemoveUntil(
+//                popAndPushNamed
+
+                /*
+                Navigator.of(context).pushAndRemoveUntil(
+
+                    MaterialPageRoute(builder: (BuildContext context) {
+
+                      return BlocProvider<IdentityBloc>(
+                          bloc: IdentityBloc(),
+                         child: WelcomePage()
+                      );
+
+                    }),(Route<dynamic> route) => false);
+
+
+                */
+
+
+//                Navigator.of(context).pushNamedAndRemoveUntil(
+//
+//                return BlocProvider<IdentityBloc>(
+//                    bloc: IdentityBloc(),
+//                    child: WelcomePage()
+//                ));
+
+
+                return Navigator.pop(
+                        context, tempOrderWithdocId);}
+
+
+
+            }
+            else{
+              setState(() {
+                showFullPaymentType = false;
+              });
+            }
+
             // oneSinglePaymentType
-            setState(() {
-              showFullPaymentType = false;
-            });
+
           },
         ),
         // : Container for 2nd argument of ternary condition ends here.
@@ -12397,7 +12475,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  /* invoker -->
+/* invoker -->
 
               printTicketDummy2(
               /*paper, */
@@ -12461,7 +12539,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return nameInput3;
   }
 
-  /*
+/*
     Future<Ticket> demoReceiptOrderTypeDelivery(
       PaperSize paper,
       Restaurant thisRestaurant3,
@@ -12470,7 +12548,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ) async {
 
   */
-  // # number 1: demoReceipt Order Type TakeAway begins here...
+// # number 1: demoReceipt Order Type TakeAway begins here...
 
 
   Future<Ticket> demoReceiptOrderTypeTakeAway(
@@ -13366,11 +13444,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  // demoReceipt Order Type Delivery ends here...
+// demoReceipt Order Type Delivery ends here...
 
-  // # number 3: demoReceipt Order Type phone begins here...
+// # number 3: demoReceipt Order Type phone begins here...
 
-  // demoReceipt Order Type Phone begins here...
+// demoReceipt Order Type Phone begins here...
   Future<Ticket> demoReceiptOrderTypePhone(
       PaperSize paper,
       Restaurant thisRestaurant3,

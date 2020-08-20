@@ -52,10 +52,11 @@ import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 class UnPaidPage extends StatefulWidget {
 
   final Widget child;
+  final String docID;
 
 
-  UnPaidPage({Key key, this.child}) : super(key: key);
-  _UnPaidPageState createState() => _UnPaidPageState();
+  UnPaidPage({Key key, this.child,@required this.docID}) : super(key: key);
+  _UnPaidPageState createState() => _UnPaidPageState(docID);
 
 }
 
@@ -67,7 +68,10 @@ class _UnPaidPageState extends State<UnPaidPage> {
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
-  _UnPaidPageState(/*{firestore} */);
+  final String docID2;
+  _UnPaidPageState(/*{firestore} */ this.docID2);
+
+//  _MoreIngredientsPageState(this.oneFoodItemandId2,this.onlyIngredientsNames2);
 
 
   String _currentPageHeader = 'UNPAID';
@@ -129,7 +133,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
               height: displayHeight(context)/2.1,
               /*
 */
-              child: allUnPaidList(_currentPageHeader, context),
+              child: allUnPaidList(_currentPageHeader, context,docID2),
 
             ),
 
@@ -194,7 +198,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
   }
 
 
-  Widget allUnPaidList(String pageHeaderString,BuildContext context)  {
+  Widget allUnPaidList(String pageHeaderString,BuildContext context,String docID2)  {
 
 //    final blocH = BlocProvider.of<HistoryBloc>(context);
     final blocUB = BlocProvider.of<UnPaidBloc>(context);
@@ -284,10 +288,10 @@ class _UnPaidPageState extends State<UnPaidPage> {
 
                 print('categoryString  ##################################: $pageHeaderString');
 
-                final List<OneOrderFirebase> allFoods = snapshot.data;
+                final List<OneOrderFirebase> allUnPaidOrderList = snapshot.data;
 
 
-                final int categoryItemsCount = allFoods.length;
+                final int categoryItemsCount = allUnPaidOrderList.length;
                 print('categoryItemsCount: $categoryItemsCount');
 
                 return
@@ -337,7 +341,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
                             MediaQuery.of(context).padding.bottom  -displayHeight(context) / 6
                         /* /20 being title text height..*/,
 
-                        child: fireBaseUnPaidOrderList(allFoods, context),
+                        child: fireBaseUnPaidOrderList(allUnPaidOrderList, context,docID2),
                       ),
 
 
@@ -381,7 +385,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
   * */
   Widget fireBaseUnPaidOrderList(
       List<OneOrderFirebase> filteredItemsByCategory,
-      BuildContext context)  {
+      BuildContext context, String docID3)  {
 
     return Container(
 //      height:displayHeight(context)/2.1-displayHeight(context) / 20,
@@ -526,113 +530,118 @@ class _UnPaidPageState extends State<UnPaidPage> {
           );
 
 
+          if(docID3== documentId2){
+            return
+              Container(
 
-          return
-            Container(
-
-                color: Color(0xffFFFFFF),
+                  color: Color(0xffFFFFFF),
 //            color:Colors.lightGreenAccent,
-                padding: EdgeInsets.symmetric(
-                    horizontal: 4.0, vertical: 16.0),
-                child: InkWell(
-                  child: Column(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 4.0, vertical: 16.0),
+                  child: InkWell(
+                    child: Column(
 
-                    children: <Widget>[
+                      children: <Widget>[
 
-
-
-
-                      
 
 //                      hero animation.. image container begins here.
 
-                      new Container(
-                        width: displayWidth(context) /  6,
-                        height: displayWidth(context) / 6,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xffFCF5E4),
-                          border: new Border.all(
-                              color: Colors.yellow,
-                              width: 1.0,
-                              style: BorderStyle.solid
-                          ),
+                        new Container(
+                          width: displayWidth(context) / 6,
+                          height: displayWidth(context) / 6,
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+//                            color: Color(0xffFCF5E4),
+                            color: Colors.redAccent,
+                            border: new Border.all(
+                                color: Colors.yellow,
+                                width: 1.0,
+                                style: BorderStyle.solid
+                            ),
 //                            shape: BoxShape.circle,
 
-                        ),
+                          ),
 
-                        child:
-                        ClipOval(
-                          child: Hero(
-                            tag: startDate2.toString()+'__$totalPrice2',
+                          child:
+                          ClipOval(
+                            child: Hero(
+                              tag: startDate2.toString() + '__$totalPrice2',
 
-                            child:
-                            Container(
+                              child:
+                              Container(
 //                            color:Colors.pinkAccent,
 
-                              padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
+                                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                                //                            ssssssHHHHH
 
-                              child: Image.asset(
-                                itemImage2,
-                                fit: BoxFit.contain,
-                              ),
-
-                            ),
-                            placeholderBuilder: (context,
-                                heroSize, child) {
-                              return Opacity(
-                                opacity: 0.5, child: Container(
-                                width: displayWidth(context) /  6,
-                                height: displayWidth(context) / 6,
-                                decoration: new BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0xffEAB45E),
-                                        blurRadius: 25.0,
-                                        spreadRadius: 0.10,
-                                        offset: Offset(0, 10)
-                                    )
-                                  ],
+                                child: Image.asset(
+                                  itemImage2,
+                                  fit: BoxFit.contain,
                                 ),
-                                child:
-                                Container(
-                                  padding: EdgeInsets.fromLTRB(20,20,20,20),//
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      itemImage2,
-                                      fit: BoxFit.contain,
+
+                              ),
+                              placeholderBuilder: (context,
+                                  heroSize, child) {
+                                return Opacity(
+                                  opacity: 0.5, child: Container(
+                                  width: displayWidth(context) / 6,
+                                  height: displayWidth(context) / 6,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color(0xffEAB45E),
+                                          blurRadius: 25.0,
+                                          spreadRadius: 0.10,
+                                          offset: Offset(0, 10)
+                                      )
+                                    ],
+                                  ),
+                                  child:
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(
+                                        20, 20, 20, 20), //
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        itemImage2,
+                                        fit: BoxFit.contain,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
+
                         ),
-
-                      ),
-
-
 
 
 //                      hero animation.. image container ends here.
 
 
-
-
-
 //                              SizedBox(height: 10),
 
 
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(
+                              0, 0, 0, 6),
+                          child: Text(
+                            '${orderBy2.toUpperCase()}',
+                            style: TextStyle(
+                                fontWeight: FontWeight
+                                    .w600,
+//                                          color: Colors.blue,
+                                color: Color.fromRGBO(
+                                    112, 112, 112, 1),
+                                fontSize: 15),
+                          ),
+                        ),
 
+                        Text(
+//                                  double.parse(euroPrice).toStringAsFixed(2),
+                          '${paidStatus2.toUpperCase()}',
 
-
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(
-                            0, 0, 0, 6),
-                        child: Text(
-                          '${orderBy2.toUpperCase()}',
                           style: TextStyle(
                               fontWeight: FontWeight
                                   .w600,
@@ -641,49 +650,190 @@ class _UnPaidPageState extends State<UnPaidPage> {
                                   112, 112, 112, 1),
                               fontSize: 15),
                         ),
-                      ),
 
-                      Text(
-//                                  double.parse(euroPrice).toStringAsFixed(2),
-                        '${paidStatus2.toUpperCase()}',
+                        Container(
 
-                        style: TextStyle(
-                            fontWeight: FontWeight
-                                .w600,
-//                                          color: Colors.blue,
-                            color: Color.fromRGBO(
-                                112, 112, 112, 1),
-                            fontSize: 15),
-                      ),
+                            child: Text(
 
-                      Container(
-
-                          child: Text(
-
-                            formattedOrderPlacementDate2 + ' ' + formattedOrderPlacementDatesTimeOnly2,
+                              formattedOrderPlacementDate2 + ' ' +
+                                  formattedOrderPlacementDatesTimeOnly2,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
-                            style: TextStyle(
-                              color: Color(0xff707070),
-                              fontWeight: FontWeight.normal,
-                              letterSpacing: 0.5,
-                              fontSize: 12,
-                            ),
-                          )
-                      ),
+                              style: TextStyle(
+                                color: Color(0xff707070),
+                                fontWeight: FontWeight.normal,
+                                letterSpacing: 0.5,
+                                fontSize: 12,
+                              ),
+                            )
+                        ),
 //
 //
-                    ],
-                  ),
-                  onTap: () {
-                    _navigateAndDisplayOnePaidSelection(
-                        context, oneOrderFirebaseTemp);
-                  },
+                      ],
+                    ),
+                    onTap: () {
+                      _navigateAndDisplayOnePaidSelection(
+                          context, oneOrderFirebaseTemp);
+                    },
 
 
-                )
-            );
+                  )
+              );
 //            return SpoiledItem(/*dummy: snapshot.data[index]*/);
+
+          }
+
+          else {
+            return
+              Container(
+
+                  color: Color(0xffFFFFFF),
+//            color:Colors.lightGreenAccent,
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 4.0, vertical: 16.0),
+                  child: InkWell(
+                    child: Column(
+
+                      children: <Widget>[
+
+
+//                      hero animation.. image container begins here.
+
+                        new Container(
+                          width: displayWidth(context) / 6,
+                          height: displayWidth(context) / 6,
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xffFCF5E4),
+                            border: new Border.all(
+                                color: Colors.yellow,
+                                width: 1.0,
+                                style: BorderStyle.solid
+                            ),
+//                            shape: BoxShape.circle,
+
+                          ),
+
+                          child:
+                          ClipOval(
+                            child: Hero(
+                              tag: startDate2.toString() + '__$totalPrice2',
+
+                              child:
+                              Container(
+//                            color:Colors.pinkAccent,
+
+                                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                                //                            ssssssHHHHH
+
+                                child: Image.asset(
+                                  itemImage2,
+                                  fit: BoxFit.contain,
+                                ),
+
+                              ),
+                              placeholderBuilder: (context,
+                                  heroSize, child) {
+                                return Opacity(
+                                  opacity: 0.5, child: Container(
+                                  width: displayWidth(context) / 6,
+                                  height: displayWidth(context) / 6,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color(0xffEAB45E),
+                                          blurRadius: 25.0,
+                                          spreadRadius: 0.10,
+                                          offset: Offset(0, 10)
+                                      )
+                                    ],
+                                  ),
+                                  child:
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(
+                                        20, 20, 20, 20), //
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        itemImage2,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                );
+                              },
+                            ),
+                          ),
+
+                        ),
+
+
+//                      hero animation.. image container ends here.
+
+
+//                              SizedBox(height: 10),
+
+
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(
+                              0, 0, 0, 6),
+                          child: Text(
+                            '${orderBy2.toUpperCase()}',
+                            style: TextStyle(
+                                fontWeight: FontWeight
+                                    .w600,
+//                                          color: Colors.blue,
+                                color: Color.fromRGBO(
+                                    112, 112, 112, 1),
+                                fontSize: 15),
+                          ),
+                        ),
+
+                        Text(
+//                                  double.parse(euroPrice).toStringAsFixed(2),
+                          '${paidStatus2.toUpperCase()}',
+
+                          style: TextStyle(
+                              fontWeight: FontWeight
+                                  .w600,
+//                                          color: Colors.blue,
+                              color: Color.fromRGBO(
+                                  112, 112, 112, 1),
+                              fontSize: 15),
+                        ),
+
+                        Container(
+
+                            child: Text(
+
+                              formattedOrderPlacementDate2 + ' ' +
+                                  formattedOrderPlacementDatesTimeOnly2,
+
+//                                    foodItemIngredients.substring(0,10)+'..',
+                              style: TextStyle(
+                                color: Color(0xff707070),
+                                fontWeight: FontWeight.normal,
+                                letterSpacing: 0.5,
+                                fontSize: 12,
+                              ),
+                            )
+                        ),
+//
+//
+                      ],
+                    ),
+                    onTap: () {
+                      _navigateAndDisplayOnePaidSelection(
+                          context, oneOrderFirebaseTemp);
+                    },
+
+
+                  )
+              );
+//            return SpoiledItem(/*dummy: snapshot.data[index]*/);
+
+          }
         },
 
       ),

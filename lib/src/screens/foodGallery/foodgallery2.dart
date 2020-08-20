@@ -1,6 +1,7 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/UnPaidDetailsBloc.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
 
@@ -895,7 +896,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                           pageBuilder: (_, __, ___) =>
                               BlocProvider<UnPaidBloc>(
                                 bloc: UnPaidBloc(),
-                                child: UnPaidPage(),
+                                child: UnPaidPage(docID:''),
                               ),
 
 
@@ -906,7 +907,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                     },
                   ),
 
-
+                  SizedBox(height: 50,),
 
                   ListTile(
                     title: Container(
@@ -921,8 +922,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                               child: Image.asset(
                                 'assets/history.png',
 //                color: Colors.black,
-                                width: 47,
-                                height:47,
+                                width: 40,
+                                height:40,
 
                               ),
                             ),
@@ -945,7 +946,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                             )
 //                      Text('history'),
                           ],
-                        )),
+                        )
+                    ),
                     onTap: () {
 
 
@@ -1483,6 +1485,35 @@ Widget work1(BuildContext context){
                     );
                   }
               );
+
+              if(orderWithDocumentId.paymentTypeIndex==0){
+
+
+               return Navigator.of(context).push(
+
+
+                  PageRouteBuilder(
+                    opaque: false,
+                    transitionDuration: Duration(
+                        milliseconds: 900),
+                    pageBuilder: (_, __, ___) =>
+
+
+                    BlocProvider<UnPaidBloc>(
+                      bloc: UnPaidBloc(),
+
+                        child: UnPaidPage(docID:orderWithDocumentId.orderdocId),
+//                      child: UnPaidPage()
+                    ),
+
+
+                  ),
+                );
+              }
+
+
+
+
             }
 
 
