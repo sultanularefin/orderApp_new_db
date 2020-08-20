@@ -312,9 +312,10 @@ class FirebaseClient {
 
         'type': 0,
         'name': cheeseItems[counter].cheeseItemName,
-        'image': Uri.decodeComponent(cheeseItems[counter].imageURL.replaceAll(
-            'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
-            '').replaceAll('?alt=media', '')),
+        'image':cheeseItems[counter].imageURL,
+//        'image': Uri.decodeComponent(cheeseItems[counter].imageURL.replaceAll(
+//            'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
+//            '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
         'cheeseItemAmountByUser': cheeseItems[counter].cheeseItemAmountByUser,
         'cheeseItemPrice':cheeseItems[counter].price,
