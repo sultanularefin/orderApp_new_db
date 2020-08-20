@@ -1421,11 +1421,17 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                mainAxisAlignment: MainAxisAlignment.spaceAround,
 //                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+//                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  animatedWidgetMoreIngredientsButton(),
                   Container(
-//                                                          color:Colors.lightBlueAccent,
+
+//                      color:Colors.lightGreenAccent,
+//                  margin: EdgeInsets.only(right: 10),
+                      child: animatedWidgetMoreIngredientsButton()
+                  ),
+                  Container(
+//                  margin: EdgeInsets.fromLTRB(20,0,0,0),
+//                  color:Colors.lightBlueAccent,
                     child: StreamBuilder<SelectedFood>(
 
                         stream: blocD.getCurrentSelectedFoodStream,
@@ -1721,7 +1727,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                     ),
                   ),
 
-                  pressToContinueInitialDetailPage(),
+                  Container(
+//                      color: Colors.redAccent,
+                      child: pressToContinueInitialDetailPage()
+                  ),
                 ],
               ),
             ),
@@ -2113,24 +2122,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   Widget pressToContinueInitialDetailPage(){
 
-    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//    final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-    return    Container(
-      width:displayWidth(
-          context) /
-          3,
 
-//        color:Colors.black54,
-//      color:Colors.white,
-//      color:Colors.blue,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <
-            Widget>[
-
-          // MORE INGREDIENTS row BEGINS HERE.
+    return
           Container(
 
             width:displayWidth(context)/4,
@@ -2138,16 +2131,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             child: continueShoppingButton(),
 
-
-
-
-          ),
-
-
-
-
-        ],
-      ),
     );
   }
 
@@ -3687,6 +3670,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   }
 
 
+
+
   Widget buildSelectedCheeseItemsNameOnly(BuildContext context /*,List<NewIngredient> defaltIngs*/){
 
 
@@ -3698,113 +3683,74 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         stream: blocD.getSelectedCheeseItemsStream,
         initialData: blocD.getAllSelectedCheeseItems,
         builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-            case ConnectionState.none:
-              return Container(
-                margin: EdgeInsets.fromLTRB(
-                    0, displayHeight(context) / 2, 0, 0),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+      if (!snapshot.hasData) {
 
-                    children: <Widget>[
+        print('!snapshot.hasData');
 
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                                backgroundColor: Colors.lightGreenAccent)
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                              backgroundColor: Colors.yellow,)
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                                backgroundColor: Color(0xffFC0000))
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              );
-              break;
-            case ConnectionState.active:
-            default:
-              if (snapshot.data == null) {
-//          if (!snapshot.hasData) {
-
-                print('snapshot.data == null');
-
-                return Container(
+        return Container(
 //              height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 24,
+          height: displayHeight(context) / 24,
 //          height:190,
-                  width: displayWidth(context) / 1.50,
+          width: displayWidth(context) /2.39,
+//              width: displayWidth(context) /1.50,
 
-                  color: Color(0xFFffffff),
-                  alignment: Alignment.center,
+          color: Color(0xFFffffff),
+          alignment: Alignment.center,
 
-                  // PPPPP
+          // PPPPP
 
-                  child:
-                  Text('looking for cheese items, please wait...'.toLowerCase(),
+          child:
+          Text('looking for cheese items, please wait...'.toLowerCase(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 30,
+              fontFamily: 'Itim-Regular',
+              color: Colors.white,
+
+            ),
+
+
+          ),
+        );
+      }
+
+      else {
+
+//            print('snapshot.hasData and else statement at FDetailS2');
+        List<CheeseItem> selectedCheeseItems = snapshot.data;
+
+        if (selectedCheeseItems.length == 0) {
+          return Container(
+//                  height: displayHeight(context) / 13,
+              height: displayHeight(context) / 24,
+//          height:190,
+//                  width: displayWidth(context) /1.50,
+              width: displayWidth(context) /2.39,
+
+              color: Color(0xffFFFFFF),
+              alignment: Alignment.center,
+
+              // PPPPP
+
+              child: (
+                  Text('No cheese items found.'.toLowerCase(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
                       fontFamily: 'Itim-Regular',
-                      color: Colors.white,
-
+                      color: Colors.grey,
                     ),
-
-
-                  ),
-                );
-              }
-
-              else {
-                List<CheeseItem> selectedCheeseItems = snapshot.data;
-
-                if (selectedCheeseItems.length == 0) {
-                  return Container(
-//                  height: displayHeight(context) / 13,
-                      height: displayHeight(context) / 24,
-//          height:190,
-                      width: displayWidth(context) / 1.50,
-
-                      color: Color(0xffFFFFFF),
-                      alignment: Alignment.center,
-
-                      // PPPPP
-
-                      child: (
-                          Text('No cheese items found.'.toLowerCase(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontFamily: 'Itim-Regular',
-                              color: Colors.grey,
-                            ),
-                          )
-                      )
-                  );
-                }
-                else {
-                  return Container(
+                  )
+              )
+          );
+        }
+        else {
+          return Container(
 //                color: Colors.green,
-                    child: ListView.builder(
+            child: ListView.builder(
 
 
-                      /*
+              /*
                   gridDelegate:
                   new SliverGridDelegateWithMaxCrossAxisExtent(
 
@@ -3819,26 +3765,26 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
 
                   */
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
 
-                      itemCount: selectedCheeseItems
-                          .length,
-                      itemBuilder: (_, int index) {
-                        return oneCheeseItemNameOnly(selectedCheeseItems[index],index);
-                      },
-                    ),
-                  );
-                }
-              }
-          }
+              itemCount: selectedCheeseItems
+                  .length,
+              itemBuilder: (_, int index) {
+                return oneCheeseItemNameOnly(selectedCheeseItems[index],index);
+              },
+            ),
+          );
         }
-    );
-  }
+      }
 
+  }
+  );
+}
 
 
   Widget oneCheeseItemNameOnly(CheeseItem oneCheese,int index){
+
     final String cheeseItemName = oneCheese.cheeseItemName;
 
 
