@@ -373,11 +373,13 @@ class FoodGalleryBloc implements Bloc {
 
         String defaultKastike = doc['default_kastike'];
 
+        print('___/////// defaultKastike of $foodItemName :  $defaultKastike ______');
+
 
         List<String> defaultJuusto2 = new List<String>() ;
         defaultJuusto2.add(defaultJuusto);
 
-        List<String> defaultKastike2= new List<String>();
+        List<String> defaultKastike2 = new List<String>();
         defaultKastike2.add(defaultKastike);
 
 

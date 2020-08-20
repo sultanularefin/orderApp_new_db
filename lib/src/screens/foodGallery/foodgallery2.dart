@@ -2055,17 +2055,18 @@ Widget work1(BuildContext context){
 
         itemBuilder: (_, int index) {
 
+
+
+
           final String foodItemName = filteredItemsBySearchString[index]
               .itemName;
           final String foodImageURL = filteredItemsBySearchString[index]
               .imageURL;
 
-
           final Map<String,
               dynamic> foodSizePrice = filteredItemsBySearchString[index]
               .sizedFoodPrices;
 
-//            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
           final List<
               dynamic> foodItemIngredientsList = filteredItemsBySearchString[index]
               .ingredients;
@@ -2074,52 +2075,41 @@ Widget work1(BuildContext context){
               .isAvailable;
           final String foodCategoryName = filteredItemsBySearchString[index]
               .categoryName;
-//          final double discount = filteredItemsBySearchString[index]
-//              .discount;
-
 
           final dynamic euroPrice = foodSizePrice['normal'];
 
-          //          print('name: $foodItemName and euroPrice $euroPrice at 2109 ');
-
-          //                num euroPrice2 = tryCast(euroPrice);
-          double euroPrice2 = tryCast<double>(
-              euroPrice, fallback: 0.00);
-
-          //          print('name: $foodItemName and euroPrice2 $euroPrice2 at 2115 ');
-
-
+          double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.0);
 
           String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
-          FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
+          String documentID = filteredItemsBySearchString[index].documentId;
 
+
+          List<String> juustoORCheeses = filteredItemsBySearchString[index].defaultJuusto;
+          List<String> kastikeORSauces = filteredItemsBySearchString[index].defaultKastike;
+          int sequenceNo = filteredItemsBySearchString[index].sequenceNo;
+
+          FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
 
             itemName: foodItemName,
             categoryName: foodCategoryName,
-            imageURL: foodImageURL,
             sizedFoodPrices: foodSizePrice,
+            imageURL: foodImageURL,
 
-//              priceinEuro: euroPrice,
             ingredients: foodItemIngredientsList,
 
-//              itemId:foodItemId,
-//              isHot: foodIsHot,
             isAvailable: foodIsAvailable,
-//              discount: discount
+            documentId:documentID,
+            defaultJuusto:juustoORCheeses,
+            defaultKastike:kastikeORSauces,
+            sequenceNo:sequenceNo,
 
           );
-
-
-//            logger.i('ingredients:',foodItemIngredientsList);
 
           String stringifiedFoodItemIngredients = listTitleCase(
               foodItemIngredientsList);
 
 
-//            print('document__________________________: ${document.data}');
-//            Map<String, dynamic> oneFoodItemData = Map<String, dynamic>.from (document.data);
-//            print('FoodItem:__________________________________________ $oneFoodItemData');
 
 
           return
@@ -2142,13 +2132,7 @@ Widget work1(BuildContext context){
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-//                                          707070
-//                                              color:Color(0xffEAB45E),
-// good yellow color
-//                                            color:Color(0xff000000),
                                 color: Color(0xff707070),
-// adobe xd color
-//                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                 blurRadius: 25.0,
                                 spreadRadius: 0.10,
                                 offset: Offset(0, 10)
@@ -2340,57 +2324,28 @@ Widget work1(BuildContext context){
         shrinkWrap: false,
 
         itemBuilder: (_, int index) {
-//            logger.i("allFoods Category STring testing line # 1862: ${filteredItems[index]}");
 
-//
           final String foodItemName = filteredItemsByCategory[index]
               .itemName;
           final String foodImageURL = filteredItemsByCategory[index]
               .imageURL;
 
-//            logger.i("foodImageURL in CAtegory tap: $foodImageURL");
-
-
-//            final String euroPrice = double.parse(filteredItems[index].priceinEuro).toStringAsFixed(2);
           final Map<String,
               dynamic> foodSizePrice = filteredItemsByCategory[index]
               .sizedFoodPrices;
 
-//            final List<String> foodItemIngredientsList =  filteredItems[index].ingredient;
           final List<
               dynamic> foodItemIngredientsList = filteredItemsByCategory[index]
               .ingredients;
 
-//            final String foodItemIngredients =    filteredItems[index].ingredients;
-//            final String foodItemId =             filteredItems[index].itemId;
-//            final bool foodIsHot =                filteredItems[index].isHot;
           final bool foodIsAvailable = filteredItemsByCategory[index]
               .isAvailable;
           final String foodCategoryName = filteredItemsByCategory[index]
               .categoryName;
-//          final double discount = filteredItemsByCategory[index]
-//              .discount;
-
-//            final Map<String,dynamic> foodSizePrice = document['size'];
-
-//            final List<dynamic> foodItemIngredientsList =  document['ingredient'];
-//                print('foodSizePrice __________________________${foodSizePrice['normal']}');
 
           final dynamic euroPrice = foodSizePrice['normal'];
 
-
-
-//          final dynamic euroPrice = foodSizePrice['normal'];
-
-//          print('name: $foodItemName and euroPrice $euroPrice at 2401 ');
-
-//                num euroPrice2 = tryCast(euroPrice);
           double euroPrice2 = tryCast<double>(euroPrice, fallback: 0.0);
-
-//          print('name: $foodItemName and euroPrice2 $euroPrice2 at 2413 ');
-
-//                String euroPrice3= num.toString();
-//                print('euroPrice2 :$euroPrice2');
 
           String euroPrice3 = euroPrice2.toStringAsFixed(2);
 
@@ -2402,29 +2357,6 @@ Widget work1(BuildContext context){
           int sequenceNo = filteredItemsByCategory[index].sequenceNo;
 
           FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
-
-
-
-            /*
-            this.itemName,
-            this.categoryName,
-            this.sizedFoodPrices,
-            this.uploadDate,
-            this.imageURL,
-            this.content,
-            this.ingredients,
-            this.itemId,
-            this.indicatorValue,
-            this.isAvailable,
-            this.isHot,
-            this.uploadedBy,
-            this.documentId,
-            this.defaultJuusto,
-            this.defaultKastike,
-            this.sequenceNo,
-              */
-
-
 
             itemName: foodItemName,
             categoryName: foodCategoryName,
@@ -2441,30 +2373,20 @@ Widget work1(BuildContext context){
 
           );
 
-
-//            logger.i('ingredients:',foodItemIngredientsList);
-
           String stringifiedFoodItemIngredients = listTitleCase(
               foodItemIngredientsList);
 
 
-//            print('document__________________________: ${document.data}');
-//            Map<String, dynamic> oneFoodItemData = Map<String, dynamic>.from (document.data);
-//            print('FoodItem:__________________________________________ $oneFoodItemData');
-
-
           return
             Container(
-              // `opacity` is alpha channel of this color as a double, with 0.0 being
-              //  ///   transparent and 1.0 being fully opaque.
+
                 color: Color(0xffFFFFFF),
-//            color:Colors.lightGreenAccent,
+
                 padding: EdgeInsets.symmetric(
                     horizontal: 4.0, vertical: 16.0),
                 child: InkWell(
                   child: Column(
-//                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                      crossAxisAlignment: CrossAxisAlignment.end,
+
                     children: <Widget>[
                       new Container(child:
                       new Container(
@@ -2474,13 +2396,9 @@ Widget work1(BuildContext context){
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-//                                          707070
-//                                              color:Color(0xffEAB45E),
-// good yellow color
-//                                            color:Color(0xff000000),
+
                                 color: Color(0xff707070),
-// adobe xd color
-//                                              color: Color.fromRGBO(173, 179, 191, 1.0),
+
                                 blurRadius: 25.0,
                                 spreadRadius: 0.10,
                                 offset: Offset(0, 10)
@@ -2511,10 +2429,7 @@ Widget work1(BuildContext context){
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
-//                                          707070
-//                                              color:Color(0xffEAB45E),
-// good yellow color
-//                                            color:Color(0xff000000),
+
                                       color: Color(
                                           0xffEAB45E),
 // adobe xd color

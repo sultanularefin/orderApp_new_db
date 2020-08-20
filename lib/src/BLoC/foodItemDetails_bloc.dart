@@ -621,7 +621,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     logger.i('oneFoodItem.itemName: ${oneFoodItem.itemName}');
-    print('|||| ||||| |||||| oneFoodItem.defaultKastike.length: ${oneFoodItem.defaultKastike.length}');
+    print('|||| ||||| |||||| oneFoodItem.defaultKastike.length:'
+        ' ${oneFoodItem.defaultKastike.length}');
     print('YYY YYYY YYYY YYYY YYYY YY oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
 
 
@@ -729,14 +730,23 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     //  print('^^  ^ ^^  oneFoodItem.itemName: ${oneFoodItem.itemName}');
     final List<dynamic> foodItemIngredientsList2 = oneFoodItem.itemName==null ? null:oneFoodItem.ingredients;
 
+    print('foodItemIngredientsList2.length => : ${foodItemIngredientsList2.length}');
+    logger.i('foodItemIngredientsList2.length: ${foodItemIngredientsList2.length}');
+
     // COUNTER MEASURE 02.
     List<String> listStringIngredients = oneFoodItem.itemName==null ?null:dynamicListFilteredToStringList(
         foodItemIngredientsList2);
 
 
+    print('listStringIngredients.length => : ${listStringIngredients.length}');
+    logger.i('listStringIngredients.length: ${listStringIngredients.length}');
+
+
+
     // ingredientsOfCategory
     // SHORT CIRCUIT WORKING HERE.
     if ((listStringIngredients != null) && (listStringIngredients.length != 0)) {
+
       filterSelectedDefaultIngredients(ingredientsOfCategory,
           listStringIngredients); // only default<NewIngredient>
 
@@ -1080,16 +1090,16 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     tempUnSelectedAll.insert(index22, c1);
 
-      _unSelectedIngItems = tempUnSelectedAll;
+    _unSelectedIngItems = tempUnSelectedAll;
 
-      print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
+    print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
 //      print('modified ingredientAmountByUser at end: ${_unSelectedIngItems[tempIndex2].ingredientAmountByUser}');
 
 
 
 //   _thisFoodItem =thisFoodpriceModified;
 
-      _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
+    _unSelectedIngredientListController.sink.add(_unSelectedIngItems);
 //    }
 
 
@@ -1326,9 +1336,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     print('----_unSelectedIngItems[index22].ingredientName: ${_unSelectedIngItems[index22].ingredientName}');
 
 
-   allUnselectedbutOneDecremented.removeAt(index22);
+    allUnselectedbutOneDecremented.removeAt(index22);
 
-   allUnselectedbutOneDecremented.insert(index22, c1);
+    allUnselectedbutOneDecremented.insert(index22, c1);
 
 
 
@@ -1646,11 +1656,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   // helper method 04 filterSelectedDefaultIngredients
-  filterSelectedDefaultIngredients(List<NewIngredient> allIngList ,
-      List<String> listStringIngredients2) {
+  filterSelectedDefaultIngredients(List<NewIngredient> allIngList , List<String> listStringIngredients2) {
 // foox
 
-//    logger.w("at filterSelectedDefaultIngredients","filterSelectedDefaultIngredients");
+    logger.w("at filterSelectedDefaultIngredients  ...... >>> >>>> >>> > >> ");
 
 
 
@@ -1664,14 +1673,14 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //        ' ${oneElement.ingredientName}'));
 
 
-    var mappedFruits2 = allIngList.map((oneElement)=> '${oneElement.ingredientName==''}').toList();
-    print('mappedFruits2.length: ${mappedFruits2.length}');
+//    var mappedFruits2 = allIngList.map((oneElement)=> '${oneElement.ingredientName==''}').toList();
+//    print('mappedFruits2.length: ${mappedFruits2.length}');
 
 
-    var mappedFruits = allIngList.map((oneElement)=> '${oneElement.ingredientName}').toList();
-
-    print('mappedFruits: $mappedFruits');
-    print('mappedFruits: ${mappedFruits.length}');
+//    var mappedFruits = allIngList.map((oneElement)=> '${oneElement.ingredientName}').toList();
+//
+//    print('mappedFruits: $mappedFruits');
+//    print('mappedFruits: ${mappedFruits.length}');
 
 
 
@@ -1690,13 +1699,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     listStringIngredients2.forEach((stringIngredient) {
 
-      /*
-      NewIngredient elementExists = allIngList.where(
-              (oneItem) => oneItem.ingredientName.trim().toLowerCase()
-              == stringIngredient.trim().toLowerCase()).first;
-
-
-      */
+   
 
       NewIngredient elementExists = allIngList.firstWhere(
               (oneItem) => oneItem.ingredientName.trim().toLowerCase() == stringIngredient.trim().toLowerCase(),
