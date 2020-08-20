@@ -4106,6 +4106,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             children: <Widget>[
 
               new Container(
+                color:Colors.green,
 
                 height: displayHeight(context) / 20,
                 width: displayWidth(context) / 8,

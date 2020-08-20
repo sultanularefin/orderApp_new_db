@@ -330,7 +330,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSaucesString) async {
 
-    print('sauceItems0: $sauceItems0 length: ${sauceItems0.length}');
+    print('sauceItems0.length: ${sauceItems0.length}');
 
 //    print('defaultSauces: $defaultSaucesString length: ${defaultSaucesString.length}');
 
@@ -356,6 +356,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
           SauceItem> allSauceItemsDefaultIncluded = filterSelectedKastikesSauces(
           sauceItems,
           defaultSaucesString);
+
+
+      logger.w('allSauceItemsDefaultIncluded.length: ${allSauceItemsDefaultIncluded.length}');
+
+      print('allSauceItemsDefaultIncluded.length: ${allSauceItemsDefaultIncluded.length}');
 
       allSauceItemsDefaultIncluded.sort((a, b) => a.compareTo(b));
 
