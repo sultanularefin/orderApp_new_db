@@ -253,6 +253,16 @@ class FirebaseClient {
       print('si[counter].ingredientName}: ${si[counter].ingredientName}');
       print('si[counter].imageURL}: ${si[counter].imageURL}');
 
+
+      print('si[counter].price}: ${si[counter].price}');
+//      print('si[counter].ingredientAmountByUser}: ${si[counter].ingredientAmountByUse}');
+
+
+
+      print('si[counter].isDefault}: ${si[counter].isDefault}');
+
+
+
       print('--------------------------------------');
 
 
@@ -268,7 +278,7 @@ class FirebaseClient {
             'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
             '').replaceAll('?alt=media', '')),
 //        ROzgCEcTA7J9FpIIQJra
-        'ingredientAmountByUser': si[counter].ingredientAmountByUser,
+//        'ingredientAmountByUser': si[counter].ingredientAmountByUser,
         'ingredientPrice':si[counter].price,
         'isDefault':si[counter].isDefault,
 
