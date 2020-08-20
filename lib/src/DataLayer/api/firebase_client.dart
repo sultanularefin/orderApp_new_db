@@ -274,9 +274,13 @@ class FirebaseClient {
 
         'type': 0,
         'name': si[counter].ingredientName,
+        'image':si[counter].imageURL,
+        /*
         'image': Uri.decodeComponent(si[counter].imageURL.replaceAll(
             'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
             '').replaceAll('?alt=media', '')),
+
+        */
 //        ROzgCEcTA7J9FpIIQJra
 //        'ingredientAmountByUser': si[counter].ingredientAmountByUser,
         'ingredientPrice':si[counter].price,
