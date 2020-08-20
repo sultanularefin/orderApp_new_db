@@ -11468,17 +11468,87 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ],
             ),
           ),
-          onPressed: () {
+          onPressed: () async {
             final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
             shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
                 onePaymentType, index, _currentPaymentTypeIndex);
 
 
-            // oneSinglePaymentType
-            setState(() {
-              showFullPaymentType = false;
-            });
+            // work 0 august 20...
+            logger.e('index: $index');
+            print('YY YY  $index  YY   YY    ');
+            if(index==0){
+//              0 means later option...
+
+              print(' 0 means later option...');
+
+
+
+              // TAkEAWAY AND DINNING  Recite Print. ....
+              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+              print('later button pressed....:');
+
+              Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressedLater();
+
+
+
+
+
+              if (tempOrderWithdocId.orderdocId == '') {
+                _scaffoldKeyShoppingCartPage.currentState
+//                  Scaffold.of(context)
+//                    ..removeCurrentSnackBar()
+                    .showSnackBar(
+                    SnackBar(content: Text("someThing went wrong")));
+                print('something went wrong');
+              }
+              else {
+                logger.i('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+
+
+                shoppingCartBloc.clearSubscription();
+                print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
+
+//                pushNamedAndRemoveUntil
+//                Navigator.of(context).pushAndRemoveUntil(
+//                popAndPushNamed
+
+                /*
+                Navigator.of(context).pushAndRemoveUntil(
+
+                    MaterialPageRoute(builder: (BuildContext context) {
+
+                      return BlocProvider<IdentityBloc>(
+                          bloc: IdentityBloc(),
+                         child: WelcomePage()
+                      );
+
+                    }),(Route<dynamic> route) => false);
+
+
+                */
+
+
+//                Navigator.of(context).pushNamedAndRemoveUntil(
+//
+//                return BlocProvider<IdentityBloc>(
+//                    bloc: IdentityBloc(),
+//                    child: WelcomePage()
+//                ));
+
+
+                return Navigator.pop(
+                    context, tempOrderWithdocId);}
+
+
+
+            }
+            else{
+              setState(() {
+                showFullPaymentType = false;
+              });
+            }
           },
         ),
 
