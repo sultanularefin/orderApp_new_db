@@ -527,6 +527,11 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   // HELPER METHOD FOR TEST TO BE MODIFIED....  AUGUST 14 2020.....
   bool checkThisExtraIngredientForSomeCategory(NewIngredient x,String categroyName) {
 
+    print('categroyName:  $categroyName');
+
+//    print('{x.ingredientName}::  ${x.ingredientName}');
+
+
 //    List<String> categories =
 //    [
 //      'jauheliha_kebab_vartaat' => done
@@ -655,7 +660,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     allExtraIngredients.where((e) => checkThisExtraIngredientForSomeCategory(e,oneFoodItem.categoryName)).toList();
 
 
-    print('ingredientTest.length ==> --> ==> ${ingredientsOfCategory.length}');
+    print('{{{  {{{  {{{   ingredientsOfCategory.length ==> --> ==> ${ingredientsOfCategory.length}');
 
 
     Set<String> subgroups ={};
@@ -747,10 +752,10 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     // SHORT CIRCUIT WORKING HERE.
     if ((listStringIngredients != null) && (listStringIngredients.length != 0)) {
 
-      filterSelectedDefaultIngredients(ingredientsOfCategory,
+      filterSelectedDefaultIngredients(allExtraIngredients,
           listStringIngredients); // only default<NewIngredient>
 
-      filterUnSelectedIngredients(ingredientsOfCategory,
+      filterUnSelectedIngredients(allExtraIngredients,
           listStringIngredients); // only default<NewIngredient>
 
 
@@ -1744,8 +1749,6 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     }
     );
-
-
 
 
     _defaultIngItems = default2;
