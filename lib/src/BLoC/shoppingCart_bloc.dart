@@ -1233,8 +1233,9 @@ class ShoppingCartBloc implements Bloc {
       isSelected: true,
       orderType: 'TakeAway',
       iconDataString: 'FontAwesomeIcons.facebook',
+      orderTyepImage:'assets/orderBYicons/takeaway.png',
 
-      orderIconName: 'flight_takeoff',
+//      orderIconName: 'flight_takeoff',
     );
 
     OrderTypeSingleSelect _delivery = new OrderTypeSingleSelect(
@@ -1243,8 +1244,8 @@ class ShoppingCartBloc implements Bloc {
       isSelected: false,
       orderType: 'Delivery',
       iconDataString: 'FontAwesomeIcons.twitter',
-
-      orderIconName: 'local_shipping',
+//      orderIconName: 'local_shipping',
+      orderTyepImage:'assets/orderBYicons/delivery.png',
     );
 
 
@@ -1255,8 +1256,9 @@ class ShoppingCartBloc implements Bloc {
       isSelected: false,
       orderType: 'Phone',
       iconDataString: 'FontAwesomeIcons.home',
+      orderTyepImage:'assets/phone.png',
 
-      orderIconName: 'phone_in_talk',
+//      orderIconName: 'phone_in_talk',
     );
 
 
@@ -1266,7 +1268,8 @@ class ShoppingCartBloc implements Bloc {
       isSelected: false,
       orderType: 'DinningRoom',
       iconDataString: 'Icons.audiotrack',
-      orderIconName: 'fastfood',
+//      orderIconName: 'fastfood',
+      orderTyepImage:'assets/orderBYicons/diningroom.png',
     );
 
 
