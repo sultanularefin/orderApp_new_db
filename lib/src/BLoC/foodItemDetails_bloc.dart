@@ -1699,7 +1699,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     listStringIngredients2.forEach((stringIngredient) {
 
-   
+
 
       NewIngredient elementExists = allIngList.firstWhere(
               (oneItem) => oneItem.ingredientName.trim().toLowerCase() == stringIngredient.trim().toLowerCase(),
