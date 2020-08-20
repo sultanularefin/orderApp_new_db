@@ -1872,17 +1872,19 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
 
-  print('x.cheeseItemName == >   == >   == > : ${x.cheeseItemName}')
+  print('x.cheeseItemName == >   == >   == > : ${x.cheeseItemName}');
 
-    String elementExists = defaultCheeseJuustoItemString.firstWhere(
+    String cheeseItemNameExists = defaultCheeseJuustoItemString.firstWhere(
             (oneItem) => oneItem.toLowerCase().trim() == x.cheeseItemName.toLowerCase().trim(),
         orElse: () => '');
 
-    if(elementExists!=''){
+    if(cheeseItemNameExists!=''){
 
+      print('cheeseItemNameExists   ');
       x.isDefaultSelected=true;
       return x;
     }
+    print('cheeseItem dosn\'t exist.....');
 
 //    print('elementExists: Line # 612:  $elementExists');
 

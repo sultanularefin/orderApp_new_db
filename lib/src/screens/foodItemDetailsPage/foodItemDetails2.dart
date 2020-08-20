@@ -1305,7 +1305,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             child: Column(
                               children: [
                                 Container(
-                                    height: displayHeight(context) / 13,
+                                    height:displayHeight(context) / 11,
                                     width: displayWidth(context) /1.50,
 
                                     child: buildCheeseItems(
@@ -2304,83 +2304,83 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-        Container(
+          Container(
 
 //            color:Colors.red,
-        height: 40,
-        padding:EdgeInsets.fromLTRB(0, 8, 0, 8),
-        child: Text(
+            height: 40,
+            padding:EdgeInsets.fromLTRB(0, 8, 0, 8),
+            child: Text(
 
-            subGroup.toUpperCase(),
-            textAlign: TextAlign.left,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+                subGroup.toUpperCase(),
+                textAlign: TextAlign.left,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
 
-              fontSize: 20,
-              fontWeight: FontWeight.normal,
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
 //                  color: Colors.grey,
-              color:Color(0xff707070),
+                  color:Color(0xff707070),
 //                  fontFamily: 'Itim-Regular',
-              fontFamily: 'Poppins-ExtraBold',
+                  fontFamily: 'Poppins-ExtraBold',
 
-            )
-        ),
-      ),
+                )
+            ),
+          ),
 
-      Container(
+          Container(
 
 //        color:Colors.purple,
 
-        height: (calculateHeightBySize(withCertainSubgropus.length)==1)?
-        ((displayHeight(context)/2)/lengthForHeight):
-        (calculateHeightBySize(withCertainSubgropus.length)==2)?
-        ((((displayHeight(context)/2)/lengthForHeight)+15)*2):
-        (calculateHeightBySize(withCertainSubgropus.length)==3)?
-        ((((displayHeight(context)/2)/lengthForHeight)+15)*3):
-        ((((displayHeight(context)/2)/lengthForHeight)+15)*4),
+            height: (calculateHeightBySize(withCertainSubgropus.length)==1)?
+            ((displayHeight(context)/2)/lengthForHeight):
+            (calculateHeightBySize(withCertainSubgropus.length)==2)?
+            ((((displayHeight(context)/2)/lengthForHeight)+15)*2):
+            (calculateHeightBySize(withCertainSubgropus.length)==3)?
+            ((((displayHeight(context)/2)/lengthForHeight)+15)*3):
+            ((((displayHeight(context)/2)/lengthForHeight)+15)*4),
 
-        /*
+            /*
             height:  (
                 *  (calculateHeightBySize(withCertainSubgropus.length) +25)
             ),
 
     */
-        child: GridView.builder(
-        itemCount: withCertainSubgropus.length,
-        itemBuilder: (_, int index) {
-          return _buildOneUNSelected
-            (
-              withCertainSubgropus[index], index/*, unSelectedIngredients*/
-          );
-        },
-        gridDelegate:
+            child: GridView.builder(
+              itemCount: withCertainSubgropus.length,
+              itemBuilder: (_, int index) {
+                return _buildOneUNSelected
+                  (
+                    withCertainSubgropus[index], index/*, unSelectedIngredients*/
+                );
+              },
+              gridDelegate:
 //                                            new SliverGridDelegateWithFixedCrossAxisCount(
 //                                              crossAxisCount: 3,
-        new SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 160,
-          crossAxisSpacing: 23,
-          childAspectRatio: 140 / 125,
-          mainAxisSpacing: 23,
+              new SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 160,
+                crossAxisSpacing: 23,
+                childAspectRatio: 140 / 125,
+                mainAxisSpacing: 23,
 //                                  ///childAspectRatio:
 //                                  /// The ratio of the cross-axis to the main-axis extent of each child.
 //                                  /// H/V
-          // horizontal / vertical
+                // horizontal / vertical
 //                                              childAspectRatio: 280/360,
 
-        ),
+              ),
 
 
-        controller: new ScrollController(keepScrollOffset: false),
+              controller: new ScrollController(keepScrollOffset: false),
 
-        shrinkWrap: false,
+              shrinkWrap: false,
 
 
+            ),
+          ),
+        ],
       ),
-    ),
-    ],
-    ),
     );
 
   }
@@ -3450,6 +3450,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
   Widget oneSauceItem(SauceItem oneSauce,int index){
+
+
     final String sauceItemName = oneSauce.sauceItemName;
 
 
@@ -3906,7 +3908,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     print('at buildCheeseItems ------ +++ +++ +++');
 //    defaultIngredients
+//    final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+
 
 
     return  StreamBuilder<List<CheeseItem>>(
@@ -3914,117 +3919,77 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         initialData: blocD.getAllCheeseItems,
 
         builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-            case ConnectionState.none:
-              return Container(
-                margin: EdgeInsets.fromLTRB(
-                    0, displayHeight(context) / 2, 0, 0),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+          if (!snapshot.hasData) {
 
-                    children: <Widget>[
+            print('!snapshot.hasData');
 
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                                backgroundColor: Colors.lightGreenAccent)
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                              backgroundColor: Colors.yellow,)
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                            alignment: Alignment.center,
-                            child: new CircularProgressIndicator(
-                                backgroundColor: Color(0xffFC0000))
-                        ),
-                      ),
-                    ],
-                  ),
+            return Container(
+//              height: displayHeight(context) / 13,
+              height: displayHeight(context) / 11,
+//          height:190,
+              width: displayWidth(context) /1.50,
+
+              color: Color(0xFFffffff),
+              alignment: Alignment.center,
+
+              // PPPPP
+
+              child:
+              Text('looking for sauce items, please wait...'.toLowerCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontFamily: 'Itim-Regular',
+                  color: Colors.white,
+
                 ),
 
-              );
-              break;
-            case ConnectionState.active:
-            default:
-              if (snapshot.data == null) {
-//          if (!snapshot.hasData) {
 
-                print('snapshot.data == null');
+              ),
+            );
+          }
 
-                return Container(
-//              height: displayHeight(context) / 13,
-                  height: displayHeight(context) / 14,
+          else {
+
+//            print('snapshot.hasData and else statement at FDetailS2');
+            List<CheeseItem> selectedCheeseItems = snapshot.data;
+
+            if(selectedCheeseItems.length==0){
+              return Container(
+//                  height: displayHeight(context) / 13,
+                height:displayHeight(context) / 11,
 //          height:190,
-                  width: displayWidth(context) / 1.50,
+                width: displayWidth(context) /1.50,
 
-                  color: Color(0xFFffffff),
+                color: Color(0xffFFFFFF),
+
+                /*
                   alignment: Alignment.center,
 
                   // PPPPP
 
-                  child:
-                  Text('looking for cheese items, please wait...'.toLowerCase(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'Itim-Regular',
-                      color: Colors.white,
-
-                    ),
-
-
-                  ),
-                );
-              }
-
-              else {
-                List<CheeseItem> selectedCheeseItems = snapshot.data;
-
-
-                logger.i('____ selectedCheeseItems.length: ${selectedCheeseItems.length}');
-
-                if (selectedCheeseItems.length == 0) {
-                  return Container(
-//                  height: displayHeight(context) / 13,
-                      height: displayHeight(context) / 14,
-//          height:190,
-                      width: displayWidth(context) / 1.50,
-
-                      color: Color(0xffFFFFFF),
-                      alignment: Alignment.center,
-
-                      // PPPPP
-
-                      child: (
-                          Text('No cheese items found.'.toLowerCase(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontFamily: 'Itim-Regular',
-                              color: Colors.grey,
-                            ),
-                          )
+                  child:(
+                      Text('No sauce items found'.toLowerCase(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: 'Itim-Regular',
+                          color: Colors.grey,
+                        ),
                       )
-                  );
-                }
-                else {
-                  logger.i('____ selectedCheeseItems.length not zeor: ${selectedCheeseItems.length}');
-                  return Container(
+                  )
+
+                  */
+              );
+            }
+            else{
+
+              return Container(
 //                color: Colors.green,
-                    child: ListView.builder(
+                child: ListView.builder(
 
+                  /*
 
-                      /*
                   gridDelegate:
                   new SliverGridDelegateWithMaxCrossAxisExtent(
 
@@ -4039,22 +4004,27 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
 
                   */
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
+//                  reverse: true,
 
-                      itemCount: selectedCheeseItems
-                          .length,
-                      itemBuilder: (_, int index) {
-                        return oneCheeseItem(selectedCheeseItems[index],index);
-                      },
-                    ),
-                  );
-                }
-              }
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+
+                  itemCount: selectedCheeseItems
+                      .length,
+                  itemBuilder: (_, int index) {
+//                    return oneSauceItem(selectedCheeseItems[index],index);
+                    return oneCheeseItem(selectedCheeseItems[index],index);
+                  },
+                ),
+              );
+            }
           }
         }
     );
+
+
   }
+
 
 
 
@@ -4071,7 +4041,16 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
     if(oneCheese.isSelected==false)
     {
       return Container(
+        width: displayWidth(context) / 8,
+        height:displayHeight(context) / 11,
         decoration: BoxDecoration(
+          border: Border.all(
+//                    color: Colors.black,
+            color: Colors.grey,
+            style: BorderStyle.solid,
+            width: 1.0,
+
+          ),
           color:Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(5)),
 //
@@ -4080,7 +4059,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
         margin: EdgeInsets.symmetric(
             horizontal: 10, vertical: 0),
-//        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 0),
+
+
         child: GestureDetector(
 
           onTap: () {
@@ -4102,15 +4082,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           child: Column(
 
 
+//            child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
 
               new Container(
-                color:Colors.green,
 
-                height: displayHeight(context) / 20,
-                width: displayWidth(context) / 8,
-                padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
+//                  color:Colors.blue,
+                padding: EdgeInsets.only(top: 5),
+                height: displayHeight(context) / 16,
+                width: displayWidth(context) / 10, //S
+
 
                 child: ClipOval(
 
@@ -4129,15 +4112,21 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                              SizedBox(height: 10),
 
               Container(
+//                  color:Colors.pink,
+                padding: EdgeInsets.only(top: 5),
                 width: displayWidth(context) / 8,
                 child: Text(
+
+//                    maxLines: 2,
+//                    textAlign: TextAlign.center,
+//                    overflow: TextOverflow.ellipsis,
                   cheeseItemName,
-                  maxLines: 2,
+                  maxLines: 1,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
 
                   style: TextStyle(
-                    color: Color(0xff707070),
+                    color: Colors.black,
 //                                    color: Colors.blueGrey[800],
 
                     fontWeight: FontWeight.normal,
@@ -4161,124 +4150,115 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       // sauce item selected already condition.
 
       return Container(
+          width: displayWidth(context) / 8,
+          height:displayHeight(context) / 11,
+//          color:Colors.lightGreenAccent,
+//            color: Color.fromRGBO(239, 239, 239, 0),
+//          color: Colors.white,
 
-        decoration: BoxDecoration(
-          color:Color(0xffFCF5E4),
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+          decoration: BoxDecoration(
+//            color:Colors.white,
+            color: Color(0xffFCF5E4),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
 //
-        ),
+          ),
 
 
-        margin: EdgeInsets.symmetric(
-            horizontal: 10, vertical: 0),
+          margin: EdgeInsets.symmetric(
+              horizontal: 10, vertical: 0),
 
-        /*
+          /*
         padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
             horizontal: 10, vertical: 0),
 
         */
-        child: GestureDetector(
-          onTap: () {
-            print('at onTap: and nothing will happen since it is selected already. ');
+          child: GestureDetector(
+            onTap: () {
+              print('at onTap: and nothing will happen since it is selected already. ');
 //                print('at Long Press UP: ');
 //            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //
 //            blocD.setThisCheeseAsSelectedCheeseItem(oneCheese,index);
 
-          },
+            },
 
-          onLongPressUp: (){
+            onLongPressUp: (){
 
 
-            print('at Long Press UP selected cheese item will be removed..: ');
+              print('at Long Press UP selected cheese item will be removed..: ');
 //            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 //
 //            blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
-            final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-            blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
-          },
+              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
+              blocD.removeThisCheeseFROMSelectedCheeseItem(oneCheese,index);
+            },
 
 
 
 
 
-          child:
-          Neumorphic(
-            curve: Neumorphic.DEFAULT_CURVE,
-            style: NeumorphicStyle(
-              shape: NeumorphicShape
-                  .concave,
-              depth: 8,
-              border: NeumorphicBorder(
-                isEnabled: false,
-//                  color: Colors.white,
-                width: 0.8,
 
-              ),
-              lightSource: LightSource.top,
-              boxShape: NeumorphicBoxShape.roundRect(
-                  BorderRadius.all(Radius.circular(5))
-              ),
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
 
-              color: Color(0xffFCF5E4),
-              shadowDarkColor: Color(0xff525FFF),
-//                        Colors.lightGreenAccent
+                  new Container(
 
-//          boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(15)),
-            ),
-            child:Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
 
-                Container(
-                  height: displayHeight(context) / 20,
-                  width: displayWidth(context) / 8,
-                  padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),
 
-                  child: ClipOval(
+                    padding: EdgeInsets.only(top: 5),
+                    height: displayHeight(context) / 16,
+                    width: displayWidth(context) / 10,
 
-                    child: CachedNetworkImage(imageUrl: cheeseItemImageURL,
-                      fit: BoxFit.cover,
-                      placeholder: (context,
-                          url) => new LinearProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          Image.network(
-                              'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
+                    child: ClipOval(
+
+                      child: CachedNetworkImage(imageUrl: cheeseItemImageURL,
+                        fit: BoxFit.cover,
+                        placeholder: (context,
+                            url) => new LinearProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            Image.network(
+                                'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2Fingredient404.jpg?alt=media'),
 //
+                      ),
                     ),
                   ),
-                ),
 
 //                              SizedBox(height: 10),
-                Container(
+                  Container(
+                    padding: EdgeInsets.only(top: 5),
+                    width: displayWidth(context) / 8,
 
-                  width: displayWidth(context) / 8,
+                    child: Text(
 
-                  child: Text(
+                      cheeseItemName,
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
 
-                    cheeseItemName,
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-
-                    style: TextStyle(
-                      color: Color(0xff707070),
+                      style: TextStyle(
+//                        color: Color(0xff707070),
+                        color:Colors.black,
 //                                    color: Colors.blueGrey[800],
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                      decoration: TextDecoration.underline,
-                      decorationStyle:TextDecorationStyle.double,
+
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                        decorationStyle:TextDecorationStyle.double,
+                      ),
                     ),
-                  ),
-                ),
+                  )
+                  ,
 
-              ],
-            ),
 
-          ),
-        ),
+                ],
+              ),
+
+          )
       );
+
     }
   }
 
