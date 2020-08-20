@@ -149,8 +149,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   // cheese items
-  List<CheeseItem> _allCheeseItemsDBloc =[];
-  List<CheeseItem> get getAllCheeseItems => _allCheeseItemsDBloc;
+  List<CheeseItem> _allCheeseItemsDBlocDefaultInculded =[];
+  List<CheeseItem> get getAllCheeseItems => _allCheeseItemsDBlocDefaultInculded;
   final _cheeseItemsController      =  StreamController <List<CheeseItem>>.broadcast();
   Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsController.stream;
 
@@ -432,7 +432,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   void initiateCheeseItems(List<CheeseItem> cheeseItems0,List<String>defaultCheesesString ) async {
 
 
-    print('cheeseItems0: $cheeseItems0 length: ${cheeseItems0.length}');
+    print('cheeseItems0.length: ${cheeseItems0.length}');
 
 //    print('defaultCheeses: $defaultCheeses length: ${defaultCheeses.length}');
 
@@ -455,27 +455,31 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       print('??? ???  ???? defaultCheesesString.length !=0: ${defaultCheesesString.length !=0}');
 
       List<
-          CheeseItem> allCheeseItemsDefaultIncluded = filterSelectedJuustoOrCheeses(
+          CheeseItem> allCheeseItemsDefaultIncluded2 = filterSelectedJuustoOrCheeses(
           cheeseItems,
           defaultCheesesString);
 
 
+      print('allCheeseItemsDefaultIncluded.length: ${allCheeseItemsDefaultIncluded2.length}');
+      logger.i('allCheeseItemsDefaultIncluded.length: ${allCheeseItemsDefaultIncluded2.length}');
+
+
 //GGGGGG
 
-      allCheeseItemsDefaultIncluded.sort((a, b) => a.compareTo(b));
+      allCheeseItemsDefaultIncluded2.sort((a, b) => a.compareTo(b));
 
 //      allCheeseItemsDefaultIncluded.sort((a, b) =>
 //          checkIsDefault(a, b,
 //          ));
 
 
-      allCheeseItemsDefaultIncluded.forEach((oneCheeseItem) {
+      allCheeseItemsDefaultIncluded2.forEach((oneCheeseItem) {
         if (oneCheeseItem.isDefaultSelected) {
           oneCheeseItem.isSelected = true;
           oneCheeseItem.isDefaultSelected = true;
 
 
-          print('oneSauceItem.cheeseItemName: ${oneCheeseItem
+          print('oneCheeseItem.cheeseItemName: ${oneCheeseItem
               .cheeseItemName} and '
               ''
               'condition oneCheeseItem.isSelected == true ${oneCheeseItem
@@ -485,13 +489,13 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
       );
 
-      _allCheeseItemsDBloc = allCheeseItemsDefaultIncluded;
+      _allCheeseItemsDBlocDefaultInculded = allCheeseItemsDefaultIncluded2;
 
-      _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+      _cheeseItemsController.sink.add(_allCheeseItemsDBlocDefaultInculded);
 
 
       _allSelectedCheeseItems =
-          allCheeseItemsDefaultIncluded.where((element) => element.isSelected ==
+          allCheeseItemsDefaultIncluded2.where((element) => element.isSelected ==
               true).toList();
 
       print('WWW   WWWW   WWWW   WWWW_allSelectedCheeseItems.length: ${_allSelectedCheeseItems.length}');
@@ -500,8 +504,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     }
     else{
       print(' ????      ???? defaultCheesesString.length ==0: ${defaultCheesesString.length ==0}');
-      _allCheeseItemsDBloc = cheeseItems;
-      _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+      _allCheeseItemsDBlocDefaultInculded = cheeseItems;
+      _cheeseItemsController.sink.add(_allCheeseItemsDBlocDefaultInculded);
 
 
       _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
@@ -1171,12 +1175,12 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-    List<CheeseItem> allTempCheeseItems = _allCheeseItemsDBloc;
+    List<CheeseItem> allTempCheeseItems = _allCheeseItemsDBlocDefaultInculded;
 
     allTempCheeseItems[index].isSelected= !allTempCheeseItems[index].isSelected;
 
-    _allCheeseItemsDBloc = allTempCheeseItems;
-    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+    _allCheeseItemsDBlocDefaultInculded = allTempCheeseItems;
+    _cheeseItemsController.sink.add(_allCheeseItemsDBlocDefaultInculded);
 
     // selected update.
     _allSelectedCheeseItems = allTempCheeseItems.where((element) => ((element.isSelected == true)|| (element.isDefaultSelected ==true))).toList();
@@ -1202,12 +1206,12 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   void removeThisCheeseFROMSelectedCheeseItem(CheeseItem oneCheeseItem,int index){
 
-    List<CheeseItem> allTempCheeseItems = _allCheeseItemsDBloc;
+    List<CheeseItem> allTempCheeseItems = _allCheeseItemsDBlocDefaultInculded;
 
     allTempCheeseItems[index].isSelected= !allTempCheeseItems[index].isSelected;
 
-    _allCheeseItemsDBloc = allTempCheeseItems;
-    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+    _allCheeseItemsDBlocDefaultInculded = allTempCheeseItems;
+    _cheeseItemsController.sink.add(_allCheeseItemsDBlocDefaultInculded);
 
     // selected update.
     _allSelectedCheeseItems = allTempCheeseItems.where((element) => element.isSelected==true).toList();
@@ -1952,7 +1956,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _multiSelectForFood = [];
 
     _allSauceItemsDBloc = [];
-    _allCheeseItemsDBloc = [];
+    _allCheeseItemsDBlocDefaultInculded = [];
 
     print('_allSelectedCheeseItems = [];');
     print('_allSelectedSauceItems = [];');
@@ -1970,7 +1974,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _multiSelectForFoodController.sink.add(_multiSelectForFood);
 
     _sauceItemsController.sink.add(_allSauceItemsDBloc);
-    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+    _cheeseItemsController.sink.add(_allCheeseItemsDBlocDefaultInculded);
 
     _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
     _selectedSauceListController.sink.add(_allSelectedSauceItems);

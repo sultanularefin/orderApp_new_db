@@ -18,7 +18,7 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocIDViewModel.dart
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 //import 'package:foodgallery/src/screens/foodGallery/UNPaidPage.dart';
 //import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
-//import 'package:logger/logger.dart';
+import 'package:logger/logger.dart';
 //import 'package:neumorphic/neumorphic.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
@@ -72,9 +72,9 @@ class FoodItemDetails2 extends StatefulWidget {
 
 class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
-//  var logger = Logger(
-//    printer: PrettyPrinter(),
-//  );
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
 
   String _currentSize;
 //  int _itemCount= 0;
@@ -3904,6 +3904,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
   Widget buildCheeseItems(BuildContext context /*,List<NewIngredient> defaltIngs*/){
 
 
+    print('at buildCheeseItems ------ +++ +++ +++');
 //    defaultIngredients
     final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
@@ -3989,6 +3990,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               else {
                 List<CheeseItem> selectedCheeseItems = snapshot.data;
 
+
+                logger.i('____ selectedCheeseItems.length: ${selectedCheeseItems.length}');
+
                 if (selectedCheeseItems.length == 0) {
                   return Container(
 //                  height: displayHeight(context) / 13,
@@ -4014,6 +4018,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   );
                 }
                 else {
+                  logger.i('____ selectedCheeseItems.length not zeor: ${selectedCheeseItems.length}');
                   return Container(
 //                color: Colors.green,
                     child: ListView.builder(
