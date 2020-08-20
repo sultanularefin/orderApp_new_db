@@ -3429,6 +3429,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                   ),
 
                   */
+//                  reverse: true,
 
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -3513,13 +3514,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                 new Container(
 
-
-
-
-
+//                  color:Colors.blue,
                   padding: EdgeInsets.only(top: 5),
                   height: displayHeight(context) / 16,
-                  width: displayWidth(context) / 10,
+                  width: displayWidth(context) / 10, //S
 
 
                   child: ClipOval(
@@ -3538,7 +3536,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 ),
 //                              SizedBox(height: 10),
                 Container(
-//                  color:Colors.blue,
+//                  color:Colors.pink,
                   padding: EdgeInsets.only(top: 5),
                   width: displayWidth(context) / 8,
                   child: Text(
@@ -3548,7 +3546,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                    overflow: TextOverflow.ellipsis,
 
                     sauceItemName,
-                    maxLines: 2,
+                    maxLines: 1,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -4669,10 +4667,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 Container(
                   padding: EdgeInsets.only(top: 5),
                   height: displayHeight(context) / 16,
+                  width: displayWidth(context) / 10, //S
 
-//                  height: displayHeight(context) / 18,
 
-                  width: displayWidth(context) / 10,
+
 //                      width: displayWidth(context) /10,
 //                      height: displayWidth(context) /9,
 //                  padding:EdgeInsets.symmetric(vertical: 0,horizontal: 0),

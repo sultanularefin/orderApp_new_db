@@ -542,27 +542,15 @@ class FoodGalleryBloc implements Bloc {
     documentSnapshot.documentID
     ).toList();
 
-//    print('Ingredient documents are: $documents');
+    print('Ingredient documents are: $documents');
 
 
-    /*
+
     sauceItems.forEach((oneSauceItem) {
-
-      if(oneSauceItem.sl==1){
-
-        print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName} and '
-            ''
-            'condition oneSauceItem.sl==1 is true');
-
-        oneSauceItem.isSelected=true;
-        oneSauceItem.isDefaultSelected=true;
+        print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName}');
       }
-    }
 
     );
-    */
-
-
 
 
 
@@ -607,7 +595,7 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-    /*
+
     List<String> documents = snapshot.documents.map((documentSnapshot) =>
     documentSnapshot.documentID
     ).toList();
@@ -615,16 +603,18 @@ class FoodGalleryBloc implements Bloc {
 
     cheeseItems.forEach((oneCheeseItem) {
 
+      print('oneCheeseItem.cheeseItemName: ${oneCheeseItem.cheeseItemName}');
 
 
-      if(oneCheeseItem.sl==1){
-        oneCheeseItem.isSelected=true;
-        oneCheeseItem.isDefaultSelected=true;
-      }
+
+//      if(oneCheeseItem.sl==1){
+//        oneCheeseItem.isSelected=true;
+//        oneCheeseItem.isDefaultSelected=true;
+//      }
     }
 
     );
-    */
+
 
 //    print('Ingredient documents are: $documents');
 
