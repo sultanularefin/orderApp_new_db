@@ -443,14 +443,14 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-    cheeseItems0.map((oneSauce) =>
+    cheeseItems0.map((oneCheese) =>
     /*NewIngredient.updateSelectedIngredient */(
-        oneSauce.isDefaultSelected = false
+        oneCheese.isDefaultSelected = false
     )).toList();
 
-    cheeseItems0.map((oneSauce) =>
+    cheeseItems0.map((oneCheese) =>
     /*NewIngredient.updateSelectedIngredient */(
-        oneSauce.isSelected = false
+        oneCheese.isSelected = false
     )).toList();
 
 
@@ -1762,7 +1762,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       List <CheeseItem> /* List<NewIngredient> */ allCheeses , List<String> defaultCheeseORJuusoItems
       ) {
 
-    List <CheeseItem> allUnSelected;
+//    List <CheeseItem> allUnSelected;
 
 
 
@@ -1872,6 +1872,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
 
+  print('x.cheeseItemName == >   == >   == > : ${x.cheeseItemName}')
 
     String elementExists = defaultCheeseJuustoItemString.firstWhere(
             (oneItem) => oneItem.toLowerCase().trim() == x.cheeseItemName.toLowerCase().trim(),
