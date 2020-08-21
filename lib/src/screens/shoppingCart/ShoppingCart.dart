@@ -1738,8 +1738,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
 //                                                      padding::::
-              color:Colors.green,
-//              color: Colors.white,
+//              color:Colors.green,
+              color: Colors.limeAccent,
 //                                            height: 200,
 //              width: displayWidth(context) / 6.2,
 //              height: displayHeight(context) / 11.2,
@@ -1826,7 +1826,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */
           + displayHeight(context) / 6 /* HEIGHT OF MULTI SELECT PORTION */,
 //        from 7 to /8.5 on june 03
-    color:Colors.lightGreenAccent,
+      color:Colors.lightGreenAccent,
 
       child: StreamBuilder(
           stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
@@ -1862,9 +1862,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 width: displayWidth(context) / 1.1,
 //                height: displayHeight(context) / 12,
                 height: displayHeight(context) / 20
-                + displayHeight(context) / 6,
+                    + displayHeight(context) / 6,
 
-                color: Color(0xffffffff),
+//                color: Color(0xffffffff),
+                color:Colors.purpleAccent,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -1874,10 +1875,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Container(
                       width: displayWidth(context) /
                           1.5,
-                      height: displayHeight(
-                          context) / 20,
+
+                      height: displayHeight(context) / 20
+                          + displayHeight(context) / 6,
+
 //                      color: Color(0xffffffff),
-                    color:Colors.blue,
+                      color:Colors.blue,
 
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment
@@ -10713,89 +10716,86 @@ class _ShoppingCartState extends State<ShoppingCart> {
     String borderColor = x.borderColor;
     const Color OrderTypeIconColor = Color(0xff070707);
     return Container(
-      child: index == _currentOrderTypeIndex ?
 
-      Container(
 
 //        width:  displayWidth(context) /6,
 //        height: displayWidth(context) /6,
-        width:  displayWidth(context) / 6,
-        height: displayHeight(context) / 11,
-        alignment: Alignment.center,
-        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-        child:
-        InkWell(
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Column(
-              children: <Widget>[
+      width:  displayWidth(context) / 6,
+      height: displayHeight(context) / 11,
+      alignment: Alignment.center,
+      margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+      child: index == _currentOrderTypeIndex ?
 
-                new Container(
 
-                  width: displayWidth(context) / 6.2,
-                  height: displayHeight(context) / 11.2,
 
-                  decoration: BoxDecoration(
-                    border: Border.all(
+      InkWell(
 
-                      color: Colors.black,
-                      style: BorderStyle.solid,
-                      width: 1.0,
+        splashColor:Colors.deepOrangeAccent,
+//          focusColor:Colors.blue,
+//          hoverColor:Colors.lightGreen,
+        highlightColor:Colors.indigo,
 
-                    ),
-                    shape: BoxShape.circle,
 
-                  ),
+        child: Column(
+          children: <Widget>[
 
-                  child:Container(
+            new Container(
+
+              width: displayWidth(context) / 6.2,
+              height: displayHeight(context) / 11.2,
+
+              decoration: BoxDecoration(
+                border: Border.all(
+
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                  width: 1.0,
+
+                ),
+                shape: BoxShape.circle,
+
+              ),
+
+              child:Container(
 //                            color:Colors.pinkAccent,
 
-                    padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
+                padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
 
-                    child: Image.asset(
-                      orderTyepImage,
-                      fit: BoxFit.contain,
-                    ),
-
-                  ),
-
-                  /*
-                  child: Icon(
-                    getIconForName(orderTypeName),
-                    color: Color(0xffFC0000),
-                    size: displayWidth(context) / 16,
-
-                  ),
-
-                  */
-
+                child: Image.asset(
+                  orderTyepImage,
+                  fit: BoxFit.contain,
                 ),
-                Container(
 
-                  alignment: Alignment.center,
-                  child: Text(
-                    orderTypeName, style:
-                  TextStyle(
-                      color: Color(0xffFC0000),
+              ),
 
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                  ),
-                ),
-              ],
+
+
             ),
-          ),
-          onTap: () {
-            logger.w('on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
-            final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+            Container(
 
-            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
-                x, index, _currentOrderTypeIndex);
+              alignment: Alignment.center,
+              child: Text(
+                orderTypeName, style:
+              TextStyle(
+                  color: Color(0xffFC0000),
+
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+              ),
+            ),
+          ],
+        ),
+
+        onTap: () {
+          logger.i('on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
+          final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+          shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
+              x, index, _currentOrderTypeIndex);
 
 
-
+          setState(() {
             showFullOrderType = !showFullOrderType;
 
 //            showFullOrderType = !showFullPaymentType;
@@ -10806,112 +10806,101 @@ class _ShoppingCartState extends State<ShoppingCart> {
             showEditingCompleteCustomerReachoutIformation = false;
 
             // WORK -2
+          });
 
 
-          },
-        ),
-        // : Container for 2nd argument of ternary condition ends here.
+        },
 
 
-        // : Container for 2nd argument of ternary condition ends here.
+      )
+         :
 
-      ) :
-      Container(
-        width: displayWidth(context) / 6,
-        height: displayHeight(context) / 11,
-        alignment: Alignment.center,
-        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-        padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-        child:
-        InkWell(
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Column(
-              children: <Widget>[
-                new Container(
-//                  width: displayWidth(context) / 10.8,
-//                  height: displayWidth(context) / 10.8,
-                  width: displayWidth(context) / 6.2,
-                  height: displayHeight(context) / 11.2,
+      InkWell(
 
-                  decoration: BoxDecoration(
-                    border: Border.all(
+        splashColor:Colors.deepOrangeAccent,
+//          focusColor:Colors.blue,
+//          hoverColor:Colors.lightGreen,
+        highlightColor:Colors.indigo,
 
-                      color: Colors.black,
-                      style: BorderStyle.solid,
-                      width: 1.0,
 
-                    ),
-                    shape: BoxShape.circle,
+        child: Column(
+          children: <Widget>[
+            new Container(
 
-                  ),
+              width: displayWidth(context) / 6.2,
+              height: displayHeight(context) / 11.2,
 
-                  child:Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                  width: 1.0,
+
+                ),
+                shape: BoxShape.circle,
+
+              ),
+
+              child:Container(
 //                            color:Colors.pinkAccent,
 
-                    padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
+                padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
 
-                    child: Image.asset(
-                      orderTyepImage,
-                      fit: BoxFit.contain,
-                    ),
-
-                  ),
-                  /*
-                  child: Icon(
-                  getIconForName(orderTypeName),
-                  color: Colors.black,
-                  size: displayWidth(context) / 16,
+                child: Image.asset(
+                  orderTyepImage,
+                  fit: BoxFit.contain,
                 ),
 
-                  */
-                ),
-                Container(
+              ),
 
-                  alignment: Alignment.center,
-                  child: Text(
-                    orderTypeName, style:
-                  TextStyle(
-                      color: Color(0xffFC0000),
-
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                  ),
-                ),
-              ],
             ),
-          ),
-          onTap: () {
-            final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+            Container(
 
-            shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
-                x, index, _currentOrderTypeIndex);
+              alignment: Alignment.center,
+              child: Text(
+                orderTypeName, style:
+              TextStyle(
+                  color: Color(0xffFC0000),
 
-            setState(() {
-              showCustomerInformationHeader = true;
-              showUserInputOptionsLikeFirstTime = true;
-              // MAKEING THEM AS THEY ARE IN THE FIRST TIME:
-
-              showEditingCompleteCustomerAddressInformation = false;
-              showEditingCompleteCustomerHouseFlatIformation = false;
-              showEditingCompleteCustomerPhoneIformation = false;
-              showEditingCompleteCustomerReachoutIformation = false;
-
-
-              // WE ARE oneSingleDeliveryType;
-//            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-            }
-            );
-          },
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+              ),
+            ),
+          ],
         ),
+
+        onTap: () {
+
+          logger.i('on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
+          final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+          shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
+              x, index, _currentOrderTypeIndex);
+
+          setState(() {
+            showFullOrderType = !showFullOrderType;
+            showCustomerInformationHeader = true;
+            showUserInputOptionsLikeFirstTime = true;
+            // MAKEING THEM AS THEY ARE IN THE FIRST TIME:
+
+            showEditingCompleteCustomerAddressInformation = false;
+            showEditingCompleteCustomerHouseFlatIformation = false;
+            showEditingCompleteCustomerPhoneIformation = false;
+            showEditingCompleteCustomerReachoutIformation = false;
+
+
+            // WE ARE oneSingleDeliveryType;
+//            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+          }
+          );
+        },
       ),
+//      ),
+//      ),
 
     );
   }
-
-// PAYMENT RELATED WIDGETS ARE HERE  --- below:
-
 
   Widget animatedObscuredPaymentSelectContainerTakeAwayDinning(
       Order priceandselectedCardFunctionality) {
