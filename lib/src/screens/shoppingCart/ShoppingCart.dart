@@ -1666,7 +1666,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             alignment: Alignment
                                 .center,
                             child: Text(
-                                'choose order type',
+                                'select the order type',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight
@@ -1680,11 +1680,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
                           ),
 
+                          /*
                           CustomPaint(
                             size: Size(0, 19),
                             painter: LongPainterForChooseOrderTypeUpdated(
                                 context),
                           ),
+
+                          */
 
 
                         ]
@@ -1734,10 +1737,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Container(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
 //                                                      padding::::
-//              color:Colors.green,
-              color: Colors.white,
+              color:Colors.green,
+//              color: Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) / 11,
+//              width: displayWidth(context) / 6.2,
+//              height: displayHeight(context) / 11.2,
+
+
+
+              height: displayHeight(context) /6,
               width: displayWidth(context)
                   - displayWidth(context) /
                       5,
@@ -1837,7 +1845,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
               String orderTypeName = selectedOne.orderType;
-              String orderIconName = selectedOne.orderIconName;
+//              String orderIconName = selectedOne.orderIconName;
+              String orderTyepImage =  selectedOne.orderTyepImage;
               String borderColor = selectedOne.borderColor;
               const Color OrderTypeIconColor = Color(0xff070707);
 
@@ -10740,7 +10749,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
   Widget oneSingleDeliveryType(OrderTypeSingleSelect x, int index) {
     String orderTypeName = x.orderType;
-    String orderIconName = x.orderIconName;
+//    String orderIconName = x.orderIconName;
+    String orderTyepImage = x.orderTyepImage;
     String borderColor = x.borderColor;
     const Color OrderTypeIconColor = Color(0xff070707);
     return Container(
@@ -10748,7 +10758,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       Container(
 
-        width: displayWidth(context) / 6,
+//        width:  displayWidth(context) /6,
+//        height: displayWidth(context) /6,
+        width:  displayWidth(context) / 6,
         height: displayHeight(context) / 11,
         alignment: Alignment.center,
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -10763,8 +10775,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 new Container(
 
-                  width: displayWidth(context) / 10.8,
-                  height: displayWidth(context) / 10.8,
+//                  width: displayWidth(context) / 10.8,
+//                  height: displayWidth(context) / 10.8,
+//                  width:  displayWidth(context) /6,
+//                  height: displayWidth(context) /6,
+                  width: displayWidth(context) / 6.2,
+                  height: displayHeight(context) / 11.2,
 
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -10778,12 +10794,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   ),
 
+                  child:Container(
+//                            color:Colors.pinkAccent,
+
+                    padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
+
+                    child: Image.asset(
+                      orderTyepImage,
+                      fit: BoxFit.contain,
+                    ),
+
+                  ),
+
+                  /*
                   child: Icon(
                     getIconForName(orderTypeName),
                     color: Color(0xffFC0000),
                     size: displayWidth(context) / 16,
 
                   ),
+
+                  */
 
                 ),
                 Container(
@@ -10836,8 +10867,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
             child: Column(
               children: <Widget>[
                 new Container(
-                  width: displayWidth(context) / 10.8,
-                  height: displayWidth(context) / 10.8,
+//                  width: displayWidth(context) / 10.8,
+//                  height: displayWidth(context) / 10.8,
+                  width: displayWidth(context) / 6.2,
+                  height: displayHeight(context) / 11.2,
+
                   decoration: BoxDecoration(
                     border: Border.all(
 
@@ -10850,11 +10884,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   ),
 
+                   child:Container(
+//                            color:Colors.pinkAccent,
+
+              padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
+
+          child: Image.asset(
+            orderTyepImage,
+            fit: BoxFit.contain,
+          ),
+
+        ),
+                  /*
                   child: Icon(
-                    getIconForName(orderTypeName),
-                    color: Colors.black,
-                    size: displayWidth(context) / 16,
-                  ),
+                  getIconForName(orderTypeName),
+                  color: Colors.black,
+                  size: displayWidth(context) / 16,
+                ),
+
+                  */
                 ),
                 Container(
 
@@ -11304,7 +11352,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             if(index==0){
 //              0 means later option...
 
-            print(' 0 means later option...');
+              print(' 0 means later option...');
 
 
 
@@ -11330,8 +11378,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 logger.i('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
 
-                    shoppingCartBloc.clearSubscription();
-                    print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
+                shoppingCartBloc.clearSubscription();
+                print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
 
 //                pushNamedAndRemoveUntil
 //                Navigator.of(context).pushAndRemoveUntil(
@@ -11362,7 +11410,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                 return Navigator.pop(
-                        context, tempOrderWithdocId);}
+                    context, tempOrderWithdocId);}
 
 
 

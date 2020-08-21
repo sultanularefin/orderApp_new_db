@@ -6,24 +6,26 @@ class OrderTypeSingleSelect {
 
   String  orderType;
 //  Color   itemTextColor;
-  String  orderIconName;
+//  String  orderIconName;
   int     index;
   String  borderColor;
   String  iconColor;
   bool    isSelected;
   String iconDataString;
+  String orderTyepImage;
 
 
   OrderTypeSingleSelect(
       {
 
         this.orderType,
-        this.orderIconName,
+//        this.orderIconName,
         this.index,
         this.borderColor,
         this.isSelected,
         this.iconColor,
         this.iconDataString,
+        this.orderTyepImage,
 
       }
       );
