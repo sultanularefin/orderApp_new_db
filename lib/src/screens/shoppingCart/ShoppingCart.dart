@@ -16,22 +16,18 @@ import 'package:flutter/material.dart' hide Image;
 //import 'package:image/image.dart';
 import 'package:flutter/services.dart'; // InputFormatters.
 import 'package:flutter/widgets.dart';
-import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
-import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
-import 'package:foodgallery/src/welcomePage.dart';
-import 'package:image/image.dart' as ImageAliasAnotherSource;
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
-import 'package:platform_action_sheet/platform_action_sheet.dart';
-import 'package:dotted_border/dotted_border.dart';
+
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
@@ -14592,23 +14588,28 @@ class CustomPicker extends CommonPickerModel {
 
   @override
   String rightDivider() {
-    return "|";
+//    return "|";
+    return "";
   }
 
   @override
   List<int> layoutProportions() {
-    return [1, 2, 1];
+    return [2, 2, 0];
+//    return [1, 2, 1];
+
+//    return [2, 2];
+
   }
 
   @override
   DateTime finalTime() {
     return currentTime.isUtc
         ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
-        this.currentLeftIndex(), this.currentMiddleIndex(), this.currentRightIndex())
+        this.currentLeftIndex(), this.currentMiddleIndex(), /*this.currentRightIndex() */)
         : DateTime(currentTime.year, currentTime.month, currentTime.day, this.currentLeftIndex(),
         this.currentMiddleIndex(),
 
-        this.currentRightIndex()
+        /*this.currentRightIndex()*/
 
     );
   }
