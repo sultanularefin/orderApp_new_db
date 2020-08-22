@@ -1484,12 +1484,25 @@ class ShoppingCartBloc implements Bloc {
 
 
 
-//    CustomerInformation currentUser = _oneCustomerInfo;
-//
-//    currentUser.etaTimeInMinutes=minutes3;
-//
-//    _oneCustomerInfo = currentUser;
-//    _customerInformationController.sink.add(_oneCustomerInfo);
+  }
+
+  setETAForOrder2(TimeOfDay test){
+
+
+
+    /*
+    double minutes2 = double.parse(minutes);
+    int minutes3 =minutes2.ceil(); // no need to have double
+
+    */
+
+    Order tempOrderModifyCustomerInfo = _curretnOrder;
+
+    tempOrderModifyCustomerInfo.orderingCustomer.etaTimeOfDay = test;
+
+    _curretnOrder = tempOrderModifyCustomerInfo;
+
+    _orderController.sink.add(_curretnOrder);
 
 
   }

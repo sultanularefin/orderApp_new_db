@@ -1,10 +1,3 @@
-
-
-//food_gallery.dart
-
-
-
-// dependency files
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,8 +9,7 @@ import 'package:flutter/material.dart' hide Image;
 //import 'package:image/image.dart';
 import 'package:flutter/services.dart'; // InputFormatters.
 import 'package:flutter/widgets.dart';
-import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
@@ -2449,44 +2441,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget animatedShowUserAddressDetailsInLineTakeAway(
       CustomerInformation currentUserForInline) {
-//    final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
-//
-//    return StreamBuilder(
-//        stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
-//        initialData: shoppingCartbloc.getCurrentOrderType,
-//
-//        builder: (context, snapshot)
-//        {
-//          if (!snapshot.hasData) {
-//            print('!snapshot.hasData');
-////        return Center(child: new LinearProgressIndicator());
-//            return Container(child: Text('Null'));
-//          }
-//          else {
-//            List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
-//
-////            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
-//
-//            print('orderTypes: $allOrderTypesSingleSelect');
-//            OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect
-//                .firstWhere((oneOrderType) => oneOrderType.isSelected == true);
-//            _currentOrderTypeIndex = selectedOne.index;
-//
-//
-//            String orderTypeName = selectedOne.orderType;
-//            String orderIconName = selectedOne.orderIconName;
-//            String borderColor = selectedOne.borderColor;
-//            const Color OrderTypeIconColor=Color(0xff070707);
-
-
-//    currentUserForInline
 
     return Container(
       width: displayWidth(context) / 1.03,
       height: displayHeight(context) / 21 + displayHeight(context) / 15,
-//      height: displayHeight(context) / 8,
-      // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
-      // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
+
       color: Color(0xffffffff),
       child: Column(
           children: <Widget>[
@@ -2570,293 +2529,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
 
-                  /*
-                  RaisedButton(
-                    color:Color(0xffFC0000),
-                    // highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: currentUserForInline.address != ''? Container(
-                      color:Colors.lightBlueAccent,
-                      width:displayWidth(context) /2.6,
-                      height:displayHeight(
-                          context) / 20,
-                      child:  Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Container(
-
-                            width: displayWidth(context)/34,
-//                             height: displayHeight(context) /28,
-//                    alignment: Alignment.center,
-//                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
-                            child:
-                            Icon(Icons.location_on,
-                                size: 32.0,
-                                color: Colors.black),
-
-
-
-                            //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
-                            //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-
-//                    setState(() {
-//                      showFullOrderType = !showFullOrderType;
-//                    });
-
-
-
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-                          ),
-                          Expanded(
-                            child: Container(
-                              color:Color(0xffFC0000),
-//                                  height: displayHeight(context) /28,
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .centerLeft,
-                              child: Text(
-                                  '${currentUserForInline.address}',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
-//                                      textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
-                              ),
-                            ),
-                          ),
-
-
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),):  Container(
-                      width:displayWidth(context) /4.9,
-//                              width:displayWidth(context) /5.5
-                    ),
-
-                    onPressed: ()=>{
-                      setState(() {
-
-                        showEditingCompleteCustomerAddressInformation = !showEditingCompleteCustomerAddressInformation;
-                        addressController.text = currentUserForInline.address;
-
-//                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
-                  ),
-                  RaisedButton(
-                    color:Color(0xffFC0000),
-                    // highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: currentUserForInline.flatOrHouseNumber != ''?
-                    Container(
-                      color:Colors.brown,
-//                       width:displayWidth(context) /2.6,
-                      width:displayWidth(context) /4,
-                      child:  Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-
-                          Icon(
-                              Icons.home,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.flatOrHouseNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
-                              ),
-                            ),
-                          ),
-
-
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),):  Container(
-//                              width:displayWidth(context) /5.5
-//                       width:displayWidth(context) /8,
-                      width:displayWidth(context) /4,
-                    )
-                    ,
-                    onPressed: ()=>{
-                      setState(() {
-
-                        showEditingCompleteCustomerHouseFlatIformation =
-                        !showEditingCompleteCustomerHouseFlatIformation;
-
-                        addressController.text = currentUserForInline.address;
-                        houseFlatNumberController.text = currentUserForInline.flatOrHouseNumber;
-
-//                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
-                  ),
-
-                  // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
-                  // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
-                  RaisedButton(
-                    color:Color(0xffFC0000),
-                    // highlightColor: Colors.lightGreenAccent,
-//                        highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: currentUserForInline.phoneNumber != ''?
-                    Container(
-                      color:Colors.lightGreenAccent,
-                      width:displayWidth(context) /3,
-
-                      child:  Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Icon(Icons.phone,
-                              size: 32.0,
-                              color: Colors.black)
-                          ,
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.phoneNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
-                              ),
-                            ),
-                          ),
-
-
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),):  Container(
-                      width:displayWidth(context) /3,
-//                              width:displayWidth(context) /5.5
-//                       width:displayWidth(context) /5.9,
-                    )
-                    ,
-                    onPressed: ()=>{
-                      setState(() {
-
-                        showEditingCompleteCustomerPhoneIformation =
-                        !showEditingCompleteCustomerPhoneIformation;
-
-
-                        phoneNumberController.text = currentUserForInline.phoneNumber;
-
-
-
-//                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
-                  ),
-                  */
                   RaisedButton(
                     color: Color(0xffFC0000),
                     // highlightColor: Colors.lightGreenAccent,
@@ -2945,36 +2617,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       })
                     },
                   ),
-
-                  /*
-                   Container(
-                     height: 50,
-                     color: Colors.amber[500],
-                     child: const Center(child: Text('Entry B')),
-                   ),
-                   Container(
-                     height: 50,
-                     color: Colors.amber[100],
-                     child: const Center(child: Text('Entry C')),
-                   ),
-                   Container(
-                     height: 50,
-                     color: Colors.amber[100],
-                     child: const Center(child: Text('Entry C')),
-                   ),
-                   */
                 ],
               ),
-
             )
-
-
           ]
       ),
     );
-//          }
-//        }
-//    );
+
   }
 
 //}
@@ -2989,9 +2638,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      color:Colors.pink,
       width: displayWidth(context) / 1.03,
       height: displayHeight(context) / 21 + displayHeight(context) / 15,
-//      height: displayHeight(context) / 8,
-      // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
-      // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
+
       color: Color(0xffffffff),
       child: Column(
           children: <Widget>[
@@ -2999,7 +2646,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
               height: displayHeight(context) / 21,
 //              color:Colors.purple,
               child:
-
               Container(
                 width: displayWidth(context) /
                     1.3,
@@ -3202,14 +2848,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                       width:displayWidth(context) /10,
                       width: displayWidth(context) / 3.5,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-
-
                           Icon(
                               Icons.watch,
                               size: 32.0,
@@ -3337,7 +2978,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     return Container(
       color:Colors.pink,
       width: displayWidth(context) / 1.3,
-      height: displayHeight(context) / 21 + displayHeight(context) / 15,
+      height: displayHeight(context) / 7,
 //      height: displayHeight(context) / 8,
       // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
       // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
@@ -3360,50 +3001,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
                     color: Color(0xffFFFFFF),
-                    // highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                    // clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-//                    highlightElevation: 12,
-
 
                     child: currentUserForInline.address != '' ? Container(
                       color: Color(0xffFFFFFF),
 //                      color:Colors.lightBlueAccent,
-                      width: displayWidth(context) / 4.9,
-                      height: displayHeight(
-                          context) / 15,
+                      width: displayWidth(context) / 6.9,
+                      height: displayHeight(context) / 10,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
+                        mainAxisAlignment: MainAxisAlignment.start
                         ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-
                           Container(
-
                             width: displayWidth(context) / 34,
-//                             height: displayHeight(context) /28,
-//                    alignment: Alignment.center,
-//                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
                             child:
                             Icon(Icons.location_on,
                                 size: 32.0,
                                 color: Colors.black),
-
-
-                            //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
-                            //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-
-//                    setState(() {
-//                      showFullOrderType = !showFullOrderType;
-//                    });
-
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
                           ),
                           Expanded(
                             child: Container(
@@ -3424,9 +3038,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     fontSize: 19,
                                     fontWeight: FontWeight
                                         .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
 
-//                    fontStyle: FontStyle.italic,
                                     color: Color(
                                         0xff000000),
                                   )
@@ -3435,16 +3047,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           ),
 
 
-                          //ZZZZ
-
-
                         ],
                       ),) : Container(
                       color: Color(0xffFFFFFF),
 //                      color:Colors.lightBlueAccent,
-                      width: displayWidth(context) / 4.9,
-                      height: displayHeight(
-                          context) / 15,
+                      width: displayWidth(context) / 6.9,
+                      height: displayHeight(context) / 10,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -3529,35 +3137,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
                     color: Color(0xffFFFFFF),
-//                    color:Color(0xffFFFFFF),
-//                    color:Color(0xffFC0000),
-                    // highlightColor: Colors.lightGreenAccent,
-//
-//
-                    /*
-//                  highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-
-                    */
-                    /*
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-
-                    */
                     child: currentUserForInline.flatOrHouseNumber != '' ?
                     Container(
 //                      color:Colors.brown,
                       color: Color(0xffFFFFFF),
-//                       width:displayWidth(context) /2.6,
-                      width: displayWidth(context) / 5.8,
+
+                      width: displayWidth(context) / 6.8,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -3609,7 +3194,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      color:Colors.brown,
                       color: Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
-                      width: displayWidth(context) / 5.8,
+                      width: displayWidth(context) / 6.8,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -3680,30 +3265,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
                     color: Color(0xffFFFFFF),
-                    /*
-                    color:Color(0xffFFFFFF),
-//                    color:Color(0xffFC0000),
-                    // highlightColor: Colors.lightGreenAccent,
-//                        highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-                    */
-                    /*
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    */
+
                     child: currentUserForInline.phoneNumber != '' ?
                     Container(
                       color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width: displayWidth(context) / 5.5,
+                      width: displayWidth(context) / 6.5,
 
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
@@ -3753,7 +3320,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),) : Container(
                       color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width: displayWidth(context) / 5.5,
+                      width: displayWidth(context) / 6.5,
 
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
@@ -3817,90 +3384,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       })
                     },
                   ),
+
+
                   RaisedButton(
                     splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
                     color: Color(0xffFFFFFF),
 
-                    /*
-                    color:Color(0xffFFFFFF),
-//                    color:Color(0xffFC0000),
-//                    // highlightColor: Colors.lightGreenAccent,
-//                    // splashColor: Color(0xffFC0000),
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                    clipBehavior: Clip.hardEdge,
-
-                    highlightElevation: 12,
-                    */
-                    /*
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-
-                    */
-
-                    child: currentUserForInline.etaTimeInMinutes != -1 ?
+                    child:
+                    ((currentUserForInline.etaTimeOfDay.hour==0) &&(
+                        currentUserForInline.etaTimeOfDay.minute==0
+                    ) && currentUserForInline.etaTimeInMinutes == -1)?
                     Container(
                       color: Color(0xffFFFFFF),
-//                      color:Color(0xffFC0000),
-//                       width:displayWidth(context) /10,
-                      width: displayWidth(context) / 4,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                '${currentUserForInline.etaTimeInMinutes}',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    ) : Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Color(0xffFC0000),
-//                       width:displayWidth(context) /10,
-                      width: displayWidth(context) / 4,
+                      height:displayHeight(context) /10,
+                      width: displayWidth(context) / 5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -3947,7 +3445,118 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         ],
                       ),
-                    )
+                    ):
+                    ((currentUserForInline.etaTimeInMinutes != -1)?
+
+
+
+
+                    Container(
+                      color: Color(0xffFFFFFF),
+//                      color:Color(0xffFC0000),
+                       height:displayHeight(context) /10,
+                      width: displayWidth(context) / 5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                              Icons.watch,
+                              size: 32.0,
+                              color: Colors.black
+                          ),
+
+
+                          // : Container for 2nd argument of ternary condition ends here.
+
+
+                          Container(
+                            padding: EdgeInsets
+                                .fromLTRB(
+                                5, 0, 5, 0),
+                            alignment: Alignment
+                                .center,
+                            child: Text(
+                                '${currentUserForInline.etaTimeInMinutes}',
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight
+                                      .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                  color: Color(
+                                      0xff000000),
+                                )
+                            ),
+                          ),
+
+
+                          //ZZZZ
+
+
+                        ],
+                      ),
+                    ):
+
+//                      (
+//                          (currentUserForInline.etaTimeOfDay.hour != 0) &&(
+//                          currentUserForInline.etaTimeOfDay.minute != 0
+//                      )?
+
+
+
+
+                  Container(
+                    color: Color(0xffFFFFFF),
+//                      color:Color(0xffFC0000),
+                    height:displayHeight(context) /10,
+                    width: displayWidth(context) / 5,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                            Icons.watch,
+                            size: 32.0,
+                            color: Colors.black
+                        ),
+
+
+                        // : Container for 2nd argument of ternary condition ends here.
+
+
+                        Container(
+                          padding: EdgeInsets
+                              .fromLTRB(
+                              5, 0, 5, 0),
+                          alignment: Alignment
+                              .center,
+                          child: Text(
+                              '${currentUserForInline.etaTimeOfDay.hour} :'
+                                  '${currentUserForInline.etaTimeOfDay.minute} ',
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight
+                                    .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                color: Color(
+                                    0xff000000),
+                              )
+                          ),
+                        ),
+
+
+                        //ZZZZ
+
+
+                      ],
+                    ),
+                  )
+                      )
+
 
                     // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                     ,
@@ -3956,46 +3565,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       setState(() {
                         showEditingCompleteCustomerReachoutIformation =
                         !showEditingCompleteCustomerReachoutIformation;
-
-
                         etaController.text =
                             currentUserForInline.etaTimeInMinutes.toString();
-
-
-//                      showFullOrderType = !showFullOrderType;
                       })
                     },
                   ),
-
-                  /*
-                   Container(
-                     height: 50,
-                     color: Colors.amber[500],
-                     child: const Center(child: Text('Entry B')),
-                   ),
-                   Container(
-                     height: 50,
-                     color: Colors.amber[100],
-                     child: const Center(child: Text('Entry C')),
-                   ),
-                   Container(
-                     height: 50,
-                     color: Colors.amber[100],
-                     child: const Center(child: Text('Entry C')),
-                   ),
-                   */
                 ],
               ),
-
             )
-
-
           ]
       ),
     );
-//          }
-//        }
-//    );
+
   }
 
 
@@ -5356,112 +4937,149 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         height:displayHeight(context)/18,
                         width: displayWidth(context) / 1.03,
 //GHGHGHGH
+
+
 //                        color: Colors.white,
-                        child: Row(
+                        child: Container(
+                          child:
+
+                          showEditingCompleteCustomerReachoutIformation
+                              ? Container()
+                              : Row(
 //                              mainAxisAlignment: MainAxisAlignment.center,
 //                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
 
 
-                            Container(
+                              Container(
 //                                                                        width:60,
-                              width: displayWidth(context) / 4.5,
+                                width: displayWidth(context) / 4.5,
 //                              height:displayHeight(context)/18,
 //                              alignment: Alignment.center,
-                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              height: displayHeight(context) / 24,
-                              padding: EdgeInsets.only(
-                                  left: 4, top: 3, bottom: 3, right: 3),
+                                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                height: displayHeight(context) / 24,
+                                padding: EdgeInsets.only(
+                                    left: 4, top: 3, bottom: 3, right: 3),
 
-                              child: OutlineButton(
-                                onPressed: () async {
+                                child: OutlineButton(
+                                  onPressed: () async {
 
 
-                                  Future<TimeOfDay> selectedTime24Hour = showTimePicker(
-                                    context: context,
-                                    initialTime: TimeOfDay(hour: 10, minute: 47),
-                                    builder: (BuildContext context, Widget child) {
-                                      return MediaQuery(
-                                        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-                                        child: child,
+                                    Future<TimeOfDay> selectedTime24Hour = showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay(hour: 10, minute: 47),
+                                      builder: (BuildContext context, Widget child) {
+                                        return MediaQuery(
+                                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                                          child: child,
+                                        );
+                                      },
+                                    );
+
+
+
+
+
+
+                                    selectedTime24Hour.whenComplete(() {
+                                      print("selectedTime24Hour called when future completes");
+
+                                    }
+                                    ).then((selectedTime24HourResult) async {
+
+                                      print("selectedTime24HourResult: $selectedTime24HourResult");
+
+                                      final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+
+                                      shoppingCartBloc.setETAForOrder2(selectedTime24HourResult);
+                                      setState(
+                                              () {
+                                            showFullOrderType = false;
+                                            showCustomerInformationHeader = true;
+                                            showUserInputOptionsLikeFirstTime = false;
+                                            showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                            showEditingCompleteCustomerReachoutIformation=true;
+
+                                          }
                                       );
-                                    },
-                                  );
+                                    }
+                                    ).catchError((onError) {
+                                      print('printing not successful: $onError');
+                                      return false;
+                                    });
 
-                                },
+//                                  RRRRRGHGHGHGH
 
-                                splashColor: Colors.indigoAccent,
+                                  },
+
+                                  splashColor: Colors.indigoAccent,
 //                                highlightElevation: 12,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0.0),
-                                ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0.0),
+                                  ),
 
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
+                                  borderSide: BorderSide(
+                                    color: Colors.grey,
 //                                        color:Color(0xff707070),
-                                  style: BorderStyle.solid,
-                                  width: 1.6,
-                                ),
+                                    style: BorderStyle.solid,
+                                    width: 1.6,
+                                  ),
 
 
 //                                clipBehavior: Clip.hardEdge,
 //                                splashColor: Color(0xffFEE295),
 
-                                highlightElevation: 12,
-                                child:
-                                Container(
+                                  highlightElevation: 12,
+                                  child:
+                                  Container(
 
-                                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0 /*15*/),
-                                  width: displayWidth(context) / 4.5,
-                                  height: displayHeight(context) / 24,
+                                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0 /*15*/),
+                                    width: displayWidth(context) / 4.5,
+                                    height: displayHeight(context) / 24,
 
 
-                                  child: Row(
+                                    child: Row(
 
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
 
 //                                          height: 25,
-                                        height: displayHeight(context) / 40,
-                                        width: 5,
-                                        margin: EdgeInsets.only(left: 0),
+                                          height: displayHeight(context) / 40,
+                                          width: 5,
+                                          margin: EdgeInsets.only(left: 0),
 
-                                        child: Icon(
+                                          child: Icon(
 //                                          Icons.add_shopping_cart,
-                                          Icons.watch_later,
-                                          size: 28,
-                                          color: Color(0xffBCBCBD),
+                                            Icons.watch_later,
+                                            size: 28,
+                                            color: Color(0xffBCBCBD),
+                                          ),
+
+
                                         ),
 
-
-                                      ),
-
-                                      Container(
-                                        alignment: Alignment.center,
-                                        width: displayWidth(context) / 7.5,
+                                        Container(
+                                          alignment: Alignment.center,
+                                          width: displayWidth(context) / 7.5,
 //                                        color:Colors.purpleAccent,
-                                        // do it in both Container
-                                        child: Text('choose Time'),
+                                          // do it in both Container
+                                          child: Text('choose Time'),
 
-                                      )
+                                        )
 
 
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )
-                            ,
-                            Container(
+                              )
+                              ,
 
-                              child: showEditingCompleteCustomerReachoutIformation
-                                  ? Container()
-                                  :
                               Container(
                                 margin: EdgeInsets.fromLTRB(
                                     0, 0, 0, 0),
@@ -5615,9 +5233,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           } else {
                                             setState(() {
                                               showFullOrderType = false;
-                                              // showFullOrderType
-                                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-//                                                  showCustomerInformationHeader = false;
                                               showCustomerInformationHeader =
                                               true;
                                               showUserInputOptionsLikeFirstTime =
@@ -5630,20 +5245,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           }
                                         },
 
-
-//                                            onTap: () {
-//                                              setState(() => showFullOrderType = false);
-//                                            },
                                         onEditingComplete: () {
                                           print(
                                               'at editing complete of Customer\'s address ETA Time:');
-//                                              setState(() =>
-//                                              {
-//                                                showEditingCompleteCustomerReachoutIformation =
-//                                                true
-//                                              }
-//                                              );
-
                                         },
 
 
@@ -5655,49 +5259,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   ],
                                 ),
                               ),
-                            ),
 
 
 
-
-
-
-                            // showEditingCompleteCustomerReachoutIformation ENDS HERE.
-                            // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
-
-
-                          ],
+                            ],
+                          ),
                         )
-
                     )
-
-
-
                 )
               ],
             ),
           ),
-
-          // ENDS HERE.
-          // 2ND CONTAINER HOLDING THE INPUT FIELDS
-          // AND THE PAYMENT OPTIONS IN A STACK
-          // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
-
-
-//            OOOO
-
-
-          //VVVVVV
-
-          // PAYMENT RELATED CONTAINER INVOKED FROM HERE:
-
-//                        Flexible(
-//                          child:
-
-          // 3.
-
-
-          // 3. ends here.
         ],
 
         //showInputtedCustomerIformation
@@ -14548,11 +14120,11 @@ class CustomPicker extends CommonPickerModel {
   DateTime finalTime() {
     return currentTime.isUtc
         ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
-        this.currentLeftIndex(), this.currentMiddleIndex(), /*this.currentRightIndex() */)
+      this.currentLeftIndex(), this.currentMiddleIndex(), /*this.currentRightIndex() */)
         : DateTime(currentTime.year, currentTime.month, currentTime.day, this.currentLeftIndex(),
-        this.currentMiddleIndex(),
+      this.currentMiddleIndex(),
 
-        /*this.currentRightIndex()*/
+      /*this.currentRightIndex()*/
 
     );
   }

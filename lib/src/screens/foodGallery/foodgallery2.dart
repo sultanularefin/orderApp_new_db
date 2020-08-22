@@ -1349,6 +1349,8 @@ Widget work1(BuildContext context){
               flatOrHouseNumber: '',
               phoneNumber: '',
               etaTimeInMinutes: -1,
+              etaTimeOfDay: new TimeOfDay(hour: 0,minute: 0),
+//              etaTimeOfDay: new TimeOfDay(),
 //        CustomerInformation currentUser = _oneCustomerInfo;
 //    currentUser.address = address;
 //
@@ -1489,7 +1491,7 @@ Widget work1(BuildContext context){
               if(orderWithDocumentId.paymentTypeIndex==0){
 
 
-               return Navigator.of(context).push(
+                return Navigator.of(context).push(
 
 
                   PageRouteBuilder(
@@ -1499,12 +1501,12 @@ Widget work1(BuildContext context){
                     pageBuilder: (_, __, ___) =>
 
 
-                    BlocProvider<UnPaidBloc>(
-                      bloc: UnPaidBloc(),
+                        BlocProvider<UnPaidBloc>(
+                          bloc: UnPaidBloc(),
 
-                        child: UnPaidPage(docID:orderWithDocumentId.orderdocId),
+                          child: UnPaidPage(docID:orderWithDocumentId.orderdocId),
 //                      child: UnPaidPage()
-                    ),
+                        ),
 
 
                   ),
