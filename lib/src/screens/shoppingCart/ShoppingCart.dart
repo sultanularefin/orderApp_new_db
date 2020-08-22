@@ -5416,64 +5416,45 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                             Container(
-                              width: displayWidth(context) / 4.5,
-                              color:Colors.red,
-                              child: FlatButton(
+//                                                                        width:60,
+                              width: displayWidth(
+                                  context) / 13,
+                              height: displayHeight(context) / 25,
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
 
-//                                    color:Colors.blue,
-                                onPressed: () {
-                                  DatePicker.showPicker(context, showTitleActions: true, onChanged: (date) {
-                                    print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
-                                  }, onConfirm: (date) {
-                                    print('confirm $date');
-                                  }, pickerModel: CustomPicker(currentTime: DateTime.now()), locale: LocaleType.en);
+                              child: OutlineButton(
+                                onPressed: () async {
+
+
+                                  Future<TimeOfDay> selectedTime24Hour = showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay(hour: 10, minute: 47),
+                                    builder: (BuildContext context, Widget child) {
+                                      return MediaQuery(
+                                        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                                        child: child,
+                                      );
+                                    },
+                                  );
+
                                 },
+
+
+                                clipBehavior: Clip.hardEdge,
+                                splashColor: Color(0xffFEE295),
+
+                                highlightElevation: 12,
                                 child:
-
-
                                 Container(
-//                      color:Colors.blue,
-//                    width:displayWidth(context)/4,
 
-                                  margin: EdgeInsets.fromLTRB(
-                                      0, 0, 0, 0 /*15*/),
+                                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0 /*15*/),
                                   width: displayWidth(context) / 4.5,
                                   height: displayHeight(context) / 24,
-//                                      padding: EdgeInsets.only(
-//                                          left: 4, top: 3, bottom: 3, right: 3),
-
-                                  decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                                    borderRadius: BorderRadius.circular(4),
-                                    border: Border.all(
-
-                                      color: Color(0xffBCBCBD),
-
-                                      style: BorderStyle.solid,
-                                      width: 2.0,
-
-
-                                    ),
-
-                                    boxShadow: [
-                                      BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                          color: Color(0xffFFFFFF),
-                                          blurRadius: 10.0,
-                                          offset: Offset(0.0, 2.0))
-                                    ],
-
-//                      color:Colors.blue,
-                                    color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                                  ),
-
-//                                  color: Color(0xffFFFFFF),
 
 
                                   child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: <Widget>[
@@ -5483,10 +5464,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         height: displayHeight(context) / 40,
                                         width: 5,
                                         margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
+
                                         child: Icon(
 //                                          Icons.add_shopping_cart,
                                           Icons.watch_later,
@@ -5498,10 +5476,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       ),
 
                                       Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
-//                          color:Colors.green,
                                         alignment: Alignment.center,
                                         width: displayWidth(context) / 7.5,
 //                                        color:Colors.purpleAccent,
@@ -5515,9 +5489,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   ),
                                 ),
                               ),
-                            ),
-
-
+                            )
+                            ,
                             Container(
 
                               child: showEditingCompleteCustomerReachoutIformation
