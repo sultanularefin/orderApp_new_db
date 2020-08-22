@@ -1,16 +1,4 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//
 
-//import 'package:foodgallery/src/models/IngredientItem.dart';
-
-//CODE FORMAT ANDROID STUDIO CTRL +
-//ALT + I
-//IN WINDOWS
-
-
-//import 'package:flutter/material.dart';
-
-//import 'dart:core';
 import 'dart:math';
 
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
@@ -59,20 +47,6 @@ class SelectedFood {
       }
       );
 
-//  WHAT ABOUT:
-
-//  NewIngredient.fromMap(Map<String, dynamic> data)
-//  NewIngredient.fromMap(Map<dynamic, dynamic> data)
-
-//  OrderList.fromMap(Map<String, dynamic> data,String docID)
-//      :imageURL= data['image'],
-//        ingredientName= data['name'],
-//        price = data['price'].toDouble(),
-//        documentId = docID,
-//        ingredientAmountByUser = 1;
-
-
-
   Future<String> generateItemId(int length)  async {
     String _result = "";
     int i = 0;
@@ -80,15 +54,8 @@ class SelectedFood {
     while (i < length.round()) {
       //Get random int
       int randomInt = Random.secure().nextInt(_allowedChars.length);
-      //      print('randomInt: $randomInt');
-      //Get random char and append it to the password
-
-      //      print('_allowedChars[randomInt]: ${_allowedChars[randomInt]}');
-
 
       _result += _allowedChars[randomInt];
-
-      //      print('_result: $_result');
 
       i++;
     }

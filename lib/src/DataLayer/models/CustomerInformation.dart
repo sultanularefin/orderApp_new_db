@@ -4,7 +4,6 @@
 //
 class CustomerInformation {
   String address;
-
   String flatOrHouseNumber;
   String phoneNumber;
   int etaTimeInMinutes;

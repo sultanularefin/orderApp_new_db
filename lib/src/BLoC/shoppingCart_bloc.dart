@@ -9,6 +9,7 @@ import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/OneInputCustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
@@ -68,6 +69,11 @@ class ShoppingCartBloc implements Bloc {
 //  List<SelectedFood> _savedSelectedFood    =[];
 
 
+
+
+
+
+
 //  CustomerInformation _oneCustomerInfo;
 
 
@@ -118,13 +124,22 @@ class ShoppingCartBloc implements Bloc {
   final _categoriesController = StreamController<List<NewCategoryItem>>();
   Stream <List<NewCategoryItem>> get getCategoryItemsStream => _categoriesController.stream;
 
+
+
   /*
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
       _customerInformationController.stream;
   */
 
-  Restaurant _thisRestaurant ;
 
+  List<OneInputCustomerInformation> _allCustomerInput=[];
+  List<OneInputCustomerInformation> get getAllUserInputs => _allCustomerInput;
+  final _customerInputController = StreamController<List<OneInputCustomerInformation>>.broadcast();
+  Stream <List<OneInputCustomerInformation>> get getCustomerInputsStream => _customerInputController.stream;
+
+
+
+  Restaurant _thisRestaurant ;
   Restaurant get getCurrentRestaurant => _thisRestaurant;
   final _restaurantController = StreamController <Restaurant>();
   Stream<Restaurant> get getCurrentRestaurantsStream => _restaurantController.stream;
@@ -508,6 +523,8 @@ class ShoppingCartBloc implements Bloc {
 //    return firstCategory.rating > secondCategory.rating;
 
   }
+
+
   Future<Order> paymentButtonPressed(Order payMentProcessing) async{
 
     String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
@@ -1166,15 +1183,16 @@ class ShoppingCartBloc implements Bloc {
   void clearSubscription(){
 
 
-    _curretnOrder=null;
-    _expandedSelectedFood =[];
-    _orderType =[];
-    _paymentType =[];
+    _curretnOrder = null;
+    _expandedSelectedFood = [];
+    _orderType = [];
+    _paymentType = [];
 
     _devicesBlueTooth = [];
 
-    _thisRestaurant= null;
-    _allCategories=[];
+    _thisRestaurant = null;
+    _allCategories = [];
+    _allCustomerInput = [];
 
 
 
@@ -1187,6 +1205,8 @@ class ShoppingCartBloc implements Bloc {
 
     _restaurantController.sink.add(_thisRestaurant);
     _categoriesController.sink.add(_allCategories);
+
+    _customerInputController.sink.add(_allCustomerInput);
 
 
   }
@@ -1221,7 +1241,78 @@ class ShoppingCartBloc implements Bloc {
 
 
   */
-  
+
+
+
+  void initiateCustomerInputFieldSingleSelectOptions()
+  {
+
+    OneInputCustomerInformation _address = new OneInputCustomerInformation(
+
+
+      index:0,
+      returnValue:'String',
+      complete:false,
+      inputName:'address',
+      inputOf: ['delivery'],
+
+     //      orderIconName: 'flight_takeoff',
+    );
+
+    OneInputCustomerInformation _flat = new OneInputCustomerInformation(
+      index:1,
+      returnValue:'String',
+      complete:false,
+      inputName:'flat',
+      inputOf: ['delivery'],
+    );
+
+
+//     0xffFEE295 false
+    OneInputCustomerInformation _phone = new OneInputCustomerInformation(
+      index:2,
+      returnValue:'String',
+      complete:false,
+      inputName:'phone',
+      inputOf: ['delivery','phone'],
+
+//      orderIconName: 'phone_in_talk',
+    );
+
+
+    OneInputCustomerInformation _timeOfDay = new OneInputCustomerInformation(
+      index:3,
+      returnValue:'DateTime',
+      complete:false,
+      inputName:'timeOfDay',
+      inputOf: ['takeAway','delivery','phone','Dinning'],
+
+//      orderIconName: 'phone_in_talk',
+    );
+
+    OneInputCustomerInformation _eta = new OneInputCustomerInformation(
+      index:4,
+      returnValue:'int',
+      complete:false,
+      inputName:'ETA',
+      inputOf: ['takeAway','delivery','_phone','Dinning'],
+
+//      orderIconName: 'phone_in_talk',
+    );
+
+
+
+    List <OneInputCustomerInformation> customerFieldsInputArray = new List<OneInputCustomerInformation>();
+
+
+    customerFieldsInputArray.addAll([_address,_flat,_phone, _timeOfDay, _eta]);
+
+    _allCustomerInput = customerFieldsInputArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+//    initiateAllMultiSelectOptions();
+    _customerInputController.sink.add(_allCustomerInput);
+
+  }
+
 
 
   void initiateOrderTypeSingleSelectOptions()
@@ -1544,6 +1635,7 @@ class ShoppingCartBloc implements Bloc {
     _devicesController.close();
     _restaurantController.close();
     _categoriesController.close();
+    _customerInputController.close();
 //    _customerInformationController.close();
 //    _multiSelectForFoodController.close();
 
