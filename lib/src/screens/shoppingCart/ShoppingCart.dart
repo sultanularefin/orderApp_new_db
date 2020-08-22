@@ -16,18 +16,22 @@ import 'package:flutter/material.dart' hide Image;
 //import 'package:image/image.dart';
 import 'package:flutter/services.dart'; // InputFormatters.
 import 'package:flutter/widgets.dart';
-
+import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
+import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
-
+import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+import 'package:foodgallery/src/welcomePage.dart';
+import 'package:image/image.dart' as ImageAliasAnotherSource;
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
-
+import 'package:platform_action_sheet/platform_action_sheet.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
