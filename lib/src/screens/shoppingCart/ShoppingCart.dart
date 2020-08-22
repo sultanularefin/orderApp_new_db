@@ -1273,9 +1273,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
                                             height: displayHeight(context)/5.4,
 
-                                            width: displayWidth(context)
-                                                - displayWidth(context) /
-                                                    5, /* this is about the width of yellow side menu */
+                                            width: displayWidth(context)/1.03,
 
 //                                            width: displayWidth(context) * 0.57,
                                             child:
@@ -5343,8 +5341,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           Container(
 //            color:Colors.white38,
-//            color:Colors.amber,
-            color: Colors.white,
+            color:Colors.amber,
+//            color: Colors.white,
 //            height: displayWidth(context)/2.6,
             height: displayWidth(context) / 2.1,
             child: Stack(
@@ -5398,232 +5396,308 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 ),
                 AnimatedPositioned(
-                  duration: Duration(milliseconds: 500),
-                  top:
-                  0,
-//                  displayHeight(context)/4,
-//                  getNumberOfInputsFilledUp (
-//                      unObsecuredInputandPayment.ordersCustomer) ==4?
+                    duration: Duration(milliseconds: 500),
+                    top: 0,
+
+                    child:
+                    Container(
+                        color: Colors.green,
+                        height:displayHeight(context)/18,
+                        width: displayWidth(context) / 1.03,
+//GHGHGHGH
+//                        color: Colors.white,
+                        child: Row(
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
 
 
-//                  displayWidth(context)/2.6 - displayWidth(context)/2,
+                            Container(
+                              width: displayWidth(context) / 4.5,
+                              color:Colors.red,
+                              child: FlatButton(
 
-                  // bottom 0 means full of green Container content shown.
-
-                  child:
-                  Container(
-//                        alignment:Alignment.topCenter,0
-
-
-                    // QQQ RoDo height
-//                      height: displayWidth(context)/2.6,
-                      child: Container(
-//                            height: displayWidth(context)/2.6,
-//                            height: displayHeight(context) / 3.7,
-                        padding: EdgeInsets.fromLTRB(
-                            (displayWidth(context) / 1.03) / 4,
-                            15,
-                            (displayWidth(context) / 1.03) / 4,
-                            0
-
-//                          horizontal: (displayWidth(context)/1.1)/4,
-                        ),
-//                        color: Colors.green,
-                        color: Colors.white,
-                        child: Center(
-//                    color:Colors.white.withOpacity(0.9),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
+//                                    color:Colors.blue,
+                                onPressed: () {
+                                  DatePicker.showPicker(context, showTitleActions: true, onChanged: (date) {
+                                    print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
+                                  }, onConfirm: (date) {
+                                    print('confirm $date');
+                                  }, pickerModel: CustomPicker(currentTime: DateTime.now()), locale: LocaleType.en);
+                                },
+                                child:
 
 
-
-                                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
-
-                                // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
-
-//                                showEditingCompleteCustomerReachoutIformation BEGINS HERE.
                                 Container(
+//                      color:Colors.blue,
+//                    width:displayWidth(context)/4,
 
-                                  child: showEditingCompleteCustomerReachoutIformation
-                                      ? Container()
-                                      :
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(
-                                        0, 0, 0, 15),
-                                    decoration: BoxDecoration(
+                                  margin: EdgeInsets.fromLTRB(
+                                      0, 0, 0, 0 /*15*/),
+                                  width: displayWidth(context) / 4.5,
+                                  height: displayHeight(context) / 24,
+//                                      padding: EdgeInsets.only(
+//                                          left: 4, top: 3, bottom: 3, right: 3),
+
+                                  decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                                      borderRadius: BorderRadius.circular(25),
-                                      border: Border.all(
+                                    borderRadius: BorderRadius.circular(4),
+                                    border: Border.all(
 
-                                        color: Color(0xffBCBCBD),
-                                        style: BorderStyle.solid,
-                                        width: 2.0,
+                                      color: Color(0xffBCBCBD),
 
-
-                                      ),
-
-                                      boxShadow: [
-                                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                            color: Color(0xffFFFFFF),
-                                            blurRadius: 10.0,
-                                            offset: Offset(0.0, 2.0))
-                                      ],
+                                      style: BorderStyle.solid,
+                                      width: 2.0,
 
 
-                                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
                                     ),
 
+                                    boxShadow: [
+                                      BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                          color: Color(0xffFFFFFF),
+                                          blurRadius: 10.0,
+                                          offset: Offset(0.0, 2.0))
+                                    ],
+
+//                      color:Colors.blue,
+                                    color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                                  ),
+
 //                                  color: Color(0xffFFFFFF),
-                                    width: displayWidth(context) / 2.5,
-                                    height: displayHeight(context) / 24,
-                                    padding: EdgeInsets.only(
-                                        left: 4, top: 3, bottom: 3, right: 3),
-                                    child: Row(
+
+
+                                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceAround,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      children: <Widget>[
-                                        Container(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
 
 //                                          height: 25,
-                                          height: displayHeight(context) / 40,
-                                          width: 5,
-                                          margin: EdgeInsets.only(left: 0),
+                                        height: displayHeight(context) / 40,
+                                        width: 5,
+                                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                                          child: Icon(
+                                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                                            Icons.watch_later,
-                                            size: 28,
-                                            color: Color(0xffBCBCBD),
-                                          ),
-
-
+                                          Icons.watch_later,
+                                          size: 28,
+                                          color: Color(0xffBCBCBD),
                                         ),
 
-                                        Container(
+
+                                      ),
+
+                                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                                          alignment: Alignment.center,
-                                          width: displayWidth(context) / 4,
+//                          color:Colors.green,
+                                        alignment: Alignment.center,
+                                        width: displayWidth(context) / 7.5,
 //                                        color:Colors.purpleAccent,
-                                          // do it in both Container
-                                          child: TextField(
+                                        // do it in both Container
+                                        child: Text('choose Time'),
 
-                                            controller: etaController,
+                                      )
 
 
-                                            keyboardType: TextInputType.number,
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+
+
+                            Container(
+
+                              child: showEditingCompleteCustomerReachoutIformation
+                                  ? Container()
+                                  :
+                              Container(
+                                margin: EdgeInsets.fromLTRB(
+                                    0, 0, 0, 0),
+                                decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                                  borderRadius: BorderRadius.circular(25),
+                                  border: Border.all(
+
+                                    color: Color(0xffBCBCBD),
+                                    style: BorderStyle.solid,
+                                    width: 2.0,
+
+
+                                  ),
+
+                                  boxShadow: [
+                                    BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                                        color: Color(0xffFFFFFF),
+                                        blurRadius: 10.0,
+                                        offset: Offset(0.0, 2.0))
+                                  ],
+
+
+                                  color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                                ),
+
+//                                  color: Color(0xffFFFFFF),
+                                width: displayWidth(context) / 2.5,
+                                height: displayHeight(context) / 24,
+                                padding: EdgeInsets.only(
+                                    left: 4, top: 3, bottom: 3, right: 3),
+                                child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .center,
+                                  children: <Widget>[
+                                    Container(
+
+//                                          height: 25,
+                                      height: displayHeight(context) / 40,
+                                      width: 5,
+                                      margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                                      child: Icon(
+//                                          Icons.add_shopping_cart,
+                                        Icons.watch_later,
+                                        size: 28,
+                                        color: Color(0xffBCBCBD),
+                                      ),
+
+
+                                    ),
+
+                                    Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                                      alignment: Alignment.center,
+                                      width: displayWidth(context) / 4,
+//                                        color:Colors.purpleAccent,
+                                      // do it in both Container
+                                      child: TextField(
+
+                                        controller: etaController,
+
+
+                                        keyboardType: TextInputType.number,
 //                                            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                                            inputFormatters: <
-                                                TextInputFormatter>[
-                                              WhitelistingTextInputFormatter
-                                                  .digitsOnly
-                                            ],
+                                        inputFormatters: <
+                                            TextInputFormatter>[
+                                          WhitelistingTextInputFormatter
+                                              .digitsOnly
+                                        ],
 //inputFormatters: <TextInputFormatter>[
 //    WhitelistingTextInputFormatter.digitsOnly
 //],
-                                            textInputAction: TextInputAction
-                                                .done,
+                                        textInputAction: TextInputAction
+                                            .done,
 //
-                                            onSubmitted: (_) =>
-                                                FocusScope.of(context)
-                                                    .unfocus(),
-                                            textAlign: TextAlign.center,
-                                            decoration: InputDecoration(
+                                        onSubmitted: (_) =>
+                                            FocusScope.of(context)
+                                                .unfocus(),
+                                        textAlign: TextAlign.center,
+                                        decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                                              border: InputBorder.none,
+                                          border: InputBorder.none,
 //                                              hintText: 'Enter when you want your ordered foods',
-                                              hintText: 'After XX minutes',
-                                              hintStyle: TextStyle(
-                                                  color: Color(0xffFC0000),
-                                                  fontSize: 17),
+                                          hintText: 'After XX minutes',
+                                          hintStyle: TextStyle(
+                                              color: Color(0xffFC0000),
+                                              fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                                            ),
+                                        ),
 
-                                            style: TextStyle(
-                                                color: Color(0xffFC0000),
-                                                fontSize: 16),
+                                        style: TextStyle(
+                                            color: Color(0xffFC0000),
+                                            fontSize: 16),
 
-                                            onChanged: (text) {
-                                              print("0444: $text");
+                                        onChanged: (text) {
+                                          print("0444: $text");
 
 
-                                              print("33: $text");
-                                              final shoppingCartBloc = BlocProvider
-                                                  .of<
-                                                  ShoppingCartBloc>(context);
+                                          print("33: $text");
+                                          final shoppingCartBloc = BlocProvider
+                                              .of<
+                                              ShoppingCartBloc>(context);
 
-                                              shoppingCartBloc.setETAForOrder(
-                                                  text);
-                                              setState(() {
-                                                showFullOrderType = false;
+                                          shoppingCartBloc.setETAForOrder(
+                                              text);
+                                          setState(() {
+                                            showFullOrderType = false;
 
-                                                // showFullOrderType
-                                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                            // showFullOrderType
+                                            /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                                showCustomerInformationHeader =
-                                                true;
-                                                showUserInputOptionsLikeFirstTime =
-                                                false;
-                                                showFullPaymentType =
-                                                true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                                              }
+                                            showCustomerInformationHeader =
+                                            true;
+                                            showUserInputOptionsLikeFirstTime =
+                                            false;
+                                            showFullPaymentType =
+                                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                          }
 
 
-                                              );
-                                            },
+                                          );
+                                        },
 
 
-                                            onTap: () {
-                                              if ((currentUser.address
+                                        onTap: () {
+                                          if ((currentUser.address
+                                              .trim()
+                                              .length) > 0 ||
+                                              (currentUser.flatOrHouseNumber
                                                   .trim()
                                                   .length) > 0 ||
-                                                  (currentUser.flatOrHouseNumber
-                                                      .trim()
-                                                      .length) > 0 ||
-                                                  (currentUser.phoneNumber
-                                                      .trim()
-                                                      .length) > 0) {
-                                                showEditingCompleteCustomerHouseFlatIformation =
-                                                true;
-                                              } else {
-                                                setState(() {
-                                                  showFullOrderType = false;
-                                                  // showFullOrderType
-                                                  /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                              (currentUser.phoneNumber
+                                                  .trim()
+                                                  .length) > 0) {
+                                            showEditingCompleteCustomerHouseFlatIformation =
+                                            true;
+                                          } else {
+                                            setState(() {
+                                              showFullOrderType = false;
+                                              // showFullOrderType
+                                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                  showCustomerInformationHeader = false;
-                                                  showCustomerInformationHeader =
-                                                  true;
-                                                  showUserInputOptionsLikeFirstTime =
-                                                  false;
-                                                  showFullPaymentType =
-                                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                                                }
+                                              showCustomerInformationHeader =
+                                              true;
+                                              showUserInputOptionsLikeFirstTime =
+                                              false;
+                                              showFullPaymentType =
+                                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                            }
 
-                                                );
-                                              }
-                                            },
+                                            );
+                                          }
+                                        },
 
 
 //                                            onTap: () {
 //                                              setState(() => showFullOrderType = false);
 //                                            },
-                                            onEditingComplete: () {
-                                              print(
-                                                  'at editing complete of Customer\'s address ETA Time:');
+                                        onEditingComplete: () {
+                                          print(
+                                              'at editing complete of Customer\'s address ETA Time:');
 //                                              setState(() =>
 //                                              {
 //                                                showEditingCompleteCustomerReachoutIformation =
@@ -5631,127 +5705,34 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                              }
 //                                              );
 
-                                            },
-
-
-                                          ),
-
-                                        )
-
-
-                                      ],
-                                    ),
-                                  ),
-                                ),
-
-
-
-
-
-                                FlatButton(
-                                  onPressed: () {
-                                    DatePicker.showPicker(context, showTitleActions: true, onChanged: (date) {
-                                      print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
-                                    }, onConfirm: (date) {
-                                      print('confirm $date');
-                                    }, pickerModel: CustomPicker(currentTime: DateTime.now()), locale: LocaleType.en);
-                                  },
-                                  child:
-
-
-                                  Container(
-//                      color:Colors.blue,
-//                    width:displayWidth(context)/4,
-
-                                    margin: EdgeInsets.fromLTRB(
-                                        0, 0, 0, 0 /*15*/),
-                                    decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                                      borderRadius: BorderRadius.circular(4),
-                                      border: Border.all(
-
-                                        color: Color(0xffBCBCBD),
-                                        style: BorderStyle.solid,
-                                        width: 2.0,
+                                        },
 
 
                                       ),
 
-                                      boxShadow: [
-                                        BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                                            color: Color(0xffFFFFFF),
-                                            blurRadius: 10.0,
-                                            offset: Offset(0.0, 2.0))
-                                      ],
-
-//                      color:Colors.blue,
-                                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                                    ),
-
-//                                  color: Color(0xffFFFFFF),
-                                    width: displayWidth(context) / 5,
-                                    height: displayHeight(context) / 24,
-                                    padding: EdgeInsets.only(
-                                        left: 4, top: 3, bottom: 3, right: 3),
-                                    child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Container(
-
-//                                          height: 25,
-                                          height: displayHeight(context) / 40,
-                                          width: 5,
-                                          margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
-                                          child: Icon(
-//                                          Icons.add_shopping_cart,
-                                            Icons.watch_later,
-                                            size: 28,
-                                            color: Color(0xffBCBCBD),
-                                          ),
+                                    )
 
 
-                                        ),
-
-                                        Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
-//                          color:Colors.green,
-                                          alignment: Alignment.center,
-                                          width: displayWidth(context) / 7.5,
-//                                        color:Colors.purpleAccent,
-                                          // do it in both Container
-                                          child: Text('choose Time'),
-
-                                        )
-
-
-                                      ],
-                                    ),
-                                  ),
+                                  ],
                                 ),
+                              ),
+                            ),
 
 
 
-                                // showEditingCompleteCustomerReachoutIformation ENDS HERE.
-                                // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
 
 
-                              ],
-                            )
-                        ),
-                      )
 
-                  ),
+                            // showEditingCompleteCustomerReachoutIformation ENDS HERE.
+                            // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+
+
+                          ],
+                        )
+
+                    )
+
+
 
                 )
               ],
@@ -7263,10 +7244,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             child: (
                 (showEditingCompleteCustomerAddressInformation)
-                &&
-                (showEditingCompleteCustomerHouseFlatIformation)
-                && (showEditingCompleteCustomerPhoneIformation) &&
-                  (showEditingCompleteCustomerReachoutIformation == false))
+                    &&
+                    (showEditingCompleteCustomerHouseFlatIformation)
+                    && (showEditingCompleteCustomerPhoneIformation) &&
+                    (showEditingCompleteCustomerReachoutIformation == false))
                 ?
 
             Container(
@@ -14590,6 +14571,8 @@ class CustomPicker extends CommonPickerModel {
     }
   }
 
+
+
   @override
   String rightStringAtIndex(int index) {
     if (index >= 0 && index < 60) {
@@ -14598,6 +14581,9 @@ class CustomPicker extends CommonPickerModel {
       return null;
     }
   }
+
+
+
 
   @override
   String leftDivider() {
@@ -14620,7 +14606,11 @@ class CustomPicker extends CommonPickerModel {
         ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
         this.currentLeftIndex(), this.currentMiddleIndex(), this.currentRightIndex())
         : DateTime(currentTime.year, currentTime.month, currentTime.day, this.currentLeftIndex(),
-        this.currentMiddleIndex(), this.currentRightIndex());
+        this.currentMiddleIndex(),
+
+        this.currentRightIndex()
+
+    );
   }
 }
 
