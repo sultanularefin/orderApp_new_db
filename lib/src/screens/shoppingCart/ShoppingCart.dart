@@ -5283,65 +5283,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 ),
 
-                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                /*
-                                                        Container(
-//                                                  alignment: Alignment.center,
-                                                          padding: EdgeInsets.fromLTRB(
-                                                              0, 2, 0, 0),
-                                                          width: displayWidth(context) /
-                                                              16,
-//                                                height: displayHeight(context)/20,
-                                                          color: Color(0xffffffff),
-//                                                    child:Row(
-//                                                      mainAxisAlignment: MainAxisAlignment.end,
-//                                                      children: <Widget>[
-                                                          child: Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(0, 0, 200, 0),
-                                                            child: Icon(
-
-                                                              Icons.add_shopping_cart,
-                                                              size: 30,
-                                                              color: Color(0xff54463E),
-                                                            ),
-                                                          ),
-
-
-                                                        ),
-                                                        */
-
-
-                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-
-
-                ////WWWEEEQQQ
-
-
               ],
             ),
           ),
-//      _buildShoppingCartInputFieldsUNObscured(oneOrder)
-//      _buildShoppingCartInputFieldsUNObscured (oneOrder):
-//      animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
 
 
-          // ),
-          // ),
-
-          // 1ST CONTAINER OF INPUTS ENDS HERE. HOLDS
-          // LABEL TEXT, OR
-          // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
-
-
-          // 2ND CONTAINER HOLDING THE INPUT FIELDS
-          // AND THE PAYMENT OPTIONS IN A STACK
-          // PAYMENT STACK IS BEHIND THE CUSTOMER INPUT STACK.
-          // BEGINS HERE.
 
           Container(
 //            color:Colors.white38,
-            color:Colors.amber,
+//            color:Colors.amber,
 //            color: Colors.white,
 //            height: displayWidth(context)/2.6,
             height: displayWidth(context) / 2.1,
@@ -5401,7 +5351,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     child:
                     Container(
-                        color: Colors.green,
+//                        color: Colors.green,
+
                         height:displayHeight(context)/18,
                         width: displayWidth(context) / 1.03,
 //GHGHGHGH
@@ -5417,11 +5368,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                             Container(
 //                                                                        width:60,
-                              width: displayWidth(
-                                  context) / 13,
-                              height: displayHeight(context) / 25,
-                              alignment: Alignment.center,
+                              width: displayWidth(context) / 4.5,
+//                              height:displayHeight(context)/18,
+//                              alignment: Alignment.center,
                               margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              height: displayHeight(context) / 24,
+                              padding: EdgeInsets.only(
+                                  left: 4, top: 3, bottom: 3, right: 3),
 
                               child: OutlineButton(
                                 onPressed: () async {
@@ -5440,9 +5393,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                 },
 
+                                splashColor: Colors.indigoAccent,
+//                                highlightElevation: 12,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0.0),
+                                ),
 
-                                clipBehavior: Clip.hardEdge,
-                                splashColor: Color(0xffFEE295),
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+//                                        color:Color(0xff707070),
+                                  style: BorderStyle.solid,
+                                  width: 1.6,
+                                ),
+
+
+//                                clipBehavior: Clip.hardEdge,
+//                                splashColor: Color(0xffFEE295),
 
                                 highlightElevation: 12,
                                 child:
