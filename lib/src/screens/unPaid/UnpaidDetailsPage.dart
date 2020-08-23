@@ -11,6 +11,7 @@ import 'package:foodgallery/src/BLoC/HistoryDetailsBloc.dart';
 import 'package:foodgallery/src/BLoC/UnPaidDetailsBloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
+import 'package:foodgallery/src/DataLayer/models/PaymentTypeSingleSelect.dart';
 import 'package:foodgallery/src/screens/unPaid/UnPaidDetailImage.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -24,7 +25,7 @@ import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:foodgallery/src/screens/history/HistoryDetailImage.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //sizeConstantsList
 
@@ -60,63 +61,30 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   );
 
   String _currentSize;
-//  int _itemCount= 0;
-//  double priceBySize = 0.0;
-//  double priceBasedOnCheeseSauceIngredientsSizeState = 0.0;
-//
-//  List<String> allSubGroups1 = new List<String>();
-
-/*
-
-  @override
-  void initState() {
-
-//    setallSubgroups();
-
-    super.initState();
-  }
-
-
-   */
-
-
-
-
-
-
+  bool showCancelPayButtonFirstTime = true;
+  bool showFullPaymentType =true;
+  int _currentPaymentTypeIndex = 2; // PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
 
   double tryCast<num>(dynamic x, {num fallback }) {
 
-
     bool status = x is num;
-
     if(status) {
       return x.toDouble() ;
     }
-
     if(x is int) {return x.toDouble();}
     else if(x is double) {return x.toDouble();}
-
-
     else return 0.0;
   }
 
   bool showUnSelectedIngredients = false;
   bool showPressWhenFinishButton = false;
 
-
-
   @override
   Widget build(BuildContext context) {
-
-
     final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
-
-
     return Container(
 
         child: StreamBuilder<OneOrderFirebase>(
-
 
             stream:       blocUD.getCurrentUnPaidOrderStream,
             initialData:  blocUD.getCurrentUnPaidFireBaseOrder,
@@ -130,14 +98,6 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                 final OneOrderFirebase oneFireBaseOrderDetail = snapshot.data;
 
 
-
-//                priceBasedOnCheeseSauceIngredientsSizeState =  oneFireBaseOrderDetail.priceBasedOnCheeseSauceIngredientsSize;
-//
-//                priceBySize = oneFireBaseOrderDetail.itemPriceBasedOnSize;
-//
-//                _currentSize = oneFireBaseOrderDetail.itemSize;
-
-
                 return GestureDetector(
                   onTap: () {
                     print('s');
@@ -148,11 +108,6 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                     if (!currentFocus.hasPrimaryFocus) {
                       currentFocus.unfocus();
                     }
-
-// WE DON'T NEED TO CREATE THE ORDER OBJECT AND STORE SELECTED ITEMS, RATHER,
-// WE JUST NEED TO SENT THE SELECTED ITEM IN FOOD GALLERY PAGE.
-// FROM FOOD ITEM PAGE.
-
 
                     print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
 
@@ -212,6 +167,324 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   }
 
 
+  Widget animatedUnObscuredCancelPayButtonUnpaidDetailsPage(){
+
+
+    print(' < >  <   >    << TT       >>  \\   ');
+
+    return
+      Container(
+        margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+            Container(
+              width: displayWidth(context) / 4,
+              height: displayHeight(context) / 24,
+              child: OutlineButton(
+                color: Color(0xffFC0000),
+
+                borderSide: BorderSide(
+                  color: Color(0xffFC0000), // 0xff54463E
+                  style: BorderStyle.solid,
+                  width: 7.6,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                child: Container(
+
+//              alignment: Alignment.center,
+                  child: Text('Cancel',
+                    style: TextStyle(color: Color(0xffFC0000),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,),),
+
+                ),
+
+                onPressed: () {
+                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+
+
+
+                },
+              ),
+            ),
+
+            SizedBox(width: displayWidth(context) / 12,),
+
+            Container(
+              width: displayWidth(context) / 4,
+              height: displayHeight(context) / 24,
+              child: OutlineButton(
+                color: Colors.green,
+
+                borderSide: BorderSide(
+                  color: Colors.green, // 0xff54463E
+                  style: BorderStyle.solid,
+                  width: 7.6,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                child: Container(
+                  child: Text('Pay', style: TextStyle(color: Colors.green,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,),
+                  ),
+                ),
+
+                onPressed: () async {
+
+
+                  print(
+                      'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: ');
+
+
+                    print('something went wrong');
+                  }
+
+
+              ),
+            ),
+
+          ],
+        ),
+      );
+  }
+
+
+
+  IconData getIconForName(String iconName) {
+    print('iconName at getIconForName: $iconName');
+    switch (iconName) {
+      case 'facebook':
+        {
+//        return FontAwesomeIcons.facebook;
+          return FontAwesomeIcons.facebook;
+        }
+        break;
+
+      case 'twitter':
+        {
+          return FontAwesomeIcons.twitter;
+        }
+        break;
+      case 'TakeAway':
+        {
+          return Icons.work;
+        }
+        break;
+      case 'Delivery':
+        {
+          return Icons.local_shipping;
+        }
+        break;
+      case 'Phone':
+        {
+          return Icons.phone_in_talk;
+        }
+        break;
+      case 'DinningRoom':
+        {
+          return Icons.fastfood;
+        }
+
+      case 'Card':
+        {
+          return FontAwesomeIcons.solidCreditCard;
+        }
+        break;
+      case 'Cash':
+        {
+          return FontAwesomeIcons.moneyBill;
+        }
+        break;
+      case 'Later':
+        {
+          return FontAwesomeIcons.bookmark;
+        }
+        break;
+
+
+      default:
+        {
+          return FontAwesomeIcons.home;
+        }
+    }
+  }
+
+//  oneSingleDeliveryType to be replaced with oneSinglePaymentType
+  Widget oneSinglePaymentType(PaymentTypeSingleSelect onePaymentType,
+      int index) {
+    String paymentTypeName = onePaymentType.paymentTypeName;
+    String paymentIconName = onePaymentType.paymentTypeName;
+    String borderColor = onePaymentType.borderColor;
+    const Color OrderTypeIconColor = Color(0xff070707);
+    return Container(
+
+      child: index == _currentPaymentTypeIndex ?
+
+      Container(
+
+        color: Colors.purple,
+        width: displayWidth(context) / 6.5,
+        height: displayHeight(context) / 11,
+        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+        child:
+        InkWell(
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Column(
+              children: <Widget>[
+                new Container(
+                  width: displayWidth(context) / 4.5,
+                  height: displayHeight(context) / 12.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      style: BorderStyle.solid,
+                      width: 2.0,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    getIconForName(paymentTypeName),
+                    color: Color(0xffFC0000),
+                    size: displayWidth(context) / 13,
+                  ),
+
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    paymentTypeName, style:
+                  TextStyle(color: Color(0xffFC0000),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onTap: () async {
+
+            logger.e('index: $index');
+
+          },
+        ),
+      ) :
+
+      Container(
+        width: displayWidth(context) / 6.5,
+        height: displayHeight(context) / 10,
+        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+        child:
+        InkWell(
+
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Column(
+              children: <Widget>[
+                new Container(
+                  width: displayWidth(context) / 4.5,
+                  height: displayHeight(context) / 12.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      style: BorderStyle.solid,
+                      width: 2.0,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    getIconForName(paymentTypeName),
+                    color: Colors.grey,
+                    size: displayWidth(context) / 13,
+                  ),
+
+                ),
+                Container(
+
+                  alignment: Alignment.center,
+                  child: Text(
+                    paymentTypeName, style:
+                  TextStyle(
+                      color: Color(0xffFC0000),
+
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onTap: () async {
+
+            logger.e('index: $index');
+            print('YY YY  $index  YY   YY    ');
+
+          },
+        ),
+
+      ),
+    );
+  }
+
+
+
+
+  Widget _buildPaymentTypeSingleSelectOption() {
+
+    final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+
+    return StreamBuilder(
+        stream: blocUD.getCurrentPaymentTypeSingleSelectStream,
+        initialData: blocUD.getCurrentPaymentType,
+
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            print('!snapshot.hasData');
+
+            return Container(child: Text('Null'));
+          }
+          else {
+            List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot
+                .data;
+
+//            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
+
+            print('paymentTypes: $allPaymentTypesSingleSelect');
+
+
+            return Center(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+
+//              reverse: true,
+
+                shrinkWrap: true,
+                itemCount: allPaymentTypesSingleSelect.length,
+
+                itemBuilder: (_, int index) {
+                  return oneSinglePaymentType(
+                      allPaymentTypesSingleSelect[index],
+                      index);
+                },
+
+              ),
+            );
+          }
+        }
+
+      // M VSM ORG VS TODO. ENDS HERE.
+    );
+  }
+
   Widget initialView(OneOrderFirebase oneFireBaseOrder){
 
     List<OrderedItem> orderedItems = oneFireBaseOrder.orderedItems;
@@ -254,12 +527,6 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
           boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(5)),
           ),
         ),
-
-//                    MAX_DEPTH,DEFAULT_CURVE
-
-//
-//                      BorderRadius.circular(25),
-//                  border: Border.all(
 
         child: Column(
           mainAxisAlignment: MainAxisAlignment
@@ -390,7 +657,6 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                 0, 0, 0,
                                 0),
 
-//                          child: Text('FoodImageURL')
 
                             child:
                             UnPaidDetailImage(
@@ -401,8 +667,6 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 //
                             ),
-//                          formattedOrderPlacementDatesTimeOnly2
-//),
 
                           ),
 
@@ -468,9 +732,9 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           style: TextStyle(
                                             fontSize: 20,
                                 fontWeight: FontWeight.bold,
-//                                                      color: Colors.white
+
                                             color:Colors.grey,
-//                                fontFamily: 'Itim-Regular',
+
 
                                           )
                                       ),
@@ -508,9 +772,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           style: TextStyle(
                                             fontSize: 20,
                                 fontWeight: FontWeight.bold,
-//                                                      color: Colors.white
                                             color:Colors.grey,
-//                                fontFamily: 'Itim-Regular',
+
 
                                           )
                                       ),
@@ -523,9 +786,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           style: TextStyle(
                                             fontSize: 20,
                                 fontWeight: FontWeight.bold,
-//                                                      color: Colors.white
+
                                             color:Colors.grey,
-//                                fontFamily: 'Itim-Regular',
 
                                           )
                                       ),
@@ -660,26 +922,9 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                   ),
                                 ),
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                               ],
                             ),
-//                          formattedOrderPlacementDatesTimeOnly2
-//),
-
                           ),
-
 
 
                         ],
@@ -693,10 +938,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                       color:Colors.grey,
                     ),
 
-
-
                     Container(
-//                      color:Colors.purpleAccent,
+
                       height:displayHeight(context)/1.7,
 
 
@@ -738,70 +981,21 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
             Center(
-              child: OutlineButton(
-                padding: EdgeInsets.all(0),
-                splashColor: Colors.lightBlueAccent,
-                highlightElevation: 12,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+              child: AnimatedSwitcher(
+                child:
+                  showCancelPayButtonFirstTime ==true?
+                  animatedUnObscuredCancelPayButtonUnpaidDetailsPage():
+                  Container(
 
-                borderSide: BorderSide(
-                  color:Color(0xff707070),
-                  style: BorderStyle.solid,
-                  width: 1.6,
-                ),
+                    color:Colors.white,
+//                                            height: 200,
+                    height: displayHeight(context) / 9,
+                    width: displayWidth(context)/1.03,
+                    child: _buildPaymentTypeSingleSelectOption(),
 
-                child: Container(
-
-                  child:
-                  Column(
-                    children: [
-                      Container(
-                        width: 150,
-                        height:150,
-                        child: QrImage(
-                          data: "1234567890",
-                          version: QrVersions.auto,
-                          size: 200.0,
-                        ),
-                      ),
-
-                      Text(
-                        'check order',
-
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-//                        color: Color(0xffF50303),
-                          fontSize: 23,
-//                          fontFamily: 'Itim-Regular',
-                        ),
-                      ),
-
-                    ],
                   ),
-                ),
-                onPressed: () {
-
-                  print('-------------- ---------- pressed');
-
-                },
-
-
-              ),
+              )
             ),
-
-
-
-
-
-
-
-
-
-/*  TOP CONTAINER IN THE STACK WHICH IS VISIBLE ENDS HERE. */
 
           ],
         ),

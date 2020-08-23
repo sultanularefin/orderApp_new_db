@@ -7,6 +7,7 @@ import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
+import 'package:foodgallery/src/DataLayer/models/PaymentTypeSingleSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 
 
@@ -41,6 +42,20 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   Stream<OneOrderFirebase> get getCurrentUnPaidOrderStream => _oneFireBaseOrderController.stream;
 
 
+  /* all _paymentType begins here.....*/
+
+  List<PaymentTypeSingleSelect> _paymentType;
+  List<PaymentTypeSingleSelect> get getCurrentPaymentType => _paymentType;
+  final _paymentTypeController = StreamController <List<PaymentTypeSingleSelect>>.broadcast();
+  Stream  <List<PaymentTypeSingleSelect>> get getCurrentPaymentTypeSingleSelectStream => _paymentTypeController.stream;
+
+  /* all _paymentType ends here.....*/
+
+
+
+
+  //  Stream  <List<PaymentTypeSingleSelect>> get getCurrentPaymentTypeSingleSelectStream => _paymentTypeController.stream;
+
   void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSaucesString) async {
 
     print('sauceItems0: $sauceItems0 length: ${sauceItems0.length}');
@@ -65,11 +80,59 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   }
 
+
+  void initiatePaymentTypeSingleSelectOptions(int selectedPayment){
+    PaymentTypeSingleSelect Later = new PaymentTypeSingleSelect(
+      borderColor: '0xff739DFA',
+      index: 0,
+      isSelected: false,
+      paymentTypeName: 'Later',
+      iconDataString: 'FontAwesomeIcons.facebook',
+
+      paymentIconName: 'Later',
+    );
+
+    PaymentTypeSingleSelect Cash = new PaymentTypeSingleSelect(
+      borderColor: '0xff95CB04',
+      index: 1,
+      isSelected: false,
+      paymentTypeName: 'Cash',
+      iconDataString: 'FontAwesomeIcons.twitter',
+
+      paymentIconName: 'Cash',
+    );
+
+
+//     0xffFEE295 false
+    PaymentTypeSingleSelect Card = new PaymentTypeSingleSelect(
+      borderColor: '0xffFEE295',
+      index: 2,
+      isSelected: false,
+      paymentTypeName: 'Card',
+      iconDataString: 'FontAwesomeIcons.home',
+
+      paymentIconName: 'Card',
+    );
+
+    List <PaymentTypeSingleSelect> paymentTypeSingleSelectArray = new List<PaymentTypeSingleSelect>();
+
+
+    paymentTypeSingleSelectArray.addAll([Later, Cash, Card  ]);
+
+    paymentTypeSingleSelectArray[selectedPayment].isSelected =true;
+
+    _paymentType = paymentTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+
+    _paymentTypeController.sink.add(_paymentType);
+  }
+
+
   // CONSTRUCTOR BEGINS HERE.
   UnPaidDetailsBloc(
       OneOrderFirebase oneFireBaseOrder,
       ) {
 
+    initiatePaymentTypeSingleSelectOptions(2);
     logger.i('oneFoodItem.itemName: ${oneFireBaseOrder.documentId}');
 
     _curretnFireBaseOrder= oneFireBaseOrder;
@@ -158,6 +221,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   void dispose() {
 
     _oneFireBaseOrderController.close();
+    _paymentTypeController.close();
 
   }
 }

@@ -358,23 +358,7 @@ class ShoppingCartBloc implements Bloc {
 
     return multiplied;
   }
-  /*
 
-  void initiateCustomerInformation(){
-    CustomerInformation customerInfoAtConstructor = new CustomerInformation(
-      address:'',
-      flatOrHouseNumber:'',
-      phoneNumber:'',
-      etaTimeInMinutes:-1,
-//        CustomerInformation currentUser = _oneCustomerInfo;
-//    currentUser.address = address;
-//
-
-    );
-    _oneCustomerInfo = customerInfoAtConstructor;
-    _customerInformationController.sink.add(_oneCustomerInfo);
-  }
-  */
 
   void initiatePaymentTypeSingleSelectOptions(int selectedPayment){
     PaymentTypeSingleSelect Later = new PaymentTypeSingleSelect(
@@ -409,18 +393,6 @@ class ShoppingCartBloc implements Bloc {
       paymentIconName: 'Card',
     );
 
-//
-//    OrderTypeSingleSelect _dinningRoom = new OrderTypeSingleSelect(
-//      borderColor: '0xffB47C00',
-//      index: 3,
-//      isSelected: false,
-//      orderType: 'DinningRoom',
-//      iconDataString: 'Icons.audiotrack',
-//      orderIconName: 'fastfood',
-//    );
-
-
-
     List <PaymentTypeSingleSelect> paymentTypeSingleSelectArray = new List<PaymentTypeSingleSelect>();
 
 
@@ -429,9 +401,6 @@ class ShoppingCartBloc implements Bloc {
     paymentTypeSingleSelectArray[selectedPayment].isSelected =true;
 
     _paymentType = paymentTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
-
-
-//    initiateAllMultiSelectOptions();
 
     _paymentTypeController.sink.add(_paymentType);
   }
@@ -443,32 +412,13 @@ class ShoppingCartBloc implements Bloc {
 
 
     List <PaymentTypeSingleSelect> singleSelectArray = _paymentType;
-//    _currentOrderTypeIndex
-
-    /*
-    logger.w('singleSelectArray[oldPaymentIndex].isSelected:'
-        ' ${singleSelectArray[oldPaymentIndex].isSelected}');
-
-
-    */
 
     singleSelectArray[oldPaymentIndex].isSelected =
     !singleSelectArray[oldPaymentIndex].isSelected;
 
-    /*
-    logger.w('singleSelectArray[oldPaymentIndex].isSelected:'
-
-        ' ${singleSelectArray[oldPaymentIndex].isSelected}');
-
-     */
 
     singleSelectArray [newPaymentIndex].isSelected =
     !singleSelectArray[newPaymentIndex].isSelected;
-
-//    singleSelectArray[index].isSelected = true;
-
-//    x.isSelected= !x.isSelected;
-
 
     Order currentOrderTemp = _curretnOrder;
 
@@ -478,8 +428,6 @@ class ShoppingCartBloc implements Bloc {
     _paymentType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
     _curretnOrder = currentOrderTemp;
-
-//    initiateAllMultiSelectOptions();
 
     _paymentTypeController.sink.add(_paymentType);
     _orderController.sink.add(_curretnOrder);
