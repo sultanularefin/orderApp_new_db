@@ -5941,10 +5941,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: inputFieldsDelivery(unObsecuredInputandPayment),
             ),
 
-
-
-
-
           ):animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
             (unObsecuredInputandPayment),
 
@@ -7549,7 +7545,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
       Order unObsecuredInputandPayment) {
-    print('at animated Un Obscured Card UnSelect Container');
+    print('at animated Un Obscured  Payment UnSelect Container Delivery Phone');
     return
       Column(
         children: <Widget>[
@@ -8701,23 +8697,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: displayWidth(context) / 1.03,
+
+
+//                      *******911
+//                      width: displayWidth(context) / 1.03-60 /* for example*/,
+                      width: ((displayWidth(context) / 1.03) -40) ,
                       height: displayHeight(context) / 11,
 //                height: displayHeight(context) / 12,
 
-                      color: Color(0xffffffff),
+//                      color: Colors.red,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+//                    color: Colors.black,
+                          color: Colors.grey,
+                          style: BorderStyle.solid,
+                          width: 2.0,
+
+                        ),
+                        shape: BoxShape.rectangle,
+//                    borderRadius: BorderRadius.all(Radius.circular(20))
+                      ),
+//                      color: Color(0xffffffff),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+//                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
 
 
                           Container(
-                            width: displayWidth(context) /
-                                1.5,
-                            height: displayHeight(
-                                context) / 20,
-                            color: Color(0xffffffff),
+                            color:Colors.greenAccent,
+                            width: displayWidth(context) / 2.5,
+                            height: displayHeight(context) / 20,
+
+
+//                            color: Color(0xffffffff),
 
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment
@@ -8748,18 +8762,66 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     ),
                                   ),
 
+
+
+                                  /*
                                   CustomPaint(
                                     size: Size(0, 19),
                                     painter: LongPainterForanimatedWidgetShowSelectedOrderType(
                                         context),
                                   ),
 
+                                  */
                                 ]
                             ),
 
                           ),
                           // THE ABOVE PART DEALS WITH LINES AND TEXT,
                           // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
+                          Container(
+
+                            padding: EdgeInsets
+                                .fromLTRB(
+                                0, 0, 0, 0),
+                            alignment: Alignment
+                                .center,
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                    'TOTAL : ',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight
+                                          .bold,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                      color: Color(0xffFC0000)
+                                      ,
+                                    )
+                                ),
+
+                                Text(
+                                    '${
+                                        (unObsecuredInputandPayment.totalPrice
+                                            /* * unObsecuredInputandPayment.totalPrice */)
+                                            .toStringAsFixed(2)} '
+                                        '\u20AC',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight
+                                          .bold,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                      color: Color(0xffFC0000)
+                                      ,
+                                    )
+                                )
+                              ],
+                            ),
+                          ),
+
 
                           Container(
 
@@ -8868,49 +8930,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),
                     ),
 
-                    Container(
 
-                      padding: EdgeInsets
-                          .fromLTRB(
-                          300, 0, 10, 0),
-                      alignment: Alignment
-                          .center,
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                              'TOTAL : ',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight
-                                    .bold,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                color: Color(0xffFC0000)
-                                ,
-                              )
-                          ),
-
-                          Text(
-                              '${
-                                  (unObsecuredInputandPayment.totalPrice
-                                      /* * unObsecuredInputandPayment.totalPrice */)
-                                      .toStringAsFixed(2)} '
-                                  '\u20AC',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight
-                                    .bold,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                color: Color(0xffFC0000)
-                                ,
-                              )
-                          )
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               );
@@ -9106,6 +9126,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
       Order unObsecuredInputandPayment) {
 //    XYZ
+  
     return
       Container(
 //        color: Colors.blueGrey,
@@ -9116,23 +9137,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
         child: Column(
           children: <Widget>[
             Container(
-              width: displayWidth(context) / 1.03,
-              height: displayHeight(context) / 20,
-//              color: Color(0xffffffff),
-//              color: Colors.blueGrey,
-              color: Colors.white,
+
+              width: ((displayWidth(context) / 1.03) -40) ,
+              height: displayHeight(context) / 11,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey,
+                  style: BorderStyle.solid,
+                  width: 2.0,
+                ),
+                shape: BoxShape.rectangle,
+
+              ),
+//              color: Colors.white,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .start
-                ,
-                crossAxisAlignment: CrossAxisAlignment
-                    .center,
+//                mainAxisAlignment: MainAxisAlignment.start,
+//                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-
-
                   Container(
-                    width: displayWidth(context) /
-                        1.5,
+//                    width: displayWidth(context) / 1.5,
+                    width: displayWidth(context) / 2.5,
                     height: displayHeight(
                         context) / 20,
                     color: Color(0xffffffff),
@@ -9166,52 +9192,66 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
                           ),
 
+                          /*
                           CustomPaint(
                             size: Size(0, 19),
                             painter: LongPainterForPaymentUnSelected(
                                 context),
                           ),
 
+                          */
 
                         ]
                     ),
 
                   ),
 
-                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                  /*
-                                                        Container(
-//                                                  alignment: Alignment.center,
-                                                          padding: EdgeInsets.fromLTRB(
-                                                              0, 2, 0, 0),
-                                                          width: displayWidth(context) /
-                                                              16,
-//                                                height: displayHeight(context)/20,
-                                                          color: Color(0xffffffff),
-//                                                    child:Row(
-//                                                      mainAxisAlignment: MainAxisAlignment.end,
-//                                                      children: <Widget>[
-                                                          child: Container(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(0, 0, 200, 0),
-                                                            child: Icon(
 
-                                                              Icons.add_shopping_cart,
-                                                              size: 30,
-                                                              color: Color(0xff54463E),
-                                                            ),
-                                                          ),
+                  Container(
 
+                    padding: EdgeInsets
+                        .fromLTRB(
+                        0, 0, 10, 0),
+                    alignment: Alignment
+                        .center,
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                            'TOTAL : ',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight
+                                  .bold,
+//                                                        fontFamily: 'GreatVibes-Regular',
 
-                                                        ),
-                                                        */
+//                    fontStyle: FontStyle.italic,
+                              color: Color(0xffFC0000)
+                              ,
+                            )
+                        ),
 
+                        Text(
+                            '${
+                                (unObsecuredInputandPayment.totalPrice
+                                    /* * unObsecuredInputandPayment.totalPrice */)
+                                    .toStringAsFixed(2)} '
+                                '\u20AC',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight
+                                  .bold,
+//                                                        fontFamily: 'GreatVibes-Regular',
 
-                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+//                    fontStyle: FontStyle.italic,
+                              color: Color(0xffFC0000)
+                              ,
+                            )
+                        )
+                      ],
+                    ),
+                  ),
 
-
-                  ////WWWEEEQQQ
-
+                  /* Total Text ends here...*/
 
                 ],
               ),
@@ -9219,49 +9259,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //            GYG
             // 2ND CONTAINER HOLDS THE total price BEGINS HERE..
-            Container(
 
-              padding: EdgeInsets
-                  .fromLTRB(
-                  300, 0, 10, 0),
-              alignment: Alignment
-                  .center,
-              child: Row(
-                children: <Widget>[
-                  Text(
-                      'TOTAL : ',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight
-                            .bold,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                        color: Color(0xffFC0000)
-                        ,
-                      )
-                  ),
-
-                  Text(
-                      '${
-                          (unObsecuredInputandPayment.totalPrice
-                              /* * unObsecuredInputandPayment.totalPrice */)
-                              .toStringAsFixed(2)} '
-                          '\u20AC',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight
-                            .bold,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                        color: Color(0xffFC0000)
-                        ,
-                      )
-                  )
-                ],
-              ),
-            ),
 
             Container(
 //              padding: EdgeInsets.fromLTRB(displayWidth(context)/6, 20, 0, 5),
@@ -9904,6 +9902,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
   bool zeroORMoreInputsEmpty(CustomerInformation customerInfoFieldsCheck) {
+
     print(
         ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
     print('customerInfoFieldsCheck '
@@ -9929,7 +9928,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             .trim()
             .length > 0)
         &&
-        (customerInfoFieldsCheck.etaTimeInMinutes != -1)
+        (customerInfoFieldsCheck.etaTimeInMinutes != -1 || (customerInfoFieldsCheck.etaTimeOfDay.hour != -0))
     ) {
       print('WILL RETURN FALSE');
       return false;
