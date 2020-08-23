@@ -17,11 +17,7 @@ import 'package:logger/logger.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 
 import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
-
-
 import 'dart:async';
-
-
 
 //Map<String, int> mapOneSize = new Map();
 
@@ -191,6 +187,53 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     multiSelectArray.addAll([_org,_vs,_vsm,_m]);
 
   }
+
+
+
+  void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newPaymentIndex,int oldPaymentIndex){
+
+    print('new Payment Index is $newPaymentIndex');
+    print('old Payment Index is $oldPaymentIndex');
+
+
+    List <PaymentTypeSingleSelect> singleSelectArray = _paymentType;
+
+    singleSelectArray[oldPaymentIndex].isSelected =
+    !singleSelectArray[oldPaymentIndex].isSelected;
+
+
+    singleSelectArray [newPaymentIndex].isSelected =
+    !singleSelectArray[newPaymentIndex].isSelected;
+
+
+    _paymentType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+
+    _paymentTypeController.sink.add(_paymentType);
+
+
+    OneOrderFirebase temp = _curretnFireBaseOrder;
+    temp.tempPaymentIndex = newPaymentIndex;
+    _curretnFireBaseOrder = temp;
+    _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
+
+
+  }
+
+
+
+  // not added to anything yet...
+
+  void clearSubscription(){
+
+    _curretnFireBaseOrder = null; ;
+    _paymentType = [];
+
+    _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
+    _paymentTypeController.sink.add(_paymentType);
+
+
+  }
+
 
 
   // HELPER METHOD tryCast Number (1)

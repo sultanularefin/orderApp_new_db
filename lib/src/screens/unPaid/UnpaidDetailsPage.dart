@@ -96,6 +96,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
               else {
 
                 final OneOrderFirebase oneFireBaseOrderDetail = snapshot.data;
+                _currentPaymentTypeIndex = oneFireBaseOrderDetail.tempPaymentIndex;
 
 
                 return GestureDetector(
@@ -169,90 +170,194 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
   Widget animatedUnObscuredCancelPayButtonUnpaidDetailsPage(){
 
-
     print(' < >  <   >    << TT       >>  \\   ');
 
-    return
-      Container(
-        margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
+    final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+    return Container(
 
-            Container(
-              width: displayWidth(context) / 4,
-              height: displayHeight(context) / 24,
-              child: OutlineButton(
-                color: Color(0xffFC0000),
+      height: displayHeight(context) / 8.2,
+      child: StreamBuilder(
+        stream: blocUD.getCurrentPaymentTypeSingleSelectStream,
+        initialData: blocUD.getCurrentPaymentType,
 
-                borderSide: BorderSide(
-                  color: Color(0xffFC0000), // 0xff54463E
-                  style: BorderStyle.solid,
-                  width: 7.6,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-                child: Container(
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            print('!snapshot.hasData');
+//        return Center(child: new LinearProgressIndicator());
+            return Container(child: Text('Null'));
+          }
+          else {
+            List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot.data;
+
+            PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
+                .firstWhere((onePaymentType) =>
+            onePaymentType.isSelected == true);
+
+            _currentPaymentTypeIndex = selectedOne.index;
+//              logger.e('selectedOne.index',selectedOne.index);
+            String paymentTypeName = selectedOne.paymentTypeName;
+            String paymentIconName = selectedOne.paymentIconName;
+            String borderColor = selectedOne.borderColor;
+            const Color OrderTypeIconColor = Color(0xff070707);
+
+
+            return
+              Container(
+//                color: Colors.deepOrange,
+                margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
+
+                child: Row(
+//                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+
+
+                    Container(
+
+//                            width: 100,
+                      width: displayWidth(context) / 8,
+                      height: displayHeight(context) / 10,
+
+                      child:
+                      InkWell(
+                        child: Container(
+
+                          padding: EdgeInsets.fromLTRB(0, 10, 20, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+
+                            children: <Widget>[
+                              new Container(
+                                width: 100,
+                                height: displayHeight(context) / 15,
+                                decoration: BoxDecoration(
+
+                                  color: Color(0xffF4F6CE),
+                                  shape: BoxShape.circle,
+
+                                ),
+
+                                child: Icon(
+                                  getIconForName(paymentTypeName),
+                                  color: Colors.black,
+                                  size: displayHeight(context) / 30,
+
+                                ),
+                              ),
+
+                              Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  paymentTypeName, style:
+                                TextStyle(
+                                    color: Color(0xffFC0000),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          setState(() {
+
+                            showCancelPayButtonFirstTime = true;
+                            showFullPaymentType = !showFullPaymentType;
+                          });
+                        },
+                      ),
+
+                    ),
+
+
+
+                    /*
+                    Container(
+                      width: displayWidth(context) / 4,
+                      height: displayHeight(context) / 24,
+                      child: OutlineButton(
+                        color: Color(0xffFC0000),
+
+                        borderSide: BorderSide(
+                          color: Color(0xffFC0000), // 0xff54463E
+                          style: BorderStyle.solid,
+                          width: 7.6,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35.0),
+                        ),
+                        child: Container(
 
 //              alignment: Alignment.center,
-                  child: Text('Cancel',
-                    style: TextStyle(color: Color(0xffFC0000),
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,),),
+                          child: Text('Cancel',
+                            style: TextStyle(color: Color(0xffFC0000),
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,),),
 
+                        ),
+
+                        onPressed: () {
+                          print(
+                              'on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+
+
+                          setState(() {
+                            showCancelPayButtonFirstTime = true;
+                          });
+                        },
+                      ),
+                    ),
+
+                    */
+
+
+//                    SizedBox(width: displayWidth(context) / 12,),
+
+                    Container(
+                      width: displayWidth(context) / 4,
+                      height: displayHeight(context) / 24,
+                      child: OutlineButton(
+                        color: Colors.green,
+
+                        borderSide: BorderSide(
+                          color: Colors.green, // 0xff54463E
+                          style: BorderStyle.solid,
+                          width: 7.6,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35.0),
+                        ),
+                        child: Container(
+                          child: Text('Pay', style: TextStyle(color: Colors.green,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,),
+                          ),
+                        ),
+
+                        onPressed: () async {
+                          print(
+                              'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: ');
+
+
+                          print('something went wrong');
+
+
+                          setState(() {
+                            showCancelPayButtonFirstTime = true;
+                          });
+                        },
+
+                      ),
+                    ),
+
+                  ],
                 ),
-
-                onPressed: () {
-                  print('on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
-
-
-
-                },
-              ),
-            ),
-
-            SizedBox(width: displayWidth(context) / 12,),
-
-            Container(
-              width: displayWidth(context) / 4,
-              height: displayHeight(context) / 24,
-              child: OutlineButton(
-                color: Colors.green,
-
-                borderSide: BorderSide(
-                  color: Colors.green, // 0xff54463E
-                  style: BorderStyle.solid,
-                  width: 7.6,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-                child: Container(
-                  child: Text('Pay', style: TextStyle(color: Colors.green,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,),
-                  ),
-                ),
-
-                onPressed: () async {
-
-
-                  print(
-                      'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: ');
-
-
-                    print('something went wrong');
-                  }
-
-
-              ),
-            ),
-
-          ],
-        ),
-      );
+              );
+          }
+        },
+      ),
+    );
   }
 
 
@@ -374,6 +479,45 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             logger.e('index: $index');
 
+            setState(() {
+              showCancelPayButtonFirstTime = false;
+            });
+
+
+            final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+
+//            final shoppingCartBloc = BlocProvider.of<UnPaidDetailsBloc>(context);
+
+            blocUD.setPaymentTypeSingleSelectOptionForOrder(
+                onePaymentType, index, _currentPaymentTypeIndex);
+
+            // work 0 august 20...
+            logger.e('index: $index');
+            print('YY YY  $index  YY   YY    ');
+            if(index==0){
+//              0 means later option...
+
+              print(' 0 means later option...');
+
+              // TAkEAWAY AND DINNING  Recite Print. ....
+              final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+//              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+              print('later button pressed....:');
+
+
+            }
+            else {
+
+
+              setState(() {
+                showFullPaymentType = false;
+              });
+
+              print(' pushing data to firebase required.... ||scanning printer ||  printing recite ');
+            }
+
+
+
           },
         ),
       ) :
@@ -425,8 +569,12 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
           ),
           onTap: () async {
 
+
             logger.e('index: $index');
             print('YY YY  $index  YY   YY    ');
+            setState(() {
+              showCancelPayButtonFirstTime = false;
+            });
 
           },
         ),
@@ -440,6 +588,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
   Widget _buildPaymentTypeSingleSelectOption() {
 
+    print('at _buildPaymentTypeSingleSelectOption of UnPaid Details page... ');
     final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
     return StreamBuilder(
@@ -506,8 +655,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
       decoration:
       new BoxDecoration(
-        borderRadius: new BorderRadius
-            .circular(
+        borderRadius: new BorderRadius.circular(
             10.0),
 //                                    color: Colors.purple,
         color: Colors.white,
@@ -731,7 +879,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold,
 
                                             color:Colors.grey,
 
@@ -746,7 +894,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
                                             color:Colors.grey,
 //                                fontFamily: 'Itim-Regular',
@@ -771,7 +919,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold,
                                             color:Colors.grey,
 
 
@@ -785,7 +933,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold,
 
                                             color:Colors.grey,
 
@@ -941,19 +1089,12 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                     Container(
 
                       height:displayHeight(context)/1.7,
-
-
-
                       width:displayWidth(context) /1.91,
 
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .end,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-
-
 
                           Container(
                               width: 550,
@@ -962,16 +1103,9 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                           ),
 
 //                          FFFFF
-
-
-
-
                         ],
                       ),
                     ),
-
-
-
 
                   ],
                 )
@@ -980,11 +1114,13 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
 
-            Center(
-              child: AnimatedSwitcher(
-                child:
+            Container(
+                child: AnimatedSwitcher(
+                  duration: Duration(
+                      milliseconds: 1000),
+                  child:
                   showCancelPayButtonFirstTime ==true?
-                  animatedUnObscuredCancelPayButtonUnpaidDetailsPage():
+
                   Container(
 
                     color:Colors.white,
@@ -993,8 +1129,13 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                     width: displayWidth(context)/1.03,
                     child: _buildPaymentTypeSingleSelectOption(),
 
+                  ):Container(
+                      height: displayHeight(context) / 9,
+                      width: displayWidth(context)/1.03,
+                      child: animatedUnObscuredCancelPayButtonUnpaidDetailsPage()
+
                   ),
-              )
+                )
             ),
 
           ],

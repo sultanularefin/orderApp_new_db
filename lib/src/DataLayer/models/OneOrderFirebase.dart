@@ -24,6 +24,7 @@ class OneOrderFirebase {
   double                    tax; // 14% upon total Cost.
   double                    priceWithDelivery;
   int                       orderProductionTime;
+  int                       tempPaymentIndex;
 
   OneOrderFirebase(
       {
@@ -47,6 +48,7 @@ class OneOrderFirebase {
         this.tax, // 14% upon total Cost.
         this.priceWithDelivery,
         this.orderProductionTime, //  int minutes3 =minutes2.ceil(); // no need to have double
+        this.tempPaymentIndex,
       }
       );
 
