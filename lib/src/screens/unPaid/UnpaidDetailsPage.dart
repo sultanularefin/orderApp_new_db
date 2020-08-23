@@ -1137,11 +1137,11 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                     width: displayWidth(context)/1.03,
                     child: _buildPaymentTypeSingleSelectOption(),
 
-                  ):Container(
+                  ):
+                  Container(
                       height: displayHeight(context) / 9,
                       width: displayWidth(context)/1.03,
                       child: animatedUnObscuredCancelPayButtonUnpaidDetailsPage()
-
                   ),
                 )
             ),

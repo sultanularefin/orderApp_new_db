@@ -144,10 +144,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
   bool showFullPaymentType = true;
 //  bool showFullOrderType = true;
 
-  bool showEditingCompleteCustomerAddressInformation = false;
-  bool showEditingCompleteCustomerHouseFlatIformation = false;
-  bool showEditingCompleteCustomerPhoneIformation = false;
-  bool showEditingCompleteCustomerReachoutIformation = false;
+  bool showEditingCompleteCustomerAddressInformation      = false;
+  bool showEditingCompleteCustomerHouseFlatIformation     = false;
+  bool showEditingCompleteCustomerPhoneIformation         = false;
+  bool showEditingCompleteCustomerReachoutIformation      = false;
 
 
 //  bool showInputtedCustomerIformation = false;
@@ -1863,7 +1863,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         + displayHeight(context) / 6,
 
 //                color: Color(0xffffffff),
-                    color:Colors.purpleAccent,
+//                    color:Colors.purpleAccent,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -1876,8 +1876,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           width:displayWidth(context)/6,
 
 
-                          height: displayHeight(context) / 20
-                              + displayHeight(context) / 6,
+                          height: displayHeight(context) / 9,
 
 //                      color: Color(0xffffffff),
                           color:Colors.blue,
@@ -2001,8 +2000,34 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
         ),
 
+//911
+        Container(
+//                      *******911
+//                      width: displayWidth(context) / 1.03-60 /* for example*/,
+            width: ((displayWidth(context) / 1.03) -140) ,
+            height: displayHeight(context) / 9,
+//                height: displayHeight(context) / 12,
 
-        animatedShowUserAddressDetailsInLine(currentUser)
+//                      color: Colors.red,
+            decoration: BoxDecoration(
+              border: Border.all(
+//                    color: Colors.black,
+                color: Colors.grey,
+                style: BorderStyle.solid,
+                width: 2.0,
+
+              ),
+              shape: BoxShape.rectangle,
+
+            ),
+//                      color: Color(0xffffffff),
+
+
+
+            child: animatedShowUserAddressDetailsInLine(currentUser)
+
+
+        )
       ],
     );
   }
@@ -2976,162 +3001,207 @@ class _ShoppingCartState extends State<ShoppingCart> {
       CustomerInformation currentUserForInline) {
 
     return Container(
-      color:Colors.pink,
+//      color:Colors.pink,
       width: displayWidth(context) / 1.3,
-      height: displayHeight(context) / 7,
-//      height: displayHeight(context) / 8,
-      // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
-      // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
-//      color: Color(0xffffffff),
+      height: displayHeight(context) / 9,
       child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Container(
 
+              padding:EdgeInsets.fromLTRB(5,5,0,5),
+              child:Text(
+                  'Address',
+
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.normal,
+
+                    color: Color(
+                        0xff000000),
+                  )
+              ),
+
+              height: displayHeight(context) / 33,
+            ),
 
             Container(
-              height: displayHeight(context) / 15,
-//              color:Colors.amber,
-              color: Colors.white,
+//              height: displayHeight(context) / 15,
+              height: displayHeight(context) / 13,
+              color:Colors.amber,
+//              color: Colors.white,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0,0),
                 children: <Widget>[
-                  RaisedButton(
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
 
-                    splashColor: Color(0xffEEF6CE),
-                    highlightColor: Color(0xffEEF6CE),
-                    color: Color(0xffFFFFFF),
 
-                    child: currentUserForInline.address != '' ? Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Colors.lightBlueAccent,
-                      width: displayWidth(context) / 6.9,
-                      height: displayHeight(context) / 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: displayWidth(context) / 34,
-                            child:
-                            Icon(Icons.location_on,
+
+                  Container(
+                    width: displayWidth(context) /5,
+                    height: displayHeight(context) / 9,
+
+                    child: InkWell(
+                      splashColor: Color(0xffEEF6CE),
+                      highlightColor: Color(0xffEEF6CE),
+                      child: currentUserForInline.address != '' ?
+                      Container(
+                        width: displayWidth(context) /5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+                              Icon(Icons.location_on,
                                 size: 32.0,
-                                color: Colors.black),
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Color(0xffFFFFFF),
-//                              color:Color(0xffFC0000),
-//                                  height: displayHeight(context) /28,
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .centerLeft,
-                              child: Text(
-                                  '${currentUserForInline.address}',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
-//                                      textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-
-                                    color: Color(
-                                        0xff000000),
-                                  )
                               ),
                             ),
-                          ),
+                            Expanded(
+
+                              child: Container(
+                                color:Color(0xffFCF5E4),
+//                                color: Color(0xffFFFFFF),
+                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                    '${currentUserForInline.address}',
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+//                                      textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight
+                                          .normal,
+
+                                      color: Colors.redAccent,
+                                    )
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ) : Container(
+                        color: Color(0xffFFFFFF),
+                        width: displayWidth(context) / 5.5,
+                        height: displayHeight(context) / 9,
+                        child: Container(),
+                      ),
+
+                      onTap: () =>
+                      {
+                        setState(() {
+                          showEditingCompleteCustomerAddressInformation =
+                          !showEditingCompleteCustomerAddressInformation;
+                          addressController.text = currentUserForInline.address;
+                        })
+                      },
+                    ),
+                  ),
 
 
-                        ],
-                      ),) : Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Colors.lightBlueAccent,
-                      width: displayWidth(context) / 6.9,
-                      height: displayHeight(context) / 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
+                  Container(
+                    width: displayWidth(context) /5,
+                    height: displayHeight(context) / 9,
 
-                          Container(
+                    child: InkWell(
+                      splashColor: Color(0xffEEF6CE),
+                      highlightColor: Color(0xffEEF6CE),
 
-                            width: displayWidth(context) / 34,
-//                             height: displayHeight(context) /28,
-//                    alignment: Alignment.center,
-//                    margin: EdgeInsets.fromLTRB(5, 0, 3, 0),
-                            child:
-                            Icon(Icons.location_on,
+                      child: currentUserForInline.flatOrHouseNumber != '' ?
+                      Container(
+//                      color:Colors.brown,
+//                        color: Color(0xffFFFFFF),
+
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+                              Icon(
+                                Icons.home,
                                 size: 32.0,
-                                color: Colors.black),
-
-
-                            //final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-//              final locationBloc = BlocProvider.of<>(context);
-                            //shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(x,index,_currentOrderTypeIndex);
-
-//                    setState(() {
-//                      showFullOrderType = !showFullOrderType;
-//                    });
+                                // color: Colors.black
+                              ),
+                            ),
 
 
                             // : Container for 2nd argument of ternary condition ends here.
 
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Color(0xffFFFFFF),
-//                              color:Color(0xffFC0000),
-//                                  height: displayHeight(context) /28,
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .centerLeft,
-                              child: Text(
-                                  'address',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
-//                                      textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
+
+                            Expanded(
+                              child: Container(
+                                color:Color(0xffFCF5E4),
+                                padding: EdgeInsets
+                                    .fromLTRB(
+                                    5, 0, 5, 0),
+                                alignment: Alignment
+                                    .center,
+                                child: Text(
+                                    '${currentUserForInline.flatOrHouseNumber}',
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight
+                                          .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
+                                      color: Colors.redAccent,
+                                    )
+                                ),
                               ),
                             ),
-                          ),
 
 
-                          //ZZZZ
+                            //ZZZZ
 
 
-                        ],
-                      ),),
+                          ],
+                        ),) : Container(
+//                      color:Colors.brown,
+                        color: Color(0xffFFFFFF),
+//                       width:displayWidth(context) /2.6,
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        child: Container(),
+                      ),
 
-                    onPressed: () =>
-                    {
-                      setState(() {
-                        showEditingCompleteCustomerAddressInformation =
-                        !showEditingCompleteCustomerAddressInformation;
-                        addressController.text = currentUserForInline.address;
+                      onTap: () =>
+                      {
+                        setState(() {
+                          showEditingCompleteCustomerHouseFlatIformation =
+                          !showEditingCompleteCustomerHouseFlatIformation;
+
+                          addressController.text = currentUserForInline.address;
+                          houseFlatNumberController.text =
+                              currentUserForInline.flatOrHouseNumber;
 
 //                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
+                        })
+                      },
+                    ),
                   ),
+
+
+
+                  /*
                   RaisedButton(
 
                     splashColor: Color(0xffEEF6CE),
@@ -3143,15 +3213,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       color: Color(0xffFFFFFF),
 
                       width: displayWidth(context) / 6.8,
+                      height: displayHeight(context) / 9,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-
-
                           Icon(
                               Icons.home,
                               size: 32.0,
@@ -3195,6 +3261,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       color: Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
                       width: displayWidth(context) / 6.8,
+                      height: displayHeight(context) / 9,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
                             .start
@@ -3259,133 +3326,255 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     },
                   ),
 
-                  // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
-                  // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
-                  RaisedButton(
-                    splashColor: Color(0xffEEF6CE),
-                    highlightColor: Color(0xffEEF6CE),
-                    color: Color(0xffFFFFFF),
 
-                    child: currentUserForInline.phoneNumber != '' ?
-                    Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Colors.lightGreenAccent,
-                      width: displayWidth(context) / 6.5,
+                  */
 
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
 
-                          Icon(Icons.phone,
-                              size: 32.0,
-                              color: Colors.black)
+                  //phone begins here...
+
+                  Container(
+                    width: displayWidth(context) /5,
+                    height: displayHeight(context) / 9,
+                    child: InkWell(
+                      splashColor: Color(0xffEEF6CE),
+                      highlightColor: Color(0xffEEF6CE),
+                      child: currentUserForInline.phoneNumber != '' ?
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
                           ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
 
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.phoneNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
+                              Icon(Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
                               ),
                             ),
-                          ),
 
-
-                          //ZZZZ
-
-
-                        ],
-                      ),) : Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Colors.lightGreenAccent,
-                      width: displayWidth(context) / 6.5,
-
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Icon(Icons.phone,
-                              size: 32.0,
-                              color: Colors.black)
-                          ,
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  'phone',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
+                            Expanded(
+                              child: Container(
+                                color:Color(0xffFCF5E4),
+                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                    '${currentUserForInline.phoneNumber}',
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.redAccent,
+                                    )
+                                ),
                               ),
                             ),
-                          ),
+                          ],
+                        ),) : Container(
 
-
-                          //ZZZZ
-
-
-                        ],
-                      ),)
-                    ,
-                    onPressed: () =>
-                    {
-                      setState(() {
-                        showEditingCompleteCustomerPhoneIformation =
-                        !showEditingCompleteCustomerPhoneIformation;
-
-
-                        phoneNumberController.text =
-                            currentUserForInline.phoneNumber;
-
-
-//                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
+                        color: Color(0xffFFFFFF),
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        child: Container(),
+                      )
+                      ,
+                      onTap: () =>
+                      {
+                        setState(() {
+                          showEditingCompleteCustomerPhoneIformation =
+                          !showEditingCompleteCustomerPhoneIformation;
+                          phoneNumberController.text =
+                              currentUserForInline.phoneNumber;
+                        })
+                      },
+                    ),
                   ),
 
 
+
+                  //phone ends here....
+
+                  Container(
+                    width: displayWidth(context) /5,
+                    height: displayHeight(context) / 9,
+                    child: InkWell(
+                      splashColor: Color(0xffEEF6CE),
+                      highlightColor: Color(0xffEEF6CE),
+
+
+                      child:
+                      ((currentUserForInline.etaTimeOfDay.hour==-0) &&(
+                          currentUserForInline.etaTimeOfDay.minute==-0
+                      ) && currentUserForInline.etaTimeInMinutes == -1)?
+                      Container()
+                          :
+                      ((currentUserForInline.etaTimeInMinutes != -1)?
+
+
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon( Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+
+
+                            // : Container for 2nd argument of ternary condition ends here.
+
+
+                            Expanded(
+                              child: Container(
+                                color:Color(0xffFCF5E4),
+                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                    '${currentUserForInline.etaTimeInMinutes}',
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.redAccent,
+                                    )
+                                ),
+                              ),
+                            ),
+
+
+                            Container(
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  5, 0, 5, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight
+                                        .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(
+                                        0xff000000),
+                                  )
+                              ),
+                            ),
+
+
+                            //ZZZZ
+
+
+                          ],
+                        ),
+                      ):
+
+
+
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon(Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+                            Expanded(
+                              child: Container(
+                                color:Color(0xffFCF5E4),
+                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                alignment: Alignment.center,
+                                child:
+
+                                Text(
+                                    '${currentUserForInline.etaTimeOfDay.hour} :'
+                                        '${currentUserForInline.etaTimeOfDay.minute} ',
+
+
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.redAccent,
+                                    )
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+
+                      ),
+
+
+
+                      //ZZZZ
+
+                      onTap: () =>
+                      {
+                        setState(() {
+                          showEditingCompleteCustomerReachoutIformation =
+                          !showEditingCompleteCustomerReachoutIformation;
+                          etaController.text =
+                              currentUserForInline.etaTimeInMinutes.toString();
+                        })
+                      },
+
+                    ),
+                  )
+
+
+                  // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
+
+
+
+
+
+                  /*
                   RaisedButton(
                     splashColor: Color(0xffEEF6CE),
                     highlightColor: Color(0xffEEF6CE),
@@ -3397,7 +3586,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ) && currentUserForInline.etaTimeInMinutes == -1)?
                     Container(
                       color: Color(0xffFFFFFF),
-                      height:displayHeight(context) /10,
+//                      height:displayHeight(context) /10,
+                      height: displayHeight(context) / 9,
                       width: displayWidth(context) / 5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment
@@ -3454,7 +3644,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Container(
                       color: Color(0xffFFFFFF),
 //                      color:Color(0xffFC0000),
-                      height:displayHeight(context) /10,
+                      height: displayHeight(context) / 9,
+//                      height:displayHeight(context) /10,
                       width: displayWidth(context) / 5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -3501,7 +3692,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Container(
                       color: Color(0xffFFFFFF),
 //                      color:Color(0xffFC0000),
-                      height:displayHeight(context) /10,
+//                      height:displayHeight(context) /10,
+                      height: displayHeight(context) / 9,
                       width: displayWidth(context) / 5,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -3561,6 +3753,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       })
                     },
                   ),
+
+                  */
+
                 ],
               ),
             )
@@ -5929,18 +6124,24 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
           child:
-          zeroORMoreInputsEmpty
-            (unObsecuredInputandPayment.orderingCustomer) == true ?
+          ((zeroORMoreInputsEmpty(unObsecuredInputandPayment.orderingCustomer) == true)
+              &&(
+                  showEditingCompleteCustomerAddressInformation ==true
+              )
+              &&(
+                  showEditingCompleteCustomerHouseFlatIformation==true
+              )
+              &&( showEditingCompleteCustomerPhoneIformation==true
+              ) &&(showEditingCompleteCustomerReachoutIformation==true)
+          ) ?
 
 
           Container(
 
             color: Color(0xffFFFFFF),
             child: Center(
-//                    color:Colors.white.withOpacity(0.9),
               child: inputFieldsDelivery(unObsecuredInputandPayment),
             ),
-
           ):animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
             (unObsecuredInputandPayment),
 
@@ -9105,7 +9306,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                            height: 200,
               height: displayHeight(context) / 9,
               width: displayWidth(context)/1.03,
-               child: _buildPaymentTypeSingleSelectOption(),
+              child: _buildPaymentTypeSingleSelectOption(),
 
             ),
           ],
