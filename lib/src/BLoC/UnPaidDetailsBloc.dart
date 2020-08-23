@@ -190,8 +190,13 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newPaymentIndex,int oldPaymentIndex){
+  void setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
+      PaymentTypeSingleSelect x,
+      int newPaymentIndex,
+      int oldPaymentIndex
+      ){
 
+    logger.i('at setPaymentTypeSingleSelectOptionForOrder');
     print('new Payment Index is $newPaymentIndex');
     print('old Payment Index is $oldPaymentIndex');
 

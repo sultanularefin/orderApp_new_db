@@ -424,6 +424,11 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
   Widget oneSinglePaymentType(PaymentTypeSingleSelect onePaymentType,
       int index) {
+
+    print('at oneSinglePaymentType(\'\'\'   ');
+    print('_currentPaymentTypeIndex: $_currentPaymentTypeIndex');
+
+
     String paymentTypeName = onePaymentType.paymentTypeName;
     String paymentIconName = onePaymentType.paymentTypeName;
     String borderColor = onePaymentType.borderColor;
@@ -479,17 +484,9 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             logger.e('index: $index');
 
-            setState(() {
-              showCancelPayButtonFirstTime = false;
-            });
 
 
-            final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
-//            final shoppingCartBloc = BlocProvider.of<UnPaidDetailsBloc>(context);
-
-            blocUD.setPaymentTypeSingleSelectOptionForOrder(
-                onePaymentType, index, _currentPaymentTypeIndex);
 
             // work 0 august 20...
             logger.e('index: $index');
@@ -508,12 +505,21 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
             }
             else {
 
+              final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+
+//            final shoppingCartBloc = BlocProvider.of<UnPaidDetailsBloc>(context);
+
+              blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
+                  onePaymentType, index, _currentPaymentTypeIndex);
+
+
 
               setState(() {
                 showFullPaymentType = false;
+                showCancelPayButtonFirstTime = false;
               });
 
-              print(' pushing data to firebase required.... ||scanning printer ||  printing recite ');
+
             }
 
 
@@ -1115,6 +1121,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
             Container(
+              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: AnimatedSwitcher(
                   duration: Duration(
                       milliseconds: 1000),
@@ -1123,9 +1130,10 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                   Container(
 
-                    color:Colors.white,
+                    color:Colors.limeAccent,
+//                    color:Colors.white,
 //                                            height: 200,
-                    height: displayHeight(context) / 9,
+                    height: displayHeight(context) / 8,
                     width: displayWidth(context)/1.03,
                     child: _buildPaymentTypeSingleSelectOption(),
 
