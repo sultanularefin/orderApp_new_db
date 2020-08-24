@@ -5166,12 +5166,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           // showFullOrderType
                           /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                          showCustomerInformationHeader =
-                          true;
-                          showUserInputOptionsLikeFirstTime =
-                          false;
-                          showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                          showCustomerInformationHeader = true;
+                          showUserInputOptionsLikeFirstTime = false;
+                          showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+
                         }
 
 
@@ -5207,6 +5205,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       },
 
                       onEditingComplete: () {
+                        showEditingCompleteCustomerReachoutIformation = true;
                         print(
                             'at editing complete of Customer\'s address ETA Time:');
                       },
@@ -6069,7 +6068,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
     print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
     print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer): ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
 
 
@@ -6089,26 +6089,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
         AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
           child:
-          ((allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer) == false)
+          ((allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
               &&(
-                  showEditingCompleteCustomerAddressInformation == false
+                  showEditingCompleteCustomerAddressInformation == true
               )
               &&(
-                  showEditingCompleteCustomerHouseFlatIformation == false
+                  showEditingCompleteCustomerHouseFlatIformation == true
               )
-              &&( showEditingCompleteCustomerPhoneIformation == false
-              ) &&(showEditingCompleteCustomerReachoutIformation == false )
+              &&( showEditingCompleteCustomerPhoneIformation == true
+              ) &&(showEditingCompleteCustomerReachoutIformation == true)
           ) ?
 
 
+
+          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+            (unObsecuredInputandPayment):
           Container(
 
             color: Color(0xffFFFFFF),
             child: Center(
               child: inputFieldsDelivery(unObsecuredInputandPayment),
             ),
-          ):animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment),
+          ),
+
+
+
+
+
 
         ),
 
