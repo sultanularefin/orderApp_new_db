@@ -213,6 +213,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                   children: <Widget>[
 
 
+                    /*
                     Container(
 
 //                            width: 100,
@@ -270,9 +271,11 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                     ),
 
+                    */
 
 
-                    /*
+
+
                     Container(
                       width: displayWidth(context) / 4,
                       height: displayHeight(context) / 24,
@@ -309,7 +312,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                       ),
                     ),
 
-                    */
+
 
 
 //                    SizedBox(width: displayWidth(context) / 12,),
