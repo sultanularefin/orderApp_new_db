@@ -2982,9 +2982,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.fromLTRB(0, 0, 10,0),
                 children: <Widget>[
-
-
-
                   Container(
                     width: displayWidth(context) /4,
                     height: displayHeight(context) / 9,
@@ -3038,7 +3035,55 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                           ],
                         ),
-                      ) : Container(
+                      ) :showEditingCompleteCustomerAddressInformation ?
+                      Container(
+                        width: displayWidth(context) /5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+//                        color:Colors.pinkAccent,
+
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+                              Icon(Icons.location_on,
+                                size: 32.0,
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) /5.5,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+//                                color: Color(0xffFFFFFF),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                  '${currentUserForInline.address}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+//                                      textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight
+                                        .normal,
+
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      )
+                          :
+                      Container(
                         color: Color(0xffFFFFFF),
                         width: displayWidth(context) /5,
                         height: displayHeight(context) / 9,
@@ -3124,7 +3169,68 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                           ],
-                        ),) : Container(
+                        ),) : (showEditingCompleteCustomerHouseFlatIformation)?
+                      Container(
+//                      color:Colors.brown,
+//                        color: Color(0xffFFFFFF),
+
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+                              Icon(
+                                Icons.home,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+
+                            // : Container for 2nd argument of ternary condition ends here.
+
+
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) /7.4,
+                              height: displayHeight(context) / 9,
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  5, 0, 5, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  '${currentUserForInline.flatOrHouseNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight
+                                        .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+
+
+                            //ZZZZ
+
+
+                          ],
+                        ),)
+                          :
+                      Container(
 //                      color:Colors.brown,
                         color: Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
@@ -3331,7 +3437,54 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
 
                           ],
-                        ),) : Container(
+                        ),) :
+                      (showEditingCompleteCustomerPhoneIformation)?
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon(Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+                            Container(
+                              width: displayWidth(context) /7.4,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+                          ],
+                        ),)
+
+                          :
+                      Container(
 
                         color: Color(0xffFFFFFF),
                         width: displayWidth(context) / 6.8,
@@ -3364,16 +3517,95 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       child:
-                      ((currentUserForInline.etaTimeOfDay.hour==-0) &&(
-                          currentUserForInline.etaTimeOfDay.minute==-0
-                      ) && currentUserForInline.etaTimeInMinutes == -1)?
+                      ((currentUserForInline.etaTimeOfDay.hour==0) &&(
+                          currentUserForInline.etaTimeOfDay.minute==0
+                      ) && (currentUserForInline.etaTimeInMinutes == -1)
+                          &&(showEditingCompleteCustomerReachoutIformation==false)
+                      )?
                       Container(
                         color:Colors.white,
                       )
                           :
-                      ((currentUserForInline.etaTimeInMinutes != -1)?
+                      (currentUserForInline.etaTimeInMinutes != -1)?
 
 
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon( Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+
+
+                            // : Container for 2nd argument of ternary condition ends here.
+
+
+                            Container(
+                              width: displayWidth(context) / 7,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+
+
+                            Container(
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  5, 0, 5, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color(0xff000000),
+                                  )
+                              ),
+                            ),
+
+
+                            //ZZZZ
+
+
+                          ],
+                        ),
+                      ):
+                      (
+                          (showEditingCompleteCustomerReachoutIformation)
+                          &&
+                          (currentUserForInline.etaTimeOfDay.hour == 0)
+                          &&(currentUserForInline.etaTimeOfDay.minute == 0)
+                      ) ?
                       Container(
                         width: displayWidth(context) / 6.5,
                         height: displayHeight(context) / 9,
@@ -3501,11 +3733,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
                           ],
                         ),
-                      )
-
                       ),
-
-
 
                       //ZZZZ
 
@@ -3518,7 +3746,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               currentUserForInline.etaTimeInMinutes.toString();
                         })
                       },
-
                     ),
                   )
 
@@ -4916,10 +5143,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-//                                                                        width:60,
               width: displayWidth(context) / 4.5,
-//                              height:displayHeight(context)/18,
-//                              alignment: Alignment.center,
               margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
               height: displayHeight(context) / 24,
               padding: EdgeInsets.only(
@@ -5038,8 +5262,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                 ),
               ),
-            )
-            ,
+            ),
 
             Container(
               margin: EdgeInsets.fromLTRB(
@@ -5075,74 +5298,45 @@ class _ShoppingCartState extends State<ShoppingCart> {
               padding: EdgeInsets.only(
                   left: 4, top: 3, bottom: 3, right: 3),
               child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment
-                    .center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
 
-//                                          height: 25,
                     height: displayHeight(context) / 40,
                     width: 5,
                     margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
                     child: Icon(
-//                                          Icons.add_shopping_cart,
+
                       Icons.watch_later,
                       size: 28,
                       color: Color(0xffBCBCBD),
                     ),
-
-
                   ),
 
                   Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
                     alignment: Alignment.center,
                     width: displayWidth(context) / 4,
-//                                        color:Colors.purpleAccent,
-                    // do it in both Container
                     child: TextField(
 
                       controller: etaController,
-
-
                       keyboardType: TextInputType.number,
-//                                            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                       inputFormatters: <
                           TextInputFormatter>[
-                        WhitelistingTextInputFormatter
-                            .digitsOnly
+                        WhitelistingTextInputFormatter.digitsOnly
                       ],
-//inputFormatters: <TextInputFormatter>[
-//    WhitelistingTextInputFormatter.digitsOnly
-//],
-                      textInputAction: TextInputAction
-                          .done,
-//
+                      textInputAction: TextInputAction.done,
+
                       onSubmitted: (_) =>
-                          FocusScope.of(context)
-                              .unfocus(),
+                          FocusScope.of(context).unfocus(),
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
-//                                            prefixIcon: new Icon(Icons.search),
-//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//                                        border: Border.all(color: Colors.white, width: 2),
                         border: InputBorder.none,
-//                                              hintText: 'Enter when you want your ordered foods',
                         hintText: 'After XX minutes',
                         hintStyle: TextStyle(
                             color: Color(0xffFC0000),
                             fontSize: 17),
-
-//                                        labelText: 'Search about meal.'
                       ),
 
                       style: TextStyle(
@@ -5191,24 +5385,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           true;
                         } else {
                           setState(() {
-                            showFullOrderDeliveryType = false;
-                            showCustomerInformationHeader =
-                            true;
-                            showUserInputOptionsLikeFirstTime =
-                            false;
-                            showFullPaymentType =
-                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                          }
 
+                            showFullOrderDeliveryType = false;
+                            showCustomerInformationHeader = true;
+                            showUserInputOptionsLikeFirstTime = false;
+                            showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                          }
                           );
                         }
                       },
 
+
                       onEditingComplete: () {
+
+                        logger.i('...................on onEditingComplete of  ETA..........  ');
                         showEditingCompleteCustomerReachoutIformation = true;
                         print(
-                            'at editing complete of Customer\'s address ETA Time:');
+                            'MMMM      MMMM           MMMM     at editing complete of Customer\'s address ETA Time:');
                       },
+
 
 
                     ),
@@ -6127,8 +6322,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   Widget inputFieldsDelivery(Order unObsecuredInputandPayment){
-    CustomerInformation currentUser = unObsecuredInputandPayment
-        .orderingCustomer;
+
+
+    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
 
 
     return
