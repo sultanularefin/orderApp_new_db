@@ -95,3 +95,34 @@ PS C:\Users\Taxi\Programs\kebabBank2> flutter doctor
 PS C:\Users\Taxi\Programs\kebabBank2>
 ```
 
+
+## august 24, monday, 2020:
+## flutter --version , dart --version , flutter doctor
+## arefin windows pc.
+## after downgrading flutter as recite printing wasn't successful due to scanner didn't find the printer.
+
+
+```dart
+PS C:\Users\Taxi\Programs\kebabBank2> dart --version
+Dart SDK version: 2.9.0 (stable) (Fri Jul 31 10:59:48 2020 +0200) on "windows_x64"
+PS C:\Users\Taxi\Programs\kebabBank2> flutter --version
+Flutter 1.20.1 • channel unknown • unknown source
+Framework • revision 2ae34518b8 (3 weeks ago) • 2020-08-05 19:53:19 -0700
+Engine • revision c8e3b94853
+Tools • Dart 2.9.0
+PS C:\Users\Taxi\Programs\kebabBank2> flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel unknown, 1.20.1, on Microsoft Windows [Version 10.0.19041.388], locale en-US)
+[!] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+    ✗ Android license status unknown.
+      Try re-installing or updating your Android SDK Manager.
+      See https://developer.android.com/studio/#downloads or visit
+      https://flutter.dev/docs/get-started/install/windows#android-setup for detailed instructions.
+[✓] Android Studio (version 4.0)
+[✓] VS Code, 64-bit edition (version 1.48.1)
+[!] Connected device
+    ! No devices available
+
+! Doctor found issues in 2 categories.
+PS C:\Users\Taxi\Programs\kebabBank2>
+```
