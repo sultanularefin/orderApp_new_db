@@ -127,6 +127,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 PS C:\Users\Taxi\Programs\kebabBank2>
 ```
 
+
 ## verson v1.17.5, released on july;:::
 
 ## flutter doctor:
@@ -146,4 +147,29 @@ Doctor summary (to see all details, run flutter doctor -v):
 
 ! Doctor found issues in 2 categories.
 PS C:\> flutter doctor
+=======
+
+### the time picker works differently with this flutter version:
+###  also text input in shopping cart of customer not working ,, can't write from keyborad..
+
+
+
+```dart
+BUILD SUCCESSFUL in 16s
+14 actionable tasks: 14 up-to-date
+taxi@taxi-HP-ProBook-4540s:~/Programs/linkup/android$ cd ..
+taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$ flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel unknown, v1.17.5, on Linux, locale en_US.UTF-8)
+
+[!] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+    ! Some Android licenses not accepted.  To resolve this, run: flutter doctor --android-licenses
+[✓] Android Studio (version 4.0)
+[✓] VS Code (version 1.48.0)
+[✓] Connected device (1 available)
+
+! Doctor found issues in 1 category.
+taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$
+
+
 ```
