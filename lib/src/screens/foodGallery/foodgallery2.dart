@@ -1349,7 +1349,7 @@ Widget work1(BuildContext context){
               flatOrHouseNumber: '',
               phoneNumber: '',
               etaTimeInMinutes: -1,
-              etaTimeOfDay: new TimeOfDay(hour: -0,minute: -0),
+              etaTimeOfDay: new TimeOfDay(hour:-0,minute:-0),
 //              etaTimeOfDay: new TimeOfDay(),
 //        CustomerInformation currentUser = _oneCustomerInfo;
 //    currentUser.address = address;

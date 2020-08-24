@@ -237,29 +237,7 @@ class ShoppingCartBloc implements Bloc {
       ) {
     discoverDevicesConstructor();
 
-    /*
-    if(x.page==1){
-      cancelButtonPressed();
 
-    }
-    else {
-  */
-//      logger.e('enterred into ShoppingCartBloc ');
-
-//    Order x = new Order(
-//      foodItemName: foodItemDetailsbloc.currentFoodItem.itemName,
-//      foodItemImageURL: foodItemDetailsbloc.currentFoodItem.imageURL,
-//      unitPrice:initialPriceByQuantityANDSize ,
-//      foodDocumentId: foodItemDetailsbloc.currentFoodItem.documentId,
-//      quantity: _itemCount,
-//      foodItemSize: _currentSize,
-//      ingredients: foodItemDetailsbloc.getDefaultIngredients,
-//    );
-
-
-//    getAllIngredients();
-
-//    List<NewIngredient> allIngsScoped= _allIngItems;
     print("at the begin of Constructor [ShoppingCartBloc]");
 
 //    print('food Item name in Shopping Cart BlocK ${x.foodItemName}');
@@ -1437,12 +1415,6 @@ class ShoppingCartBloc implements Bloc {
   setETAForOrder2(TimeOfDay test){
 
 
-
-    /*
-    double minutes2 = double.parse(minutes);
-    int minutes3 =minutes2.ceil(); // no need to have double
-
-    */
 
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
