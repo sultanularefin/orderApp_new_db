@@ -8305,6 +8305,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),),
 
 
+
+
                 onPressed: () async {
 
                   // TAkEAWAY AND DINNING  Recite Print. ....
@@ -8421,7 +8423,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   }
 
                 },
-
 
               ),
             ),
@@ -8588,6 +8589,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+
                 onPressed: () async {
 
                   // Delivery Phone Recite Print.
@@ -8620,7 +8622,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
                             .orderdocId}');
 
-                    List<PrinterBluetooth> blueToothDevicesState = shoppingCartBloc.getDevices;
+                    List<PrinterBluetooth> blueToothDevicesState
+                    = shoppingCartBloc.getDevices;
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
@@ -8711,8 +8714,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   }
 
                 },
-
-
                 // ---
               ),
             ),
