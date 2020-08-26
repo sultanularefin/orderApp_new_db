@@ -408,7 +408,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
                   // image and string JEDILINE BEGINS HERE.
                   SizedBox(
                     height: kToolbarHeight + 6, // 6 for spacing padding at top for .
-                    width: 200,
+                    // width: 200,
                     child:  Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -426,6 +426,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                           child: Image.asset('assets/Path2008.png'),
 
                         ),
+
+
                         Container(
 
                           margin: EdgeInsets.symmetric(
@@ -447,14 +449,14 @@ class _FoodGalleryState extends State<FoodGallery2> {
                                 Text(
                                   'Jediline',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(fontSize: 30,
+                                  style: TextStyle(fontSize: 20,
                                       color: Color(0xff07D607),
                                       fontFamily: 'Itim-Regular'),
                                 ),
                                 Text(
                                   'Online Orders',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(fontSize: 16.42,color: Color(0xff07D607)),
+                                  style: TextStyle(fontSize: 10.42,color: Color(0xff07D607)),
                                 ),
                               ],
                             ),
@@ -515,7 +517,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
 //                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 3.3,
+                    width: displayWidth(context) / 4.3,
                     height: displayHeight(context) / 27,
                     padding: EdgeInsets.only(
                         left: 4, top: 3, bottom: 3, right: 3),
@@ -550,11 +552,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
                         ),
 
                         Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
                           alignment: Alignment.center,
-                          width: displayWidth(context) / 4.7,
+                          width: displayWidth(context) / 7.7,
 //                                        color:Colors.purpleAccent,
                           // do it in both Container
                           child: TextField(
@@ -620,10 +619,6 @@ class _FoodGalleryState extends State<FoodGallery2> {
                           ),
 
                         )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
 
                       ],
                     ),
@@ -1261,37 +1256,6 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
 
   Widget shoppingCartWidget(BuildContext context){
-
-
-//    final bloc = LocationQueryBloc();
-
-//    final blocZZ = FoodItemsQueryBloc();
-
-//    BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-    // I AM NOT USING THIS HERE.
-//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-
-
-//    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<
-//        FoodItemDetailsBloc>(context);
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
-
-    /*
-Widget work1(BuildContext context){
-  BlocProvider(
-    bloc: ,
-    child: ,
-//
-  )
-
-  */
-
-    // NOT REQUIRED THIS STREAM WILL BE REQUIRED IN SHOPPING CART PAGE.
-    // PLANNED TO PASS IT FROM HERE.
-    // HOW CAN I HAVE IT HERE ????
-
-
     return Container(
 //                                                                        width:60,
       width: displayWidth(
@@ -1332,37 +1296,19 @@ Widget work1(BuildContext context){
           else {
             print(
                 ' method for old Outline button that deals with navigation to Shopping Cart Page');
-
-            // work 01.
-
-//          orderFG
-
-
-//      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-
-
-//              final locationBloc = BlocProvider.of<>(context);
-//                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
-
-            CustomerInformation oneCustomerInfo = new CustomerInformation(
+       CustomerInformation oneCustomerInfo = new CustomerInformation(
               address: '',
               flatOrHouseNumber: '',
               phoneNumber: '',
               etaTimeInMinutes: -1,
               etaTimeOfDay: new TimeOfDay(hour:-0,minute:-0),
-//              etaTimeOfDay: new TimeOfDay(),
-//        CustomerInformation currentUser = _oneCustomerInfo;
-//    currentUser.address = address;
-//
+
 
             );
 
 
             final blocG = BlocProvider.of<FoodGalleryBloc>(context);
             List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.allCategories;
-
-//            List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.getAllIngredientsPublicFGB2;
-
 
             orderFG.selectedFoodInOrder = allSelectedFoodGallery;
 
@@ -1394,9 +1340,6 @@ Widget work1(BuildContext context){
                       child: ShoppingCart(),
 
                     ),
-                // fUTURE USE -- ANIMATION TRANSITION CODE.
-
-
               ),
             );
 
@@ -1445,9 +1388,6 @@ Widget work1(BuildContext context){
                   SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON"),
                     duration: Duration(milliseconds: 8000),
                   ),);
-//      setState(() => _reloadRequired = true);
-
-
             }
 
             else if ((orderWithDocumentId.paymentButtonPressed) &&
@@ -1461,13 +1401,6 @@ Widget work1(BuildContext context){
                     duration: Duration(milliseconds: 8000)
                 )
                 );
-
-              /*
-            Scaffold.of(context)
-              ..removeCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text("Order Cancelled by user.")));
-            */
-//      setState(() => _reloadRequired = true);
 
               setState(
                       () {
@@ -1500,14 +1433,12 @@ Widget work1(BuildContext context){
                         milliseconds: 900),
                     pageBuilder: (_, __, ___) =>
 
-
                         BlocProvider<UnPaidBloc>(
                           bloc: UnPaidBloc(),
 
                           child: UnPaidPage(docID:orderWithDocumentId.orderdocId),
 //                      child: UnPaidPage()
                         ),
-
 
                   ),
                 );
@@ -1610,7 +1541,8 @@ Widget work1(BuildContext context){
                 child: Icon(
 
                   Icons.add_shopping_cart,
-                  size: displayWidth(context)/19,
+                  // size: displayWidth(context)/19,
+                  size: displayWidth(context)/29,
                   color: Color(0xff707070),
                 ),
               ),
@@ -1618,8 +1550,6 @@ Widget work1(BuildContext context){
                 Container(
 //                                              color:Colors.red,
                   width: displayWidth(context)/25,
-
-
                   decoration: new BoxDecoration(
                     color: Colors.redAccent,
 
