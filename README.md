@@ -173,3 +173,35 @@ taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$
 
 
 ```
+
+
+### on august 27 ... when in shopping cart page with physical xiaomi device: dosn't ask for bluetooth permission:
+### form linux mint device flutter doctor output below...
+```dart
+
+Lost connection to device.
+taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$ flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel unknown, 1.20.2, on Linux, locale en_US.UTF-8)
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+[✓] Android Studio (version 4.0)
+[✓] VS Code (version 1.48.0)
+[✓] Connected device (1 available)
+
+• No issues found!
+taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$
+
+```
+
+
+### but from windows the permission was asked...
+
+###flutter doctor output windows....
+
+
+```dart
+
+
+
+```
