@@ -128,6 +128,27 @@ PS C:\Users\Taxi\Programs\kebabBank2>
 ```
 
 
+## verson v1.17.5, released on july;:::
+
+## flutter doctor:
+
+```dart
+Running flutter doctor...
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel unknown, v1.17.5, on Microsoft Windows [Version 10.0.19041.388], locale en-US)
+[!] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+    ✗ Android license status unknown.
+      Try re-installing or updating your Android SDK Manager.
+      See https://developer.android.com/studio/#downloads or visit visit https://flutter.dev/docs/get-started/install/windows#android-setup for detailed instructions.
+[✓] Android Studio (version 4.0)
+[✓] VS Code, 64-bit edition (version 1.48.1)
+[!] Connected device
+    ! No devices available
+
+! Doctor found issues in 2 categories.
+PS C:\> flutter doctor
+=======
+
 ### the time picker works differently with this flutter version:
 ###  also text input in shopping cart of customer not working ,, can't write from keyborad..
 
@@ -149,5 +170,6 @@ Doctor summary (to see all details, run flutter doctor -v):
 
 ! Doctor found issues in 1 category.
 taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$
+
 
 ```

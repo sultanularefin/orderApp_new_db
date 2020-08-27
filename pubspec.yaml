@@ -72,6 +72,7 @@ dependencies:
   characters: ^1.0.0
   flutter_datetime_picker: ^1.4.0
   qr_flutter: ^3.2.0
+  permission_handler: ^5.0.1+1
 
 
 dev_dependencies:
