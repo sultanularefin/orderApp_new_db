@@ -1096,23 +1096,6 @@ class _FoodGalleryState extends State<FoodGallery2> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
 
-                /*
-                Text(
-//                unSelectedOneIngredient.ingredientName,
-                  unSelectedOneIngredient.ingredientName.length==0?
-                  'EMPTY':  unSelectedOneIngredient.ingredientName.length>12?
-                  unSelectedOneIngredient.ingredientName.substring(0,12)+'...':
-                  unSelectedOneIngredient.ingredientName,
-                  style: TextStyle(
-                    color:Color(0xff707070),
-//                                    color: Colors.blueGrey[800],
-
-                    fontWeight: FontWeight.normal,
-                    fontSize: 18,
-                  ),
-
-                ),
-                */
 
                 Text(categoryName.toLowerCase().length>8?categoryName.toLowerCase().substring(0,8)+'..':
                 categoryName.toLowerCase()
@@ -1121,9 +1104,9 @@ class _FoodGalleryState extends State<FoodGallery2> {
                   TextStyle(
 
                     fontFamily: 'Itim-Regular',
-                    fontSize: 30,
+                    fontSize: 27,
                     fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
+
                     color: Color(0xff000000),
                   ),
 
@@ -1131,7 +1114,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                    'Reross Quadratic',
 
 
-                ), CustomPaint(size: Size(0, 19),
+                ), CustomPaint(size: Size(0, 14),
                   painter: MyPainter(),
                 )
               ]
