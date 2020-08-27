@@ -1,6 +1,10 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter/services.dart';
+
+
 import 'package:foodgallery/src/BLoC/UnPaidDetailsBloc.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
@@ -26,11 +30,7 @@ import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dar
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
 
-//import 'package:foodgallery/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
-
-// import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:foodgallery/src/screens/history/HistoryPage.dart';
@@ -41,8 +41,11 @@ import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
 
-//import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
+import 'package:system_shortcuts/system_shortcuts.dart';
+// import 'package:system_shortcuts/system_shortcuts.dart';
+import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 //import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 //import 'package:neumorphic/neumorphic.dart';
 
@@ -99,6 +102,10 @@ class FoodGallery2 extends StatefulWidget {
 
 class _FoodGalleryState extends State<FoodGallery2> {
 
+  static const platform = const MethodChannel('com.example.timePickerTest');
+
+
+
   final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery = new GlobalKey<ScaffoldState>();
 //  final GlobalKey<ScaffoldState> scaffoldKeyClientHome = GlobalKey<ScaffoldState>();
   final SnackBar snackBar = const SnackBar(content: Text('Menu button pressed'));
@@ -110,24 +117,73 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
   _FoodGalleryState(/*{firestore} */);
 
-//  File _image;
 
-//  List<NewCategoryItem>_allCategoryList=[];
+// test codes starts herer....
 
 
-  // List<NewIngredient> _allIngredientState=[];
+  bool blueToothState = false;
+  bool wiFiState = false;
 
-  /*
+
+
+
   @override
-  void initState() {
-//    setAllIngredients();
+  void initState(){
+
+
+
+    localStorageCheck();
+    _getBatteryLevel();
+
+
     super.initState();
+
+  }
+
+  // Get battery level.
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
+
+
+  // Future<void> return type .  ??
+  Future<void> localStorageCheck () async{
+
+
+
+    bool blueTooth = await SystemShortcuts.checkBluetooth;// return true/false
+    bool wifi =   await SystemShortcuts.checkWifi;// return true/false
+
+
+    setState(() {
+      wiFiState = wifi;
+      blueToothState = blueTooth;
+    });
 
   }
 
 
 
+
+  //ends here test code...
+
+
+
+
   // !(NOT) NECESSARY NOW.
+  /*
   Future<void> setAllIngredients() async {
 
     debugPrint("Entering in retrieveIngredients1");
@@ -135,7 +191,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
 
 //    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
-    final bloc = BlocProvider2.of(context).getIdentityBlocsObject;
+    final bloc = BlocProvider.of(context).getIdentityBlocsObject;
 
     await bloc.getAllIngredients();
     List<NewIngredient> test = bloc.allIngredients;
@@ -161,6 +217,8 @@ class _FoodGalleryState extends State<FoodGallery2> {
   }
 
   */
+
+
 
 
   //  final _formKey = GlobalKey();
@@ -316,6 +374,24 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //    String a = Constants.SUCCESS_MESSAGE;
 
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+
+
+    var logger = Logger();
+
+    logger.d("Logger is working!");
+
+
+    // wiFiState = wifi;
+    // blueToothState = blueTooth;
+
+    print('wiFiState: $wiFiState');
+    print('blueToothState: $blueToothState');
+
+    // print('blueToothState: $blueToothState');
+
+    logger.w('wiFiState: $wiFiState');
+    logger.w('blueToothState: $blueToothState');
+    logger.w('_batteryLevel: $_batteryLevel');
 
 
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
