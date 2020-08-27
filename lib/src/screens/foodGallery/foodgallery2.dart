@@ -1105,6 +1105,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
                     fontFamily: 'Itim-Regular',
                     fontSize: 27,
+                    //august 27 ... fontSize : 30 to 27 upon some yellow black error ,, overflow....
                     fontWeight: FontWeight.normal,
 
                     color: Color(0xff000000),
@@ -1114,7 +1115,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
 //                    'Reross Quadratic',
 
 
-                ), CustomPaint(size: Size(0, 14),
+                ), CustomPaint(size: Size(0, 10), // upon overflow error from 17 to 14.... to 10... on august 27.... arefin...
                   painter: MyPainter(),
                 )
               ]
