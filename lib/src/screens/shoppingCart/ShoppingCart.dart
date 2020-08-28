@@ -4143,7 +4143,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     TimeOfDay tempTimeOfDay = new TimeOfDay(hour: 0, minute: 0);
 
-    if( currentUser.etaTimeOfDay.minute!=0 && currentUser.etaTimeOfDay.hour != 0 ){
+    if((currentUser.etaTimeOfDay.minute!=0) || (currentUser.etaTimeOfDay.hour != 0) ){
       tempTimeOfDay =
       new TimeOfDay(hour: currentUser.etaTimeOfDay.hour, minute: currentUser.etaTimeOfDay.minute);
     }
@@ -8173,7 +8173,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
         (
             (customerInfoFieldsCheck.etaTimeOfDay.hour != 0)
-                && (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
+              ||
+              (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
         )
     ) {
       print('WILL RETURN FALSE');
@@ -8211,7 +8212,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ((customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
             (
                 (customerInfoFieldsCheck.etaTimeOfDay.hour != 0)
-                    && (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
+                    || (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
             ))
     ) {
       print('WILL RETURN FALSE');
@@ -8261,7 +8262,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
         (
             (customerInfoFieldsCheck.etaTimeOfDay.hour != 0)
-                && (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
+                || (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
         )
     ) {
       print('WILL RETURN FALSE');
