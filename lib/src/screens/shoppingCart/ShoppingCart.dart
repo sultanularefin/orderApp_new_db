@@ -1332,7 +1332,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
 
 
-                                          // work 2
+                                          // work_2
+                                          // 911_2
                                           Container(
 //                                          color: Colors.red,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -3451,7 +3452,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               width: displayWidth(context) / 30,
                               child:
 
-                              Icon(Icons.phone,
+                              Icon(Icons.watch,
                                 size: 32.0,
                                 // color: Colors.black
                               ),
@@ -3820,7 +3821,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               width: displayWidth(context) / 30,
                               child:
 
-                              Icon(Icons.phone,
+                              Icon(Icons.watch,
                                 size: 32.0,
                                 // color: Colors.black
                               ),
@@ -3995,11 +3996,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           borderRadius: BorderRadius.circular(35),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               color:Color(0xffFCF5E4),
@@ -4063,7 +4061,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               width: displayWidth(context) / 30,
                               child:
 
-                              Icon(Icons.phone,
+                              Icon(Icons.watch,
                                 size: 32.0,
                                 // color: Colors.black
                               ),
@@ -5597,197 +5595,68 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+
   Widget unobscureInputandRestforTakeAway(Order unObsecuredInputandPayment) {
     CustomerInformation currentUser = unObsecuredInputandPayment
         .orderingCustomer;
-    // means
-    // 1. Row Holding user's information.
-    // 2. means holding the inputFields for User Input.
-    // 3. If all 4 inputs are there show user the payment
+
+
+    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+
+    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+
     return Container(
 
       height: displayHeight(context) / 2.2,
-//        height: displayHeight(context)/2.5,
       width: displayWidth(context) / 1.03,
-//        height: displayHeight(context) / 2,
-//      color: Colors.tealAccent,
-      color: Colors.white,
+      // color:Colors.lightBlueAccent,
 
-      child: Column(
-        children: <Widget>[
+      child:
+      Container(
 
+        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
 
-          // 1ST CONTAINER OF INPUTS BEGINS HERE. HOLDS
-          // LABEL TEXT, OR
-          // LABEL TEXT + USER INPUT INLINE IN AN AnimatedSwitcher
+        child:
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 500),
+          child:
 
+          ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
 
-          // COMMENTING THIS FOR TAKE AWAY, WE DON'T NEED ANIMATION HERE.
-          /*
+          // 911_3
+          //     work_3
+
+               &&(showEditingCompleteCustomerReachoutIformation == true)
+          ) ?
+
+          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+            (unObsecuredInputandPayment):
           Container(
-            child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-//
-//                                                child: showFullOrderType? animatedObscuredTextInputContainer():
-//                                                animatedUnObscuredTextInputContainer(),
-              child: (showUserInputOptionsLikeFirstTime == false)?
-//      unobscureInputandRest(unObsecuredInputandPayment)
 
-              animatedShowUserAddressDetailsInLineTakeAway(currentUser)
-
-
-                  :
-
-                  */
-
-          /*
-          Container(
+            // color:Colors.lightBlueAccent,
+            // color: Color(0xffFFFFFF),
             child:
-
-            animatedShowUserAddressDetailsInLineTakeAway(currentUser),
-          ),
-
-          */
-          Container(
-            width: displayWidth(context) / 1.03,
-            height: displayHeight(context) / 20,
-            color: Color(0xffffffff),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment
-                  .start
-              ,
-              crossAxisAlignment: CrossAxisAlignment
-                  .center,
-              children: <Widget>[
-
-
                 Container(
-                  width: displayWidth(context) /
-                      1.5,
-                  height: displayHeight(
-                      context) / 20,
-                  color: Color(0xffffffff),
-
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment
-                          .start
-                      ,
-                      crossAxisAlignment: CrossAxisAlignment
-                          .center,
-                      children: <Widget>[
-
-                        Container(
-                          margin: EdgeInsets
-                              .fromLTRB(
-                              20, 0, 10, 0),
-                          alignment: Alignment
-                              .center,
-                          child: Text(
-                              'when you will pick the Order',
-//                              'when you want to receive your order'
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight
-                                    .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                color: Color(
-                                    0xff000000),
-                              )
-                          ),
-                        ),
-
-                        CustomPaint(
-                          size: Size(0, 19),
-                          painter: LongPainterForETA(
-                              context),
-                        ),
-
-
-                      ]
-                  ),
-
-                ),
-
-              ],
-            ),
-          ),
-
-
-
-          Container(
-//            color:Colors.white38,
-//            color:Colors.amber,
-//            color: Colors.white,
-//            height: displayWidth(context)/2.6,
-            height: displayWidth(context) / 2.1,
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-//                  left:0,
-                  // top:20,//displayHeight(context)/10,
-                  // initial Case.
-//            getNumberOfInputsFilledUp
-                  bottom:
-                  getNumberOfInputsFilledUpTakeAway(
-                      unObsecuredInputandPayment.orderingCustomer) > 0
-                      ? 22 : -10,
-
-                  child:
-                  AnimatedSwitcher(
-                    duration: Duration(milliseconds: 500),
-//
-//                                                child: showFullOrderType? animatedObscuredTextInputContainer():
-//                                                animatedUnObscuredTextInputContainer(),
-                    // zeroORMoreInputsEmpty
-                    // zeroORMoreInputsEmptyTakeAway
-                    child:
-                    zeroORMoreInputsEmptyTakeAway
-                      (unObsecuredInputandPayment.orderingCustomer) == true ?
-
-                    // animatedObscuredPaymentSelectContainerTakeAway
-                    // animatedUnObscuredPaymentTypeUnSelectedContainerTakeAway
-                    // animatedUnObscuredPaymentUnSelectContainer
-                    animatedObscuredPaymentSelectContainerTakeAwayDinning
-                      (unObsecuredInputandPayment) :
-                    animatedUnObscuredPaymentTypeUnSelectedContainerTakeAwayDinning
-                      (unObsecuredInputandPayment),
-
-
-                  ),
-                  // ),
-
-                ),
-                AnimatedPositioned(
-                    duration: Duration(milliseconds: 500),
-                    top: 0,
-
-                    child:
-                    Container(
-//                        color: Colors.green,
-
-                      height:displayHeight(context)/18,
-                      width: displayWidth(context) / 1.03,
-//GHGHGHGH
-
-
-//                        color: Colors.white,
-                      child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                    )
+                  // color:Colors.red,
+                  height:displayHeight(context)/18,
+                  width: displayWidth(context) / 1.03,
+                  child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
                 )
-              ],
-            ),
+                // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            ,
           ),
-        ],
-
-        //showInputtedCustomerIformation
+        ),
       ),
     );
 // GGG),
 
   }
-// p-h-o-n-e
+
 
 
 
@@ -6482,10 +6351,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
           ),
 
 
-
-
-
-
         ),
 
 
@@ -7110,33 +6975,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('currentUser.phoneNumber: ${currentUser.phoneNumber}');
     print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
 
-//    animatedObscuredTextInputContainer
-//    if((showEditingCompleteCustomerAddressInformation == true)||
-//        (showEditingCompleteCustomerHouseFlatIformation == true)||
-//        (showEditingCompleteCustomerPhoneIformation == true)||
-//        (showEditingCompleteCustomerReachoutIformation == true)){
+
 
     return
       unobscureInputandRestforTakeAway(unObsecuredInputandPayment);
-
-
-    /*
-      return AnimatedSwitcher(
-      duration: Duration(milliseconds: 300),
-//
-//                                                child: showFullOrderType? animatedObscuredTextInputContainer():
-//                                                animatedUnObscuredTextInputContainer(),
-      child: (showFullOrderType == false)?
-      unobscureInputandRest(unObsecuredInputandPayment)
-
-          :unobsuredEsleFirstTime(unObsecuredInputandPayment),
-//      _buildShoppingCartInputFieldsUNObscured(oneOrder)
-//      _buildShoppingCartInputFieldsUNObscured (oneOrder):
-//      animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
-
-
-    );
-     */
 
 
   }
@@ -10261,6 +10103,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
     else {
       print('WILL RETURN TRUE');
       return true; // empty; one or more of the user inputs are.
+    }
+  }
+
+
+  // bool allCustomerInputsCompleted(CustomerInformation customerInfoFieldsCheck) {
+    bool takeAwayDinningTimeInputCompleted(CustomerInformation customerInfoFieldsCheck) {
+
+    print(
+        ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
+    print('customerInfoFieldsCheck '
+        ' FH :${customerInfoFieldsCheck.flatOrHouseNumber} ,\n'
+        ' A :${customerInfoFieldsCheck.address}  ,\n'
+        ' ETA : ${customerInfoFieldsCheck.etaTimeInMinutes}  ,\n'
+        ' PH : ${customerInfoFieldsCheck.phoneNumber}  ,\n'
+        'Hour : ${customerInfoFieldsCheck.etaTimeOfDay.hour}  ,\n'
+    );
+
+    if (
+
+
+
+
+        (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
+        (
+            (customerInfoFieldsCheck.etaTimeOfDay.hour != 0)
+                && (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
+        )
+    ) {
+      print('WILL RETURN FALSE');
+      return true;
+    }
+
+    else {
+      print('WILL RETURN TRUE');
+      return false; // empty; one or more of the user inputs are.
     }
   }
 
