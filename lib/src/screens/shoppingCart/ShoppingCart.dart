@@ -4129,21 +4129,37 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget whenYouWillPickTheOrder(Order unObsecuredInputandPayment){
 
-    CustomerInformation currentUser = unObsecuredInputandPayment
-        .orderingCustomer;
+    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
 
+//    currentUser.etaTimeInMinutes!=-1
+//    currentUser.etaTimeOfDay.hour != 0
+//    currentUser.etaTimeOfDay.minute !=0
+
+    print('currentUser.etaTimeOfDay.hour: ${currentUser.etaTimeOfDay.hour}');
+
+    print('currentUser.etaTimeOfDay.minute: ${currentUser.etaTimeOfDay.minute}');
+
+
+
+    TimeOfDay tempTimeOfDay = new TimeOfDay(hour: 0, minute: 0);
+
+    if( currentUser.etaTimeOfDay.minute!=0 && currentUser.etaTimeOfDay.hour != 0 ){
+      tempTimeOfDay =
+      new TimeOfDay(hour: currentUser.etaTimeOfDay.hour, minute: currentUser.etaTimeOfDay.minute);
+    }
+
+
+
+//    911_4
+//work_4
 //    CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
 
     return
       Container(
         child:
-
         showEditingCompleteCustomerReachoutIformation
             ? Container()
             : Row(
-//                              mainAxisAlignment: MainAxisAlignment.center,
-//                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -4162,7 +4178,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   Future<TimeOfDay> selectedTime24Hour = showTimePicker(
                     context: context,
-                    initialTime: TimeOfDay(hour: 10, minute: 47),
+                    initialTime: tempTimeOfDay,
+
+//                    TimeOfDay(hour: 10, minute: 47),
+
                     builder: (BuildContext context, Widget child) {
                       return MediaQuery(
                         data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
@@ -4339,6 +4358,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           FocusScope.of(context).unfocus(),
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        // work_5
+                        // 911_5
                         border: InputBorder.none,
                         hintText: 'After XX minutes',
                         hintStyle: TextStyle(
