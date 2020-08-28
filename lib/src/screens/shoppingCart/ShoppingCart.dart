@@ -1763,15 +1763,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
     CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
 
 
-    return Row(
-      children: [
+    return
         Container(
-//      height: displayHeight(context) / 9,
           height: displayHeight(context) / 20
               + displayHeight(context) / 6 /* HEIGHT OF MULTI SELECT PORTION */,
 
           color:Colors.lightGreenAccent,
-          width:displayWidth(context)/6,
+          width:displayWidth(context)/1.03,
 
 
           child: StreamBuilder(
@@ -1785,162 +1783,156 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   return Container(child: Text('Null'));
                 }
                 else {
-                  List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot
-                      .data;
+                  List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
 
-//            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
-//            print('orderTypes: $allOrderTypesSingleSelect');
-                  OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect
-                      .firstWhere((oneOrderType) =>
+                  OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect.firstWhere((oneOrderType) =>
                   oneOrderType.isSelected == true);
                   _currentOrderTypeIndex = selectedOne.index;
 
-
                   String orderTypeName = selectedOne.orderType;
-//              String orderIconName = selectedOne.orderIconName;
+
                   String orderTyepImage =  selectedOne.orderTyepImage;
                   String borderColor = selectedOne.borderColor;
                   const Color OrderTypeIconColor = Color(0xff070707);
 
 
                   return Container(
-//                    width: displayWidth(context) / 1.03,
-                    width:displayWidth(context)/6,
+                    width:displayWidth(context)/1.03,
+                    height: displayHeight(context) / 20 + displayHeight(context) / 6,
 
-//                height: displayHeight(context) / 12,
-                    height: displayHeight(context) / 20
-                        + displayHeight(context) / 6,
-
-//                color: Color(0xffffffff),
-//                    color:Colors.purpleAccent,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
+                      children: [
 
 
-                        Container(
-//                          width: displayWidth(context) /
-//                              1.5,
-                          width:displayWidth(context)/6,
+//                        child: Row(
+//                          mainAxisAlignment: MainAxisAlignment.start,
+//                          crossAxisAlignment: CrossAxisAlignment.center,
+//                          children: <Widget>[
 
 
-                          height: displayHeight(context) / 9,
+                              Container(
+                                width:displayWidth(context)/6,
+                                height: displayHeight(context) / 9,
+                                color:Colors.blue,
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .start
+                                    ,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    children: <Widget>[
 
-//                      color: Color(0xffffffff),
-                          color:Colors.blue,
 
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .start
-                              ,
-                              crossAxisAlignment: CrossAxisAlignment
-                                  .center,
-                              children: <Widget>[
+                                      Container(
+                                        width: displayWidth(context) / 8,
+                                        height: displayHeight(context) / 10,
+                                        child:
+                                        InkWell(
 
+                                          child: Container(
+                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                            decoration: BoxDecoration(
+                                              color: Color(0xffFCF5E4),
+                                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: <Widget>[
 
-                                Container(
-                                  width: displayWidth(context) / 8,
-                                  height: displayHeight(context) / 10,
-                                  child:
-                                  InkWell(
+                                                new Container(
 
-                                    child: Container(
-//                        alignment: Alignment.topCenter,
-                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                      decoration: BoxDecoration(
-//            color:Colors.white,
-                                        color: Color(0xffFCF5E4),
-                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start
-                                        ,
-//                          crossAxisAlignment: CrossAxisAlignment
-//                              .center,
-//                          AA
-                                        children: <Widget>[
+                                                  width: displayWidth(context) / 8.4,
+                                                  height: displayHeight(context) / 15,
 
-                                          new Container(
-
-                                            width: displayWidth(context) / 8.4,
-                                            height: displayHeight(context) / 15,
-
-                                            child: Container(
+                                                  child: Container(
 //                            color:Colors.pinkAccent,
 
-                                              padding: EdgeInsets.fromLTRB(10,10,10,10),//                            ssssssHHHHH
+                                                    padding: EdgeInsets.fromLTRB(10,10,10,10),//                            ssssssHHHHH
 
-                                              child: Image.asset(
-                                                orderTyepImage,
-                                                fit: BoxFit.contain,
-                                              ),
+                                                    child: Image.asset(
+                                                      orderTyepImage,
+                                                      fit: BoxFit.contain,
+                                                    ),
 
+                                                  ),
+
+                                                ),
+
+                                                Container(
+
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    orderTypeName, style:
+                                                  TextStyle(
+                                                      color: Color(0xffFC0000),
+
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 16),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-
                                           ),
+                                          onTap: () {
 
-                                          Container(
-
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              orderTypeName, style:
-                                            TextStyle(
-                                                color: Color(0xffFC0000),
-
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    onTap: () {
-
-                                      setState(() {
-                                        showFullOrderDeliveryType =
-                                        !showFullOrderDeliveryType;
+                                            setState(() {
+                                              showFullOrderDeliveryType =
+                                              !showFullOrderDeliveryType;
 
 //                            showFullOrderType
-                                        /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                                        showCustomerInformationHeader = false;
-                                        showUserInputOptionsLikeFirstTime = true;
+                                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                              showCustomerInformationHeader = false;
+                                              showUserInputOptionsLikeFirstTime = true;
 
-                                        showFullPaymentType = true; //DEFAULT.
+                                              showFullPaymentType = true; //DEFAULT.
 
-                                        // JUST LIKE THE FIRST TIME.
-                                        showEditingCompleteCustomerAddressInformation =
-                                        false;
-                                        showEditingCompleteCustomerHouseFlatIformation =
-                                        false;
-                                        showEditingCompleteCustomerPhoneIformation = false;
-                                        showEditingCompleteCustomerReachoutIformation =
-                                        false;
-                                      });
-                                    },
-                                  ),
-                                  // : Container for 2nd argument of ternary condition ends here.
+                                              // JUST LIKE THE FIRST TIME.
+                                              showEditingCompleteCustomerAddressInformation = false;
+                                              showEditingCompleteCustomerHouseFlatIformation = false;
+                                              showEditingCompleteCustomerPhoneIformation = false;
+                                              showEditingCompleteCustomerReachoutIformation = false;
+                                            });
+                                          },
+                                        ),
 
-                                )
+                                      )
 
+                                    ]
+                                ),
 
+                              ),
 
-
-
-                              ]
-                          ),
-
-                        ),
-                        // THE ABOVE PART DEALS WITH LINES AND TEXT,
-                        // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
+//                          ],
+//                        ),
+//                      ),
 
 
+//911
+                        Container(
+
+                            width: ((displayWidth(context) / 1.03) -140) ,
+                            height: displayHeight(context) / 9,
+//                height: displayHeight(context) / 12,
+
+//                      color: Colors.red,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+//                    color: Colors.black,
+                                color: Colors.grey,
+                                style: BorderStyle.solid,
+                                width: 2.0,
+
+                              ),
+                              shape: BoxShape.rectangle,
+
+                            ),
+
+                            child: animatedShowUserAddressDetailsInLineDeliveryOrderType(currentUser)
 
 
-                        //ZZZZ
+                        )
+
 
 
                       ],
@@ -1949,65 +1941,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 }
               }
           ),
-        ),
 
-//911
-        Container(
-//                      *******911
-//                      width: displayWidth(context) / 1.03-60 /* for example*/,
-            width: ((displayWidth(context) / 1.03) -140) ,
-            height: displayHeight(context) / 9,
-//                height: displayHeight(context) / 12,
-
-//                      color: Colors.red,
-            decoration: BoxDecoration(
-              border: Border.all(
-//                    color: Colors.black,
-                color: Colors.grey,
-                style: BorderStyle.solid,
-                width: 2.0,
-
-              ),
-              shape: BoxShape.rectangle,
-
-            ),
-//                      color: Color(0xffffffff),
-
-
-
-            child: animatedShowUserAddressDetailsInLine(currentUser)
-
-
-        )
-      ],
     );
   }
 
-/*
-  Widget animatedUnObscuredTextInputContainer(Order forUnObscured){
-
-    print('at animated Un Obscured Text Input Container');
-    return
-      Container(
-//            height: displayWidth(context)/2,
-//          padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-////                                                      padding::::
-//          color:Colors.orange,
-////                                            height: 200,
-//          height: displayHeight(context) /2,
-//          width: displayWidth(context)
-//              - displayWidth(context) / 5,
-//                                            width: displayWidth(context) * 0.57,
-
-            child: _buildShoppingCartInputFieldsUNObscured(forUnObscured)
-
-
-
-      );
-
-
-  }
-  */
 
   Widget animatedObscuredTextInputContainer(
       CustomerInformation forObscuredCustomerInputDisplay) {
@@ -2947,7 +2884,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
-  Widget animatedShowUserAddressDetailsInLine(
+  Widget animatedShowUserAddressDetailsInLineDeliveryOrderType(
       CustomerInformation currentUserForInline) {
 
     return Container(
