@@ -18,6 +18,10 @@ import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
+// this pkg i am using for searching device's only and for testing now on august 29....
+import 'package:blue_thermal_printer/blue_thermal_printer.dart';
+
+
 
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:logger/logger.dart';
