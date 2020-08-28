@@ -1908,7 +1908,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      ),
 
 
-//911
+
                         Container(
 
                             width: ((displayWidth(context) / 1.03) -140) ,
@@ -1928,7 +1928,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                             ),
 
-                            child: animatedShowUserAddressDetailsInLineDeliveryOrderType(currentUser)
+//
+//                        911
+                            child: orderTypeName=='Delivery'?
+                animatedShowUserAddressDetailsInLineDeliveryOrderType(currentUser):
+                            orderTypeName=='TakeAway'?animatedShowUserAddressDetailsInLineTakeAwayOrderType(currentUser):
+                orderTypeName=='Phone'?animatedShowUserAddressDetailsInLinePhoneOrderType(currentUser):
+                animatedShowUserAddressDetailsInLineTakeAwayOrderType(currentUser),
 
 
                         )
@@ -3884,6 +3890,680 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   }
 
+
+
+
+  Widget animatedShowUserAddressDetailsInLinePhoneOrderType(
+      CustomerInformation currentUserForInline) {
+
+    return Container(
+//      color:Colors.pink,
+      width: displayWidth(context) / 1.3,
+      height: displayHeight(context) / 9,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+
+              padding:EdgeInsets.fromLTRB(5,5,0,5),
+              child:Text(
+                  'phone and select time:',
+
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.normal,
+
+                    color: Color(
+                        0xff000000),
+                  )
+              ),
+
+              height: displayHeight(context) / 33,
+            ),
+
+            Container(
+              height: displayHeight(context) / 13,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.fromLTRB(0, 0, 10,0),
+                children: <Widget>[
+
+
+                  //phone begins here...
+
+                  Container(
+                    width: displayWidth(context) /5,
+                    height: displayHeight(context) / 9,
+                    child: InkWell(
+                      splashColor: Color(0xffEEF6CE),
+                      highlightColor: Color(0xffEEF6CE),
+                      child: currentUserForInline.phoneNumber != '' ?
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon(Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+                            Container(
+                              width: displayWidth(context) /7.4,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+                          ],
+                        ),) :
+                      (showEditingCompleteCustomerPhoneIformation)?
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon(Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+                            Container(
+                              width: displayWidth(context) /7.4,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+                          ],
+                        ),)
+
+                          :
+                      Container(
+
+                        color: Color(0xffFFFFFF),
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        child: Container(),
+                      )
+                      ,
+                      onTap: () =>
+                      {
+                        setState(() {
+                          showEditingCompleteCustomerPhoneIformation =
+                          !showEditingCompleteCustomerPhoneIformation;
+                          phoneNumberController.text =
+                              currentUserForInline.phoneNumber;
+                        })
+                      },
+                    ),
+                  ),
+
+
+
+                  //phone ends here....
+
+                  Container(
+                    width: displayWidth(context) /5,
+                    height: displayHeight(context) / 9,
+                    child: InkWell(
+                      splashColor: Color(0xffEEF6CE),
+                      highlightColor: Color(0xffEEF6CE),
+
+
+                      child:
+                      ((currentUserForInline.etaTimeOfDay.hour==0) &&(
+                          currentUserForInline.etaTimeOfDay.minute==0
+                      ) && (currentUserForInline.etaTimeInMinutes == -1)
+                          &&(showEditingCompleteCustomerReachoutIformation==false)
+                      )?
+                      Container(
+                        color:Colors.white,
+                      )
+                          :
+                      (currentUserForInline.etaTimeInMinutes != -1)?
+
+
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon( Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+
+
+                            // : Container for 2nd argument of ternary condition ends here.
+
+
+                            Container(
+                              width: displayWidth(context) / 7,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+
+
+                            Container(
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  5, 0, 5, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color(0xff000000),
+                                  )
+                              ),
+                            ),
+
+
+                            //ZZZZ
+
+
+                          ],
+                        ),
+                      ):
+                      (
+                          (showEditingCompleteCustomerReachoutIformation)
+                              &&
+                              (currentUserForInline.etaTimeOfDay.hour == 0)
+                              &&(currentUserForInline.etaTimeOfDay.minute == 0)
+                      ) ?
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon( Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+
+
+                            // : Container for 2nd argument of ternary condition ends here.
+
+
+                            Container(
+                              width: displayWidth(context) / 7,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+
+
+                            Container(
+                              padding: EdgeInsets
+                                  .fromLTRB(
+                                  5, 0, 5, 0),
+                              alignment: Alignment
+                                  .center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight
+                                        .normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(
+                                        0xff000000),
+                                  )
+                              ),
+                            ),
+
+
+                            //ZZZZ
+
+
+                          ],
+                        ),
+                      ):
+
+
+
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon(Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+                            Container(
+                              width: displayWidth(context) / 7,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child:
+
+                              Text(
+                                  '${currentUserForInline.etaTimeOfDay.hour} :'
+                                      '${currentUserForInline.etaTimeOfDay.minute} ',
+
+
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      //ZZZZ
+
+                      onTap: () =>
+                      {
+                        setState(() {
+                          showEditingCompleteCustomerReachoutIformation =
+                          !showEditingCompleteCustomerReachoutIformation;
+                          etaController.text =
+                              currentUserForInline.etaTimeInMinutes.toString();
+                        })
+                      },
+                    ),
+                  )
+
+                ],
+              ),
+            )
+          ]
+      ),
+    );
+
+  }
+
+
+
+
+  Widget animatedShowUserAddressDetailsInLineTakeAwayOrderType(
+      CustomerInformation currentUserForInline) {
+
+    return Container(
+//      color:Colors.pink,
+      width: displayWidth(context) / 1.3,
+      height: displayHeight(context) / 9,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+
+              padding:EdgeInsets.fromLTRB(5,5,0,5),
+              child:Text(
+                  'select either a time or minutes from now:',
+
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.normal,
+
+                    color: Color(
+                        0xff000000),
+                  )
+              ),
+
+              height: displayHeight(context) / 33,
+            ),
+
+            Container(
+              height: displayHeight(context) / 13,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.fromLTRB(0, 0, 10,0),
+                children: <Widget>[
+
+
+
+                  //phone ends here....
+
+                  Container(
+//                    color:Colors.red,
+                    width: displayWidth(context) /5,
+                    height: displayHeight(context) / 9,
+                    child: InkWell(
+                      splashColor: Color(0xffEEF6CE),
+                      highlightColor: Color(0xffEEF6CE),
+
+
+                      child:
+                      ((currentUserForInline.etaTimeOfDay.hour==0) &&(
+                          currentUserForInline.etaTimeOfDay.minute==0
+                      ) && (currentUserForInline.etaTimeInMinutes == -1)
+                          &&(showEditingCompleteCustomerReachoutIformation==false)
+                      )?
+                      Container(
+                        color:Colors.white,
+                      )
+                          :
+                      (currentUserForInline.etaTimeInMinutes != -1)?
+
+
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon( Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+
+
+                            // : Container for 2nd argument of ternary condition ends here.
+
+
+                            Container(
+                              width: displayWidth(context) / 7,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+
+
+
+
+
+                            //ZZZZ
+
+
+                          ],
+                        ),
+                      ):
+                      (
+                          (showEditingCompleteCustomerReachoutIformation)
+                              &&
+                              (currentUserForInline.etaTimeOfDay.hour == 0)
+                              &&(currentUserForInline.etaTimeOfDay.minute == 0)
+                      ) ?
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon( Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+
+
+                            // : Container for 2nd argument of ternary condition ends here.
+
+
+                            Container(
+                              width: displayWidth(context) / 7,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+                            ),
+
+
+
+
+
+
+                            //ZZZZ
+
+
+                          ],
+                        ),
+                      ):
+
+
+
+                      Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color:Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start
+                          ,
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center,
+                          children: <Widget>[
+                            Container(
+                              color:Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child:
+
+                              Icon(Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+
+                            Container(
+                              width: displayWidth(context) / 7,
+                              height: displayHeight(context) / 9,
+                              color:Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child:
+
+                              Text(
+                                  '${currentUserForInline.etaTimeOfDay.hour} :'
+                                      '${currentUserForInline.etaTimeOfDay.minute} ',
+
+
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )
+                              ),
+
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      //ZZZZ
+
+                      onTap: () =>
+                      {
+                        setState(() {
+                          showEditingCompleteCustomerReachoutIformation =
+                          !showEditingCompleteCustomerReachoutIformation;
+                          etaController.text =
+                              currentUserForInline.etaTimeInMinutes.toString();
+                        })
+                      },
+                    ),
+                  )
+
+
+                  // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
+
+
+
+                ],
+              ),
+            )
+          ]
+      ),
+    );
+
+  }
 
 // YYYY
 
@@ -8974,7 +9654,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     Container(
 
 
-//                      *******911
 //                      width: displayWidth(context) / 1.03-60 /* for example*/,
                       width: ((displayWidth(context) / 1.03) -40) ,
                       height: displayHeight(context) / 11,
