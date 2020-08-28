@@ -4166,7 +4166,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             Container(
-              width: displayWidth(context) / 4.5,
+//              color:Colors.purple,
+//              width: displayWidth(context) / 4.5,
+              width: displayWidth(context) / 3.5,
               margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
               height: displayHeight(context) / 24,
               padding: EdgeInsets.only(
@@ -4229,19 +4231,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 splashColor: Colors.indigoAccent,
 //                                highlightElevation: 12,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
 
                 borderSide: BorderSide(
                   color: Colors.grey,
 //                                        color:Color(0xff707070),
                   style: BorderStyle.solid,
-                  width: 1.6,
+                  width: 2.6,
                 ),
 
-
-//                                clipBehavior: Clip.hardEdge,
-//                                splashColor: Color(0xffFEE295),
 
                 highlightElevation: 12,
                 child:
@@ -4254,14 +4253,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   child: Row(
 
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
 
 //                                          height: 25,
-                        height: displayHeight(context) / 40,
-                        width: 5,
+//                        height: displayHeight(context) / 40,
+//                        width: 5,
                         margin: EdgeInsets.only(left: 0),
 
                         child: Icon(
@@ -4275,11 +4275,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),
 
                       Container(
+//                        color:Colors.pinkAccent,
                         alignment: Alignment.center,
-                        width: displayWidth(context) / 7.5,
+                        width: displayWidth(context) / 5.5,
 //                                        color:Colors.purpleAccent,
                         // do it in both Container
-                        child: Text('choose Time'),
+                        child:
+
+                        Text('choose Time',
+                          maxLines: 1,
+                          style: TextStyle(color: Colors.black,
+                            fontSize: 22,
+//                            fontWeight: FontWeight.bold,
+                          ),),
 
                       )
 
@@ -4300,7 +4308,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                   color: Color(0xffBCBCBD),
                   style: BorderStyle.solid,
-                  width: 2.0,
+                  width: 3.0,
 
 
                 ),

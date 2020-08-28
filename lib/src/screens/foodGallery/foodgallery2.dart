@@ -1,16 +1,12 @@
 
 
-//### for smaller deviecs:
+
+//## foodgallery Page August29: with android's Mainactivity invocation:
 //
 //```dart
-
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/services.dart';
-
-
 import 'package:foodgallery/src/BLoC/UnPaidDetailsBloc.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
@@ -36,9 +32,13 @@ import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dar
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+//import 'package:foodgallery/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
+
+// import 'dart:io';
 
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 //import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
@@ -47,11 +47,12 @@ import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
 
+//import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
-import 'package:system_shortcuts/system_shortcuts.dart';
-// import 'package:system_shortcuts/system_shortcuts.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/services.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 // import 'package:permission_handler/permission_handler.dart';
+import 'package:system_shortcuts/system_shortcuts.dart';
 //import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 //import 'package:neumorphic/neumorphic.dart';
 
@@ -67,10 +68,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foodgallery/src/welcomePage.dart';
 
 
-// models, dummy data file:
 
-//import '../../DataLayer/itemData.dart';
-//import '../../DataLayer/FoodItem.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 
@@ -79,17 +77,6 @@ import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-//import 'package:foodgallery/src/BLoC/foodItems_query_bloc.dart';
-//import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
-
-//import './../../shared/category_Constants.dart' as Constants;
-
-
-//import CategoryItems from 'package:foodgallery/src/shared/category_Constants.dart';
-
-
-//final Firestore firestore = Firestore();
-
 
 
 class FoodGallery2 extends StatefulWidget {
@@ -108,9 +95,10 @@ _FoodGalleryState createState() => _FoodGalleryState();
 
 class _FoodGalleryState extends State<FoodGallery2> {
 
-static const platform = const MethodChannel('com.example.timePickerTest');
 
+// static const platform = const MethodChannel('com.example.timePickerTest');
 
+static const platform = const MethodChannel('com.linkup.foodgallery');
 
 final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery = new GlobalKey<ScaffoldState>();
 //  final GlobalKey<ScaffoldState> scaffoldKeyClientHome = GlobalKey<ScaffoldState>();
@@ -120,114 +108,7 @@ final SnackBar snackBar = const SnackBar(content: Text('Menu button pressed'));
 final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 //  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
-
 _FoodGalleryState(/*{firestore} */);
-
-
-// test codes starts herer....
-
-
-bool blueToothState = false;
-bool wiFiState = false;
-
-
-
-
-@override
-void initState(){
-
-
-
-localStorageCheck();
-//_getBatteryLevel();
-
-
-super.initState();
-
-}
-
-// Get battery level.
-String _batteryLevel = 'Unknown battery level.';
-
-/*
-Future<void> _getBatteryLevel() async {
-String batteryLevel;
-try {
-final int result = await platform.invokeMethod('getBatteryLevel');
-batteryLevel = 'Battery level at $result % .';
-} on PlatformException catch (e) {
-batteryLevel = "Failed to get battery level: '${e.message}'.";
-}
-
-setState(() {
-_batteryLevel = batteryLevel;
-});
-}
-
-*/
-
-
-// Future<void> return type .  ??
-Future<void> localStorageCheck () async{
-
-
-
-bool blueTooth = await SystemShortcuts.checkBluetooth;// return true/false
-bool wifi =   await SystemShortcuts.checkWifi;// return true/false
-
-
-setState(() {
-wiFiState = wifi;
-blueToothState = blueTooth;
-});
-
-}
-
-
-
-
-//ends here test code...
-
-
-
-
-// !(NOT) NECESSARY NOW.
-/*
-  Future<void> setAllIngredients() async {
-
-    debugPrint("Entering in retrieveIngredients1");
-
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
-//    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
-    final bloc = BlocProvider.of(context).getIdentityBlocsObject;
-
-    await bloc.getAllIngredients();
-    List<NewIngredient> test = bloc.allIngredients;
-
-//    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
-
-    print('done: ');
-
-//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
-//    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
-
-    setState(()
-    {
-      print('_allIngredientState: $test');
-      _allIngredientState = test;
-//      priceByQuantityANDSize = euroPrice1;
-//      initialPriceByQuantityANDSize = euroPrice1;
-    }
-    );
-
-
-
-  }
-
-  */
-
-
 
 
 //  final _formKey = GlobalKey();
@@ -255,8 +136,59 @@ page:0,
 );
 
 
-//  double _total_cart_price = 1.00;
-// empty MEANS PIZZA
+String _batteryLevel = 'Unknown battery level.';
+
+
+bool blueToothState = false;
+bool wiFiState = false;
+
+
+@override
+void initState(){
+
+print('at initState of foodGallery page');
+
+localStorageCheck();
+//_getBatteryLevel();
+super.initState();
+
+
+}
+
+/*
+Future<void> _getBatteryLevel() async {
+String batteryLevel;
+try {
+final int result = await platform.invokeMethod('getBatteryLevel');
+batteryLevel = 'Battery level at $result % .';
+} on PlatformException catch (e) {
+batteryLevel = "Failed to get battery level: '${e.message}'.";
+}
+
+setState(() {
+_batteryLevel = batteryLevel;
+});
+}
+
+*/
+
+
+// Future<void> return type .  ??
+Future<void> localStorageCheck () async{
+
+
+
+bool blueTooth= await SystemShortcuts.checkBluetooth;// return true/false
+bool wifi =   await SystemShortcuts.checkWifi;// return true/false
+
+
+setState(() {
+wiFiState = wifi;
+blueToothState = blueTooth;
+});
+
+}
+
 
 
 
@@ -385,24 +317,6 @@ Widget build(BuildContext context) {
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
 
 
-var logger = Logger();
-
-logger.d("Logger is working!");
-
-
-// wiFiState = wifi;
-// blueToothState = blueTooth;
-
-print('wiFiState: $wiFiState');
-print('blueToothState: $blueToothState');
-
-// print('blueToothState: $blueToothState');
-
-logger.w('wiFiState: $wiFiState');
-logger.w('blueToothState: $blueToothState');
-logger.w('_batteryLevel: $_batteryLevel');
-
-
 final blocG = BlocProvider.of<FoodGalleryBloc>(context);
 //    final bloc = BlocProvider2
 //        .of(context)
@@ -493,7 +407,7 @@ children: <Widget>[
 // image and string JEDILINE BEGINS HERE.
 SizedBox(
 height: kToolbarHeight + 6, // 6 for spacing padding at top for .
-// width: 200,
+width: 200,
 child:  Row(
 mainAxisAlignment: MainAxisAlignment.start,
 crossAxisAlignment: CrossAxisAlignment.start,
@@ -511,8 +425,6 @@ height: displayHeight(context) / 15,
 child: Image.asset('assets/Path2008.png'),
 
 ),
-
-
 Container(
 
 margin: EdgeInsets.symmetric(
@@ -534,14 +446,14 @@ children: <Widget>[
 Text(
 'Jediline',
 textAlign: TextAlign.left,
-style: TextStyle(fontSize: 20,
+style: TextStyle(fontSize: 30,
 color: Color(0xff07D607),
 fontFamily: 'Itim-Regular'),
 ),
 Text(
 'Online Orders',
 textAlign: TextAlign.left,
-style: TextStyle(fontSize: 10.42,color: Color(0xff07D607)),
+style: TextStyle(fontSize: 16.42,color: Color(0xff07D607)),
 ),
 ],
 ),
@@ -602,7 +514,7 @@ color: Color(0xffFFFFFF),
 
 
 //                                  color: Color(0xffFFFFFF),
-width: displayWidth(context) / 4.3,
+width: displayWidth(context) / 3.3,
 height: displayHeight(context) / 27,
 padding: EdgeInsets.only(
 left: 4, top: 3, bottom: 3, right: 3),
@@ -637,8 +549,11 @@ color: Color(0xffBCBCBD),
 ),
 
 Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
 alignment: Alignment.center,
-width: displayWidth(context) / 7.7,
+width: displayWidth(context) / 4.7,
 //                                        color:Colors.purpleAccent,
 // do it in both Container
 child: TextField(
@@ -704,6 +619,10 @@ child: const Text('OK'),
 ),
 
 )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
 
 ],
 ),
@@ -1181,6 +1100,23 @@ mainAxisAlignment: MainAxisAlignment.start,
 crossAxisAlignment: CrossAxisAlignment.start,
 children: <Widget>[
 
+/*
+                Text(
+//                unSelectedOneIngredient.ingredientName,
+                  unSelectedOneIngredient.ingredientName.length==0?
+                  'EMPTY':  unSelectedOneIngredient.ingredientName.length>12?
+                  unSelectedOneIngredient.ingredientName.substring(0,12)+'...':
+                  unSelectedOneIngredient.ingredientName,
+                  style: TextStyle(
+                    color:Color(0xff707070),
+//                                    color: Colors.blueGrey[800],
+
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                  ),
+
+                ),
+                */
 
 Text(categoryName.toLowerCase().length>8?categoryName.toLowerCase().substring(0,8)+'..':
 categoryName.toLowerCase()
@@ -1189,10 +1125,9 @@ categoryName.toLowerCase()
 TextStyle(
 
 fontFamily: 'Itim-Regular',
-fontSize: 27,
-//august 27 ... fontSize : 30 to 27 upon some yellow black error ,, overflow....
+fontSize: 30,
 fontWeight: FontWeight.normal,
-
+//                    fontStyle: FontStyle.italic,
 color: Color(0xff000000),
 ),
 
@@ -1200,7 +1135,7 @@ color: Color(0xff000000),
 //                    'Reross Quadratic',
 
 
-), CustomPaint(size: Size(0, 10), // upon overflow error from 17 to 14.... to 10... on august 27.... arefin...
+), CustomPaint(size: Size(0, 19),
 painter: MyPainter(),
 )
 ]
@@ -1325,6 +1260,37 @@ onTap: () {
 
 
 Widget shoppingCartWidget(BuildContext context){
+
+
+//    final bloc = LocationQueryBloc();
+
+//    final blocZZ = FoodItemsQueryBloc();
+
+//    BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+// I AM NOT USING THIS HERE.
+//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
+
+
+//    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<
+//        FoodItemDetailsBloc>(context);
+//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
+
+
+/*
+Widget work1(BuildContext context){
+  BlocProvider(
+    bloc: ,
+    child: ,
+//
+  )
+
+  */
+
+// NOT REQUIRED THIS STREAM WILL BE REQUIRED IN SHOPPING CART PAGE.
+// PLANNED TO PASS IT FROM HERE.
+// HOW CAN I HAVE IT HERE ????
+
+
 return Container(
 //                                                                        width:60,
 width: displayWidth(
@@ -1365,19 +1331,37 @@ Navigator.of(context).pop();
 else {
 print(
 ' method for old Outline button that deals with navigation to Shopping Cart Page');
+
+// work 01.
+
+//          orderFG
+
+
+//      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
+
+
+//              final locationBloc = BlocProvider.of<>(context);
+//                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
+
 CustomerInformation oneCustomerInfo = new CustomerInformation(
 address: '',
 flatOrHouseNumber: '',
 phoneNumber: '',
 etaTimeInMinutes: -1,
 etaTimeOfDay: new TimeOfDay(hour:-0,minute:-0),
-
+//              etaTimeOfDay: new TimeOfDay(),
+//        CustomerInformation currentUser = _oneCustomerInfo;
+//    currentUser.address = address;
+//
 
 );
 
 
 final blocG = BlocProvider.of<FoodGalleryBloc>(context);
 List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.allCategories;
+
+//            List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.getAllIngredientsPublicFGB2;
+
 
 orderFG.selectedFoodInOrder = allSelectedFoodGallery;
 
@@ -1409,6 +1393,9 @@ orderFG,allCategoriesForShoppingCartPage),
 child: ShoppingCart(),
 
 ),
+// fUTURE USE -- ANIMATION TRANSITION CODE.
+
+
 ),
 );
 
@@ -1457,6 +1444,9 @@ Scaffold.of(context)
 SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON"),
 duration: Duration(milliseconds: 8000),
 ),);
+//      setState(() => _reloadRequired = true);
+
+
 }
 
 else if ((orderWithDocumentId.paymentButtonPressed) &&
@@ -1470,6 +1460,13 @@ Scaffold.of(context)
 duration: Duration(milliseconds: 8000)
 )
 );
+
+/*
+            Scaffold.of(context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text("Order Cancelled by user.")));
+            */
+//      setState(() => _reloadRequired = true);
 
 setState(
 () {
@@ -1502,12 +1499,14 @@ transitionDuration: Duration(
 milliseconds: 900),
 pageBuilder: (_, __, ___) =>
 
+
 BlocProvider<UnPaidBloc>(
 bloc: UnPaidBloc(),
 
 child: UnPaidPage(docID:orderWithDocumentId.orderdocId),
 //                      child: UnPaidPage()
 ),
+
 
 ),
 );
@@ -1610,8 +1609,7 @@ children: <Widget>[ Center(
 child: Icon(
 
 Icons.add_shopping_cart,
-// size: displayWidth(context)/19,
-size: displayWidth(context)/29,
+size: displayWidth(context)/19,
 color: Color(0xff707070),
 ),
 ),
@@ -1619,6 +1617,8 @@ color: Color(0xff707070),
 Container(
 //                                              color:Colors.red,
 width: displayWidth(context)/25,
+
+
 decoration: new BoxDecoration(
 color: Colors.redAccent,
 
