@@ -1087,8 +1087,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             );
                           }
                           else {
-                            CustomerInformation x = oneOrder
-                                .orderingCustomer;
+                            CustomerInformation x = oneOrder.orderingCustomer;
 
 
                             logger.e(
@@ -1101,25 +1100,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   Container(
 
                                     color:Colors.indigoAccent,
-//                              alignment: Alignment.bottomCenter,
                                     height: displayHeight(context) / 1.10,
 
-                                    width: displayWidth(context)/1.03
-                                    /* this is about the width of yellow side menu */
-                                    ,
-//                  color:Colors.lightGreenAccent,
+                                    width: displayWidth(context)/1.03,
+
                                     margin: EdgeInsets.fromLTRB(
                                         12, displayHeight(context) / 16,
                                         10, 0),
 
 
                                     child: Neumorphic(
-                                      // State of Neumorphic (may be convex, flat & emboss)
-
-//                                      NeumorphicStyle
-//                                      NeumorphicBoxShape
-//                                      boxShape:
-
                                       curve: Neumorphic.DEFAULT_CURVE,
                                       style: NeumorphicStyle(
                                         shape: NeumorphicShape
@@ -1166,8 +1156,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               children: <Widget>[
 
                                                 Container(
-                                                  width: displayWidth(
-                                                      context) /
+                                                  width: displayWidth(context) /
                                                       1.5,
                                                   height: displayHeight(
                                                       context) / 30,
@@ -1317,6 +1306,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                           // work 1
+                                          // 911_1
                                           Container(
 //                                        width: displayWidth(context) /1.8,
                                             width: displayWidth(
