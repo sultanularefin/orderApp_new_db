@@ -139,7 +139,7 @@ void initState(){
 
 
 localStorageCheck();
-_getBatteryLevel();
+//_getBatteryLevel();
 
 
 super.initState();
@@ -149,6 +149,7 @@ super.initState();
 // Get battery level.
 String _batteryLevel = 'Unknown battery level.';
 
+/*
 Future<void> _getBatteryLevel() async {
 String batteryLevel;
 try {
@@ -162,6 +163,8 @@ setState(() {
 _batteryLevel = batteryLevel;
 });
 }
+
+*/
 
 
 // Future<void> return type .  ??

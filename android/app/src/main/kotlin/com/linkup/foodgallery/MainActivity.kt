@@ -5,6 +5,20 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugins.GeneratedPluginRegistrant
 
+class MainActivity: FlutterActivity() {
+    override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+        GeneratedPluginRegistrant.registerWith(flutterEngine);
+    }
+}
+
+// FOR BATTER CHECKING..
+/*package com.linkup.foodgallery
+
+import androidx.annotation.NonNull;
+import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugins.GeneratedPluginRegistrant
+
 
 
 import android.content.Context
@@ -20,7 +34,7 @@ import android.os.Build.VERSION_CODES
 //import io.flutter.embedding.android.FlutterActivity
 //import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
-
+*/
 
 /*
 // Iteration 01//
@@ -35,8 +49,11 @@ class MainActivity: FlutterActivity() {
 */
 
 
+//FOR BATTER CHECKING
+/*
 
 class MainActivity: FlutterActivity() {
+
 //    private val CHANNEL = "com.example.timePickerTest"
 
     private  val CHANNEL = "com.linkup.foodgallery";
@@ -89,4 +106,8 @@ class MainActivity: FlutterActivity() {
 
 
 
+
+
 }
+
+*/
