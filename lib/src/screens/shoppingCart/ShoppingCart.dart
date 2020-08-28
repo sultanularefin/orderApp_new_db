@@ -4338,8 +4338,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 padding: const EdgeInsets.fromLTRB(0, 0, 10,0),
                 children: <Widget>[
 
-
-
                   //phone ends here....
 
                   Container(
@@ -4372,20 +4370,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           borderRadius: BorderRadius.circular(35),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               color:Color(0xffFCF5E4),
                               width: displayWidth(context) / 30,
                               child:
-
-                              Icon( Icons.watch,
+                              Icon(Icons.watch,
                                 size: 32.0,
-                                // color: Colors.black
                               ),
                             ),
 
@@ -4395,7 +4388,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                             Container(
-                              width: displayWidth(context) / 7,
+                              width: displayWidth(context) / 9,
                               height: displayHeight(context) / 9,
                               color:Color(0xffFCF5E4),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -4409,14 +4402,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   )
                               ),
                             ),
-
-
-
-
-
-
-                            //ZZZZ
-
 
                           ],
                         ),
@@ -4458,7 +4443,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                             Container(
-                              width: displayWidth(context) / 7,
+                              width: displayWidth(context) / 9,
                               height: displayHeight(context) / 9,
                               color:Color(0xffFCF5E4),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -4495,11 +4480,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           borderRadius: BorderRadius.circular(35),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               color:Color(0xffFCF5E4),
@@ -4513,7 +4495,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
 
                             Container(
-                              width: displayWidth(context) / 7,
+                              width: displayWidth(context) / 9,
                               height: displayHeight(context) / 9,
                               color:Color(0xffFCF5E4),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
