@@ -32,7 +32,7 @@ import 'dart:async';
 
 // import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 //import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
@@ -43,6 +43,10 @@ import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
+import 'package:flutter/services.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:permission_handler/permission_handler.dart';
+import 'package:system_shortcuts/system_shortcuts.dart';
 //import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 //import 'package:neumorphic/neumorphic.dart';
 
@@ -58,10 +62,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foodgallery/src/welcomePage.dart';
 
 
-// models, dummy data file:
 
-//import '../../DataLayer/itemData.dart';
-//import '../../DataLayer/FoodItem.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 
@@ -70,17 +71,6 @@ import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-//import 'package:foodgallery/src/BLoC/foodItems_query_bloc.dart';
-//import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
-
-//import './../../shared/category_Constants.dart' as Constants;
-
-
-//import CategoryItems from 'package:foodgallery/src/shared/category_Constants.dart';
-
-
-//final Firestore firestore = Firestore();
-
 
 
 class FoodGallery2 extends StatefulWidget {
@@ -99,6 +89,11 @@ class FoodGallery2 extends StatefulWidget {
 
 class _FoodGalleryState extends State<FoodGallery2> {
 
+
+  // static const platform = const MethodChannel('com.example.timePickerTest');
+
+  static const platform = const MethodChannel('com.linkup.foodgallery');
+
   final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery = new GlobalKey<ScaffoldState>();
 //  final GlobalKey<ScaffoldState> scaffoldKeyClientHome = GlobalKey<ScaffoldState>();
   final SnackBar snackBar = const SnackBar(content: Text('Menu button pressed'));
@@ -107,60 +102,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 //  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
-
   _FoodGalleryState(/*{firestore} */);
-
-//  File _image;
-
-//  List<NewCategoryItem>_allCategoryList=[];
-
-
-  // List<NewIngredient> _allIngredientState=[];
-
-  /*
-  @override
-  void initState() {
-//    setAllIngredients();
-    super.initState();
-
-  }
-
-
-
-  // !(NOT) NECESSARY NOW.
-  Future<void> setAllIngredients() async {
-
-    debugPrint("Entering in retrieveIngredients1");
-
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
-//    final identityBlocInvokerAppBlockWelcomPageInitState = BlocProvider2.of(context).getIdentityBlocsObject;
-    final bloc = BlocProvider2.of(context).getIdentityBlocsObject;
-
-    await bloc.getAllIngredients();
-    List<NewIngredient> test = bloc.allIngredients;
-
-//    print(' ^^^ ^^^ ^^^ ^^^ ### test: $test');
-
-    print('done: ');
-
-//    dynamic normalPrice = oneFoodItemandId.sizedFoodPrices['normal'];
-//    double euroPrice1 = tryCast<double>(normalPrice, fallback: 0.00);
-
-    setState(()
-    {
-      print('_allIngredientState: $test');
-      _allIngredientState = test;
-//      priceByQuantityANDSize = euroPrice1;
-//      initialPriceByQuantityANDSize = euroPrice1;
-    }
-    );
-
-
-
-  }
-
-  */
 
 
   //  final _formKey = GlobalKey();
@@ -188,8 +130,56 @@ class _FoodGalleryState extends State<FoodGallery2> {
   );
 
 
-//  double _total_cart_price = 1.00;
-  // empty MEANS PIZZA
+  String _batteryLevel = 'Unknown battery level.';
+
+
+  bool blueToothState = false;
+  bool wiFiState = false;
+
+
+  @override
+  void initState(){
+
+    print('at initState of foodGallery page');
+
+    localStorageCheck();
+    _getBatteryLevel();
+    super.initState();
+
+
+  }
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
+
+
+  // Future<void> return type .  ??
+  Future<void> localStorageCheck () async{
+
+
+
+    bool blueTooth= await SystemShortcuts.checkBluetooth;// return true/false
+    bool wifi =   await SystemShortcuts.checkWifi;// return true/false
+
+
+    setState(() {
+      wiFiState = wifi;
+      blueToothState = blueTooth;
+    });
+
+  }
+
 
 
 
