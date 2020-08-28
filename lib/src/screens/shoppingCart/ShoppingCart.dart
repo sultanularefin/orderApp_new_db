@@ -3200,135 +3200,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                  /*
-                  RaisedButton(
-
-                    splashColor: Color(0xffEEF6CE),
-                    highlightColor: Color(0xffEEF6CE),
-                    color: Color(0xffFFFFFF),
-                    child: currentUserForInline.flatOrHouseNumber != '' ?
-                    Container(
-//                      color:Colors.brown,
-                      color: Color(0xffFFFFFF),
-
-                      width: displayWidth(context) / 6.8,
-                      height: displayHeight(context) / 9,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                              Icons.home,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.flatOrHouseNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
-                              ),
-                            ),
-                          ),
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),) : Container(
-//                      color:Colors.brown,
-                      color: Color(0xffFFFFFF),
-//                       width:displayWidth(context) /2.6,
-                      width: displayWidth(context) / 6.8,
-                      height: displayHeight(context) / 9,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-
-                          Icon(
-                              Icons.home,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  'flat number',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
-                              ),
-                            ),
-                          ),
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),)
-                    ,
-                    onPressed: () =>
-                    {
-                      setState(() {
-                        showEditingCompleteCustomerHouseFlatIformation =
-                        !showEditingCompleteCustomerHouseFlatIformation;
-
-                        addressController.text = currentUserForInline.address;
-                        houseFlatNumberController.text =
-                            currentUserForInline.flatOrHouseNumber;
-
-//                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
-                  ),
-
-
-                  */
-
-
                   //phone begins here...
 
                   Container(
@@ -3447,12 +3318,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
                   ),
 
-
-
                   //phone ends here....
 
+                  // Time begins here...
                   Container(
-                    width: displayWidth(context) /5,
+                    width: displayWidth(context) /5.5,
                     height: displayHeight(context) / 9,
                     child: InkWell(
                       splashColor: Color(0xffEEF6CE),
@@ -3460,8 +3330,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       child:
-                      ((currentUserForInline.etaTimeOfDay.hour==0) &&(
-                          currentUserForInline.etaTimeOfDay.minute==0
+                      (
+                          (currentUserForInline.etaTimeOfDay.hour == 0)
+                              &&(
+                          currentUserForInline.etaTimeOfDay.minute == 0
                       ) && (currentUserForInline.etaTimeInMinutes == -1)
                           &&(showEditingCompleteCustomerReachoutIformation==false)
                       )?
@@ -3470,46 +3342,35 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       )
                           :
                       (currentUserForInline.etaTimeInMinutes != -1)?
-
-
                       Container(
-                        width: displayWidth(context) / 6.5,
+                        width: displayWidth(context) / 7.5,
                         height: displayHeight(context) / 9,
                         decoration: BoxDecoration(
                           color:Color(0xffFCF5E4),
                           borderRadius: BorderRadius.circular(35),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               color:Color(0xffFCF5E4),
                               width: displayWidth(context) / 30,
                               child:
-
                               Icon( Icons.watch,
                                 size: 32.0,
                                 // color: Colors.black
                               ),
                             ),
 
-
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-
                             Container(
-                              width: displayWidth(context) / 7,
+                              width: displayWidth(context) / 10,
                               height: displayHeight(context) / 9,
                               color:Color(0xffFCF5E4),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                               alignment: Alignment.center,
                               child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  '${currentUserForInline.etaTimeInMinutes} min',
                                   style: TextStyle(
                                     fontSize: 19,
                                     fontWeight: FontWeight.normal,
@@ -3517,29 +3378,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   )
                               ),
                             ),
-
-
-
-                            Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Color(0xff000000),
-                                  )
-                              ),
-                            ),
-
-
-                            //ZZZZ
-
-
                           ],
                         ),
                       ):
@@ -3547,10 +3385,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           (showEditingCompleteCustomerReachoutIformation)
                           &&
                           (currentUserForInline.etaTimeOfDay.hour == 0)
-                          &&(currentUserForInline.etaTimeOfDay.minute == 0)
+                          &&
+                              (currentUserForInline.etaTimeOfDay.minute == 0)
                       ) ?
                       Container(
-                        width: displayWidth(context) / 6.5,
+                        width: displayWidth(context) / 7.5,
                         height: displayHeight(context) / 9,
                         decoration: BoxDecoration(
                           color:Color(0xffFCF5E4),
@@ -3580,7 +3419,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                             Container(
-                              width: displayWidth(context) / 7,
+                              width: displayWidth(context) / 10,
                               height: displayHeight(context) / 9,
                               color:Color(0xffFCF5E4),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -3597,28 +3436,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-                            Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
-                              ),
-                            ),
-
-
                             //ZZZZ
 
 
@@ -3629,18 +3446,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       Container(
-                        width: displayWidth(context) / 6.5,
+                        width: displayWidth(context) / 7.5,
                         height: displayHeight(context) / 9,
                         decoration: BoxDecoration(
                           color:Color(0xffFCF5E4),
                           borderRadius: BorderRadius.circular(35),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               color:Color(0xffFCF5E4),
@@ -3654,7 +3468,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
 
                             Container(
-                              width: displayWidth(context) / 7,
+                              width: displayWidth(context) / 10,
                               height: displayHeight(context) / 9,
                               color:Color(0xffFCF5E4),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -3691,195 +3505,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       },
                     ),
                   )
-
-
-                  // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
-
-
-
-
-
-                  /*
-                  RaisedButton(
-                    splashColor: Color(0xffEEF6CE),
-                    highlightColor: Color(0xffEEF6CE),
-                    color: Color(0xffFFFFFF),
-
-                    child:
-                    ((currentUserForInline.etaTimeOfDay.hour==-0) &&(
-                        currentUserForInline.etaTimeOfDay.minute==-0
-                    ) && currentUserForInline.etaTimeInMinutes == -1)?
-                    Container(
-                      color: Color(0xffFFFFFF),
-//                      height:displayHeight(context) /10,
-                      height: displayHeight(context) / 9,
-                      width: displayWidth(context) / 5,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'ETA',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    ):
-                    ((currentUserForInline.etaTimeInMinutes != -1)?
-
-
-
-
-                    Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Color(0xffFC0000),
-                      height: displayHeight(context) / 9,
-//                      height:displayHeight(context) /10,
-                      width: displayWidth(context) / 5,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                '${currentUserForInline.etaTimeInMinutes}',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    ):
-                    Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Color(0xffFC0000),
-//                      height:displayHeight(context) /10,
-                      height: displayHeight(context) / 9,
-                      width: displayWidth(context) / 5,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                '${currentUserForInline.etaTimeOfDay.hour} :'
-                                    '${currentUserForInline.etaTimeOfDay.minute} ',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    )
-                    )
-
-
-                    // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
-                    ,
-                    onPressed: () =>
-                    {
-                      setState(() {
-                        showEditingCompleteCustomerReachoutIformation =
-                        !showEditingCompleteCustomerReachoutIformation;
-                        etaController.text =
-                            currentUserForInline.etaTimeInMinutes.toString();
-                      })
-                    },
-                  ),
-
-                  */
 
                 ],
               ),
@@ -4071,7 +3696,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                       Container(
-                        width: displayWidth(context) / 6.5,
+                        width: displayWidth(context) / 9,
                         height: displayHeight(context) / 9,
                         decoration: BoxDecoration(
                           color:Color(0xffFCF5E4),
@@ -4099,22 +3724,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                             // : Container for 2nd argument of ternary condition ends here.
 
-
-                            Container(
-                              width: displayWidth(context) / 7,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
 
 
 
@@ -4145,7 +3754,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           (showEditingCompleteCustomerReachoutIformation)
                               &&
                               (currentUserForInline.etaTimeOfDay.hour == 0)
-                              &&(currentUserForInline.etaTimeOfDay.minute == 0)
+                              &&
+                              (currentUserForInline.etaTimeOfDay.minute == 0)
                       ) ?
                       Container(
                         width: displayWidth(context) / 6.5,
@@ -4178,7 +3788,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                             Container(
-                              width: displayWidth(context) / 7,
+                              width: displayWidth(context) /9,
                               height: displayHeight(context) / 9,
                               color:Color(0xffFCF5E4),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -4193,31 +3803,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               ),
                             ),
 
-
-
-                            Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
-                              ),
-                            ),
-
-
-                            //ZZZZ
 
 
                           ],
@@ -4252,7 +3837,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
 
                             Container(
-                              width: displayWidth(context) / 7,
+                              width: displayWidth(context) / 9,
                               height: displayHeight(context) / 9,
                               color:Color(0xffFCF5E4),
                               padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
