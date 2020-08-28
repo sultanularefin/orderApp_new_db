@@ -173,7 +173,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
 
-//  List<PrinterBluetooth> blueToothDevicesState = [];
+  List<PrinterBluetooth> blueToothDevicesState = [];
 //  bool localScanAvailableState = true; // meant not busy.
 
 //  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
@@ -267,7 +267,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
     */
 
-    /*
+
     BluetoothDevice _x = new BluetoothDevice();
     _x.name = 'Restaurant Printer';
     _x.address = '0F:02:18:51:23:46';
@@ -293,7 +293,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       blueToothDevicesState = tempBlueToothDevices;
     });
 
-    */
+
   }
 
 

@@ -18,8 +18,13 @@ import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
+import 'package:flutter/services.dart';
+//import 'package:path_provider/path_provider.dart';
+
+
 // this pkg i am using for searching device's only and for testing now on august 29....
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
+import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart' as primaryBlueToothPrinter;
 
 
 
@@ -158,6 +163,17 @@ class ShoppingCartBloc implements Bloc {
   Stream <List<PrinterBluetooth>> get getDevicesStream => _devicesController.stream;
 
 
+
+
+/*
+  List<BluetoothDevice> _devicesBlueTooth = [];
+  //  List<String> _devices =[];
+  List<BluetoothDevice> get getDevices => _devicesBlueTooth;
+  final _devicesController = StreamController<List<BluetoothDevice>>();
+  Stream <List<BluetoothDevice>> get getDevicesStream => _devicesController.stream;
+
+*/
+
   //  List<PrinterBluetooth> blueToothDevicesState = [];
 
 
@@ -240,7 +256,8 @@ class ShoppingCartBloc implements Bloc {
       /*FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped */
       Order x,List<NewCategoryItem> allCategories
       ) {
-    discoverDevicesConstructor();
+//    discoverDevicesConstructor();
+    discoverDevicesConstructorNewPKG();
 
 
     print("at the begin of Constructor [ShoppingCartBloc]");
@@ -1491,37 +1508,121 @@ class ShoppingCartBloc implements Bloc {
 //  Future <bool> checkUserinLocalStorage() async {
   void discoverDevicesConstructor(/*String portNumber*/) async {
 
+    /*
+    // THIS THINGS WORKED SOME MONTH AGO...
     printerManager.scanResults.listen((devices) async {
       print('UI: Devices found ${devices.length}');
 
       _devicesBlueTooth = devices;
       _devicesController.sink.add(_devicesBlueTooth);
-//        blueToothDevicesState = devices;
-//        localScanAvailableState=!localScanAvailableState;
 
-    });
-
-
-    //OPTION 1..
-
-    /*
-    printerManager.startScan(Duration(seconds: 4));
-    printerManager.scanResults.listen((scannedDevices) {
-
-
-      logger.w('scannedDevices: $scannedDevices');
-      _devicesBlueTooth = scannedDevices;
-      _devicesController.sink.add(_devicesBlueTooth);
-
-//    bluetoo
-    }, onDone: () {
-      print("Task Done zzzzz zzzzzz zzzzzzz zzzzzzz zzzzzz zzzzzzzz zzzzzzzzz zzzzzzz zzzzzzz");
-    }, onError: (error, StackTrace stackTrace) {
-      print("Some Error $stackTrace");
     });
 
     */
 
+
+
+
+  }
+
+  void discoverDevicesConstructorNewPKG(/*String portNumber*/) async {
+
+    BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
+    /*
+    // THIS THINGS WORKED SOME MONTH AGO...
+    printerManager.scanResults.listen((devices) async {
+      print('UI: Devices found ${devices.length}');
+
+      _devicesBlueTooth = devices;
+      _devicesController.sink.add(_devicesBlueTooth);
+
+    });
+
+    */
+
+    bool isConnected=await bluetooth.isConnected;
+    List<BluetoothDevice> devices = [];
+    try {
+      devices = await bluetooth.getBondedDevices();
+//    } on PlatformException {
+//      // TODO - Error
+//    }
+    } on PlatformException {
+      // import service for this...
+      logger.i('some exception please check');
+      // TODO - Error
+    }
+
+//    bluetooth.onStateChanged().listen((state) {
+//      switch (state) {
+//        case BlueThermalPrinter.CONNECTED:
+//          setState(() {
+//            _connected = true;
+//          });
+//          break;
+//        case BlueThermalPrinter.DISCONNECTED:
+//          setState(() {
+//            _connected = false;
+//          });
+//          break;
+//        default:
+//          print(state);
+//          break;
+//      }
+//    });
+
+//    if (!mounted) return;
+//    setState(() {
+//      _devices = devices;
+//    });
+
+//    if(isConnected) {
+//      setState(() {
+//        _connected=true;
+//      });
+//    }
+
+    /*
+    NewIngredient.ingredientConvert(Map<String, dynamic> data,String docID)
+        :imageURL= data['image'],
+    ingredientName= data['name'],
+    price = data['price'].toDouble(),
+    documentId = docID,
+    isDefault= false,
+    tempIndex=0,
+    ingredientAmountByUser = 1;
+
+    */
+
+    List<PrinterBluetooth> tempPrinterBluetooth = new List<PrinterBluetooth>() ;
+    devices.forEach((element) {
+
+
+      primaryBlueToothPrinter.BluetoothDevice _y = new primaryBlueToothPrinter.BluetoothDevice();
+
+      print('element.name:  ..... ***       ***      @@@    @@@ ${element.name}');
+
+
+      _y.name = element.name;
+      _y.address =  element.address;
+      //'98:52:3D:BB:18:26';
+      _y.type = element.type;
+      //3;
+
+      _y.connected = element.connected;
+
+      //null;
+
+      PrinterBluetooth y = new PrinterBluetooth(_y);
+
+      tempPrinterBluetooth.add(y);
+
+    });
+//    BluetoothDevice
+
+
+    _devicesBlueTooth = tempPrinterBluetooth;
+    _devicesController.sink.add(_devicesBlueTooth);
 
   }
 
