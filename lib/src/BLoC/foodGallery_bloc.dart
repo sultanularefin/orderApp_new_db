@@ -130,9 +130,10 @@ class FoodGalleryBloc implements Bloc {
 
 
 // this code bloc cut paste from foodGallery Bloc:
+
+  /*
   Future<void> getAllIngredientsConstructor() async {
     print('at getAllIngredientsConstructor()');
-
 
     if (_isDisposedIngredients == false) {
       var snapshot = await _client.fetchAllIngredients();
@@ -170,6 +171,7 @@ class FoodGalleryBloc implements Bloc {
   }
 
 
+  */
 
 
   // HELPER METHOD FOR TEST TO BE MODIFIED....  AUGUST 14 2020.....
@@ -251,36 +253,40 @@ class FoodGalleryBloc implements Bloc {
   // this code bloc cut paste from foodGallery Bloc:
   Future<void> getAllExtraIngredientsConstructor() async {
 
-    /*
-
-
-    */
     print('at getAllExtraIngredientsConstructor()');
 
 
 
     if (_isDisposedExtraIngredients == false) {
 
-//      categories.forEach((doc) {
-
       var snapshot = await _client.fetchAllExtraIngredients();
       List docList = snapshot.documents;
-
 
       List <NewIngredient> ingItems = new List<NewIngredient>();
       ingItems = snapshot.documents.map((documentSnapshot) =>
           NewIngredient.ingredientConvertExtra
             (documentSnapshot.data, documentSnapshot.documentID)
-
       ).toList();
 
 
       List<String> documents = snapshot.documents.map((documentSnapshot) =>
       documentSnapshot.documentID).toList();
 
-      // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+       print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
+
+      ingItems.forEach((doc) {
+        print('one Extra . . . . . . . name: ${doc.ingredientName} documentID: ${doc.documentId}');
+//        String imageURL;
+//        double price;
+//        String documentId;
+//        doc['name'],
+//        price = data['price'].toDouble(),
+//        documentId = docID,
+
+      }
+      );
 
 
 
@@ -659,7 +665,7 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-    getAllIngredientsConstructor();
+//    getAllIngredientsConstructor();
 
     getAllExtraIngredientsConstructor();
 

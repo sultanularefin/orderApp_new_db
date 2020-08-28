@@ -61,13 +61,14 @@ dependencies:
   #  random_color: ^1.0.5
   font_awesome_flutter: ^8.8.1
 #  esc_pos_printer: ^3.2.5
-#  esc_pos_utils: ^0.4.5
+
   ping_discover_network: ^0.2.0+1
   wifi: ^0.1.5
   intl: ^0.16.1
   oktoast: ^2.3.2
   platform_action_sheet: ^0.0.3
   esc_pos_bluetooth: ^0.2.8
+  esc_pos_utils: ^0.3.6
   dotted_border: ^1.0.5
   characters: ^1.0.0
   flutter_datetime_picker: ^1.4.0

@@ -158,6 +158,7 @@ class FirebaseClient {
     return snapshot;
   }
 
+  /*
   Future<QuerySnapshot> fetchAllIngredients()async{
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
@@ -173,6 +174,8 @@ class FirebaseClient {
 
     return snapshot;
   }
+
+  */
 
 
 

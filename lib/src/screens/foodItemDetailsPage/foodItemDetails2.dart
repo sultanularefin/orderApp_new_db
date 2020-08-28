@@ -1479,7 +1479,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
 
-
                                   // todo shopping.
 
 //                                                                          SizedBox(
