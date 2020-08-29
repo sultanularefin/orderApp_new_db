@@ -23,8 +23,9 @@ class SauceItem implements Comparable {
   final String documentId;
   final int    sauceItemAmountByUser;
 //  final int    sl;
-        bool   isSelected;
-        bool   isDefaultSelected;
+        bool    isSelected;
+        bool    isDefaultSelected;
+        bool    isDeleted;
 
 
 //  String ingredients;
@@ -39,6 +40,7 @@ class SauceItem implements Comparable {
 //        this.sl,
         this.isSelected:false,
         this.isDefaultSelected:false,
+        this.isDeleted:false,
       }
       );
 
@@ -84,7 +86,8 @@ class SauceItem implements Comparable {
         documentId = docID,
         sauceItemAmountByUser = 0,
 //        sl = data['sl'],
-        isSelected = false;
+        isSelected = false,
+        isDeleted = false;
 
 
 //  NewIngredient.updateIngredient(NewIngredient oneIngredient)

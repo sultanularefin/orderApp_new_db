@@ -25,6 +25,7 @@ class CheeseItem implements Comparable {
 //  final int    sl;
         bool   isSelected;
         bool isDefaultSelected;
+        bool isDeleted;
 
 //  String ingredients;
 
@@ -38,6 +39,7 @@ class CheeseItem implements Comparable {
 //        this.sl,
         this.isSelected:false,
         this.isDefaultSelected:false,
+        this.isDeleted: false,
 
       }
       );
@@ -75,6 +77,7 @@ class CheeseItem implements Comparable {
         documentId = docID,
         cheeseItemAmountByUser = 0,
 //        sl = data['sl'],
+        isDeleted=false,
         isSelected =false;
 //
 //

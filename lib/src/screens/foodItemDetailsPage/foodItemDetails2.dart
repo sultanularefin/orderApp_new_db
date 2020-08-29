@@ -1974,8 +1974,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
 
-            FocusScopeNode currentFocus = FocusScope.of(
-                context);
+            FocusScopeNode currentFocus = FocusScope.of(context);
 
             if (!currentFocus.hasPrimaryFocus) {
               currentFocus.unfocus();
@@ -1986,16 +1985,15 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
 
             final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//                      final blocD =
-//                          BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-
-
 
             SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
 
             print('temp is $temp');
 
             print('temp.selectedIngredients: ${temp.selectedIngredients}');
+
+            logger.i('temp.selectedIngredients.length: ${temp.selectedIngredients.length}');
+
             print('temp.selectedCheeseItems: ${temp.selectedCheeseItems}');
             print('temp.selectedSauceItems:  ${temp.selectedSauceItems}');
 
@@ -4257,7 +4255,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           else {
 
 //            print('snapshot.hasData and else statement at FDetailS2');
-            List<NewIngredient> selectedIngredients = snapshot.data;
+            List<NewIngredient> selectedIngredients2 = snapshot.data;
+            print("selectedIngredients2.length: >>> >>> <<< ${selectedIngredients2.length}");
+            List<NewIngredient> selectedIngredients = selectedIngredients2.where((element) => element.isDeleted==false).toList();
+
+            print("selectedIngredients.length: >>> >>> <<< ${selectedIngredients.length}");
+
+
 
             if( (selectedIngredients.length ==1)&&
                 (selectedIngredients[0].ingredientName.toLowerCase()=='none')){
@@ -4390,7 +4394,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
           else {
 
 //            print('snapshot.hasData and else statement at FDetailS2');
-            List<NewIngredient> selectedIngredients = snapshot.data;
+            List<NewIngredient> selectedIngredients2 = snapshot.data;
+//            List<NewIngredient> selectedIngredients2 = snapshot.data;
+            print("selectedIngredients2.length: >>> >>> <<< ${selectedIngredients2.length}");
+            List<NewIngredient> selectedIngredients = selectedIngredients2.where((element) => element.isDeleted==false).toList();
+
+//            _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
+            print("selectedIngredients.length: >>> >>> <<< ${selectedIngredients.length}");
 
             if( (selectedIngredients.length ==1)&&
                 (selectedIngredients[0].ingredientName.toLowerCase()=='none')){

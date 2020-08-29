@@ -5143,61 +5143,61 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // Widget unobscureInputandRestforDinningRoom(Order unObsecuredInputandPayment) {
 
 
-      // CustomerInformation currentUser = unObsecuredInputandPayment
-      //     .orderingCustomer;
+    // CustomerInformation currentUser = unObsecuredInputandPayment
+    //     .orderingCustomer;
 
 
-      print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
 
-      print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-      print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-      print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-      print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-      print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-          ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
-      return Container(
+    return Container(
 
-        height: displayHeight(context) / 2.2,
-        width: displayWidth(context) / 1.03,
-        // color:Colors.lightBlueAccent,
+      height: displayHeight(context) / 2.2,
+      width: displayWidth(context) / 1.03,
+      // color:Colors.lightBlueAccent,
+
+      child:
+      Container(
+
+        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
 
         child:
-        Container(
-
-          height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 500),
           child:
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
+
+          ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+
+
+
+              &&(showEditingCompleteCustomerReachoutIformation == true)
+          ) ?
+
+          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+            (unObsecuredInputandPayment):
+          Container(
+
+            // color:Colors.lightBlueAccent,
+            // color: Color(0xffFFFFFF),
             child:
-
-            ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-
-
-
-                &&(showEditingCompleteCustomerReachoutIformation == true)
-            ) ?
-
-            animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-              (unObsecuredInputandPayment):
             Container(
-
-              // color:Colors.lightBlueAccent,
-              // color: Color(0xffFFFFFF),
-              child:
-              Container(
-                // color:Colors.red,
-                height:displayHeight(context)/18,
-                width: displayWidth(context) / 1.03,
-                child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-              )
-              // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
-              ,
-            ),
+              // color:Colors.red,
+              height:displayHeight(context)/18,
+              width: displayWidth(context) / 1.03,
+              child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            )
+            // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            ,
           ),
         ),
-      );
+      ),
+    );
 // GGG),
 
     // }
@@ -5229,58 +5229,58 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //       .orderingCustomer;
 
 
-      print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
 
-      print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-      print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-      print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-      print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-      print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-          ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
-      return Container(
+    return Container(
 
-        height: displayHeight(context) / 2.2,
-        width: displayWidth(context) / 1.03,
-        // color:Colors.lightBlueAccent,
+      height: displayHeight(context) / 2.2,
+      width: displayWidth(context) / 1.03,
+      // color:Colors.lightBlueAccent,
+
+      child:
+      Container(
+
+        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
 
         child:
-        Container(
-
-          height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 500),
           child:
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
+
+          ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+
+              // 911_3
+              //     work_3
+
+              &&(showEditingCompleteCustomerReachoutIformation == true)
+          ) ?
+
+          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+            (unObsecuredInputandPayment):
+          Container(
+
+            // color:Colors.lightBlueAccent,
+            // color: Color(0xffFFFFFF),
             child:
-
-            ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-
-                // 911_3
-                //     work_3
-
-                &&(showEditingCompleteCustomerReachoutIformation == true)
-            ) ?
-
-            animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-              (unObsecuredInputandPayment):
             Container(
-
-              // color:Colors.lightBlueAccent,
-              // color: Color(0xffFFFFFF),
-              child:
-              Container(
-                // color:Colors.red,
-                height:displayHeight(context)/18,
-                width: displayWidth(context) / 1.03,
-                child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-              )
-              // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
-              ,
-            ),
+              // color:Colors.red,
+              height:displayHeight(context)/18,
+              width: displayWidth(context) / 1.03,
+              child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            )
+            // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            ,
           ),
         ),
-      );
+      ),
+    );
 // GGG),
 
     // }
@@ -5307,56 +5307,56 @@ class _ShoppingCartState extends State<ShoppingCart> {
     // Widget unobscureInputandOthersPhone(Order unObsecuredInputandPayment) {
 
 
-      // CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+    // CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
 
-      print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
 
-      print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-      print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-      print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-      print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-      print('inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer):'
-          ' ${inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer)}');
+    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print('inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer):'
+        ' ${inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer)}');
 
 
 
-      return Container(
+    return Container(
 
-        height: displayHeight(context) / 2.2,
-        width: displayWidth(context) / 1.03,
+      height: displayHeight(context) / 2.2,
+      width: displayWidth(context) / 1.03,
+
+      child:
+      Container(
+
+        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
 
         child:
-        Container(
-
-          height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 500),
           child:
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
-            child:
-            ((inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-                &&(showEditingCompleteCustomerPhoneIformation == true
-                ) &&(showEditingCompleteCustomerReachoutIformation == true)
-            ) ?
+          ((inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+              &&(showEditingCompleteCustomerPhoneIformation == true
+              ) &&(showEditingCompleteCustomerReachoutIformation == true)
+          ) ?
 
-            animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-              (unObsecuredInputandPayment):
-            Container(
+          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+            (unObsecuredInputandPayment):
+          Container(
 
-              color: Color(0xffFFFFFF),
-              child: Center(
+            color: Color(0xffFFFFFF),
+            child: Center(
 //              child: inputFieldsDelivery(unObsecuredInputandPayment),
-                child: inputFieldsPhoneOrderType(unObsecuredInputandPayment),
+              child: inputFieldsPhoneOrderType(unObsecuredInputandPayment),
 
-              ),
             ),
-
-
           ),
 
 
         ),
-      );
+
+
+      ),
+    );
 // GGG),
 //     }
 
@@ -5386,64 +5386,64 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-      // CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+    // CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
 
-      print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
 
-      print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-      print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-      print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-      print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-      print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-          ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
-
-
+    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
 
 
-      return Container(
 
-        height: displayHeight(context) / 2.2,
-        width: displayWidth(context) / 1.03,
+
+    return Container(
+
+      height: displayHeight(context) / 2.2,
+      width: displayWidth(context) / 1.03,
+
+      child:
+      Container(
+
+        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
 
         child:
-        Container(
-
-          height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 500),
           child:
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
-            child:
-            ((allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-                &&(
-                    showEditingCompleteCustomerAddressInformation == true
-                )
-                &&(
-                    showEditingCompleteCustomerHouseFlatIformation == true
-                )
-                &&( showEditingCompleteCustomerPhoneIformation == true
-                ) &&(showEditingCompleteCustomerReachoutIformation == true)
-            ) ?
+          ((allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+              &&(
+                  showEditingCompleteCustomerAddressInformation == true
+              )
+              &&(
+                  showEditingCompleteCustomerHouseFlatIformation == true
+              )
+              &&( showEditingCompleteCustomerPhoneIformation == true
+              ) &&(showEditingCompleteCustomerReachoutIformation == true)
+          ) ?
 
 
 
-            animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-              (unObsecuredInputandPayment):
-            Container(
+          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+            (unObsecuredInputandPayment):
+          Container(
 
-              color: Color(0xffFFFFFF),
-              child: Center(
-                child: inputFieldsDelivery(unObsecuredInputandPayment),
-              ),
+            color: Color(0xffFFFFFF),
+            child: Center(
+              child: inputFieldsDelivery(unObsecuredInputandPayment),
             ),
-
-
           ),
 
 
         ),
-      );
+
+
+      ),
+    );
 // GGG),
 
     // }
@@ -6587,12 +6587,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 onPressed: () async {
 
-                  // TAkEAWAY AND DINNING  Recite Print. ....
+                  // TAkEAWAY AND DINNING DUMMY PRINT ....
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
+
+
                   print(
                       'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning
                           .paymentTypeIndex}');
+
+
+                  // PRINTING CODES WILL BE PUTTED HERE.
+
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
+
                   Order tempOrderWithdocId = await shoppingCartBloc
                       .paymentButtonPressed(cancelPaySelectUNObscuredTakeAwayDinning);
 
@@ -6610,7 +6619,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
+                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
                         .orderdocId}');
 
                     List<
@@ -6620,87 +6629,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
 
-                      await _showMyDialog2(
-                          '___________ blueTooth device not found _____ TakeAway || Dinning pay button');
-
-                      print(
-                          'at here... __________ blueTooth device not found _____ TakeAway || Dinning pay button');
-
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUNObscuredTakeAwayDinning);
-
-                    }
-
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
-
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
-
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUNObscuredTakeAwayDinning);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUNObscuredTakeAwayDinning);
-                        }
-                      }
-                      else {
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-                        await _showMyDialog2(
-                            '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
+
+                    _testPrintDummyDevices(x);
+
+                    shoppingCartBloc.clearSubscription();
 
 
-                        shoppingCartBloc.clearSubscription();
-                        print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
-                        return Navigator.pop(
-                            context, cancelPaySelectUNObscuredTakeAwayDinning);
-                      }
-                    }
+                    print('Unboscured takeAway || '
+                        'DinningRoom Dummy print--- returning to FoodGallery Page');
+                    return Navigator.pop(
+                        context, cancelPaySelectUNObscuredTakeAwayDinning);
+
+
                   }
 
                 },
+
+
 
               ),
             ),
@@ -6865,17 +6819,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),),
 
 
+
+
                 onPressed: () async {
 
-                  // Delivery Phone Recite Print.
+                  // DUMMY PRINT DELIVERY PHONE ......
 
                   final shoppingCartBloc = BlocProvider.of<
                       ShoppingCartBloc>(context);
 
+                  print(
+                      'debug print before invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+
+
 
                   print(
-                      'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: '
-                          '${cancelPaySelectUnobscuredDeliveryPhone
+                      'debug print after invoking _startScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
+
+                  print(
+                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUnobscuredDeliveryPhone
                           .paymentTypeIndex}');
 
                   // let's not use this order returned use the one from the bloc:
@@ -6893,99 +6855,37 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     print('something went wrong');
                   }
                   else {
-                    logger.i(
-                        'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
-                            .orderdocId}');
+                    logger.i('tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
+                        .orderdocId}');
 
-                    List<PrinterBluetooth> blueToothDevicesState
-                    = shoppingCartBloc.getDevices;
+                    List<
+                        PrinterBluetooth> blueToothDevicesState = shoppingCartBloc
+                        .getDevices;
 
                     print('blueToothDevicesState.length: ${blueToothDevicesState
                         .length}');
 
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
-
-                      await _showMyDialog2(
-                          '___________ blueTooth device not found _____ delivery phone pay button');
-
-                      print(
-                          'at here... __________ blueTooth device not found _____ delivery phone pay button');
-
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUnobscuredDeliveryPhone);
-
-                    }
-
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
-
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
 
 
-
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
-
-//                      _testPrintDummyDevices(blueToothDevicesState[index]);
+                    BluetoothDevice _x = new BluetoothDevice();
+                    _x.name = 'Restaurant Printer';
+                    _x.address = '0F:02:18:51:23:46';
+                    _x.type = 3;
+                    _x.connected = null;
 
 
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                      }
-                      else {
+                    PrinterBluetooth x = new PrinterBluetooth(_x);
 
 
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
+                    _testPrintDummyDevices(x);
 
-                        await
-                        _showMyDialog2('___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+                    shoppingCartBloc.clearSubscription();
 
+                    print('shopping Cart : shoppingCartBloc.clearSubscription() called... delivery Phone ');
 
-                        shoppingCartBloc.clearSubscription();
-                        print('going to food Gallery page  Restaurant Printer not found');
-                        return Navigator.pop(
-                            context, cancelPaySelectUnobscuredDeliveryPhone);
-                      }
-                    }
+                    return Navigator.pop(
+                        context, cancelPaySelectUnobscuredDeliveryPhone);
+
                   }
 
                 },
@@ -8121,8 +8021,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
         (
             (customerInfoFieldsCheck.etaTimeOfDay.hour != 0)
-              ||
-              (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
+                ||
+                (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
         )
     ) {
       print('WILL RETURN FALSE');
@@ -8574,20 +8474,57 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+//                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',),
             ),
 
           ],
         ),
       );
     }
+
+    else if(oneIngredientForRecite.isDeleted==true) {
+      return Container(
+        height: 40,
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+
+
+            Text('${((oneIngredientForRecite.ingredientName == null) ||
+                (oneIngredientForRecite.ingredientName.length == 0)) ?
+            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
+            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
+            oneIngredientForRecite.ingredientName}',
+              /*
+            Text(
+              '${oneIngredientForRecite.ingredientName}', */
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+//                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                decoration: TextDecoration.lineThrough,
+                fontSize: 25,
+                fontFamily: 'Itim-Regular',),
+            ),
+
+
+          ],
+        ),
+      );
+    }
+
+
     else return Container(
-        height: 0,
-        width: 0
-    );
+          height: 0,
+          width: 0
+      );
   }
 
   Widget displayOneExtraSauceItemInRecite(SauceItem oneSauceItemForRecite, int index,int quantity){
@@ -8608,10 +8545,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+//                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',),
             ),
 
             Text('${((oneSauceItemForRecite.sauceItemName == null) ||
@@ -8626,21 +8563,54 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+//                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',),
             ),
             Text(
               '  +${(oneSauceItemForRecite.price * quantity).toStringAsFixed(2)}',
 
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+//                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',),
             ),
+
+          ],
+        ),
+      );
+    }
+
+    else if(oneSauceItemForRecite.isDeleted ==true) {
+      return Container(
+        height: 40,
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+
+
+            Text('${((oneSauceItemForRecite.sauceItemName == null) ||
+                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+            '---' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+            oneSauceItemForRecite.sauceItemName}',
+
+
+              textAlign: TextAlign.left,
+              style: TextStyle(
+//                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                decoration: TextDecoration.lineThrough,
+//                        color: Color(0xffF50303),
+                fontSize: 25, fontFamily: 'Itim-Regular',),
+            ),
+
 
           ],
         ),
@@ -8683,10 +8653,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
             oneCheeseItemForRecite.cheeseItemName}',
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+//                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',),
             ),
 
             /*
@@ -8714,20 +8684,55 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+//                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',),
             ),
 
           ],
         ),
       );
     }
+
+
+    else if
+
+    (oneCheeseItemForRecite.isDeleted ==true) {
+      return Container(
+        height: 40,
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+
+            Text('${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '---' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+//                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                decoration: TextDecoration.lineThrough,
+//                        color: Color(0xffF50303),
+                fontSize: 25, fontFamily: 'Itim-Regular',),
+            ),
+
+
+
+          ],
+        ),
+      );
+    }
+
     else return Container(
-        height: 0,
-        width: 0
-    );
+          height: 0,
+          width: 0
+      );
   }
 
   Widget displayOneFoodInformation(OrderedItem oneFood, int index){
@@ -8744,9 +8749,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print('extraCheeseItems: $extraCheeseItems');
 
-    List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
-    List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => e.isDefaultSelected != true).toList();
-    List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+    List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+        ||(e.isDeleted == true)
+    )).toList();
+    List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+        ||(e.isDeleted == true))).toList();
+    List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+        ||(e.isDeleted == true))).toList();
 
 
     print('onlyExtraIngredient: $onlyExtraIngredient');
@@ -8887,15 +8896,36 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           Container(
               height:700,
-              color:Colors.redAccent,
+//              color:Colors.redAccent,
               padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 0),
               child:ListView(
+                scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  Container(
-                      width: 350,
-                      height:210,
-                      color:Colors.blue,
-                      child: showExtraIngredients(onlyExtraIngredient,oneFood.quantity)),
+                  Column(
+                    children: [
+
+                      Text('Ingredient.........',
+                        /*
+            Text(
+              '${oneIngredientForRecite.ingredientName}', */
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                          decoration: TextDecoration.lineThrough,
+                          fontSize: 27,
+                          fontFamily: 'Itim-Regular',),
+                      ),
+
+                      Container(
+                          width: 350,
+                          height:210,
+//                      color:Colors.blue,
+                          child: showExtraIngredients(onlyExtraIngredient,oneFood.quantity)
+                      ),
+                    ],
+                  ),
 
 
 
@@ -8905,11 +8935,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     thickness:5,
                     color:Colors.black,
                   ),
-                  Container(
-                      width: 350,
-                      height:210,
-                      color:Colors.orange,
-                      child: showExtraCheeseItems(onlyExtraCheeseItems,oneFood.quantity)
+                  Column(
+                    children: [
+
+                      Text('Cheeses.........',
+                        /*
+            Text(
+              '${oneIngredientForRecite.ingredientName}', */
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                          decoration: TextDecoration.lineThrough,
+                          fontSize: 27,
+                          fontFamily: 'Itim-Regular',),
+                      ),
+
+                      Container(
+                          width: 350,
+                          height:210,
+                          color:Colors.orange,
+                          child: showExtraCheeseItems(onlyExtraCheeseItems,oneFood.quantity)
+                      ),
+                    ],
                   ),
 
                   Divider(
@@ -8918,12 +8967,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     thickness:5,
                     color:Colors.black,
                   ),
-                  Container(
-                      width: 350,
+                  Column(
+                    children: [
 
-                      height:210,
-                      color:Colors.deepPurpleAccent,
-                      child: showExtraSauces(onlyExtraSauces,oneFood.quantity)
+                      Text('Sauces.........',
+                        /*
+            Text(
+              '${oneIngredientForRecite.ingredientName}', */
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                          decoration: TextDecoration.lineThrough,
+                          fontSize: 27,
+                          fontFamily: 'Itim-Regular',),
+                      ),
+
+
+                      Container(
+                          width: 350,
+                          height:210,
+                          color:Colors.deepPurpleAccent,
+                          child: showExtraSauces(onlyExtraSauces,oneFood.quantity)
+                      ),
+                    ],
                   ),
 
 
@@ -9754,12 +9822,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      print('extraSauces: $extraSauces');
 //      print('extraCheeseItems: $extraCheeseItems');
 
-      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+//      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<SauceItem> onlyExtraSauces       =
-      extraSauces.where((e) => e.isDefaultSelected != true).toList();
-      List<CheeseItem>    onlyExtraCheeseItems  =
-      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+          ||(e.isDeleted == true)
+      )).toList();
+
+      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
+
+      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
 
       print('onlyExtraIngredient: $onlyExtraIngredient');
 
@@ -9805,54 +9884,125 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-          ticket.row([
+
+          if(oneIngredientForRecite.isDeleted==false) {
+            ticket.row([
 
 
-            PosColumn(text: '+${((oneIngredientForRecite.ingredientName == null) ||
-                (oneIngredientForRecite.ingredientName.length == 0)) ?
-            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
-            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
-            oneIngredientForRecite.ingredientName}',
-                width: 9,styles: PosStyles(
+              PosColumn(
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                align: PosAlign.left,
+              )),
 
-            PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right)),
+              PosColumn(
+                  text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);
+          }
+          else{
+
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+
+          }
         });
       }
 
       // extra cheeseItems...
       if(onlyExtraSauces.length>0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-          ticket.row([
+
+          if(oneSauceItemForRecite.isDeleted==false) {
+            ticket.row([
 
 
-            PosColumn(text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
-                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-            '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-            oneSauceItemForRecite.sauceItemName}',
-                width: 9,styles: PosStyles(
+              PosColumn(
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                align: PosAlign.left,
+              )),
 
-            PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right) ),
+              PosColumn(
+                  text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);
+          }
+          else{
+
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                      ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                      :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+
+          }
+          ;
         });
       }
 
       // extra sauceItems...
       if(onlyExtraCheeseItems.length>0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
+
+          if(oneCheeseItemForRecite.isDeleted==false){
           ticket.row([
 
 
@@ -9870,7 +10020,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 width: 3,styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+          ]);}
+          else{
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                      ?
+                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                      :
+                  oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+          };
         });
       }
 
@@ -10210,7 +10386,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       categories.add(oneFood.category);
 
-
       ticket.feed(1);
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
@@ -10222,12 +10397,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      print('extraSauces: $extraSauces');
 //      print('extraCheeseItems: $extraCheeseItems');
 
-      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+//      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<SauceItem> onlyExtraSauces       =
-      extraSauces.where((e) => e.isDefaultSelected != true).toList();
-      List<CheeseItem>    onlyExtraCheeseItems  =
-      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+          ||(e.isDeleted == true)
+      )).toList();
+
+      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
+
+      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
 
       print('onlyExtraIngredient: $onlyExtraIngredient');
 
@@ -10262,7 +10448,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             width: 5,  styles: PosStyles(align: PosAlign.left) ),
         PosColumn(text: '',
           width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${(oneFood.unitPriceWithoutCheeseIngredientSauces * oneFood.quantity).toStringAsFixed(2)}',
+        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
             width: 5,styles: PosStyles(
 
               align: PosAlign.right,
@@ -10273,72 +10459,169 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-          ticket.row([
+
+          if(oneIngredientForRecite.isDeleted==false) {
+            ticket.row([
 
 
-            PosColumn(text: '+${((oneIngredientForRecite.ingredientName == null) ||
-                (oneIngredientForRecite.ingredientName.length == 0)) ?
-            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
-            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
-            oneIngredientForRecite.ingredientName}',
-                width: 9,styles: PosStyles(
+              PosColumn(
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                align: PosAlign.left,
+              )),
 
-            PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right)),
+              PosColumn(
+                  text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);
+          }
+          else{
+
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+
+          }
         });
       }
 
       // extra cheeseItems...
       if(onlyExtraSauces.length>0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-          ticket.row([
+
+          if(oneSauceItemForRecite.isDeleted==false) {
+            ticket.row([
 
 
-            PosColumn(text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
-                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-            '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-            oneSauceItemForRecite.sauceItemName}',
-                width: 9,styles: PosStyles(
+              PosColumn(
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                align: PosAlign.left,
+              )),
 
-            PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right) ),
+              PosColumn(
+                  text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);
+          }
+          else{
+
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                      ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                      :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+
+          }
+          ;
         });
       }
 
       // extra sauceItems...
       if(onlyExtraCheeseItems.length>0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-          ticket.row([
+
+          if(oneCheeseItemForRecite.isDeleted==false){
+            ticket.row([
 
 
-            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-            oneCheeseItemForRecite.cheeseItemName}',
-                width: 9,styles: PosStyles(
+              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+              oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                    align: PosAlign.left,
+                  )),
 
-            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right)),
+              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);}
+          else{
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                      ?
+                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                      :
+                  oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+          };
         });
       }
 
@@ -10665,9 +10948,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       }
 
       categories.add(oneFood.category);
+
       ticket.feed(1);
-
-
 
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
       List<SauceItem>     extraSauces       = oneFood.selectedSauces;
@@ -10678,12 +10960,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      print('extraSauces: $extraSauces');
 //      print('extraCheeseItems: $extraCheeseItems');
 
-      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+//      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<SauceItem> onlyExtraSauces       =
-      extraSauces.where((e) => e.isDefaultSelected != true).toList();
-      List<CheeseItem>    onlyExtraCheeseItems  =
-      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+          ||(e.isDeleted == true)
+      )).toList();
+
+      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
+
+      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
 
       print('onlyExtraIngredient: $onlyExtraIngredient');
 
@@ -10729,72 +11022,169 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-          ticket.row([
+
+          if(oneIngredientForRecite.isDeleted==false) {
+            ticket.row([
 
 
-            PosColumn(text: '+${((oneIngredientForRecite.ingredientName == null) ||
-                (oneIngredientForRecite.ingredientName.length == 0)) ?
-            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
-            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
-            oneIngredientForRecite.ingredientName}',
-                width: 9,styles: PosStyles(
+              PosColumn(
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                align: PosAlign.left,
+              )),
 
-            PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right)),
+              PosColumn(
+                  text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);
+          }
+          else{
+
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+
+          }
         });
       }
 
       // extra cheeseItems...
       if(onlyExtraSauces.length>0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-          ticket.row([
+
+          if(oneSauceItemForRecite.isDeleted==false) {
+            ticket.row([
 
 
-            PosColumn(text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
-                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-            '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-            oneSauceItemForRecite.sauceItemName}',
-                width: 9,styles: PosStyles(
+              PosColumn(
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                align: PosAlign.left,
+              )),
 
-            PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right) ),
+              PosColumn(
+                  text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);
+          }
+          else{
+
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                      ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                      :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+
+          }
+          ;
         });
       }
 
       // extra sauceItems...
       if(onlyExtraCheeseItems.length>0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-          ticket.row([
+
+          if(oneCheeseItemForRecite.isDeleted==false){
+            ticket.row([
 
 
-            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-            oneCheeseItemForRecite.cheeseItemName}',
-                width: 9,styles: PosStyles(
+              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+              oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                    align: PosAlign.left,
+                  )),
 
-            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right)),
+              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);}
+          else{
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                      ?
+                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                      :
+                  oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+          };
         });
       }
 
@@ -11097,8 +11487,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
     Set<String> categories ={};
-
-//    List<String> categories = [];
     orderedItems.forEach((oneFood) {
 
 
@@ -11126,12 +11514,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //      print('extraSauces: $extraSauces');
 //      print('extraCheeseItems: $extraCheeseItems');
 
-      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+//      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<SauceItem> onlyExtraSauces       =
-      extraSauces.where((e) => e.isDefaultSelected != true).toList();
-      List<CheeseItem>    onlyExtraCheeseItems  =
-      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+          ||(e.isDeleted == true)
+      )).toList();
+
+      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
+
+      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
 
       print('onlyExtraIngredient: $onlyExtraIngredient');
 
@@ -11177,72 +11576,169 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-          ticket.row([
+
+          if(oneIngredientForRecite.isDeleted==false) {
+            ticket.row([
 
 
-            PosColumn(text: '+${((oneIngredientForRecite.ingredientName == null) ||
-                (oneIngredientForRecite.ingredientName.length == 0)) ?
-            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
-            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
-            oneIngredientForRecite.ingredientName}',
-                width: 9,styles: PosStyles(
+              PosColumn(
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                align: PosAlign.left,
+              )),
 
-            PosColumn(text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right)),
+              PosColumn(
+                  text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);
+          }
+          else{
+
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+
+          }
         });
       }
 
       // extra cheeseItems...
       if(onlyExtraSauces.length>0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-          ticket.row([
+
+          if(oneSauceItemForRecite.isDeleted==false) {
+            ticket.row([
 
 
-            PosColumn(text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
-                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-            '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-            oneSauceItemForRecite.sauceItemName}',
-                width: 9,styles: PosStyles(
+              PosColumn(
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                align: PosAlign.left,
+              )),
 
-            PosColumn(text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right) ),
+              PosColumn(
+                  text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);
+          }
+          else{
+
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                      ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                      :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+
+          }
+          ;
         });
       }
 
       // extra sauceItems...
       if(onlyExtraCheeseItems.length>0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-          ticket.row([
+
+          if(oneCheeseItemForRecite.isDeleted==false){
+            ticket.row([
 
 
-            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-            oneCheeseItemForRecite.cheeseItemName}',
-                width: 9,styles: PosStyles(
+              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+              oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,styles: PosStyles(
 
-                  align: PosAlign.left,
-                )),
+                    align: PosAlign.left,
+                  )),
 
-            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right)),
+              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,styles: PosStyles(align: PosAlign.right)),
 
 
-          ]);
+            ]);}
+          else{
+            ticket.row([
+
+
+              PosColumn(
+                  text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                      ?
+                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                      :
+                  oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+                reverse: true,
+
+              )),
+
+              PosColumn(
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);
+          };
         });
       }
 
@@ -11754,8 +12250,6 @@ class CustomPicker extends CommonPickerModel {
     }
   }
 
-
-
   @override
   String rightStringAtIndex(int index) {
     if (index >= 0 && index < 60) {
@@ -11765,9 +12259,7 @@ class CustomPicker extends CommonPickerModel {
     }
   }
 
-
-
-
+  
   @override
   String leftDivider() {
     return "|";

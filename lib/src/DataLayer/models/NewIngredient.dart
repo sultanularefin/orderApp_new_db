@@ -27,6 +27,7 @@ class NewIngredient {
   int sequenceNo;
   String subgroup;
   int tempIndex; // for incrementing and decrementing view data field only
+  bool isDeleted;
 
 //  String ingredients;
 
@@ -42,6 +43,7 @@ class NewIngredient {
         this.sequenceNo,
         this.subgroup,
         this.tempIndex:0,
+        this.isDeleted:false,
       }
       );
 
@@ -62,6 +64,7 @@ class NewIngredient {
         price = data['price'].toDouble(),
         documentId = docID,
         isDefault= false,
+        isDeleted =false,
         tempIndex=0,
         ingredientAmountByUser = 1;
 
@@ -76,6 +79,7 @@ class NewIngredient {
         price = data['price'].toDouble(),
         documentId = docID,
         isDefault= false,
+        isDeleted =false,
         ingredientAmountByUser = 1,
         extraIngredientOf= data['extraIngredientOf'],
         sequenceNo = data['sequenceNo'] ,
@@ -91,7 +95,8 @@ class NewIngredient {
         extraIngredientOf= oneIngredient.extraIngredientOf,
         sequenceNo = oneIngredient.sequenceNo,
         subgroup= oneIngredient.subgroup,
-        isDefault= false;
+        isDeleted = false,
+        isDefault = false;
 
   // PURPOSE SETTING ISDEFAULT TRUE INORDER TO CALCULATE PRICE UPON NEW INGREDIENT ADD
   /*
@@ -104,10 +109,6 @@ class NewIngredient {
         isDefault= true;
 
   */
-
-
-
-
 
 
 //        ingredientAmountByUser = 1;

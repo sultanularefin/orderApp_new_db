@@ -299,6 +299,7 @@ class FirebaseClient {
 //        'ingredientAmountByUser': si[counter].ingredientAmountByUser,
         'ingredientPrice':si[counter].price,
         'isDefault':si[counter].isDefault,
+        'isDeleted':si[counter].isDeleted,
 
       };
       testIngredients.add(identifier);
@@ -334,6 +335,7 @@ class FirebaseClient {
         'cheeseItemAmountByUser': cheeseItems[counter].cheeseItemAmountByUser,
         'cheeseItemPrice':cheeseItems[counter].price,
         'isDefaultSelected':cheeseItems[counter].isDefaultSelected,
+        'isDeleted':cheeseItems[counter].isDeleted,
 
       };
       testCheeseItems.add(identifier);
@@ -375,6 +377,7 @@ class FirebaseClient {
         'sauceItemAmountByUser': sauceItems[counter].sauceItemAmountByUser,// +1, // 1 is added since by default it is zero
         'sauceItemPrice':sauceItems[counter].price,
         'isDefaultSelected':sauceItems[counter].isDefaultSelected,
+        'isDeleted':sauceItems[counter].isDeleted,
 
       };
       testIngredients.add(identifier);

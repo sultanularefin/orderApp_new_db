@@ -322,7 +322,7 @@ class ShoppingCartBloc implements Bloc {
 //    }
 
 
-  // put categoryitems here..
+    // put categoryitems here..
 
     _allCategories=allCategories;
     _categoriesController.sink.add(_allCategories);
@@ -476,10 +476,6 @@ class ShoppingCartBloc implements Bloc {
   Future<Order> paymentButtonPressed(Order payMentProcessing) async{
 
     String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
-//    logger.i('payment Button Pressed is payMentProcessing.orderTypeIndex ${payMentProcessing.orderTypeIndex} ::'
-//        ' orderBy: $orderBy    ${_curretnOrder.paymentTypeIndex}');
-
-
 
 
     String paidType0 =  _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
@@ -775,8 +771,9 @@ class ShoppingCartBloc implements Bloc {
         ingredientName: oneFireStoreSauce['name'] ,
         imageURL: oneFireStoreSauce['image'] ,
         ingredientAmountByUser: oneFireStoreSauce['ingredientAmountByUser'] ,
-          isDefault:oneFireStoreSauce['isDefault'],
+        isDefault:oneFireStoreSauce['isDefault'],
         price:oneFireStoreSauce['ingredientPrice'],
+        isDeleted:  oneFireStoreSauce['isDeleted'],
 //          isDefault: oneFireStoreSauce['isDefault'],
 
       );
@@ -824,6 +821,7 @@ class ShoppingCartBloc implements Bloc {
         cheeseItemAmountByUser: oneCheeseItem['cheeseItemAmountByUser'] ,
         price: oneCheeseItem['cheeseItemPrice'] ,
         isDefaultSelected:  oneCheeseItem['isDefaultSelected'],
+          isDeleted: oneCheeseItem['isDeleted'],
 
       );
 
@@ -866,6 +864,7 @@ class ShoppingCartBloc implements Bloc {
         sauceItemAmountByUser: oneSauceItem['sauceItemAmountByUser'] ,
         price: oneSauceItem['sauceItemPrice'],
         isDefaultSelected: oneSauceItem['isDefaultSelected'],
+        isDeleted: oneSauceItem['isDeleted'],
 
       );
 
@@ -1229,7 +1228,7 @@ class ShoppingCartBloc implements Bloc {
       inputName:'address',
       inputOf: ['delivery'],
 
-     //      orderIconName: 'flight_takeoff',
+      //      orderIconName: 'flight_takeoff',
     );
 
     OneInputCustomerInformation _flat = new OneInputCustomerInformation(

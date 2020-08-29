@@ -11,6 +11,7 @@ class FoodPropertyMultiSelect {
   String  borderColor;
   bool    isSelected;
   String  itemImage;
+  String  itemFullName;
 
 
   FoodPropertyMultiSelect(
@@ -22,6 +23,7 @@ class FoodPropertyMultiSelect {
         this.borderColor,
         this.isSelected,
         this.itemImage,
+        this.itemFullName,
 
       }
       );
