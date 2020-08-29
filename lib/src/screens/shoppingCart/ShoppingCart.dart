@@ -3995,69 +3995,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // YYYY
 
-  Widget unobscureInputandRestforDinningRoom(Order unObsecuredInputandPayment) {
-
-
-    CustomerInformation currentUser = unObsecuredInputandPayment
-        .orderingCustomer;
-
-
-    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
-
-    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
-
-    return Container(
-
-      height: displayHeight(context) / 2.2,
-      width: displayWidth(context) / 1.03,
-      // color:Colors.lightBlueAccent,
-
-      child:
-      Container(
-
-        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
-        child:
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 500),
-          child:
-
-          ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-
-              // 911_3
-              //     work_3
-
-              &&(showEditingCompleteCustomerReachoutIformation == true)
-          ) ?
-
-          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment):
-          Container(
-
-            // color:Colors.lightBlueAccent,
-            // color: Color(0xffFFFFFF),
-            child:
-            Container(
-              // color:Colors.red,
-              height:displayHeight(context)/18,
-              width: displayWidth(context) / 1.03,
-              child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-            )
-            // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
-            ,
-          ),
-        ),
-      ),
-    );
-// GGG),
-
-  }
-
 
   Widget whenYouWillPickTheOrder(Order unObsecuredInputandPayment){
 
@@ -4392,193 +4329,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-  Widget unobscureInputandRestforTakeAway(Order unObsecuredInputandPayment) {
-    CustomerInformation currentUser = unObsecuredInputandPayment
-        .orderingCustomer;
-
-
-    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
-
-    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
-
-    return Container(
-
-      height: displayHeight(context) / 2.2,
-      width: displayWidth(context) / 1.03,
-      // color:Colors.lightBlueAccent,
-
-      child:
-      Container(
-
-        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
-        child:
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 500),
-          child:
-
-          ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-
-              // 911_3
-              //     work_3
-
-              &&(showEditingCompleteCustomerReachoutIformation == true)
-          ) ?
-
-          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment):
-          Container(
-
-            // color:Colors.lightBlueAccent,
-            // color: Color(0xffFFFFFF),
-            child:
-            Container(
-              // color:Colors.red,
-              height:displayHeight(context)/18,
-              width: displayWidth(context) / 1.03,
-              child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-            )
-            // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
-            ,
-          ),
-        ),
-      ),
-    );
-// GGG),
-
-  }
-
-
-
-
-  Widget unobscureInputandOthersPhone(Order unObsecuredInputandPayment) {
-
-
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
-
-    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
-
-    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer):'
-        ' ${inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer)}');
-
-
-
-    return Container(
-
-      height: displayHeight(context) / 2.2,
-      width: displayWidth(context) / 1.03,
-
-      child:
-      Container(
-
-        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
-        child:
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 500),
-          child:
-          ((inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-              &&(showEditingCompleteCustomerPhoneIformation == true
-              ) &&(showEditingCompleteCustomerReachoutIformation == true)
-          ) ?
-
-          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment):
-          Container(
-
-            color: Color(0xffFFFFFF),
-            child: Center(
-//              child: inputFieldsDelivery(unObsecuredInputandPayment),
-              child: inputFieldsPhoneOrderType(unObsecuredInputandPayment),
-
-            ),
-          ),
-
-
-        ),
-
-
-      ),
-    );
-// GGG),
-  }
-
-
-
-  Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment) {
-
-
-
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
-
-    print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
-
-    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
 
 
 
 
-    return Container(
-
-      height: displayHeight(context) / 2.2,
-      width: displayWidth(context) / 1.03,
-
-      child:
-      Container(
-
-        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
-        child:
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 500),
-          child:
-          ((allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-              &&(
-                  showEditingCompleteCustomerAddressInformation == true
-              )
-              &&(
-                  showEditingCompleteCustomerHouseFlatIformation == true
-              )
-              &&( showEditingCompleteCustomerPhoneIformation == true
-              ) &&(showEditingCompleteCustomerReachoutIformation == true)
-          ) ?
 
 
-
-          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment):
-          Container(
-
-            color: Color(0xffFFFFFF),
-            child: Center(
-              child: inputFieldsDelivery(unObsecuredInputandPayment),
-            ),
-          ),
-
-
-        ),
-
-
-      ),
-    );
-// GGG),
-
-  }
 
 
   Widget inputFieldsPhoneOrderType(Order unObsecuredInputandPayment){
@@ -5375,11 +5132,77 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('currentUser.phoneNumber: ${currentUser.phoneNumber}');
     print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
 
-    return unobscureInputandRestforDinningRoom(unObsecuredInputandPayment);
+    // work_1
+    // return unobscureInputandRestforDinningRoom(unObsecuredInputandPayment);
 
 
 //    return
 //      unobscureInputandRestforTakeAway(unObsecuredInputandPayment);
+
+
+    // Widget unobscureInputandRestforDinningRoom(Order unObsecuredInputandPayment) {
+
+
+      // CustomerInformation currentUser = unObsecuredInputandPayment
+      //     .orderingCustomer;
+
+
+      print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+
+      print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+      print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+      print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+      print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+      print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+          ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+
+      return Container(
+
+        height: displayHeight(context) / 2.2,
+        width: displayWidth(context) / 1.03,
+        // color:Colors.lightBlueAccent,
+
+        child:
+        Container(
+
+          height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+
+          child:
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 500),
+            child:
+
+            ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+
+                // 911_3
+                //     work_3
+
+                &&(showEditingCompleteCustomerReachoutIformation == true)
+            ) ?
+
+            animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+              (unObsecuredInputandPayment):
+            Container(
+
+              // color:Colors.lightBlueAccent,
+              // color: Color(0xffFFFFFF),
+              child:
+              Container(
+                // color:Colors.red,
+                height:displayHeight(context)/18,
+                width: displayWidth(context) / 1.03,
+                child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
+              )
+              // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+              ,
+            ),
+          ),
+        ),
+      );
+// GGG),
+
+    // }
+
 
 
   }
@@ -5398,8 +5221,71 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    return
-      unobscureInputandRestforTakeAway(unObsecuredInputandPayment);
+    // return
+    //   unobscureInputandRestforTakeAway(unObsecuredInputandPayment);
+
+
+    // Widget unobscureInputandRestforTakeAway(Order unObsecuredInputandPayment) {
+    //   CustomerInformation currentUser = unObsecuredInputandPayment
+    //       .orderingCustomer;
+
+
+      print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+
+      print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+      print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+      print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+      print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+      print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+          ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+
+      return Container(
+
+        height: displayHeight(context) / 2.2,
+        width: displayWidth(context) / 1.03,
+        // color:Colors.lightBlueAccent,
+
+        child:
+        Container(
+
+          height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+
+          child:
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 500),
+            child:
+
+            ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+
+                // 911_3
+                //     work_3
+
+                &&(showEditingCompleteCustomerReachoutIformation == true)
+            ) ?
+
+            animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+              (unObsecuredInputandPayment):
+            Container(
+
+              // color:Colors.lightBlueAccent,
+              // color: Color(0xffFFFFFF),
+              child:
+              Container(
+                // color:Colors.red,
+                height:displayHeight(context)/18,
+                width: displayWidth(context) / 1.03,
+                child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
+              )
+              // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+              ,
+            ),
+          ),
+        ),
+      );
+// GGG),
+
+    // }
+
 
 
   }
@@ -5416,7 +5302,66 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
 
 
-    return unobscureInputandOthersPhone(unObsecuredInputandPayment);
+    // work 1
+    // return unobscureInputandOthersPhone(unObsecuredInputandPayment);
+
+    // Widget unobscureInputandOthersPhone(Order unObsecuredInputandPayment) {
+
+
+      // CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+
+      print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+
+      print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+      print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+      print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+      print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+      print('inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer):'
+          ' ${inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer)}');
+
+
+
+      return Container(
+
+        height: displayHeight(context) / 2.2,
+        width: displayWidth(context) / 1.03,
+
+        child:
+        Container(
+
+          height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+
+          child:
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 500),
+            child:
+            ((inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+                &&(showEditingCompleteCustomerPhoneIformation == true
+                ) &&(showEditingCompleteCustomerReachoutIformation == true)
+            ) ?
+
+            animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+              (unObsecuredInputandPayment):
+            Container(
+
+              color: Color(0xffFFFFFF),
+              child: Center(
+//              child: inputFieldsDelivery(unObsecuredInputandPayment),
+                child: inputFieldsPhoneOrderType(unObsecuredInputandPayment),
+
+              ),
+            ),
+
+
+          ),
+
+
+        ),
+      );
+// GGG),
+//     }
+
+
 
   }
 
@@ -5436,7 +5381,73 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('currentUser.phoneNumber: ${currentUser.phoneNumber}');
     print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
 
-    return unobscureInputandRestDeliveryPhone(unObsecuredInputandPayment);
+    // return unobscureInputandRestDeliveryPhone(unObsecuredInputandPayment);
+
+    // Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment) {
+
+
+
+      // CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+
+      print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
+
+      print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+      print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+      print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+      print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+      print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+          ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+
+
+
+
+
+      return Container(
+
+        height: displayHeight(context) / 2.2,
+        width: displayWidth(context) / 1.03,
+
+        child:
+        Container(
+
+          height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+
+          child:
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 500),
+            child:
+            ((allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+                &&(
+                    showEditingCompleteCustomerAddressInformation == true
+                )
+                &&(
+                    showEditingCompleteCustomerHouseFlatIformation == true
+                )
+                &&( showEditingCompleteCustomerPhoneIformation == true
+                ) &&(showEditingCompleteCustomerReachoutIformation == true)
+            ) ?
+
+
+
+            animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
+              (unObsecuredInputandPayment):
+            Container(
+
+              color: Color(0xffFFFFFF),
+              child: Center(
+                child: inputFieldsDelivery(unObsecuredInputandPayment),
+              ),
+            ),
+
+
+          ),
+
+
+        ),
+      );
+// GGG),
+
+    // }
 
   }
 
