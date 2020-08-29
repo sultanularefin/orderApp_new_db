@@ -1504,11 +1504,12 @@ class ShoppingCartBloc implements Bloc {
   }
 
   */
+  /*
 
 //  Future <bool> checkUserinLocalStorage() async {
   void discoverDevicesConstructor(/*String portNumber*/) async {
 
-    /*
+
     // THIS THINGS WORKED SOME MONTH AGO...
     printerManager.scanResults.listen((devices) async {
       print('UI: Devices found ${devices.length}');
@@ -1518,12 +1519,14 @@ class ShoppingCartBloc implements Bloc {
 
     });
 
-    */
+
 
 
 
 
   }
+
+  */
 
   void discoverDevicesConstructorNewPKG(/*String portNumber*/) async {
 
