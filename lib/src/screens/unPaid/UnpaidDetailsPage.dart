@@ -863,7 +863,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                 ),
 
                                 Text(
-                                    '${oneFireBaseOrder.orderProductionTime}:00 min',
+                                    '${oneFireBaseOrder.orderProductionTimeFromNow}:00 min',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(

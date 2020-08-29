@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 
@@ -23,7 +24,9 @@ class OneOrderFirebase {
   double                    deliveryCost;
   double                    tax; // 14% upon total Cost.
   double                    priceWithDelivery;
-  int                       orderProductionTime;
+  int                       orderProductionTimeFromNow;
+  // String                    orderProductionTimeOfDay;
+  String                    timeOfDay;
   int                       tempPaymentIndex;
 
   OneOrderFirebase(
@@ -47,7 +50,8 @@ class OneOrderFirebase {
         this.deliveryCost,
         this.tax, // 14% upon total Cost.
         this.priceWithDelivery,
-        this.orderProductionTime, //  int minutes3 =minutes2.ceil(); // no need to have double
+        this.orderProductionTimeFromNow, //  int minutes3 =minutes2.ceil(); // no need to have double
+        this.timeOfDay,
         this.tempPaymentIndex,
       }
       );

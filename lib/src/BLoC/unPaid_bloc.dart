@@ -255,7 +255,8 @@ class UnPaidBloc implements Bloc {
         String                    orderType =   doc['orderType'];
         final String documentID = doc.documentID;
 //        String                    documentId = orderDocumentId;
-        int                    orderProductionTime =    doc['orderProductionTime'];
+        int                    orderProductionTimeFromNow =    doc['orderProductionTimeFromNow'];
+        String                timeOfDay2 = doc['orderProductionTimeOfDay'];
         double                 deliveryCost2 =          doc['deliveryCost?'];
         double                 tax =                    doc['tax'];
         double                 priceWithDelivery2 =     doc['priceWithDelivery?'];
@@ -313,7 +314,9 @@ class UnPaidBloc implements Bloc {
         print('formattedOrderPlacementDatesTimeOnly2: $formattedOrderPlacementDatesTimeOnly2');
         print('formattedOrderPlacementDatesTimeOnly: $formattedOrderPlacementDatesTimeOnly');
 
-        print('orderProductionTime: $orderProductionTime');
+        print('orderProductionTimeFromNow: $orderProductionTimeFromNow');
+
+        print('timeOfDay2............... ** ** ** $timeOfDay2');
 
         //    ticket.text(timestamp,
         //        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
@@ -420,7 +423,8 @@ class UnPaidBloc implements Bloc {
           orderStatus:orderStatus,
           tableNo:tableNo,
           orderType:orderType,
-          orderProductionTime:orderProductionTime,
+          orderProductionTimeFromNow:orderProductionTimeFromNow,
+          timeOfDay: timeOfDay2,
           deliveryCost: deliveryCost2,
           tax:          tax,
           priceWithDelivery: priceWithDelivery2,

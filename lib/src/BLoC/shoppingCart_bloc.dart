@@ -930,7 +930,8 @@ class ShoppingCartBloc implements Bloc {
     String                    tableNo = snapshot['tableNo'];
     String                    orderType = snapshot['orderType'];
     String                    documentId = orderDocumentId;
-    int                    orderProductionTime = snapshot['orderProductionTime'];
+    int                    orderProductionTimeFromNow = snapshot['orderProductionTimeFromNow'];
+    String                timeOfDay2 = snapshot['orderProductionTimeOfDay'];
     double                 deliveryCost2 = snapshot['deliveryCost?'];
     double                 tax = snapshot['tax'];
     double                 priceWithDelivery2 = snapshot['priceWithDelivery?'];
@@ -969,7 +970,11 @@ class ShoppingCartBloc implements Bloc {
     print('startDate: $startDate');
 
 //    final now = DateTime.now();
-    final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US');
+//     final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US');
+
+
+    final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMd();
+    // new DateFormat.yMd()
     final String timestamp = formatter1.format(startDate);
 
     final formatter2 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_Hm();
@@ -988,7 +993,9 @@ class ShoppingCartBloc implements Bloc {
     print('formattedOrderPlacementDatesTimeOnly2: $formattedOrderPlacementDatesTimeOnly2');
     print('formattedOrderPlacementDatesTimeOnly < < > >: $formattedOrderPlacementDatesTimeOnly');
 
-    print('orderProductionTime: $orderProductionTime');
+    print('orderProductionTimeFromNow: $orderProductionTimeFromNow');
+
+    print('timeOfDay2............... ** ** ** $timeOfDay2');
 
     //    ticket.text(timestamp,
     //        styles: PosStyles(align: PosAlign.center), linesAfter: 2);
@@ -1096,7 +1103,8 @@ class ShoppingCartBloc implements Bloc {
       orderStatus:orderStatus,
       tableNo:tableNo,
       orderType:orderType,
-      orderProductionTime:orderProductionTime,
+      orderProductionTimeFromNow:orderProductionTimeFromNow,
+      timeOfDay: timeOfDay2,
       deliveryCost: deliveryCost2,
       tax:          tax,
       priceWithDelivery: priceWithDelivery2,

@@ -464,8 +464,14 @@ class _HistoryPageState extends State<HistoryPage> {
           double                    deliveryCost2 = filteredItemsByCategory[index].deliveryCost;
           double                    tax2 = filteredItemsByCategory[index].tax;
 
+          // double                    priceWithDelivery2 = filteredItemsByCategory[index].priceWithDelivery;
+          // int                       orderProductionTime2 = filteredItemsByCategory[index].orderProductionTime;
+
           double                    priceWithDelivery2 = filteredItemsByCategory[index].priceWithDelivery;
-          int                       orderProductionTime2 = filteredItemsByCategory[index].orderProductionTime;
+          int                       orderProductionTimeFromNow2 = filteredItemsByCategory[index].orderProductionTimeFromNow;
+          String                    timeOfDay2    = filteredItemsByCategory[index].timeOfDay;
+
+
           OneOrderFirebase oneOrderFirebaseTemp = new  OneOrderFirebase(
 
             formattedOrderPlacementDatesTimeOnly: formattedOrderPlacementDatesTimeOnly2,
@@ -488,7 +494,8 @@ class _HistoryPageState extends State<HistoryPage> {
             deliveryCost:deliveryCost2,
             tax:tax2,
             priceWithDelivery:priceWithDelivery2,
-            orderProductionTime:orderProductionTime2,
+            orderProductionTimeFromNow:orderProductionTimeFromNow2,
+            timeOfDay: timeOfDay2,
 
 //              CustomerInformation       oneCustomer;
 //          List<OrderedItem>         orderedItems;
@@ -565,12 +572,12 @@ class _HistoryPageState extends State<HistoryPage> {
 //                            color:Colors.pinkAccent,
 
                               padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
-                             
-                                child: Image.asset(
-                                  itemImage2,
-                                  fit: BoxFit.contain,
-                                ),
-                              
+
+                              child: Image.asset(
+                                itemImage2,
+                                fit: BoxFit.contain,
+                              ),
+
                             ),
                             placeholderBuilder: (context,
                                 heroSize, child) {

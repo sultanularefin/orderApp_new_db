@@ -473,7 +473,9 @@ class _UnPaidPageState extends State<UnPaidPage> {
           double                    tax2 = filteredItemsByCategory[index].tax;
 
           double                    priceWithDelivery2 = filteredItemsByCategory[index].priceWithDelivery;
-          int                       orderProductionTime2 = filteredItemsByCategory[index].orderProductionTime;
+          int                       orderProductionTimeOfDay2 = filteredItemsByCategory[index].orderProductionTimeFromNow;
+          String                    timeOfDay2    = filteredItemsByCategory[index].timeOfDay;
+
           OneOrderFirebase oneOrderFirebaseTemp = new  OneOrderFirebase(
 
             formattedOrderPlacementDatesTimeOnly: formattedOrderPlacementDatesTimeOnly2,
@@ -496,7 +498,9 @@ class _UnPaidPageState extends State<UnPaidPage> {
             deliveryCost:deliveryCost2,
             tax:tax2,
             priceWithDelivery:priceWithDelivery2,
-            orderProductionTime:orderProductionTime2,
+            orderProductionTimeFromNow:orderProductionTimeOfDay2,
+timeOfDay: timeOfDay2,
+
 
 //              CustomerInformation       oneCustomer;
 //          List<OrderedItem>         orderedItems;

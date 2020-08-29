@@ -496,7 +496,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
             // 2 ends here.
-            Text('${oneOrderForReceipt.orderProductionTime} min',
+            Text('${oneOrderForReceipt.orderProductionTimeFromNow} min',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -1305,8 +1305,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           ),
 
 
-                                          // work 1
-                                          // 911_1
+
                                           Container(
 //                                        width: displayWidth(context) /1.8,
                                             width: displayWidth(
@@ -9052,14 +9051,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       ),
 
                       // 2 ends here.
-                      Text('${oneOrderForReceipt.orderProductionTime} min',
 
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      // 911_1
+                      Container(
+                        child: oneOrderForReceipt.timeOfDay==''?
+
+                        Text('${oneOrderForReceipt.orderProductionTimeFromNow} min',
+
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                            fontSize: 20, fontFamily: 'Itim-Regular',),
+                        ):Text('${oneOrderForReceipt.timeOfDay}',
+
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+//                        color: Color(0xffF50303),
+                            fontSize: 20, fontFamily: 'Itim-Regular',),
+                        ),
                       ),
                     ],
                   ),
@@ -9571,8 +9584,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             .etaTimeInMinutes}');
     print('restaurantNameBytesNotFuture3---takeAway---> : $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
-        .orderProductionTime}');
+    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
+        .orderProductionTimeFromNow}');
 
 
 
@@ -9651,7 +9664,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.hr(ch:'=',len:null,linesAfter:1);
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
-        +'${oneOrderData3.orderProductionTime} min',
+        +'${oneOrderData3.orderProductionTimeFromNow} min',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
@@ -10010,8 +10023,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             .etaTimeInMinutes}');
     print('restaurantNameBytesNotFuture3 line # 10760: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
-        .orderProductionTime}');
+    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
+        .orderProductionTimeFromNow}');
 
 
 
@@ -10097,7 +10110,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' + '                '
 
-        +'${oneOrderData3.orderProductionTime} min',
+        +'${oneOrderData3.orderProductionTimeFromNow} min',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
@@ -10474,8 +10487,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             .etaTimeInMinutes}');
     print('restaurantNameBytesNotFuture3 line# 11159: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
-        .orderProductionTime}');
+    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
+        .orderProductionTimeFromNow}');
 
 
 
@@ -10549,7 +10562,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.hr(ch:'=',len:null,linesAfter:1);
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
-        +'${oneOrderData3.orderProductionTime} min',
+        +'${oneOrderData3.orderProductionTimeFromNow} min',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
@@ -10905,8 +10918,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
             .etaTimeInMinutes}');
     print('restaurantNameImageBytes2 line # 11509: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print('oneOrderListdocument.orderProductionTime: ${oneOrderData3
-        .orderProductionTime}');
+    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
+        .orderProductionTimeFromNow}');
 
 
 
@@ -10984,7 +10997,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.hr(ch:'=',len:null,linesAfter:1);
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
-        +'${oneOrderData3.orderProductionTime} min',
+        +'${oneOrderData3.orderProductionTimeFromNow} min',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
