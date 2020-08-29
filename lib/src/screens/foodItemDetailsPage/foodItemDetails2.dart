@@ -622,7 +622,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                                    color:Colors.orange,
                                       padding: EdgeInsets.fromLTRB(
                                           10, 3, 0, 3),
-                                      alignment: Alignment.centerLeft,                                      child: Text('DEFAULT'.toUpperCase(),
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('DEFAULT'.toUpperCase(),
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       fontSize: 20,
@@ -3233,39 +3234,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                            );
             },
 
-            onLongPressUp: () {
-              print('at Long Press UP SauceItem: ');
-              final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
-              blocD.removeThisSauceFROMSelectedSauceItem(oneSauce, index);
-//                blocD.addThisCheeseAsSelectedCheeseItem(oneSauce,index)
-            },
 
             child:
             Container(
-              width: displayWidth(context) / 8,
-
-              /*
-              child: Text(
-
-                sauceItemName,
-
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-
-                style: TextStyle(
-                  color: Color(0xff707070),
-//                                    color: Colors.blueGrey[800],
-
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-//                        decoration: TextDecoration.underline,
-//                        decorationStyle: TextDecorationStyle.double,
-                ),
-              ),
-
-              */
+              width: displayWidth(context) / 7,
 
 
 
@@ -3273,16 +3246,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               child:Row(
                 children: [
                   MyBullet(),
-                  Text(' '),
                   Text(sauceItemName,
-                    maxLines: 2,
+                    maxLines: 1,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
-
                     style: TextStyle(
                       color: Color(0xff707070),
 //                                    color: Colors.blueGrey[800],
-
                       fontWeight: FontWeight.normal,
                       fontSize: 18,
 //                    decoration: TextDecoration.underline,
@@ -3692,18 +3662,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
           // PPPPP
 
-          child:
-          Text('looking for cheese items, please wait...'.toLowerCase(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 30,
-              fontFamily: 'Itim-Regular',
-              color: Colors.white,
-
-            ),
-
-
-          ),
         );
       }
 
@@ -3725,16 +3683,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               // PPPPP
 
-              child: (
-                  Text('No cheese items found.'.toLowerCase(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'Itim-Regular',
-                      color: Colors.grey,
-                    ),
-                  )
-              )
+
           );
         }
         else {
@@ -3743,21 +3692,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             child: ListView.builder(
 
 
-              /*
-                  gridDelegate:
-                  new SliverGridDelegateWithMaxCrossAxisExtent(
-
-
-                    maxCrossAxisExtent: 160,
-                    mainAxisSpacing: 8, // Vertical  direction
-                    crossAxisSpacing: 5,
-                    childAspectRatio: 160 / 180,
-                    // H/V
-
-
-                  ),
-
-                  */
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
 
@@ -4222,7 +4156,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //              height: displayHeight(context) / 13,
               height: displayHeight(context) / 30,
 //          height:190,
-              width: displayWidth(context) /1.50,
+              width: displayWidth(context) /1.20,
 
               color: Color(0xFFffffff),
 
@@ -4266,7 +4200,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                  height: displayHeight(context) / 13,
                 height: displayHeight(context) / 30,
 //          height:190,
-                width: displayWidth(context) /1.50,
+                width: displayWidth(context) /1.20,
 
                 color: Color(0xFFffffff),
 
@@ -4293,7 +4227,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 //                  height: displayHeight(context) / 13,
                 height: displayHeight(context) / 30,
 //          height:190,
-                width: displayWidth(context) /1.50,
+                width: displayWidth(context) /1.20,
 
                 color: Color(0xffFFFFFF),
 
@@ -4510,6 +4444,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     return
       Container(
+//        width: displayWidth(context) /1.20,
 
         padding: EdgeInsets.symmetric(
 //                          horizontal: 10.0, vertical: 22.0),
@@ -4518,15 +4453,23 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         child:
 
         Container(
-          width: displayWidth(context) / 8,
+          width: displayWidth(context) / 7,
           child:
 
           Row(
             children: [
               MyBullet(),
-              Text(' '),
-              Text(ingredientName,
-                maxLines: 2,
+//              911_1
+
+
+              Text(
+                ((ingredientName == null) ||
+                    (ingredientName.length == 0)) ?
+                '' : ingredientName.length > 15 ?
+                ingredientName.substring(0, 12) + '...' :
+                ingredientName,
+//                ingredientName,
+                maxLines: 1,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
 
