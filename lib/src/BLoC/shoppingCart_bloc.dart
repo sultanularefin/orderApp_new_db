@@ -821,7 +821,7 @@ class ShoppingCartBloc implements Bloc {
         cheeseItemAmountByUser: oneCheeseItem['cheeseItemAmountByUser'] ,
         price: oneCheeseItem['cheeseItemPrice'] ,
         isDefaultSelected:  oneCheeseItem['isDefaultSelected'],
-          isDeleted: oneCheeseItem['isDeleted'],
+        isDeleted: oneCheeseItem['isDeleted'],
 
       );
 
@@ -948,6 +948,7 @@ class ShoppingCartBloc implements Bloc {
 
 
 
+
     double                 deliveryCost2 = snapshot['deliveryCost?'];
     double                 tax = snapshot['tax'];
     double                 priceWithDelivery2 = snapshot['priceWithDelivery?'];
@@ -955,10 +956,11 @@ class ShoppingCartBloc implements Bloc {
 
     CustomerInformation currentCustomerFromFireStore = localCustomerInformationObject(customerAddress);
 //    new CustomerInformation
-    print('currentCustomerFromFireStore.address: ${currentCustomerFromFireStore.address}');
+    print('currentCustomerFromFireStore.address:____ __ || || || ||  ${currentCustomerFromFireStore.address}');
     print('currentCustomerFromFireStore.flatOrHouseNumber: ${currentCustomerFromFireStore.flatOrHouseNumber}');
     print('currentCustomerFromFireStore.phoneNumber: ${currentCustomerFromFireStore.phoneNumber}');
 //    print('currentCustomerFromFireStore.etaTimeInMinutes: ${currentCustomerFromFireStore.etaTimeInMinutes}');
+
 
 
 
@@ -985,12 +987,8 @@ class ShoppingCartBloc implements Bloc {
     print('endDate: $endDate');
     print('startDate: $startDate');
 
-//    final now = DateTime.now();
-//     final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US');
-
-
     final formatter1 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMd();
-    // new DateFormat.yMd()
+
     final String timestamp = formatter1.format(startDate);
 
     final formatter2 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_Hm();
@@ -1059,12 +1057,28 @@ class ShoppingCartBloc implements Bloc {
       print('selectedIngredients : $selectedIngredients ');
       print('selectedCheeses : $selectedCheeses ');
 
+      List<dynamic>          multiSelect =    oneFoodItem['multiSelect'];
+
+      print('multiSelect:_____________________ _____  $multiSelect');
+      List<String> multiSelectStringList= new List<String>();
+      if(multiSelect!=null){
+        multiSelectStringList = List<String>.from(multiSelect);
+      }
+      print('multiSelectStringList: $multiSelectStringList');
+
+      print('multiSelectStringList.length: ${multiSelectStringList.length}');
+
+
+
+
       OrderedItem oneTempOrderedItem= new OrderedItem(
         category:  oneFoodItem['category'],
 
         selectedSauces:  defaultSauces,
         selectedIngredients: selectedIngredients,
         selectedCheeses: selectedCheeses,
+        multiSelectString: multiSelectStringList,
+//        final List<dynamic> foodItemIngredientsList =  doc['ingredients'];,
 
         discount:  oneFoodItem['discount'],
         foodItemImage:  oneFoodItem['foodImage'],
@@ -1076,13 +1090,6 @@ class ShoppingCartBloc implements Bloc {
         unitPriceWithoutCheeseIngredientSauces: oneFoodItem['unitPriceWithoutCheeseIngredientSauces'],
         foodItemSize: oneFoodItem['foodItemSize'],
       );
-
-
-
-//        print('oneFoodItem[\'quantity\'] ${oneFoodItem['quantity']}!');
-//        print('oneFoodItem[\'name\'] ${oneFoodItem['name']}!');
-//        print('oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
-
 
       allOrderedItems.add(oneTempOrderedItem);
 

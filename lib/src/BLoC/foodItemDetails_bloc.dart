@@ -606,10 +606,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     initiateSauces(tempSauceItems,saucesStrings2);
-
     initiateCheeseItems(tempCheeseItems,cheesesStrings2);
-
-
 
 
     List<NewIngredient> ingredientsOfOnlyThisFoodItemsCategory =
@@ -754,6 +751,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //      discount:oneFoodItem.discount,
       selectedCheeseItems : _allSelectedDeletedCheeseItems,
       selectedSauceItems:   _allSelectedDeletedSauceItems,
+      multiSelct: _multiSelectForFood,
     );
 
     _currentSelectedFoodDetails = selectedFoodInConstructor;
@@ -891,20 +889,12 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
       _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
 
-
     }
-
-
-
-
 
 //    x.selectedFoodInOrder.add(constructorSelectedFoodFD);
   }
 
   void incrementOneSelectedFoodForOrder(SelectedFood oneSelectedFoodFD,int  initialItemCount  /*ItemCount */){
-
-
-
 
 
     print('_   _    _ itemCount _   _   _:$initialItemCount');
@@ -962,8 +952,22 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     _multiSelectForFood = multiSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
-
     _multiSelectForFoodController.sink.add(_multiSelectForFood);
+
+
+
+//    void remove....
+
+    // selected update.
+//    _allSelectedDeletedSauceItems = allTempSauceItems.where((element) => ((element.isSelected==true) ||
+//        (element.isDeleted==true))).toList();
+//    _selectedSauceListController.sink.add(_allSelectedDeletedSauceItems);
+
+    SelectedFood tempSelectedFood = _currentSelectedFoodDetails;//oneSelectedFoodFD ;
+    tempSelectedFood.multiSelct= _multiSelectForFood;
+    _currentSelectedFoodDetails = tempSelectedFood;
+    _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
+
   }
 
 
@@ -1847,7 +1851,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
 
-  print('x.cheeseItemName == >   == >   == > : ${x.cheeseItemName}');
+    print('x.cheeseItemName == >   == >   == > : ${x.cheeseItemName}');
 
     String cheeseItemNameExists = defaultCheeseJuustoItemString.firstWhere(
             (oneItem) => oneItem.toLowerCase().trim() == x.cheeseItemName.toLowerCase().trim(),

@@ -26,6 +26,7 @@ class OrderedItem {
   List<NewIngredient> selectedIngredients;
   int                 quantity;
   List<CheeseItem>    selectedCheeses;
+  List<String> multiSelectString;
   double              oneFoodTypeTotalPrice;
   double              unitPrice;
   double              unitPriceWithoutCheeseIngredientSauces;
@@ -65,6 +66,8 @@ class OrderedItem {
         this.unitPrice,
         this.unitPriceWithoutCheeseIngredientSauces,
         this.foodItemSize,
+        this.multiSelectString,
+
 
         // this.foodItemOrderID,
       }

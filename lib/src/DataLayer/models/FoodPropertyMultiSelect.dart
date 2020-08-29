@@ -21,7 +21,7 @@ class FoodPropertyMultiSelect {
         this.itemTextColor,
         this.index,
         this.borderColor,
-        this.isSelected,
+        this.isSelected:false,
         this.itemImage,
         this.itemFullName,
 

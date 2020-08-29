@@ -8,6 +8,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
@@ -249,6 +250,60 @@ class FirebaseClient {
   }
 
 
+//  List <Map<String, dynamic>> /*<OrderedFood>*/ convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects){
+  List <String> /*<OrderedFood>*/ convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) {
+
+    print('at here... convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) ... .... .... %%%%% ECHO');
+    print('multiSelects: $multiSelects');
+
+    List<String> multiSelectStrings = new List<String>();
+
+    if (multiSelects == null) {
+      multiSelectStrings.add("");
+      return multiSelectStrings;
+    }
+
+    int counter = 0;
+
+    List<FoodPropertyMultiSelect> selectedMultiSelects = new List<
+        FoodPropertyMultiSelect>(4);
+
+    selectedMultiSelects =
+        multiSelects.where((element) => element.isSelected == true).toList();
+
+    if (selectedMultiSelects.length != 0){
+      selectedMultiSelects.forEach((oneFoodPropertyMultiSelect) {
+        print('--------------------------------------');
+        print(
+            'oneFoodPropertyMultiSelect.itemFullName}: ${oneFoodPropertyMultiSelect
+                .itemFullName}');
+
+        print('--------------------------------------');
+
+        // FOR MAP
+        /*
+      var identifier = {
+        'multiSelectName': oneFoodPropertyMultiSelect.itemFullName,
+      };
+      */
+
+        // FOR ARRAY..
+        multiSelectStrings.add(oneFoodPropertyMultiSelect.itemFullName);
+        counter ++;
+      });
+
+
+    print('counter: $counter');
+    return multiSelectStrings;
+  }
+
+    else{
+      multiSelectStrings.add("");
+      return multiSelectStrings;
+    }
+
+  }
+
 
   List <Map<String, dynamic>> /*<OrderedFood>*/ convertedIngredients(List<NewIngredient> si){
 
@@ -410,6 +465,8 @@ class FirebaseClient {
         'selectedSauces':convertedSauceItems(sf[counter].selectedSauceItems),
         'selectedCheeses':convertedCheeseItems(sf[counter].selectedCheeseItems),
         'ingredients':convertedIngredients(sf[counter].selectedIngredients),
+        'multiSelect':convertedMultiSelect(sf[counter].multiSelct),
+//        _multiSelectForFood
         'name':sf[counter].foodItemName,
         'oneFoodTypeTotalPrice': sf[counter].quantity * sf[counter].unitPrice,
         'unitPrice':sf[counter].unitPrice,
@@ -418,7 +475,6 @@ class FirebaseClient {
       };
       testFoodItems.add(identifier);
       counter ++;
-
 
     });
     return testFoodItems;
@@ -491,9 +547,7 @@ class FirebaseClient {
 
 
   Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType)async {
-    // print('currentOrderToFirebaseL: $currentOrderToFirebase');
-    /*print('currentOrderToFirebase.selectedFoodInOrder: '
-        '${currentOrderToFirebase.selectedFoodInOrder}'); */
+
 
     List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
 

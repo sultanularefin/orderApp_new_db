@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
+import 'package:foodgallery/src/DataLayer/models/FoodPropertyMultiSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
@@ -23,6 +24,7 @@ class SelectedFood {
   List<CheeseItem>  selectedCheeseItems;
   List<SauceItem>   selectedSauceItems;
   double subTotalPrice;
+  List<FoodPropertyMultiSelect> multiSelct = new List<FoodPropertyMultiSelect>(4);
 
 //  String ingredients;
 //  itemId = await generateItemId(6);
@@ -42,6 +44,7 @@ class SelectedFood {
         this.selectedCheeseItems,
         this.selectedSauceItems,
         this.subTotalPrice,
+        this.multiSelct,
 
         // this.foodItemOrderID,
       }

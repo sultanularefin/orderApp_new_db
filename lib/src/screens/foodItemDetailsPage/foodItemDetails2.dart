@@ -1983,7 +1983,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             }
 
 
-
             final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
 
             SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
@@ -2862,8 +2861,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     return Container(
 
-
-
       child:  x.isSelected == true  ?
       Container(
         width:displayWidth(context)/14,
@@ -2898,7 +2895,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             blocD.setMultiSelectOptionForFood(x,index);
 
           },
-
 
 
         ),

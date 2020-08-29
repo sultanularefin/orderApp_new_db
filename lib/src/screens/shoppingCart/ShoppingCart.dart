@@ -8372,6 +8372,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+  Widget showMultiSelectStrings(List <String> multiSelectStrings) {
+//    if(multiSelectStrings.length==)
+
+    print('multiSelectStrings: $multiSelectStrings');
+
+    print('multiSelectStrings == null: ${multiSelectStrings == null}');
+
+
+    if (multiSelectStrings == null)
+      return Text('');
+
+    else{
+      return ListView.builder(
+
+        scrollDirection: Axis.vertical,
+        reverse: false,
+        shrinkWrap: false,
+        itemCount: multiSelectStrings.length,
+        itemBuilder: (_, int index) {
+          return displayOneMultiSelectString(multiSelectStrings[index], index);
+        },
+
+      );
+  }
+
+  }
 
 // DUMMY RECITE RELATED PRINT CODES ARE HERE ==> LINE # 11264 ==>
 
@@ -8427,6 +8453,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
 
+  Widget displayOneMultiSelectString(String oneMultiSelectString, int index){
+
+    print('oneMultiSelectString:_____ _____ ______  ${oneMultiSelectString}');
+
+    if(oneMultiSelectString!="") {
+      return
+        Text('$oneMultiSelectString',
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 17, fontFamily: 'Itim-Regular',),
+      );
+    }
+
+    else return Text('');
+  }
+
+
 
   Widget displayOneExtraIngredientInRecite(NewIngredient oneIngredientForRecite, int index,int quantity){
 
@@ -8443,7 +8488,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             Text(
 //              '+SauceItem: $quantity'+'X',
-              '+Ingre.: $quantity'+'X',
+              '+: $quantity'+'X',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -8453,7 +8498,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 fontSize: 20, fontFamily: 'Itim-Regular',),
             ),
 
-            Text('${((oneIngredientForRecite.ingredientName == null) ||
+            Text(' ##: ${((oneIngredientForRecite.ingredientName == null) ||
                 (oneIngredientForRecite.ingredientName.length == 0)) ?
             '----' : oneIngredientForRecite.ingredientName.length > 18 ?
             oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
@@ -8541,7 +8586,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: <Widget>[
 
             Text(
-              '+SauceItem: $quantity'+'X',
+              ' ** : $quantity'+'X',
 
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -8617,9 +8662,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
     }
     else return Container(
-        height: 0,
-        width: 0
-    );
+          height: 0,
+          width: 0
+      );
   }
 
 
@@ -8636,7 +8681,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: <Widget>[
 
             Text(
-              '+cheese: $quantity'+'X',
+              ' ++ : $quantity'+'X',
 //              '+Ingre.: $quantity'+'X',
 
               textAlign: TextAlign.left,
@@ -8742,11 +8787,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
     List<SauceItem>     extraSauces       = oneFood.selectedSauces;
     List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
 
+    List<String> multiSelectStrings2 = oneFood.multiSelectString;
+
+    print('multiSelectStrings2: $multiSelectStrings2');
+
+
+
+
 
     print('extraIngredient: $extraIngredient');
-
     print('extraSauces: $extraSauces');
-
     print('extraCheeseItems: $extraCheeseItems');
 
     List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
@@ -8763,6 +8813,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('onlyExtraSauces: $onlyExtraSauces');
 
     print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
 
 
     /*
@@ -8824,6 +8876,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 fontSize: 20, fontFamily: 'Itim-Regular',),
             ),
           ),
+
+
+
+
           Container(
             height: 50,
             width: 350,
@@ -8894,6 +8950,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
+
+
           Container(
               height:700,
 //              color:Colors.redAccent,
@@ -8901,6 +8959,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child:ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
+
+                  Column(
+                    children: [
+
+                      Text('multi Select Strings...............',
+                        /*
+            Text(
+              '${oneIngredientForRecite.ingredientName}', */
+
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+//                          decoration: TextDecoration.lineThrough,
+                          fontSize: 27,
+                          fontFamily: 'Itim-Regular',),
+                      ),
+                      Container(
+                          width: 350,
+                          height:210,
+                          child: showMultiSelectStrings(multiSelectStrings2)
+                      ),
+                    ],
+                  ),
+
+
                   Column(
                     children: [
 
@@ -9817,6 +9901,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       List<SauceItem>     extraSauces       = oneFood.selectedSauces;
       List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
 
+      List<String> multiSelectStrings2 = oneFood.multiSelectString;
+
 //      print('extraIngredient: $extraIngredient');
 
 //      print('extraSauces: $extraSauces');
@@ -9882,6 +9968,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       // 5.2 --- extra ingredients...
 
+      if(multiSelectStrings2.length > 0)
+      {
+        multiSelectStrings2.forEach((oneMultiSelectString) {
+
+            ticket.text(
+                  oneMultiSelectString, styles: PosStyles(
+                align: PosAlign.left,
+              ),
+            );
+        });
+      }
+
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
 
@@ -9941,7 +10039,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       }
 
       // extra cheeseItems...
-      if(onlyExtraSauces.length>0) {
+      if(onlyExtraSauces.length>0){
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
 
           if(oneSauceItemForRecite.isDeleted==false) {
@@ -10003,27 +10101,26 @@ class _ShoppingCartState extends State<ShoppingCart> {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
 
           if(oneCheeseItemForRecite.isDeleted==false){
-          ticket.row([
-
-
-            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-            oneCheeseItemForRecite.cheeseItemName}',
-                width: 9,styles: PosStyles(
-
-                  align: PosAlign.left,
-                )),
-
-            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                width: 3,styles: PosStyles(align: PosAlign.right)),
-
-
-          ]);}
-          else{
             ticket.row([
 
+
+              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+              oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,styles: PosStyles(
+
+                    align: PosAlign.left,
+                  )),
+
+              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);}
+          else{
+            ticket.row([
 
               PosColumn(
                   text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
@@ -10042,9 +10139,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               PosColumn(
                   text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3, styles: PosStyles(align: PosAlign.right)
+              ),
             ]);
           };
         });
@@ -10391,7 +10487,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
       List<SauceItem>     extraSauces       = oneFood.selectedSauces;
       List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
-
+      List<String> multiSelectStrings2 = oneFood.multiSelectString;
 //      print('extraIngredient: $extraIngredient');
 
 //      print('extraSauces: $extraSauces');
@@ -10456,6 +10552,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ]);
 
       // 5.2 --- extra ingredients...
+
+      if(multiSelectStrings2.length > 0)
+      {
+        multiSelectStrings2.forEach((oneMultiSelectString) {
+
+          ticket.text(
+            oneMultiSelectString, styles: PosStyles(
+            align: PosAlign.left,
+          ),
+          );
+        });
+      }
+
 
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
@@ -10954,7 +11063,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
       List<SauceItem>     extraSauces       = oneFood.selectedSauces;
       List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
-
+      List<String> multiSelectStrings2 = oneFood.multiSelectString;
 //      print('extraIngredient: $extraIngredient');
 
 //      print('extraSauces: $extraSauces');
@@ -11019,6 +11128,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ]);
 
       // 5.2 --- extra ingredients...
+      if(multiSelectStrings2.length > 0)
+      {
+        multiSelectStrings2.forEach((oneMultiSelectString) {
+
+          ticket.text(
+            oneMultiSelectString, styles: PosStyles(
+            align: PosAlign.left,
+          ),
+          );
+        });
+      }
+
 
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
@@ -11508,7 +11629,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
       List<SauceItem>     extraSauces       = oneFood.selectedSauces;
       List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
-
+      List<String> multiSelectStrings2 = oneFood.multiSelectString;
 //      print('extraIngredient: $extraIngredient');
 
 //      print('extraSauces: $extraSauces');
@@ -11573,6 +11694,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ]);
 
       // 5.2 --- extra ingredients...
+      if(multiSelectStrings2.length > 0)
+      {
+        multiSelectStrings2.forEach((oneMultiSelectString) {
+
+          ticket.text(
+            oneMultiSelectString, styles: PosStyles(
+            align: PosAlign.left,
+          ),
+          );
+        });
+      }
+
 
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
@@ -12259,7 +12392,7 @@ class CustomPicker extends CommonPickerModel {
     }
   }
 
-  
+
   @override
   String leftDivider() {
     return "|";
