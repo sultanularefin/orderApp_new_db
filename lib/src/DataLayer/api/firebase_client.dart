@@ -92,15 +92,26 @@ class FirebaseClient {
   }
 
 
-  Future<QuerySnapshot> fetchOrderListItems() async {
+  Future<QuerySnapshot> fetchOrderListItemsForHistoryPaidOnly() async {
 
     var snapshot= Firestore.instance
         .collection("restaurants").document('kebab_bank').
-    collection('orderList').orderBy('end',descending: true)
+    collection('orderList').orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Paid')
         .getDocuments();
 
 //    orderBy('_timeStampUTC', descending: true)
     return snapshot;
+
+    /*
+
+    var snapshot= Firestore.instance
+        .collection("restaurants").document('kebab_bank').collection('orderList')
+        .orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Unpaid')
+        .getDocuments();
+
+//    orderBy('_timeStampUTC', descending: true)
+    return snapshot;
+    */
 
 
   }

@@ -237,7 +237,7 @@ class HistoryBloc implements Bloc {
 
 //      var snapshot = await _client.fetchFoodItems();
 
-      var snapshot = await _client.fetchOrderListItems();
+      var snapshot = await _client.fetchOrderListItemsForHistoryPaidOnly();
       List docList = snapshot.documents;
 
       List<OneOrderFirebase> tempAllOrderedItems= new List<OneOrderFirebase>();

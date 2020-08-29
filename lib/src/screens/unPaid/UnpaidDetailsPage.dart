@@ -862,6 +862,32 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                     )
                                 ),
 
+
+                                Container(
+                                  child: oneFireBaseOrder.orderProductionTimeFromNow !=-1?
+
+                                  Text('${oneFireBaseOrder.orderProductionTimeFromNow} min',
+                                    maxLines: 1,
+
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                                      fontSize: 20, fontFamily: 'Itim-Regular',),
+                                  ):Text('${oneFireBaseOrder.timeOfDay.toString()}',
+
+                                    maxLines: 1,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+//                        color: Color(0xffF50303),
+                                      fontSize: 20, fontFamily: 'Itim-Regular',),
+                                  ),
+                                ),
+
+                                /*
                                 Text(
                                     '${oneFireBaseOrder.orderProductionTimeFromNow}:00 min',
                                     maxLines: 2,
@@ -875,6 +901,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                                     )
                                 ),
+
+                                */
 
                                 Container(
                                   child: Row(

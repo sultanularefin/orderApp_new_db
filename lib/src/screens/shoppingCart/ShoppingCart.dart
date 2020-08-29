@@ -5174,8 +5174,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
 
-                // 911_3
-                //     work_3
+
 
                 &&(showEditingCompleteCustomerReachoutIformation == true)
             ) ?
