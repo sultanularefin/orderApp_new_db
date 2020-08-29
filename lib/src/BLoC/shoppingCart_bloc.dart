@@ -905,6 +905,18 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
+  String sanitizeTimeOfDay(String nameInput) {
+    // String nameInput2 = nameInput.replaceAll(new RegExp(r'e'), 'é');
+
+    String nameInput2 = nameInput.replaceAll(new RegExp(r'TimeOfDay'), '');
+
+    String nameInput3 = nameInput2.replaceAll(new RegExp(r'\)'), '');
+
+    String nameInput4 = nameInput3.replaceAll(new RegExp(r'\('), '');
+
+    return nameInput4;
+  }
+
 
   Future<OneOrderFirebase> fetchOrderDataFromFirebase(String orderDocumentId) async {
 
@@ -931,7 +943,12 @@ class ShoppingCartBloc implements Bloc {
     String                    orderType = snapshot['orderType'];
     String                    documentId = orderDocumentId;
     int                    orderProductionTimeFromNow = snapshot['orderProductionTimeFromNow'];
-    String                timeOfDay2 = snapshot['orderProductionTimeOfDay'];
+    String                timeOfDay3 = snapshot['orderProductionTimeOfDay'];
+    String                timeOfDay2 = sanitizeTimeOfDay(timeOfDay3);
+
+
+
+
     double                 deliveryCost2 = snapshot['deliveryCost?'];
     double                 tax = snapshot['tax'];
     double                 priceWithDelivery2 = snapshot['priceWithDelivery?'];
@@ -1434,6 +1451,8 @@ class ShoppingCartBloc implements Bloc {
 
     tempOrderModifyCustomerInfo.orderingCustomer.etaTimeInMinutes = minutes3;
 
+    tempOrderModifyCustomerInfo.orderingCustomer.etaTimeOfDay= TimeOfDay(hour: 0,minute: 0);
+
     _curretnOrder = tempOrderModifyCustomerInfo;
 
     _orderController.sink.add(_curretnOrder);
@@ -1449,6 +1468,8 @@ class ShoppingCartBloc implements Bloc {
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
     tempOrderModifyCustomerInfo.orderingCustomer.etaTimeOfDay = test;
+
+    tempOrderModifyCustomerInfo.orderingCustomer.etaTimeInMinutes =-1;
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 

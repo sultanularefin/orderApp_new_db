@@ -212,6 +212,19 @@ class UnPaidBloc implements Bloc {
 
 
 
+  String sanitizeTimeOfDay(String nameInput) {
+    // String nameInput2 = nameInput.replaceAll(new RegExp(r'e'), 'é');
+
+    String nameInput2 = nameInput.replaceAll(new RegExp(r'TimeOfDay'), '');
+
+    String nameInput3 = nameInput2.replaceAll(new RegExp(r'\)'), '');
+
+    String nameInput4 = nameInput3.replaceAll(new RegExp(r'\('), '');
+
+    return nameInput4;
+  }
+
+
   void getAllUnPaidOrderListItemsConstructor(/*String laterPaidDocumentId */) async {
 
 
@@ -256,7 +269,12 @@ class UnPaidBloc implements Bloc {
         final String documentID = doc.documentID;
 //        String                    documentId = orderDocumentId;
         int                    orderProductionTimeFromNow =    doc['orderProductionTimeFromNow'];
-        String                timeOfDay2 = doc['orderProductionTimeOfDay'];
+        // String                timeOfDay2 = doc['orderProductionTimeOfDay'];
+
+        String                timeOfDay3 = doc['orderProductionTimeOfDay'];
+        String                timeOfDay2 = sanitizeTimeOfDay(timeOfDay3);
+
+
         double                 deliveryCost2 =          doc['deliveryCost?'];
         double                 tax =                    doc['tax'];
         double                 priceWithDelivery2 =     doc['priceWithDelivery?'];

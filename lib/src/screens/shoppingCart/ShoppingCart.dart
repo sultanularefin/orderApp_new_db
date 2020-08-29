@@ -450,71 +450,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //  orderInformationAndCustomerInformationWidget
 
-  Widget orderInformationForReciteWidget(OneOrderFirebase oneOrderForReceipt){
-
-    print('at orderInformationForReciteWidget');
-    return  new Directionality(
-      textDirection: TextDirection.ltr,
-      child:
-      Container(
-        height:100,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
-                  ? 'Delivery'
-                  :
-              (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-              'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                  'takeaway') ? 'TakeAway' : 'DinningRoom',
-//                    oneOrderForReceipt.orderBy
-//                    'dinningRoom',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-//                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
-            ),
-
-            // 1 ends here.
-
-
-            Text(
-              '${oneOrderForReceipt
-                  .formattedOrderPlacementDatesTimeOnly}',
-
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-//                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
-            ),
-
-
-            // 2 ends here.
-            Text('${oneOrderForReceipt.orderProductionTimeFromNow} min',
-
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-//                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
-            ),
-
-            // 3 ends here.
-          ],
-
-        ),
-      ),
-    );
-
-  }
-
 
   Widget customerInformationOnlyWidget(
       OneOrderFirebase oneOrderForReceipt) {
@@ -1453,6 +1388,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           ),
           ),
+          /*
           floatingActionButton: StreamBuilder<bool>(
             stream: printerManager.isScanningStream,
             // dEFINED IN HERE: C:\src\flutter\.pub-cache\hosted\
@@ -1501,6 +1437,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
               }
             },
           ),
+
+
+
+          */
         )
     );
     //return Text('${x.toString()}');
@@ -8975,13 +8915,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
 
-    CustomerInformation customerForReciteGeneration = oneOrderForReceipt
-        .oneCustomer;
+    CustomerInformation customerForReciteGeneration = oneOrderForReceipt.oneCustomer;
 
     List<OrderedItem> orderedItems = oneOrderForReceipt.orderedItems;
 
 
-
+    print('oneOrderForReceipt.timeOfDay: ${oneOrderForReceipt.timeOfDay}');
 
 
 
@@ -9054,7 +8993,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                       // 911_1
                       Container(
-                        child: oneOrderForReceipt.timeOfDay==''?
+                        child: oneOrderForReceipt.orderProductionTimeFromNow !=-1?
 
                         Text('${oneOrderForReceipt.orderProductionTimeFromNow} min',
 
@@ -9064,7 +9003,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             color: Colors.black,
 //                        color: Color(0xffF50303),
                             fontSize: 20, fontFamily: 'Itim-Regular',),
-                        ):Text('${oneOrderForReceipt.timeOfDay}',
+                        ):Text('${oneOrderForReceipt.timeOfDay.toString()}',
 
                           textAlign: TextAlign.left,
                           style: TextStyle(
@@ -9663,15 +9602,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
     ticket.hr(ch:'=',len:null,linesAfter:1);
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
-        +'${oneOrderData3.orderProductionTimeFromNow} min',
-        styles: PosStyles(
-          height: PosTextSize.size1,
-          width: PosTextSize.size1,
-          bold:true,
-          align: PosAlign.left,
-        )
-    );
+    if(oneOrderData3.orderProductionTimeFromNow==-1){
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
+          +'${oneOrderData3.timeOfDay.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold:true,
+            align: PosAlign.left,
+          )
+      );
+    }else {
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+          '                 '
+          + '${oneOrderData3.orderProductionTimeFromNow} min',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold: true,
+            align: PosAlign.left,
+          )
+      );
+    }
 
     //    ticket.feed(2);
 
@@ -10108,16 +10060,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' + '                '
-
-        +'${oneOrderData3.orderProductionTimeFromNow} min',
-        styles: PosStyles(
-          height: PosTextSize.size1,
-          width: PosTextSize.size1,
-          bold:true,
-          align: PosAlign.left,
-        )
-    );
+    if(oneOrderData3.orderProductionTimeFromNow==-1){
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
+          +'${oneOrderData3.timeOfDay.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold:true,
+            align: PosAlign.left,
+          )
+      );
+    }else {
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+          '                 '
+          + '${oneOrderData3.orderProductionTimeFromNow} min',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold: true,
+            align: PosAlign.left,
+          )
+      );
+    }
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDate}',
         styles: PosStyles(
@@ -10561,15 +10525,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
     ticket.hr(ch:'=',len:null,linesAfter:1);
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
-        +'${oneOrderData3.orderProductionTimeFromNow} min',
-        styles: PosStyles(
-          height: PosTextSize.size1,
-          width: PosTextSize.size1,
-          bold:true,
-          align: PosAlign.left,
-        )
-    );
+    if(oneOrderData3.orderProductionTimeFromNow==-1){
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
+          +'${oneOrderData3.timeOfDay.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold:true,
+            align: PosAlign.left,
+          )
+      );
+    }else {
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+          '                 '
+          + '${oneOrderData3.orderProductionTimeFromNow} min',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold: true,
+            align: PosAlign.left,
+          )
+      );
+    }
 
     //    ticket.feed(2);
 
@@ -10996,15 +10973,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.feed(1);
     ticket.hr(ch:'=',len:null,linesAfter:1);
 
-    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
-        +'${oneOrderData3.orderProductionTimeFromNow} min',
-        styles: PosStyles(
-          height: PosTextSize.size1,
-          width: PosTextSize.size1,
-          bold:true,
-          align: PosAlign.left,
-        )
-    );
+    if(oneOrderData3.orderProductionTimeFromNow==-1){
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'                 '
+          +'${oneOrderData3.timeOfDay.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold:true,
+            align: PosAlign.left,
+          )
+      );
+    }else {
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+          '                 '
+          + '${oneOrderData3.orderProductionTimeFromNow} min',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold: true,
+            align: PosAlign.left,
+          )
+      );
+    }
 
     //    ticket.feed(2);
 

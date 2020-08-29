@@ -540,7 +540,12 @@ class FirebaseClient {
           ? 'Delivery'
           : orderBy == 'TakeAway' ? 'TakeAway' : 'DinningRoom',
       'orderProductionTimeFromNow': currentOrderToFirebase.orderingCustomer.etaTimeInMinutes,
-      'orderProductionTimeOfDay': currentOrderToFirebase.orderingCustomer.etaTimeOfDay.toString(),
+      'orderProductionTimeOfDay':  currentOrderToFirebase.orderingCustomer.etaTimeOfDay.toString(),
+
+
+      // currentOrderToFirebase.orderingCustomer.etaTimeOfDay.hour +
+      //     currentOrderToFirebase.orderingCustomer.etaTimeOfDay.minute,
+
       'orderProduction'
       'recitePrinted':'false',
       'deliveryCost?':orderBy == 'Phone' ? 0.00 : orderBy == 'Delivery'
