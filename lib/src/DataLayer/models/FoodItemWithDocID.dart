@@ -8,6 +8,7 @@ class FoodItemWithDocID {
 
   String itemName;
   String categoryName;
+  String shorCategoryName;
 
   Map<String,dynamic> sizedFoodPrices;
   List<dynamic> ingredients;
@@ -34,6 +35,7 @@ class FoodItemWithDocID {
 
         this.itemName,
         this.categoryName,
+        this.shorCategoryName,
         this.sizedFoodPrices,
         this.uploadDate,
         this.imageURL,
@@ -57,6 +59,7 @@ class FoodItemWithDocID {
   FoodItemWithDocID.reverseCustomCast(FoodItemWithDocIDViewModel data /*,String size, double price*/)
       : itemName = data.itemName,
         categoryName = data.categoryName,
+        shorCategoryName = data.shorCategoryName,
         sizedFoodPrices = data.sizedFoodPrices,
         uploadDate = data.uploadDate,
         imageURL = data.imageURL,

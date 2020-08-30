@@ -5,6 +5,7 @@ class NewCategoryItem {
   String categoryName;
   int squenceNo;
   String documentID;
+  String fireStoreFieldName;
 //  String imageURL;
 //  double rating;
 //  double totalRating;
@@ -16,6 +17,7 @@ class NewCategoryItem {
         this.categoryName,
         this.squenceNo,
         this.documentID,
+        this.fireStoreFieldName,
 //        this.imageURL,
 //        this.rating,
 //        this.totalRating,

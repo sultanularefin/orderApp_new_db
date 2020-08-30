@@ -573,6 +573,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       List<NewIngredient> allExtraIngredients,
       ) {
 
+//    fireStoreFieldName
 //    oneFoodItem,
 //    tempIngs,
 
@@ -610,10 +611,13 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     List<NewIngredient> ingredientsOfOnlyThisFoodItemsCategory =
-    allExtraIngredients.where((e) => checkThisExtraIngredientForSomeCategory(e,oneFoodItem.categoryName)).toList();
+    allExtraIngredients.where((e) => checkThisExtraIngredientForSomeCategory(e,oneFoodItem.shorCategoryName)).toList();
 
 
-    print('{{{  {{{  {{{   ingredientsOfOnlyThisFoodItemsCategory.length ==> --> ==> ${ingredientsOfOnlyThisFoodItemsCategory.length}');
+    print('{{{  {{{  {{{   ingredientsOfOnlyThisFoodItemsCategory[${oneFoodItem.shorCategoryName}.length ==> --> '
+        '==> ${ingredientsOfOnlyThisFoodItemsCategory.length}');
+    logger.i('{{{  {{{  {{{   ingredientsOfOnlyThisFoodItemsCategory[${oneFoodItem.shorCategoryName}.length ==> -->'
+        ' ==> ${ingredientsOfOnlyThisFoodItemsCategory.length}');
 
 
     Set<String> allSubgroupsForThisFoodItem ={};

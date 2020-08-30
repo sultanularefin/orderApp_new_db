@@ -54,7 +54,7 @@ class FoodGalleryBloc implements Bloc {
   List<NewCategoryItem> _allCategoryList=[];
 
 
-  
+
   List<NewIngredient> _allIngItemsFGBloc =[];
   List<NewIngredient> get getAllIngredientsPublicFGB2 => _allIngItemsFGBloc;
   Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
@@ -272,7 +272,7 @@ class FoodGalleryBloc implements Bloc {
       List<String> documents = snapshot.documents.map((documentSnapshot) =>
       documentSnapshot.documentID).toList();
 
-       print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+      print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
 
@@ -370,6 +370,8 @@ class FoodGalleryBloc implements Bloc {
 
         final String foodCategoryName = doc['category'];
 
+        final String shorCategoryName2 = doc['shorCategoryName'];
+
 
 
 
@@ -410,6 +412,7 @@ class FoodGalleryBloc implements Bloc {
         FoodItemWithDocID oneFoodItemWithDocID = new FoodItemWithDocID(
           itemName: foodItemName,
           categoryName: foodCategoryName,
+          shorCategoryName:shorCategoryName2,
           imageURL: foodImageURL,
           sizedFoodPrices: oneFoodSizePriceMap,
           ingredients: foodItemIngredientsList,
@@ -433,11 +436,6 @@ class FoodGalleryBloc implements Bloc {
 
     }
   }
-
-  //  Future<List<NewCategoryItem>> getAllCategories() async {
-
-
-  // COPIED TO IDENTITY BLOC
 
 
 
@@ -486,6 +484,9 @@ class FoodGalleryBloc implements Bloc {
 //        final num totalCategoryRating = doc['total_rating'];
 
 
+        final String fireStoreFieldName2= doc['fireStoreFieldName'];
+
+
         /*
 
         print('categoryItemName : $categoryItemName,categoryRating :'
@@ -498,7 +499,8 @@ class FoodGalleryBloc implements Bloc {
 
           categoryName: categoryItemName,
           squenceNo: sequenceNo0.toInt(),
-            documentID:documentID,
+          documentID:documentID,
+          fireStoreFieldName:fireStoreFieldName2,
 
 //          imageURL: categoryImageURL,
 //          rating: categoryRating.toDouble(),
@@ -555,8 +557,8 @@ class FoodGalleryBloc implements Bloc {
 
 
     sauceItems.forEach((oneSauceItem) {
-        print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName}');
-      }
+      print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName}');
+    }
 
     );
 
