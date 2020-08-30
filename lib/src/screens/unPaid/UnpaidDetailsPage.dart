@@ -213,7 +213,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                   children: <Widget>[
 
 
-                    /*
+
                     Container(
 
 //                            width: 100,
@@ -271,7 +271,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                     ),
 
-                    */
+
 
 
 

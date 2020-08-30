@@ -668,8 +668,9 @@ class _HistoryPageState extends State<HistoryPage> {
                             style: TextStyle(
                               color: Color(0xff707070),
                               fontWeight: FontWeight.normal,
+
                               letterSpacing: 0.5,
-                              fontSize: 12,
+                              fontSize: 14,
                             ),
                           )
                       ),

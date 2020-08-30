@@ -52,33 +52,10 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   //  Stream  <List<PaymentTypeSingleSelect>> get getCurrentPaymentTypeSingleSelectStream => _paymentTypeController.stream;
 
-  void initiateSauces(List<SauceItem> sauceItems0, List<String>defaultSaucesString) async {
-
-    print('sauceItems0: $sauceItems0 length: ${sauceItems0.length}');
-
-//    print('defaultSauces: $defaultSaucesString length: ${defaultSaucesString.length}');
-
-
-    sauceItems0.map((oneSauce) =>
-    /*NewIngredient.updateSelectedIngredient */(
-        oneSauce.isDefaultSelected = false
-    )).toList();
-
-    sauceItems0.map((oneSauce) =>
-    /*NewIngredient.updateSelectedIngredient */(
-        oneSauce.isSelected = false
-    )).toList();
-
-    List <SauceItem> sauceItems = sauceItems0;
-
-
-//    return ingItems;
-
-  }
 
 
   void initiatePaymentTypeSingleSelectOptions(int selectedPayment){
-    PaymentTypeSingleSelect Later = new PaymentTypeSingleSelect(
+    PaymentTypeSingleSelect later = new PaymentTypeSingleSelect(
       borderColor: '0xff739DFA',
       index: 0,
       isSelected: false,
@@ -88,7 +65,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       paymentIconName: 'Later',
     );
 
-    PaymentTypeSingleSelect Cash = new PaymentTypeSingleSelect(
+    PaymentTypeSingleSelect cash = new PaymentTypeSingleSelect(
       borderColor: '0xff95CB04',
       index: 1,
       isSelected: false,
@@ -100,7 +77,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 //     0xffFEE295 false
-    PaymentTypeSingleSelect Card = new PaymentTypeSingleSelect(
+    PaymentTypeSingleSelect card = new PaymentTypeSingleSelect(
       borderColor: '0xffFEE295',
       index: 2,
       isSelected: false,
@@ -113,13 +90,15 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List <PaymentTypeSingleSelect> paymentTypeSingleSelectArray = new List<PaymentTypeSingleSelect>();
 
 
-    paymentTypeSingleSelectArray.addAll([Later, Cash, Card  ]);
+    paymentTypeSingleSelectArray.addAll([later, cash, card  ]);
 
     paymentTypeSingleSelectArray[selectedPayment].isSelected =true;
 
     _paymentType = paymentTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
     _paymentTypeController.sink.add(_paymentType);
+
+
   }
 
 
@@ -131,6 +110,9 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     initiatePaymentTypeSingleSelectOptions(2);
     logger.i('oneFoodItem.itemName: ${oneFireBaseOrder.documentId}');
 
+    oneFireBaseOrder.tempPaymentIndex =2;
+    oneFireBaseOrder.paidType='Card';
+
     _curretnFireBaseOrder= oneFireBaseOrder;
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 
@@ -138,55 +120,6 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   // CONSTRUCTOR ENDS HERE.
 
-//  List<FoodPropertyMultiSelect> initiateAllMultiSelectOptions()
-  void initiateAllMultiSelectOptions()
-  {
-
-    FoodPropertyMultiSelect _org = new FoodPropertyMultiSelect(
-      borderColor: '0xff739DFA',
-      index: 4,
-      isSelected: false,
-      itemName: 'ORG',
-      itemImage:'assets/multiselectImages/multiSelectAssetORG.png',
-      itemTextColor: '0xff739DFA',
-    );
-
-    FoodPropertyMultiSelect _vs = new FoodPropertyMultiSelect(
-      borderColor: '0xff95CB04',
-      index: 3,
-      isSelected: false,
-      itemName: 'VS',
-      itemImage:'assets/multiselectImages/multiSelectAssetVS.png',
-      itemTextColor: '0xff95CB04',
-    );
-
-
-//     0xffFEE295 false
-    FoodPropertyMultiSelect _vsm = new FoodPropertyMultiSelect(
-      borderColor: '0xff34720D',
-      index: 2,
-      isSelected: false,
-      itemName: 'VSM',
-      itemImage:'assets/multiselectImages/multiSelectAssetVSM.png',
-      itemTextColor: '0xff34720D',
-    );
-
-
-    FoodPropertyMultiSelect _m = new FoodPropertyMultiSelect(
-      borderColor: '0xffB47C00',
-      index: 1,
-      isSelected: false,
-      itemName: 'M',
-      itemImage:'assets/multiselectImages/multiSelectAssetM.png',
-      itemTextColor: '0xffB47C00',
-    );
-
-
-    List <FoodPropertyMultiSelect> multiSelectArray = new List<FoodPropertyMultiSelect>();
-
-    multiSelectArray.addAll([_org,_vs,_vsm,_m]);
-
-  }
 
 
 
@@ -207,17 +140,19 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     !singleSelectArray[oldPaymentIndex].isSelected;
 
 
-    singleSelectArray [newPaymentIndex].isSelected =
+     singleSelectArray[newPaymentIndex].isSelected =
     !singleSelectArray[newPaymentIndex].isSelected;
 
 
     _paymentType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
-
     _paymentTypeController.sink.add(_paymentType);
 
 
     OneOrderFirebase temp = _curretnFireBaseOrder;
+
+
     temp.tempPaymentIndex = newPaymentIndex;
+    temp.paidType = newPaymentIndex==0?'Later':newPaymentIndex==1?'Cash':'Card';
     _curretnFireBaseOrder = temp;
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 

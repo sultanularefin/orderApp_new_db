@@ -10,6 +10,7 @@ class OneOrderFirebase {
   String                    orderBy;
   String                    paidStatus;
   String                    paidType;
+//  int                       paidIndex;
   double                    totalPrice;
   String                    contact;
   String                    driverName;
@@ -27,7 +28,7 @@ class OneOrderFirebase {
   int                       orderProductionTimeFromNow;
   // String                    orderProductionTimeOfDay;
   String                    timeOfDay;
-  int                       tempPaymentIndex;
+  int                       tempPaymentIndex; // for unpaid Order....
 
   OneOrderFirebase(
       {
@@ -36,6 +37,7 @@ class OneOrderFirebase {
         this.orderBy,
         this.paidStatus,
         this.paidType,
+//        this.paidIndex,
         this.totalPrice,
         this.contact,
         this.driverName,
