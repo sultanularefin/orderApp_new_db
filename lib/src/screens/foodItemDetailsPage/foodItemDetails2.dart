@@ -638,7 +638,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                   Container(
 //                                      color:Colors.blue,
 //                                                            height: displayHeight(context) / 10,
-                                      height: displayHeight(context) / 30,
+//                                       height: displayHeight(context) / 30,
+                                      height: displayHeight(context)/30,
                                       width: displayWidth(context) /2.39,
                                       child: selectedIngredientsNameOnly(context)
                                     //Text('buildDefaultIngredients('
@@ -4154,7 +4155,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             return Container(
 //              height: displayHeight(context) / 13,
-              height: displayHeight(context) / 30,
+//               height: displayHeight(context) / 30,
+              height: displayHeight(context)/30,
 //          height:190,
               width: displayWidth(context) /1.20,
 
@@ -4198,7 +4200,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
               return Container(
 //                  height: displayHeight(context) / 13,
-                height: displayHeight(context) / 30,
+//                 height: displayHeight(context) / 30,
+                height: displayHeight(context)/30,
 //          height:190,
                 width: displayWidth(context) /1.20,
 
@@ -4225,7 +4228,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             else if(selectedIngredients.length==0){
               return Container(
 //                  height: displayHeight(context) / 13,
-                height: displayHeight(context) / 30,
+//                 height: displayHeight(context) / 30,
+                height: displayHeight(context)/30,
 //          height:190,
                 width: displayWidth(context) /1.20,
 
@@ -4252,6 +4256,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             else{
 
               return Container(
+                height: displayHeight(context)/30,
 //                color: Colors.green,
                 child: ListView.builder(
 
@@ -4443,17 +4448,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         + '?alt=media';
 
     return
-      Container(
-//        width: displayWidth(context) /1.20,
-
-        padding: EdgeInsets.symmetric(
-//                          horizontal: 10.0, vertical: 22.0),
-            horizontal: 0, vertical: 0),
-
-        child:
 
         Container(
-          width: displayWidth(context) / 7,
+          width: displayWidth(context) / 6,
+          height: displayHeight(context)/30,
+          color:Colors.lightBlueAccent,
           child:
 
           Row(
@@ -4465,12 +4464,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               Text(
                 ((ingredientName == null) ||
                     (ingredientName.length == 0)) ?
-                '' : ingredientName.length > 15 ?
+                '' : ingredientName.length > 14 ?
                 ingredientName.substring(0, 12) + '...' :
                 ingredientName,
 //                ingredientName,
-                maxLines: 1,
-                textAlign: TextAlign.center,
+                maxLines: 2,
+                textAlign: TextAlign.start,
                 overflow: TextOverflow.ellipsis,
 
                 style: TextStyle(
@@ -4486,7 +4485,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             ],
           ),
 
-        ),
+
 
       );
 
