@@ -4452,7 +4452,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         Container(
           width: displayWidth(context) / 6,
           height: displayHeight(context)/30,
-          color:Colors.lightBlueAccent,
+          // color:Colors.lightBlueAccent,
           child:
 
           Row(
