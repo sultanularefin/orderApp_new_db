@@ -1144,7 +1144,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                           Container(
                                             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                            color: Colors.white,
+//                                            color: Colors.white,
+color:Colors.blue,
 //                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
                                             height: displayHeight(context)/5.4,
                                             width: displayWidth(context)/1.03,

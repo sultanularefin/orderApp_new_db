@@ -921,7 +921,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                       children: <Widget>[
                         Container(
-                          width: displayWidth(context)/3.9,
+//                          color:Colors.blue,
+                          width: displayWidth(context)/4.4,
                           padding: EdgeInsets
                               .fromLTRB(
                               10, 0, 0,
@@ -931,6 +932,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                           Text(
                               '${oneFood
                                   .itemName}',
+//                              '${oneFood
+//                                  .itemName}123123123',
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -946,6 +949,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         ),
 
                         Container(
+//                          color:Colors.yellow,
                           padding: EdgeInsets
                               .fromLTRB(
                               0, 4, displayWidth(context)/40,
@@ -954,6 +958,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
                           Text(
                               '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}' +
+//                              '${priceBasedOnCheeseSauceIngredientsSizeState.toStringAsFixed(2)}12' +
                                   '\u20AC',
                               style: TextStyle(
                                 fontSize: 18,
