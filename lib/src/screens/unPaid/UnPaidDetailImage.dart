@@ -55,11 +55,12 @@ class UnPaidDetailImage extends StatelessWidget {
               width: displayWidth(context) /  4.8,
               height: displayWidth(context) / 4.8,
               decoration: BoxDecoration(
+                color:Color(0xffFFE18E),
                 border: Border.all(
 
                   color: Colors.black,
                   style: BorderStyle.solid,
-                  width: 1.0,
+                  width: 3.0,
 
                 ),
                 shape: BoxShape.circle,

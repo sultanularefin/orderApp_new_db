@@ -56,7 +56,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   void initiatePaymentTypeSingleSelectOptionsUnPaidPage(int selectedPayment){
 
-   
+
 
     PaymentTypeSingleSelect cash = new PaymentTypeSingleSelect(
       borderColor: '0xff95CB04',
@@ -83,7 +83,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List <PaymentTypeSingleSelect> paymentTypeSingleSelectArray = new List<PaymentTypeSingleSelect>();
 
 
-    paymentTypeSingleSelectArray.addAll([/*later, */ cash, card  ]);
+    paymentTypeSingleSelectArray.addAll([cash, card  ]);
 
     paymentTypeSingleSelectArray[selectedPayment].isSelected =true;
 
@@ -101,7 +101,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       ) {
 
     initiatePaymentTypeSingleSelectOptionsUnPaidPage(1);
-    logger.i('oneFoodItem.itemName: ${oneFireBaseOrder.documentId}');
+    logger.i('___ ___ || || @@@@  oneFireBaseOrder.documentId: ${oneFireBaseOrder.documentId}');
 
     oneFireBaseOrder.tempPaymentIndex =1;
     oneFireBaseOrder.paidType='Card';
@@ -133,7 +133,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     !singleSelectArray[oldPaymentIndex].isSelected;
 
 
-     singleSelectArray[newPaymentIndex].isSelected =
+    singleSelectArray[newPaymentIndex].isSelected =
     !singleSelectArray[newPaymentIndex].isSelected;
 
 
@@ -145,7 +145,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     temp.tempPaymentIndex = newPaymentIndex;
-    temp.paidType = newPaymentIndex==0?'Later':newPaymentIndex==1?'Cash':'Card';
+    temp.paidType = newPaymentIndex==0?'Cash':'Card';
     _curretnFireBaseOrder = temp;
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 
@@ -174,48 +174,57 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   Future<String>  paymentButtonPressedUnPaidDetailsPage() async{
 
     OneOrderFirebase currenttempUnPaidOneOrderFB = _curretnFireBaseOrder;
+
     print('temp.documentId: ${currenttempUnPaidOneOrderFB.documentId}');
-    String documentID = currenttempUnPaidOneOrderFB.documentId;
+    String previouslyLaterPaidDocumentID = currenttempUnPaidOneOrderFB.documentId;
 
     String paidType0 =   currenttempUnPaidOneOrderFB.tempPaymentIndex==0?'Cash':'Card'; // no later option..
 
-//    tempOrder.paymentButtonPressed=true;
 
     currenttempUnPaidOneOrderFB.tempPayButtonPressed =true;
 
     _curretnFireBaseOrder =currenttempUnPaidOneOrderFB;
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 
-//    _curretnOrder=tempOrder;
-//    _orderController.sink.add(_curretnOrder);
 
     print('paidType0 : $paidType0');
 
+    var updateResult =
+    await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(previouslyLaterPaidDocumentID,paidType0);
 
-
-      var updateResult =
-      await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,paidType0);
-      print('updateResult is:: :: $updateResult');
-      String                    paidType2 = updateResult['paidType'];
-
-      print('paidType2: $paidType2');
-
-      if(paidType2==paidType0){
-        print('update successfull');
-        logger.w('update successfull');
-
-      }
-
-//    print('...update not successful....');
-    return documentID;
+    currenttempUnPaidOneOrderFB.paidStatus='Paid';
+    currenttempUnPaidOneOrderFB.paidType= paidType0;
+    currenttempUnPaidOneOrderFB.tempPayButtonPressed=false;
 
 
 
+//    _curretnFireBaseOrder=null;
 
+    _curretnFireBaseOrder = currenttempUnPaidOneOrderFB;
 
-//      return paidType2;
+    _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
+
+//    await Future.delayed(Duration(milliseconds: 500));
+
+    print('updateResult is:: :: $updateResult');
+    String                    paidType2 = updateResult['paidType'];
+
+    print('paidType2: $paidType2');
+
+    if(paidType2==paidType0){
+      print('update successfull');
+
+      return previouslyLaterPaidDocumentID;
+
 
     }
+
+
+    return previouslyLaterPaidDocumentID;
+
+
+
+  }
 
 
 

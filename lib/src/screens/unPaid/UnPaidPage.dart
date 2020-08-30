@@ -499,7 +499,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
             tax:tax2,
             priceWithDelivery:priceWithDelivery2,
             orderProductionTimeFromNow:orderProductionTimeOfDay2,
-timeOfDay: timeOfDay2,
+            timeOfDay: timeOfDay2,
 
 
 //              CustomerInformation       oneCustomer;
@@ -533,7 +533,7 @@ timeOfDay: timeOfDay2,
 
           );
 
-
+/*
           if(docID3== documentId2){
             return
               Container(
@@ -688,6 +688,7 @@ timeOfDay: timeOfDay2,
           }
 
           else {
+            */
             return
               Container(
 
@@ -708,7 +709,8 @@ timeOfDay: timeOfDay2,
                           height: displayWidth(context) / 6,
                           decoration: new BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Color(0xffFCF5E4),
+//                            color: Color(0xffFCF5E4),
+                            color:Color(0xffFFE18E),
                             border: new Border.all(
                                 color: Colors.yellow,
                                 width: 1.0,
@@ -838,7 +840,7 @@ timeOfDay: timeOfDay2,
               );
 //            return SpoiledItem(/*dummy: snapshot.data[index]*/);
 
-          }
+//          }
         },
 
       ),
@@ -885,10 +887,16 @@ timeOfDay: timeOfDay2,
       print('refresh the page or do something so the paid item not showed to the user...');
 
 
+      final blocUB = BlocProvider.of<UnPaidBloc>(context);
+
+      return blocUB.updateUnPaidList(returnedDocId);
+
+//      blocUB.updateUnPaidList(returnedDocId);
+
+//  911_1
+//  work_1
+
     }
-
-
-
 
   }
 

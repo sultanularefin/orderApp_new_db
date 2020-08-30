@@ -132,7 +132,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                           Center(
                             child: Text(
                                 'updating your payment information, please wait.',
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 34,
@@ -302,6 +302,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                 decoration: BoxDecoration(
 
                                   color: Color(0xffF4F6CE),
+//                                  color:Color(0xffFFE18E),
+
                                   shape: BoxShape.circle,
 
                                 ),
@@ -418,11 +420,11 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
 
-                          blocUD.clearSubscription();
+                          print('orderDocumentId finally: >> $orderDocumentId');
+//                          blocUD.clearSubscription();
 
-                          print('Unboscured takeAway || '
-                              'DinningRoom Dummy print--- returning to FoodGallery Page');
-                          return Navigator.pop(context,orderDocumentId);
+
+//                          return Navigator.pop(context,orderDocumentId);
 
 
                         },
@@ -747,6 +749,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
   Widget initialView(OneOrderFirebase oneFireBaseOrder){
 
+    logger.e('oneFireBaseOrder.paidType > > > ${oneFireBaseOrder.paidType} ???');
+
     List<OrderedItem> orderedItems = oneFireBaseOrder.orderedItems;
 
 
@@ -1046,8 +1050,11 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
 
+
                                 Container(
-                                  child: Row(
+                                  child: oneFireBaseOrder.orderBy=='Delivery'?
+
+                                  Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
@@ -1079,7 +1086,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           )
                                       ),
                                     ],
-                                  ),
+                                  ):Container(width: 0,height: 0),
                                 ),
 
 
