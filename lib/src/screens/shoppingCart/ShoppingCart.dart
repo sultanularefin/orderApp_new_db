@@ -960,59 +960,118 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           //              int x = 5;
                           if (oneOrder.paymentButtonPressed == true) {
 
+
+
+
                             print('....payment button pressed.....');
-                            return Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  0, displayHeight(context)/2, 0, 0),
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
+                            if(oneOrder.paymentTypeIndex !=0) {
+                              return Container(
+                                margin: EdgeInsets.fromLTRB(
+                                    0, displayHeight(context) / 2, 0, 0),
+                                child: Center(
+                                  child: Column(
+                                    children: <Widget>[
 
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                            backgroundColor: Colors
-                                                .lightGreenAccent,
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child: new CircularProgressIndicator(
+                                              backgroundColor: Colors
+                                                  .lightGreenAccent,
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
 
 
-                                          )
+                                            )
+                                        ),
                                       ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                          'printing recite... please wait.',
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 34,
-                                            fontWeight: FontWeight.normal,
+                                      Center(
+                                        child: Text(
+                                            'printing recite... please wait.',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 34,
+                                              fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
-                                            color: Colors.redAccent,
-                                            fontFamily: 'Itim-Regular',
+                                              color: Colors.redAccent,
+                                              fontFamily: 'Itim-Regular',
 
-                                          )
+                                            )
+                                        ),
                                       ),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                            backgroundColor: Color(
-                                                0xffFC0000),
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child: new CircularProgressIndicator(
+                                              backgroundColor: Color(
+                                                  0xffFC0000),
 
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                          )
+                                            )
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
 
-                            );
+                              );
+                            }
+                            else{
+                              return Container(
+                                margin: EdgeInsets.fromLTRB(
+                                    0, displayHeight(context)/2, 0, 0),
+                                child: Center(
+                                  child: Column(
+                                    children: <Widget>[
+
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child: new CircularProgressIndicator(
+                                              backgroundColor: Colors
+                                                  .lightGreenAccent,
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+
+                                            )
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Text(
+                                            'later button pressed... please wait.',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 34,
+                                              fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                              color: Colors.redAccent,
+                                              fontFamily: 'Itim-Regular',
+
+                                            )
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child: new CircularProgressIndicator(
+                                              backgroundColor: Color(
+                                                  0xffFC0000),
+
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                            )
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                              );
+                            }
                           }
                           else {
                             CustomerInformation x = oneOrder.orderingCustomer;
@@ -10008,8 +10067,6 @@ color:Colors.blue,
 
               align: PosAlign.right,
             )),
-
-
       ]);
 
       ticket.row([
@@ -10024,42 +10081,48 @@ color:Colors.blue,
             )),
       ]);
 
-      // 5.2 --- extra ingredients...
+
 
       if(multiSelectStrings2.length > 0)
       {
         multiSelectStrings2.forEach((oneMultiSelectString) {
 
-            ticket.text(
-                  oneMultiSelectString, styles: PosStyles(
-                align: PosAlign.left,
-              ),
-            );
+          ticket.row([
+            PosColumn(
+                text:'# $oneMultiSelectString',
+                width: 9,
+                styles: PosStyles(
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
         });
       }
 
+// 5.2 --- extra ingredients...
       if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
 
           if(oneIngredientForRecite.isDeleted==false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                  text:'+ ${((oneIngredientForRecite.ingredientName == null) ||
                       (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
+                  '----' :oneIngredientForRecite.ingredientName.length > 18
+                      ?oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :oneIngredientForRecite.ingredientName}',
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
               )),
 
               PosColumn(
-                  text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                  text:'${oneIngredientForRecite.price.toStringAsFixed(2)}',
                   width: 3, styles: PosStyles(align: PosAlign.right)),
 
 
@@ -10071,7 +10134,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
+                  text:'- ${((oneIngredientForRecite.ingredientName == null) ||
                       (oneIngredientForRecite.ingredientName.length == 0)) ?
                   '----' : oneIngredientForRecite.ingredientName.length > 18
                       ?
@@ -10106,7 +10169,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                  text:'+ ${((oneSauceItemForRecite.sauceItemName == null) ||
                       (oneSauceItemForRecite.sauceItemName.length == 0)) ?
                   '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
                   oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
@@ -10129,7 +10192,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                  text:'- ${((oneSauceItemForRecite.sauceItemName == null) ||
                       (oneSauceItemForRecite.sauceItemName.length == 0)) ?
                   '----' : oneSauceItemForRecite.sauceItemName.length > 18
                       ?
@@ -10145,10 +10208,8 @@ color:Colors.blue,
               )),
 
               PosColumn(
-                  text: '',
+                  text:'',
                   width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
             ]);
 
           }
@@ -10164,7 +10225,7 @@ color:Colors.blue,
             ticket.row([
 
 
-              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+              PosColumn(text: '+ ${((oneCheeseItemForRecite.cheeseItemName == null) ||
                   (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
               '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
               oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
@@ -10183,7 +10244,7 @@ color:Colors.blue,
             ticket.row([
 
               PosColumn(
-                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  text:'- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
                       (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
                   '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
                       ?
@@ -10612,19 +10673,31 @@ color:Colors.blue,
             )),
       ]);
 
-      // 5.2 --- extra ingredients...
 
+      // multiSelect ...
       if(multiSelectStrings2.length > 0)
       {
         multiSelectStrings2.forEach((oneMultiSelectString) {
 
-          ticket.text(
-            oneMultiSelectString, styles: PosStyles(
-            align: PosAlign.left,
-          ),
-          );
+          ticket.row([
+            PosColumn(
+                text:'# $oneMultiSelectString',
+                width: 9,
+                styles: PosStyles(
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
         });
       }
+
+
+      // 5.2 --- extra ingredients...
 
 
       if(onlyExtraIngredient.length>0) {
@@ -11191,18 +11264,29 @@ color:Colors.blue,
             )),
       ]);
 
-      // 5.2 --- extra ingredients...
+      // multiselect ...
       if(multiSelectStrings2.length > 0)
       {
         multiSelectStrings2.forEach((oneMultiSelectString) {
 
-          ticket.text(
-            oneMultiSelectString, styles: PosStyles(
-            align: PosAlign.left,
-          ),
-          );
+          ticket.row([
+            PosColumn(
+                text:'# $oneMultiSelectString',
+                width: 9,
+                styles: PosStyles(
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
         });
       }
+      // 5.2 --- extra ingredients...
+
 
 
       if(onlyExtraIngredient.length>0) {
@@ -11228,7 +11312,6 @@ color:Colors.blue,
               PosColumn(
                   text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
                   width: 3, styles: PosStyles(align: PosAlign.right)),
-
 
             ]);
           }
@@ -11760,18 +11843,29 @@ color:Colors.blue,
             )),
       ]);
 
-      // 5.2 --- extra ingredients...
+      // multiSelect..
       if(multiSelectStrings2.length > 0)
       {
         multiSelectStrings2.forEach((oneMultiSelectString) {
 
-          ticket.text(
-            oneMultiSelectString, styles: PosStyles(
-            align: PosAlign.left,
-          ),
-          );
+          ticket.row([
+            PosColumn(
+                text:'# $oneMultiSelectString',
+                width: 9,
+                styles: PosStyles(
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
         });
       }
+      // 5.2 --- extra ingredients...
+
 
 
       if(onlyExtraIngredient.length>0) {

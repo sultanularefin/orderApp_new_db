@@ -1467,12 +1467,7 @@ Widget work1(BuildContext context){
                 )
                 );
 
-/*
-            Scaffold.of(context)
-              ..removeCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text("Order Cancelled by user.")));
-            */
-//      setState(() => _reloadRequired = true);
+
 
               setState(
                       () {
@@ -1493,6 +1488,7 @@ Widget work1(BuildContext context){
                   }
               );
 
+              /*
               if(orderWithDocumentId.paymentTypeIndex==0){
 
 
@@ -1519,6 +1515,7 @@ Widget work1(BuildContext context){
               }
 
 
+              */
 
 
             }
@@ -2595,31 +2592,12 @@ Widget work1(BuildContext context){
     }
 
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-//    blocG.allCategories
 
-//    final blocG =
-//        BlocProvider2.of(context).getFoodGalleryBlockObject;
-
-//    List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
 
     List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
     List<SauceItem>  tempSauceItems = blocG.getAllSauceItemsFoodGallery;
     List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
 
-
-
-//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-
-//                                    blocD.getAllIngredients();
-//                                    List<NewIngredient> test = blocD.allIngredients;
-
-
-//    logger.e('tempIngs_push 1: $tempIngs');
-
-
-//    blocD.setallIngredients(tempIngs);
-//                                    _allIngredientState
-//                                    final result = await
 
     final SelectedFood receivedSelectedFood = await
     Navigator.of(context).push(
@@ -2631,15 +2609,9 @@ Widget work1(BuildContext context){
             milliseconds: 900),
         pageBuilder: (_, __, ___) =>
 
-
-
-//        tempCheeseItems
-//          tempSauceItems
-
         BlocProvider<FoodItemDetailsBloc>(
           bloc: FoodItemDetailsBloc(
               oneFoodItem,
-//              tempIngs,
               tempCheeseItems,
               tempSauceItems,
               allExtraIngredients
@@ -2647,34 +2619,12 @@ Widget work1(BuildContext context){
           ),
 
 
-          child: FoodItemDetails2()
+          child: FoodItemDetails2(),),
 
-          ,),
-
-
-// fUTURE USE -- ANIMATION TRANSITION CODE.
-/*
-                                  transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
-                                    return FadeTransition(
-                                      opacity: animation,
-                                      child: RotationTransition(
-                                        turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-                                        child: child,
-                                      ),
-                                    );
-                                  }
-                                  */
       ),
     );
 
-/*
-    Navigator.push(
-      context,
-      // Create the SelectionScreen in the next step.
-      MaterialPageRoute(builder: (context) => SelectionScreen()),
-    );
 
-    */
 
 // After the Selection Screen returns a result, hide any previous snackbars
 // and show the new result.
