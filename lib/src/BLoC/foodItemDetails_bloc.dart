@@ -527,9 +527,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
   // HELPER METHOD FOR TEST TO BE MODIFIED....  AUGUST 14 2020.....
-  bool checkThisExtraIngredientForSomeCategory(NewIngredient x,String categroyName) {
+  bool checkThisExtraIngredientForSomeCategory(NewIngredient x,String shortCategroyName) {
 
-    print('_______ ________ categroyName:  $categroyName');
+    print('_______ ________ shortCategroyName:  $shortCategroyName');
 
 
 
@@ -541,7 +541,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     String elementExists = extraIngredientOFstringList.firstWhere(
-            (oneItem) => oneItem.toLowerCase().trim() == categroyName.toLowerCase().trim(),
+            (oneItem) => oneItem.toLowerCase().trim() == shortCategroyName.toLowerCase().trim(),
         orElse: () => '');
 
     if(elementExists!=''){
@@ -554,7 +554,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 //    print('elementExists: Line # 612:  $elementExists');
 
-    print('element don\'t Exists: and  categroyName:  $categroyName ingredient Name: ${x.ingredientName}');
+    print('element don\'t Exists: and  shortCategroyName:  $shortCategroyName ingredient Name: ${x.ingredientName}');
 
 
 
