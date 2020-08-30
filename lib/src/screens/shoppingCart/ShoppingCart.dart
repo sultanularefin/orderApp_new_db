@@ -27,8 +27,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-
-
 /* classes added */
 //import 'dart:convert';
 //import 'dart:typed_data';
@@ -70,16 +68,11 @@ onTap: () => _testPrint(blueToothDevicesState[index]),
 
 * */
 
-
-
-
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 //import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 //import 'package:foodgallery/src/screens/foodGallery/UNPaidPage.dart';
-
-
 
 import 'package:foodgallery/src/screens/shoppingCart/widgets/FoodImage_inShoppingCart.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
@@ -100,18 +93,14 @@ import './widgets/ShoppingCartPagePainters.dart';
 
 final Firestore firestore = Firestore();
 
-
-
 class ShoppingCart extends StatefulWidget {
 //  AdminFirebase({this.firestore});
-
 
   final Widget child;
 //  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 //  final FoodItem oneFoodItemData;
 
 //  FoodItemWithDocID oneFoodItem =new FoodItemWithDocID(
-
 
   ShoppingCart({Key key, this.child}) : super(key: key);
 
@@ -120,35 +109,31 @@ class ShoppingCart extends StatefulWidget {
 
 //  _FoodItemDetailsState createState() => _FoodItemDetailsState();
 
-
 }
 
-
 class _ShoppingCartState extends State<ShoppingCart> {
-
-
   var logger = Logger(
     printer: PrettyPrinter(),
   );
 
-  final GlobalKey<ScaffoldState> _scaffoldKeyShoppingCartPage = new GlobalKey<
-      ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyShoppingCartPage =
+      new GlobalKey<ScaffoldState>();
 
 //  String _currentSize;
 //  int _itemCount = 1;
   int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
-  int _currentPaymentTypeIndex = 2; // PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+  int _currentPaymentTypeIndex =
+      2; // PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
   bool showFullOrderDeliveryType = true;
   bool showUserInputOptionsLikeFirstTime = true;
   bool showCustomerInformationHeader = false;
   bool showFullPaymentType = true;
 //  bool showFullOrderType = true;
 
-  bool showEditingCompleteCustomerAddressInformation      = false;
-  bool showEditingCompleteCustomerHouseFlatIformation     = false;
-  bool showEditingCompleteCustomerPhoneIformation         = false;
-  bool showEditingCompleteCustomerReachoutIformation      = false;
-
+  bool showEditingCompleteCustomerAddressInformation = false;
+  bool showEditingCompleteCustomerHouseFlatIformation = false;
+  bool showEditingCompleteCustomerPhoneIformation = false;
+  bool showEditingCompleteCustomerReachoutIformation = false;
 
 //  bool showInputtedCustomerIformation = false;
 
@@ -157,19 +142,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
   final phoneNumberController = TextEditingController();
   final etaController = TextEditingController();
 
-
   bool loadingState = false;
   Timer _timer;
 
   // Set<String> categories ={}; // for Recite dummy Print
-
 
   /*
   * PRINTING RELATED STATE VARIABLES ARE HERE.
   * */
 
 //  PrinterNetworkManager printerManager = PrinterNetworkManager();
-
 
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
 
@@ -201,11 +183,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
     etaController.dispose();
   }
 
-
 //  color: Color(0xff34720D),
 //  VS 0xffFEE295 3 0xffFEE295 false
 //  ORG 0xff739DFA 4 0xff739DFA false
-
 
 /*
   @override
@@ -234,7 +214,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   */
 
-
 //  void _startScanDummyDevices() {
   void _startScanDevices() {
     print('debug print inside _startScanDevices() method ');
@@ -252,7 +231,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print(
         'debug print after calling  printerManager.startScan(Duration(seconds: 4));'
-            ' inside _startScanDevices() method   ');
+        ' inside _startScanDevices() method   ');
     // Test devices added.
 
     /*
@@ -267,13 +246,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
     */
 
-
     BluetoothDevice _x = new BluetoothDevice();
     _x.name = 'Restaurant Printer';
     _x.address = '0F:02:18:51:23:46';
     _x.type = 3;
     _x.connected = null;
-
 
     PrinterBluetooth x = new PrinterBluetooth(_x);
 
@@ -283,7 +260,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     _y.type = 3;
     _y.connected = null;
 
-
     PrinterBluetooth y = new PrinterBluetooth(_y);
 
     List<PrinterBluetooth> tempBlueToothDevices = new List<PrinterBluetooth>();
@@ -292,10 +268,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     setState(() {
       blueToothDevicesState = tempBlueToothDevices;
     });
-
-
   }
-
 
   void _startScanDummyDevices() {
     print('debug print inside _startScanDevices() method ');
@@ -314,7 +287,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print(
         'debug print after calling  printerManager.startScan(Duration(seconds: 4));'
-            ' inside _startScanDevices() method   ');
+        ' inside _startScanDevices() method   ');
     // Test devices added.
 
     /*
@@ -329,13 +302,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
     */
 
-
     BluetoothDevice _x = new BluetoothDevice();
     _x.name = 'Restaurant Printer';
     _x.address = '0F:02:18:51:23:46';
     _x.type = 3;
     _x.connected = null;
-
 
     PrinterBluetooth x = new PrinterBluetooth(_x);
 
@@ -344,7 +315,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
     _y.address = '98:52:3D:BB:18:26';
     _y.type = 3;
     _y.connected = null;
-
 
     PrinterBluetooth y = new PrinterBluetooth(_y);
 
@@ -363,8 +333,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'debug print inside _stopScanDevices() method and finished calling printerManager.stopScan() method');
   }
 
-
-
   /// Creates an image from the given widget by first spinning up a element and render tree,
   /// then waiting for the given [wait] amount of time and then creating an image via a [RepaintBoundary].
   ///
@@ -372,11 +340,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  Future<Uint8List> createImageFromWidget(
   Future<Uint8List> createImageFromWidget(Widget widget,
       {
-        /* Duration wait, */
-        Size logicalSize,
-        Size imageSize}) async {
+      /* Duration wait, */
+      Size logicalSize,
+      Size imageSize}) async {
     print('at here: $createImageFromWidget');
-
 
     final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();
 
@@ -401,8 +368,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     pipelineOwner.rootNode = renderView;
     renderView.prepareInitialFrame();
 
-    final RenderObjectToWidgetElement<RenderBox>
-    rootElement = RenderObjectToWidgetAdapter<RenderBox>(
+    final RenderObjectToWidgetElement<RenderBox> rootElement =
+        RenderObjectToWidgetAdapter<RenderBox>(
       container: repaintBoundary,
       child: widget,
     ).attachToRenderTree(buildOwner);
@@ -423,8 +390,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     final ui.Image image = await repaintBoundary.toImage(
         pixelRatio: imageSize.width / logicalSize.width);
-    final ByteData byteData = await image.toByteData(
-        format: ui.ImageByteFormat.png);
+    final ByteData byteData =
+        await image.toByteData(format: ui.ImageByteFormat.png);
 
 //    final Uint8List bytes =  byteData.buffer.asUint8List();
 
@@ -439,125 +406,116 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    uint8LIstController.sink.add(bytesArefins);
 
     print('byteData: $byteData');
-    return
-      byteData.buffer.asUint8List();
-
+    return byteData.buffer.asUint8List();
   }
 
-  Widget customerInformationOnlyWidget(
-      OneOrderFirebase oneOrderForReceipt) {
+  Widget customerInformationOnlyWidget(OneOrderFirebase oneOrderForReceipt) {
     print(
-        'at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt
-            .orderBy}'
-            'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
-
+        'at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}'
+        'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
 
     print('oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}');
 
     if (oneOrderForReceipt.orderBy.toLowerCase() == 'TakeAway'.toLowerCase() ||
-        oneOrderForReceipt.orderBy.toLowerCase() == 'DinningRoom'.toLowerCase()) {
+        oneOrderForReceipt.orderBy.toLowerCase() ==
+            'DinningRoom'.toLowerCase()) {
       return new Directionality(
           textDirection: TextDirection.ltr,
           child: Container(
-            height:50,
-            child: Text('phone || address empty...',
-
-
+            height: 50,
+            child: Text(
+              'phone || address empty...',
               textAlign: TextAlign.left,
               maxLines: 2,
               style: TextStyle(
-
                 color: Colors.black,
-
-                fontSize: 18, fontFamily: 'Itim-Regular',),
-
+                fontSize: 18,
+                fontFamily: 'Itim-Regular',
+              ),
             ),
-          )
-      );
-    }
-    else {
-      CustomerInformation customerForReciteGeneration = oneOrderForReceipt
-          .oneCustomer;
-
+          ));
+    } else {
+      CustomerInformation customerForReciteGeneration =
+          oneOrderForReceipt.oneCustomer;
 
 //  Widget paidUnpaidDeliveryType =
       return new Directionality(
         textDirection: TextDirection.ltr,
         child:
 
-        /// toDo: multiline. maxlines
-        Container(
-          height:160,
+            /// toDo: multiline. maxlines
+            Container(
+          height: 160,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-
               Container(
-                height:50,
+                height: 50,
                 child: Text(
                   ((customerForReciteGeneration.address == null) ||
-                      (customerForReciteGeneration.address.length == 0)) ?
-                  '' : customerForReciteGeneration.address.length > 39 ?
-                  customerForReciteGeneration.address.substring(0, 35) + '...' :
-                  customerForReciteGeneration.address,
-
+                          (customerForReciteGeneration.address.length == 0))
+                      ? ''
+                      : customerForReciteGeneration.address.length > 39
+                          ? customerForReciteGeneration.address
+                                  .substring(0, 35) +
+                              '...'
+                          : customerForReciteGeneration.address,
                   textAlign: TextAlign.left,
                   maxLines: 2,
                   style: TextStyle(
-
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
-
-                    fontSize: 18, fontFamily: 'Itim-Regular',),
-
+                    fontSize: 18,
+                    fontFamily: 'Itim-Regular',
+                  ),
                 ),
               ),
 
               Container(
-                height:50,
+                height: 50,
                 child: Text(
                   ((customerForReciteGeneration.flatOrHouseNumber == null) ||
-                      (customerForReciteGeneration.flatOrHouseNumber.length ==
-                          0)) ?
-                  '' : customerForReciteGeneration.flatOrHouseNumber.length > 39 ?
-                  customerForReciteGeneration.flatOrHouseNumber.substring(0, 35) +
-                      '...' :
-                  customerForReciteGeneration.flatOrHouseNumber,
-
+                          (customerForReciteGeneration
+                                  .flatOrHouseNumber.length ==
+                              0))
+                      ? ''
+                      : customerForReciteGeneration.flatOrHouseNumber.length >
+                              39
+                          ? customerForReciteGeneration.flatOrHouseNumber
+                                  .substring(0, 35) +
+                              '...'
+                          : customerForReciteGeneration.flatOrHouseNumber,
                   maxLines: 2,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-
-                    fontSize: 18, fontFamily: 'Itim-Regular',),
-
+                    fontSize: 18,
+                    fontFamily: 'Itim-Regular',
+                  ),
                 ),
               ),
 
               Container(
-                height:50,
+                height: 50,
                 child: Text(
-
                   ((customerForReciteGeneration.phoneNumber == null) ||
-                      (customerForReciteGeneration.phoneNumber.length == 0)) ?
-                  '' : customerForReciteGeneration.phoneNumber.length > 39
-                      ?
-                  customerForReciteGeneration.phoneNumber.substring(0, 35) + '...'
-                      :
-                  customerForReciteGeneration.phoneNumber,
+                          (customerForReciteGeneration.phoneNumber.length == 0))
+                      ? ''
+                      : customerForReciteGeneration.phoneNumber.length > 39
+                          ? customerForReciteGeneration.phoneNumber
+                                  .substring(0, 35) +
+                              '...'
+                          : customerForReciteGeneration.phoneNumber,
                   maxLines: 2,
-
                   textAlign: TextAlign.left,
                   style: TextStyle(
-
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-
-                    fontSize: 18, fontFamily: 'Itim-Regular',),
-
+                    fontSize: 18,
+                    fontFamily: 'Itim-Regular',
+                  ),
                 ),
               ),
 
@@ -569,43 +527,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
     }
   }
 
-
-
-
   Widget restaurantName(String name) {
     return Directionality(
-      textDirection:
-      TextDirection.ltr,
+      textDirection: TextDirection.ltr,
       child: Text('${name.toLowerCase()}',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle
-            (
+          style: TextStyle(
             fontSize: 29,
-            fontWeight:
-            FontWeight.normal,
+            fontWeight: FontWeight.normal,
             color: Colors.black,
             fontFamily: 'Itim-Regular',
-          )
-      ),
+          )),
     );
   }
 
   Widget subTotalTotalDeliveryCost(double subtotal,
       {double deliveryCost: 2.50}) {
-
-
     return Directionality(
-
       textDirection: TextDirection.ltr,
-      child:
-      Container(
+      child: Container(
         height: 130,
         width: 300,
-
-        child:
-
-        Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -614,8 +558,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: <
-                    Widget>[
+                children: <Widget>[
                   //  SizedBox(width: 5,),
                   Container(
 //                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
@@ -626,7 +569,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                            fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                          color: Color(0xffF50303),
-                        fontSize: 18, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',
+                      ),
                     ),
                   ),
 
@@ -635,13 +579,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                              (unObsecuredInputandPayment.totalPrice
 //                                  /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
 //                              '\u20AC',
-                  Text(subtotal.toStringAsFixed(2) + '\u20AC',
+                  Text(
+                    subtotal.toStringAsFixed(2) + '\u20AC',
                     textAlign: TextAlign.center,
                     style: TextStyle(
 //                          fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 18, fontFamily: 'Itim-Regular',),
+                      fontSize: 18, fontFamily: 'Itim-Regular',
+                    ),
                   ),
                 ],
               ),
@@ -649,15 +595,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
             // 1st row ends here.
 
-
             Container(
               height: 40,
-
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: <
-                    Widget>[
+                children: <Widget>[
                   //  SizedBox(width: 5,),
                   Container(
 //                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
@@ -668,29 +611,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                          color: Color(0xffF50303),
-                        fontSize: 18, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',
+                      ),
                     ),
                   ),
-                  Text(deliveryCost.toStringAsFixed(2) + '\u20AC',
+                  Text(
+                    deliveryCost.toStringAsFixed(2) + '\u20AC',
                     textAlign: TextAlign.center,
                     style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 18, fontFamily: 'Itim-Regular',),
+                      fontSize: 18, fontFamily: 'Itim-Regular',
+                    ),
                   ),
                 ],
               ),
             ),
-
 
             Container(
               height: 40,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: <
-                    Widget>[
+                children: <Widget>[
                   //  SizedBox(width: 5,),
                   Container(
 //                    padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
@@ -701,7 +645,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
 //                          color: Color(0xffF50303),
-                        fontSize: 18, fontFamily: 'Itim-Regular',),
+                        fontSize: 18, fontFamily: 'Itim-Regular',
+                      ),
                     ),
                   ),
                   Text(
@@ -711,22 +656,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 18, fontFamily: 'Itim-Regular',),
+                      fontSize: 18, fontFamily: 'Itim-Regular',
+                    ),
                   ),
                 ],
               ),
             ),
-
           ],
         ),
-
       ),
     );
   }
 
-
   Widget cusomTtimerTest() {
-
     print('-------- .  ...  . at here: ::   ------- cusomTtimerTest');
 //    _timer = new Timer(const Duration(milliseconds: 800), () {
     const Color beginColor = Colors.deepPurple;
@@ -734,8 +676,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     AnimationController controller;
 
     return Container(
-      margin: EdgeInsets.fromLTRB(
-          0, displayHeight(context) / 2, 0, 0),
+      margin: EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
       child: Center(
         child: Column(
           children: <Widget>[
@@ -744,47 +685,36 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   alignment: Alignment.center,
                   child: new CircularProgressIndicator(
                       backgroundColor: Colors.cyanAccent,
-                      valueColor:
-                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                  )
-              ),
+                      valueColor: ColorTween(begin: beginColor, end: endColor)
+                          .animate(controller))),
             ),
             Center(
               child: Container(
                   alignment: Alignment.center,
                   child: new CircularProgressIndicator(
                       backgroundColor: Colors.green,
-                      valueColor:
-                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                  )
-              ),
+                      valueColor: ColorTween(begin: beginColor, end: endColor)
+                          .animate(controller))),
             ),
             Center(
               child: Container(
                   alignment: Alignment.center,
                   child: new CircularProgressIndicator(
                       backgroundColor: Colors.yellow,
-                      valueColor:
-                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-
-                  )
-              ),
+                      valueColor: ColorTween(begin: beginColor, end: endColor)
+                          .animate(controller))),
             ),
             Center(
               child: Container(
                   alignment: Alignment.center,
                   child: new CircularProgressIndicator(
                       backgroundColor: Colors.pink,
-
-                      valueColor:
-                      ColorTween(begin: beginColor, end: endColor).animate(controller)
-                  )
-              ),
+                      valueColor: ColorTween(begin: beginColor, end: endColor)
+                          .animate(controller))),
             ),
           ],
         ),
       ),
-
     );
 //    _timer = new Timer(const Duration(seconds: 1), () {
 //
@@ -794,24 +724,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
 
     var logger = Logger(
       printer: PrettyPrinter(),
     );
 
-
     return GestureDetector(
         onTap: () {
           print('s');
 //                      Navigator.pop(context);
-          FocusScopeNode currentFocus = FocusScope.of(
-              context);
+          FocusScopeNode currentFocus = FocusScope.of(context);
 
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
@@ -819,35 +744,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
           }
         },
-
-
-        child:
-        Scaffold(
+        child: Scaffold(
           key: _scaffoldKeyShoppingCartPage,
           backgroundColor: Colors.white.withOpacity(0.05),
 //          backgroundColor: Colors.purpleAccent,
 
 //      resizeToAvoidBottomPadding: false ,
           // appBar: AppBar(title: Text('Food Gallery')),
-          body:
-          WillPopScope(
+          body: WillPopScope(
             onWillPop: () {
-              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(
-                  context);
+              final shoppingCartBloc =
+                  BlocProvider.of<ShoppingCartBloc>(context);
               print('at WillPopScope: ');
 
-              List<SelectedFood> backUP = shoppingCartBloc
-                  .getExpandedSelectedFood;
+              List<SelectedFood> backUP =
+                  shoppingCartBloc.getExpandedSelectedFood;
               print('at WillPopScope : $backUP');
 
               print('backUP.length == 0 ${backUP.length == 0}');
 
-
               if (backUP.length == 0) {
                 Navigator.pop(context);
               }
-
-
 
               Order z = shoppingCartBloc.getCurrentOrder;
 
@@ -856,270 +774,243 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               shoppingCartBloc.clearSubscription();
 
-              logger.e('at WillPopScope Quantity: ${z.selectedFoodInOrder[0]
-                  .quantity}');
+              logger.e(
+                  'at WillPopScope Quantity: ${z.selectedFoodInOrder[0].quantity}');
 
               Navigator.pop(context, z);
               return new Future(() => false);
-            }, child:
-          SafeArea(
-            child: SingleChildScrollView(
-              child:
-
-              StreamBuilder<Order>(
-
-
-                  stream: shoppingCartBloc.getCurrentOrderStream,
-                  initialData: shoppingCartBloc.getCurrentOrder,
-
-                  builder: (context, snapshot) {
+            },
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: StreamBuilder<Order>(
+                    stream: shoppingCartBloc.getCurrentOrderStream,
+                    initialData: shoppingCartBloc.getCurrentOrder,
+                    builder: (context, snapshot) {
 //            if (snapshot.hasData) {
 
 //              print('snapshot.hasData in main build(BuildContext context) : ${snapshot.hasData}');
-                    // ---
-                    const Color beginColor = Colors.deepPurple;
-                    const Color endColor = Colors.deepOrange;
-                    AnimationController controller;
+                      // ---
+                      const Color beginColor = Colors.deepPurple;
+                      const Color endColor = Colors.deepOrange;
+                      AnimationController controller;
 
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                      case ConnectionState.none:
-                        print(
-                            'at ConnectionState.none || ConnectionState.waiting ||  ');
-                        return Container(
-                          margin: EdgeInsets.fromLTRB(
-                              0, displayHeight(context) / 2, 0, 0),
-                          child: Center(
-                            child: Column(
-                              children: <Widget>[
-
-                                Center(
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.green,
-//                                          valueColor:
-//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
-
-                                      )
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.yellow,
-//                                        valueColor:
-//                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                      )
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.blue,
-//                                          valueColor:
-//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                      )
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      child: new CircularProgressIndicator(
-                                        backgroundColor: Colors.pink,
-//                                          valueColor:
-//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                      )
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                        );
-                        break;
-
-                      case ConnectionState.active:
-                      default:
-                        if (snapshot.data is Order) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                        case ConnectionState.none:
                           print(
-                              'at snapshot.data is Order for ConnectionState.active or default ');
-
-                          Order oneOrder = snapshot.data;
-
-                          logger.i('oneOrder.orderingCustomer.etaTimeOfDay.hour =>'
-                              ' ${oneOrder.orderingCustomer.etaTimeOfDay.hour}');
-                          logger.w('oneOrder.orderingCustomer.etaTimeInMinutes =>'
-                              ' ${oneOrder.orderingCustomer.etaTimeInMinutes}');
-                          logger.e('oneOrder.orderingCustomer.etaTimeOfDay.minute => '
-                              '${oneOrder.orderingCustomer.etaTimeOfDay.minute}'); // always return's -1;
-
-
-                          //              int x = 5;
-                          if (oneOrder.paymentButtonPressed == true) {
-
-                            print('....payment button pressed.....');
-                            return Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  0, displayHeight(context)/2, 0, 0),
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                            backgroundColor: Colors
-                                                .lightGreenAccent,
-//                                              valueColor:
-//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-
-
-                                          )
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(
-                                          'printing recite... please wait.',
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 34,
-                                            fontWeight: FontWeight.normal,
-//                                                      color: Colors.white
-                                            color: Colors.redAccent,
-                                            fontFamily: 'Itim-Regular',
-
-                                          )
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                            backgroundColor: Color(
-                                                0xffFC0000),
-
-//                                              valueColor:
-//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                          )
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                            );
-                          }
-                          else {
-                            CustomerInformation x = oneOrder.orderingCustomer;
-
-
-                            logger.e(
-                                '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
-
-                            return Container(
-                              height: displayHeight(context),
+                              'at ConnectionState.none || ConnectionState.waiting ||  ');
+                          return Container(
+                            margin: EdgeInsets.fromLTRB(
+                                0, displayHeight(context) / 2, 0, 0),
+                            child: Center(
                               child: Column(
                                 children: <Widget>[
-                                  Container(
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.green,
+//                                          valueColor:
+//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                        )),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.yellow,
+//                                        valueColor:
+//                                            ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                        )),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.blue,
+//                                          valueColor:
+//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                        )),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        child: new CircularProgressIndicator(
+                                          backgroundColor: Colors.pink,
+//                                          valueColor:
+//                                          ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                          break;
 
-//                                    color:Colors.indigoAccent,
-                                    height: displayHeight(context) / 1.10,
+                        case ConnectionState.active:
+                        default:
+                          if (snapshot.data is Order) {
+                            print(
+                                'at snapshot.data is Order for ConnectionState.active or default ');
 
-                                    width: displayWidth(context)/1.03,
+                            Order oneOrder = snapshot.data;
 
-                                    margin: EdgeInsets.fromLTRB(
-                                        12, displayHeight(context) / 16,
-                                        10, 0),
+                            logger.i(
+                                'oneOrder.orderingCustomer.etaTimeOfDay.hour =>'
+                                ' ${oneOrder.orderingCustomer.etaTimeOfDay.hour}');
+                            logger.w(
+                                'oneOrder.orderingCustomer.etaTimeInMinutes =>'
+                                ' ${oneOrder.orderingCustomer.etaTimeInMinutes}');
+                            logger.e(
+                                'oneOrder.orderingCustomer.etaTimeOfDay.minute => '
+                                '${oneOrder.orderingCustomer.etaTimeOfDay.minute}'); // always return's -1;
 
-
-                                    child: Neumorphic(
-                                      curve: Neumorphic.DEFAULT_CURVE,
-                                      style: NeumorphicStyle(
-                                        shape: NeumorphicShape
-                                            .concave,
-                                        depth: 8,
-                                        lightSource: LightSource
-                                            .topLeft,
-                                        color: Colors.white,
-                                        boxShape: NeumorphicBoxShape
-                                            .roundRect(
-                                          BorderRadius.all(
-                                              Radius.circular(15)),
-
-                                        ),
+                            //              int x = 5;
+                            if (oneOrder.paymentButtonPressed == true) {
+                              print('....payment button pressed.....');
+                              return Container(
+                                margin: EdgeInsets.fromLTRB(
+                                    0, displayHeight(context) / 2, 0, 0),
+                                child: Center(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child:
+                                                new CircularProgressIndicator(
+                                              backgroundColor:
+                                                  Colors.lightGreenAccent,
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                            )),
                                       ),
+                                      Center(
+                                        child: Text(
+                                            'printing recite... please wait.',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 34,
+                                              fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                              color: Colors.redAccent,
+                                              fontFamily: 'Itim-Regular',
+                                            )),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child:
+                                                new CircularProgressIndicator(
+                                              backgroundColor:
+                                                  Color(0xffFC0000),
 
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              CustomerInformation x = oneOrder.orderingCustomer;
 
-                                      // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
+                              logger.e(
+                                  '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
 
+                              return Container(
+                                height: displayHeight(context),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+//                                    color:Colors.indigoAccent,
+                                      height: displayHeight(context) / 1.10,
 
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start,
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .start,
-                                        children: <Widget>[
+                                      width: displayWidth(context) / 1.03,
 
+                                      margin: EdgeInsets.fromLTRB(12,
+                                          displayHeight(context) / 16, 10, 0),
+
+                                      child: Neumorphic(
+                                        curve: Neumorphic.DEFAULT_CURVE,
+                                        style: NeumorphicStyle(
+                                          shape: NeumorphicShape.concave,
+                                          depth: 8,
+                                          lightSource: LightSource.topLeft,
+                                          color: Colors.white,
+                                          boxShape:
+                                              NeumorphicBoxShape.roundRect(
+                                            BorderRadius.all(
+                                                Radius.circular(15)),
+                                          ),
+                                        ),
+
+                                        // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
+
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
 //                                          /WWW??
 
+                                            // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
 
-                                          // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
-
-
-                                          Container(
-                                            width: displayWidth(
-                                                context) / 1.03,
-                                            height: displayHeight(
-                                                context) / 20,
-                                            color: Color(0xffffffff),
+                                            Container(
+                                              width:
+                                                  displayWidth(context) / 1.03,
+                                              height:
+                                                  displayHeight(context) / 20,
+                                              color: Color(0xffffffff),
 //                                            color:Colors.yellowAccent,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: <Widget>[
-
-                                                Container(
-                                                  width: displayWidth(context) /
-                                                      1.5,
-                                                  height: displayHeight(
-                                                      context) / 30,
-                                                  color: Color(
-                                                      0xffffffff),
-
-                                                  child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: <
-                                                          Widget>[
-
-                                                        Container(
-                                                          margin: EdgeInsets
-                                                              .fromLTRB(
-                                                              20, 0, 10,
-                                                              0),
-                                                          alignment: Alignment
-                                                              .center,
-                                                          child: Text(
-                                                              'Shopping Cart',
-                                                              style: TextStyle(
-                                                                fontSize: 24,
-                                                                fontWeight: FontWeight
-                                                                    .normal,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Container(
+                                                    width:
+                                                        displayWidth(context) /
+                                                            1.5,
+                                                    height:
+                                                        displayHeight(context) /
+                                                            30,
+                                                    color: Color(0xffffffff),
+                                                    child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: <Widget>[
+                                                          Container(
+                                                            margin: EdgeInsets
+                                                                .fromLTRB(20, 0,
+                                                                    10, 0),
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                                'Shopping Cart',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 24,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                                                color: Color(
-                                                                    0xff000000),
-                                                              )
+                                                                  color: Color(
+                                                                      0xff000000),
+                                                                )),
                                                           ),
-                                                        ),
 
-                                                        /*
+                                                          /*
                                                         CustomPaint(
                                                           size: Size(
                                                               0, 19),
@@ -1129,186 +1020,182 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                                         */
-                                                      ]
+                                                        ]),
                                                   ),
 
-                                                ),
-
-
-                                                // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-
-
-                                              ],
+                                                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                                                ],
+                                              ),
                                             ),
-                                          ),
 
-                                          Container(
-                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                            Container(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 0, 0, 0),
 //                                            color: Colors.white,
-color:Colors.blue,
+                                              color: Colors.blue,
 //                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
-                                            height: displayHeight(context)/5.4,
-                                            width: displayWidth(context)/1.03,
+                                              height:
+                                                  displayHeight(context) / 5.4,
+                                              width:
+                                                  displayWidth(context) / 1.03,
 //                                            width: displayWidth(context) * 0.57,
-                                            child:
+                                              child:
 
-                                            //ssd
-                                            StreamBuilder<
-                                                List<SelectedFood>>(
-                                                stream: shoppingCartBloc.getExpandedFoodsStream,
-                                                initialData: shoppingCartBloc.getExpandedSelectedFood,
+                                                  //ssd
+                                                  StreamBuilder<
+                                                          List<SelectedFood>>(
+                                                      stream: shoppingCartBloc
+                                                          .getExpandedFoodsStream,
+                                                      initialData: shoppingCartBloc
+                                                          .getExpandedSelectedFood,
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        if (snapshot.hasData) {
+                                                          List<SelectedFood>
+                                                              expandedSelectedFoodInOrder =
+                                                              snapshot.data;
 
-                                                builder: (context,
-                                                    snapshot) {
-                                                  if (snapshot
-                                                      .hasData) {
-                                                    List<SelectedFood> expandedSelectedFoodInOrder = snapshot.data;
+                                                          if (expandedSelectedFoodInOrder ==
+                                                              null) {
+                                                            print(
+                                                                'Order has no data');
+                                                            print(
+                                                                'this will never happen don\'t worry');
 
-                                                    if (expandedSelectedFoodInOrder == null) {
-                                                      print('Order has no data');
-                                                      print('this will never happen don\'t worry');
-
-                                                      return Container(
-                                                          child: Text(
-                                                              'expandedSelectedFoodInOrder == Null'));
-                                                    }
-
-                                                    else {
+                                                            return Container(
+                                                                child: Text(
+                                                                    'expandedSelectedFoodInOrder == Null'));
+                                                          } else {
 //      int quantity = qTimes.quantity;
 //      int quantity = qTimes.selectedFoodInOrder.length;
 
-                                                      List<SelectedFood> allOrderedFoods = expandedSelectedFoodInOrder;
+                                                            List<SelectedFood>
+                                                                allOrderedFoods =
+                                                                expandedSelectedFoodInOrder;
 
-
-                                                      logger.e(
-                                                          '\n\n AM I EXECUTED TWICE  ;;;'
-                                                              ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
-                                                      return Container(
+                                                            logger.e(
+                                                                '\n\n AM I EXECUTED TWICE  ;;;'
+                                                                ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
+                                                            return Container(
 //                color: Colors.green,
-                                                        color: Color(
-                                                            0xffFFFFFF),
+                                                              color: Color(
+                                                                  0xffFFFFFF),
 
-                                                        child: ListView
-                                                            .builder(
-                                                          scrollDirection: Axis.horizontal,
+                                                              child: ListView
+                                                                  .builder(
+                                                                scrollDirection:
+                                                                    Axis.horizontal,
 
-                                                          reverse: false,
-                                                          shrinkWrap: false,
-                                                          itemCount: allOrderedFoods.length,
-                                                          // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+                                                                reverse: false,
+                                                                shrinkWrap:
+                                                                    false,
+                                                                itemCount:
+                                                                    allOrderedFoods
+                                                                        .length,
+                                                                // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
-
-                                                          itemBuilder: (_, int index) {
+                                                                itemBuilder: (_,
+                                                                    int index) {
 //            return Text('ss');
 
-                                                            return FoodImageInShoppingCart(
-                                                                allOrderedFoods[index].foodItemImageURL, /*OrderedFoodImageURL,*/
-                                                                allOrderedFoods[index].foodItemName, /*OrderedFoodItemName, */
-                                                                allOrderedFoods[index].selectedIngredients,
-                                                                allOrderedFoods[index].unitPrice,
-                                                                index
-                                                            );
+                                                                  return FoodImageInShoppingCart(
+                                                                      allOrderedFoods[
+                                                                              index]
+                                                                          .foodItemImageURL,
+                                                                      /*OrderedFoodImageURL,*/
+                                                                      allOrderedFoods[
+                                                                              index]
+                                                                          .foodItemName,
+                                                                      /*OrderedFoodItemName, */
+                                                                      allOrderedFoods[
+                                                                              index]
+                                                                          .selectedIngredients,
+                                                                      allOrderedFoods[
+                                                                              index]
+                                                                          .unitPrice,
+                                                                      index);
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
 //            index);
+                                                                },
+                                                              ),
 
-
-                                                          },
-                                                        ),
-
-
-                                                        // M VSM ORG VS TODO. ENDS HERE.
-                                                      );
-                                                    }
-                                                  }
-                                                  else {
-                                                    print(
-                                                        '!snapshot.hasData');
+                                                              // M VSM ORG VS TODO. ENDS HERE.
+                                                            );
+                                                          }
+                                                        } else {
+                                                          print(
+                                                              '!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
-                                                    return Container(
-                                                        child: Text(
-                                                            'Null'));
-                                                  }
-                                                }
+                                                          return Container(
+                                                              child:
+                                                                  Text('Null'));
+                                                        }
+                                                      }),
+                                              //ssd
                                             ),
-                                            //ssd
-                                          ),
 
-
-
-                                          Container(
+                                            Container(
 //                                        width: displayWidth(context) /1.8,
-                                            width: displayWidth(
-                                                context) / 1.03,
-                                            child:
-                                            AnimatedSwitcher(
-                                              duration: Duration(
-                                                  milliseconds: 1000),
+                                              width:
+                                                  displayWidth(context) / 1.03,
+                                              child: AnimatedSwitcher(
+                                                duration: Duration(
+                                                    milliseconds: 1000),
 //
-                                              child: showFullOrderDeliveryType
-                                                  ?
-                                              animatedWidgetShowFullOrderDeliveryType()
-                                                  : /*1 */
-                                              animatedWidgetShowSelectedOrderDeliveryType(oneOrder), /* 2*/
-
+                                                child: showFullOrderDeliveryType
+                                                    ? animatedWidgetShowFullOrderDeliveryType()
+                                                    : /*1 */
+                                                    animatedWidgetShowSelectedOrderDeliveryType(
+                                                        oneOrder), /* 2*/
+                                              ),
                                             ),
 
-
-                                          ),
-
-
-                                          /*
+                                            /*
                                             * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
 
-
-                                          // work_2
-                                          // 911_2
-                                          Container(
+                                            // work_2
+                                            // 911_2
+                                            Container(
 //                                          color: Colors.red,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
-                                            width: displayWidth(
-                                                context) / 1.03,
-                                            height: displayHeight(
-                                                context) / 2.2,
+                                              width:
+                                                  displayWidth(context) / 1.03,
+                                              height:
+                                                  displayHeight(context) / 2.2,
 
-                                            //Text('AnimatedSwitcher('),
-                                            child: AnimatedSwitcher(
-                                              duration: Duration(
-                                                  milliseconds: 300),
+                                              //Text('AnimatedSwitcher('),
+                                              child: AnimatedSwitcher(
+                                                duration:
+                                                    Duration(milliseconds: 300),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                                              child: oneOrder
-                                                  .orderTypeIndex ==
-                                                  0
-                                                  ?
-                                              _buildShoppingCartInputFieldsUNObscuredTakeAway(
-                                                  oneOrder)
-                                                  : oneOrder
-                                                  .orderTypeIndex == 1
-                                                  ?
-                                              _buildShoppingCartInputFieldsUNObscuredDelivery(oneOrder)
-                                                  : oneOrder
-                                                  .orderTypeIndex == 2
-                                                  ?
-                                              _buildShoppingCartInputFieldsUNObscuredPhone(oneOrder)
-                                                  :
-                                              //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
-                                              // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
+                                                child: oneOrder
+                                                            .orderTypeIndex ==
+                                                        0
+                                                    ? _buildShoppingCartInputFieldsUNObscuredTakeAway(
+                                                        oneOrder)
+                                                    : oneOrder.orderTypeIndex ==
+                                                            1
+                                                        ? _buildShoppingCartInputFieldsUNObscuredDelivery(
+                                                            oneOrder)
+                                                        : oneOrder.orderTypeIndex ==
+                                                                2
+                                                            ? _buildShoppingCartInputFieldsUNObscuredPhone(
+                                                                oneOrder)
+                                                            :
+                                                            //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
+                                                            // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
 //                                        _buildShoppingCartInputFieldsUNObscuredTakeAway(oneOrder)
 
-                                              _buildShoppingCartInputFieldsUNObscuredDinningRoom(
-                                                  oneOrder),
+                                                            _buildShoppingCartInputFieldsUNObscuredDinningRoom(
+                                                                oneOrder),
 //                                        animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
-
-
+                                              ),
                                             ),
 
-
-                                          ),
-
-
-                                          /*
+                                            /*
                                         // workTest
                                         Container(
                                           height:68,
@@ -1318,69 +1205,54 @@ color:Colors.blue,
 
 
                                         */
-
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
+                              );
+                            }
+                          } else {
+                            print('sanp shot.data !is Order');
+                            return Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  0, displayHeight(context) / 2, 0, 0),
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                            backgroundColor:
+                                                Colors.lightGreenAccent,
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                            backgroundColor: Color(0xffFC0000),
 
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             );
                           }
-                        }
-
-                        else {
-                          print('sanp shot.data !is Order');
-                          return Container(
-                            margin: EdgeInsets.fromLTRB(
-                                0, displayHeight(context) / 2, 0, 0),
-                            child: Center(
-                              child: Column(
-                                children: <Widget>[
-
-                                  Center(
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        child: new CircularProgressIndicator(
-                                          backgroundColor: Colors
-                                              .lightGreenAccent,
-//                                              valueColor:
-//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-
-
-                                        )
-                                    ),
-                                  ),
-
-                                  Center(
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        child: new CircularProgressIndicator(
-                                          backgroundColor: Color(
-                                              0xffFC0000),
-
-//                                              valueColor:
-//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                        )
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                          );
-                        }
-                    }
+                      }
 //                          }
 
 //                    }
-                  }
+                    }),
               ),
             ),
-
-
-          ),
           ),
           /*
           floatingActionButton: StreamBuilder<bool>(
@@ -1435,8 +1307,7 @@ color:Colors.blue,
 
 
           */
-        )
-    );
+        ));
     //return Text('${x.toString()}');
 
 //  }
@@ -1448,8 +1319,7 @@ color:Colors.blue,
 ////    }
   }
 
-
-  double tryCast<num>(dynamic x, {num fallback }) {
+  double tryCast<num>(dynamic x, {num fallback}) {
 //    print(" at tryCast");
 //    print('x: $x');
 
@@ -1464,358 +1334,261 @@ color:Colors.blue,
 
     if (x is int) {
       return x.toDouble();
-    }
-    else if (x is double) {
+    } else if (x is double) {
       return x.toDouble();
-    }
-
-
-    else
+    } else
       return 0.0;
   }
-
 
   Widget test1(Order oneOrder) {
 //    final Order oneOrder = snapshot.data;
 //              _currentPaymentTypeIndex = oneOrder.paymentTypeIndex;
-
-
   }
-
 
   Widget animatedWidgetShowFullOrderDeliveryType() {
 //    print ('at animatedWidgetShowFullOrderType() ');
 
-    return
-      Container(
-        height: displayHeight(context) / 20
-            /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */
-            + displayHeight(context) / 6 /* HEIGHT OF MULTI SELECT PORTION */,
+    return Container(
+      height: displayHeight(context) / 20
+          /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */
+          +
+          displayHeight(context) / 6 /* HEIGHT OF MULTI SELECT PORTION */,
 //        from 7 to /8.5 on june 03
-        width: ((displayWidth(context) / 1.03) -40) ,
+      width: ((displayWidth(context) / 1.03) - 40),
 //        color:Colors.blue,
 
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: displayWidth(context) / 1.03,
-              height: displayHeight(context) / 20,
-              color: Color(0xffffffff),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .start
-                ,
-                crossAxisAlignment: CrossAxisAlignment
-                    .center,
-                children: <Widget>[
-
-
-                  Container(
-                    width: displayWidth(context) /
-                        1.5,
-                    height: displayHeight(
-                        context) / 20,
-                    color: Color(0xffffffff),
-
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Container(
-                            margin: EdgeInsets
-                                .fromLTRB(
-                                20, 0, 10, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'select the order type',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-                          /*
-                          CustomPaint(
-                            size: Size(0, 19),
-                            painter: LongPainterForChooseOrderTypeUpdated(
-                                context),
-                          ),
-
-                          */
-
-
-                        ]
-                    ),
-
-                  ),
-
-
-
-                ],
-              ),
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: displayWidth(context) / 1.03,
+            height: displayHeight(context) / 20,
+            color: Color(0xffffffff),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: displayWidth(context) / 1.5,
+                  height: displayHeight(context) / 20,
+                  color: Color(0xffffffff),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                          alignment: Alignment.center,
+                          child: Text('valinta tilaus tyyppi'.toUpperCase(),
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                                color: Color(0xff000000),
+                              )),
+                        ),
+                      ]),
+                ),
+              ],
             ),
-
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-
-//              color: Colors.limeAccent,
-
-
-
-              height: displayHeight(context) /6,
-              width: displayWidth(context)/1.03,
-//              width: displayWidth(context)
-//                  - displayWidth(context) /
-//                      5,
-//                                            width: displayWidth(context) * 0.57,
-              child: _buildOrderTypeSingleSelectOption(),
-
-            ),
-          ],
-        ),
-      );
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+            height: displayHeight(context) / 6,
+            width: displayWidth(context) / 1.03,
+            child: _buildOrderTypeSingleSelectOption(),
+          ),
+        ],
+      ),
+    );
   }
 
-
   Widget _buildOrderTypeSingleSelectOption() {
-//   height: 40,
-//   width: displayWidth(context) * 0.57,
-
-
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     return StreamBuilder(
         stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
         initialData: shoppingCartbloc.getCurrentOrderType,
-
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             print('!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
             return Container(child: Text('Null'));
-          }
-          else {
-            List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot
-                .data;
+          } else {
+            List<OrderTypeSingleSelect> allOrderTypesSingleSelect =
+                snapshot.data;
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
             print('orderTypes: $allOrderTypesSingleSelect');
             OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect
-                .firstWhere((oneOrderType) =>
-            oneOrderType.isSelected == true);
+                .firstWhere((oneOrderType) => oneOrderType.isSelected == true);
             _currentOrderTypeIndex = selectedOne.index;
-
 
             return Center(
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-
-
                 shrinkWrap: true,
-
                 itemCount: allOrderTypesSingleSelect.length,
-
                 itemBuilder: (_, int index) {
                   return oneSingleDeliveryType(
-                      allOrderTypesSingleSelect[index],
-                      index);
+                      allOrderTypesSingleSelect[index], index);
                 },
               ),
             );
           }
         }
 
-      // M VSM ORG VS TODO. ENDS HERE.
-    );
+        // M VSM ORG VS TODO. ENDS HERE.
+        );
   }
 
-
-  Widget animatedWidgetShowSelectedOrderDeliveryType(Order unObsecuredInputandPayment) {
+  Widget animatedWidgetShowSelectedOrderDeliveryType(
+      Order unObsecuredInputandPayment) {
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
-
 //    Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment) {
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+    CustomerInformation currentUser =
+        unObsecuredInputandPayment.orderingCustomer;
 
-
-    return
-      Container(
-        height: displayHeight(context) / 20
-            + displayHeight(context) / 6 /* HEIGHT OF MULTI SELECT PORTION */,
+    return Container(
+      height: displayHeight(context) / 20 +
+          displayHeight(context) / 6 /* HEIGHT OF MULTI SELECT PORTION */,
 
 //        color:Colors.lightGreenAccent,
 //        width:displayWidth(context)/1.03,
-        width: ((displayWidth(context) / 1.03) -40) ,
+      width: ((displayWidth(context) / 1.03) - 40),
 
-
-        child: StreamBuilder(
-            stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
-            initialData: shoppingCartbloc.getCurrentOrderType,
-
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                print('!snapshot.hasData');
+      child: StreamBuilder(
+          stream: shoppingCartbloc.getCurrentOrderTypeSingleSelectStream,
+          initialData: shoppingCartbloc.getCurrentOrderType,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              print('!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
-                return Container(child: Text('Null'));
-              }
-              else {
-                List<OrderTypeSingleSelect> allOrderTypesSingleSelect = snapshot.data;
+              return Container(child: Text('Null'));
+            } else {
+              List<OrderTypeSingleSelect> allOrderTypesSingleSelect =
+                  snapshot.data;
 
+              OrderTypeSingleSelect selectedOne =
+                  allOrderTypesSingleSelect.firstWhere(
+                      (oneOrderType) => oneOrderType.isSelected == true);
+              _currentOrderTypeIndex = selectedOne.index;
 
-                OrderTypeSingleSelect selectedOne = allOrderTypesSingleSelect.firstWhere((oneOrderType) =>
-                oneOrderType.isSelected == true);
-                _currentOrderTypeIndex = selectedOne.index;
+              String orderTypeName = selectedOne.orderType;
 
-                String orderTypeName = selectedOne.orderType;
+              String orderTyepImage = selectedOne.orderTyepImage;
+              String borderColor = selectedOne.borderColor;
+              const Color OrderTypeIconColor = Color(0xff070707);
 
-                String orderTyepImage =  selectedOne.orderTyepImage;
-                String borderColor = selectedOne.borderColor;
-                const Color OrderTypeIconColor = Color(0xff070707);
-
-
-                return Container(
-                  width:displayWidth(context)/1.03,
-                  height: displayHeight(context) / 20 + displayHeight(context) / 6,
-
-                  child: Row(
-                    children: [
-
-
-
-                      Container(
-                        width: displayWidth(context) / 8,
+              return Container(
+                width: displayWidth(context) / 1.03,
+                height:
+                    displayHeight(context) / 20 + displayHeight(context) / 6,
+                child: Row(
+                  children: [
+                    Container(
+                      width: displayWidth(context) / 8,
 //                        height: displayHeight(context) / 10,
-                        height: displayHeight(context) / 9,
-                        child:
-                        InkWell(
-
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            decoration: BoxDecoration(
-                              color: Color(0xffFCF5E4),
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-
-                                new Container(
-
-                                  width: displayWidth(context) / 8.4,
-                                  height: displayHeight(context) / 15,
-
-                                  child: Container(
+                      height: displayHeight(context) / 9,
+                      child: InkWell(
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          decoration: BoxDecoration(
+                            color: Color(0xffFCF5E4),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              new Container(
+                                width: displayWidth(context) / 8.4,
+                                height: displayHeight(context) / 15,
+                                child: Container(
 //                            color:Colors.pinkAccent,
 
-                                    padding: EdgeInsets.fromLTRB(5,10,5,0),
+                                  padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
 
-
-                                    child: Image.asset(
-                                      orderTyepImage,
-                                      fit: BoxFit.contain,
-                                    ),
-
+                                  child: Image.asset(
+                                    orderTyepImage,
+                                    fit: BoxFit.contain,
                                   ),
-
                                 ),
-
-                                SizedBox(height:15),
-                                Container(
-
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    orderTypeName, style:
-                                  TextStyle(
+                              ),
+                              SizedBox(height: 15),
+                              Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  orderTypeName,
+                                  style: TextStyle(
                                       color: Color(0xffFC0000),
-
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
-                                  ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          onTap: () {
-
-                            setState(() {
-                              showFullOrderDeliveryType =
-                              !showFullOrderDeliveryType;
+                        ),
+                        onTap: () {
+                          setState(() {
+                            showFullOrderDeliveryType =
+                                !showFullOrderDeliveryType;
 
 //                            showFullOrderType
-                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-                              showCustomerInformationHeader = false;
-                              showUserInputOptionsLikeFirstTime = true;
+                            /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                            showCustomerInformationHeader = false;
+                            showUserInputOptionsLikeFirstTime = true;
 
-                              showFullPaymentType = true; //DEFAULT.
+                            showFullPaymentType = true; //DEFAULT.
 
-                              // JUST LIKE THE FIRST TIME.
-                              showEditingCompleteCustomerAddressInformation = false;
-                              showEditingCompleteCustomerHouseFlatIformation = false;
-                              showEditingCompleteCustomerPhoneIformation = false;
-                              showEditingCompleteCustomerReachoutIformation = false;
-                            });
-                          },
-                        ),
-
+                            // JUST LIKE THE FIRST TIME.
+                            showEditingCompleteCustomerAddressInformation =
+                                false;
+                            showEditingCompleteCustomerHouseFlatIformation =
+                                false;
+                            showEditingCompleteCustomerPhoneIformation = false;
+                            showEditingCompleteCustomerReachoutIformation =
+                                false;
+                          });
+                        },
                       ),
-
-
-
-                      Container(
-
-                        width: ((displayWidth(context) / 1.03) -140) ,
-                        height: displayHeight(context) / 9,
+                    ),
+                    Container(
+                      width: ((displayWidth(context) / 1.03) - 140),
+                      height: displayHeight(context) / 9,
 //                height: displayHeight(context) / 12,
 
 //                      color: Colors.red,
-                        decoration: BoxDecoration(
-                          border: Border.all(
+                      decoration: BoxDecoration(
+                        border: Border.all(
 //                    color: Colors.black,
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 2.0,
-
-                          ),
-                          shape: BoxShape.rectangle,
-
+                          color: Colors.grey,
+                          style: BorderStyle.solid,
+                          width: 2.0,
                         ),
+                        shape: BoxShape.rectangle,
+                      ),
 
 //
 //                        911
-                        child: orderTypeName=='Delivery'?
-                        animatedShowUserAddressDetailsInLineDeliveryOrderType(currentUser):
-                        orderTypeName=='TakeAway'?animatedShowUserAddressDetailsInLineTakeAwayOrderType(currentUser):
-                        orderTypeName=='Phone'?animatedShowUserAddressDetailsInLinePhoneOrderType(currentUser):
-                        animatedShowUserAddressDetailsInLineTakeAwayOrderType(currentUser),
-
-
-                      )
-
-
-
-                    ],
-                  ),
-                );
-              }
+                      child: orderTypeName == 'Delivery'
+                          ? animatedShowUserAddressDetailsInLineDeliveryOrderType(
+                              currentUser)
+                          : orderTypeName == 'TakeAway'
+                              ? animatedShowUserAddressDetailsInLineTakeAwayOrderType(
+                                  currentUser)
+                              : orderTypeName == 'Phone'
+                                  ? animatedShowUserAddressDetailsInLinePhoneOrderType(
+                                      currentUser)
+                                  : animatedShowUserAddressDetailsInLineTakeAwayOrderType(
+                                      currentUser),
+                    )
+                  ],
+                ),
+              );
             }
-        ),
-
-      );
+          }),
+    );
   }
-
 
   Widget animatedObscuredTextInputContainer(
       CustomerInformation forObscuredCustomerInputDisplay) {
@@ -1824,35 +1597,28 @@ color:Colors.blue,
 //    ),
 
     print('at animated Obscured Text Input Container');
-    return
-      AbsorbPointer(
-        child: Opacity(
-          opacity: 0.4,
-          child: Container(
+    return AbsorbPointer(
+      child: Opacity(
+        opacity: 0.4,
+        child: Container(
 //            Colors.white.withOpacity(0.10),
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                                      padding::::
-              color: Colors.white,
+            color: Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) / 4,
-              width: displayWidth(context)
-                  - displayWidth(context) /
-                      5,
+            height: displayHeight(context) / 4,
+            width: displayWidth(context) - displayWidth(context) / 5,
 //                                            width: displayWidth(context) * 0.57,
-              /*
+            /*
                                                     child:  AbsorbPointer(
                                                       child: _buildShoppingCartInputFields()
                                                   ),
                                                   */
-              child: _buildShoppingCartInputFieldsObscured(
-                  forObscuredCustomerInputDisplay)
-
-
-          ),
-        ),
-      );
+            child: _buildShoppingCartInputFieldsObscured(
+                forObscuredCustomerInputDisplay)),
+      ),
+    );
   }
-
 
   /*
   Widget _buildQuantityTimesofFood(/*Order qTimes */) {
@@ -2007,7 +1773,6 @@ color:Colors.blue,
 
    */
 
-
 //  animatedShowUserAddressDetailsInLineTakeAway
 
   Widget animatedShowUserAddressDetailsInLineDinningRoom(
@@ -2019,180 +1784,132 @@ color:Colors.blue,
       // CHANGED FROM THIS */*  height: displayHeight(context) / 8, */ TO
       // THIS :  height: displayHeight(context) / 20, ON june  04 2020.
       color: Color(0xFFffffff),
-      child: Column(
-          children: <Widget>[
-            Container(
-              height: displayHeight(context) / 21,
+      child: Column(children: <Widget>[
+        Container(
+          height: displayHeight(context) / 21,
 //              color:Colors.purple,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-
-
-                  Container(
-                    width: displayWidth(context) /
-                        1.5,
-                    height: displayHeight(
-                        context) / 21,
-                    color: Color(0xffffffff),
-
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Container(
-                            margin: EdgeInsets
-                                .fromLTRB(
-                                20, 0, 10, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'when you want to receive it',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight
-                                      .normal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: displayWidth(context) / 1.5,
+                height: displayHeight(context) / 21,
+                color: Color(0xffffffff),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                        alignment: Alignment.center,
+                        child: Text('when you want to receive it',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-                          CustomPaint(
-                            size: Size(0, 19),
-                            painter: LongPainterForanimatedWidgetShowSelectedOrderType(
+                              color: Color(0xff000000),
+                            )),
+                      ),
+                      CustomPaint(
+                        size: Size(0, 19),
+                        painter:
+                            LongPainterForanimatedWidgetShowSelectedOrderType(
                                 context),
-                          ),
-
-                        ]
-                    ),
-
-                  ),
-                  // THE ABOVE PART DEALS WITH LINES AND TEXT,
-                  // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
-
-
-                  //ZZZZ
-
-
-                ],
-              ),
-            ),
-            // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
-
-
-            // BELOW ROW HANDLES THE CUSTOMER INFORMATION ALONG WITH ICON AND POSSIBLY EDIT BUTTON.
-            //HHH
-
-            Container(
-              height: displayHeight(context) / 15,
-//              color:Colors.amber,
-              color: Colors.white,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(8),
-                children: <Widget>[
-
-
-                  RaisedButton(
-                    color: Color(0xffFC0000),
-//                    color:Color(0xffFC0000),
-                    // highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                    // clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
                       ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: currentUserForInline.etaTimeInMinutes != -1 ?
-                    Container(
-                      color: Color(0xffFC0000),
+                    ]),
+              ),
+              // THE ABOVE PART DEALS WITH LINES AND TEXT,
+              // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
+
+              //ZZZZ
+            ],
+          ),
+        ),
+        // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
+
+        // BELOW ROW HANDLES THE CUSTOMER INFORMATION ALONG WITH ICON AND POSSIBLY EDIT BUTTON.
+        //HHH
+
+        Container(
+          height: displayHeight(context) / 15,
+//              color:Colors.amber,
+          color: Colors.white,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.all(8),
+            children: <Widget>[
+              RaisedButton(
+                color: Color(0xffFC0000),
+//                    color:Color(0xffFC0000),
+                // highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                // clipBehavior: Clip.hardEdge,
+                // splashColor: Color(0xffFC0000),
+                highlightElevation: 12,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Color(0xff707070),
+                    style: BorderStyle.solid,
+//            width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: currentUserForInline.etaTimeInMinutes != -1
+                    ? Container(
+                        color: Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                      width: displayWidth(context) / 4,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
+                        width: displayWidth(context) / 4,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Icons.watch, size: 32.0, color: Colors.black),
 
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                '${currentUserForInline.etaTimeInMinutes}',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
+                            Container(
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
+                                    color: Color(0xff000000),
+                                  )),
                             ),
-                          ),
 
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    ) : Container(
-                      width: displayWidth(context) / 4,
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+                    : Container(
+                        width: displayWidth(context) / 4,
 //                       width:displayWidth(context) /10,
-                    )
+                      )
 
-                    // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
-                    ,
-                    onPressed: () =>
-                    {
-                      setState(() {
-                        showEditingCompleteCustomerReachoutIformation =
+                // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
+                ,
+                onPressed: () => {
+                  setState(() {
+                    showEditingCompleteCustomerReachoutIformation =
                         !showEditingCompleteCustomerReachoutIformation;
 
-
-                        etaController.text =
-                            currentUserForInline.etaTimeInMinutes.toString();
-
+                    etaController.text =
+                        currentUserForInline.etaTimeInMinutes.toString();
 
 //                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
-                  ),
+                  })
+                },
+              ),
 
-                  /*
+              /*
                    Container(
                      height: 50,
                      color: Colors.amber[500],
@@ -2209,14 +1926,10 @@ color:Colors.blue,
                      child: const Center(child: Text('Entry C')),
                    ),
                    */
-                ],
-              ),
-
-            )
-
-
-          ]
-      ),
+            ],
+          ),
+        )
+      ]),
     );
 //          }
 //        }
@@ -2225,189 +1938,138 @@ color:Colors.blue,
 
   Widget animatedShowUserAddressDetailsInLineTakeAway(
       CustomerInformation currentUserForInline) {
-
     return Container(
       width: displayWidth(context) / 1.03,
       height: displayHeight(context) / 21 + displayHeight(context) / 15,
-
       color: Color(0xffffffff),
-      child: Column(
-          children: <Widget>[
-            Container(
-              height: displayHeight(context) / 21,
+      child: Column(children: <Widget>[
+        Container(
+          height: displayHeight(context) / 21,
 //              color:Colors.purple,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-
-
-                  Container(
-                    width: displayWidth(context) /
-                        1.5,
-                    height: displayHeight(
-                        context) / 21,
-                    color: Color(0xffffffff),
-
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Container(
-                            margin: EdgeInsets
-                                .fromLTRB(
-                                20, 0, 10, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'when you want to receive it',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight
-                                      .normal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: displayWidth(context) / 1.5,
+                height: displayHeight(context) / 21,
+                color: Color(0xffffffff),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                        alignment: Alignment.center,
+                        child: Text('when you want to receive it',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-                          CustomPaint(
-                            size: Size(0, 19),
-                            painter: LongPainterForanimatedWidgetShowSelectedOrderType(
+                              color: Color(0xff000000),
+                            )),
+                      ),
+                      CustomPaint(
+                        size: Size(0, 19),
+                        painter:
+                            LongPainterForanimatedWidgetShowSelectedOrderType(
                                 context),
-                          ),
-
-                        ]
-                    ),
-
-                  ),
-                  // THE ABOVE PART DEALS WITH LINES AND TEXT,
-                  // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
-
-
-                  //ZZZZ
-
-
-                ],
-              ),
-            ),
-            // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
-
-
-            // BELOW ROW HANDLES THE CUSTOMER INFORMATION ALONG WITH ICON AND POSSIBLY EDIT BUTTON.
-            //HHH
-
-            Container(
-              height: displayHeight(context) / 15,
-//              color:Colors.amber,
-              color: Colors.white,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(8),
-                children: <Widget>[
-
-                  RaisedButton(
-                    color: Color(0xffFC0000),
-                    // highlightColor: Colors.lightGreenAccent,
-//                                                                          highlightedBorderColor: Colors.blueAccent,
-                    // clipBehavior: Clip.hardEdge,
-                    // splashColor: Color(0xffFC0000),
-                    highlightElevation: 12,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Color(0xff707070),
-                        style: BorderStyle.solid,
-//            width: 1,
                       ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: currentUserForInline.etaTimeInMinutes != -1 ?
-                    Container(
-                      color: Color(0xffFC0000),
+                    ]),
+              ),
+              // THE ABOVE PART DEALS WITH LINES AND TEXT,
+              // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
+
+              //ZZZZ
+            ],
+          ),
+        ),
+        // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
+
+        // BELOW ROW HANDLES THE CUSTOMER INFORMATION ALONG WITH ICON AND POSSIBLY EDIT BUTTON.
+        //HHH
+
+        Container(
+          height: displayHeight(context) / 15,
+//              color:Colors.amber,
+          color: Colors.white,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.all(8),
+            children: <Widget>[
+              RaisedButton(
+                color: Color(0xffFC0000),
+                // highlightColor: Colors.lightGreenAccent,
+//                                                                          highlightedBorderColor: Colors.blueAccent,
+                // clipBehavior: Clip.hardEdge,
+                // splashColor: Color(0xffFC0000),
+                highlightElevation: 12,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Color(0xff707070),
+                    style: BorderStyle.solid,
+//            width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: currentUserForInline.etaTimeInMinutes != -1
+                    ? Container(
+                        color: Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                      width: displayWidth(context) / 4,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
+                        width: displayWidth(context) / 4,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Icons.watch, size: 32.0, color: Colors.black),
 
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                '${currentUserForInline.etaTimeInMinutes}',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
+                            Container(
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
+                                    color: Color(0xff000000),
+                                  )),
                             ),
-                          ),
 
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    ) : Container(
-                      width: displayWidth(context) / 4,
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+                    : Container(
+                        width: displayWidth(context) / 4,
 //                       width:displayWidth(context) /10,
-                    )
+                      )
 
-                    // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
-                    ,
-                    onPressed: () =>
-                    {
-                      setState(() {
-                        showEditingCompleteCustomerReachoutIformation =
+                // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
+                ,
+                onPressed: () => {
+                  setState(() {
+                    showEditingCompleteCustomerReachoutIformation =
                         !showEditingCompleteCustomerReachoutIformation;
 
-
-                        etaController.text =
-                            currentUserForInline.etaTimeInMinutes.toString();
-
+                    etaController.text =
+                        currentUserForInline.etaTimeInMinutes.toString();
 
 //                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
-                  ),
-                ],
+                  })
+                },
               ),
-            )
-          ]
-      ),
+            ],
+          ),
+        )
+      ]),
     );
-
   }
 
 //}
@@ -2416,348 +2078,240 @@ color:Colors.blue,
 
 //  animatedShowUserAddressDetailsInLine
 
-  Widget animatedShowUserInputPhoneOrderInLine(CustomerInformation currentUserForInline) {
-
+  Widget animatedShowUserInputPhoneOrderInLine(
+      CustomerInformation currentUserForInline) {
     return Container(
       width: displayWidth(context) / 1.03,
       height: displayHeight(context) / 21 + displayHeight(context) / 15,
-
       color: Color(0xffffffff),
-      child: Column(
-          children: <Widget>[
-            Container(
-              height: displayHeight(context) / 21,
+      child: Column(children: <Widget>[
+        Container(
+          height: displayHeight(context) / 21,
 //              color:Colors.purple,
-              child:
-              Container(
-                width: displayWidth(context) /
-                    1.3,
-                height: displayHeight(
-                    context) / 21,
-                color: Color(0xffffffff),
-
-                child:
-
-                Container(
-                  margin: EdgeInsets
-                      .fromLTRB(
-                      10, 0, 10, 0),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                      'client\'s phone and duration in minutes:',
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight
-                            .normal,
+          child: Container(
+            width: displayWidth(context) / 1.3,
+            height: displayHeight(context) / 21,
+            color: Color(0xffffffff),
+            child: Container(
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              alignment: Alignment.centerLeft,
+              child: Text('client\'s phone and duration in minutes:',
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                        color: Color(
-                            0xff000000),
-                      )
-                  ),
-                ),
+                    color: Color(0xff000000),
+                  )),
+            ),
 
-
-                /*
+            /*
                           CustomPaint(
                             size: Size(0, 19),
                             painter: LongPainterForPhone(
                                 context),
                           ),
                           */
+          ),
+          // THE ABOVE PART DEALS WITH LINES AND TEXT,
+          // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
 
+          //ZZZZ
+        ),
+        // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
 
-              ),
-              // THE ABOVE PART DEALS WITH LINES AND TEXT,
-              // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
+        // BELOW ROW HANDLES THE CUSTOMER INFORMATION ALONG WITH ICON AND POSSIBLY EDIT BUTTON.
+        //HHH
 
-
-              //ZZZZ
-
-            ),
-            // ABOVE ROW CONTROLS THE TEXT AND LINE PAINTER AND EDIT BUTTON.
-
-
-            // BELOW ROW HANDLES THE CUSTOMER INFORMATION ALONG WITH ICON AND POSSIBLY EDIT BUTTON.
-            //HHH
-
-            Container(
-              height: displayHeight(context) / 15,
+        Container(
+          height: displayHeight(context) / 15,
 //              color:Colors.amber,
-              color: Colors.white,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(8),
-                children: <Widget>[
-
-
-
-                  // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
-                  // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
-                  RaisedButton(
-                    splashColor: Color(0xffEEF6CE),
-                    highlightColor: Color(0xffEEF6CE),
-                    color: Color(0xffFFFFFF),
-
-                    child: currentUserForInline.phoneNumber != '' ?
-                    Container(
-                      color: Color(0xffFFFFFF),
+          color: Colors.white,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.all(8),
+            children: <Widget>[
+              // THIS CONTAINER ABOVE IS ABOUT HOUSE OR FLAT NUMBER INFORMATION ENDS HERE.
+              // THIS CONTAINER BELOW IS ABOUT PHONE NUMBER INFORMATION BEGINS HERE.
+              RaisedButton(
+                splashColor: Color(0xffEEF6CE),
+                highlightColor: Color(0xffEEF6CE),
+                color: Color(0xffFFFFFF),
+                child: currentUserForInline.phoneNumber != ''
+                    ? Container(
+                        color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width: displayWidth(context) / 3,
+                        width: displayWidth(context) / 3,
 
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Icons.phone, size: 32.0, color: Colors.black),
 
-                          Icon(Icons.phone,
-                              size: 32.0,
-                              color: Colors.black)
-                          ,
+                            // : Container for 2nd argument of ternary condition ends here.
 
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.phoneNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                alignment: Alignment.center,
+                                child:
+                                    Text('${currentUserForInline.phoneNumber}',
+                                        style: TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
+                                          color: Color(0xff000000),
+                                        )),
                               ),
                             ),
-                          ),
 
-
-                          //ZZZZ
-
-
-                        ],
-                      ),) : Container(
-                      color: Color(0xffFFFFFF),
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+                    : Container(
+                        color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                      width: displayWidth(context) / 3,
+                        width: displayWidth(context) / 3,
 
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Icons.phone, size: 32.0, color: Colors.black),
 
-                          Icon(Icons.phone,
-                              size: 32.0,
-                              color: Colors.black)
-                          ,
+                            // : Container for 2nd argument of ternary condition ends here.
 
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  'phone',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                alignment: Alignment.center,
+                                child: Text('phone',
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(
-                                        0xff000000),
-                                  )
+                                      color: Color(0xff000000),
+                                    )),
                               ),
                             ),
-                          ),
 
-
-                          //ZZZZ
-
-
-                        ],
-                      ),)
-                    ,
-                    onPressed: () =>
-                    {
-                      setState(() {
-                        showEditingCompleteCustomerPhoneIformation =
+                            //ZZZZ
+                          ],
+                        ),
+                      ),
+                onPressed: () => {
+                  setState(() {
+                    showEditingCompleteCustomerPhoneIformation =
                         !showEditingCompleteCustomerPhoneIformation;
 
-
-                        phoneNumberController.text =
-                            currentUserForInline.phoneNumber;
-
+                    phoneNumberController.text =
+                        currentUserForInline.phoneNumber;
 
 //                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
-                  ),
-
-                  RaisedButton(
-                    splashColor: Color(0xffEEF6CE),
-                    highlightColor: Color(0xffEEF6CE),
-                    color: Color(0xffFFFFFF),
-                    child: currentUserForInline.etaTimeInMinutes != -1 ?
-                    Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Color(0xffFC0000),
-//                       width:displayWidth(context) /10,
-                      width: displayWidth(context) / 3.5,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                '${currentUserForInline.etaTimeInMinutes}',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    ) : Container(
-                      color: Color(0xffFFFFFF),
-//                      color:Color(0xffFC0000),
-//                       width:displayWidth(context) /10,
-                      width: displayWidth(context) / 4,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-
-                          Icon(
-                              Icons.watch,
-                              size: 32.0,
-                              color: Colors.black
-                          ),
-
-
-                          // : Container for 2nd argument of ternary condition ends here.
-
-
-                          Container(
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                5, 0, 5, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'ETA',
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-
-                          //ZZZZ
-
-
-                        ],
-                      ),
-                    )
-
-                    // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
-                    ,
-                    onPressed: () =>
-                    {
-                      setState(() {
-                        showEditingCompleteCustomerReachoutIformation =
-                        !showEditingCompleteCustomerReachoutIformation;
-
-
-                        etaController.text =
-                            currentUserForInline.etaTimeInMinutes.toString();
-
-
-//                      showFullOrderType = !showFullOrderType;
-                      })
-                    },
-                  ),
-
-                ],
+                  })
+                },
               ),
 
-            )
+              RaisedButton(
+                splashColor: Color(0xffEEF6CE),
+                highlightColor: Color(0xffEEF6CE),
+                color: Color(0xffFFFFFF),
+                child: currentUserForInline.etaTimeInMinutes != -1
+                    ? Container(
+                        color: Color(0xffFFFFFF),
+//                      color:Color(0xffFC0000),
+//                       width:displayWidth(context) /10,
+                        width: displayWidth(context) / 3.5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Icons.watch, size: 32.0, color: Colors.black),
 
+                            // : Container for 2nd argument of ternary condition ends here.
 
-          ]
-      ),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(0xff000000),
+                                  )),
+                            ),
+
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+                    : Container(
+                        color: Color(0xffFFFFFF),
+//                      color:Color(0xffFC0000),
+//                       width:displayWidth(context) /10,
+                        width: displayWidth(context) / 4,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Icons.watch, size: 32.0, color: Colors.black),
+
+                            // : Container for 2nd argument of ternary condition ends here.
+
+                            Container(
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text('ETA',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                    color: Color(0xff000000),
+                                  )),
+                            ),
+
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+
+                // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
+                ,
+                onPressed: () => {
+                  setState(() {
+                    showEditingCompleteCustomerReachoutIformation =
+                        !showEditingCompleteCustomerReachoutIformation;
+
+                    etaController.text =
+                        currentUserForInline.etaTimeInMinutes.toString();
+
+//                      showFullOrderType = !showFullOrderType;
+                  })
+                },
+              ),
+            ],
+          ),
+        )
+      ]),
     );
-
   }
-
 
   Widget animatedShowUserAddressDetailsInLineDeliveryOrderType(
       CustomerInformation currentUserForInline) {
-
     return Container(
 //      color:Colors.pink,
       width: displayWidth(context) / 1.3,
@@ -2767,291 +2321,249 @@ color:Colors.blue,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-
-              padding:EdgeInsets.fromLTRB(5,5,0,5),
-              child:Text(
-                  'Address',
-
+              padding: EdgeInsets.fromLTRB(5, 5, 0, 5),
+              child: Text('Address',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.normal,
-
-                    color: Color(
-                        0xff000000),
-                  )
-              ),
-
+                    color: Color(0xff000000),
+                  )),
               height: displayHeight(context) / 33,
             ),
-
             Container(
               height: displayHeight(context) / 13,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.fromLTRB(0, 0, 10,0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 children: <Widget>[
                   Container(
-                    width: displayWidth(context) /4,
+                    width: displayWidth(context) / 4,
                     height: displayHeight(context) / 9,
-
                     child: InkWell(
                       splashColor: Color(0xffEEF6CE),
                       highlightColor: Color(0xffEEF6CE),
-                      child: currentUserForInline.address != '' ?
-                      Container(
-                        width: displayWidth(context) /5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
+                      child: currentUserForInline.address != ''
+                          ? Container(
+                              width: displayWidth(context) / 5,
+                              height: displayHeight(context) / 9,
+                              decoration: BoxDecoration(
+                                color: Color(0xffFCF5E4),
 //                        color:Colors.pinkAccent,
 
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-                              Icon(Icons.location_on,
-                                size: 32.0,
+                                borderRadius: BorderRadius.circular(35),
                               ),
-                            ),
-                            Container(
-                              width: displayWidth(context) /5.5,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    color: Color(0xffFCF5E4),
+                                    width: displayWidth(context) / 30,
+                                    child: Icon(
+                                      Icons.location_on,
+                                      size: 32.0,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: displayWidth(context) / 5.5,
+                                    height: displayHeight(context) / 9,
+                                    color: Color(0xffFCF5E4),
 //                                color: Color(0xffFFFFFF),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                  '${currentUserForInline.address}',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
+                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                    alignment: Alignment.centerLeft,
+                                    child:
+                                        Text('${currentUserForInline.address}',
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
 //                                      textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-
-                                    color: Colors.redAccent,
-                                  )
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.redAccent,
+                                            )),
+                                  ),
+                                ],
                               ),
-                            ),
-
-                          ],
-                        ),
-                      ) :showEditingCompleteCustomerAddressInformation ?
-                      Container(
-                        width: displayWidth(context) /5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
+                            )
+                          : showEditingCompleteCustomerAddressInformation
+                              ? Container(
+                                  width: displayWidth(context) / 5,
+                                  height: displayHeight(context) / 9,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffFCF5E4),
 //                        color:Colors.pinkAccent,
 
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-                              Icon(Icons.location_on,
-                                size: 32.0,
-                              ),
-                            ),
-                            Container(
-                              width: displayWidth(context) /5.5,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        color: Color(0xffFCF5E4),
+                                        width: displayWidth(context) / 30,
+                                        child: Icon(
+                                          Icons.location_on,
+                                          size: 32.0,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: displayWidth(context) / 5.5,
+                                        height: displayHeight(context) / 9,
+                                        color: Color(0xffFCF5E4),
 //                                color: Color(0xffFFFFFF),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                  '${currentUserForInline.address}',
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                            '${currentUserForInline.address}',
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
 //                                      textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
-
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      )
-                          :
-                      Container(
-                        color: Color(0xffFFFFFF),
-                        width: displayWidth(context) /5,
-                        height: displayHeight(context) / 9,
-                        child: Container(),
-                      ),
-
-                      onTap: () =>
-                      {
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.redAccent,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Container(
+                                  color: Color(0xffFFFFFF),
+                                  width: displayWidth(context) / 5,
+                                  height: displayHeight(context) / 9,
+                                  child: Container(),
+                                ),
+                      onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerAddressInformation =
-                          !showEditingCompleteCustomerAddressInformation;
+                              !showEditingCompleteCustomerAddressInformation;
                           addressController.text = currentUserForInline.address;
                         })
                       },
                     ),
                   ),
 
-
                   Container(
-                    width: displayWidth(context) /5,
+                    width: displayWidth(context) / 5,
                     height: displayHeight(context) / 9,
-
                     child: InkWell(
                       splashColor: Color(0xffEEF6CE),
                       highlightColor: Color(0xffEEF6CE),
-
-                      child: currentUserForInline.flatOrHouseNumber != '' ?
-                      Container(
+                      child: currentUserForInline.flatOrHouseNumber != ''
+                          ? Container(
 //                      color:Colors.brown,
 //                        color: Color(0xffFFFFFF),
 
-                        width: displayWidth(context) / 6.8,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-                              Icon(
-                                Icons.home,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) /7.4,
+                              width: displayWidth(context) / 6.8,
                               height: displayHeight(context) / 9,
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.flatOrHouseNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
+                              decoration: BoxDecoration(
+                                color: Color(0xffFCF5E4),
+                                borderRadius: BorderRadius.circular(35),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    color: Color(0xffFCF5E4),
+                                    width: displayWidth(context) / 30,
+                                    child: Icon(
+                                      Icons.home,
+                                      size: 32.0,
+                                      // color: Colors.black
+                                    ),
+                                  ),
+
+                                  // : Container for 2nd argument of ternary condition ends here.
+
+                                  Container(
+                                    color: Color(0xffFCF5E4),
+                                    width: displayWidth(context) / 7.4,
+                                    height: displayHeight(context) / 9,
+                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                        '${currentUserForInline.flatOrHouseNumber}',
+                                        style: TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Colors.redAccent,
-                                  )
+                                          color: Colors.redAccent,
+                                        )),
+                                  ),
+
+                                  //ZZZZ
+                                ],
                               ),
-                            ),
-
-
-
-                            //ZZZZ
-
-
-                          ],
-                        ),) : (showEditingCompleteCustomerHouseFlatIformation)?
-                      Container(
+                            )
+                          : (showEditingCompleteCustomerHouseFlatIformation)
+                              ? Container(
 //                      color:Colors.brown,
 //                        color: Color(0xffFFFFFF),
 
-                        width: displayWidth(context) / 6.8,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-                              Icon(
-                                Icons.home,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
+                                  width: displayWidth(context) / 6.8,
+                                  height: displayHeight(context) / 9,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffFCF5E4),
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        color: Color(0xffFCF5E4),
+                                        width: displayWidth(context) / 30,
+                                        child: Icon(
+                                          Icons.home,
+                                          size: 32.0,
+                                          // color: Colors.black
+                                        ),
+                                      ),
 
+                                      // : Container for 2nd argument of ternary condition ends here.
 
-                            // : Container for 2nd argument of ternary condition ends here.
-
-
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) /7.4,
-                              height: displayHeight(context) / 9,
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.flatOrHouseNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight
-                                        .normal,
+                                      Container(
+                                        color: Color(0xffFCF5E4),
+                                        width: displayWidth(context) / 7.4,
+                                        height: displayHeight(context) / 9,
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            '${currentUserForInline.flatOrHouseNumber}',
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
+                                              color: Colors.redAccent,
+                                            )),
+                                      ),
 
-
-
-                            //ZZZZ
-
-
-                          ],
-                        ),)
-                          :
-                      Container(
+                                      //ZZZZ
+                                    ],
+                                  ),
+                                )
+                              : Container(
 //                      color:Colors.brown,
-                        color: Color(0xffFFFFFF),
+                                  color: Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
-                        width: displayWidth(context) / 6.8,
-                        height: displayHeight(context) / 9,
-                        child: Container(),
-                      ),
-
-                      onTap: () =>
-                      {
+                                  width: displayWidth(context) / 6.8,
+                                  height: displayHeight(context) / 9,
+                                  child: Container(),
+                                ),
+                      onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerHouseFlatIformation =
-                          !showEditingCompleteCustomerHouseFlatIformation;
+                              !showEditingCompleteCustomerHouseFlatIformation;
 
                           addressController.text = currentUserForInline.address;
                           houseFlatNumberController.text =
@@ -3063,119 +2575,102 @@ color:Colors.blue,
                     ),
                   ),
 
-
-
                   //phone begins here...
 
                   Container(
-                    width: displayWidth(context) /5,
+                    width: displayWidth(context) / 5,
                     height: displayHeight(context) / 9,
                     child: InkWell(
                       splashColor: Color(0xffEEF6CE),
                       highlightColor: Color(0xffEEF6CE),
-                      child: currentUserForInline.phoneNumber != '' ?
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon(Icons.phone,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-                            Container(
-                              width: displayWidth(context) /7.4,
+                      child: currentUserForInline.phoneNumber != ''
+                          ? Container(
+                              width: displayWidth(context) / 6.5,
                               height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.phoneNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
+                              decoration: BoxDecoration(
+                                color: Color(0xffFCF5E4),
+                                borderRadius: BorderRadius.circular(35),
                               ),
-                            ),
-
-                          ],
-                        ),) :
-                      (showEditingCompleteCustomerPhoneIformation)?
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon(Icons.phone,
-                                size: 32.0,
-                                // color: Colors.black
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    color: Color(0xffFCF5E4),
+                                    width: displayWidth(context) / 30,
+                                    child: Icon(
+                                      Icons.phone,
+                                      size: 32.0,
+                                      // color: Colors.black
+                                    ),
+                                  ),
+                                  Container(
+                                    width: displayWidth(context) / 7.4,
+                                    height: displayHeight(context) / 9,
+                                    color: Color(0xffFCF5E4),
+                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                        '${currentUserForInline.phoneNumber}',
+                                        style: TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.redAccent,
+                                        )),
+                                  ),
+                                ],
                               ),
-                            ),
-
-                            Container(
-                              width: displayWidth(context) /7.4,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.phoneNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
-
-                          ],
-                        ),)
-
-                          :
-                      Container(
-
-                        color: Color(0xffFFFFFF),
-                        width: displayWidth(context) / 6.8,
-                        height: displayHeight(context) / 9,
-                        child: Container(),
-                      )
-                      ,
-                      onTap: () =>
-                      {
+                            )
+                          : (showEditingCompleteCustomerPhoneIformation)
+                              ? Container(
+                                  width: displayWidth(context) / 6.5,
+                                  height: displayHeight(context) / 9,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffFCF5E4),
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        color: Color(0xffFCF5E4),
+                                        width: displayWidth(context) / 30,
+                                        child: Icon(
+                                          Icons.phone,
+                                          size: 32.0,
+                                          // color: Colors.black
+                                        ),
+                                      ),
+                                      Container(
+                                        width: displayWidth(context) / 7.4,
+                                        height: displayHeight(context) / 9,
+                                        color: Color(0xffFCF5E4),
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            '${currentUserForInline.phoneNumber}',
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.redAccent,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Container(
+                                  color: Color(0xffFFFFFF),
+                                  width: displayWidth(context) / 6.8,
+                                  height: displayHeight(context) / 9,
+                                  child: Container(),
+                                ),
+                      onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerPhoneIformation =
-                          !showEditingCompleteCustomerPhoneIformation;
+                              !showEditingCompleteCustomerPhoneIformation;
                           phoneNumberController.text =
                               currentUserForInline.phoneNumber;
                         })
@@ -3187,205 +2682,174 @@ color:Colors.blue,
 
                   // Time begins here...
                   Container(
-                    width: displayWidth(context) /5.5,
+                    width: displayWidth(context) / 5.5,
                     height: displayHeight(context) / 9,
                     child: InkWell(
                       splashColor: Color(0xffEEF6CE),
                       highlightColor: Color(0xffEEF6CE),
 
+                      child: ((currentUserForInline.etaTimeOfDay.hour == 0) &&
+                              (currentUserForInline.etaTimeOfDay.minute == 0) &&
+                              (currentUserForInline.etaTimeInMinutes == -1) &&
+                              (showEditingCompleteCustomerReachoutIformation ==
+                                  false))
+                          ? Container(
+                              color: Colors.white,
+                            )
+                          : (currentUserForInline.etaTimeInMinutes != -1)
+                              ? Container(
+                                  width: displayWidth(context) / 7.5,
+                                  height: displayHeight(context) / 9,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffFCF5E4),
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        color: Color(0xffFCF5E4),
+                                        width: displayWidth(context) / 30,
+                                        child: Icon(
+                                          Icons.watch,
+                                          size: 32.0,
+                                          // color: Colors.black
+                                        ),
+                                      ),
+                                      Container(
+                                        width: displayWidth(context) / 10,
+                                        height: displayHeight(context) / 9,
+                                        color: Color(0xffFCF5E4),
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            '${currentUserForInline.etaTimeInMinutes} min',
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.redAccent,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : ((showEditingCompleteCustomerReachoutIformation) &&
+                                      (currentUserForInline.etaTimeOfDay.hour ==
+                                          0) &&
+                                      (currentUserForInline
+                                              .etaTimeOfDay.minute ==
+                                          0))
+                                  ? Container(
+                                      width: displayWidth(context) / 7.5,
+                                      height: displayHeight(context) / 9,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFCF5E4),
+                                        borderRadius: BorderRadius.circular(35),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            color: Color(0xffFCF5E4),
+                                            width: displayWidth(context) / 30,
+                                            child: Icon(
+                                              Icons.watch,
+                                              size: 32.0,
+                                              // color: Colors.black
+                                            ),
+                                          ),
 
-                      child:
-                      (
-                          (currentUserForInline.etaTimeOfDay.hour == 0)
-                              &&(
-                              currentUserForInline.etaTimeOfDay.minute == 0
-                          ) && (currentUserForInline.etaTimeInMinutes == -1)
-                              &&(showEditingCompleteCustomerReachoutIformation==false)
-                      )?
-                      Container(
-                        color:Colors.white,
-                      )
-                          :
-                      (currentUserForInline.etaTimeInMinutes != -1)?
-                      Container(
-                        width: displayWidth(context) / 7.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-                              Icon( Icons.watch,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
+                                          // : Container for 2nd argument of ternary condition ends here.
 
-                            Container(
-                              width: displayWidth(context) / 10,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes} min',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
-                          ],
-                        ),
-                      ):
-                      (
-                          (showEditingCompleteCustomerReachoutIformation)
-                              &&
-                              (currentUserForInline.etaTimeOfDay.hour == 0)
-                              &&
-                              (currentUserForInline.etaTimeOfDay.minute == 0)
-                      ) ?
-                      Container(
-                        width: displayWidth(context) / 7.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
+                                          Container(
+                                            width: displayWidth(context) / 10,
+                                            height: displayHeight(context) / 9,
+                                            color: Color(0xffFCF5E4),
+                                            padding:
+                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                '${currentUserForInline.etaTimeInMinutes}',
+                                                style: TextStyle(
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.redAccent,
+                                                )),
+                                          ),
 
-                              Icon( Icons.watch,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-
-                            Container(
-                              width: displayWidth(context) / 10,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
-
-
-
-                            //ZZZZ
-
-
-                          ],
-                        ),
-                      ):
-
-
-
-                      Container(
-                        width: displayWidth(context) / 7.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon(Icons.watch,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-                            Container(
-                              width: displayWidth(context) / 10,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child:
-
-                              Text(
-                                  '${currentUserForInline.etaTimeOfDay.hour} :'
-                                      '${currentUserForInline.etaTimeOfDay.minute} ',
-
-
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-
-                            ),
-                          ],
-                        ),
-                      ),
+                                          //ZZZZ
+                                        ],
+                                      ),
+                                    )
+                                  : Container(
+                                      width: displayWidth(context) / 7.5,
+                                      height: displayHeight(context) / 9,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFCF5E4),
+                                        borderRadius: BorderRadius.circular(35),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            color: Color(0xffFCF5E4),
+                                            width: displayWidth(context) / 30,
+                                            child: Icon(
+                                              Icons.watch,
+                                              size: 32.0,
+                                              // color: Colors.black
+                                            ),
+                                          ),
+                                          Container(
+                                            width: displayWidth(context) / 10,
+                                            height: displayHeight(context) / 9,
+                                            color: Color(0xffFCF5E4),
+                                            padding:
+                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                '${currentUserForInline.etaTimeOfDay.hour} :'
+                                                '${currentUserForInline.etaTimeOfDay.minute} ',
+                                                style: TextStyle(
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.redAccent,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
 
                       //ZZZZ
 
-                      onTap: () =>
-                      {
+                      onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerReachoutIformation =
-                          !showEditingCompleteCustomerReachoutIformation;
+                              !showEditingCompleteCustomerReachoutIformation;
                           etaController.text =
                               currentUserForInline.etaTimeInMinutes.toString();
                         })
                       },
                     ),
                   )
-
                 ],
               ),
             )
-          ]
-      ),
+          ]),
     );
-
   }
-
-
-
 
   Widget animatedShowUserAddressDetailsInLinePhoneOrderType(
       CustomerInformation currentUserForInline) {
-
     return Container(
 //      color:Colors.pink,
       width: displayWidth(context) / 1.3,
@@ -3395,139 +2859,117 @@ color:Colors.blue,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-
-              padding:EdgeInsets.fromLTRB(5,5,0,5),
-              child:Text(
-                  'phone and select time:',
-
+              padding: EdgeInsets.fromLTRB(5, 5, 0, 5),
+              child: Text('phone and select time:',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.normal,
-
-                    color: Color(
-                        0xff000000),
-                  )
-              ),
-
+                    color: Color(0xff000000),
+                  )),
               height: displayHeight(context) / 33,
             ),
-
             Container(
               height: displayHeight(context) / 13,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.fromLTRB(0, 0, 10,0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 children: <Widget>[
-
-
                   //phone begins here...
 
                   Container(
-                    width: displayWidth(context) /5,
+                    width: displayWidth(context) / 5,
                     height: displayHeight(context) / 9,
                     child: InkWell(
                       splashColor: Color(0xffEEF6CE),
                       highlightColor: Color(0xffEEF6CE),
-                      child: currentUserForInline.phoneNumber != '' ?
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon(Icons.phone,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-                            Container(
-                              width: displayWidth(context) /7.4,
+                      child: currentUserForInline.phoneNumber != ''
+                          ? Container(
+                              width: displayWidth(context) / 6.5,
                               height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.phoneNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
+                              decoration: BoxDecoration(
+                                color: Color(0xffFCF5E4),
+                                borderRadius: BorderRadius.circular(35),
                               ),
-                            ),
-
-                          ],
-                        ),) :
-                      (showEditingCompleteCustomerPhoneIformation)?
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon(Icons.phone,
-                                size: 32.0,
-                                // color: Colors.black
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    color: Color(0xffFCF5E4),
+                                    width: displayWidth(context) / 30,
+                                    child: Icon(
+                                      Icons.phone,
+                                      size: 32.0,
+                                      // color: Colors.black
+                                    ),
+                                  ),
+                                  Container(
+                                    width: displayWidth(context) / 7.4,
+                                    height: displayHeight(context) / 9,
+                                    color: Color(0xffFCF5E4),
+                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                        '${currentUserForInline.phoneNumber}',
+                                        style: TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.redAccent,
+                                        )),
+                                  ),
+                                ],
                               ),
-                            ),
-
-                            Container(
-                              width: displayWidth(context) /7.4,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.phoneNumber}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
-
-                          ],
-                        ),)
-
-                          :
-                      Container(
-
-                        color: Color(0xffFFFFFF),
-                        width: displayWidth(context) / 6.8,
-                        height: displayHeight(context) / 9,
-                        child: Container(),
-                      )
-                      ,
-                      onTap: () =>
-                      {
+                            )
+                          : (showEditingCompleteCustomerPhoneIformation)
+                              ? Container(
+                                  width: displayWidth(context) / 6.5,
+                                  height: displayHeight(context) / 9,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffFCF5E4),
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        color: Color(0xffFCF5E4),
+                                        width: displayWidth(context) / 30,
+                                        child: Icon(
+                                          Icons.phone,
+                                          size: 32.0,
+                                          // color: Colors.black
+                                        ),
+                                      ),
+                                      Container(
+                                        width: displayWidth(context) / 7.4,
+                                        height: displayHeight(context) / 9,
+                                        color: Color(0xffFCF5E4),
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            '${currentUserForInline.phoneNumber}',
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.redAccent,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Container(
+                                  color: Color(0xffFFFFFF),
+                                  width: displayWidth(context) / 6.8,
+                                  height: displayHeight(context) / 9,
+                                  child: Container(),
+                                ),
+                      onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerPhoneIformation =
-                          !showEditingCompleteCustomerPhoneIformation;
+                              !showEditingCompleteCustomerPhoneIformation;
                           phoneNumberController.text =
                               currentUserForInline.phoneNumber;
                         })
@@ -3535,226 +2977,177 @@ color:Colors.blue,
                     ),
                   ),
 
-
-
                   //phone ends here....
 
                   Container(
-                    width: displayWidth(context) /5,
+                    width: displayWidth(context) / 5,
                     height: displayHeight(context) / 9,
                     child: InkWell(
                       splashColor: Color(0xffEEF6CE),
                       highlightColor: Color(0xffEEF6CE),
 
+                      child: ((currentUserForInline.etaTimeOfDay.hour == 0) &&
+                              (currentUserForInline.etaTimeOfDay.minute == 0) &&
+                              (currentUserForInline.etaTimeInMinutes == -1) &&
+                              (showEditingCompleteCustomerReachoutIformation ==
+                                  false))
+                          ? Container(
+                              color: Colors.white,
+                            )
+                          : (currentUserForInline.etaTimeInMinutes != -1)
+                              ? Container(
+                                  width: displayWidth(context) / 9,
+                                  height: displayHeight(context) / 9,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffFCF5E4),
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        color: Color(0xffFCF5E4),
+                                        width: displayWidth(context) / 30,
+                                        child: Icon(
+                                          Icons.watch,
+                                          size: 32.0,
+                                          // color: Colors.black
+                                        ),
+                                      ),
 
-                      child:
-                      ((currentUserForInline.etaTimeOfDay.hour==0) &&(
-                          currentUserForInline.etaTimeOfDay.minute==0
-                      ) && (currentUserForInline.etaTimeInMinutes == -1)
-                          &&(showEditingCompleteCustomerReachoutIformation==false)
-                      )?
-                      Container(
-                        color:Colors.white,
-                      )
-                          :
-                      (currentUserForInline.etaTimeInMinutes != -1)?
+                                      // : Container for 2nd argument of ternary condition ends here.
 
+                                      Container(
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            '${currentUserForInline.etaTimeInMinutes}',
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.normal,
+                                              color: Color(0xff000000),
+                                            )),
+                                      ),
 
-                      Container(
-                        width: displayWidth(context) / 9,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
+                                      //ZZZZ
+                                    ],
+                                  ),
+                                )
+                              : ((showEditingCompleteCustomerReachoutIformation) &&
+                                      (currentUserForInline.etaTimeOfDay.hour ==
+                                          0) &&
+                                      (currentUserForInline
+                                              .etaTimeOfDay.minute ==
+                                          0))
+                                  ? Container(
+                                      width: displayWidth(context) / 6.5,
+                                      height: displayHeight(context) / 9,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFCF5E4),
+                                        borderRadius: BorderRadius.circular(35),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            color: Color(0xffFCF5E4),
+                                            width: displayWidth(context) / 30,
+                                            child: Icon(
+                                              Icons.watch,
+                                              size: 32.0,
+                                              // color: Colors.black
+                                            ),
+                                          ),
 
-                              Icon( Icons.watch,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
+                                          // : Container for 2nd argument of ternary condition ends here.
 
-
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-
-
-
-                            Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  5, 0, 5, 0),
-                              alignment: Alignment
-                                  .center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Color(0xff000000),
-                                  )
-                              ),
-                            ),
-
-
-                            //ZZZZ
-
-
-                          ],
-                        ),
-                      ):
-                      (
-                          (showEditingCompleteCustomerReachoutIformation)
-                              &&
-                              (currentUserForInline.etaTimeOfDay.hour == 0)
-                              &&
-                              (currentUserForInline.etaTimeOfDay.minute == 0)
-                      ) ?
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon( Icons.watch,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-
-                            Container(
-                              width: displayWidth(context) /9,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
-
-
-
-                          ],
-                        ),
-                      ):
-
-
-
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .start
-                          ,
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon(Icons.watch,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-                            Container(
-                              width: displayWidth(context) / 9,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child:
-
-                              Text(
-                                  '${currentUserForInline.etaTimeOfDay.hour} :'
-                                      '${currentUserForInline.etaTimeOfDay.minute} ',
-
-
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-
-                            ),
-                          ],
-                        ),
-                      ),
+                                          Container(
+                                            width: displayWidth(context) / 9,
+                                            height: displayHeight(context) / 9,
+                                            color: Color(0xffFCF5E4),
+                                            padding:
+                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                '${currentUserForInline.etaTimeInMinutes}',
+                                                style: TextStyle(
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.redAccent,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Container(
+                                      width: displayWidth(context) / 6.5,
+                                      height: displayHeight(context) / 9,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFCF5E4),
+                                        borderRadius: BorderRadius.circular(35),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            color: Color(0xffFCF5E4),
+                                            width: displayWidth(context) / 30,
+                                            child: Icon(
+                                              Icons.watch,
+                                              size: 32.0,
+                                              // color: Colors.black
+                                            ),
+                                          ),
+                                          Container(
+                                            width: displayWidth(context) / 9,
+                                            height: displayHeight(context) / 9,
+                                            color: Color(0xffFCF5E4),
+                                            padding:
+                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                '${currentUserForInline.etaTimeOfDay.hour} :'
+                                                '${currentUserForInline.etaTimeOfDay.minute} ',
+                                                style: TextStyle(
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.redAccent,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
 
                       //ZZZZ
 
-                      onTap: () =>
-                      {
+                      onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerReachoutIformation =
-                          !showEditingCompleteCustomerReachoutIformation;
+                              !showEditingCompleteCustomerReachoutIformation;
                           etaController.text =
                               currentUserForInline.etaTimeInMinutes.toString();
                         })
                       },
                     ),
                   )
-
                 ],
               ),
             )
-          ]
-      ),
+          ]),
     );
-
   }
-
-
-
 
   Widget animatedShowUserAddressDetailsInLineTakeAwayOrderType(
       CustomerInformation currentUserForInline) {
-
     return Container(
 //      color:Colors.pink,
       width: displayWidth(context) / 1.3,
@@ -3764,215 +3157,180 @@ color:Colors.blue,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-
-              padding:EdgeInsets.fromLTRB(5,5,0,5),
-              child:Text(
-                  'select either a time or minutes from now:',
-
+              padding: EdgeInsets.fromLTRB(5, 5, 0, 5),
+              child: Text('select either a time or minutes from now:',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.normal,
-
-                    color: Color(
-                        0xff000000),
-                  )
-              ),
-
+                    color: Color(0xff000000),
+                  )),
               height: displayHeight(context) / 33,
             ),
-
             Container(
               height: displayHeight(context) / 13,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.fromLTRB(0, 0, 10,0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 children: <Widget>[
-
                   //phone ends here....
 
                   Container(
 //                    color:Colors.red,
-                    width: displayWidth(context) /5,
+                    width: displayWidth(context) / 5,
                     height: displayHeight(context) / 9,
                     child: InkWell(
                       splashColor: Color(0xffEEF6CE),
                       highlightColor: Color(0xffEEF6CE),
 
+                      child: ((currentUserForInline.etaTimeOfDay.hour == 0) &&
+                              (currentUserForInline.etaTimeOfDay.minute == 0) &&
+                              (currentUserForInline.etaTimeInMinutes == -1) &&
+                              (showEditingCompleteCustomerReachoutIformation ==
+                                  false))
+                          ? Container(
+                              color: Colors.white,
+                            )
+                          : (currentUserForInline.etaTimeInMinutes != -1)
+                              ? Container(
+                                  width: displayWidth(context) / 6.5,
+                                  height: displayHeight(context) / 9,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffFCF5E4),
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        color: Color(0xffFCF5E4),
+                                        width: displayWidth(context) / 30,
+                                        child: Icon(
+                                          Icons.watch,
+                                          size: 32.0,
+                                        ),
+                                      ),
 
-                      child:
-                      ((currentUserForInline.etaTimeOfDay.hour==0) &&(
-                          currentUserForInline.etaTimeOfDay.minute==0
-                      ) && (currentUserForInline.etaTimeInMinutes == -1)
-                          &&(showEditingCompleteCustomerReachoutIformation==false)
-                      )?
-                      Container(
-                        color:Colors.white,
-                      )
-                          :
-                      (currentUserForInline.etaTimeInMinutes != -1)?
+                                      // : Container for 2nd argument of ternary condition ends here.
 
+                                      Container(
+                                        width: displayWidth(context) / 9,
+                                        height: displayHeight(context) / 9,
+                                        color: Color(0xffFCF5E4),
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            '${currentUserForInline.etaTimeInMinutes}',
+                                            style: TextStyle(
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.redAccent,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : ((showEditingCompleteCustomerReachoutIformation) &&
+                                      (currentUserForInline.etaTimeOfDay.hour ==
+                                          0) &&
+                                      (currentUserForInline
+                                              .etaTimeOfDay.minute ==
+                                          0))
+                                  ? Container(
+                                      width: displayWidth(context) / 6.5,
+                                      height: displayHeight(context) / 9,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFCF5E4),
+                                        borderRadius: BorderRadius.circular(35),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            color: Color(0xffFCF5E4),
+                                            width: displayWidth(context) / 30,
+                                            child: Icon(
+                                              Icons.watch,
+                                              size: 32.0,
+                                              // color: Colors.black
+                                            ),
+                                          ),
 
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-                              Icon(Icons.watch,
-                                size: 32.0,
-                              ),
-                            ),
+                                          // : Container for 2nd argument of ternary condition ends here.
 
+                                          Container(
+                                            width: displayWidth(context) / 9,
+                                            height: displayHeight(context) / 9,
+                                            color: Color(0xffFCF5E4),
+                                            padding:
+                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                '${currentUserForInline.etaTimeInMinutes}',
+                                                style: TextStyle(
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.redAccent,
+                                                )),
+                                          ),
 
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-
-                            Container(
-                              width: displayWidth(context) / 9,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      ):
-                      (
-                          (showEditingCompleteCustomerReachoutIformation)
-                              &&
-                              (currentUserForInline.etaTimeOfDay.hour == 0)
-                              &&(currentUserForInline.etaTimeOfDay.minute == 0)
-                      ) ?
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon( Icons.watch,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-
-                            Container(
-                              width: displayWidth(context) / 9,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-                            ),
-
-
-
-
-
-
-                            //ZZZZ
-
-
-                          ],
-                        ),
-                      ):
-
-
-
-                      Container(
-                        width: displayWidth(context) / 6.5,
-                        height: displayHeight(context) / 9,
-                        decoration: BoxDecoration(
-                          color:Color(0xffFCF5E4),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color:Color(0xffFCF5E4),
-                              width: displayWidth(context) / 30,
-                              child:
-
-                              Icon(Icons.watch,
-                                size: 32.0,
-                                // color: Colors.black
-                              ),
-                            ),
-
-                            Container(
-                              width: displayWidth(context) / 9,
-                              height: displayHeight(context) / 9,
-                              color:Color(0xffFCF5E4),
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child:
-
-                              Text(
-                                  '${currentUserForInline.etaTimeOfDay.hour} :'
-                                      '${currentUserForInline.etaTimeOfDay.minute} ',
-
-
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.redAccent,
-                                  )
-                              ),
-
-                            ),
-                          ],
-                        ),
-                      ),
+                                          //ZZZZ
+                                        ],
+                                      ),
+                                    )
+                                  : Container(
+                                      width: displayWidth(context) / 6.5,
+                                      height: displayHeight(context) / 9,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffFCF5E4),
+                                        borderRadius: BorderRadius.circular(35),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            color: Color(0xffFCF5E4),
+                                            width: displayWidth(context) / 30,
+                                            child: Icon(
+                                              Icons.watch,
+                                              size: 32.0,
+                                              // color: Colors.black
+                                            ),
+                                          ),
+                                          Container(
+                                            width: displayWidth(context) / 9,
+                                            height: displayHeight(context) / 9,
+                                            color: Color(0xffFCF5E4),
+                                            padding:
+                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                '${currentUserForInline.etaTimeOfDay.hour} :'
+                                                '${currentUserForInline.etaTimeOfDay.minute} ',
+                                                style: TextStyle(
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.redAccent,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
 
                       //ZZZZ
 
-                      onTap: () =>
-                      {
+                      onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerReachoutIformation =
-                          !showEditingCompleteCustomerReachoutIformation;
+                              !showEditingCompleteCustomerReachoutIformation;
                           etaController.text =
                               currentUserForInline.etaTimeInMinutes.toString();
                         })
@@ -3980,26 +3338,19 @@ color:Colors.blue,
                     ),
                   )
 
-
                   // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
-
-
-
                 ],
               ),
             )
-          ]
-      ),
+          ]),
     );
-
   }
 
 // YYYY
 
-
-  Widget whenYouWillPickTheOrder(Order unObsecuredInputandPayment){
-
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
+  Widget whenYouWillPickTheOrder(Order unObsecuredInputandPayment) {
+    CustomerInformation currentUser =
+        unObsecuredInputandPayment.orderingCustomer;
 
 //    currentUser.etaTimeInMinutes!=-1
 //    currentUser.etaTimeOfDay.hour != 0
@@ -4007,762 +3358,149 @@ color:Colors.blue,
 
     print('currentUser.etaTimeOfDay.hour: ${currentUser.etaTimeOfDay.hour}');
 
-    print('currentUser.etaTimeOfDay.minute: ${currentUser.etaTimeOfDay.minute}');
-
-
+    print(
+        'currentUser.etaTimeOfDay.minute: ${currentUser.etaTimeOfDay.minute}');
 
     TimeOfDay tempTimeOfDay = new TimeOfDay(hour: 0, minute: 0);
 
-    if((currentUser.etaTimeOfDay.minute!=0) || (currentUser.etaTimeOfDay.hour != 0) ){
-      tempTimeOfDay =
-      new TimeOfDay(hour: currentUser.etaTimeOfDay.hour, minute: currentUser.etaTimeOfDay.minute);
+    if ((currentUser.etaTimeOfDay.minute != 0) ||
+        (currentUser.etaTimeOfDay.hour != 0)) {
+      tempTimeOfDay = new TimeOfDay(
+          hour: currentUser.etaTimeOfDay.hour,
+          minute: currentUser.etaTimeOfDay.minute);
     }
-
-
 
 //    911_4
 //work_4
 //    CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
 
-    return
-      Container(
-        child:
-        showEditingCompleteCustomerReachoutIformation
-            ? Container()
-            : Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-
-
-            Container(
+    return Container(
+      child: showEditingCompleteCustomerReachoutIformation
+          ? Container()
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
 //              color:Colors.purple,
 //              width: displayWidth(context) / 4.5,
-              width: displayWidth(context) / 3.5,
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-              height: displayHeight(context) / 24,
-              padding: EdgeInsets.only(
-                  left: 4, top: 3, bottom: 3, right: 3),
+                  width: displayWidth(context) / 3.5,
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  height: displayHeight(context) / 24,
+                  padding:
+                      EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
 
-              child: OutlineButton(
-                onPressed: () async {
-
-
-                  Future<TimeOfDay> selectedTime24Hour = showTimePicker(
-                    context: context,
-                    initialTime: tempTimeOfDay,
+                  child: OutlineButton(
+                    onPressed: () async {
+                      Future<TimeOfDay> selectedTime24Hour = showTimePicker(
+                        context: context,
+                        initialTime: tempTimeOfDay,
 
 //                    TimeOfDay(hour: 10, minute: 47),
 
-                    builder: (BuildContext context, Widget child) {
-                      return MediaQuery(
-                        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-                        child: child,
+                        builder: (BuildContext context, Widget child) {
+                          return MediaQuery(
+                            data: MediaQuery.of(context)
+                                .copyWith(alwaysUse24HourFormat: true),
+                            child: child,
+                          );
+                        },
                       );
-                    },
-                  );
 
+                      selectedTime24Hour.whenComplete(() {
+                        print(
+                            "selectedTime24Hour called when future completes");
+                      }).then((selectedTime24HourResult) async {
+                        print(
+                            "selectedTime24HourResult: $selectedTime24HourResult");
 
+                        final shoppingCartBloc =
+                            BlocProvider.of<ShoppingCartBloc>(context);
 
-
-
-
-                  selectedTime24Hour.whenComplete(() {
-                    print("selectedTime24Hour called when future completes");
-
-                  }
-                  ).then((selectedTime24HourResult) async {
-
-                    print("selectedTime24HourResult: $selectedTime24HourResult");
-
-                    final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-                    shoppingCartBloc.setETAForOrder2(selectedTime24HourResult);
-                    setState(
-                            () {
+                        shoppingCartBloc
+                            .setETAForOrder2(selectedTime24HourResult);
+                        setState(() {
                           showFullOrderDeliveryType = false;
                           showCustomerInformationHeader = true;
                           showUserInputOptionsLikeFirstTime = false;
-                          showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                          showEditingCompleteCustomerReachoutIformation=true;
-
-                        }
-                    );
-                  }
-                  ).catchError((onError) {
-                    print('printing not successful: $onError');
-                    return false;
-                  });
+                          showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                          showEditingCompleteCustomerReachoutIformation = true;
+                        });
+                      }).catchError((onError) {
+                        print('printing not successful: $onError');
+                        return false;
+                      });
 
 //                                  RRRRRGHGHGHGH
+                    },
 
-                },
-
-                splashColor: Colors.indigoAccent,
+                    splashColor: Colors.indigoAccent,
 //                                highlightElevation: 12,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
 
-                borderSide: BorderSide(
-                  color: Colors.grey,
+                    borderSide: BorderSide(
+                      color: Colors.grey,
 //                                        color:Color(0xff707070),
-                  style: BorderStyle.solid,
-                  width: 2.6,
-                ),
+                      style: BorderStyle.solid,
+                      width: 2.6,
+                    ),
 
-
-                highlightElevation: 12,
-                child:
-                Container(
-
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0 /*15*/),
-                  width: displayWidth(context) / 4.5,
-                  height: displayHeight(context) / 24,
-
-
-                  child: Row(
-
+                    highlightElevation: 12,
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0 /*15*/),
+                      width: displayWidth(context) / 4.5,
+                      height: displayHeight(context) / 24,
+                      child: Row(
 //                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
 //                                          height: 25,
 //                        height: displayHeight(context) / 40,
 //                        width: 5,
-                        margin: EdgeInsets.only(left: 0),
+                            margin: EdgeInsets.only(left: 0),
 
-                        child: Icon(
+                            child: Icon(
 //                                          Icons.add_shopping_cart,
-                          Icons.watch_later,
-                          size: 28,
-                          color: Color(0xffBCBCBD),
-                        ),
-
-
-                      ),
-
-                      Container(
+                              Icons.watch_later,
+                              size: 28,
+                              color: Color(0xffBCBCBD),
+                            ),
+                          ),
+                          Container(
 //                        color:Colors.pinkAccent,
-                        alignment: Alignment.center,
-                        width: displayWidth(context) / 5.5,
+                            alignment: Alignment.center,
+                            width: displayWidth(context) / 5.5,
 //                                        color:Colors.purpleAccent,
-                        // do it in both Container
-                        child:
-
-                        Text('choose Time',
-                          maxLines: 1,
-                          style: TextStyle(color: Colors.black,
-                            fontSize: 22,
+                            // do it in both Container
+                            child: Text(
+                              'choose Time',
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 22,
 //                            fontWeight: FontWeight.bold,
-                          ),),
-
-                      )
-
-
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-            Container(
-              margin: EdgeInsets.fromLTRB(
-                  0, 0, 0, 0),
-              decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(
-
-                  color: Color(0xffBCBCBD),
-                  style: BorderStyle.solid,
-                  width: 3.0,
-
-
-                ),
-
-                boxShadow: [
-                  BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                      color: Color(0xffFFFFFF),
-                      blurRadius: 10.0,
-                      offset: Offset(0.0, 2.0))
-                ],
-
-
-                color: Color(0xffFFFFFF),
-//                                      Colors.black54
-              ),
-
-//                                  color: Color(0xffFFFFFF),
-              width: displayWidth(context) / 2.5,
-              height: displayHeight(context) / 24,
-              padding: EdgeInsets.only(
-                  left: 4, top: 3, bottom: 3, right: 3),
-              child: Row(
-
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-
-                    height: displayHeight(context) / 40,
-                    width: 5,
-                    margin: EdgeInsets.only(left: 0),
-                    child: Icon(
-
-                      Icons.watch_later,
-                      size: 28,
-                      color: Color(0xffBCBCBD),
-                    ),
-                  ),
-
-                  Container(
-                    alignment: Alignment.center,
-                    width: displayWidth(context) / 4,
-                    child: TextField(
-
-                      controller: etaController,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <
-                          TextInputFormatter>[
-                        WhitelistingTextInputFormatter.digitsOnly
-                      ],
-                      textInputAction: TextInputAction.done,
-
-                      onSubmitted: (_) =>
-                          FocusScope.of(context).unfocus(),
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        // work_5
-                        // 911_5
-                        border: InputBorder.none,
-                        hintText: 'After XX minutes',
-                        hintStyle: TextStyle(
-                            color: Color(0xffFC0000),
-                            fontSize: 17),
-                      ),
-
-                      style: TextStyle(
-                          color: Color(0xffFC0000),
-                          fontSize: 16),
-
-                      onChanged: (text) {
-                        print("0444: $text");
-
-
-                        print("33: $text");
-                        final shoppingCartBloc = BlocProvider
-                            .of<
-                            ShoppingCartBloc>(context);
-
-                        shoppingCartBloc.setETAForOrder(
-                            text);
-                        setState(() {
-                          showFullOrderDeliveryType = false;
-
-                          // showFullOrderType
-                          /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-//                                                showCustomerInformationHeader = false;
-                          showCustomerInformationHeader = true;
-                          showUserInputOptionsLikeFirstTime = false;
-                          showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-
-                        }
-
-
-                        );
-                      },
-
-
-                      onTap: () {
-                        if ((currentUser.address
-                            .trim()
-                            .length) > 0 ||
-                            (currentUser.flatOrHouseNumber
-                                .trim()
-                                .length) > 0 ||
-                            (currentUser.phoneNumber
-                                .trim()
-                                .length) > 0) {
-                          showEditingCompleteCustomerHouseFlatIformation =
-                          true;
-                        } else {
-                          setState(() {
-
-                            showFullOrderDeliveryType = false;
-                            showCustomerInformationHeader = true;
-                            showUserInputOptionsLikeFirstTime = false;
-                            showFullPaymentType = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                          }
-                          );
-                        }
-                      },
-
-
-                      onEditingComplete: () {
-
-                        logger.i('...................on onEditingComplete of  ETA..........  ');
-                        showEditingCompleteCustomerReachoutIformation = true;
-                        print(
-                            'MMMM      MMMM           MMMM     at editing complete of Customer\'s address ETA Time:');
-                      },
-
-
-
-                    ),
-
-                  )
-
-
-                ],
-              ),
-            ),
-
-
-
-          ],
-        ),
-      );
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-  Widget inputFieldsPhoneOrderType(Order unObsecuredInputandPayment){
-
-    logger.i('at  inputFieldsPhoneOrderType(Order unObsecuredInputandPayment)');
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
-
-    return
-      Container(
-//        color:Colors.purple,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-
-            Container(
-              child: (showEditingCompleteCustomerPhoneIformation==false)
-                  ?
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    0, 0, 0, 15),
-                decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(
-
-                    color: Color(0xffBCBCBD),
-                    style: BorderStyle.solid,
-                    width: 2.0,
-
-
-                  ),
-
-                  boxShadow: [
-                    BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                        color: Color(0xffFFFFFF),
-                        blurRadius: 10.0,
-                        offset: Offset(0.0, 2.0))
-                  ],
-
-
-                  color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                ),
-
-//                                  color: Color(0xffFFFFFF),
-                width: displayWidth(context) / 2.5,
-                height: displayHeight(context) / 24,
-                padding: EdgeInsets.only(
-                    left: 4, top: 3, bottom: 3, right: 3),
-                child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment
-                      .center,
-                  children: <Widget>[
-                    Container(
-
-//                                            height: 25,
-                      height: displayHeight(context) / 40,
-                      width: 5,
-                      margin: EdgeInsets.only(left: 0),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
-                      child: Icon(
-//                                          Icons.add_shopping_cart,
-                        Icons.phone,
-                        size: 28,
-                        color: Color(0xffBCBCBD),
-                      ),
-
-
-                    ),
-
-                    Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
-                      alignment: Alignment.center,
-                      width: displayWidth(context) / 4,
-//                                        color:Colors.purpleAccent,
-                      // do it in both Container
-                      child: TextField(
-
-                        keyboardType: TextInputType.phone,
-                        inputFormatters: <TextInputFormatter>[
-                          LengthLimitingTextInputFormatter(16),
-                          WhitelistingTextInputFormatter.digitsOnly,
-//                                                WhitelistingTextInputFormatter(RegExp("+[0-9]"))
-//                                                WhitelistingTextInputFormatter(RegExp("[+]"))
+                              ),
+                            ),
+                          )
                         ],
-
-                        controller: phoneNumberController,
-
-
-                        textInputAction: TextInputAction
-                            .next,
-                        onSubmitted: (_) =>
-                            FocusScope.of(context)
-                                .nextFocus(),
-
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-//                                            prefixIcon: new Icon(Icons.search),
-//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//                                        border: Border.all(color: Colors.white, width: 2),
-                          border: InputBorder.none,
-                          hintText: 'Enter phone / telephone number',
-                          hintStyle: TextStyle(
-                              color: Color(0xffFC0000),
-                              fontSize: 17),
-
-//                                        labelText: 'Search about meal.'
-                        ),
-
-                        style: TextStyle(
-                            color: Color(0xffFC0000),
-                            fontSize: 16),
-
-                        onChanged: (text) {
-                          print("33: $text");
-
-                          final shoppingCartBloc = BlocProvider
-                              .of<
-                              ShoppingCartBloc>(context);
-//
-                          shoppingCartBloc
-                              .setPhoneNumberForOrder(
-                              text);
-
-                          setState(() {
-                            showFullOrderDeliveryType
-                            = false;
-                            // showFullOrderType = false;
-                            // showFullOrderType
-                            /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-//                                                showCustomerInformationHeader = false;
-                            showCustomerInformationHeader =
-                            true;
-                            showUserInputOptionsLikeFirstTime =
-                            false;
-                            showFullPaymentType =
-                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                          }
-                          );
-                          // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-                        },
-
-                        onTap: () {
-                          setState(() {
-                            showFullOrderDeliveryType
-                            = false;
-                            // showFullOrderType = false;
-                            // showFullOrderType
-                            /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-//                                                showCustomerInformationHeader = false;
-                            showCustomerInformationHeader =
-                            true;
-                            showUserInputOptionsLikeFirstTime =
-                            false;
-                            showFullPaymentType =
-                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-//                                                showFullOrderType = false,
-
-                          });
-                        },
-                        onEditingComplete: () {
-//                                                              logger.i('onEditingComplete  of condition 4');
-//                                                              print('called onEditing complete');
-
-                          print(
-                              'at editing complete of Customer Phone Iformation ');
-                          setState(() =>
-                          {
-                            showEditingCompleteCustomerPhoneIformation =
-                            true
-//                                          showInputtedCustomerIformation= true,
-                          }
-                          );
-                        },
-
                       ),
-
-                    )
-                  ],
-                ),
-              ):
-              Container(),
-            ),
-
-
-            Container(
-                child: ((showEditingCompleteCustomerPhoneIformation)
-                    && (showEditingCompleteCustomerReachoutIformation==false))
-                    ?
-                Container(
-                  height:displayHeight(context)/18,
-                  width: displayWidth(context) / 1.03,
-                  child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                ):Container()
-            ),
-
-          ],
-        ),
-      );
-  }
-
-
-
-
-  Widget inputFieldsDelivery(Order unObsecuredInputandPayment){
-
-
-    CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
-
-
-    return
-      Container(
-//        color:Colors.purple,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-
-            Container(
-              child: showEditingCompleteCustomerAddressInformation
-                  ?
-              Container()
-                  :
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    0, 0, 0, 15),
-                decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(
-
-                    color: Color(0xffBCBCBD),
-                    style: BorderStyle.solid,
-                    width: 2.0,
-
-
-                  ),
-
-                  boxShadow: [
-                    BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                        color: Color(0xffFFFFFF),
-                        blurRadius: 10.0,
-                        offset: Offset(0.0, 2.0))
-                  ],
-
-
-                  color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                ),
-
-//                                  color: Color(0xffFFFFFF),
-                width: displayWidth(context) / 2.5,
-                height: displayHeight(context) / 24,
-                padding: EdgeInsets.only(
-                    left: 4, top: 3, bottom: 3, right: 3),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment
-                      .center,
-                  children: <Widget>[
-                    Container(
-
-//                                            height: 25,
-                      height: displayHeight(context) / 40,
-                      width: 5,
-                      margin: EdgeInsets.only(left: 0),
-                      child: Icon(
-//                                          Icons.add_shopping_cart,
-                        Icons.location_on,
-
-                        size: 28,
-                        color: Color(0xffBCBCBD),
-                      ),
-
-
                     ),
-
-                    Container(
-                      alignment: Alignment.center,
-                      width: displayWidth(context) / 4,
-//                                        color:Colors.purpleAccent,
-                      // do it in both Container
-                      child: TextField(
-                        controller: addressController,
-
-                        textInputAction: TextInputAction
-                            .next,
-                        onSubmitted: (_) =>
-                            FocusScope.of(context)
-                                .nextFocus(),
-
-
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          focusColor: Color(0xffFC0000),
-                          border: InputBorder.none,
-                          hintText: 'Enter delivery location',
-                          hintStyle: TextStyle(
-                              color: Color(0xffFC0000),
-                              fontSize: 17),
-
-//                                      currentUser
-//                                        labelText: 'Search about meal.'
-                        ),
-
-
-                        onChanged: (text) {
-                          //RRRR
-
-                          print(
-                              'at address of unobsecured (deliver loc)');
-
-                          final shoppingCartBloc = BlocProvider
-                              .of<ShoppingCartBloc>(
-                              context);
-//
-                          shoppingCartBloc
-                              .setAddressForOrder(text);
-                          if ((text
-                              .trim()
-                              .length) > 0) {
-                            print(
-                                'at (text.trim().length) >0)');
-                            setState(() {
-                              showFullOrderDeliveryType = false;
-
-                              showCustomerInformationHeader =
-                              true;
-                              showUserInputOptionsLikeFirstTime =
-                              false;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-
-                            });
-                          }
-                          else {
-                            setState(() {
-                              showFullOrderDeliveryType = false;
-
-                              showCustomerInformationHeader =
-                              true;
-                              showUserInputOptionsLikeFirstTime =
-                              false;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-
-//                                                showCustomerInformationHeader = true,
-
-                            });
-                          }
-
-                        },
-
-                        onTap: () {
-                          setState(() {
-                            showFullOrderDeliveryType = false;
-                            showCustomerInformationHeader =
-                            true;
-                            showUserInputOptionsLikeFirstTime =
-                            false;
-                            showFullPaymentType =
-                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-
-                          });
-                        },
-
-
-                        onEditingComplete: () {
-                          print(
-                              'at editing complete of address ');
-//                                                              logger.i('onEditingComplete  of condition 4');
-//                                                              print('called onEditing complete');
-                          setState(() =>
-                          {
-                            showEditingCompleteCustomerAddressInformation =
-                            true
-//                                          showInputtedCustomerIformation= true,
-                          }
-                          );
-                        },
-
-
-
-                        style: TextStyle(
-                            color: Color(0xffFC0000),
-                            fontSize: 16),
-                      ),
-
-                    )
-
-
-                  ],
+                  ),
                 ),
-              ),
-            ),
-
-            Container(
-
-                child: ((showEditingCompleteCustomerAddressInformation)
-                    &&
-                    (showEditingCompleteCustomerHouseFlatIformation==false))
-                    ?
                 Container(
-                  margin: EdgeInsets.fromLTRB(
-                      0, 0, 0, 15),
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                     borderRadius: BorderRadius.circular(25),
                     border: Border.all(
-
                       color: Color(0xffBCBCBD),
                       style: BorderStyle.solid,
-                      width: 2.0,
-
-
+                      width: 3.0,
                     ),
 
                     boxShadow: [
@@ -4773,7 +3511,6 @@ color:Colors.blue,
                           offset: Offset(0.0, 2.0))
                     ],
 
-
                     color: Color(0xffFFFFFF),
 //                                      Colors.black54
                   ),
@@ -4781,344 +3518,683 @@ color:Colors.blue,
 //                                  color: Color(0xffFFFFFF),
                   width: displayWidth(context) / 2.5,
                   height: displayHeight(context) / 24,
-                  padding: EdgeInsets.only(
-                      left: 4, top: 3, bottom: 3, right: 3),
+                  padding:
+                      EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
                   child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment
-                        .center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
                         height: displayHeight(context) / 40,
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
                         child: Icon(
-//                                          Icons.add_shopping_cart,
-                          Icons.home,
+                          Icons.watch_later,
                           size: 28,
                           color: Color(0xffBCBCBD),
                         ),
-
-
                       ),
-
                       Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
                         alignment: Alignment.center,
                         width: displayWidth(context) / 4,
-//                                        color:Colors.purpleAccent,
-                        // do it in both Container
                         child: TextField(
-                          controller: houseFlatNumberController,
-
-
-                          textInputAction: TextInputAction
-                              .next,
-                          onSubmitted: (_) =>
-                              FocusScope.of(context)
-                                  .nextFocus(),
+                          controller: etaController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            WhitelistingTextInputFormatter.digitsOnly
+                          ],
+                          textInputAction: TextInputAction.done,
+                          onSubmitted: (_) => FocusScope.of(context).unfocus(),
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
+                            // work_5
+                            // 911_5
                             border: InputBorder.none,
-                            hintText: 'Enter House/Flat address/number',
+                            hintText: 'After XX minutes',
                             hintStyle: TextStyle(
-                                color: Color(0xffFC0000),
-                                fontSize: 17),
-
-//                                        labelText: 'Search about meal.'
+                                color: Color(0xffFC0000), fontSize: 17),
                           ),
-
+                          style:
+                              TextStyle(color: Color(0xffFC0000), fontSize: 16),
                           onChanged: (text) {
-                            final shoppingCartBloc = BlocProvider
-                                .of<
-                                ShoppingCartBloc>(context);
-//
-                            shoppingCartBloc
-                                .setHouseorFlatNumberForOrder(
-                                text);
+                            print("0444: $text");
 
+                            print("33: $text");
+                            final shoppingCartBloc =
+                                BlocProvider.of<ShoppingCartBloc>(context);
+
+                            shoppingCartBloc.setETAForOrder(text);
                             setState(() {
                               showFullOrderDeliveryType = false;
 
-                              showCustomerInformationHeader =
-                              true;
-                              showUserInputOptionsLikeFirstTime =
-                              false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+//                                                showCustomerInformationHeader = false;
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
                               showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                            }
-                            );
-                            // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-                          },
-                          onTap: () {
-                            setState(() {
-                              showFullOrderDeliveryType = false;
-                              showCustomerInformationHeader =
-                              true;
-                              showUserInputOptionsLikeFirstTime =
-                              false;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-
+                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                             });
                           },
-
-
-
-
-                          onEditingComplete: () {
-                            print(
-                                'at editing complete of House or Flat Iformation ');
-//                                                              logger.i('onEditingComplete  of condition 4');
-//                                                              print('called onEditing complete');
-                            setState(() =>
-                            {
+                          onTap: () {
+                            if ((currentUser.address.trim().length) > 0 ||
+                                (currentUser.flatOrHouseNumber.trim().length) >
+                                    0 ||
+                                (currentUser.phoneNumber.trim().length) > 0) {
                               showEditingCompleteCustomerHouseFlatIformation =
-                              true
-//                                          showInputtedCustomerIformation= true,
+                                  true;
+                            } else {
+                              setState(() {
+                                showFullOrderDeliveryType = false;
+                                showCustomerInformationHeader = true;
+                                showUserInputOptionsLikeFirstTime = false;
+                                showFullPaymentType =
+                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              });
                             }
-                            );
                           },
-
-
-                          style: TextStyle(
-                              color: Color(0xffFC0000),
-                              fontSize: 16),
+                          onEditingComplete: () {
+                            logger.i(
+                                '...................on onEditingComplete of  ETA..........  ');
+                            showEditingCompleteCustomerReachoutIformation =
+                                true;
+                            print(
+                                'MMMM      MMMM           MMMM     at editing complete of Customer\'s address ETA Time:');
+                          },
                         ),
-
                       )
-
-
                     ],
                   ),
-                )
-                    :Container()
-            ),
-
-            Container(
-
-              child: ((showEditingCompleteCustomerAddressInformation)
-                  &&
-                  (showEditingCompleteCustomerHouseFlatIformation)
-                  && (showEditingCompleteCustomerPhoneIformation==false) )
-                  ?
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    0, 0, 0, 15),
-                decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(
-
-                    color: Color(0xffBCBCBD),
-                    style: BorderStyle.solid,
-                    width: 2.0,
-
-
-                  ),
-
-                  boxShadow: [
-                    BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                        color: Color(0xffFFFFFF),
-                        blurRadius: 10.0,
-                        offset: Offset(0.0, 2.0))
-                  ],
-
-
-                  color: Color(0xffFFFFFF),
-//                                      Colors.black54
                 ),
+              ],
+            ),
+    );
+  }
+
+  Widget inputFieldsPhoneOrderType(Order unObsecuredInputandPayment) {
+    logger.i('at  inputFieldsPhoneOrderType(Order unObsecuredInputandPayment)');
+    CustomerInformation currentUser =
+        unObsecuredInputandPayment.orderingCustomer;
+
+    return Container(
+//        color:Colors.purple,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            child: (showEditingCompleteCustomerPhoneIformation == false)
+                ? Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Color(0xffBCBCBD),
+                        style: BorderStyle.solid,
+                        width: 2.0,
+                      ),
+
+                      boxShadow: [
+                        BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                            color: Color(0xffFFFFFF),
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 2.0))
+                      ],
+
+                      color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                    ),
 
 //                                  color: Color(0xffFFFFFF),
-                width: displayWidth(context) / 2.5,
-                height: displayHeight(context) / 24,
-                padding: EdgeInsets.only(
-                    left: 4, top: 3, bottom: 3, right: 3),
-                child: Row(
+                    width: displayWidth(context) / 2.5,
+                    height: displayHeight(context) / 24,
+                    padding:
+                        EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                    child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment
-                      .center,
-                  children: <Widget>[
-                    Container(
-
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
 //                                            height: 25,
-                      height: displayHeight(context) / 40,
-                      width: 5,
-                      margin: EdgeInsets.only(left: 0),
+                          height: displayHeight(context) / 40,
+                          width: 5,
+                          margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                      child: Icon(
+                          child: Icon(
 //                                          Icons.add_shopping_cart,
-                        Icons.phone,
-                        size: 28,
-                        color: Color(0xffBCBCBD),
-                      ),
-
-
-                    ),
-
-                    Container(
+                            Icons.phone,
+                            size: 28,
+                            color: Color(0xffBCBCBD),
+                          ),
+                        ),
+                        Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                      alignment: Alignment.center,
-                      width: displayWidth(context) / 4,
+                          alignment: Alignment.center,
+                          width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                      // do it in both Container
-                      child: TextField(
-
-                        keyboardType: TextInputType.phone,
-                        inputFormatters: <TextInputFormatter>[
-                          LengthLimitingTextInputFormatter(16),
-                          WhitelistingTextInputFormatter.digitsOnly,
+                          // do it in both Container
+                          child: TextField(
+                            keyboardType: TextInputType.phone,
+                            inputFormatters: <TextInputFormatter>[
+                              LengthLimitingTextInputFormatter(16),
+                              WhitelistingTextInputFormatter.digitsOnly,
 //                                                WhitelistingTextInputFormatter(RegExp("+[0-9]"))
 //                                                WhitelistingTextInputFormatter(RegExp("[+]"))
-                        ],
-
-                        controller: phoneNumberController,
-
-
-                        textInputAction: TextInputAction
-                            .next,
-                        onSubmitted: (_) =>
-                            FocusScope.of(context)
-                                .nextFocus(),
-
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
+                            ],
+                            controller: phoneNumberController,
+                            textInputAction: TextInputAction.next,
+                            onSubmitted: (_) =>
+                                FocusScope.of(context).nextFocus(),
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                          border: InputBorder.none,
-                          hintText: 'Enter phone / telephone number',
-                          hintStyle: TextStyle(
-                              color: Color(0xffFC0000),
-                              fontSize: 17),
+                              border: InputBorder.none,
+                              hintText: 'Enter phone / telephone number',
+                              hintStyle: TextStyle(
+                                  color: Color(0xffFC0000), fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                        ),
+                            ),
+                            style: TextStyle(
+                                color: Color(0xffFC0000), fontSize: 16),
+                            onChanged: (text) {
+                              print("33: $text");
 
-                        style: TextStyle(
-                            color: Color(0xffFC0000),
-                            fontSize: 16),
-
-                        onChanged: (text) {
-                          print("33: $text");
-
-                          final shoppingCartBloc = BlocProvider
-                              .of<
-                              ShoppingCartBloc>(context);
+                              final shoppingCartBloc =
+                                  BlocProvider.of<ShoppingCartBloc>(context);
 //
-                          shoppingCartBloc
-                              .setPhoneNumberForOrder(
-                              text);
+                              shoppingCartBloc.setPhoneNumberForOrder(text);
 
-                          setState(() {
-                            showFullOrderDeliveryType
-                            = false;
-                            // showFullOrderType = false;
-                            // showFullOrderType
-                            /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                              setState(() {
+                                showFullOrderDeliveryType = false;
+                                // showFullOrderType = false;
+                                // showFullOrderType
+                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                            showCustomerInformationHeader =
-                            true;
-                            showUserInputOptionsLikeFirstTime =
-                            false;
-                            showFullPaymentType =
-                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                          }
-                          );
-                          // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-                        },
-
-                        onTap: () {
-                          setState(() {
-                            showFullOrderDeliveryType
-                            = false;
-                            // showFullOrderType = false;
-                            // showFullOrderType
-                            /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                                showCustomerInformationHeader = true;
+                                showUserInputOptionsLikeFirstTime = false;
+                                showFullPaymentType =
+                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              });
+                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                            },
+                            onTap: () {
+                              setState(() {
+                                showFullOrderDeliveryType = false;
+                                // showFullOrderType = false;
+                                // showFullOrderType
+                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                            showCustomerInformationHeader =
-                            true;
-                            showUserInputOptionsLikeFirstTime =
-                            false;
-                            showFullPaymentType =
-                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                showCustomerInformationHeader = true;
+                                showUserInputOptionsLikeFirstTime = false;
+                                showFullPaymentType =
+                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 //                                                showFullOrderType = false,
-
-                          });
-                        },
-                        onEditingComplete: () {
+                              });
+                            },
+                            onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
 
-                          print(
-                              'at editing complete of Customer Phone Iformation ');
-                          setState(() =>
-                          {
-                            showEditingCompleteCustomerPhoneIformation =
-                            true
+                              print(
+                                  'at editing complete of Customer Phone Iformation ');
+                              setState(() => {
+                                    showEditingCompleteCustomerPhoneIformation =
+                                        true
 //                                          showInputtedCustomerIformation= true,
-                          }
-                          );
-                        },
-
-                      ),
-
+                                  });
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                : Container(),
+          ),
+          Container(
+              child: ((showEditingCompleteCustomerPhoneIformation) &&
+                      (showEditingCompleteCustomerReachoutIformation == false))
+                  ? Container(
+                      height: displayHeight(context) / 18,
+                      width: displayWidth(context) / 1.03,
+                      child:
+                          whenYouWillPickTheOrder(unObsecuredInputandPayment),
                     )
-                  ],
-                ),
-              ):
-              Container(),
-            ),
-
-
-            Container(
-
-                child: ((showEditingCompleteCustomerAddressInformation)
-                    &&
-                    (showEditingCompleteCustomerHouseFlatIformation)
-                    && (showEditingCompleteCustomerPhoneIformation)
-                    && (showEditingCompleteCustomerReachoutIformation==false))
-                    ?
-                Container(
-
-
-                  height:displayHeight(context)/18,
-                  width: displayWidth(context) / 1.03,
-                  child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                ):Container()
-            ),
-
-//          whenYouWillPickTheOrder(unObsecuredInputandPayment),
-
-
-          ],
-        ),
-      );
+                  : Container()),
+        ],
+      ),
+    );
   }
 
+  Widget inputFieldsDelivery(Order unObsecuredInputandPayment) {
+    CustomerInformation currentUser =
+        unObsecuredInputandPayment.orderingCustomer;
 
+    return Container(
+//        color:Colors.purple,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            child: showEditingCompleteCustomerAddressInformation
+                ? Container()
+                : Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Color(0xffBCBCBD),
+                        style: BorderStyle.solid,
+                        width: 2.0,
+                      ),
 
+                      boxShadow: [
+                        BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                            color: Color(0xffFFFFFF),
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 2.0))
+                      ],
+
+                      color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                    ),
+
+//                                  color: Color(0xffFFFFFF),
+                    width: displayWidth(context) / 2.5,
+                    height: displayHeight(context) / 24,
+                    padding:
+                        EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+//                                            height: 25,
+                          height: displayHeight(context) / 40,
+                          width: 5,
+                          margin: EdgeInsets.only(left: 0),
+                          child: Icon(
+//                                          Icons.add_shopping_cart,
+                            Icons.location_on,
+
+                            size: 28,
+                            color: Color(0xffBCBCBD),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          width: displayWidth(context) / 4,
+//                                        color:Colors.purpleAccent,
+                          // do it in both Container
+                          child: TextField(
+                            controller: addressController,
+                            textInputAction: TextInputAction.next,
+                            onSubmitted: (_) =>
+                                FocusScope.of(context).nextFocus(),
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              focusColor: Color(0xffFC0000),
+                              border: InputBorder.none,
+                              hintText: 'Enter delivery location',
+                              hintStyle: TextStyle(
+                                  color: Color(0xffFC0000), fontSize: 17),
+
+//                                      currentUser
+//                                        labelText: 'Search about meal.'
+                            ),
+                            onChanged: (text) {
+                              //RRRR
+
+                              print('at address of unobsecured (deliver loc)');
+
+                              final shoppingCartBloc =
+                                  BlocProvider.of<ShoppingCartBloc>(context);
+//
+                              shoppingCartBloc.setAddressForOrder(text);
+                              if ((text.trim().length) > 0) {
+                                print('at (text.trim().length) >0)');
+                                setState(() {
+                                  showFullOrderDeliveryType = false;
+
+                                  showCustomerInformationHeader = true;
+                                  showUserInputOptionsLikeFirstTime = false;
+                                  showFullPaymentType =
+                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                });
+                              } else {
+                                setState(() {
+                                  showFullOrderDeliveryType = false;
+
+                                  showCustomerInformationHeader = true;
+                                  showUserInputOptionsLikeFirstTime = false;
+                                  showFullPaymentType =
+                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+
+//                                                showCustomerInformationHeader = true,
+                                });
+                              }
+                            },
+                            onTap: () {
+                              setState(() {
+                                showFullOrderDeliveryType = false;
+                                showCustomerInformationHeader = true;
+                                showUserInputOptionsLikeFirstTime = false;
+                                showFullPaymentType =
+                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              });
+                            },
+                            onEditingComplete: () {
+                              print('at editing complete of address ');
+//                                                              logger.i('onEditingComplete  of condition 4');
+//                                                              print('called onEditing complete');
+                              setState(() => {
+                                    showEditingCompleteCustomerAddressInformation =
+                                        true
+//                                          showInputtedCustomerIformation= true,
+                                  });
+                            },
+                            style: TextStyle(
+                                color: Color(0xffFC0000), fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+          ),
+
+          Container(
+              child: ((showEditingCompleteCustomerAddressInformation) &&
+                      (showEditingCompleteCustomerHouseFlatIformation == false))
+                  ? Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(
+                          color: Color(0xffBCBCBD),
+                          style: BorderStyle.solid,
+                          width: 2.0,
+                        ),
+
+                        boxShadow: [
+                          BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                              color: Color(0xffFFFFFF),
+                              blurRadius: 10.0,
+                              offset: Offset(0.0, 2.0))
+                        ],
+
+                        color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                      ),
+
+//                                  color: Color(0xffFFFFFF),
+                      width: displayWidth(context) / 2.5,
+                      height: displayHeight(context) / 24,
+                      padding:
+                          EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                      child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            height: displayHeight(context) / 40,
+                            width: 5,
+                            margin: EdgeInsets.only(left: 0),
+                            child: Icon(
+//                                          Icons.add_shopping_cart,
+                              Icons.home,
+                              size: 28,
+                              color: Color(0xffBCBCBD),
+                            ),
+                          ),
+                          Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                            alignment: Alignment.center,
+                            width: displayWidth(context) / 4,
+//                                        color:Colors.purpleAccent,
+                            // do it in both Container
+                            child: TextField(
+                              controller: houseFlatNumberController,
+                              textInputAction: TextInputAction.next,
+                              onSubmitted: (_) =>
+                                  FocusScope.of(context).nextFocus(),
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'Enter House/Flat address/number',
+                                hintStyle: TextStyle(
+                                    color: Color(0xffFC0000), fontSize: 17),
+
+//                                        labelText: 'Search about meal.'
+                              ),
+                              onChanged: (text) {
+                                final shoppingCartBloc =
+                                    BlocProvider.of<ShoppingCartBloc>(context);
+//
+                                shoppingCartBloc
+                                    .setHouseorFlatNumberForOrder(text);
+
+                                setState(() {
+                                  showFullOrderDeliveryType = false;
+
+                                  showCustomerInformationHeader = true;
+                                  showUserInputOptionsLikeFirstTime = false;
+                                  showFullPaymentType =
+                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                });
+                                // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                              },
+                              onTap: () {
+                                setState(() {
+                                  showFullOrderDeliveryType = false;
+                                  showCustomerInformationHeader = true;
+                                  showUserInputOptionsLikeFirstTime = false;
+                                  showFullPaymentType =
+                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                                });
+                              },
+                              onEditingComplete: () {
+                                print(
+                                    'at editing complete of House or Flat Iformation ');
+//                                                              logger.i('onEditingComplete  of condition 4');
+//                                                              print('called onEditing complete');
+                                setState(() => {
+                                      showEditingCompleteCustomerHouseFlatIformation =
+                                          true
+//                                          showInputtedCustomerIformation= true,
+                                    });
+                              },
+                              style: TextStyle(
+                                  color: Color(0xffFC0000), fontSize: 16),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  : Container()),
+
+          Container(
+            child: ((showEditingCompleteCustomerAddressInformation) &&
+                    (showEditingCompleteCustomerHouseFlatIformation) &&
+                    (showEditingCompleteCustomerPhoneIformation == false))
+                ? Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Color(0xffBCBCBD),
+                        style: BorderStyle.solid,
+                        width: 2.0,
+                      ),
+
+                      boxShadow: [
+                        BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                            color: Color(0xffFFFFFF),
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 2.0))
+                      ],
+
+                      color: Color(0xffFFFFFF),
+//                                      Colors.black54
+                    ),
+
+//                                  color: Color(0xffFFFFFF),
+                    width: displayWidth(context) / 2.5,
+                    height: displayHeight(context) / 24,
+                    padding:
+                        EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                    child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+//                                            height: 25,
+                          height: displayHeight(context) / 40,
+                          width: 5,
+                          margin: EdgeInsets.only(left: 0),
+//                    decoration: BoxDecoration(
+//                      shape: BoxShape.circle,
+//                      color: Colors.white,
+//                    ),
+                          child: Icon(
+//                                          Icons.add_shopping_cart,
+                            Icons.phone,
+                            size: 28,
+                            color: Color(0xffBCBCBD),
+                          ),
+                        ),
+                        Container(
+//                                        margin:  EdgeInsets.only(
+//                                          right:displayWidth(context) /32 ,
+//                                        ),
+                          alignment: Alignment.center,
+                          width: displayWidth(context) / 4,
+//                                        color:Colors.purpleAccent,
+                          // do it in both Container
+                          child: TextField(
+                            keyboardType: TextInputType.phone,
+                            inputFormatters: <TextInputFormatter>[
+                              LengthLimitingTextInputFormatter(16),
+                              WhitelistingTextInputFormatter.digitsOnly,
+//                                                WhitelistingTextInputFormatter(RegExp("+[0-9]"))
+//                                                WhitelistingTextInputFormatter(RegExp("[+]"))
+                            ],
+                            controller: phoneNumberController,
+                            textInputAction: TextInputAction.next,
+                            onSubmitted: (_) =>
+                                FocusScope.of(context).nextFocus(),
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+//                                            prefixIcon: new Icon(Icons.search),
+//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+//                                        border: Border.all(color: Colors.white, width: 2),
+                              border: InputBorder.none,
+                              hintText: 'Enter phone / telephone number',
+                              hintStyle: TextStyle(
+                                  color: Color(0xffFC0000), fontSize: 17),
+
+//                                        labelText: 'Search about meal.'
+                            ),
+                            style: TextStyle(
+                                color: Color(0xffFC0000), fontSize: 16),
+                            onChanged: (text) {
+                              print("33: $text");
+
+                              final shoppingCartBloc =
+                                  BlocProvider.of<ShoppingCartBloc>(context);
+//
+                              shoppingCartBloc.setPhoneNumberForOrder(text);
+
+                              setState(() {
+                                showFullOrderDeliveryType = false;
+                                // showFullOrderType = false;
+                                // showFullOrderType
+                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+//                                                showCustomerInformationHeader = false;
+                                showCustomerInformationHeader = true;
+                                showUserInputOptionsLikeFirstTime = false;
+                                showFullPaymentType =
+                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              });
+                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                            },
+                            onTap: () {
+                              setState(() {
+                                showFullOrderDeliveryType = false;
+                                // showFullOrderType = false;
+                                // showFullOrderType
+                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+//                                                showCustomerInformationHeader = false;
+                                showCustomerInformationHeader = true;
+                                showUserInputOptionsLikeFirstTime = false;
+                                showFullPaymentType =
+                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+//                                                showFullOrderType = false,
+                              });
+                            },
+                            onEditingComplete: () {
+//                                                              logger.i('onEditingComplete  of condition 4');
+//                                                              print('called onEditing complete');
+
+                              print(
+                                  'at editing complete of Customer Phone Iformation ');
+                              setState(() => {
+                                    showEditingCompleteCustomerPhoneIformation =
+                                        true
+//                                          showInputtedCustomerIformation= true,
+                                  });
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                : Container(),
+          ),
+
+          Container(
+              child: ((showEditingCompleteCustomerAddressInformation) &&
+                      (showEditingCompleteCustomerHouseFlatIformation) &&
+                      (showEditingCompleteCustomerPhoneIformation) &&
+                      (showEditingCompleteCustomerReachoutIformation == false))
+                  ? Container(
+                      height: displayHeight(context) / 18,
+                      width: displayWidth(context) / 1.03,
+                      child:
+                          whenYouWillPickTheOrder(unObsecuredInputandPayment),
+                    )
+                  : Container()),
+
+//          whenYouWillPickTheOrder(unObsecuredInputandPayment),
+        ],
+      ),
+    );
+  }
 
   Widget _buildShoppingCartInputFieldsUNObscuredDinningRoom(
       Order unObsecuredInputandPayment) {
-
-
     CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
-
 
     CustomerInformation currentUser = x;
 
@@ -5136,75 +4212,62 @@ color:Colors.blue,
     // work_1
     // return unobscureInputandRestforDinningRoom(unObsecuredInputandPayment);
 
-
 //    return
 //      unobscureInputandRestforTakeAway(unObsecuredInputandPayment);
 
-
     // Widget unobscureInputandRestforDinningRoom(Order unObsecuredInputandPayment) {
-
 
     // CustomerInformation currentUser = unObsecuredInputandPayment
     //     .orderingCustomer;
 
-
     print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
 
-    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+    print(
+        'showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print(
+        'showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print(
+        'showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print(
+        'showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print(
+        'allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
         ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
     return Container(
-
       height: displayHeight(context) / 2.2,
       width: displayWidth(context) / 1.03,
       // color:Colors.lightBlueAccent,
 
-      child:
-      Container(
-
-        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
-        child:
-        AnimatedSwitcher(
+      child: Container(
+        height:
+            displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+        child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
-          child:
-
-          ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-
-
-
-              &&(showEditingCompleteCustomerReachoutIformation == true)
-          ) ?
-
-          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment):
-          Container(
-
-            // color:Colors.lightBlueAccent,
-            // color: Color(0xffFFFFFF),
-            child:
-            Container(
-              // color:Colors.red,
-              height:displayHeight(context)/18,
-              width: displayWidth(context) / 1.03,
-              child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-            )
-            // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
-            ,
-          ),
+          child: ((takeAwayDinningTimeInputCompleted(
+                          unObsecuredInputandPayment.orderingCustomer) ==
+                      true) &&
+                  (showEditingCompleteCustomerReachoutIformation == true))
+              ? animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
+                  unObsecuredInputandPayment)
+              : Container(
+                  // color:Colors.lightBlueAccent,
+                  // color: Color(0xffFFFFFF),
+                  child: Container(
+                    // color:Colors.red,
+                    height: displayHeight(context) / 18,
+                    width: displayWidth(context) / 1.03,
+                    child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
+                  )
+                  // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+                  ,
+                ),
         ),
       ),
     );
 // GGG),
 
     // }
-
-
-
   }
 
   Widget _buildShoppingCartInputFieldsUNObscuredTakeAway(
@@ -5219,152 +4282,131 @@ color:Colors.blue,
     print('currentUser.phoneNumber: ${currentUser.phoneNumber}');
     print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
 
-
-
     // return
     //   unobscureInputandRestforTakeAway(unObsecuredInputandPayment);
-
 
     // Widget unobscureInputandRestforTakeAway(Order unObsecuredInputandPayment) {
     //   CustomerInformation currentUser = unObsecuredInputandPayment
     //       .orderingCustomer;
 
-
     print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
 
-    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+    print(
+        'showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print(
+        'showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print(
+        'showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print(
+        'showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print(
+        'allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
         ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
     return Container(
-
       height: displayHeight(context) / 2.2,
       width: displayWidth(context) / 1.03,
       // color:Colors.lightBlueAccent,
 
-      child:
-      Container(
-
-        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
-        child:
-        AnimatedSwitcher(
+      child: Container(
+        height:
+            displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+        child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
-          child:
+          child: ((takeAwayDinningTimeInputCompleted(
+                          unObsecuredInputandPayment.orderingCustomer) ==
+                      true)
 
-          ((takeAwayDinningTimeInputCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
+                  // 911_3
+                  //     work_3
 
-              // 911_3
-              //     work_3
-
-              &&(showEditingCompleteCustomerReachoutIformation == true)
-          ) ?
-
-          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment):
-          Container(
-
-            // color:Colors.lightBlueAccent,
-            // color: Color(0xffFFFFFF),
-            child:
-            Container(
-              // color:Colors.red,
-              height:displayHeight(context)/18,
-              width: displayWidth(context) / 1.03,
-              child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-            )
-            // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
-            ,
-          ),
+                  &&
+                  (showEditingCompleteCustomerReachoutIformation == true))
+              ? animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
+                  unObsecuredInputandPayment)
+              : Container(
+                  // color:Colors.lightBlueAccent,
+                  // color: Color(0xffFFFFFF),
+                  child: Container(
+                    // color:Colors.red,
+                    height: displayHeight(context) / 18,
+                    width: displayWidth(context) / 1.03,
+                    child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
+                  )
+                  // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+                  ,
+                ),
         ),
       ),
     );
 // GGG),
 
     // }
-
-
-
   }
 
-
-  Widget _buildShoppingCartInputFieldsUNObscuredPhone(Order unObsecuredInputandPayment) {
+  Widget _buildShoppingCartInputFieldsUNObscuredPhone(
+      Order unObsecuredInputandPayment) {
     CustomerInformation x = unObsecuredInputandPayment.orderingCustomer;
 
     CustomerInformation currentUser = x;
 
-    print('currentUser.address:--should be null or empty..... ${currentUser.address}');
-    print('currentUser.flatOrHouseNumber: --should be null or empty..... ${currentUser.flatOrHouseNumber}');
+    print(
+        'currentUser.address:--should be null or empty..... ${currentUser.address}');
+    print(
+        'currentUser.flatOrHouseNumber: --should be null or empty..... ${currentUser.flatOrHouseNumber}');
     print('currentUser.phoneNumber: ${currentUser.phoneNumber}');
     print('currentUser.etaTimeInMinutes: ${currentUser.etaTimeInMinutes}');
-
 
     // work 1
     // return unobscureInputandOthersPhone(unObsecuredInputandPayment);
 
     // Widget unobscureInputandOthersPhone(Order unObsecuredInputandPayment) {
 
-
     // CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
 
     print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
 
-    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer):'
+    print(
+        'showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print(
+        'showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print(
+        'showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print(
+        'showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print(
+        'inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer):'
         ' ${inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer)}');
 
-
-
     return Container(
-
       height: displayHeight(context) / 2.2,
       width: displayWidth(context) / 1.03,
-
-      child:
-      Container(
-
-        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
-        child:
-        AnimatedSwitcher(
+      child: Container(
+        height:
+            displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+        child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
-          child:
-          ((inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-              &&(showEditingCompleteCustomerPhoneIformation == true
-              ) &&(showEditingCompleteCustomerReachoutIformation == true)
-          ) ?
-
-          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment):
-          Container(
-
-            color: Color(0xffFFFFFF),
-            child: Center(
+          child: ((inputsForPhoneOrderTypeCompleted(
+                          unObsecuredInputandPayment.orderingCustomer) ==
+                      true) &&
+                  (showEditingCompleteCustomerPhoneIformation == true) &&
+                  (showEditingCompleteCustomerReachoutIformation == true))
+              ? animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
+                  unObsecuredInputandPayment)
+              : Container(
+                  color: Color(0xffFFFFFF),
+                  child: Center(
 //              child: inputFieldsDelivery(unObsecuredInputandPayment),
-              child: inputFieldsPhoneOrderType(unObsecuredInputandPayment),
-
-            ),
-          ),
-
-
+                    child:
+                        inputFieldsPhoneOrderType(unObsecuredInputandPayment),
+                  ),
+                ),
         ),
-
-
       ),
     );
 // GGG),
 //     }
-
-
-
   }
-
 
 // work 3
   Widget _buildShoppingCartInputFieldsUNObscuredDelivery(
@@ -5385,235 +4427,192 @@ color:Colors.blue,
 
     // Widget unobscureInputandRestDeliveryPhone(Order unObsecuredInputandPayment) {
 
-
-
     // CustomerInformation currentUser = unObsecuredInputandPayment.orderingCustomer;
 
     print('at VV VV ^^ ^^ unobscureInputandRestDeliveryPhone.......\" \"\" ');
 
-    print('showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
-    print('showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
-    print('showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
-    print('showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
-    print('allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
+    print(
+        'showEditingCompleteCustomerAddressInformation: $showEditingCompleteCustomerAddressInformation');
+    print(
+        'showEditingCompleteCustomerHouseFlatIformation: $showEditingCompleteCustomerHouseFlatIformation');
+    print(
+        'showEditingCompleteCustomerPhoneIformation : $showEditingCompleteCustomerPhoneIformation');
+    print(
+        'showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
+    print(
+        'allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
         ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
-
-
-
-
     return Container(
-
       height: displayHeight(context) / 2.2,
       width: displayWidth(context) / 1.03,
-
-      child:
-      Container(
-
-        height: displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
-
-        child:
-        AnimatedSwitcher(
+      child: Container(
+        height:
+            displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+        child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
-          child:
-          ((allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer) == true)
-              &&(
-                  showEditingCompleteCustomerAddressInformation == true
-              )
-              &&(
-                  showEditingCompleteCustomerHouseFlatIformation == true
-              )
-              &&( showEditingCompleteCustomerPhoneIformation == true
-              ) &&(showEditingCompleteCustomerReachoutIformation == true)
-          ) ?
-
-
-
-          animatedUnObscuredPaymentUnSelectContainerDeliveryPhone
-            (unObsecuredInputandPayment):
-          Container(
-
-            color: Color(0xffFFFFFF),
-            child: Center(
-              child: inputFieldsDelivery(unObsecuredInputandPayment),
-            ),
-          ),
-
-
+          child: ((allCustomerInputsCompleted(
+                          unObsecuredInputandPayment.orderingCustomer) ==
+                      true) &&
+                  (showEditingCompleteCustomerAddressInformation == true) &&
+                  (showEditingCompleteCustomerHouseFlatIformation == true) &&
+                  (showEditingCompleteCustomerPhoneIformation == true) &&
+                  (showEditingCompleteCustomerReachoutIformation == true))
+              ? animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
+                  unObsecuredInputandPayment)
+              : Container(
+                  color: Color(0xffFFFFFF),
+                  child: Center(
+                    child: inputFieldsDelivery(unObsecuredInputandPayment),
+                  ),
+                ),
         ),
-
-
       ),
     );
 // GGG),
 
     // }
-
   }
 
-
-  Widget _buildShoppingCartInputFieldsObscured(CustomerInformation obscuredDisplay) {
-
-
+  Widget _buildShoppingCartInputFieldsObscured(
+      CustomerInformation obscuredDisplay) {
     CustomerInformation currentUser = obscuredDisplay;
     // THIS INFORMATION ABOVE IS NOT USED NOW.
 
     return Center(
-
         child: Container(
 //                  color: Colors.green,
 //                    color:Colors.white.withOpacity(0.9),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Container(
+            alignment: Alignment.center,
+            child: Text(
+              'Enter user address',
+              style: TextStyle(
+                color: Color(0xffFC0000),
+                fontSize: 30,
+              ),
+            )),
 
-                Container(
-                    alignment: Alignment.center,
-
-                    child: Text('Enter user address',
-                      style: TextStyle(
-                        color:
-                        Color(0xffFC0000),
-                        fontSize: 30,
-                      ),)
-                ),
-
-
-                // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 0),
-                  decoration: BoxDecoration(
+        // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(
+              color: Color(0xffBCBCBD),
+              style: BorderStyle.solid,
+              width: 2.0,
+            ),
 
-                      color: Color(0xffBCBCBD),
-                      style: BorderStyle.solid,
-                      width: 2.0,
-
-
-                    ),
-
-                    boxShadow: [
-                      BoxShadow(
+            boxShadow: [
+              BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                          color: Color(0xffFFFFFF),
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 2.0))
-                    ],
+                  color: Color(0xffFFFFFF),
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 2.0))
+            ],
 
-
-                    color: Color(0xffFFFFFF),
+            color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                  ),
+          ),
 
 //                                  color: Color(0xffFFFFFF),
-                  width: displayWidth(context) / 2.5,
-                  height: displayHeight(context) / 24,
-                  padding: EdgeInsets.only(
-                      left: 4, top: 3, bottom: 3, right: 3),
-                  child: Row(
+          width: displayWidth(context) / 2.5,
+          height: displayHeight(context) / 24,
+          padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+          child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
 //                        height: 25,
-                        height: displayHeight(context) / 40,
-                        width: 5,
-                        margin: EdgeInsets.only(left: 0),
+                height: displayHeight(context) / 40,
+                width: 5,
+                margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                        child: Icon(
+                child: Icon(
 //                                          Icons.add_shopping_cart,
-                          Icons.location_on,
+                  Icons.location_on,
 
-                          size: 28,
-                          color: Color(0xffBCBCBD),
-                        ),
+                  size: 28,
+                  color: Color(0xffBCBCBD),
+                ),
+              ),
 
-
-                      ),
-
-                      Container(
+              Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                        alignment: Alignment.center,
-                        width: displayWidth(context) / 4,
+                alignment: Alignment.center,
+                width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                        // do it in both Container
-                        child: TextField(
-                          controller: addressController,
-
-                          textAlign: TextAlign.center,
-                          textInputAction: TextInputAction.next,
-                          onSubmitted: (_) =>
-                              FocusScope.of(context).nextFocus(),
-                          decoration: InputDecoration(
-                            focusColor: Color(0xffFC0000),
+                // do it in both Container
+                child: TextField(
+                  controller: addressController,
+                  textAlign: TextAlign.center,
+                  textInputAction: TextInputAction.next,
+                  onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                  decoration: InputDecoration(
+                    focusColor: Color(0xffFC0000),
 //                                                            fillColor: Color(0xffFC0000),
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                            border: InputBorder.none,
-                            hintText: 'Enter delivery location',
-                            hintStyle: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 17),
+                    border: InputBorder.none,
+                    hintText: 'Enter delivery location',
+                    hintStyle:
+                        TextStyle(color: Color(0xffFC0000), fontSize: 17),
 
 //                                      currentUser
 //                                        labelText: 'Search about meal.'
-                          ),
+                  ),
+                  onChanged: (text) {
+                    //RRRR
 
-                          onChanged: (text) {
-                            //RRRR
-
-                            final shoppingCartBloc = BlocProvider.of<
-                                ShoppingCartBloc>(context);
+                    final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
 //
-                            shoppingCartBloc.setAddressForOrder(text);
+                    shoppingCartBloc.setAddressForOrder(text);
 
-                            setState(() {
-                              // showFullOrderType = false;
-                              showFullOrderDeliveryType
-                              = false;
-                              // showFullOrderType = false;
-                              // showFullOrderType
-                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                    setState(() {
+                      // showFullOrderType = false;
+                      showFullOrderDeliveryType = false;
+                      // showFullOrderType = false;
+                      // showFullOrderType
+                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                              showCustomerInformationHeader = false;
-                              showCustomerInformationHeader = true;
-                              showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                            }
+                      showCustomerInformationHeader = true;
+                      showUserInputOptionsLikeFirstTime = false;
+                      showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                    }
 //                            showFullOrderType = false;
-                            );
-                          },
-
-                          onTap: () {
-                            setState(() {
-                              // showFullOrderType = false;
-                              showFullOrderDeliveryType
-                              = false;
-                              // showFullOrderType = false;
-                              // showFullOrderType
-                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                        );
+                  },
+                  onTap: () {
+                    setState(() {
+                      // showFullOrderType = false;
+                      showFullOrderDeliveryType = false;
+                      // showFullOrderType = false;
+                      // showFullOrderType
+                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                              showCustomerInformationHeader = false;
-                              showCustomerInformationHeader = true;
-                              showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                            }
-
-                            );
-                          },
-                          /*
+                      showCustomerInformationHeader = true;
+                      showUserInputOptionsLikeFirstTime = false;
+                      showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                    });
+                  },
+                  /*
 
                                                             onEditingComplete: (){
                                                               logger.i('onEditingComplete  of condition 4');
@@ -5642,158 +4641,134 @@ color:Colors.blue,
                                                             },
                           */
 
-
-                          style: TextStyle(
-                              color: Color(0xffFC0000), fontSize: 16),
-                        ),
-
-                      )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                    ],
-                  ),
+                  style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
                 ),
+              )
 
-                // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
+//                                  Spacer(),
 
-                // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 0),
-                  decoration: BoxDecoration(
+//                                  Spacer(),
+            ],
+          ),
+        ),
+
+        // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
+
+        // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(
+              color: Color(0xffBCBCBD),
+              style: BorderStyle.solid,
+              width: 2.0,
+            ),
 
-                      color: Color(0xffBCBCBD),
-                      style: BorderStyle.solid,
-                      width: 2.0,
-
-
-                    ),
-
-                    boxShadow: [
-                      BoxShadow(
+            boxShadow: [
+              BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                          color: Color(0xffFFFFFF),
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 2.0))
-                    ],
+                  color: Color(0xffFFFFFF),
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 2.0))
+            ],
 
-
-                    color: Color(0xffFFFFFF),
+            color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                  ),
+          ),
 
 //                                  color: Color(0xffFFFFFF),
-                  width: displayWidth(context) / 2.5,
-                  height: displayHeight(context) / 24,
-                  padding: EdgeInsets.only(
-                      left: 4, top: 3, bottom: 3, right: 3),
-                  child: Row(
+          width: displayWidth(context) / 2.5,
+          height: displayHeight(context) / 24,
+          padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+          child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
 //                        height: 25,
-                        height: displayHeight(context) / 40,
-                        width: 5,
-                        margin: EdgeInsets.only(left: 0),
+                height: displayHeight(context) / 40,
+                width: 5,
+                margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                        child: Icon(
+                child: Icon(
 //                                          Icons.add_shopping_cart,
-                          Icons.home,
-                          size: 28,
-                          color: Color(0xffBCBCBD),
-                        ),
+                  Icons.home,
+                  size: 28,
+                  color: Color(0xffBCBCBD),
+                ),
+              ),
 
-
-                      ),
-
-                      Container(
+              Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                        alignment: Alignment.center,
-                        width: displayWidth(context) / 4,
+                alignment: Alignment.center,
+                width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                        // do it in both Container
-                        child: TextField(
-
-                          textAlign: TextAlign.center,
-                          textInputAction: TextInputAction.next,
-                          onSubmitted: (_) =>
-                              FocusScope.of(context).nextFocus(),
-                          decoration: InputDecoration(
+                // do it in both Container
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  textInputAction: TextInputAction.next,
+                  onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                  decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                            border: InputBorder.none,
-                            hintText: 'Enter House/Flat address/number',
-                            hintStyle: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 17),
+                    border: InputBorder.none,
+                    hintText: 'Enter House/Flat address/number',
+                    hintStyle:
+                        TextStyle(color: Color(0xffFC0000), fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                          ),
-
-                          onChanged: (text) {
-                            final shoppingCartBloc = BlocProvider.of<
-                                ShoppingCartBloc>(context);
+                  ),
+                  onChanged: (text) {
+                    final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
 //
-                            shoppingCartBloc
-                                .setHouseorFlatNumberForOrder(
-                                text);
+                    shoppingCartBloc.setHouseorFlatNumberForOrder(text);
 
-                            setState(() {
-                              // showFullOrderType = false;
-                              showFullOrderDeliveryType
-                              = false;
-                              // showFullOrderType = false;
-                              // showFullOrderType
-                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                    setState(() {
+                      // showFullOrderType = false;
+                      showFullOrderDeliveryType = false;
+                      // showFullOrderType = false;
+                      // showFullOrderType
+                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                showCustomerInformationHeader = false;
-                              showCustomerInformationHeader = true;
-                              showUserInputOptionsLikeFirstTime = false;
+                      showCustomerInformationHeader = true;
+                      showUserInputOptionsLikeFirstTime = false;
 
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-
+                      showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                              showFullOrderType = false;
-                            });
-                          },
-
-
-                          onTap: () {
-                            setState(() {
+                    });
+                  },
+                  onTap: () {
+                    setState(() {
 //                              showFullOrderType = false;
 
-                              // showFullOrderType = false;
-                              showFullOrderDeliveryType
-                              = false;
-                              // showFullOrderType = false;
-                              // showFullOrderType
-                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                      // showFullOrderType = false;
+                      showFullOrderDeliveryType = false;
+                      // showFullOrderType = false;
+                      // showFullOrderType
+                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                              showCustomerInformationHeader = false;
-                              showCustomerInformationHeader = true;
-                              showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                      showCustomerInformationHeader = true;
+                      showUserInputOptionsLikeFirstTime = false;
+                      showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                              showFullOrderType = false;
-                            });
-                          },
-                          /*
+                    });
+                  },
+                  /*
 
                                                             onEditingComplete: (){
                                                               logger.i('onEditingComplete  of condition 4');
@@ -5821,437 +4796,347 @@ color:Colors.blue,
 
                                                             */
 
-                          style: TextStyle(
-                              color: Color(0xffFC0000), fontSize: 16),
-                        ),
-
-                      )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                    ],
-                  ),
+                  style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
                 ),
+              )
 
+//                                  Spacer(),
 
-                // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
+//                                  Spacer(),
+            ],
+          ),
+        ),
 
-                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 0),
-                  decoration: BoxDecoration(
+        // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
+
+        // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(
+              color: Color(0xffBCBCBD),
+              style: BorderStyle.solid,
+              width: 2.0,
+            ),
 
-                      color: Color(0xffBCBCBD),
-                      style: BorderStyle.solid,
-                      width: 2.0,
-
-
-                    ),
-
-                    boxShadow: [
-                      BoxShadow(
+            boxShadow: [
+              BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                          color: Color(0xffFFFFFF),
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 2.0))
-                    ],
+                  color: Color(0xffFFFFFF),
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 2.0))
+            ],
 
-
-                    color: Color(0xffFFFFFF),
+            color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                  ),
+          ),
 
 //                                  color: Color(0xffFFFFFF),
-                  width: displayWidth(context) / 2.5,
-                  height: displayHeight(context) / 24,
-                  padding: EdgeInsets.only(
-                      left: 4, top: 3, bottom: 3, right: 3),
-                  child: Row(
+          width: displayWidth(context) / 2.5,
+          height: displayHeight(context) / 24,
+          padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+          child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
 //                        height: 25,
-                        height: displayHeight(context) / 40,
-                        width: 5,
-                        margin: EdgeInsets.only(left: 0),
+                height: displayHeight(context) / 40,
+                width: 5,
+                margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                        child: Icon(
+                child: Icon(
 //                                          Icons.add_shopping_cart,
-                          Icons.phone,
-                          size: 28,
-                          color: Color(0xffBCBCBD),
-                        ),
+                  Icons.phone,
+                  size: 28,
+                  color: Color(0xffBCBCBD),
+                ),
+              ),
 
-
-                      ),
-
-                      Container(
+              Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                        alignment: Alignment.center,
-                        width: displayWidth(context) / 4,
+                alignment: Alignment.center,
+                width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                        // do it in both Container
-                        child: TextField(
-                          keyboardType: TextInputType.phone,
-                          inputFormatters: <TextInputFormatter>[
-                            LengthLimitingTextInputFormatter(16),
-                            WhitelistingTextInputFormatter.digitsOnly,
+                // do it in both Container
+                child: TextField(
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: <TextInputFormatter>[
+                    LengthLimitingTextInputFormatter(16),
+                    WhitelistingTextInputFormatter.digitsOnly,
 //                            WhitelistingTextInputFormatter(RegExp("[0-9]"))
 //                            WhitelistingTextInputFormatter(RegExp("[+]"))
-                          ],
-
-                          textAlign: TextAlign.center,
-                          textInputAction: TextInputAction.next,
-                          onSubmitted: (_) =>
-                              FocusScope.of(context).nextFocus(),
-                          decoration: InputDecoration(
+                  ],
+                  textAlign: TextAlign.center,
+                  textInputAction: TextInputAction.next,
+                  onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                  decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                            border: InputBorder.none,
-                            hintText: 'Enter phone / telephone number',
+                    border: InputBorder.none,
+                    hintText: 'Enter phone / telephone number',
 
-                            hintStyle: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 17),
+                    hintStyle:
+                        TextStyle(color: Color(0xffFC0000), fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                          ),
+                  ),
+                  style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                  onChanged: (text) {
+                    print("33: $text");
 
-                          style: TextStyle(
-                              color: Color(0xffFC0000), fontSize: 16),
-
-                          onChanged: (text) {
-                            print("33: $text");
-
-                            final shoppingCartBloc = BlocProvider.of<
-                                ShoppingCartBloc>(context);
+                    final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
 //
-                            shoppingCartBloc.setPhoneNumberForOrder(
-                                text);
+                    shoppingCartBloc.setPhoneNumberForOrder(text);
 
-                            setState(() {
-                              showFullOrderDeliveryType = false;
+                    setState(() {
+                      showFullOrderDeliveryType = false;
 //                              showCustomerInformationHeader = false;
-                              showCustomerInformationHeader = true;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                            }
-
-
-                            );
-                          },
-
-
-                          onTap: () {
-                            setState(() {
-                              showFullOrderDeliveryType = false;
+                      showCustomerInformationHeader = true;
+                      showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                    });
+                  },
+                  onTap: () {
+                    setState(() {
+                      showFullOrderDeliveryType = false;
 
 //                              showCustomerInformationHeader = false;
-                              showCustomerInformationHeader = true;
-                              showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                            }
-                            );
-                          },
-
-                        ),
-
-                      )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                    ],
-                  ),
+                      showCustomerInformationHeader = true;
+                      showUserInputOptionsLikeFirstTime = false;
+                      showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                    });
+                  },
                 ),
+              )
 
+//                                  Spacer(),
 
-                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
+//                                  Spacer(),
+            ],
+          ),
+        ),
 
-                // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
+        // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
 
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 0),
-                  decoration: BoxDecoration(
+        // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
+
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(
+              color: Color(0xffBCBCBD),
+              style: BorderStyle.solid,
+              width: 2.0,
+            ),
 
-                      color: Color(0xffBCBCBD),
-                      style: BorderStyle.solid,
-                      width: 2.0,
-
-
-                    ),
-
-                    boxShadow: [
-                      BoxShadow(
+            boxShadow: [
+              BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                          color: Color(0xffFFFFFF),
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 2.0))
-                    ],
+                  color: Color(0xffFFFFFF),
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 2.0))
+            ],
 
-
-                    color: Color(0xffFFFFFF),
+            color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                  ),
+          ),
 
 //                                  color: Color(0xffFFFFFF),
-                  width: displayWidth(context) / 2.5,
-                  height: displayHeight(context) / 24,
-                  padding: EdgeInsets.only(
-                      left: 4, top: 3, bottom: 3, right: 3),
-                  child: Row(
+          width: displayWidth(context) / 2.5,
+          height: displayHeight(context) / 24,
+          padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+          child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
 //                        height: 25,
-                        height: displayHeight(context) / 40,
-                        width: 5,
-                        margin: EdgeInsets.only(left: 0),
+                height: displayHeight(context) / 40,
+                width: 5,
+                margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                        child: Icon(
+                child: Icon(
 //                                          Icons.add_shopping_cart,
-                          Icons.watch_later,
-                          size: 28,
-                          color: Color(0xffBCBCBD),
-                        ),
+                  Icons.watch_later,
+                  size: 28,
+                  color: Color(0xffBCBCBD),
+                ),
+              ),
 
-
-                      ),
-
-                      Container(
+              Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                        alignment: Alignment.center,
-                        width: displayWidth(context) / 4,
+                alignment: Alignment.center,
+                width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                        // do it in both Container
-                        child: TextField(
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            WhitelistingTextInputFormatter.digitsOnly
-                          ],
-                          textInputAction: TextInputAction.done,
-                          onSubmitted: (_) => FocusScope.of(context).unfocus(),
-
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                // do it in both Container
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    WhitelistingTextInputFormatter.digitsOnly
+                  ],
+                  textInputAction: TextInputAction.done,
+                  onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                            border: InputBorder.none,
-                            hintText: 'Enter reach out time',
-                            hintStyle: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 17),
+                    border: InputBorder.none,
+                    hintText: 'Enter reach out time',
+                    hintStyle:
+                        TextStyle(color: Color(0xffFC0000), fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                          ),
+                  ),
+                  style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                  onChanged: (text) {
+                    print("0444: $text");
 
-                          style: TextStyle(
-                              color: Color(0xffFC0000), fontSize: 16),
+                    print("33: $text");
+                    final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
 
-                          onChanged: (text) {
-                            print("0444: $text");
-
-
-                            print("33: $text");
-                            final shoppingCartBloc = BlocProvider.of<
-                                ShoppingCartBloc>(context);
-
-                            shoppingCartBloc.setETAForOrder(text);
-                            setState(() {
-                              showFullOrderDeliveryType = false;
+                    shoppingCartBloc.setETAForOrder(text);
+                    setState(() {
+                      showFullOrderDeliveryType = false;
 
 //                            showCustomerInformationHeader = false;
-                              showCustomerInformationHeader = true;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                              showUserInputOptionsLikeFirstTime = false;
-                            });
-                          },
-
-                          onTap: () {
-                            setState(() {
-                              showFullOrderDeliveryType = false;
+                      showCustomerInformationHeader = true;
+                      showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                      showUserInputOptionsLikeFirstTime = false;
+                    });
+                  },
+                  onTap: () {
+                    setState(() {
+                      showFullOrderDeliveryType = false;
 //                              showCustomerInformationHeader = false;
-                              showUserInputOptionsLikeFirstTime = false;
-                              showCustomerInformationHeader = true;
-                              showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                            }
-                            );
-                          },
-
-                        ),
-
-                      )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
-
-                    ],
-                  ),
+                      showUserInputOptionsLikeFirstTime = false;
+                      showCustomerInformationHeader = true;
+                      showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                    });
+                  },
                 ),
+              )
 
-                // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+//                                  Spacer(),
 
+//                                  Spacer(),
+            ],
+          ),
+        ),
 
-              ],
-            )
-        )
-
-    );
+        // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+      ],
+    )));
   }
 
-
-
-
-  Widget animatedUnObscuredPaymentUnSelectContainerPhoneOnly(Order unObsecuredInputandPayment) {
+  Widget animatedUnObscuredPaymentUnSelectContainerPhoneOnly(
+      Order unObsecuredInputandPayment) {
     print('at animated Un Obscured Card UnSelect Container');
-    return
-      Column(
-        children: <Widget>[
-
-          Container(
-              color: Colors.white,
-              width: displayWidth(context)/1.03,
+    return Column(
+      children: <Widget>[
+        Container(
+            color: Colors.white,
+            width: displayWidth(context) / 1.03,
 //                                            width: displayWidth(context) * 0.57,
 
-
-              // Work 5.
-              child: Container(child:
-              AnimatedSwitcher(
+            // Work 5.
+            child: Container(
+              child: AnimatedSwitcher(
                 duration: Duration(milliseconds: 0),
 //
                 child: showFullPaymentType == false
-                    ? animatedWidgetShowSelectedPaymentTypeDeliveryPhone(unObsecuredInputandPayment) :
-                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(unObsecuredInputandPayment)
-                ,
-
+                    ? animatedWidgetShowSelectedPaymentTypeDeliveryPhone(
+                        unObsecuredInputandPayment)
+                    : _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
+                        unObsecuredInputandPayment),
               ),
-
-
-              )
+            )
             //HHHH
 
-
-          ),
-
-          Container(
-
+            ),
+        Container(
 //            alignment: Alignment.center,
-            /*
+          /*
     padding: EdgeInsets.fromLTRB(displayWidth(context)/3,
                 0, 0, 0),
 
 
             */
 
-            width: displayWidth(context)/1.03,
-            child:
-            AnimatedSwitcher(
-              duration: Duration(milliseconds: 0),
+          width: displayWidth(context) / 1.03,
+          child: AnimatedSwitcher(
+            duration: Duration(milliseconds: 0),
 //
-              child: showFullPaymentType == false ?
-              animatedUnObscuredCancelPayButtonDeliveryPhone(
-                  unObsecuredInputandPayment) :
-              animatedObscuredCancelPayButtonDeliveryPhone(
-                  unObsecuredInputandPayment)
-
-              ,
-
-            ),
+            child: showFullPaymentType == false
+                ? animatedUnObscuredCancelPayButtonDeliveryPhone(
+                    unObsecuredInputandPayment)
+                : animatedObscuredCancelPayButtonDeliveryPhone(
+                    unObsecuredInputandPayment),
           ),
-
-
-        ],
-      );
+        ),
+      ],
+    );
   }
 
   Widget animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
       Order unObsecuredInputandPayment) {
     print('at animated Un Obscured  Payment UnSelect Container Delivery Phone');
-    return
-      Column(
-        children: <Widget>[
-          Container(
-
-              color: Colors.white,
-
-              width: displayWidth(context)/1.03,
-              child: Container(child:
-              AnimatedSwitcher(
+    return Column(
+      children: <Widget>[
+        Container(
+            color: Colors.white,
+            width: displayWidth(context) / 1.03,
+            child: Container(
+              child: AnimatedSwitcher(
                 duration: Duration(milliseconds: 0),
 //
                 child: showFullPaymentType == false
                     ? animatedWidgetShowSelectedPaymentTypeDeliveryPhone(
-                    unObsecuredInputandPayment)
-                    :
-                _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
-                    unObsecuredInputandPayment)
-                ,
-
+                        unObsecuredInputandPayment)
+                    : _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
+                        unObsecuredInputandPayment),
               ),
-
-
-              )
-
-          ),
-
-          Container(
-
-            width: displayWidth(context)/1.03,
-            child:
-            AnimatedSwitcher(
-              duration: Duration(milliseconds: 0),
+            )),
+        Container(
+          width: displayWidth(context) / 1.03,
+          child: AnimatedSwitcher(
+            duration: Duration(milliseconds: 0),
 //
-              child: showFullPaymentType == false ?
-              animatedUnObscuredCancelPayButtonDeliveryPhone(
-                  unObsecuredInputandPayment) :
-              animatedObscuredCancelPayButtonDeliveryPhone(
-                  unObsecuredInputandPayment)
-
-              ,
-
-            ),
+            child: showFullPaymentType == false
+                ? animatedUnObscuredCancelPayButtonDeliveryPhone(
+                    unObsecuredInputandPayment)
+                : animatedObscuredCancelPayButtonDeliveryPhone(
+                    unObsecuredInputandPayment),
           ),
-
-
-        ],
-      );
+        ),
+      ],
+    );
   }
-
 
   Widget animatedObscuredCancelPayButtonTakeAwayDinning(Order cancelPaySelect) {
     //  Widget animatedObscuredTextInputContainer(){
@@ -6262,103 +5147,97 @@ color:Colors.blue,
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
         'animated Obscured Cancel Pay Button()');
-    return
-      AbsorbPointer(
-        child: Opacity(
-          opacity: 0.2,
-          child: Container(
-
-            color: Colors.white,
-            margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-
-
-                Container(
-                  width: displayWidth(context) / 4,
-                  height: displayHeight(context) / 24,
-                  child: OutlineButton(
-                    onPressed: () {
-                      print('Cancel Pressed obscured animatedObscuredCancelPayButtonTakeAwayDinning');
+    return AbsorbPointer(
+      child: Opacity(
+        opacity: 0.2,
+        child: Container(
+          color: Colors.white,
+          margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: displayWidth(context) / 4,
+                height: displayHeight(context) / 24,
+                child: OutlineButton(
+                  onPressed: () {
+                    print(
+                        'Cancel Pressed obscured animatedObscuredCancelPayButtonTakeAwayDinning');
 //                    onPressed: _testPrintDummyDe
 //                    return Navigator.pop(context,true);
-                    },
-                    color: Color(0xffFC0000),
-                    // clipBehavior:Clip.hardEdge,
+                  },
+                  color: Color(0xffFC0000),
+                  // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                    borderSide: BorderSide(
-                      color: Color(0xffFC0000), // 0xff54463E
-                      style: BorderStyle.solid,
-                      width: 7.6,
-                    ),
-                    shape: RoundedRectangleBorder(
-
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                    child: Container(
-
+                  borderSide: BorderSide(
+                    color: Color(0xffFC0000), // 0xff54463E
+                    style: BorderStyle.solid,
+                    width: 7.6,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
+                  child: Container(
 //              alignment: Alignment.center,
-                      child: Text('Cancel',
-                        style: TextStyle(color: Color(0xffFC0000),
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,),),
-
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: Color(0xffFC0000),
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-
                 ),
-
-
-                SizedBox(width: displayWidth(context) / 12,),
-                Container(
-                  width: displayWidth(context) / 4,
+              ),
+              SizedBox(
+                width: displayWidth(context) / 12,
+              ),
+              Container(
+                width: displayWidth(context) / 4,
 //                  width:displayWidth(context)/3.1,
-                  height: displayHeight(context) / 24,
-                  child: OutlineButton(
-                    onPressed: () async {
-                      print('obscure pay');
-                    },
-                    color: Colors.green,
-                    // clipBehavior:Clip.hardEdge,
+                height: displayHeight(context) / 24,
+                child: OutlineButton(
+                  onPressed: () async {
+                    print('obscure pay');
+                  },
+                  color: Colors.green,
+                  // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                    borderSide: BorderSide(
-                      color: Colors.green, // 0xff54463E
-                      style: BorderStyle.solid,
-                      width: 7.6,
-                    ),
-                    shape: RoundedRectangleBorder(
-
-
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                    child: Container(
-
+                  borderSide: BorderSide(
+                    color: Colors.green, // 0xff54463E
+                    style: BorderStyle.solid,
+                    width: 7.6,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
+                  child: Container(
 //              alignment: Alignment.center,
 
-                      //OBSCURE PAY
+                    //OBSCURE PAY
 
-                      child: Text('Pay', style: TextStyle(color: Colors.green,
-                        fontSize: 30, fontWeight: FontWeight.bold,),
-                      ),),
+                    child: Text(
+                      'Pay',
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-
-
                 ),
-
-
-              ],
-            ),
+              ),
+            ],
           ),
-
-
         ),
-      );
+      ),
+    );
   }
 
   Widget animatedObscuredCancelPayButtonDeliveryPhone(Order cancelPaySelect) {
@@ -6370,104 +5249,96 @@ color:Colors.blue,
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
         'animated Obscured Cancel Pay Button()');
-    return
-      AbsorbPointer(
-        child: Opacity(
-          opacity: 0.2,
-          child:
-          Container(
-            color: Colors.white,
-            margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-
-                Container(
-                  width: displayWidth(context) / 4,
-                  height: displayHeight(context) / 24,
-                  child: OutlineButton(
-                    onPressed: () {
-                      print('Cancel Pressed obscured delivery phone obscured');
+    return AbsorbPointer(
+      child: Opacity(
+        opacity: 0.2,
+        child: Container(
+          color: Colors.white,
+          margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: displayWidth(context) / 4,
+                height: displayHeight(context) / 24,
+                child: OutlineButton(
+                  onPressed: () {
+                    print('Cancel Pressed obscured delivery phone obscured');
 //                    onPressed: _testPrintDummyDe
 //                    return Navigator.pop(context,true);
-                    },
-                    color: Color(0xffFC0000),
-                    // clipBehavior:Clip.hardEdge,
+                  },
+                  color: Color(0xffFC0000),
+                  // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                    borderSide: BorderSide(
-                      color: Color(0xffFC0000), // 0xff54463E
-                      style: BorderStyle.solid,
-                      width: 7.6,
-                    ),
-                    shape: RoundedRectangleBorder(
-
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                    child: Container(
-
+                  borderSide: BorderSide(
+                    color: Color(0xffFC0000), // 0xff54463E
+                    style: BorderStyle.solid,
+                    width: 7.6,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
+                  child: Container(
 //              alignment: Alignment.center,
-                      child: Text('Cancel',
-                        style: TextStyle(color: Color(0xffFC0000),
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,),),
-
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: Color(0xffFC0000),
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-
                 ),
-
-
-                SizedBox(width: displayWidth(context) / 12,),
-                Container(
-                  width: displayWidth(context) / 4,
-                  height: displayHeight(context) / 24,
-                  child: OutlineButton(
-                    onPressed: () async {
-                      print(
-                          'pay button Pressed obscured delivery phone obscured');
-                    },
-                    color: Colors.green,
-                    // clipBehavior:Clip.hardEdge,
+              ),
+              SizedBox(
+                width: displayWidth(context) / 12,
+              ),
+              Container(
+                width: displayWidth(context) / 4,
+                height: displayHeight(context) / 24,
+                child: OutlineButton(
+                  onPressed: () async {
+                    print(
+                        'pay button Pressed obscured delivery phone obscured');
+                  },
+                  color: Colors.green,
+                  // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                    borderSide: BorderSide(
-                      color: Colors.green, // 0xff54463E
-                      style: BorderStyle.solid,
-                      width: 7.6,
-                    ),
-                    shape: RoundedRectangleBorder(
-
-
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                    child: Container(
-
+                  borderSide: BorderSide(
+                    color: Colors.green, // 0xff54463E
+                    style: BorderStyle.solid,
+                    width: 7.6,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
+                  child: Container(
 //              alignment: Alignment.center,
 
-                      // PAY OBSCURED DELIVERY PHONE...
-                      child: Text('Pay', style: TextStyle(color: Colors.green,
-                        fontSize: 30, fontWeight: FontWeight.bold,),
-                      ),),
+                    // PAY OBSCURED DELIVERY PHONE...
+                    child: Text(
+                      'Pay',
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-
-
                 ),
-
-
-              ],
-            ),
+              ),
+            ],
           ),
-
-
         ),
-      );
+      ),
+    );
   }
-
-
 
   Widget animatedUnObscuredCancelPayButtonTakeAwayDinning(
       Order cancelPaySelectUNObscuredTakeAwayDinning) {
@@ -6479,45 +5350,45 @@ color:Colors.blue,
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
         'animatedUnObscuredCancelPayButtonTakeAwayDinning()');
-    return
-      Container(
-        margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: displayWidth(context) / 4,
-              height: displayHeight(context) / 24,
-              child: OutlineButton(
-                color: Color(0xffFC0000),
-                // clipBehavior:Clip.hardEdge,
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: displayWidth(context) / 4,
+            height: displayHeight(context) / 24,
+            child: OutlineButton(
+              color: Color(0xffFC0000),
+              // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                borderSide: BorderSide(
-                  color: Color(0xffFC0000), // 0xff54463E
-                  style: BorderStyle.solid,
-                  width: 7.6,
-                ),
-                shape: RoundedRectangleBorder(
-
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-                child: Container(
-
+              borderSide: BorderSide(
+                color: Color(0xffFC0000), // 0xff54463E
+                style: BorderStyle.solid,
+                width: 7.6,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35.0),
+              ),
+              child: Container(
 //              alignment: Alignment.center,
-                  child: Text('Cancel',
-                    style: TextStyle(color: Color(0xffFC0000),
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,),),
-
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    color: Color(0xffFC0000),
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                onPressed: () {
-                  print(
-                      'on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+              ),
+              onPressed: () {
+                print(
+                    'on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
 
-                  /*
+                /*
                         cancelPaySelect.page=1;
                         return Navigator.of(context).pop(
                             BlocProvider<ShoppingCartBloc>(
@@ -6530,150 +5401,125 @@ color:Colors.blue,
                         ),);
                         */
 
-                  print(
-                      'debug print before invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button ');
-                  _stopScanDevices();
-                  print(
-                      'debug print after invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button');
+                print(
+                    'debug print before invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button ');
+                _stopScanDevices();
+                print(
+                    'debug print after invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button');
 
+                final shoppingCartBloc =
+                    BlocProvider.of<ShoppingCartBloc>(context);
+                shoppingCartBloc.clearSubscription();
 
-                  final shoppingCartBloc = BlocProvider.of<
-                      ShoppingCartBloc>(context);
-                  shoppingCartBloc.clearSubscription();
+                cancelPaySelectUNObscuredTakeAwayDinning.isCanceled = true;
 
-                  cancelPaySelectUNObscuredTakeAwayDinning.isCanceled = true;
-
-
-                  return Navigator.pop(
-                      context, cancelPaySelectUNObscuredTakeAwayDinning);
-
+                return Navigator.pop(
+                    context, cancelPaySelectUNObscuredTakeAwayDinning);
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
-                },
-              ),
+              },
             ),
-
-            SizedBox(width: displayWidth(context) / 12,),
-
-            Container(
-              width: displayWidth(context) / 4,
-              height: displayHeight(context) / 24,
-              child: OutlineButton(
-                color: Colors.green,
-                // clipBehavior:Clip.hardEdge,
+          ),
+          SizedBox(
+            width: displayWidth(context) / 12,
+          ),
+          Container(
+            width: displayWidth(context) / 4,
+            height: displayHeight(context) / 24,
+            child: OutlineButton(
+              color: Colors.green,
+              // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                borderSide: BorderSide(
-                  color: Colors.green, // 0xff54463E
-                  style: BorderStyle.solid,
-                  width: 7.6,
-                ),
-                shape: RoundedRectangleBorder(
-
-
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-                child: Container(
-
+              borderSide: BorderSide(
+                color: Colors.green, // 0xff54463E
+                style: BorderStyle.solid,
+                width: 7.6,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35.0),
+              ),
+              child: Container(
 //              alignment: Alignment.center,
 
-                  // PAY UNOBSCURED DINNING TAKEAWAY.
-                  child: Text('Pay', style: TextStyle(color: Colors.green,
-                    fontSize: 30, fontWeight: FontWeight.bold,),
-                  ),),
+                // PAY UNOBSCURED DINNING TAKEAWAY.
+                child: Text(
+                  'Pay',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
 
+              onPressed: () async {
+                // TAkEAWAY AND DINNING DUMMY PRINT ....
+                final shoppingCartBloc =
+                    BlocProvider.of<ShoppingCartBloc>(context);
 
+                print(
+                    'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning.paymentTypeIndex}');
 
+                // PRINTING CODES WILL BE PUTTED HERE.
 
-                onPressed: () async {
+                print(
+                    'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
-                  // TAkEAWAY AND DINNING DUMMY PRINT ....
-                  final shoppingCartBloc = BlocProvider.of<
-                      ShoppingCartBloc>(context);
+                Order tempOrderWithdocId =
+                    await shoppingCartBloc.paymentButtonPressed(
+                        cancelPaySelectUNObscuredTakeAwayDinning);
 
-
-                  print(
-                      'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning
-                          .paymentTypeIndex}');
-
-
-                  // PRINTING CODES WILL BE PUTTED HERE.
-
-                  print(
-                      'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
-
-                  Order tempOrderWithdocId = await shoppingCartBloc
-                      .paymentButtonPressed(cancelPaySelectUNObscuredTakeAwayDinning);
-
-
-
-
-
-                  if ((cancelPaySelectUNObscuredTakeAwayDinning.paymentButtonPressed == true) &&
-                      (cancelPaySelectUNObscuredTakeAwayDinning.orderdocId == '')) {
-                    _scaffoldKeyShoppingCartPage.currentState
+                if ((cancelPaySelectUNObscuredTakeAwayDinning
+                            .paymentButtonPressed ==
+                        true) &&
+                    (cancelPaySelectUNObscuredTakeAwayDinning.orderdocId ==
+                        '')) {
+                  _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
-                        .showSnackBar(
-                        SnackBar(content: Text("someThing went wrong")));
-                    print('something went wrong');
-                  }
-                  else {
-                    print('tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning
-                        .orderdocId}');
+                      .showSnackBar(
+                          SnackBar(content: Text("someThing went wrong")));
+                  print('something went wrong');
+                } else {
+                  print(
+                      'tempOrderWithdocId.orderdocId: ${cancelPaySelectUNObscuredTakeAwayDinning.orderdocId}');
 
-                    List<
-                        PrinterBluetooth> blueToothDevicesState = shoppingCartBloc
-                        .getDevices;
+                  List<PrinterBluetooth> blueToothDevicesState =
+                      shoppingCartBloc.getDevices;
 
-                    print('blueToothDevicesState.length: ${blueToothDevicesState
-                        .length}');
+                  print(
+                      'blueToothDevicesState.length: ${blueToothDevicesState.length}');
 
+                  BluetoothDevice _x = new BluetoothDevice();
+                  _x.name = 'Restaurant Printer';
+                  _x.address = '0F:02:18:51:23:46';
+                  _x.type = 3;
+                  _x.connected = null;
 
-                    BluetoothDevice _x = new BluetoothDevice();
-                    _x.name = 'Restaurant Printer';
-                    _x.address = '0F:02:18:51:23:46';
-                    _x.type = 3;
-                    _x.connected = null;
+                  PrinterBluetooth x = new PrinterBluetooth(_x);
 
+                  _testPrintDummyDevices(x);
 
-                    PrinterBluetooth x = new PrinterBluetooth(_x);
+                  shoppingCartBloc.clearSubscription();
 
-                    _testPrintDummyDevices(x);
-
-                    shoppingCartBloc.clearSubscription();
-
-
-                    print('Unboscured takeAway || '
-                        'DinningRoom Dummy print--- returning to FoodGallery Page');
-                    return Navigator.pop(
-                        context, cancelPaySelectUNObscuredTakeAwayDinning);
-
-
-                  }
-
-                },
-
-
-
-              ),
+                  print('Unboscured takeAway || '
+                      'DinningRoom Dummy print--- returning to FoodGallery Page');
+                  return Navigator.pop(
+                      context, cancelPaySelectUNObscuredTakeAwayDinning);
+                }
+              },
             ),
-
-
-          ],
-        ),
-
-
-      );
+          ),
+        ],
+      ),
+    );
   }
 
-
   Future<void> _showMyDialog2(String message) async {
-
     logger.e('in showMyDialog2');
     print(' at the beginning of  _showMyDialog2 ....');
-
 
     return showDialog<void>(
       context: context,
@@ -6685,7 +5531,6 @@ color:Colors.blue,
             child: ListBody(
               children: <Widget>[
                 Text('$message'),
-
               ],
             ),
           ),
@@ -6693,11 +5538,7 @@ color:Colors.blue,
             FlatButton(
               child: Text('return Home page.'),
               onPressed: () {
-
-
                 Navigator.of(context).pop();
-
-
               },
             ),
           ],
@@ -6706,259 +5547,225 @@ color:Colors.blue,
     );
   }
 
-
 // animatedUnObscuredCancelPayButton
 // animatedUnObscuredCancelPayButtonDeliveryPhone
   Widget animatedUnObscuredCancelPayButtonDeliveryPhone(
       Order cancelPaySelectUnobscuredDeliveryPhone) {
-
-
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
         'animated Obscured Cancel Pay Button()');
-    return
-      Container(
-        margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-
-
-            Container(
-              width: displayWidth(context) / 4,
-              height: displayHeight(context) / 24,
-              child: OutlineButton(
-                color: Color(0xffFC0000),
-
-                borderSide: BorderSide(
-                  color: Color(0xffFC0000), // 0xff54463E
-                  style: BorderStyle.solid,
-                  width: 7.6,
-                ),
-                shape: RoundedRectangleBorder(
-
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-                child: Container(
-
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: displayWidth(context) / 4,
+            height: displayHeight(context) / 24,
+            child: OutlineButton(
+              color: Color(0xffFC0000),
+              borderSide: BorderSide(
+                color: Color(0xffFC0000), // 0xff54463E
+                style: BorderStyle.solid,
+                width: 7.6,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35.0),
+              ),
+              child: Container(
 //              alignment: Alignment.center,
-                  child: Text('Cancel',
-                    style: TextStyle(color: Color(0xffFC0000),
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,),),
-
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    color: Color(0xffFC0000),
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                onPressed: () {
-                  print(
-                      'on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
+              ),
+              onPressed: () {
+                print(
+                    'on Pressed of Cancel of animatedUnObscuredCancelPayButtonTakeAway');
 
+                print(
+                    'debug print before invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
+                _stopScanDevices();
+                print(
+                    'debug print after invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
-
-                  print(
-                      'debug print before invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button ');
-                  _stopScanDevices();
-                  print(
-                      'debug print after invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
-
-
-                  final shoppingCartBloc = BlocProvider.of<
-                      ShoppingCartBloc>(context);
-                  shoppingCartBloc.clearSubscription();
+                final shoppingCartBloc =
+                    BlocProvider.of<ShoppingCartBloc>(context);
+                shoppingCartBloc.clearSubscription();
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
 //                  shoppingCartBloc.getExpandedSelectedFood;
-                  cancelPaySelectUnobscuredDeliveryPhone.isCanceled = true;
+                cancelPaySelectUnobscuredDeliveryPhone.isCanceled = true;
 
-
-                  /*
+                /*
                   //MIGHT NOT BE NECESSARY.
                   setState(() {
                     localScanAvailableState = !localScanAvailableState;
                   });
                   */
 
-
-                  return Navigator.pop(
-                      context, cancelPaySelectUnobscuredDeliveryPhone);
+                return Navigator.pop(
+                    context, cancelPaySelectUnobscuredDeliveryPhone);
 //                  return Navigator.pop(context,cancelPaySelect);
 
 //                  return Navigator.pop(context,expandedFoodReturnTemp);
-                },
-              ),
+              },
             ),
-
-            SizedBox(width: displayWidth(context) / 12,),
-
-            Container(
-              width: displayWidth(context) / 4,
-              height: displayHeight(context) / 24,
-              child: OutlineButton(
-                color: Colors.green,
-                // clipBehavior:Clip.hardEdge,
+          ),
+          SizedBox(
+            width: displayWidth(context) / 12,
+          ),
+          Container(
+            width: displayWidth(context) / 4,
+            height: displayHeight(context) / 24,
+            child: OutlineButton(
+              color: Colors.green,
+              // clipBehavior:Clip.hardEdge,
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                borderSide: BorderSide(
-                  color: Colors.green, // 0xff54463E
-                  style: BorderStyle.solid,
-                  width: 7.6,
-                ),
-                shape: RoundedRectangleBorder(
-
-
-                  borderRadius: BorderRadius.circular(35.0),
-                ),
-                child: Container(
-
+              borderSide: BorderSide(
+                color: Colors.green, // 0xff54463E
+                style: BorderStyle.solid,
+                width: 7.6,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35.0),
+              ),
+              child: Container(
 //              alignment: Alignment.center,
 
-                  //    cancel Pay Select Unobscured Delivery Phone
-                  child: Text('Pay', style: TextStyle(color: Colors.green,
+                //    cancel Pay Select Unobscured Delivery Phone
+                child: Text(
+                  'Pay',
+                  style: TextStyle(
+                    color: Colors.green,
                     fontSize: 30,
-                    fontWeight: FontWeight.bold,),
-                  ),),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
 
+              onPressed: () async {
+                // Delivery Phone Recite Print.
 
+                final shoppingCartBloc =
+                    BlocProvider.of<ShoppingCartBloc>(context);
 
+                print(
+                    'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: '
+                    '${cancelPaySelectUnobscuredDeliveryPhone.paymentTypeIndex}');
 
+                // let's not use this order returned use the one from the bloc:
+                // Order tempOrderWithdocId
+                Order tempOrderWithdocId =
+                    await shoppingCartBloc.paymentButtonPressed(
+                        cancelPaySelectUnobscuredDeliveryPhone);
 
-                onPressed: () async {
+                if ((cancelPaySelectUnobscuredDeliveryPhone
+                            .paymentButtonPressed ==
+                        true) &&
+                    (cancelPaySelectUnobscuredDeliveryPhone.orderdocId == '')) {
+                  _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+                      SnackBar(content: Text("someThing went wrong")));
+                  print('something went wrong');
+                } else {
+                  logger.i(
+                      'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone.orderdocId}');
 
-                  // Delivery Phone Recite Print.
-
-                  final shoppingCartBloc = BlocProvider.of<
-                      ShoppingCartBloc>(context);
-
+                  List<PrinterBluetooth> blueToothDevicesState =
+                      shoppingCartBloc.getDevices;
 
                   print(
-                      'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: '
-                          '${cancelPaySelectUnobscuredDeliveryPhone
-                          .paymentTypeIndex}');
+                      'blueToothDevicesState.length: ${blueToothDevicesState.length}');
 
-                  // let's not use this order returned use the one from the bloc:
-                  // Order tempOrderWithdocId
-                  Order tempOrderWithdocId = await shoppingCartBloc
-                      .paymentButtonPressed(
-                      cancelPaySelectUnobscuredDeliveryPhone);
+                  if (blueToothDevicesState.length == 0) {
+                    logger.i('___________ blueTooth device not found _____');
 
+                    await _showMyDialog2(
+                        '___________ blueTooth device not found _____ delivery phone pay button');
 
-                  if ((cancelPaySelectUnobscuredDeliveryPhone.paymentButtonPressed == true) &&
-                      (cancelPaySelectUnobscuredDeliveryPhone.orderdocId == '')) {
-                    _scaffoldKeyShoppingCartPage.currentState
-                        .showSnackBar(
-                        SnackBar(content: Text("someThing went wrong")));
-                    print('something went wrong');
-                  }
-                  else {
-                    logger.i(
-                        'tempOrderWithdocId.orderdocId: ${cancelPaySelectUnobscuredDeliveryPhone
-                            .orderdocId}');
+                    print(
+                        'at here... __________ blueTooth device not found _____ delivery phone pay button');
 
-                    List<PrinterBluetooth> blueToothDevicesState
-                    = shoppingCartBloc.getDevices;
-
-                    print('blueToothDevicesState.length: ${blueToothDevicesState
-                        .length}');
-
-                    if (blueToothDevicesState.length == 0) {
-                      logger.i('___________ blueTooth device not found _____');
-
-                      await _showMyDialog2(
-                          '___________ blueTooth device not found _____ delivery phone pay button');
+                    shoppingCartBloc.clearSubscription();
+                    return Navigator.pop(
+                        context, cancelPaySelectUnobscuredDeliveryPhone);
+                  } else {
+                    bool found = false;
+                    int index = -1;
+                    for (int i = 0; i < blueToothDevicesState.length; i++) {
+                      ++index;
 
                       print(
-                          'at here... __________ blueTooth device not found _____ delivery phone pay button');
+                          'blueToothDevicesState[$i].name: ${blueToothDevicesState[i].name}');
+                      print(
+                          'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i].address}');
 
-                      shoppingCartBloc.clearSubscription();
-                      return Navigator.pop(
-                          context, cancelPaySelectUnobscuredDeliveryPhone);
+                      if ((blueToothDevicesState[i].name ==
+                              'Restaurant Printer') ||
+                          (blueToothDevicesState[i].address ==
+                              '0F:02:18:51:23:46')) {
+                        found = true;
+                        break;
 
+                        // _testPrint(oneBlueToothDevice);
+
+                      }
                     }
+                    ;
 
-                    else {
-                      bool found = false;
-                      int index = -1;
-                      for (int i = 0; i < blueToothDevicesState.length; i++) {
-                        ++index;
+                    logger.w('check device listed or not');
+                    print('index: $index');
+                    print('found == true ${found == true}');
 
-                        print(
-                            'blueToothDevicesState[$i].name: ${blueToothDevicesState[i]
-                                .name}');
-                        print(
-                            'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i]
-                                .address}');
-
-                        if ((blueToothDevicesState[i].name ==
-                            'Restaurant Printer') ||
-                            (blueToothDevicesState[i].address ==
-                                '0F:02:18:51:23:46')) {
-                          found = true;
-                          break;
-
-                          // _testPrint(oneBlueToothDevice);
-
-                        }
-                      };
-
-
-
-                      logger.w('check device listed or not');
-                      print('index: $index');
-                      print('found == true ${found == true}');
-
-                      if (found == true) {
-                        print('found == true');
-                        bool printResult = await _testPrint(
-                            blueToothDevicesState[index]);
+                    if (found == true) {
+                      print('found == true');
+                      bool printResult =
+                          await _testPrint(blueToothDevicesState[index]);
 
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
-
-                        if (printResult == true) {
-                          logger.i('printResult==true i.e. print successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                        else {
-                          logger.i('printResult!=true i.e. print UN successfull');
-                          shoppingCartBloc.clearSubscription();
-                          return Navigator.pop(
-                              context, cancelPaySelectUnobscuredDeliveryPhone);
-                        }
-                      }
-                      else {
-
-
-                        logger.i(
-                            '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
-
-                        await
-                        _showMyDialog2('___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
-
-
+                      if (printResult == true) {
+                        logger.i('printResult==true i.e. print successfull');
                         shoppingCartBloc.clearSubscription();
-                        print('going to food Gallery page  Restaurant Printer not found');
+                        return Navigator.pop(
+                            context, cancelPaySelectUnobscuredDeliveryPhone);
+                      } else {
+                        logger.i('printResult!=true i.e. print UN successfull');
+                        shoppingCartBloc.clearSubscription();
                         return Navigator.pop(
                             context, cancelPaySelectUnobscuredDeliveryPhone);
                       }
+                    } else {
+                      logger.i(
+                          '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
+
+                      await _showMyDialog2(
+                          '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+
+                      shoppingCartBloc.clearSubscription();
+                      print(
+                          'going to food Gallery page  Restaurant Printer not found');
+                      return Navigator.pop(
+                          context, cancelPaySelectUnobscuredDeliveryPhone);
                     }
                   }
+                }
+              },
 
-                },
-
-                // ---
-              ),
+              // ---
             ),
-
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
-
-
-
 
   // work 4
   Widget animatedWidgetShowSelectedPaymentTypeDeliveryPhone(
@@ -6967,27 +5774,23 @@ color:Colors.blue,
 
     // work -3
     return Container(
-
 //      color:Colors.deepOrange,
       height: displayHeight(context) / 8.2,
       child: StreamBuilder(
           stream: shoppingCartbloc.getCurrentPaymentTypeSingleSelectStream,
           initialData: shoppingCartbloc.getCurrentPaymentType,
-
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               print('!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
               return Container(child: Text('Null'));
-            }
-            else {
-              List<
-                  PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot
-                  .data;
+            } else {
+              List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect =
+                  snapshot.data;
 
-              PaymentTypeSingleSelect selectedOne = allPaymentTypesSingleSelect
-                  .firstWhere((onePaymentType) =>
-              onePaymentType.isSelected == true);
+              PaymentTypeSingleSelect selectedOne =
+                  allPaymentTypesSingleSelect.firstWhere(
+                      (onePaymentType) => onePaymentType.isSelected == true);
 
               _currentPaymentTypeIndex = selectedOne.index;
 //              logger.e('selectedOne.index',selectedOne.index);
@@ -6996,15 +5799,12 @@ color:Colors.blue,
               String borderColor = selectedOne.borderColor;
               const Color OrderTypeIconColor = Color(0xff070707);
 
-
               return Container(
                 child: Column(
                   children: <Widget>[
                     Container(
-
-
 //                      width: displayWidth(context) / 1.03-60 /* for example*/,
-                      width: ((displayWidth(context) / 1.03) -40) ,
+                      width: ((displayWidth(context) / 1.03) - 40),
 //                      height: displayHeight(context) / 10,
                       height: displayHeight(context) / 9.2,
 //                height: displayHeight(context) / 12,
@@ -7016,10 +5816,8 @@ color:Colors.blue,
                           color: Colors.grey,
                           style: BorderStyle.solid,
                           width: 2.0,
-
                         ),
                         shape: BoxShape.rectangle,
-
                       ),
 //                      color: Color(0xffffffff),
                       child: Row(
@@ -7028,13 +5826,10 @@ color:Colors.blue,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-
-
                           Container(
 //                            color:Colors.greenAccent,
                             width: displayWidth(context) / 2.5,
                             height: displayHeight(context) / 20,
-
 
 //                            color: Color(0xffffffff),
 
@@ -7042,111 +5837,81 @@ color:Colors.blue,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-
                                   Container(
-                                    margin: EdgeInsets
-                                        .fromLTRB(
-                                        20, 0, 10, 0),
+                                    margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
                                     alignment: Alignment.center,
-                                    child: Text(
-                                        'Payment Method',
+                                    child: Text('Payment Method',
                                         style: TextStyle(
                                           fontSize: 30,
-                                          fontWeight: FontWeight
-                                              .normal,
+                                          fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                          color: Color(
-                                              0xff000000),
-                                        )
-                                    ),
+                                          color: Color(0xff000000),
+                                        )),
                                   ),
-
-                                ]
-                            ),
-
+                                ]),
                           ),
                           // THE ABOVE PART DEALS WITH LINES AND TEXT,
                           // BELOW PART HANDLES RAISED BUTTON WITH SELECTED DELIVERY TYPE ICON:
                           Container(
-
-                            padding: EdgeInsets
-                                .fromLTRB(
-                                0, 0, 0, 0),
-                            alignment: Alignment
-                                .center,
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            alignment: Alignment.center,
                             child: Row(
                               children: <Widget>[
-                                Text(
-                                    'TOTAL : ',
+                                Text('TOTAL : ',
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xffFC0000),
-                                    )
-                                ),
-
+                                    )),
                                 Text(
-                                    '${
-                                        (unObsecuredInputandPayment.totalPrice
-                                            /* * unObsecuredInputandPayment.totalPrice */)
-                                            .toStringAsFixed(2)} '
-                                        '\u20AC',
+                                    '${(unObsecuredInputandPayment.totalPrice
+                                        /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
+                                    '\u20AC',
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xffFC0000),
-                                    )
-                                )
+                                    ))
                               ],
                             ),
                           ),
 
-
                           Container(
-
 //                            width: 100,
                             width: displayWidth(context) / 8,
                             height: displayHeight(context) / 9,
 
-                            child:
-                            InkWell(
+                            child: InkWell(
                               child: Container(
-
                                 padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
-
                                   children: <Widget>[
                                     new Container(
-                                      padding:EdgeInsets.fromLTRB(0,5,0,0),
+                                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                                       width: 100,
                                       height: displayHeight(context) / 15,
                                       decoration: BoxDecoration(
-
                                         color: Color(0xffF4F6CE),
                                         shape: BoxShape.circle,
-
                                       ),
-
                                       child: Icon(
                                         getIconForName(paymentTypeName),
                                         color: Colors.black,
                                         size: displayHeight(context) / 30,
-
                                       ),
                                     ),
-                                    SizedBox(height:5),
-
+                                    SizedBox(height: 5),
                                     Container(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        paymentTypeName, style:
-                                      TextStyle(
-                                          color: Color(0xffFC0000),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16),
+                                        paymentTypeName,
+                                        style: TextStyle(
+                                            color: Color(0xffFC0000),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16),
                                       ),
                                     ),
                                   ],
@@ -7158,314 +5923,229 @@ color:Colors.blue,
                                 });
                               },
                             ),
-
                           )
-
                         ],
                       ),
                     ),
-
-
                   ],
                 ),
               );
             }
-          }
-      ),
+          }),
     );
   }
 
   Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelectedTakeAway(
       Order unObsecuredInputandPayment) {
     //XYZ
-    return
-      Container(
+    return Container(
 //        color: Colors.blueGrey,
-        color: Colors.white,
-        height: displayHeight(context) /
-            20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
-            displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: displayWidth(context) / 1.03,
-              height: displayHeight(context) / 20,
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-
-
-                  Container(
-                    width: displayWidth(context) / 1.5,
-                    height: displayHeight(context) / 20,
-                    color: Color(0xffffffff),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets
-                                .fromLTRB(
-                                20, 0, 10, 0),
-                            alignment: Alignment.center,
-                            child: Text(
-                                'Payment Method',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.normal,
-                                  color: Color(0xff000000),
-                                )
-                            ),
-                          ),
-
-                          CustomPaint(
-                            size: Size(0, 19),
-                            painter: LongPainterForPaymentUnSelected(
-                                context),
-                          ),
-
-
-                        ]
-                    ),
-
-                  ),
-
-                ],
-              ),
+      color: Colors.white,
+      height: displayHeight(context) /
+              20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
+          displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: displayWidth(context) / 1.03,
+            height: displayHeight(context) / 20,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: displayWidth(context) / 1.5,
+                  height: displayHeight(context) / 20,
+                  color: Color(0xffffffff),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                          alignment: Alignment.center,
+                          child: Text('Payment Method',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.normal,
+                                color: Color(0xff000000),
+                              )),
+                        ),
+                        CustomPaint(
+                          size: Size(0, 19),
+                          painter: LongPainterForPaymentUnSelected(context),
+                        ),
+                      ]),
+                ),
+              ],
             ),
+          ),
 
 //            GYG
-            // 2ND CONTAINER HOLDS THE total price BEGINS HERE..
-            Container(
-
-              padding: EdgeInsets
-                  .fromLTRB(
-                  300, 0, 10, 0),
-              alignment: Alignment
-                  .center,
-              child: Row(
-                children: <Widget>[
-                  Text(
-                      'TOTAL : ',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight
-                            .bold,
+          // 2ND CONTAINER HOLDS THE total price BEGINS HERE..
+          Container(
+            padding: EdgeInsets.fromLTRB(300, 0, 10, 0),
+            alignment: Alignment.center,
+            child: Row(
+              children: <Widget>[
+                Text('TOTAL : ',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                        color: Color(0xffFC0000)
-                        ,
-                      )
-                  ),
-
-                  Text(
-                      '${
-                          (unObsecuredInputandPayment.totalPrice
-                              /* * unObsecuredInputandPayment.totalPrice */)
-                              .toStringAsFixed(2)} '
-                          '\u20AC',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight
-                            .bold,
+                      color: Color(0xffFC0000),
+                    )),
+                Text(
+                    '${(unObsecuredInputandPayment.totalPrice
+                        /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
+                    '\u20AC',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                        color: Color(0xffFC0000)
-                        ,
-                      )
-                  )
-                ],
-              ),
+                      color: Color(0xffFC0000),
+                    ))
+              ],
             ),
+          ),
 
-            Container(
-
-              color: Colors.white,
+          Container(
+            color: Colors.white,
 //              color:Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) / 9,
-              width: displayWidth(context)
-                  - displayWidth(context) /
-                      5,
+            height: displayHeight(context) / 9,
+            width: displayWidth(context) - displayWidth(context) / 5,
 //                                            width: displayWidth(context) * 0.57,
-              child: _buildPaymentTypeSingleSelectOption(),
-
-            ),
-          ],
-        ),
-      );
+            child: _buildPaymentTypeSingleSelectOption(),
+          ),
+        ],
+      ),
+    );
   }
-
 
   Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
       Order unObsecuredInputandPayment) {
 //    XYZ
 
-    return
-      Container(
+    return Container(
 //        color: Colors.blueGrey,
 //        color: Colors.white,
 //        color:Colors.cyanAccent,
-        height: displayHeight(context) /
-            11 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
-            displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
-        child: Column(
-          children: <Widget>[
-            Container(
-
-              width: ((displayWidth(context) / 1.03) -40) ,
-              height: displayHeight(context) / 11,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                  style: BorderStyle.solid,
-                  width: 2.0,
-                ),
-                shape: BoxShape.rectangle,
-
+      height: displayHeight(context) /
+              11 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
+          displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: ((displayWidth(context) / 1.03) - 40),
+            height: displayHeight(context) / 11,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey,
+                style: BorderStyle.solid,
+                width: 2.0,
               ),
+              shape: BoxShape.rectangle,
+            ),
 //              color: Colors.white,
-              child: Row(
+            child: Row(
 //                mainAxisAlignment: MainAxisAlignment.start,
 //                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
 //                    width: displayWidth(context) / 1.5,
-                    width: displayWidth(context) / 2.5,
-                    height: displayHeight(
-                        context) / 20,
-                    color: Color(0xffffffff),
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 20,
+                  color: Color(0xffffffff),
 
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .start
-                        ,
-                        crossAxisAlignment: CrossAxisAlignment
-                            .center,
-                        children: <Widget>[
-
-                          Container(
-                            margin: EdgeInsets
-                                .fromLTRB(
-                                20, 0, 10, 0),
-                            alignment: Alignment
-                                .center,
-                            child: Text(
-                                'Payment Method',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight
-                                      .normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(
-                                      0xff000000),
-                                )
-                            ),
-                          ),
-
-
-                        ]
-                    ),
-
-                  ),
-
-
-                  Container(
-
-                    padding: EdgeInsets
-                        .fromLTRB(
-                        0, 0, 10, 0),
-                    alignment: Alignment
-                        .center,
-                    child: Row(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text(
-                            'TOTAL : ',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight
-                                  .bold,
-
-                              color: Color(0xffFC0000)
-                              ,
-                            )
-                        ),
-
-                        Text(
-                            '${
-                                (unObsecuredInputandPayment.totalPrice
-                                    /* * unObsecuredInputandPayment.totalPrice */)
-                                    .toStringAsFixed(2)} '
-                                '\u20AC',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight
-                                  .bold,
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                          alignment: Alignment.center,
+                          child: Text('Payment Method',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                              color: Color(0xffFC0000)
-                              ,
-                            )
-                        )
-                      ],
-                    ),
+                                color: Color(0xff000000),
+                              )),
+                        ),
+                      ]),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: <Widget>[
+                      Text('TOTAL : ',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xffFC0000),
+                          )),
+                      Text(
+                          '${(unObsecuredInputandPayment.totalPrice
+                              /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
+                          '\u20AC',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                            color: Color(0xffFC0000),
+                          ))
+                    ],
                   ),
+                ),
 
-                  /* Total Text ends here...*/
-
-                ],
-              ),
+                /* Total Text ends here...*/
+              ],
             ),
-
-            Container(
-
-              color:Colors.white,
+          ),
+          Container(
+            color: Colors.white,
 //                                            height: 200,
-              height: displayHeight(context) / 9,
-              width: displayWidth(context)/1.03,
-              child: _buildPaymentTypeSingleSelectOption(),
-
-            ),
-          ],
-        ),
-      );
+            height: displayHeight(context) / 9,
+            width: displayWidth(context) / 1.03,
+            child: _buildPaymentTypeSingleSelectOption(),
+          ),
+        ],
+      ),
+    );
   }
-
 
   int getNumberOfInputsFilledUpDinningRoom(
       CustomerInformation customerInfoFieldsCheck) {
     print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
     int total = 0;
-    switch (customerInfoFieldsCheck.address
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.address.trim().length) {
       case 0:
         total = total + 0;
         break;
       default:
         total = total + 1;
     }
-    switch (customerInfoFieldsCheck.flatOrHouseNumber
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.flatOrHouseNumber.trim().length) {
       case 0:
         total = total + 0;
         break;
       default:
         total = total + 1;
     }
-    switch (customerInfoFieldsCheck.phoneNumber
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.phoneNumber.trim().length) {
       case 0:
         total = total + 0;
         break;
@@ -7480,44 +6160,34 @@ color:Colors.blue,
         total = total + 1;
     }
 
-
     print('-----  ||  ** **  **TOTAL : $total');
     return total;
-
 
 //    else{
 //      return false;
 //      // empty; 3 inputs are not filled.
 //    }
-
   }
-
 
   int getNumberOfInputsFilledUpTakeAway(
       CustomerInformation customerInfoFieldsCheck) {
     print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
     int total = 0;
-    switch (customerInfoFieldsCheck.address
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.address.trim().length) {
       case 0:
         total = total + 0;
         break;
       default:
         total = total + 1;
     }
-    switch (customerInfoFieldsCheck.flatOrHouseNumber
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.flatOrHouseNumber.trim().length) {
       case 0:
         total = total + 0;
         break;
       default:
         total = total + 1;
     }
-    switch (customerInfoFieldsCheck.phoneNumber
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.phoneNumber.trim().length) {
       case 0:
         total = total + 0;
         break;
@@ -7532,21 +6202,17 @@ color:Colors.blue,
         total = total + 1;
     }
 
-
     print('-----  ||  ** **  **TOTAL : $total');
     return total;
-
 
 //    else{
 //      return false;
 //      // empty; 3 inputs are not filled.
 //    }
-
   }
 
-
-
-  int getNumberOfInputsFilledUpPhoneOrder(CustomerInformation customerInfoFieldsCheck) {
+  int getNumberOfInputsFilledUpPhoneOrder(
+      CustomerInformation customerInfoFieldsCheck) {
     print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
     int total = 0;
     /*
@@ -7569,9 +6235,7 @@ color:Colors.blue,
         total = total + 1;
     }
     */
-    switch (customerInfoFieldsCheck.phoneNumber
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.phoneNumber.trim().length) {
       case 0:
         total = total + 0;
         break;
@@ -7586,44 +6250,33 @@ color:Colors.blue,
         total = total + 1;
     }
 
-
     print('-----  ||  ** **  **TOTAL : $total');
     return total;
-
 
 //    else{
 //      return false;
 //      // empty; 3 inputs are not filled.
 //    }
-
   }
-
-
 
   int getNumberOfInputsFilledUp(CustomerInformation customerInfoFieldsCheck) {
     print(' U   U    U  ?   U   ? getNumberOfInputsFilledUp');
     int total = 0;
-    switch (customerInfoFieldsCheck.address
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.address.trim().length) {
       case 0:
         total = total + 0;
         break;
       default:
         total = total + 1;
     }
-    switch (customerInfoFieldsCheck.flatOrHouseNumber
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.flatOrHouseNumber.trim().length) {
       case 0:
         total = total + 0;
         break;
       default:
         total = total + 1;
     }
-    switch (customerInfoFieldsCheck.phoneNumber
-        .trim()
-        .length) {
+    switch (customerInfoFieldsCheck.phoneNumber.trim().length) {
       case 0:
         total = total + 0;
         break;
@@ -7638,18 +6291,14 @@ color:Colors.blue,
         total = total + 1;
     }
 
-
     print('-----  ||  ** **  **TOTAL : $total');
     return total;
-
 
 //    else{
 //      return false;
 //      // empty; 3 inputs are not filled.
 //    }
-
   }
-
 
   IconData getIconForName(String iconName) {
     print('iconName at getIconForName: $iconName');
@@ -7702,7 +6351,6 @@ color:Colors.blue,
         }
         break;
 
-
       default:
         {
           return FontAwesomeIcons.home;
@@ -7718,190 +6366,135 @@ color:Colors.blue,
     String borderColor = x.borderColor;
     const Color OrderTypeIconColor = Color(0xff070707);
     return Container(
-
-
 //      color:Colors.blue,
 //        width:  displayWidth(context) /6,
 //        height: displayWidth(context) /6,
-      width:  displayWidth(context) / 5,
+      width: displayWidth(context) / 5,
       height: displayHeight(context) / 11,
       alignment: Alignment.center,
       margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-      child: index == _currentOrderTypeIndex ?
-
-
-
-      InkWell(
-
-        splashColor:Colors.deepOrangeAccent,
-
-        highlightColor:Colors.indigo,
-
-        child: Column(
-          children: <Widget>[
-
-            new Container(
-
-              width: displayWidth(context) /5,
-              height: displayHeight(context) / 10.2,
-
-              decoration: BoxDecoration(
-                border: Border.all(
-
-                  color: Colors.black,
-                  style: BorderStyle.solid,
-                  width: 1.0,
-
-                ),
-                shape: BoxShape.circle,
-
+      child: index == _currentOrderTypeIndex
+          ? InkWell(
+              splashColor: Colors.deepOrangeAccent,
+              highlightColor: Colors.indigo,
+              child: Column(
+                children: <Widget>[
+                  new Container(
+                    width: displayWidth(context) / 5,
+                    height: displayHeight(context) / 10.2,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        style: BorderStyle.solid,
+                        width: 0.5,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
+                      child: Image.asset(
+                        orderTyepImage,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      orderTypeName.toUpperCase(),
+                      style: TextStyle(
+                          color: Color(0xffFC0000),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 18),
+                    ),
+                  ),
+                ],
               ),
+              onTap: () {
+                logger.i(
+                    'on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
+                final shoppingCartBloc =
+                    BlocProvider.of<ShoppingCartBloc>(context);
 
-              child:Container(
-//                            color:Colors.pinkAccent,
+                shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
+                    x, index, _currentOrderTypeIndex);
 
-                padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
+                setState(() {
+                  showFullOrderDeliveryType = !showFullOrderDeliveryType;
 
-                child: Image.asset(
-                  orderTyepImage,
-                  fit: BoxFit.contain,
-                ),
-
+                  showEditingCompleteCustomerAddressInformation = false;
+                  showEditingCompleteCustomerHouseFlatIformation = false;
+                  showEditingCompleteCustomerPhoneIformation = false;
+                  showEditingCompleteCustomerReachoutIformation = false;
+                });
+              },
+            )
+          : InkWell(
+              splashColor: Colors.deepOrangeAccent,
+              highlightColor: Colors.indigo,
+              child: Column(
+                children: <Widget>[
+                  new Container(
+                    width: displayWidth(context) / 5,
+                    height: displayHeight(context) / 10.2,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        style: BorderStyle.solid,
+                        width: 1.0,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                      child: Image.asset(
+                        orderTyepImage,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      orderTypeName,
+                      style: TextStyle(
+                          color: Color(0xffFC0000),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                  ),
+                ],
               ),
+              onTap: () {
+                logger.i(
+                    'on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
+                final shoppingCartBloc =
+                    BlocProvider.of<ShoppingCartBloc>(context);
 
+                shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
+                    x, index, _currentOrderTypeIndex);
 
+                setState(() {
+                  showFullOrderDeliveryType = !showFullOrderDeliveryType;
+                  showCustomerInformationHeader = true;
+                  showUserInputOptionsLikeFirstTime = true;
+                  // MAKEING THEM AS THEY ARE IN THE FIRST TIME:
 
-            ),
-            SizedBox(height:10),
-            Container(
+                  showEditingCompleteCustomerAddressInformation = false;
+                  showEditingCompleteCustomerHouseFlatIformation = false;
+                  showEditingCompleteCustomerPhoneIformation = false;
+                  showEditingCompleteCustomerReachoutIformation = false;
 
-              alignment: Alignment.center,
-              child: Text(
-                orderTypeName, style:
-              TextStyle(
-                  color: Color(0xffFC0000),
-
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-              ),
-            ),
-          ],
-        ),
-
-        onTap: () {
-          logger.i('on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
-          final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-          shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
-              x, index, _currentOrderTypeIndex);
-
-
-          setState(() {
-            showFullOrderDeliveryType = !showFullOrderDeliveryType;
-
-//            showFullOrderType = !showFullPaymentType;
-
-            showEditingCompleteCustomerAddressInformation = false;
-            showEditingCompleteCustomerHouseFlatIformation = false;
-            showEditingCompleteCustomerPhoneIformation = false;
-            showEditingCompleteCustomerReachoutIformation = false;
-
-            // WORK -2
-          });
-
-
-        },
-
-
-      )
-          :
-
-      InkWell(
-
-        splashColor:Colors.deepOrangeAccent,
-//          focusColor:Colors.blue,
-//          hoverColor:Colors.lightGreen,
-        highlightColor:Colors.indigo,
-
-
-        child: Column(
-          children: <Widget>[
-            new Container(
-
-              width: displayWidth(context) /5,
-              height: displayHeight(context) / 10.2,
-
-              decoration: BoxDecoration(
-                border: Border.all(
-
-                  color: Colors.black,
-                  style: BorderStyle.solid,
-                  width: 1.0,
-
-                ),
-                shape: BoxShape.circle,
-
-              ),
-
-              child:Container(
-//                            color:Colors.pinkAccent,
-
-                padding: EdgeInsets.fromLTRB(20,20,20,20),//                            ssssssHHHHH
-
-                child: Image.asset(
-                  orderTyepImage,
-                  fit: BoxFit.contain,
-                ),
-
-              ),
-
-            ),
-            SizedBox(height:10),
-            Container(
-
-              alignment: Alignment.center,
-              child: Text(
-                orderTypeName, style:
-              TextStyle(
-                  color: Color(0xffFC0000),
-
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-              ),
-            ),
-          ],
-        ),
-
-        onTap: () {
-
-          logger.i('on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
-          final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-
-          shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
-              x, index, _currentOrderTypeIndex);
-
-          setState(() {
-            showFullOrderDeliveryType = !showFullOrderDeliveryType;
-            showCustomerInformationHeader = true;
-            showUserInputOptionsLikeFirstTime = true;
-            // MAKEING THEM AS THEY ARE IN THE FIRST TIME:
-
-            showEditingCompleteCustomerAddressInformation = false;
-            showEditingCompleteCustomerHouseFlatIformation = false;
-            showEditingCompleteCustomerPhoneIformation = false;
-            showEditingCompleteCustomerReachoutIformation = false;
-
-
-            // WE ARE oneSingleDeliveryType;
+                  // WE ARE oneSingleDeliveryType;
 //            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-          }
-          );
-        },
-      ),
+                });
+              },
+            ),
 //      ),
 //      ),
-
     );
   }
 
@@ -7915,49 +6508,42 @@ color:Colors.blue,
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
         'animated Obscured Card Select Container()');
-    return
-      Container(
-        height: displayWidth(context) / 2.5,
-        child: AbsorbPointer(
-          child: Opacity(
-            opacity: 0.2,
-            child: Container(
-                color: Colors.greenAccent,
-                padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                width: displayWidth(context)/1.03,
-                child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
-                    priceandselectedCardFunctionality)
-
-            ),
-          ),
+    return Container(
+      height: displayWidth(context) / 2.5,
+      child: AbsorbPointer(
+        child: Opacity(
+          opacity: 0.2,
+          child: Container(
+              color: Colors.greenAccent,
+              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+              width: displayWidth(context) / 1.03,
+              child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
+                  priceandselectedCardFunctionality)),
         ),
-      );
+      ),
+    );
   }
-
 
   Widget animatedObscuredPaymentSelectContainer(
       Order priceandselectedCardFunctionality) {
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
         'animated Obscured Card Select Container()');
-    return
-      Container(
-        height: displayWidth(context) / 2.5,
-        child: AbsorbPointer(
-          child: Opacity(
-            opacity: 0.2,
-            child: Container(
-                color: Colors.white,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                width: displayWidth(context)/1.03,
-                child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
-                    priceandselectedCardFunctionality)
-            ),
-          ),
+    return Container(
+      height: displayWidth(context) / 2.5,
+      child: AbsorbPointer(
+        child: Opacity(
+          opacity: 0.2,
+          child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              width: displayWidth(context) / 1.03,
+              child: _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
+                  priceandselectedCardFunctionality)),
         ),
-      );
+      ),
+    );
   }
-
 
   bool zeroORMoreInputsEmptyDinningRoom(
       CustomerInformation customerInfoFieldsCheck) {
@@ -7980,17 +6566,14 @@ color:Colors.blue,
 //        &&
 //        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
 //        &&
-    (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
+        (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
       print('WILL RETURN FALSE');
       return false;
-    }
-
-    else {
+    } else {
       print('WILL RETURN TRUE');
       return true; // empty; one or more of the user inputs are.
     }
   }
-
 
   bool zeroORMoreInputsEmptyTakeAway(
       CustomerInformation customerInfoFieldsCheck) {
@@ -8013,18 +6596,14 @@ color:Colors.blue,
 //        &&
 //        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
 //        &&
-    (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
+        (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
       print('WILL RETURN FALSE');
       return false;
-    }
-
-    else {
+    } else {
       print('WILL RETURN TRUE');
       return true; // empty; one or more of the user inputs are.
     }
   }
-
-
 
   bool zeroORMoreInputsEmptyPhone(CustomerInformation customerInfoFieldsCheck) {
     print(
@@ -8039,28 +6618,19 @@ color:Colors.blue,
 //    assert(customerInfoFieldsCheck.flatOrHouseNumber.trim().length >0);
 //    assert(customerInfoFieldsCheck.phoneNumber.trim().length >0);
 //    assert(customerInfoFieldsCheck.etaTimeInMinutes != -1);
-    if (
-
-    (customerInfoFieldsCheck.phoneNumber
-        .trim()
-        .length > 0)
-        &&
-        (customerInfoFieldsCheck.etaTimeInMinutes != -1)
-    ) {
+    if ((customerInfoFieldsCheck.phoneNumber.trim().length > 0) &&
+        (customerInfoFieldsCheck.etaTimeInMinutes != -1)) {
       print('WILL RETURN FALSE');
       return false;
-    }
-
-    else {
+    } else {
       print('WILL RETURN TRUE');
       return true; // empty; one or more of the user inputs are.
     }
   }
 
-
   // bool allCustomerInputsCompleted(CustomerInformation customerInfoFieldsCheck) {
-  bool takeAwayDinningTimeInputCompleted(CustomerInformation customerInfoFieldsCheck) {
-
+  bool takeAwayDinningTimeInputCompleted(
+      CustomerInformation customerInfoFieldsCheck) {
     print(
         ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
     print('customerInfoFieldsCheck '
@@ -8068,35 +6638,22 @@ color:Colors.blue,
         ' A :${customerInfoFieldsCheck.address}  ,\n'
         ' ETA : ${customerInfoFieldsCheck.etaTimeInMinutes}  ,\n'
         ' PH : ${customerInfoFieldsCheck.phoneNumber}  ,\n'
-        'Hour : ${customerInfoFieldsCheck.etaTimeOfDay.hour}  ,\n'
-    );
+        'Hour : ${customerInfoFieldsCheck.etaTimeOfDay.hour}  ,\n');
 
-    if (
-
-
-
-
-    (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
-        (
-            (customerInfoFieldsCheck.etaTimeOfDay.hour != 0)
-                ||
-                (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
-        )
-    ) {
+    if ((customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
+        ((customerInfoFieldsCheck.etaTimeOfDay.hour != 0) ||
+            (customerInfoFieldsCheck.etaTimeOfDay.minute != 0))) {
       print('WILL RETURN FALSE');
       return true;
-    }
-
-    else {
+    } else {
       print('WILL RETURN TRUE');
       return false; // empty; one or more of the user inputs are.
     }
   }
-
 
 //  bool allCustomerInputsCompleted(CustomerInformation customerInfoFieldsCheck) {
-  bool inputsForPhoneOrderTypeCompleted(CustomerInformation customerInfoFieldsCheck) {
-
+  bool inputsForPhoneOrderTypeCompleted(
+      CustomerInformation customerInfoFieldsCheck) {
     print(
         ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
     print('customerInfoFieldsCheck '
@@ -8104,37 +6661,21 @@ color:Colors.blue,
         ' A :${customerInfoFieldsCheck.address}  ,\n'
         ' ETA : ${customerInfoFieldsCheck.etaTimeInMinutes}  ,\n'
         ' PH : ${customerInfoFieldsCheck.phoneNumber}  ,\n'
-        'Hour : ${customerInfoFieldsCheck.etaTimeOfDay.hour}  ,\n'
-    );
+        'Hour : ${customerInfoFieldsCheck.etaTimeOfDay.hour}  ,\n');
 
-    if (
-
-
-    (customerInfoFieldsCheck.phoneNumber
-        .trim()
-        .length > 0
-    )
-        &&
+    if ((customerInfoFieldsCheck.phoneNumber.trim().length > 0) &&
         ((customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
-            (
-                (customerInfoFieldsCheck.etaTimeOfDay.hour != 0)
-                    || (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
-            ))
-    ) {
+            ((customerInfoFieldsCheck.etaTimeOfDay.hour != 0) ||
+                (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)))) {
       print('WILL RETURN FALSE');
       return true;
-    }
-
-    else {
+    } else {
       print('WILL RETURN TRUE');
       return false; // empty; one or more of the user inputs are.
     }
   }
 
-
-
   bool allCustomerInputsCompleted(CustomerInformation customerInfoFieldsCheck) {
-
     print(
         ' ??? ??? ||| at zeroORMoreInputsEmpty check for Card Opacity effect and untouchable effect: ');
     print('customerInfoFieldsCheck '
@@ -8142,308 +6683,260 @@ color:Colors.blue,
         ' A :${customerInfoFieldsCheck.address}  ,\n'
         ' ETA : ${customerInfoFieldsCheck.etaTimeInMinutes}  ,\n'
         ' PH : ${customerInfoFieldsCheck.phoneNumber}  ,\n'
-        'Hour : ${customerInfoFieldsCheck.etaTimeOfDay.hour}  ,\n'
-    );
+        'Hour : ${customerInfoFieldsCheck.etaTimeOfDay.hour}  ,\n');
 
 //    assert(customerInfoFieldsCheck.address.trim().length >0);
 //    assert(customerInfoFieldsCheck.flatOrHouseNumber.trim().length >0);
 //    assert(customerInfoFieldsCheck.phoneNumber.trim().length >0);
 //    assert(customerInfoFieldsCheck.etaTimeInMinutes != -1);
-    if (
-    (customerInfoFieldsCheck.address
-        .trim()
-        .length > 0
-    )
-        &&
-        (customerInfoFieldsCheck.flatOrHouseNumber
-            .trim()
-            .length > 0
-        )
-        &&
-        (customerInfoFieldsCheck.phoneNumber
-            .trim()
-            .length > 0
-        )
-        &&
-        (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
-        (
-            (customerInfoFieldsCheck.etaTimeOfDay.hour != 0)
-                || (customerInfoFieldsCheck.etaTimeOfDay.minute != 0)
-        )
-    ) {
+    if ((customerInfoFieldsCheck.address.trim().length > 0) &&
+            (customerInfoFieldsCheck.flatOrHouseNumber.trim().length > 0) &&
+            (customerInfoFieldsCheck.phoneNumber.trim().length > 0) &&
+            (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
+        ((customerInfoFieldsCheck.etaTimeOfDay.hour != 0) ||
+            (customerInfoFieldsCheck.etaTimeOfDay.minute != 0))) {
       print('WILL RETURN FALSE');
       return true;
-    }
-
-    else {
+    } else {
       print('WILL RETURN TRUE');
       return false; // empty; one or more of the user inputs are.
     }
   }
 
-
   Widget _buildPaymentTypeSingleSelectOption() {
-
     final shoppingCartbloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     return StreamBuilder(
         stream: shoppingCartbloc.getCurrentPaymentTypeSingleSelectStream,
         initialData: shoppingCartbloc.getCurrentPaymentType,
-
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             print('!snapshot.hasData');
 
             return Container(child: Text('Null'));
-          }
-          else {
-            List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect = snapshot
-                .data;
+          } else {
+            List<PaymentTypeSingleSelect> allPaymentTypesSingleSelect =
+                snapshot.data;
 
 //            List<OrderTypeSingleSelect> orderTypes = shoppingCartBloc.getCurrentOrderType;
 
             print('paymentTypes: $allPaymentTypesSingleSelect');
 
-
             return Center(
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-
-
-
                 shrinkWrap: true,
                 itemCount: allPaymentTypesSingleSelect.length,
-
                 itemBuilder: (_, int index) {
                   return oneSinglePaymentType(
-                      allPaymentTypesSingleSelect[index],
-                      index);
+                      allPaymentTypesSingleSelect[index], index);
                 },
-
               ),
             );
           }
         }
 
-      // M VSM ORG VS TODO. ENDS HERE.
-    );
+        // M VSM ORG VS TODO. ENDS HERE.
+        );
   }
 
-
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
-  Widget oneSinglePaymentType(PaymentTypeSingleSelect onePaymentType,
-      int index) {
+  Widget oneSinglePaymentType(
+      PaymentTypeSingleSelect onePaymentType, int index) {
     String paymentTypeName = onePaymentType.paymentTypeName;
     String paymentIconName = onePaymentType.paymentTypeName;
     String borderColor = onePaymentType.borderColor;
     const Color OrderTypeIconColor = Color(0xff070707);
     return Container(
-
-      child: index == _currentPaymentTypeIndex ?
-
-      Container(
-
+      child: index == _currentPaymentTypeIndex
+          ? Container(
 //        color: Colors.purple,
-        width: displayWidth(context) / 6.5,
-        height: displayHeight(context) / 11,
-        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-        child:
-        InkWell(
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-            child: Column(
-              children: <Widget>[
-                new Container(
-                  width: displayWidth(context) / 4.5,
-                  height: displayHeight(context) / 12.5,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                      style: BorderStyle.solid,
-                      width: 2.0,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    getIconForName(paymentTypeName),
-                    color: Color(0xffFC0000),
-                    size: displayWidth(context) / 13,
-                  ),
-
-                ),
-                Container(
+              width: displayWidth(context) / 6.5,
+              height: displayHeight(context) / 11,
+              margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+              child: InkWell(
+                child: Container(
                   alignment: Alignment.center,
-                  child: Text(
-                    paymentTypeName, style:
-                  TextStyle(color: Color(0xffFC0000),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                  child: Column(
+                    children: <Widget>[
+                      new Container(
+                        width: displayWidth(context) / 4.5,
+                        height: displayHeight(context) / 12.5,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                            style: BorderStyle.solid,
+                            width: 2.0,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          getIconForName(paymentTypeName),
+                          color: Color(0xffFC0000),
+                          size: displayWidth(context) / 13,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          paymentTypeName,
+                          style: TextStyle(
+                              color: Color(0xffFC0000),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          onTap: () async {
-            final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+                onTap: () async {
+                  final shoppingCartBloc =
+                      BlocProvider.of<ShoppingCartBloc>(context);
 
-            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
-                onePaymentType, index, _currentPaymentTypeIndex);
+                  shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
+                      onePaymentType, index, _currentPaymentTypeIndex);
 
-            // work 0 august 20...
-            logger.e('index: $index');
-            print('YY YY  $index  YY   YY    ');
-            if(index==0){
+                  // work 0 august 20...
+                  logger.e('index: $index');
+                  print('YY YY  $index  YY   YY    ');
+                  if (index == 0) {
 //              0 means later option...
 
-              print(' 0 means later option...');
+                    print(' 0 means later option...');
 
-              // TAkEAWAY AND DINNING  Recite Print. ....
-              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-              print('later button pressed....:');
+                    // TAkEAWAY AND DINNING  Recite Print. ....
+                    final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
+                    print('later button pressed....:');
 
-              Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressedLater();
+                    Order tempOrderWithdocId =
+                        await shoppingCartBloc.paymentButtonPressedLater();
 
-              if (tempOrderWithdocId.orderdocId == '') {
-                _scaffoldKeyShoppingCartPage.currentState
+                    if (tempOrderWithdocId.orderdocId == '') {
+                      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+                          SnackBar(content: Text("someThing went wrong")));
+                      print('something went wrong');
+                    } else {
+                      logger.i(
+                          'tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
-                    .showSnackBar(
-                    SnackBar(content: Text("someThing went wrong")));
-                print('something went wrong');
-              }
-              else {
-                logger.i('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+                      shoppingCartBloc.clearSubscription();
+                      print(
+                          'going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
 
-
-                shoppingCartBloc.clearSubscription();
-                print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
-
-                return Navigator.pop(
-                    context, tempOrderWithdocId);}
-
-            }
-            else{
-              setState(() {
-                showFullPaymentType = false;
-              });
-            }
-          },
-        ),
-      ) :
-
-      Container(
-        width: displayWidth(context) / 6.5,
-        height: displayHeight(context) / 10,
-        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-        child:
-        InkWell(
-
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-            child: Column(
-              children: <Widget>[
-                new Container(
-                  width: displayWidth(context) / 4.5,
-                  height: displayHeight(context) / 12.5,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                      style: BorderStyle.solid,
-                      width: 2.0,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    getIconForName(paymentTypeName),
-                    color: Colors.grey,
-                    size: displayWidth(context) / 13,
-                  ),
-
-                ),
-                Container(
-
+                      return Navigator.pop(context, tempOrderWithdocId);
+                    }
+                  } else {
+                    setState(() {
+                      showFullPaymentType = false;
+                    });
+                  }
+                },
+              ),
+            )
+          : Container(
+              width: displayWidth(context) / 6.5,
+              height: displayHeight(context) / 10,
+              margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+              child: InkWell(
+                child: Container(
                   alignment: Alignment.center,
-                  child: Text(
-                    paymentTypeName, style:
-                  TextStyle(
-                      color: Color(0xffFC0000),
-
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                  child: Column(
+                    children: <Widget>[
+                      new Container(
+                        width: displayWidth(context) / 4.5,
+                        height: displayHeight(context) / 12.5,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                            style: BorderStyle.solid,
+                            width: 2.0,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          getIconForName(paymentTypeName),
+                          color: Colors.grey,
+                          size: displayWidth(context) / 13,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          paymentTypeName,
+                          style: TextStyle(
+                              color: Color(0xffFC0000),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          onTap: () async {
-            final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+                onTap: () async {
+                  final shoppingCartBloc =
+                      BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
-                onePaymentType, index, _currentPaymentTypeIndex);
+                  shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
+                      onePaymentType, index, _currentPaymentTypeIndex);
 
-            // work 0 august 20...
-            logger.e('index: $index');
-            print('YY YY  $index  YY   YY    ');
-            if(index==0){
+                  // work 0 august 20...
+                  logger.e('index: $index');
+                  print('YY YY  $index  YY   YY    ');
+                  if (index == 0) {
 //              0 means later option...
 
-              print(' 0 means later option...');
+                    print(' 0 means later option...');
 
-              // TAkEAWAY AND DINNING  Recite Print. ....
-              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
-              print('later button pressed....:');
+                    // TAkEAWAY AND DINNING  Recite Print. ....
+                    final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
+                    print('later button pressed....:');
 
-              Order tempOrderWithdocId = await shoppingCartBloc.paymentButtonPressedLater();
+                    Order tempOrderWithdocId =
+                        await shoppingCartBloc.paymentButtonPressedLater();
 
-              if (tempOrderWithdocId.orderdocId == '') {
-                _scaffoldKeyShoppingCartPage.currentState
+                    if (tempOrderWithdocId.orderdocId == '') {
+                      _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
-                    .showSnackBar(
-                    SnackBar(content: Text("someThing went wrong")));
-                print('something went wrong');
-              }
-              else {
-                logger.i('tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+                          .showSnackBar(
+                              SnackBar(content: Text("someThing went wrong")));
+                      print('something went wrong');
+                    } else {
+                      logger.i(
+                          'tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
+                      shoppingCartBloc.clearSubscription();
+                      print(
+                          'going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
 
-                shoppingCartBloc.clearSubscription();
-                print('going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
-
-                return Navigator.pop(
-                    context, tempOrderWithdocId);}
-
-            }
-            else{
-              setState(() {
-                showFullPaymentType = false;
-              });
-            }
-          },
-        ),
-
-      ),
+                      return Navigator.pop(context, tempOrderWithdocId);
+                    }
+                  } else {
+                    setState(() {
+                      showFullPaymentType = false;
+                    });
+                  }
+                },
+              ),
+            ),
     );
   }
 
-
-
-
-  Widget showMultiSelectStrings(List <String> multiSelectStrings) {
+  Widget showMultiSelectStrings(List<String> multiSelectStrings) {
 //    if(multiSelectStrings.length==)
 
     print('multiSelectStrings: $multiSelectStrings');
 
     print('multiSelectStrings == null: ${multiSelectStrings == null}');
 
-
     if (multiSelectStrings == null)
       return Text('');
-
-    else{
+    else {
       return ListView.builder(
-
         scrollDirection: Axis.vertical,
         reverse: false,
         shrinkWrap: false,
@@ -8451,10 +6944,8 @@ color:Colors.blue,
         itemBuilder: (_, int index) {
           return displayOneMultiSelectString(multiSelectStrings[index], index);
         },
-
       );
-  }
-
+    }
   }
 
 // DUMMY RECITE RELATED PRINT CODES ARE HERE ==> LINE # 11264 ==>
@@ -8463,79 +6954,74 @@ color:Colors.blue,
 //  showExtraCheeseItems(oneFood.selectedCheeses)
 //  showExtraSauces(oneFood.defaultSauces)
 
-  Widget showExtraIngredients(List <NewIngredient> reciteIngrdients,int quantity){
-
+  Widget showExtraIngredients(
+      List<NewIngredient> reciteIngrdients, int quantity) {
     print('reciteIngrdients.length: ${reciteIngrdients.length}');
     return ListView.builder(
-
       scrollDirection: Axis.vertical,
       reverse: false,
       shrinkWrap: false,
       itemCount: reciteIngrdients.length,
-
-
-      itemBuilder: (_,int index) {
-        return displayOneExtraIngredientInRecite(reciteIngrdients[index], index,quantity);
+      itemBuilder: (_, int index) {
+        return displayOneExtraIngredientInRecite(
+            reciteIngrdients[index], index, quantity);
       },
-
     );
-
   }
-  Widget showExtraCheeseItems(List<CheeseItem> reciteCheeseItems,int quantity){
+
+  Widget showExtraCheeseItems(
+      List<CheeseItem> reciteCheeseItems, int quantity) {
     print('reciteCheeseItems.length: ${reciteCheeseItems.length}');
     return ListView.builder(
-
       scrollDirection: Axis.vertical,
       reverse: false,
       shrinkWrap: false,
       itemCount: reciteCheeseItems.length,
-
-      itemBuilder: (_,int index) {
-        return displayOneExtraCheeseItemInRecite(reciteCheeseItems[index], index,quantity);
+      itemBuilder: (_, int index) {
+        return displayOneExtraCheeseItemInRecite(
+            reciteCheeseItems[index], index, quantity);
       },
     );
   }
-  Widget showExtraSauces(List<SauceItem> reciteSauceItems,int quantity){
+
+  Widget showExtraSauces(List<SauceItem> reciteSauceItems, int quantity) {
     print('reciteSauceItems.length: ${reciteSauceItems.length}');
     return ListView.builder(
-
       scrollDirection: Axis.vertical,
       reverse: false,
       shrinkWrap: false,
       itemCount: reciteSauceItems.length,
-
-      itemBuilder: (_,int index) {
-        return displayOneExtraSauceItemInRecite(reciteSauceItems[index], index,quantity);
+      itemBuilder: (_, int index) {
+        return displayOneExtraSauceItemInRecite(
+            reciteSauceItems[index], index, quantity);
       },
     );
   }
 
-
-  Widget displayOneMultiSelectString(String oneMultiSelectString, int index){
-
+  Widget displayOneMultiSelectString(String oneMultiSelectString, int index) {
     print('oneMultiSelectString:_____ _____ ______  ${oneMultiSelectString}');
 
-    if(oneMultiSelectString!="") {
-      return
-        Text('$oneMultiSelectString',
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 17, fontFamily: 'Itim-Regular',),
+    if (oneMultiSelectString != "") {
+      return Text(
+        '$oneMultiSelectString',
+        textAlign: TextAlign.left,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: 17,
+          fontFamily: 'Itim-Regular',
+        ),
       );
-    }
-
-    else return Text('');
+    } else
+      return Text('');
   }
 
+  Widget displayOneExtraIngredientInRecite(
+      NewIngredient oneIngredientForRecite, int index, int quantity) {
+    print(
+        'oneIngredientForRecite.ingredientName: ${oneIngredientForRecite.ingredientName}');
 
-
-  Widget displayOneExtraIngredientInRecite(NewIngredient oneIngredientForRecite, int index,int quantity){
-
-    print('oneIngredientForRecite.ingredientName: ${oneIngredientForRecite.ingredientName}');
-
-    if(oneIngredientForRecite.isDefault==false) {
+    if (oneIngredientForRecite.isDefault == false) {
       return Container(
         height: 40,
         width: 220,
@@ -8543,24 +7029,20 @@ color:Colors.blue,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
             Text(
 //              '+SauceItem: $quantity'+'X',
-              '+: $quantity'+'X',
+              '+: $quantity' + 'X',
 
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 20, fontFamily: 'Itim-Regular',
+              ),
             ),
-
-            Text(' ##: ${((oneIngredientForRecite.ingredientName == null) ||
-                (oneIngredientForRecite.ingredientName.length == 0)) ?
-            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
-            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
-            oneIngredientForRecite.ingredientName}',
+            Text(
+              ' ##: ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
               /*
             Text(
               '${oneIngredientForRecite.ingredientName}', */
@@ -8570,25 +7052,23 @@ color:Colors.blue,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 17, fontFamily: 'Itim-Regular',),
+                fontSize: 17, fontFamily: 'Itim-Regular',
+              ),
             ),
             Text(
-              '  +${(oneIngredientForRecite.price *quantity).toStringAsFixed(2)}',
-
+              '  +${(oneIngredientForRecite.price * quantity).toStringAsFixed(2)}',
               textAlign: TextAlign.left,
               style: TextStyle(
 //                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 25, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',
+              ),
             ),
-
           ],
         ),
       );
-    }
-
-    else if(oneIngredientForRecite.isDeleted==true) {
+    } else if (oneIngredientForRecite.isDeleted == true) {
       return Container(
         height: 40,
         width: 220,
@@ -8596,14 +7076,8 @@ color:Colors.blue,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
-
-
-            Text('${((oneIngredientForRecite.ingredientName == null) ||
-                (oneIngredientForRecite.ingredientName.length == 0)) ?
-            '----' : oneIngredientForRecite.ingredientName.length > 18 ?
-            oneIngredientForRecite.ingredientName.substring(0, 15) + '...' :
-            oneIngredientForRecite.ingredientName}',
+            Text(
+              '${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
               /*
             Text(
               '${oneIngredientForRecite.ingredientName}', */
@@ -8614,27 +7088,22 @@ color:Colors.blue,
                 color: Colors.black,
                 decoration: TextDecoration.lineThrough,
                 fontSize: 25,
-                fontFamily: 'Itim-Regular',),
+                fontFamily: 'Itim-Regular',
+              ),
             ),
-
-
           ],
         ),
       );
-    }
-
-
-    else return Container(
-          height: 0,
-          width: 0
-      );
+    } else
+      return Container(height: 0, width: 0);
   }
 
-  Widget displayOneExtraSauceItemInRecite(SauceItem oneSauceItemForRecite, int index,int quantity){
+  Widget displayOneExtraSauceItemInRecite(
+      SauceItem oneSauceItemForRecite, int index, int quantity) {
+    print(
+        'oneSauceItemForRecite.ingredientName: ${oneSauceItemForRecite.sauceItemName}');
 
-    print('oneSauceItemForRecite.ingredientName: ${oneSauceItemForRecite.sauceItemName}');
-
-    if(oneSauceItemForRecite.isDefaultSelected !=true) {
+    if (oneSauceItemForRecite.isDefaultSelected != true) {
       return Container(
         height: 40,
         width: 220,
@@ -8642,23 +7111,18 @@ color:Colors.blue,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
             Text(
-              ' ** : $quantity'+'X',
-
+              ' ** : $quantity' + 'X',
               textAlign: TextAlign.left,
               style: TextStyle(
 //                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 25, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',
+              ),
             ),
-
-            Text('${((oneSauceItemForRecite.sauceItemName == null) ||
-                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-            '---' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-            oneSauceItemForRecite.sauceItemName}',
+            Text(
+              '${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '---' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
               /*
           Text(
               '${oneSauceItemForRecite.sauceItemName} ',
@@ -8669,25 +7133,23 @@ color:Colors.blue,
 //                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 25, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',
+              ),
             ),
             Text(
               '  +${(oneSauceItemForRecite.price * quantity).toStringAsFixed(2)}',
-
               textAlign: TextAlign.left,
               style: TextStyle(
 //                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 25, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',
+              ),
             ),
-
           ],
         ),
       );
-    }
-
-    else if(oneSauceItemForRecite.isDeleted ==true) {
+    } else if (oneSauceItemForRecite.isDeleted == true) {
       return Container(
         height: 40,
         width: 220,
@@ -8695,41 +7157,29 @@ color:Colors.blue,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
-
-
-            Text('${((oneSauceItemForRecite.sauceItemName == null) ||
-                (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-            '---' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-            oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-            oneSauceItemForRecite.sauceItemName}',
-
-
+            Text(
+              '${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '---' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
               textAlign: TextAlign.left,
               style: TextStyle(
 //                fontWeight: FontWeight.bold,
                 color: Colors.black,
                 decoration: TextDecoration.lineThrough,
 //                        color: Color(0xffF50303),
-                fontSize: 25, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',
+              ),
             ),
-
-
           ],
         ),
       );
-    }
-    else return Container(
-          height: 0,
-          width: 0
-      );
+    } else
+      return Container(height: 0, width: 0);
   }
 
-
-  Widget displayOneExtraCheeseItemInRecite(CheeseItem oneCheeseItemForRecite, int index,int quantity){
-
-    print('oneCheeseItemForRecite.ingredientName: ${oneCheeseItemForRecite.cheeseItemName}');
-    if(oneCheeseItemForRecite.isDefaultSelected !=true) {
+  Widget displayOneExtraCheeseItemInRecite(
+      CheeseItem oneCheeseItemForRecite, int index, int quantity) {
+    print(
+        'oneCheeseItemForRecite.ingredientName: ${oneCheeseItemForRecite.cheeseItemName}');
+    if (oneCheeseItemForRecite.isDefaultSelected != true) {
       return Container(
         height: 40,
         width: 220,
@@ -8737,9 +7187,8 @@ color:Colors.blue,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
             Text(
-              ' ++ : $quantity'+'X',
+              ' ++ : $quantity' + 'X',
 //              '+Ingre.: $quantity'+'X',
 
               textAlign: TextAlign.left,
@@ -8747,19 +7196,18 @@ color:Colors.blue,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 20, fontFamily: 'Itim-Regular',
+              ),
             ),
-            Text('${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-            '---' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-            oneCheeseItemForRecite.cheeseItemName}',
+            Text(
+              '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '---' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
               textAlign: TextAlign.left,
               style: TextStyle(
 //                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 25, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',
+              ),
             ),
 
             /*
@@ -8784,24 +7232,18 @@ color:Colors.blue,
             */
             Text(
               '  +${(oneCheeseItemForRecite.price * quantity).toStringAsFixed(2)}',
-
               textAlign: TextAlign.left,
               style: TextStyle(
 //                fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 25, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',
+              ),
             ),
-
           ],
         ),
       );
-    }
-
-
-    else if
-
-    (oneCheeseItemForRecite.isDeleted ==true) {
+    } else if (oneCheeseItemForRecite.isDeleted == true) {
       return Container(
         height: 40,
         width: 220,
@@ -8809,62 +7251,48 @@ color:Colors.blue,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
-
-            Text('${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-            '---' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-            oneCheeseItemForRecite.cheeseItemName}',
+            Text(
+              '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '---' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
               textAlign: TextAlign.left,
               style: TextStyle(
 //                fontWeight: FontWeight.bold,
                 color: Colors.black,
                 decoration: TextDecoration.lineThrough,
 //                        color: Color(0xffF50303),
-                fontSize: 25, fontFamily: 'Itim-Regular',),
+                fontSize: 25, fontFamily: 'Itim-Regular',
+              ),
             ),
-
-
-
           ],
         ),
       );
-    }
-
-    else return Container(
-          height: 0,
-          width: 0
-      );
+    } else
+      return Container(height: 0, width: 0);
   }
 
-  Widget displayOneFoodInformation(OrderedItem oneFood, int index){
+  Widget displayOneFoodInformation(OrderedItem oneFood, int index) {
     print('index: : : : $index');
 
-    List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
-    List<SauceItem>     extraSauces       = oneFood.selectedSauces;
-    List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+    List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
+    List<SauceItem> extraSauces = oneFood.selectedSauces;
+    List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
 
     List<String> multiSelectStrings2 = oneFood.multiSelectString;
 
     print('multiSelectStrings2: $multiSelectStrings2');
 
-
-
-
-
     print('extraIngredient: $extraIngredient');
     print('extraSauces: $extraSauces');
     print('extraCheeseItems: $extraCheeseItems');
 
-    List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
-        ||(e.isDeleted == true)
-    )).toList();
-    List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
-        ||(e.isDeleted == true))).toList();
-    List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
-        ||(e.isDeleted == true))).toList();
-
+    List<NewIngredient> onlyExtraIngredient = extraIngredient
+        .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
+        .toList();
+    List<SauceItem> onlyExtraSauces = extraSauces
+        .where((e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+        .toList();
+    List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
+        .where((e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+        .toList();
 
     print('onlyExtraIngredient: $onlyExtraIngredient');
 
@@ -8872,23 +7300,12 @@ color:Colors.blue,
 
     print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
-
-
-
     /*
     List<NewIngredient> defaultIngredientsLaterAdded
     = defaultIngredients.where((oneDefaultIngredient) =>
     oneDefaultIngredient.isDefault!=true).toList();
 
     */
-
-
-
-
-
-
-
-
 
 //    List<String> categories = [];
 //    orderedItems.forEach((oneFood) {
@@ -8909,35 +7326,26 @@ color:Colors.blue,
 
 //    List<String> categories = [];
 
-
     return Container(
-
-      height:940,
+      height: 940,
       width: 350,
-
       child: Column(
         children: <Widget>[
-
-
           Container(
             height: 50,
             width: 350,
             alignment: Alignment.center,
             child: Text(
               '${oneFood.category.toString()}',
-
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
 //                        color: Color(0xffF50303),
-                fontSize: 20, fontFamily: 'Itim-Regular',),
+                fontSize: 20, fontFamily: 'Itim-Regular',
+              ),
             ),
           ),
-
-
-
-
           Container(
             height: 50,
             width: 350,
@@ -8945,33 +7353,29 @@ color:Colors.blue,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-
                 Text(
                   '${oneFood.name.toString()}',
-
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
 //                        color: Color(0xffF50303),
-                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                    fontSize: 20, fontFamily: 'Itim-Regular',
+                  ),
                 ),
                 Text(
                   'X${oneFood.quantity}',
-
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
 //                        color: Color(0xffF50303),
-                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                    fontSize: 20, fontFamily: 'Itim-Regular',
+                  ),
                 ),
-
               ],
             ),
           ),
-
-
           Container(
             height: 50,
             width: 350,
@@ -8979,16 +7383,15 @@ color:Colors.blue,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-
                 Text(
                   '${oneFood.foodItemSize}',
-
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
 //                        color: Color(0xffF50303),
-                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                    fontSize: 20, fontFamily: 'Itim-Regular',
+                  ),
                 ),
                 Text(
                   '${(oneFood.unitPriceWithoutCheeseIngredientSauces * oneFood.quantity).toStringAsFixed(2)}',
@@ -8999,29 +7402,23 @@ color:Colors.blue,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
 //                        color: Color(0xffF50303),
-                    fontSize: 20, fontFamily: 'Itim-Regular',),
+                    fontSize: 20, fontFamily: 'Itim-Regular',
+                  ),
                 ),
-
               ],
             ),
           ),
-
-
-
-
-
           Container(
-              height:700,
+              height: 700,
 //              color:Colors.redAccent,
-              padding:const EdgeInsets.symmetric(horizontal: 10,vertical: 0),
-              child:ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+              child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-
                   Column(
                     children: [
-
-                      Text('multi Select Strings...............',
+                      Text(
+                        'multi Select Strings...............',
                         /*
             Text(
               '${oneIngredientForRecite.ingredientName}', */
@@ -9032,21 +7429,19 @@ color:Colors.blue,
                           color: Colors.black,
 //                          decoration: TextDecoration.lineThrough,
                           fontSize: 27,
-                          fontFamily: 'Itim-Regular',),
+                          fontFamily: 'Itim-Regular',
+                        ),
                       ),
                       Container(
                           width: 350,
-                          height:210,
-                          child: showMultiSelectStrings(multiSelectStrings2)
-                      ),
+                          height: 210,
+                          child: showMultiSelectStrings(multiSelectStrings2)),
                     ],
                   ),
-
-
                   Column(
                     children: [
-
-                      Text('Ingredient.........',
+                      Text(
+                        'Ingredient.........',
                         /*
             Text(
               '${oneIngredientForRecite.ingredientName}', */
@@ -9057,30 +7452,27 @@ color:Colors.blue,
                           color: Colors.black,
 //                          decoration: TextDecoration.lineThrough,
                           fontSize: 27,
-                          fontFamily: 'Itim-Regular',),
+                          fontFamily: 'Itim-Regular',
+                        ),
                       ),
-
                       Container(
                           width: 350,
-                          height:210,
+                          height: 210,
 //                      color:Colors.blue,
-                          child: showExtraIngredients(onlyExtraIngredient,oneFood.quantity)
-                      ),
+                          child: showExtraIngredients(
+                              onlyExtraIngredient, oneFood.quantity)),
                     ],
                   ),
-
-
-
                   Divider(
-                    height:10,
+                    height: 10,
 //            width: 220,
-                    thickness:5,
-                    color:Colors.black,
+                    thickness: 5,
+                    color: Colors.black,
                   ),
                   Column(
                     children: [
-
-                      Text('Cheeses.........',
+                      Text(
+                        'Cheeses.........',
                         /*
             Text(
               '${oneIngredientForRecite.ingredientName}', */
@@ -9091,28 +7483,27 @@ color:Colors.blue,
                           color: Colors.black,
 //                          decoration: TextDecoration.lineThrough,
                           fontSize: 27,
-                          fontFamily: 'Itim-Regular',),
+                          fontFamily: 'Itim-Regular',
+                        ),
                       ),
-
                       Container(
                           width: 350,
-                          height:210,
-                          color:Colors.orange,
-                          child: showExtraCheeseItems(onlyExtraCheeseItems,oneFood.quantity)
-                      ),
+                          height: 210,
+                          color: Colors.orange,
+                          child: showExtraCheeseItems(
+                              onlyExtraCheeseItems, oneFood.quantity)),
                     ],
                   ),
-
                   Divider(
-                    height:10,
+                    height: 10,
 //            width: 220,
-                    thickness:5,
-                    color:Colors.black,
+                    thickness: 5,
+                    color: Colors.black,
                   ),
                   Column(
                     children: [
-
-                      Text('Sauces.........',
+                      Text(
+                        'Sauces.........',
                         /*
             Text(
               '${oneIngredientForRecite.ingredientName}', */
@@ -9123,73 +7514,54 @@ color:Colors.blue,
                           color: Colors.black,
 //                          decoration: TextDecoration.lineThrough,
                           fontSize: 27,
-                          fontFamily: 'Itim-Regular',),
+                          fontFamily: 'Itim-Regular',
+                        ),
                       ),
-
-
                       Container(
                           width: 350,
-                          height:210,
-                          color:Colors.deepPurpleAccent,
-                          child: showExtraSauces(onlyExtraSauces,oneFood.quantity)
-                      ),
+                          height: 210,
+                          color: Colors.deepPurpleAccent,
+                          child: showExtraSauces(
+                              onlyExtraSauces, oneFood.quantity)),
                     ],
                   ),
-
-
                 ],
-              )
-          ),
-
-
+              )),
           Divider(
-            height:20,
+            height: 20,
 //            width: 220,
-            thickness:5,
-            color:Colors.black,
+            thickness: 5,
+            color: Colors.black,
           ),
-
-
         ],
       ),
     );
   }
 
-
-
-  Widget processFoodForRecite(List<OrderedItem> orderedItems){
-
+  Widget processFoodForRecite(List<OrderedItem> orderedItems) {
     return ListView.builder(
-
       scrollDirection: Axis.vertical,
       reverse: false,
       shrinkWrap: false,
       itemCount: orderedItems.length,
-
-      itemBuilder: (_,int index) {
+      itemBuilder: (_, int index) {
         return displayOneFoodInformation(orderedItems[index], index);
       },
     );
   }
 
-
-
   Future<void> dummyPrintDialog(
-
-      OneOrderFirebase oneOrderForReceipt,
-      Uint8List restaurantNameImageByte2,
-      ) async {
-
+    OneOrderFirebase oneOrderForReceipt,
+    Uint8List restaurantNameImageByte2,
+  ) async {
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
 
-    CustomerInformation customerForReciteGeneration = oneOrderForReceipt.oneCustomer;
+    CustomerInformation customerForReciteGeneration =
+        oneOrderForReceipt.oneCustomer;
 
     List<OrderedItem> orderedItems = oneOrderForReceipt.orderedItems;
 
-
     print('oneOrderForReceipt.timeOfDay: ${oneOrderForReceipt.timeOfDay}');
-
-
 
     return showDialog<void>(
       context: context,
@@ -9201,43 +7573,39 @@ color:Colors.blue,
             child: ListBody(
 //              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container
-                  (
+                Container(
 //                    color:Colors.green,
                     width: 200,
-                    height:40,
-                    child: Image.memory(restaurantNameImageByte2)
-                ),
+                    height: 40,
+                    child: Image.memory(restaurantNameImageByte2)),
 
                 Divider(
-                  height:10,
-                  thickness:5,
-                  color:Colors.black,
+                  height: 10,
+                  thickness: 5,
+                  color: Colors.black,
                 ),
-
 
                 Container(
                   child:
 
-                  // 2 ends here.
-                  Text('Order No: from F.S. Cloud Function',
-
+                      // 2 ends here.
+                      Text(
+                    'Order No: from F.S. Cloud Function',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 20, fontFamily: 'Itim-Regular',),
+                      fontSize: 20, fontFamily: 'Itim-Regular',
+                    ),
                   ),
-
                 ),
 
                 Divider(
-                  height:10,
-                  thickness:5,
-                  color:Colors.black,
+                  height: 10,
+                  thickness: 5,
+                  color: Colors.black,
                 ),
-
 
                 Container(
                   child: Row(
@@ -9245,40 +7613,42 @@ color:Colors.blue,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        '${oneOrderForReceipt
-                            .formattedOrderPlacementDatesTimeOnly}',
-
+                        '${oneOrderForReceipt.formattedOrderPlacementDatesTimeOnly}',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
 
                       // 2 ends here.
 
                       // 911_1
                       Container(
-                        child: oneOrderForReceipt.orderProductionTimeFromNow !=-1?
-
-                        Text('${oneOrderForReceipt.orderProductionTimeFromNow} min',
-
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                        child:
+                            oneOrderForReceipt.orderProductionTimeFromNow != -1
+                                ? Text(
+                                    '${oneOrderForReceipt.orderProductionTimeFromNow} min',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
 //                        color: Color(0xffF50303),
-                            fontSize: 20, fontFamily: 'Itim-Regular',),
-                        ):Text('${oneOrderForReceipt.timeOfDay.toString()}',
-
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                                      fontSize: 20, fontFamily: 'Itim-Regular',
+                                    ),
+                                  )
+                                : Text(
+                                    '${oneOrderForReceipt.timeOfDay.toString()}',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
 //                        color: Color(0xffF50303),
-                            fontSize: 20, fontFamily: 'Itim-Regular',),
-                        ),
+                                      fontSize: 20, fontFamily: 'Itim-Regular',
+                                    ),
+                                  ),
                       ),
                     ],
                   ),
@@ -9287,27 +7657,22 @@ color:Colors.blue,
                 Container(
                   child:
 
-                  // 2 ends here.
-                  Text('${oneOrderForReceipt.formattedOrderPlacementDate}',
-
+                      // 2 ends here.
+                      Text(
+                    '${oneOrderForReceipt.formattedOrderPlacementDate}',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
 //                        color: Color(0xffF50303),
-                      fontSize: 20, fontFamily: 'Itim-Regular',),
+                      fontSize: 20, fontFamily: 'Itim-Regular',
+                    ),
                   ),
-
                 ),
-
 
                 SizedBox(
                   height: 10,
                 ),
-
-
-
-
 
                 // ADDRESS: BEGINS HERE.
 
@@ -9316,41 +7681,37 @@ color:Colors.blue,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-
                       Text(
                         'address: ',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
                       Text(
-                        '${((customerForReciteGeneration.address == null) ||
-                            (customerForReciteGeneration.address.length == 0)) ?
-                        '----' : customerForReciteGeneration.address.length > 21 ?
-                        customerForReciteGeneration.address.substring(0, 18) + '_ _' :
-                        customerForReciteGeneration.address}',
-
+                        '${((customerForReciteGeneration.address == null) || (customerForReciteGeneration.address.length == 0)) ? '----' : customerForReciteGeneration.address.length > 21 ? customerForReciteGeneration.address.substring(0, 18) + '_ _' : customerForReciteGeneration.address}',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
 
                       // 2 ends here.
-                      Text('${customerForReciteGeneration.flatOrHouseNumber}',
-
+                      Text(
+                        '${customerForReciteGeneration.flatOrHouseNumber}',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
                     ],
                   ),
@@ -9360,132 +7721,114 @@ color:Colors.blue,
 
                 // PHONE: BEGINS HERE.
 
-
-
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-
                       Text(
                         'phone: ',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
                       Text(
                         '${customerForReciteGeneration.phoneNumber}',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
-
                     ],
                   ),
                 ),
 
                 // PHONE: ENDS HERE.
 
-
                 Divider(
-                  height:30,
-                  thickness:10,
-                  color:Colors.black,
+                  height: 30,
+                  thickness: 10,
+                  color: Colors.black,
                 ),
-
 
                 //  ORDEREDITEMS BEGINS HERE..
 
 //                orderedItems.map((e) => null)
 
-
-
-
                 Container(
                     width: 350,
-                    height:580,
-                    child: processFoodForRecite(orderedItems)
-                ),
-
-
+                    height: 580,
+                    child: processFoodForRecite(orderedItems)),
 
                 //  ORDEREDITEMS endS HERE..
 
                 Divider(
-                  height:30,
-                  thickness:8,
-                  color:Colors.black,
+                  height: 30,
+                  thickness: 8,
+                  color: Colors.black,
                 ),
-
 
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-
                       Text(
                         'SUBTOTAL: ',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 26, fontFamily: 'Itim-Regular',),
+                          fontSize: 26, fontFamily: 'Itim-Regular',
+                        ),
                       ),
                       Text(
                         '${oneOrderForReceipt.totalPrice.toStringAsFixed(2)}',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
-
                     ],
                   ),
                 ),
-
 
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-
                       Text(
                         'DELIVERY: ',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 26, fontFamily: 'Itim-Regular',),
+                          fontSize: 26, fontFamily: 'Itim-Regular',
+                        ),
                       ),
                       Text(
                         '${oneOrderForReceipt.deliveryCost.toStringAsFixed(2)}',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
-
                     ],
                   ),
                 ),
@@ -9495,28 +7838,26 @@ color:Colors.blue,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-
                       Text(
                         'ALV: ',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 26, fontFamily: 'Itim-Regular',),
+                          fontSize: 26, fontFamily: 'Itim-Regular',
+                        ),
                       ),
                       Text(
                         '${oneOrderForReceipt.tax.toStringAsFixed(2)}',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
-
                     ],
                   ),
                 ),
@@ -9526,71 +7867,64 @@ color:Colors.blue,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-
                       Text(
                         'TOTAL: ',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 30, fontFamily: 'Itim-Regular',),
+                          fontSize: 30, fontFamily: 'Itim-Regular',
+                        ),
                       ),
 
                       // TODO: PROBLEM CODE NEEDS CHECKING....
                       Text(
                         '${(oneOrderForReceipt.priceWithDelivery).toStringAsFixed(2)}',
-
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
 //                        color: Color(0xffF50303),
-                          fontSize: 20, fontFamily: 'Itim-Regular',),
+                          fontSize: 20, fontFamily: 'Itim-Regular',
+                        ),
                       ),
-
                     ],
                   ),
                 ),
 
-
-
-
-
-
-
                 Container(
-                  height:70,
+                  height: 70,
                   width: 400,
                   child: Row(
                     children: <Widget>[
                       Container(
-                        color:Colors.red,
+                        color: Colors.red,
                         //sss
                         width: 70,
-                        height:70,
+                        height: 70,
                         child: Image.asset(
-                          oneOrderForReceipt.paidType.toLowerCase() == 'card' ?
-                          'assets/unpaid_cash_card/card.png'
-                              :oneOrderForReceipt.paidType.toLowerCase() == 'cash'?
-                          'assets/unpaid_cash_card/cash.png':'assets/unpaid_cash_card/unpaid.png',
+                          oneOrderForReceipt.paidType.toLowerCase() == 'card'
+                              ? 'assets/unpaid_cash_card/card.png'
+                              : oneOrderForReceipt.paidType.toLowerCase() ==
+                                      'cash'
+                                  ? 'assets/unpaid_cash_card/cash.png'
+                                  : 'assets/unpaid_cash_card/unpaid.png',
 
 //                color: Colors.black,
                           width: 50,
-                          height:50,
-
+                          height: 50,
                         ),
                       ),
                       Row(
                         children: <Widget>[
-
-
                           Text(
-                            oneOrderForReceipt.paidType.toLowerCase() == 'card' ?
-                            'card'
-                                :oneOrderForReceipt.paidType.toLowerCase() == 'cash'?
-                            'cash':'unpaid',
+                            oneOrderForReceipt.paidType.toLowerCase() == 'card'
+                                ? 'card'
+                                : oneOrderForReceipt.paidType.toLowerCase() ==
+                                        'cash'
+                                    ? 'cash'
+                                    : 'unpaid',
 
 //                            oneOrderForReceipt.paidType.toLowerCase() == 'paid' ?
 //                            'paid' : 'unpaid',
@@ -9600,18 +7934,22 @@ color:Colors.blue,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
 //                          color: Color(0xffF50303),
-                              fontSize: 20, fontFamily: 'Itim-Regular',),
+                              fontSize: 20, fontFamily: 'Itim-Regular',
+                            ),
                           ),
-
                           SizedBox(width: 50),
-
                           Text(
-                            (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery')
+                            (oneOrderForReceipt.orderBy.toLowerCase() ==
+                                    'delivery')
                                 ? 'Delivery'
-                                :
-                            (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-                            'Phone' : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                                'takeaway') ? 'TakeAway' : 'DinningRoom',
+                                : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                                        'phone')
+                                    ? 'Phone'
+                                    : (oneOrderForReceipt.orderBy
+                                                .toLowerCase() ==
+                                            'takeaway')
+                                        ? 'TakeAway'
+                                        : 'DinningRoom',
 //                    oneOrderForReceipt.orderBy
 //                    'dinningRoom',
                             textAlign: TextAlign.center,
@@ -9619,46 +7957,43 @@ color:Colors.blue,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
 //                        color: Color(0xffF50303),
-                              fontSize: 20, fontFamily: 'Itim-Regular',),
+                              fontSize: 20, fontFamily: 'Itim-Regular',
+                            ),
                           ),
-
-
-
                         ],
                       ),
-
                       Container(
 //                      color: Colors.black,
                         width: 70,
-                        height:70,
+                        height: 70,
 
-                        child: (oneOrderForReceipt.orderBy.toLowerCase() == 'delivery') ?
-                        Image.asset(
-                          'assets/orderBYicons/delivery.png',
-                          color: Colors.black,
-                          width: 50,
-                          height:50,) :
-                        (oneOrderForReceipt.orderBy.toLowerCase() == 'phone') ?
-                        Image.asset(
-                            'assets/phone.png',
-                            color: Colors.black,
-                            width: 50,
-                            height:50) : (oneOrderForReceipt.orderBy
-                            .toLowerCase() == 'takeaway')
+                        child: (oneOrderForReceipt.orderBy.toLowerCase() ==
+                                'delivery')
                             ? Image.asset(
-                          'assets/orderBYicons/takeaway.png',
-                          color: Colors.black,
-                          width: 50,
-                          height:50,
-                        )
-                            : Image.asset('assets/orderBYicons/diningroom.png',
-                          color: Colors.black,
-                          width: 50,
-                          height:50,),
-
+                                'assets/orderBYicons/delivery.png',
+                                color: Colors.black,
+                                width: 50,
+                                height: 50,
+                              )
+                            : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                                    'phone')
+                                ? Image.asset('assets/phone.png',
+                                    color: Colors.black, width: 50, height: 50)
+                                : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                                        'takeaway')
+                                    ? Image.asset(
+                                        'assets/orderBYicons/takeaway.png',
+                                        color: Colors.black,
+                                        width: 50,
+                                        height: 50,
+                                      )
+                                    : Image.asset(
+                                        'assets/orderBYicons/diningroom.png',
+                                        color: Colors.black,
+                                        width: 50,
+                                        height: 50,
+                                      ),
                       ),
-
-
                     ],
                   ),
                 ),
@@ -9696,25 +8031,25 @@ color:Colors.blue,
           }).catchError((onError) {
 
   * */
-  void printTicketDummy2(/*PaperSize paper, */
-      Restaurant currentRestaurant,
-      OneOrderFirebase oneOrderdocument,
-      ImageAliasAnotherSource.Image imageResource,
+  void printTicketDummy2(
+    /*PaperSize paper, */
+    Restaurant currentRestaurant,
+    OneOrderFirebase oneOrderdocument,
+    ImageAliasAnotherSource.Image imageResource,
 //      Uint8List orderInformationAndUserInformationTopInBytes,
-      /*
+    /*
       Uint8List orderInformationForReciteWidgetBytes2,
       Uint8List customerInformationOnlyBytes2, */
-      Uint8List restaurantNameImageBytes,
-      /* Uint8List totalCostDeliveryBytes2,*/
-      /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */
-      ) async {
+    Uint8List restaurantNameImageBytes,
+    /* Uint8List totalCostDeliveryBytes2,*/
+    /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */
+  ) async {
     print(' came here: printTicketDummy');
 
 //    final PosPrintResult res =
 //    await printerManager.printTicket(await demoReceipt(paper,currentRestaurant, oneOrderdocument));
 
 //    showToast('res.msg  res.msg   res.msg');
-
 
     dummyPrintDialog(
       oneOrderdocument,
@@ -9730,7 +8065,6 @@ color:Colors.blue,
       /*paidUnpaidDeliveryTypeWidgetBytes2 */
     );
   }
-
 
   String sanitize(String nameInput) {
 //    String nameInput2 = nameInput.replaceAll(new RegExp(r'e'), 'é');
@@ -9755,19 +8089,16 @@ color:Colors.blue,
   */
 // # number 1: demoReceipt Order Type TakeAway begins here...
 
-
   Future<Ticket> demoReceiptOrderTypeTakeAway(
-      PaperSize paper,
-      Restaurant thisRestaurant3, // not required but just for printing...
-      OneOrderFirebase oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
-      Uint8List restaurantNameBytesNotFuture3,
-
-      ) async {
+    PaperSize paper,
+    Restaurant thisRestaurant3, // not required but just for printing...
+    OneOrderFirebase
+        oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
+    Uint8List restaurantNameBytesNotFuture3,
+  ) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
-
-    CustomerInformation customerForReciteGeneration = oneOrderData3
-        .oneCustomer;
+    CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
 
     List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
@@ -9777,89 +8108,75 @@ color:Colors.blue,
     print('currentRestaurant: ${thisRestaurant3.name}');
     print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration.address: ${customerForReciteGeneration
-        .address}');
     print(
-        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
-            .flatOrHouseNumber}');
+        'customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
     print(
-        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
-            .phoneNumber}');
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
     print(
-        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
-            .etaTimeInMinutes}');
-    print('restaurantNameBytesNotFuture3---takeAway---> : $restaurantNameBytesNotFuture3');
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+    print(
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+    print(
+        'restaurantNameBytesNotFuture3---takeAway---> : $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
-        .orderProductionTimeFromNow}');
-
-
-
+    print(
+        'oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3.orderProductionTimeFromNow}');
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
-    final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
+    final ByteData faceBookLikedata =
+        await rootBundle.load('assets/icons8-facebook-like-64.png');
+    final Uint8List faceBookLikedataBytes =
+        faceBookLikedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
-    = ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
-
+    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
+        ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
+    final ByteData handsdata =
+        await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image handsdataBytesImage
-    = ImageAliasAnotherSource.decodeImage(handsdataBytes);
-
-
-
-
-
+    final ImageAliasAnotherSource.Image handsdataBytesImage =
+        ImageAliasAnotherSource.decodeImage(handsdataBytes);
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
+    final ByteData deliveryData =
+        await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image deliveryDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
-
+    final ImageAliasAnotherSource.Image deliveryDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
 
     //differentImages 4 => phonedataBytesImage
     final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image phonedataBytesImage
-    = ImageAliasAnotherSource.decodeImage(phonedataBytes);
-
+    final ImageAliasAnotherSource.Image phonedataBytesImage =
+        ImageAliasAnotherSource.decodeImage(phonedataBytes);
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
+    final ByteData takeAwayData =
+        await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image takeAwayDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
-
+    final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
+    final ByteData dinningRoomData =
+        await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
-
-
-
-
+    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
 
     //0.... printing codes starts here..
-
 
     //  printing begins::: //1.... starts...
 
     //1... RESTAURANT NAME DONE...
-    final ImageAliasAnotherSource
-        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameBytesNotFuture3);
+    final ImageAliasAnotherSource.Image oneImageRestaurant =
+        ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
 
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
@@ -9867,33 +8184,33 @@ color:Colors.blue,
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch:'=',len:null,linesAfter:1);
+    ticket.hr(ch: '=', len: null, linesAfter: 1);
 
-    if(oneOrderData3.orderProductionTimeFromNow ==-1 ){
-      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'     '
-          +'${oneOrderData3.timeOfDay.toString()}',
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width:  PosTextSize.size2,
-            bold:true,
-            align: PosAlign.left,
-          )
-      );
-    } else {
-      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
-          '     '
-          + '${oneOrderData3.orderProductionTimeFromNow} min',
+    if (oneOrderData3.orderProductionTimeFromNow == -1) {
+      ticket.text(
+          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+              '     ' +
+              '${oneOrderData3.timeOfDay.toString()}',
           styles: PosStyles(
             height: PosTextSize.size2,
             width: PosTextSize.size2,
             bold: true,
             align: PosAlign.left,
-          )
-      );
+          ));
+    } else {
+      ticket.text(
+          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+              '     ' +
+              '${oneOrderData3.orderProductionTimeFromNow} min',
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+            bold: true,
+            align: PosAlign.left,
+          ));
     }
 
     //    ticket.feed(2);
-
 
     // 3 ... address: .... + flat
 
@@ -9929,35 +8246,33 @@ color:Colors.blue,
     ticket.feed(1);
 
     */
-    ticket.hr(ch:'.',len:null,linesAfter:0);
+    ticket.hr(ch: '.', len: null, linesAfter: 0);
 
     // 5... processFoodForRecite
 
-
-    Set<String> categories ={};
+    Set<String> categories = {};
 
 //    List<String> categories = [];
     orderedItems.forEach((oneFood) {
-
-
-      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
+      if ((categories == null) ||
+          (categories.length == 0) ||
+          (categories.contains(oneFood.category) == false)) {
         ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
               bold: true,
               align: PosAlign.center,
-            )
-        );
+            ));
       }
 
       categories.add(oneFood.category);
 
       ticket.feed(1);
 
-      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
-      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
-      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+      List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
+      List<SauceItem> extraSauces = oneFood.selectedSauces;
+      List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
 
       List<String> multiSelectStrings2 = oneFood.multiSelectString;
 
@@ -9968,15 +8283,19 @@ color:Colors.blue,
 
 //      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
-          ||(e.isDeleted == true)
-      )).toList();
+      List<NewIngredient> onlyExtraIngredient = extraIngredient
+          .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
+          .toList();
 
-      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
-          ||(e.isDeleted == true))).toList();
+      List<SauceItem> onlyExtraSauces = extraSauces
+          .where(
+              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+          .toList();
 
-      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
-          ||(e.isDeleted == true))).toList();
+      List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
+          .where(
+              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+          .toList();
 
 //      List<SauceItem> onlyExtraSauces       =
 //      extraSauces.where((e) => e.isDefaultSelected != true).toList();
@@ -9989,243 +8308,184 @@ color:Colors.blue,
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
-
-
-
-
       // 5.... (name and quantity) + (size and price )
       ticket.row([
-
-
-        PosColumn(text: '${sanitize(oneFood.name)}',
-            width: 5, styles: PosStyles(align: PosAlign.left,
-            ) ),
-        PosColumn(text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-
-        PosColumn(text: 'X${oneFood.quantity}',
-            width: 5,styles: PosStyles(
-
+        PosColumn(
+            text: '${sanitize(oneFood.name)}',
+            width: 5,
+            styles: PosStyles(
+              align: PosAlign.left,
+            )),
+        PosColumn(
+          text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+        ),
+        PosColumn(
+            text: 'X${oneFood.quantity}',
+            width: 5,
+            styles: PosStyles(
               align: PosAlign.right,
             )),
-
-
       ]);
 
       ticket.row([
-        PosColumn(text: '${oneFood.foodItemSize}',
-            width: 5,  styles: PosStyles(align: PosAlign.left) ),
-        PosColumn(text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
-            width: 5,styles: PosStyles(
-
+        PosColumn(
+            text: '${oneFood.foodItemSize}',
+            width: 5,
+            styles: PosStyles(align: PosAlign.left)),
+        PosColumn(
+          text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+        ),
+        PosColumn(
+            text:
+                '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+            width: 5,
+            styles: PosStyles(
               align: PosAlign.right,
             )),
       ]);
 
       // 5.2 --- extra ingredients...
 
-      if(multiSelectStrings2.length > 0)
-      {
+      if (multiSelectStrings2.length > 0) {
         multiSelectStrings2.forEach((oneMultiSelectString) {
-
-            ticket.text(
-                  oneMultiSelectString, styles: PosStyles(
-                align: PosAlign.left,
-              ),
-            );
+          ticket.text(
+            oneMultiSelectString,
+            styles: PosStyles(
+              align: PosAlign.left,
+            ),
+          );
         });
       }
 
-      if(onlyExtraIngredient.length>0) {
+      if (onlyExtraIngredient.length > 0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-
-          if(oneIngredientForRecite.isDeleted==false) {
+          if (oneIngredientForRecite.isDeleted == false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
-                      (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-              )),
-
+                  text:
+                      '+${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+                  )),
               PosColumn(
                   text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          }
-          else{
-
+          } else {
             ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
-                      (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
+                  text:
+                      '- ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
 //                reverse: true,
-              underline: true,
-
-              )),
-
+                    underline: true,
+                  )),
               PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
-
           }
         });
       }
 
       // extra cheeseItems...
-      if(onlyExtraSauces.length>0){
+      if (onlyExtraSauces.length > 0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-
-          if(oneSauceItemForRecite.isDeleted==false) {
+          if (oneSauceItemForRecite.isDeleted == false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
-                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-                  oneSauceItemForRecite.sauceItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-              )),
-
+                  text:
+                      '+${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+                  )),
               PosColumn(
                   text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          }
-          else{
-
+          } else {
             ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
-                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
-                      ?
-                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
-                      :
-                  oneSauceItemForRecite.sauceItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
+                  text:
+                      '- ${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
 //                reverse: true,
-                underline: true,
-
-              )),
-
+                    underline: true,
+                  )),
               PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
-
           }
           ;
         });
       }
 
       // extra sauceItems...
-      if(onlyExtraCheeseItems.length>0) {
+      if (onlyExtraCheeseItems.length > 0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-
-          if(oneCheeseItemForRecite.isDeleted==false){
+          if (oneCheeseItemForRecite.isDeleted == false) {
             ticket.row([
-
-
-              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-              oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,styles: PosStyles(
-
+              PosColumn(
+                  text:
+                      '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,
+                  styles: PosStyles(
                     align: PosAlign.left,
                   )),
-
-              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,styles: PosStyles(align: PosAlign.right)),
-
-
-            ]);}
-          else{
-            ticket.row([
-
               PosColumn(
-                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
-                      ?
-                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
-                      :
-                  oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-//                reverse: true,
-                underline: true,
-
-              )),
-
-              PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)
-              ),
+                  text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          };
+          } else {
+            ticket.row([
+              PosColumn(
+                  text:
+                      '- ${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+//                reverse: true,
+                    underline: true,
+                  )),
+              PosColumn(
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+            ]);
+          }
+          ;
         });
       }
 
-
       // needed. as per design. when one food Item is printed then an hr added.
       ticket.feed(1);
-      ticket.hr(ch:'_',len:null,linesAfter:1);
+      ticket.hr(ch: '_', len: null, linesAfter: 1);
 //      ticket.feed(1);
     });
 
-
-
-
     // Price 1 subtotal
     ticket.row([
-      PosColumn(text: 'SUBTOTAL',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
-
+      PosColumn(
+        text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+          text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+          width: 5,
+          styles: PosStyles(
+              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
     ]);
 
     /*
@@ -10245,70 +8505,66 @@ color:Colors.blue,
 
 //    ticket.hr();
 
-    ticket.hr(ch:'_',len:null,linesAfter:0);
-
+    ticket.hr(ch: '_', len: null, linesAfter: 0);
 
     // Price 3  Total
     ticket.row([
-
-
-      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
-
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
-        width: 5,),
-
+      PosColumn(
+        text: 'TOTAL',
+        styles: PosStyles(bold: true),
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+        text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        styles: PosStyles(
+            bold: true, align: PosAlign.right, codeTable: PosCodeTable.westEur),
+        width: 5,
+      ),
     ]);
 
     ticket.feed(1);
 
-
-    oneOrderData3.paidStatus.toLowerCase() == 'paid'?
-    ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
-    ticket.image(handsdataBytesImage,align: PosAlign.center);
-
-
-
+    oneOrderData3.paidStatus.toLowerCase() == 'paid'
+        ? ticket.image(faceBookLikedataBytesImage, align: PosAlign.center)
+        : ticket.image(handsdataBytesImage, align: PosAlign.center);
 
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
-
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
-      'paid' : 'unpaid'}',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
-          ? 'Delivery'
-          :
-      (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
-      'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
-          'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 4,),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+        text:
+            '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text:
+            '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        width: 4,
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
     ]);
-
-
 
     // 7 image::
     // orderBy: 'Delivery: TakeAway: DinningRoom: phone
-    oneOrderData3.orderBy.toLowerCase() == 'delivery'?
-    ticket.image(deliveryDataBytesImage,align: PosAlign.center):
-    oneOrderData3.orderBy.toLowerCase() == 'phone'?
-    ticket.image(phonedataBytesImage,align: PosAlign.center):
-    oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
-    ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
-    ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
+    oneOrderData3.orderBy.toLowerCase() == 'delivery'
+        ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
+        : oneOrderData3.orderBy.toLowerCase() == 'phone'
+            ? ticket.image(phonedataBytesImage, align: PosAlign.center)
+            : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
+                ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
+                : ticket.image(dinningRoomDataBytesImage,
+                    align: PosAlign.center);
 
 //    ticket.hr();
     // needed. as per design.
@@ -10317,32 +8573,20 @@ color:Colors.blue,
 
     ticket.cut();
     return ticket;
-
-
-
   }
-
-
-
-
-
 
 // # number 2: demoReceipt Order Type Delivery begins here...
 
 //  restaurantNameImageBytes,totalCostDeliveryBytes2
   Future<Ticket> demoReceiptOrderTypeDelivery(
-      PaperSize paper,
-      Restaurant thisRestaurant3,
-      OneOrderFirebase oneOrderData3,
-      Uint8List restaurantNameBytesNotFuture3,
-      ) async {
-
-
+    PaperSize paper,
+    Restaurant thisRestaurant3,
+    OneOrderFirebase oneOrderData3,
+    Uint8List restaurantNameBytesNotFuture3,
+  ) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
-
-    CustomerInformation customerForReciteGeneration = oneOrderData3
-        .oneCustomer;
+    CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
 
     List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
@@ -10352,88 +8596,80 @@ color:Colors.blue,
     print('currentRestaurant: ${thisRestaurant3.name}');
     print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration.address: ${customerForReciteGeneration
-        .address}');
     print(
-        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
-            .flatOrHouseNumber}');
+        'customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
     print(
-        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
-            .phoneNumber}');
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
     print(
-        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
-            .etaTimeInMinutes}');
-    print('restaurantNameBytesNotFuture3 line # 10760: $restaurantNameBytesNotFuture3');
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+    print(
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+    print(
+        'restaurantNameBytesNotFuture3 line # 10760: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
-        .orderProductionTimeFromNow}');
-
-
-
+    print(
+        'oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3.orderProductionTimeFromNow}');
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
-    final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
+    final ByteData faceBookLikedata =
+        await rootBundle.load('assets/icons8-facebook-like-64.png');
+    final Uint8List faceBookLikedataBytes =
+        faceBookLikedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
-    = ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
-
+    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
+        ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
+    final ByteData handsdata =
+        await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image handsdataBytesImage
-    = ImageAliasAnotherSource.decodeImage(handsdataBytes);
-
-
+    final ImageAliasAnotherSource.Image handsdataBytesImage =
+        ImageAliasAnotherSource.decodeImage(handsdataBytes);
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
+    final ByteData deliveryData =
+        await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image deliveryDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
-
+    final ImageAliasAnotherSource.Image deliveryDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
 
     //differentImages 4 => phonedataBytesImage
     final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image phonedataBytesImage
-    = ImageAliasAnotherSource.decodeImage(phonedataBytes);
-
+    final ImageAliasAnotherSource.Image phonedataBytesImage =
+        ImageAliasAnotherSource.decodeImage(phonedataBytes);
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
+    final ByteData takeAwayData =
+        await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image takeAwayDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
-
+    final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
+    final ByteData dinningRoomData =
+        await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
-
+    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
 
     //  printing begins::: //1.... starts...
 
     //1... RESTAURANT NAME DONE...
-    final ImageAliasAnotherSource
-        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameBytesNotFuture3);
+    final ImageAliasAnotherSource.Image oneImageRestaurant =
+        ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
 
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
 
-
     ticket.image(oneImageRestaurant);
     ticket.feed(1);
-    ticket.hr(ch:'=',len:null,linesAfter:0);
+    ticket.hr(ch: '=', len: null, linesAfter: 0);
 
     ticket.text('Order No: from F.S. Cloud Function',
         styles: PosStyles(
@@ -10441,113 +8677,98 @@ color:Colors.blue,
           width: PosTextSize.size1,
           bold: true,
           align: PosAlign.center,
-        )
-    );
+        ));
 
-    ticket.hr(ch:'=',len:null,linesAfter:1);
+    ticket.hr(ch: '=', len: null, linesAfter: 1);
 
 //    Order No: Cloud Function generated..
 
-
-
-
-    if(oneOrderData3.orderProductionTimeFromNow==-1){
-      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'     '
-          +'${oneOrderData3.timeOfDay.toString()}',
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-            bold:true,
-            align: PosAlign.left,
-          )
-      );
-    }else {
-      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
-          '     '
-          + '${oneOrderData3.orderProductionTimeFromNow} min',
+    if (oneOrderData3.orderProductionTimeFromNow == -1) {
+      ticket.text(
+          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+              '     ' +
+              '${oneOrderData3.timeOfDay.toString()}',
           styles: PosStyles(
             height: PosTextSize.size2,
             width: PosTextSize.size2,
             bold: true,
             align: PosAlign.left,
-          )
-      );
+          ));
+    } else {
+      ticket.text(
+          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+              '     ' +
+              '${oneOrderData3.orderProductionTimeFromNow} min',
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+            bold: true,
+            align: PosAlign.left,
+          ));
     }
 
     ticket.text('${oneOrderData3.formattedOrderPlacementDate}',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
-          bold:true,
+          bold: true,
           align: PosAlign.left,
-        )
-    );
+        ));
 
 //    ticket.feed(1);
     ticket.feed(1);
-    ticket.hr(ch:'.',len:null,linesAfter:0);
+    ticket.hr(ch: '.', len: null, linesAfter: 0);
 
 //    ticket.feed(1);
     // 3 ... address: .... + flat
 
-
-    ticket.text('${((customerForReciteGeneration.address == null) ||
-        (customerForReciteGeneration.address.length == 0)) ?
-    '----' : customerForReciteGeneration.address.length > 21 ?
-    customerForReciteGeneration.address.substring(0, 18) + '...' :
-    customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
+    ticket.text(
+        '${((customerForReciteGeneration.address == null) || (customerForReciteGeneration.address.length == 0)) ? '----' : customerForReciteGeneration.address.length > 21 ? customerForReciteGeneration.address.substring(0, 18) + '...' : customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
-          bold:true,
-          align: PosAlign.left,
-        )
-    );
-
-    // 4 ... phone: phone
-    ticket.text('${((customerForReciteGeneration.phoneNumber == null) ||
-        (customerForReciteGeneration.phoneNumber.length == 0)) ?
-    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
-    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
-    customerForReciteGeneration.phoneNumber}',
-        styles: PosStyles(
-          height: PosTextSize.size1,
-          width: PosTextSize.size1,
-          bold:true,
+          bold: true,
           align: PosAlign.left,
         ));
 
+    // 4 ... phone: phone
+    ticket.text(
+        '${((customerForReciteGeneration.phoneNumber == null) || (customerForReciteGeneration.phoneNumber.length == 0)) ? '----' : customerForReciteGeneration.phoneNumber.length > 21 ? customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' : customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold: true,
+          align: PosAlign.left,
+        ));
 
     ticket.feed(1);
-    ticket.hr(ch:'.',len:null,linesAfter:0);
+    ticket.hr(ch: '.', len: null, linesAfter: 0);
 
     // 5... processFoodForRecite
 
-
-    Set<String> categories ={};
+    Set<String> categories = {};
 
 //    List<String> categories = [];
     orderedItems.forEach((oneFood) {
-
-
-      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
+      if ((categories == null) ||
+          (categories.length == 0) ||
+          (categories.contains(oneFood.category) == false)) {
         ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
               bold: true,
               align: PosAlign.center,
-            )
-        );
+            ));
       }
 
       categories.add(oneFood.category);
 
       ticket.feed(1);
 
-      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
-      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
-      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+      List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
+      List<SauceItem> extraSauces = oneFood.selectedSauces;
+      List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
       List<String> multiSelectStrings2 = oneFood.multiSelectString;
 //      print('extraIngredient: $extraIngredient');
 
@@ -10556,15 +8777,19 @@ color:Colors.blue,
 
 //      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
-          ||(e.isDeleted == true)
-      )).toList();
+      List<NewIngredient> onlyExtraIngredient = extraIngredient
+          .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
+          .toList();
 
-      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
-          ||(e.isDeleted == true))).toList();
+      List<SauceItem> onlyExtraSauces = extraSauces
+          .where(
+              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+          .toList();
 
-      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
-          ||(e.isDeleted == true))).toList();
+      List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
+          .where(
+              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+          .toList();
 
 //      List<SauceItem> onlyExtraSauces       =
 //      extraSauces.where((e) => e.isDefaultSelected != true).toList();
@@ -10577,342 +8802,277 @@ color:Colors.blue,
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
-
-
-
-
       // 5.... (name and quantity) + (size and price )
       ticket.row([
-
-
-        PosColumn(text: '${sanitize(oneFood.name)}',
-            width: 5, styles: PosStyles(align: PosAlign.left,
-            ) ),
-        PosColumn(text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-
-        PosColumn(text: 'X${oneFood.quantity}',
-            width: 5,styles: PosStyles(
-
+        PosColumn(
+            text: '${sanitize(oneFood.name)}',
+            width: 5,
+            styles: PosStyles(
+              align: PosAlign.left,
+            )),
+        PosColumn(
+          text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+        ),
+        PosColumn(
+            text: 'X${oneFood.quantity}',
+            width: 5,
+            styles: PosStyles(
               align: PosAlign.right,
             )),
-
-
       ]);
 
       ticket.row([
-        PosColumn(text: '${oneFood.foodItemSize}',
-            width: 5,  styles: PosStyles(align: PosAlign.left) ),
-        PosColumn(text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
-            width: 5,styles: PosStyles(
-
+        PosColumn(
+            text: '${oneFood.foodItemSize}',
+            width: 5,
+            styles: PosStyles(align: PosAlign.left)),
+        PosColumn(
+          text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+        ),
+        PosColumn(
+            text:
+                '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+            width: 5,
+            styles: PosStyles(
               align: PosAlign.right,
             )),
       ]);
 
       // 5.2 --- extra ingredients...
 
-      if(multiSelectStrings2.length > 0)
-      {
+      if (multiSelectStrings2.length > 0) {
         multiSelectStrings2.forEach((oneMultiSelectString) {
-
           ticket.text(
-            oneMultiSelectString, styles: PosStyles(
-            align: PosAlign.left,
-          ),
+            oneMultiSelectString,
+            styles: PosStyles(
+              align: PosAlign.left,
+            ),
           );
         });
       }
 
-
-      if(onlyExtraIngredient.length>0) {
+      if (onlyExtraIngredient.length > 0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-
-          if(oneIngredientForRecite.isDeleted==false) {
+          if (oneIngredientForRecite.isDeleted == false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
-                      (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-              )),
-
+                  text:
+                      '+${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+                  )),
               PosColumn(
                   text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          }
-          else{
-
+          } else {
             ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
-                      (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
+                  text:
+                      '- ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
 //                reverse: true,
-                underline: true,
-
-              )),
-
+                    underline: true,
+                  )),
               PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
-
           }
         });
       }
 
       // extra cheeseItems...
-      if(onlyExtraSauces.length>0) {
+      if (onlyExtraSauces.length > 0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-
-          if(oneSauceItemForRecite.isDeleted==false) {
+          if (oneSauceItemForRecite.isDeleted == false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
-                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-                  oneSauceItemForRecite.sauceItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-              )),
-
+                  text:
+                      '+${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+                  )),
               PosColumn(
                   text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          }
-          else{
-
+          } else {
             ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
-                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
-                      ?
-                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
-                      :
-                  oneSauceItemForRecite.sauceItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
+                  text:
+                      '- ${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
 //                reverse: true,
-                underline: true,
-
-              )),
-
+                    underline: true,
+                  )),
               PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
-
           }
           ;
         });
       }
 
       // extra sauceItems...
-      if(onlyExtraCheeseItems.length>0) {
+      if (onlyExtraCheeseItems.length > 0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-
-          if(oneCheeseItemForRecite.isDeleted==false){
+          if (oneCheeseItemForRecite.isDeleted == false) {
             ticket.row([
-
-
-              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-              oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,styles: PosStyles(
-
+              PosColumn(
+                  text:
+                      '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,
+                  styles: PosStyles(
                     align: PosAlign.left,
                   )),
-
-              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,styles: PosStyles(align: PosAlign.right)),
-
-
-            ]);}
-          else{
-            ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
-                      ?
-                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
-                      :
-                  oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-//                reverse: true,
-                underline: true,
-
-              )),
-
-              PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          };
+          } else {
+            ticket.row([
+              PosColumn(
+                  text:
+                      '- ${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+//                reverse: true,
+                    underline: true,
+                  )),
+              PosColumn(
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+            ]);
+          }
+          ;
         });
       }
 
-
       // needed. as per design. when one food Item is printed then an hr added.
       ticket.feed(1);
-      ticket.hr(ch:'_',len:null,linesAfter:1);
+      ticket.hr(ch: '_', len: null, linesAfter: 1);
 //      ticket.feed(1);
     });
 
-
-
-
     // Price 1 subtotal
     ticket.row([
-      PosColumn(text: 'SUBTOTAL',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
-
+      PosColumn(
+        text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+          text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+          width: 5,
+          styles: PosStyles(
+              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
     ]);
-
 
     ticket.row([
-
-
-      PosColumn(text: 'DELIVERY',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.deliveryCost.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
-
+      PosColumn(
+        text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+          text: '${oneOrderData3.deliveryCost.toStringAsFixed(2)}',
+          width: 5,
+          styles: PosStyles(
+              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
     ]);
-
 
     ticket.row([
-
-
-      PosColumn(text: 'ALV',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '14%',
-          width: 5,styles:PosStyles(align: PosAlign.right)),
-
+      PosColumn(
+        text: 'ALV',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+          text: '14%', width: 5, styles: PosStyles(align: PosAlign.right)),
     ]);
-
-
 
 //    ticket.hr();
 
-    ticket.hr(ch:'_',len:null,linesAfter:0);
-
+    ticket.hr(ch: '_', len: null, linesAfter: 0);
 
     // Price 3  Total
     ticket.row([
-
-
-      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
-
-      PosColumn(text: '${oneOrderData3.priceWithDelivery.toStringAsFixed(2)}',
-        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
-        width: 5,),
-
+      PosColumn(
+        text: 'TOTAL',
+        styles: PosStyles(bold: true),
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+        text: '${oneOrderData3.priceWithDelivery.toStringAsFixed(2)}',
+        styles: PosStyles(
+            bold: true, align: PosAlign.right, codeTable: PosCodeTable.westEur),
+        width: 5,
+      ),
     ]);
 
     ticket.feed(1);
 
-
-    oneOrderData3.paidStatus.toLowerCase() == 'paid'?
-    ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
-    ticket.image(handsdataBytesImage,align: PosAlign.center);
-
-
-
+    oneOrderData3.paidStatus.toLowerCase() == 'paid'
+        ? ticket.image(faceBookLikedataBytesImage, align: PosAlign.center)
+        : ticket.image(handsdataBytesImage, align: PosAlign.center);
 
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
-
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
-      'paid' : 'unpaid'}',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
-          ? 'Delivery'
-          :
-      (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
-      'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
-          'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 4,),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+        text:
+            '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text:
+            '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        width: 4,
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
     ]);
-
-
 
     // 7 image::
     // orderBy: 'Delivery: TakeAway: DinningRoom: phone
-    oneOrderData3.orderBy.toLowerCase() == 'delivery'?
-    ticket.image(deliveryDataBytesImage,align: PosAlign.center):
-    oneOrderData3.orderBy.toLowerCase() == 'phone'?
-    ticket.image(phonedataBytesImage,align: PosAlign.center):
-    oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
-    ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
-    ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
+    oneOrderData3.orderBy.toLowerCase() == 'delivery'
+        ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
+        : oneOrderData3.orderBy.toLowerCase() == 'phone'
+            ? ticket.image(phonedataBytesImage, align: PosAlign.center)
+            : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
+                ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
+                : ticket.image(dinningRoomDataBytesImage,
+                    align: PosAlign.center);
 
 //    ticket.hr();
     // needed. as per design.
@@ -10921,9 +9081,7 @@ color:Colors.blue,
 
     ticket.cut();
     return ticket;
-
   }
-
 
 // demoReceipt Order Type Delivery ends here...
 
@@ -10931,18 +9089,14 @@ color:Colors.blue,
 
 // demoReceipt Order Type Phone begins here...
   Future<Ticket> demoReceiptOrderTypePhone(
-      PaperSize paper,
-      Restaurant thisRestaurant3,
-      OneOrderFirebase oneOrderData3,
-      Uint8List restaurantNameBytesNotFuture3,
-      ) async {
-
-
+    PaperSize paper,
+    Restaurant thisRestaurant3,
+    OneOrderFirebase oneOrderData3,
+    Uint8List restaurantNameBytesNotFuture3,
+  ) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
-
-    CustomerInformation customerForReciteGeneration = oneOrderData3
-        .oneCustomer;
+    CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
 
     List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
@@ -10952,84 +9106,73 @@ color:Colors.blue,
     print('currentRestaurant: ${thisRestaurant3.name}');
     print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration.address: ${customerForReciteGeneration
-        .address}');
     print(
-        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
-            .flatOrHouseNumber}');
+        'customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
     print(
-        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
-            .phoneNumber}');
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
     print(
-        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
-            .etaTimeInMinutes}');
-    print('restaurantNameBytesNotFuture3 line# 11159: $restaurantNameBytesNotFuture3');
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+    print(
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+    print(
+        'restaurantNameBytesNotFuture3 line# 11159: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
-        .orderProductionTimeFromNow}');
-
-
-
+    print(
+        'oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3.orderProductionTimeFromNow}');
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
-    final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
+    final ByteData faceBookLikedata =
+        await rootBundle.load('assets/icons8-facebook-like-64.png');
+    final Uint8List faceBookLikedataBytes =
+        faceBookLikedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
-    = ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
-
+    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
+        ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
+    final ByteData handsdata =
+        await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image handsdataBytesImage
-    = ImageAliasAnotherSource.decodeImage(handsdataBytes);
-
-
-
-
-
+    final ImageAliasAnotherSource.Image handsdataBytesImage =
+        ImageAliasAnotherSource.decodeImage(handsdataBytes);
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
+    final ByteData deliveryData =
+        await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image deliveryDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
-
+    final ImageAliasAnotherSource.Image deliveryDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
 
     //differentImages 4 => phonedataBytesImage
     final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image phonedataBytesImage
-    = ImageAliasAnotherSource.decodeImage(phonedataBytes);
-
+    final ImageAliasAnotherSource.Image phonedataBytesImage =
+        ImageAliasAnotherSource.decodeImage(phonedataBytes);
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
+    final ByteData takeAwayData =
+        await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image takeAwayDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
-
+    final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
+    final ByteData dinningRoomData =
+        await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
-
-
+    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
 
     //  printing begins::: //1.... starts...
 
     //1... RESTAURANT NAME DONE...
-    final ImageAliasAnotherSource
-        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameBytesNotFuture3);
+    final ImageAliasAnotherSource.Image oneImageRestaurant =
+        ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
 
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
@@ -11037,36 +9180,35 @@ color:Colors.blue,
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch:'=',len:null,linesAfter:1);
+    ticket.hr(ch: '=', len: null, linesAfter: 1);
 
-    if(oneOrderData3.orderProductionTimeFromNow==-1){
-      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'     '
-          +'${oneOrderData3.timeOfDay.toString()}',
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-            bold:true,
-            align: PosAlign.left,
-          )
-      );
-    }else {
-      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
-          '     '
-          + '${oneOrderData3.orderProductionTimeFromNow} min',
+    if (oneOrderData3.orderProductionTimeFromNow == -1) {
+      ticket.text(
+          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+              '     ' +
+              '${oneOrderData3.timeOfDay.toString()}',
           styles: PosStyles(
             height: PosTextSize.size2,
             width: PosTextSize.size2,
             bold: true,
             align: PosAlign.left,
-          )
-      );
+          ));
+    } else {
+      ticket.text(
+          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+              '     ' +
+              '${oneOrderData3.orderProductionTimeFromNow} min',
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+            bold: true,
+            align: PosAlign.left,
+          ));
     }
 
     //    ticket.feed(2);
 
-
     // 3 ... address: .... + flat
-
 
     /*
     ticket.text('address: ${((customerForReciteGeneration.address == null) ||
@@ -11084,49 +9226,43 @@ color:Colors.blue,
     */
 
     // 4 ... phone: phone
-    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
-        (customerForReciteGeneration.phoneNumber.length == 0)) ?
-    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
-    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
-    customerForReciteGeneration.phoneNumber}',
+    ticket.text(
+        'phone: ${((customerForReciteGeneration.phoneNumber == null) || (customerForReciteGeneration.phoneNumber.length == 0)) ? '----' : customerForReciteGeneration.phoneNumber.length > 21 ? customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' : customerForReciteGeneration.phoneNumber}',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
-          bold:true,
+          bold: true,
           align: PosAlign.left,
         ));
 
-
     ticket.feed(1);
-    ticket.hr(ch:'.',len:null,linesAfter:0);
+    ticket.hr(ch: '.', len: null, linesAfter: 0);
 
     // 5... processFoodForRecite
 
-
-    Set<String> categories ={};
+    Set<String> categories = {};
 
 //    List<String> categories = [];
     orderedItems.forEach((oneFood) {
-
-
-      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
+      if ((categories == null) ||
+          (categories.length == 0) ||
+          (categories.contains(oneFood.category) == false)) {
         ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
               bold: true,
               align: PosAlign.center,
-            )
-        );
+            ));
       }
 
       categories.add(oneFood.category);
 
       ticket.feed(1);
 
-      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
-      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
-      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+      List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
+      List<SauceItem> extraSauces = oneFood.selectedSauces;
+      List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
       List<String> multiSelectStrings2 = oneFood.multiSelectString;
 //      print('extraIngredient: $extraIngredient');
 
@@ -11135,15 +9271,19 @@ color:Colors.blue,
 
 //      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
-          ||(e.isDeleted == true)
-      )).toList();
+      List<NewIngredient> onlyExtraIngredient = extraIngredient
+          .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
+          .toList();
 
-      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
-          ||(e.isDeleted == true))).toList();
+      List<SauceItem> onlyExtraSauces = extraSauces
+          .where(
+              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+          .toList();
 
-      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
-          ||(e.isDeleted == true))).toList();
+      List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
+          .where(
+              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+          .toList();
 
 //      List<SauceItem> onlyExtraSauces       =
 //      extraSauces.where((e) => e.isDefaultSelected != true).toList();
@@ -11156,247 +9296,184 @@ color:Colors.blue,
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
-
-
-
-
       // 5.... (name and quantity) + (size and price )
       ticket.row([
-
-
-        PosColumn(text: '${sanitize(oneFood.name)}',
-            width: 5, styles: PosStyles(align: PosAlign.left,
-            ) ),
-        PosColumn(text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-
-        PosColumn(text: 'X${oneFood.quantity}',
-            width: 5,styles: PosStyles(
-
+        PosColumn(
+            text: '${sanitize(oneFood.name)}',
+            width: 5,
+            styles: PosStyles(
+              align: PosAlign.left,
+            )),
+        PosColumn(
+          text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+        ),
+        PosColumn(
+            text: 'X${oneFood.quantity}',
+            width: 5,
+            styles: PosStyles(
               align: PosAlign.right,
             )),
-
-
       ]);
 
       ticket.row([
-        PosColumn(text: '${oneFood.foodItemSize}',
-            width: 5,  styles: PosStyles(align: PosAlign.left) ),
-        PosColumn(text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
-            width: 5,styles: PosStyles(
-
+        PosColumn(
+            text: '${oneFood.foodItemSize}',
+            width: 5,
+            styles: PosStyles(align: PosAlign.left)),
+        PosColumn(
+          text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+        ),
+        PosColumn(
+            text:
+                '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+            width: 5,
+            styles: PosStyles(
               align: PosAlign.right,
             )),
       ]);
 
       // 5.2 --- extra ingredients...
-      if(multiSelectStrings2.length > 0)
-      {
+      if (multiSelectStrings2.length > 0) {
         multiSelectStrings2.forEach((oneMultiSelectString) {
-
           ticket.text(
-            oneMultiSelectString, styles: PosStyles(
-            align: PosAlign.left,
-          ),
+            oneMultiSelectString,
+            styles: PosStyles(
+              align: PosAlign.left,
+            ),
           );
         });
       }
 
-
-      if(onlyExtraIngredient.length>0) {
+      if (onlyExtraIngredient.length > 0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-
-          if(oneIngredientForRecite.isDeleted==false) {
+          if (oneIngredientForRecite.isDeleted == false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
-                      (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-              )),
-
+                  text:
+                      '+${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+                  )),
               PosColumn(
                   text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          }
-          else{
-
+          } else {
             ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
-                      (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
+                  text:
+                      '- ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
 //                reverse: true,
-                underline: true,
-
-              )),
-
+                    underline: true,
+                  )),
               PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
-
           }
         });
       }
 
       // extra cheeseItems...
-      if(onlyExtraSauces.length>0) {
+      if (onlyExtraSauces.length > 0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-
-          if(oneSauceItemForRecite.isDeleted==false) {
+          if (oneSauceItemForRecite.isDeleted == false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
-                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-                  oneSauceItemForRecite.sauceItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-              )),
-
+                  text:
+                      '+${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+                  )),
               PosColumn(
                   text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          }
-          else{
-
+          } else {
             ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
-                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
-                      ?
-                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
-                      :
-                  oneSauceItemForRecite.sauceItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
+                  text:
+                      '- ${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
 //                reverse: true,
-                underline: true,
-
-              )),
-
+                    underline: true,
+                  )),
               PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
-
           }
           ;
         });
       }
 
       // extra sauceItems...
-      if(onlyExtraCheeseItems.length>0) {
+      if (onlyExtraCheeseItems.length > 0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-
-          if(oneCheeseItemForRecite.isDeleted==false){
+          if (oneCheeseItemForRecite.isDeleted == false) {
             ticket.row([
-
-
-              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-              oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,styles: PosStyles(
-
+              PosColumn(
+                  text:
+                      '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,
+                  styles: PosStyles(
                     align: PosAlign.left,
                   )),
-
-              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,styles: PosStyles(align: PosAlign.right)),
-
-
-            ]);}
-          else{
-            ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
-                      ?
-                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
-                      :
-                  oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-//                reverse: true,
-                underline: true,
-
-              )),
-
-              PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          };
+          } else {
+            ticket.row([
+              PosColumn(
+                  text:
+                      '- ${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+//                reverse: true,
+                    underline: true,
+                  )),
+              PosColumn(
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+            ]);
+          }
+          ;
         });
       }
 
-
       // needed. as per design. when one food Item is printed then an hr added.
       ticket.feed(1);
-      ticket.hr(ch:'_',len:null,linesAfter:1);
+      ticket.hr(ch: '_', len: null, linesAfter: 1);
 //      ticket.feed(1);
     });
 
-
-
-
     // Price 1 subtotal
     ticket.row([
-      PosColumn(text: 'SUBTOTAL',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
-
+      PosColumn(
+        text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+          text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+          width: 5,
+          styles: PosStyles(
+              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
     ]);
-
 
     /*
     ticket.row([
@@ -11415,70 +9492,66 @@ color:Colors.blue,
 
 //    ticket.hr();
 
-    ticket.hr(ch:'_',len:null,linesAfter:0);
-
+    ticket.hr(ch: '_', len: null, linesAfter: 0);
 
     // Price 3  Total
     ticket.row([
-
-
-      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
-
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
-        width: 5,),
-
+      PosColumn(
+        text: 'TOTAL',
+        styles: PosStyles(bold: true),
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+        text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        styles: PosStyles(
+            bold: true, align: PosAlign.right, codeTable: PosCodeTable.westEur),
+        width: 5,
+      ),
     ]);
 
     ticket.feed(1);
 
-
-    oneOrderData3.paidStatus.toLowerCase() == 'paid'?
-    ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
-    ticket.image(handsdataBytesImage,align: PosAlign.center);
-
-
-
+    oneOrderData3.paidStatus.toLowerCase() == 'paid'
+        ? ticket.image(faceBookLikedataBytesImage, align: PosAlign.center)
+        : ticket.image(handsdataBytesImage, align: PosAlign.center);
 
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
-
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
-      'paid' : 'unpaid'}',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
-          ? 'Delivery'
-          :
-      (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
-      'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
-          'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 4,),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+        text:
+            '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text:
+            '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        width: 4,
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
     ]);
-
-
 
     // 7 image::
     // orderBy: 'Delivery: TakeAway: DinningRoom: phone
-    oneOrderData3.orderBy.toLowerCase() == 'delivery'?
-    ticket.image(deliveryDataBytesImage,align: PosAlign.center):
-    oneOrderData3.orderBy.toLowerCase() == 'phone'?
-    ticket.image(phonedataBytesImage,align: PosAlign.center):
-    oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
-    ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
-    ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
+    oneOrderData3.orderBy.toLowerCase() == 'delivery'
+        ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
+        : oneOrderData3.orderBy.toLowerCase() == 'phone'
+            ? ticket.image(phonedataBytesImage, align: PosAlign.center)
+            : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
+                ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
+                : ticket.image(dinningRoomDataBytesImage,
+                    align: PosAlign.center);
 
 //    ticket.hr();
     // needed. as per design.
@@ -11487,28 +9560,23 @@ color:Colors.blue,
 
     ticket.cut();
     return ticket;
-
   }
 
 // demoReceipt Order Type Phone ends here...
 
-
 // # number 4: demoReceipt Order Type Dinning begins here...
 
   Future<Ticket> demoReceiptOrderTypeDinning(
-      PaperSize paper,
-      Restaurant thisRestaurant3,
-      OneOrderFirebase oneOrderData3,
-      Uint8List restaurantNameBytesNotFuture3,
-      ) async {
-
+    PaperSize paper,
+    Restaurant thisRestaurant3,
+    OneOrderFirebase oneOrderData3,
+    Uint8List restaurantNameBytesNotFuture3,
+  ) async {
     //--4
 
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
-
-    CustomerInformation customerForReciteGeneration = oneOrderData3
-        .oneCustomer;
+    CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
 
     List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
@@ -11518,88 +9586,73 @@ color:Colors.blue,
     print('currentRestaurant: ${thisRestaurant3.name}');
     print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
-    print('customerForReciteGeneration.address: ${customerForReciteGeneration
-        .address}');
     print(
-        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
-            .flatOrHouseNumber}');
+        'customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
     print(
-        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
-            .phoneNumber}');
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
     print(
-        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
-            .etaTimeInMinutes}');
-    print('restaurantNameImageBytes2 line # 11509: $restaurantNameBytesNotFuture3');
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+    print(
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+    print(
+        'restaurantNameImageBytes2 line # 11509: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
-        .orderProductionTimeFromNow}');
-
-
-
+    print(
+        'oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3.orderProductionTimeFromNow}');
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
-    final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
+    final ByteData faceBookLikedata =
+        await rootBundle.load('assets/icons8-facebook-like-64.png');
+    final Uint8List faceBookLikedataBytes =
+        faceBookLikedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
-    = ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
-
+    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
+        ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
+    final ByteData handsdata =
+        await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image handsdataBytesImage
-    = ImageAliasAnotherSource.decodeImage(handsdataBytes);
-
-
-
-
-
+    final ImageAliasAnotherSource.Image handsdataBytesImage =
+        ImageAliasAnotherSource.decodeImage(handsdataBytes);
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
+    final ByteData deliveryData =
+        await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image deliveryDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
-
+    final ImageAliasAnotherSource.Image deliveryDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
 
     //differentImages 4 => phonedataBytesImage
     final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image phonedataBytesImage
-    = ImageAliasAnotherSource.decodeImage(phonedataBytes);
-
+    final ImageAliasAnotherSource.Image phonedataBytesImage =
+        ImageAliasAnotherSource.decodeImage(phonedataBytes);
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
+    final ByteData takeAwayData =
+        await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image takeAwayDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
-
+    final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
+    final ByteData dinningRoomData =
+        await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
-    = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
-
-
-
-
-
-
+    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
+        ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
 
     //  printing begins::: //1.... starts...
 
     //1... RESTAURANT NAME DONE...
-    final ImageAliasAnotherSource
-        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
-        restaurantNameBytesNotFuture3);
+    final ImageAliasAnotherSource.Image oneImageRestaurant =
+        ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
 
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
@@ -11607,33 +9660,33 @@ color:Colors.blue,
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch:'=',len:null,linesAfter:1);
+    ticket.hr(ch: '=', len: null, linesAfter: 1);
 
-    if(oneOrderData3.orderProductionTimeFromNow==-1){
-      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'     '
-          +'${oneOrderData3.timeOfDay.toString()}',
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-            bold:true,
-            align: PosAlign.left,
-          )
-      );
-    }else {
-      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
-          '     '
-          + '${oneOrderData3.orderProductionTimeFromNow} min',
+    if (oneOrderData3.orderProductionTimeFromNow == -1) {
+      ticket.text(
+          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+              '     ' +
+              '${oneOrderData3.timeOfDay.toString()}',
           styles: PosStyles(
             height: PosTextSize.size2,
             width: PosTextSize.size2,
             bold: true,
             align: PosAlign.left,
-          )
-      );
+          ));
+    } else {
+      ticket.text(
+          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+              '     ' +
+              '${oneOrderData3.orderProductionTimeFromNow} min',
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+            bold: true,
+            align: PosAlign.left,
+          ));
     }
 
     //    ticket.feed(2);
-
 
     // 3 ... address: .... + flat
 
@@ -11669,33 +9722,31 @@ color:Colors.blue,
     ticket.feed(1);
 
     */
-    ticket.hr(ch:'.',len:null,linesAfter:0);
+    ticket.hr(ch: '.', len: null, linesAfter: 0);
 
     // 5... processFoodForRecite
 
-
-    Set<String> categories ={};
+    Set<String> categories = {};
     orderedItems.forEach((oneFood) {
-
-
-      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
+      if ((categories == null) ||
+          (categories.length == 0) ||
+          (categories.contains(oneFood.category) == false)) {
         ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
               bold: true,
               align: PosAlign.center,
-            )
-        );
+            ));
       }
 
       categories.add(oneFood.category);
 
       ticket.feed(1);
 
-      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
-      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
-      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+      List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
+      List<SauceItem> extraSauces = oneFood.selectedSauces;
+      List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
       List<String> multiSelectStrings2 = oneFood.multiSelectString;
 //      print('extraIngredient: $extraIngredient');
 
@@ -11704,15 +9755,19 @@ color:Colors.blue,
 
 //      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
-          ||(e.isDeleted == true)
-      )).toList();
+      List<NewIngredient> onlyExtraIngredient = extraIngredient
+          .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
+          .toList();
 
-      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
-          ||(e.isDeleted == true))).toList();
+      List<SauceItem> onlyExtraSauces = extraSauces
+          .where(
+              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+          .toList();
 
-      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
-          ||(e.isDeleted == true))).toList();
+      List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
+          .where(
+              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+          .toList();
 
 //      List<SauceItem> onlyExtraSauces       =
 //      extraSauces.where((e) => e.isDefaultSelected != true).toList();
@@ -11725,245 +9780,183 @@ color:Colors.blue,
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
-
-
-
-
       // 5.... (name and quantity) + (size and price )
       ticket.row([
-
-
-        PosColumn(text: '${sanitize(oneFood.name)}',
-            width: 5, styles: PosStyles(align: PosAlign.left,
-            ) ),
-        PosColumn(text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-
-        PosColumn(text: 'X${oneFood.quantity}',
-            width: 5,styles: PosStyles(
-
+        PosColumn(
+            text: '${sanitize(oneFood.name)}',
+            width: 5,
+            styles: PosStyles(
+              align: PosAlign.left,
+            )),
+        PosColumn(
+          text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+        ),
+        PosColumn(
+            text: 'X${oneFood.quantity}',
+            width: 5,
+            styles: PosStyles(
               align: PosAlign.right,
             )),
-
-
       ]);
 
       ticket.row([
-        PosColumn(text: '${oneFood.foodItemSize}',
-            width: 5,  styles: PosStyles(align: PosAlign.left) ),
-        PosColumn(text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
-        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
-            width: 5,styles: PosStyles(
-
+        PosColumn(
+            text: '${oneFood.foodItemSize}',
+            width: 5,
+            styles: PosStyles(align: PosAlign.left)),
+        PosColumn(
+          text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+        ),
+        PosColumn(
+            text:
+                '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+            width: 5,
+            styles: PosStyles(
               align: PosAlign.right,
             )),
       ]);
 
       // 5.2 --- extra ingredients...
-      if(multiSelectStrings2.length > 0)
-      {
+      if (multiSelectStrings2.length > 0) {
         multiSelectStrings2.forEach((oneMultiSelectString) {
-
           ticket.text(
-            oneMultiSelectString, styles: PosStyles(
-            align: PosAlign.left,
-          ),
+            oneMultiSelectString,
+            styles: PosStyles(
+              align: PosAlign.left,
+            ),
           );
         });
       }
 
-
-      if(onlyExtraIngredient.length>0) {
+      if (onlyExtraIngredient.length > 0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-
-          if(oneIngredientForRecite.isDeleted==false) {
+          if (oneIngredientForRecite.isDeleted == false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
-                      (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-              )),
-
+                  text:
+                      '+${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+                  )),
               PosColumn(
                   text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          }
-          else{
-
+          } else {
             ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
-                      (oneIngredientForRecite.ingredientName.length == 0)) ?
-                  '----' : oneIngredientForRecite.ingredientName.length > 18
-                      ?
-                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
-                      :
-                  oneIngredientForRecite.ingredientName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
+                  text:
+                      '- ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
 //                reverse: true,
-                underline: true,
-
-              )),
-
+                    underline: true,
+                  )),
               PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
-
           }
         });
       }
 
       // extra cheeseItems...
-      if(onlyExtraSauces.length>0) {
+      if (onlyExtraSauces.length > 0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-
-          if(oneSauceItemForRecite.isDeleted==false) {
+          if (oneSauceItemForRecite.isDeleted == false) {
             ticket.row([
-
-
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
-                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
-                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
-                  oneSauceItemForRecite.sauceItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-              )),
-
+                  text:
+                      '+${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+                  )),
               PosColumn(
                   text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          }
-          else{
-
+          } else {
             ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
-                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
-                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
-                      ?
-                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
-                      :
-                  oneSauceItemForRecite.sauceItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
+                  text:
+                      '- ${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
 //                reverse: true,
-                underline: true,
-
-              )),
-
+                    underline: true,
+                  )),
               PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
-
           }
           ;
         });
       }
 
       // extra sauceItems...
-      if(onlyExtraCheeseItems.length>0) {
+      if (onlyExtraCheeseItems.length > 0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-
-          if(oneCheeseItemForRecite.isDeleted==false){
+          if (oneCheeseItemForRecite.isDeleted == false) {
             ticket.row([
-
-
-              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
-              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
-              oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,styles: PosStyles(
-
+              PosColumn(
+                  text:
+                      '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,
+                  styles: PosStyles(
                     align: PosAlign.left,
                   )),
-
-              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,styles: PosStyles(align: PosAlign.right)),
-
-
-            ]);}
-          else{
-            ticket.row([
-
-
               PosColumn(
-                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
-                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
-                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
-                      ?
-                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
-                      :
-                  oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9, styles: PosStyles(
-
-                align: PosAlign.left,
-//                reverse: true,
-                underline: true,
-
-              )),
-
-              PosColumn(
-                  text: '',
-                  width: 3, styles: PosStyles(align: PosAlign.right)),
-
-
+                  text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,
+                  styles: PosStyles(align: PosAlign.right)),
             ]);
-          };
+          } else {
+            ticket.row([
+              PosColumn(
+                  text:
+                      '- ${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,
+                  styles: PosStyles(
+                    align: PosAlign.left,
+//                reverse: true,
+                    underline: true,
+                  )),
+              PosColumn(
+                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+            ]);
+          }
+          ;
         });
       }
 
-
       // needed. as per design. when one food Item is printed then an hr added.
       ticket.feed(1);
-      ticket.hr(ch:'_',len:null,linesAfter:1);
+      ticket.hr(ch: '_', len: null, linesAfter: 1);
 //      ticket.feed(1);
     });
 
-
-
-
     // Price 1 subtotal
     ticket.row([
-      PosColumn(text: 'SUBTOTAL',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
-
+      PosColumn(
+        text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+          text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+          width: 5,
+          styles: PosStyles(
+              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
     ]);
 
     /*
@@ -11983,70 +9976,66 @@ color:Colors.blue,
 
 //    ticket.hr();
 
-    ticket.hr(ch:'_',len:null,linesAfter:0);
-
+    ticket.hr(ch: '_', len: null, linesAfter: 0);
 
     // Price 3  Total
     ticket.row([
-
-
-      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
-
-      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
-        width: 5,),
-
+      PosColumn(
+        text: 'TOTAL',
+        styles: PosStyles(bold: true),
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+        text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        styles: PosStyles(
+            bold: true, align: PosAlign.right, codeTable: PosCodeTable.westEur),
+        width: 5,
+      ),
     ]);
 
     ticket.feed(1);
 
-
-    oneOrderData3.paidStatus.toLowerCase() == 'paid'?
-    ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
-    ticket.image(handsdataBytesImage,align: PosAlign.center);
-
-
-
+    oneOrderData3.paidStatus.toLowerCase() == 'paid'
+        ? ticket.image(faceBookLikedataBytesImage, align: PosAlign.center)
+        : ticket.image(handsdataBytesImage, align: PosAlign.center);
 
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
-
-
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-      PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
-      'paid' : 'unpaid'}',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
-
-      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
-          ? 'Delivery'
-          :
-      (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
-      'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
-          'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 4,),
-      PosColumn(text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
-
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
+      PosColumn(
+        text:
+            '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+        text:
+            '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        width: 4,
+      ),
+      PosColumn(
+        text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+      ),
     ]);
-
-
 
     // 7 image::
     // orderBy: 'Delivery: TakeAway: DinningRoom: phone
-    oneOrderData3.orderBy.toLowerCase() == 'delivery'?
-    ticket.image(deliveryDataBytesImage,align: PosAlign.center):
-    oneOrderData3.orderBy.toLowerCase() == 'phone'?
-    ticket.image(phonedataBytesImage,align: PosAlign.center):
-    oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
-    ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
-    ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
+    oneOrderData3.orderBy.toLowerCase() == 'delivery'
+        ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
+        : oneOrderData3.orderBy.toLowerCase() == 'phone'
+            ? ticket.image(phonedataBytesImage, align: PosAlign.center)
+            : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
+                ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
+                : ticket.image(dinningRoomDataBytesImage,
+                    align: PosAlign.center);
 
 //    ticket.hr();
     // needed. as per design.
@@ -12055,87 +10044,72 @@ color:Colors.blue,
 
     ticket.cut();
     return ticket;
-
-
-
   }
 
 // # number 4: demoReceipt Order Type Dinning ends here...
 
-
-
-  Future <bool> printTicket2(
-      PaperSize paper,
-      Restaurant thisRestaurant2,
-      OneOrderFirebase oneOrderData2,
-      Uint8List restaurantNameBytesNotFuture2,
-      ) async {
+  Future<bool> printTicket2(
+    PaperSize paper,
+    Restaurant thisRestaurant2,
+    OneOrderFirebase oneOrderData2,
+    Uint8List restaurantNameBytesNotFuture2,
+  ) async {
     // pqr
-
 
     print('restaurantNameBytesNotFuture2:: $restaurantNameBytesNotFuture2');
 
     print('oneOrderdocument.orderBy: ${oneOrderData2.orderBy}');
 
     final PosPrintResult res = (oneOrderData2.orderBy.toLowerCase() ==
-        'delivery') ?
-    await printerManager.printTicket(
-        await demoReceiptOrderTypeDelivery(
-          paper,
-          thisRestaurant2,
-          oneOrderData2,
-          restaurantNameBytesNotFuture2,
-        )) :
-    (oneOrderData2.orderBy.toLowerCase() == 'phone') ?
-    await printerManager.printTicket(await demoReceiptOrderTypePhone(
-      paper,
-      thisRestaurant2,
-      oneOrderData2,
-      restaurantNameBytesNotFuture2,
-    )) :
-    (oneOrderData2.orderBy.toLowerCase() == 'takeaway') ?
-    await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(
-      paper,
-      thisRestaurant2,
-      oneOrderData2,
-      restaurantNameBytesNotFuture2,
-    )) :
-    await printerManager.printTicket(
-        await demoReceiptOrderTypeDinning(
-          paper,
-          thisRestaurant2,
-          oneOrderData2,
-          restaurantNameBytesNotFuture2,
-        ));
-
+            'delivery')
+        ? await printerManager.printTicket(await demoReceiptOrderTypeDelivery(
+            paper,
+            thisRestaurant2,
+            oneOrderData2,
+            restaurantNameBytesNotFuture2,
+          ))
+        : (oneOrderData2.orderBy.toLowerCase() == 'phone')
+            ? await printerManager.printTicket(await demoReceiptOrderTypePhone(
+                paper,
+                thisRestaurant2,
+                oneOrderData2,
+                restaurantNameBytesNotFuture2,
+              ))
+            : (oneOrderData2.orderBy.toLowerCase() == 'takeaway')
+                ? await printerManager
+                    .printTicket(await demoReceiptOrderTypeTakeAway(
+                    paper,
+                    thisRestaurant2,
+                    oneOrderData2,
+                    restaurantNameBytesNotFuture2,
+                  ))
+                : await printerManager
+                    .printTicket(await demoReceiptOrderTypeDinning(
+                    paper,
+                    thisRestaurant2,
+                    oneOrderData2,
+                    restaurantNameBytesNotFuture2,
+                  ));
 
     logger.i('----- res : $res');
     print('res.msg: ${res.msg}');
     String response2 = res.msg;
 
-
     // showToast(res.msg);
 
     logger.i('this never executes .. TODO...');
-    if (response2== 'Success') {
+    if (response2 == 'Success') {
       print('at Success');
       print('-----check above condition\'s.... -----');
       return true;
-    }
-
-
-
-    else {
+    } else {
       print('before returning false from Future <bool> printTicket ');
       return false;
     }
 
 //    TODO: NEED TO check the res.msg
     // true means printed.
-
-
   }
-
 
   Future<bool> _testPrint(PrinterBluetooth printer) async {
     printerManager.selectPrinter(printer);
@@ -12145,7 +10119,6 @@ color:Colors.blue,
 
     print(" at _testPrint");
 
-
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
@@ -12154,40 +10127,30 @@ color:Colors.blue,
 
     print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
-
-    Future<OneOrderFirebase> testFirebaseOrderFetch =
-    shoppingCartBloc.fetchOrderDataFromFirebase(
-        oneOrderForReceipt.orderdocId.trim());
-
-
-
-
+    Future<OneOrderFirebase> testFirebaseOrderFetch = shoppingCartBloc
+        .fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
 
 //                            _handleSignIn();
 
     /* await */
-    testFirebaseOrderFetch.whenComplete(()
-    {
+    testFirebaseOrderFetch.whenComplete(() {
       print("called when future completes");
-    }
-    ).then((oneOrderData) {
-
+    }).then((oneOrderData) {
       Widget restaurantName2 = restaurantName(thisRestaurant.name);
 
-      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+      final Future<Uint8List> restaurantNameBytesFuture =
+          createImageFromWidget(restaurantName2);
 
       Uint8List restaurantNameBytesNotFuture;
 
       print('restaurantNameBytes: $restaurantNameBytesNotFuture');
-
 
       ImageAliasAnotherSource.Image imageRestaurant;
 
       /* await */
       restaurantNameBytesFuture.whenComplete(() {
         print("restaurantNameBytes.whenComplete called when future completes");
-      }
-      ).then((oneImageInBytes) {
+      }).then((oneImageInBytes) {
 //      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
         print('calling ticket.image(imageRestaurant); ');
         restaurantNameBytesNotFuture = oneImageInBytes;
@@ -12195,22 +10158,13 @@ color:Colors.blue,
         print('oneImageInBytes: $oneImageInBytes');
 //      ticket.image(imageRestaurant);
 
-
         print('reached here: $oneOrderData');
 
-
-
-
-
-
-        Future<bool> isPrint =
-        printTicket2(
+        Future<bool> isPrint = printTicket2(
           paper,
           thisRestaurant,
           oneOrderData /*,imageRestaurant */,
-
           restaurantNameBytesNotFuture,
-
         );
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
@@ -12218,19 +10172,17 @@ color:Colors.blue,
         isPrint.whenComplete(() {
           print("called when future completes");
 //          return true;
-        }
-        ).then((printResult) async {
+        }).then((printResult) async {
           if (printResult == true) {
             print("printResult: $printResult");
-            Future<String> docID = shoppingCartBloc
-                .recitePrinted(oneOrderForReceipt.orderdocId, 'Done');
-
+            Future<String> docID = shoppingCartBloc.recitePrinted(
+                oneOrderForReceipt.orderdocId, 'Done');
 
 //              --
 
-
-            docID.whenComplete(() => print('printing completed..')).then((
-                value) {
+            docID
+                .whenComplete(() => print('printing completed..'))
+                .then((value) {
               print(
                   'docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
               return true;
@@ -12239,44 +10191,39 @@ color:Colors.blue,
             });
 //            --
             return false;
-          }
-          else {
+          } else {
             return false;
           }
-
         }).catchError((onError) {
           print('printing not successful: $onError');
           return false;
         });
-
       }).catchError((onError) {
         print(' error in getting restaurant name as image---1');
         print('false: means something wrong not printed');
         //means something wrong not printed
         return false;
       });
-
-
-
-
     }).catchError((onError) {
       print('Order data fetch Error $onError ***');
       _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(duration: new Duration(seconds: 6), content: Container(
-          child:
-          new Row(
-            children: <Widget>[
-              new CircularProgressIndicator(),
-              new Text("Error: ${onError.message.substring(0, 40)}", style:
-              TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                  color: Colors.white)),
-            ],
-          ),
-        )),);
+        new SnackBar(
+            duration: new Duration(seconds: 6),
+            content: Container(
+              child: new Row(
+                children: <Widget>[
+                  new CircularProgressIndicator(),
+                  new Text("Error: ${onError.message.substring(0, 40)}",
+                      style: TextStyle(
+                          /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                          color: Colors.white)),
+                ],
+              ),
+            )),
+      );
 
       return false;
     });
-
 
     // final return false if true is not return from the above conditioned.
     return false;
@@ -12296,8 +10243,6 @@ color:Colors.blue,
 
     print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
-
-
     TODO: // something wrong maybe here. docID needs to be processed...
 
     Future<String> docID = shoppingCartBloc.recitePrinted(
@@ -12312,7 +10257,7 @@ color:Colors.blue,
 
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
     final Future<Uint8List> restaurantNameBytesFuture =
-    createImageFromWidget(restaurantName2);
+        createImageFromWidget(restaurantName2);
     Uint8List restaurantNameBytesNotFuture;
 
     print('restaurantNameBytes: $restaurantNameBytesNotFuture');
@@ -12324,7 +10269,7 @@ color:Colors.blue,
       print("restaurantNameBytes.whenComplete called when future completes");
     }).then((oneImageInBytes) {
       ImageAliasAnotherSource.Image imageRestaurant =
-      ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+          ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       print('calling ticket.image(imageRestaurant); ');
       restaurantNameBytesNotFuture = oneImageInBytes;
 
@@ -12340,22 +10285,13 @@ color:Colors.blue,
     testFirebaseOrderFetch.whenComplete(() {
       print("called when future completes");
     }).then((oneOrderData) {
-
-
-
-
-
       printTicketDummy2(
         /*paper, */
         thisRestaurant,
         oneOrderData,
         imageRestaurant,
-
         restaurantNameBytesNotFuture,
-
       );
-
-
     }).catchError((onError) {
       print('Order data fetch Error $onError ***');
       _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
@@ -12367,7 +10303,7 @@ color:Colors.blue,
                   new CircularProgressIndicator(),
                   new Text("Error: $onError",
                       style: TextStyle(
-                        /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                          /*fontSize: 10,*/ fontWeight: FontWeight.w500,
                           color: Colors.white)),
                 ],
               ),
@@ -12375,9 +10311,6 @@ color:Colors.blue,
       );
     });
   }
-
-
-
 
   Future<void> _showMyDialog3(Uint8List x) async {
     print('x: $x');
@@ -12393,10 +10326,8 @@ color:Colors.blue,
               children: <Widget>[
                 Text(
                     'please use real blueTooth devices and also change functions in '
-                        'shopping cart page.'),
-                Container
-                  (child: Image.memory(x)
-                ),
+                    'shopping cart page.'),
+                Container(child: Image.memory(x)),
 
 //                Text('Would you like to approve of this message?'),
               ],
@@ -12417,18 +10348,15 @@ color:Colors.blue,
 
 /* PRINTING REcite related codes resides here: */
 
-
 }
-
-
-
 
 class CustomPicker extends CommonPickerModel {
   String digits(int value, int length) {
     return '$value'.padLeft(length, "0");
   }
 
-  CustomPicker({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
+  CustomPicker({DateTime currentTime, LocaleType locale})
+      : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
     this.setLeftIndex(this.currentTime.hour);
     this.setMiddleIndex(this.currentTime.minute);
@@ -12462,7 +10390,6 @@ class CustomPicker extends CommonPickerModel {
     }
   }
 
-
   @override
   String leftDivider() {
     return "|";
@@ -12480,20 +10407,26 @@ class CustomPicker extends CommonPickerModel {
 //    return [1, 2, 1];
 
 //    return [2, 2];
-
   }
 
   @override
   DateTime finalTime() {
     return currentTime.isUtc
-        ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
-      this.currentLeftIndex(), this.currentMiddleIndex(), /*this.currentRightIndex() */)
-        : DateTime(currentTime.year, currentTime.month, currentTime.day, this.currentLeftIndex(),
-      this.currentMiddleIndex(),
+        ? DateTime.utc(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(), /*this.currentRightIndex() */
+          )
+        : DateTime(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
 
-      /*this.currentRightIndex()*/
-
-    );
+            /*this.currentRightIndex()*/
+          );
   }
 }
-

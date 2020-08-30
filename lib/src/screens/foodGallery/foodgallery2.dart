@@ -311,24 +311,6 @@ _batteryLevel = batteryLevel;
             shadowColor: Colors.white,
             backgroundColor: Color(0xffFFE18E),
 
-/*
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.accessible),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          ],
-
-          */
-
-/*
-          leading: IconButton(
-            icon: Icon(Icons.accessible),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-
-          */
-
             title: Container(
               height: displayHeight(context) / 14,
               width: displayWidth(context) -
@@ -378,19 +360,18 @@ _batteryLevel = batteryLevel;
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  'Jediline',
+                                  'restapojut',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                      fontSize: 30,
+                                      fontSize: 20,
                                       color: Color(0xff07D607),
-                                      fontFamily: 'Itim-Regular'),
+                                      fontFamily: 'poppins'),
                                 ),
                                 Text(
                                   'Online Orders',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                      fontSize: 16.42,
-                                      color: Color(0xff07D607)),
+                                      fontSize: 12, color: Color(0xff07D607)),
                                 ),
                               ],
                             ),
@@ -399,19 +380,7 @@ _batteryLevel = batteryLevel;
                       ],
                     ),
                   ),
-// image and string JEDILINE BEGINS HERE.
-/*
-                                    Container(
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 9,
-                                          vertical: 0),
 
-                                      width: displayWidth(context) / 5,
-                                      height: displayHeight(context) / 15,
-                                      child: Image.asset('assets/Path2008.png'),
-
-                                    ),
-                                    */
 // CONTAINER FOR TOTAL PRICE CART BELOW.
 
                   Container(
@@ -422,7 +391,7 @@ _batteryLevel = batteryLevel;
                       border: Border.all(
                         color: Color(0xffBCBCBD),
                         style: BorderStyle.solid,
-                        width: 3,
+                        width: 0.5,
                       ),
 
                       boxShadow: [
@@ -903,43 +872,22 @@ _batteryLevel = batteryLevel;
 
     if (_currentCategory.toLowerCase() == categoryName.toLowerCase()) {
       return ListTile(
-        contentPadding: EdgeInsets.fromLTRB(10, 6, 5, 6),
+        contentPadding: EdgeInsets.fromLTRB(30, 6, 5, 26),
 //    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
         title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-/*
-                Text(
-//                unSelectedOneIngredient.ingredientName,
-                  unSelectedOneIngredient.ingredientName.length==0?
-                  'EMPTY':  unSelectedOneIngredient.ingredientName.length>12?
-                  unSelectedOneIngredient.ingredientName.substring(0,12)+'...':
-                  unSelectedOneIngredient.ingredientName,
-                  style: TextStyle(
-                    color:Color(0xff707070),
-//                                    color: Colors.blueGrey[800],
-
-                    fontWeight: FontWeight.normal,
-                    fontSize: 18,
-                  ),
-
-                ),
-                */
-
               Text(
                 categoryName.toLowerCase().length > 8
                     ? categoryName.toLowerCase().substring(0, 8) + '..'
                     : categoryName.toLowerCase(),
                 style: TextStyle(
                   fontFamily: 'poppins',
-                  fontSize: 30,
+                  fontSize: 24,
                   fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
                   color: Color(0xff000000),
                 ),
-
-//                    'Reross Quadratic',
               ),
               CustomPaint(
                 size: Size(0, 19),
@@ -959,15 +907,15 @@ _batteryLevel = batteryLevel;
       );
     } else {
       return ListTile(
-        contentPadding: EdgeInsets.fromLTRB(10, 6, 5, 6),
+        contentPadding: EdgeInsets.fromLTRB(20, 6, 5, 6),
 
         title: Text(
           categoryName.toLowerCase(),
 //    Text(categoryName.substring(0, 2),
           style: TextStyle(
-            fontFamily: 'Itim-Regular',
+            fontFamily: 'poppins',
 
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
             color: Color(0xff000000),
@@ -1026,65 +974,7 @@ _batteryLevel = batteryLevel;
     );
   }
 
-// FROM CLASS TO WIDGET REQUIRED, SINCE I NEED TO CALL SETTATE FROM THE RETURNED ORDER
-
-/*
-  Future<void> _showMyDialog33() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Approve'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-  */
-
   Widget shoppingCartWidget(BuildContext context) {
-//    final bloc = LocationQueryBloc();
-
-//    final blocZZ = FoodItemsQueryBloc();
-
-//    BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-// I AM NOT USING THIS HERE.
-//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-
-//    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<
-//        FoodItemDetailsBloc>(context);
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
-/*
-Widget work1(BuildContext context){
-  BlocProvider(
-    bloc: ,
-    child: ,
-//
-  )
-
-  */
-
-// NOT REQUIRED THIS STREAM WILL BE REQUIRED IN SHOPPING CART PAGE.
-// PLANNED TO PASS IT FROM HERE.
-// HOW CAN I HAVE IT HERE ????
-
     return Container(
 //                                                                        width:60,
       width: displayWidth(context) / 13,
@@ -1600,7 +1490,7 @@ Widget work1(BuildContext context){
                               Text(
                                 '$_currentCategory'.toLowerCase(),
                                 style: TextStyle(
-                                  fontFamily: 'Itim-Regular',
+                                  fontFamily: 'poppins',
                                   fontSize: 30,
                                   fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
@@ -2007,8 +1897,8 @@ Widget work1(BuildContext context){
                   children: <Widget>[
                     new Container(
                       child: new Container(
-                        width: displayWidth(context) / 7,
-                        height: displayWidth(context) / 7,
+                        width: displayWidth(context) / 6,
+                        height: displayWidth(context) / 6,
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -2040,17 +1930,14 @@ Widget work1(BuildContext context){
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Color(0xffEAB45E),
-// adobe xd color
-//                                              color: Color.fromRGBO(173, 179, 191, 1.0),
+                                        color: Colors.black54,
                                         blurRadius: 25.0,
                                         spreadRadius: 0.10,
-                                        offset: Offset(0, 10))
+                                        offset: Offset(0, 20))
                                   ],
                                 ),
                                 child: ClipOval(
                                   child: CachedNetworkImage(
-//                  imageUrl: dummy.url,
                                     imageUrl: foodImageURL,
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) =>
@@ -2060,55 +1947,38 @@ Widget work1(BuildContext context){
                               ),
                             );
                           },
-//                                  placeholderBuilder: (context,
-//                                      Size.fromWidth(displayWidth(context) / 7),
-//                          Image.network(foodImageURL)
-//
-//                                );
-//Placeholder Image.network(foodImageURL),
                         ),
                       ),
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                     ),
-//                              SizedBox(height: 10),
+                    SizedBox(height: 10),
 
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-//                                  double.parse(euroPrice).toStringAsFixed(2),
                             euroPrice3 + '\u20AC',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
-//                                          color: Colors.blue,
-                                color: Color.fromRGBO(112, 112, 112, 1),
-                                fontSize: 15),
+                                color: Colors.black54,
+                                fontSize: 16),
                           ),
-//                                    SizedBox(width: 10),
                           SizedBox(width: displayWidth(context) / 100),
-
-                          Icon(
-                            Icons.whatshot,
-                            size: 24,
-                            color: Colors.red,
-                          ),
                         ]),
 
                     FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-//                '${dummy.counter}',
-                        foodItemName,
-
+                        foodItemName.toUpperCase(),
                         style: TextStyle(
-                          color: Color(0xff707070),
-//                                color:Color.fromRGBO(112,112,112,1),
-
+                          color: Colors.black87,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
                       ),
                     ),
+                    SizedBox(height: 5),
+
                     Container(
 //                                        height: displayHeight(context) / 61,
 
