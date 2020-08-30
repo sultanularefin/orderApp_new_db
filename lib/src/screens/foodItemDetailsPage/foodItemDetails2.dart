@@ -1994,14 +1994,18 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
             SelectedFood temp = blocD.getCurrentSelectedFoodDetails;
 
-            print('temp is $temp');
+//            print('temp is $temp');
 
-            print('temp.selectedIngredients: ${temp.selectedIngredients}');
+//            print('temp.selectedIngredients: ${temp.selectedIngredients}');
+//
+//            logger.i('temp.selectedIngredients.length: ${temp.selectedIngredients.length}');
+//
+//            print('temp.selectedCheeseItems: ${temp.selectedCheeseItems}');
+//            print('temp.selectedSauceItems:  ${temp.selectedSauceItems}');
 
-            logger.i('temp.selectedIngredients.length: ${temp.selectedIngredients.length}');
+            logger.i('temp.multiSelct.length: ${temp.multiSelct.length}');
 
-            print('temp.selectedCheeseItems: ${temp.selectedCheeseItems}');
-            print('temp.selectedSauceItems:  ${temp.selectedSauceItems}');
+//            _selectedFoodControllerFoodDetails
 
 
             print('temp.unitPrice:  ${temp.unitPrice}');

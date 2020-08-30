@@ -608,6 +608,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     initiateSauces(tempSauceItems,saucesStrings2);
     initiateCheeseItems(tempCheeseItems,cheesesStrings2);
+    initiateAllMultiSelectOptions();
 
 
     List<NewIngredient> ingredientsOfOnlyThisFoodItemsCategory =
@@ -772,7 +773,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
         thisFood; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
 
-    initiateAllMultiSelectOptions();
+
 
     _controller.sink.add(_thisFoodItem);
   }
@@ -916,6 +917,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       oneSelectedFoodFD.selectedIngredients = _defaultIngItems;
       oneSelectedFoodFD.selectedCheeseItems = _allSelectedDeletedCheeseItems;
       oneSelectedFoodFD.selectedSauceItems  = _allSelectedDeletedSauceItems;
+      oneSelectedFoodFD.multiSelct  = _multiSelectForFood;
 
 
 
@@ -969,6 +971,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     SelectedFood tempSelectedFood = _currentSelectedFoodDetails;//oneSelectedFoodFD ;
     tempSelectedFood.multiSelct= _multiSelectForFood;
+
+
     _currentSelectedFoodDetails = tempSelectedFood;
     _selectedFoodControllerFoodDetails.sink.add(_currentSelectedFoodDetails);
 
