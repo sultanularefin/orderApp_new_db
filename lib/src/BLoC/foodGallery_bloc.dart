@@ -370,7 +370,9 @@ class FoodGalleryBloc implements Bloc {
 
         final String foodCategoryName = doc['category'];
 
-        final String shorCategoryName2 = doc['shorCategoryName'];
+        final String shorCategoryName2 = doc['categoryShort'];
+
+        print('shorCategoryName2: ZZZZ ZZZZZZ ZZZZZ   $shorCategoryName2');
 
 
 
