@@ -176,6 +176,51 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
+
+
+  Future<String>  paymentButtonPressedUnPaidDetailsPage() async{
+
+    OneOrderFirebase temp = _curretnFireBaseOrder;
+    print('temp.documentId: ${temp.documentId}');
+    String documentID = temp.documentId;
+
+
+
+    // Order payMentProcessing=_curretnOrder;
+
+    // String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
+
+    String paidType0 =   temp.paidType;
+
+    print('paidType0 : $paidType0');
+
+
+    //
+    //
+    // Future<String> recitePrinted(String orderDocumentID,String status) async{
+
+      //
+
+
+      var updateResult =
+      await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,paidType0);
+
+      print('updateResult is:: :: $updateResult');
+
+
+
+      String                    recitePrintedString = updateResult['recitePrinted'];
+
+      print('recitePrintedString: $recitePrintedString');
+
+      return recitePrintedString;
+
+    }
+
+
+
+
+
   // HELPER METHOD tryCast Number (1)
   double tryCast<num>(dynamic x, {num fallback }) {
 

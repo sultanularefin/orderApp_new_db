@@ -361,12 +361,12 @@ _batteryLevel = batteryLevel;
 
           appBar: AppBar(
 
-//          backgroundColor: Colors.deepOrange,
+         // backgroundColor: Colors.deepOrange,
 
-//            toolbarHeight: 85,
+           toolbarHeight: 85,
             elevation: 0,
             titleSpacing: 0,
-//            shadowColor: Colors.white,
+           shadowColor: Colors.white,
             backgroundColor: Color(0xffFFE18E),
 
 /*

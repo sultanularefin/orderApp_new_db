@@ -483,7 +483,7 @@ class FirebaseClient {
   }
 
 
-  Future<DocumentSnapshot> updateOrderCollectionDocumentWithRecitePrintedInformation
+  Future<DocumentSnapshot> updateOneUnPaidOrderLater
 //  Future<bool> updateOrderCollectionDocumentWithRecitePrintedInformation
       (String orderDocumentId, String status) async {
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
@@ -501,6 +501,70 @@ class FirebaseClient {
       if (postSnapshot.exists) {
         print('postSnapshot.exists....');
         await tx.update(postRef, <String, String>{'recitePrinted': status});
+
+
+//        return true;
+      }else{
+
+        return null;
+        throw ('postSnapshot don\'t exists....');
+
+      }
+
+    });
+
+
+    return test.whenComplete(() => print("update complete let\'s download the data")
+    ).then((document) {
+
+
+      var snapshot = Firestore.instance.collection(
+          "restaurants").
+      document('kebab_bank').
+      collection('orderList').document(orderDocumentId)
+          .get();
+//     print('async result [document] for runTransaction in order : $document');
+//     return true;
+      print('snapshot: $snapshot');
+
+      return snapshot;
+
+//                            _handleSignIn();
+    }).catchError((onError) {
+      print('..... transaction not successfull.... : $onError');
+
+      return null;
+      throw ('postSnapshot don\'t exists....');
+//     return false;
+//     orderDocId= '';
+//      return '';
+    });
+
+//    print('will this method return null');
+//    return null;
+//    return null;
+  }
+
+
+  Future<DocumentSnapshot> updateOrderCollectionDocumentWithRecitePrintedInformation
+//  Future<bool> updateOrderCollectionDocumentWithRecitePrintedInformation
+      (String orderDocumentId, String paidType) async {
+    print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
+
+    final DocumentReference postRef = Firestore.instance.collection(
+        "restaurants").
+    document('kebab_bank').
+    collection('orderList').document(orderDocumentId);
+
+
+    Future<Map<String, dynamic>> test=    Firestore.instance.runTransaction((Transaction tx) async {
+
+      DocumentSnapshot postSnapshot = await tx.get(postRef);
+
+      if (postSnapshot.exists) {
+        print('postSnapshot.exists....');
+        await tx.update(postRef, <String, String>{'paidType': paidType,
+          'paidStatus': paidType != 'Later' ? 'Paid' : 'Unpaid',});
 
 
 //        return true;

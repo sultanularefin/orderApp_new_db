@@ -63,7 +63,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   String _currentSize;
   bool showCancelPayButtonFirstTime = true;
   bool showFullPaymentType =true;
-  int _currentPaymentTypeIndex = 2; // PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+  int _currentPaymentTypeIndex ; // PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
 
   double tryCast<num>(dynamic x, {num fallback }) {
 
@@ -99,67 +99,134 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                 _currentPaymentTypeIndex = oneFireBaseOrderDetail.tempPaymentIndex;
 
 
-                return GestureDetector(
-                  onTap: () {
-                    print('s');
-                    print('navigating to FoodGallery 2 again with block');
-
-                    FocusScopeNode currentFocus = FocusScope.of(context);
-
-                    if (!currentFocus.hasPrimaryFocus) {
-                      currentFocus.unfocus();
-                    }
-
-                    print('CLEAR SUBSCRIPTION ... before going to food gallery page..');
+                logger.i('_currentPaymentTypeIndex: $_currentPaymentTypeIndex');
 
 
-                    return Navigator.pop(context);
 
 
-                  },
-                  child:
-                  Scaffold(
+                //......
 
-                    backgroundColor: Colors.white.withOpacity(0.05),
+
+                if (oneFireBaseOrderDetail.tempPayButtonPressed == true) {
+                  print('....payment button pressed.....');
+                  return Container(
+                    margin: EdgeInsets.fromLTRB(
+                        0, displayHeight(context) / 2, 0, 0),
+                    child: Center(
+                      child: Column(
+                        children: <Widget>[
+
+                          Center(
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: new CircularProgressIndicator(
+                                  backgroundColor: Colors
+                                      .lightGreenAccent,
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+
+                                )
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                                'printing recite... please wait.',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 34,
+                                  fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                  color: Colors.redAccent,
+                                  fontFamily: 'Itim-Regular',
+
+                                )
+                            ),
+                          ),
+                          Center(
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: new CircularProgressIndicator(
+                                  backgroundColor: Color(
+                                      0xffFC0000),
+
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                                )
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  );
+                  // .....
+                }
+
+                else {
+                  return GestureDetector(
+                    onTap: () {
+                      print('s');
+                      print('navigating to FoodGallery 2 again with block');
+
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                      print(
+                          'CLEAR SUBSCRIPTION ... before going to food gallery page..');
+
+                      return Navigator.pop(context);
+                    },
+                    child:
+                    Scaffold(
+
+                      backgroundColor: Colors.white.withOpacity(0.05),
 // this is the main reason of transparency at next screen.
 // I am ignoring rest implementation but what i have achieved is you can see.
 
-                    body: SafeArea(
+                      body: SafeArea(
 
 // smaller container containing all modal FoodItem Details things.
-                      child: Container(
-                          height: displayHeight(context) -
-                              MediaQuery.of(context).padding.top -
-                              MediaQuery.of(context).padding.bottom,
+                        child: Container(
+                            height: displayHeight(context) -
+                                MediaQuery
+                                    .of(context)
+                                    .padding
+                                    .top -
+                                MediaQuery
+                                    .of(context)
+                                    .padding
+                                    .bottom,
 //                            kToolbarHeight
 
-                          child: GestureDetector(
-                            onTap: () {
-                              print('GestureDetector for Stack working');
-                              print('no navigation now');
+                            child: GestureDetector(
+                              onTap: () {
+                                print('GestureDetector for Stack working');
+                                print('no navigation now');
+                              },
+                              child:
 
-
-                            },
-                            child:
-
-                            Container(
+                              Container(
 
 // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-                                width: displayWidth(context)/1.03,
+                                  width: displayWidth(context) / 1.03,
 
-                                child:
-                                initialView(oneFireBaseOrderDetail)
-                            ),
-
-
-
-                          )
+                                  child:
+                                  initialView(oneFireBaseOrderDetail)
+                              ),
 
 
+                            )
+
+
+                        ),
                       ),
                     ),
-                  ),
-                );
+                  );
+                }
               }
             }
         )
@@ -204,14 +271,14 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
             return
               Container(
 //                color: Colors.deepOrange,
-                margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
+//                 margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
 
                 child: Row(
-//                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+//                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-
 
 
                     Container(
@@ -274,6 +341,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
 
+                    SizedBox(width:20),
 
 
                     Container(
@@ -313,6 +381,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                     ),
 
 
+                    SizedBox(width:40),
 
 
 //                    SizedBox(width: displayWidth(context) / 12,),
@@ -340,19 +409,25 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                         onPressed: () async {
                           print(
-                              'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: ');
+                              'pay button pressed need to update paid Status and redirect to another page...'
+                                  ' Print..: ');
+
+                          final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+
+                          String orderDocumentId = await blocUD.paymentButtonPressedUnPaidDetailsPage();
+
+                          blocUD.clearSubscription();
+
+                          print('Unboscured takeAway || '
+                              'DinningRoom Dummy print--- returning to FoodGallery Page');
+                          return Navigator.pop(context);
 
 
-                          print('something went wrong');
-
-
-                          setState(() {
-                            showCancelPayButtonFirstTime = true;
-                          });
                         },
 
                       ),
                     ),
+                    SizedBox(width:40),
 
                   ],
                 ),
@@ -442,7 +517,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
       Container(
 
-        color: Colors.purple,
+        // color: Colors.purple,
         width: displayWidth(context) / 6.5,
         height: displayHeight(context) / 11,
         margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
@@ -452,6 +527,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
             alignment: Alignment.center,
             padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Container(
                   width: displayWidth(context) / 4.5,
@@ -485,23 +561,17 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
           ),
           onTap: () async {
 
-            logger.e('index: $index');
 
-
-
-
-
-            // work 0 august 20...
-            logger.e('index: $index');
+            logger.i('index: $index');
             print('YY YY  $index  YY   YY    ');
             if(index==0){
-//              0 means later option...
 
               print(' 0 means later option...');
 
-              // TAkEAWAY AND DINNING  Recite Print. ....
               final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
-//              final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
+              // blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
+              //     onePaymentType, index, _currentPaymentTypeIndex);
+
               print('later button pressed....:');
 
 
@@ -510,12 +580,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
               final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
-//            final shoppingCartBloc = BlocProvider.of<UnPaidDetailsBloc>(context);
-
               blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
                   onePaymentType, index, _currentPaymentTypeIndex);
-
-
 
               setState(() {
                 showFullPaymentType = false;
@@ -542,6 +608,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
             alignment: Alignment.center,
             padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Container(
                   width: displayWidth(context) / 4.5,
@@ -581,9 +648,37 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             logger.e('index: $index');
             print('YY YY  $index  YY   YY    ');
-            setState(() {
-              showCancelPayButtonFirstTime = false;
-            });
+
+
+
+            logger.i('index: $index');
+            print('YY YY  $index  YY   YY    ');
+            if(index==0){
+
+              print(' 0 means later option...');
+
+              final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+
+              print('later button pressed....:');
+
+
+            }
+            else {
+
+              final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+
+              blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
+                  onePaymentType, index, _currentPaymentTypeIndex);
+
+              setState(() {
+                showFullPaymentType = false;
+                showCancelPayButtonFirstTime = false;
+              });
+            }
+
+            // setState(() {
+            //   showCancelPayButtonFirstTime = false;
+            // });
 
           },
         ),
@@ -1152,7 +1247,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
             Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: AnimatedSwitcher(
                   duration: Duration(
                       milliseconds: 1000),
@@ -1161,7 +1256,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                   Container(
 
-                    color:Colors.limeAccent,
+                    // color:Colors.limeAccent,
 //                    color:Colors.white,
 //                                            height: 200,
                     height: displayHeight(context) / 8,

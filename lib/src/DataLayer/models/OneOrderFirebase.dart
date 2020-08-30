@@ -29,6 +29,7 @@ class OneOrderFirebase {
   // String                    orderProductionTimeOfDay;
   String                    timeOfDay;
   int                       tempPaymentIndex; // for unpaid Order....
+  bool                      tempPayButtonPressed;
 
   OneOrderFirebase(
       {
@@ -55,6 +56,7 @@ class OneOrderFirebase {
         this.orderProductionTimeFromNow, //  int minutes3 =minutes2.ceil(); // no need to have double
         this.timeOfDay,
         this.tempPaymentIndex,
+        this.tempPayButtonPressed:false,
       }
       );
 

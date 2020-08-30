@@ -205,3 +205,54 @@ taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$
 
 
 ```
+
+
+
+### flutter doctor output on linux machine: AUGUST 30, 2020:::
+
+```dart
+taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$ flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel unknown, 1.20.2, on Linux, locale en_US.UTF-8)
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+[✓] Android Studio (version 4.0)
+[✓] VS Code (version 1.48.0)
+[✓] Connected device (1 available)
+
+• No issues found!
+taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$ flutter doctor -v
+[✓] Flutter (Channel unknown, 1.20.2, on Linux, locale en_US.UTF-8)
+    • Flutter version 1.20.2 at /home/taxi/developmentFlutter
+    • Framework revision bbfbf1770c (2 weeks ago), 2020-08-13 08:33:09 -0700
+    • Engine revision 9d5b21729f
+    • Dart version 2.9.1
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+    • Android SDK at /home/taxi/Android/Sdk
+    • Platform android-30, build-tools 30.0.2
+    • ANDROID_HOME = /home/taxi/Android/Sdk
+    • Java binary at: /opt/android-studio/jre/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+    • All Android licenses accepted.
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at /opt/android-studio
+    • Flutter plugin version 48.1.2
+    • Dart plugin version 193.7547
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+
+[✓] VS Code (version 1.48.0)
+    • VS Code at /usr/share/code
+    • Flutter extension version 3.13.2
+
+[✓] Connected device (1 available)
+    • sdk gphone x86 64 arm64 (mobile) • emulator-5554 • android-x64 • Android 11 (API 30) (emulator)
+
+• No issues found!
+taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$
+
+
+```
+
+
