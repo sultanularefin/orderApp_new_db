@@ -186,20 +186,10 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-    // Order payMentProcessing=_curretnOrder;
-
-    // String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
-
     String paidType0 =   temp.paidType;
 
     print('paidType0 : $paidType0');
 
-
-    //
-    //
-    // Future<String> recitePrinted(String orderDocumentID,String status) async{
-
-      //
 
 
       var updateResult =
