@@ -202,7 +202,43 @@ taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$
 
 ```dart
 
+Copyright (C) Microsoft Corporation. All rights reserved.
 
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\WINDOWS\system32> cd ..
+PS C:\WINDOWS> cd ..
+PS C:\> flutter doctor -v
+[✓] Flutter (Channel unknown, 1.20.2, on Microsoft Windows [Version 10.0.19041.388], locale en-US)
+    • Flutter version 1.20.2 at C:\src\flutter
+    • Framework revision bbfbf1770c (2 weeks ago), 2020-08-13 08:33:09 -0700
+    • Engine revision 9d5b21729f
+    • Dart version 2.9.1
+
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+    • Android SDK at C:\Users\Taxi\AppData\Local\Android\Sdk
+    • Platform android-29, build-tools 29.0.3
+    • ANDROID_HOME = C:\Users\Taxi\AppData\Local\Android\Sdk
+    • Java binary at: C:\Program Files\Android\Android Studio\jre\bin\java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+    • All Android licenses accepted.
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    • Flutter plugin version 48.1.2
+    • Dart plugin version 193.7361
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+
+[✓] VS Code, 64-bit edition (version 1.48.1)
+    • VS Code at C:\Program Files\Microsoft VS Code
+    • Flutter extension version 3.13.2
+
+[✓] Connected device (1 available)
+    • sdk gphone x86 64 arm64 (mobile) • emulator-5554 • android-x64 • Android 11 (API 30) (emulator)
+
+• No issues found!
+PS C:\>
 
 ```
 
@@ -255,4 +291,43 @@ taxi@taxi-HP-ProBook-4540s:~/Programs/linkup$
 
 ```
 
+## flutter doctor output: AMJED BROTHER's windows pc:
+
+```dart
+PS C:\Users\amjed> flutter doctor -v
+[✓] Flutter (Channel master, 1.22.0-2.0.pre.114, on Microsoft Windows [Version 10.0.19041.450], locale en-US)
+    • Flutter version 1.22.0-2.0.pre.114 at F:\flutter
+    • Framework revision 3579f1c33e (2 days ago), 2020-08-28 14:08:04 -0400
+    • Engine revision 569fd19357
+    • Dart version 2.10.0 (build 2.10.0-68.0.dev)
+
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)
+    • Android SDK at C:\Users\amjed\AppData\Local\Android\sdk
+    • Platform android-29, build-tools 29.0.2
+    • ANDROID_HOME = C:\Users\amjed\AppData\Local\Android\sdk
+    • Java binary at: C:\Program Files\Android\Android Studio\jre\bin\java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+    • All Android licenses accepted.
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    • Flutter plugin version 48.1.2
+    • Dart plugin version 193.7361
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+
+[✓] VS Code (version 1.48.2)
+    • VS Code at C:\Users\amjed\AppData\Local\Programs\Microsoft VS Code
+    • Flutter extension version 3.13.2
+
+[✓] Connected device (1 available)
+    • SM T515 (mobile) • R52N107R5AK • android-arm • Android 10 (API 29)
+
+• No issues found!
+```
+
+
+### flutter upgrade in arefin's both pc's after:::
+
+## august 31
 

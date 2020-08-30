@@ -8209,7 +8209,7 @@ color:Colors.blue,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
 
-//              reverse: true,
+
 
                 shrinkWrap: true,
                 itemCount: allPaymentTypesSingleSelect.length,
@@ -10071,7 +10071,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
                       (oneIngredientForRecite.ingredientName.length == 0)) ?
                   '----' : oneIngredientForRecite.ingredientName.length > 18
                       ?
@@ -10081,7 +10081,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+              underline: true,
 
               )),
 
@@ -10128,7 +10129,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
                       (oneSauceItemForRecite.sauceItemName.length == 0)) ?
                   '----' : oneSauceItemForRecite.sauceItemName.length > 18
                       ?
@@ -10138,7 +10139,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -10181,7 +10183,7 @@ color:Colors.blue,
             ticket.row([
 
               PosColumn(
-                  text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
                       (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
                   '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
                       ?
@@ -10191,7 +10193,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -10657,7 +10660,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
                       (oneIngredientForRecite.ingredientName.length == 0)) ?
                   '----' : oneIngredientForRecite.ingredientName.length > 18
                       ?
@@ -10667,7 +10670,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -10714,7 +10718,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
                       (oneSauceItemForRecite.sauceItemName.length == 0)) ?
                   '----' : oneSauceItemForRecite.sauceItemName.length > 18
                       ?
@@ -10724,7 +10728,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -10768,7 +10773,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
                       (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
                   '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
                       ?
@@ -10778,7 +10783,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -11232,7 +11238,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
                       (oneIngredientForRecite.ingredientName.length == 0)) ?
                   '----' : oneIngredientForRecite.ingredientName.length > 18
                       ?
@@ -11242,7 +11248,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -11289,7 +11296,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
                       (oneSauceItemForRecite.sauceItemName.length == 0)) ?
                   '----' : oneSauceItemForRecite.sauceItemName.length > 18
                       ?
@@ -11299,7 +11306,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -11343,7 +11351,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
                       (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
                   '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
                       ?
@@ -11353,7 +11361,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -11798,7 +11807,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
                       (oneIngredientForRecite.ingredientName.length == 0)) ?
                   '----' : oneIngredientForRecite.ingredientName.length > 18
                       ?
@@ -11808,7 +11817,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -11855,7 +11865,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
                       (oneSauceItemForRecite.sauceItemName.length == 0)) ?
                   '----' : oneSauceItemForRecite.sauceItemName.length > 18
                       ?
@@ -11865,7 +11875,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
@@ -11909,7 +11920,7 @@ color:Colors.blue,
 
 
               PosColumn(
-                  text: '+${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
                       (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
                   '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
                       ?
@@ -11919,7 +11930,8 @@ color:Colors.blue,
                   width: 9, styles: PosStyles(
 
                 align: PosAlign.left,
-                reverse: true,
+//                reverse: true,
+                underline: true,
 
               )),
 
