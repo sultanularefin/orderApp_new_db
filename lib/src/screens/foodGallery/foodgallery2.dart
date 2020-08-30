@@ -1,6 +1,3 @@
-
-
-
 //## foodgallery Page August29: with android's Mainactivity invocation:
 //
 //```dart
@@ -21,7 +18,6 @@ import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 
-
 // MODEL'S IMPORT BEGINS HERE.
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
@@ -38,14 +34,12 @@ import 'dart:async';
 
 // import 'dart:io';
 
-
 import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 //import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
-
 
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
@@ -67,8 +61,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Screen files.
 import 'package:foodgallery/src/welcomePage.dart';
 
-
-
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 
@@ -77,7 +69,6 @@ import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-
 
 class FoodGallery2 extends StatefulWidget {
 //  AdminFirebase({this.firestore});
@@ -89,32 +80,27 @@ class FoodGallery2 extends StatefulWidget {
   FoodGallery2({Key key, this.child}) : super(key: key);
 
   _FoodGalleryState createState() => _FoodGalleryState();
-
 }
 
-
 class _FoodGalleryState extends State<FoodGallery2> {
-
-
 // static const platform = const MethodChannel('com.example.timePickerTest');
 
   static const platform = const MethodChannel('com.linkup.foodgallery');
 
-  final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery =
+      new GlobalKey<ScaffoldState>();
 //  final GlobalKey<ScaffoldState> scaffoldKeyClientHome = GlobalKey<ScaffoldState>();
-  final SnackBar snackBar = const SnackBar(content: Text('Menu button pressed'));
-
+  final SnackBar snackBar =
+      const SnackBar(content: Text('Menu button pressed'));
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 //  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
   _FoodGalleryState(/*{firestore} */);
 
-
 //  final _formKey = GlobalKey();
 
 //  final _formKey = GlobalKey<FormState>();
-
 
   String _searchString = '';
   String _currentCategory = "pizza";
@@ -127,32 +113,27 @@ class _FoodGalleryState extends State<FoodGallery2> {
 
   Order orderFG = new Order(
     selectedFoodInOrder: [],
-    selectedFoodListLength:0,
+    selectedFoodListLength: 0,
     orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-    paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+    paymentTypeIndex:
+        2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
     orderingCustomer: null,
     totalPrice: 0,
-    page:0,
+    page: 0,
   );
 
-
   String _batteryLevel = 'Unknown battery level.';
-
 
   bool blueToothState = false;
   bool wiFiState = false;
 
-
   @override
-  void initState(){
-
+  void initState() {
     print('at initState of foodGallery page');
 
     localStorageCheck();
 //_getBatteryLevel();
     super.initState();
-
-
   }
 
 /*
@@ -172,30 +153,18 @@ _batteryLevel = batteryLevel;
 
 */
 
-
 // Future<void> return type .  ??
-  Future<void> localStorageCheck () async{
-
-
-
-    bool blueTooth= await SystemShortcuts.checkBluetooth;// return true/false
-    bool wifi =   await SystemShortcuts.checkWifi;// return true/false
-
+  Future<void> localStorageCheck() async {
+    bool blueTooth = await SystemShortcuts.checkBluetooth; // return true/false
+    bool wifi = await SystemShortcuts.checkWifi; // return true/false
 
     setState(() {
       wiFiState = wifi;
       blueToothState = blueTooth;
     });
-
   }
 
-
-
-
-
-
-  double tryCast<num>(dynamic x, {num fallback }) {
-
+  double tryCast<num>(dynamic x, {num fallback}) {
 //    print(" at tryCast");
 //    print('x: $x');
 
@@ -204,26 +173,23 @@ _batteryLevel = batteryLevel;
 //    print('status : x is num $status');
 //    print('status : x is dynamic ${x is dynamic}');
 //    print('status : x is int ${x is int}');
-    if(status) {
-      return x.toDouble() ;
+    if (status) {
+      return x.toDouble();
     }
 
-    if(x is int) {return x.toDouble();}
-    else if(x is double) {return x.toDouble();}
-
-
-    else return 0.0;
+    if (x is int) {
+      return x.toDouble();
+    } else if (x is double) {
+      return x.toDouble();
+    } else
+      return 0.0;
   }
 
-
 //  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
-
 
   var logger = Logger(
     printer: PrettyPrinter(),
   );
-
-
 
 //  Future<void> _showMyDialog() async {
 //    return showDialog<void>(
@@ -253,15 +219,11 @@ _batteryLevel = batteryLevel;
 //    );
 //  }
 
-
   Future<void> logout(BuildContext context2) async {
     print('what i do is : ||Logout||');
 
-
-
 //    _scaffoldKey.currentState.showSnackBar(
 //    ABOVE ONE ALSO WORKS
-
 
 //    _showMyDialog();
 
@@ -275,22 +237,18 @@ _batteryLevel = batteryLevel;
     );
     */
 
-
 //    return Navigator.push(context,
 //
 //        MaterialPageRoute(builder: (context)
 //        => FoodItemDetails(oneFoodItemData:oneFoodItem))
 //    );
 
-
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (BuildContext context) {
-
-          return BlocProvider<IdentityBloc>(
-              bloc: IdentityBloc(),
+      return BlocProvider<IdentityBloc>(
+          bloc: IdentityBloc(),
 //AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
-              child: WelcomePage(fromWhicPage:'foodGallery2')
-          );
+          child: WelcomePage(fromWhicPage: 'foodGallery2'));
 /*
                                   return BlocProvider<FoodGalleryBloc>(
                                       bloc: FoodGalleryBloc(),
@@ -298,17 +256,8 @@ _batteryLevel = batteryLevel;
 
                                   );
                                   */
-
-        }),(Route<dynamic> route) => false);
-
-
+    }), (Route<dynamic> route) => false);
   }
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -316,15 +265,12 @@ _batteryLevel = batteryLevel;
 
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
 
-
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
 //    final bloc = BlocProvider2
 //        .of(context)
 //        .getFoodGalleryBlockObject;
 
-
 //    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<FoodItemDetailsBloc>(context);
-
 
 //    List<NewIngredient> testIngs =  bloc.allIngredients;
 
@@ -348,25 +294,21 @@ _batteryLevel = batteryLevel;
           currentFocus.unfocus();
         }
       },
-      child:
-      SafeArea(
-        child:
-        Scaffold(
+      child: SafeArea(
+        child: Scaffold(
           key: _scaffoldKeyFoodGallery,
 //          backgroundColor: Colors.purpleAccent,
 
 //      resizeToAvoidBottomPadding: false ,
 // appBar: AppBar(title: Text('Food Gallery')),
 
-
           appBar: AppBar(
+            // backgroundColor: Colors.deepOrange,
 
-         // backgroundColor: Colors.deepOrange,
-
-           toolbarHeight: 85,
+            toolbarHeight: 85,
             elevation: 0,
             titleSpacing: 0,
-           shadowColor: Colors.white,
+            shadowColor: Colors.white,
             backgroundColor: Color(0xffFFE18E),
 
 /*
@@ -387,32 +329,27 @@ _batteryLevel = batteryLevel;
 
           */
 
-            title:
-            Container(
+            title: Container(
               height: displayHeight(context) / 14,
-              width: displayWidth(context) - MediaQuery
-                  .of(context)
-                  .size
-                  .width / 3.8,
+              width: displayWidth(context) -
+                  MediaQuery.of(context).size.width / 3.8,
 
               color: Color(0xffFFFFFF),
 //                              color:Colors.purpleAccent,
 
 //                      color: Color.fromARGB(255, 255,255,255),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-
 // image and string JEDILINE BEGINS HERE.
                   SizedBox(
-                    height: kToolbarHeight + 6, // 6 for spacing padding at top for .
+                    height: kToolbarHeight +
+                        6, // 6 for spacing padding at top for .
                     width: 200,
-                    child:  Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-
                         Container(
 //                                          color: Colors.yellow,
 //                                          margin: EdgeInsets.symmetric(
@@ -423,13 +360,10 @@ _batteryLevel = batteryLevel;
                           height: displayHeight(context) / 15,
 //                                            color:Colors.blue,
                           child: Image.asset('assets/Path2008.png'),
-
                         ),
                         Container(
-
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 0,
-                              vertical: 0),
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 0, vertical: 0),
 
 //                                          width: displayWidth(context) / 6,
                           height: displayHeight(context) / 15,
@@ -437,8 +371,8 @@ _batteryLevel = batteryLevel;
                           child:
 
 //                                          Container(child: Image.asset('assets/Path2008.png')),
-                          Container(
-                            padding:EdgeInsets.fromLTRB(0,1,0,0),
+                              Container(
+                            padding: EdgeInsets.fromLTRB(0, 1, 0, 0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -446,22 +380,22 @@ _batteryLevel = batteryLevel;
                                 Text(
                                   'Jediline',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(fontSize: 30,
+                                  style: TextStyle(
+                                      fontSize: 30,
                                       color: Color(0xff07D607),
                                       fontFamily: 'Itim-Regular'),
                                 ),
                                 Text(
                                   'Online Orders',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(fontSize: 16.42,color: Color(0xff07D607)),
+                                  style: TextStyle(
+                                      fontSize: 16.42,
+                                      color: Color(0xff07D607)),
                                 ),
                               ],
                             ),
                           ),
-
-
                         ),
-
                       ],
                     ),
                   ),
@@ -480,21 +414,15 @@ _batteryLevel = batteryLevel;
                                     */
 // CONTAINER FOR TOTAL PRICE CART BELOW.
 
-
                   Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: 0),
+                    margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                     decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(
-
                         color: Color(0xffBCBCBD),
                         style: BorderStyle.solid,
                         width: 3,
-
-
                       ),
 
                       boxShadow: [
@@ -506,32 +434,28 @@ _batteryLevel = batteryLevel;
                             offset: Offset(0.0, 2.0))
                       ],
 
-
                       color: Color(0xffFFFFFF),
 //                                      Colors.black54
                     ),
 // USER INPUT
 
-
 //                                  color: Color(0xffFFFFFF),
                     width: displayWidth(context) / 3.3,
                     height: displayHeight(context) / 27,
-                    padding: EdgeInsets.only(
-                        left: 4, top: 3, bottom: 3, right: 3),
+                    padding:
+                        EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
                     child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisAlignment: MainAxisAlignment
-                          .spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment
-                          .center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-
-                          height:displayWidth(context)/34,
+                          height: displayWidth(context) / 34,
 //                                          height: 25,
                           width: 5,
-                          margin: EdgeInsets.only(left: 0,right:15,bottom: 5),
+                          margin:
+                              EdgeInsets.only(left: 0, right: 15, bottom: 5),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
@@ -541,11 +465,9 @@ _batteryLevel = batteryLevel;
 //                                          Icons.add_shopping_cart,
                             Icons.search,
 //                                            size: 28,
-                            size: displayWidth(context)/24,
+                            size: displayWidth(context) / 24,
                             color: Color(0xffBCBCBD),
                           ),
-
-
                         ),
 
                         Container(
@@ -565,14 +487,12 @@ _batteryLevel = batteryLevel;
 //                                              hintText: 'Search about meal',
 //                                              hintStyle: TextStyle(fontWeight: FontWeight.bold),
 
-
 //                                        labelText: 'Search about meal.'
                             ),
                             onChanged: (text) {
 //                                              logger.i('on onChanged of condition 4');
 
-                              setState(() =>
-                              _searchString = text);
+                              setState(() => _searchString = text);
                               print(
                                   "First text field from Condition 04: $text");
                             },
@@ -580,34 +500,25 @@ _batteryLevel = batteryLevel;
                               print('condition 4');
 //                                              logger.i('on Tap of condition 4');
                               setState(() {
-                                _firstTimeCategoryString =
-                                'PIZZA';
+                                _firstTimeCategoryString = 'PIZZA';
                               });
                             },
-
                             onEditingComplete: () {
 //                                              logger.i('onEditingComplete  of condition 4');
-                              print(
-                                  'called onEditing complete');
-                              setState(() =>
-                              _searchString = "");
+                              print('called onEditing complete');
+                              setState(() => _searchString = "");
                             },
-
                             onSubmitted: (String value) async {
                               await showDialog<void>(
                                 context: context,
-                                builder: (
-                                    BuildContext context) {
+                                builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text(
-                                        'Thanks!'),
-                                    content: Text(
-                                        'You typed "$value".'),
+                                    title: const Text('Thanks!'),
+                                    content: Text('You typed "$value".'),
                                     actions: <Widget>[
                                       FlatButton(
                                         onPressed: () {
-                                          Navigator.pop(
-                                              context);
+                                          Navigator.pop(context);
                                         },
                                         child: const Text('OK'),
                                       ),
@@ -617,17 +528,14 @@ _batteryLevel = batteryLevel;
                               );
                             },
                           ),
-
                         )
 
 //                                  Spacer(),
 
 //                                  Spacer(),
-
                       ],
                     ),
                   ),
-
 
                   Container(
 /*
@@ -638,42 +546,32 @@ _batteryLevel = batteryLevel;
                                       */
 // FOR CATEGORY SERARCH.
 
-
-                    child: shoppingCartWidget(context), // CLASS TO WIDGET SINCE I NEED TO INVOKE THE
-
+                    child: shoppingCartWidget(
+                        context), // CLASS TO WIDGET SINCE I NEED TO INVOKE THE
                   ),
                 ],
               ),
             ),
-
           ),
 
-
-          body:
-          SingleChildScrollView(
+          body: SingleChildScrollView(
             child: Container(
 //              color:Colors.lightGreenAccent,
-                child:
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
 //                #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
-                    Container(
+                Container(
 //                      color:Colors.red,
-                      width: displayWidth(context)-MediaQuery
-                          .of(context)
-                          .size
-                          .width / 3.8,
-                      height: displayHeight(context) + kToolbarHeight + 10,
-                      child: foodList(_currentCategory,_searchString,
-                          context /*allIngredients:_allIngredientState */),
+                  width: displayWidth(context) -
+                      MediaQuery.of(context).size.width / 3.8,
+                  height: displayHeight(context) + kToolbarHeight + 10,
+                  child: foodList(_currentCategory, _searchString,
+                      context /*allIngredients:_allIngredientState */),
+                ),
 
-                    ),
-
-                    Container(
-                      height: displayHeight(context) + kToolbarHeight + 10,
+                Container(
+                  height: displayHeight(context) + kToolbarHeight + 10,
 
 /* -
                           MediaQuery
@@ -688,129 +586,89 @@ _batteryLevel = batteryLevel;
 
 */
 //+ displayHeight(context) / 20
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width / 3.8,
+                  width: MediaQuery.of(context).size.width / 3.8,
 
-                      color: Color(0xffFFE18E),
+                  color: Color(0xffFFE18E),
 
-                      child: StreamBuilder<List<NewCategoryItem>>(
-
-                          stream: blocG.categoryItemsStream,
-                          initialData: blocG.allCategories,
+                  child: StreamBuilder<List<NewCategoryItem>>(
+                      stream: blocG.categoryItemsStream,
+                      initialData: blocG.allCategories,
 //        initialData: bloc.getAllFoodItems(),
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                              case ConnectionState.none:
-                                return Container(
-                                  margin: EdgeInsets.fromLTRB(
-                                      0, displayHeight(context) / 2, 0,
-                                      0),
-                                  child: Center(
-                                    child: Column(
-                                      children: <Widget>[
-
-                                        Center(
-                                          child: Container(
-                                              alignment: Alignment.center,
-                                              child: new CircularProgressIndicator(
-                                                  backgroundColor: Colors
-                                                      .lightGreenAccent)
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Container(
-                                              alignment: Alignment.center,
-                                              child: new CircularProgressIndicator(
-                                                backgroundColor: Colors
-                                                    .yellow,)
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Container(
-                                              alignment: Alignment.center,
-                                              child: new CircularProgressIndicator(
-                                                  backgroundColor: Colors
-                                                      .redAccent)
-                                          ),
-                                        ),
-                                      ],
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.waiting:
+                          case ConnectionState.none:
+                            return Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  0, displayHeight(context) / 2, 0, 0),
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                              backgroundColor:
+                                                  Colors.lightGreenAccent)),
                                     ),
-                                  ),
-
-                                );
-                                break;
-                              case ConnectionState.active:
-                              default:
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                      child: new LinearProgressIndicator());
-                                }
-                                else {
-                                  final List allCategories = snapshot
-                                      .data;
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                            backgroundColor: Colors.yellow,
+                                          )),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                              backgroundColor:
+                                                  Colors.redAccent)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                            break;
+                          case ConnectionState.active:
+                          default:
+                            if (!snapshot.hasData) {
+                              return Center(
+                                  child: new LinearProgressIndicator());
+                            } else {
+                              final List allCategories = snapshot.data;
 //                                  logger.i('allCategories.length:', allCategories.length);
 
-
 //                                  _allCategoryList.add(All);
-
 
 //                                  allCategories.add(all);
 //                                  logger.i('allCategories.length after :', allCategories.length);
 
-                                  final int categoryCount = allCategories
-                                      .length;
-
+                              final int categoryCount = allCategories.length;
 
 //                              print('categoryCount in condition 04: ');
 
-
 //                                logger.i("categoryCount in condition 04: $categoryCount");
 
-                                  return (
-                                      new ListView.builder
-                                        (
-                                          itemCount: categoryCount,
-
+                              return (new ListView.builder(
+                                  itemCount: categoryCount,
 
 //    itemBuilder: (BuildContext ctxt, int index) {
-                                          itemBuilder: (_, int index) {
+                                  itemBuilder: (_, int index) {
 //                                            return (Text('ss'));
 
-
-                                            return _buildCategoryRow(
-                                                allCategories[index]
+                                    return _buildCategoryRow(
+                                        allCategories[index]
 /*categoryItems[index]*/,
-                                                index);
-                                          }
-                                      )
-                                  )
-                                  ;
-                                }
+                                        index);
+                                  }));
                             }
-                          }
-                      ),
-                    ),
-
-
-
-
-                  ]
-                  ,)
-
-            ),
+                        }
+                      }),
+                ),
+              ],
+            )),
           ),
-
-
-
-
-
-
-
-
-
 
           endDrawer: Drawer(
 // Add a ListView to the drawer. This ensures the user can scroll
@@ -819,20 +677,17 @@ _batteryLevel = batteryLevel;
 //
 // .
 
-
             child: Container(
               color: Color(0xffFFE18E),
               child: ListView(
 // Important: Remove any padding from the ListView.
                 padding: EdgeInsets.zero,
                 children: <Widget>[
-
                   DrawerHeader(
                     decoration: BoxDecoration(
                       color: Color(0xffFFE18E),
 //                    backgroundColor: Color(0xffFFE18E),
                     ),
-
                     child: Text(
                       'Order Application',
                       style: TextStyle(
@@ -840,37 +695,28 @@ _batteryLevel = batteryLevel;
                         fontSize: 24,
                       ),
                     ),
-
-
                   ),
-
                   ListTile(
                     title: Container(
                         color: Color(0xffFFE18E),
                         child: Row(
                           children: [
                             Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  10, 0, 10,
-                                  0),
+                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                               child: Image.asset(
                                 'assets/unpaid_cash_card/unpaid.png',
 //                color: Colors.black,
                                 width: 47,
-                                height:47,
-
+                                height: 47,
                               ),
                             ),
 
                             Container(
 //                          width: displayWidth(context)/3.9,
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  10, 0, 0,
-                                  0),
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
-                              child: Text('unpaid'.toUpperCase(),
+                              child: Text(
+                                'unpaid'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 20,
@@ -883,58 +729,42 @@ _batteryLevel = batteryLevel;
                           ],
                         )),
                     onTap: () {
-
-
-
                       Navigator.of(context).push(
-
                         PageRouteBuilder(
                           opaque: false,
-                          transitionDuration: Duration(
-                              milliseconds: 900),
-                          pageBuilder: (_, __, ___) =>
-                              BlocProvider<UnPaidBloc>(
-                                bloc: UnPaidBloc(),
-                                child: UnPaidPage(docID:''),
-                              ),
-
-
+                          transitionDuration: Duration(milliseconds: 900),
+                          pageBuilder: (_, __, ___) => BlocProvider<UnPaidBloc>(
+                            bloc: UnPaidBloc(),
+                            child: UnPaidPage(docID: ''),
+                          ),
                         ),
                       );
-
-
                     },
                   ),
-
-                  SizedBox(height: 50,),
-
+                  SizedBox(
+                    height: 50,
+                  ),
                   ListTile(
                     title: Container(
                         color: Color(0xffFFE18E),
                         child: Row(
                           children: [
                             Container(
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  10, 0, 10,
-                                  0),
+                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                               child: Image.asset(
                                 'assets/history.png',
 //                color: Colors.black,
                                 width: 40,
-                                height:40,
-
+                                height: 40,
                               ),
                             ),
 
                             Container(
 //                          width: displayWidth(context)/3.9,
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  10, 0, 0,
-                                  0),
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
-                              child: Text('history'.toUpperCase(),
+                              child: Text(
+                                'history'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 20,
@@ -945,41 +775,25 @@ _batteryLevel = batteryLevel;
                             )
 //                      Text('history'),
                           ],
-                        )
-                    ),
+                        )),
                     onTap: () {
-
-
-
                       Navigator.of(context).push(
-
                         PageRouteBuilder(
                           opaque: false,
-                          transitionDuration: Duration(
-                              milliseconds: 900),
+                          transitionDuration: Duration(milliseconds: 900),
                           pageBuilder: (_, __, ___) =>
                               BlocProvider<HistoryBloc>(
-                                bloc: HistoryBloc(),
-                                child: HistoryPage(),
-                              ),
-
-
+                            bloc: HistoryBloc(),
+                            child: HistoryPage(),
+                          ),
                         ),
                       );
-
-
                     },
                   ),
-
-
-
                 ],
               ),
             ),
           ),
-
-
-
         ),
       ),
     );
@@ -1074,9 +888,10 @@ _batteryLevel = batteryLevel;
   }
   */
 
-
-  Widget _buildCategoryRow(/*DocumentSnapshot document*/
-      NewCategoryItem oneCategory, int index) {
+  Widget _buildCategoryRow(
+      /*DocumentSnapshot document*/
+      NewCategoryItem oneCategory,
+      int index) {
 //    final DocumentSnapshot document = snapshot.data.documents[index];
     final String categoryName = oneCategory.categoryName;
 //    final String categoryName = document['name'];
@@ -1086,20 +901,14 @@ _batteryLevel = batteryLevel;
 
 //    logger.i('category Name in _buildCategoryRow: $categoryName');
 
-
-
     if (_currentCategory.toLowerCase() == categoryName.toLowerCase()) {
-      return
-
-        ListTile(
-
-          contentPadding: EdgeInsets.fromLTRB(10, 6, 5, 6),
+      return ListTile(
+        contentPadding: EdgeInsets.fromLTRB(10, 6, 5, 6),
 //    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
-          title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
 /*
                 Text(
 //                unSelectedOneIngredient.ingredientName,
@@ -1118,48 +927,44 @@ _batteryLevel = batteryLevel;
                 ),
                 */
 
-                Text(categoryName.toLowerCase().length>8?categoryName.toLowerCase().substring(0,8)+'..':
-                categoryName.toLowerCase()
-
-                  , style:
-                  TextStyle(
-
-                    fontFamily: 'Itim-Regular',
-                    fontSize: 30,
-                    fontWeight: FontWeight.normal,
+              Text(
+                categoryName.toLowerCase().length > 8
+                    ? categoryName.toLowerCase().substring(0, 8) + '..'
+                    : categoryName.toLowerCase(),
+                style: TextStyle(
+                  fontFamily: 'poppins',
+                  fontSize: 30,
+                  fontWeight: FontWeight.normal,
 //                    fontStyle: FontStyle.italic,
-                    color: Color(0xff000000),
-                  ),
-
+                  color: Color(0xff000000),
+                ),
 
 //                    'Reross Quadratic',
-
-
-                ), CustomPaint(size: Size(0, 19),
-                  painter: MyPainter(),
-                )
-              ]
-          ),
-          onTap: () { // Add 9 lines from here...
-            print('onTap pressed');
-            print('index: $index');
-            setState(() {
-              _currentCategory = categoryName;
-              _firstTimeCategoryString = categoryName;
-              _searchString = '';
-            });
-          }, // ... to here.
-        )
-      ;
-    }
-    else {
+              ),
+              CustomPaint(
+                size: Size(0, 19),
+                painter: MyPainter(),
+              )
+            ]),
+        onTap: () {
+          // Add 9 lines from here...
+          print('onTap pressed');
+          print('index: $index');
+          setState(() {
+            _currentCategory = categoryName;
+            _firstTimeCategoryString = categoryName;
+            _searchString = '';
+          });
+        }, // ... to here.
+      );
+    } else {
       return ListTile(
         contentPadding: EdgeInsets.fromLTRB(10, 6, 5, 6),
 
-        title: Text(categoryName.toLowerCase(),
+        title: Text(
+          categoryName.toLowerCase(),
 //    Text(categoryName.substring(0, 2),
           style: TextStyle(
-
             fontFamily: 'Itim-Regular',
 
             fontSize: 24,
@@ -1167,9 +972,9 @@ _batteryLevel = batteryLevel;
 //                    fontStyle: FontStyle.italic,
             color: Color(0xff000000),
           ),
-
         ),
-        onTap: () { // Add 9 lines from here...
+        onTap: () {
+          // Add 9 lines from here...
           print('onTap pressed');
           print('index: $index');
           setState(() {
@@ -1182,13 +987,10 @@ _batteryLevel = batteryLevel;
     }
   }
 
-
   Widget drawerTest(BuildContext context) {
 //    key: _drawerKey;
     return Scaffold(
-
       drawer: Drawer(
-
         child: ListView(
 // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
@@ -1226,8 +1028,6 @@ _batteryLevel = batteryLevel;
 
 // FROM CLASS TO WIDGET REQUIRED, SINCE I NEED TO CALL SETTATE FROM THE RETURNED ORDER
 
-
-
 /*
   Future<void> _showMyDialog33() async {
     return showDialog<void>(
@@ -1258,10 +1058,7 @@ _batteryLevel = batteryLevel;
   }
   */
 
-
-  Widget shoppingCartWidget(BuildContext context){
-
-
+  Widget shoppingCartWidget(BuildContext context) {
 //    final bloc = LocationQueryBloc();
 
 //    final blocZZ = FoodItemsQueryBloc();
@@ -1270,11 +1067,9 @@ _batteryLevel = batteryLevel;
 // I AM NOT USING THIS HERE.
 //    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
-
 //    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<
 //        FoodItemDetailsBloc>(context);
 //    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
 
 /*
 Widget work1(BuildContext context){
@@ -1290,11 +1085,9 @@ Widget work1(BuildContext context){
 // PLANNED TO PASS IT FROM HERE.
 // HOW CAN I HAVE IT HERE ????
 
-
     return Container(
 //                                                                        width:60,
-      width: displayWidth(
-          context) / 13,
+      width: displayWidth(context) / 13,
       height: displayHeight(context) / 25,
       alignment: Alignment.center,
       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -1312,7 +1105,8 @@ Widget work1(BuildContext context){
                     child: ListBody(
                       children: <Widget>[
 //                        Text('you haven\'t selected any food yet, please select some food'),
-                        Text('You need to select some food item in order to go to the shopping cart page.'),
+                        Text(
+                            'You need to select some food item in order to go to the shopping cart page.'),
                       ],
                     ),
                   ),
@@ -1327,8 +1121,7 @@ Widget work1(BuildContext context){
                 );
               },
             );
-          }
-          else {
+          } else {
             print(
                 ' method for old Outline button that deals with navigation to Shopping Cart Page');
 
@@ -1336,9 +1129,7 @@ Widget work1(BuildContext context){
 
 //          orderFG
 
-
 //      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-
 
 //              final locationBloc = BlocProvider.of<>(context);
 //                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
@@ -1348,7 +1139,7 @@ Widget work1(BuildContext context){
               flatOrHouseNumber: '',
               phoneNumber: '',
               etaTimeInMinutes: -1,
-              etaTimeOfDay: new TimeOfDay(hour:0,minute:0),
+              etaTimeOfDay: new TimeOfDay(hour: 0, minute: 0),
 
               // etaTimeOfDay: new TimeOfDay(hour:-0,minute:-0),
               // THIS DOESN'T WORK...
@@ -1358,56 +1149,40 @@ Widget work1(BuildContext context){
 //        CustomerInformation currentUser = _oneCustomerInfo;
 
 //    currentUser.address = address;
-
-
             );
 
-
             final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-            List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.allCategories;
+            List<NewCategoryItem> allCategoriesForShoppingCartPage =
+                blocG.allCategories;
 
 //            List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.getAllIngredientsPublicFGB2;
-
 
             orderFG.selectedFoodInOrder = allSelectedFoodGallery;
 
             orderFG.selectedFoodListLength = allSelectedFoodGallery.length;
             orderFG.totalPrice = totalPriceState;
             orderFG.orderingCustomer = oneCustomerInfo;
+            print('add_shopping_cart button pressed');
+
+            logger.e(
+                'orderFG.selectedFoodInOrder ${orderFG.selectedFoodInOrder}');
             print(
-
-                'add_shopping_cart button pressed');
-
-            logger.e('orderFG.selectedFoodInOrder ${orderFG.selectedFoodInOrder}');
-            print('allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity} ');
-
-
-
+                'allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity} ');
 
             final Order orderWithDocumentId = await Navigator.of(context).push(
-
               PageRouteBuilder(
                 opaque: false,
-                transitionDuration: Duration(
-                    milliseconds: 900),
-                pageBuilder: (_, __, ___) =>
-                    BlocProvider<ShoppingCartBloc>(
-                      bloc: ShoppingCartBloc(
-                          orderFG,allCategoriesForShoppingCartPage),
-
-
-                      child: ShoppingCart(),
-
-                    ),
+                transitionDuration: Duration(milliseconds: 900),
+                pageBuilder: (_, __, ___) => BlocProvider<ShoppingCartBloc>(
+                  bloc: ShoppingCartBloc(
+                      orderFG, allCategoriesForShoppingCartPage),
+                  child: ShoppingCart(),
+                ),
 // fUTURE USE -- ANIMATION TRANSITION CODE.
-
-
               ),
             );
 
-
-
-            if(orderWithDocumentId==null) {
+            if (orderWithDocumentId == null) {
               setState(() {
                 _totalCount = 0;
                 totalPriceState = 0;
@@ -1424,48 +1199,46 @@ Widget work1(BuildContext context){
                   page: 0,
                   isCanceled: false,
                   orderdocId: '',
-
                 );
               });
-            }
-            else if ((orderWithDocumentId.isCanceled != true) && (orderWithDocumentId.orderdocId=='')) {
+            } else if ((orderWithDocumentId.isCanceled != true) &&
+                (orderWithDocumentId.orderdocId == '')) {
               print('//   //    //    // THIS ELSE IS FOR BACK BUTTON =>');
-              print('orderWithDocumentId.selectedFoodInOrder: ${orderWithDocumentId.selectedFoodInOrder}');
-              print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
-              print('allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
+              print(
+                  'orderWithDocumentId.selectedFoodInOrder: ${orderWithDocumentId.selectedFoodInOrder}');
+              print(
+                  'allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
+              print(
+                  'allSelectedFoodGallery: ${orderWithDocumentId.selectedFoodInOrder}');
 
               print('_totalCount: $_totalCount');
               print('totalPriceState: $totalPriceState');
 
-              setState((){
+              setState(() {
 //                        int _totalCount = 0;
-                allSelectedFoodGallery = orderWithDocumentId.selectedFoodInOrder;
-
-              }
-              );
+                allSelectedFoodGallery =
+                    orderWithDocumentId.selectedFoodInOrder;
+              });
 
               Scaffold.of(context)
                 ..removeCurrentSnackBar()
                 ..showSnackBar(
-                  SnackBar(content: Text("THIS ELSE IS FOR BACK BUTTON"),
+                  SnackBar(
+                    content: Text("THIS ELSE IS FOR BACK BUTTON"),
                     duration: Duration(milliseconds: 8000),
-                  ),);
+                  ),
+                );
 //      setState(() => _reloadRequired = true);
 
-
-            }
-
-            else if ((orderWithDocumentId.paymentButtonPressed) &&
+            } else if ((orderWithDocumentId.paymentButtonPressed) &&
                 (orderWithDocumentId.orderdocId != '')) {
-
               logger.e("Order received, id: ${orderWithDocumentId.orderdocId}");
               Scaffold.of(context)
                 ..removeCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text(
-                    "Order received, id: ${orderWithDocumentId.orderdocId}"),
-                    duration: Duration(milliseconds: 8000)
-                )
-                );
+                ..showSnackBar(SnackBar(
+                    content: Text(
+                        "Order received, id: ${orderWithDocumentId.orderdocId}"),
+                    duration: Duration(milliseconds: 8000)));
 
 /*
             Scaffold.of(context)
@@ -1474,67 +1247,50 @@ Widget work1(BuildContext context){
             */
 //      setState(() => _reloadRequired = true);
 
-              setState(
-                      () {
-                    _totalCount = 0;
-                    totalPriceState = 0;
-                    allSelectedFoodGallery=[];
-                    orderFG = new Order(
-                      selectedFoodInOrder: [],
-                      selectedFoodListLength:0,
-                      orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-                      paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                      orderingCustomer: null,
-                      totalPrice: 0,
-                      page:0,
-                      isCanceled: false,
-                      orderdocId:'',
-                    );
-                  }
-              );
+              setState(() {
+                _totalCount = 0;
+                totalPriceState = 0;
+                allSelectedFoodGallery = [];
+                orderFG = new Order(
+                  selectedFoodInOrder: [],
+                  selectedFoodListLength: 0,
+                  orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
+                  paymentTypeIndex:
+                      2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                  orderingCustomer: null,
+                  totalPrice: 0,
+                  page: 0,
+                  isCanceled: false,
+                  orderdocId: '',
+                );
+              });
 
-              if(orderWithDocumentId.paymentTypeIndex==0){
-
-
+              if (orderWithDocumentId.paymentTypeIndex == 0) {
                 return Navigator.of(context).push(
-
-
                   PageRouteBuilder(
                     opaque: false,
-                    transitionDuration: Duration(
-                        milliseconds: 900),
-                    pageBuilder: (_, __, ___) =>
+                    transitionDuration: Duration(milliseconds: 900),
+                    pageBuilder: (_, __, ___) => BlocProvider<UnPaidBloc>(
+                      bloc: UnPaidBloc(),
 
-
-                        BlocProvider<UnPaidBloc>(
-                          bloc: UnPaidBloc(),
-
-                          child: UnPaidPage(docID:orderWithDocumentId.orderdocId),
+                      child: UnPaidPage(docID: orderWithDocumentId.orderdocId),
 //                      child: UnPaidPage()
-                        ),
-
-
+                    ),
                   ),
                 );
               }
-
-
-
-
-            }
-
-
-            else if (orderWithDocumentId.isCanceled == true) {
-
+            } else if (orderWithDocumentId.isCanceled == true) {
 //              Order Cancelled by user.
               print("Order Cancelled by user,");
-              print("orderWithDocumentId.paymentButtonPressed: ${orderWithDocumentId.paymentButtonPressed}");
-              print("orderWithDocumentId.orderdocId == '': ${orderWithDocumentId.orderdocId}");
+              print(
+                  "orderWithDocumentId.paymentButtonPressed: ${orderWithDocumentId.paymentButtonPressed}");
+              print(
+                  "orderWithDocumentId.orderdocId == '': ${orderWithDocumentId.orderdocId}");
 
               Scaffold.of(context)
                 ..removeCurrentSnackBar()
-                ..showSnackBar(SnackBar(content: Text(
-                    "Order Cancelled by user: ")));
+                ..showSnackBar(
+                    SnackBar(content: Text("Order Cancelled by user: ")));
 
 /*
             Scaffold.of(context)
@@ -1543,36 +1299,31 @@ Widget work1(BuildContext context){
             */
 //      setState(() => _reloadRequired = true);
 
-              setState(
-                      () {
+              setState(() {
 //                        int _totalCount = 0;
 //                        List<SelectedFood> allSelectedFoodGallery = [];
 //                        double totalPriceState = 0;
-                    _totalCount = 0;
-                    totalPriceState = 0;
-                    allSelectedFoodGallery=[];
+                _totalCount = 0;
+                totalPriceState = 0;
+                allSelectedFoodGallery = [];
 
-                    orderFG = new Order(
-                      selectedFoodInOrder: [],
-                      selectedFoodListLength:0,
-                      orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-                      paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                      orderingCustomer: null,
-                      totalPrice: 0,
-                      page:0,
-                      isCanceled: false,
-                      orderdocId:'',
-                    );
-                  }
-              );
-            }
-
-            else{
+                orderFG = new Order(
+                  selectedFoodInOrder: [],
+                  selectedFoodListLength: 0,
+                  orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
+                  paymentTypeIndex:
+                      2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                  orderingCustomer: null,
+                  totalPrice: 0,
+                  page: 0,
+                  isCanceled: false,
+                  orderdocId: '',
+                );
+              });
+            } else {
               print('why this condition executed.');
               logger.e('why this condition executed.');
             }
-
-
 
 //          setState(
 //                  ()
@@ -1593,7 +1344,6 @@ Widget work1(BuildContext context){
 //          clipBehavior: Clip.hardEdge,
 //          highlightElevation: 12,
         shape: RoundedRectangleBorder(
-
           borderRadius: BorderRadius.circular(35.0),
         ),
 //          disabledBorderColor: false,
@@ -1603,69 +1353,48 @@ Widget work1(BuildContext context){
           width: 3.6,
         ),
 
-
         child:
 
-        ///SSWW
+            ///SSWW
 
+            Center(
+          child: Stack(children: <Widget>[
+            Center(
+              child: Icon(
+                Icons.add_shopping_cart,
+                size: displayWidth(context) / 19,
+                color: Color(0xff707070),
+              ),
+            ),
+            Container(
+//                                              color:Colors.red,
+              width: displayWidth(context) / 25,
 
-        Center(
-          child: Stack(
-              children: <Widget>[ Center(
-                child: Icon(
-
-                  Icons.add_shopping_cart,
-                  size: displayWidth(context)/19,
-                  color: Color(0xff707070),
-                ),
+              decoration: new BoxDecoration(
+                color: Colors.redAccent,
+                border: new Border.all(
+                    color: Colors.green, width: 1.0, style: BorderStyle.solid),
+                shape: BoxShape.circle,
               ),
 
-                Container(
-//                                              color:Colors.red,
-                  width: displayWidth(context)/25,
-
-
-                  decoration: new BoxDecoration(
-                    color: Colors.redAccent,
-
-                    border: new Border.all(
-                        color: Colors.green,
-                        width: 1.0,
-                        style: BorderStyle.solid
-                    ),
-                    shape: BoxShape.circle,
-
-                  ),
-
-                  alignment: Alignment.center,
-                  child: Text(
-                    _totalCount.toString(),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight
-                          .normal,
-                      fontSize: 20,
-                    ),
-                  ),
-
+              alignment: Alignment.center,
+              child: Text(
+                _totalCount.toString(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 20,
                 ),
-
-              ]
-          ),
+              ),
+            ),
+          ]),
         ),
-
       ),
     );
-
-
-
   }
-
 
 // ALL FOODLIST CLASS RELATED FUNCTIONS ARE BLOW UNTIL CLASS STARTS THAT WE CAN PUT IN ANOTHER FILE.
 // IF WE WANT, START'S HERE:
-
-
 
   String titleCase(var text) {
 // print("text: $text");
@@ -1680,23 +1409,19 @@ Widget work1(BuildContext context){
           .split(' ')
           .map((word) => word[0].toUpperCase() + word.substring(1))
           .join(' ');
-
-
     }
   }
-
 
   String listTitleCase(List<dynamic> dlist) {
 //    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
 //    print('dlist ---------------------------------------------> $dlist');
 
     List<String> stringList = List<String>.from(dlist);
-    if (stringList.length==0) {
+    if (stringList.length == 0) {
       return " ";
     } else if (stringList == null) {
       return ' ';
     }
-
 
 //    var strings = text.OfType<String>().ToList();
 
@@ -1704,9 +1429,8 @@ Widget work1(BuildContext context){
 
 //    print ('stringList --> : $stringList');
 
-
 // print("text: $text");
-    if (stringList.length==0) {
+    if (stringList.length == 0) {
       return " ";
     } else if (stringList == null) {
       return ' ';
@@ -1725,23 +1449,22 @@ Widget work1(BuildContext context){
 
     else {
       return stringList
-          .map((word) => word.toString().split(' ')
-          .map((word2) => titleCase(word2)).join(' '))
+          .map((word) => word
+              .toString()
+              .split(' ')
+              .map((word2) => titleCase(word2))
+              .join(' '))
           .join(', ');
-
     }
 //    word2[0].toUpperCase() + word2.substring(1)
 
 //    return "bash";
   }
 
-
 //  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
 
-
-
-  Widget foodList(String categoryString,String searchString2,BuildContext context)  {
-
+  Widget foodList(
+      String categoryString, String searchString2, BuildContext context) {
 //    print('_allIngredientState: in FoodLIst: $allIngredients');
 //    final bloc = LocationQueryBloc();
 
@@ -1751,52 +1474,41 @@ Widget work1(BuildContext context){
     final foodGalleryBloc = BlocProvider.of<FoodGalleryBloc>(context);
 
     return Container(
-
       child: StreamBuilder<List<FoodItemWithDocID>>(
-
         stream: foodGalleryBloc.foodItemsStream,
-
         initialData: foodGalleryBloc.allFoodItems,
-
         builder: (context, snapshot) {
-
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
             case ConnectionState.none:
               return Container(
-
-                margin: EdgeInsets.fromLTRB(
-                    0, displayHeight(context) / 2, 0, 0),
-
+                margin:
+                    EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
                 child: Center(
                   child: Column(
                     children: <Widget>[
-
                       Center(
                         child: Container(
                             alignment: Alignment.center,
                             child: new CircularProgressIndicator(
-                                backgroundColor: Colors.lightGreenAccent)
-                        ),
+                                backgroundColor: Colors.lightGreenAccent)),
                       ),
                       Center(
                         child: Container(
                             alignment: Alignment.center,
                             child: new CircularProgressIndicator(
-                              backgroundColor: Colors.yellow,)
-                        ),
+                              backgroundColor: Colors.yellow,
+                            )),
                       ),
                       Center(
                         child: Container(
                             alignment: Alignment.center,
                             child: new CircularProgressIndicator(
-                                backgroundColor: Colors.redAccent)
-                        ),
+                                backgroundColor: Colors.redAccent)),
                       ),
                     ],
                   ),
                 ),
-
               );
               break;
             case ConnectionState.active:
@@ -1805,17 +1517,14 @@ Widget work1(BuildContext context){
             default:
               if (!snapshot.hasData) {
                 return Container(
-                  margin: EdgeInsets.fromLTRB(
-                      0, displayHeight(context) / 2, 0, 0),
+                  margin:
+                      EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
                   child: Center(
                     child: Column(
                       children: <Widget>[
-
                         Center(
                           child: Container(
-                              alignment: Alignment.center,
-                              child: Text('....')
-                          ),
+                              alignment: Alignment.center, child: Text('....')),
                         ),
 //                    Center(
 //                      child: Container(
@@ -1828,13 +1537,11 @@ Widget work1(BuildContext context){
                           child: Container(
                               alignment: Alignment.center,
                               child: new CircularProgressIndicator(
-                                  backgroundColor: Colors.redAccent)
-                          ),
+                                  backgroundColor: Colors.redAccent)),
                         ),
                       ],
                     ),
                   ),
-
                 );
               }
 //          return Center(child:
@@ -1847,24 +1554,20 @@ Widget work1(BuildContext context){
                     'categoryString  ##################################: $categoryString');
 // ..p
 
-
 //          int messageCount = filteredItems.length;
 
 //..p
                 final List<FoodItemWithDocID> allFoods = snapshot.data;
 
-
 //          logger.i('categoryString.toLowerCase().trim(): ',categoryString.toLowerCase().trim());
-
 
                 if (searchString2 == '') {
 //               filteredItemsByCategory;
                   List<FoodItemWithDocID> filteredItemsByCategory = allFoods
                       .where((oneItem) =>
-                  oneItem.categoryName.
-                  toLowerCase() ==
-                      categoryString.toLowerCase()).toList();
-
+                          oneItem.categoryName.toLowerCase() ==
+                          categoryString.toLowerCase())
+                      .toList();
 
 // to do test.
 // if(searchString2!=null)
@@ -1880,29 +1583,79 @@ Widget work1(BuildContext context){
 
                   final int categoryItemsCount = filteredItemsByCategory.length;
                   print('categoryItemsCount: $categoryItemsCount');
-                  return
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                        height: displayHeight(context) / 20,
+                        color: Color(0xffffffff),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Spacer(),
+                              CustomPaint(
+                                size: Size(0, 19),
+                                painter: LongHeaderPainterBefore(context),
+                              ),
+                              Text(
+                                '$_currentCategory'.toLowerCase(),
+                                style: TextStyle(
+                                  fontFamily: 'Itim-Regular',
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.normal,
+//                    fontStyle: FontStyle.italic,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                              CustomPaint(
+                                size: Size(0, 19),
+                                painter: LongHeaderPainterAfter(context),
+                              ),
+                              Spacer(),
+                            ]),
+                      ),
+                      Container(
+                        child: foodListByCategoryandNoSearch(
+                            filteredItemsByCategory, context),
+                      ),
+                    ],
+                  );
+                } else {
+//searchString2 != ''
+//              filteredItemsByCategory = allFoods.where((oneItem) =>
+//              oneItem.categoryName.
+//              toLowerCase() ==
+//                  categoryString.toLowerCase()).toList();
 
-                    Column(
+// to do test.
+// if(searchString2!=null)
+
+                  final List<FoodItemWithDocID> filteredItems = allFoods
+                      .where((oneItem) => oneItem.itemName
+                          .toLowerCase()
+                          .contains(searchString2.toLowerCase()))
+                      .toList();
+
+//              final int ItemsCount = filteredItems.length;
+//              print('categoryItemsCount: $categoryItemsCount');
+                  return SingleChildScrollView(
+                    child: Column(
                       children: <Widget>[
-
                         Container(
-
-
                           height: displayHeight(context) / 20,
                           color: Color(0xffffffff),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-
                                 Spacer(),
-                                CustomPaint(size: Size(0, 19),
+                                CustomPaint(
+                                  size: Size(0, 19),
                                   painter: LongHeaderPainterBefore(context),
                                 ),
-                                Text('$_currentCategory'.toLowerCase(),
-                                  style:
-                                  TextStyle(
-
+                                Text(
+                                  '$searchString2'.toLowerCase(),
+                                  style: TextStyle(
                                     fontFamily: 'Itim-Regular',
                                     fontSize: 30,
                                     fontWeight: FontWeight.normal,
@@ -1910,83 +1663,12 @@ Widget work1(BuildContext context){
                                     color: Color(0xff000000),
                                   ),
                                 ),
-                                CustomPaint(size: Size(0, 19),
+                                CustomPaint(
+                                  size: Size(0, 19),
                                   painter: LongHeaderPainterAfter(context),
                                 ),
                                 Spacer(),
-                              ]
-                          ),
-
-
-                        ),
-                        Container(
-
-                          child: foodListByCategoryandNoSearch(
-                              filteredItemsByCategory, context),
-                        ),
-
-
-                      ],
-
-                    );
-                }
-                else {
-
-//searchString2 != ''
-//              filteredItemsByCategory = allFoods.where((oneItem) =>
-//              oneItem.categoryName.
-//              toLowerCase() ==
-//                  categoryString.toLowerCase()).toList();
-
-
-// to do test.
-// if(searchString2!=null)
-
-
-                  final List<FoodItemWithDocID> filteredItems = allFoods.where((
-                      oneItem) =>
-                      oneItem.itemName.toLowerCase().
-                      contains(
-                          searchString2.toLowerCase())).toList();
-
-
-//              final int ItemsCount = filteredItems.length;
-//              print('categoryItemsCount: $categoryItemsCount');
-                  return
-                    SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-
-
-                            height: displayHeight(context) / 20,
-                            color: Color(0xffffffff),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-
-                                  Spacer(),
-                                  CustomPaint(size: Size(0, 19),
-                                    painter: LongHeaderPainterBefore(context),
-                                  ),
-                                  Text('$searchString2'.toLowerCase(),
-                                    style:
-                                    TextStyle(
-
-                                      fontFamily: 'Itim-Regular',
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
-                                      color: Color(0xff000000),
-                                    ),
-                                  ),
-                                  CustomPaint(size: Size(0, 19),
-                                    painter: LongHeaderPainterAfter(context),
-                                  ),
-                                  Spacer(),
-                                ]
-                            ),
+                              ]),
 /*
                               child:Text('$_currentCategory'.toLowerCase(),
                                 style: GoogleFonts.itim(
@@ -1999,10 +1681,8 @@ Widget work1(BuildContext context){
 
                               ),
                               */
-
-                          ),
-
-                          Container(
+                        ),
+                        Container(
 //                        height:displayHeight(context) -
 //                            MediaQuery
 //                                .of(context)
@@ -2010,18 +1690,14 @@ Widget work1(BuildContext context){
 //                                .top - (displayHeight(context) / 14) -
 //                            (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
 
-                            child: foodListBySearchString(
-                                filteredItems, context),
-                          ),
-
-
-                        ],
-                      ),
-                    );
+                          child: foodListBySearchString(filteredItems, context),
+                        ),
+                      ],
+                    ),
+                  );
                 }
               }
           }
-
 
 //          else {
 //            return Center(child:
@@ -2033,57 +1709,43 @@ Widget work1(BuildContext context){
     );
   }
 
-
   Widget foodListBySearchString(
       List<FoodItemWithDocID> filteredItemsBySearchString,
-      BuildContext context)  {
-
+      BuildContext context) {
     return Container(
       height: displayHeight(context) -
-          MediaQuery
-              .of(context)
-              .padding
-              .top - (displayHeight(context) / 14) -
-          (displayHeight(context) / 20), /* displayHeight(context) / 20 is the header of category of search*/
+          MediaQuery.of(context).padding.top -
+          (displayHeight(context) / 14) -
+          (displayHeight(context) / 20),
+      /* displayHeight(context) / 20 is the header of category of search*/
       child: GridView.builder(
         itemCount: filteredItemsBySearchString.length,
-        gridDelegate:
-        new SliverGridDelegateWithMaxCrossAxisExtent(
-
+        gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
 //Above to below for 3 not 2 Food Items:
           maxCrossAxisExtent: 240,
           mainAxisSpacing: 0, // H  direction
 //          crossAxisSpacing: 5,
           childAspectRatio: 140 / 180,
-
-
         ),
         shrinkWrap: false,
-
         itemBuilder: (_, int index) {
+          final String foodItemName =
+              filteredItemsBySearchString[index].itemName;
+          final String foodImageURL =
+              filteredItemsBySearchString[index].imageURL;
 
+          final Map<String, dynamic> foodSizePrice =
+              filteredItemsBySearchString[index].sizedFoodPrices;
 
+          final List<dynamic> foodItemIngredientsList =
+              filteredItemsBySearchString[index].ingredients;
 
-
-          final String foodItemName = filteredItemsBySearchString[index]
-              .itemName;
-          final String foodImageURL = filteredItemsBySearchString[index]
-              .imageURL;
-
-          final Map<String,
-              dynamic> foodSizePrice = filteredItemsBySearchString[index]
-              .sizedFoodPrices;
-
-          final List<
-              dynamic> foodItemIngredientsList = filteredItemsBySearchString[index]
-              .ingredients;
-
-          final bool foodIsAvailable = filteredItemsBySearchString[index]
-              .isAvailable;
-          final String foodCategoryName = filteredItemsBySearchString[index]
-              .categoryName;
-          final String foodCategoryNameShort = filteredItemsBySearchString[index]
-          .shorCategoryName;
+          final bool foodIsAvailable =
+              filteredItemsBySearchString[index].isAvailable;
+          final String foodCategoryName =
+              filteredItemsBySearchString[index].categoryName;
+          final String foodCategoryNameShort =
+              filteredItemsBySearchString[index].shorCategoryName;
 
           final dynamic euroPrice = foodSizePrice['normal'];
 
@@ -2093,49 +1755,41 @@ Widget work1(BuildContext context){
 
           String documentID = filteredItemsBySearchString[index].documentId;
 
-
-          List<String> juustoORCheeses = filteredItemsBySearchString[index].defaultJuusto;
-          List<String> kastikeORSauces = filteredItemsBySearchString[index].defaultKastike;
+          List<String> juustoORCheeses =
+              filteredItemsBySearchString[index].defaultJuusto;
+          List<String> kastikeORSauces =
+              filteredItemsBySearchString[index].defaultKastike;
           int sequenceNo = filteredItemsBySearchString[index].sequenceNo;
 
           FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
-
             itemName: foodItemName,
             categoryName: foodCategoryName,
-            shorCategoryName:foodCategoryNameShort,
+            shorCategoryName: foodCategoryNameShort,
             sizedFoodPrices: foodSizePrice,
             imageURL: foodImageURL,
-
             ingredients: foodItemIngredientsList,
-
             isAvailable: foodIsAvailable,
-            documentId:documentID,
-            defaultJuusto:juustoORCheeses,
-            defaultKastike:kastikeORSauces,
-            sequenceNo:sequenceNo,
-
+            documentId: documentID,
+            defaultJuusto: juustoORCheeses,
+            defaultKastike: kastikeORSauces,
+            sequenceNo: sequenceNo,
           );
 
-          String stringifiedFoodItemIngredients = listTitleCase(
-              foodItemIngredientsList);
+          String stringifiedFoodItemIngredients =
+              listTitleCase(foodItemIngredientsList);
 
-
-
-
-          return
-            Container(
+          return Container(
 // `opacity` is alpha channel of this color as a double, with 0.0 being
 //  ///   transparent and 1.0 being fully opaque.
-                color: Color(0xffFFFFFF),
-                padding: EdgeInsets.symmetric(
-                    horizontal: 4.0, vertical: 16.0),
-                child: InkWell(
-                  child: Column(
+              color: Color(0xffFFFFFF),
+              padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),
+              child: InkWell(
+                child: Column(
 //                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                      crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      new Container(child:
-                      new Container(
+                  children: <Widget>[
+                    new Container(
+                      child: new Container(
                         width: displayWidth(context) / 7,
                         height: displayWidth(context) / 7,
                         decoration: new BoxDecoration(
@@ -2145,59 +1799,52 @@ Widget work1(BuildContext context){
                                 color: Color(0xff707070),
                                 blurRadius: 25.0,
                                 spreadRadius: 0.10,
-                                offset: Offset(0, 10)
-                            )
+                                offset: Offset(0, 10))
                           ],
                         ),
                         child: Hero(
                           tag: foodItemName,
-                          child:
-                          ClipOval(
+                          child: ClipOval(
                             child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
                               imageUrl: foodImageURL,
                               fit: BoxFit.cover,
-                              placeholder: (context,
-                                  url) => new CircularProgressIndicator(),
+                              placeholder: (context, url) =>
+                                  new CircularProgressIndicator(),
                             ),
                           ),
-                          placeholderBuilder: (context,
-                              heroSize, child) {
+                          placeholderBuilder: (context, heroSize, child) {
                             return Opacity(
-                              opacity: 0.5, child: Container(
-                              width: displayWidth(context) /
-                                  7,
-                              height: displayWidth(context) /
-                                  7,
-                              decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
+                              opacity: 0.5,
+                              child: Container(
+                                width: displayWidth(context) / 7,
+                                height: displayWidth(context) / 7,
+                                decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
 //                                          707070
 //                                              color:Color(0xffEAB45E),
 // good yellow color
 //                                            color:Color(0xff000000),
-                                      color: Color(
-                                          0xffEAB45E),
+                                        color: Color(0xffEAB45E),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                      blurRadius: 25.0,
-                                      spreadRadius: 0.10,
-                                      offset: Offset(0, 10)
-                                  )
-                                ],
-                              ),
-                              child:
-                              ClipOval(
-                                child: CachedNetworkImage(
+                                        blurRadius: 25.0,
+                                        spreadRadius: 0.10,
+                                        offset: Offset(0, 10))
+                                  ],
+                                ),
+                                child: ClipOval(
+                                  child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                  imageUrl: foodImageURL,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context,
-                                      url) => new CircularProgressIndicator(),
+                                    imageUrl: foodImageURL,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) =>
+                                        new CircularProgressIndicator(),
+                                  ),
                                 ),
                               ),
-                            ),
                             );
                           },
 //                                  placeholderBuilder: (context,
@@ -2207,46 +1854,36 @@ Widget work1(BuildContext context){
 //                                );
 //Placeholder Image.network(foodImageURL),
                         ),
-
                       ),
-
-                        padding: const EdgeInsets.fromLTRB(
-                            0, 0, 0, 6),
-                      ),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
+                    ),
 //                              SizedBox(height: 10),
 
-
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Text(
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                              euroPrice3 + '\u20AC',
-                              style: TextStyle(
-                                  fontWeight: FontWeight
-                                      .w600,
+                            euroPrice3 + '\u20AC',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
 //                                          color: Colors.blue,
-                                  color: Color.fromRGBO(
-                                      112, 112, 112, 1),
-                                  fontSize: 15),
-                            ),
+                                color: Color.fromRGBO(112, 112, 112, 1),
+                                fontSize: 15),
+                          ),
 //                                    SizedBox(width: 10),
-                            SizedBox(
-                                width: displayWidth(context) /
-                                    100),
+                          SizedBox(width: displayWidth(context) / 100),
 
-                            Icon(
-                              Icons.whatshot,
-                              size: 24,
-                              color: Colors.red,
-                            ),
-                          ]),
+                          Icon(
+                            Icons.whatshot,
+                            size: 24,
+                            color: Colors.red,
+                          ),
+                        ]),
 
-
-                      FittedBox(
-                        fit: BoxFit.fitWidth, child:
-                      Text(
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
 //                '${dummy.counter}',
                         foodItemName,
 
@@ -2258,105 +1895,78 @@ Widget work1(BuildContext context){
                           fontSize: 16,
                         ),
                       ),
-                      )
-                      ,
-                      Container(
+                    ),
+                    Container(
 //                                        height: displayHeight(context) / 61,
 
-                          child: Text(
+                        child: Text(
 //                                'stringifiedFoodItemIngredients',
 
-
-                            stringifiedFoodItemIngredients
-                                .length == 0
-                                ?
-                            'EMPTY'
-                                : stringifiedFoodItemIngredients
-                                .length > 12 ?
-                            stringifiedFoodItemIngredients
-                                .substring(0, 12) + '...' :
-                            stringifiedFoodItemIngredients,
+                      stringifiedFoodItemIngredients.length == 0
+                          ? 'EMPTY'
+                          : stringifiedFoodItemIngredients.length > 12
+                              ? stringifiedFoodItemIngredients.substring(
+                                      0, 12) +
+                                  '...'
+                              : stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
-                            style: TextStyle(
-                              color: Color(0xff707070),
-                              fontWeight: FontWeight.normal,
-                              letterSpacing: 0.5,
-                              fontSize: 12,
-                            ),
-                          )
+                      style: TextStyle(
+                        color: Color(0xff707070),
+                        fontWeight: FontWeight.normal,
+                        letterSpacing: 0.5,
+                        fontSize: 12,
                       ),
+                    )),
 //
 //
-                    ],
-                  ),
-                  onTap: () {
-                    _navigateAndDisplaySelection(
-                        context, oneFoodItem);
-                  },
-
-
-                )
-            );
+                  ],
+                ),
+                onTap: () {
+                  _navigateAndDisplaySelection(context, oneFoodItem);
+                },
+              ));
 //            return SpoiledItem(/*dummy: snapshot.data[index]*/);
         },
-
       ),
     );
   }
-  Widget foodListByCategoryandNoSearch(List<FoodItemWithDocID> filteredItemsByCategory,BuildContext context)  {
 
-
+  Widget foodListByCategoryandNoSearch(
+      List<FoodItemWithDocID> filteredItemsByCategory, BuildContext context) {
     return Container(
       height: displayHeight(context) -
-          MediaQuery
-              .of(context)
-              .padding
-              .top -MediaQuery
-          .of(context)
-          .padding
-          .bottom,
+          MediaQuery.of(context).padding.top -
+          MediaQuery.of(context).padding.bottom,
 /* displayHeight(context) / 20 is the header of category of search || like pizza and /14 is the
       * container holding the logo*/
       child: GridView.builder(
         itemCount: filteredItemsByCategory.length,
-        gridDelegate:
-        new SliverGridDelegateWithMaxCrossAxisExtent(
-
+        gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
 //Above to below for 3 not 2 Food Items:
           maxCrossAxisExtent: 240,
           mainAxisSpacing: 0, // H  direction
 //          crossAxisSpacing: 5, // horizontal padding error check image snpashot for details in august 10.
           childAspectRatio: 140 / 180,
-
-
         ),
         shrinkWrap: false,
-
         itemBuilder: (_, int index) {
+          final String foodItemName = filteredItemsByCategory[index].itemName;
+          final String foodImageURL = filteredItemsByCategory[index].imageURL;
 
-          final String foodItemName = filteredItemsByCategory[index]
-              .itemName;
-          final String foodImageURL = filteredItemsByCategory[index]
-              .imageURL;
+          final Map<String, dynamic> foodSizePrice =
+              filteredItemsByCategory[index].sizedFoodPrices;
 
-          final Map<String,
-              dynamic> foodSizePrice = filteredItemsByCategory[index]
-              .sizedFoodPrices;
+          final List<dynamic> foodItemIngredientsList =
+              filteredItemsByCategory[index].ingredients;
 
-          final List<
-              dynamic> foodItemIngredientsList = filteredItemsByCategory[index]
-              .ingredients;
+          final bool foodIsAvailable =
+              filteredItemsByCategory[index].isAvailable;
+          final String foodCategoryName =
+              filteredItemsByCategory[index].categoryName;
 
-          final bool foodIsAvailable = filteredItemsByCategory[index]
-              .isAvailable;
-          final String foodCategoryName = filteredItemsByCategory[index]
-              .categoryName;
-
-          final String foodCategoryNameShort = filteredItemsByCategory[index]
-              .shorCategoryName;
-
-
+          final String foodCategoryNameShort =
+              filteredItemsByCategory[index].shorCategoryName;
 
           final dynamic euroPrice = foodSizePrice['normal'];
 
@@ -2366,107 +1976,88 @@ Widget work1(BuildContext context){
 
           String documentID = filteredItemsByCategory[index].documentId;
 
-
-          List<String> juustoORCheeses = filteredItemsByCategory[index].defaultJuusto;
-          List<String> kastikeORSauces = filteredItemsByCategory[index].defaultKastike;
+          List<String> juustoORCheeses =
+              filteredItemsByCategory[index].defaultJuusto;
+          List<String> kastikeORSauces =
+              filteredItemsByCategory[index].defaultKastike;
           int sequenceNo = filteredItemsByCategory[index].sequenceNo;
 
           FoodItemWithDocID oneFoodItem = new FoodItemWithDocID(
-
             itemName: foodItemName,
             categoryName: foodCategoryName,
             shorCategoryName: foodCategoryNameShort,
             sizedFoodPrices: foodSizePrice,
             imageURL: foodImageURL,
-
             ingredients: foodItemIngredientsList,
-
             isAvailable: foodIsAvailable,
-            documentId:documentID,
-            defaultJuusto:juustoORCheeses,
-            defaultKastike:kastikeORSauces,
-            sequenceNo:sequenceNo,
-
+            documentId: documentID,
+            defaultJuusto: juustoORCheeses,
+            defaultKastike: kastikeORSauces,
+            sequenceNo: sequenceNo,
           );
 
-          String stringifiedFoodItemIngredients = listTitleCase(
-              foodItemIngredientsList);
+          String stringifiedFoodItemIngredients =
+              listTitleCase(foodItemIngredientsList);
 
-
-          return
-            Container(
-
-                color: Color(0xffFFFFFF),
-
-                padding: EdgeInsets.symmetric(
-                    horizontal: 4.0, vertical: 16.0),
-                child: InkWell(
-                  child: Column(
-
-                    children: <Widget>[
-                      new Container(child:
-                      new Container(
+          return Container(
+              color: Color(0xffFFFFFF),
+              padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),
+              child: InkWell(
+                child: Column(
+                  children: <Widget>[
+                    new Container(
+                      child: new Container(
                         width: displayWidth(context) / 7,
                         height: displayWidth(context) / 7,
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-
                                 color: Color(0xff707070),
-
                                 blurRadius: 25.0,
                                 spreadRadius: 0.10,
-                                offset: Offset(0, 10)
-                            )
+                                offset: Offset(0, 10))
                           ],
                         ),
                         child: Hero(
                           tag: foodItemName,
-                          child:
-                          ClipOval(
+                          child: ClipOval(
                             child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
                               imageUrl: foodImageURL,
                               fit: BoxFit.cover,
-                              placeholder: (context,
-                                  url) => new CircularProgressIndicator(),
+                              placeholder: (context, url) =>
+                                  new CircularProgressIndicator(),
                             ),
                           ),
-                          placeholderBuilder: (context,
-                              heroSize, child) {
+                          placeholderBuilder: (context, heroSize, child) {
                             return Opacity(
-                              opacity: 0.5, child: Container(
-                              width: displayWidth(context) /
-                                  7,
-                              height: displayWidth(context) /
-                                  7,
-                              decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-
-                                      color: Color(
-                                          0xffEAB45E),
+                              opacity: 0.5,
+                              child: Container(
+                                width: displayWidth(context) / 7,
+                                height: displayWidth(context) / 7,
+                                decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xffEAB45E),
 // adobe xd color
 //                                              color: Color.fromRGBO(173, 179, 191, 1.0),
-                                      blurRadius: 25.0,
-                                      spreadRadius: 0.10,
-                                      offset: Offset(0, 10)
-                                  )
-                                ],
-                              ),
-                              child:
-                              ClipOval(
-                                child: CachedNetworkImage(
+                                        blurRadius: 25.0,
+                                        spreadRadius: 0.10,
+                                        offset: Offset(0, 10))
+                                  ],
+                                ),
+                                child: ClipOval(
+                                  child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                                  imageUrl: foodImageURL,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context,
-                                      url) => new CircularProgressIndicator(),
+                                    imageUrl: foodImageURL,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) =>
+                                        new CircularProgressIndicator(),
+                                  ),
                                 ),
                               ),
-                            ),
                             );
                           },
 //                                  placeholderBuilder: (context,
@@ -2476,45 +2067,36 @@ Widget work1(BuildContext context){
 //                                );
 //Placeholder Image.network(foodImageURL),
                         ),
-
                       ),
-
-                        padding: const EdgeInsets.fromLTRB(
-                            0, 0, 0, 6),
-                      ),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
+                    ),
 //                              SizedBox(height: 10),
 
-
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment
-                              .center,
-                          children: <Widget>[
-                            Text(
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
 //                                  double.parse(euroPrice).toStringAsFixed(2),
-                              euroPrice3 + '\u20AC',
-                              style: TextStyle(
-                                  fontWeight: FontWeight
-                                      .w600,
+                            euroPrice3 + '\u20AC',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
 //                                          color: Colors.blue,
-                                  color: Color.fromRGBO(
-                                      112, 112, 112, 1),
-                                  fontSize: 15),
-                            ),
+                                color: Color.fromRGBO(112, 112, 112, 1),
+                                fontSize: 15),
+                          ),
 //                                    SizedBox(width: 10),
-                            SizedBox(
-                                width: displayWidth(context) /
-                                    100),
+                          SizedBox(width: displayWidth(context) / 100),
 
-                            Icon(
-                              Icons.whatshot,
-                              size: 24,
-                              color: Colors.red,
-                            ),
-                          ]),
+                          Icon(
+                            Icons.whatshot,
+                            size: 24,
+                            color: Colors.red,
+                          ),
+                        ]),
 
-
-                      FittedBox(fit: BoxFit.fitWidth, child:
-                      Text(
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
 //                '${dummy.counter}',
                         foodItemName,
 
@@ -2525,62 +2107,49 @@ Widget work1(BuildContext context){
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
-                      ),)
-                      ,
-                      Container(
+                      ),
+                    ),
+                    Container(
 //                                        height: displayHeight(context) / 61,
 
-                          child: Text(
+                        child: Text(
 //                                'stringifiedFoodItemIngredients',
 
-
-                            stringifiedFoodItemIngredients
-                                .length == 0
-                                ?
-                            'EMPTY'
-                                : stringifiedFoodItemIngredients
-                                .length > 12 ?
-                            stringifiedFoodItemIngredients
-                                .substring(0, 12) + '...' :
-                            stringifiedFoodItemIngredients,
+                      stringifiedFoodItemIngredients.length == 0
+                          ? 'EMPTY'
+                          : stringifiedFoodItemIngredients.length > 12
+                              ? stringifiedFoodItemIngredients.substring(
+                                      0, 12) +
+                                  '...'
+                              : stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
-                            style: TextStyle(
-                              color: Color(0xff707070),
-                              fontWeight: FontWeight.normal,
-                              letterSpacing: 0.5,
-                              fontSize: 12,
-                            ),
-                          )
+                      style: TextStyle(
+                        color: Color(0xff707070),
+                        fontWeight: FontWeight.normal,
+                        letterSpacing: 0.5,
+                        fontSize: 12,
                       ),
+                    )),
 //
 //
-                    ],
-                  ),
-                  onTap: () {
-                    _navigateAndDisplaySelection(
-                        context, oneFoodItem);
-                  },
-
-
-                )
-            );
+                  ],
+                ),
+                onTap: () {
+                  _navigateAndDisplaySelection(context, oneFoodItem);
+                },
+              ));
 //            return SpoiledItem(/*dummy: snapshot.data[index]*/);
         },
-
       ),
     );
   }
 
-
-
-  _navigateAndDisplaySelection(BuildContext context,FoodItemWithDocID oneFoodItem) async {
-
-
+  _navigateAndDisplaySelection(
+      BuildContext context, FoodItemWithDocID oneFoodItem) async {
 //    var logger = Logger(
 //      printer: PrettyPrinter(),
 //    );
-
 
 // Navigator.push returns a Future that completes after calling
 // Navigator.pop on the Selection Screen.
@@ -2603,54 +2172,38 @@ Widget work1(BuildContext context){
 //    List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
 
     List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
-    List<SauceItem>  tempSauceItems = blocG.getAllSauceItemsFoodGallery;
+    List<SauceItem> tempSauceItems = blocG.getAllSauceItemsFoodGallery;
     List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
-
-
 
 //    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
 //                                    blocD.getAllIngredients();
 //                                    List<NewIngredient> test = blocD.allIngredients;
 
-
 //    logger.e('tempIngs_push 1: $tempIngs');
-
 
 //    blocD.setallIngredients(tempIngs);
 //                                    _allIngredientState
 //                                    final result = await
 
-    final SelectedFood receivedSelectedFood = await
-    Navigator.of(context).push(
-
-
+    final SelectedFood receivedSelectedFood = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
-        transitionDuration: Duration(
-            milliseconds: 900),
+        transitionDuration: Duration(milliseconds: 900),
         pageBuilder: (_, __, ___) =>
-
-
 
 //        tempCheeseItems
 //          tempSauceItems
 
-        BlocProvider<FoodItemDetailsBloc>(
+            BlocProvider<FoodItemDetailsBloc>(
           bloc: FoodItemDetailsBloc(
               oneFoodItem,
 //              tempIngs,
               tempCheeseItems,
               tempSauceItems,
-              allExtraIngredients
-
-          ),
-
-
-          child: FoodItemDetails2()
-
-          ,),
-
+              allExtraIngredients),
+          child: FoodItemDetails2(),
+        ),
 
 // fUTURE USE -- ANIMATION TRANSITION CODE.
 /*
@@ -2679,20 +2232,18 @@ Widget work1(BuildContext context){
 // After the Selection Screen returns a result, hide any previous snackbars
 // and show the new result.
 
-    if(
-    (receivedSelectedFood!=null) && (receivedSelectedFood.foodItemName!=null)
-    ) {
-
+    if ((receivedSelectedFood != null) &&
+        (receivedSelectedFood.foodItemName != null)) {
 //      print('| | | | | | | |   receivedSelectedFood.quantity: ${receivedSelectedFood.quantity}');
 
-      print('| | | | | | | |   receivedSelectedFood.selectedSauceItems: ${receivedSelectedFood.selectedSauceItems}');
-      print('| | | | | | | |   receivedSelectedFood.selectedCheeseItems: ${receivedSelectedFood.selectedCheeseItems}');
+      print(
+          '| | | | | | | |   receivedSelectedFood.selectedSauceItems: ${receivedSelectedFood.selectedSauceItems}');
+      print(
+          '| | | | | | | |   receivedSelectedFood.selectedCheeseItems: ${receivedSelectedFood.selectedCheeseItems}');
 
 // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 //       int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
 //      int totalCount = tempSelectedFoodInOrder.reduce((a,element) => a.quantity +test1(element));
-
-
 
       int currentFoodItemQuantity = receivedSelectedFood.quantity;
       double unitPricecurrentFood = receivedSelectedFood.unitPrice;
@@ -2701,60 +2252,39 @@ Widget work1(BuildContext context){
 
 //    tempOrder.selectedFoodInOrder.add(receivedSelectedFood);
 
-
 // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 //       int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
 
-
       Scaffold.of(context)
         ..removeCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text("selected ${receivedSelectedFood.quantity} items")));
+        ..showSnackBar(SnackBar(
+            content: Text("selected ${receivedSelectedFood.quantity} items")));
 //      setState(() => _reloadRequired = true);
 
-      setState(
-              ()
-          {
-            _totalCount = _totalCount + receivedSelectedFood.quantity;
-            allSelectedFoodGallery.add(receivedSelectedFood);
-            totalPriceState =
-                totalPriceState + currentFoodItemQuantity * unitPricecurrentFood;
-
-          }
-      );
+      setState(() {
+        _totalCount = _totalCount + receivedSelectedFood.quantity;
+        allSelectedFoodGallery.add(receivedSelectedFood);
+        totalPriceState =
+            totalPriceState + currentFoodItemQuantity * unitPricecurrentFood;
+      });
 
 // bloc 1.
 
-
-    }
-    else{
+    } else {
       Scaffold.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(content: Text("selected 0 items")));
     }
-
   }
 
 // HELPER METHOD tryCast Number (1)
   int test1(SelectedFood x) {
-
-
-    return x.quantity ;
+    return x.quantity;
   }
 // ALL FOODLIST CLASS RELATED FUNCTIONS ARE BLOW UNTIL CLASS STARTS THAT WE CAN PUT IN ANOTHER FILE.
 // IF WE WANT, END'S HERE:
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 //
 //class FoodList extends StatelessWidget {
@@ -2776,25 +2306,12 @@ Widget work1(BuildContext context){
 //
 //}
 
-
-
-
-
 /*}*/
 //}
 
-
-
-
-
-
-
-
 class MyPainter extends CustomPainter {
-
   @override
-  void paint(Canvas canvas, Size size){
-
+  void paint(Canvas canvas, Size size) {
 //    canvas.drawLine(...);
     final p1 = Offset(50, 20);
     final p2 = Offset(5, 20);
@@ -2802,7 +2319,6 @@ class MyPainter extends CustomPainter {
       ..color = Colors.black
       ..strokeWidth = 3;
     canvas.drawLine(p1, p2, paint);
-
 
 //    canvas.drawRect();
 //    canvas.drawCircle();
@@ -2815,63 +2331,52 @@ class MyPainter extends CustomPainter {
 //    canvas.drawParagraph();
 //...
   }
+
   @override
   bool shouldRepaint(CustomPainter old) {
     return false;
   }
-
 }
 
-
 class LongHeaderPainterAfter extends CustomPainter {
-
   final BuildContext context;
   LongHeaderPainterAfter(this.context);
   @override
-  void paint(Canvas canvas, Size size){
-
+  void paint(Canvas canvas, Size size) {
 //    canvas.drawLine(...);
-    final p1 = Offset(displayWidth(context)/4, 15); //(X,Y) TO (X,Y)
+    final p1 = Offset(displayWidth(context) / 4, 15); //(X,Y) TO (X,Y)
     final p2 = Offset(10, 15);
     final paint = Paint()
       ..color = Color(0xff000000)
 //          Colors.white
       ..strokeWidth = 3;
     canvas.drawLine(p1, p2, paint);
-
   }
+
   @override
   bool shouldRepaint(CustomPainter old) {
     return false;
   }
-
 }
 
-
-
 class LongHeaderPainterBefore extends CustomPainter {
-
-
   final BuildContext context;
   LongHeaderPainterBefore(this.context);
 
-
   @override
-  void paint(Canvas canvas, Size size){
-
+  void paint(Canvas canvas, Size size) {
 //    canvas.drawLine(...);
-    final p1 = Offset(-displayWidth(context)/4, 15); //(X,Y) TO (X,Y)
+    final p1 = Offset(-displayWidth(context) / 4, 15); //(X,Y) TO (X,Y)
     final p2 = Offset(-10, 15);
     final paint = Paint()
       ..color = Color(0xff000000)
 //          Colors.white
       ..strokeWidth = 3;
     canvas.drawLine(p1, p2, paint);
-
   }
+
   @override
   bool shouldRepaint(CustomPainter old) {
     return false;
   }
-
 }
