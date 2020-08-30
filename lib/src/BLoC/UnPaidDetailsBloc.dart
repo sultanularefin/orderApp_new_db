@@ -54,20 +54,13 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-  void initiatePaymentTypeSingleSelectOptions(int selectedPayment){
-    PaymentTypeSingleSelect later = new PaymentTypeSingleSelect(
-      borderColor: '0xff739DFA',
-      index: 0,
-      isSelected: false,
-      paymentTypeName: 'Later',
-      iconDataString: 'FontAwesomeIcons.facebook',
+  void initiatePaymentTypeSingleSelectOptionsUnPaidPage(int selectedPayment){
 
-      paymentIconName: 'Later',
-    );
+   
 
     PaymentTypeSingleSelect cash = new PaymentTypeSingleSelect(
       borderColor: '0xff95CB04',
-      index: 1,
+      index: 0,
       isSelected: false,
       paymentTypeName: 'Cash',
       iconDataString: 'FontAwesomeIcons.twitter',
@@ -79,7 +72,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 //     0xffFEE295 false
     PaymentTypeSingleSelect card = new PaymentTypeSingleSelect(
       borderColor: '0xffFEE295',
-      index: 2,
+      index: 1,
       isSelected: false,
       paymentTypeName: 'Card',
       iconDataString: 'FontAwesomeIcons.home',
@@ -90,7 +83,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     List <PaymentTypeSingleSelect> paymentTypeSingleSelectArray = new List<PaymentTypeSingleSelect>();
 
 
-    paymentTypeSingleSelectArray.addAll([later, cash, card  ]);
+    paymentTypeSingleSelectArray.addAll([/*later, */ cash, card  ]);
 
     paymentTypeSingleSelectArray[selectedPayment].isSelected =true;
 
@@ -107,10 +100,10 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
       OneOrderFirebase oneFireBaseOrder,
       ) {
 
-    initiatePaymentTypeSingleSelectOptions(2);
+    initiatePaymentTypeSingleSelectOptionsUnPaidPage(1);
     logger.i('oneFoodItem.itemName: ${oneFireBaseOrder.documentId}');
 
-    oneFireBaseOrder.tempPaymentIndex =2;
+    oneFireBaseOrder.tempPaymentIndex =1;
     oneFireBaseOrder.paidType='Card';
 
     _curretnFireBaseOrder= oneFireBaseOrder;
@@ -180,13 +173,21 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   Future<String>  paymentButtonPressedUnPaidDetailsPage() async{
 
-    OneOrderFirebase temp = _curretnFireBaseOrder;
-    print('temp.documentId: ${temp.documentId}');
-    String documentID = temp.documentId;
+    OneOrderFirebase currenttempUnPaidOneOrderFB = _curretnFireBaseOrder;
+    print('temp.documentId: ${currenttempUnPaidOneOrderFB.documentId}');
+    String documentID = currenttempUnPaidOneOrderFB.documentId;
 
+    String paidType0 =   currenttempUnPaidOneOrderFB.tempPaymentIndex==0?'Cash':'Card'; // no later option..
 
+//    tempOrder.paymentButtonPressed=true;
 
-    String paidType0 =   temp.paidType;
+    currenttempUnPaidOneOrderFB.tempPayButtonPressed =true;
+
+    _curretnFireBaseOrder =currenttempUnPaidOneOrderFB;
+    _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
+
+//    _curretnOrder=tempOrder;
+//    _orderController.sink.add(_curretnOrder);
 
     print('paidType0 : $paidType0');
 
@@ -194,16 +195,25 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
       var updateResult =
       await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,paidType0);
-
       print('updateResult is:: :: $updateResult');
+      String                    paidType2 = updateResult['paidType'];
+
+      print('paidType2: $paidType2');
+
+      if(paidType2==paidType0){
+        print('update successfull');
+        logger.w('update successfull');
+
+      }
+
+//    print('...update not successful....');
+    return documentID;
 
 
 
-      String                    recitePrintedString = updateResult['recitePrinted'];
 
-      print('recitePrintedString: $recitePrintedString');
 
-      return recitePrintedString;
+//      return paidType2;
 
     }
 

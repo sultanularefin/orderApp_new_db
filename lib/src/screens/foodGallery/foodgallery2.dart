@@ -1488,35 +1488,6 @@ Widget work1(BuildContext context){
                   }
               );
 
-              /*
-              if(orderWithDocumentId.paymentTypeIndex==0){
-
-
-                return Navigator.of(context).push(
-
-
-                  PageRouteBuilder(
-                    opaque: false,
-                    transitionDuration: Duration(
-                        milliseconds: 900),
-                    pageBuilder: (_, __, ___) =>
-
-
-                        BlocProvider<UnPaidBloc>(
-                          bloc: UnPaidBloc(),
-
-                          child: UnPaidPage(docID:orderWithDocumentId.orderdocId),
-//                      child: UnPaidPage()
-                        ),
-
-
-                  ),
-                );
-              }
-
-
-              */
-
 
             }
 

@@ -131,7 +131,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                           ),
                           Center(
                             child: Text(
-                                'printing recite... please wait.',
+                                'updating your payment information, please wait.',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -416,11 +416,13 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                           String orderDocumentId = await blocUD.paymentButtonPressedUnPaidDetailsPage();
 
+
+
                           blocUD.clearSubscription();
 
                           print('Unboscured takeAway || '
                               'DinningRoom Dummy print--- returning to FoodGallery Page');
-                          return Navigator.pop(context);
+                          return Navigator.pop(context,orderDocumentId);
 
 
                         },
@@ -564,6 +566,9 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             logger.i('index: $index');
             print('YY YY  $index  YY   YY    ');
+
+
+            /*
             if(index==0){
 
               print(' 0 means later option...');
@@ -578,6 +583,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
             }
             else {
 
+            }*/
+
               final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
               blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
@@ -589,7 +596,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
               });
 
 
-            }
+
 
 
 
@@ -646,13 +653,13 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
           onTap: () async {
 
 
-            logger.e('index: $index');
-            print('YY YY  $index  YY   YY    ');
+
 
 
 
             logger.i('index: $index');
             print('YY YY  $index  YY   YY    ');
+            /*
             if(index==0){
 
               print(' 0 means later option...');
@@ -664,7 +671,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             }
             else {
-
+*/
               final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
               blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
@@ -674,7 +681,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                 showFullPaymentType = false;
                 showCancelPayButtonFirstTime = false;
               });
-            }
+
 
             // setState(() {
             //   showCancelPayButtonFirstTime = false;

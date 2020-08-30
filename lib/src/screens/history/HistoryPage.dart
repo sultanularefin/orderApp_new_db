@@ -632,7 +632,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
                       Container(
                         padding: const EdgeInsets.fromLTRB(
-                            0, 0, 0, 6),
+                            0, 5, 0, 6),
                         child: Text(
                           '${orderBy2.toUpperCase()}',
                           style: TextStyle(

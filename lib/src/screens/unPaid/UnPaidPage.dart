@@ -781,7 +781,7 @@ timeOfDay: timeOfDay2,
 
                         Container(
                           padding: const EdgeInsets.fromLTRB(
-                              0, 0, 0, 6),
+                              0, 5, 0, 6),
                           child: Text(
                             '${orderBy2.toUpperCase()}',
                             style: TextStyle(
@@ -856,7 +856,10 @@ timeOfDay: timeOfDay2,
       currentFocus.unfocus();
     }
 
-    return Navigator.of(context).push(
+    final tempDocumentID= oneFirebaseOrderItem.documentId;
+
+    final returnedDocId = await
+    Navigator.of(context).push(
 
 
       PageRouteBuilder(
@@ -874,6 +877,18 @@ timeOfDay: timeOfDay2,
 
       ),
     );
+
+    if(tempDocumentID== returnedDocId){
+
+      logger.i('tempDocumentID== returnedDocId : :: : ${tempDocumentID== returnedDocId}');
+
+      print('refresh the page or do something so the paid item not showed to the user...');
+
+
+    }
+
+
+
 
   }
 
