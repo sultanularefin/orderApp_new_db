@@ -331,3 +331,38 @@ PS C:\Users\amjed> flutter doctor -v
 
 ## august 31
 
+## windows pc: september 1st:
+
+```dart
+PS C:\Users\Taxi\Programs\linkupSeptember> flutter doctor -v
+[✓] Flutter (Channel master, 1.22.0-2.0.pre.140, on Microsoft Windows [Version 10.0.19041.388], locale en-US)
+    • Flutter version 1.22.0-2.0.pre.140 at C:\src\flutter
+    • Framework revision 6d1242dd4b (10 hours ago), 2020-08-31 03:53:04 -0400
+    • Engine revision 784e6d746e
+    • Dart version 2.10.0 (build 2.10.0-76.0.dev)
+
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+    • Android SDK at C:\Users\Taxi\AppData\Local\Android\Sdk
+    • Platform android-29, build-tools 29.0.3
+    • ANDROID_HOME = C:\Users\Taxi\AppData\Local\Android\Sdk
+    • Java binary at: C:\Program Files\Android\Android Studio\jre\bin\java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+    • All Android licenses accepted.
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    • Flutter plugin version 48.1.2
+    • Dart plugin version 193.7361
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+
+[✓] VS Code, 64-bit edition (version 1.48.1)
+    • VS Code at C:\Program Files\Microsoft VS Code
+    • Flutter extension version 3.13.2
+
+[✓] Connected device (1 available)
+    • sdk gphone x86 64 arm64 (mobile) • emulator-5554 • android-x64 • Android 11 (API 30) (emulator)
+
+• No issues found!
+PS C:\Users\Taxi\Programs\linkupSeptember>
+```
