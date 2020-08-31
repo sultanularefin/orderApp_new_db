@@ -444,17 +444,27 @@ class UnPaidBloc implements Bloc {
 
   void updateUnPaidList(String paidDocumentID){
 
+    logger.i('at updateUnPaidList');
+
+    print('paidDocumentID from unpaid details page ... for filtering...$paidDocumentID');
 
     List<OneOrderFirebase> tempAllOrderedItems= new List<OneOrderFirebase>();
+
+    print('_allOneOrderFirebaseUnPaidBloc.length: ${_allOneOrderFirebaseUnPaidBloc.length}');
+
+
 
     tempAllOrderedItems= _allOneOrderFirebaseUnPaidBloc;
 
 
-    List<OneOrderFirebase> tempAllOrderedItems2= new List<OneOrderFirebase>();
+//    List<OneOrderFirebase> tempAllOrderedItems2= new List<OneOrderFirebase>();
 
     /*tempAllOrderedItems2=  */tempAllOrderedItems.removeWhere((element) => element.documentId==paidDocumentID);
 
-    _allOneOrderFirebaseUnPaidBloc= tempAllOrderedItems2;
+
+    print('tempAllOrderedItems.length: ${tempAllOrderedItems.length}');
+//    _allOneOrderFirebaseUnPaidBloc= tempAllOrderedItems2;
+    _allOneOrderFirebaseUnPaidBloc=tempAllOrderedItems;
 
 
     _firebaseOrderListControllerUnPaidPage.sink.add(_allOneOrderFirebaseUnPaidBloc);
@@ -486,6 +496,7 @@ class UnPaidBloc implements Bloc {
 
  */
 
+    logger.i('going away from updateUnPaidList...........');
 
   }
 

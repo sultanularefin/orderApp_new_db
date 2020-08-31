@@ -104,7 +104,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     logger.i('___ ___ || || @@@@  oneFireBaseOrder.documentId: ${oneFireBaseOrder.documentId}');
 
     oneFireBaseOrder.tempPaymentIndex =1;
-    oneFireBaseOrder.paidType='Card';
+    oneFireBaseOrder.tempPaidType='Card';
 
     _curretnFireBaseOrder= oneFireBaseOrder;
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
@@ -145,7 +145,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     temp.tempPaymentIndex = newPaymentIndex;
-    temp.paidType = newPaymentIndex==0?'Cash':'Card';
+    temp.tempPaidType = newPaymentIndex==0?'Cash':'Card';
     _curretnFireBaseOrder = temp;
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 
