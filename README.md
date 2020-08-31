@@ -366,3 +366,45 @@ PS C:\Users\Taxi\Programs\linkupSeptember> flutter doctor -v
 • No issues found!
 PS C:\Users\Taxi\Programs\linkupSeptember>
 ```
+
+
+## september 1st :: mint pc:
+
+```dart
+
+! Doctor found issues in 1 category.
+taxi@taxi-HP-ProBook-4540s:~/Desktop$ flutter doctor -v
+[✓] Flutter (Channel master, 1.22.0-2.0.pre.142, on Linux, locale en_US.UTF-8)
+    • Flutter version 1.22.0-2.0.pre.142 at /home/taxi/developmentFlutter
+    • Framework revision 719268b43a (63 minutes ago), 2020-09-01 00:33:04 +0800
+    • Engine revision 784e6d746e
+    • Dart version 2.10.0 (build 2.10.0-76.0.dev)
+
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+    • Android SDK at /home/taxi/Android/Sdk
+    • Platform android-30, build-tools 30.0.2
+    • ANDROID_HOME = /home/taxi/Android/Sdk
+    • Java binary at: /opt/android-studio/jre/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+    • All Android licenses accepted.
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at /opt/android-studio
+    • Flutter plugin version 48.1.2
+    • Dart plugin version 193.7547
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+
+[✓] VS Code (version 1.48.0)
+    • VS Code at /usr/share/code
+    • Flutter extension version 3.13.2
+
+[✓] Connected device (1 available)
+    • sdk gphone x86 64 arm64 (mobile) • emulator-5554 • android-x64 • Android 11 (API 30) (emulator)
+
+• No issues found!
+taxi@taxi-HP-ProBook-4540s:~/Desktop$
+
+```
+
+

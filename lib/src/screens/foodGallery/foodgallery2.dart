@@ -89,10 +89,10 @@ class _FoodGalleryState extends State<FoodGallery2> {
   static const platform = const MethodChannel('com.linkup.foodgallery');
 
   final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery =
-      new GlobalKey<ScaffoldState>();
+  new GlobalKey<ScaffoldState>();
 //  final GlobalKey<ScaffoldState> scaffoldKeyClientHome = GlobalKey<ScaffoldState>();
   final SnackBar snackBar =
-      const SnackBar(content: Text('Menu button pressed'));
+  const SnackBar(content: Text('Menu button pressed'));
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 //  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -117,7 +117,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
     selectedFoodListLength: 0,
     orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
     paymentTypeIndex:
-        2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+    2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
     orderingCustomer: null,
     totalPrice: 0,
     page: 0,
@@ -246,10 +246,10 @@ _batteryLevel = batteryLevel;
 
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (BuildContext context) {
-      return BlocProvider<IdentityBloc>(
-          bloc: IdentityBloc(),
+          return BlocProvider<IdentityBloc>(
+              bloc: IdentityBloc(),
 //AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
-          child: WelcomePage(fromWhicPage: 'foodGallery2'));
+              child: WelcomePage(fromWhicPage: 'foodGallery2'));
 /*
                                   return BlocProvider<FoodGalleryBloc>(
                                       bloc: FoodGalleryBloc(),
@@ -257,7 +257,7 @@ _batteryLevel = batteryLevel;
 
                                   );
                                   */
-    }), (Route<dynamic> route) => false);
+        }), (Route<dynamic> route) => false);
   }
 
   @override
@@ -273,231 +273,245 @@ _batteryLevel = batteryLevel;
         }
       },
       child: SafeArea(
-        child: Scaffold(
-          key: _scaffoldKeyFoodGallery,
+        child: Theme(
+          data: ThemeData(primaryIconTheme: IconThemeData(
+
+            color: Colors.black,
+            // size: 40,
+
+          )), // use this
+
+          child: Scaffold(
+            key: _scaffoldKeyFoodGallery,
 //          backgroundColor: Colors.purpleAccent,
 
 //      resizeToAvoidBottomPadding: false ,
 // appBar: AppBar(title: Text('Food Gallery')),
 
-          appBar: AppBar(
-            // backgroundColor: Colors.deepOrange,
+            appBar: AppBar(
+              // backgroundColor: Colors.deepOrange,
 
-            toolbarHeight: 85,
-            elevation: 0,
-            titleSpacing: 0,
-            shadowColor: Colors.white,
-            backgroundColor: Color(0xffFFE18E),
+              toolbarHeight: 85,
+              elevation: 0,
+              titleSpacing: 0,
+              shadowColor: Colors.white,
+              backgroundColor: Color(0xffFFE18E),
 
-            title: Container(
-              height: displayHeight(context) / 14,
-              width: displayWidth(context) -
-                  MediaQuery.of(context).size.width / 3.8,
+              title: Container(
+                height: displayHeight(context) / 14,
+                width: displayWidth(context) -
+                    MediaQuery.of(context).size.width / 3.8,
 
-              color: Color(0xffFFFFFF),
+                color: Color(0xffFFFFFF),
 //                              color:Colors.purpleAccent,
 
 //                      color: Color.fromARGB(255, 255,255,255),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
 // image and string JEDILINE BEGINS HERE.
-                  SizedBox(
-                    height: kToolbarHeight +
-                        6, // 6 for spacing padding at top for .
-                    width: 200,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        /*
-                        Container(
-                          height: displayHeight(context) / 15,
-                          child: Image.asset('assets/logo.png'),
-                        ),
+                    SizedBox(
+                      height: kToolbarHeight +
+                          6, // 6 for spacing padding at top for .
+                      width: 200,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          /*
+                          Container(
+                            height: displayHeight(context) / 15,
+                            child: Image.asset('assets/logo.png'),
+                          ),
 
-                        */
-                        Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                          height: displayHeight(context) / 15,
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(0, 1, 0, 0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'restapojut',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xff07D607),
-                                      fontFamily: 'poppins'),
-                                ),
-                                Text(
-                                  'Online Orders',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontSize: 12, color: Color(0xff07D607)),
-                                ),
-                              ],
+                          */
+
+                          Container(
+                            height: displayHeight(context) / 15,
+                            child: Image.asset('assets/Path2008.png'),
+
+                          ),
+                          Container(
+                            margin:
+                            EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                            height: displayHeight(context) / 15,
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(0, 1, 0, 0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    'restapojut',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Color(0xff07D607),
+                                        fontFamily: 'poppins'),
+                                  ),
+                                  Text(
+                                    'Online Orders',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontSize: 12, color: Color(0xff07D607)),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 0.5,
+                        ],
                       ),
-                      color: Colors.white,
                     ),
-                    width: displayWidth(context) / 3.3,
-                    height: displayHeight(context) / 27,
-                    padding:
-                        EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          height: displayWidth(context) / 34,
-                          width: 5,
-                          margin:
-                              EdgeInsets.only(left: 0, right: 10, bottom: 5),
-                          child: Icon(
-                            Icons.search,
-                            size: displayWidth(context) / 24,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4.7,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (text) {
-                              setState(() => _searchString = text);
-                              print(
-                                  "First text field from Condition 04: $text");
-                            },
-                            onTap: () {
-                              print('condition 4');
-                              setState(() {
-                                _firstTimeCategoryString = 'PIZZA';
-                              });
-                            },
-                            onEditingComplete: () {
-                              print('called onEditing complete');
-                              setState(() => _searchString = "");
-                            },
-                            onSubmitted: (String value) async {
-                              await showDialog<void>(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text('Thanks!'),
-                                    content: Text('You typed "$value".'),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
 
-                  Container(
-                    child: shoppingCartWidget(
-                        context), // CLASS TO WIDGET SINCE I NEED TO INVOKE THE
-                  ),
-                ],
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(
+                          color: Color(0xffBCBCBD),
+                          style: BorderStyle.solid,
+                          width: 0.5,
+                        ),
+                        color: Colors.white,
+                      ),
+                      width: displayWidth(context) / 3.3,
+                      height: displayHeight(context) / 27,
+                      padding:
+                      EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            height: displayWidth(context) / 34,
+                            width: 5,
+                            margin:
+                            EdgeInsets.only(left: 0, right: 10, bottom: 5),
+                            child: Icon(
+                              Icons.search,
+                              size: displayWidth(context) / 24,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            width: displayWidth(context) / 4.7,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                              ),
+                              onChanged: (text) {
+                                setState(() => _searchString = text);
+                                print(
+                                    "First text field from Condition 04: $text");
+                              },
+                              onTap: () {
+                                print('condition 4');
+                                setState(() {
+                                  _firstTimeCategoryString = 'PIZZA';
+                                });
+                              },
+                              onEditingComplete: () {
+                                print('called onEditing complete');
+                                setState(() => _searchString = "");
+                              },
+                              onSubmitted: (String value) async {
+                                await showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Thanks!'),
+                                      content: Text('You typed "$value".'),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    Container(
+                      child: shoppingCartWidget(
+                          context), // CLASS TO WIDGET SINCE I NEED TO INVOKE THE
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          body: SingleChildScrollView(
-            child: Container(
+            body: SingleChildScrollView(
+              child: Container(
 //              color:Colors.lightGreenAccent,
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  width: displayWidth(context) -
-                      MediaQuery.of(context).size.width / 3.8,
-                  height: displayHeight(context) + kToolbarHeight + 10,
-                  child: foodList(_currentCategory, _searchString,
-                      context /*allIngredients:_allIngredientState */),
-                ),
-                Container(
-                  height: displayHeight(context) + kToolbarHeight + 10,
-                  width: MediaQuery.of(context).size.width / 3.8,
-                  color: Color(0xffFFE18E),
-                  child: StreamBuilder<List<NewCategoryItem>>(
-                      stream: blocG.categoryItemsStream,
-                      initialData: blocG.allCategories,
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                          case ConnectionState.none:
-                            return Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  0, displayHeight(context) / 2, 0, 0),
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                              backgroundColor:
-                                                  Colors.lightGreenAccent)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: displayWidth(context) -
+                            MediaQuery.of(context).size.width / 3.8,
+                        height: displayHeight(context) + kToolbarHeight + 10,
+                        child: foodList(_currentCategory, _searchString,
+                            context /*allIngredients:_allIngredientState */),
+                      ),
+                      Container(
+                        height: displayHeight(context) + kToolbarHeight + 10,
+                        width: MediaQuery.of(context).size.width / 3.8,
+                        color: Color(0xffFFE18E),
+                        child: StreamBuilder<List<NewCategoryItem>>(
+                            stream: blocG.categoryItemsStream,
+                            initialData: blocG.allCategories,
+                            builder: (context, snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
+                                case ConnectionState.none:
+                                  return Container(
+                                    margin: EdgeInsets.fromLTRB(
+                                        0, displayHeight(context) / 2, 0, 0),
+                                    child: Center(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Center(
+                                            child: Container(
+                                                alignment: Alignment.center,
+                                                child: new CircularProgressIndicator(
+                                                    backgroundColor:
+                                                    Colors.lightGreenAccent)),
+                                          ),
+                                          Center(
+                                            child: Container(
+                                                alignment: Alignment.center,
+                                                child: new CircularProgressIndicator(
+                                                  backgroundColor: Colors.yellow,
+                                                )),
+                                          ),
+                                          Center(
+                                            child: Container(
+                                                alignment: Alignment.center,
+                                                child: new CircularProgressIndicator(
+                                                    backgroundColor:
+                                                    Colors.redAccent)),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                            backgroundColor: Colors.yellow,
-                                          )),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                              backgroundColor:
-                                                  Colors.redAccent)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                            break;
-                          case ConnectionState.active:
-                          default:
-                            if (!snapshot.hasData) {
-                              return Center(
-                                  child: new LinearProgressIndicator());
-                            } else {
-                              final List allCategories = snapshot.data;
+                                  );
+                                  break;
+                                case ConnectionState.active:
+                                default:
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                        child: new LinearProgressIndicator());
+                                  } else {
+                                    final List allCategories = snapshot.data;
 //                                  logger.i('allCategories.length:', allCategories.length);
 
 //                                  _allCategoryList.add(All);
@@ -505,155 +519,161 @@ _batteryLevel = batteryLevel;
 //                                  allCategories.add(all);
 //                                  logger.i('allCategories.length after :', allCategories.length);
 
-                              final int categoryCount = allCategories.length;
+                                    final int categoryCount = allCategories.length;
 
 //                              print('categoryCount in condition 04: ');
 
 //                                logger.i("categoryCount in condition 04: $categoryCount");
 
-                              return (new ListView.builder(
-                                  itemCount: categoryCount,
+                                    return (new ListView.builder(
+                                        itemCount: categoryCount,
 
 //    itemBuilder: (BuildContext ctxt, int index) {
-                                  itemBuilder: (_, int index) {
+                                        itemBuilder: (_, int index) {
 //                                            return (Text('ss'));
 
-                                    return _buildCategoryRow(
-                                        allCategories[index]
+                                          return _buildCategoryRow(
+                                              allCategories[index]
 /*categoryItems[index]*/,
-                                        index);
-                                  }));
-                            }
-                        }
-                      }),
-                ),
-              ],
-            )),
-          ),
+                                              index);
+                                        }));
+                                  }
+                              }
+                            }),
+                      ),
+                    ],
+                  )),
+            ),
 
-          endDrawer: Drawer(
+            endDrawer: Drawer(
 // Add a ListView to the drawer. This ensures the user can scroll
 // through the options in the drawer if there isn't enough vertical
 // space to fit everything
 //
 // .
 
-            child: Container(
-              color: Color(0xffFFE18E),
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: Color(0xffFFE18E),
-                    ),
-                    child: Text(
-                      'restapojut'.toUpperCase(),
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'poppins',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20,
+              child: Container(
+                color: Color(0xffFFE18E),
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  // padding: EdgeInsets.fromLTRB(0,0,10,0),
+                  children: <Widget>[
+
+                    DrawerHeader(
+                      //decoration: BoxDecoration(color:Theme.of(context).bottomAppBarColor),
+
+                      decoration: BoxDecoration(
+                        color: Color(0xffFFE18E),
+                      ),
+
+                      child: Text(
+                        'restapojut'.toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'poppins',
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                  ListTile(
-                    title: Container(
-                        color: Color(0xffFFE18E),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: Image.asset(
-                                'assets/unpaid_cash_card/unpaid.png',
+                    ListTile(
+                      title: Container(
+                          color: Color(0xffFFE18E),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                child: Image.asset(
+                                  'assets/unpaid_cash_card/unpaid.png',
 //                color: Colors.black,
-                                width: 30,
-                                height: 30,
-                              ),
-                            ),
-
-                            Container(
-//                          width: displayWidth(context)/3.9,
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-
-                              child: Text(
-                                'maksamatta'.toUpperCase(),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: 'poppins',
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
+                                  width: 30,
+                                  height: 30,
                                 ),
                               ),
-                            )
-//                      Text('history'),
-                          ],
-                        )),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        PageRouteBuilder(
-                          opaque: false,
-                          transitionDuration: Duration(milliseconds: 900),
-                          pageBuilder: (_, __, ___) => BlocProvider<UnPaidBloc>(
-                            bloc: UnPaidBloc(),
-                            child: UnPaidPage(docID: ''),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  ListTile(
-                    title: Container(
-                        color: Color(0xffFFE18E),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: Image.asset(
-                                'assets/history.png',
-//                color: Colors.black,
-                                width: 30,
-                                height: 30,
-                              ),
-                            ),
 
-                            Container(
+                              Container(
 //                          width: displayWidth(context)/3.9,
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
-                              child: Text(
-                                'history'.toUpperCase(),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: 'historia',
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
+                                child: Text(
+                                  'maksamatta'.toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'poppins',
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )
+//                      Text('history'),
+                            ],
+                          )),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            opaque: false,
+                            transitionDuration: Duration(milliseconds: 900),
+                            pageBuilder: (_, __, ___) => BlocProvider<UnPaidBloc>(
+                              bloc: UnPaidBloc(),
+                              child: UnPaidPage(docID: ''),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    ListTile(
+                      title: Container(
+                          color: Color(0xffFFE18E),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                child: Image.asset(
+                                  'assets/history.png',
+//                color: Colors.black,
+                                  width: 30,
+                                  height: 30,
                                 ),
                               ),
-                            )
+
+                              Container(
+//                          width: displayWidth(context)/3.9,
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+
+                                child: Text(
+                                  'history'.toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'historia',
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )
 //                      Text('history'),
-                          ],
-                        )),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        PageRouteBuilder(
-                          opaque: false,
-                          transitionDuration: Duration(milliseconds: 900),
-                          pageBuilder: (_, __, ___) =>
-                              BlocProvider<HistoryBloc>(
-                            bloc: HistoryBloc(),
-                            child: HistoryPage(),
+                            ],
+                          )),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            opaque: false,
+                            transitionDuration: Duration(milliseconds: 900),
+                            pageBuilder: (_, __, ___) =>
+                                BlocProvider<HistoryBloc>(
+                                  bloc: HistoryBloc(),
+                                  child: HistoryPage(),
+                                ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -1083,7 +1103,7 @@ _batteryLevel = batteryLevel;
                   selectedFoodListLength: 0,
                   orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
                   paymentTypeIndex:
-                      2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                  2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
                   orderingCustomer: null,
                   totalPrice: 0,
                   page: 0,
@@ -1126,9 +1146,9 @@ _batteryLevel = batteryLevel;
 
         child:
 
-            ///SSWW
+        ///SSWW
 
-            Center(
+        Center(
           child: Stack(children: <Widget>[
             Center(
               child: Icon(
@@ -1221,10 +1241,10 @@ _batteryLevel = batteryLevel;
     else {
       return stringList
           .map((word) => word
-              .toString()
-              .split(' ')
-              .map((word2) => titleCase(word2))
-              .join(' '))
+          .toString()
+          .split(' ')
+          .map((word2) => titleCase(word2))
+          .join(' '))
           .join(', ');
     }
 //    word2[0].toUpperCase() + word2.substring(1)
@@ -1254,7 +1274,7 @@ _batteryLevel = batteryLevel;
             case ConnectionState.none:
               return Container(
                 margin:
-                    EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
+                EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
                 child: Center(
                   child: Column(
                     children: <Widget>[
@@ -1289,7 +1309,7 @@ _batteryLevel = batteryLevel;
               if (!snapshot.hasData) {
                 return Container(
                   margin:
-                      EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
+                  EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
                   child: Center(
                     child: Column(
                       children: <Widget>[
@@ -1336,8 +1356,8 @@ _batteryLevel = batteryLevel;
 //               filteredItemsByCategory;
                   List<FoodItemWithDocID> filteredItemsByCategory = allFoods
                       .where((oneItem) =>
-                          oneItem.categoryName.toLowerCase() ==
-                          categoryString.toLowerCase())
+                  oneItem.categoryName.toLowerCase() ==
+                      categoryString.toLowerCase())
                       .toList();
 
 // to do test.
@@ -1403,8 +1423,8 @@ _batteryLevel = batteryLevel;
 
                   final List<FoodItemWithDocID> filteredItems = allFoods
                       .where((oneItem) => oneItem.itemName
-                          .toLowerCase()
-                          .contains(searchString2.toLowerCase()))
+                      .toLowerCase()
+                      .contains(searchString2.toLowerCase()))
                       .toList();
 
 //              final int ItemsCount = filteredItems.length;
@@ -1547,7 +1567,7 @@ _batteryLevel = batteryLevel;
           );
 
           String stringifiedFoodItemIngredients =
-              listTitleCase(foodItemIngredientsList);
+          listTitleCase(foodItemIngredientsList);
 
           return Container(
 // `opacity` is alpha channel of this color as a double, with 0.0 being
@@ -1581,7 +1601,7 @@ _batteryLevel = batteryLevel;
                               imageUrl: foodImageURL,
                               fit: BoxFit.cover,
                               placeholder: (context, url) =>
-                                  new CircularProgressIndicator(),
+                              new CircularProgressIndicator(),
                             ),
                           ),
                           placeholderBuilder: (context, heroSize, child) {
@@ -1612,7 +1632,7 @@ _batteryLevel = batteryLevel;
                                     imageUrl: foodImageURL,
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) =>
-                                        new CircularProgressIndicator(),
+                                    new CircularProgressIndicator(),
                                   ),
                                 ),
                               ),
@@ -1673,22 +1693,22 @@ _batteryLevel = batteryLevel;
                         child: Text(
 //                                'stringifiedFoodItemIngredients',
 
-                      stringifiedFoodItemIngredients.length == 0
-                          ? 'EMPTY'
-                          : stringifiedFoodItemIngredients.length > 12
+                          stringifiedFoodItemIngredients.length == 0
+                              ? 'EMPTY'
+                              : stringifiedFoodItemIngredients.length > 12
                               ? stringifiedFoodItemIngredients.substring(
-                                      0, 12) +
-                                  '...'
+                              0, 12) +
+                              '...'
                               : stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
-                      style: TextStyle(
-                        color: Color(0xff707070),
-                        fontWeight: FontWeight.normal,
-                        letterSpacing: 0.5,
-                        fontSize: 12,
-                      ),
-                    )),
+                          style: TextStyle(
+                            color: Color(0xff707070),
+                            fontWeight: FontWeight.normal,
+                            letterSpacing: 0.5,
+                            fontSize: 12,
+                          ),
+                        )),
 //
 //
                   ],
@@ -1768,7 +1788,7 @@ _batteryLevel = batteryLevel;
           );
 
           String stringifiedFoodItemIngredients =
-              listTitleCase(foodItemIngredientsList);
+          listTitleCase(foodItemIngredientsList);
 
           return Container(
               color: Color(0xffFFFFFF),
@@ -1798,7 +1818,7 @@ _batteryLevel = batteryLevel;
                               imageUrl: foodImageURL,
                               fit: BoxFit.cover,
                               placeholder: (context, url) =>
-                                  new CircularProgressIndicator(),
+                              new CircularProgressIndicator(),
                             ),
                           ),
                           placeholderBuilder: (context, heroSize, child) {
@@ -1822,7 +1842,7 @@ _batteryLevel = batteryLevel;
                                     imageUrl: foodImageURL,
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) =>
-                                        new CircularProgressIndicator(),
+                                    new CircularProgressIndicator(),
                                   ),
                                 ),
                               ),
@@ -1866,22 +1886,22 @@ _batteryLevel = batteryLevel;
                         child: Text(
 //                                'stringifiedFoodItemIngredients',
 
-                      stringifiedFoodItemIngredients.length == 0
-                          ? 'EMPTY'
-                          : stringifiedFoodItemIngredients.length > 12
+                          stringifiedFoodItemIngredients.length == 0
+                              ? 'EMPTY'
+                              : stringifiedFoodItemIngredients.length > 12
                               ? stringifiedFoodItemIngredients.substring(
-                                      0, 12) +
-                                  '...'
+                              0, 12) +
+                              '...'
                               : stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
-                      style: TextStyle(
-                        color: Color(0xff707070),
-                        fontWeight: FontWeight.normal,
-                        letterSpacing: 0.5,
-                        fontSize: 12,
-                      ),
-                    )),
+                          style: TextStyle(
+                            color: Color(0xff707070),
+                            fontWeight: FontWeight.normal,
+                            letterSpacing: 0.5,
+                            fontSize: 12,
+                          ),
+                        )),
 //
 //
                   ],
@@ -1933,17 +1953,17 @@ _batteryLevel = batteryLevel;
         pageBuilder: (_, __, ___) =>
 
 
-        BlocProvider<FoodItemDetailsBloc>(
-          bloc: FoodItemDetailsBloc(
-              oneFoodItem,
-              tempCheeseItems,
-              tempSauceItems,
-              allExtraIngredients
+            BlocProvider<FoodItemDetailsBloc>(
+              bloc: FoodItemDetailsBloc(
+                  oneFoodItem,
+                  tempCheeseItems,
+                  tempSauceItems,
+                  allExtraIngredients
 
-          ),
+              ),
 
 
-          child: FoodItemDetails2(),),
+              child: FoodItemDetails2(),),
 
       ),
     );
