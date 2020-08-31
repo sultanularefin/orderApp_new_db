@@ -30,6 +30,7 @@ class OneOrderFirebase {
   String                    timeOfDay;
   int                       tempPaymentIndex; // for unpaid Order....
   bool                      tempPayButtonPressed;
+  String                    tempPaidType;
 
   OneOrderFirebase(
       {
