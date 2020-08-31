@@ -854,234 +854,234 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 'at snapshot.data is Order for ConnectionState.active or default ');
 
 //                      <<<<<<< finnishLanguage
-                      Order oneOrder = snapshot.data;
+                            Order oneOrder = snapshot.data;
 
-                      logger.i(
-                      'oneOrder.orderingCustomer.etaTimeOfDay.hour =>'
-                      ' ${oneOrder.orderingCustomer.etaTimeOfDay.hour}');
-                      logger.w(
-                      'oneOrder.orderingCustomer.etaTimeInMinutes =>'
-                      ' ${oneOrder.orderingCustomer.etaTimeInMinutes}');
-                      logger.e(
-                      'oneOrder.orderingCustomer.etaTimeOfDay.minute => '
-                      '${oneOrder.orderingCustomer.etaTimeOfDay.minute}'); // always return's -1;
-
-
-                      //              int x = 5;
-                      if (oneOrder.paymentButtonPressed == true) {
+                            logger.i(
+                                'oneOrder.orderingCustomer.etaTimeOfDay.hour =>'
+                                    ' ${oneOrder.orderingCustomer.etaTimeOfDay.hour}');
+                            logger.w(
+                                'oneOrder.orderingCustomer.etaTimeInMinutes =>'
+                                    ' ${oneOrder.orderingCustomer.etaTimeInMinutes}');
+                            logger.e(
+                                'oneOrder.orderingCustomer.etaTimeOfDay.minute => '
+                                    '${oneOrder.orderingCustomer.etaTimeOfDay.minute}'); // always return's -1;
 
 
+                            //              int x = 5;
+                            if (oneOrder.paymentButtonPressed == true) {
 
 
-                      print('....payment button pressed.....');
-                      if(oneOrder.paymentTypeIndex !=0) {
-                      return Container(
-                      margin: EdgeInsets.fromLTRB(
-                      0, displayHeight(context) / 2, 0, 0),
-                      child: Center(
-                      child: Column(
-                      children: <Widget>[
 
-                      Center(
-                      child: Container(
-                      alignment: Alignment.center,
-                      child: new CircularProgressIndicator(
-                      backgroundColor: Colors
-                          .lightGreenAccent,
+
+                              print('....payment button pressed.....');
+                              if(oneOrder.paymentTypeIndex !=0) {
+                                return Container(
+                                  margin: EdgeInsets.fromLTRB(
+                                      0, displayHeight(context) / 2, 0, 0),
+                                  child: Center(
+                                    child: Column(
+                                      children: <Widget>[
+
+                                        Center(
+                                          child: Container(
+                                              alignment: Alignment.center,
+                                              child: new CircularProgressIndicator(
+                                                backgroundColor: Colors
+                                                    .lightGreenAccent,
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
 
 
-                      )
-                      ),
-                      ),
-                      Center(
-                      child: Text(
-                      'printing recite... please wait.',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.normal,
+                                              )
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Text(
+                                              'printing recite... please wait.',
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 34,
+                                                fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
-                      color: Colors.redAccent,
-                      fontFamily: 'Itim-Regular',
+                                                color: Colors.redAccent,
+                                                fontFamily: 'Itim-Regular',
 
-                      )
-                      ),
-                      ),
-                      Center(
-                      child: Container(
-                      alignment: Alignment.center,
-                      child: new CircularProgressIndicator(
-                      backgroundColor: Color(
-                      0xffFC0000),
+                                              )
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Container(
+                                              alignment: Alignment.center,
+                                              child: new CircularProgressIndicator(
+                                                backgroundColor: Color(
+                                                    0xffFC0000),
 
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                      )
-                      ),
-                      ),
-                      ],
-                      ),
-                      ),
+                                              )
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
 
-                      );
-                      }
-                      else{
-                      return Container(
-                      margin: EdgeInsets.fromLTRB(
-                      0, displayHeight(context)/2, 0, 0),
-                      child: Center(
-                      child: Column(
-                      children: <Widget>[
+                                );
+                              }
+                              else{
+                                return Container(
+                                  margin: EdgeInsets.fromLTRB(
+                                      0, displayHeight(context)/2, 0, 0),
+                                  child: Center(
+                                    child: Column(
+                                      children: <Widget>[
 
-                      Center(
-                      child: Container(
-                      alignment: Alignment.center,
-                      child: new CircularProgressIndicator(
-                      backgroundColor: Colors
-                          .lightGreenAccent,
+                                        Center(
+                                          child: Container(
+                                              alignment: Alignment.center,
+                                              child: new CircularProgressIndicator(
+                                                backgroundColor: Colors
+                                                    .lightGreenAccent,
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
 
 
-                      )
-                      ),
-                      ),
-                      Center(
-                      child: Text(
-                      'later button pressed... please wait.',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.normal,
+                                              )
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Text(
+                                              'later button pressed... please wait.',
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 34,
+                                                fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
-                      color: Colors.redAccent,
-                      fontFamily: 'Itim-Regular',
+                                                color: Colors.redAccent,
+                                                fontFamily: 'Itim-Regular',
 
-                      )
-                      ),
-                      ),
-                      Center(
-                      child: Container(
-                      alignment: Alignment.center,
-                      child: new CircularProgressIndicator(
-                      backgroundColor: Color(
-                      0xffFC0000),
+                                              )
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Container(
+                                              alignment: Alignment.center,
+                                              child: new CircularProgressIndicator(
+                                                backgroundColor: Color(
+                                                    0xffFC0000),
 
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                      )
-                      ),
-                      ),
-                      ],
-                      ),
-                      ),
+                                              )
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
 
-                      );
-                      }
-                      }
-                      else {
-                      CustomerInformation x = oneOrder.orderingCustomer;
+                                );
+                              }
+                            }
+                            else {
+                              CustomerInformation x = oneOrder.orderingCustomer;
 
 
-                      logger.e(
-                      '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
+                              logger.e(
+                                  '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
 
-                      return Container(
-                      height: displayHeight(context),
-                      child: Column(
-                      children: <Widget>[
-                      Container(
+                              return Container(
+                                height: displayHeight(context),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
 
 //                                    color:Colors.indigoAccent,
-                      height: displayHeight(context) / 1.10,
+                                      height: displayHeight(context) / 1.10,
 
-                      width: displayWidth(context) / 1.03,
+                                      width: displayWidth(context) / 1.03,
 
-                      margin: EdgeInsets.fromLTRB(12,
-                      displayHeight(context) / 16, 10, 0),
+                                      margin: EdgeInsets.fromLTRB(12,
+                                          displayHeight(context) / 16, 10, 0),
 
-                      child: Neumorphic(
-                      curve: Neumorphic.DEFAULT_CURVE,
-                      style: NeumorphicStyle(
-                      shape: NeumorphicShape.concave,
-                      depth: 8,
-                      lightSource: LightSource.topLeft,
-                      color: Colors.white,
-                      boxShape:
-                      NeumorphicBoxShape.roundRect(
-                      BorderRadius.all(
-                      Radius.circular(15)),
-                      ),
-                      ),
+                                      child: Neumorphic(
+                                        curve: Neumorphic.DEFAULT_CURVE,
+                                        style: NeumorphicStyle(
+                                          shape: NeumorphicShape.concave,
+                                          depth: 8,
+                                          lightSource: LightSource.topLeft,
+                                          color: Colors.white,
+                                          boxShape:
+                                          NeumorphicBoxShape.roundRect(
+                                            BorderRadius.all(
+                                                Radius.circular(15)),
+                                          ),
+                                        ),
 
-                      // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
+                                        // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
 
-                      child: Column(
-                      mainAxisAlignment:
-                      MainAxisAlignment.start,
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
-                      children: <Widget>[
+                                        child: Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
 //                                          /WWW??
 
-                      // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
+                                            // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
 
-                      Container(
-                      width:
-                      displayWidth(context) / 1.03,
-                      height:
-                      displayHeight(context) / 20,
-                      color: Color(0xffffffff),
+                                            Container(
+                                              width:
+                                              displayWidth(context) / 1.03,
+                                              height:
+                                              displayHeight(context) / 20,
+                                              color: Color(0xffffffff),
 //                                            color:Colors.yellowAccent,
-                      child: Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.start,
-                      crossAxisAlignment:
-                      CrossAxisAlignment.center,
-                      children: <Widget>[
-                      Container(
-                      width:
-                      displayWidth(context) /
-                      1.5,
-                      height:
-                      displayHeight(context) /
-                      30,
-                      color: Color(0xffffffff),
-                      child: Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment
-                          .start,
-                      crossAxisAlignment:
-                      CrossAxisAlignment
-                          .center,
-                      children: <Widget>[
-                      Container(
-                      margin: EdgeInsets
-                          .fromLTRB(20, 0,
-                      10, 0),
-                      alignment: Alignment
-                          .center,
-                      child: Text(
-                      'Shopping Cart',
-                      style:
-                      TextStyle(
-                      fontSize: 24,
-                      fontWeight:
-                      FontWeight
-                          .normal,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Container(
+                                                    width:
+                                                    displayWidth(context) /
+                                                        1.5,
+                                                    height:
+                                                    displayHeight(context) /
+                                                        30,
+                                                    color: Color(0xffffffff),
+                                                    child: Row(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .start,
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                        children: <Widget>[
+                                                          Container(
+                                                            margin: EdgeInsets
+                                                                .fromLTRB(20, 0,
+                                                                10, 0),
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                                'Shopping Cart',
+                                                                style:
+                                                                TextStyle(
+                                                                  fontSize: 24,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                      color: Color(
-                      0xff000000),
-                      )),
-                      ),
+                                                                  color: Color(
+                                                                      0xff000000),
+                                                                )),
+                                                          ),
 
-                      /*
+                                                          /*
                                                         CustomPaint(
                                                           size: Size(
                                                               0, 19),
@@ -1091,182 +1091,182 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                                         */
-                      ]),
-                      ),
+                                                        ]),
+                                                  ),
 
-                      // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                      ],
-                      ),
-                      ),
+                                                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                                                ],
+                                              ),
+                                            ),
 
-                      Container(
-                      padding: EdgeInsets.fromLTRB(
-                      0, 0, 0, 0),
+                                            Container(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 0, 0, 0),
 //                                            color: Colors.white,
-                      color: Colors.blue,
+                                              color: Colors.blue,
 //                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
-                      height:
-                      displayHeight(context) / 5.4,
-                      width:
-                      displayWidth(context) / 1.03,
+                                              height:
+                                              displayHeight(context) / 5.4,
+                                              width:
+                                              displayWidth(context) / 1.03,
 //                                            width: displayWidth(context) * 0.57,
-                      child:
+                                              child:
 
-                      //ssd
-                      StreamBuilder<
-                      List<SelectedFood>>(
-                      stream: shoppingCartBloc
-                          .getExpandedFoodsStream,
-                      initialData: shoppingCartBloc
-                          .getExpandedSelectedFood,
-                      builder:
-                      (context, snapshot) {
-                      if (snapshot.hasData) {
-                      List<SelectedFood>
-                      expandedSelectedFoodInOrder =
-                      snapshot.data;
+                                              //ssd
+                                              StreamBuilder<
+                                                  List<SelectedFood>>(
+                                                  stream: shoppingCartBloc
+                                                      .getExpandedFoodsStream,
+                                                  initialData: shoppingCartBloc
+                                                      .getExpandedSelectedFood,
+                                                  builder:
+                                                      (context, snapshot) {
+                                                    if (snapshot.hasData) {
+                                                      List<SelectedFood>
+                                                      expandedSelectedFoodInOrder =
+                                                          snapshot.data;
 
-                      if (expandedSelectedFoodInOrder ==
-                      null) {
-                      print(
-                      'Order has no data');
-                      print(
-                      'this will never happen don\'t worry');
+                                                      if (expandedSelectedFoodInOrder ==
+                                                          null) {
+                                                        print(
+                                                            'Order has no data');
+                                                        print(
+                                                            'this will never happen don\'t worry');
 
-                      return Container(
-                      child: Text(
-                      'expandedSelectedFoodInOrder == Null'));
-                      } else {
+                                                        return Container(
+                                                            child: Text(
+                                                                'expandedSelectedFoodInOrder == Null'));
+                                                      } else {
 //      int quantity = qTimes.quantity;
 //      int quantity = qTimes.selectedFoodInOrder.length;
 
-                      List<SelectedFood>
-                      allOrderedFoods =
-                      expandedSelectedFoodInOrder;
+                                                        List<SelectedFood>
+                                                        allOrderedFoods =
+                                                            expandedSelectedFoodInOrder;
 
-                      logger.e(
-                      '\n\n AM I EXECUTED TWICE  ;;;'
-                      ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
-                      return Container(
+                                                        logger.e(
+                                                            '\n\n AM I EXECUTED TWICE  ;;;'
+                                                                ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
+                                                        return Container(
 //                color: Colors.green,
-                      color: Color(
-                      0xffFFFFFF),
+                                                          color: Color(
+                                                              0xffFFFFFF),
 
-                      child: ListView
-                          .builder(
-                      scrollDirection:
-                      Axis.horizontal,
+                                                          child: ListView
+                                                              .builder(
+                                                            scrollDirection:
+                                                            Axis.horizontal,
 
-                      reverse: false,
-                      shrinkWrap:
-                      false,
-                      itemCount:
-                      allOrderedFoods
-                          .length,
-                      // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+                                                            reverse: false,
+                                                            shrinkWrap:
+                                                            false,
+                                                            itemCount:
+                                                            allOrderedFoods
+                                                                .length,
+                                                            // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
-                      itemBuilder: (_,
-                      int index) {
+                                                            itemBuilder: (_,
+                                                                int index) {
 //            return Text('ss');
 
-                      return FoodImageInShoppingCart(
-                      allOrderedFoods[
-                      index]
-                          .foodItemImageURL,
-                      /*OrderedFoodImageURL,*/
-                      allOrderedFoods[
-                      index]
-                          .foodItemName,
-                      /*OrderedFoodItemName, */
-                      allOrderedFoods[
-                      index]
-                          .selectedIngredients,
-                      allOrderedFoods[
-                      index]
-                          .unitPrice,
-                      index);
+                                                              return FoodImageInShoppingCart(
+                                                                  allOrderedFoods[
+                                                                  index]
+                                                                      .foodItemImageURL,
+                                                                  /*OrderedFoodImageURL,*/
+                                                                  allOrderedFoods[
+                                                                  index]
+                                                                      .foodItemName,
+                                                                  /*OrderedFoodItemName, */
+                                                                  allOrderedFoods[
+                                                                  index]
+                                                                      .selectedIngredients,
+                                                                  allOrderedFoods[
+                                                                  index]
+                                                                      .unitPrice,
+                                                                  index);
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
 //            index);
-                      },
-                      ),
+                                                            },
+                                                          ),
 
-                      // M VSM ORG VS TODO. ENDS HERE.
-                      );
-                      }
-                      } else {
-                      print(
-                      '!snapshot.hasData');
+                                                          // M VSM ORG VS TODO. ENDS HERE.
+                                                        );
+                                                      }
+                                                    } else {
+                                                      print(
+                                                          '!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
-                      return Container(
-                      child:
-                      Text('Null'));
-                      }
-                      }),
-                      //ssd
-                      ),
+                                                      return Container(
+                                                          child:
+                                                          Text('Null'));
+                                                    }
+                                                  }),
+                                              //ssd
+                                            ),
 
-                      Container(
+                                            Container(
 //                                        width: displayWidth(context) /1.8,
-                      width:
-                      displayWidth(context) / 1.03,
-                      child: AnimatedSwitcher(
-                      duration: Duration(
-                      milliseconds: 1000),
+                                              width:
+                                              displayWidth(context) / 1.03,
+                                              child: AnimatedSwitcher(
+                                                duration: Duration(
+                                                    milliseconds: 1000),
 //
-                      child: showFullOrderDeliveryType
-                      ? animatedWidgetShowFullOrderDeliveryType()
-                          : /*1 */
-                      animatedWidgetShowSelectedOrderDeliveryType(
-                      oneOrder), /* 2*/
-                      ),
-                      ),
+                                                child: showFullOrderDeliveryType
+                                                    ? animatedWidgetShowFullOrderDeliveryType()
+                                                    : /*1 */
+                                                animatedWidgetShowSelectedOrderDeliveryType(
+                                                    oneOrder), /* 2*/
+                                              ),
+                                            ),
 
-                      /*
+                                            /*
                                             * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
 
-                      // work_2
-                      // 911_2
-                      Container(
+                                            // work_2
+                                            // 911_2
+                                            Container(
 //                                          color: Colors.red,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
-                      width:
-                      displayWidth(context) / 1.03,
-                      height:
-                      displayHeight(context) / 2.2,
+                                              width:
+                                              displayWidth(context) / 1.03,
+                                              height:
+                                              displayHeight(context) / 2.2,
 
-                      //Text('AnimatedSwitcher('),
-                      child: AnimatedSwitcher(
-                      duration:
-                      Duration(milliseconds: 300),
+                                              //Text('AnimatedSwitcher('),
+                                              child: AnimatedSwitcher(
+                                                duration:
+                                                Duration(milliseconds: 300),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                      child: oneOrder
-                          .orderTypeIndex ==
-                      0
-                      ? _buildShoppingCartInputFieldsUNObscuredTakeAway(
-                      oneOrder)
-                          : oneOrder.orderTypeIndex ==
-                      1
-                      ? _buildShoppingCartInputFieldsUNObscuredDelivery(
-                      oneOrder)
-                          : oneOrder.orderTypeIndex ==
-                      2
-                      ? _buildShoppingCartInputFieldsUNObscuredPhone(
-                      oneOrder)
-                          :
-                      //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
-                      // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
+                                                child: oneOrder
+                                                    .orderTypeIndex ==
+                                                    0
+                                                    ? _buildShoppingCartInputFieldsUNObscuredTakeAway(
+                                                    oneOrder)
+                                                    : oneOrder.orderTypeIndex ==
+                                                    1
+                                                    ? _buildShoppingCartInputFieldsUNObscuredDelivery(
+                                                    oneOrder)
+                                                    : oneOrder.orderTypeIndex ==
+                                                    2
+                                                    ? _buildShoppingCartInputFieldsUNObscuredPhone(
+                                                    oneOrder)
+                                                    :
+                                                //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
+                                                // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
 //                                        _buildShoppingCartInputFieldsUNObscuredTakeAway(oneOrder)
 
-                      _buildShoppingCartInputFieldsUNObscuredDinningRoom(
-                      oneOrder),
+                                                _buildShoppingCartInputFieldsUNObscuredDinningRoom(
+                                                    oneOrder),
 //                                        animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
-                      ),
-                      ),
+                                              ),
+                                            ),
 
-                      /*
+                                            /*
                                         // workTest
                                         Container(
                                           height:68,
@@ -1276,48 +1276,48 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                         */
-                      ],
-                      ),
-                      ),
-                      ),
-                      ],
-                      ),
-                      );
-                      }
-                      } else {
-                      print('sanp shot.data !is Order');
-                      return Container(
-                      margin: EdgeInsets.fromLTRB(
-                      0, displayHeight(context) / 2, 0, 0),
-                      child: Center(
-                      child: Column(
-                      children: <Widget>[
-                      Center(
-                      child: Container(
-                      alignment: Alignment.center,
-                      child: new CircularProgressIndicator(
-                      backgroundColor:
-                      Colors.lightGreenAccent,
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          } else {
+                            print('sanp shot.data !is Order');
+                            return Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  0, displayHeight(context) / 2, 0, 0),
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                            backgroundColor:
+                                            Colors.lightGreenAccent,
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                      )),
-                      ),
-                      Center(
-                      child: Container(
-                      alignment: Alignment.center,
-                      child: new CircularProgressIndicator(
-                      backgroundColor: Color(0xffFC0000),
+                                          )),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: new CircularProgressIndicator(
+                                            backgroundColor: Color(0xffFC0000),
 
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                      )),
-                      ),
-                      ],
-                      ),
-                      ),
-                      );
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
                       }
-                    }
 //                          }
 
 //                    }

@@ -170,8 +170,8 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
 
-
-  Future<String>  paymentButtonPressedUnPaidDetailsPage() async{
+  Future<int>  paymentButtonPressedUnPaidDetailsPage() async{
+  // Future<int>  paymentButtonPressedUnPaidDetailsPage() async{
 
     OneOrderFirebase currenttempUnPaidOneOrderFB = _curretnFireBaseOrder;
 
@@ -181,13 +181,6 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     String paidType0 =   currenttempUnPaidOneOrderFB.tempPaymentIndex==0?'Cash':'Card'; // no later option..
 
 
-    currenttempUnPaidOneOrderFB.tempPayButtonPressed =true;
-
-    _curretnFireBaseOrder =currenttempUnPaidOneOrderFB;
-    _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
-
-
-    // print('paidType0 : $paidType0');
     print('paidType0 : $paidType0');
 
     var updateResult =
@@ -196,10 +189,16 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     currenttempUnPaidOneOrderFB.paidStatus='Paid';
     currenttempUnPaidOneOrderFB.paidType= paidType0;
 
+
+    // OneOrderFirebase returningOrder= currenttempUnPaidOneOrderFB;
+
+    // currenttempUnPaidOneOrderFB.tempPayButtonPressed =false;
+
     _curretnFireBaseOrder = currenttempUnPaidOneOrderFB;
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 
-//    await Future.delayed(Duration(milliseconds: 500));
+
+
 
     print('updateResult is:: :: $updateResult');
     String                    paidType2 = updateResult['paidType'];
@@ -208,14 +207,14 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     if(paidType2==paidType0){
       print('update successfull');
-
-      return previouslyLaterPaidDocumentID;
-
+      return 1;
 
     }
 
 
-    return previouslyLaterPaidDocumentID;
+    return 0;
+
+
 
 
   }
@@ -251,8 +250,12 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   @override
   void dispose() {
 
+
     _oneFireBaseOrderController.close();
     _paymentTypeController.close();
+
+    // _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
+    // _paymentTypeController.sink.add(_paymentType);
 
   }
 }

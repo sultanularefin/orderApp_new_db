@@ -94,6 +94,13 @@ class _UnPaidPageState extends State<UnPaidPage> {
 
 
   @override
+  void dispose() {
+    print('.....at void dispose()...');
+    super.dispose();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     final blocUB = BlocProvider.of<UnPaidBloc>(context);
@@ -538,162 +545,6 @@ class _UnPaidPageState extends State<UnPaidPage> {
 
           );
 
-/*
-          if(docID3== documentId2){
-            return
-              Container(
-
-                  color: Color(0xffFFFFFF),
-//            color:Colors.lightGreenAccent,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 4.0, vertical: 16.0),
-                  child: InkWell(
-                    child: Column(
-
-                      children: <Widget>[
-
-
-//                      hero animation.. image container begins here.
-
-                        new Container(
-                          width: displayWidth(context) / 6,
-                          height: displayWidth(context) / 6,
-                          decoration: new BoxDecoration(
-                            shape: BoxShape.circle,
-//                            color: Color(0xffFCF5E4),
-                            color: Colors.redAccent,
-                            border: new Border.all(
-                                color: Colors.yellow,
-                                width: 1.0,
-                                style: BorderStyle.solid
-                            ),
-//                            shape: BoxShape.circle,
-
-                          ),
-
-                          child:
-                          ClipOval(
-                            child: Hero(
-                              tag: startDate2.toString() + '__$totalPrice2',
-
-                              child:
-                              Container(
-//                            color:Colors.pinkAccent,
-
-                                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                                //                            ssssssHHHHH
-
-                                child: Image.asset(
-                                  itemImage2,
-                                  fit: BoxFit.contain,
-                                ),
-
-                              ),
-                              placeholderBuilder: (context,
-                                  heroSize, child) {
-                                return Opacity(
-                                  opacity: 0.5, child: Container(
-                                  width: displayWidth(context) / 6,
-                                  height: displayWidth(context) / 6,
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Color(0xffEAB45E),
-                                          blurRadius: 25.0,
-                                          spreadRadius: 0.10,
-                                          offset: Offset(0, 10)
-                                      )
-                                    ],
-                                  ),
-                                  child:
-                                  Container(
-                                    padding: EdgeInsets.fromLTRB(
-                                        20, 20, 20, 20), //
-                                    child: ClipOval(
-                                      child: Image.asset(
-                                        itemImage2,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                );
-                              },
-                            ),
-                          ),
-
-                        ),
-
-
-//                      hero animation.. image container ends here.
-
-
-//                              SizedBox(height: 10),
-
-
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(
-                              0, 0, 0, 6),
-                          child: Text(
-                            '${orderBy2.toUpperCase()}',
-                            style: TextStyle(
-                                fontWeight: FontWeight
-                                    .w600,
-//                                          color: Colors.blue,
-                                color: Color.fromRGBO(
-                                    112, 112, 112, 1),
-                                fontSize: 15),
-                          ),
-                        ),
-
-                        Text(
-//                                  double.parse(euroPrice).toStringAsFixed(2),
-                          '${paidStatus2.toUpperCase()}',
-
-                          style: TextStyle(
-                              fontWeight: FontWeight
-                                  .w600,
-//                                          color: Colors.blue,
-                              color: Color.fromRGBO(
-                                  112, 112, 112, 1),
-                              fontSize: 15),
-                        ),
-
-                        Container(
-
-                            child: Text(
-
-                              formattedOrderPlacementDate2 + ' ' +
-                                  formattedOrderPlacementDatesTimeOnly2,
-
-//                                    foodItemIngredients.substring(0,10)+'..',
-                              style: TextStyle(
-                                color: Color(0xff707070),
-                                fontWeight: FontWeight.normal,
-                                letterSpacing: 0.5,
-                                fontSize: 14,
-                              ),
-                            )
-                        ),
-//
-//
-                      ],
-                    ),
-                    onTap: () {
-                      _navigateAndDisplayOnePaidSelection(
-                          context, oneOrderFirebaseTemp);
-                    },
-
-
-                  )
-              );
-//            return SpoiledItem(/*dummy: snapshot.data[index]*/);
-
-          }
-
-          else {
-            */
             return
               Container(
 
@@ -774,16 +625,12 @@ class _UnPaidPageState extends State<UnPaidPage> {
                                 ),
                                 );
                               },
+
+
                             ),
                           ),
 
                         ),
-
-
-//                      hero animation.. image container ends here.
-
-
-//                              SizedBox(height: 10),
 
 
                         Container(
@@ -865,8 +712,8 @@ class _UnPaidPageState extends State<UnPaidPage> {
 
     final tempDocumentID= oneFirebaseOrderItem.documentId;
 
-    final returnedDocId = await
-    Navigator.of(context).push(
+    // final returnedDocId = await
+    return Navigator.of(context).push(
 
 
       PageRouteBuilder(
@@ -885,6 +732,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
       ),
     );
 
+    /*
     if(tempDocumentID== returnedDocId){
 
       logger.i('tempDocumentID== returnedDocId : :: : ${tempDocumentID== returnedDocId}');
@@ -902,6 +750,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
 //  work_1
 
     }
+    */
 
   }
 

@@ -83,7 +83,20 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
   bool showUnSelectedIngredients = false;
   bool showPressWhenFinishButton = false;
-  // bool tempPayButtonPressed = false;
+  bool tempPayButtonPressed = false;
+
+
+  @override
+  void dispose() {
+
+    print('.....at void dispose()  2222...');
+    // Clean up the controller when the widget is disposed.
+    super.dispose();
+    // addressController.dispose();
+    // houseFlatNumberController.dispose();
+    // phoneNumberController.dispose();
+    // etaController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,78 +120,136 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                 logger.i('_currentPaymentTypeIndex: $_currentPaymentTypeIndex');
 
+                /*
+                if (tempPayButtonPressed == true) {
+                  print('....payment button pressed.....');
+                  return Container(
+                    margin: EdgeInsets.fromLTRB(
+                        0, displayHeight(context) / 2, 0, 0),
+                    child: Center(
+                      child: Column(
+                        children: <Widget>[
+
+                          Center(
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: new CircularProgressIndicator(
+                                  backgroundColor: Colors
+                                      .lightGreenAccent,
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
 
 
+                                )
+                            ),
+                          ),
 
-                //......
+                          Center(
+                            child: Text(
+                                'updating, please wait.',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
 
-
-
-
-
-                  return GestureDetector(
-                    onTap: () {
-                      print('s');
-                      print('navigating to FoodGallery 2 again with block');
-
-                      FocusScopeNode currentFocus = FocusScope.of(context);
-
-                      if (!currentFocus.hasPrimaryFocus) {
-                        currentFocus.unfocus();
-                      }
-                      print(
-                          'CLEAR SUBSCRIPTION ... before going to food gallery page..');
-
-                      return Navigator.pop(context);
-                    },
-                    child:
-                    Scaffold(
-
-                      backgroundColor: Colors.white.withOpacity(0.05),
-// this is the main reason of transparency at next screen.
-// I am ignoring rest implementation but what i have achieved is you can see.
-
-                      body: SafeArea(
-
-// smaller container containing all modal FoodItem Details things.
-                        child: Container(
-                            height: displayHeight(context) -
-                                MediaQuery
-                                    .of(context)
-                                    .padding
-                                    .top -
-                                MediaQuery
-                                    .of(context)
-                                    .padding
-                                    .bottom,
-//                            kToolbarHeight
-
-                            child: GestureDetector(
-                              onTap: () {
-                                print('GestureDetector for Stack working');
-                                print('no navigation now');
-                              },
-                              child:
-
-                              Container(
-
-// FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-                                  width: displayWidth(context) / 1.03,
-
-                                  child:
-                                  initialView(oneFireBaseOrderDetail)
-                              ),
+                            ),
+                          ),
 
 
-                            )
+                          Center(
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: new CircularProgressIndicator(
+                                  backgroundColor: Color(
+                                      0xffFC0000),
 
-
-                        ),
+                                )
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+
                   );
+                  // .....
                 }
+                else {
+                  //......
+
+                  */
+
+                return GestureDetector(
+                  onTap: () {
+                    print('s');
+                    print('navigating to FoodGallery 2 again with block');
+
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+
+                    if (!currentFocus.hasPrimaryFocus) {
+                      currentFocus.unfocus();
+                    }
+                    blocUD.clearSubscription();
+                    print(
+                        'CLEAR SUBSCRIPTION ... before going to food gallery page..');
+
+                    return Navigator.pop(context);
+                  },
+                  child:
+                  Scaffold(
+                    // key: _scaffoldKeyShoppingCartPage,
+                    //   _scaffoldKeyUnPaidDetailsPage
+
+
+                    key: _scaffoldKeyUnPaidDetailsPage,
+
+                    backgroundColor: Colors.white.withOpacity(0.05),
+
+
+                    body: WillPopScope(
+                      onWillPop: () {
+                        Navigator.pop(context);
+                        return new Future(() => false);
+                      }, child: SafeArea(
+
+// smaller container containing all modal FoodItem Details things.
+                      child: Container(
+                          height: displayHeight(context) -
+                              MediaQuery
+                                  .of(context)
+                                  .padding
+                                  .top -
+                              MediaQuery
+                                  .of(context)
+                                  .padding
+                                  .bottom,
+//                            kToolbarHeight
+
+                          child: GestureDetector(
+                            onTap: () {
+                              print('GestureDetector for Stack working');
+                              print('no navigation now');
+                            },
+                            child:
+
+                            Container(
+
+// FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
+                                width: displayWidth(context) / 1.03,
+
+                                child:
+                                initialView(oneFireBaseOrderDetail)
+                            ),
+
+
+                          )
+
+
+                      ),
+                    ),
+                    ),
+                  ),
+                );
+
               }
+            }
 
         )
     );
@@ -186,64 +257,45 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   }
 
 
-  Widget updateCompleteGoToPreviousPage(BuildContext context, String  updatedDocumentID){
+  Widget updateCompleteGoToPreviousPage(BuildContext context){
 
     print(' < >  <   >  at updateCompleteGoToPreviousPage      >>  \\   ');
 
-            return
-              Container(
-
-
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
+    return
+      Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.end,
 //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-
-                    SizedBox(width:40),
-//                    SizedBox(width:20),
-
-//                    SizedBox(width: displayWidth(context) / 12,),
-
-                    Container(
-                      width: displayWidth(context) / 4,
-                      height: displayHeight(context) / 24,
-                      child: OutlineButton(
-                        color: Colors.green,
-
-                        borderSide: BorderSide(
-                          color: Colors.green, // 0xff54463E
-                          style: BorderStyle.solid,
-                          width: 7.6,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(35.0),
-                        ),
-                        child: Container(
-                          child: Text('Go Back', style: TextStyle(color: Colors.green,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,),
-                          ),
-                        ),
-
-                        onPressed: () async {
-                          print('--navigate');
-
-                         _navigateAndDisplaySelection(context, updatedDocumentID);
-//                          _navigateAndDisplaySelection(),
-
-                        },
-
-                      ),
-                    ),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                alignment: Alignment.center,
+                child: new CircularProgressIndicator(
+                  backgroundColor: Colors.lightGreenAccent,
+                )
+            ),
 
 
-                  ],
-                ),
+            Container(
+              child: Text(
+                'updating, please wait.',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
 
+              ),),
 
-    );
+            Container(
+
+                child: new CircularProgressIndicator(
+                  backgroundColor: Color(0xffFC0000),
+
+                )
+            ),
+          ],
+        ),
+
+      );
   }
 
 
@@ -406,70 +458,77 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                       width: displayWidth(context) / 4,
                       height: displayHeight(context) / 24,
                       child: OutlineButton(
-                        color: Colors.green,
+                          color: Colors.green,
 
-                        borderSide: BorderSide(
-                          color: Colors.green, // 0xff54463E
-                          style: BorderStyle.solid,
-                          width: 7.6,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(35.0),
-                        ),
-                        child: Container(
-                          child: Text('Pay', style: TextStyle(color: Colors.green,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,),
+                          borderSide: BorderSide(
+                            color: Colors.green, // 0xff54463E
+                            style: BorderStyle.solid,
+                            width: 7.6,
                           ),
-                        ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(35.0),
+                          ),
+                          child: Container(
+                            child: Text('Pay', style: TextStyle(color: Colors.green,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,),
+                            ),
+                          ),
 
-                        onPressed: () async {
-                          // setState(() {
-                          //   tempPayButtonPressed= true;
-                          // });
-                          print(
-                              'pay button pressed need to update paid Status and redirect to another page...'
-                                  ' Print..: ');
+                          onPressed: () async {
 
-                          final blocUD = BlocProvider.of<UnPaidDetailsBloc>(
-                              context);
-
-                          String orderDocumentId = await blocUD
-                              .paymentButtonPressedUnPaidDetailsPage();
-
-                          // oneFireBaseOrderDetail
-
-                          if ((oneFireBaseOrderDetail
-                              .tempPayButtonPressed ==
-                              true) &&
-                              (oneFireBaseOrderDetail.documentId ==
-                                  '')) {
-                            _scaffoldKeyUnPaidDetailsPage.currentState
-//                  Scaffold.of(context)
-//                    ..removeCurrentSnackBar()
-                                .showSnackBar(
-                                SnackBar(
-                                    content: Text("someThing went wrong")));
-                            print('something went wrong');
-                          } else {
                             print(
-                                'orderDocumentId finally: >> $orderDocumentId');
+                                'pay button pressed need to update paid Status and redirect to another page...'
+                                    ' Print..: ');
+
+                            final blocUD = BlocProvider.of<UnPaidDetailsBloc>(
+                                context);
+
+                            // OneOrderFirebase
+                            int test = await blocUD
+                                .paymentButtonPressedUnPaidDetailsPage();
+
+                            print('test: $test');
+
+                            logger.i('tempPayButtonPressed: > > > > > $tempPayButtonPressed');
+                            // oneFireBaseOrderDetail
+
+                            if (test == 0) {
+                              _scaffoldKeyUnPaidDetailsPage.currentState.showSnackBar(SnackBar(
+                                      content: Text("someThing went wrong")));
+                              print('something went wrong');
+                            } else {
+
+
+                              print('orderDocumentId finally: >> ${oneFireBaseOrderDetail.documentId}');
+
+
+
+                              blocUD.clearSubscription();
+
+
+                              /*
+                              return Navigator.pop(
+                                  context);
+                              */
+
 
 
 //                              pushNamedAndRemoveUntil
-                            return Navigator.of(context).pushAndRemoveUntil(
-                              //        MaterialPageRoute(builder: (context) => HomeScreen())
-                              //
-                              //        MaterialPageRoute(builder: (context) => MyHomePage())
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                      return BlocProvider<FoodGalleryBloc>(
-                                          bloc: FoodGalleryBloc(),
-                                          child: FoodGallery2()
-                                      );
-                                    }), (Route<dynamic> route) => false);
-                          };
-                        }
+                              return Navigator.of(context).pushAndRemoveUntil(
+
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                        return BlocProvider<FoodGalleryBloc>(
+                                            bloc: FoodGalleryBloc(),
+                                            child: FoodGallery2()
+                                        );
+                                      }), (Route<dynamic> route) => false);
+
+
+
+                            }
+                          }
 
                       ),
                     ),
@@ -629,15 +688,15 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             }*/
 
-              final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+            final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
-              blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
-                  onePaymentType, index, _currentPaymentTypeIndex);
+            blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
+                onePaymentType, index, _currentPaymentTypeIndex);
 
-              setState(() {
-                showFullPaymentType = false;
-                showCancelPayButtonFirstTime = false;
-              });
+            setState(() {
+              showFullPaymentType = false;
+              showCancelPayButtonFirstTime = false;
+            });
 
 
 
@@ -716,15 +775,15 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
             }
             else {
 */
-              final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
+            final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
-              blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
-                  onePaymentType, index, _currentPaymentTypeIndex);
+            blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
+                onePaymentType, index, _currentPaymentTypeIndex);
 
-              setState(() {
-                showFullPaymentType = false;
-                showCancelPayButtonFirstTime = false;
-              });
+            setState(() {
+              showFullPaymentType = false;
+              showCancelPayButtonFirstTime = false;
+            });
 
 
             // setState(() {
@@ -798,7 +857,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
         context, updatedDocumentID);
 
 
-    }
+  }
 
 
   Widget initialView(OneOrderFirebase oneFireBaseOrderDetail){
@@ -809,314 +868,258 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
 
-    if (oneFireBaseOrderDetail.tempPayButtonPressed == true) {
-      print('....payment button pressed.....');
-      return Container(
-        margin: EdgeInsets.fromLTRB(
-            0, displayHeight(context) / 2, 0, 0),
-        child: Center(
-          child: Column(
-            children: <Widget>[
 
-              Center(
-                child: Container(
-                    alignment: Alignment.center,
-                    child: new CircularProgressIndicator(
-                      backgroundColor: Colors
-                          .lightGreenAccent,
-//                                              valueColor:
-//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+    return Container(
 
-
-                    )
-                ),
-              ),
-              Center(
-                child: Text(
-                    'updating your payment information, please wait.',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.normal,
-//                                                      color: Colors.white
-                      color: Colors.redAccent,
-                      fontFamily: 'Itim-Regular',
-
-                    )
-                ),
-              ),
-              Center(
-                child: Container(
-                    alignment: Alignment.center,
-                    child: new CircularProgressIndicator(
-                      backgroundColor: Color(
-                          0xffFC0000),
-
-//                                              valueColor:
-//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                    )
-                ),
-              ),
-            ],
-          ),
-        ),
-
-      );
-      // .....
-    }
-    else {
-      return Container(
-
-        height: displayHeight(context) -
-            MediaQuery
-                .of(context)
-                .padding
-                .top - MediaQuery
-            .of(context)
-            .padding
-            .bottom,
+      height: displayHeight(context) -
+          MediaQuery
+              .of(context)
+              .padding
+              .top - MediaQuery
+          .of(context)
+          .padding
+          .bottom,
 
 
 // FROM 2.3 ON JULY 3 AFTER CHANGE INTRODUCTION OF CHEESE AND SAUCES.
-        width: displayWidth(context) / 1.03,
+      width: displayWidth(context) / 1.03,
 
-        margin: EdgeInsets.fromLTRB(0, displayHeight(context) / 16, 0, 5),
+      margin: EdgeInsets.fromLTRB(0, displayHeight(context) / 16, 0, 5),
 
-        decoration:
-        new BoxDecoration(
-          borderRadius: new BorderRadius.circular(
-              10.0),
+      decoration:
+      new BoxDecoration(
+        borderRadius: new BorderRadius.circular(
+            10.0),
 //                                    color: Colors.purple,
+        color: Colors.white,
+      ),
+
+
+      child:
+      Neumorphic(
+        curve: Neumorphic.DEFAULT_CURVE,
+        style: NeumorphicStyle(
+          shape: NeumorphicShape
+              .concave,
+          depth: 8,
+          lightSource: LightSource
+              .topLeft,
           color: Colors.white,
+          boxShape: NeumorphicBoxShape.roundRect(
+            BorderRadius.all(Radius.circular(5)),
+          ),
         ),
 
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment
+              .start,
+          crossAxisAlignment: CrossAxisAlignment
+              .start,
+          children: <Widget>[
 
-        child:
-        Neumorphic(
-          curve: Neumorphic.DEFAULT_CURVE,
-          style: NeumorphicStyle(
-            shape: NeumorphicShape
-                .concave,
-            depth: 8,
-            lightSource: LightSource
-                .topLeft,
-            color: Colors.white,
-            boxShape: NeumorphicBoxShape.roundRect(
-              BorderRadius.all(Radius.circular(5)),
-            ),
-          ),
-
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment
-                .start,
-            crossAxisAlignment: CrossAxisAlignment
-                .start,
-            children: <Widget>[
-
-              Container(
+            Container(
 //              color: Colors.blue,
-                height: displayHeight(context) / 11,
-                width: displayWidth(context) / 1.07,
+              height: displayHeight(context) / 11,
+              width: displayWidth(context) / 1.07,
 
-                child:
+              child:
 // YELLOW NAME AND PRICE BEGINS HERE.
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: displayWidth(context) /
-                          2.8 /*+  displayWidth(context)/8 */, /*3.9 */
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: displayWidth(context) /
+                        2.8 /*+  displayWidth(context)/8 */, /*3.9 */
 
 
-                      decoration: BoxDecoration(
-                        color: Color(0xffFFE18E),
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(60)),
+                    decoration: BoxDecoration(
+                      color: Color(0xffFFE18E),
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(60)),
 //
-                      ),
-
-
-                      height: displayHeight(context) / 18,
-//                                          height: displayHeight(context)/40,
-
-                      child:
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                        children: <Widget>[
-                          Container(
-                            width: displayWidth(context) / 3.9,
-                            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child:
-
-                            Text(
-                                '${oneFireBaseOrderDetail.orderBy.toLowerCase()}',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 20,
-//                                fontWeight: FontWeight.bold,
-//                                                      color: Colors.white
-                                  color: Colors.black,
-//                                fontFamily: 'Itim-Regular',
-
-                                )
-                            ),
-                          ),
-
-
-                        ],
-                      ),
-
-
                     ),
 
 
-                    Container(
+                    height: displayHeight(context) / 18,
+//                                          height: displayHeight(context)/40,
+
+                    child:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                      children: <Widget>[
+                        Container(
+                          width: displayWidth(context) / 3.9,
+                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child:
+
+                          Text(
+                              '${oneFireBaseOrderDetail.orderBy.toLowerCase()}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 20,
+//                                fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                              )
+                          ),
+                        ),
+
+
+                      ],
+                    ),
+
+
+                  ),
+
+
+                  Container(
 
 //                    color:Colors.green,
-                      width: displayWidth(context) / 2.5,
-                      height: displayHeight(context) / 11,
-                      child: displayCustomerInformationWidget(
-                          oneFireBaseOrderDetail.oneCustomer),
+                    width: displayWidth(context) / 2.5,
+                    height: displayHeight(context) / 11,
+                    child: displayCustomerInformationWidget(
+                        oneFireBaseOrderDetail.oneCustomer),
 //                    height: displayHeight(context)/20,
 
-                    )
+                  )
 
-                  ],
-                ),
-
+                ],
               ),
 
-              Divider(
-                height: 10,
-                thickness: 1,
-                color: Colors.grey,
-              ),
+            ),
+
+            Divider(
+              height: 10,
+              thickness: 1,
+              color: Colors.grey,
+            ),
 
 
-              SizedBox(height: 10),
+            SizedBox(height: 10),
 
-              Container(
+            Container(
 
-                  width: displayWidth(context) / 2.49 +
-                      displayWidth(context) / 1.91,
+                width: displayWidth(context) / 2.49 +
+                    displayWidth(context) / 1.91,
 
-                  height: displayHeight(context) / 1.6,
+                height: displayHeight(context) / 1.6,
 
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
 
-                      Container(
+                    Container(
 //                                                    width: displayWidth(context)/4,
-                        width: displayWidth(context) / 3,
+                      width: displayWidth(context) / 3,
 //                                                    width: displayWidth(context)/3.29,
 //                      color:Colors.blue,
-                        child:
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                      child:
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
 
 
-                          children: [
-                            Container(
-                              height: displayHeight(context) / 6.5,
-                              width: displayWidth(context) / 3.59,
+                        children: [
+                          Container(
+                            height: displayHeight(context) / 6.5,
+                            width: displayWidth(context) / 3.59,
 //                        color: Colors.red,
 //                            color:Colors.blue,
 
 
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  0, 0, 0,
-                                  0),
+                            padding: EdgeInsets
+                                .fromLTRB(
+                                0, 0, 0,
+                                0),
 
 
-                              child:
-                              UnPaidDetailImage(
-                                oneFireBaseOrderDetail
-                                    .formattedOrderPlacementDatesTimeOnly,
-                                oneFireBaseOrderDetail.orderBy,
-                                oneFireBaseOrderDetail.startDate,
-                                oneFireBaseOrderDetail.totalPrice,
+                            child:
+                            UnPaidDetailImage(
+                              oneFireBaseOrderDetail
+                                  .formattedOrderPlacementDatesTimeOnly,
+                              oneFireBaseOrderDetail.orderBy,
+                              oneFireBaseOrderDetail.startDate,
+                              oneFireBaseOrderDetail.totalPrice,
 
 //
-                              ),
-
                             ),
 
+                          ),
 
-                            Container(
-                              height: displayHeight(context) / 4,
-                              width: displayWidth(context) / 2.99,
+
+                          Container(
+                            height: displayHeight(context) / 4,
+                            width: displayWidth(context) / 2.99,
 //                        color: Colors.red,
 
 
-                              padding: EdgeInsets
-                                  .fromLTRB(
-                                  20, 0, 20,
-                                  0),
+                            padding: EdgeInsets
+                                .fromLTRB(
+                                20, 0, 20,
+                                0),
 
 //                          child: Text('FoodImageURL')
 
-                              child:
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                            child:
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
 
-                                children: [
+                              children: [
 
-                                  Text(
-                                      '${oneFireBaseOrderDetail
-                                          .formattedOrderPlacementDatesTimeOnly}',
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                Text(
+                                    '${oneFireBaseOrderDetail
+                                        .formattedOrderPlacementDatesTimeOnly}',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
-                                        color: Colors.black,
+                                      color: Colors.black,
 //                                fontFamily: 'Itim-Regular',
 
-                                      )
-                                  ),
+                                    )
+                                ),
 
 
-                                  Container(
-                                    child: oneFireBaseOrderDetail
-                                        .orderProductionTimeFromNow != -1 ?
+                                Container(
+                                  child: oneFireBaseOrderDetail
+                                      .orderProductionTimeFromNow != -1 ?
 
-                                    Text('${oneFireBaseOrderDetail
-                                        .orderProductionTimeFromNow} min',
-                                      maxLines: 1,
+                                  Text('${oneFireBaseOrderDetail
+                                      .orderProductionTimeFromNow} min',
+                                    maxLines: 1,
 
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
 //                        color: Color(0xffF50303),
-                                        fontSize: 20,
-                                        fontFamily: 'Itim-Regular',),
-                                    ) : Text('${oneFireBaseOrderDetail.timeOfDay
-                                        .toString()}',
+                                      fontSize: 20,
+                                      fontFamily: 'Itim-Regular',),
+                                  ) : Text('${oneFireBaseOrderDetail.timeOfDay
+                                      .toString()}',
 
-                                      maxLines: 1,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
 //                        color: Color(0xffF50303),
-                                        fontSize: 20,
-                                        fontFamily: 'Itim-Regular',),
-                                    ),
+                                      fontSize: 20,
+                                      fontFamily: 'Itim-Regular',),
                                   ),
+                                ),
 
-                                  /*
+                                /*
                                 Text(
                                     '${oneFireBaseOrder.orderProductionTimeFromNow}:00 min',
                                     maxLines: 2,
@@ -1133,313 +1136,316 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                                 */
 
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      children: [
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    children: [
 
-                                        Text(
-                                            'SUBTOTAL',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+                                      Text(
+                                          'SUBTOTAL',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
 
-                                              color: Colors.grey,
-
-
-                                            )
-                                        ),
+                                            color: Colors.grey,
 
 
-                                        Text(
-                                            '${oneFireBaseOrderDetail.totalPrice
-                                                .toStringAsFixed(2)}' +
-                                                '\u20AC',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+                                          )
+                                      ),
+
+
+                                      Text(
+                                          '${oneFireBaseOrderDetail.totalPrice
+                                              .toStringAsFixed(2)}' +
+                                              '\u20AC',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
-                                              color: Colors.grey,
+                                            color: Colors.grey,
 //                                fontFamily: 'Itim-Regular',
 
-                                            )
-                                        ),
-                                      ],
-                                    ),
+                                          )
+                                      ),
+                                    ],
                                   ),
+                                ),
 
 
-                                  Container(
-                                    child: oneFireBaseOrderDetail.orderBy ==
-                                        'Delivery' ?
+                                Container(
+                                  child: oneFireBaseOrderDetail.orderBy ==
+                                      'Delivery' ?
 
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    children: [
 
-                                        Text(
-                                            'DELIVERY',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey,
-
-
-                                            )
-                                        ),
+                                      Text(
+                                          'DELIVERY',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey,
 
 
-                                        Text(
-                                            '${oneFireBaseOrderDetail.deliveryCost
-                                                .toStringAsFixed(2)}' +
-                                                '\u20AC',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-
-                                              color: Colors.grey,
-
-                                            )
-                                        ),
-                                      ],
-                                    ) : Container(width: 0, height: 0),
-                                  ),
+                                          )
+                                      ),
 
 
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      children: [
+                                      Text(
+                                          '${oneFireBaseOrderDetail.deliveryCost
+                                              .toStringAsFixed(2)}' +
+                                              '\u20AC',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
 
-                                        Text(
-                                            'ALV',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
+                                            color: Colors.grey,
+
+                                          )
+                                      ),
+                                    ],
+                                  ) : Container(width: 0, height: 0),
+                                ),
+
+
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    children: [
+
+                                      Text(
+                                          'ALV',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
 //                                fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
-                                              color: Colors.black,
+                                            color: Colors.black,
 //                                fontFamily: 'Itim-Regular',
 
-                                            )
-                                        ),
+                                          )
+                                      ),
 
 
-                                        Text(
-                                            '14%',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
+                                      Text(
+                                          '14%',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
 //                                fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
-                                              color: Colors.black,
+                                            color: Colors.black,
 //                                fontFamily: 'Itim-Regular',
 
-                                            )
-                                        ),
-                                      ],
-                                    ),
+                                          )
+                                      ),
+                                    ],
                                   ),
+                                ),
 
-                                  Divider(
-                                    height: 5,
-                                    thickness: 1,
-                                    color: Colors.grey,
+                                Divider(
+                                  height: 5,
+                                  thickness: 1,
+                                  color: Colors.grey,
+                                ),
+
+
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    children: [
+
+                                      Text(
+                                          'TOTAL',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+
+
+                                      Text(
+                                          '${oneFireBaseOrderDetail
+                                              .priceWithDelivery
+                                              .toStringAsFixed(2)}' +
+                                              '\u20AC',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+//                                                      color: Colors.white
+                                            color: Colors.black,
+//                                fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ],
                                   ),
+                                ),
 
+                                Container(
+                                  child: Row(
 
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      children: [
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .center,
+                                    children: [
 
-                                        Text(
-                                            'TOTAL',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+                                      Text(
+                                          '${oneFireBaseOrderDetail.paidStatus}',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
-                                              color: Colors.black,
+                                            color: Colors.black,
 //                                fontFamily: 'Itim-Regular',
 
-                                            )
-                                        ),
+                                          )
+                                      ),
 
 
-                                        Text(
-                                            '${oneFireBaseOrderDetail
-                                                .priceWithDelivery
-                                                .toStringAsFixed(2)}' +
-                                                '\u20AC',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+                                      Text(
+                                          '${oneFireBaseOrderDetail.paidType}',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
 //                                                      color: Colors.white
-                                              color: Colors.black,
+                                            color: Colors.black,
 //                                fontFamily: 'Itim-Regular',
 
-                                            )
-                                        ),
-                                      ],
-                                    ),
+                                          )
+                                      ),
+                                    ],
                                   ),
+                                ),
 
-                                  Container(
-                                    child: Row(
-
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      children: [
-
-                                        Text(
-                                            '${oneFireBaseOrderDetail.paidStatus}',
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-//                                                      color: Colors.white
-                                              color: Colors.black,
-//                                fontFamily: 'Itim-Regular',
-
-                                            )
-                                        ),
-
-
-                                        Text(
-                                            '${oneFireBaseOrderDetail.paidType}',
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-//                                                      color: Colors.white
-                                              color: Colors.black,
-//                                fontFamily: 'Itim-Regular',
-
-                                            )
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                ],
-                              ),
+                              ],
                             ),
+                          ),
 
 
-                          ],
-                        ),
+                        ],
                       ),
+                    ),
 
-                      VerticalDivider(
+                    VerticalDivider(
 //                      height:10,
-                        width: 10,
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
+                      width: 10,
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
 
-                      Container(
+                    Container(
 
-                        height: displayHeight(context) / 1.7,
-                        width: displayWidth(context) / 1.91,
+                      height: displayHeight(context) / 1.7,
+                      width: displayWidth(context) / 1.91,
 
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
 
-                            Container(
-                                width: 550,
-                                height: displayHeight(context) / 1.7,
-                                child: processFoodForUnPaidDetailsPage(
-                                    orderedItems)
-                            ),
+                          Container(
+                              width: 550,
+                              height: displayHeight(context) / 1.7,
+                              child: processFoodForUnPaidDetailsPage(
+                                  orderedItems)
+                          ),
 
 //                          FFFFF
-                          ],
-                        ),
+                        ],
                       ),
+                    ),
 
-                    ],
-                  )
+                  ],
+                )
+
+            ),
+
+
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+
+
+              child:
+              AnimatedSwitcher(
+                duration: Duration(
+                    milliseconds: 1000),
+                child: tempPayButtonPressed == false ?
+
+                AnimatedSwitcher(
+                  duration: Duration(
+                      milliseconds: 1000),
+                  child:
+                  showCancelPayButtonFirstTime == true ?
+
+                  Container(
+
+                    // color:Colors.limeAccent,
+//                    color:Colors.white,
+//                                            height: 200,
+                    height: displayHeight(context) / 8,
+                    width: displayWidth(context) / 1.03,
+                    child: _buildPaymentTypeSingleSelectOption(),
+
+                  ) :
+                  Container(
+                      height: displayHeight(context) / 9,
+                      width: displayWidth(context) / 1.03,
+                      child: animatedCancelPayButtonUnpaidDetailsPage(
+                          oneFireBaseOrderDetail)
+                  ),
+                )
+
+                    : updateCompleteGoToPreviousPage(
+                    context /*oneFireBaseOrderDetail.documentId*/),
 
               ),
 
-
-              Container(
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            ),
 
 
-                  child: /*AnimatedSwitcher(
-                    duration: Duration(
-                        milliseconds: 1000),
-                    child: oneFireBaseOrder.paidType == 'Later' ?
-                        */
-                  AnimatedSwitcher(
-                    duration: Duration(
-                        milliseconds: 1000),
-                    child:
-                    showCancelPayButtonFirstTime == true ?
-
-                    Container(
-
-                      // color:Colors.limeAccent,
-//                    color:Colors.white,
-//                                            height: 200,
-                      height: displayHeight(context) / 8,
-                      width: displayWidth(context) / 1.03,
-                      child: _buildPaymentTypeSingleSelectOption(),
-
-                    ) :
-                    Container(
-                        height: displayHeight(context) / 9,
-                        width: displayWidth(context) / 1.03,
-                        child: animatedCancelPayButtonUnpaidDetailsPage(
-                            oneFireBaseOrderDetail)
-                    ),
-                  )
-                /*
-                      : updateCompleteGoToPreviousPage(
-                        context, oneFireBaseOrder.documentId),
-        */
-              )
-
-
-            ],
-          ),
-
+          ],
         ),
-      );
-    }
+
+      ),
+    );
+
 
   }
 
