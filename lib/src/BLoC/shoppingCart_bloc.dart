@@ -1,5 +1,3 @@
-
-
 //### EXTERNAL PACKAGES
 import 'dart:async';
 
@@ -17,16 +15,13 @@ import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 import 'package:flutter/services.dart';
 //import 'package:path_provider/path_provider.dart';
 
-
 // this pkg i am using for searching device's only and for testing now on august 29....
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
-import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart' as primaryBlueToothPrinter;
-
-
+import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart'
+    as primaryBlueToothPrinter;
 
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:logger/logger.dart';
@@ -34,11 +29,9 @@ import 'package:logger/logger.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 
-
 //printing blue tooth or wifi in same local area network.
 
 //import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
-
 
 //### LOCAL DATA RELATED RESOURCES
 import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
@@ -47,45 +40,30 @@ import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderTypeSingleSelect.dart';
 import 'package:foodgallery/src/DataLayer/models/PaymentTypeSingleSelect.dart';
 
-
-
-
 //MODELS
 
-
 class ShoppingCartBloc implements Bloc {
-
   var logger = Logger(
     printer: PrettyPrinter(),
   );
 
   final _client = FirebaseClient();
 
-
-
 //  PRINTING RELATED objects put here Beginning {.
-
 
   final FirebaseAuth _auth = FirebaseAuth.instance; // TO BE REMOVE LATER.
 
 //  PRINTING RELATED objects put here } ends .
 //  List<Order> _curretnOrder = [];
 
-  Order _curretnOrder ;
-  List<OrderTypeSingleSelect>   _orderType;
+  Order _curretnOrder;
+  List<OrderTypeSingleSelect> _orderType;
   List<PaymentTypeSingleSelect> _paymentType;
-  List<SelectedFood> _expandedSelectedFood =[];
+  List<SelectedFood> _expandedSelectedFood = [];
 
 //  List<SelectedFood> _savedSelectedFood    =[];
 
-
-
-
-
-
-
 //  CustomerInformation _oneCustomerInfo;
-
 
 //  List<Order> get getCurrentOrder => _curretnOrder;
   Order get getCurrentOrder => _curretnOrder;
@@ -97,62 +75,61 @@ class ShoppingCartBloc implements Bloc {
 
 //  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
 
+  final _orderController = StreamController<Order>();
 
-
-  final _orderController = StreamController <Order>();
-
-  final _expandedSelectedFoodController =  StreamController<List<SelectedFood>>/*.broadcast*/();
+  final _expandedSelectedFoodController =
+      StreamController<List<SelectedFood>> /*.broadcast*/ ();
 
 //  final _savedSelectedFoodController =  StreamController<List<SelectedFood>>();
 
-  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
-  final _paymentTypeController = StreamController <List<PaymentTypeSingleSelect>>.broadcast();
+  final _orderTypeController =
+      StreamController<List<OrderTypeSingleSelect>>.broadcast();
+  final _paymentTypeController =
+      StreamController<List<PaymentTypeSingleSelect>>.broadcast();
 
 //  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
 //  final _customerInformationController = StreamController <CustomerInformation>();
 //  final _customerInformationController = StreamController <CustomerInformation>.broadcast();
 
-
   Stream<Order> get getCurrentOrderStream => _orderController.stream;
 
-  Stream  <List<SelectedFood>> get getExpandedFoodsStream => _expandedSelectedFoodController.stream;
+  Stream<List<SelectedFood>> get getExpandedFoodsStream =>
+      _expandedSelectedFoodController.stream;
 
-  Stream  <List<OrderTypeSingleSelect>> get getCurrentOrderTypeSingleSelectStream =>
-      _orderTypeController.stream;
+  Stream<List<OrderTypeSingleSelect>>
+      get getCurrentOrderTypeSingleSelectStream => _orderTypeController.stream;
 
-  Stream  <List<PaymentTypeSingleSelect>> get getCurrentPaymentTypeSingleSelectStream =>
-      _paymentTypeController.stream;
+  Stream<List<PaymentTypeSingleSelect>>
+      get getCurrentPaymentTypeSingleSelectStream =>
+          _paymentTypeController.stream;
 
 //  Stream  <List<SelectedFood>> get getSavedFoodsStream => _savedSelectedFoodController.stream;
 
-
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
 
-
-  List<NewCategoryItem> _allCategories =[];
+  List<NewCategoryItem> _allCategories = [];
   List<NewCategoryItem> get getAllCategories => _allCategories;
   final _categoriesController = StreamController<List<NewCategoryItem>>();
-  Stream <List<NewCategoryItem>> get getCategoryItemsStream => _categoriesController.stream;
-
-
+  Stream<List<NewCategoryItem>> get getCategoryItemsStream =>
+      _categoriesController.stream;
 
   /*
   Stream<CustomerInformation> get getCurrentCustomerInformationStream =>
       _customerInformationController.stream;
   */
 
-
-  List<OneInputCustomerInformation> _allCustomerInput=[];
+  List<OneInputCustomerInformation> _allCustomerInput = [];
   List<OneInputCustomerInformation> get getAllUserInputs => _allCustomerInput;
-  final _customerInputController = StreamController<List<OneInputCustomerInformation>>.broadcast();
-  Stream <List<OneInputCustomerInformation>> get getCustomerInputsStream => _customerInputController.stream;
+  final _customerInputController =
+      StreamController<List<OneInputCustomerInformation>>.broadcast();
+  Stream<List<OneInputCustomerInformation>> get getCustomerInputsStream =>
+      _customerInputController.stream;
 
-
-
-  Restaurant _thisRestaurant ;
+  Restaurant _thisRestaurant;
   Restaurant get getCurrentRestaurant => _thisRestaurant;
-  final _restaurantController = StreamController <Restaurant>();
-  Stream<Restaurant> get getCurrentRestaurantsStream => _restaurantController.stream;
+  final _restaurantController = StreamController<Restaurant>();
+  Stream<Restaurant> get getCurrentRestaurantsStream =>
+      _restaurantController.stream;
 
 // BLUETOOTH PRINTER DEVICES..
 
@@ -160,10 +137,8 @@ class ShoppingCartBloc implements Bloc {
   //  List<String> _devices =[];
   List<PrinterBluetooth> get getDevices => _devicesBlueTooth;
   final _devicesController = StreamController<List<PrinterBluetooth>>();
-  Stream <List<PrinterBluetooth>> get getDevicesStream => _devicesController.stream;
-
-
-
+  Stream<List<PrinterBluetooth>> get getDevicesStream =>
+      _devicesController.stream;
 
 /*
   List<BluetoothDevice> _devicesBlueTooth = [];
@@ -176,40 +151,34 @@ class ShoppingCartBloc implements Bloc {
 
   //  List<PrinterBluetooth> blueToothDevicesState = [];
 
-
-
-  Future<void> getRestaurantInformationConstructor() async{
-
+  Future<void> getRestaurantInformationConstructor() async {
     var snapshot = await _client.fetchRestaurantDataClient();
 
+    Map<String, dynamic> restaurantAddress = snapshot['address'];
+    Map<String, dynamic> restaurantAttribute = snapshot['attribute'];
+    List<dynamic> restaurantCousine = snapshot['cousine'];
+    bool restaurantKidFriendly = snapshot['kid_friendly'];
+    bool restaurantReservation = snapshot['reservation'];
+    bool restaurantRomantic = snapshot['romantic'];
+    List<String> restaurantOffday = snapshot['offday'];
 
-    Map     <String,dynamic> restaurantAddress = snapshot['address'];
-    Map     <String,dynamic> restaurantAttribute = snapshot['attribute'];
-    List    <dynamic> restaurantCousine = snapshot['cousine'];
-    bool    restaurantKidFriendly =  snapshot['kid_friendly'];
-    bool    restaurantReservation = snapshot['reservation'];
-    bool    restaurantRomantic  = snapshot['romantic'];
-    List    <String> restaurantOffday = snapshot['offday'];
+    String restaurantOpen = snapshot['open'];
 
-    String  restaurantOpen = snapshot['open'];
-
-
-
-    String  restaurantAvatar =snapshot['avatar']==''?
-    'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
-        :''
-        + storageBucketURLPredicate +
-        Uri.encodeComponent(snapshot['avatar'])
-        +'?alt=media';
+    String restaurantAvatar = snapshot['avatar'] == ''
+        ? 'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+        : '' +
+            storageBucketURLPredicate +
+            Uri.encodeComponent(snapshot['avatar']) +
+            '?alt=media';
     // 'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/'
 
     print('restaurantAvatar: $restaurantAvatar');
 
+    String restaurantContact = snapshot['contact'];
 
-    String  restaurantContact= snapshot['contact'];
-
-    double  restaurantDeliveryCharge = snapshot['deliveryCharge'];
-    int restaurantDiscount0 =snapshot['discount'];// from string;// need to convert string to double.
+    double restaurantDeliveryCharge = snapshot['deliveryCharge'];
+    int restaurantDiscount0 = snapshot[
+        'discount']; // from string;// need to convert string to double.
     print('restaurantDiscount0-> $restaurantDiscount0 is : ' is num);
     print('restaurantDiscount0-> $restaurantDiscount0 is : ' is int);
     print('restaurantDiscount0-> $restaurantDiscount0 is : ' is double);
@@ -217,48 +186,45 @@ class ShoppingCartBloc implements Bloc {
 
     final double restaurantDiscount = restaurantDiscount0.toDouble();
 //    final double foodItemDiscount = doc['discount'];
-    String  restaurantName =snapshot['name'];
+    String restaurantName = snapshot['name'];
 
     print('restaurantName: $restaurantName');
-    double  restaurantRating =snapshot['rating'];
-    double  restaurantTotalRating =snapshot['totalRating'];
-
+    double restaurantRating = snapshot['rating'];
+    double restaurantTotalRating = snapshot['totalRating'];
 
     Restaurant onlyRestaurant = new Restaurant(
-      address:restaurantAddress,
+      address: restaurantAddress,
       attribute: restaurantAttribute,
       cousine: restaurantCousine,
-      kidFriendly:restaurantKidFriendly, // kid_friendly
-      reservation:restaurantReservation,
-      romantic:restaurantRomantic,
-      offday:restaurantOffday,
+      kidFriendly: restaurantKidFriendly, // kid_friendly
+      reservation: restaurantReservation,
+      romantic: restaurantRomantic,
+      offday: restaurantOffday,
       open: restaurantOpen,
       avatar: restaurantAvatar,
       contact: restaurantContact,
       deliveryCharge: restaurantDeliveryCharge,
-      discount: restaurantDiscount,// from string;// need to convert string to double.
+      discount:
+          restaurantDiscount, // from string;// need to convert string to double.
       name: restaurantName,
       rating: restaurantRating,
-      totalRating :restaurantTotalRating,
+      totalRating: restaurantTotalRating,
     );
 
-    _thisRestaurant= onlyRestaurant;
+    _thisRestaurant = onlyRestaurant;
     _restaurantController.sink.add(_thisRestaurant);
 
 //    _foodItemController.sink.add(_allFoodsList);
-
   }
 
   // CONSTRUCTOR BEGINS HERE.
 
-
   ShoppingCartBloc(
       /*FoodItemWithDocID oneFoodItem, List<NewIngredient> allIngsScoped */
-      Order x,List<NewCategoryItem> allCategories
-      ) {
+      Order x,
+      List<NewCategoryItem> allCategories) {
 //    discoverDevicesConstructor();
     discoverDevicesConstructorNewPKG();
-
 
     print("at the begin of Constructor [ShoppingCartBloc]");
 
@@ -277,18 +243,14 @@ class ShoppingCartBloc implements Bloc {
 
     initiatePaymentTypeSingleSelectOptions(paymentTypeIndex);
 
-
     List<SelectedFood> allOrderedFoods = x.selectedFoodInOrder;
-
 
 //    _savedSelectedFood = allOrderedFoods;
 //    _savedSelectedFoodController.sink.add(_savedSelectedFood);
 
-
     List<SelectedFood> selectedFoodforDisplay = new List<SelectedFood>();
 
 //      List<SelectedFood> test = makeMoreFoodByQuantity(allOrderedFoods.first);
-
 
     allOrderedFoods.forEach((oneFood) {
       print('oneFood details: ===> ===> ');
@@ -302,7 +264,6 @@ class ShoppingCartBloc implements Bloc {
       selectedFoodforDisplay.addAll(test);
     });
 
-
 //      selectedFoodforDisplay.addAll(test);
 
 //      logger.i('|| || || || forDisplay: $selectedFoodforDisplay');
@@ -313,27 +274,20 @@ class ShoppingCartBloc implements Bloc {
     _expandedSelectedFood = selectedFoodforDisplay;
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
 
-
-
     //    initiateCustomerInformation();
 
     _curretnOrder = x;
     _orderController.sink.add(x);
 //    }
 
-
     // put categoryitems here..
 
-    _allCategories=allCategories;
+    _allCategories = allCategories;
     _categoriesController.sink.add(_allCategories);
-
   }
 // CONSTRUCTOR ENDS HERE.
 
-
-
-  List<SelectedFood> makeMoreFoodByQuantity(SelectedFood X){
-
+  List<SelectedFood> makeMoreFoodByQuantity(SelectedFood X) {
     int fillingLength = X.quantity;
     print('X X is $X');
     print('X.quantity is: ${X.quantity}');
@@ -343,7 +297,8 @@ class ShoppingCartBloc implements Bloc {
     print('oneSelectedFood.quantity is: ${oneSelectedFood.quantity}');
     print('oneSelectedFood.foodItemName is: ${oneSelectedFood.foodItemName}');
     logger.i('oneSelectedFood.unitPrice is: ${oneSelectedFood.unitPrice}');
-    logger.i('oneSelectedFood.subTotalPrice is:${oneSelectedFood.subTotalPrice}');
+    logger
+        .i('oneSelectedFood.subTotalPrice is:${oneSelectedFood.subTotalPrice}');
 
     List<SelectedFood> multiplied = List.filled(fillingLength, oneSelectedFood);
 
@@ -359,15 +314,13 @@ class ShoppingCartBloc implements Bloc {
     return multiplied;
   }
 
-
-  void initiatePaymentTypeSingleSelectOptions(int selectedPayment){
+  void initiatePaymentTypeSingleSelectOptions(int selectedPayment) {
     PaymentTypeSingleSelect Later = new PaymentTypeSingleSelect(
       borderColor: '0xff739DFA',
       index: 0,
       isSelected: false,
       paymentTypeName: 'Later',
       iconDataString: 'FontAwesomeIcons.facebook',
-
       paymentIconName: 'Later',
     );
 
@@ -377,10 +330,8 @@ class ShoppingCartBloc implements Bloc {
       isSelected: false,
       paymentTypeName: 'Cash',
       iconDataString: 'FontAwesomeIcons.twitter',
-
       paymentIconName: 'Cash',
     );
-
 
 //     0xffFEE295 false
     PaymentTypeSingleSelect Card = new PaymentTypeSingleSelect(
@@ -389,43 +340,41 @@ class ShoppingCartBloc implements Bloc {
       isSelected: false,
       paymentTypeName: 'Card',
       iconDataString: 'FontAwesomeIcons.home',
-
       paymentIconName: 'Card',
     );
 
-    List <PaymentTypeSingleSelect> paymentTypeSingleSelectArray = new List<PaymentTypeSingleSelect>();
+    List<PaymentTypeSingleSelect> paymentTypeSingleSelectArray =
+        new List<PaymentTypeSingleSelect>();
 
+    paymentTypeSingleSelectArray.addAll([Later, Cash, Card]);
 
-    paymentTypeSingleSelectArray.addAll([Later, Cash, Card  ]);
+    paymentTypeSingleSelectArray[selectedPayment].isSelected = true;
 
-    paymentTypeSingleSelectArray[selectedPayment].isSelected =true;
-
-    _paymentType = paymentTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+    _paymentType =
+        paymentTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
     _paymentTypeController.sink.add(_paymentType);
   }
 
-  void setPaymentTypeSingleSelectOptionForOrder(PaymentTypeSingleSelect x, int newPaymentIndex,int oldPaymentIndex){
-
+  void setPaymentTypeSingleSelectOptionForOrder(
+      PaymentTypeSingleSelect x, int newPaymentIndex, int oldPaymentIndex) {
     print('new Payment Index is $newPaymentIndex');
     print('old Payment Index is $oldPaymentIndex');
 
-
-    List <PaymentTypeSingleSelect> singleSelectArray = _paymentType;
+    List<PaymentTypeSingleSelect> singleSelectArray = _paymentType;
 
     singleSelectArray[oldPaymentIndex].isSelected =
-    !singleSelectArray[oldPaymentIndex].isSelected;
+        !singleSelectArray[oldPaymentIndex].isSelected;
 
-
-    singleSelectArray [newPaymentIndex].isSelected =
-    !singleSelectArray[newPaymentIndex].isSelected;
+    singleSelectArray[newPaymentIndex].isSelected =
+        !singleSelectArray[newPaymentIndex].isSelected;
 
     Order currentOrderTemp = _curretnOrder;
 
     currentOrderTemp.paymentTypeIndex = newPaymentIndex;
 
-
-    _paymentType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+    _paymentType =
+        singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
     _curretnOrder = currentOrderTemp;
 
@@ -433,77 +382,66 @@ class ShoppingCartBloc implements Bloc {
     _orderController.sink.add(_curretnOrder);
   }
 
-
   //PAYMENT FIRESTORE =>
 
-
-
 //  Future<OneOrderFirebase> fetchOrderDataFromFirebase(String orderDocumentId) async {
-  Future<String> recitePrinted(String orderDocumentID,String status) async{
-
+  Future<String> recitePrinted(String orderDocumentID, String status) async {
     String documentID = orderDocumentID;
 
-
     var updateResult =
-    await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
+        await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(
+            documentID, status);
 
     print('updateResult is:: :: $updateResult');
 
-
-
-    String                    recitePrintedString = updateResult['recitePrinted'];
+    String recitePrintedString = updateResult['recitePrinted'];
 
     print('recitePrintedString: $recitePrintedString');
 
     return recitePrintedString;
-
   }
 
-
-  int checkRating(String oneCategoryString, String secondCategoryString, List<NewCategoryItem> allCats){
-
-    NewCategoryItem firstCategory = allCats.where((element) => element.categoryName == oneCategoryString).first;
-    NewCategoryItem secondCategory = allCats.where((element) => element.categoryName == secondCategoryString).first;
+  int checkRating(String oneCategoryString, String secondCategoryString,
+      List<NewCategoryItem> allCats) {
+    NewCategoryItem firstCategory = allCats
+        .where((element) => element.categoryName == oneCategoryString)
+        .first;
+    NewCategoryItem secondCategory = allCats
+        .where((element) => element.categoryName == secondCategoryString)
+        .first;
 
 //    numbers.sort((a, b) => a.length.compareTo(b.length));
     return firstCategory.squenceNo.compareTo(secondCategory.squenceNo);
 
 //    return firstCategory.rating > secondCategory.rating;
-
   }
 
+  Future<Order> paymentButtonPressed(Order payMentProcessing) async {
+    String orderBy = _orderType[payMentProcessing.orderTypeIndex].orderType;
 
-  Future<Order> paymentButtonPressed(Order payMentProcessing) async{
-
-    String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
-
-
-    String paidType0 =  _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
+    String paidType0 =
+        _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
 
     // where should i put cancelButtonPressed();
 //
     // payMentProcessing
-    Order tempOrder= payMentProcessing;
+    Order tempOrder = payMentProcessing;
 
-    tempOrder.paymentButtonPressed=true;
-
+    tempOrder.paymentButtonPressed = true;
 
     // loader/ spinner loads from this 2 lines not tested yet.... july 25 2020.
 
-
-    _curretnOrder=tempOrder;
+    _curretnOrder = tempOrder;
     _orderController.sink.add(_curretnOrder);
 
     // loader/ spinner loads from this 2 lines not tested yet.... july 25 2020. ends here.
-
 
 //    _curretnOrder= tempOrder;
 
 //    List<SelectedFood> selectedFoodCheckForList = tempOrder.selectedFoodInOrder;
 
     List<SelectedFood> selectedFoodCheckForList = _expandedSelectedFood;
-    int length =tempOrder.selectedFoodListLength;
-
+    int length = tempOrder.selectedFoodListLength;
 
 //    logger.e('tempOrder.selectedFoodListLength ${tempOrder.selectedFoodListLength}');
 //
@@ -511,19 +449,18 @@ class ShoppingCartBloc implements Bloc {
 
 //    print('selectedFoodCheckForList[3].quantity => ${selectedFoodCheckForList[3].quantity}');
 
-    Set<SelectedFood> selectedFoodCheckForListToSet= selectedFoodCheckForList.toSet();
+    Set<SelectedFood> selectedFoodCheckForListToSet =
+        selectedFoodCheckForList.toSet();
 
-    int lengthOfNotDuplicateFoods= selectedFoodCheckForListToSet.length;
+    int lengthOfNotDuplicateFoods = selectedFoodCheckForListToSet.length;
 
 //    unDuplicatedSelectedFoods
 //
 
     selectedFoodCheckForListToSet.forEach((oneFood) {
-
-
-      for(int i=0;i<selectedFoodCheckForList.length;i++){
-        if(oneFood==selectedFoodCheckForList[i]){
-          oneFood.quantity= oneFood.quantity +1;
+      for (int i = 0; i < selectedFoodCheckForList.length; i++) {
+        if (oneFood == selectedFoodCheckForList[i]) {
+          oneFood.quantity = oneFood.quantity + 1;
         }
       }
 
@@ -531,27 +468,19 @@ class ShoppingCartBloc implements Bloc {
 //      print('oneFood: ${oneFood.foodItemName}');
 //      logger.i('oneFood.quantity: ${oneFood.quantity}');
 //         print('oneFood: ${oneFood.foodItemName}');
-
-
-
     });
 
     selectedFoodCheckForListToSet.forEach((oneFood) {
-
-      oneFood.quantity= oneFood.quantity-1; //initially 1 that was incremented in the previous forEach loop.
+      oneFood.quantity = oneFood.quantity -
+          1; //initially 1 that was incremented in the previous forEach loop.
       print('oneFood.quantity SS: ${oneFood.quantity}');
-
     });
-
-
 
 //    print('${selectedFoodCheckForListToSet.}')
 
-
     tempOrder.selectedFoodInOrder = selectedFoodCheckForListToSet.toList();
 
-
-    List<SelectedFood> tempForCategorising=  tempOrder.selectedFoodInOrder;
+    List<SelectedFood> tempForCategorising = tempOrder.selectedFoodInOrder;
 
     // todo sorting by categories ....
 
@@ -559,94 +488,71 @@ class ShoppingCartBloc implements Bloc {
 
 //    List<NewCategoryItem> tempCategoryForCategorisingOrderedFoods = _allCategories;
 
-    tempForCategorising.sort((a,b)=>checkRating(a.categoryName,b.categoryName,
-        _allCategories));
+    tempForCategorising.sort(
+        (a, b) => checkRating(a.categoryName, b.categoryName, _allCategories));
 
-    List<SelectedFood> tempForCategorising2 =  new List.from(tempForCategorising.reversed);
+    List<SelectedFood> tempForCategorising2 =
+        new List.from(tempForCategorising.reversed);
     /* List<String> numbers2 */
-
-
-
-
 
 //    categoryName
 //    _allCategories
 
-
     tempOrder.selectedFoodInOrder = tempForCategorising2;
 
-
-
-
-
-    String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0);
-
+    String documentID =
+        await _client.insertOrder(tempOrder, orderBy, paidType0);
 
     print('documentID: $documentID');
 
-    if(documentID!=null){
-      tempOrder.orderdocId= documentID;
+    if (documentID != null) {
+      tempOrder.orderdocId = documentID;
 
-      _curretnOrder=null;
-      _expandedSelectedFood =[];
-      _orderType =[];
-      _paymentType =[];
-
+      _curretnOrder = null;
+      _expandedSelectedFood = [];
+      _orderType = [];
+      _paymentType = [];
 
       // required to properly show data in the receipt thus don't clear _currentOrder object.
-      _curretnOrder=tempOrder;
+      _curretnOrder = tempOrder;
       _orderController.sink.add(_curretnOrder);
 
-
       return tempOrder;
-
-    }
-    else{
+    } else {
       return tempOrder;
     }
-
-
-
   }
 
+  Future<Order> paymentButtonPressedLater() async {
+    Order payMentProcessing = _curretnOrder;
 
-  Future<Order> paymentButtonPressedLater() async{
-
-    Order payMentProcessing=_curretnOrder;
-
-    String orderBy =    _orderType[payMentProcessing.orderTypeIndex].orderType;
+    String orderBy = _orderType[payMentProcessing.orderTypeIndex].orderType;
 //    logger.i('payment Button Pressed is payMentProcessing.orderTypeIndex ${payMentProcessing.orderTypeIndex} ::'
 //        ' orderBy: $orderBy    ${_curretnOrder.paymentTypeIndex}');
 
-
-
-
-    String paidType0 =  _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
+    String paidType0 =
+        _paymentType[payMentProcessing.paymentTypeIndex].paymentTypeName;
 
     // where should i put cancelButtonPressed();
 //
     // payMentProcessing
-    Order tempOrder= payMentProcessing;
+    Order tempOrder = payMentProcessing;
 
-    tempOrder.paymentButtonPressed=true;
-
+    tempOrder.paymentButtonPressed = true;
 
     // loader/ spinner loads from this 2 lines not tested yet.... july 25 2020.
 
-
-    _curretnOrder=tempOrder;
+    _curretnOrder = tempOrder;
     _orderController.sink.add(_curretnOrder);
 
     // loader/ spinner loads from this 2 lines not tested yet.... july 25 2020. ends here.
-
 
 //    _curretnOrder= tempOrder;
 
 //    List<SelectedFood> selectedFoodCheckForList = tempOrder.selectedFoodInOrder;
 
     List<SelectedFood> selectedFoodCheckForList = _expandedSelectedFood;
-    int length =tempOrder.selectedFoodListLength;
-
+    int length = tempOrder.selectedFoodListLength;
 
 //    logger.e('tempOrder.selectedFoodListLength ${tempOrder.selectedFoodListLength}');
 //
@@ -654,19 +560,18 @@ class ShoppingCartBloc implements Bloc {
 
 //    print('selectedFoodCheckForList[3].quantity => ${selectedFoodCheckForList[3].quantity}');
 
-    Set<SelectedFood> selectedFoodCheckForListToSet= selectedFoodCheckForList.toSet();
+    Set<SelectedFood> selectedFoodCheckForListToSet =
+        selectedFoodCheckForList.toSet();
 
-    int lengthOfNotDuplicateFoods= selectedFoodCheckForListToSet.length;
+    int lengthOfNotDuplicateFoods = selectedFoodCheckForListToSet.length;
 
 //    unDuplicatedSelectedFoods
 //
 
     selectedFoodCheckForListToSet.forEach((oneFood) {
-
-
-      for(int i=0;i<selectedFoodCheckForList.length;i++){
-        if(oneFood==selectedFoodCheckForList[i]){
-          oneFood.quantity= oneFood.quantity +1;
+      for (int i = 0; i < selectedFoodCheckForList.length; i++) {
+        if (oneFood == selectedFoodCheckForList[i]) {
+          oneFood.quantity = oneFood.quantity + 1;
         }
       }
 
@@ -674,27 +579,19 @@ class ShoppingCartBloc implements Bloc {
 //      print('oneFood: ${oneFood.foodItemName}');
 //      logger.i('oneFood.quantity: ${oneFood.quantity}');
 //         print('oneFood: ${oneFood.foodItemName}');
-
-
-
     });
 
     selectedFoodCheckForListToSet.forEach((oneFood) {
-
-      oneFood.quantity= oneFood.quantity-1; //initially 1 that was incremented in the previous forEach loop.
+      oneFood.quantity = oneFood.quantity -
+          1; //initially 1 that was incremented in the previous forEach loop.
       print('oneFood.quantity SS: ${oneFood.quantity}');
-
     });
-
-
 
 //    print('${selectedFoodCheckForListToSet.}')
 
-
     tempOrder.selectedFoodInOrder = selectedFoodCheckForListToSet.toList();
 
-
-    List<SelectedFood> tempForCategorising=  tempOrder.selectedFoodInOrder;
+    List<SelectedFood> tempForCategorising = tempOrder.selectedFoodInOrder;
 
     // todo sorting by categories ....
 
@@ -702,57 +599,44 @@ class ShoppingCartBloc implements Bloc {
 
 //    List<NewCategoryItem> tempCategoryForCategorisingOrderedFoods = _allCategories;
 
-    tempForCategorising.sort((a,b)=>checkRating(a.categoryName,b.categoryName,
-        _allCategories));
+    tempForCategorising.sort(
+        (a, b) => checkRating(a.categoryName, b.categoryName, _allCategories));
 
-    List<SelectedFood> tempForCategorising2 =  new List.from(tempForCategorising.reversed);
+    List<SelectedFood> tempForCategorising2 =
+        new List.from(tempForCategorising.reversed);
     /* List<String> numbers2 */
-
-
-
-
 
 //    categoryName
 //    _allCategories
 
-
     tempOrder.selectedFoodInOrder = tempForCategorising2;
 
-
-
-
-
-    String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0);
-
+    String documentID =
+        await _client.insertOrder(tempOrder, orderBy, paidType0);
 
     print('documentID: $documentID');
 
-    if(documentID!=null){
-      tempOrder.orderdocId= documentID;
+    if (documentID != null) {
+      tempOrder.orderdocId = documentID;
 
-      _curretnOrder=null;
-      _expandedSelectedFood =[];
-      _orderType =[];
-      _paymentType =[];
-
+      _curretnOrder = null;
+      _expandedSelectedFood = [];
+      _orderType = [];
+      _paymentType = [];
 
       // required to properly show data in the receipt thus don't clear _currentOrder object.
-      _curretnOrder=tempOrder;
+      _curretnOrder = tempOrder;
       _orderController.sink.add(_curretnOrder);
 
-
       return tempOrder;
-
-    }
-    else{
+    } else {
       return tempOrder;
     }
   }
 
-
-  List<NewIngredient> convertFireStoreIngredientItemsToLocalNewIngredientItemsList(List<dynamic>
-  fireStoreNewIngredients){
-
+  List<NewIngredient>
+      convertFireStoreIngredientItemsToLocalNewIngredientItemsList(
+          List<dynamic> fireStoreNewIngredients) {
     print('at convertFireStoreIngredientItemsToLocalNewIngredientItemsList');
 
     // List<Map<String, dynamic>>
@@ -761,35 +645,31 @@ class ShoppingCartBloc implements Bloc {
 
     List<NewIngredient> allIngredientItems = new List<NewIngredient>();
 
-    int ingredientCount =0;
+    int ingredientCount = 0;
     fireStoreNewIngredients.forEach((oneFireStoreSauce) {
-
       var oneNewIngredient = oneFireStoreSauce;
 
-
       NewIngredient oneTempNewIngredient = new NewIngredient(
-        ingredientName: oneFireStoreSauce['name'] ,
-        imageURL: oneFireStoreSauce['image'] ,
-        ingredientAmountByUser: oneFireStoreSauce['ingredientAmountByUser'] ,
-        isDefault:oneFireStoreSauce['isDefault'],
-        price:oneFireStoreSauce['ingredientPrice'],
-        isDeleted:  oneFireStoreSauce['isDeleted'],
+        ingredientName: oneFireStoreSauce['name'],
+        imageURL: oneFireStoreSauce['image'],
+        ingredientAmountByUser: oneFireStoreSauce['ingredientAmountByUser'],
+        isDefault: oneFireStoreSauce['isDefault'],
+        price: oneFireStoreSauce['ingredientPrice'],
+        isDeleted: oneFireStoreSauce['isDeleted'],
 //          isDefault: oneFireStoreSauce['isDefault'],
-
       );
 
-      print('--   ::      :: at here: convertFireStoreIngredientItemsToLocalNewIngredientItemsList -------- : :'
+      print(
+          '--   ::      :: at here: convertFireStoreIngredientItemsToLocalNewIngredientItemsList -------- : :'
           ' for ingredient: ${oneTempNewIngredient.ingredientName} ');
 
       print('name: ${oneTempNewIngredient.ingredientName} '
           'imageURL: ${oneTempNewIngredient.imageURL} price: ${oneTempNewIngredient.price},'
           ' ingredientAmountByUser: ${oneTempNewIngredient.ingredientAmountByUser}... isDefault: ${oneTempNewIngredient.isDefault}');
 
-
       allIngredientItems.add(oneTempNewIngredient);
 
-      ingredientCount = ingredientCount +1;
-
+      ingredientCount = ingredientCount + 1;
     });
 
     logger.i('total Ingredient count: $ingredientCount');
@@ -800,32 +680,30 @@ class ShoppingCartBloc implements Bloc {
 
 //  convertFireStoreCheeseItemsToLocalCheeseItemsList(oneFoodItem['selectedCheeses']),
 
-  List<CheeseItem> convertFireStoreCheeseItemsToLocalCheeseItemsList(List<dynamic> fireStoreCheeseItems){
-
-
+  List<CheeseItem> convertFireStoreCheeseItemsToLocalCheeseItemsList(
+      List<dynamic> fireStoreCheeseItems) {
     // List<Map<String, dynamic>>
 
-    print('--   ::      :: at here: convertFireStoreCheeseItemsToLocalCheeseItemsList -------- : : ');
+    print(
+        '--   ::      :: at here: convertFireStoreCheeseItemsToLocalCheeseItemsList -------- : : ');
 
     List<CheeseItem> allCheeseItems = new List<CheeseItem>();
 
-    int cheeseItemCount= 0;
+    int cheeseItemCount = 0;
     fireStoreCheeseItems.forEach((oneFireStoreCheese) {
-
       var oneCheeseItem = oneFireStoreCheese;
 
-
       CheeseItem oneTempCheeseItem = new CheeseItem(
-        cheeseItemName: oneCheeseItem['name'] ,
-        imageURL: oneCheeseItem['image'] ,
-        cheeseItemAmountByUser: oneCheeseItem['cheeseItemAmountByUser'] ,
-        price: oneCheeseItem['cheeseItemPrice'] ,
-        isDefaultSelected:  oneCheeseItem['isDefaultSelected'],
+        cheeseItemName: oneCheeseItem['name'],
+        imageURL: oneCheeseItem['image'],
+        cheeseItemAmountByUser: oneCheeseItem['cheeseItemAmountByUser'],
+        price: oneCheeseItem['cheeseItemPrice'],
+        isDefaultSelected: oneCheeseItem['isDefaultSelected'],
         isDeleted: oneCheeseItem['isDeleted'],
-
       );
 
-      print('--   ::      :: at here: convertFireStoreCheeseItemsToLocalCheeseItemsList -------- : :'
+      print(
+          '--   ::      :: at here: convertFireStoreCheeseItemsToLocalCheeseItemsList -------- : :'
           ' for cheeseItem: ${oneTempCheeseItem.cheeseItemName} ');
 
       print('CheeseItem_name: ${oneTempCheeseItem.cheeseItemName} '
@@ -833,11 +711,9 @@ class ShoppingCartBloc implements Bloc {
           ' cheeseItemAmountByUser: ${oneTempCheeseItem.cheeseItemAmountByUser} isDefaultSelected: '
           '${oneTempCheeseItem.isDefaultSelected}');
 
-
       allCheeseItems.add(oneTempCheeseItem);
 
-      cheeseItemCount = cheeseItemCount +1;
-
+      cheeseItemCount = cheeseItemCount + 1;
     });
 
     logger.i('cheeseItemCount: $cheeseItemCount');
@@ -845,63 +721,58 @@ class ShoppingCartBloc implements Bloc {
 //    return sf.length
   }
 
-  List<SauceItem> convertFireStoreSauceItemsToLocalSauceItemsList(List<dynamic> fireStoreSauces){
+  List<SauceItem> convertFireStoreSauceItemsToLocalSauceItemsList(
+      List<dynamic> fireStoreSauces) {
     // List<Map<String, dynamic>>
 
     print('at convertFireStoreSauceItemsToLocalSauceItemsList');
 
     List<SauceItem> allSauceItems = new List<SauceItem>();
 
-    int sauceCount= 0;
+    int sauceCount = 0;
     fireStoreSauces.forEach((oneFireStoreSauce) {
-
       var oneSauceItem = oneFireStoreSauce;
 
-
       SauceItem oneTempSauceItem = new SauceItem(
-        sauceItemName: oneSauceItem['name'] ,
-        imageURL: oneSauceItem['image'] ,
-        sauceItemAmountByUser: oneSauceItem['sauceItemAmountByUser'] ,
+        sauceItemName: oneSauceItem['name'],
+        imageURL: oneSauceItem['image'],
+        sauceItemAmountByUser: oneSauceItem['sauceItemAmountByUser'],
         price: oneSauceItem['sauceItemPrice'],
         isDefaultSelected: oneSauceItem['isDefaultSelected'],
         isDeleted: oneSauceItem['isDeleted'],
-
       );
 
-      print('--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : for sauce: ${oneSauceItem['name']} ');
+      print(
+          '--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : for sauce: ${oneSauceItem['name']} ');
 
       print('sauceItemName: ${oneTempSauceItem.sauceItemName} '
           'imageURL: ${oneTempSauceItem.imageURL} price: ${oneTempSauceItem.price},'
           ' sauceItemAmountByUser: ${oneTempSauceItem.sauceItemAmountByUser} VV isDefaultSelected: '
           '${oneTempSauceItem.isDefaultSelected}');
 
-
       allSauceItems.add(oneTempSauceItem);
 
-      sauceCount= sauceCount+ 1;
+      sauceCount = sauceCount + 1;
     });
 
     logger.i('sauceCount: $sauceCount');
 
     return allSauceItems;
 //    return sf.length
-
   }
 
-  CustomerInformation localCustomerInformationObject(Map<String,dynamic> customerAddress){
+  CustomerInformation localCustomerInformationObject(
+      Map<String, dynamic> customerAddress) {
 // List<Map<String, dynamic>>
 
     CustomerInformation oneCustomer = new CustomerInformation(
       address: customerAddress['state'],
       flatOrHouseNumber: customerAddress['apartNo'],
-      phoneNumber:customerAddress['phone'],
+      phoneNumber: customerAddress['phone'],
 //      etaTimeInMinutes: , ETA IS orderProductionTime
     );
 
-
-
     return oneCustomer;
-
   }
 
   String sanitizeTimeOfDay(String nameInput) {
@@ -916,53 +787,47 @@ class ShoppingCartBloc implements Bloc {
     return nameInput4;
   }
 
-
-  Future<OneOrderFirebase> fetchOrderDataFromFirebase(String orderDocumentId) async {
-
+  Future<OneOrderFirebase> fetchOrderDataFromFirebase(
+      String orderDocumentId) async {
     var snapshot = await _client.invokeClientForOneOrder(orderDocumentId);
 
-
 //    List <Map<String, dynamic>>
-    Map<String,dynamic>       customerAddress = snapshot['address'];
+    Map<String, dynamic> customerAddress = snapshot['address'];
 //    List <Map<dynamic, dynamic>> orderedItems = snapshot['items'];
     List<dynamic> orderedItems = snapshot['items'];
 //    List<Map<String, dynamic>>
-    String                    orderBy = snapshot['orderby'];
-    String                    paidStatus = snapshot['paidStatus'];
-    String                    paidType = snapshot['paidType'];
-    double                    totalPrice = snapshot['price'];
+    String orderBy = snapshot['orderby'];
+    String paidStatus = snapshot['paidStatus'];
+    String paidType = snapshot['paidType'];
+    double totalPrice = snapshot['price'];
 
-    String                    contact = snapshot['contact'];
-    String                    driverName = snapshot['driver'];
-    DateTime                  endDate = snapshot['end'].toDate();
-    DateTime                  startDate = snapshot['start'].toDate();
+    String contact = snapshot['contact'];
+    String driverName = snapshot['driver'];
+    DateTime endDate = snapshot['end'].toDate();
+    DateTime startDate = snapshot['start'].toDate();
 
-    String                    orderStatus = snapshot['status'];
-    String                    tableNo = snapshot['tableNo'];
-    String                    orderType = snapshot['orderType'];
-    String                    documentId = orderDocumentId;
-    int                    orderProductionTimeFromNow = snapshot['orderProductionTimeFromNow'];
-    String                timeOfDay3 = snapshot['orderProductionTimeOfDay'];
-    String                timeOfDay2 = sanitizeTimeOfDay(timeOfDay3);
+    String orderStatus = snapshot['status'];
+    String tableNo = snapshot['tableNo'];
+    String orderType = snapshot['orderType'];
+    String documentId = orderDocumentId;
+    int orderProductionTimeFromNow = snapshot['orderProductionTimeFromNow'];
+    String timeOfDay3 = snapshot['orderProductionTimeOfDay'];
+    String timeOfDay2 = sanitizeTimeOfDay(timeOfDay3);
 
+    double deliveryCost2 = snapshot['deliveryCost?'];
+    double tax = snapshot['tax'];
+    double priceWithDelivery2 = snapshot['priceWithDelivery?'];
 
-
-
-
-    double                 deliveryCost2 = snapshot['deliveryCost?'];
-    double                 tax = snapshot['tax'];
-    double                 priceWithDelivery2 = snapshot['priceWithDelivery?'];
-
-
-    CustomerInformation currentCustomerFromFireStore = localCustomerInformationObject(customerAddress);
+    CustomerInformation currentCustomerFromFireStore =
+        localCustomerInformationObject(customerAddress);
 //    new CustomerInformation
-    print('currentCustomerFromFireStore.address:____ __ || || || ||  ${currentCustomerFromFireStore.address}');
-    print('currentCustomerFromFireStore.flatOrHouseNumber: ${currentCustomerFromFireStore.flatOrHouseNumber}');
-    print('currentCustomerFromFireStore.phoneNumber: ${currentCustomerFromFireStore.phoneNumber}');
+    print(
+        'currentCustomerFromFireStore.address:____ __ || || || ||  ${currentCustomerFromFireStore.address}');
+    print(
+        'currentCustomerFromFireStore.flatOrHouseNumber: ${currentCustomerFromFireStore.flatOrHouseNumber}');
+    print(
+        'currentCustomerFromFireStore.phoneNumber: ${currentCustomerFromFireStore.phoneNumber}');
 //    print('currentCustomerFromFireStore.etaTimeInMinutes: ${currentCustomerFromFireStore.etaTimeInMinutes}');
-
-
-
 
     print('orderedItems: $orderedItems');
     print('orderBy: $orderBy');
@@ -972,17 +837,17 @@ class ShoppingCartBloc implements Bloc {
     print('contact: $contact');
     print('driverName: $driverName');
 
-    print('snapshot[\'end\'].toDate().toString(): ${snapshot['end'].toDate().toString()}');
+    print(
+        'snapshot[\'end\'].toDate().toString(): ${snapshot['end'].toDate().toString()}');
 
 //    DateTime d = t.toDate();
 //    print(d.toString()); //2019-12-28 18:48:48.364
-    print('snapshot[\'start\'].toDate().toString()${snapshot['start'].toDate().toString()}');
-
+    print(
+        'snapshot[\'start\'].toDate().toString()${snapshot['start'].toDate().toString()}');
 
     print('snapshot[\'end\']: ${snapshot['end'].toDate()}');
 
     print('snapshot[\'start\']${snapshot['start'].toDate()}');
-
 
     print('endDate: $endDate');
     print('startDate: $startDate');
@@ -991,21 +856,27 @@ class ShoppingCartBloc implements Bloc {
 
     final String timestamp = formatter1.format(startDate);
 
-    final formatter2 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat.yMMMMd('en_US').add_Hm();
+    final formatter2 = /*DateFormat('MM/dd/yyyy H:m'); */ DateFormat
+            .yMMMMd('en_US')
+        .add_Hm();
     final String timestamp2 = formatter1.format(startDate);
 
     print('timestamp >>>: $timestamp');
     print('timestamp2 >>> <<<: $timestamp2');
 
-    final formatter3 =  DateFormat.jm();
-    final formatter4 =  DateFormat.Hm();
+    final formatter3 = DateFormat.jm();
+    final formatter4 = DateFormat.Hm();
 
-    final String formattedOrderPlacementDatesTimeOnly = formatter2.format(startDate);
+    final String formattedOrderPlacementDatesTimeOnly =
+        formatter2.format(startDate);
 
-    final String formattedOrderPlacementDatesTimeOnly2 = formatter4.format(startDate);
+    final String formattedOrderPlacementDatesTimeOnly2 =
+        formatter4.format(startDate);
 
-    print('formattedOrderPlacementDatesTimeOnly2: $formattedOrderPlacementDatesTimeOnly2');
-    print('formattedOrderPlacementDatesTimeOnly < < > >: $formattedOrderPlacementDatesTimeOnly');
+    print(
+        'formattedOrderPlacementDatesTimeOnly2: $formattedOrderPlacementDatesTimeOnly2');
+    print(
+        'formattedOrderPlacementDatesTimeOnly < < > >: $formattedOrderPlacementDatesTimeOnly');
 
     print('orderProductionTimeFromNow: $orderProductionTimeFromNow');
 
@@ -1022,81 +893,77 @@ class ShoppingCartBloc implements Bloc {
     //    -> 5:08 PM
     //    -> 7/10/1996 5:08 PM
 
-
-
     print('orderStatus: $orderStatus'); // "ready"
     print('tableNo: $tableNo');
     print('orderType: $orderType');
     print('documentId: $documentId');
 
-    List<OrderedItem> allOrderedItems= new List<OrderedItem>();
+    List<OrderedItem> allOrderedItems = new List<OrderedItem>();
     orderedItems.forEach((oneFood) {
-
       var oneFoodItem = oneFood;
       print('oneFoodItem[\'quantity\'] ${oneFoodItem['quantity']}!');
       print('oneFoodItem[\'name\'] ${oneFoodItem['name']}!');
-      print('oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
+      print(
+          'oneFoodItem[\'oneFoodTypeTotalPrice\'] ${oneFoodItem['oneFoodTypeTotalPrice']}!');
 //      print('oneFoodItem.category: ${oneFoodItem.category}');
       print('oneFoodItem[\'category\']: ${oneFoodItem['category']}');
-
-
 
       print('unitPrice: ${oneFoodItem['unitPrice']}');
       print('unitPrice: ${oneFoodItem['foodImage']}');
       print('unitPrice: ${oneFoodItem['discount']}');
-      print('unitPriceWithoutCheeseIngredientSauces: ${oneFoodItem['unitPriceWithoutCheeseIngredientSauces']}');
+      print(
+          'unitPriceWithoutCheeseIngredientSauces: ${oneFoodItem['unitPriceWithoutCheeseIngredientSauces']}');
 //      print('unitPrice');
       print('foodItemSize: ${oneFoodItem['foodItemSize']}');
 
-      List<SauceItem>     defaultSauces = convertFireStoreSauceItemsToLocalSauceItemsList(oneFoodItem['selectedSauces']);
-      List<NewIngredient> selectedIngredients = convertFireStoreIngredientItemsToLocalNewIngredientItemsList(oneFoodItem['ingredients']);
-      List<CheeseItem>    selectedCheeses = convertFireStoreCheeseItemsToLocalCheeseItemsList(oneFoodItem['selectedCheeses']);
-
+      List<SauceItem> defaultSauces =
+          convertFireStoreSauceItemsToLocalSauceItemsList(
+              oneFoodItem['selectedSauces']);
+      List<NewIngredient> selectedIngredients =
+          convertFireStoreIngredientItemsToLocalNewIngredientItemsList(
+              oneFoodItem['ingredients']);
+      List<CheeseItem> selectedCheeses =
+          convertFireStoreCheeseItemsToLocalCheeseItemsList(
+              oneFoodItem['selectedCheeses']);
 
       print('defaultSauces : $defaultSauces ');
       print('selectedIngredients : $selectedIngredients ');
       print('selectedCheeses : $selectedCheeses ');
 
-      List<dynamic>          multiSelect =    oneFoodItem['multiSelect'];
+      List<dynamic> multiSelect = oneFoodItem['multiSelect'];
 
       print('multiSelect:_____________________ _____  $multiSelect');
-      List<String> multiSelectStringList= new List<String>();
-      if(multiSelect!=null){
+      List<String> multiSelectStringList = new List<String>();
+      if (multiSelect != null) {
         multiSelectStringList = List<String>.from(multiSelect);
       }
       print('multiSelectStringList: $multiSelectStringList');
 
       print('multiSelectStringList.length: ${multiSelectStringList.length}');
 
+      OrderedItem oneTempOrderedItem = new OrderedItem(
+        category: oneFoodItem['category'],
 
-
-
-      OrderedItem oneTempOrderedItem= new OrderedItem(
-        category:  oneFoodItem['category'],
-
-        selectedSauces:  defaultSauces,
+        selectedSauces: defaultSauces,
         selectedIngredients: selectedIngredients,
         selectedCheeses: selectedCheeses,
         multiSelectString: multiSelectStringList,
 //        final List<dynamic> foodItemIngredientsList =  doc['ingredients'];,
 
-        discount:  oneFoodItem['discount'],
-        foodItemImage:  oneFoodItem['foodImage'],
+        discount: oneFoodItem['discount'],
+        foodItemImage: oneFoodItem['foodImage'],
 
-        quantity:  oneFoodItem['quantity'],
-        name:oneFoodItem['name'],
-        oneFoodTypeTotalPrice:oneFoodItem['oneFoodTypeTotalPrice'],
-        unitPrice:oneFoodItem['unitPrice'],
-        unitPriceWithoutCheeseIngredientSauces: oneFoodItem['unitPriceWithoutCheeseIngredientSauces'],
+        quantity: oneFoodItem['quantity'],
+        name: oneFoodItem['name'],
+        oneFoodTypeTotalPrice: oneFoodItem['oneFoodTypeTotalPrice'],
+        unitPrice: oneFoodItem['unitPrice'],
+        unitPriceWithoutCheeseIngredientSauces:
+            oneFoodItem['unitPriceWithoutCheeseIngredientSauces'],
         foodItemSize: oneFoodItem['foodItemSize'],
       );
 
       allOrderedItems.add(oneTempOrderedItem);
-
-
     });
-
-
 
     /*
     orderedItems55.forEach((oneFood) {
@@ -1106,40 +973,33 @@ class ShoppingCartBloc implements Bloc {
     });
     */
 
-
-
-
     OneOrderFirebase oneOrderForReceiptProduction = new OneOrderFirebase(
-      oneCustomer:currentCustomerFromFireStore,
+      oneCustomer: currentCustomerFromFireStore,
 //      orderedItems:[],
-      orderedItems:allOrderedItems,
-      orderBy:orderBy,
-      paidStatus:paidStatus,
-      paidType:paidType,
-      totalPrice:totalPrice,
-      contact:contact,
-      driverName:driverName,
-      endDate:endDate,
-      startDate:startDate,
-      formattedOrderPlacementDate:timestamp,
-      formattedOrderPlacementDatesTimeOnly:formattedOrderPlacementDatesTimeOnly2,
-      orderStatus:orderStatus,
-      tableNo:tableNo,
-      orderType:orderType,
-      orderProductionTimeFromNow:orderProductionTimeFromNow,
+      orderedItems: allOrderedItems,
+      orderBy: orderBy,
+      paidStatus: paidStatus,
+      paidType: paidType,
+      totalPrice: totalPrice,
+      contact: contact,
+      driverName: driverName,
+      endDate: endDate,
+      startDate: startDate,
+      formattedOrderPlacementDate: timestamp,
+      formattedOrderPlacementDatesTimeOnly:
+          formattedOrderPlacementDatesTimeOnly2,
+      orderStatus: orderStatus,
+      tableNo: tableNo,
+      orderType: orderType,
+      orderProductionTimeFromNow: orderProductionTimeFromNow,
       timeOfDay: timeOfDay2,
       deliveryCost: deliveryCost2,
-      tax:          tax,
+      tax: tax,
       priceWithDelivery: priceWithDelivery2,
-      documentId:documentId,
+      documentId: documentId,
     );
 
-
-
-
-
     // print('result:  IIIII   >>>>>  $result'  );
-
 
     /*
     if ((oneOrderForReceiptProduction.type != null) &&((oneOrderForReceiptProduction.totalPrice !=null))) {
@@ -1157,11 +1017,7 @@ class ShoppingCartBloc implements Bloc {
 //    AssertionError(result.user.email);
 //    print('result: ' + result.user.email);
 
-
-
-  void clearSubscription(){
-
-
+  void clearSubscription() {
     _curretnOrder = null;
     _expandedSelectedFood = [];
     _orderType = [];
@@ -1172,8 +1028,6 @@ class ShoppingCartBloc implements Bloc {
     _thisRestaurant = null;
     _allCategories = [];
     _allCustomerInput = [];
-
-
 
     _orderController.sink.add(_curretnOrder);
     _expandedSelectedFoodController.sink.add(_expandedSelectedFood);
@@ -1186,8 +1040,6 @@ class ShoppingCartBloc implements Bloc {
     _categoriesController.sink.add(_allCategories);
 
     _customerInputController.sink.add(_allCustomerInput);
-
-
   }
 
   /*
@@ -1221,89 +1073,76 @@ class ShoppingCartBloc implements Bloc {
 
   */
 
-
-
-  void initiateCustomerInputFieldSingleSelectOptions()
-  {
-
+  void initiateCustomerInputFieldSingleSelectOptions() {
     OneInputCustomerInformation _address = new OneInputCustomerInformation(
-
-
-      index:0,
-      returnValue:'String',
-      complete:false,
-      inputName:'address',
+      index: 0,
+      returnValue: 'String',
+      complete: false,
+      inputName: 'address',
       inputOf: ['delivery'],
 
       //      orderIconName: 'flight_takeoff',
     );
 
     OneInputCustomerInformation _flat = new OneInputCustomerInformation(
-      index:1,
-      returnValue:'String',
-      complete:false,
-      inputName:'flat',
+      index: 1,
+      returnValue: 'String',
+      complete: false,
+      inputName: 'flat',
       inputOf: ['delivery'],
     );
 
-
 //     0xffFEE295 false
     OneInputCustomerInformation _phone = new OneInputCustomerInformation(
-      index:2,
-      returnValue:'String',
-      complete:false,
-      inputName:'phone',
-      inputOf: ['delivery','phone'],
+      index: 2,
+      returnValue: 'String',
+      complete: false,
+      inputName: 'phone',
+      inputOf: ['delivery', 'phone'],
 
 //      orderIconName: 'phone_in_talk',
     );
 
-
     OneInputCustomerInformation _timeOfDay = new OneInputCustomerInformation(
-      index:3,
-      returnValue:'DateTime',
-      complete:false,
-      inputName:'timeOfDay',
-      inputOf: ['takeAway','delivery','phone','Dinning'],
+      index: 3,
+      returnValue: 'DateTime',
+      complete: false,
+      inputName: 'timeOfDay',
+      inputOf: ['takeAway', 'delivery', 'phone', 'Dinning'],
 
 //      orderIconName: 'phone_in_talk',
     );
 
     OneInputCustomerInformation _eta = new OneInputCustomerInformation(
-      index:4,
-      returnValue:'int',
-      complete:false,
-      inputName:'ETA',
-      inputOf: ['takeAway','delivery','_phone','Dinning'],
+      index: 4,
+      returnValue: 'int',
+      complete: false,
+      inputName: 'ETA',
+      inputOf: ['takeAway', 'delivery', '_phone', 'Dinning'],
 
 //      orderIconName: 'phone_in_talk',
     );
 
+    List<OneInputCustomerInformation> customerFieldsInputArray =
+        new List<OneInputCustomerInformation>();
 
+    customerFieldsInputArray
+        .addAll([_address, _flat, _phone, _timeOfDay, _eta]);
 
-    List <OneInputCustomerInformation> customerFieldsInputArray = new List<OneInputCustomerInformation>();
-
-
-    customerFieldsInputArray.addAll([_address,_flat,_phone, _timeOfDay, _eta]);
-
-    _allCustomerInput = customerFieldsInputArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+    _allCustomerInput =
+        customerFieldsInputArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 //    initiateAllMultiSelectOptions();
     _customerInputController.sink.add(_allCustomerInput);
-
   }
 
-
-
-  void initiateOrderTypeSingleSelectOptions()
-  {
-
+  void initiateOrderTypeSingleSelectOptions() {
     OrderTypeSingleSelect _takeAway = new OrderTypeSingleSelect(
       borderColor: '0xff739DFA',
       index: 0,
       isSelected: true,
       orderType: 'TakeAway',
       iconDataString: 'FontAwesomeIcons.facebook',
-      orderTyepImage:'assets/orderBYicons/takeaway.png',
+      orderTyepImage: 'assets/orderBYicons/takeaway.png',
 
 //      orderIconName: 'flight_takeoff',
     );
@@ -1315,9 +1154,8 @@ class ShoppingCartBloc implements Bloc {
       orderType: 'Delivery',
       iconDataString: 'FontAwesomeIcons.twitter',
 //      orderIconName: 'local_shipping',
-      orderTyepImage:'assets/orderBYicons/delivery.png',
+      orderTyepImage: 'assets/orderBYicons/delivery.png',
     );
-
 
 //     0xffFEE295 false
     OrderTypeSingleSelect _phone = new OrderTypeSingleSelect(
@@ -1326,11 +1164,10 @@ class ShoppingCartBloc implements Bloc {
       isSelected: false,
       orderType: 'Phone',
       iconDataString: 'FontAwesomeIcons.home',
-      orderTyepImage:'assets/phone.png',
+      orderTyepImage: 'assets/phone.png',
 
 //      orderIconName: 'phone_in_talk',
     );
-
 
     OrderTypeSingleSelect _dinningRoom = new OrderTypeSingleSelect(
       borderColor: '0xffB47C00',
@@ -1339,52 +1176,47 @@ class ShoppingCartBloc implements Bloc {
       orderType: 'DinningRoom',
       iconDataString: 'Icons.audiotrack',
 //      orderIconName: 'fastfood',
-      orderTyepImage:'assets/orderBYicons/diningroom.png',
+      orderTyepImage: 'assets/orderBYicons/diningroom.png',
     );
 
+    List<OrderTypeSingleSelect> orderTypeSingleSelectArray =
+        new List<OrderTypeSingleSelect>();
 
+    orderTypeSingleSelectArray
+        .addAll([_takeAway, _delivery, _phone, _dinningRoom]);
 
-    List <OrderTypeSingleSelect> orderTypeSingleSelectArray = new List<OrderTypeSingleSelect>();
-
-
-    orderTypeSingleSelectArray.addAll([_takeAway,_delivery, _phone, _dinningRoom]);
-
-    _orderType = orderTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
-
+    _orderType =
+        orderTypeSingleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
 //    initiateAllMultiSelectOptions();
 
     _orderTypeController.sink.add(_orderType);
-
   }
 
-  void setOrderTypeSingleSelectOptionForOrder(OrderTypeSingleSelect x, int newIndex,int oldIndex){
-
+  void setOrderTypeSingleSelectOptionForOrder(
+      OrderTypeSingleSelect x, int newIndex, int oldIndex) {
     print('newIndex is $newIndex');
     print('oldIndex is $oldIndex');
 
-
-    List <OrderTypeSingleSelect> singleSelectArray = _orderType;
+    List<OrderTypeSingleSelect> singleSelectArray = _orderType;
 //    _currentOrderTypeIndex
 
-
     singleSelectArray[oldIndex].isSelected =
-    !singleSelectArray[oldIndex].isSelected;
+        !singleSelectArray[oldIndex].isSelected;
 
     singleSelectArray[newIndex].isSelected =
-    !singleSelectArray[newIndex].isSelected;
+        !singleSelectArray[newIndex].isSelected;
 
 //    singleSelectArray[index].isSelected = true;
 
 //    x.isSelected= !x.isSelected;
 
-
     Order currentOrderTemp = _curretnOrder;
 
-    currentOrderTemp.orderTypeIndex=newIndex;
+    currentOrderTemp.orderTypeIndex = newIndex;
 
-
-    _orderType = singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
+    _orderType =
+        singleSelectArray; // important otherwise => The getter 'sizedFoodPrices' was called on null.
 
     _curretnOrder = currentOrderTemp;
 
@@ -1394,29 +1226,25 @@ class ShoppingCartBloc implements Bloc {
     _orderController.sink.add(_curretnOrder);
   }
 
-  setAddressForOrder(String address){
-
+  setAddressForOrder(String address) {
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    tempOrderModifyCustomerInfo.orderingCustomer.address= address;
+    tempOrderModifyCustomerInfo.orderingCustomer.address = address;
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 
     _orderController.sink.add(_curretnOrder);
-
   }
 
-  setHouseorFlatNumberForOrder(String houseOrFlatNumber){
-
+  setHouseorFlatNumberForOrder(String houseOrFlatNumber) {
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
-    tempOrderModifyCustomerInfo.orderingCustomer.flatOrHouseNumber= houseOrFlatNumber;
+    tempOrderModifyCustomerInfo.orderingCustomer.flatOrHouseNumber =
+        houseOrFlatNumber;
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 
     _orderController.sink.add(_curretnOrder);
-
-
 
 //    CustomerInformation currentUser = _oneCustomerInfo;
 //
@@ -1424,11 +1252,9 @@ class ShoppingCartBloc implements Bloc {
 //
 //    _oneCustomerInfo = currentUser;
 //    _customerInformationController.sink.add(_oneCustomerInfo);
-
   }
 
-  setPhoneNumberForOrder(String phoneNumber){
-
+  setPhoneNumberForOrder(String phoneNumber) {
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
     tempOrderModifyCustomerInfo.orderingCustomer.phoneNumber = phoneNumber;
@@ -1446,44 +1272,33 @@ class ShoppingCartBloc implements Bloc {
   }
 
   // ETA = estimated time of arrival.
-  setETAForOrder(String minutes){
-
-
-
+  setETAForOrder(String minutes) {
     double minutes2 = double.parse(minutes);
-    int minutes3 =minutes2.ceil(); // no need to have double
+    int minutes3 = minutes2.ceil(); // no need to have double
 
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
     tempOrderModifyCustomerInfo.orderingCustomer.etaTimeInMinutes = minutes3;
 
-    tempOrderModifyCustomerInfo.orderingCustomer.etaTimeOfDay= TimeOfDay(hour: 0,minute: 0);
+    tempOrderModifyCustomerInfo.orderingCustomer.etaTimeOfDay =
+        TimeOfDay(hour: 0, minute: 0);
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 
     _orderController.sink.add(_curretnOrder);
-
-
-
   }
 
-  setETAForOrder2(TimeOfDay test){
-
-
-
+  setETAForOrder2(TimeOfDay test) {
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
     tempOrderModifyCustomerInfo.orderingCustomer.etaTimeOfDay = test;
 
-    tempOrderModifyCustomerInfo.orderingCustomer.etaTimeInMinutes =-1;
+    tempOrderModifyCustomerInfo.orderingCustomer.etaTimeInMinutes = -1;
 
     _curretnOrder = tempOrderModifyCustomerInfo;
 
     _orderController.sink.add(_curretnOrder);
-
-
   }
-
 
   /*
   Future<List<String>> discoverDevices2(String portNumber) async {
@@ -1564,7 +1379,6 @@ class ShoppingCartBloc implements Bloc {
   */
 
   void discoverDevicesConstructorNewPKG(/*String portNumber*/) async {
-
     BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
     /*
     // THIS THINGS WORKED SOME MONTH AGO...
@@ -1578,7 +1392,7 @@ class ShoppingCartBloc implements Bloc {
 
     */
 
-    bool isConnected=await bluetooth.isConnected;
+    bool isConnected = await bluetooth.isConnected;
     List<BluetoothDevice> devices = [];
     try {
       devices = await bluetooth.getBondedDevices();
@@ -1632,17 +1446,16 @@ class ShoppingCartBloc implements Bloc {
 
     */
 
-    List<PrinterBluetooth> tempPrinterBluetooth = new List<PrinterBluetooth>() ;
+    List<PrinterBluetooth> tempPrinterBluetooth = new List<PrinterBluetooth>();
     devices.forEach((element) {
+      primaryBlueToothPrinter.BluetoothDevice _y =
+          new primaryBlueToothPrinter.BluetoothDevice();
 
-
-      primaryBlueToothPrinter.BluetoothDevice _y = new primaryBlueToothPrinter.BluetoothDevice();
-
-      print('element.name:  ..... ***       ***      @@@    @@@ ${element.name}');
-
+      print(
+          'element.name:  ..... ***       ***      @@@    @@@ ${element.name}');
 
       _y.name = element.name;
-      _y.address =  element.address;
+      _y.address = element.address;
       //'98:52:3D:BB:18:26';
       _y.type = element.type;
       //3;
@@ -1654,21 +1467,15 @@ class ShoppingCartBloc implements Bloc {
       PrinterBluetooth y = new PrinterBluetooth(_y);
 
       tempPrinterBluetooth.add(y);
-
     });
 //    BluetoothDevice
 
-
     _devicesBlueTooth = tempPrinterBluetooth;
     _devicesController.sink.add(_devicesBlueTooth);
-
   }
-
-
 
   //  Future <bool> checkUserinLocalStorage() async {
   Future<List<PrinterBluetooth>> discoverDevicesInitState() async {
-
     printerManager.startScan(Duration(seconds: 4));
     printerManager.scanResults.listen((scannedDevices) {
 //      setState(() {
@@ -1680,27 +1487,16 @@ class ShoppingCartBloc implements Bloc {
       _devicesController.sink.add(_devicesBlueTooth);
       return _devicesBlueTooth;
 
-
 //    bluetoo
     }, onDone: () {
       print("Task Done: zzzzz zzzzzz zzzzzzz  zzzzzzzzz zzzzzzz zzzzzzz");
 //      _devicesBlueTooth = scannedDevices;
-
     }, onError: (error, StackTrace stackTrace) {
       print("Some Error: $stackTrace");
-    },cancelOnError: false);
+    }, cancelOnError: false);
 
     return _devicesBlueTooth;
-
-
-
-
   }
-
-
-
-
-
 
   @override
   void dispose() {
@@ -1715,6 +1511,5 @@ class ShoppingCartBloc implements Bloc {
     _customerInputController.close();
 //    _customerInformationController.close();
 //    _multiSelectForFoodController.close();
-
   }
 }
