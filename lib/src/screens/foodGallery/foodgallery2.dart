@@ -355,12 +355,6 @@ _batteryLevel = batteryLevel;
                         style: BorderStyle.solid,
                         width: 0.5,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 25.0,
-                            offset: Offset(0.0, 2.0))
-                      ],
                       color: Colors.white,
                     ),
                     width: displayWidth(context) / 3.3,
@@ -375,11 +369,11 @@ _batteryLevel = batteryLevel;
                           height: displayWidth(context) / 34,
                           width: 5,
                           margin:
-                              EdgeInsets.only(left: 0, right: 15, bottom: 5),
+                              EdgeInsets.only(left: 0, right: 10, bottom: 5),
                           child: Icon(
                             Icons.search,
                             size: displayWidth(context) / 24,
-                            color: Color(0xffBCBCBD),
+                            color: Colors.black,
                           ),
                         ),
                         Container(
