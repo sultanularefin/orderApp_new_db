@@ -3489,7 +3489,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   BlocProvider.of<ShoppingCartBloc>(context);
 
                   shoppingCartBloc
-                      .setETAForOrder2(selectedTime24HourResult);
+                      .setETATimeOFDayForOrder(selectedTime24HourResult);
                   setState(() {
                     showFullOrderDeliveryType = false;
                     showCustomerInformationHeader = true;
@@ -3499,7 +3499,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     showEditingCompleteCustomerReachoutIformation = true;
                   });
                 }).catchError((onError) {
-                  print('printing not successful: $onError');
+                  print('getting time not successful: $onError');
                   return false;
                 });
 

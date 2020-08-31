@@ -1467,9 +1467,25 @@ class ShoppingCartBloc implements Bloc {
 
   }
 
-  setETAForOrder2(TimeOfDay test){
+  setETATimeOFDayForOrder(TimeOfDay test){
 
 
+    print('test: $test');
+    print('${test.hour}');
+    print('${test.minute}');
+
+    if(test==null){
+      TimeOfDay tempTimeOfDay = new TimeOfDay(hour: 0, minute: 0);
+      Order tempOrderModifyCustomerInfo = _curretnOrder;
+
+      tempOrderModifyCustomerInfo.orderingCustomer.etaTimeOfDay = test;
+
+      tempOrderModifyCustomerInfo.orderingCustomer.etaTimeInMinutes =-1;
+
+      _curretnOrder = tempOrderModifyCustomerInfo;
+
+      _orderController.sink.add(_curretnOrder);
+    }
 
     Order tempOrderModifyCustomerInfo = _curretnOrder;
 
