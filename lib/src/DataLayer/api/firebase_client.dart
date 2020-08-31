@@ -499,7 +499,7 @@ class FirebaseClient {
       DocumentSnapshot postSnapshot = await tx.get(postRef);
 
       if (postSnapshot.exists) {
-        print('postSnapshot.exists....');
+        print('postSnapshot.exists.... in updateOneUnPaidOrderLater');
         await tx.update(postRef, <String, String>{'recitePrinted': status});
 
 

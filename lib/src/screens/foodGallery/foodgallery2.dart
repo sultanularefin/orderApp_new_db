@@ -1021,46 +1021,33 @@ _batteryLevel = batteryLevel;
                         "Order received, id: ${orderWithDocumentId.orderdocId}"),
                     duration: Duration(milliseconds: 8000)));
 
-/*
-            Scaffold.of(context)
-              ..removeCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text("Order Cancelled by user.")));
-            */
-//      setState(() => _reloadRequired = true);
 
-              setState(() {
-                _totalCount = 0;
-                totalPriceState = 0;
-                allSelectedFoodGallery = [];
-                orderFG = new Order(
-                  selectedFoodInOrder: [],
-                  selectedFoodListLength: 0,
-                  orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-                  paymentTypeIndex:
-                      2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                  orderingCustomer: null,
-                  totalPrice: 0,
-                  page: 0,
-                  isCanceled: false,
-                  orderdocId: '',
-                );
-              });
+              setState(
+                      () {
+                    _totalCount = 0;
+                    totalPriceState = 0;
+                    allSelectedFoodGallery=[];
+                    orderFG = new Order(
+                      selectedFoodInOrder: [],
+                      selectedFoodListLength:0,
+                      orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
+                      paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                      orderingCustomer: null,
+                      totalPrice: 0,
+                      page:0,
+                      isCanceled: false,
+                      orderdocId:'',
+                    );
+                  }
+              );
 
-              if (orderWithDocumentId.paymentTypeIndex == 0) {
-                return Navigator.of(context).push(
-                  PageRouteBuilder(
-                    opaque: false,
-                    transitionDuration: Duration(milliseconds: 900),
-                    pageBuilder: (_, __, ___) => BlocProvider<UnPaidBloc>(
-                      bloc: UnPaidBloc(),
 
-                      child: UnPaidPage(docID: orderWithDocumentId.orderdocId),
-//                      child: UnPaidPage()
-                    ),
-                  ),
-                );
-              }
-            } else if (orderWithDocumentId.isCanceled == true) {
+            }
+
+
+            else if (orderWithDocumentId.isCanceled == true) {
+
+
 //              Order Cancelled by user.
               print("Order Cancelled by user,");
               print(
@@ -1925,70 +1912,40 @@ _batteryLevel = batteryLevel;
     }
 
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-//    blocG.allCategories
 
-//    final blocG =
-//        BlocProvider2.of(context).getFoodGalleryBlockObject;
-
-//    List<NewIngredient> tempIngs = blocG.getAllIngredientsPublicFGB2;
 
     List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
     List<SauceItem> tempSauceItems = blocG.getAllSauceItemsFoodGallery;
     List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
 
-//    final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
 
-//                                    blocD.getAllIngredients();
-//                                    List<NewIngredient> test = blocD.allIngredients;
+    final SelectedFood receivedSelectedFood = await
+    Navigator.of(context).push(
 
-//    logger.e('tempIngs_push 1: $tempIngs');
 
-//    blocD.setallIngredients(tempIngs);
-//                                    _allIngredientState
-//                                    final result = await
-
-    final SelectedFood receivedSelectedFood = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
-        transitionDuration: Duration(milliseconds: 900),
+        transitionDuration: Duration(
+            milliseconds: 900),
         pageBuilder: (_, __, ___) =>
 
-//        tempCheeseItems
-//          tempSauceItems
 
-            BlocProvider<FoodItemDetailsBloc>(
+        BlocProvider<FoodItemDetailsBloc>(
           bloc: FoodItemDetailsBloc(
               oneFoodItem,
-//              tempIngs,
               tempCheeseItems,
               tempSauceItems,
-              allExtraIngredients),
-          child: FoodItemDetails2(),
-        ),
+              allExtraIngredients
 
-// fUTURE USE -- ANIMATION TRANSITION CODE.
-/*
-                                  transitionsBuilder: (___, Animation<double> animation, ____, Widget child) {
-                                    return FadeTransition(
-                                      opacity: animation,
-                                      child: RotationTransition(
-                                        turns: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
-                                        child: child,
-                                      ),
-                                    );
-                                  }
-                                  */
+          ),
+
+
+          child: FoodItemDetails2(),),
+
       ),
     );
 
-/*
-    Navigator.push(
-      context,
-      // Create the SelectionScreen in the next step.
-      MaterialPageRoute(builder: (context) => SelectionScreen()),
-    );
 
-    */
 
 // After the Selection Screen returns a result, hide any previous snackbars
 // and show the new result.

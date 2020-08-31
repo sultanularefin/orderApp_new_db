@@ -32,30 +32,14 @@ class UnPaidBloc implements Bloc {
 //  bool  _isDisposedIngredients = false;
   bool    _isDisposedOrderListItems = false;
 
-//  List<FoodItemWithDocID> _allFoodsList=[];
-//
-//  List<NewCategoryItem> _allCategoryList=[];
-
-
-
-//  List<OneOrderFirebase> tempAllOrderedItems= new List<OneOrderFirebase>();
-
-
-  // cheese items
-//  List<CheeseItem> _allCheeseItemsFoodGalleryBloc =[];
-//  List<CheeseItem> get getAllCheeseItemsFoodGallery => _allCheeseItemsFoodGalleryBloc;
-//  final _cheeseItemsControllerFoodGallery      =  StreamController <List<CheeseItem>>();
-//  Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsControllerFoodGallery.stream;
-
 
   // OneOrderFirebase items
-  List<OneOrderFirebase> _allOneOrderFirebaseHistoryBloc =[];
-  List<OneOrderFirebase> get getAllFirebaseUnPaidOrderList => _allOneOrderFirebaseHistoryBloc;
-  final _firebaseOrderListController      =  StreamController <List<OneOrderFirebase>>();
-  Stream<List<OneOrderFirebase>> get getFirebaseUnPaidOrderListStream => _firebaseOrderListController.stream;
+  List<OneOrderFirebase> _allOneOrderFirebaseUnPaidBloc =[];
+  List<OneOrderFirebase> get getAllFirebaseUnPaidOrderList => _allOneOrderFirebaseUnPaidBloc;
+  final _firebaseOrderListControllerUnPaidPage      =  StreamController <List<OneOrderFirebase>>();
+  Stream<List<OneOrderFirebase>> get getFirebaseUnPaidOrderListStream => _firebaseOrderListControllerUnPaidPage.stream;
 
   final _client = FirebaseClient();
-
 
 
   //Helper method in history page...
@@ -80,10 +64,6 @@ class UnPaidBloc implements Bloc {
 
     print('at convertFireStoreIngredientItemsToLocalNewIngredientItemsList');
 
-    // List<Map<String, dynamic>>
-
-//    print('--   ::      :: at here: convertFireStoreSauceItemsToLocalSauceItemsList -------- : : ');
-
     List<NewIngredient> allIngredientItems = new List<NewIngredient>();
 
     int ingredientCount =0;
@@ -91,15 +71,12 @@ class UnPaidBloc implements Bloc {
 
       var oneNewIngredient = oneFireStoreSauce;
 
-
       NewIngredient oneTempNewIngredient = new NewIngredient(
         ingredientName: oneFireStoreSauce['name'] ,
         imageURL: oneFireStoreSauce['image'] ,
         ingredientAmountByUser: oneFireStoreSauce['ingredientAmountByUser'] ,
         isDefault:oneFireStoreSauce['isDefault'],
         price:oneFireStoreSauce['ingredientPrice'],
-//          isDefault: oneFireStoreSauce['isDefault'],
-
       );
 
       print('--   ::      :: at here: convertFireStoreIngredientItemsToLocalNewIngredientItemsList -------- : :'
@@ -292,7 +269,10 @@ class UnPaidBloc implements Bloc {
         print('orderedItems: $orderedItems');
         print('orderBy: $orderBy');
         print('paidStatus: $paidStatus');
-        print('paidType: $paidType');
+
+        print('####### paidType: ########  -------------->>  $paidType');
+
+
         print('totalPrice: $totalPrice');
         print('contact: $contact');
         print('driverName: $driverName');
@@ -453,12 +433,60 @@ class UnPaidBloc implements Bloc {
       }
       );
 
-      _allOneOrderFirebaseHistoryBloc = tempAllOrderedItems;
+      _allOneOrderFirebaseUnPaidBloc = tempAllOrderedItems;
 
-      _firebaseOrderListController.sink.add(_allOneOrderFirebaseHistoryBloc);
+      _firebaseOrderListControllerUnPaidPage.sink.add(_allOneOrderFirebaseUnPaidBloc);
+
       _isDisposedOrderListItems = true;
 
     }
+  }
+
+  void updateUnPaidList(String paidDocumentID){
+
+
+    List<OneOrderFirebase> tempAllOrderedItems= new List<OneOrderFirebase>();
+
+    tempAllOrderedItems= _allOneOrderFirebaseUnPaidBloc;
+
+
+    List<OneOrderFirebase> tempAllOrderedItems2= new List<OneOrderFirebase>();
+
+    /*tempAllOrderedItems2=  */tempAllOrderedItems.removeWhere((element) => element.documentId==paidDocumentID);
+
+    _allOneOrderFirebaseUnPaidBloc= tempAllOrderedItems2;
+
+
+    _firebaseOrderListControllerUnPaidPage.sink.add(_allOneOrderFirebaseUnPaidBloc);
+
+
+/*
+//..........
+
+    List<NewIngredient> tempUnSelectedAll = _unSelectedIngItems;
+
+
+
+    int index22 = tempUnSelectedAll.
+    indexWhere((note) => note.ingredientName.toLowerCase().trim()== thisIngredient.ingredientName);
+
+
+    print('index22 : :: $index22');
+
+    print('----_unSelectedIngItems[index22].ingredientName: ${_unSelectedIngItems[index22].ingredientName}');
+
+
+    tempUnSelectedAll.removeAt(index22);
+
+    tempUnSelectedAll.insert(index22, c1);
+
+//    ..........
+
+
+
+ */
+
+
   }
 
 
@@ -489,7 +517,7 @@ class UnPaidBloc implements Bloc {
   @override
   void dispose() {
 
-    _firebaseOrderListController.close();
+    _firebaseOrderListControllerUnPaidPage.close();
 //    _foodItemController.close();
 //    _categoriesController.close();
 //    _allIngredientListController.close();

@@ -117,13 +117,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
   );
 
   final GlobalKey<ScaffoldState> _scaffoldKeyShoppingCartPage =
-      new GlobalKey<ScaffoldState>();
+  new GlobalKey<ScaffoldState>();
 
 //  String _currentSize;
 //  int _itemCount = 1;
   int _currentOrderTypeIndex = 0; // phone, takeaway, delivery, dinning.
   int _currentPaymentTypeIndex =
-      2; // PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+  2; // PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
   bool showFullOrderDeliveryType = true;
   bool showUserInputOptionsLikeFirstTime = true;
   bool showCustomerInformationHeader = false;
@@ -231,7 +231,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print(
         'debug print after calling  printerManager.startScan(Duration(seconds: 4));'
-        ' inside _startScanDevices() method   ');
+            ' inside _startScanDevices() method   ');
     // Test devices added.
 
     /*
@@ -287,7 +287,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print(
         'debug print after calling  printerManager.startScan(Duration(seconds: 4));'
-        ' inside _startScanDevices() method   ');
+            ' inside _startScanDevices() method   ');
     // Test devices added.
 
     /*
@@ -340,9 +340,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //  Future<Uint8List> createImageFromWidget(
   Future<Uint8List> createImageFromWidget(Widget widget,
       {
-      /* Duration wait, */
-      Size logicalSize,
-      Size imageSize}) async {
+        /* Duration wait, */
+        Size logicalSize,
+        Size imageSize}) async {
     print('at here: $createImageFromWidget');
 
     final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();
@@ -369,7 +369,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     renderView.prepareInitialFrame();
 
     final RenderObjectToWidgetElement<RenderBox> rootElement =
-        RenderObjectToWidgetAdapter<RenderBox>(
+    RenderObjectToWidgetAdapter<RenderBox>(
       container: repaintBoundary,
       child: widget,
     ).attachToRenderTree(buildOwner);
@@ -391,7 +391,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     final ui.Image image = await repaintBoundary.toImage(
         pixelRatio: imageSize.width / logicalSize.width);
     final ByteData byteData =
-        await image.toByteData(format: ui.ImageByteFormat.png);
+    await image.toByteData(format: ui.ImageByteFormat.png);
 
 //    final Uint8List bytes =  byteData.buffer.asUint8List();
 
@@ -412,7 +412,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget customerInformationOnlyWidget(OneOrderFirebase oneOrderForReceipt) {
     print(
         'at paidUnpaidDeliveryType: && oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}'
-        'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
+            'oneOrderForReceipt.paidStatus: ${oneOrderForReceipt.paidStatus}');
 
     print('oneOrderForReceipt.orderBy: ${oneOrderForReceipt.orderBy}');
 
@@ -443,8 +443,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
         textDirection: TextDirection.ltr,
         child:
 
-            /// toDo: multiline. maxlines
-            Container(
+        /// toDo: multiline. maxlines
+        Container(
           height: 160,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -454,13 +454,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 height: 50,
                 child: Text(
                   ((customerForReciteGeneration.address == null) ||
-                          (customerForReciteGeneration.address.length == 0))
+                      (customerForReciteGeneration.address.length == 0))
                       ? ''
                       : customerForReciteGeneration.address.length > 39
-                          ? customerForReciteGeneration.address
-                                  .substring(0, 35) +
-                              '...'
-                          : customerForReciteGeneration.address,
+                      ? customerForReciteGeneration.address
+                      .substring(0, 35) +
+                      '...'
+                      : customerForReciteGeneration.address,
                   textAlign: TextAlign.left,
                   maxLines: 2,
                   style: TextStyle(
@@ -476,16 +476,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 height: 50,
                 child: Text(
                   ((customerForReciteGeneration.flatOrHouseNumber == null) ||
-                          (customerForReciteGeneration
-                                  .flatOrHouseNumber.length ==
-                              0))
+                      (customerForReciteGeneration
+                          .flatOrHouseNumber.length ==
+                          0))
                       ? ''
                       : customerForReciteGeneration.flatOrHouseNumber.length >
-                              39
-                          ? customerForReciteGeneration.flatOrHouseNumber
-                                  .substring(0, 35) +
-                              '...'
-                          : customerForReciteGeneration.flatOrHouseNumber,
+                      39
+                      ? customerForReciteGeneration.flatOrHouseNumber
+                      .substring(0, 35) +
+                      '...'
+                      : customerForReciteGeneration.flatOrHouseNumber,
                   maxLines: 2,
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -501,13 +501,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 height: 50,
                 child: Text(
                   ((customerForReciteGeneration.phoneNumber == null) ||
-                          (customerForReciteGeneration.phoneNumber.length == 0))
+                      (customerForReciteGeneration.phoneNumber.length == 0))
                       ? ''
                       : customerForReciteGeneration.phoneNumber.length > 39
-                          ? customerForReciteGeneration.phoneNumber
-                                  .substring(0, 35) +
-                              '...'
-                          : customerForReciteGeneration.phoneNumber,
+                      ? customerForReciteGeneration.phoneNumber
+                      .substring(0, 35) +
+                      '...'
+                      : customerForReciteGeneration.phoneNumber,
                   maxLines: 2,
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -754,7 +754,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
           body: WillPopScope(
             onWillPop: () {
               final shoppingCartBloc =
-                  BlocProvider.of<ShoppingCartBloc>(context);
+              BlocProvider.of<ShoppingCartBloc>(context);
               print('at WillPopScope: ');
 
               List<SelectedFood> backUP =
@@ -853,164 +853,235 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             print(
                                 'at snapshot.data is Order for ConnectionState.active or default ');
 
-                            Order oneOrder = snapshot.data;
+//                      <<<<<<< finnishLanguage
+                      Order oneOrder = snapshot.data;
 
-                            logger.i(
-                                'oneOrder.orderingCustomer.etaTimeOfDay.hour =>'
-                                ' ${oneOrder.orderingCustomer.etaTimeOfDay.hour}');
-                            logger.w(
-                                'oneOrder.orderingCustomer.etaTimeInMinutes =>'
-                                ' ${oneOrder.orderingCustomer.etaTimeInMinutes}');
-                            logger.e(
-                                'oneOrder.orderingCustomer.etaTimeOfDay.minute => '
-                                '${oneOrder.orderingCustomer.etaTimeOfDay.minute}'); // always return's -1;
+                      logger.i(
+                      'oneOrder.orderingCustomer.etaTimeOfDay.hour =>'
+                      ' ${oneOrder.orderingCustomer.etaTimeOfDay.hour}');
+                      logger.w(
+                      'oneOrder.orderingCustomer.etaTimeInMinutes =>'
+                      ' ${oneOrder.orderingCustomer.etaTimeInMinutes}');
+                      logger.e(
+                      'oneOrder.orderingCustomer.etaTimeOfDay.minute => '
+                      '${oneOrder.orderingCustomer.etaTimeOfDay.minute}'); // always return's -1;
 
-                            //              int x = 5;
-                            if (oneOrder.paymentButtonPressed == true) {
-                              print('....payment button pressed.....');
-                              return Container(
-                                margin: EdgeInsets.fromLTRB(
-                                    0, displayHeight(context) / 2, 0, 0),
-                                child: Center(
-                                  child: Column(
-                                    children: <Widget>[
-                                      Center(
-                                        child: Container(
-                                            alignment: Alignment.center,
-                                            child:
-                                                new CircularProgressIndicator(
-                                              backgroundColor:
-                                                  Colors.lightGreenAccent,
+
+                      //              int x = 5;
+                      if (oneOrder.paymentButtonPressed == true) {
+
+
+
+
+                      print('....payment button pressed.....');
+                      if(oneOrder.paymentTypeIndex !=0) {
+                      return Container(
+                      margin: EdgeInsets.fromLTRB(
+                      0, displayHeight(context) / 2, 0, 0),
+                      child: Center(
+                      child: Column(
+                      children: <Widget>[
+
+                      Center(
+                      child: Container(
+                      alignment: Alignment.center,
+                      child: new CircularProgressIndicator(
+                      backgroundColor: Colors
+                          .lightGreenAccent,
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                            )),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                            'printing recite... please wait.',
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 34,
-                                              fontWeight: FontWeight.normal,
+
+
+                      )
+                      ),
+                      ),
+                      Center(
+                      child: Text(
+                      'printing recite... please wait.',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
-                                              color: Colors.redAccent,
-                                              fontFamily: 'Itim-Regular',
-                                            )),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                            alignment: Alignment.center,
-                                            child:
-                                                new CircularProgressIndicator(
-                                              backgroundColor:
-                                                  Color(0xffFC0000),
+                      color: Colors.redAccent,
+                      fontFamily: 'Itim-Regular',
+
+                      )
+                      ),
+                      ),
+                      Center(
+                      child: Container(
+                      alignment: Alignment.center,
+                      child: new CircularProgressIndicator(
+                      backgroundColor: Color(
+                      0xffFC0000),
 
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            } else {
-                              CustomerInformation x = oneOrder.orderingCustomer;
+                      )
+                      ),
+                      ),
+                      ],
+                      ),
+                      ),
 
-                              logger.e(
-                                  '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
+                      );
+                      }
+                      else{
+                      return Container(
+                      margin: EdgeInsets.fromLTRB(
+                      0, displayHeight(context)/2, 0, 0),
+                      child: Center(
+                      child: Column(
+                      children: <Widget>[
 
-                              return Container(
-                                height: displayHeight(context),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
+                      Center(
+                      child: Container(
+                      alignment: Alignment.center,
+                      child: new CircularProgressIndicator(
+                      backgroundColor: Colors
+                          .lightGreenAccent,
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+
+
+                      )
+                      ),
+                      ),
+                      Center(
+                      child: Text(
+                      'later button pressed... please wait.',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                      color: Colors.redAccent,
+                      fontFamily: 'Itim-Regular',
+
+                      )
+                      ),
+                      ),
+                      Center(
+                      child: Container(
+                      alignment: Alignment.center,
+                      child: new CircularProgressIndicator(
+                      backgroundColor: Color(
+                      0xffFC0000),
+
+//                                              valueColor:
+//                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
+                      )
+                      ),
+                      ),
+                      ],
+                      ),
+                      ),
+
+                      );
+                      }
+                      }
+                      else {
+                      CustomerInformation x = oneOrder.orderingCustomer;
+
+
+                      logger.e(
+                      '\n\n AM I EXECUTED TWICE snapshot.data !=null  in build method  ;;; \n\n ');
+
+                      return Container(
+                      height: displayHeight(context),
+                      child: Column(
+                      children: <Widget>[
+                      Container(
+
 //                                    color:Colors.indigoAccent,
-                                      height: displayHeight(context) / 1.10,
+                      height: displayHeight(context) / 1.10,
 
-                                      width: displayWidth(context) / 1.03,
+                      width: displayWidth(context) / 1.03,
 
-                                      margin: EdgeInsets.fromLTRB(12,
-                                          displayHeight(context) / 16, 10, 0),
+                      margin: EdgeInsets.fromLTRB(12,
+                      displayHeight(context) / 16, 10, 0),
 
-                                      child: Neumorphic(
-                                        curve: Neumorphic.DEFAULT_CURVE,
-                                        style: NeumorphicStyle(
-                                          shape: NeumorphicShape.concave,
-                                          depth: 8,
-                                          lightSource: LightSource.topLeft,
-                                          color: Colors.white,
-                                          boxShape:
-                                              NeumorphicBoxShape.roundRect(
-                                            BorderRadius.all(
-                                                Radius.circular(15)),
-                                          ),
-                                        ),
+                      child: Neumorphic(
+                      curve: Neumorphic.DEFAULT_CURVE,
+                      style: NeumorphicStyle(
+                      shape: NeumorphicShape.concave,
+                      depth: 8,
+                      lightSource: LightSource.topLeft,
+                      color: Colors.white,
+                      boxShape:
+                      NeumorphicBoxShape.roundRect(
+                      BorderRadius.all(
+                      Radius.circular(15)),
+                      ),
+                      ),
 
-                                        // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
+                      // THIS CHILD COLUMNS HOLDS THE CONTENTS OF THIS PAGE. BEGINS HERE.
 
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
+                      child: Column(
+                      mainAxisAlignment:
+                      MainAxisAlignment.start,
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: <Widget>[
 //                                          /WWW??
 
-                                            // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
+                      // IMAGES OF FOODS   QUANTITY TIMES PUT HERE
 
-                                            Container(
-                                              width:
-                                                  displayWidth(context) / 1.03,
-                                              height:
-                                                  displayHeight(context) / 20,
-                                              color: Color(0xffffffff),
+                      Container(
+                      width:
+                      displayWidth(context) / 1.03,
+                      height:
+                      displayHeight(context) / 20,
+                      color: Color(0xffffffff),
 //                                            color:Colors.yellowAccent,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Container(
-                                                    width:
-                                                        displayWidth(context) /
-                                                            1.5,
-                                                    height:
-                                                        displayHeight(context) /
-                                                            30,
-                                                    color: Color(0xffffffff),
-                                                    child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: <Widget>[
-                                                          Container(
-                                                            margin: EdgeInsets
-                                                                .fromLTRB(20, 0,
-                                                                    10, 0),
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: Text(
-                                                                'Shopping Cart',
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 24,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
+                      child: Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.start,
+                      crossAxisAlignment:
+                      CrossAxisAlignment.center,
+                      children: <Widget>[
+                      Container(
+                      width:
+                      displayWidth(context) /
+                      1.5,
+                      height:
+                      displayHeight(context) /
+                      30,
+                      color: Color(0xffffffff),
+                      child: Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment
+                          .start,
+                      crossAxisAlignment:
+                      CrossAxisAlignment
+                          .center,
+                      children: <Widget>[
+                      Container(
+                      margin: EdgeInsets
+                          .fromLTRB(20, 0,
+                      10, 0),
+                      alignment: Alignment
+                          .center,
+                      child: Text(
+                      'Shopping Cart',
+                      style:
+                      TextStyle(
+                      fontSize: 24,
+                      fontWeight:
+                      FontWeight
+                          .normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                                                  color: Color(
-                                                                      0xff000000),
-                                                                )),
-                                                          ),
+                      color: Color(
+                      0xff000000),
+                      )),
+                      ),
 
-                                                          /*
+                      /*
                                                         CustomPaint(
                                                           size: Size(
                                                               0, 19),
@@ -1020,182 +1091,182 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                                         */
-                                                        ]),
-                                                  ),
+                      ]),
+                      ),
 
-                                                  // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
-                                                ],
-                                              ),
-                                            ),
+                      // 2ND CONTAINER HOLDING THE SHOPPING CART ICON. BEGINS HERE.
+                      ],
+                      ),
+                      ),
 
-                                            Container(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  0, 0, 0, 0),
+                      Container(
+                      padding: EdgeInsets.fromLTRB(
+                      0, 0, 0, 0),
 //                                            color: Colors.white,
-                                              color: Colors.blue,
+                      color: Colors.blue,
 //                                      FROM height: displayHeight(context) / 5.2 TO 4.8 ON JUNE 16
-                                              height:
-                                                  displayHeight(context) / 5.4,
-                                              width:
-                                                  displayWidth(context) / 1.03,
+                      height:
+                      displayHeight(context) / 5.4,
+                      width:
+                      displayWidth(context) / 1.03,
 //                                            width: displayWidth(context) * 0.57,
-                                              child:
+                      child:
 
-                                                  //ssd
-                                                  StreamBuilder<
-                                                          List<SelectedFood>>(
-                                                      stream: shoppingCartBloc
-                                                          .getExpandedFoodsStream,
-                                                      initialData: shoppingCartBloc
-                                                          .getExpandedSelectedFood,
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        if (snapshot.hasData) {
-                                                          List<SelectedFood>
-                                                              expandedSelectedFoodInOrder =
-                                                              snapshot.data;
+                      //ssd
+                      StreamBuilder<
+                      List<SelectedFood>>(
+                      stream: shoppingCartBloc
+                          .getExpandedFoodsStream,
+                      initialData: shoppingCartBloc
+                          .getExpandedSelectedFood,
+                      builder:
+                      (context, snapshot) {
+                      if (snapshot.hasData) {
+                      List<SelectedFood>
+                      expandedSelectedFoodInOrder =
+                      snapshot.data;
 
-                                                          if (expandedSelectedFoodInOrder ==
-                                                              null) {
-                                                            print(
-                                                                'Order has no data');
-                                                            print(
-                                                                'this will never happen don\'t worry');
+                      if (expandedSelectedFoodInOrder ==
+                      null) {
+                      print(
+                      'Order has no data');
+                      print(
+                      'this will never happen don\'t worry');
 
-                                                            return Container(
-                                                                child: Text(
-                                                                    'expandedSelectedFoodInOrder == Null'));
-                                                          } else {
+                      return Container(
+                      child: Text(
+                      'expandedSelectedFoodInOrder == Null'));
+                      } else {
 //      int quantity = qTimes.quantity;
 //      int quantity = qTimes.selectedFoodInOrder.length;
 
-                                                            List<SelectedFood>
-                                                                allOrderedFoods =
-                                                                expandedSelectedFoodInOrder;
+                      List<SelectedFood>
+                      allOrderedFoods =
+                      expandedSelectedFoodInOrder;
 
-                                                            logger.e(
-                                                                '\n\n AM I EXECUTED TWICE  ;;;'
-                                                                ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
-                                                            return Container(
+                      logger.e(
+                      '\n\n AM I EXECUTED TWICE  ;;;'
+                      ' allOrderedFoods.length: ${allOrderedFoods.length} \n\n ');
+                      return Container(
 //                color: Colors.green,
-                                                              color: Color(
-                                                                  0xffFFFFFF),
+                      color: Color(
+                      0xffFFFFFF),
 
-                                                              child: ListView
-                                                                  .builder(
-                                                                scrollDirection:
-                                                                    Axis.horizontal,
+                      child: ListView
+                          .builder(
+                      scrollDirection:
+                      Axis.horizontal,
 
-                                                                reverse: false,
-                                                                shrinkWrap:
-                                                                    false,
-                                                                itemCount:
-                                                                    allOrderedFoods
-                                                                        .length,
-                                                                // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
+                      reverse: false,
+                      shrinkWrap:
+                      false,
+                      itemCount:
+                      allOrderedFoods
+                          .length,
+                      // List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
 
-                                                                itemBuilder: (_,
-                                                                    int index) {
+                      itemBuilder: (_,
+                      int index) {
 //            return Text('ss');
 
-                                                                  return FoodImageInShoppingCart(
-                                                                      allOrderedFoods[
-                                                                              index]
-                                                                          .foodItemImageURL,
-                                                                      /*OrderedFoodImageURL,*/
-                                                                      allOrderedFoods[
-                                                                              index]
-                                                                          .foodItemName,
-                                                                      /*OrderedFoodItemName, */
-                                                                      allOrderedFoods[
-                                                                              index]
-                                                                          .selectedIngredients,
-                                                                      allOrderedFoods[
-                                                                              index]
-                                                                          .unitPrice,
-                                                                      index);
+                      return FoodImageInShoppingCart(
+                      allOrderedFoods[
+                      index]
+                          .foodItemImageURL,
+                      /*OrderedFoodImageURL,*/
+                      allOrderedFoods[
+                      index]
+                          .foodItemName,
+                      /*OrderedFoodItemName, */
+                      allOrderedFoods[
+                      index]
+                          .selectedIngredients,
+                      allOrderedFoods[
+                      index]
+                          .unitPrice,
+                      index);
 //          oneMultiSelectInDetailsPage(foodItemPropertyOptions[index],
 //            index);
-                                                                },
-                                                              ),
+                      },
+                      ),
 
-                                                              // M VSM ORG VS TODO. ENDS HERE.
-                                                            );
-                                                          }
-                                                        } else {
-                                                          print(
-                                                              '!snapshot.hasData');
+                      // M VSM ORG VS TODO. ENDS HERE.
+                      );
+                      }
+                      } else {
+                      print(
+                      '!snapshot.hasData');
 //        return Center(child: new LinearProgressIndicator());
-                                                          return Container(
-                                                              child:
-                                                                  Text('Null'));
-                                                        }
-                                                      }),
-                                              //ssd
-                                            ),
+                      return Container(
+                      child:
+                      Text('Null'));
+                      }
+                      }),
+                      //ssd
+                      ),
 
-                                            Container(
+                      Container(
 //                                        width: displayWidth(context) /1.8,
-                                              width:
-                                                  displayWidth(context) / 1.03,
-                                              child: AnimatedSwitcher(
-                                                duration: Duration(
-                                                    milliseconds: 1000),
+                      width:
+                      displayWidth(context) / 1.03,
+                      child: AnimatedSwitcher(
+                      duration: Duration(
+                      milliseconds: 1000),
 //
-                                                child: showFullOrderDeliveryType
-                                                    ? animatedWidgetShowFullOrderDeliveryType()
-                                                    : /*1 */
-                                                    animatedWidgetShowSelectedOrderDeliveryType(
-                                                        oneOrder), /* 2*/
-                                              ),
-                                            ),
+                      child: showFullOrderDeliveryType
+                      ? animatedWidgetShowFullOrderDeliveryType()
+                          : /*1 */
+                      animatedWidgetShowSelectedOrderDeliveryType(
+                      oneOrder), /* 2*/
+                      ),
+                      ),
 
-                                            /*
+                      /*
                                             * INITIAL CHOOSE ORDER TYPE ENDS HERE.*/
 
-                                            // work_2
-                                            // 911_2
-                                            Container(
+                      // work_2
+                      // 911_2
+                      Container(
 //                                          color: Colors.red,
 //                                              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
 //                                        width: displayWidth(context) /1.8,
-                                              width:
-                                                  displayWidth(context) / 1.03,
-                                              height:
-                                                  displayHeight(context) / 2.2,
+                      width:
+                      displayWidth(context) / 1.03,
+                      height:
+                      displayHeight(context) / 2.2,
 
-                                              //Text('AnimatedSwitcher('),
-                                              child: AnimatedSwitcher(
-                                                duration:
-                                                    Duration(milliseconds: 300),
+                      //Text('AnimatedSwitcher('),
+                      child: AnimatedSwitcher(
+                      duration:
+                      Duration(milliseconds: 300),
 //
 //                                                child: showFullOrderType? animatedObscuredTextInputContainer():
 //                                                animatedUnObscuredTextInputContainer(),
-                                                child: oneOrder
-                                                            .orderTypeIndex ==
-                                                        0
-                                                    ? _buildShoppingCartInputFieldsUNObscuredTakeAway(
-                                                        oneOrder)
-                                                    : oneOrder.orderTypeIndex ==
-                                                            1
-                                                        ? _buildShoppingCartInputFieldsUNObscuredDelivery(
-                                                            oneOrder)
-                                                        : oneOrder.orderTypeIndex ==
-                                                                2
-                                                            ? _buildShoppingCartInputFieldsUNObscuredPhone(
-                                                                oneOrder)
-                                                            :
-                                                            //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
-                                                            // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
+                      child: oneOrder
+                          .orderTypeIndex ==
+                      0
+                      ? _buildShoppingCartInputFieldsUNObscuredTakeAway(
+                      oneOrder)
+                          : oneOrder.orderTypeIndex ==
+                      1
+                      ? _buildShoppingCartInputFieldsUNObscuredDelivery(
+                      oneOrder)
+                          : oneOrder.orderTypeIndex ==
+                      2
+                      ? _buildShoppingCartInputFieldsUNObscuredPhone(
+                      oneOrder)
+                          :
+                      //OBSCURED NOT REQUIRED SINCE FOR DINNING ROOM OPTION WE WILL HAVE
+                      // WHEN DO YOU WANT THE FOOD ON YOUR TABLE.
 //                                        _buildShoppingCartInputFieldsUNObscuredTakeAway(oneOrder)
 
-                                                            _buildShoppingCartInputFieldsUNObscuredDinningRoom(
-                                                                oneOrder),
+                      _buildShoppingCartInputFieldsUNObscuredDinningRoom(
+                      oneOrder),
 //                                        animatedObscuredTextInputContainer (oneOrder.ordersCustomer),
-                                              ),
-                                            ),
+                      ),
+                      ),
 
-                                            /*
+                      /*
                                         // workTest
                                         Container(
                                           height:68,
@@ -1205,48 +1276,48 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 
                                         */
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }
-                          } else {
-                            print('sanp shot.data !is Order');
-                            return Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  0, displayHeight(context) / 2, 0, 0),
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                            backgroundColor:
-                                                Colors.lightGreenAccent,
+                      ],
+                      ),
+                      ),
+                      ),
+                      ],
+                      ),
+                      );
+                      }
+                      } else {
+                      print('sanp shot.data !is Order');
+                      return Container(
+                      margin: EdgeInsets.fromLTRB(
+                      0, displayHeight(context) / 2, 0, 0),
+                      child: Center(
+                      child: Column(
+                      children: <Widget>[
+                      Center(
+                      child: Container(
+                      alignment: Alignment.center,
+                      child: new CircularProgressIndicator(
+                      backgroundColor:
+                      Colors.lightGreenAccent,
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                          )),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          child: new CircularProgressIndicator(
-                                            backgroundColor: Color(0xffFC0000),
+                      )),
+                      ),
+                      Center(
+                      child: Container(
+                      alignment: Alignment.center,
+                      child: new CircularProgressIndicator(
+                      backgroundColor: Color(0xffFC0000),
 
 //                                              valueColor:
 //                                              ColorTween(begin: beginColor, end: endColor).animate(controller)
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }
+                      )),
+                      ),
+                      ],
+                      ),
+                      ),
+                      );
                       }
+                    }
 //                          }
 
 //                    }
@@ -1437,8 +1508,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           }
         }
 
-        // M VSM ORG VS TODO. ENDS HERE.
-        );
+      // M VSM ORG VS TODO. ENDS HERE.
+    );
   }
 
   Widget animatedWidgetShowSelectedOrderDeliveryType(
@@ -1470,7 +1541,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   snapshot.data;
 
               OrderTypeSingleSelect selectedOne =
-                  allOrderTypesSingleSelect.firstWhere(
+              allOrderTypesSingleSelect.firstWhere(
                       (oneOrderType) => oneOrderType.isSelected == true);
               _currentOrderTypeIndex = selectedOne.index;
 
@@ -1483,7 +1554,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               return Container(
                 width: displayWidth(context) / 1.03,
                 height:
-                    displayHeight(context) / 20 + displayHeight(context) / 6,
+                displayHeight(context) / 20 + displayHeight(context) / 6,
                 child: Row(
                   children: [
                     Container(
@@ -1531,7 +1602,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         onTap: () {
                           setState(() {
                             showFullOrderDeliveryType =
-                                !showFullOrderDeliveryType;
+                            !showFullOrderDeliveryType;
 
 //                            showFullOrderType
                             /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
@@ -1542,12 +1613,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                             // JUST LIKE THE FIRST TIME.
                             showEditingCompleteCustomerAddressInformation =
-                                false;
+                            false;
                             showEditingCompleteCustomerHouseFlatIformation =
-                                false;
+                            false;
                             showEditingCompleteCustomerPhoneIformation = false;
                             showEditingCompleteCustomerReachoutIformation =
-                                false;
+                            false;
                           });
                         },
                       ),
@@ -1572,15 +1643,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                        911
                       child: orderTypeName == 'Delivery'
                           ? animatedShowUserAddressDetailsInLineDeliveryOrderType(
-                              currentUser)
+                          currentUser)
                           : orderTypeName == 'TakeAway'
-                              ? animatedShowUserAddressDetailsInLineTakeAwayOrderType(
-                                  currentUser)
-                              : orderTypeName == 'Phone'
-                                  ? animatedShowUserAddressDetailsInLinePhoneOrderType(
-                                      currentUser)
-                                  : animatedShowUserAddressDetailsInLineTakeAwayOrderType(
-                                      currentUser),
+                          ? animatedShowUserAddressDetailsInLineTakeAwayOrderType(
+                          currentUser)
+                          : orderTypeName == 'Phone'
+                          ? animatedShowUserAddressDetailsInLinePhoneOrderType(
+                          currentUser)
+                          : animatedShowUserAddressDetailsInLineTakeAwayOrderType(
+                          currentUser),
                     )
                   ],
                 ),
@@ -1816,8 +1887,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       CustomPaint(
                         size: Size(0, 19),
                         painter:
-                            LongPainterForanimatedWidgetShowSelectedOrderType(
-                                context),
+                        LongPainterForanimatedWidgetShowSelectedOrderType(
+                            context),
                       ),
                     ]),
               ),
@@ -1859,47 +1930,47 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 child: currentUserForInline.etaTimeInMinutes != -1
                     ? Container(
-                        color: Color(0xffFC0000),
+                  color: Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                        width: displayWidth(context) / 4,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Icons.watch, size: 32.0, color: Colors.black),
+                  width: displayWidth(context) / 4,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.watch, size: 32.0, color: Colors.black),
 
-                            // : Container for 2nd argument of ternary condition ends here.
+                      // : Container for 2nd argument of ternary condition ends here.
 
-                            Container(
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                        alignment: Alignment.center,
+                        child: Text(
+                            '${currentUserForInline.etaTimeInMinutes}',
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(0xff000000),
-                                  )),
-                            ),
+                              color: Color(0xff000000),
+                            )),
+                      ),
 
-                            //ZZZZ
-                          ],
-                        ),
-                      )
+                      //ZZZZ
+                    ],
+                  ),
+                )
                     : Container(
-                        width: displayWidth(context) / 4,
+                  width: displayWidth(context) / 4,
 //                       width:displayWidth(context) /10,
-                      )
+                )
 
                 // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                 ,
                 onPressed: () => {
                   setState(() {
                     showEditingCompleteCustomerReachoutIformation =
-                        !showEditingCompleteCustomerReachoutIformation;
+                    !showEditingCompleteCustomerReachoutIformation;
 
                     etaController.text =
                         currentUserForInline.etaTimeInMinutes.toString();
@@ -1974,8 +2045,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       CustomPaint(
                         size: Size(0, 19),
                         painter:
-                            LongPainterForanimatedWidgetShowSelectedOrderType(
-                                context),
+                        LongPainterForanimatedWidgetShowSelectedOrderType(
+                            context),
                       ),
                     ]),
               ),
@@ -2016,47 +2087,47 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
                 child: currentUserForInline.etaTimeInMinutes != -1
                     ? Container(
-                        color: Color(0xffFC0000),
+                  color: Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                        width: displayWidth(context) / 4,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Icons.watch, size: 32.0, color: Colors.black),
+                  width: displayWidth(context) / 4,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.watch, size: 32.0, color: Colors.black),
 
-                            // : Container for 2nd argument of ternary condition ends here.
+                      // : Container for 2nd argument of ternary condition ends here.
 
-                            Container(
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                        alignment: Alignment.center,
+                        child: Text(
+                            '${currentUserForInline.etaTimeInMinutes}',
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(0xff000000),
-                                  )),
-                            ),
+                              color: Color(0xff000000),
+                            )),
+                      ),
 
-                            //ZZZZ
-                          ],
-                        ),
-                      )
+                      //ZZZZ
+                    ],
+                  ),
+                )
                     : Container(
-                        width: displayWidth(context) / 4,
+                  width: displayWidth(context) / 4,
 //                       width:displayWidth(context) /10,
-                      )
+                )
 
                 // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                 ,
                 onPressed: () => {
                   setState(() {
                     showEditingCompleteCustomerReachoutIformation =
-                        !showEditingCompleteCustomerReachoutIformation;
+                    !showEditingCompleteCustomerReachoutIformation;
 
                     etaController.text =
                         currentUserForInline.etaTimeInMinutes.toString();
@@ -2141,76 +2212,76 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 color: Color(0xffFFFFFF),
                 child: currentUserForInline.phoneNumber != ''
                     ? Container(
-                        color: Color(0xffFFFFFF),
+                  color: Color(0xffFFFFFF),
 //                      color:Colors.lightGreenAccent,
-                        width: displayWidth(context) / 3,
+                  width: displayWidth(context) / 3,
 
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Icons.phone, size: 32.0, color: Colors.black),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.phone, size: 32.0, color: Colors.black),
 
-                            // : Container for 2nd argument of ternary condition ends here.
+                      // : Container for 2nd argument of ternary condition ends here.
 
-                            Expanded(
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                alignment: Alignment.center,
-                                child:
-                                    Text('${currentUserForInline.phoneNumber}',
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.normal,
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                          alignment: Alignment.center,
+                          child:
+                          Text('${currentUserForInline.phoneNumber}',
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                          color: Color(0xff000000),
-                                        )),
-                              ),
-                            ),
-
-                            //ZZZZ
-                          ],
-                        ),
-                      )
-                    : Container(
-                        color: Color(0xffFFFFFF),
-//                      color:Colors.lightGreenAccent,
-                        width: displayWidth(context) / 3,
-
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Icons.phone, size: 32.0, color: Colors.black),
-
-                            // : Container for 2nd argument of ternary condition ends here.
-
-                            Expanded(
-                              child: Container(
-                                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                alignment: Alignment.center,
-                                child: Text('phone',
-                                    style: TextStyle(
-                                      fontSize: 19,
-                                      fontWeight: FontWeight.normal,
-//                                                        fontFamily: 'GreatVibes-Regular',
-
-//                    fontStyle: FontStyle.italic,
-                                      color: Color(0xff000000),
-                                    )),
-                              ),
-                            ),
-
-                            //ZZZZ
-                          ],
+                                color: Color(0xff000000),
+                              )),
                         ),
                       ),
+
+                      //ZZZZ
+                    ],
+                  ),
+                )
+                    : Container(
+                  color: Color(0xffFFFFFF),
+//                      color:Colors.lightGreenAccent,
+                  width: displayWidth(context) / 3,
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.phone, size: 32.0, color: Colors.black),
+
+                      // : Container for 2nd argument of ternary condition ends here.
+
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                          alignment: Alignment.center,
+                          child: Text('phone',
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.normal,
+//                                                        fontFamily: 'GreatVibes-Regular',
+
+//                    fontStyle: FontStyle.italic,
+                                color: Color(0xff000000),
+                              )),
+                        ),
+                      ),
+
+                      //ZZZZ
+                    ],
+                  ),
+                ),
                 onPressed: () => {
                   setState(() {
                     showEditingCompleteCustomerPhoneIformation =
-                        !showEditingCompleteCustomerPhoneIformation;
+                    !showEditingCompleteCustomerPhoneIformation;
 
                     phoneNumberController.text =
                         currentUserForInline.phoneNumber;
@@ -2226,75 +2297,75 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 color: Color(0xffFFFFFF),
                 child: currentUserForInline.etaTimeInMinutes != -1
                     ? Container(
-                        color: Color(0xffFFFFFF),
+                  color: Color(0xffFFFFFF),
 //                      color:Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                        width: displayWidth(context) / 3.5,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Icons.watch, size: 32.0, color: Colors.black),
+                  width: displayWidth(context) / 3.5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.watch, size: 32.0, color: Colors.black),
 
-                            // : Container for 2nd argument of ternary condition ends here.
+                      // : Container for 2nd argument of ternary condition ends here.
 
-                            Container(
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                  '${currentUserForInline.etaTimeInMinutes}',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                        alignment: Alignment.center,
+                        child: Text(
+                            '${currentUserForInline.etaTimeInMinutes}',
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(0xff000000),
-                                  )),
-                            ),
+                              color: Color(0xff000000),
+                            )),
+                      ),
 
-                            //ZZZZ
-                          ],
-                        ),
-                      )
+                      //ZZZZ
+                    ],
+                  ),
+                )
                     : Container(
-                        color: Color(0xffFFFFFF),
+                  color: Color(0xffFFFFFF),
 //                      color:Color(0xffFC0000),
 //                       width:displayWidth(context) /10,
-                        width: displayWidth(context) / 4,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Icons.watch, size: 32.0, color: Colors.black),
+                  width: displayWidth(context) / 4,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.watch, size: 32.0, color: Colors.black),
 
-                            // : Container for 2nd argument of ternary condition ends here.
+                      // : Container for 2nd argument of ternary condition ends here.
 
-                            Container(
-                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                              alignment: Alignment.center,
-                              child: Text('ETA',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal,
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                        alignment: Alignment.center,
+                        child: Text('ETA',
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                    color: Color(0xff000000),
-                                  )),
-                            ),
+                              color: Color(0xff000000),
+                            )),
+                      ),
 
-                            //ZZZZ
-                          ],
-                        ),
-                      )
+                      //ZZZZ
+                    ],
+                  ),
+                )
 
                 // THIS CONTAINER ABOVE IS ABOUT ETA INFORMATION ENDS HERE.
                 ,
                 onPressed: () => {
                   setState(() {
                     showEditingCompleteCustomerReachoutIformation =
-                        !showEditingCompleteCustomerReachoutIformation;
+                    !showEditingCompleteCustomerReachoutIformation;
 
                     etaController.text =
                         currentUserForInline.etaTimeInMinutes.toString();
@@ -2344,102 +2415,102 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       highlightColor: Color(0xffEEF6CE),
                       child: currentUserForInline.address != ''
                           ? Container(
-                              width: displayWidth(context) / 5,
+                        width: displayWidth(context) / 5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+//                        color:Colors.pinkAccent,
+
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.location_on,
+                                size: 32.0,
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 5.5,
                               height: displayHeight(context) / 9,
-                              decoration: BoxDecoration(
-                                color: Color(0xffFCF5E4),
-//                        color:Colors.pinkAccent,
-
-                                borderRadius: BorderRadius.circular(35),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    color: Color(0xffFCF5E4),
-                                    width: displayWidth(context) / 30,
-                                    child: Icon(
-                                      Icons.location_on,
-                                      size: 32.0,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: displayWidth(context) / 5.5,
-                                    height: displayHeight(context) / 9,
-                                    color: Color(0xffFCF5E4),
+                              color: Color(0xffFCF5E4),
 //                                color: Color(0xffFFFFFF),
-                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                    alignment: Alignment.centerLeft,
-                                    child:
-                                        Text('${currentUserForInline.address}',
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 3,
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.centerLeft,
+                              child:
+                              Text('${currentUserForInline.address}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
 //                                      textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.redAccent,
-                                            )),
-                                  ),
-                                ],
-                              ),
-                            )
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
                           : showEditingCompleteCustomerAddressInformation
-                              ? Container(
-                                  width: displayWidth(context) / 5,
-                                  height: displayHeight(context) / 9,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCF5E4),
+                          ? Container(
+                        width: displayWidth(context) / 5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
 //                        color:Colors.pinkAccent,
 
-                                    borderRadius: BorderRadius.circular(35),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 30,
-                                        child: Icon(
-                                          Icons.location_on,
-                                          size: 32.0,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: displayWidth(context) / 5.5,
-                                        height: displayHeight(context) / 9,
-                                        color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.location_on,
+                                size: 32.0,
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 5.5,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
 //                                color: Color(0xffFFFFFF),
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                            '${currentUserForInline.address}',
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 3,
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                  '${currentUserForInline.address}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
 //                                      textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.redAccent,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : Container(
-                                  color: Color(0xffFFFFFF),
-                                  width: displayWidth(context) / 5,
-                                  height: displayHeight(context) / 9,
-                                  child: Container(),
-                                ),
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                          : Container(
+                        color: Color(0xffFFFFFF),
+                        width: displayWidth(context) / 5,
+                        height: displayHeight(context) / 9,
+                        child: Container(),
+                      ),
                       onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerAddressInformation =
-                              !showEditingCompleteCustomerAddressInformation;
+                          !showEditingCompleteCustomerAddressInformation;
                           addressController.text = currentUserForInline.address;
                         })
                       },
@@ -2457,113 +2528,113 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      color:Colors.brown,
 //                        color: Color(0xffFFFFFF),
 
-                              width: displayWidth(context) / 6.8,
-                              height: displayHeight(context) / 9,
-                              decoration: BoxDecoration(
-                                color: Color(0xffFCF5E4),
-                                borderRadius: BorderRadius.circular(35),
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.home,
+                                size: 32.0,
+                                // color: Colors.black
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    color: Color(0xffFCF5E4),
-                                    width: displayWidth(context) / 30,
-                                    child: Icon(
-                                      Icons.home,
-                                      size: 32.0,
-                                      // color: Colors.black
-                                    ),
-                                  ),
+                            ),
 
-                                  // : Container for 2nd argument of ternary condition ends here.
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                                  Container(
-                                    color: Color(0xffFCF5E4),
-                                    width: displayWidth(context) / 7.4,
-                                    height: displayHeight(context) / 9,
-                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                        '${currentUserForInline.flatOrHouseNumber}',
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.normal,
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 7.4,
+                              height: displayHeight(context) / 9,
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.flatOrHouseNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                          color: Colors.redAccent,
-                                        )),
-                                  ),
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
 
-                                  //ZZZZ
-                                ],
-                              ),
-                            )
+                            //ZZZZ
+                          ],
+                        ),
+                      )
                           : (showEditingCompleteCustomerHouseFlatIformation)
-                              ? Container(
+                          ? Container(
 //                      color:Colors.brown,
 //                        color: Color(0xffFFFFFF),
 
-                                  width: displayWidth(context) / 6.8,
-                                  height: displayHeight(context) / 9,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCF5E4),
-                                    borderRadius: BorderRadius.circular(35),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 30,
-                                        child: Icon(
-                                          Icons.home,
-                                          size: 32.0,
-                                          // color: Colors.black
-                                        ),
-                                      ),
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.home,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
 
-                                      // : Container for 2nd argument of ternary condition ends here.
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                                      Container(
-                                        color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 7.4,
-                                        height: displayHeight(context) / 9,
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            '${currentUserForInline.flatOrHouseNumber}',
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.normal,
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 7.4,
+                              height: displayHeight(context) / 9,
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.flatOrHouseNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
-                                              color: Colors.redAccent,
-                                            )),
-                                      ),
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
 
-                                      //ZZZZ
-                                    ],
-                                  ),
-                                )
-                              : Container(
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+                          : Container(
 //                      color:Colors.brown,
-                                  color: Color(0xffFFFFFF),
+                        color: Color(0xffFFFFFF),
 //                       width:displayWidth(context) /2.6,
-                                  width: displayWidth(context) / 6.8,
-                                  height: displayHeight(context) / 9,
-                                  child: Container(),
-                                ),
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        child: Container(),
+                      ),
                       onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerHouseFlatIformation =
-                              !showEditingCompleteCustomerHouseFlatIformation;
+                          !showEditingCompleteCustomerHouseFlatIformation;
 
                           addressController.text = currentUserForInline.address;
                           houseFlatNumberController.text =
@@ -2585,92 +2656,92 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       highlightColor: Color(0xffEEF6CE),
                       child: currentUserForInline.phoneNumber != ''
                           ? Container(
-                              width: displayWidth(context) / 6.5,
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 7.4,
                               height: displayHeight(context) / 9,
-                              decoration: BoxDecoration(
-                                color: Color(0xffFCF5E4),
-                                borderRadius: BorderRadius.circular(35),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    color: Color(0xffFCF5E4),
-                                    width: displayWidth(context) / 30,
-                                    child: Icon(
-                                      Icons.phone,
-                                      size: 32.0,
-                                      // color: Colors.black
-                                    ),
-                                  ),
-                                  Container(
-                                    width: displayWidth(context) / 7.4,
-                                    height: displayHeight(context) / 9,
-                                    color: Color(0xffFCF5E4),
-                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                        '${currentUserForInline.phoneNumber}',
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.redAccent,
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            )
+                              color: Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
                           : (showEditingCompleteCustomerPhoneIformation)
-                              ? Container(
-                                  width: displayWidth(context) / 6.5,
-                                  height: displayHeight(context) / 9,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCF5E4),
-                                    borderRadius: BorderRadius.circular(35),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 30,
-                                        child: Icon(
-                                          Icons.phone,
-                                          size: 32.0,
-                                          // color: Colors.black
-                                        ),
-                                      ),
-                                      Container(
-                                        width: displayWidth(context) / 7.4,
-                                        height: displayHeight(context) / 9,
-                                        color: Color(0xffFCF5E4),
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            '${currentUserForInline.phoneNumber}',
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.redAccent,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : Container(
-                                  color: Color(0xffFFFFFF),
-                                  width: displayWidth(context) / 6.8,
-                                  height: displayHeight(context) / 9,
-                                  child: Container(),
-                                ),
+                          ? Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 7.4,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                          : Container(
+                        color: Color(0xffFFFFFF),
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        child: Container(),
+                      ),
                       onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerPhoneIformation =
-                              !showEditingCompleteCustomerPhoneIformation;
+                          !showEditingCompleteCustomerPhoneIformation;
                           phoneNumberController.text =
                               currentUserForInline.phoneNumber;
                         })
@@ -2689,152 +2760,152 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       highlightColor: Color(0xffEEF6CE),
 
                       child: ((currentUserForInline.etaTimeOfDay.hour == 0) &&
-                              (currentUserForInline.etaTimeOfDay.minute == 0) &&
-                              (currentUserForInline.etaTimeInMinutes == -1) &&
-                              (showEditingCompleteCustomerReachoutIformation ==
-                                  false))
+                          (currentUserForInline.etaTimeOfDay.minute == 0) &&
+                          (currentUserForInline.etaTimeInMinutes == -1) &&
+                          (showEditingCompleteCustomerReachoutIformation ==
+                              false))
                           ? Container(
-                              color: Colors.white,
-                            )
+                        color: Colors.white,
+                      )
                           : (currentUserForInline.etaTimeInMinutes != -1)
-                              ? Container(
-                                  width: displayWidth(context) / 7.5,
-                                  height: displayHeight(context) / 9,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCF5E4),
-                                    borderRadius: BorderRadius.circular(35),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 30,
-                                        child: Icon(
-                                          Icons.watch,
-                                          size: 32.0,
-                                          // color: Colors.black
-                                        ),
-                                      ),
-                                      Container(
-                                        width: displayWidth(context) / 10,
-                                        height: displayHeight(context) / 9,
-                                        color: Color(0xffFCF5E4),
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            '${currentUserForInline.etaTimeInMinutes} min',
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.redAccent,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : ((showEditingCompleteCustomerReachoutIformation) &&
-                                      (currentUserForInline.etaTimeOfDay.hour ==
-                                          0) &&
-                                      (currentUserForInline
-                                              .etaTimeOfDay.minute ==
-                                          0))
-                                  ? Container(
-                                      width: displayWidth(context) / 7.5,
-                                      height: displayHeight(context) / 9,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFCF5E4),
-                                        borderRadius: BorderRadius.circular(35),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                            color: Color(0xffFCF5E4),
-                                            width: displayWidth(context) / 30,
-                                            child: Icon(
-                                              Icons.watch,
-                                              size: 32.0,
-                                              // color: Colors.black
-                                            ),
-                                          ),
+                          ? Container(
+                        width: displayWidth(context) / 7.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 10,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes} min',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                          : ((showEditingCompleteCustomerReachoutIformation) &&
+                          (currentUserForInline.etaTimeOfDay.hour ==
+                              0) &&
+                          (currentUserForInline
+                              .etaTimeOfDay.minute ==
+                              0))
+                          ? Container(
+                        width: displayWidth(context) / 7.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
 
-                                          // : Container for 2nd argument of ternary condition ends here.
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                                          Container(
-                                            width: displayWidth(context) / 10,
-                                            height: displayHeight(context) / 9,
-                                            color: Color(0xffFCF5E4),
-                                            padding:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                '${currentUserForInline.etaTimeInMinutes}',
-                                                style: TextStyle(
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.redAccent,
-                                                )),
-                                          ),
+                            Container(
+                              width: displayWidth(context) / 10,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
 
-                                          //ZZZZ
-                                        ],
-                                      ),
-                                    )
-                                  : Container(
-                                      width: displayWidth(context) / 7.5,
-                                      height: displayHeight(context) / 9,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFCF5E4),
-                                        borderRadius: BorderRadius.circular(35),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                            color: Color(0xffFCF5E4),
-                                            width: displayWidth(context) / 30,
-                                            child: Icon(
-                                              Icons.watch,
-                                              size: 32.0,
-                                              // color: Colors.black
-                                            ),
-                                          ),
-                                          Container(
-                                            width: displayWidth(context) / 10,
-                                            height: displayHeight(context) / 9,
-                                            color: Color(0xffFCF5E4),
-                                            padding:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                '${currentUserForInline.etaTimeOfDay.hour} :'
-                                                '${currentUserForInline.etaTimeOfDay.minute} ',
-                                                style: TextStyle(
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.redAccent,
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+                          : Container(
+                        width: displayWidth(context) / 7.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 10,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeOfDay.hour} :'
+                                      '${currentUserForInline.etaTimeOfDay.minute} ',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
 
                       //ZZZZ
 
                       onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerReachoutIformation =
-                              !showEditingCompleteCustomerReachoutIformation;
+                          !showEditingCompleteCustomerReachoutIformation;
                           etaController.text =
                               currentUserForInline.etaTimeInMinutes.toString();
                         })
@@ -2884,92 +2955,92 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       highlightColor: Color(0xffEEF6CE),
                       child: currentUserForInline.phoneNumber != ''
                           ? Container(
-                              width: displayWidth(context) / 6.5,
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 7.4,
                               height: displayHeight(context) / 9,
-                              decoration: BoxDecoration(
-                                color: Color(0xffFCF5E4),
-                                borderRadius: BorderRadius.circular(35),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    color: Color(0xffFCF5E4),
-                                    width: displayWidth(context) / 30,
-                                    child: Icon(
-                                      Icons.phone,
-                                      size: 32.0,
-                                      // color: Colors.black
-                                    ),
-                                  ),
-                                  Container(
-                                    width: displayWidth(context) / 7.4,
-                                    height: displayHeight(context) / 9,
-                                    color: Color(0xffFCF5E4),
-                                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                        '${currentUserForInline.phoneNumber}',
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.redAccent,
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            )
+                              color: Color(0xffFCF5E4),
+                              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
                           : (showEditingCompleteCustomerPhoneIformation)
-                              ? Container(
-                                  width: displayWidth(context) / 6.5,
-                                  height: displayHeight(context) / 9,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCF5E4),
-                                    borderRadius: BorderRadius.circular(35),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 30,
-                                        child: Icon(
-                                          Icons.phone,
-                                          size: 32.0,
-                                          // color: Colors.black
-                                        ),
-                                      ),
-                                      Container(
-                                        width: displayWidth(context) / 7.4,
-                                        height: displayHeight(context) / 9,
-                                        color: Color(0xffFCF5E4),
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            '${currentUserForInline.phoneNumber}',
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.redAccent,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : Container(
-                                  color: Color(0xffFFFFFF),
-                                  width: displayWidth(context) / 6.8,
-                                  height: displayHeight(context) / 9,
-                                  child: Container(),
-                                ),
+                          ? Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.phone,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 7.4,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                          : Container(
+                        color: Color(0xffFFFFFF),
+                        width: displayWidth(context) / 6.8,
+                        height: displayHeight(context) / 9,
+                        child: Container(),
+                      ),
                       onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerPhoneIformation =
-                              !showEditingCompleteCustomerPhoneIformation;
+                          !showEditingCompleteCustomerPhoneIformation;
                           phoneNumberController.text =
                               currentUserForInline.phoneNumber;
                         })
@@ -2987,152 +3058,152 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       highlightColor: Color(0xffEEF6CE),
 
                       child: ((currentUserForInline.etaTimeOfDay.hour == 0) &&
-                              (currentUserForInline.etaTimeOfDay.minute == 0) &&
-                              (currentUserForInline.etaTimeInMinutes == -1) &&
-                              (showEditingCompleteCustomerReachoutIformation ==
-                                  false))
+                          (currentUserForInline.etaTimeOfDay.minute == 0) &&
+                          (currentUserForInline.etaTimeInMinutes == -1) &&
+                          (showEditingCompleteCustomerReachoutIformation ==
+                              false))
                           ? Container(
-                              color: Colors.white,
-                            )
+                        color: Colors.white,
+                      )
                           : (currentUserForInline.etaTimeInMinutes != -1)
-                              ? Container(
-                                  width: displayWidth(context) / 9,
-                                  height: displayHeight(context) / 9,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCF5E4),
-                                    borderRadius: BorderRadius.circular(35),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 30,
-                                        child: Icon(
-                                          Icons.watch,
-                                          size: 32.0,
-                                          // color: Colors.black
-                                        ),
-                                      ),
+                          ? Container(
+                        width: displayWidth(context) / 9,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
 
-                                      // : Container for 2nd argument of ternary condition ends here.
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                                      Container(
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            '${currentUserForInline.etaTimeInMinutes}',
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.normal,
-                                              color: Color(0xff000000),
-                                            )),
-                                      ),
+                            Container(
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color(0xff000000),
+                                  )),
+                            ),
 
-                                      //ZZZZ
-                                    ],
-                                  ),
-                                )
-                              : ((showEditingCompleteCustomerReachoutIformation) &&
-                                      (currentUserForInline.etaTimeOfDay.hour ==
-                                          0) &&
-                                      (currentUserForInline
-                                              .etaTimeOfDay.minute ==
-                                          0))
-                                  ? Container(
-                                      width: displayWidth(context) / 6.5,
-                                      height: displayHeight(context) / 9,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFCF5E4),
-                                        borderRadius: BorderRadius.circular(35),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                            color: Color(0xffFCF5E4),
-                                            width: displayWidth(context) / 30,
-                                            child: Icon(
-                                              Icons.watch,
-                                              size: 32.0,
-                                              // color: Colors.black
-                                            ),
-                                          ),
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+                          : ((showEditingCompleteCustomerReachoutIformation) &&
+                          (currentUserForInline.etaTimeOfDay.hour ==
+                              0) &&
+                          (currentUserForInline
+                              .etaTimeOfDay.minute ==
+                              0))
+                          ? Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
 
-                                          // : Container for 2nd argument of ternary condition ends here.
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                                          Container(
-                                            width: displayWidth(context) / 9,
-                                            height: displayHeight(context) / 9,
-                                            color: Color(0xffFCF5E4),
-                                            padding:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                '${currentUserForInline.etaTimeInMinutes}',
-                                                style: TextStyle(
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.redAccent,
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : Container(
-                                      width: displayWidth(context) / 6.5,
-                                      height: displayHeight(context) / 9,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFCF5E4),
-                                        borderRadius: BorderRadius.circular(35),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                            color: Color(0xffFCF5E4),
-                                            width: displayWidth(context) / 30,
-                                            child: Icon(
-                                              Icons.watch,
-                                              size: 32.0,
-                                              // color: Colors.black
-                                            ),
-                                          ),
-                                          Container(
-                                            width: displayWidth(context) / 9,
-                                            height: displayHeight(context) / 9,
-                                            color: Color(0xffFCF5E4),
-                                            padding:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                '${currentUserForInline.etaTimeOfDay.hour} :'
-                                                '${currentUserForInline.etaTimeOfDay.minute} ',
-                                                style: TextStyle(
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.redAccent,
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                            Container(
+                              width: displayWidth(context) / 9,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                          : Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 9,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeOfDay.hour} :'
+                                      '${currentUserForInline.etaTimeOfDay.minute} ',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
 
                       //ZZZZ
 
                       onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerReachoutIformation =
-                              !showEditingCompleteCustomerReachoutIformation;
+                          !showEditingCompleteCustomerReachoutIformation;
                           etaController.text =
                               currentUserForInline.etaTimeInMinutes.toString();
                         })
@@ -3183,154 +3254,154 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       highlightColor: Color(0xffEEF6CE),
 
                       child: ((currentUserForInline.etaTimeOfDay.hour == 0) &&
-                              (currentUserForInline.etaTimeOfDay.minute == 0) &&
-                              (currentUserForInline.etaTimeInMinutes == -1) &&
-                              (showEditingCompleteCustomerReachoutIformation ==
-                                  false))
+                          (currentUserForInline.etaTimeOfDay.minute == 0) &&
+                          (currentUserForInline.etaTimeInMinutes == -1) &&
+                          (showEditingCompleteCustomerReachoutIformation ==
+                              false))
                           ? Container(
-                              color: Colors.white,
-                            )
+                        color: Colors.white,
+                      )
                           : (currentUserForInline.etaTimeInMinutes != -1)
-                              ? Container(
-                                  width: displayWidth(context) / 6.5,
-                                  height: displayHeight(context) / 9,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffFCF5E4),
-                                    borderRadius: BorderRadius.circular(35),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 20,
-                                        child: Icon(
-                                          Icons.watch_later_outlined,
-                                          size: 32.0,
-                                        ),
-                                      ),
+                          ? Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 20,
+                              child: Icon(
+                                Icons.watch_later_outlined,
+                                size: 32.0,
+                              ),
+                            ),
 
-                                      // : Container for 2nd argument of ternary condition ends here.
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                                      Container(
-                                        width: displayWidth(context) / 9,
-                                        height: displayHeight(context) / 9,
-                                        color: Color(0xffFCF5E4),
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            '${currentUserForInline.etaTimeInMinutes}',
-                                            style: TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.redAccent,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : ((showEditingCompleteCustomerReachoutIformation) &&
-                                      (currentUserForInline.etaTimeOfDay.hour ==
-                                          0) &&
-                                      (currentUserForInline
-                                              .etaTimeOfDay.minute ==
-                                          0))
-                                  ? Container(
-                                      width: displayWidth(context) / 6.5,
-                                      height: displayHeight(context) / 9,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFCF5E4),
-                                        borderRadius: BorderRadius.circular(35),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                            color: Color(0xffFCF5E4),
-                                            width: displayWidth(context) / 30,
-                                            child: Icon(
-                                              Icons.watch,
-                                              size: 32.0,
-                                              // color: Colors.black
-                                            ),
-                                          ),
+                            Container(
+                              width: displayWidth(context) / 9,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                          : ((showEditingCompleteCustomerReachoutIformation) &&
+                          (currentUserForInline.etaTimeOfDay.hour ==
+                              0) &&
+                          (currentUserForInline
+                              .etaTimeOfDay.minute ==
+                              0))
+                          ? Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
 
-                                          // : Container for 2nd argument of ternary condition ends here.
+                            // : Container for 2nd argument of ternary condition ends here.
 
-                                          Container(
-                                            width: displayWidth(context) / 9,
-                                            height: displayHeight(context) / 9,
-                                            color: Color(0xffFCF5E4),
-                                            padding:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                '${currentUserForInline.etaTimeInMinutes}',
-                                                style: TextStyle(
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.redAccent,
-                                                )),
-                                          ),
+                            Container(
+                              width: displayWidth(context) / 9,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeInMinutes}',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
 
-                                          //ZZZZ
-                                        ],
-                                      ),
-                                    )
-                                  : Container(
-                                      width: displayWidth(context) / 6.5,
-                                      height: displayHeight(context) / 9,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFCF5E4),
-                                        borderRadius: BorderRadius.circular(35),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                            color: Color(0xffFCF5E4),
-                                            width: displayWidth(context) / 30,
-                                            child: Icon(
-                                              Icons.watch,
-                                              size: 32.0,
-                                              // color: Colors.black
-                                            ),
-                                          ),
-                                          Container(
-                                            width: displayWidth(context) / 9,
-                                            height: displayHeight(context) / 9,
-                                            color: Color(0xffFCF5E4),
-                                            padding:
-                                                EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                                '${currentUserForInline.etaTimeOfDay.hour} :'
-                                                '${currentUserForInline.etaTimeOfDay.minute} ',
-                                                style: TextStyle(
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.redAccent,
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                            //ZZZZ
+                          ],
+                        ),
+                      )
+                          : Container(
+                        width: displayWidth(context) / 6.5,
+                        height: displayHeight(context) / 9,
+                        decoration: BoxDecoration(
+                          color: Color(0xffFCF5E4),
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              color: Color(0xffFCF5E4),
+                              width: displayWidth(context) / 30,
+                              child: Icon(
+                                Icons.watch,
+                                size: 32.0,
+                                // color: Colors.black
+                              ),
+                            ),
+                            Container(
+                              width: displayWidth(context) / 9,
+                              height: displayHeight(context) / 9,
+                              color: Color(0xffFCF5E4),
+                              padding:
+                              EdgeInsets.fromLTRB(5, 0, 5, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  '${currentUserForInline.etaTimeOfDay.hour} :'
+                                      '${currentUserForInline.etaTimeOfDay.minute} ',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.redAccent,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
 
                       //ZZZZ
 
                       onTap: () => {
                         setState(() {
                           showEditingCompleteCustomerReachoutIformation =
-                              !showEditingCompleteCustomerReachoutIformation;
+                          !showEditingCompleteCustomerReachoutIformation;
                           etaController.text =
                               currentUserForInline.etaTimeInMinutes.toString();
                         })
@@ -3378,226 +3449,226 @@ class _ShoppingCartState extends State<ShoppingCart> {
       child: showEditingCompleteCustomerReachoutIformation
           ? Container()
           : Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+//              color:Colors.purple,
+//              width: displayWidth(context) / 4.5,
+            width: displayWidth(context) / 3.5,
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            height: displayHeight(context) / 24,
+            padding:
+            EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+
+            child: OutlineButton(
+              onPressed: () async {
+                Future<TimeOfDay> selectedTime24Hour = showTimePicker(
+                  context: context,
+                  initialTime: tempTimeOfDay,
+
+//                    TimeOfDay(hour: 10, minute: 47),
+
+                  builder: (BuildContext context, Widget child) {
+                    return MediaQuery(
+                      data: MediaQuery.of(context)
+                          .copyWith(alwaysUse24HourFormat: true),
+                      child: child,
+                    );
+                  },
+                );
+
+                selectedTime24Hour.whenComplete(() {
+                  print(
+                      "selectedTime24Hour called when future completes");
+                }).then((selectedTime24HourResult) async {
+                  print(
+                      "selectedTime24HourResult: $selectedTime24HourResult");
+
+                  final shoppingCartBloc =
+                  BlocProvider.of<ShoppingCartBloc>(context);
+
+                  shoppingCartBloc
+                      .setETAForOrder2(selectedTime24HourResult);
+                  setState(() {
+                    showFullOrderDeliveryType = false;
+                    showCustomerInformationHeader = true;
+                    showUserInputOptionsLikeFirstTime = false;
+                    showFullPaymentType =
+                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                    showEditingCompleteCustomerReachoutIformation = true;
+                  });
+                }).catchError((onError) {
+                  print('printing not successful: $onError');
+                  return false;
+                });
+
+//                                  RRRRRGHGHGHGH
+              },
+
+              splashColor: Colors.indigoAccent,
+//                                highlightElevation: 12,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+
+              borderSide: BorderSide(
+                color: Colors.grey,
+//                                        color:Color(0xff707070),
+                style: BorderStyle.solid,
+                width: 1.0,
+              ),
+
+              highlightElevation: 12,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 0 /*15*/),
+                width: displayWidth(context) / 4.5,
+                height: displayHeight(context) / 24,
+                child: Row(
+//                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(left: 0),
+                      child: Icon(
+                        Icons.access_alarm,
+                        size: 28,
+                        color: Color(0xffBCBCBD),
+                      ),
+                    ),
+                    Container(
+//                        color:Colors.pinkAccent,
+                      alignment: Alignment.center,
+                      width: displayWidth(context) / 5.5,
+//                                        color:Colors.purpleAccent,
+                      // do it in both Container
+                      child: Text(
+                        'milloin tulet',
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: Colors.black26,
+                          fontSize: 20,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            decoration: BoxDecoration(
+//                                      shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(25),
+              border: Border.all(
+                color: Color(0xffBCBCBD),
+                style: BorderStyle.solid,
+                width: 1.0,
+              ),
+
+              boxShadow: [
+                BoxShadow(
+//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
+                    color: Color(0xffFFFFFF),
+                    blurRadius: 10.0,
+                    offset: Offset(0.0, 2.0))
+              ],
+
+              color: Color(0xffFFFFFF),
+//                                      Colors.black54
+            ),
+            width: displayWidth(context) / 2.5,
+            height: displayHeight(context) / 24,
+            padding:
+            EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-//              color:Colors.purple,
-//              width: displayWidth(context) / 4.5,
-                  width: displayWidth(context) / 3.5,
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  height: displayHeight(context) / 24,
-                  padding:
-                      EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                  height: displayHeight(context) / 40,
+                  width: 5,
+                  margin: EdgeInsets.only(left: 0),
+                  child: Icon(
+                    Icons.watch_later_outlined,
+                    size: 28,
+                    color: Color(0xffBCBCBD),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  width: displayWidth(context) / 4,
+                  child: TextField(
+                    controller: etaController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      WhitelistingTextInputFormatter.digitsOnly
+                    ],
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Valitse sopiva aika',
+                      hintStyle:
+                      TextStyle(color: Colors.black26, fontSize: 17),
+                    ),
+                    style:
+                    TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                    onChanged: (text) {
+                      print("0444: $text");
 
-                  child: OutlineButton(
-                    onPressed: () async {
-                      Future<TimeOfDay> selectedTime24Hour = showTimePicker(
-                        context: context,
-                        initialTime: tempTimeOfDay,
+                      print("33: $text");
+                      final shoppingCartBloc =
+                      BlocProvider.of<ShoppingCartBloc>(context);
 
-//                    TimeOfDay(hour: 10, minute: 47),
+                      shoppingCartBloc.setETAForOrder(text);
+                      setState(() {
+                        showFullOrderDeliveryType = false;
 
-                        builder: (BuildContext context, Widget child) {
-                          return MediaQuery(
-                            data: MediaQuery.of(context)
-                                .copyWith(alwaysUse24HourFormat: true),
-                            child: child,
-                          );
-                        },
-                      );
-
-                      selectedTime24Hour.whenComplete(() {
-                        print(
-                            "selectedTime24Hour called when future completes");
-                      }).then((selectedTime24HourResult) async {
-                        print(
-                            "selectedTime24HourResult: $selectedTime24HourResult");
-
-                        final shoppingCartBloc =
-                            BlocProvider.of<ShoppingCartBloc>(context);
-
-                        shoppingCartBloc
-                            .setETAForOrder2(selectedTime24HourResult);
+                        // showFullOrderType
+                        /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+//                                                showCustomerInformationHeader = false;
+                        showCustomerInformationHeader = true;
+                        showUserInputOptionsLikeFirstTime = false;
+                        showFullPaymentType =
+                        true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                      });
+                    },
+                    onTap: () {
+                      if ((currentUser.address.trim().length) > 0 ||
+                          (currentUser.flatOrHouseNumber.trim().length) >
+                              0 ||
+                          (currentUser.phoneNumber.trim().length) > 0) {
+                        showEditingCompleteCustomerHouseFlatIformation =
+                        true;
+                      } else {
                         setState(() {
                           showFullOrderDeliveryType = false;
                           showCustomerInformationHeader = true;
                           showUserInputOptionsLikeFirstTime = false;
                           showFullPaymentType =
-                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                          showEditingCompleteCustomerReachoutIformation = true;
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                         });
-                      }).catchError((onError) {
-                        print('printing not successful: $onError');
-                        return false;
-                      });
-
-//                                  RRRRRGHGHGHGH
+                      }
                     },
-
-                    splashColor: Colors.indigoAccent,
-//                                highlightElevation: 12,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-//                                        color:Color(0xff707070),
-                      style: BorderStyle.solid,
-                      width: 1.0,
-                    ),
-
-                    highlightElevation: 12,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0 /*15*/),
-                      width: displayWidth(context) / 4.5,
-                      height: displayHeight(context) / 24,
-                      child: Row(
-//                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(left: 0),
-                            child: Icon(
-                              Icons.access_alarm,
-                              size: 28,
-                              color: Color(0xffBCBCBD),
-                            ),
-                          ),
-                          Container(
-//                        color:Colors.pinkAccent,
-                            alignment: Alignment.center,
-                            width: displayWidth(context) / 5.5,
-//                                        color:Colors.purpleAccent,
-                            // do it in both Container
-                            child: Text(
-                              'milloin tulet',
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.black26,
-                                fontSize: 20,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    onEditingComplete: () {
+                      logger.i(
+                          '...................on onEditingComplete of  ETA..........  ');
+                      showEditingCompleteCustomerReachoutIformation =
+                      true;
+                      print(
+                          'MMMM      MMMM           MMMM     at editing complete of Customer\'s address ETA Time:');
+                    },
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: Color(0xffBCBCBD),
-                      style: BorderStyle.solid,
-                      width: 1.0,
-                    ),
-
-                    boxShadow: [
-                      BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                          color: Color(0xffFFFFFF),
-                          blurRadius: 10.0,
-                          offset: Offset(0.0, 2.0))
-                    ],
-
-                    color: Color(0xffFFFFFF),
-//                                      Colors.black54
-                  ),
-                  width: displayWidth(context) / 2.5,
-                  height: displayHeight(context) / 24,
-                  padding:
-                      EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        height: displayHeight(context) / 40,
-                        width: 5,
-                        margin: EdgeInsets.only(left: 0),
-                        child: Icon(
-                          Icons.watch_later_outlined,
-                          size: 28,
-                          color: Color(0xffBCBCBD),
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        width: displayWidth(context) / 4,
-                        child: TextField(
-                          controller: etaController,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            WhitelistingTextInputFormatter.digitsOnly
-                          ],
-                          textInputAction: TextInputAction.done,
-                          onSubmitted: (_) => FocusScope.of(context).unfocus(),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Valitse sopiva aika',
-                            hintStyle:
-                                TextStyle(color: Colors.black26, fontSize: 17),
-                          ),
-                          style:
-                              TextStyle(color: Color(0xffFC0000), fontSize: 16),
-                          onChanged: (text) {
-                            print("0444: $text");
-
-                            print("33: $text");
-                            final shoppingCartBloc =
-                                BlocProvider.of<ShoppingCartBloc>(context);
-
-                            shoppingCartBloc.setETAForOrder(text);
-                            setState(() {
-                              showFullOrderDeliveryType = false;
-
-                              // showFullOrderType
-                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-//                                                showCustomerInformationHeader = false;
-                              showCustomerInformationHeader = true;
-                              showUserInputOptionsLikeFirstTime = false;
-                              showFullPaymentType =
-                                  true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                            });
-                          },
-                          onTap: () {
-                            if ((currentUser.address.trim().length) > 0 ||
-                                (currentUser.flatOrHouseNumber.trim().length) >
-                                    0 ||
-                                (currentUser.phoneNumber.trim().length) > 0) {
-                              showEditingCompleteCustomerHouseFlatIformation =
-                                  true;
-                            } else {
-                              setState(() {
-                                showFullOrderDeliveryType = false;
-                                showCustomerInformationHeader = true;
-                                showUserInputOptionsLikeFirstTime = false;
-                                showFullPaymentType =
-                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                              });
-                            }
-                          },
-                          onEditingComplete: () {
-                            logger.i(
-                                '...................on onEditingComplete of  ETA..........  ');
-                            showEditingCompleteCustomerReachoutIformation =
-                                true;
-                            print(
-                                'MMMM      MMMM           MMMM     at editing complete of Customer\'s address ETA Time:');
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                )
               ],
             ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -3614,152 +3685,152 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
             child: (showEditingCompleteCustomerPhoneIformation == false)
                 ? Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-                    decoration: BoxDecoration(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+              decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 2.0,
-                      ),
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color: Color(0xffBCBCBD),
+                  style: BorderStyle.solid,
+                  width: 2.0,
+                ),
 
-                      boxShadow: [
-                        BoxShadow(
+                boxShadow: [
+                  BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 2.0))
-                      ],
-
                       color: Color(0xffFFFFFF),
+                      blurRadius: 10.0,
+                      offset: Offset(0.0, 2.0))
+                ],
+
+                color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                    ),
+              ),
 
 //                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 2.5,
-                    height: displayHeight(context) / 24,
-                    padding:
-                        EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
+              width: displayWidth(context) / 2.5,
+              height: displayHeight(context) / 24,
+              padding:
+              EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+              child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
 //                                            height: 25,
-                          height: displayHeight(context) / 40,
-                          width: 5,
-                          margin: EdgeInsets.only(left: 0),
+                    height: displayHeight(context) / 40,
+                    width: 5,
+                    margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                          child: Icon(
+                    child: Icon(
 //                                          Icons.add_shopping_cart,
-                            Icons.phone,
-                            size: 28,
-                            color: Color(0xffBCBCBD),
-                          ),
-                        ),
-                        Container(
+                      Icons.phone,
+                      size: 28,
+                      color: Color(0xffBCBCBD),
+                    ),
+                  ),
+                  Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4,
+                    alignment: Alignment.center,
+                    width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                          // do it in both Container
-                          child: TextField(
-                            keyboardType: TextInputType.phone,
-                            inputFormatters: <TextInputFormatter>[
-                              LengthLimitingTextInputFormatter(16),
-                              WhitelistingTextInputFormatter.digitsOnly,
+                    // do it in both Container
+                    child: TextField(
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: <TextInputFormatter>[
+                        LengthLimitingTextInputFormatter(16),
+                        WhitelistingTextInputFormatter.digitsOnly,
 //                                                WhitelistingTextInputFormatter(RegExp("+[0-9]"))
 //                                                WhitelistingTextInputFormatter(RegExp("[+]"))
-                            ],
-                            controller: phoneNumberController,
-                            textInputAction: TextInputAction.next,
-                            onSubmitted: (_) =>
-                                FocusScope.of(context).nextFocus(),
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                      ],
+                      controller: phoneNumberController,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: (_) =>
+                          FocusScope.of(context).nextFocus(),
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                              border: InputBorder.none,
-                              hintText: 'Enter phone / telephone number',
-                              hintStyle: TextStyle(
-                                  color: Color(0xffFC0000), fontSize: 17),
+                        border: InputBorder.none,
+                        hintText: 'Enter phone / telephone number',
+                        hintStyle: TextStyle(
+                            color: Color(0xffFC0000), fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                            ),
-                            style: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 16),
-                            onChanged: (text) {
-                              print("33: $text");
+                      ),
+                      style: TextStyle(
+                          color: Color(0xffFC0000), fontSize: 16),
+                      onChanged: (text) {
+                        print("33: $text");
 
-                              final shoppingCartBloc =
-                                  BlocProvider.of<ShoppingCartBloc>(context);
+                        final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
 //
-                              shoppingCartBloc.setPhoneNumberForOrder(text);
+                        shoppingCartBloc.setPhoneNumberForOrder(text);
 
-                              setState(() {
-                                showFullOrderDeliveryType = false;
-                                // showFullOrderType = false;
-                                // showFullOrderType
-                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                        setState(() {
+                          showFullOrderDeliveryType = false;
+                          // showFullOrderType = false;
+                          // showFullOrderType
+                          /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                showCustomerInformationHeader = true;
-                                showUserInputOptionsLikeFirstTime = false;
-                                showFullPaymentType =
-                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                              });
-                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-                            },
-                            onTap: () {
-                              setState(() {
-                                showFullOrderDeliveryType = false;
-                                // showFullOrderType = false;
-                                // showFullOrderType
-                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                          showCustomerInformationHeader = true;
+                          showUserInputOptionsLikeFirstTime = false;
+                          showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                        });
+                        // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                      },
+                      onTap: () {
+                        setState(() {
+                          showFullOrderDeliveryType = false;
+                          // showFullOrderType = false;
+                          // showFullOrderType
+                          /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                showCustomerInformationHeader = true;
-                                showUserInputOptionsLikeFirstTime = false;
-                                showFullPaymentType =
-                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                          showCustomerInformationHeader = true;
+                          showUserInputOptionsLikeFirstTime = false;
+                          showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 //                                                showFullOrderType = false,
-                              });
-                            },
-                            onEditingComplete: () {
+                        });
+                      },
+                      onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
 
-                              print(
-                                  'at editing complete of Customer Phone Iformation ');
-                              setState(() => {
-                                    showEditingCompleteCustomerPhoneIformation =
-                                        true
+                        print(
+                            'at editing complete of Customer Phone Iformation ');
+                        setState(() => {
+                          showEditingCompleteCustomerPhoneIformation =
+                          true
 //                                          showInputtedCustomerIformation= true,
-                                  });
-                            },
-                          ),
-                        )
-                      ],
+                        });
+                      },
                     ),
                   )
+                ],
+              ),
+            )
                 : Container(),
           ),
           Container(
               child: ((showEditingCompleteCustomerPhoneIformation) &&
-                      (showEditingCompleteCustomerReachoutIformation == false))
+                  (showEditingCompleteCustomerReachoutIformation == false))
                   ? Container(
-                      height: displayHeight(context) / 18,
-                      width: displayWidth(context) / 1.03,
-                      child:
-                          whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                    )
+                height: displayHeight(context) / 18,
+                width: displayWidth(context) / 1.03,
+                child:
+                whenYouWillPickTheOrder(unObsecuredInputandPayment),
+              )
                   : Container()),
         ],
       ),
@@ -3779,377 +3850,377 @@ class _ShoppingCartState extends State<ShoppingCart> {
             child: showEditingCompleteCustomerAddressInformation
                 ? Container()
                 : Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-                    decoration: BoxDecoration(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+              decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 2.0,
-                      ),
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color: Color(0xffBCBCBD),
+                  style: BorderStyle.solid,
+                  width: 2.0,
+                ),
 
-                      boxShadow: [
-                        BoxShadow(
+                boxShadow: [
+                  BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 2.0))
-                      ],
-
                       color: Color(0xffFFFFFF),
+                      blurRadius: 10.0,
+                      offset: Offset(0.0, 2.0))
+                ],
+
+                color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                    ),
+              ),
 
 //                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 2.5,
-                    height: displayHeight(context) / 24,
-                    padding:
-                        EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
+              width: displayWidth(context) / 2.5,
+              height: displayHeight(context) / 24,
+              padding:
+              EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
 //                                            height: 25,
-                          height: displayHeight(context) / 40,
-                          width: 5,
-                          margin: EdgeInsets.only(left: 0),
-                          child: Icon(
-                            Icons.location_on_outlined,
-                            size: 28,
-                            color: Color(0xffBCBCBD),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4,
+                    height: displayHeight(context) / 40,
+                    width: 5,
+                    margin: EdgeInsets.only(left: 0),
+                    child: Icon(
+                      Icons.location_on_outlined,
+                      size: 28,
+                      color: Color(0xffBCBCBD),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                          // do it in both Container
-                          child: TextField(
-                            controller: addressController,
-                            textInputAction: TextInputAction.next,
-                            onSubmitted: (_) =>
-                                FocusScope.of(context).nextFocus(),
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              focusColor: Color(0xffFC0000),
-                              border: InputBorder.none,
-                              hintText: 'katuosoite ja talon numero ',
-                              hintStyle: TextStyle(
-                                  color: Colors.black54, fontSize: 14),
+                    // do it in both Container
+                    child: TextField(
+                      controller: addressController,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: (_) =>
+                          FocusScope.of(context).nextFocus(),
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        focusColor: Color(0xffFC0000),
+                        border: InputBorder.none,
+                        hintText: 'katuosoite ja talon numero ',
+                        hintStyle: TextStyle(
+                            color: Colors.black54, fontSize: 14),
 
 //                                      currentUser
 //                                        labelText: 'Search about meal.'
-                            ),
-                            onChanged: (text) {
-                              //RRRR
+                      ),
+                      onChanged: (text) {
+                        //RRRR
 
-                              print('at address of unobsecured (deliver loc)');
+                        print('at address of unobsecured (deliver loc)');
 
-                              final shoppingCartBloc =
-                                  BlocProvider.of<ShoppingCartBloc>(context);
+                        final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
 //
-                              shoppingCartBloc.setAddressForOrder(text);
-                              if ((text.trim().length) > 0) {
-                                print('at (text.trim().length) >0)');
-                                setState(() {
-                                  showFullOrderDeliveryType = false;
+                        shoppingCartBloc.setAddressForOrder(text);
+                        if ((text.trim().length) > 0) {
+                          print('at (text.trim().length) >0)');
+                          setState(() {
+                            showFullOrderDeliveryType = false;
 
-                                  showCustomerInformationHeader = true;
-                                  showUserInputOptionsLikeFirstTime = false;
-                                  showFullPaymentType =
-                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                                });
-                              } else {
-                                setState(() {
-                                  showFullOrderDeliveryType = false;
+                            showCustomerInformationHeader = true;
+                            showUserInputOptionsLikeFirstTime = false;
+                            showFullPaymentType =
+                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                          });
+                        } else {
+                          setState(() {
+                            showFullOrderDeliveryType = false;
 
-                                  showCustomerInformationHeader = true;
-                                  showUserInputOptionsLikeFirstTime = false;
-                                  showFullPaymentType =
-                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                            showCustomerInformationHeader = true;
+                            showUserInputOptionsLikeFirstTime = false;
+                            showFullPaymentType =
+                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                                                showCustomerInformationHeader = true,
-                                });
-                              }
-                            },
-                            onTap: () {
-                              setState(() {
-                                showFullOrderDeliveryType = false;
-                                showCustomerInformationHeader = true;
-                                showUserInputOptionsLikeFirstTime = false;
-                                showFullPaymentType =
-                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                              });
-                            },
-                            onEditingComplete: () {
-                              print('at editing complete of address ');
+                          });
+                        }
+                      },
+                      onTap: () {
+                        setState(() {
+                          showFullOrderDeliveryType = false;
+                          showCustomerInformationHeader = true;
+                          showUserInputOptionsLikeFirstTime = false;
+                          showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                        });
+                      },
+                      onEditingComplete: () {
+                        print('at editing complete of address ');
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
-                              setState(() => {
-                                    showEditingCompleteCustomerAddressInformation =
-                                        true
+                        setState(() => {
+                          showEditingCompleteCustomerAddressInformation =
+                          true
 //                                          showInputtedCustomerIformation= true,
-                                  });
-                            },
-                            style: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 16),
-                          ),
-                        )
-                      ],
+                        });
+                      },
+                      style: TextStyle(
+                          color: Color(0xffFC0000), fontSize: 16),
                     ),
-                  ),
+                  )
+                ],
+              ),
+            ),
           ),
 
           Container(
               child: ((showEditingCompleteCustomerAddressInformation) &&
-                      (showEditingCompleteCustomerHouseFlatIformation == false))
+                  (showEditingCompleteCustomerHouseFlatIformation == false))
                   ? Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-                      decoration: BoxDecoration(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(
-                          color: Color(0xffBCBCBD),
-                          style: BorderStyle.solid,
-                          width: 2.0,
-                        ),
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(
+                    color: Color(0xffBCBCBD),
+                    style: BorderStyle.solid,
+                    width: 2.0,
+                  ),
 
-                        boxShadow: [
-                          BoxShadow(
+                  boxShadow: [
+                    BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                              color: Color(0xffFFFFFF),
-                              blurRadius: 10.0,
-                              offset: Offset(0.0, 2.0))
-                        ],
-
                         color: Color(0xffFFFFFF),
+                        blurRadius: 10.0,
+                        offset: Offset(0.0, 2.0))
+                  ],
+
+                  color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                      ),
+                ),
 
 //                                  color: Color(0xffFFFFFF),
-                      width: displayWidth(context) / 2.5,
-                      height: displayHeight(context) / 24,
-                      padding:
-                          EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-                      child: Row(
+                width: displayWidth(context) / 2.5,
+                height: displayHeight(context) / 24,
+                padding:
+                EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            height: displayHeight(context) / 40,
-                            width: 5,
-                            margin: EdgeInsets.only(left: 0),
-                            child: Icon(
-                              Icons.home_outlined,
-                              size: 28,
-                              color: Color(0xffBCBCBD),
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            width: displayWidth(context) / 4,
-                            child: TextField(
-                              controller: houseFlatNumberController,
-                              textInputAction: TextInputAction.next,
-                              onSubmitted: (_) =>
-                                  FocusScope.of(context).nextFocus(),
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'asunto numero ',
-                                hintStyle: TextStyle(
-                                    color: Colors.black54, fontSize: 14),
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      height: displayHeight(context) / 40,
+                      width: 5,
+                      margin: EdgeInsets.only(left: 0),
+                      child: Icon(
+                        Icons.home_outlined,
+                        size: 28,
+                        color: Color(0xffBCBCBD),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: displayWidth(context) / 4,
+                      child: TextField(
+                        controller: houseFlatNumberController,
+                        textInputAction: TextInputAction.next,
+                        onSubmitted: (_) =>
+                            FocusScope.of(context).nextFocus(),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'asunto numero ',
+                          hintStyle: TextStyle(
+                              color: Colors.black54, fontSize: 14),
 
 //                                        labelText: 'Search about meal.'
-                              ),
-                              onChanged: (text) {
-                                final shoppingCartBloc =
-                                    BlocProvider.of<ShoppingCartBloc>(context);
+                        ),
+                        onChanged: (text) {
+                          final shoppingCartBloc =
+                          BlocProvider.of<ShoppingCartBloc>(context);
 //
-                                shoppingCartBloc
-                                    .setHouseorFlatNumberForOrder(text);
+                          shoppingCartBloc
+                              .setHouseorFlatNumberForOrder(text);
 
-                                setState(() {
-                                  showFullOrderDeliveryType = false;
+                          setState(() {
+                            showFullOrderDeliveryType = false;
 
-                                  showCustomerInformationHeader = true;
-                                  showUserInputOptionsLikeFirstTime = false;
-                                  showFullPaymentType =
-                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                                });
-                                // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
-                              },
-                              onTap: () {
-                                setState(() {
-                                  showFullOrderDeliveryType = false;
-                                  showCustomerInformationHeader = true;
-                                  showUserInputOptionsLikeFirstTime = false;
-                                  showFullPaymentType =
-                                      true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                                });
-                              },
-                              onEditingComplete: () {
-                                print(
-                                    'at editing complete of House or Flat Iformation ');
+                            showCustomerInformationHeader = true;
+                            showUserInputOptionsLikeFirstTime = false;
+                            showFullPaymentType =
+                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                          });
+                          // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
+                        },
+                        onTap: () {
+                          setState(() {
+                            showFullOrderDeliveryType = false;
+                            showCustomerInformationHeader = true;
+                            showUserInputOptionsLikeFirstTime = false;
+                            showFullPaymentType =
+                            true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                          });
+                        },
+                        onEditingComplete: () {
+                          print(
+                              'at editing complete of House or Flat Iformation ');
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
-                                setState(() => {
-                                      showEditingCompleteCustomerHouseFlatIformation =
-                                          true
+                          setState(() => {
+                            showEditingCompleteCustomerHouseFlatIformation =
+                            true
 //                                          showInputtedCustomerIformation= true,
-                                    });
-                              },
-                              style: TextStyle(
-                                  color: Color(0xffFC0000), fontSize: 16),
-                            ),
-                          )
-                        ],
+                          });
+                        },
+                        style: TextStyle(
+                            color: Color(0xffFC0000), fontSize: 16),
                       ),
                     )
+                  ],
+                ),
+              )
                   : Container()),
 
           Container(
             child: ((showEditingCompleteCustomerAddressInformation) &&
-                    (showEditingCompleteCustomerHouseFlatIformation) &&
-                    (showEditingCompleteCustomerPhoneIformation == false))
+                (showEditingCompleteCustomerHouseFlatIformation) &&
+                (showEditingCompleteCustomerPhoneIformation == false))
                 ? Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-                    decoration: BoxDecoration(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+              decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                        color: Color(0xffBCBCBD),
-                        style: BorderStyle.solid,
-                        width: 2.0,
-                      ),
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color: Color(0xffBCBCBD),
+                  style: BorderStyle.solid,
+                  width: 2.0,
+                ),
 
-                      boxShadow: [
-                        BoxShadow(
+                boxShadow: [
+                  BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                            color: Color(0xffFFFFFF),
-                            blurRadius: 10.0,
-                            offset: Offset(0.0, 2.0))
-                      ],
-
                       color: Color(0xffFFFFFF),
+                      blurRadius: 10.0,
+                      offset: Offset(0.0, 2.0))
+                ],
+
+                color: Color(0xffFFFFFF),
 //                                      Colors.black54
-                    ),
+              ),
 
 //                                  color: Color(0xffFFFFFF),
-                    width: displayWidth(context) / 2.5,
-                    height: displayHeight(context) / 24,
-                    padding:
-                        EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-                    child: Row(
+              width: displayWidth(context) / 2.5,
+              height: displayHeight(context) / 24,
+              padding:
+              EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+              child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
 //                                            height: 25,
-                          height: displayHeight(context) / 40,
-                          width: 5,
-                          margin: EdgeInsets.only(left: 0),
+                    height: displayHeight(context) / 40,
+                    width: 5,
+                    margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                          child: Icon(
+                    child: Icon(
 //                                          Icons.add_shopping_cart,
-                            Icons.phone_outlined,
-                            size: 28,
-                            color: Color(0xffBCBCBD),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          width: displayWidth(context) / 4,
-                          child: TextField(
-                            keyboardType: TextInputType.phone,
-                            inputFormatters: <TextInputFormatter>[
-                              LengthLimitingTextInputFormatter(16),
-                              WhitelistingTextInputFormatter.digitsOnly,
-                            ],
-                            controller: phoneNumberController,
-                            textInputAction: TextInputAction.next,
-                            onSubmitted: (_) =>
-                                FocusScope.of(context).nextFocus(),
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'puhelin numero',
-                              hintStyle: TextStyle(
-                                  color: Colors.black54, fontSize: 16),
-                            ),
-                            style: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 16),
-                            onChanged: (text) {
-                              print("33: $text");
+                      Icons.phone_outlined,
+                      size: 28,
+                      color: Color(0xffBCBCBD),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: displayWidth(context) / 4,
+                    child: TextField(
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: <TextInputFormatter>[
+                        LengthLimitingTextInputFormatter(16),
+                        WhitelistingTextInputFormatter.digitsOnly,
+                      ],
+                      controller: phoneNumberController,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: (_) =>
+                          FocusScope.of(context).nextFocus(),
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'puhelin numero',
+                        hintStyle: TextStyle(
+                            color: Colors.black54, fontSize: 16),
+                      ),
+                      style: TextStyle(
+                          color: Color(0xffFC0000), fontSize: 16),
+                      onChanged: (text) {
+                        print("33: $text");
 
-                              final shoppingCartBloc =
-                                  BlocProvider.of<ShoppingCartBloc>(context);
+                        final shoppingCartBloc =
+                        BlocProvider.of<ShoppingCartBloc>(context);
 
-                              shoppingCartBloc.setPhoneNumberForOrder(text);
+                        shoppingCartBloc.setPhoneNumberForOrder(text);
 
-                              setState(() {
-                                showFullOrderDeliveryType = false;
+                        setState(() {
+                          showFullOrderDeliveryType = false;
 
-                                showCustomerInformationHeader = true;
-                                showUserInputOptionsLikeFirstTime = false;
-                                showFullPaymentType =
-                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                              });
-                            },
-                            onTap: () {
-                              setState(() {
-                                showFullOrderDeliveryType = false;
-                                // showFullOrderType = false;
-                                // showFullOrderType
-                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                          showCustomerInformationHeader = true;
+                          showUserInputOptionsLikeFirstTime = false;
+                          showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                        });
+                      },
+                      onTap: () {
+                        setState(() {
+                          showFullOrderDeliveryType = false;
+                          // showFullOrderType = false;
+                          // showFullOrderType
+                          /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                                showCustomerInformationHeader = false;
-                                showCustomerInformationHeader = true;
-                                showUserInputOptionsLikeFirstTime = false;
-                                showFullPaymentType =
-                                    true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                          showCustomerInformationHeader = true;
+                          showUserInputOptionsLikeFirstTime = false;
+                          showFullPaymentType =
+                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 //                                                showFullOrderType = false,
-                              });
-                            },
-                            onEditingComplete: () {
+                        });
+                      },
+                      onEditingComplete: () {
 //                                                              logger.i('onEditingComplete  of condition 4');
 //                                                              print('called onEditing complete');
 
-                              print(
-                                  'at editing complete of Customer Phone Iformation ');
-                              setState(() => {
-                                    showEditingCompleteCustomerPhoneIformation =
-                                        true
+                        print(
+                            'at editing complete of Customer Phone Iformation ');
+                        setState(() => {
+                          showEditingCompleteCustomerPhoneIformation =
+                          true
 //                                          showInputtedCustomerIformation= true,
-                                  });
-                            },
-                          ),
-                        )
-                      ],
+                        });
+                      },
                     ),
                   )
+                ],
+              ),
+            )
                 : Container(),
           ),
 
           Container(
               child: ((showEditingCompleteCustomerAddressInformation) &&
-                      (showEditingCompleteCustomerHouseFlatIformation) &&
-                      (showEditingCompleteCustomerPhoneIformation) &&
-                      (showEditingCompleteCustomerReachoutIformation == false))
+                  (showEditingCompleteCustomerHouseFlatIformation) &&
+                  (showEditingCompleteCustomerPhoneIformation) &&
+                  (showEditingCompleteCustomerReachoutIformation == false))
                   ? Container(
-                      height: displayHeight(context) / 18,
-                      width: displayWidth(context) / 1.03,
-                      child:
-                          whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                    )
+                height: displayHeight(context) / 18,
+                width: displayWidth(context) / 1.03,
+                child:
+                whenYouWillPickTheOrder(unObsecuredInputandPayment),
+              )
                   : Container()),
 
 //          whenYouWillPickTheOrder(unObsecuredInputandPayment),
@@ -4198,7 +4269,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
     print(
         'allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+            ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
     return Container(
       height: displayHeight(context) / 2.2,
@@ -4207,27 +4278,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       child: Container(
         height:
-            displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+        displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
         child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
           child: ((takeAwayDinningTimeInputCompleted(
-                          unObsecuredInputandPayment.orderingCustomer) ==
-                      true) &&
-                  (showEditingCompleteCustomerReachoutIformation == true))
+              unObsecuredInputandPayment.orderingCustomer) ==
+              true) &&
+              (showEditingCompleteCustomerReachoutIformation == true))
               ? animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
-                  unObsecuredInputandPayment)
+              unObsecuredInputandPayment)
               : Container(
-                  // color:Colors.lightBlueAccent,
-                  // color: Color(0xffFFFFFF),
-                  child: Container(
-                    // color:Colors.red,
-                    height: displayHeight(context) / 18,
-                    width: displayWidth(context) / 1.03,
-                    child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                  )
-                  // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                  ,
-                ),
+            // color:Colors.lightBlueAccent,
+            // color: Color(0xffFFFFFF),
+            child: Container(
+              // color:Colors.red,
+              height: displayHeight(context) / 18,
+              width: displayWidth(context) / 1.03,
+              child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            )
+            // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            ,
+          ),
         ),
       ),
     );
@@ -4267,7 +4338,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
     print(
         'allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+            ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
     return Container(
       height: displayHeight(context) / 2.2,
@@ -4276,32 +4347,32 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
       child: Container(
         height:
-            displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+        displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
         child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
           child: ((takeAwayDinningTimeInputCompleted(
-                          unObsecuredInputandPayment.orderingCustomer) ==
-                      true)
+              unObsecuredInputandPayment.orderingCustomer) ==
+              true)
 
-                  // 911_3
-                  //     work_3
+              // 911_3
+              //     work_3
 
-                  &&
-                  (showEditingCompleteCustomerReachoutIformation == true))
+              &&
+              (showEditingCompleteCustomerReachoutIformation == true))
               ? animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
-                  unObsecuredInputandPayment)
+              unObsecuredInputandPayment)
               : Container(
-                  // color:Colors.lightBlueAccent,
-                  // color: Color(0xffFFFFFF),
-                  child: Container(
-                    // color:Colors.red,
-                    height: displayHeight(context) / 18,
-                    width: displayWidth(context) / 1.03,
-                    child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                  )
-                  // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
-                  ,
-                ),
+            // color:Colors.lightBlueAccent,
+            // color: Color(0xffFFFFFF),
+            child: Container(
+              // color:Colors.red,
+              height: displayHeight(context) / 18,
+              width: displayWidth(context) / 1.03,
+              child: whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            )
+            // child:  whenYouWillPickTheOrder(unObsecuredInputandPayment),
+            ,
+          ),
         ),
       ),
     );
@@ -4342,31 +4413,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
     print(
         'inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer):'
-        ' ${inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer)}');
+            ' ${inputsForPhoneOrderTypeCompleted(unObsecuredInputandPayment.orderingCustomer)}');
 
     return Container(
       height: displayHeight(context) / 2.2,
       width: displayWidth(context) / 1.03,
       child: Container(
         height:
-            displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+        displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
         child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
           child: ((inputsForPhoneOrderTypeCompleted(
-                          unObsecuredInputandPayment.orderingCustomer) ==
-                      true) &&
-                  (showEditingCompleteCustomerPhoneIformation == true) &&
-                  (showEditingCompleteCustomerReachoutIformation == true))
+              unObsecuredInputandPayment.orderingCustomer) ==
+              true) &&
+              (showEditingCompleteCustomerPhoneIformation == true) &&
+              (showEditingCompleteCustomerReachoutIformation == true))
               ? animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
-                  unObsecuredInputandPayment)
+              unObsecuredInputandPayment)
               : Container(
-                  color: Color(0xffFFFFFF),
-                  child: Center(
+            color: Color(0xffFFFFFF),
+            child: Center(
 //              child: inputFieldsDelivery(unObsecuredInputandPayment),
-                    child:
-                        inputFieldsPhoneOrderType(unObsecuredInputandPayment),
-                  ),
-                ),
+              child:
+              inputFieldsPhoneOrderType(unObsecuredInputandPayment),
+            ),
+          ),
         ),
       ),
     );
@@ -4407,31 +4478,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
         'showEditingCompleteCustomerReachoutIformation: $showEditingCompleteCustomerReachoutIformation');
     print(
         'allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer):'
-        ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
+            ' ${allCustomerInputsCompleted(unObsecuredInputandPayment.orderingCustomer)} ');
 
     return Container(
       height: displayHeight(context) / 2.2,
       width: displayWidth(context) / 1.03,
       child: Container(
         height:
-            displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
+        displayHeight(context) / 2.2 - displayHeight(context) / 20 - 100,
         child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
           child: ((allCustomerInputsCompleted(
-                          unObsecuredInputandPayment.orderingCustomer) ==
-                      true) &&
-                  (showEditingCompleteCustomerAddressInformation == true) &&
-                  (showEditingCompleteCustomerHouseFlatIformation == true) &&
-                  (showEditingCompleteCustomerPhoneIformation == true) &&
-                  (showEditingCompleteCustomerReachoutIformation == true))
+              unObsecuredInputandPayment.orderingCustomer) ==
+              true) &&
+              (showEditingCompleteCustomerAddressInformation == true) &&
+              (showEditingCompleteCustomerHouseFlatIformation == true) &&
+              (showEditingCompleteCustomerPhoneIformation == true) &&
+              (showEditingCompleteCustomerReachoutIformation == true))
               ? animatedUnObscuredPaymentUnSelectContainerDeliveryPhone(
-                  unObsecuredInputandPayment)
+              unObsecuredInputandPayment)
               : Container(
-                  color: Color(0xffFFFFFF),
-                  child: Center(
-                    child: inputFieldsDelivery(unObsecuredInputandPayment),
-                  ),
-                ),
+            color: Color(0xffFFFFFF),
+            child: Center(
+              child: inputFieldsDelivery(unObsecuredInputandPayment),
+            ),
+          ),
         ),
       ),
     );
@@ -4450,135 +4521,135 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                  color: Colors.green,
 //                    color:Colors.white.withOpacity(0.9),
             child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Container(
-            alignment: Alignment.center,
-            child: Text(
-              'Enter user address',
-              style: TextStyle(
-                color: Color(0xffFC0000),
-                fontSize: 30,
-              ),
-            )),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Enter user address',
+                      style: TextStyle(
+                        color: Color(0xffFC0000),
+                        fontSize: 30,
+                      ),
+                    )),
 
-        // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-          decoration: BoxDecoration(
+                // CUSTOMER LOCATION ADDRESS CONTAINER BEGINS HERE.
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(
-              color: Color(0xffBCBCBD),
-              style: BorderStyle.solid,
-              width: 2.0,
-            ),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: Color(0xffBCBCBD),
+                      style: BorderStyle.solid,
+                      width: 2.0,
+                    ),
 
-            boxShadow: [
-              BoxShadow(
+                    boxShadow: [
+                      BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                  color: Color(0xffFFFFFF),
-                  blurRadius: 10.0,
-                  offset: Offset(0.0, 2.0))
-            ],
+                          color: Color(0xffFFFFFF),
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 2.0))
+                    ],
 
-            color: Color(0xffFFFFFF),
+                    color: Color(0xffFFFFFF),
 //                                      Colors.black54
-          ),
+                  ),
 
 //                                  color: Color(0xffFFFFFF),
-          width: displayWidth(context) / 2.5,
-          height: displayHeight(context) / 24,
-          padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-          child: Row(
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 24,
+                  padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
 //                        height: 25,
-                height: displayHeight(context) / 40,
-                width: 5,
-                margin: EdgeInsets.only(left: 0),
+                        height: displayHeight(context) / 40,
+                        width: 5,
+                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                child: Icon(
+                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                  Icons.location_on,
+                          Icons.location_on,
 
-                  size: 28,
-                  color: Color(0xffBCBCBD),
-                ),
-              ),
+                          size: 28,
+                          color: Color(0xffBCBCBD),
+                        ),
+                      ),
 
-              Container(
+                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                alignment: Alignment.center,
-                width: displayWidth(context) / 4,
+                        alignment: Alignment.center,
+                        width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                // do it in both Container
-                child: TextField(
-                  controller: addressController,
-                  textAlign: TextAlign.center,
-                  textInputAction: TextInputAction.next,
-                  onSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                  decoration: InputDecoration(
-                    focusColor: Color(0xffFC0000),
+                        // do it in both Container
+                        child: TextField(
+                          controller: addressController,
+                          textAlign: TextAlign.center,
+                          textInputAction: TextInputAction.next,
+                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          decoration: InputDecoration(
+                            focusColor: Color(0xffFC0000),
 //                                                            fillColor: Color(0xffFC0000),
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                    border: InputBorder.none,
-                    hintText: 'Enter delivery location',
-                    hintStyle:
-                        TextStyle(color: Color(0xffFC0000), fontSize: 17),
+                            border: InputBorder.none,
+                            hintText: 'Enter delivery location',
+                            hintStyle:
+                            TextStyle(color: Color(0xffFC0000), fontSize: 17),
 
 //                                      currentUser
 //                                        labelText: 'Search about meal.'
-                  ),
-                  onChanged: (text) {
-                    //RRRR
+                          ),
+                          onChanged: (text) {
+                            //RRRR
 
-                    final shoppingCartBloc =
-                        BlocProvider.of<ShoppingCartBloc>(context);
+                            final shoppingCartBloc =
+                            BlocProvider.of<ShoppingCartBloc>(context);
 //
-                    shoppingCartBloc.setAddressForOrder(text);
+                            shoppingCartBloc.setAddressForOrder(text);
 
-                    setState(() {
-                      // showFullOrderType = false;
-                      showFullOrderDeliveryType = false;
-                      // showFullOrderType = false;
-                      // showFullOrderType
-                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                            setState(() {
+                              // showFullOrderType = false;
+                              showFullOrderDeliveryType = false;
+                              // showFullOrderType = false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                              showCustomerInformationHeader = false;
-                      showCustomerInformationHeader = true;
-                      showUserInputOptionsLikeFirstTime = false;
-                      showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                    }
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                            }
 //                            showFullOrderType = false;
-                        );
-                  },
-                  onTap: () {
-                    setState(() {
-                      // showFullOrderType = false;
-                      showFullOrderDeliveryType = false;
-                      // showFullOrderType = false;
-                      // showFullOrderType
-                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                            );
+                          },
+                          onTap: () {
+                            setState(() {
+                              // showFullOrderType = false;
+                              showFullOrderDeliveryType = false;
+                              // showFullOrderType = false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                              showCustomerInformationHeader = false;
-                      showCustomerInformationHeader = true;
-                      showUserInputOptionsLikeFirstTime = false;
-                      showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                    });
-                  },
-                  /*
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                            });
+                          },
+                          /*
 
                                                             onEditingComplete: (){
                                                               logger.i('onEditingComplete  of condition 4');
@@ -4607,134 +4678,134 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                             },
                           */
 
-                  style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                          style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                        ),
+                      )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+                    ],
+                  ),
                 ),
-              )
 
-//                                  Spacer(),
+                // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
 
-//                                  Spacer(),
-            ],
-          ),
-        ),
-
-        // CUSTOMER LOACATION ADDRESS CONTAINER ENDS HERE.
-
-        // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-          decoration: BoxDecoration(
+                // CUSTOMER HOUSE || FLAT NUMBER CONTAINER BEGINS HERE.
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(
-              color: Color(0xffBCBCBD),
-              style: BorderStyle.solid,
-              width: 2.0,
-            ),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: Color(0xffBCBCBD),
+                      style: BorderStyle.solid,
+                      width: 2.0,
+                    ),
 
-            boxShadow: [
-              BoxShadow(
+                    boxShadow: [
+                      BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                  color: Color(0xffFFFFFF),
-                  blurRadius: 10.0,
-                  offset: Offset(0.0, 2.0))
-            ],
+                          color: Color(0xffFFFFFF),
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 2.0))
+                    ],
 
-            color: Color(0xffFFFFFF),
+                    color: Color(0xffFFFFFF),
 //                                      Colors.black54
-          ),
+                  ),
 
 //                                  color: Color(0xffFFFFFF),
-          width: displayWidth(context) / 2.5,
-          height: displayHeight(context) / 24,
-          padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-          child: Row(
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 24,
+                  padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
 //                        height: 25,
-                height: displayHeight(context) / 40,
-                width: 5,
-                margin: EdgeInsets.only(left: 0),
+                        height: displayHeight(context) / 40,
+                        width: 5,
+                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                child: Icon(
+                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                  Icons.home,
-                  size: 28,
-                  color: Color(0xffBCBCBD),
-                ),
-              ),
+                          Icons.home,
+                          size: 28,
+                          color: Color(0xffBCBCBD),
+                        ),
+                      ),
 
-              Container(
+                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                alignment: Alignment.center,
-                width: displayWidth(context) / 4,
+                        alignment: Alignment.center,
+                        width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                // do it in both Container
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  textInputAction: TextInputAction.next,
-                  onSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                  decoration: InputDecoration(
+                        // do it in both Container
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          textInputAction: TextInputAction.next,
+                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                    border: InputBorder.none,
-                    hintText: 'Enter House/Flat address/number',
-                    hintStyle:
-                        TextStyle(color: Color(0xffFC0000), fontSize: 17),
+                            border: InputBorder.none,
+                            hintText: 'Enter House/Flat address/number',
+                            hintStyle:
+                            TextStyle(color: Color(0xffFC0000), fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                  ),
-                  onChanged: (text) {
-                    final shoppingCartBloc =
-                        BlocProvider.of<ShoppingCartBloc>(context);
+                          ),
+                          onChanged: (text) {
+                            final shoppingCartBloc =
+                            BlocProvider.of<ShoppingCartBloc>(context);
 //
-                    shoppingCartBloc.setHouseorFlatNumberForOrder(text);
+                            shoppingCartBloc.setHouseorFlatNumberForOrder(text);
 
-                    setState(() {
-                      // showFullOrderType = false;
-                      showFullOrderDeliveryType = false;
-                      // showFullOrderType = false;
-                      // showFullOrderType
-                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                            setState(() {
+                              // showFullOrderType = false;
+                              showFullOrderDeliveryType = false;
+                              // showFullOrderType = false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                                showCustomerInformationHeader = false;
-                      showCustomerInformationHeader = true;
-                      showUserInputOptionsLikeFirstTime = false;
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
 
-                      showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                              showFullOrderType = false;
-                    });
-                  },
-                  onTap: () {
-                    setState(() {
+                            });
+                          },
+                          onTap: () {
+                            setState(() {
 //                              showFullOrderType = false;
 
-                      // showFullOrderType = false;
-                      showFullOrderDeliveryType = false;
-                      // showFullOrderType = false;
-                      // showFullOrderType
-                      /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
+                              // showFullOrderType = false;
+                              showFullOrderDeliveryType = false;
+                              // showFullOrderType = false;
+                              // showFullOrderType
+                              /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
 //                              showCustomerInformationHeader = false;
-                      showCustomerInformationHeader = true;
-                      showUserInputOptionsLikeFirstTime = false;
-                      showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
 
 //                              showFullOrderType = false;
-                    });
-                  },
-                  /*
+                            });
+                          },
+                          /*
 
                                                             onEditingComplete: (){
                                                               logger.i('onEditingComplete  of condition 4');
@@ -4762,262 +4833,262 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                                                             */
 
-                  style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                          style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                        ),
+                      )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+                    ],
+                  ),
                 ),
-              )
 
-//                                  Spacer(),
+                // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
 
-//                                  Spacer(),
-            ],
-          ),
-        ),
-
-        // CUSTOMER HOUSE || FLAT NUMBER CONTAINER ENDS HERE.
-
-        // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-          decoration: BoxDecoration(
+                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER BEGINS HERE.
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(
-              color: Color(0xffBCBCBD),
-              style: BorderStyle.solid,
-              width: 2.0,
-            ),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: Color(0xffBCBCBD),
+                      style: BorderStyle.solid,
+                      width: 2.0,
+                    ),
 
-            boxShadow: [
-              BoxShadow(
+                    boxShadow: [
+                      BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                  color: Color(0xffFFFFFF),
-                  blurRadius: 10.0,
-                  offset: Offset(0.0, 2.0))
-            ],
+                          color: Color(0xffFFFFFF),
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 2.0))
+                    ],
 
-            color: Color(0xffFFFFFF),
+                    color: Color(0xffFFFFFF),
 //                                      Colors.black54
-          ),
+                  ),
 
 //                                  color: Color(0xffFFFFFF),
-          width: displayWidth(context) / 2.5,
-          height: displayHeight(context) / 24,
-          padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-          child: Row(
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 24,
+                  padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
 //                        height: 25,
-                height: displayHeight(context) / 40,
-                width: 5,
-                margin: EdgeInsets.only(left: 0),
+                        height: displayHeight(context) / 40,
+                        width: 5,
+                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                child: Icon(
+                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                  Icons.phone,
-                  size: 28,
-                  color: Color(0xffBCBCBD),
-                ),
-              ),
+                          Icons.phone,
+                          size: 28,
+                          color: Color(0xffBCBCBD),
+                        ),
+                      ),
 
-              Container(
+                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                alignment: Alignment.center,
-                width: displayWidth(context) / 4,
+                        alignment: Alignment.center,
+                        width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                // do it in both Container
-                child: TextField(
-                  keyboardType: TextInputType.phone,
-                  inputFormatters: <TextInputFormatter>[
-                    LengthLimitingTextInputFormatter(16),
-                    WhitelistingTextInputFormatter.digitsOnly,
+                        // do it in both Container
+                        child: TextField(
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: <TextInputFormatter>[
+                            LengthLimitingTextInputFormatter(16),
+                            WhitelistingTextInputFormatter.digitsOnly,
 //                            WhitelistingTextInputFormatter(RegExp("[0-9]"))
 //                            WhitelistingTextInputFormatter(RegExp("[+]"))
-                  ],
-                  textAlign: TextAlign.center,
-                  textInputAction: TextInputAction.next,
-                  onSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                  decoration: InputDecoration(
+                          ],
+                          textAlign: TextAlign.center,
+                          textInputAction: TextInputAction.next,
+                          onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                          decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                    border: InputBorder.none,
-                    hintText: 'Enter phone / telephone number',
+                            border: InputBorder.none,
+                            hintText: 'Enter phone / telephone number',
 
-                    hintStyle:
-                        TextStyle(color: Color(0xffFC0000), fontSize: 17),
+                            hintStyle:
+                            TextStyle(color: Color(0xffFC0000), fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                  ),
-                  style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
-                  onChanged: (text) {
-                    print("33: $text");
+                          ),
+                          style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                          onChanged: (text) {
+                            print("33: $text");
 
-                    final shoppingCartBloc =
-                        BlocProvider.of<ShoppingCartBloc>(context);
+                            final shoppingCartBloc =
+                            BlocProvider.of<ShoppingCartBloc>(context);
 //
-                    shoppingCartBloc.setPhoneNumberForOrder(text);
+                            shoppingCartBloc.setPhoneNumberForOrder(text);
 
-                    setState(() {
-                      showFullOrderDeliveryType = false;
+                            setState(() {
+                              showFullOrderDeliveryType = false;
 //                              showCustomerInformationHeader = false;
-                      showCustomerInformationHeader = true;
-                      showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                    });
-                  },
-                  onTap: () {
-                    setState(() {
-                      showFullOrderDeliveryType = false;
+                              showCustomerInformationHeader = true;
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                            });
+                          },
+                          onTap: () {
+                            setState(() {
+                              showFullOrderDeliveryType = false;
 
 //                              showCustomerInformationHeader = false;
-                      showCustomerInformationHeader = true;
-                      showUserInputOptionsLikeFirstTime = false;
-                      showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                    });
-                  },
+                              showCustomerInformationHeader = true;
+                              showUserInputOptionsLikeFirstTime = false;
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                            });
+                          },
+                        ),
+                      )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+                    ],
+                  ),
                 ),
-              )
 
-//                                  Spacer(),
+                // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
 
-//                                  Spacer(),
-            ],
-          ),
-        ),
+                // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
 
-        // CUSTOMER PHONE || MOBILE NUMBER CONTAINER ENDS HERE.
-
-        // CUSTOMER LOCATION REACH OUT TIME CONTAINER BEGINS HERE.
-
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-          decoration: BoxDecoration(
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  decoration: BoxDecoration(
 //                                      shape: BoxShape.circle,
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(
-              color: Color(0xffBCBCBD),
-              style: BorderStyle.solid,
-              width: 2.0,
-            ),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: Color(0xffBCBCBD),
+                      style: BorderStyle.solid,
+                      width: 2.0,
+                    ),
 
-            boxShadow: [
-              BoxShadow(
+                    boxShadow: [
+                      BoxShadow(
 //                                            color: Color.fromRGBO(250, 200, 200, 1.0),
-                  color: Color(0xffFFFFFF),
-                  blurRadius: 10.0,
-                  offset: Offset(0.0, 2.0))
-            ],
+                          color: Color(0xffFFFFFF),
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 2.0))
+                    ],
 
-            color: Color(0xffFFFFFF),
+                    color: Color(0xffFFFFFF),
 //                                      Colors.black54
-          ),
+                  ),
 
 //                                  color: Color(0xffFFFFFF),
-          width: displayWidth(context) / 2.5,
-          height: displayHeight(context) / 24,
-          padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
-          child: Row(
+                  width: displayWidth(context) / 2.5,
+                  height: displayHeight(context) / 24,
+                  padding: EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                  child: Row(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 //                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
 //                        height: 25,
-                height: displayHeight(context) / 40,
-                width: 5,
-                margin: EdgeInsets.only(left: 0),
+                        height: displayHeight(context) / 40,
+                        width: 5,
+                        margin: EdgeInsets.only(left: 0),
 //                    decoration: BoxDecoration(
 //                      shape: BoxShape.circle,
 //                      color: Colors.white,
 //                    ),
-                child: Icon(
+                        child: Icon(
 //                                          Icons.add_shopping_cart,
-                  Icons.watch_later,
-                  size: 28,
-                  color: Color(0xffBCBCBD),
-                ),
-              ),
+                          Icons.watch_later,
+                          size: 28,
+                          color: Color(0xffBCBCBD),
+                        ),
+                      ),
 
-              Container(
+                      Container(
 //                                        margin:  EdgeInsets.only(
 //                                          right:displayWidth(context) /32 ,
 //                                        ),
-                alignment: Alignment.center,
-                width: displayWidth(context) / 4,
+                        alignment: Alignment.center,
+                        width: displayWidth(context) / 4,
 //                                        color:Colors.purpleAccent,
-                // do it in both Container
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    WhitelistingTextInputFormatter.digitsOnly
-                  ],
-                  textInputAction: TextInputAction.done,
-                  onSubmitted: (_) => FocusScope.of(context).unfocus(),
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
+                        // do it in both Container
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            WhitelistingTextInputFormatter.digitsOnly
+                          ],
+                          textInputAction: TextInputAction.done,
+                          onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
 //                                            prefixIcon: new Icon(Icons.search),
 //                                        borderRadius: BorderRadius.all(Radius.circular(5)),
 //                                        border: Border.all(color: Colors.white, width: 2),
-                    border: InputBorder.none,
-                    hintText: 'Enter reach out time',
-                    hintStyle:
-                        TextStyle(color: Color(0xffFC0000), fontSize: 17),
+                            border: InputBorder.none,
+                            hintText: 'Enter reach out time',
+                            hintStyle:
+                            TextStyle(color: Color(0xffFC0000), fontSize: 17),
 
 //                                        labelText: 'Search about meal.'
-                  ),
-                  style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
-                  onChanged: (text) {
-                    print("0444: $text");
+                          ),
+                          style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                          onChanged: (text) {
+                            print("0444: $text");
 
-                    print("33: $text");
-                    final shoppingCartBloc =
-                        BlocProvider.of<ShoppingCartBloc>(context);
+                            print("33: $text");
+                            final shoppingCartBloc =
+                            BlocProvider.of<ShoppingCartBloc>(context);
 
-                    shoppingCartBloc.setETAForOrder(text);
-                    setState(() {
-                      showFullOrderDeliveryType = false;
+                            shoppingCartBloc.setETAForOrder(text);
+                            setState(() {
+                              showFullOrderDeliveryType = false;
 
 //                            showCustomerInformationHeader = false;
-                      showCustomerInformationHeader = true;
-                      showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                      showUserInputOptionsLikeFirstTime = false;
-                    });
-                  },
-                  onTap: () {
-                    setState(() {
-                      showFullOrderDeliveryType = false;
+                              showCustomerInformationHeader = true;
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                              showUserInputOptionsLikeFirstTime = false;
+                            });
+                          },
+                          onTap: () {
+                            setState(() {
+                              showFullOrderDeliveryType = false;
 //                              showCustomerInformationHeader = false;
-                      showUserInputOptionsLikeFirstTime = false;
-                      showCustomerInformationHeader = true;
-                      showFullPaymentType =
-                          true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                    });
-                  },
+                              showUserInputOptionsLikeFirstTime = false;
+                              showCustomerInformationHeader = true;
+                              showFullPaymentType =
+                              true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+                            });
+                          },
+                        ),
+                      )
+
+//                                  Spacer(),
+
+//                                  Spacer(),
+                    ],
+                  ),
                 ),
-              )
 
-//                                  Spacer(),
-
-//                                  Spacer(),
-            ],
-          ),
-        ),
-
-        // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
-      ],
-    )));
+                // CUSTOMER LOCATION REACH OUT TIME CONTAINER ENDS HERE.
+              ],
+            )));
   }
 
   Widget animatedUnObscuredPaymentUnSelectContainerPhoneOnly(
@@ -5037,14 +5108,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                 child: showFullPaymentType == false
                     ? animatedWidgetShowSelectedPaymentTypeDeliveryPhone(
-                        unObsecuredInputandPayment)
+                    unObsecuredInputandPayment)
                     : _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
-                        unObsecuredInputandPayment),
+                    unObsecuredInputandPayment),
               ),
             )
-            //HHHH
+          //HHHH
 
-            ),
+        ),
         Container(
 //            alignment: Alignment.center,
           /*
@@ -5060,9 +5131,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
             child: showFullPaymentType == false
                 ? animatedUnObscuredCancelPayButtonDeliveryPhone(
-                    unObsecuredInputandPayment)
+                unObsecuredInputandPayment)
                 : animatedObscuredCancelPayButtonDeliveryPhone(
-                    unObsecuredInputandPayment),
+                unObsecuredInputandPayment),
           ),
         ),
       ],
@@ -5083,9 +5154,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
                 child: showFullPaymentType == false
                     ? animatedWidgetShowSelectedPaymentTypeDeliveryPhone(
-                        unObsecuredInputandPayment)
+                    unObsecuredInputandPayment)
                     : _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
-                        unObsecuredInputandPayment),
+                    unObsecuredInputandPayment),
               ),
             )),
         Container(
@@ -5095,9 +5166,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //
             child: showFullPaymentType == false
                 ? animatedUnObscuredCancelPayButtonDeliveryPhone(
-                    unObsecuredInputandPayment)
+                unObsecuredInputandPayment)
                 : animatedObscuredCancelPayButtonDeliveryPhone(
-                    unObsecuredInputandPayment),
+                unObsecuredInputandPayment),
           ),
         ),
       ],
@@ -5360,7 +5431,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     'debug print after invoking _stopScanDevices(); in cancelPaySelectUNObscuredTakeAway cancel button');
 
                 final shoppingCartBloc =
-                    BlocProvider.of<ShoppingCartBloc>(context);
+                BlocProvider.of<ShoppingCartBloc>(context);
                 shoppingCartBloc.clearSubscription();
 
                 cancelPaySelectUNObscuredTakeAwayDinning.isCanceled = true;
@@ -5409,7 +5480,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               onPressed: () async {
                 // TAkEAWAY AND DINNING DUMMY PRINT ....
                 final shoppingCartBloc =
-                    BlocProvider.of<ShoppingCartBloc>(context);
+                BlocProvider.of<ShoppingCartBloc>(context);
 
                 print(
                     'cancelPaySelect.paymentTypeIndex: ${cancelPaySelectUNObscuredTakeAwayDinning.paymentTypeIndex}');
@@ -5420,19 +5491,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     'debug print before invoking _startScanDevices(); in cancelPaySelectUNObscuredTakeAway || pay button');
 
                 Order tempOrderWithdocId =
-                    await shoppingCartBloc.paymentButtonPressed(
-                        cancelPaySelectUNObscuredTakeAwayDinning);
+                await shoppingCartBloc.paymentButtonPressed(
+                    cancelPaySelectUNObscuredTakeAwayDinning);
 
                 if ((cancelPaySelectUNObscuredTakeAwayDinning
-                            .paymentButtonPressed ==
-                        true) &&
+                    .paymentButtonPressed ==
+                    true) &&
                     (cancelPaySelectUNObscuredTakeAwayDinning.orderdocId ==
                         '')) {
                   _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
                       .showSnackBar(
-                          SnackBar(content: Text("someThing went wrong")));
+                      SnackBar(content: Text("someThing went wrong")));
                   print('something went wrong');
                 } else {
                   print(
@@ -5542,7 +5613,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     'debug print after invoking _stopScanDevices(); in cancelPaySelectUnobscuredDeliveryPhone cancel button');
 
                 final shoppingCartBloc =
-                    BlocProvider.of<ShoppingCartBloc>(context);
+                BlocProvider.of<ShoppingCartBloc>(context);
                 shoppingCartBloc.clearSubscription();
 
 //                  List<SelectedFood> expandedFoodReturnTemp= new List<SelectedFood>(0);
@@ -5594,21 +5665,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 // Delivery Phone Recite Print.
 
                 final shoppingCartBloc =
-                    BlocProvider.of<ShoppingCartBloc>(context);
+                BlocProvider.of<ShoppingCartBloc>(context);
 
                 print(
                     'cancelPaySelect.paymentTypeIndex Delivery Phone Recite Print..: '
-                    '${cancelPaySelectUnobscuredDeliveryPhone.paymentTypeIndex}');
+                        '${cancelPaySelectUnobscuredDeliveryPhone.paymentTypeIndex}');
 
                 // let's not use this order returned use the one from the bloc:
                 // Order tempOrderWithdocId
                 Order tempOrderWithdocId =
-                    await shoppingCartBloc.paymentButtonPressed(
-                        cancelPaySelectUnobscuredDeliveryPhone);
+                await shoppingCartBloc.paymentButtonPressed(
+                    cancelPaySelectUnobscuredDeliveryPhone);
 
                 if ((cancelPaySelectUnobscuredDeliveryPhone
-                            .paymentButtonPressed ==
-                        true) &&
+                    .paymentButtonPressed ==
+                    true) &&
                     (cancelPaySelectUnobscuredDeliveryPhone.orderdocId == '')) {
                   _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
                       SnackBar(content: Text("someThing went wrong")));
@@ -5647,7 +5718,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i].address}');
 
                       if ((blueToothDevicesState[i].name ==
-                              'Restaurant Printer') ||
+                          'Restaurant Printer') ||
                           (blueToothDevicesState[i].address ==
                               '0F:02:18:51:23:46')) {
                         found = true;
@@ -5666,7 +5737,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     if (found == true) {
                       print('found == true');
                       bool printResult =
-                          await _testPrint(blueToothDevicesState[index]);
+                      await _testPrint(blueToothDevicesState[index]);
 
 //                      _testPrintDummyDevices(blueToothDevicesState[index]);
 
@@ -5728,7 +5799,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   snapshot.data;
 
               PaymentTypeSingleSelect selectedOne =
-                  allPaymentTypesSingleSelect.firstWhere(
+              allPaymentTypesSingleSelect.firstWhere(
                       (onePaymentType) => onePaymentType.isSelected == true);
 
               _currentPaymentTypeIndex = selectedOne.index;
@@ -5805,7 +5876,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 Text(
                                     '${(unObsecuredInputandPayment.totalPrice
                                         /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
-                                    '\u20AC',
+                                        '\u20AC',
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
@@ -5869,7 +5940,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        color: Colors.blueGrey,
       color: Colors.white,
       height: displayHeight(context) /
-              20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
+          20 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
           displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
       child: Column(
         children: <Widget>[
@@ -5928,7 +5999,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 Text(
                     '${(unObsecuredInputandPayment.totalPrice
                         /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
-                    '\u20AC',
+                        '\u20AC',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -5958,7 +6029,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Order unObsecuredInputandPayment) {
     return Container(
       height: displayHeight(context) /
-              11 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
+          11 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
           displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
       child: Column(
         children: <Widget>[
@@ -6014,7 +6085,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       Text(
                           '${(unObsecuredInputandPayment.totalPrice
                               /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
-                          '\u20AC',
+                              '\u20AC',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.normal,
@@ -6292,123 +6363,123 @@ class _ShoppingCartState extends State<ShoppingCart> {
       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
       child: index == _currentOrderTypeIndex
           ? InkWell(
-              splashColor: Colors.deepOrangeAccent,
-              highlightColor: Colors.indigo,
-              child: Column(
-                children: <Widget>[
-                  new Container(
-                    width: displayWidth(context) / 5,
-                    height: displayHeight(context) / 10.2,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        style: BorderStyle.solid,
-                        width: 2.0,
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
-                      child: Image.asset(
-                        orderTyepImage,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      orderTypeName.toUpperCase(),
-                      style: TextStyle(
-                          color: Color(0xffFC0000),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 18),
-                    ),
-                  ),
-                ],
+        splashColor: Colors.deepOrangeAccent,
+        highlightColor: Colors.indigo,
+        child: Column(
+          children: <Widget>[
+            new Container(
+              width: displayWidth(context) / 5,
+              height: displayHeight(context) / 10.2,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                  width: 2.0,
+                ),
+                shape: BoxShape.circle,
               ),
-              onTap: () {
-                logger.i(
-                    'on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
-                final shoppingCartBloc =
-                    BlocProvider.of<ShoppingCartBloc>(context);
-
-                shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
-                    x, index, _currentOrderTypeIndex);
-
-                setState(() {
-                  showFullOrderDeliveryType = !showFullOrderDeliveryType;
-
-                  showEditingCompleteCustomerAddressInformation = false;
-                  showEditingCompleteCustomerHouseFlatIformation = false;
-                  showEditingCompleteCustomerPhoneIformation = false;
-                  showEditingCompleteCustomerReachoutIformation = false;
-                });
-              },
-            )
-          : InkWell(
-              splashColor: Colors.deepOrangeAccent,
-              highlightColor: Colors.indigo,
-              child: Column(
-                children: <Widget>[
-                  new Container(
-                    width: displayWidth(context) / 5,
-                    height: displayHeight(context) / 10.2,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        style: BorderStyle.solid,
-                        width: 2.0,
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
-                      child: Image.asset(
-                        orderTyepImage,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      orderTypeName,
-                      style: TextStyle(
-                          color: Color(0xffFC0000),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
-                  ),
-                ],
+              child: Container(
+                padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
+                child: Image.asset(
+                  orderTyepImage,
+                  fit: BoxFit.contain,
+                ),
               ),
-              onTap: () {
-                logger.i(
-                    'on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
-                final shoppingCartBloc =
-                    BlocProvider.of<ShoppingCartBloc>(context);
-
-                shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
-                    x, index, _currentOrderTypeIndex);
-
-                setState(() {
-                  showFullOrderDeliveryType = !showFullOrderDeliveryType;
-                  showCustomerInformationHeader = true;
-                  showUserInputOptionsLikeFirstTime = true;
-                  // MAKEING THEM AS THEY ARE IN THE FIRST TIME:
-
-                  showEditingCompleteCustomerAddressInformation = false;
-                  showEditingCompleteCustomerHouseFlatIformation = false;
-                  showEditingCompleteCustomerPhoneIformation = false;
-                  showEditingCompleteCustomerReachoutIformation = false;
-
-                  // WE ARE oneSingleDeliveryType;
-//            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
-                });
-              },
             ),
+            SizedBox(height: 10),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                orderTypeName.toUpperCase(),
+                style: TextStyle(
+                    color: Color(0xffFC0000),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18),
+              ),
+            ),
+          ],
+        ),
+        onTap: () {
+          logger.i(
+              'on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
+          final shoppingCartBloc =
+          BlocProvider.of<ShoppingCartBloc>(context);
+
+          shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
+              x, index, _currentOrderTypeIndex);
+
+          setState(() {
+            showFullOrderDeliveryType = !showFullOrderDeliveryType;
+
+            showEditingCompleteCustomerAddressInformation = false;
+            showEditingCompleteCustomerHouseFlatIformation = false;
+            showEditingCompleteCustomerPhoneIformation = false;
+            showEditingCompleteCustomerReachoutIformation = false;
+          });
+        },
+      )
+          : InkWell(
+        splashColor: Colors.deepOrangeAccent,
+        highlightColor: Colors.indigo,
+        child: Column(
+          children: <Widget>[
+            new Container(
+              width: displayWidth(context) / 5,
+              height: displayHeight(context) / 10.2,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  style: BorderStyle.solid,
+                  width: 2.0,
+                ),
+                shape: BoxShape.circle,
+              ),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
+                child: Image.asset(
+                  orderTyepImage,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                orderTypeName,
+                style: TextStyle(
+                    color: Color(0xffFC0000),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ),
+          ],
+        ),
+        onTap: () {
+          logger.i(
+              'on tap preesed on unselected order list_ orderTypeName: $orderTypeName ');
+          final shoppingCartBloc =
+          BlocProvider.of<ShoppingCartBloc>(context);
+
+          shoppingCartBloc.setOrderTypeSingleSelectOptionForOrder(
+              x, index, _currentOrderTypeIndex);
+
+          setState(() {
+            showFullOrderDeliveryType = !showFullOrderDeliveryType;
+            showCustomerInformationHeader = true;
+            showUserInputOptionsLikeFirstTime = true;
+            // MAKEING THEM AS THEY ARE IN THE FIRST TIME:
+
+            showEditingCompleteCustomerAddressInformation = false;
+            showEditingCompleteCustomerHouseFlatIformation = false;
+            showEditingCompleteCustomerPhoneIformation = false;
+            showEditingCompleteCustomerReachoutIformation = false;
+
+            // WE ARE oneSingleDeliveryType;
+//            showFullPaymentType = false;  = true; // default.// NOTHING TO DO WITH INPUT FIELDS.
+          });
+        },
+      ),
 //      ),
 //      ),
     );
@@ -6482,7 +6553,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        &&
 //        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
 //        &&
-        (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
+    (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
       print('WILL RETURN FALSE');
       return false;
     } else {
@@ -6512,7 +6583,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //        &&
 //        (customerInfoFieldsCheck.phoneNumber.trim().length >0)
 //        &&
-        (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
+    (customerInfoFieldsCheck.etaTimeInMinutes != -1) {
       print('WILL RETURN FALSE');
       return false;
     } else {
@@ -6606,9 +6677,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //    assert(customerInfoFieldsCheck.phoneNumber.trim().length >0);
 //    assert(customerInfoFieldsCheck.etaTimeInMinutes != -1);
     if ((customerInfoFieldsCheck.address.trim().length > 0) &&
-            (customerInfoFieldsCheck.flatOrHouseNumber.trim().length > 0) &&
-            (customerInfoFieldsCheck.phoneNumber.trim().length > 0) &&
-            (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
+        (customerInfoFieldsCheck.flatOrHouseNumber.trim().length > 0) &&
+        (customerInfoFieldsCheck.phoneNumber.trim().length > 0) &&
+        (customerInfoFieldsCheck.etaTimeInMinutes != -1) ||
         ((customerInfoFieldsCheck.etaTimeOfDay.hour != 0) ||
             (customerInfoFieldsCheck.etaTimeOfDay.minute != 0))) {
       print('WILL RETURN FALSE');
@@ -6652,8 +6723,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
           }
         }
 
-        // M VSM ORG VS TODO. ENDS HERE.
-        );
+      // M VSM ORG VS TODO. ENDS HERE.
+    );
   }
 
 //  oneSingleDeliveryType to be replaced with oneSinglePaymentType
@@ -6667,179 +6738,179 @@ class _ShoppingCartState extends State<ShoppingCart> {
       child: index == _currentPaymentTypeIndex
           ? Container(
 //        color: Colors.purple,
-              width: displayWidth(context) / 6.5,
-              height: displayHeight(context) / 11,
-              margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-              child: InkWell(
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  child: Column(
-                    children: <Widget>[
-                      new Container(
-                        width: displayWidth(context) / 4.5,
-                        height: displayHeight(context) / 12.5,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 2.0,
-                          ),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          getIconForName(paymentTypeName),
-                          color: Color(0xffFC0000),
-                          size: displayWidth(context) / 18,
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          paymentTypeName,
-                          style: TextStyle(
-                              color: Color(0xffFC0000),
-                              fontWeight: FontWeight.normal,
-                              fontSize: 18),
-                        ),
-                      ),
-                    ],
+        width: displayWidth(context) / 6.5,
+        height: displayHeight(context) / 11,
+        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+        child: InkWell(
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Column(
+              children: <Widget>[
+                new Container(
+                  width: displayWidth(context) / 4.5,
+                  height: displayHeight(context) / 12.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      style: BorderStyle.solid,
+                      width: 2.0,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    getIconForName(paymentTypeName),
+                    color: Color(0xffFC0000),
+                    size: displayWidth(context) / 18,
                   ),
                 ),
-                onTap: () async {
-                  final shoppingCartBloc =
-                      BlocProvider.of<ShoppingCartBloc>(context);
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    paymentTypeName,
+                    style: TextStyle(
+                        color: Color(0xffFC0000),
+                        fontWeight: FontWeight.normal,
+                        fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onTap: () async {
+            final shoppingCartBloc =
+            BlocProvider.of<ShoppingCartBloc>(context);
 
-                  shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
-                      onePaymentType, index, _currentPaymentTypeIndex);
+            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
+                onePaymentType, index, _currentPaymentTypeIndex);
 
-                  // work 0 august 20...
-                  logger.e('index: $index');
-                  print('YY YY  $index  YY   YY    ');
-                  if (index == 0) {
+            // work 0 august 20...
+            logger.e('index: $index');
+            print('YY YY  $index  YY   YY    ');
+            if (index == 0) {
 //              0 means later option...
 
-                    print(' 0 means later option...');
+              print(' 0 means later option...');
 
-                    // TAkEAWAY AND DINNING  Recite Print. ....
-                    final shoppingCartBloc =
-                        BlocProvider.of<ShoppingCartBloc>(context);
-                    print('later button pressed....:');
+              // TAkEAWAY AND DINNING  Recite Print. ....
+              final shoppingCartBloc =
+              BlocProvider.of<ShoppingCartBloc>(context);
+              print('later button pressed....:');
 
-                    Order tempOrderWithdocId =
-                        await shoppingCartBloc.paymentButtonPressedLater();
+              Order tempOrderWithdocId =
+              await shoppingCartBloc.paymentButtonPressedLater();
 
-                    if (tempOrderWithdocId.orderdocId == '') {
-                      _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-                          SnackBar(content: Text("someThing went wrong")));
-                      print('something went wrong');
-                    } else {
-                      logger.i(
-                          'tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+              if (tempOrderWithdocId.orderdocId == '') {
+                _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
+                    SnackBar(content: Text("someThing went wrong")));
+                print('something went wrong');
+              } else {
+                logger.i(
+                    'tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
-                      shoppingCartBloc.clearSubscription();
-                      print(
-                          'going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
+                shoppingCartBloc.clearSubscription();
+                print(
+                    'going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
 
-                      return Navigator.pop(context, tempOrderWithdocId);
-                    }
-                  } else {
-                    setState(() {
-                      showFullPaymentType = false;
-                    });
-                  }
-                },
-              ),
-            )
+                return Navigator.pop(context, tempOrderWithdocId);
+              }
+            } else {
+              setState(() {
+                showFullPaymentType = false;
+              });
+            }
+          },
+        ),
+      )
           : Container(
-              width: displayWidth(context) / 6.5,
-              height: displayHeight(context) / 10,
-              margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-              child: InkWell(
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  child: Column(
-                    children: <Widget>[
-                      new Container(
-                        width: displayWidth(context) / 4.5,
-                        height: displayHeight(context) / 12.5,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 2.0,
-                          ),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          getIconForName(paymentTypeName),
-                          color: Colors.grey,
-                          size: displayWidth(context) / 18,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          paymentTypeName,
-                          style: TextStyle(
-                              color: Color(0xffFC0000),
-                              fontWeight: FontWeight.normal,
-                              fontSize: 18),
-                        ),
-                      ),
-                    ],
+        width: displayWidth(context) / 6.5,
+        height: displayHeight(context) / 10,
+        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+        child: InkWell(
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: Column(
+              children: <Widget>[
+                new Container(
+                  width: displayWidth(context) / 4.5,
+                  height: displayHeight(context) / 12.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      style: BorderStyle.solid,
+                      width: 2.0,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    getIconForName(paymentTypeName),
+                    color: Colors.grey,
+                    size: displayWidth(context) / 18,
                   ),
                 ),
-                onTap: () async {
-                  final shoppingCartBloc =
-                      BlocProvider.of<ShoppingCartBloc>(context);
+                Container(
+                  margin: EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    paymentTypeName,
+                    style: TextStyle(
+                        color: Color(0xffFC0000),
+                        fontWeight: FontWeight.normal,
+                        fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onTap: () async {
+            final shoppingCartBloc =
+            BlocProvider.of<ShoppingCartBloc>(context);
 //              final locationBloc = BlocProvider.of<>(context);
-                  shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
-                      onePaymentType, index, _currentPaymentTypeIndex);
+            shoppingCartBloc.setPaymentTypeSingleSelectOptionForOrder(
+                onePaymentType, index, _currentPaymentTypeIndex);
 
-                  // work 0 august 20...
-                  logger.e('index: $index');
-                  print('YY YY  $index  YY   YY    ');
-                  if (index == 0) {
+            // work 0 august 20...
+            logger.e('index: $index');
+            print('YY YY  $index  YY   YY    ');
+            if (index == 0) {
 //              0 means later option...
 
-                    print(' 0 means later option...');
+              print(' 0 means later option...');
 
-                    // TAkEAWAY AND DINNING  Recite Print. ....
-                    final shoppingCartBloc =
-                        BlocProvider.of<ShoppingCartBloc>(context);
-                    print('later button pressed....:');
+              // TAkEAWAY AND DINNING  Recite Print. ....
+              final shoppingCartBloc =
+              BlocProvider.of<ShoppingCartBloc>(context);
+              print('later button pressed....:');
 
-                    Order tempOrderWithdocId =
-                        await shoppingCartBloc.paymentButtonPressedLater();
+              Order tempOrderWithdocId =
+              await shoppingCartBloc.paymentButtonPressedLater();
 
-                    if (tempOrderWithdocId.orderdocId == '') {
-                      _scaffoldKeyShoppingCartPage.currentState
+              if (tempOrderWithdocId.orderdocId == '') {
+                _scaffoldKeyShoppingCartPage.currentState
 //                  Scaffold.of(context)
 //                    ..removeCurrentSnackBar()
-                          .showSnackBar(
-                              SnackBar(content: Text("someThing went wrong")));
-                      print('something went wrong');
-                    } else {
-                      logger.i(
-                          'tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
+                    .showSnackBar(
+                    SnackBar(content: Text("someThing went wrong")));
+                print('something went wrong');
+              } else {
+                logger.i(
+                    'tempOrderWithdocId.orderdocId: ${tempOrderWithdocId.orderdocId}');
 
-                      shoppingCartBloc.clearSubscription();
-                      print(
-                          'going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
+                shoppingCartBloc.clearSubscription();
+                print(
+                    'going to food \" cancelPaySelectUNObscuredTakeAwayDinning \" Gallery page   Restaurant Printer not found');
 
-                      return Navigator.pop(context, tempOrderWithdocId);
-                    }
-                  } else {
-                    setState(() {
-                      showFullPaymentType = false;
-                    });
-                  }
-                },
-              ),
-            ),
+                return Navigator.pop(context, tempOrderWithdocId);
+              }
+            } else {
+              setState(() {
+                showFullPaymentType = false;
+              });
+            }
+          },
+        ),
+      ),
     );
   }
 
@@ -7468,9 +7539,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   Future<void> dummyPrintDialog(
-    OneOrderFirebase oneOrderForReceipt,
-    Uint8List restaurantNameImageByte2,
-  ) async {
+      OneOrderFirebase oneOrderForReceipt,
+      Uint8List restaurantNameImageByte2,
+      ) async {
     print('restaurantNameImageByte2: $restaurantNameImageByte2');
 
     CustomerInformation customerForReciteGeneration =
@@ -7505,8 +7576,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 Container(
                   child:
 
-                      // 2 ends here.
-                      Text(
+                  // 2 ends here.
+                  Text(
                     'Order No: from F.S. Cloud Function',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -7545,27 +7616,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       // 911_1
                       Container(
                         child:
-                            oneOrderForReceipt.orderProductionTimeFromNow != -1
-                                ? Text(
-                                    '${oneOrderForReceipt.orderProductionTimeFromNow} min',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                        oneOrderForReceipt.orderProductionTimeFromNow != -1
+                            ? Text(
+                          '${oneOrderForReceipt.orderProductionTimeFromNow} min',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
 //                        color: Color(0xffF50303),
-                                      fontSize: 20, fontFamily: 'Itim-Regular',
-                                    ),
-                                  )
-                                : Text(
-                                    '${oneOrderForReceipt.timeOfDay.toString()}',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                            fontSize: 20, fontFamily: 'Itim-Regular',
+                          ),
+                        )
+                            : Text(
+                          '${oneOrderForReceipt.timeOfDay.toString()}',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
 //                        color: Color(0xffF50303),
-                                      fontSize: 20, fontFamily: 'Itim-Regular',
-                                    ),
-                                  ),
+                            fontSize: 20, fontFamily: 'Itim-Regular',
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -7574,8 +7645,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 Container(
                   child:
 
-                      // 2 ends here.
-                      Text(
+                  // 2 ends here.
+                  Text(
                     '${oneOrderForReceipt.formattedOrderPlacementDate}',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -7824,9 +7895,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           oneOrderForReceipt.paidType.toLowerCase() == 'card'
                               ? 'assets/unpaid_cash_card/card.png'
                               : oneOrderForReceipt.paidType.toLowerCase() ==
-                                      'cash'
-                                  ? 'assets/unpaid_cash_card/cash.png'
-                                  : 'assets/unpaid_cash_card/unpaid.png',
+                              'cash'
+                              ? 'assets/unpaid_cash_card/cash.png'
+                              : 'assets/unpaid_cash_card/unpaid.png',
 
 //                color: Colors.black,
                           width: 50,
@@ -7839,9 +7910,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             oneOrderForReceipt.paidType.toLowerCase() == 'card'
                                 ? 'card'
                                 : oneOrderForReceipt.paidType.toLowerCase() ==
-                                        'cash'
-                                    ? 'cash'
-                                    : 'unpaid',
+                                'cash'
+                                ? 'cash'
+                                : 'unpaid',
 
 //                            oneOrderForReceipt.paidType.toLowerCase() == 'paid' ?
 //                            'paid' : 'unpaid',
@@ -7857,16 +7928,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           SizedBox(width: 50),
                           Text(
                             (oneOrderForReceipt.orderBy.toLowerCase() ==
-                                    'delivery')
+                                'delivery')
                                 ? 'Delivery'
                                 : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                                        'phone')
-                                    ? 'Phone'
-                                    : (oneOrderForReceipt.orderBy
-                                                .toLowerCase() ==
-                                            'takeaway')
-                                        ? 'TakeAway'
-                                        : 'DinningRoom',
+                                'phone')
+                                ? 'Phone'
+                                : (oneOrderForReceipt.orderBy
+                                .toLowerCase() ==
+                                'takeaway')
+                                ? 'TakeAway'
+                                : 'DinningRoom',
 //                    oneOrderForReceipt.orderBy
 //                    'dinningRoom',
                             textAlign: TextAlign.center,
@@ -7885,31 +7956,31 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         height: 70,
 
                         child: (oneOrderForReceipt.orderBy.toLowerCase() ==
-                                'delivery')
+                            'delivery')
                             ? Image.asset(
-                                'assets/orderBYicons/delivery.png',
-                                color: Colors.black,
-                                width: 50,
-                                height: 50,
-                              )
+                          'assets/orderBYicons/delivery.png',
+                          color: Colors.black,
+                          width: 50,
+                          height: 50,
+                        )
                             : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                                    'phone')
-                                ? Image.asset('assets/phone.png',
-                                    color: Colors.black, width: 50, height: 50)
-                                : (oneOrderForReceipt.orderBy.toLowerCase() ==
-                                        'takeaway')
-                                    ? Image.asset(
-                                        'assets/orderBYicons/takeaway.png',
-                                        color: Colors.black,
-                                        width: 50,
-                                        height: 50,
-                                      )
-                                    : Image.asset(
-                                        'assets/orderBYicons/diningroom.png',
-                                        color: Colors.black,
-                                        width: 50,
-                                        height: 50,
-                                      ),
+                            'phone')
+                            ? Image.asset('assets/phone.png',
+                            color: Colors.black, width: 50, height: 50)
+                            : (oneOrderForReceipt.orderBy.toLowerCase() ==
+                            'takeaway')
+                            ? Image.asset(
+                          'assets/orderBYicons/takeaway.png',
+                          color: Colors.black,
+                          width: 50,
+                          height: 50,
+                        )
+                            : Image.asset(
+                          'assets/orderBYicons/diningroom.png',
+                          color: Colors.black,
+                          width: 50,
+                          height: 50,
+                        ),
                       ),
                     ],
                   ),
@@ -7949,18 +8020,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   * */
   void printTicketDummy2(
-    /*PaperSize paper, */
-    Restaurant currentRestaurant,
-    OneOrderFirebase oneOrderdocument,
-    ImageAliasAnotherSource.Image imageResource,
+      /*PaperSize paper, */
+      Restaurant currentRestaurant,
+      OneOrderFirebase oneOrderdocument,
+      ImageAliasAnotherSource.Image imageResource,
 //      Uint8List orderInformationAndUserInformationTopInBytes,
-    /*
+      /*
       Uint8List orderInformationForReciteWidgetBytes2,
       Uint8List customerInformationOnlyBytes2, */
-    Uint8List restaurantNameImageBytes,
-    /* Uint8List totalCostDeliveryBytes2,*/
-    /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */
-  ) async {
+      Uint8List restaurantNameImageBytes,
+      /* Uint8List totalCostDeliveryBytes2,*/
+      /*Uint8List paidUnpaidDeliveryTypeWidgetBytes2 */
+      ) async {
     print(' came here: printTicketDummy');
 
 //    final PosPrintResult res =
@@ -7984,7 +8055,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   }
 
   String sanitize(String nameInput) {
-//    String nameInput2 = nameInput.replaceAll(new RegExp(r'e'), 'é');
+//    String nameInput2 = nameInput.replaceAll(new RegExp(r'e'), 'Ã©');
 //
 //    print(nameInput2);
 
@@ -8007,12 +8078,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
 // # number 1: demoReceipt Order Type TakeAway begins here...
 
   Future<Ticket> demoReceiptOrderTypeTakeAway(
-    PaperSize paper,
-    Restaurant thisRestaurant3, // not required but just for printing...
-    OneOrderFirebase
-        oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
-    Uint8List restaurantNameBytesNotFuture3,
-  ) async {
+      PaperSize paper,
+      Restaurant thisRestaurant3, // not required but just for printing...
+      OneOrderFirebase
+      oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
+      Uint8List restaurantNameBytesNotFuture3,
+      ) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
     CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
@@ -8041,51 +8112,51 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
     final ByteData faceBookLikedata =
-        await rootBundle.load('assets/icons8-facebook-like-64.png');
+    await rootBundle.load('assets/icons8-facebook-like-64.png');
     final Uint8List faceBookLikedataBytes =
-        faceBookLikedata.buffer.asUint8List();
+    faceBookLikedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
-        ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+    ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
 
     //differentImages 2  ==> handsdataBytesImage
     final ByteData handsdata =
-        await rootBundle.load('assets/icons8-hand-64.png');
+    await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image handsdataBytesImage =
-        ImageAliasAnotherSource.decodeImage(handsdataBytes);
+    ImageAliasAnotherSource.decodeImage(handsdataBytes);
 
     //differentImages 3 =>  deliveryDataBytesImage
     final ByteData deliveryData =
-        await rootBundle.load('assets/orderBYicons/delivery.png');
+    await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image deliveryDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+    ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
 
     //differentImages 4 => phonedataBytesImage
     final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage =
-        ImageAliasAnotherSource.decodeImage(phonedataBytes);
+    ImageAliasAnotherSource.decodeImage(phonedataBytes);
 
     //differentImages 5  ==> takeAwayDataBytesImage
     final ByteData takeAwayData =
-        await rootBundle.load('assets/orderBYicons/takeaway.png');
+    await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+    ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
     final ByteData dinningRoomData =
-        await rootBundle.load('assets/orderBYicons/diningroom.png');
+    await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+    ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
 
     //0.... printing codes starts here..
 
@@ -8093,7 +8164,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     //1... RESTAURANT NAME DONE...
     final ImageAliasAnotherSource.Image oneImageRestaurant =
-        ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
+    ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
 
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
@@ -8256,53 +8327,80 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ),
         PosColumn(
             text:
-                '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+            '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
             width: 5,
             styles: PosStyles(
               align: PosAlign.right,
             )),
       ]);
 
-      // 5.2 --- extra ingredients...
+
 
       if (multiSelectStrings2.length > 0) {
         multiSelectStrings2.forEach((oneMultiSelectString) {
-          ticket.text(
-            oneMultiSelectString,
-            styles: PosStyles(
-              align: PosAlign.left,
-            ),
-          );
+
+          ticket.row([
+            PosColumn(
+                text:'# $oneMultiSelectString',
+                width: 9,
+                styles: PosStyles(
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
         });
       }
 
-      if (onlyExtraIngredient.length > 0) {
+// 5.2 --- extra ingredients...
+      if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-          if (oneIngredientForRecite.isDeleted == false) {
+
+          if(oneIngredientForRecite.isDeleted==false) {
             ticket.row([
               PosColumn(
-                  text:
-                      '+${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
-                  )),
+                  text:'+ ${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' :oneIngredientForRecite.ingredientName.length > 18
+                      ?oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+              )),
+
               PosColumn(
-                  text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
+                  text:'${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          } else {
+          }
+          else{
+
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text:'- ${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
                   text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
@@ -8316,31 +8414,47 @@ class _ShoppingCartState extends State<ShoppingCart> {
           if (oneSauceItemForRecite.isDeleted == false) {
             ticket.row([
               PosColumn(
-                  text:
-                      '+${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
-                  )),
+                  text:'+ ${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+              )),
+
               PosColumn(
                   text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          } else {
+          }
+          else{
+
             ticket.row([
               PosColumn(
-                  text:
-                      '- ${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text:'- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                      ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                      :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text:'',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
+
           }
           ;
         });
@@ -8351,29 +8465,41 @@ class _ShoppingCartState extends State<ShoppingCart> {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
           if (oneCheeseItemForRecite.isDeleted == false) {
             ticket.row([
-              PosColumn(
-                  text:
-                      '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,
-                  styles: PosStyles(
+
+
+              PosColumn(text: '+ ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+              oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,styles: PosStyles(
+
                     align: PosAlign.left,
                   )),
-              PosColumn(
-                  text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
-            ]);
-          } else {
+
+              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);}
+          else{
             ticket.row([
               PosColumn(
-                  text:
-                      '- ${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text:'- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                      ?
+                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                      :
+                  oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
                   text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
             ]);
@@ -8458,12 +8584,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ),
       PosColumn(
         text:
-            '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
+        '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
         width: 4, /*,styles: PosStyles(align: PosAlign.left) */
       ),
       PosColumn(
         text:
-            '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
         width: 4,
       ),
       PosColumn(
@@ -8477,11 +8603,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
     oneOrderData3.orderBy.toLowerCase() == 'delivery'
         ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
         : oneOrderData3.orderBy.toLowerCase() == 'phone'
-            ? ticket.image(phonedataBytesImage, align: PosAlign.center)
-            : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
-                ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
-                : ticket.image(dinningRoomDataBytesImage,
-                    align: PosAlign.center);
+        ? ticket.image(phonedataBytesImage, align: PosAlign.center)
+        : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
+        ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
+        : ticket.image(dinningRoomDataBytesImage,
+        align: PosAlign.center);
 
 //    ticket.hr();
     // needed. as per design.
@@ -8496,11 +8622,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //  restaurantNameImageBytes,totalCostDeliveryBytes2
   Future<Ticket> demoReceiptOrderTypeDelivery(
-    PaperSize paper,
-    Restaurant thisRestaurant3,
-    OneOrderFirebase oneOrderData3,
-    Uint8List restaurantNameBytesNotFuture3,
-  ) async {
+      PaperSize paper,
+      Restaurant thisRestaurant3,
+      OneOrderFirebase oneOrderData3,
+      Uint8List restaurantNameBytesNotFuture3,
+      ) async {
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
     CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
@@ -8529,57 +8655,57 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
     final ByteData faceBookLikedata =
-        await rootBundle.load('assets/icons8-facebook-like-64.png');
+    await rootBundle.load('assets/icons8-facebook-like-64.png');
     final Uint8List faceBookLikedataBytes =
-        faceBookLikedata.buffer.asUint8List();
+    faceBookLikedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
-        ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+    ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
 
     //differentImages 2  ==> handsdataBytesImage
     final ByteData handsdata =
-        await rootBundle.load('assets/icons8-hand-64.png');
+    await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image handsdataBytesImage =
-        ImageAliasAnotherSource.decodeImage(handsdataBytes);
+    ImageAliasAnotherSource.decodeImage(handsdataBytes);
 
     //differentImages 3 =>  deliveryDataBytesImage
     final ByteData deliveryData =
-        await rootBundle.load('assets/orderBYicons/delivery.png');
+    await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image deliveryDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+    ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
 
     //differentImages 4 => phonedataBytesImage
     final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image phonedataBytesImage =
-        ImageAliasAnotherSource.decodeImage(phonedataBytes);
+    ImageAliasAnotherSource.decodeImage(phonedataBytes);
 
     //differentImages 5  ==> takeAwayDataBytesImage
     final ByteData takeAwayData =
-        await rootBundle.load('assets/orderBYicons/takeaway.png');
+    await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+    ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
     final ByteData dinningRoomData =
-        await rootBundle.load('assets/orderBYicons/diningroom.png');
+    await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
     final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+    ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
 
     //  printing begins::: //1.... starts...
 
     //1... RESTAURANT NAME DONE...
     final ImageAliasAnotherSource.Image oneImageRestaurant =
-        ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
+    ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
 
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
@@ -8750,90 +8876,151 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ),
         PosColumn(
             text:
-                '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+            '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
             width: 5,
             styles: PosStyles(
               align: PosAlign.right,
             )),
       ]);
 
-      // 5.2 --- extra ingredients...
 
-      if (multiSelectStrings2.length > 0) {
+      // multiSelect ...
+      if(multiSelectStrings2.length > 0)
+      {
         multiSelectStrings2.forEach((oneMultiSelectString) {
-          ticket.text(
-            oneMultiSelectString,
-            styles: PosStyles(
-              align: PosAlign.left,
-            ),
-          );
+
+          ticket.row([
+            PosColumn(
+                text:'# $oneMultiSelectString',
+                width: 9,
+                styles: PosStyles(
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
         });
       }
 
-      if (onlyExtraIngredient.length > 0) {
+
+      // 5.2 --- extra ingredients...
+
+
+      if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-          if (oneIngredientForRecite.isDeleted == false) {
+
+          if(oneIngredientForRecite.isDeleted==false) {
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '+${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
-                  )),
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+              )),
+
               PosColumn(
                   text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          } else {
+          }
+          else{
+
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
+
           }
         });
       }
 
       // extra cheeseItems...
-      if (onlyExtraSauces.length > 0) {
+      if(onlyExtraSauces.length>0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-          if (oneSauceItemForRecite.isDeleted == false) {
+
+          if(oneSauceItemForRecite.isDeleted==false) {
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '+${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
-                  )),
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+              )),
+
               PosColumn(
                   text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          } else {
+          }
+          else{
+
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                      ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                      :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
           }
           ;
@@ -8841,155 +9028,173 @@ class _ShoppingCartState extends State<ShoppingCart> {
       }
 
       // extra sauceItems...
-      if (onlyExtraCheeseItems.length > 0) {
+      if(onlyExtraCheeseItems.length>0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-          if (oneCheeseItemForRecite.isDeleted == false) {
+
+          if(oneCheeseItemForRecite.isDeleted==false){
             ticket.row([
-              PosColumn(
-                  text:
-                      '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,
-                  styles: PosStyles(
+
+
+              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+              oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,styles: PosStyles(
+
                     align: PosAlign.left,
                   )),
-              PosColumn(
-                  text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
-            ]);
-          } else {
+
+              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);}
+          else{
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                      ?
+                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                      :
+                  oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          }
-          ;
+          };
         });
       }
 
+
       // needed. as per design. when one food Item is printed then an hr added.
       ticket.feed(1);
-      ticket.hr(ch: '_', len: null, linesAfter: 1);
+      ticket.hr(ch:'_',len:null,linesAfter:1);
 //      ticket.feed(1);
     });
 
+
+
+
     // Price 1 subtotal
     ticket.row([
-      PosColumn(
-        text: 'SUBTOTAL',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-          text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,
-          styles: PosStyles(
-              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
+      PosColumn(text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
     ]);
 
-    ticket.row([
-      PosColumn(
-        text: 'DELIVERY',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-          text: '${oneOrderData3.deliveryCost.toStringAsFixed(2)}',
-          width: 5,
-          styles: PosStyles(
-              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
-    ]);
 
     ticket.row([
-      PosColumn(
-        text: 'ALV',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-          text: '14%', width: 5, styles: PosStyles(align: PosAlign.right)),
+
+
+      PosColumn(text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.deliveryCost.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
     ]);
+
+
+    ticket.row([
+
+
+      PosColumn(text: 'ALV',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '14%',
+          width: 5,styles:PosStyles(align: PosAlign.right)),
+
+    ]);
+
+
 
 //    ticket.hr();
 
-    ticket.hr(ch: '_', len: null, linesAfter: 0);
+    ticket.hr(ch:'_',len:null,linesAfter:0);
+
 
     // Price 3  Total
     ticket.row([
-      PosColumn(
-        text: 'TOTAL',
-        styles: PosStyles(bold: true),
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-        text: '${oneOrderData3.priceWithDelivery.toStringAsFixed(2)}',
-        styles: PosStyles(
-            bold: true, align: PosAlign.right, codeTable: PosCodeTable.westEur),
-        width: 5,
-      ),
+
+
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      PosColumn(text: '${oneOrderData3.priceWithDelivery.toStringAsFixed(2)}',
+        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
+        width: 5,),
+
     ]);
 
     ticket.feed(1);
 
-    oneOrderData3.paidStatus.toLowerCase() == 'paid'
-        ? ticket.image(faceBookLikedataBytesImage, align: PosAlign.center)
-        : ticket.image(handsdataBytesImage, align: PosAlign.center);
+
+    oneOrderData3.paidStatus.toLowerCase() == 'paid'?
+    ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
+    ticket.image(handsdataBytesImage,align: PosAlign.center);
+
+
+
 
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-        text:
-            '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text:
-            '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 4,
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
+
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
+      'paid' : 'unpaid'}',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
+          ? 'Delivery'
+          :
+      (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
+      'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
+          'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
     ]);
+
+
 
     // 7 image::
     // orderBy: 'Delivery: TakeAway: DinningRoom: phone
-    oneOrderData3.orderBy.toLowerCase() == 'delivery'
-        ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
-        : oneOrderData3.orderBy.toLowerCase() == 'phone'
-            ? ticket.image(phonedataBytesImage, align: PosAlign.center)
-            : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
-                ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
-                : ticket.image(dinningRoomDataBytesImage,
-                    align: PosAlign.center);
+    oneOrderData3.orderBy.toLowerCase() == 'delivery'?
+    ticket.image(deliveryDataBytesImage,align: PosAlign.center):
+    oneOrderData3.orderBy.toLowerCase() == 'phone'?
+    ticket.image(phonedataBytesImage,align: PosAlign.center):
+    oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
+    ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
+    ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
 
 //    ticket.hr();
     // needed. as per design.
@@ -8998,7 +9203,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.cut();
     return ticket;
+
   }
+
 
 // demoReceipt Order Type Delivery ends here...
 
@@ -9006,14 +9213,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 // demoReceipt Order Type Phone begins here...
   Future<Ticket> demoReceiptOrderTypePhone(
-    PaperSize paper,
-    Restaurant thisRestaurant3,
-    OneOrderFirebase oneOrderData3,
-    Uint8List restaurantNameBytesNotFuture3,
-  ) async {
+      PaperSize paper,
+      Restaurant thisRestaurant3,
+      OneOrderFirebase oneOrderData3,
+      Uint8List restaurantNameBytesNotFuture3,
+      ) async {
+
+
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
-    CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
+
+    CustomerInformation customerForReciteGeneration = oneOrderData3
+        .oneCustomer;
 
     List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
@@ -9023,73 +9234,84 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('currentRestaurant: ${thisRestaurant3.name}');
     print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
+    print('customerForReciteGeneration.address: ${customerForReciteGeneration
+        .address}');
     print(
-        'customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
+            .flatOrHouseNumber}');
     print(
-        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
+            .phoneNumber}');
     print(
-        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-    print(
-        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-    print(
-        'restaurantNameBytesNotFuture3 line# 11159: $restaurantNameBytesNotFuture3');
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
+            .etaTimeInMinutes}');
+    print('restaurantNameBytesNotFuture3 line# 11159: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print(
-        'oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3.orderProductionTimeFromNow}');
+    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
+        .orderProductionTimeFromNow}');
+
+
+
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata =
-        await rootBundle.load('assets/icons8-facebook-like-64.png');
-    final Uint8List faceBookLikedataBytes =
-        faceBookLikedata.buffer.asUint8List();
+    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
+    final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
-        ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
+    = ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata =
-        await rootBundle.load('assets/icons8-hand-64.png');
+    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image handsdataBytesImage =
-        ImageAliasAnotherSource.decodeImage(handsdataBytes);
+    final ImageAliasAnotherSource.Image handsdataBytesImage
+    = ImageAliasAnotherSource.decodeImage(handsdataBytes);
+
+
+
+
+
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData =
-        await rootBundle.load('assets/orderBYicons/delivery.png');
+    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image deliveryDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+    final ImageAliasAnotherSource.Image deliveryDataBytesImage
+    = ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+
 
     //differentImages 4 => phonedataBytesImage
     final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image phonedataBytesImage =
-        ImageAliasAnotherSource.decodeImage(phonedataBytes);
+    final ImageAliasAnotherSource.Image phonedataBytesImage
+    = ImageAliasAnotherSource.decodeImage(phonedataBytes);
+
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData =
-        await rootBundle.load('assets/orderBYicons/takeaway.png');
+    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+    final ImageAliasAnotherSource.Image takeAwayDataBytesImage
+    = ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData =
-        await rootBundle.load('assets/orderBYicons/diningroom.png');
+    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
+    = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+
+
 
     //  printing begins::: //1.... starts...
 
     //1... RESTAURANT NAME DONE...
-    final ImageAliasAnotherSource.Image oneImageRestaurant =
-        ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
+    final ImageAliasAnotherSource
+        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+        restaurantNameBytesNotFuture3);
 
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
@@ -9097,35 +9319,36 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch: '=', len: null, linesAfter: 1);
+    ticket.hr(ch:'=',len:null,linesAfter:1);
 
-    if (oneOrderData3.orderProductionTimeFromNow == -1) {
-      ticket.text(
-          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
-              '     ' +
-              '${oneOrderData3.timeOfDay.toString()}',
+    if(oneOrderData3.orderProductionTimeFromNow==-1){
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'     '
+          +'${oneOrderData3.timeOfDay.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size2,
+            width: PosTextSize.size2,
+            bold:true,
+            align: PosAlign.left,
+          )
+      );
+    }else {
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+          '     '
+          + '${oneOrderData3.orderProductionTimeFromNow} min',
           styles: PosStyles(
             height: PosTextSize.size2,
             width: PosTextSize.size2,
             bold: true,
             align: PosAlign.left,
-          ));
-    } else {
-      ticket.text(
-          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
-              '     ' +
-              '${oneOrderData3.orderProductionTimeFromNow} min',
-          styles: PosStyles(
-            height: PosTextSize.size2,
-            width: PosTextSize.size2,
-            bold: true,
-            align: PosAlign.left,
-          ));
+          )
+      );
     }
 
     //    ticket.feed(2);
 
+
     // 3 ... address: .... + flat
+
 
     /*
     ticket.text('address: ${((customerForReciteGeneration.address == null) ||
@@ -9143,43 +9366,49 @@ class _ShoppingCartState extends State<ShoppingCart> {
     */
 
     // 4 ... phone: phone
-    ticket.text(
-        'phone: ${((customerForReciteGeneration.phoneNumber == null) || (customerForReciteGeneration.phoneNumber.length == 0)) ? '----' : customerForReciteGeneration.phoneNumber.length > 21 ? customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' : customerForReciteGeneration.phoneNumber}',
+    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
+        (customerForReciteGeneration.phoneNumber.length == 0)) ?
+    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
+    customerForReciteGeneration.phoneNumber}',
         styles: PosStyles(
           height: PosTextSize.size1,
           width: PosTextSize.size1,
-          bold: true,
+          bold:true,
           align: PosAlign.left,
         ));
 
+
     ticket.feed(1);
-    ticket.hr(ch: '.', len: null, linesAfter: 0);
+    ticket.hr(ch:'.',len:null,linesAfter:0);
 
     // 5... processFoodForRecite
 
-    Set<String> categories = {};
+
+    Set<String> categories ={};
 
 //    List<String> categories = [];
     orderedItems.forEach((oneFood) {
-      if ((categories == null) ||
-          (categories.length == 0) ||
-          (categories.contains(oneFood.category) == false)) {
+
+
+      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
         ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
               bold: true,
               align: PosAlign.center,
-            ));
+            )
+        );
       }
 
       categories.add(oneFood.category);
 
       ticket.feed(1);
 
-      List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
-      List<SauceItem> extraSauces = oneFood.selectedSauces;
-      List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
+      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
       List<String> multiSelectStrings2 = oneFood.multiSelectString;
 //      print('extraIngredient: $extraIngredient');
 
@@ -9188,19 +9417,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<NewIngredient> onlyExtraIngredient = extraIngredient
-          .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
-          .toList();
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+          ||(e.isDeleted == true)
+      )).toList();
 
-      List<SauceItem> onlyExtraSauces = extraSauces
-          .where(
-              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
-          .toList();
+      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
 
-      List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
-          .where(
-              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
-          .toList();
+      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
 
 //      List<SauceItem> onlyExtraSauces       =
 //      extraSauces.where((e) => e.isDefaultSelected != true).toList();
@@ -9213,184 +9438,257 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
+
+
+
+
       // 5.... (name and quantity) + (size and price )
       ticket.row([
-        PosColumn(
-            text: '${sanitize(oneFood.name)}',
-            width: 5,
-            styles: PosStyles(
-              align: PosAlign.left,
-            )),
-        PosColumn(
-          text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
-        ),
-        PosColumn(
-            text: 'X${oneFood.quantity}',
-            width: 5,
-            styles: PosStyles(
+
+
+        PosColumn(text: '${sanitize(oneFood.name)}',
+            width: 5, styles: PosStyles(align: PosAlign.left,
+            ) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+        PosColumn(text: 'X${oneFood.quantity}',
+            width: 5,styles: PosStyles(
+
               align: PosAlign.right,
             )),
+
+
       ]);
 
       ticket.row([
-        PosColumn(
-            text: '${oneFood.foodItemSize}',
-            width: 5,
-            styles: PosStyles(align: PosAlign.left)),
-        PosColumn(
-          text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
-        ),
-        PosColumn(
-            text:
-                '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
-            width: 5,
-            styles: PosStyles(
+        PosColumn(text: '${oneFood.foodItemSize}',
+            width: 5,  styles: PosStyles(align: PosAlign.left) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+            width: 5,styles: PosStyles(
+
               align: PosAlign.right,
             )),
       ]);
 
-      // 5.2 --- extra ingredients...
-      if (multiSelectStrings2.length > 0) {
+      // multiselect ...
+      if(multiSelectStrings2.length > 0)
+      {
         multiSelectStrings2.forEach((oneMultiSelectString) {
-          ticket.text(
-            oneMultiSelectString,
-            styles: PosStyles(
-              align: PosAlign.left,
-            ),
-          );
+
+          ticket.row([
+            PosColumn(
+                text:'# $oneMultiSelectString',
+                width: 9,
+                styles: PosStyles(
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
         });
       }
+      // 5.2 --- extra ingredients...
 
-      if (onlyExtraIngredient.length > 0) {
+
+
+      if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-          if (oneIngredientForRecite.isDeleted == false) {
+
+          if(oneIngredientForRecite.isDeleted==false) {
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '+${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
-                  )),
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+              )),
+
               PosColumn(
                   text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
             ]);
-          } else {
+          }
+          else{
+
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
+
           }
         });
       }
 
       // extra cheeseItems...
-      if (onlyExtraSauces.length > 0) {
+      if(onlyExtraSauces.length>0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-          if (oneSauceItemForRecite.isDeleted == false) {
+
+          if(oneSauceItemForRecite.isDeleted==false) {
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '+${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
-                  )),
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+              )),
+
               PosColumn(
                   text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          } else {
+          }
+          else{
+
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                      ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                      :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
+
           }
           ;
         });
       }
 
       // extra sauceItems...
-      if (onlyExtraCheeseItems.length > 0) {
+      if(onlyExtraCheeseItems.length>0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-          if (oneCheeseItemForRecite.isDeleted == false) {
+
+          if(oneCheeseItemForRecite.isDeleted==false){
             ticket.row([
-              PosColumn(
-                  text:
-                      '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,
-                  styles: PosStyles(
+
+
+              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+              oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,styles: PosStyles(
+
                     align: PosAlign.left,
                   )),
-              PosColumn(
-                  text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
-            ]);
-          } else {
+
+              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);}
+          else{
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                      ?
+                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                      :
+                  oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          }
-          ;
+          };
         });
       }
 
+
       // needed. as per design. when one food Item is printed then an hr added.
       ticket.feed(1);
-      ticket.hr(ch: '_', len: null, linesAfter: 1);
+      ticket.hr(ch:'_',len:null,linesAfter:1);
 //      ticket.feed(1);
     });
 
+
+
+
     // Price 1 subtotal
     ticket.row([
-      PosColumn(
-        text: 'SUBTOTAL',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-          text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,
-          styles: PosStyles(
-              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
+      PosColumn(text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
     ]);
+
 
     /*
     ticket.row([
@@ -9409,66 +9707,70 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    ticket.hr();
 
-    ticket.hr(ch: '_', len: null, linesAfter: 0);
+    ticket.hr(ch:'_',len:null,linesAfter:0);
+
 
     // Price 3  Total
     ticket.row([
-      PosColumn(
-        text: 'TOTAL',
-        styles: PosStyles(bold: true),
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-        text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-        styles: PosStyles(
-            bold: true, align: PosAlign.right, codeTable: PosCodeTable.westEur),
-        width: 5,
-      ),
+
+
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
+        width: 5,),
+
     ]);
 
     ticket.feed(1);
 
-    oneOrderData3.paidStatus.toLowerCase() == 'paid'
-        ? ticket.image(faceBookLikedataBytesImage, align: PosAlign.center)
-        : ticket.image(handsdataBytesImage, align: PosAlign.center);
+
+    oneOrderData3.paidStatus.toLowerCase() == 'paid'?
+    ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
+    ticket.image(handsdataBytesImage,align: PosAlign.center);
+
+
+
 
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-        text:
-            '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text:
-            '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 4,
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
+
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
+      'paid' : 'unpaid'}',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
+          ? 'Delivery'
+          :
+      (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
+      'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
+          'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
     ]);
+
+
 
     // 7 image::
     // orderBy: 'Delivery: TakeAway: DinningRoom: phone
-    oneOrderData3.orderBy.toLowerCase() == 'delivery'
-        ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
-        : oneOrderData3.orderBy.toLowerCase() == 'phone'
-            ? ticket.image(phonedataBytesImage, align: PosAlign.center)
-            : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
-                ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
-                : ticket.image(dinningRoomDataBytesImage,
-                    align: PosAlign.center);
+    oneOrderData3.orderBy.toLowerCase() == 'delivery'?
+    ticket.image(deliveryDataBytesImage,align: PosAlign.center):
+    oneOrderData3.orderBy.toLowerCase() == 'phone'?
+    ticket.image(phonedataBytesImage,align: PosAlign.center):
+    oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
+    ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
+    ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
 
 //    ticket.hr();
     // needed. as per design.
@@ -9477,23 +9779,28 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.cut();
     return ticket;
+
   }
 
 // demoReceipt Order Type Phone ends here...
 
+
 // # number 4: demoReceipt Order Type Dinning begins here...
 
   Future<Ticket> demoReceiptOrderTypeDinning(
-    PaperSize paper,
-    Restaurant thisRestaurant3,
-    OneOrderFirebase oneOrderData3,
-    Uint8List restaurantNameBytesNotFuture3,
-  ) async {
+      PaperSize paper,
+      Restaurant thisRestaurant3,
+      OneOrderFirebase oneOrderData3,
+      Uint8List restaurantNameBytesNotFuture3,
+      ) async {
+
     //--4
 
     print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
 
-    CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
+
+    CustomerInformation customerForReciteGeneration = oneOrderData3
+        .oneCustomer;
 
     List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
 
@@ -9503,73 +9810,88 @@ class _ShoppingCartState extends State<ShoppingCart> {
     print('currentRestaurant: ${thisRestaurant3.name}');
     print('oneOrderListdocument: $oneOrderData3');
     print('orderedItems: $orderedItems');
+    print('customerForReciteGeneration.address: ${customerForReciteGeneration
+        .address}');
     print(
-        'customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
+            .flatOrHouseNumber}');
     print(
-        'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
+            .phoneNumber}');
     print(
-        'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
-    print(
-        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
-    print(
-        'restaurantNameImageBytes2 line # 11509: $restaurantNameBytesNotFuture3');
+        'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
+            .etaTimeInMinutes}');
+    print('restaurantNameImageBytes2 line # 11509: $restaurantNameBytesNotFuture3');
 //    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
-    print(
-        'oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3.orderProductionTimeFromNow}');
+    print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
+        .orderProductionTimeFromNow}');
+
+
+
 
     //differentImages 1  ==>   faceBookLikedataBytesImage
-    final ByteData faceBookLikedata =
-        await rootBundle.load('assets/icons8-facebook-like-64.png');
-    final Uint8List faceBookLikedataBytes =
-        faceBookLikedata.buffer.asUint8List();
+    final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
+    final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
-        ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+    final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
+    = ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+
 
     //differentImages 2  ==> handsdataBytesImage
-    final ByteData handsdata =
-        await rootBundle.load('assets/icons8-hand-64.png');
+    final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
     final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image handsdataBytesImage =
-        ImageAliasAnotherSource.decodeImage(handsdataBytes);
+    final ImageAliasAnotherSource.Image handsdataBytesImage
+    = ImageAliasAnotherSource.decodeImage(handsdataBytes);
+
+
+
+
+
 
     //differentImages 3 =>  deliveryDataBytesImage
-    final ByteData deliveryData =
-        await rootBundle.load('assets/orderBYicons/delivery.png');
+    final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
     final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image deliveryDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+    final ImageAliasAnotherSource.Image deliveryDataBytesImage
+    = ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+
 
     //differentImages 4 => phonedataBytesImage
     final ByteData phonedata = await rootBundle.load('assets/phone.png');
     final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image phonedataBytesImage =
-        ImageAliasAnotherSource.decodeImage(phonedataBytes);
+    final ImageAliasAnotherSource.Image phonedataBytesImage
+    = ImageAliasAnotherSource.decodeImage(phonedataBytes);
+
 
     //differentImages 5  ==> takeAwayDataBytesImage
-    final ByteData takeAwayData =
-        await rootBundle.load('assets/orderBYicons/takeaway.png');
+    final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
     final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+    final ImageAliasAnotherSource.Image takeAwayDataBytesImage
+    = ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+
 
     //differentImages 6  ==>  dinningRoomDataBytesImage
-    final ByteData dinningRoomData =
-        await rootBundle.load('assets/orderBYicons/diningroom.png');
+    final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
     final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
 
-    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
-        ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+    final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
+    = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+
+
+
+
+
+
 
     //  printing begins::: //1.... starts...
 
     //1... RESTAURANT NAME DONE...
-    final ImageAliasAnotherSource.Image oneImageRestaurant =
-        ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
+    final ImageAliasAnotherSource
+        .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+        restaurantNameBytesNotFuture3);
 
     //    final ImageAliasAnotherSource
     //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
@@ -9577,33 +9899,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
     ticket.image(oneImageRestaurant);
 
     ticket.feed(1);
-    ticket.hr(ch: '=', len: null, linesAfter: 1);
+    ticket.hr(ch:'=',len:null,linesAfter:1);
 
-    if (oneOrderData3.orderProductionTimeFromNow == -1) {
-      ticket.text(
-          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
-              '     ' +
-              '${oneOrderData3.timeOfDay.toString()}',
+    if(oneOrderData3.orderProductionTimeFromNow==-1){
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'     '
+          +'${oneOrderData3.timeOfDay.toString()}',
           styles: PosStyles(
             height: PosTextSize.size2,
             width: PosTextSize.size2,
             bold: true,
             align: PosAlign.left,
-          ));
-    } else {
-      ticket.text(
-          '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
-              '     ' +
-              '${oneOrderData3.orderProductionTimeFromNow} min',
+          )
+      );
+    }else {
+      ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+          '     '
+          + '${oneOrderData3.orderProductionTimeFromNow} min',
           styles: PosStyles(
             height: PosTextSize.size2,
             width: PosTextSize.size2,
             bold: true,
             align: PosAlign.left,
-          ));
+          )
+      );
     }
 
     //    ticket.feed(2);
+
 
     // 3 ... address: .... + flat
 
@@ -9643,27 +9965,29 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     // 5... processFoodForRecite
 
-    Set<String> categories = {};
+
+    Set<String> categories ={};
     orderedItems.forEach((oneFood) {
-      if ((categories == null) ||
-          (categories.length == 0) ||
-          (categories.contains(oneFood.category) == false)) {
+
+
+      if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
         ticket.text('${oneFood.category.toString()}',
             styles: PosStyles(
               height: PosTextSize.size1,
               width: PosTextSize.size1,
               bold: true,
               align: PosAlign.center,
-            ));
+            )
+        );
       }
 
       categories.add(oneFood.category);
 
       ticket.feed(1);
 
-      List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
-      List<SauceItem> extraSauces = oneFood.selectedSauces;
-      List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
+      List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+      List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+      List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
       List<String> multiSelectStrings2 = oneFood.multiSelectString;
 //      print('extraIngredient: $extraIngredient');
 
@@ -9672,19 +9996,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
 
-      List<NewIngredient> onlyExtraIngredient = extraIngredient
-          .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
-          .toList();
+      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+          ||(e.isDeleted == true)
+      )).toList();
 
-      List<SauceItem> onlyExtraSauces = extraSauces
-          .where(
-              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
-          .toList();
+      List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
 
-      List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
-          .where(
-              (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
-          .toList();
+      List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+          ||(e.isDeleted == true))).toList();
 
 //      List<SauceItem> onlyExtraSauces       =
 //      extraSauces.where((e) => e.isDefaultSelected != true).toList();
@@ -9697,183 +10017,256 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print('onlyExtraSauces: $onlyExtraSauces');
       print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
+
+
+
+
       // 5.... (name and quantity) + (size and price )
       ticket.row([
-        PosColumn(
-            text: '${sanitize(oneFood.name)}',
-            width: 5,
-            styles: PosStyles(
-              align: PosAlign.left,
-            )),
-        PosColumn(
-          text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
-        ),
-        PosColumn(
-            text: 'X${oneFood.quantity}',
-            width: 5,
-            styles: PosStyles(
+
+
+        PosColumn(text: '${sanitize(oneFood.name)}',
+            width: 5, styles: PosStyles(align: PosAlign.left,
+            ) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+        PosColumn(text: 'X${oneFood.quantity}',
+            width: 5,styles: PosStyles(
+
               align: PosAlign.right,
             )),
+
+
       ]);
 
       ticket.row([
-        PosColumn(
-            text: '${oneFood.foodItemSize}',
-            width: 5,
-            styles: PosStyles(align: PosAlign.left)),
-        PosColumn(
-          text: '',
-          width: 2, /*,styles: PosStyles(align: PosAlign.left) */
-        ),
-        PosColumn(
-            text:
-                '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
-            width: 5,
-            styles: PosStyles(
+        PosColumn(text: '${oneFood.foodItemSize}',
+            width: 5,  styles: PosStyles(align: PosAlign.left) ),
+        PosColumn(text: '',
+          width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+        PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+            width: 5,styles: PosStyles(
+
               align: PosAlign.right,
             )),
       ]);
 
-      // 5.2 --- extra ingredients...
-      if (multiSelectStrings2.length > 0) {
+      // multiSelect..
+      if(multiSelectStrings2.length > 0)
+      {
         multiSelectStrings2.forEach((oneMultiSelectString) {
-          ticket.text(
-            oneMultiSelectString,
-            styles: PosStyles(
-              align: PosAlign.left,
-            ),
-          );
+
+          ticket.row([
+            PosColumn(
+                text:'# $oneMultiSelectString',
+                width: 9,
+                styles: PosStyles(
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
         });
       }
+      // 5.2 --- extra ingredients...
 
-      if (onlyExtraIngredient.length > 0) {
+
+
+      if(onlyExtraIngredient.length>0) {
         onlyExtraIngredient.forEach((oneIngredientForRecite) {
-          if (oneIngredientForRecite.isDeleted == false) {
+
+          if(oneIngredientForRecite.isDeleted==false) {
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '+${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
-                  )),
+                  text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+              )),
+
               PosColumn(
                   text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          } else {
+          }
+          else{
+
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneIngredientForRecite.ingredientName == null) || (oneIngredientForRecite.ingredientName.length == 0)) ? '----' : oneIngredientForRecite.ingredientName.length > 18 ? oneIngredientForRecite.ingredientName.substring(0, 15) + '...' : oneIngredientForRecite.ingredientName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneIngredientForRecite.ingredientName == null) ||
+                      (oneIngredientForRecite.ingredientName.length == 0)) ?
+                  '----' : oneIngredientForRecite.ingredientName.length > 18
+                      ?
+                  oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                      :
+                  oneIngredientForRecite.ingredientName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
+
           }
         });
       }
 
       // extra cheeseItems...
-      if (onlyExtraSauces.length > 0) {
+      if(onlyExtraSauces.length>0) {
         onlyExtraSauces.forEach((oneSauceItemForRecite) {
-          if (oneSauceItemForRecite.isDeleted == false) {
+
+          if(oneSauceItemForRecite.isDeleted==false) {
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '+${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
-                  )),
+                  text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
+              )),
+
               PosColumn(
                   text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          } else {
+          }
+          else{
+
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneSauceItemForRecite.sauceItemName == null) || (oneSauceItemForRecite.sauceItemName.length == 0)) ? '----' : oneSauceItemForRecite.sauceItemName.length > 18 ? oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' : oneSauceItemForRecite.sauceItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                      (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                  '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                      ?
+                  oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                      :
+                  oneSauceItemForRecite.sauceItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
+
           }
           ;
         });
       }
 
       // extra sauceItems...
-      if (onlyExtraCheeseItems.length > 0) {
+      if(onlyExtraCheeseItems.length>0) {
         onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
-          if (oneCheeseItemForRecite.isDeleted == false) {
+
+          if(oneCheeseItemForRecite.isDeleted==false){
             ticket.row([
-              PosColumn(
-                  text:
-                      '${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,
-                  styles: PosStyles(
+
+
+              PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                  (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+              '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+              oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+              oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9,styles: PosStyles(
+
                     align: PosAlign.left,
                   )),
-              PosColumn(
-                  text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
-                  width: 3,
-                  styles: PosStyles(align: PosAlign.right)),
-            ]);
-          } else {
+
+              PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                  width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+            ]);}
+          else{
             ticket.row([
+
+
               PosColumn(
-                  text:
-                      '- ${((oneCheeseItemForRecite.cheeseItemName == null) || (oneCheeseItemForRecite.cheeseItemName.length == 0)) ? '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ? oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' : oneCheeseItemForRecite.cheeseItemName}',
-                  width: 9,
-                  styles: PosStyles(
-                    align: PosAlign.left,
+                  text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                      (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                  '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                      ?
+                  oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                      :
+                  oneCheeseItemForRecite.cheeseItemName}',
+                  width: 9, styles: PosStyles(
+
+                align: PosAlign.left,
 //                reverse: true,
-                    underline: true,
-                  )),
+                underline: true,
+
+              )),
+
               PosColumn(
-                  text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+                  text: '',
+                  width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
             ]);
-          }
-          ;
+          };
         });
       }
 
+
       // needed. as per design. when one food Item is printed then an hr added.
       ticket.feed(1);
-      ticket.hr(ch: '_', len: null, linesAfter: 1);
+      ticket.hr(ch:'_',len:null,linesAfter:1);
 //      ticket.feed(1);
     });
 
+
+
+
     // Price 1 subtotal
     ticket.row([
-      PosColumn(
-        text: 'SUBTOTAL',
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-          text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-          width: 5,
-          styles: PosStyles(
-              align: PosAlign.right, codeTable: PosCodeTable.westEur)),
+      PosColumn(text: 'SUBTOTAL',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
     ]);
 
     /*
@@ -9893,66 +10286,70 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //    ticket.hr();
 
-    ticket.hr(ch: '_', len: null, linesAfter: 0);
+    ticket.hr(ch:'_',len:null,linesAfter:0);
+
 
     // Price 3  Total
     ticket.row([
-      PosColumn(
-        text: 'TOTAL',
-        styles: PosStyles(bold: true),
-        width: 5, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-        text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
-        styles: PosStyles(
-            bold: true, align: PosAlign.right, codeTable: PosCodeTable.westEur),
-        width: 5,
-      ),
+
+
+      PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+      PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
+        width: 5,),
+
     ]);
 
     ticket.feed(1);
 
-    oneOrderData3.paidStatus.toLowerCase() == 'paid'
-        ? ticket.image(faceBookLikedataBytesImage, align: PosAlign.center)
-        : ticket.image(handsdataBytesImage, align: PosAlign.center);
+
+    oneOrderData3.paidStatus.toLowerCase() == 'paid'?
+    ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
+    ticket.image(handsdataBytesImage,align: PosAlign.center);
+
+
+
 
     //6 Text "paid || Unpaid && Space "OrderBY"
     //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
     ticket.row([
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
-      PosColumn(
-        text:
-            '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
-        width: 4, /*,styles: PosStyles(align: PosAlign.left) */
-      ),
-      PosColumn(
-        text:
-            '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
-        width: 4,
-      ),
-      PosColumn(
-        text: '',
-        width: 2, /*, styles: PosStyles(align: PosAlign.center) */
-      ),
+
+
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
+      'paid' : 'unpaid'}',
+        width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
+          ? 'Delivery'
+          :
+      (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
+      'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
+          'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+        width: 4,),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
     ]);
+
+
 
     // 7 image::
     // orderBy: 'Delivery: TakeAway: DinningRoom: phone
-    oneOrderData3.orderBy.toLowerCase() == 'delivery'
-        ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
-        : oneOrderData3.orderBy.toLowerCase() == 'phone'
-            ? ticket.image(phonedataBytesImage, align: PosAlign.center)
-            : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
-                ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
-                : ticket.image(dinningRoomDataBytesImage,
-                    align: PosAlign.center);
+    oneOrderData3.orderBy.toLowerCase() == 'delivery'?
+    ticket.image(deliveryDataBytesImage,align: PosAlign.center):
+    oneOrderData3.orderBy.toLowerCase() == 'phone'?
+    ticket.image(phonedataBytesImage,align: PosAlign.center):
+    oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
+    ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
+    ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
 
 //    ticket.hr();
     // needed. as per design.
@@ -9961,72 +10358,87 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     ticket.cut();
     return ticket;
+
+
+
   }
 
 // # number 4: demoReceipt Order Type Dinning ends here...
 
-  Future<bool> printTicket2(
-    PaperSize paper,
-    Restaurant thisRestaurant2,
-    OneOrderFirebase oneOrderData2,
-    Uint8List restaurantNameBytesNotFuture2,
-  ) async {
+
+
+  Future <bool> printTicket2(
+      PaperSize paper,
+      Restaurant thisRestaurant2,
+      OneOrderFirebase oneOrderData2,
+      Uint8List restaurantNameBytesNotFuture2,
+      ) async {
     // pqr
+
 
     print('restaurantNameBytesNotFuture2:: $restaurantNameBytesNotFuture2');
 
     print('oneOrderdocument.orderBy: ${oneOrderData2.orderBy}');
 
     final PosPrintResult res = (oneOrderData2.orderBy.toLowerCase() ==
-            'delivery')
-        ? await printerManager.printTicket(await demoReceiptOrderTypeDelivery(
-            paper,
-            thisRestaurant2,
-            oneOrderData2,
-            restaurantNameBytesNotFuture2,
-          ))
-        : (oneOrderData2.orderBy.toLowerCase() == 'phone')
-            ? await printerManager.printTicket(await demoReceiptOrderTypePhone(
-                paper,
-                thisRestaurant2,
-                oneOrderData2,
-                restaurantNameBytesNotFuture2,
-              ))
-            : (oneOrderData2.orderBy.toLowerCase() == 'takeaway')
-                ? await printerManager
-                    .printTicket(await demoReceiptOrderTypeTakeAway(
-                    paper,
-                    thisRestaurant2,
-                    oneOrderData2,
-                    restaurantNameBytesNotFuture2,
-                  ))
-                : await printerManager
-                    .printTicket(await demoReceiptOrderTypeDinning(
-                    paper,
-                    thisRestaurant2,
-                    oneOrderData2,
-                    restaurantNameBytesNotFuture2,
-                  ));
+        'delivery') ?
+    await printerManager.printTicket(
+        await demoReceiptOrderTypeDelivery(
+          paper,
+          thisRestaurant2,
+          oneOrderData2,
+          restaurantNameBytesNotFuture2,
+        )) :
+    (oneOrderData2.orderBy.toLowerCase() == 'phone') ?
+    await printerManager.printTicket(await demoReceiptOrderTypePhone(
+      paper,
+      thisRestaurant2,
+      oneOrderData2,
+      restaurantNameBytesNotFuture2,
+    )) :
+    (oneOrderData2.orderBy.toLowerCase() == 'takeaway') ?
+    await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(
+      paper,
+      thisRestaurant2,
+      oneOrderData2,
+      restaurantNameBytesNotFuture2,
+    )) :
+    await printerManager.printTicket(
+        await demoReceiptOrderTypeDinning(
+          paper,
+          thisRestaurant2,
+          oneOrderData2,
+          restaurantNameBytesNotFuture2,
+        ));
+
 
     logger.i('----- res : $res');
     print('res.msg: ${res.msg}');
     String response2 = res.msg;
 
+
     // showToast(res.msg);
 
     logger.i('this never executes .. TODO...');
-    if (response2 == 'Success') {
+    if (response2== 'Success') {
       print('at Success');
       print('-----check above condition\'s.... -----');
       return true;
-    } else {
+    }
+
+
+
+    else {
       print('before returning false from Future <bool> printTicket ');
       return false;
     }
 
 //    TODO: NEED TO check the res.msg
     // true means printed.
+
+
   }
+
 
   Future<bool> _testPrint(PrinterBluetooth printer) async {
     printerManager.selectPrinter(printer);
@@ -10036,6 +10448,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print(" at _testPrint");
 
+
     final shoppingCartBloc = BlocProvider.of<ShoppingCartBloc>(context);
 
     Restaurant thisRestaurant = shoppingCartBloc.getCurrentRestaurant;
@@ -10044,30 +10457,40 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
-    Future<OneOrderFirebase> testFirebaseOrderFetch = shoppingCartBloc
-        .fetchOrderDataFromFirebase(oneOrderForReceipt.orderdocId.trim());
+
+    Future<OneOrderFirebase> testFirebaseOrderFetch =
+    shoppingCartBloc.fetchOrderDataFromFirebase(
+        oneOrderForReceipt.orderdocId.trim());
+
+
+
+
 
 //                            _handleSignIn();
 
     /* await */
-    testFirebaseOrderFetch.whenComplete(() {
+    testFirebaseOrderFetch.whenComplete(()
+    {
       print("called when future completes");
-    }).then((oneOrderData) {
+    }
+    ).then((oneOrderData) {
+
       Widget restaurantName2 = restaurantName(thisRestaurant.name);
 
-      final Future<Uint8List> restaurantNameBytesFuture =
-          createImageFromWidget(restaurantName2);
+      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
 
       Uint8List restaurantNameBytesNotFuture;
 
       print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
 
       ImageAliasAnotherSource.Image imageRestaurant;
 
       /* await */
       restaurantNameBytesFuture.whenComplete(() {
         print("restaurantNameBytes.whenComplete called when future completes");
-      }).then((oneImageInBytes) {
+      }
+      ).then((oneImageInBytes) {
 //      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
         print('calling ticket.image(imageRestaurant); ');
         restaurantNameBytesNotFuture = oneImageInBytes;
@@ -10075,13 +10498,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
         print('oneImageInBytes: $oneImageInBytes');
 //      ticket.image(imageRestaurant);
 
+
         print('reached here: $oneOrderData');
 
-        Future<bool> isPrint = printTicket2(
+
+
+
+
+
+        Future<bool> isPrint =
+        printTicket2(
           paper,
           thisRestaurant,
           oneOrderData /*,imageRestaurant */,
+
           restaurantNameBytesNotFuture,
+
         );
 
 //        Future<OneOrderFirebase> testFirebaseOrderFetch=
@@ -10089,17 +10521,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
         isPrint.whenComplete(() {
           print("called when future completes");
 //          return true;
-        }).then((printResult) async {
+        }
+        ).then((printResult) async {
           if (printResult == true) {
             print("printResult: $printResult");
-            Future<String> docID = shoppingCartBloc.recitePrinted(
-                oneOrderForReceipt.orderdocId, 'Done');
+            Future<String> docID = shoppingCartBloc
+                .recitePrinted(oneOrderForReceipt.orderdocId, 'Done');
+
 
 //              --
 
-            docID
-                .whenComplete(() => print('printing completed..'))
-                .then((value) {
+
+            docID.whenComplete(() => print('printing completed..')).then((
+                value) {
               print(
                   'docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
               return true;
@@ -10108,39 +10542,44 @@ class _ShoppingCartState extends State<ShoppingCart> {
             });
 //            --
             return false;
-          } else {
+          }
+          else {
             return false;
           }
+
         }).catchError((onError) {
           print('printing not successful: $onError');
           return false;
         });
+
       }).catchError((onError) {
         print(' error in getting restaurant name as image---1');
         print('false: means something wrong not printed');
         //means something wrong not printed
         return false;
       });
+
+
+
+
     }).catchError((onError) {
       print('Order data fetch Error $onError ***');
       _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
-        new SnackBar(
-            duration: new Duration(seconds: 6),
-            content: Container(
-              child: new Row(
-                children: <Widget>[
-                  new CircularProgressIndicator(),
-                  new Text("Error: ${onError.message.substring(0, 40)}",
-                      style: TextStyle(
-                          /*fontSize: 10,*/ fontWeight: FontWeight.w500,
-                          color: Colors.white)),
-                ],
-              ),
-            )),
-      );
+        new SnackBar(duration: new Duration(seconds: 6), content: Container(
+          child:
+          new Row(
+            children: <Widget>[
+              new CircularProgressIndicator(),
+              new Text("Error: ${onError.message.substring(0, 40)}", style:
+              TextStyle(/*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                  color: Colors.white)),
+            ],
+          ),
+        )),);
 
       return false;
     });
+
 
     // final return false if true is not return from the above conditioned.
     return false;
@@ -10160,6 +10599,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     print('oneOrderForReceipt.orderdocId: ${oneOrderForReceipt.orderdocId}');
 
+
+
     TODO: // something wrong maybe here. docID needs to be processed...
 
     Future<String> docID = shoppingCartBloc.recitePrinted(
@@ -10174,7 +10615,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
     Widget restaurantName2 = restaurantName(thisRestaurant.name);
     final Future<Uint8List> restaurantNameBytesFuture =
-        createImageFromWidget(restaurantName2);
+    createImageFromWidget(restaurantName2);
     Uint8List restaurantNameBytesNotFuture;
 
     print('restaurantNameBytes: $restaurantNameBytesNotFuture');
@@ -10186,7 +10627,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       print("restaurantNameBytes.whenComplete called when future completes");
     }).then((oneImageInBytes) {
       ImageAliasAnotherSource.Image imageRestaurant =
-          ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+      ImageAliasAnotherSource.decodeImage(oneImageInBytes);
       print('calling ticket.image(imageRestaurant); ');
       restaurantNameBytesNotFuture = oneImageInBytes;
 
@@ -10202,13 +10643,22 @@ class _ShoppingCartState extends State<ShoppingCart> {
     testFirebaseOrderFetch.whenComplete(() {
       print("called when future completes");
     }).then((oneOrderData) {
+
+
+
+
+
       printTicketDummy2(
         /*paper, */
         thisRestaurant,
         oneOrderData,
         imageRestaurant,
+
         restaurantNameBytesNotFuture,
+
       );
+
+
     }).catchError((onError) {
       print('Order data fetch Error $onError ***');
       _scaffoldKeyShoppingCartPage.currentState.showSnackBar(
@@ -10220,7 +10670,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   new CircularProgressIndicator(),
                   new Text("Error: $onError",
                       style: TextStyle(
-                          /*fontSize: 10,*/ fontWeight: FontWeight.w500,
+                        /*fontSize: 10,*/ fontWeight: FontWeight.w500,
                           color: Colors.white)),
                 ],
               ),
@@ -10228,6 +10678,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
       );
     });
   }
+
+
+
 
   Future<void> _showMyDialog3(Uint8List x) async {
     print('x: $x');
@@ -10243,8 +10696,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
               children: <Widget>[
                 Text(
                     'please use real blueTooth devices and also change functions in '
-                    'shopping cart page.'),
-                Container(child: Image.memory(x)),
+                        'shopping cart page.'),
+                Container
+                  (child: Image.memory(x)
+                ),
 
 //                Text('Would you like to approve of this message?'),
               ],
@@ -10265,15 +10720,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 /* PRINTING REcite related codes resides here: */
 
+
 }
+
+
+
 
 class CustomPicker extends CommonPickerModel {
   String digits(int value, int length) {
     return '$value'.padLeft(length, "0");
   }
 
-  CustomPicker({DateTime currentTime, LocaleType locale})
-      : super(locale: locale) {
+  CustomPicker({DateTime currentTime, LocaleType locale}) : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
     this.setLeftIndex(this.currentTime.hour);
     this.setMiddleIndex(this.currentTime.minute);
@@ -10324,26 +10782,20 @@ class CustomPicker extends CommonPickerModel {
 //    return [1, 2, 1];
 
 //    return [2, 2];
+
   }
 
   @override
   DateTime finalTime() {
     return currentTime.isUtc
-        ? DateTime.utc(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(), /*this.currentRightIndex() */
-          )
-        : DateTime(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
+        ? DateTime.utc(currentTime.year, currentTime.month, currentTime.day,
+      this.currentLeftIndex(), this.currentMiddleIndex(), /*this.currentRightIndex() */)
+        : DateTime(currentTime.year, currentTime.month, currentTime.day, this.currentLeftIndex(),
+      this.currentMiddleIndex(),
 
-            /*this.currentRightIndex()*/
-          );
+      /*this.currentRightIndex()*/
+
+    );
   }
 }
+

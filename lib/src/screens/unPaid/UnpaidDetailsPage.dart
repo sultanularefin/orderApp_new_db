@@ -131,8 +131,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                           ),
                           Center(
                             child: Text(
-                                'printing recite... please wait.',
-                                maxLines: 1,
+                                'updating your payment information, please wait.',
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 34,
@@ -302,6 +302,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                 decoration: BoxDecoration(
 
                                   color: Color(0xffF4F6CE),
+//                                  color:Color(0xffFFE18E),
+
                                   shape: BoxShape.circle,
 
                                 ),
@@ -416,11 +418,13 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                           String orderDocumentId = await blocUD.paymentButtonPressedUnPaidDetailsPage();
 
-                          blocUD.clearSubscription();
 
-                          print('Unboscured takeAway || '
-                              'DinningRoom Dummy print--- returning to FoodGallery Page');
-                          return Navigator.pop(context);
+
+                          print('orderDocumentId finally: >> $orderDocumentId');
+//                          blocUD.clearSubscription();
+
+
+//                          return Navigator.pop(context,orderDocumentId);
 
 
                         },
@@ -564,6 +568,9 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             logger.i('index: $index');
             print('YY YY  $index  YY   YY    ');
+
+
+            /*
             if(index==0){
 
               print(' 0 means later option...');
@@ -578,6 +585,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
             }
             else {
 
+            }*/
+
               final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
               blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
@@ -589,7 +598,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
               });
 
 
-            }
+
 
 
 
@@ -646,13 +655,13 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
           onTap: () async {
 
 
-            logger.e('index: $index');
-            print('YY YY  $index  YY   YY    ');
+
 
 
 
             logger.i('index: $index');
             print('YY YY  $index  YY   YY    ');
+            /*
             if(index==0){
 
               print(' 0 means later option...');
@@ -664,7 +673,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             }
             else {
-
+*/
               final blocUD = BlocProvider.of<UnPaidDetailsBloc>(context);
 
               blocUD.setPaymentTypeSingleSelectOptionForOrderUnPaidDetailsPage(
@@ -674,7 +683,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                 showFullPaymentType = false;
                 showCancelPayButtonFirstTime = false;
               });
-            }
+
 
             // setState(() {
             //   showCancelPayButtonFirstTime = false;
@@ -739,6 +748,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   }
 
   Widget initialView(OneOrderFirebase oneFireBaseOrder){
+
+    logger.e('oneFireBaseOrder.paidType > > > ${oneFireBaseOrder.paidType} ???');
 
     List<OrderedItem> orderedItems = oneFireBaseOrder.orderedItems;
 
@@ -1039,8 +1050,11 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
 
+
                                 Container(
-                                  child: Row(
+                                  child: oneFireBaseOrder.orderBy=='Delivery'?
+
+                                  Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
@@ -1072,7 +1086,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                                           )
                                       ),
                                     ],
-                                  ),
+                                  ):Container(width: 0,height: 0),
                                 ),
 
 
