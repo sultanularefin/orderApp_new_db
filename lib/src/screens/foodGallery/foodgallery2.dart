@@ -24,6 +24,7 @@ import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 // import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
+import 'package:wakelock/wakelock.dart';
 
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -261,31 +262,10 @@ _batteryLevel = batteryLevel;
 
   @override
   Widget build(BuildContext context) {
-//    String a = Constants.SUCCESS_MESSAGE;
-
-//    final bloc = BlocProvider.of<FoodGalleryBloc>(context);
-
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-//    final bloc = BlocProvider2
-//        .of(context)
-//        .getFoodGalleryBlockObject;
+    // prevent screen lock with this package
+    Wakelock.enable();
 
-//    final foodItemDetailsBlocForOrderProcessing = BlocProvider.of<FoodItemDetailsBloc>(context);
-
-//    List<NewIngredient> testIngs =  bloc.allIngredients;
-
-//    print('testIngs: $testIngs');
-
-/*
-    List<NewIngredient> favorites =((testIngs==null) ||(testIngs.length==0))
-//    (snapshot.connectionState == ConnectionState.waiting)
-        ? bloc.favorites
-        : testIngs;
-
-
-    */
-
-// FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
