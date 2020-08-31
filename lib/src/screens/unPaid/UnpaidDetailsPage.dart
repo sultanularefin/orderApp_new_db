@@ -235,7 +235,68 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   }
 
 
-  Widget animatedUnObscuredCancelPayButtonUnpaidDetailsPage(){
+  Widget updateCompleteGoToPreviousPage(BuildContext context, String  updatedDocumentID){
+
+    print(' < >  <   >  at updateCompleteGoToPreviousPage      >>  \\   ');
+
+            return
+              Container(
+
+
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+//                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+
+                    SizedBox(width:40),
+//                    SizedBox(width:20),
+
+//                    SizedBox(width: displayWidth(context) / 12,),
+
+                    Container(
+                      width: displayWidth(context) / 4,
+                      height: displayHeight(context) / 24,
+                      child: OutlineButton(
+                        color: Colors.green,
+
+                        borderSide: BorderSide(
+                          color: Colors.green, // 0xff54463E
+                          style: BorderStyle.solid,
+                          width: 7.6,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35.0),
+                        ),
+                        child: Container(
+                          child: Text('Go Back', style: TextStyle(color: Colors.green,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,),
+                          ),
+                        ),
+
+                        onPressed: () async {
+                          print('--navigate');
+
+                         _navigateAndDisplaySelection(context, updatedDocumentID);
+//                          _navigateAndDisplaySelection(),
+
+                        },
+
+                      ),
+                    ),
+
+
+                  ],
+                ),
+
+
+    );
+  }
+
+
+  Widget animatedCancelPayButtonUnpaidDetailsPage(){
 
     print(' < >  <   >    << TT       >>  \\   ');
 
@@ -421,6 +482,8 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
                           print('orderDocumentId finally: >> $orderDocumentId');
+
+
 //                          blocUD.clearSubscription();
 
 
@@ -746,6 +809,18 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
       // M VSM ORG VS TODO. ENDS HERE.
     );
   }
+
+
+  _navigateAndDisplaySelection(BuildContext context,String updatedDocumentID) async {
+
+
+
+    return Navigator.pop(
+        context, updatedDocumentID);
+
+
+    }
+
 
   Widget initialView(OneOrderFirebase oneFireBaseOrder){
 
@@ -1186,7 +1261,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                                       Text(
                                           '${oneFireBaseOrder.paidStatus}',
-                                          maxLines: 2,
+                                          maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 20,
@@ -1201,7 +1276,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
                                       Text(
                                           '${oneFireBaseOrder.paidType}',
-                                          maxLines: 2,
+                                          maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 20,
@@ -1262,27 +1337,34 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
             Container(
                 margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+
+
                 child: AnimatedSwitcher(
                   duration: Duration(
                       milliseconds: 1000),
-                  child:
-                  showCancelPayButtonFirstTime ==true?
+                  child: oneFireBaseOrder.paidType =='Later'?
+                  AnimatedSwitcher(
+                    duration: Duration(
+                        milliseconds: 1000),
+                    child:
+                    showCancelPayButtonFirstTime ==true?
 
-                  Container(
+                    Container(
 
-                    // color:Colors.limeAccent,
+                      // color:Colors.limeAccent,
 //                    color:Colors.white,
 //                                            height: 200,
-                    height: displayHeight(context) / 8,
-                    width: displayWidth(context)/1.03,
-                    child: _buildPaymentTypeSingleSelectOption(),
-
-                  ):
-                  Container(
-                      height: displayHeight(context) / 9,
+                      height: displayHeight(context) / 8,
                       width: displayWidth(context)/1.03,
-                      child: animatedUnObscuredCancelPayButtonUnpaidDetailsPage()
-                  ),
+                      child: _buildPaymentTypeSingleSelectOption(),
+
+                    ):
+                    Container(
+                        height: displayHeight(context) / 9,
+                        width: displayWidth(context)/1.03,
+                        child: animatedCancelPayButtonUnpaidDetailsPage()
+                    ),
+                  ): updateCompleteGoToPreviousPage(context,oneFireBaseOrder.documentId),
                 )
             ),
 
