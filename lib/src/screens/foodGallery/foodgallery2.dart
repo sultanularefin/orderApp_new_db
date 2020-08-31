@@ -263,8 +263,6 @@ _batteryLevel = batteryLevel;
   @override
   Widget build(BuildContext context) {
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-    // prevent screen lock with this package
-    Wakelock.enable();
 
     return GestureDetector(
       onTap: () {
@@ -629,19 +627,19 @@ _batteryLevel = batteryLevel;
             child: Container(
               color: Color(0xffFFE18E),
               child: ListView(
-// Important: Remove any padding from the ListView.
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                   DrawerHeader(
                     decoration: BoxDecoration(
                       color: Color(0xffFFE18E),
-//                    backgroundColor: Color(0xffFFE18E),
                     ),
                     child: Text(
-                      'Order Application',
+                      'restapojut'.toUpperCase(),
                       style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 24,
+                        color: Colors.black,
+                        fontFamily: 'poppins',
+                        fontWeight: FontWeight.normal,
+                        fontSize: 20,
                       ),
                     ),
                   ),
@@ -655,8 +653,8 @@ _batteryLevel = batteryLevel;
                               child: Image.asset(
                                 'assets/unpaid_cash_card/unpaid.png',
 //                color: Colors.black,
-                                width: 47,
-                                height: 47,
+                                width: 30,
+                                height: 30,
                               ),
                             ),
 
@@ -665,12 +663,13 @@ _batteryLevel = batteryLevel;
                               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
                               child: Text(
-                                'unpaid'.toUpperCase(),
+                                'maksamatta'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: 'Itim-Regular',
-                                  color: Color(0xff707070),
+                                  fontSize: 18,
+                                  fontFamily: 'poppins',
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
                                 ),
                               ),
                             )
@@ -703,8 +702,8 @@ _batteryLevel = batteryLevel;
                               child: Image.asset(
                                 'assets/history.png',
 //                color: Colors.black,
-                                width: 40,
-                                height: 40,
+                                width: 30,
+                                height: 30,
                               ),
                             ),
 
@@ -716,9 +715,10 @@ _batteryLevel = batteryLevel;
                                 'history'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: 'Itim-Regular',
-                                  color: Color(0xff707070),
+                                  fontSize: 18,
+                                  fontFamily: 'historia',
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
                                 ),
                               ),
                             )
