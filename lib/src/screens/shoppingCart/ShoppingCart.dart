@@ -1563,7 +1563,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    color: Colors.black,
                           color: Colors.grey,
                           style: BorderStyle.solid,
-                          width: 2.0,
+                          width: 0.5,
                         ),
                         shape: BoxShape.rectangle,
                       ),
@@ -3158,16 +3158,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.fromLTRB(5, 5, 0, 5),
-              child: Text('select either a time or minutes from now:',
+              child: Text('valitse aika:',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: Color(0xff000000),
                   )),
               height: displayHeight(context) / 33,
             ),
             Container(
-              height: displayHeight(context) / 13,
+              height: displayHeight(context) / 23,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
@@ -3205,9 +3205,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     children: <Widget>[
                                       Container(
                                         color: Color(0xffFCF5E4),
-                                        width: displayWidth(context) / 30,
+                                        width: displayWidth(context) / 20,
                                         child: Icon(
-                                          Icons.watch,
+                                          Icons.watch_later_outlined,
                                           size: 32.0,
                                         ),
                                       ),
@@ -3438,14 +3438,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     splashColor: Colors.indigoAccent,
 //                                highlightElevation: 12,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
 
                     borderSide: BorderSide(
                       color: Colors.grey,
 //                                        color:Color(0xff707070),
                       style: BorderStyle.solid,
-                      width: 2.6,
+                      width: 1.0,
                     ),
 
                     highlightElevation: 12,
@@ -3459,14 +3459,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Container(
-//                                          height: 25,
-//                        height: displayHeight(context) / 40,
-//                        width: 5,
                             margin: EdgeInsets.only(left: 0),
-
                             child: Icon(
-//                                          Icons.add_shopping_cart,
-                              Icons.watch_later,
+                              Icons.access_alarm,
                               size: 28,
                               color: Color(0xffBCBCBD),
                             ),
@@ -3478,12 +3473,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                             // do it in both Container
                             child: Text(
-                              'choose Time',
+                              'milloin tulet',
                               maxLines: 1,
                               style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 22,
-//                            fontWeight: FontWeight.bold,
+                                color: Colors.black26,
+                                fontSize: 20,
                               ),
                             ),
                           )
@@ -3500,7 +3494,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     border: Border.all(
                       color: Color(0xffBCBCBD),
                       style: BorderStyle.solid,
-                      width: 3.0,
+                      width: 1.0,
                     ),
 
                     boxShadow: [
@@ -3514,8 +3508,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     color: Color(0xffFFFFFF),
 //                                      Colors.black54
                   ),
-
-//                                  color: Color(0xffFFFFFF),
                   width: displayWidth(context) / 2.5,
                   height: displayHeight(context) / 24,
                   padding:
@@ -3529,7 +3521,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         width: 5,
                         margin: EdgeInsets.only(left: 0),
                         child: Icon(
-                          Icons.watch_later,
+                          Icons.watch_later_outlined,
                           size: 28,
                           color: Color(0xffBCBCBD),
                         ),
@@ -3547,12 +3539,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           onSubmitted: (_) => FocusScope.of(context).unfocus(),
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
-                            // work_5
-                            // 911_5
                             border: InputBorder.none,
-                            hintText: 'After XX minutes',
-                            hintStyle: TextStyle(
-                                color: Color(0xffFC0000), fontSize: 17),
+                            hintText: 'Valitse sopiva aika',
+                            hintStyle:
+                                TextStyle(color: Colors.black26, fontSize: 17),
                           ),
                           style:
                               TextStyle(color: Color(0xffFC0000), fontSize: 16),
@@ -5262,33 +5252,23 @@ class _ShoppingCartState extends State<ShoppingCart> {
               Container(
                 width: displayWidth(context) / 4,
                 height: displayHeight(context) / 24,
-                child: OutlineButton(
+                child: RaisedButton(
                   onPressed: () {
                     print('Cancel Pressed obscured delivery phone obscured');
 //                    onPressed: _testPrintDummyDe
 //                    return Navigator.pop(context,true);
                   },
                   color: Color(0xffFC0000),
-                  // clipBehavior:Clip.hardEdge,
-//            ContinuousRectangleBorder
-//            BeveledRectangleBorder
-//            RoundedRectangleBorder
-                  borderSide: BorderSide(
-                    color: Color(0xffFC0000), // 0xff54463E
-                    style: BorderStyle.solid,
-                    width: 7.6,
-                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(35.0),
                   ),
                   child: Container(
-//              alignment: Alignment.center,
                     child: Text(
-                      'Cancel',
+                      'peruuta'.toUpperCase(),
                       style: TextStyle(
-                        color: Color(0xffFC0000),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
@@ -5300,7 +5280,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               Container(
                 width: displayWidth(context) / 4,
                 height: displayHeight(context) / 24,
-                child: OutlineButton(
+                child: RaisedButton(
                   onPressed: () async {
                     print(
                         'pay button Pressed obscured delivery phone obscured');
@@ -5310,11 +5290,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //            ContinuousRectangleBorder
 //            BeveledRectangleBorder
 //            RoundedRectangleBorder
-                  borderSide: BorderSide(
-                    color: Colors.green, // 0xff54463E
-                    style: BorderStyle.solid,
-                    width: 7.6,
-                  ),
+
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(35.0),
                   ),
@@ -5323,11 +5299,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     // PAY OBSCURED DELIVERY PHONE...
                     child: Text(
-                      'Pay',
+                      'maksaa'.toUpperCase(),
                       style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
@@ -5563,23 +5539,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
             width: displayWidth(context) / 4,
             height: displayHeight(context) / 24,
-            child: OutlineButton(
-              color: Color(0xffFC0000),
-              borderSide: BorderSide(
-                color: Color(0xffFC0000), // 0xff54463E
-                style: BorderStyle.solid,
-                width: 7.6,
-              ),
+            child: RaisedButton(
+              color: Colors.red,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(35.0),
               ),
               child: Container(
 //              alignment: Alignment.center,
                 child: Text(
-                  'Cancel',
+                  'peruuta'.toUpperCase(),
                   style: TextStyle(
-                    color: Color(0xffFC0000),
-                    fontSize: 30,
+                    color: Colors.white,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -5623,17 +5594,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
           Container(
             width: displayWidth(context) / 4,
             height: displayHeight(context) / 24,
-            child: OutlineButton(
+            child: RaisedButton(
               color: Colors.green,
-              // clipBehavior:Clip.hardEdge,
-//            ContinuousRectangleBorder
-//            BeveledRectangleBorder
-//            RoundedRectangleBorder
-              borderSide: BorderSide(
-                color: Colors.green, // 0xff54463E
-                style: BorderStyle.solid,
-                width: 7.6,
-              ),
+
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(35.0),
               ),
@@ -5642,11 +5605,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 //    cancel Pay Select Unobscured Delivery Phone
                 child: Text(
-                  'Pay',
+                  'maksaa'.toUpperCase(),
                   style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
@@ -5806,16 +5769,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                      width: displayWidth(context) / 1.03-60 /* for example*/,
                       width: ((displayWidth(context) / 1.03) - 40),
 //                      height: displayHeight(context) / 10,
-                      height: displayHeight(context) / 9.2,
-//                height: displayHeight(context) / 12,
+                      height: displayHeight(context) / 11.2,
 
 //                      color: Colors.red,
                       decoration: BoxDecoration(
                         border: Border.all(
-//                    color: Colors.black,
                           color: Colors.grey,
                           style: BorderStyle.solid,
-                          width: 2.0,
+                          width: 1.0,
                         ),
                         shape: BoxShape.rectangle,
                       ),
@@ -5840,9 +5801,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   Container(
                                     margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
                                     alignment: Alignment.center,
-                                    child: Text('Payment Method',
+                                    child: Text('maksu tapa'.toUpperCase(),
                                         style: TextStyle(
-                                          fontSize: 30,
+                                          fontSize: 26,
                                           fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
@@ -5881,7 +5842,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           Container(
 //                            width: 100,
                             width: displayWidth(context) / 8,
-                            height: displayHeight(context) / 9,
+                            height: displayHeight(context) / 11,
 
                             child: InkWell(
                               child: Container(
@@ -5904,16 +5865,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       ),
                                     ),
                                     SizedBox(height: 5),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        paymentTypeName,
-                                        style: TextStyle(
-                                            color: Color(0xffFC0000),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),
@@ -6005,7 +5956,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-//                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
                       color: Color(0xffFC0000),
@@ -6030,12 +5980,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
   Widget _buildShoppingCartPaymentMethodsUNObscuredUnSelected(
       Order unObsecuredInputandPayment) {
-//    XYZ
-
     return Container(
-//        color: Colors.blueGrey,
-//        color: Colors.white,
-//        color:Colors.cyanAccent,
       height: displayHeight(context) /
               11 /* HEIGHT OF CHOOSE ORDER TYPE TEXT PORTION */ +
           displayHeight(context) / 7 /* HEIGHT OF MULTI SELECT PORTION */,
@@ -6043,38 +5988,33 @@ class _ShoppingCartState extends State<ShoppingCart> {
         children: <Widget>[
           Container(
             width: ((displayWidth(context) / 1.03) - 40),
-            height: displayHeight(context) / 11,
+            height: displayHeight(context) / 18,
             decoration: BoxDecoration(
               border: Border.all(
                 color: Colors.grey,
                 style: BorderStyle.solid,
-                width: 2.0,
+                width: 1.0,
               ),
               shape: BoxShape.rectangle,
             ),
-//              color: Colors.white,
             child: Row(
-//                mainAxisAlignment: MainAxisAlignment.start,
-//                crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-//                    width: displayWidth(context) / 1.5,
                   width: displayWidth(context) / 2.5,
                   height: displayHeight(context) / 20,
                   color: Color(0xffffffff),
-
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                           alignment: Alignment.center,
-                          child: Text('Payment Method',
+                          child: Text('maksu tapa'.toUpperCase(),
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 20,
                                 fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
@@ -6089,10 +6029,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   alignment: Alignment.center,
                   child: Row(
                     children: <Widget>[
-                      Text('TOTAL : ',
+                      Text('Summa : '.toUpperCase(),
                           style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal,
                             color: Color(0xffFC0000),
                           )),
                       Text(
@@ -6100,8 +6040,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               /* * unObsecuredInputandPayment.totalPrice */).toStringAsFixed(2)} '
                           '\u20AC',
                           style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal,
 //                                                        fontFamily: 'GreatVibes-Regular',
 
 //                    fontStyle: FontStyle.italic,
@@ -6387,7 +6327,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       border: Border.all(
                         color: Colors.black,
                         style: BorderStyle.solid,
-                        width: 0.5,
+                        width: 2.0,
                       ),
                       shape: BoxShape.circle,
                     ),
@@ -6443,12 +6383,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       border: Border.all(
                         color: Colors.black,
                         style: BorderStyle.solid,
-                        width: 1.0,
+                        width: 2.0,
                       ),
                       shape: BoxShape.circle,
                     ),
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                      padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
                       child: Image.asset(
                         orderTyepImage,
                         fit: BoxFit.contain,
@@ -6774,7 +6714,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         child: Icon(
                           getIconForName(paymentTypeName),
                           color: Color(0xffFC0000),
-                          size: displayWidth(context) / 13,
+                          size: displayWidth(context) / 18,
                         ),
                       ),
                       Container(
@@ -6783,7 +6723,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           paymentTypeName,
                           style: TextStyle(
                               color: Color(0xffFC0000),
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                               fontSize: 18),
                         ),
                       ),
@@ -6859,16 +6799,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         child: Icon(
                           getIconForName(paymentTypeName),
                           color: Colors.grey,
-                          size: displayWidth(context) / 13,
+                          size: displayWidth(context) / 18,
                         ),
                       ),
                       Container(
+                        margin: EdgeInsets.all(5.0),
                         alignment: Alignment.center,
                         child: Text(
                           paymentTypeName,
                           style: TextStyle(
                               color: Color(0xffFC0000),
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                               fontSize: 18),
                         ),
                       ),
