@@ -3816,9 +3816,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                           width: 5,
                           margin: EdgeInsets.only(left: 0),
                           child: Icon(
-//                                          Icons.add_shopping_cart,
-                            Icons.location_on,
-
+                            Icons.location_on_outlined,
                             size: 28,
                             color: Color(0xffBCBCBD),
                           ),
@@ -3837,9 +3835,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             decoration: InputDecoration(
                               focusColor: Color(0xffFC0000),
                               border: InputBorder.none,
-                              hintText: 'Enter delivery location',
+                              hintText: 'katuosoite ja talon numero ',
                               hintStyle: TextStyle(
-                                  color: Color(0xffFC0000), fontSize: 17),
+                                  color: Colors.black54, fontSize: 14),
 
 //                                      currentUser
 //                                        labelText: 'Search about meal.'
@@ -3946,20 +3944,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             width: 5,
                             margin: EdgeInsets.only(left: 0),
                             child: Icon(
-//                                          Icons.add_shopping_cart,
-                              Icons.home,
+                              Icons.home_outlined,
                               size: 28,
                               color: Color(0xffBCBCBD),
                             ),
                           ),
                           Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
                             alignment: Alignment.center,
                             width: displayWidth(context) / 4,
-//                                        color:Colors.purpleAccent,
-                            // do it in both Container
                             child: TextField(
                               controller: houseFlatNumberController,
                               textInputAction: TextInputAction.next,
@@ -3968,9 +3960,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: 'Enter House/Flat address/number',
+                                hintText: 'asunto numero ',
                                 hintStyle: TextStyle(
-                                    color: Color(0xffFC0000), fontSize: 17),
+                                    color: Colors.black54, fontSize: 14),
 
 //                                        labelText: 'Search about meal.'
                               ),
@@ -4069,26 +4061,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                    ),
                           child: Icon(
 //                                          Icons.add_shopping_cart,
-                            Icons.phone,
+                            Icons.phone_outlined,
                             size: 28,
                             color: Color(0xffBCBCBD),
                           ),
                         ),
                         Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
                           alignment: Alignment.center,
                           width: displayWidth(context) / 4,
-//                                        color:Colors.purpleAccent,
-                          // do it in both Container
                           child: TextField(
                             keyboardType: TextInputType.phone,
                             inputFormatters: <TextInputFormatter>[
                               LengthLimitingTextInputFormatter(16),
                               WhitelistingTextInputFormatter.digitsOnly,
-//                                                WhitelistingTextInputFormatter(RegExp("+[0-9]"))
-//                                                WhitelistingTextInputFormatter(RegExp("[+]"))
                             ],
                             controller: phoneNumberController,
                             textInputAction: TextInputAction.next,
@@ -4096,15 +4081,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 FocusScope.of(context).nextFocus(),
                             textAlign: TextAlign.center,
                             decoration: InputDecoration(
-//                                            prefixIcon: new Icon(Icons.search),
-//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//                                        border: Border.all(color: Colors.white, width: 2),
                               border: InputBorder.none,
-                              hintText: 'Enter phone / telephone number',
+                              hintText: 'puhelin numero',
                               hintStyle: TextStyle(
-                                  color: Color(0xffFC0000), fontSize: 17),
-
-//                                        labelText: 'Search about meal.'
+                                  color: Colors.black54, fontSize: 16),
                             ),
                             style: TextStyle(
                                 color: Color(0xffFC0000), fontSize: 16),
@@ -4113,21 +4093,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                               final shoppingCartBloc =
                                   BlocProvider.of<ShoppingCartBloc>(context);
-//
+
                               shoppingCartBloc.setPhoneNumberForOrder(text);
 
                               setState(() {
                                 showFullOrderDeliveryType = false;
-                                // showFullOrderType = false;
-                                // showFullOrderType
-                                /* WHEN CHANGE showFullOrderType CHANGE BELOW THIS 2 BOOLEAN STATE'S */
-//                                                showCustomerInformationHeader = false;
+
                                 showCustomerInformationHeader = true;
                                 showUserInputOptionsLikeFirstTime = false;
                                 showFullPaymentType =
                                     true; // default.// NOTHING TO DO WITH INPUT FIELDS.
                               });
-                              // NECESSARY TO SHRINK THE SELECTED ORDER WIDGET.
                             },
                             onTap: () {
                               setState(() {

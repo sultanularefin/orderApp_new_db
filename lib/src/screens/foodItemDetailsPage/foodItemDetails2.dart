@@ -1297,7 +1297,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
   Widget animatedWidgetPressToFinish() {
     return RaisedButton(
-        color: Color(0xffFCF5E4),
+        color: Colors.blue,
         highlightColor: Color(0xff525FFF),
         splashColor: Color(0xffB47C00),
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -1315,7 +1315,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'poppins',
                 ),
