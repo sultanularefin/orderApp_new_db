@@ -187,6 +187,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 
 
+    // print('paidType0 : $paidType0');
     print('paidType0 : $paidType0');
 
     var updateResult =
@@ -194,14 +195,8 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     currenttempUnPaidOneOrderFB.paidStatus='Paid';
     currenttempUnPaidOneOrderFB.paidType= paidType0;
-    currenttempUnPaidOneOrderFB.tempPayButtonPressed=false;
-
-
-
-//    _curretnFireBaseOrder=null;
 
     _curretnFireBaseOrder = currenttempUnPaidOneOrderFB;
-
     _oneFireBaseOrderController.sink.add(_curretnFireBaseOrder);
 
 //    await Future.delayed(Duration(milliseconds: 500));
@@ -221,7 +216,6 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     return previouslyLaterPaidDocumentID;
-
 
 
   }

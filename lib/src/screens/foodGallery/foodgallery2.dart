@@ -566,15 +566,23 @@ _batteryLevel = batteryLevel;
                         color: Color(0xffFFE18E),
                       ),
 
-                      child: Text(
-                        'restapojut'.toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'poppins',
-                          fontWeight: FontWeight.normal,
-                          fontSize: 20,
+                      // child: RaisedButton(
+                        child: Text(
+                          'restapojut'.toUpperCase(),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'poppins',
+                            fontWeight: FontWeight.normal,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
+                /*
+                        onPressed: (){
+                          // 911_1
+                          Navigator.pop(context);
+                        },
+              */
+                     // ),
                     ),
                     ListTile(
                       title: Container(
@@ -616,7 +624,7 @@ _batteryLevel = batteryLevel;
                             transitionDuration: Duration(milliseconds: 900),
                             pageBuilder: (_, __, ___) => BlocProvider<UnPaidBloc>(
                               bloc: UnPaidBloc(),
-                              child: UnPaidPage(docID: ''),
+                              child: UnPaidPage(),
                             ),
                           ),
                         );

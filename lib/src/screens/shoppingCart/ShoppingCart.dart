@@ -3502,7 +3502,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   print('getting time not successful: $onError');
                   return false;
                 });
-
 //                                  RRRRRGHGHGHGH
               },
 
@@ -3570,14 +3569,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
               boxShadow: [
                 BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
                     color: Color(0xffFFFFFF),
                     blurRadius: 10.0,
                     offset: Offset(0.0, 2.0))
               ],
-
               color: Color(0xffFFFFFF),
-//                                      Colors.black54
             ),
             width: displayWidth(context) / 2.5,
             height: displayHeight(context) / 24,
@@ -5576,7 +5572,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       Order cancelPaySelectUnobscuredDeliveryPhone) {
     print(' < >  <   >    << TT       >>  \\    '
         ' Widget name: '
-        'animated Obscured Cancel Pay Button()');
+        'animatedUnObscuredCancelPayButtonDeliveryPhone Pay Button()');
     return Container(
       margin: EdgeInsets.fromLTRB(0, 9, 0, 9),
       child: Row(

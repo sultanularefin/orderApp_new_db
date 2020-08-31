@@ -27,6 +27,7 @@ class OrderedItem {
   int                 quantity;
   List<CheeseItem>    selectedCheeses;
   List<String> multiSelectString;
+
   double              oneFoodTypeTotalPrice;
   double              unitPrice;
   double              unitPriceWithoutCheeseIngredientSauces;

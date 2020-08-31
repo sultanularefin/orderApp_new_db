@@ -1,32 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-//import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
-//import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
-
-//import 'package:foodgallery/src/identity/signup.dart';
-//import 'package:foodgallery/src/screens/foodGallery/UNPaidPage.dart';
-//import 'package:google_fonts/google_fonts.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodgallery/src/welcomePage.dart';
-//import 'package:google_sign_in/google_sign_in.dart';
-//import 'package:logger/logger.dart';
-import './Widget/bezierContainer.dart';
-//import 'package:fluttercrud/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
-//import 'package:fluttercrud/src/screens/homeScreen/admin_firebase_food.dart';
 
+import './Widget/bezierContainer.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'dart:convert';
 
-/* bloc's  */
 
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-//import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
-//import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
-//import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
-//import 'package:foodgallery/src/BLoC/app_bloc.dart';
+
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 
 
@@ -36,35 +20,25 @@ class LoginPage extends StatefulWidget {
 
   final String title;
 
-//  @override
-//  _WelcomePageState createState() => _WelcomePageState(fromWhicPage);
 
   @override
   _LoginPageState createState() => _LoginPageState(showSnackbar0);
 
-//  _WelcomePageState createState() => _WelcomePageState(fromWhicPage);
+
 }
 
 
-// class _WelcomePageState extends State<WelcomePage> {
 class _LoginPageState extends State<LoginPage> {
 
 
   bool fromWhicPage1;
   _LoginPageState(this.fromWhicPage1);
 
-//  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   String emailState ='';
   String passwordState = '';
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-
-
-
-//  final logger = Logger(
-//    printer: PrettyPrinter(),
-//  );
 
 
 

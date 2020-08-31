@@ -99,6 +99,8 @@ class _HistoryPageState extends State<HistoryPage> {
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
+
+        return Navigator.pop(context);
       },
       child:
       Scaffold(

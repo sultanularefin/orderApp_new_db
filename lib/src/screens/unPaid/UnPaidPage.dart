@@ -52,11 +52,11 @@ import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 class UnPaidPage extends StatefulWidget {
 
   final Widget child;
-  final String docID;
+  // final String docID;
 
 
-  UnPaidPage({Key key, this.child,@required this.docID}) : super(key: key);
-  _UnPaidPageState createState() => _UnPaidPageState(docID);
+  UnPaidPage({Key key, this.child, /*@required this.docID */}) : super(key: key);
+  _UnPaidPageState createState() => _UnPaidPageState(/*docID*/);
 
 }
 
@@ -68,8 +68,8 @@ class _UnPaidPageState extends State<UnPaidPage> {
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
-  final String docID2;
-  _UnPaidPageState(/*{firestore} */ this.docID2);
+  // final String docID2;
+  _UnPaidPageState(/*{firestore} */ /*this.docID2 */);
 
 //  _MoreIngredientsPageState(this.oneFoodItemandId2,this.onlyIngredientsNames2);
 
@@ -106,6 +106,11 @@ class _UnPaidPageState extends State<UnPaidPage> {
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
+        // 911_1..
+
+        return Navigator.pop(context);
+
+        // Navigator.pop(context);
       },
       child:
       Scaffold(
@@ -133,7 +138,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
               height: displayHeight(context)/2.1,
               /*
 */
-              child: allUnPaidList(_currentPageHeader, context,docID2),
+              child: allUnPaidList(_currentPageHeader, context),
 
             ),
 
@@ -198,7 +203,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
   }
 
 
-  Widget allUnPaidList(String pageHeaderString,BuildContext context,String docID2)  {
+  Widget allUnPaidList(String pageHeaderString,BuildContext context /*,String docID2 */)  {
 
 //    final blocH = BlocProvider.of<HistoryBloc>(context);
     final blocUB = BlocProvider.of<UnPaidBloc>(context);
@@ -341,7 +346,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
                             MediaQuery.of(context).padding.bottom  -displayHeight(context) / 6
                         /* /20 being title text height..*/,
 
-                        child: fireBaseUnPaidOrderList(allUnPaidOrderList, context,docID2),
+                        child: fireBaseUnPaidOrderList(allUnPaidOrderList, context /*,docID2 */),
                       ),
 
 
@@ -385,7 +390,7 @@ class _UnPaidPageState extends State<UnPaidPage> {
   * */
   Widget fireBaseUnPaidOrderList(
       List<OneOrderFirebase> filteredItemsByCategory,
-      BuildContext context, String docID3)  {
+      BuildContext context /*, String docID3 */)  {
 
     return Container(
 //      height:displayHeight(context)/2.1-displayHeight(context) / 20,
