@@ -311,27 +311,14 @@ _batteryLevel = batteryLevel;
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-//                                          color: Colors.yellow,
-//                                          margin: EdgeInsets.symmetric(
-//                                              horizontal:0,
-//                                              vertical: 0),
-
-//                                          width: displayWidth(context) / 13,
                           height: displayHeight(context) / 15,
-//                                            color:Colors.blue,
-                          child: Image.asset('assets/Path2008.png'),
+                          child: Image.asset('assets/logo.png'),
                         ),
                         Container(
                           margin:
                               EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-
-//                                          width: displayWidth(context) / 6,
                           height: displayHeight(context) / 15,
-//                                            color:Colors.red,
-                          child:
-
-//                                          Container(child: Image.asset('assets/Path2008.png')),
-                              Container(
+                          child: Container(
                             padding: EdgeInsets.fromLTRB(0, 1, 0, 0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -359,99 +346,61 @@ _batteryLevel = batteryLevel;
                     ),
                   ),
 
-// CONTAINER FOR TOTAL PRICE CART BELOW.
-
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                     decoration: BoxDecoration(
-//                                      shape: BoxShape.circle,
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(
                         color: Color(0xffBCBCBD),
                         style: BorderStyle.solid,
                         width: 0.5,
                       ),
-
                       boxShadow: [
                         BoxShadow(
-//                                            color: Color.fromRGBO(250, 200, 200, 1.0),
                             color: Color(0xffFFFFFF),
                             blurRadius: 25.0,
-// USER INPUT
                             offset: Offset(0.0, 2.0))
                       ],
-
-                      color: Color(0xffFFFFFF),
-//                                      Colors.black54
+                      color: Colors.white,
                     ),
-// USER INPUT
-
-//                                  color: Color(0xffFFFFFF),
                     width: displayWidth(context) / 3.3,
                     height: displayHeight(context) / 27,
                     padding:
                         EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
                     child: Row(
-//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
                           height: displayWidth(context) / 34,
-//                                          height: 25,
                           width: 5,
                           margin:
                               EdgeInsets.only(left: 0, right: 15, bottom: 5),
-//                    decoration: BoxDecoration(
-//                      shape: BoxShape.circle,
-//                      color: Colors.white,
-//                    ),
-// work 1
                           child: Icon(
-//                                          Icons.add_shopping_cart,
                             Icons.search,
-//                                            size: 28,
                             size: displayWidth(context) / 24,
                             color: Color(0xffBCBCBD),
                           ),
                         ),
-
                         Container(
-//                                        margin:  EdgeInsets.only(
-//                                          right:displayWidth(context) /32 ,
-//                                        ),
                           alignment: Alignment.center,
                           width: displayWidth(context) / 4.7,
-//                                        color:Colors.purpleAccent,
-// do it in both Container
                           child: TextField(
                             decoration: InputDecoration(
-//                                            prefixIcon: new Icon(Icons.search),
-//                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-//                                        border: Border.all(color: Colors.white, width: 2),
                               border: InputBorder.none,
-//                                              hintText: 'Search about meal',
-//                                              hintStyle: TextStyle(fontWeight: FontWeight.bold),
-
-//                                        labelText: 'Search about meal.'
                             ),
                             onChanged: (text) {
-//                                              logger.i('on onChanged of condition 4');
-
                               setState(() => _searchString = text);
                               print(
                                   "First text field from Condition 04: $text");
                             },
                             onTap: () {
                               print('condition 4');
-//                                              logger.i('on Tap of condition 4');
                               setState(() {
                                 _firstTimeCategoryString = 'PIZZA';
                               });
                             },
                             onEditingComplete: () {
-//                                              logger.i('onEditingComplete  of condition 4');
                               print('called onEditing complete');
                               setState(() => _searchString = "");
                             },
@@ -476,23 +425,11 @@ _batteryLevel = batteryLevel;
                             },
                           ),
                         )
-
-//                                  Spacer(),
-
-//                                  Spacer(),
                       ],
                     ),
                   ),
 
                   Container(
-/*
-                                        height:displayHeight(context) -
-                                          MediaQuery.of(context).padding.top  - displayHeight(context)/13,
-                                      padding: EdgeInsets.fromLTRB(
-                                          20, 0, 10, 0),
-                                      */
-// FOR CATEGORY SERARCH.
-
                     child: shoppingCartWidget(
                         context), // CLASS TO WIDGET SINCE I NEED TO INVOKE THE
                   ),
@@ -507,40 +444,20 @@ _batteryLevel = batteryLevel;
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-//                #### 1ST CONTAINER SEARCH STRING AND TOTAL ADD TO CART PRICE.
                 Container(
-//                      color:Colors.red,
                   width: displayWidth(context) -
                       MediaQuery.of(context).size.width / 3.8,
                   height: displayHeight(context) + kToolbarHeight + 10,
                   child: foodList(_currentCategory, _searchString,
                       context /*allIngredients:_allIngredientState */),
                 ),
-
                 Container(
                   height: displayHeight(context) + kToolbarHeight + 10,
-
-/* -
-                          MediaQuery
-                              .of(context)
-                              .padding
-                              .top */
-/* height: displayHeight(context) -
-                          MediaQuery
-                              .of(context)
-                              .padding
-                              .top,
-
-*/
-//+ displayHeight(context) / 20
                   width: MediaQuery.of(context).size.width / 3.8,
-
                   color: Color(0xffFFE18E),
-
                   child: StreamBuilder<List<NewCategoryItem>>(
                       stream: blocG.categoryItemsStream,
                       initialData: blocG.allCategories,
-//        initialData: bloc.getAllFoodItems(),
                       builder: (context, snapshot) {
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
