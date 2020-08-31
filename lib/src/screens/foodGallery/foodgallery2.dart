@@ -310,10 +310,13 @@ _batteryLevel = batteryLevel;
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        /*
                         Container(
                           height: displayHeight(context) / 15,
                           child: Image.asset('assets/logo.png'),
                         ),
+
+                        */
                         Container(
                           margin:
                               EdgeInsets.symmetric(horizontal: 0, vertical: 0),
