@@ -21,6 +21,19 @@ import 'dart:async';
 
 //Map<String, int> mapOneSize = new Map();
 
+
+/* printer related imports..*/
+
+import 'package:flutter/services.dart';
+//import 'package:path_provider/path_provider.dart';
+
+
+// this pkg i am using for searching device's only and for testing now on august 29....
+import 'package:blue_thermal_printer/blue_thermal_printer.dart';
+import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart' as primaryBlueToothPrinter;
+import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
+
+/*printer related imports..*/
 class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
   var logger = Logger(
@@ -46,6 +59,17 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   Stream  <List<PaymentTypeSingleSelect>> get getCurrentPaymentTypeSingleSelectStream => _paymentTypeController.stream;
 
   /* all _paymentType ends here.....*/
+
+
+
+  // BLUETOOTH PRINTER DEVICES..
+
+  List<PrinterBluetooth> _devicesBlueTooth = [];
+  //  List<String> _devices =[];
+  List<PrinterBluetooth> get getDevices => _devicesBlueTooth;
+  final _devicesController = StreamController<List<PrinterBluetooth>>();
+  Stream <List<PrinterBluetooth>> get getDevicesStream => _devicesController.stream;
+
 
 
 
@@ -95,10 +119,117 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   }
 
 
+
+  void discoverDevicesConstructorNewPKG(/*String portNumber*/) async {
+
+    BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
+    /*
+    // THIS THINGS WORKED SOME MONTH AGO...
+    printerManager.scanResults.listen((devices) async {
+      print('UI: Devices found ${devices.length}');
+
+      _devicesBlueTooth = devices;
+      _devicesController.sink.add(_devicesBlueTooth);
+
+    });
+
+    */
+
+    bool isConnected=await bluetooth.isConnected;
+    List<BluetoothDevice> devices = [];
+    try {
+      devices = await bluetooth.getBondedDevices();
+//    } on PlatformException {
+//      // TODO - Error
+//    }
+    } on PlatformException {
+      // import service for this...
+      logger.i('some exception please check');
+      // TODO - Error
+    }
+
+//    bluetooth.onStateChanged().listen((state) {
+//      switch (state) {
+//        case BlueThermalPrinter.CONNECTED:
+//          setState(() {
+//            _connected = true;
+//          });
+//          break;
+//        case BlueThermalPrinter.DISCONNECTED:
+//          setState(() {
+//            _connected = false;
+//          });
+//          break;
+//        default:
+//          print(state);
+//          break;
+//      }
+//    });
+
+//    if (!mounted) return;
+//    setState(() {
+//      _devices = devices;
+//    });
+
+//    if(isConnected) {
+//      setState(() {
+//        _connected=true;
+//      });
+//    }
+
+    /*
+    NewIngredient.ingredientConvert(Map<String, dynamic> data,String docID)
+        :imageURL= data['image'],
+    ingredientName= data['name'],
+    price = data['price'].toDouble(),
+    documentId = docID,
+    isDefault= false,
+    tempIndex=0,
+    ingredientAmountByUser = 1;
+
+    */
+
+    List<PrinterBluetooth> tempPrinterBluetooth = new List<PrinterBluetooth>() ;
+    devices.forEach((element) {
+
+
+      primaryBlueToothPrinter.BluetoothDevice _y = new primaryBlueToothPrinter.BluetoothDevice();
+
+      print('element.name:  ..... ***       ***      @@@    @@@ ${element.name}');
+
+
+      _y.name = element.name;
+      _y.address =  element.address;
+      //'98:52:3D:BB:18:26';
+      _y.type = element.type;
+      //3;
+
+      _y.connected = element.connected;
+
+      //null;
+
+      PrinterBluetooth y = new PrinterBluetooth(_y);
+
+      tempPrinterBluetooth.add(y);
+
+    });
+//    BluetoothDevice
+
+
+    _devicesBlueTooth = tempPrinterBluetooth;
+    _devicesController.sink.add(_devicesBlueTooth);
+
+  }
+
+
+
+
   // CONSTRUCTOR BEGINS HERE.
   UnPaidDetailsBloc(
       OneOrderFirebase oneFireBaseOrder,
       ) {
+
+    discoverDevicesConstructorNewPKG();
 
     initiatePaymentTypeSingleSelectOptionsUnPaidPage(1);
     logger.i('___ ___ || || @@@@  oneFireBaseOrder.documentId: ${oneFireBaseOrder.documentId}');
@@ -168,9 +299,28 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   }
 
 
+  Future<String> recitePrinted(String orderDocumentID,String status) async{
+
+    String documentID = orderDocumentID;
 
 
-  Future<int>  paymentButtonPressedUnPaidDetailsPage() async{
+    var updateResult =
+    await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
+
+    print('updateResult is:: :: $updateResult');
+
+
+
+    String                    recitePrintedString = updateResult['recitePrinted'];
+
+    print('recitePrintedString: $recitePrintedString');
+
+    return recitePrintedString;
+
+  }
+
+
+  Future<OneOrderFirebase>  paymentButtonPressedUnPaidDetailsPage() async{
   // Future<int>  paymentButtonPressedUnPaidDetailsPage() async{
 
     OneOrderFirebase currenttempUnPaidOneOrderFB = _curretnFireBaseOrder;
@@ -205,14 +355,18 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     print('paidType2: $paidType2');
 
-    if(paidType2==paidType0){
+    if(paidType2 == paidType0){
       print('update successfull');
-      return 1;
+
+      currenttempUnPaidOneOrderFB.updateSuccess=true;
+      return currenttempUnPaidOneOrderFB;
+      // return 1;
 
     }
 
 
-    return 0;
+    return currenttempUnPaidOneOrderFB;
+    // return 0;
 
 
 

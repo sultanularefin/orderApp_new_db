@@ -1,12 +1,29 @@
-//food_gallery.dart
+/*
+* pRINTING RELATED IMPORTS BEGINS HERE..*/
 
+import 'package:image/image.dart' as ImageAliasAnotherSource;
+import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 
+//import 'package:esc_pos_printer/esc_pos_printer.dart';
+import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
+import 'package:intl/intl.dart' hide TextDirection;
+import 'dart:typed_data';
+import 'package:flutter/services.dart'; // InputFormatters.
+import 'package:flutter/material.dart' hide Image;
+import 'package:image/image.dart' as ImageAliasAnotherSource;
+import 'package:flutter/rendering.dart'; // render...
+
+import 'dart:ui' as ui; // ui
+// import 'dart:async';
+/*
+* pRINTING RELATED IMPORTS ENDS HERE..*/
 
 // dependency files
 import 'package:cached_network_image/cached_network_image.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/HistoryDetailsBloc.dart';
 import 'package:foodgallery/src/BLoC/UnPaidDetailsBloc.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
@@ -46,6 +63,10 @@ import 'package:logger/logger.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 
+
+
+
+
 class UnpaidDetailsPage extends StatefulWidget {
 
   final Widget child;
@@ -84,7 +105,7 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   bool showUnSelectedIngredients = false;
   bool showPressWhenFinishButton = false;
   bool tempPayButtonPressed = false;
-
+  PrinterBluetoothManager printerManager = PrinterBluetoothManager();
 
   @override
   void dispose() {
@@ -299,6 +320,312 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   }
 
 
+
+  Future<void> _showMyDialog2(String message) async {
+    logger.e('in showMyDialog2');
+    print(' at the beginning of  _showMyDialog2 ....');
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('$message'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('$message'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('return Home page.'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<Uint8List> createImageFromWidget(Widget widget,
+      {
+        /* Duration wait, */
+        Size logicalSize,
+        Size imageSize}) async {
+    print('at here: $createImageFromWidget');
+
+    final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();
+
+    logicalSize ??= ui.window.physicalSize / ui.window.devicePixelRatio;
+    imageSize ??= ui.window.physicalSize;
+
+    assert(logicalSize.aspectRatio == imageSize.aspectRatio);
+
+    final RenderView renderView = RenderView(
+      window: null,
+      child: RenderPositionedBox(
+          alignment: Alignment.center, child: repaintBoundary),
+      configuration: ViewConfiguration(
+        size: logicalSize,
+        devicePixelRatio: 1.0,
+      ),
+    );
+
+    final PipelineOwner pipelineOwner = PipelineOwner();
+    final BuildOwner buildOwner = BuildOwner();
+
+    pipelineOwner.rootNode = renderView;
+    renderView.prepareInitialFrame();
+
+    final RenderObjectToWidgetElement<RenderBox> rootElement =
+    RenderObjectToWidgetAdapter<RenderBox>(
+      container: repaintBoundary,
+      child: widget,
+    ).attachToRenderTree(buildOwner);
+
+    buildOwner.buildScope(rootElement);
+
+//    if (wait != null) {
+//      await Future.delayed(wait);
+//    }
+//    print('wait ** ** **: $wait');
+
+    buildOwner.buildScope(rootElement);
+    buildOwner.finalizeTree();
+
+    pipelineOwner.flushLayout();
+    pipelineOwner.flushCompositingBits();
+    pipelineOwner.flushPaint();
+
+    final ui.Image image = await repaintBoundary.toImage(
+        pixelRatio: imageSize.width / logicalSize.width);
+    final ByteData byteData =
+    await image.toByteData(format: ui.ImageByteFormat.png);
+
+//    final Uint8List bytes =  byteData.buffer.asUint8List();
+
+//    final Uint8List bytes = data.buffer.asUint8List();
+//    final Image image = decodeImage(bytes);
+//
+//    final Image oneImage = ImageAliasAnotherSource.decodeImage(bytes);
+    // decodePng(bytes);
+//    decodeImage(bytes)
+
+//    bytesArefins = bytes;
+//    uint8LIstController.sink.add(bytesArefins);
+
+    print('byteData: $byteData');
+    return byteData.buffer.asUint8List();
+  }
+
+
+  Widget restaurantName(String name) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Text('${name.toLowerCase()}',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: 29,
+            fontWeight: FontWeight.normal,
+            color: Colors.black,
+            fontFamily: 'Itim-Regular',
+          )),
+    );
+  }
+
+
+
+  // paper,
+  // oneFirebaseOrderDetail
+  // restaurantNameBytesNotFuture,
+
+      Future <bool> printTicket2(
+      PaperSize paper,
+      OneOrderFirebase oneOrderData2,
+      Uint8List restaurantNameBytesNotFuture2,
+      ) async {
+    // pqr
+
+
+    print('restaurantNameBytesNotFuture2:: $restaurantNameBytesNotFuture2');
+
+    print('oneOrderdocument.orderBy: ${oneOrderData2.orderBy}');
+
+    final PosPrintResult res = (oneOrderData2.orderBy.toLowerCase() ==
+        'delivery') ?
+    await printerManager.printTicket(
+        await demoReceiptOrderTypeDelivery(
+          paper,
+          // thisRestaurant2,
+          oneOrderData2,
+          restaurantNameBytesNotFuture2,
+        )) :
+    (oneOrderData2.orderBy.toLowerCase() == 'phone') ?
+    await printerManager.printTicket(await demoReceiptOrderTypePhone(
+      paper,
+      // thisRestaurant2,
+      oneOrderData2,
+      restaurantNameBytesNotFuture2,
+    )) :
+    (oneOrderData2.orderBy.toLowerCase() == 'takeaway') ?
+    await printerManager.printTicket(await demoReceiptOrderTypeTakeAway(
+      paper,
+      // thisRestaurant2,
+      oneOrderData2,
+      restaurantNameBytesNotFuture2,
+    )) :
+    await printerManager.printTicket(
+        await demoReceiptOrderTypeDinning(
+          paper,
+          // thisRestaurant2,
+          oneOrderData2,
+          restaurantNameBytesNotFuture2,
+        ));
+
+
+    logger.i('----- res : $res');
+    print('res.msg: ${res.msg}');
+    String response2 = res.msg;
+
+
+    // showToast(res.msg);
+
+    logger.i('this never executes .. TODO...');
+    if (response2== 'Success') {
+      print('at Success');
+      print('-----check above condition\'s.... -----');
+      return true;
+    }
+
+
+
+    else {
+      print('before returning false from Future <bool> printTicket ');
+      return false;
+    }
+
+//    TODO: NEED TO check the res.msg
+    // true means printed.
+
+
+  }
+
+
+
+  Future<bool> _testPrint(PrinterBluetooth printer,OneOrderFirebase oneFirebaseOrderDetail) async {
+
+    // oneFirebaseOrderDetail
+    final blocUD = BlocProvider.of<UnPaidDetailsBloc>(
+        context);
+
+
+    printerManager.selectPrinter(printer);
+
+
+
+    // TODO Don't forget to choose printer's paper
+    const PaperSize paper = PaperSize.mm58;
+
+    print(" at _testPrint");
+
+
+
+    print('oneFirebaseOrderDetail.documentId: ${oneFirebaseOrderDetail.documentId}');
+
+
+
+      Widget restaurantName2 = restaurantName(oneFirebaseOrderDetail.restaurantName);
+
+      final Future<Uint8List> restaurantNameBytesFuture = createImageFromWidget(restaurantName2);
+
+      Uint8List restaurantNameBytesNotFuture;
+
+      print('restaurantNameBytes: $restaurantNameBytesNotFuture');
+
+
+      ImageAliasAnotherSource.Image imageRestaurant;
+
+      /* await */
+      restaurantNameBytesFuture.whenComplete(() {
+        print("restaurantNameBytes.whenComplete called when future completes");
+      }
+      ).then((oneImageInBytes) {
+//      ImageAliasAnotherSource.Image imageRestaurant = ImageAliasAnotherSource.decodeImage(oneImageInBytes);
+        print('calling ticket.image(imageRestaurant); ');
+        restaurantNameBytesNotFuture = oneImageInBytes;
+
+        print('oneImageInBytes: $oneImageInBytes');
+//      ticket.image(imageRestaurant);
+
+
+        // print('reached here: $oneOrderData');
+
+
+
+
+
+
+        Future<bool> isPrint =
+        printTicket2(
+          paper,
+          oneFirebaseOrderDetail,
+          restaurantNameBytesNotFuture
+        );
+
+//        Future<OneOrderFirebase> testFirebaseOrderFetch=
+
+        isPrint.whenComplete(() {
+          print("called when future completes");
+//          return true;
+        }
+        ).then((printResult) async {
+          if (printResult == true) {
+            print("printResult: $printResult");
+            Future<String> docID = blocUD
+                .recitePrinted(oneFirebaseOrderDetail.documentId, 'Done');
+
+
+//              --
+
+
+            docID.whenComplete(() => print('printing completed..')).then((
+                value) {
+              print(
+                  'docID in [Future<bool> isPrin] await shoppingCartBloc.recitePrintedt: $docID');
+              return true;
+            }).catchError((onError) {
+              return false;
+            });
+//            --
+            return false;
+          }
+          else {
+            return false;
+          }
+
+        }).catchError((onError) {
+          print('printing not successful: $onError');
+          return false;
+        });
+
+      }).catchError((onError) {
+        print(' error in getting restaurant name as image---1');
+        print('false: means something wrong not printed');
+        //means something wrong not printed
+        return false;
+      });
+
+
+    return false;
+
+  }
+
+
   Widget animatedCancelPayButtonUnpaidDetailsPage(OneOrderFirebase oneFireBaseOrderDetail){
 
     // final
@@ -458,77 +785,190 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
                       width: displayWidth(context) / 4,
                       height: displayHeight(context) / 24,
                       child: OutlineButton(
-                          color: Colors.green,
+                        color: Colors.green,
 
-                          borderSide: BorderSide(
-                            color: Colors.green, // 0xff54463E
-                            style: BorderStyle.solid,
-                            width: 7.6,
+                        borderSide: BorderSide(
+                          color: Colors.green, // 0xff54463E
+                          style: BorderStyle.solid,
+                          width: 7.6,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35.0),
+                        ),
+                        child: Container(
+                          child: Text('Pay', style: TextStyle(color: Colors.green,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,),
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(35.0),
-                          ),
-                          child: Container(
-                            child: Text('Pay', style: TextStyle(color: Colors.green,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,),
-                            ),
-                          ),
+                        ),
 
-                          onPressed: () async {
+                        onPressed: () async {
+
+                          print(
+                              'pay button pressed need to update paid Status and redirect to another page...'
+                                  ' Print..: ');
+
+                          final blocUD = BlocProvider.of<UnPaidDetailsBloc>(
+                              context);
+
+                          // OneOrderFirebase
+                          OneOrderFirebase resultingOneOrderFB = await blocUD
+                              .paymentButtonPressedUnPaidDetailsPage();
+
+                          print('test: $resultingOneOrderFB');
+
+                          logger.i('tempPayButtonPressed: > > > > > $tempPayButtonPressed');
+                          // oneFireBaseOrderDetail
+
+                          if (resultingOneOrderFB.updateSuccess == false) {
+                            _scaffoldKeyUnPaidDetailsPage.currentState.showSnackBar(SnackBar(
+                                content: Text("someThing went wrong")));
+                            print('something went wrong');
+                          } else {
+
+
+                            // success test ==1..
+                            // 911_1
+                            // work_1
+
+                            print('orderDocumentId finally: >> ${oneFireBaseOrderDetail.documentId}');
+
+
+                            List<PrinterBluetooth> blueToothDevicesState =
+                                blocUD.getDevices;
+                            // ...
+
+                            // List<PrinterBluetooth> blueToothDevicesState =
+                            // shoppingCartBloc.getDevices;
 
                             print(
-                                'pay button pressed need to update paid Status and redirect to another page...'
-                                    ' Print..: ');
+                                'blueToothDevicesState.length: ${blueToothDevicesState.length}');
 
-                            final blocUD = BlocProvider.of<UnPaidDetailsBloc>(
-                                context);
+                            if (blueToothDevicesState.length == 0) {
+                              logger.i('___________ blueTooth device not found _____');
 
-                            // OneOrderFirebase
-                            int test = await blocUD
-                                .paymentButtonPressedUnPaidDetailsPage();
+                              await _showMyDialog2(
+                                  '___________ blueTooth device not found _____ delivery phone pay button');
 
-                            print('test: $test');
-
-                            logger.i('tempPayButtonPressed: > > > > > $tempPayButtonPressed');
-                            // oneFireBaseOrderDetail
-
-                            if (test == 0) {
-                              _scaffoldKeyUnPaidDetailsPage.currentState.showSnackBar(SnackBar(
-                                      content: Text("someThing went wrong")));
-                              print('something went wrong');
-                            } else {
-
-
-                              print('orderDocumentId finally: >> ${oneFireBaseOrderDetail.documentId}');
-
-
+                              print(
+                                  'at here... __________ blueTooth device not found _____ delivery phone pay button');
 
                               blocUD.clearSubscription();
 
+                              return Navigator.pop(context);
+                            } else {
+                              bool found = false;
+                              int index = -1;
+                              for (int i = 0; i < blueToothDevicesState.length; i++) {
+                                ++index;
 
-                              /*
+                                print(
+                                    'blueToothDevicesState[$i].name: ${blueToothDevicesState[i].name}');
+                                print(
+                                    'oneBlueToothDevice[$i].address: ${blueToothDevicesState[i].address}');
+
+                                if ((blueToothDevicesState[i].name ==
+                                    'Restaurant Printer') ||
+                                    (blueToothDevicesState[i].address ==
+                                        '0F:02:18:51:23:46')) {
+                                  found = true;
+                                  break;
+
+                                  // _testPrint(oneBlueToothDevice);
+
+                                }
+                              }
+                              ;
+
+                              logger.w('check device listed or not');
+                              print('index: $index');
+                              print('found == true ${found == true}');
+
+                              if (found == true) {
+                                print('found == true');
+                                bool printResult =
+                                await _testPrint(blueToothDevicesState[index],resultingOneOrderFB);
+
+//                      _testPrintDummyDevices(blueToothDevicesState[index]);
+
+                                if (printResult == true) {
+                                  logger.i('printResult==true i.e. print successfull');
+
+                                  blocUD.clearSubscription();
+                                  // shoppingCartBloc.clearSubscription();
+
+                                  return Navigator.of(context).pushAndRemoveUntil(
+
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) {
+                                            return BlocProvider<FoodGalleryBloc>(
+                                                bloc: FoodGalleryBloc(),
+                                                child: FoodGallery2()
+                                            );
+                                          }), (Route<dynamic> route) => false);
+                                  /*
+          return Navigator.pop(
+          context, cancelPaySelectUnobscuredDeliveryPhone);
+
+          */
+
+
+                                } else {
+                                  logger.i('printResult!=true i.e. print UN successfull');
+                                  blocUD.clearSubscription();
+
+                                  return Navigator.of(context).pushAndRemoveUntil(
+
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) {
+                                            return BlocProvider<FoodGalleryBloc>(
+                                                bloc: FoodGalleryBloc(),
+                                                child: FoodGallery2()
+                                            );
+                                          }), (Route<dynamic> route) => false);
+                                  /*
+          return Navigator.pop(
+          context, cancelPaySelectUnobscuredDeliveryPhone);
+
+          */
+                                }
+                              } else {
+                                logger.i(
+                                    '___________ Restaurant Printer,  not listed ... _____ printing wasn\'t successfull');
+
+                                await _showMyDialog2(
+                                    '___________ Restaurant Printer... not listed ...  printing wasn\'t successfull _____');
+
+
+                                // ....
+
+
+                                blocUD.clearSubscription();
+
+
+                                /*
                               return Navigator.pop(
                                   context);
                               */
 
 
-
 //                              pushNamedAndRemoveUntil
-                              return Navigator.of(context).pushAndRemoveUntil(
+                                return Navigator.of(context).pushAndRemoveUntil(
 
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) {
-                                        return BlocProvider<FoodGalleryBloc>(
-                                            bloc: FoodGalleryBloc(),
-                                            child: FoodGallery2()
-                                        );
-                                      }), (Route<dynamic> route) => false);
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return BlocProvider<FoodGalleryBloc>(
+                                              bloc: FoodGalleryBloc(),
+                                              child: FoodGallery2()
+                                          );
+                                        }), (Route<dynamic> route) => false);
 
 
-
+                              }
                             }
+
                           }
+                        },
 
                       ),
                     ),
@@ -1930,6 +2370,1839 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
   }
 
 
+}
+
+String sanitize(String nameInput) {
+//    String nameInput2 = nameInput.replaceAll(new RegExp(r'e'), 'Ã©');
+//
+//    print(nameInput2);
+
+  String nameInput3 = nameInput.replaceAll(new RegExp(r"'"), "\'");
+
+  print(nameInput3);
+
+  return nameInput3;
+}
+
+
+/*
+    Future<Ticket> demoReceiptOrderTypeDelivery(
+      PaperSize paper,
+      Restaurant thisRestaurant3,
+      OneOrderFirebase oneOrderData3,
+      Uint8List restaurantNameBytesNotFuture3,
+      ) async {
+
+  */
+// # number 1: demoReceipt Order Type TakeAway begins here...
+
+Future<Ticket> demoReceiptOrderTypeTakeAway(
+    PaperSize paper,
+    // Restaurant thisRestaurant3,
+    // not required but just for printing...
+    OneOrderFirebase
+    oneOrderData3, // oneOrderData3.orderedItems --> for loop print..
+    Uint8List restaurantNameBytesNotFuture3,
+    ) async {
+  print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
+
+  CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
+
+  List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
+
+  final Ticket ticket = Ticket(PaperSize.mm58);
+
+  // print('paper.value: ${paper.value}');
+  print('oneOrderData3.restaurantName: ${oneOrderData3.restaurantName}');
+  print('oneOrderListdocument: $oneOrderData3');
+  print('orderedItems: $orderedItems');
+  print(
+      'customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+  print(
+      'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+  print(
+      'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+  print(
+      'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+  print(
+      'restaurantNameBytesNotFuture3---takeAway---> : $restaurantNameBytesNotFuture3');
+//    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+  print(
+      'oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3.orderProductionTimeFromNow}');
+
+  //differentImages 1  ==>   faceBookLikedataBytesImage
+  final ByteData faceBookLikedata =
+  await rootBundle.load('assets/icons8-facebook-like-64.png');
+  final Uint8List faceBookLikedataBytes =
+  faceBookLikedata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
+  ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+
+  //differentImages 2  ==> handsdataBytesImage
+  final ByteData handsdata =
+  await rootBundle.load('assets/icons8-hand-64.png');
+  final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image handsdataBytesImage =
+  ImageAliasAnotherSource.decodeImage(handsdataBytes);
+
+  //differentImages 3 =>  deliveryDataBytesImage
+  final ByteData deliveryData =
+  await rootBundle.load('assets/orderBYicons/delivery.png');
+  final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image deliveryDataBytesImage =
+  ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+
+  //differentImages 4 => phonedataBytesImage
+  final ByteData phonedata = await rootBundle.load('assets/phone.png');
+  final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image phonedataBytesImage =
+  ImageAliasAnotherSource.decodeImage(phonedataBytes);
+
+  //differentImages 5  ==> takeAwayDataBytesImage
+  final ByteData takeAwayData =
+  await rootBundle.load('assets/orderBYicons/takeaway.png');
+  final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
+  ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+
+  //differentImages 6  ==>  dinningRoomDataBytesImage
+  final ByteData dinningRoomData =
+  await rootBundle.load('assets/orderBYicons/diningroom.png');
+  final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
+  ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+
+  //0.... printing codes starts here..
+
+  //  printing begins::: //1.... starts...
+
+  //1... RESTAURANT NAME DONE...
+  final ImageAliasAnotherSource.Image oneImageRestaurant =
+  ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
+
+  //    final ImageAliasAnotherSource
+  //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
+
+  ticket.image(oneImageRestaurant);
+
+  ticket.feed(1);
+  ticket.hr(ch: '=', len: null, linesAfter: 1);
+
+  if (oneOrderData3.orderProductionTimeFromNow == -1) {
+    ticket.text(
+        '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+            '     ' +
+            '${oneOrderData3.timeOfDay.toString()}',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold: true,
+          align: PosAlign.left,
+        ));
+  } else {
+    ticket.text(
+        '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+            '     ' +
+            '${oneOrderData3.orderProductionTimeFromNow} min',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold: true,
+          align: PosAlign.left,
+        ));
+  }
+
+  //    ticket.feed(2);
+
+  // 3 ... address: .... + flat
+
+  /*
+
+    ticket.text('address: ${((customerForReciteGeneration.address == null) ||
+        (customerForReciteGeneration.address.length == 0)) ?
+    '----' : customerForReciteGeneration.address.length > 21 ?
+    customerForReciteGeneration.address.substring(0, 18) + '...' :
+    customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+    // 4 ... phone: phone
+    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
+        (customerForReciteGeneration.phoneNumber.length == 0)) ?
+    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
+    customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        ));
+
+
+    ticket.feed(1);
+
+    */
+  ticket.hr(ch: '.', len: null, linesAfter: 0);
+
+  // 5... processFoodForRecite
+
+  Set<String> categories = {};
+
+//    List<String> categories = [];
+  orderedItems.forEach((oneFood) {
+    if ((categories == null) ||
+        (categories.length == 0) ||
+        (categories.contains(oneFood.category) == false)) {
+      ticket.text('${oneFood.category.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold: true,
+            align: PosAlign.center,
+          ));
+    }
+
+    categories.add(oneFood.category);
+
+    ticket.feed(1);
+
+    List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
+    List<SauceItem> extraSauces = oneFood.selectedSauces;
+    List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
+
+    List<String> multiSelectStrings2 = oneFood.multiSelectString;
+
+//      print('extraIngredient: $extraIngredient');
+
+//      print('extraSauces: $extraSauces');
+//      print('extraCheeseItems: $extraCheeseItems');
+
+//      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+
+    List<NewIngredient> onlyExtraIngredient = extraIngredient
+        .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
+        .toList();
+
+    List<SauceItem> onlyExtraSauces = extraSauces
+        .where(
+            (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+        .toList();
+
+    List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
+        .where(
+            (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+        .toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+    print('onlyExtraIngredient: $onlyExtraIngredient');
+
+    print('onlyExtraSauces: $onlyExtraSauces');
+    print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+    // 5.... (name and quantity) + (size and price )
+    ticket.row([
+      PosColumn(
+          text: '${sanitize(oneFood.name)}',
+          width: 5,
+          styles: PosStyles(
+            align: PosAlign.left,
+          )),
+      PosColumn(
+        text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+          text: 'X${oneFood.quantity}',
+          width: 5,
+          styles: PosStyles(
+            align: PosAlign.right,
+          )),
+    ]);
+
+    ticket.row([
+      PosColumn(
+          text: '${oneFood.foodItemSize}',
+          width: 5,
+          styles: PosStyles(align: PosAlign.left)),
+      PosColumn(
+        text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+          text:
+          '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+          width: 5,
+          styles: PosStyles(
+            align: PosAlign.right,
+          )),
+    ]);
+
+
+
+    if (multiSelectStrings2.length > 0) {
+      multiSelectStrings2.forEach((oneMultiSelectString) {
+
+        ticket.row([
+          PosColumn(
+              text:'# $oneMultiSelectString',
+              width: 9,
+              styles: PosStyles(
+                align: PosAlign.left,
+              )),
+
+          PosColumn(
+              text:'',
+              width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+        ]);
+      });
+    }
+
+// 5.2 --- extra ingredients...
+    if(onlyExtraIngredient.length>0) {
+      onlyExtraIngredient.forEach((oneIngredientForRecite) {
+
+        if(oneIngredientForRecite.isDeleted==false) {
+          ticket.row([
+            PosColumn(
+                text:'+ ${((oneIngredientForRecite.ingredientName == null) ||
+                    (oneIngredientForRecite.ingredientName.length == 0)) ?
+                '----' :oneIngredientForRecite.ingredientName.length > 18
+                    ?oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                    :oneIngredientForRecite.ingredientName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text:'${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        }
+        else{
+
+          ticket.row([
+
+
+            PosColumn(
+                text:'- ${((oneIngredientForRecite.ingredientName == null) ||
+                    (oneIngredientForRecite.ingredientName.length == 0)) ?
+                '----' : oneIngredientForRecite.ingredientName.length > 18
+                    ?
+                oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                    :
+                oneIngredientForRecite.ingredientName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+          ]);
+        }
+      });
+    }
+
+    // extra cheeseItems...
+    if (onlyExtraSauces.length > 0) {
+      onlyExtraSauces.forEach((oneSauceItemForRecite) {
+        if (oneSauceItemForRecite.isDeleted == false) {
+          ticket.row([
+            PosColumn(
+                text:'+ ${((oneSauceItemForRecite.sauceItemName == null) ||
+                    (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                oneSauceItemForRecite.sauceItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        }
+        else{
+
+          ticket.row([
+            PosColumn(
+                text:'- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                    (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                    ?
+                oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                    :
+                oneSauceItemForRecite.sauceItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text:'',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+          ]);
+
+        }
+        ;
+      });
+    }
+
+    // extra sauceItems...
+    if (onlyExtraCheeseItems.length > 0) {
+      onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
+        if (oneCheeseItemForRecite.isDeleted == false) {
+          ticket.row([
+
+
+            PosColumn(text: '+ ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);}
+        else{
+          ticket.row([
+            PosColumn(
+                text:'- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                    (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                    ?
+                oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                    :
+                oneCheeseItemForRecite.cheeseItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '', width: 3, styles: PosStyles(align: PosAlign.right)),
+          ]);
+        }
+        ;
+      });
+    }
+
+    // needed. as per design. when one food Item is printed then an hr added.
+    ticket.feed(1);
+    ticket.hr(ch: '_', len: null, linesAfter: 1);
+//      ticket.feed(1);
+  });
+
+  // Price 1 subtotal
+  ticket.row([
+    PosColumn(
+      text: 'SUBTOTAL',
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+    ),
+    PosColumn(
+      text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+    ),
+    PosColumn(
+        text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        width: 5,
+        styles: PosStyles(
+            align: PosAlign.right, codeTable: PosCodeTable.westEur)),
+  ]);
+
+  /*
+
+    ticket.row([
+
+
+      PosColumn(text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${00.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
+    ]);
+    */
+
+//    ticket.hr();
+
+  ticket.hr(ch: '_', len: null, linesAfter: 0);
+
+  // Price 3  Total
+  ticket.row([
+    PosColumn(
+      text: 'TOTAL',
+      styles: PosStyles(bold: true),
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */
+    ),
+    PosColumn(
+      text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+    ),
+    PosColumn(
+      text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+      styles: PosStyles(
+          bold: true, align: PosAlign.right, codeTable: PosCodeTable.westEur),
+      width: 5,
+    ),
+  ]);
+
+  ticket.feed(1);
+
+  oneOrderData3.paidStatus.toLowerCase() == 'paid'
+      ? ticket.image(faceBookLikedataBytesImage, align: PosAlign.center)
+      : ticket.image(handsdataBytesImage, align: PosAlign.center);
+
+  //6 Text "paid || Unpaid && Space "OrderBY"
+  //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
+  ticket.row([
+    PosColumn(
+      text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+    ),
+    PosColumn(
+      text:
+      '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ? 'paid' : 'unpaid'}',
+      width: 4, /*,styles: PosStyles(align: PosAlign.left) */
+    ),
+    PosColumn(
+      text:
+      '${(oneOrderData3.orderBy.toLowerCase() == 'delivery') ? 'Delivery' : (oneOrderData3.orderBy.toLowerCase() == 'phone') ? 'Phone' : (oneOrderData3.orderBy.toLowerCase() == 'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+      width: 4,
+    ),
+    PosColumn(
+      text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */
+    ),
+  ]);
+
+  // 7 image::
+  // orderBy: 'Delivery: TakeAway: DinningRoom: phone
+  oneOrderData3.orderBy.toLowerCase() == 'delivery'
+      ? ticket.image(deliveryDataBytesImage, align: PosAlign.center)
+      : oneOrderData3.orderBy.toLowerCase() == 'phone'
+      ? ticket.image(phonedataBytesImage, align: PosAlign.center)
+      : oneOrderData3.orderBy.toLowerCase() == 'takeaway'
+      ? ticket.image(takeAwayDataBytesImage, align: PosAlign.center)
+      : ticket.image(dinningRoomDataBytesImage,
+      align: PosAlign.center);
+
+//    ticket.hr();
+  // needed. as per design.
+
+  ticket.feed(1); // for holding or touching the recite by finger... space..
+
+  ticket.cut();
+  return ticket;
+}
+
+// # number 2: demoReceipt Order Type Delivery begins here...
+
+//  restaurantNameImageBytes,totalCostDeliveryBytes2
+Future<Ticket> demoReceiptOrderTypeDelivery(
+    PaperSize paper,
+    // Restaurant thisRestaurant3,
+    OneOrderFirebase oneOrderData3,
+    Uint8List restaurantNameBytesNotFuture3,
+    ) async {
+  print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
+
+  CustomerInformation customerForReciteGeneration = oneOrderData3.oneCustomer;
+
+  List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
+
+  final Ticket ticket = Ticket(PaperSize.mm58);
+
+  // print('paper.value: ${paper.value}');
+  // print('currentRestaurant: ${thisRestaurant3.name}');
+  print('oneOrderData3.restaurantName: ${oneOrderData3.restaurantName}');
+  print('oneOrderListdocument: $oneOrderData3');
+  print('orderedItems: $orderedItems');
+  print(
+      'customerForReciteGeneration.address: ${customerForReciteGeneration.address}');
+  print(
+      'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration.flatOrHouseNumber}');
+  print(
+      'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration.phoneNumber}');
+  print(
+      'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration.etaTimeInMinutes}');
+  print(
+      'restaurantNameBytesNotFuture3 line # 10760: $restaurantNameBytesNotFuture3');
+//    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+  print(
+      'oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3.orderProductionTimeFromNow}');
+
+  //differentImages 1  ==>   faceBookLikedataBytesImage
+  final ByteData faceBookLikedata =
+  await rootBundle.load('assets/icons8-facebook-like-64.png');
+  final Uint8List faceBookLikedataBytes =
+  faceBookLikedata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image faceBookLikedataBytesImage =
+  ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+
+  //differentImages 2  ==> handsdataBytesImage
+  final ByteData handsdata =
+  await rootBundle.load('assets/icons8-hand-64.png');
+  final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image handsdataBytesImage =
+  ImageAliasAnotherSource.decodeImage(handsdataBytes);
+
+  //differentImages 3 =>  deliveryDataBytesImage
+  final ByteData deliveryData =
+  await rootBundle.load('assets/orderBYicons/delivery.png');
+  final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image deliveryDataBytesImage =
+  ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+
+  //differentImages 4 => phonedataBytesImage
+  final ByteData phonedata = await rootBundle.load('assets/phone.png');
+  final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image phonedataBytesImage =
+  ImageAliasAnotherSource.decodeImage(phonedataBytes);
+
+  //differentImages 5  ==> takeAwayDataBytesImage
+  final ByteData takeAwayData =
+  await rootBundle.load('assets/orderBYicons/takeaway.png');
+  final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image takeAwayDataBytesImage =
+  ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+
+  //differentImages 6  ==>  dinningRoomDataBytesImage
+  final ByteData dinningRoomData =
+  await rootBundle.load('assets/orderBYicons/diningroom.png');
+  final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image dinningRoomDataBytesImage =
+  ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+
+  //  printing begins::: //1.... starts...
+
+  //1... RESTAURANT NAME DONE...
+  final ImageAliasAnotherSource.Image oneImageRestaurant =
+  ImageAliasAnotherSource.decodeImage(restaurantNameBytesNotFuture3);
+
+  //    final ImageAliasAnotherSource
+  //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
+
+  ticket.image(oneImageRestaurant);
+  ticket.feed(1);
+  ticket.hr(ch: '=', len: null, linesAfter: 0);
+
+  ticket.text('Order No: from F.S. Cloud Function',
+      styles: PosStyles(
+        height: PosTextSize.size1,
+        width: PosTextSize.size1,
+        bold: true,
+        align: PosAlign.center,
+      ));
+
+  ticket.hr(ch: '=', len: null, linesAfter: 1);
+
+//    Order No: Cloud Function generated..
+
+  if (oneOrderData3.orderProductionTimeFromNow == -1) {
+    ticket.text(
+        '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+            '     ' +
+            '${oneOrderData3.timeOfDay.toString()}',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold: true,
+          align: PosAlign.left,
+        ));
+  } else {
+    ticket.text(
+        '${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+            '     ' +
+            '${oneOrderData3.orderProductionTimeFromNow} min',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold: true,
+          align: PosAlign.left,
+        ));
+  }
+
+  ticket.text('${oneOrderData3.formattedOrderPlacementDate}',
+      styles: PosStyles(
+        height: PosTextSize.size1,
+        width: PosTextSize.size1,
+        bold: true,
+        align: PosAlign.left,
+      ));
+
+//    ticket.feed(1);
+  ticket.feed(1);
+  ticket.hr(ch: '.', len: null, linesAfter: 0);
+
+//    ticket.feed(1);
+  // 3 ... address: .... + flat
+
+  ticket.text(
+      '${((customerForReciteGeneration.address == null) || (customerForReciteGeneration.address.length == 0)) ? '----' : customerForReciteGeneration.address.length > 21 ? customerForReciteGeneration.address.substring(0, 18) + '...' : customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
+      styles: PosStyles(
+        height: PosTextSize.size1,
+        width: PosTextSize.size1,
+        bold: true,
+        align: PosAlign.left,
+      ));
+
+  // 4 ... phone: phone
+  ticket.text(
+      '${((customerForReciteGeneration.phoneNumber == null) || (customerForReciteGeneration.phoneNumber.length == 0)) ? '----' : customerForReciteGeneration.phoneNumber.length > 21 ? customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' : customerForReciteGeneration.phoneNumber}',
+      styles: PosStyles(
+        height: PosTextSize.size1,
+        width: PosTextSize.size1,
+        bold: true,
+        align: PosAlign.left,
+      ));
+
+  ticket.feed(1);
+  ticket.hr(ch: '.', len: null, linesAfter: 0);
+
+  // 5... processFoodForRecite
+
+  Set<String> categories = {};
+
+//    List<String> categories = [];
+  orderedItems.forEach((oneFood) {
+    if ((categories == null) ||
+        (categories.length == 0) ||
+        (categories.contains(oneFood.category) == false)) {
+      ticket.text('${oneFood.category.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold: true,
+            align: PosAlign.center,
+          ));
+    }
+
+    categories.add(oneFood.category);
+
+    ticket.feed(1);
+
+    List<NewIngredient> extraIngredient = oneFood.selectedIngredients;
+    List<SauceItem> extraSauces = oneFood.selectedSauces;
+    List<CheeseItem> extraCheeseItems = oneFood.selectedCheeses;
+    List<String> multiSelectStrings2 = oneFood.multiSelectString;
+//      print('extraIngredient: $extraIngredient');
+
+//      print('extraSauces: $extraSauces');
+//      print('extraCheeseItems: $extraCheeseItems');
+
+//      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+
+    List<NewIngredient> onlyExtraIngredient = extraIngredient
+        .where((e) => ((e.isDefault != true) || (e.isDeleted == true)))
+        .toList();
+
+    List<SauceItem> onlyExtraSauces = extraSauces
+        .where(
+            (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+        .toList();
+
+    List<CheeseItem> onlyExtraCheeseItems = extraCheeseItems
+        .where(
+            (e) => ((e.isDefaultSelected != true) || (e.isDeleted == true)))
+        .toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+    print('onlyExtraIngredient: $onlyExtraIngredient');
+
+    print('onlyExtraSauces: $onlyExtraSauces');
+    print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+    // 5.... (name and quantity) + (size and price )
+    ticket.row([
+      PosColumn(
+          text: '${sanitize(oneFood.name)}',
+          width: 5,
+          styles: PosStyles(
+            align: PosAlign.left,
+          )),
+      PosColumn(
+        text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+          text: 'X${oneFood.quantity}',
+          width: 5,
+          styles: PosStyles(
+            align: PosAlign.right,
+          )),
+    ]);
+
+    ticket.row([
+      PosColumn(
+          text: '${oneFood.foodItemSize}',
+          width: 5,
+          styles: PosStyles(align: PosAlign.left)),
+      PosColumn(
+        text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */
+      ),
+      PosColumn(
+          text:
+          '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+          width: 5,
+          styles: PosStyles(
+            align: PosAlign.right,
+          )),
+    ]);
+
+
+    // multiSelect ...
+    if(multiSelectStrings2.length > 0)
+    {
+      multiSelectStrings2.forEach((oneMultiSelectString) {
+
+        ticket.row([
+          PosColumn(
+              text:'# $oneMultiSelectString',
+              width: 9,
+              styles: PosStyles(
+                align: PosAlign.left,
+              )),
+
+          PosColumn(
+              text:'',
+              width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+        ]);
+      });
+    }
+
+
+    // 5.2 --- extra ingredients...
+
+
+    if(onlyExtraIngredient.length>0) {
+      onlyExtraIngredient.forEach((oneIngredientForRecite) {
+
+        if(oneIngredientForRecite.isDeleted==false) {
+          ticket.row([
+
+
+            PosColumn(
+                text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                    (oneIngredientForRecite.ingredientName.length == 0)) ?
+                '----' : oneIngredientForRecite.ingredientName.length > 18
+                    ?
+                oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                    :
+                oneIngredientForRecite.ingredientName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        }
+        else{
+
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneIngredientForRecite.ingredientName == null) ||
+                    (oneIngredientForRecite.ingredientName.length == 0)) ?
+                '----' : oneIngredientForRecite.ingredientName.length > 18
+                    ?
+                oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                    :
+                oneIngredientForRecite.ingredientName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+
+        }
+      });
+    }
+
+    // extra cheeseItems...
+    if(onlyExtraSauces.length>0) {
+      onlyExtraSauces.forEach((oneSauceItemForRecite) {
+
+        if(oneSauceItemForRecite.isDeleted==false) {
+          ticket.row([
+
+
+            PosColumn(
+                text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                    (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                oneSauceItemForRecite.sauceItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        }
+        else{
+
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                    (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                    ?
+                oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                    :
+                oneSauceItemForRecite.sauceItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        }
+        ;
+      });
+    }
+
+    // extra sauceItems...
+    if(onlyExtraCheeseItems.length>0) {
+      onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
+
+        if(oneCheeseItemForRecite.isDeleted==false){
+          ticket.row([
+
+
+            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);}
+        else{
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                    (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                    ?
+                oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                    :
+                oneCheeseItemForRecite.cheeseItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        };
+      });
+    }
+
+
+    // needed. as per design. when one food Item is printed then an hr added.
+    ticket.feed(1);
+    ticket.hr(ch:'_',len:null,linesAfter:1);
+//      ticket.feed(1);
+  });
+
+
+
+
+  // Price 1 subtotal
+  ticket.row([
+    PosColumn(text: 'SUBTOTAL',
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+    PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
+  ]);
+
+
+  ticket.row([
+
+
+    PosColumn(text: 'DELIVERY',
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+    PosColumn(text: '${oneOrderData3.deliveryCost.toStringAsFixed(2)}',
+        width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
+  ]);
+
+
+  ticket.row([
+
+
+    PosColumn(text: 'ALV',
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+    PosColumn(text: '14%',
+        width: 5,styles:PosStyles(align: PosAlign.right)),
+
+  ]);
+
+
+
+//    ticket.hr();
+
+  ticket.hr(ch:'_',len:null,linesAfter:0);
+
+
+  // Price 3  Total
+  ticket.row([
+
+
+    PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+    PosColumn(text: '${oneOrderData3.priceWithDelivery.toStringAsFixed(2)}',
+      styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
+      width: 5,),
+
+  ]);
+
+  ticket.feed(1);
+
+
+  oneOrderData3.paidStatus.toLowerCase() == 'paid'?
+  ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
+  ticket.image(handsdataBytesImage,align: PosAlign.center);
+
+
+
+
+  //6 Text "paid || Unpaid && Space "OrderBY"
+  //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
+  ticket.row([
+
+
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+    PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
+    'paid' : 'unpaid'}',
+      width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+    PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
+        ? 'Delivery'
+        :
+    (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
+    'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
+        'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+      width: 4,),
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+  ]);
+
+
+
+  // 7 image::
+  // orderBy: 'Delivery: TakeAway: DinningRoom: phone
+  oneOrderData3.orderBy.toLowerCase() == 'delivery'?
+  ticket.image(deliveryDataBytesImage,align: PosAlign.center):
+  oneOrderData3.orderBy.toLowerCase() == 'phone'?
+  ticket.image(phonedataBytesImage,align: PosAlign.center):
+  oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
+  ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
+  ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
+
+//    ticket.hr();
+  // needed. as per design.
+
+  ticket.feed(1); // for holding or touching the recite by finger... space.
+
+  ticket.cut();
+  return ticket;
+
+}
+
+
+// demoReceipt Order Type Delivery ends here...
+
+// # number 3: demoReceipt Order Type phone begins here...
+
+// demoReceipt Order Type Phone begins here...
+Future<Ticket> demoReceiptOrderTypePhone(
+    PaperSize paper,
+    // Restaurant thisRestaurant3,
+    OneOrderFirebase oneOrderData3,
+    Uint8List restaurantNameBytesNotFuture3,
+    ) async {
+
+
+  print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
+
+
+  CustomerInformation customerForReciteGeneration = oneOrderData3
+      .oneCustomer;
+
+  List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
+
+  final Ticket ticket = Ticket(PaperSize.mm58);
+
+  // print('paper.value: ${paper.value}');
+  // print('currentRestaurant: ${thisRestaurant3.name}');
+  print('oneOrderData3.restaurantName: ${oneOrderData3.restaurantName}');
+  print('oneOrderListdocument: $oneOrderData3');
+  print('orderedItems: $orderedItems');
+  print('customerForReciteGeneration.address: ${customerForReciteGeneration
+      .address}');
+  print(
+      'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
+          .flatOrHouseNumber}');
+  print(
+      'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
+          .phoneNumber}');
+  print(
+      'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
+          .etaTimeInMinutes}');
+  print('restaurantNameBytesNotFuture3 line# 11159: $restaurantNameBytesNotFuture3');
+//    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+  print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
+      .orderProductionTimeFromNow}');
+
+
+
+
+  //differentImages 1  ==>   faceBookLikedataBytesImage
+  final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
+  final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
+  = ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+
+
+  //differentImages 2  ==> handsdataBytesImage
+  final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
+  final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image handsdataBytesImage
+  = ImageAliasAnotherSource.decodeImage(handsdataBytes);
+
+
+
+
+
+
+  //differentImages 3 =>  deliveryDataBytesImage
+  final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
+  final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image deliveryDataBytesImage
+  = ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+
+
+  //differentImages 4 => phonedataBytesImage
+  final ByteData phonedata = await rootBundle.load('assets/phone.png');
+  final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image phonedataBytesImage
+  = ImageAliasAnotherSource.decodeImage(phonedataBytes);
+
+
+  //differentImages 5  ==> takeAwayDataBytesImage
+  final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
+  final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image takeAwayDataBytesImage
+  = ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+
+
+  //differentImages 6  ==>  dinningRoomDataBytesImage
+  final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
+  final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
+  = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
+
+
+
+  //  printing begins::: //1.... starts...
+
+  //1... RESTAURANT NAME DONE...
+  final ImageAliasAnotherSource
+      .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+      restaurantNameBytesNotFuture3);
+
+  //    final ImageAliasAnotherSource
+  //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
+
+  ticket.image(oneImageRestaurant);
+
+  ticket.feed(1);
+  ticket.hr(ch:'=',len:null,linesAfter:1);
+
+  if(oneOrderData3.orderProductionTimeFromNow==-1){
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'     '
+        +'${oneOrderData3.timeOfDay.toString()}',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+  }else {
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+        '     '
+        + '${oneOrderData3.orderProductionTimeFromNow} min',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold: true,
+          align: PosAlign.left,
+        )
+    );
+  }
+
+  //    ticket.feed(2);
+
+
+  // 3 ... address: .... + flat
+
+
+  /*
+    ticket.text('address: ${((customerForReciteGeneration.address == null) ||
+        (customerForReciteGeneration.address.length == 0)) ?
+    '----' : customerForReciteGeneration.address.length > 21 ?
+    customerForReciteGeneration.address.substring(0, 18) + '...' :
+    customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+    */
+
+  // 4 ... phone: phone
+  ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
+      (customerForReciteGeneration.phoneNumber.length == 0)) ?
+  '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+  customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
+  customerForReciteGeneration.phoneNumber}',
+      styles: PosStyles(
+        height: PosTextSize.size1,
+        width: PosTextSize.size1,
+        bold:true,
+        align: PosAlign.left,
+      ));
+
+
+  ticket.feed(1);
+  ticket.hr(ch:'.',len:null,linesAfter:0);
+
+  // 5... processFoodForRecite
+
+
+  Set<String> categories ={};
+
+//    List<String> categories = [];
+  orderedItems.forEach((oneFood) {
+
+
+    if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
+      ticket.text('${oneFood.category.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold: true,
+            align: PosAlign.center,
+          )
+      );
+    }
+
+    categories.add(oneFood.category);
+
+    ticket.feed(1);
+
+    List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+    List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+    List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+    List<String> multiSelectStrings2 = oneFood.multiSelectString;
+//      print('extraIngredient: $extraIngredient');
+
+//      print('extraSauces: $extraSauces');
+//      print('extraCheeseItems: $extraCheeseItems');
+
+//      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+
+    List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+        ||(e.isDeleted == true)
+    )).toList();
+
+    List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+        ||(e.isDeleted == true))).toList();
+
+    List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+        ||(e.isDeleted == true))).toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+    print('onlyExtraIngredient: $onlyExtraIngredient');
+
+    print('onlyExtraSauces: $onlyExtraSauces');
+    print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
+
+
+
+
+
+    // 5.... (name and quantity) + (size and price )
+    ticket.row([
+
+
+      PosColumn(text: '${sanitize(oneFood.name)}',
+          width: 5, styles: PosStyles(align: PosAlign.left,
+          ) ),
+      PosColumn(text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: 'X${oneFood.quantity}',
+          width: 5,styles: PosStyles(
+
+            align: PosAlign.right,
+          )),
+
+
+    ]);
+
+    ticket.row([
+      PosColumn(text: '${oneFood.foodItemSize}',
+          width: 5,  styles: PosStyles(align: PosAlign.left) ),
+      PosColumn(text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+          width: 5,styles: PosStyles(
+
+            align: PosAlign.right,
+          )),
+    ]);
+
+    // multiselect ...
+    if(multiSelectStrings2.length > 0)
+    {
+      multiSelectStrings2.forEach((oneMultiSelectString) {
+
+        ticket.row([
+          PosColumn(
+              text:'# $oneMultiSelectString',
+              width: 9,
+              styles: PosStyles(
+                align: PosAlign.left,
+              )),
+
+          PosColumn(
+              text:'',
+              width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+        ]);
+      });
+    }
+    // 5.2 --- extra ingredients...
+
+
+
+    if(onlyExtraIngredient.length>0) {
+      onlyExtraIngredient.forEach((oneIngredientForRecite) {
+
+        if(oneIngredientForRecite.isDeleted==false) {
+          ticket.row([
+
+
+            PosColumn(
+                text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                    (oneIngredientForRecite.ingredientName.length == 0)) ?
+                '----' : oneIngredientForRecite.ingredientName.length > 18
+                    ?
+                oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                    :
+                oneIngredientForRecite.ingredientName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+          ]);
+        }
+        else{
+
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneIngredientForRecite.ingredientName == null) ||
+                    (oneIngredientForRecite.ingredientName.length == 0)) ?
+                '----' : oneIngredientForRecite.ingredientName.length > 18
+                    ?
+                oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                    :
+                oneIngredientForRecite.ingredientName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+
+        }
+      });
+    }
+
+    // extra cheeseItems...
+    if(onlyExtraSauces.length>0) {
+      onlyExtraSauces.forEach((oneSauceItemForRecite) {
+
+        if(oneSauceItemForRecite.isDeleted==false) {
+          ticket.row([
+
+
+            PosColumn(
+                text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                    (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                oneSauceItemForRecite.sauceItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        }
+        else{
+
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                    (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                    ?
+                oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                    :
+                oneSauceItemForRecite.sauceItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+
+        }
+        ;
+      });
+    }
+
+    // extra sauceItems...
+    if(onlyExtraCheeseItems.length>0) {
+      onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
+
+        if(oneCheeseItemForRecite.isDeleted==false){
+          ticket.row([
+
+
+            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);}
+        else{
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                    (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                    ?
+                oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                    :
+                oneCheeseItemForRecite.cheeseItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        };
+      });
+    }
+
+
+    // needed. as per design. when one food Item is printed then an hr added.
+    ticket.feed(1);
+    ticket.hr(ch:'_',len:null,linesAfter:1);
+//      ticket.feed(1);
+  });
+
+
+
+
+  // Price 1 subtotal
+  ticket.row([
+    PosColumn(text: 'SUBTOTAL',
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+    PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
+  ]);
+
+
+  /*
+    ticket.row([
+
+
+      PosColumn(text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${00.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
+    ]);
+
+    */
+
+//    ticket.hr();
+
+  ticket.hr(ch:'_',len:null,linesAfter:0);
+
+
+  // Price 3  Total
+  ticket.row([
+
+
+    PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+    PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+      styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
+      width: 5,),
+
+  ]);
+
+  ticket.feed(1);
+
+
+  oneOrderData3.paidStatus.toLowerCase() == 'paid'?
+  ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
+  ticket.image(handsdataBytesImage,align: PosAlign.center);
+
+
+
+
+  //6 Text "paid || Unpaid && Space "OrderBY"
+  //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
+  ticket.row([
+
+
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+    PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
+    'paid' : 'unpaid'}',
+      width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+    PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
+        ? 'Delivery'
+        :
+    (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
+    'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
+        'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+      width: 4,),
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+  ]);
+
+
+
+  // 7 image::
+  // orderBy: 'Delivery: TakeAway: DinningRoom: phone
+  oneOrderData3.orderBy.toLowerCase() == 'delivery'?
+  ticket.image(deliveryDataBytesImage,align: PosAlign.center):
+  oneOrderData3.orderBy.toLowerCase() == 'phone'?
+  ticket.image(phonedataBytesImage,align: PosAlign.center):
+  oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
+  ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
+  ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
+
+//    ticket.hr();
+  // needed. as per design.
+
+  ticket.feed(1); // for holding or touching the recite by finger... space..
+
+  ticket.cut();
+  return ticket;
+
+}
+
+// demoReceipt Order Type Phone ends here...
+
+
+// # number 4: demoReceipt Order Type Dinning begins here...
+
+Future<Ticket> demoReceiptOrderTypeDinning(
+    PaperSize paper,
+    // Restaurant thisRestaurant3,
+    OneOrderFirebase oneOrderData3,
+    Uint8List restaurantNameBytesNotFuture3,
+    ) async {
+
+  //--4
+
+  print('at here: Future<Ticket> demoReceiptOrderTypeTakeAway');
+
+
+  CustomerInformation customerForReciteGeneration = oneOrderData3
+      .oneCustomer;
+
+  List<OrderedItem> orderedItems = oneOrderData3.orderedItems;
+
+  final Ticket ticket = Ticket(PaperSize.mm58);
+
+  // print('paper.value: ${paper.value}');
+  // print('currentRestaurant: ${thisRestaurant3.name}');
+  print('oneOrderData3.restaurantName: ${oneOrderData3.restaurantName}');
+
+  print('oneOrderListdocument: $oneOrderData3');
+  print('orderedItems: $orderedItems');
+  print('customerForReciteGeneration.address: ${customerForReciteGeneration
+      .address}');
+  print(
+      'customerForReciteGeneration.flatOrHouseNumber: ${customerForReciteGeneration
+          .flatOrHouseNumber}');
+  print(
+      'customerForReciteGeneration.phoneNumber: ${customerForReciteGeneration
+          .phoneNumber}');
+  print(
+      'customerForReciteGeneration.etaTimeInMinutes: ${customerForReciteGeneration
+          .etaTimeInMinutes}');
+  print('restaurantNameImageBytes2 line # 11509: $restaurantNameBytesNotFuture3');
+//    print('totalCostDeliveryBytes2______: $totalCostDeliveryBytes3');
+  print('oneOrderListdocument.orderProductionTimeFromNow: ${oneOrderData3
+      .orderProductionTimeFromNow}');
+
+
+
+
+  //differentImages 1  ==>   faceBookLikedataBytesImage
+  final ByteData faceBookLikedata = await rootBundle.load('assets/icons8-facebook-like-64.png');
+  final Uint8List faceBookLikedataBytes = faceBookLikedata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image faceBookLikedataBytesImage
+  = ImageAliasAnotherSource.decodeImage(faceBookLikedataBytes);
+
+
+  //differentImages 2  ==> handsdataBytesImage
+  final ByteData handsdata = await rootBundle.load('assets/icons8-hand-64.png');
+  final Uint8List handsdataBytes = handsdata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image handsdataBytesImage
+  = ImageAliasAnotherSource.decodeImage(handsdataBytes);
+
+
+
+
+
+
+  //differentImages 3 =>  deliveryDataBytesImage
+  final ByteData deliveryData = await rootBundle.load('assets/orderBYicons/delivery.png');
+  final Uint8List deliveryDataBytes = deliveryData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image deliveryDataBytesImage
+  = ImageAliasAnotherSource.decodeImage(deliveryDataBytes);
+
+
+  //differentImages 4 => phonedataBytesImage
+  final ByteData phonedata = await rootBundle.load('assets/phone.png');
+  final Uint8List phonedataBytes = phonedata.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image phonedataBytesImage
+  = ImageAliasAnotherSource.decodeImage(phonedataBytes);
+
+
+  //differentImages 5  ==> takeAwayDataBytesImage
+  final ByteData takeAwayData = await rootBundle.load('assets/orderBYicons/takeaway.png');
+  final Uint8List takeAwayDataBytes = takeAwayData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image takeAwayDataBytesImage
+  = ImageAliasAnotherSource.decodeImage(takeAwayDataBytes);
+
+
+  //differentImages 6  ==>  dinningRoomDataBytesImage
+  final ByteData dinningRoomData = await rootBundle.load('assets/orderBYicons/diningroom.png');
+  final Uint8List dinningRoomDataBytes = dinningRoomData.buffer.asUint8List();
+
+  final ImageAliasAnotherSource.Image dinningRoomDataBytesImage
+  = ImageAliasAnotherSource.decodeImage(dinningRoomDataBytes);
 
 
 
@@ -1937,17 +4210,486 @@ class _UnPaidDetailsState extends State<UnpaidDetailsPage> {
 
 
 
+  //  printing begins::: //1.... starts...
+
+  //1... RESTAURANT NAME DONE...
+  final ImageAliasAnotherSource
+      .Image oneImageRestaurant = ImageAliasAnotherSource.decodeImage(
+      restaurantNameBytesNotFuture3);
+
+  //    final ImageAliasAnotherSource
+  //        .Image oneImageRestaurant = Image.memory(restaurantNameBytesNotFuture3);
+
+  ticket.image(oneImageRestaurant);
+
+  ticket.feed(1);
+  ticket.hr(ch:'=',len:null,linesAfter:1);
+
+  if(oneOrderData3.orderProductionTimeFromNow==-1){
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}'+'     '
+        +'${oneOrderData3.timeOfDay.toString()}',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold: true,
+          align: PosAlign.left,
+        )
+    );
+  }else {
+    ticket.text('${oneOrderData3.formattedOrderPlacementDatesTimeOnly}' +
+        '     '
+        + '${oneOrderData3.orderProductionTimeFromNow} min',
+        styles: PosStyles(
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+          bold: true,
+          align: PosAlign.left,
+        )
+    );
+  }
+
+  //    ticket.feed(2);
+
+
+  // 3 ... address: .... + flat
+
+  /*
+
+    ticket.text('address: ${((customerForReciteGeneration.address == null) ||
+        (customerForReciteGeneration.address.length == 0)) ?
+    '----' : customerForReciteGeneration.address.length > 21 ?
+    customerForReciteGeneration.address.substring(0, 18) + '...' :
+    customerForReciteGeneration.address}   ${customerForReciteGeneration.flatOrHouseNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        )
+    );
+
+    // 4 ... phone: phone
+    ticket.text('phone: ${((customerForReciteGeneration.phoneNumber == null) ||
+        (customerForReciteGeneration.phoneNumber.length == 0)) ?
+    '----' : customerForReciteGeneration.phoneNumber.length > 21 ?
+    customerForReciteGeneration.phoneNumber.substring(0, 18) + '...' :
+    customerForReciteGeneration.phoneNumber}',
+        styles: PosStyles(
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+          bold:true,
+          align: PosAlign.left,
+        ));
+
+
+    ticket.feed(1);
+
+    */
+  ticket.hr(ch: '.', len: null, linesAfter: 0);
+
+  // 5... processFoodForRecite
+
+
+  Set<String> categories ={};
+  orderedItems.forEach((oneFood) {
+
+
+    if((categories==null) || (categories.length==0) || (categories.contains(oneFood.category)==false) ) {
+      ticket.text('${oneFood.category.toString()}',
+          styles: PosStyles(
+            height: PosTextSize.size1,
+            width: PosTextSize.size1,
+            bold: true,
+            align: PosAlign.center,
+          )
+      );
+    }
+
+    categories.add(oneFood.category);
+
+    ticket.feed(1);
+
+    List<NewIngredient> extraIngredient   = oneFood.selectedIngredients;
+    List<SauceItem>     extraSauces       = oneFood.selectedSauces;
+    List<CheeseItem>    extraCheeseItems  = oneFood.selectedCheeses;
+    List<String> multiSelectStrings2 = oneFood.multiSelectString;
+//      print('extraIngredient: $extraIngredient');
+
+//      print('extraSauces: $extraSauces');
+//      print('extraCheeseItems: $extraCheeseItems');
+
+//      List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => e.isDefault != true).toList();
+
+    List<NewIngredient> onlyExtraIngredient   = extraIngredient.where((e) => ((e.isDefault != true)
+        ||(e.isDeleted == true)
+    )).toList();
+
+    List<SauceItem> onlyExtraSauces       = extraSauces.where((e) => ((e.isDefaultSelected != true)
+        ||(e.isDeleted == true))).toList();
+
+    List<CheeseItem>    onlyExtraCheeseItems  = extraCheeseItems.where((e) => ((e.isDefaultSelected != true)
+        ||(e.isDeleted == true))).toList();
+
+//      List<SauceItem> onlyExtraSauces       =
+//      extraSauces.where((e) => e.isDefaultSelected != true).toList();
+
+//      List<CheeseItem>    onlyExtraCheeseItems  =
+//      extraCheeseItems.where((e) => e.isDefaultSelected != true).toList();
+
+    print('onlyExtraIngredient: $onlyExtraIngredient');
+
+    print('onlyExtraSauces: $onlyExtraSauces');
+    print('onlyExtraCheeseItems: $onlyExtraCheeseItems');
 
 
 
 
 
+    // 5.... (name and quantity) + (size and price )
+    ticket.row([
 
 
+      PosColumn(text: '${sanitize(oneFood.name)}',
+          width: 5, styles: PosStyles(align: PosAlign.left,
+          ) ),
+      PosColumn(text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+
+      PosColumn(text: 'X${oneFood.quantity}',
+          width: 5,styles: PosStyles(
+
+            align: PosAlign.right,
+          )),
+
+
+    ]);
+
+    ticket.row([
+      PosColumn(text: '${oneFood.foodItemSize}',
+          width: 5,  styles: PosStyles(align: PosAlign.left) ),
+      PosColumn(text: '',
+        width: 2, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '${oneFood.unitPriceWithoutCheeseIngredientSauces.toStringAsFixed(2)}',
+          width: 5,styles: PosStyles(
+
+            align: PosAlign.right,
+          )),
+    ]);
+
+    // multiSelect..
+    if(multiSelectStrings2.length > 0)
+    {
+      multiSelectStrings2.forEach((oneMultiSelectString) {
+
+        ticket.row([
+          PosColumn(
+              text:'# $oneMultiSelectString',
+              width: 9,
+              styles: PosStyles(
+                align: PosAlign.left,
+              )),
+
+          PosColumn(
+              text:'',
+              width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+        ]);
+      });
+    }
+    // 5.2 --- extra ingredients...
+
+
+
+    if(onlyExtraIngredient.length>0) {
+      onlyExtraIngredient.forEach((oneIngredientForRecite) {
+
+        if(oneIngredientForRecite.isDeleted==false) {
+          ticket.row([
+
+
+            PosColumn(
+                text: '+${((oneIngredientForRecite.ingredientName == null) ||
+                    (oneIngredientForRecite.ingredientName.length == 0)) ?
+                '----' : oneIngredientForRecite.ingredientName.length > 18
+                    ?
+                oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                    :
+                oneIngredientForRecite.ingredientName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text: ' ${oneIngredientForRecite.price.toStringAsFixed(2)}',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        }
+        else{
+
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneIngredientForRecite.ingredientName == null) ||
+                    (oneIngredientForRecite.ingredientName.length == 0)) ?
+                '----' : oneIngredientForRecite.ingredientName.length > 18
+                    ?
+                oneIngredientForRecite.ingredientName.substring(0, 15) + '...'
+                    :
+                oneIngredientForRecite.ingredientName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+
+        }
+      });
+    }
+
+    // extra cheeseItems...
+    if(onlyExtraSauces.length>0) {
+      onlyExtraSauces.forEach((oneSauceItemForRecite) {
+
+        if(oneSauceItemForRecite.isDeleted==false) {
+          ticket.row([
+
+
+            PosColumn(
+                text: '+${((oneSauceItemForRecite.sauceItemName == null) ||
+                    (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                '----' : oneSauceItemForRecite.sauceItemName.length > 18 ?
+                oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...' :
+                oneSauceItemForRecite.sauceItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+            )),
+
+            PosColumn(
+                text: ' ${oneSauceItemForRecite.price.toStringAsFixed(2)}',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        }
+        else{
+
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneSauceItemForRecite.sauceItemName == null) ||
+                    (oneSauceItemForRecite.sauceItemName.length == 0)) ?
+                '----' : oneSauceItemForRecite.sauceItemName.length > 18
+                    ?
+                oneSauceItemForRecite.sauceItemName.substring(0, 15) + '...'
+                    :
+                oneSauceItemForRecite.sauceItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+
+        }
+        ;
+      });
+    }
+
+    // extra sauceItems...
+    if(onlyExtraCheeseItems.length>0) {
+      onlyExtraCheeseItems.forEach((oneCheeseItemForRecite) {
+
+        if(oneCheeseItemForRecite.isDeleted==false){
+          ticket.row([
+
+
+            PosColumn(text: '${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+            '----' : oneCheeseItemForRecite.cheeseItemName.length > 18 ?
+            oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...' :
+            oneCheeseItemForRecite.cheeseItemName}',
+                width: 9,styles: PosStyles(
+
+                  align: PosAlign.left,
+                )),
+
+            PosColumn(text: ' ${oneCheeseItemForRecite.price.toStringAsFixed(2)}',
+                width: 3,styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);}
+        else{
+          ticket.row([
+
+
+            PosColumn(
+                text: '- ${((oneCheeseItemForRecite.cheeseItemName == null) ||
+                    (oneCheeseItemForRecite.cheeseItemName.length == 0)) ?
+                '----' : oneCheeseItemForRecite.cheeseItemName.length > 18
+                    ?
+                oneCheeseItemForRecite.cheeseItemName.substring(0, 15) + '...'
+                    :
+                oneCheeseItemForRecite.cheeseItemName}',
+                width: 9, styles: PosStyles(
+
+              align: PosAlign.left,
+//                reverse: true,
+              underline: true,
+
+            )),
+
+            PosColumn(
+                text: '',
+                width: 3, styles: PosStyles(align: PosAlign.right)),
+
+
+          ]);
+        };
+      });
+    }
+
+
+    // needed. as per design. when one food Item is printed then an hr added.
+    ticket.feed(1);
+    ticket.hr(ch:'_',len:null,linesAfter:1);
+//      ticket.feed(1);
+  });
+
+
+
+
+  // Price 1 subtotal
+  ticket.row([
+    PosColumn(text: 'SUBTOTAL',
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+    PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+        width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
+  ]);
+
+  /*
+
+    ticket.row([
+
+
+      PosColumn(text: 'DELIVERY',
+        width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+      PosColumn(text: '',
+        width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+      PosColumn(text: '${00.toStringAsFixed(2)}',
+          width: 5,styles:PosStyles(align: PosAlign.right,codeTable: PosCodeTable.westEur)),
+
+    ]);
+    */
+
+//    ticket.hr();
+
+  ticket.hr(ch:'_',len:null,linesAfter:0);
+
+
+  // Price 3  Total
+  ticket.row([
+
+
+    PosColumn(text: 'TOTAL', styles:PosStyles(bold: true)  ,
+      width: 5, /*,styles: PosStyles(align: PosAlign.left) */),
+
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+
+    PosColumn(text: '${oneOrderData3.totalPrice.toStringAsFixed(2)}',
+      styles:PosStyles(bold: true,align: PosAlign.right,codeTable: PosCodeTable.westEur),
+      width: 5,),
+
+  ]);
+
+  ticket.feed(1);
+
+
+  oneOrderData3.paidStatus.toLowerCase() == 'paid'?
+  ticket.image(faceBookLikedataBytesImage,align: PosAlign.center):
+  ticket.image(handsdataBytesImage,align: PosAlign.center);
+
+
+
+
+  //6 Text "paid || Unpaid && Space "OrderBY"
+  //    void image(Image imgSrc, {PosAlign align = PosAlign.center}) {
+  ticket.row([
+
+
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+    PosColumn(text: '${oneOrderData3.paidStatus.toLowerCase() == 'paid' ?
+    'paid' : 'unpaid'}',
+      width: 4, /*,styles: PosStyles(align: PosAlign.left) */),
+
+    PosColumn(text: '${(oneOrderData3.orderBy.toLowerCase() == 'delivery')
+        ? 'Delivery'
+        :
+    (oneOrderData3.orderBy.toLowerCase() == 'phone') ?
+    'Phone' : (oneOrderData3.orderBy.toLowerCase() ==
+        'takeaway') ? 'TakeAway' : 'DinningRoom'}',
+      width: 4,),
+    PosColumn(text: '',
+      width: 2, /*, styles: PosStyles(align: PosAlign.center) */),
+
+  ]);
+
+
+
+  // 7 image::
+  // orderBy: 'Delivery: TakeAway: DinningRoom: phone
+  oneOrderData3.orderBy.toLowerCase() == 'delivery'?
+  ticket.image(deliveryDataBytesImage,align: PosAlign.center):
+  oneOrderData3.orderBy.toLowerCase() == 'phone'?
+  ticket.image(phonedataBytesImage,align: PosAlign.center):
+  oneOrderData3.orderBy.toLowerCase() == 'takeaway' ?
+  ticket.image(takeAwayDataBytesImage,align: PosAlign.center):
+  ticket.image(dinningRoomDataBytesImage,align: PosAlign.center);
+
+//    ticket.hr();
+  // needed. as per design.
+
+  ticket.feed(1); // for holding or touching the recite by finger... space..
+
+  ticket.cut();
+  return ticket;
 
 
 
 }
+
+// # number 4: demoReceipt Order Type Dinning ends here...
+
+
 
 
 //  FoodDetailImage

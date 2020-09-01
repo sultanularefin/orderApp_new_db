@@ -15,7 +15,7 @@ import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 
 import 'package:flutter/services.dart';
@@ -25,14 +25,14 @@ import 'package:flutter/services.dart';
 // this pkg i am using for searching device's only and for testing now on august 29....
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart' as primaryBlueToothPrinter;
-
+import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 
 
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:logger/logger.dart';
 //import 'package:wifi/wifi.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
-import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
+
 
 
 //printing blue tooth or wifi in same local area network.
@@ -577,9 +577,10 @@ class ShoppingCartBloc implements Bloc {
 
 
 
+    String restaurantName = _thisRestaurant.name;
 
 
-    String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0);
+    String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0,restaurantName);
 
 
     print('documentID: $documentID');
@@ -722,7 +723,13 @@ class ShoppingCartBloc implements Bloc {
 
 
 
-    String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0);
+
+    String restaurantName = _thisRestaurant.name;
+
+
+    String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0,restaurantName);
+
+    // String documentID = await _client.insertOrder(tempOrder,orderBy,paidType0);
 
 
     print('documentID: $documentID');

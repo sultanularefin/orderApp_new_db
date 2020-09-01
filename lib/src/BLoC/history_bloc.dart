@@ -253,6 +253,7 @@ class HistoryBloc implements Bloc {
         String                    paidStatus =  doc['paidStatus'];
         String                    paidType =    doc['paidType'];
         double                    totalPrice =  doc['price'];
+        String                    restaurantName = doc['restaurantName'];
 
         String                    contact =     doc['contact'];
         String                    driverName =  doc['driver'];
@@ -284,6 +285,7 @@ class HistoryBloc implements Bloc {
 
 
 
+        print('restaurantName: $restaurantName');
         print('orderedItems: $orderedItems');
         print('orderBy: $orderBy');
         print('paidStatus: $paidStatus');
@@ -439,10 +441,12 @@ class HistoryBloc implements Bloc {
           orderProductionTimeFromNow:orderProductionTimeFromNow,
           timeOfDay: timeOfDay2,
 
+
           deliveryCost: deliveryCost2,
           tax:          tax,
           priceWithDelivery: priceWithDelivery2,
           documentId:documentID,
+          restaurantName:restaurantName,
         );
 
         tempAllOrderedItems.add(oneOrderForReceiptProduction);

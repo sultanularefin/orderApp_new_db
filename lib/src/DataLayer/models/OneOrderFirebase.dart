@@ -29,8 +29,10 @@ class OneOrderFirebase {
   // String                    orderProductionTimeOfDay;
   String                    timeOfDay;
   int                       tempPaymentIndex; // for unpaid Order....
+  bool                      updateSuccess;
   // bool                      tempPayButtonPressed;
   String                    tempPaidType;
+  String                    restaurantName;
 
   OneOrderFirebase(
       {
@@ -57,7 +59,9 @@ class OneOrderFirebase {
         this.orderProductionTimeFromNow, //  int minutes3 =minutes2.ceil(); // no need to have double
         this.timeOfDay,
         this.tempPaymentIndex,
+        this.updateSuccess:false,
         // this.tempPayButtonPressed:false,
+        this.restaurantName,
       }
       );
 

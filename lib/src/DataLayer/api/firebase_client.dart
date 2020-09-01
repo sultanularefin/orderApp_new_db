@@ -610,7 +610,7 @@ class FirebaseClient {
   }
 
 
-  Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType)async {
+  Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType, String restaurantName)async {
 
 
     List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
@@ -647,6 +647,7 @@ class FirebaseClient {
         'phone': currentOrderToFirebase.orderingCustomer.phoneNumber,
 
       },
+      'restaurantName':restaurantName,
       'contact': currentOrderToFirebase.orderingCustomer.phoneNumber,
       'driver': 'mhmd',
       'end': FieldValue.serverTimestamp(),

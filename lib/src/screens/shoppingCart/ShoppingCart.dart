@@ -1,11 +1,12 @@
 import 'dart:typed_data';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 //import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' hide Image;
+import 'package:image/image.dart' as ImageAliasAnotherSource;
 //import 'package:image/image.dart';
 import 'package:flutter/services.dart'; // InputFormatters.
 import 'package:flutter/widgets.dart';
@@ -13,17 +14,18 @@ import 'package:flutter/widgets.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
-import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
-import 'package:foodgallery/src/welcomePage.dart';
-import 'package:image/image.dart' as ImageAliasAnotherSource;
+
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodgallery/src/DataLayer/models/OneOrderFirebase.dart';
 import 'package:foodgallery/src/DataLayer/models/OrderedItem.dart';
 import 'package:foodgallery/src/DataLayer/models/Restaurant.dart';
 //import 'package:ping_discover_network/ping_discover_network.dart';
-import 'package:platform_action_sheet/platform_action_sheet.dart';
-import 'package:dotted_border/dotted_border.dart';
+
+
+
+
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 //import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
@@ -32,14 +34,16 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 //import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/rendering.dart';
 
 //import 'package:esc_pos_printer/esc_pos_printer.dart';
+
+import 'package:flutter/rendering.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:oktoast/oktoast.dart';
 import 'dart:async';
+
 
 //  TODO: REdirect to food gallery page after pay button is pressed.
 
@@ -91,7 +95,7 @@ import 'package:foodgallery/src/DataLayer/models/PaymentTypeSingleSelect.dart';
 
 import './widgets/ShoppingCartPagePainters.dart';
 
-final Firestore firestore = Firestore();
+// final Firestore firestore = Firestore();
 
 class ShoppingCart extends StatefulWidget {
 //  AdminFirebase({this.firestore});

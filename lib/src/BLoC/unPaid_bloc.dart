@@ -234,6 +234,7 @@ class UnPaidBloc implements Bloc {
         String                    paidStatus =  doc['paidStatus'];
         String                    paidType =    doc['paidType'];
         double                    totalPrice =  doc['price'];
+        String restaurantName                   =doc['restaurantName'];
 
         String                    contact =     doc['contact'];
         String                    driverName =  doc['driver'];
@@ -427,6 +428,7 @@ class UnPaidBloc implements Bloc {
           tax:          tax,
           priceWithDelivery: priceWithDelivery2,
           documentId:documentID,
+          restaurantName: restaurantName,
         );
 
         tempAllOrderedItems.add(oneOrderForReceiptProduction);
