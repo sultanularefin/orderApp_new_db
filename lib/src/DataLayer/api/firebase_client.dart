@@ -190,6 +190,29 @@ class FirebaseClient {
   */
 
 
+  Future<QuerySnapshot /*DocumentSnapshot */> getLastSequenceNumberFromFireBaseFoodItems() async{
+
+
+    var snapshot = await Firestore.instance.collection("restaurants")
+        .document('kebab_bank')
+        .collection('foodItems')..orderBy('sequenceNo',descending: true).limit(1);
+//    where('sequenceNo', isEqualTo: 'Unpaid')
+
+
+    /*
+    var snapshot= Firestore.instance
+        .collection("restaurants").document('kebab_bank').collection('orderList')
+        .orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Unpaid')
+        .getDocuments();
+    */
+
+//    orderBy('_timeStampUTC', descending: true)
+    return snapshot;
+
+//    orderBy('sequenceNo', descending: true).limit(1);
+//
+//    return snapshot;
+  }
 
   Future<QuerySnapshot> fetchAllExtraIngredients()async{
 
@@ -757,46 +780,24 @@ class FirebaseClient {
 
 
   Future<String> insertFoodItems(/*Order currentOrderToFirebase, String orderBy, String paidType, String restaurantName */
-      String name,int sequenceNo,
+//      String name,int sequenceNo,
+
+  FoodItemWithDocID x, int sequenceNo
       )async {
 
-
     Timestamp date ;
-
-    /*
-    List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
-
-    var map1 = Map.fromIterable(tempSelectedFood, key: (e)
-    => e.foodItemName, value: (e)=>e.foodItemName,
-
-    );
-
-
-
-
-
-
     String orderDocId='';
 
-    */
-
-
-    String orderDocId='';
-
-
-    DocumentReference document = await Firestore.instance.collection(
-        "restaurants").
+    DocumentReference document = await Firestore.instance.collection("restaurants").
     document('kebab_bank').
-//    collection('orderList').add(switch (<String, dynamic>{
-    collection('foodItems').add(<String, dynamic>{
 
-      'available': true,
+    collection('foodItems').add(<String, dynamic>{
       'category':'someC',
       'categoryShort':'someC',
       'default_juust':'dj',
       'default_kastike': 'dk',
       'ingredients': foodItemIngredientsInsertDummy(null),
-      'name':name+sequenceNo.toString(),
+      'name':x.itemName+sequenceNo.toString(),
       'sequence_no':sequenceNo,
 
       'size': {
@@ -807,6 +808,11 @@ class FirebaseClient {
          'pannu':8,
          'perhe':5,
       },
+
+      'isAvailable':x.isAvailable,
+      'isHot':x.isHot,
+      'uploadedBy':_firebaseUser,
+      'uploadDate':FieldValue.serverTimestamp(),
 
 
 

@@ -95,34 +95,28 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
   final List<NewCategoryItem> categoryItems = <NewCategoryItem>[
-    CategoryItem(0,'pizza', 'pizza', Icon(Icons.android,color:  const Color(0xFF167F67))),
-    CategoryItem(1,'kebab', 'kebab' Icon(Icons.flag, color:  const Color(0xFF167F67))),
-    CategoryItem(2,'jauheliha_kebab_vartaat',  'jauheliha kebab & vartaat', Icon(Icons.format_indent_decrease,color:  const Color(0xFF167F67),)),
-    CategoryItem(3,'salaatti_kasvis', 'salaatti & kasvis',  Icon(Icons.mobile_screen_share,color:  const Color(0xFF167F67),)),
-    CategoryItem(4,'hampurilainen', 'hampurilainen', Icon(Icons.flag,color:  const Color(0xFF167F67),)),
-    CategoryItem(5,'lasten_menu', 'lasten menu',  Icon(Icons.format_indent_decrease,color:  const Color(0xFF167F67),)),
-    CategoryItem(6,'juomat', 'juomat',    Icon(Icons.mobile_screen_share,color:  const Color(0xFF167F67),)),
+    NewCategoryItem('pizza',                     0,               'pizza',                    'pizza',                    ),
+    NewCategoryItem('kebab',                     1,               'kebab'                     'kebab'                     ),
+    NewCategoryItem('jauheliha_kebab_vartaat',   2,               'jauheliha kebab & vartaat','jauheliha kebab & vartaat',),
+    NewCategoryItem('salaatti_kasvis',           3,               'salaatti & kasvis',        'salaatti & kasvis',        ),
+    NewCategoryItem('hampurilainen',             4,               'hampurilainen',            'hampurilainen',            ),
+    NewCategoryItem('lasten_menu',               5,               'lasten menu',              'lasten menu',              ),
+    NewCategoryItem('juomat',                    6,               'juomat',                   'juomat',                   ),
 
   ];
 
 
 
-  void set_CategoryValue(int categoryValue){
-
+  void setCategoryValue(int categoryValue){
 
     final blocAdminFB = BlocProvider.of<AdminFirebaseBloc>(context);
 
-
-    print('categoryItems[_currentCategory].name: ${categoryItems[categoryValue].name}');
-
+    print('categoryItems[_currentCategory].name: ${categoryItems[categoryValue].categoryName}');
+    print('categoryItems[_currentCategory].fireStoreFieldName: ${categoryItems[categoryValue].fireStoreFieldName}');
 
     // final blocAdminFB = BlocProvider.of<AdminFirebaseBloc>(context);
-    setCategoryValue(ategoryItems[categoryValue].name,ategoryItems[categoryValue].);
-
-    _itemData.itemCategoryName  = categoryItems[categoryValue].name;
-
-    setState(() => _currentCategory = categoryValue);
-
+    blocAdminFB.setCategoryValue(categoryItems[categoryValue].categoryName,
+        categoryItems[categoryValue].fireStoreFieldName);
 
   }
 

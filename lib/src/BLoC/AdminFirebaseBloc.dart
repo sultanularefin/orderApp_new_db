@@ -53,7 +53,7 @@ class AdminFirebaseBloc implements Bloc {
 
   String itemName = '';
   String categoryName = 'PIZZA'.toLowerCase();
-
+  String shortCategoryName;
 
 
   String ingredients = '';
@@ -64,6 +64,12 @@ class AdminFirebaseBloc implements Bloc {
   bool isAvailable = true;
 //  String StoragePNGURL ='';
   int sequenceNo= 0;
+
+  FoodItemWithDocID _thisFoodItem;
+  FoodItemWithDocID get getCurrentFoodItem => _thisFoodItem;
+  final _foodItemController = StreamController <FoodItemWithDocID>();
+  Stream<FoodItemWithDocID> get thisFoodItemStream => _foodItemController.stream;
+
 
 
   // CollectionReference get firestoreFoodItems => firestore.collection('foodItems');
@@ -97,13 +103,24 @@ class AdminFirebaseBloc implements Bloc {
 
 
 
-  set itemCategoryName (String name){
+
+
+  void setCategoryValue (String name,String shortName){
 
     print('setting category name to: $name');
-    categoryName = name.toLowerCase();
+    String categoryName = name.toLowerCase();
+
+    String shortCategoryName = shortName.toLowerCase();
+
+    _thisFoodItem.categoryName=name;
+    _thisFoodItem.shorCategoryName= shortCategoryName;
+
+    _foodItemController.sink.add(_thisFoodItem);
 
 
-    String shortCategoryName =
+
+
+//    String shortCategoryName =
   }
 
   set setUser(var param){
@@ -215,6 +232,77 @@ class AdminFirebaseBloc implements Bloc {
 
   }
 
+  Future<int> getLastSequenceNumberFromFireBaseFoodItems() async {
+
+
+
+      print('at get Last SequenceNumberFromFireBaseFoodItems()');
+
+
+
+      if (_isDisposedExtraIngredients == false) {
+
+        var snapshot = await _client.fetchAllExtraIngredients();
+        List docList = snapshot.documents;
+
+        List <NewIngredient> ingItems = new List<NewIngredient>();
+        ingItems = snapshot.documents.map((documentSnapshot) =>
+            NewIngredient.ingredientConvertExtra
+              (documentSnapshot.data, documentSnapshot.documentID)
+        ).toList();
+
+
+        List<String> documents = snapshot.documents.map((documentSnapshot) =>
+        documentSnapshot.documentID).toList();
+
+        print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+
+
+
+        ingItems.forEach((doc) {
+          print('one Extra . . . . . . . name: ${doc.ingredientName} documentID: ${doc.documentId}');
+//        String imageURL;
+//        double price;
+//        String documentId;
+//        doc['name'],
+//        price = data['price'].toDouble(),
+//        documentId = docID,
+
+        }
+        );
+
+
+
+        _allExtraIngredients = ingItems;
+//      _allIngItemsFGBloc = ingItems;
+
+        _allExtraIngredientItemsController.sink.add(_allExtraIngredients);
+
+//      _allIngredientListController.sink.add(_allIngItemsFGBloc);
+
+
+//    return ingItems;
+
+
+
+
+
+
+
+        _isDisposedExtraIngredients=true;
+
+
+
+
+      }
+      else {
+//      _isDisposedExtraIngredients == Element.true
+        return;
+      }
+    }
+
+
+  }
 
 
   Future<int> save() async {
@@ -283,12 +371,7 @@ class AdminFirebaseBloc implements Bloc {
     //    await firestoreFoodItems.add(<String, dynamic>{
 
 
-await insertFoodItems(itemName,sequenceNo,categoryName)
-
-    Future<String> insertFoodItems(/*Order currentOrderToFirebase,
-     String orderBy, String paidType, String restaurantName */
-        String name,int sequenceNo,
-        )async {
+    String documentID = await _client.insertFoodItems(_thisFoodItem,sequenceNo);
 
     DocumentReference document = await firestoreFoodItems.add(<String, dynamic>{
       'priceinEuro': priceInEuro,
@@ -297,10 +380,7 @@ await insertFoodItems(itemName,sequenceNo,categoryName)
       'categoryName': categoryName,
       'ingredients':ingredients,
       'imageURL':imageURL,
-      'isAvailable':isAvailable,
-      'itemId': itemId,
-      'uploadedBy':_firebaseUser,
-      'uploadDate':FieldValue.serverTimestamp(),
+
 
     });
     print('added document: ${document.documentID}');
@@ -313,131 +393,15 @@ await insertFoodItems(itemName,sequenceNo,categoryName)
 
 
 
-
-
   List<FoodItemWithDocID> _allFoodsList=[];
 
   List<NewCategoryItem> _allCategoryList=[];
 
 
 
-  List<NewIngredient> _allIngItemsFGBloc =[];
-  List<NewIngredient> get getAllIngredientsPublicFGB2 => _allIngItemsFGBloc;
-  Stream<List<NewIngredient>> get ingredientItemsStream => _allIngredientListController.stream;
-  final _allIngredientListController = StreamController <List<NewIngredient>> /*.broadcast*/();
-
-
-
-
-  List<NewIngredient> _allExtraIngredients =[];
-
-  List<NewIngredient> get getAllExtraIngredients => _allExtraIngredients;
-  Stream<List<NewIngredient>> get getExtraIngredientItemsStream => _allExtraIngredientItemsController.stream;
-  final _allExtraIngredientItemsController = StreamController <List<NewIngredient>> /*.broadcast*/();
-
-
-
-
-
-
-  // cheese items
-  List<CheeseItem> _allCheeseItemsFoodGalleryBloc =[];
-  List<CheeseItem> get getAllCheeseItemsFoodGallery => _allCheeseItemsFoodGalleryBloc;
-  final _cheeseItemsControllerFoodGallery      =  StreamController <List<CheeseItem>>();
-  Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsControllerFoodGallery.stream;
-
-  // sauce items
-  List<SauceItem> _allSauceItemsFoodGalleryBloc =[];
-  List<SauceItem> get getAllSauceItemsFoodGallery => _allSauceItemsFoodGalleryBloc;
-  final _sauceItemsControllerFoodGallery      =  StreamController <List<SauceItem>>();
-  Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsControllerFoodGallery.stream;
-
-
-
-
-
-
-
 //    List<NewCategoryItem>_allCategoryList=[];
   final _client = FirebaseClient();
 
-  //  getter for the above may be
-
-
-  List<FoodItemWithDocID> get allFoodItems => _allFoodsList;
-  List<NewCategoryItem> get allCategories => _allCategoryList;
-
-
-
-  //  The => expr syntax is a shorthand for { return expr; }.
-  //  The => notation is sometimes referred to as arrow syntax.
-
-//    BLoC/restaurant_bloc.dart:12:  final _controller = StreamController<List<Restaurant>>();
-  // 1
-  final _foodItemController = StreamController <List<FoodItemWithDocID>>();
-  final _categoriesController = StreamController <List<NewCategoryItem>>();
-
-
-
-//  final _controller = StreamController<List<Restaurant>>.broadcast();
-
-  // 2
-
-
-
-
-  Stream<List<FoodItemWithDocID>> get foodItemsStream => _foodItemController.stream;
-
-  Stream<List<NewCategoryItem>> get categoryItemsStream => _categoriesController.stream;
-
-
-
-
-
-
-// this code bloc cut paste from foodGallery Bloc:
-
-  /*
-  Future<void> getAllIngredientsConstructor() async {
-    print('at getAllIngredientsConstructor()');
-
-    if (_isDisposedIngredients == false) {
-      var snapshot = await _client.fetchAllIngredients();
-      List docList = snapshot.documents;
-
-
-      List <NewIngredient> ingItems = new List<NewIngredient>();
-      ingItems = snapshot.documents.map((documentSnapshot) =>
-          NewIngredient.ingredientConvert
-            (documentSnapshot.data, documentSnapshot.documentID)
-
-      ).toList();
-
-
-      List<String> documents = snapshot.documents.map((documentSnapshot) =>
-      documentSnapshot.documentID
-      ).toList();
-
-      // print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
-
-
-      _allIngItemsFGBloc = ingItems;
-
-      _allIngredientListController.sink.add(_allIngItemsFGBloc);
-
-
-//    return ingItems;
-
-      _isDisposedIngredients=true;
-
-    }
-    else {
-      return;
-    }
-  }
-
-
-  */
 
 
   // HELPER METHOD FOR TEST TO BE MODIFIED....  AUGUST 14 2020.....
@@ -460,15 +424,7 @@ await insertFoodItems(itemName,sequenceNo,categoryName)
     List<String> stringList = List<String>.from(x.extraIngredientOf);
 
 
-
     print('x.ingredientName ${x.ingredientName}  x.subgroup.: ${x.subgroup}');
-//    print('---------------');
-//    stringList.forEach((oneGroup) {
-//      print('oneGroup: $oneGroup');
-//    });
-//
-//
-//    print('---------------');
 
     if(stringList.contains('kastike'.toLowerCase().trim())){
 
@@ -476,27 +432,6 @@ await insertFoodItems(itemName,sequenceNo,categoryName)
       print('x.ingredientName: ${x.ingredientName}');
     };
 
-//    print('ingredientsString: $ingredientsString');
-//    print('.ingredientName.toLowerCase().trim(): ${x.ingredientName.toLowerCase().trim()}');
-
-//    List<String> foodIngredients =ingredientsString;
-
-//    logger.w('onlyIngredientsNames2',onlyIngredientsNames2);
-
-    /*
-
-    String elementExists = allIngredients.firstWhere(
-            (oneItem) => oneItem.toLowerCase() == inputString.toLowerCase(),
-        orElse: () => '');
-
-    print('elementExists: $elementExists');
-
-    return elementExists;
-
-    */
-
-
-//    categories[3]= 'lasten_menu';
 
 
     String elementExists = stringList.firstWhere(
@@ -510,9 +445,6 @@ await insertFoodItems(itemName,sequenceNo,categoryName)
       return true;
 
     }
-
-//    print('elementExists: Line # 612:  $elementExists');
-
     return false;
   }
 
