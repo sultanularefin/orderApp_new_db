@@ -760,6 +760,9 @@ class FirebaseClient {
       String name,int sequenceNo,
       )async {
 
+
+    Timestamp date ;
+
     /*
     List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
 
@@ -803,7 +806,6 @@ class FirebaseClient {
          'medium':2.5,
          'pannu':8,
          'perhe':5,
-
       },
 
 

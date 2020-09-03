@@ -3,29 +3,29 @@ import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
+// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+import 'dart:async';
+import 'dart:math';
+import 'package:logger/logger.dart';
+import 'dart:ui';
+// import 'package:firebase_core/firebase_core.dart';
+
+import 'package:firebase_storage/firebase_storage.dart';
+
 
 //MODELS
-//import 'package:foodgallery/src/DataLayer/itemData.dart';
-//    import 'package:foodgallery/src/DataLayer/FoodItem.dart';
+
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
-//import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
-//import 'package:zomatoblock/DataLayer/location.dart';
 
-import 'package:logger/logger.dart';
+
+
 
 
 import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 
-
-import 'dart:async';
-
-
-//Firestore should be in FirebaseClient file but for testing putted here:
-
-// import 'package:cloud_firestore/cloud_firestore.dart';
-//class LocationBloc implements Bloc {
 class AdminFirebaseBloc implements Bloc {
 
   var logger = Logger(
@@ -43,6 +43,276 @@ class AdminFirebaseBloc implements Bloc {
   bool _isDisposedCategories = false;
 
   bool _isDisposedExtraIngredients = false;
+
+
+  File _image2;
+  String _firebaseUser ;
+  //    final uid = user.uid
+
+
+
+  String itemName = '';
+  String categoryName = 'PIZZA'.toLowerCase();
+
+
+
+  String ingredients = '';
+  bool isHot=true;
+  String priceInEuro = '';
+
+  String imageURL = '';
+  bool isAvailable = true;
+//  String StoragePNGURL ='';
+  int sequenceNo= 0;
+
+
+  // CollectionReference get firestoreFoodItems => firestore.collection('foodItems');
+
+
+  final FirebaseStorage storage = FirebaseStorage(storageBucket: 'gs://fluttercrudarefin.appspot.com');
+
+
+  // unseen fields:
+  String itemId;
+  //  itemId
+
+  String  uploadedBy = '';
+
+
+  //  String lastName = '';
+
+  //  Map<String, bool> passions = {
+  //    PassionCooking: false,
+  //    PassionHiking: false,
+  //    PassionTraveling: false
+  //  };
+
+
+  bool newsletter = false;
+
+  set setImage(var param){
+    _image2=param;
+
+  }
+
+
+
+  set itemCategoryName (String name){
+
+    print('setting category name to: $name');
+    categoryName = name.toLowerCase();
+
+
+    String shortCategoryName =
+  }
+
+  set setUser(var param){
+    _firebaseUser = param;
+
+  }
+
+
+
+  Future<String> generateItemId(int length)  async {
+    String _result = "";
+    int i = 0;
+    String _allowedChars ='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789}';
+    while (i < length.round()) {
+      //Get random int
+      int randomInt = Random.secure().nextInt(_allowedChars.length);
+      //      print('randomInt: $randomInt');
+      //Get random char and append it to the password
+
+      //      print('_allowedChars[randomInt]: ${_allowedChars[randomInt]}');
+
+
+      _result += _allowedChars[randomInt];
+
+      //      print('_result: $_result');
+
+      i++;
+    }
+
+    return _result;
+  }
+
+
+
+  String titleCase(var text) {
+    // print("text: $text");
+    if (text is num) {
+      return text.toString();
+    } else if (text == null) {
+      return '';
+    } else if (text.length <= 1) {
+      return text.toUpperCase();
+    } else {
+      return text
+          .split(' ')
+          .map((word) => word[0].toUpperCase() + word.substring(1))
+          .join(' ');
+
+
+    }
+  }
+
+
+
+
+  Future<String> _uploadFile() async {
+
+    print('at _uploadFile: ');
+
+//    print('foodItemsStorageReference: $foodItemsStorageReference');
+
+
+//    print('categoryName: $categoryName); //to upper case
+
+
+
+    print('itemId: $itemId');
+    StorageReference storageReference_1 = storage.ref().child('foodItems').
+    child(categoryName).child(
+        'itemName'+itemId+'.png');
+
+
+
+//    print('storageReference: $storageReference');
+//    final StorageReference storageReference_1 = storageReference.child('ss.png');
+
+
+    print('_image2: $_image2');
+
+    StorageUploadTask uploadTask = storageReference_1.putFile(_image2,
+      StorageMetadata(
+
+          contentType: 'image/jpg',
+          cacheControl: 'no-store', // disable caching
+          customMetadata: {
+            'itemName': itemName,
+          }
+
+      ),);
+
+    if(uploadTask.isCanceled == true){
+      return "error";
+    }
+
+    await uploadTask.onComplete;
+
+
+    String urlString = await storageReference_1.getDownloadURL().then((onValue){
+      print('onValue: $onValue');
+//      print('t: $t');
+      print('File Uploaded');
+      return onValue;
+    });
+
+    print('am i printed :   ????????????????????');
+
+    return urlString;
+
+
+  }
+
+
+
+  Future<int> save() async {
+    //  save() {
+
+    itemId = await generateItemId(6);
+    imageURL =  await _uploadFile();
+
+    var uri = Uri.parse(imageURL);
+    // print(uri.isScheme("HTTP"));  // Prints true.
+
+    if(uri.isScheme("HTTP")||(uri.isScheme("HTTPS"))){
+      print('on of them is true');
+
+    }
+    else{
+      print ('storage server error: ');
+      print("try VPN ___________________________________________");
+
+      logger.v("Verbose log");
+
+      logger.d("Debug log");
+
+      logger.i("Info log");
+
+      logger.w("Warning log");
+
+      logger.e("Error log");
+      return 0;
+    }
+
+//    bool _validURL = Uri.parse(_adVertData.webLink).isAbsolute;
+
+//    if(imageURL == null){
+//      print ('storage server error: ');
+//      return 0;
+//    }
+
+    print('imageURL: $imageURL');
+
+
+    print('itemId: $itemId');
+    print('itemName: $itemName');
+
+    print('ingredients: $ingredients');
+    print('Euro Price: $priceInEuro');
+
+
+    print('isHot: $isHot');
+    print('isAvailable: $isAvailable');
+
+    print('_image2: $_image2');
+    print('_categoryName: $categoryName');
+
+    //    print('itemCategory: $itemCategory');
+    //    _addMessage()
+    print('saving user using a web service');
+
+    itemName = titleCase(itemName);
+    ingredients = titleCase(ingredients);
+
+
+    //    Image Storage code TODO
+
+
+    //    await firestoreFoodItems.add(<String, dynamic>{
+
+
+await insertFoodItems(itemName,sequenceNo,categoryName)
+
+    Future<String> insertFoodItems(/*Order currentOrderToFirebase,
+     String orderBy, String paidType, String restaurantName */
+        String name,int sequenceNo,
+        )async {
+
+    DocumentReference document = await firestoreFoodItems.add(<String, dynamic>{
+      'priceinEuro': priceInEuro,
+      'isHot':isHot,
+      'itemName':itemName,
+      'categoryName': categoryName,
+      'ingredients':ingredients,
+      'imageURL':imageURL,
+      'isAvailable':isAvailable,
+      'itemId': itemId,
+      'uploadedBy':_firebaseUser,
+      'uploadDate':FieldValue.serverTimestamp(),
+
+    });
+    print('added document: ${document.documentID}');
+    //    }
+
+    return(1);
+
+  }
+
+
+
+
 
 
   List<FoodItemWithDocID> _allFoodsList=[];
@@ -659,9 +929,11 @@ class AdminFirebaseBloc implements Bloc {
 
 
   // CONSTRUCTOR BIGINS HERE..
-  FoodGalleryBloc() {
+  // AdminFirebaseBloc
+  //   AdminFirebaseBloc
+    AdminFirebaseBloc() {
 
-    print('at FoodGalleryBloc()');
+    print('at AdminFirebaseBloc  ......()');
 
 
 

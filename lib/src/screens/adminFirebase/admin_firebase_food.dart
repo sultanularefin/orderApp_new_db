@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +18,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // model, dummy data file:
 
-import '../../models/itemData.dart';
+import '../../BLoC/bloc_provider.dart';
+import './../../BLoC/AdminFirebaseBloc.dart';
 
 
 //import 'package:fluttercrud/src/shared/category_Constants.dart' as CategoryItems;
@@ -26,13 +28,17 @@ import '../../models/itemData.dart';
 final Firestore firestore = Firestore();
 
 
+/*
 class CategoryItem {
   CategoryItem(this.index,this.name,this.icon);
   final int index;
   final String name;
+  final String shortName;
   final Icon icon;
 
 }
+
+*/
 
 //class Item {
 //  const Item(this.name,this.icon);
@@ -71,6 +77,13 @@ class _AddDataState extends State<AdminFirebaseFood> {
   bool _loadingState = false;
 
 
+
+  /*
+    String categoryName;
+  int squenceNo;
+  String documentID;
+  String fireStoreFieldName;*/
+
   // pizza
   // kebab
   // jauheliha_kebab_vartaat
@@ -79,14 +92,16 @@ class _AddDataState extends State<AdminFirebaseFood> {
   // juomat
   // hampurilainen
 
-  final List<CategoryItem> categoryItems = <CategoryItem>[
-    CategoryItem(0,'pizza', Icon(Icons.android,color:  const Color(0xFF167F67))),
-    CategoryItem(1,'kebab', Icon(Icons.flag, color:  const Color(0xFF167F67))),
-    CategoryItem(2,'jauheliha_kebab_vartaat',  Icon(Icons.format_indent_decrease,color:  const Color(0xFF167F67),)),
-    CategoryItem(3,'salaatti_kasvis',  Icon(Icons.mobile_screen_share,color:  const Color(0xFF167F67),)),
-    CategoryItem(4,'hampurilainen',Icon(Icons.flag,color:  const Color(0xFF167F67),)),
-    CategoryItem(5,'lasten_menu',  Icon(Icons.format_indent_decrease,color:  const Color(0xFF167F67),)),
-    CategoryItem(6,'juomat',   Icon(Icons.mobile_screen_share,color:  const Color(0xFF167F67),)),
+
+
+  final List<NewCategoryItem> categoryItems = <NewCategoryItem>[
+    CategoryItem(0,'pizza', 'pizza', Icon(Icons.android,color:  const Color(0xFF167F67))),
+    CategoryItem(1,'kebab', 'kebab' Icon(Icons.flag, color:  const Color(0xFF167F67))),
+    CategoryItem(2,'jauheliha_kebab_vartaat',  'jauheliha kebab & vartaat', Icon(Icons.format_indent_decrease,color:  const Color(0xFF167F67),)),
+    CategoryItem(3,'salaatti_kasvis', 'salaatti & kasvis',  Icon(Icons.mobile_screen_share,color:  const Color(0xFF167F67),)),
+    CategoryItem(4,'hampurilainen', 'hampurilainen', Icon(Icons.flag,color:  const Color(0xFF167F67),)),
+    CategoryItem(5,'lasten_menu', 'lasten menu',  Icon(Icons.format_indent_decrease,color:  const Color(0xFF167F67),)),
+    CategoryItem(6,'juomat', 'juomat',    Icon(Icons.mobile_screen_share,color:  const Color(0xFF167F67),)),
 
   ];
 
@@ -94,7 +109,15 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
   void set_CategoryValue(int categoryValue){
 
+
+    final blocAdminFB = BlocProvider.of<AdminFirebaseBloc>(context);
+
+
     print('categoryItems[_currentCategory].name: ${categoryItems[categoryValue].name}');
+
+
+    // final blocAdminFB = BlocProvider.of<AdminFirebaseBloc>(context);
+    setCategoryValue(ategoryItems[categoryValue].name,ategoryItems[categoryValue].);
 
     _itemData.itemCategoryName  = categoryItems[categoryValue].name;
 
@@ -102,6 +125,8 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
   }
+
+
   Future getImage() async {
 
 
@@ -158,6 +183,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
   Widget build(BuildContext context) {
 
 
+    final blocAdminFB = BlocProvider.of<AdminFirebaseBloc>(context);
 
 
 //    scaffoldKey
