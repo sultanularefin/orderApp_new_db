@@ -71,13 +71,13 @@ class _AddDataState extends State<AdminFirebaseFood> {
   bool _loadingState = false;
 
 
-  pizza
-  kebab
-  jauheliha_kebab_vartaat
-  salaatti_kasvis
-  lasten_menu
-  juomat
-  hampurilainen
+  // pizza
+  // kebab
+  // jauheliha_kebab_vartaat
+  // salaatti_kasvis
+  // lasten_menu
+  // juomat
+  // hampurilainen
 
   final List<CategoryItem> categoryItems = <CategoryItem>[
     CategoryItem(0,'pizza', Icon(Icons.android,color:  const Color(0xFF167F67))),
@@ -166,7 +166,10 @@ class _AddDataState extends State<AdminFirebaseFood> {
         key:_scaffoldKey,
         backgroundColor: Colors.blue,
         body:Center(
-          child:SpinKitFadingCircle(
+          child: Text('....please wait....'),
+
+              /*
+          SpinKitFadingCircle(
             itemBuilder: (BuildContext context, int index) {
               return DecoratedBox(
                 decoration: BoxDecoration(
@@ -175,6 +178,8 @@ class _AddDataState extends State<AdminFirebaseFood> {
               );
             },
           ),
+
+          */
         ),
       );
     }
@@ -421,17 +426,21 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                             int loginRequiredStatus = await _itemData
                                                 .save(); // invokes the method in ItemData class.
 
+                                            /*
 
                                             if (loginRequiredStatus == 1) {
                                               return Navigator.push(context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          FoodGallery())
+                                                          FoodGallery()
+                                                  )
 
 
                                               );
                                             }
                                             else{
+
+                                              */
                                               _scaffoldKey.currentState.showSnackBar(
                                                 new SnackBar(duration: new Duration(seconds: 2), content:Container(
                                                   child:
@@ -444,7 +453,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                   ),
                                                 )),);
                                             }
-                                          }
+                                          // }
                                           else {
                                             Scaffold.of(context)
                                                 .showSnackBar(
@@ -494,6 +503,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
         .showSnackBar(SnackBar(content: Text('Please Add an Image.')));
   }
 
+  /*
   _showSpinkit (BuildContext context) {
     final spinkit = SpinKitFadingCircle(
       itemBuilder: (BuildContext context, int index) {
@@ -508,56 +518,10 @@ class _AddDataState extends State<AdminFirebaseFood> {
     return spinkit;
   }
 
+  */
+
 
 
 
 }
 
-
-class spinkitTest extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SpinKit Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-      ),
-      home: Scaffold(
-        body: SafeArea(
-
-          child: Center(
-            child: WorkspaceSpinkit(),
-          ),
-        ),
-      ),
-    );
-
-  }
-}
-
-//Positioned.fill(
-
-//
-//child: Stack(
-//children: <Widget>[
-//Align(
-//child: LayoutBuilder(
-//builder: (context, _) {
-//return IconButton(
-//icon: Icon(Icons.play_circle_filled),
-//iconSize: 50.0,
-//onPressed: () {
-//Navigator.push(
-//context,
-//MaterialPageRoute<void>(
-//builder: (BuildContext context) => ShowCaseSpinkit(),
-//fullscreenDialog: false,
-//),
-//);
-//},
-//);
-//},
-//),
-//alignment: Alignment.bottomCenter,
-//),
