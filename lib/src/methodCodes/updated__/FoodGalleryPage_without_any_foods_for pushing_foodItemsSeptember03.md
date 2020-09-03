@@ -1,3 +1,9 @@
+
+
+### no foodItem data pushing:
+
+```dart
+
 //## foodgallery Page August29: with android's Mainactivity invocation:
 //
 //```dart
@@ -470,7 +476,7 @@ _batteryLevel = batteryLevel;
                       */
 
 
-                      
+
 
                       Container(
                         height: displayHeight(context) + kToolbarHeight + 10,
@@ -2139,3 +2145,5 @@ class LongHeaderPainterBefore extends CustomPainter {
     return false;
   }
 }
+
+```

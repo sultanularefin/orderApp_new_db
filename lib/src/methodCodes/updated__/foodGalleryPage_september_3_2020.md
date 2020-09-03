@@ -1,3 +1,7 @@
+##foodGalleryPage-- Sepetember 3 2020:
+
+```dart
+
 //## foodgallery Page August29: with android's Mainactivity invocation:
 //
 //```dart
@@ -455,10 +459,6 @@ _batteryLevel = batteryLevel;
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-
-
-
-                      /*
                       Container(
                         width: displayWidth(context) -
                             MediaQuery.of(context).size.width / 3.8,
@@ -466,12 +466,6 @@ _batteryLevel = batteryLevel;
                         child: foodList(_currentCategory, _searchString,
                             context /*allIngredients:_allIngredientState */),
                       ),
-
-                      */
-
-
-                      
-
                       Container(
                         height: displayHeight(context) + kToolbarHeight + 10,
                         width: MediaQuery.of(context).size.width / 3.8,
@@ -2139,3 +2133,5 @@ class LongHeaderPainterBefore extends CustomPainter {
     return false;
   }
 }
+
+```

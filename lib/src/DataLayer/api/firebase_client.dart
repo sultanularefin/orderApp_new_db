@@ -249,6 +249,59 @@ class FirebaseClient {
     return snapshot;
   }
 
+//  List <String> /*<OrderedFood>*/ convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) {
+    List <String> /*<OrderedFood>*/ foodItemIngredientsInsertDummy( List<FoodPropertyMultiSelect> multiSelects ) {
+
+    print('at here... convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) ... .... .... %%%%% ECHO');
+//    print('multiSelects: $multiSelects');
+
+    List<String> multiSelectStrings = new List<String>();
+
+    if (multiSelects == null) {
+      multiSelectStrings.add("");
+      return multiSelectStrings;
+    }
+
+    int counter = 0;
+
+    List<FoodPropertyMultiSelect> selectedMultiSelects = new List<
+        FoodPropertyMultiSelect>(4);
+
+    selectedMultiSelects =
+        multiSelects.where((element) => element.isSelected == true).toList();
+
+    if (selectedMultiSelects.length != 0){
+      selectedMultiSelects.forEach((oneFoodPropertyMultiSelect) {
+        print('--------------------------------------');
+        print(
+            'oneFoodPropertyMultiSelect.itemFullName}: ${oneFoodPropertyMultiSelect
+                .itemFullName}');
+
+        print('--------------------------------------');
+
+        // FOR MAP
+        /*
+      var identifier = {
+        'multiSelectName': oneFoodPropertyMultiSelect.itemFullName,
+      };
+      */
+
+        // FOR ARRAY..
+        multiSelectStrings.add(oneFoodPropertyMultiSelect.itemFullName);
+        counter ++;
+      });
+
+
+      print('counter: $counter');
+      return multiSelectStrings;
+    }
+
+    else{
+      multiSelectStrings.add("");
+      return multiSelectStrings;
+    }
+
+  }
 
 //  List <Map<String, dynamic>> /*<OrderedFood>*/ convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects){
   List <String> /*<OrderedFood>*/ convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) {
@@ -612,7 +665,6 @@ class FirebaseClient {
 
   Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType, String restaurantName)async {
 
-
     List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
 
     var map1 = Map.fromIterable(tempSelectedFood, key: (e)
@@ -686,6 +738,77 @@ class FirebaseClient {
           : orderBy == 'TakeAway' ? 0.00 : 0.00,
 
     }).whenComplete(() => print("called when future completes"))
+        .then((document) {
+      //  print('Added document with ID: ${document.documentID}');
+      orderDocId= document.documentID;
+//      return document;
+//                            _handleSignIn();
+    }).catchError((onError) {
+      //   print('K   K    K   at onError for Order data push : $onError');
+      orderDocId= '';
+//      return '';
+    });
+
+    return orderDocId;
+
+
+  }
+
+
+
+  Future<String> insertFoodItems(/*Order currentOrderToFirebase, String orderBy, String paidType, String restaurantName */
+      String name,int sequenceNo,
+      )async {
+
+    /*
+    List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
+
+    var map1 = Map.fromIterable(tempSelectedFood, key: (e)
+    => e.foodItemName, value: (e)=>e.foodItemName,
+
+    );
+
+
+
+
+
+
+    String orderDocId='';
+
+    */
+
+
+    String orderDocId='';
+
+
+    DocumentReference document = await Firestore.instance.collection(
+        "restaurants").
+    document('kebab_bank').
+//    collection('orderList').add(switch (<String, dynamic>{
+    collection('foodItems').add(<String, dynamic>{
+
+      'available': true,
+      'category':'someC',
+      'categoryShort':'someC',
+      'default_juust':'dj',
+      'default_kastike': 'dk',
+      'ingredients': foodItemIngredientsInsertDummy(null),
+      'name':name+sequenceNo.toString(),
+      'sequence_no':sequenceNo,
+
+      'size': {
+        'normal': 1.5,
+         'gluteeniton':1.5,
+         'lasten':1,
+         'medium':2.5,
+         'pannu':8,
+         'perhe':5,
+
+      },
+
+
+
+    }).whenComplete(() => print("called when future completes for food Item insert...."))
         .then((document) {
       //  print('Added document with ID: ${document.documentID}');
       orderDocId= document.documentID;

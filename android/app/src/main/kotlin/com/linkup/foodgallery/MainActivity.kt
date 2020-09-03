@@ -1,4 +1,4 @@
-package com.linkup.foodgallery
+package com.arefin.kebabbank
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
@@ -12,7 +12,7 @@ class MainActivity: FlutterActivity() {
 }
 
 // FOR BATTER CHECKING..
-/*package com.linkup.foodgallery
+/*package com.arefin.kebabbank
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
@@ -56,7 +56,7 @@ class MainActivity: FlutterActivity() {
 
 //    private val CHANNEL = "com.example.timePickerTest"
 
-    private  val CHANNEL = "com.linkup.foodgallery";
+    private  val CHANNEL = "com.arefin.kebabbank";
 
 //    private val CHANNEL = "samples.flutter.dev/battery"
 
