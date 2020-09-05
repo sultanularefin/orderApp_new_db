@@ -189,13 +189,13 @@ class FirebaseClient {
 
   */
 
-
-  Future<QuerySnapshot /*DocumentSnapshot */> getLastSequenceNumberFromFireBaseFoodItems() async{
+//  Future<QuerySnapshot /*DocumentSnapshot */> getLastSequenceNumberFromFireBaseFoodItems() async{
+  Future<QuerySnapshot> getLastSequenceNumberFromFireBaseFoodItems() async{
 
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection('foodItems')..orderBy('sequenceNo',descending: true).limit(1);
+        .collection('foodItems').orderBy('sequenceNo',descending: true).limit(1).getDocuments();
 //    where('sequenceNo', isEqualTo: 'Unpaid')
 
 

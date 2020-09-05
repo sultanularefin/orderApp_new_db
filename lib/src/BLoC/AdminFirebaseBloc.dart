@@ -26,7 +26,7 @@ import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 
 import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 
-class AdminFirebaseBloc implements Bloc {
+class AdminFirebaseBloc implements Bloc{
 
   var logger = Logger(
     printer: PrettyPrinter(),
@@ -42,7 +42,10 @@ class AdminFirebaseBloc implements Bloc {
 
   bool _isDisposedCategories = false;
 
-  bool _isDisposedExtraIngredients = false;
+  bool _isDisposed_known_last_sequenceNumber = false;
+
+
+
 
 
   File _image2;
@@ -240,16 +243,18 @@ class AdminFirebaseBloc implements Bloc {
 
 
 
-      if (_isDisposedExtraIngredients == false) {
+      if (_isDisposed_known_last_sequenceNumber == false) {
 
-        var snapshot = await _client.fetchAllExtraIngredients();
+        var snapshot = await _client.getLastSequenceNumberFromFireBaseFoodItems();
         List docList = snapshot.documents;
 
-        List <NewIngredient> ingItems = new List<NewIngredient>();
-        ingItems = snapshot.documents.map((documentSnapshot) =>
-            NewIngredient.ingredientConvertExtra
-              (documentSnapshot.data, documentSnapshot.documentID)
-        ).toList();
+        FoodItemWithDocID lastOne = new FoodItemWithDocID();
+//        ingItems = snapshot.documents.map((documentSnapshot) =>
+//            NewIngredient.ingredientConvertExtra
+//              (documentSnapshot.data, documentSnapshot.documentID)
+//        ).toList();
+
+        lastOne.reverseCustomCast(docList[0])
 
 
         List<String> documents = snapshot.documents.map((documentSnapshot) =>
@@ -915,7 +920,7 @@ class AdminFirebaseBloc implements Bloc {
     _isDisposedIngredients = true;
     _isDisposedFoodItems = true;
     _isDisposedCategories = true;
-    _isDisposedExtraIngredients = true;
+    _isDisposed_known_last_sequenceNumber = true;
 
 
 

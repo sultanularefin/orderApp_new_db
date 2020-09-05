@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
+import 'package:foodgallery/src/DataLayer/models/OneInputCustomerInformation.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -93,17 +94,80 @@ class _AddDataState extends State<AdminFirebaseFood> {
   // hampurilainen
 
 
+  NewCategoryItem pizza = new NewCategoryItem(
+    categoryName:'pizza',
+    squenceNo: 0,
+    documentID:'pizza',
+    fireStoreFieldName:'pizza',
+  );
 
-  final List<NewCategoryItem> categoryItems = <NewCategoryItem>[
-    NewCategoryItem('pizza',                     0,               'pizza',                    'pizza',                    ),
-    NewCategoryItem('kebab',                     1,               'kebab'                     'kebab'                     ),
-    NewCategoryItem('jauheliha_kebab_vartaat',   2,               'jauheliha kebab & vartaat','jauheliha kebab & vartaat',),
-    NewCategoryItem('salaatti_kasvis',           3,               'salaatti & kasvis',        'salaatti & kasvis',        ),
-    NewCategoryItem('hampurilainen',             4,               'hampurilainen',            'hampurilainen',            ),
-    NewCategoryItem('lasten_menu',               5,               'lasten menu',              'lasten menu',              ),
-    NewCategoryItem('juomat',                    6,               'juomat',                   'juomat',                   ),
+  NewCategoryItem kebab = new NewCategoryItem(
+    categoryName:'kebab',
+    squenceNo: 1,
+    documentID:'kebab',
+    fireStoreFieldName:'pizza',
+  );
 
-  ];
+  NewCategoryItem jauheliha_kebab_vartaat = new NewCategoryItem(
+    categoryName:'jauheliha kebab & vartaat',
+    squenceNo: 2,
+    documentID:'jauheliha_kebab_vartaat',
+    fireStoreFieldName:'jauheliha_kebab_vartaat',
+  );
+
+  NewCategoryItem salaatti_kasvis = new NewCategoryItem(
+    categoryName:'salaatti & kasvis',
+    squenceNo: 3,
+    documentID:'salaatti_kasvis',
+    fireStoreFieldName:'salaatti_kasvis',
+  );
+
+  NewCategoryItem hampurilainen = new NewCategoryItem(
+    categoryName:'hampurilainen',
+    squenceNo: 4,
+    documentID:'hampurilainen',
+    fireStoreFieldName:'hampurilainen',
+  );
+
+  NewCategoryItem lasten_menu = new NewCategoryItem(
+    categoryName:'lasten menu',
+    squenceNo: 5,
+    documentID:'lasten_menu',
+    fireStoreFieldName:'lasten_menu',
+  );
+
+  NewCategoryItem juomat = new NewCategoryItem(
+    categoryName:'juomat',
+    squenceNo: 6,
+    documentID:'juomat',
+    fireStoreFieldName:'juomat',
+  );
+
+
+  List<NewCategoryItem> categoryItems2 = new List<NewCategoryItem>();
+
+
+
+
+  List <OneInputCustomerInformation> customerFieldsInputArray = new List<OneInputCustomerInformation>();
+
+
+//  customerFieldsInputArray.addAll([_address,_flat,_phone, _timeOfDay, _eta]);
+
+//  categoryItems2.add(pizza);
+
+  categoryItems.addAll([
+    pizza,kebab
+
+
+  jauheliha_kebab_vartaat,
+  salaatti_kasvis,
+  hampurilainen,
+  lasten_menu,
+  juomat]
+
+      );
+
 
 
 
