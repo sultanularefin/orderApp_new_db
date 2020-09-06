@@ -778,11 +778,55 @@ class FirebaseClient {
   }
 
 
+  Future<String> insertIngredientItems(NewIngredient x, String email
+      )async {
+
+    Timestamp date ;
+    String orderDocId='';
+
+    DocumentReference document = await Firestore.instance.collection("restaurants").
+    document('kebab_bank').
+
+    collection('foodItems').add(<String, dynamic>{
+//      'category':'someC',
+//      'categoryShort':'someC',
+
+    'extraIngredientOf':'pizza',
+
+      'ingredients': foodItemIngredientsInsertDummy(null),
+      'name':x.ingredientName,
+      'uploadedBy':email,
+      'uploadDate':FieldValue.serverTimestamp(),
+//      'priceinEuro': priceInEuro,
+//      'isHot':isHot,
+//      'itemName':itemName,
+//      'categoryName': categoryName,
+//      'ingredients':ingredients,
+      'imageURL':x.imageURL,
+      'itemID':x.itemId,
+
+
+
+    }).whenComplete(() => print("called when future completes for food Item insert...."))
+        .then((document) {
+      //  print('Added document with ID: ${document.documentID}');
+      orderDocId= document.documentID;
+//      return document;
+//                            _handleSignIn();
+    }).catchError((onError) {
+      //   print('K   K    K   at onError for Order data push : $onError');
+      orderDocId= '';
+//      return '';
+    });
+
+    return orderDocId;
+
+  }
 
   Future<String> insertFoodItems(/*Order currentOrderToFirebase, String orderBy, String paidType, String restaurantName */
 //      String name,int sequenceNo,
 
-  FoodItemWithDocID x, int sequenceNo
+  FoodItemWithDocID x, int sequenceNo, String email
       )async {
 
     Timestamp date ;
@@ -811,8 +855,15 @@ class FirebaseClient {
 
       'isAvailable':x.isAvailable,
       'isHot':x.isHot,
-      'uploadedBy':_firebaseUser,
+      'uploadedBy':email,
       'uploadDate':FieldValue.serverTimestamp(),
+//      'priceinEuro': priceInEuro,
+//      'isHot':isHot,
+//      'itemName':itemName,
+//      'categoryName': categoryName,
+//      'ingredients':ingredients,
+      'imageURL':x.imageURL,
+      'itemID':x.itemId,
 
 
 

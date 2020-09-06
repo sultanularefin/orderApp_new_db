@@ -2,7 +2,7 @@
 // dependency files
 import 'package:flutter/material.dart';
 //import 'package:foodgallery/src/screens/adminFirebase/adminIngredientsForFood.dart';
-//import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_ingredients.dart';
+//import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_ingredient.dart';
 //import 'package:foodgallery/src/screens/animatedSample/AnimatedListSample.dart';
 //import 'package:foodgallery/src/screens/homeScreen/food_gallery.dart';
 //import 'package:foodgallery/src/screens/productScan/product_scan_checkBox.dart';

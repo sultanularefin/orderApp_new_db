@@ -3,7 +3,7 @@
 class NewCategoryItem {
 
   String categoryName;
-  int squenceNo;
+  int sequenceNo;
   String documentID;
   String fireStoreFieldName;
 //  String imageURL;
@@ -15,7 +15,7 @@ class NewCategoryItem {
       {
 
         this.categoryName,
-        this.squenceNo,
+        this.sequenceNo,
         this.documentID,
         this.fireStoreFieldName,
 //        this.imageURL,

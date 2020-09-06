@@ -358,7 +358,7 @@ class FoodGalleryBloc implements Bloc {
 
 
         final bool foodIsAvailable =  doc['available'];
-        final int sequenceNo =  doc['sequence_no'];
+        final int sequenceNo =  doc['sequenceNo'];
 
 //        print('foodIsAvailable: $foodIsAvailable');
 
@@ -500,7 +500,7 @@ class FoodGalleryBloc implements Bloc {
         NewCategoryItem oneCategoryItem = new NewCategoryItem(
 
           categoryName: categoryItemName,
-          squenceNo: sequenceNo0.toInt(),
+          sequenceNo: sequenceNo0.toInt(),
           documentID:documentID,
           fireStoreFieldName:fireStoreFieldName2,
 

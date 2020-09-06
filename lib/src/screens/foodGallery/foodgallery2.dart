@@ -4,6 +4,8 @@
 // package/ external dependency files
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgallery/src/BLoC/AdminFirebaseFoodBloc.dart';
+import 'package:foodgallery/src/BLoC/AdminFirebaseIngredientBloc.dart';
 import 'package:foodgallery/src/BLoC/UnPaidDetailsBloc.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
@@ -22,6 +24,8 @@ import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
+import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_food.dart';
+import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_ingredient.dart';
 // import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 import 'package:wakelock/wakelock.dart';
@@ -470,7 +474,7 @@ _batteryLevel = batteryLevel;
                       */
 
 
-                      
+
 
                       Container(
                         height: displayHeight(context) + kToolbarHeight + 10,
@@ -577,22 +581,22 @@ _batteryLevel = batteryLevel;
                       ),
 
                       // child: RaisedButton(
-                        child: Text(
-                          'restapojut'.toUpperCase(),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'poppins',
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20,
-                          ),
+                      child: Text(
+                        'restapojut'.toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'poppins',
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20,
                         ),
-                /*
+                      ),
+                      /*
                         onPressed: (){
                           // 911_1
                           Navigator.pop(context);
                         },
               */
-                     // ),
+                      // ),
                     ),
                     ListTile(
                       title: Container(
@@ -690,6 +694,162 @@ _batteryLevel = batteryLevel;
                         );
                       },
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 150,
+                    ),
+                    ListTile(
+                      title: Container(
+                          color: Color(0xffFFE18E),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                child:Row(
+                                  children: [
+                                    Icon(
+                                      Icons.food_bank,
+                                      size: displayWidth(context) / 19,
+                                      color: Color(0xff707070),
+                                    ),
+                                    Icon(
+                                      Icons.food_bank,
+                                      size: displayWidth(context) / 19,
+                                      color: Color(0xff707070),
+                                    ),
+                                    Icon(
+                                      Icons.food_bank,
+                                      size: displayWidth(context) / 19,
+                                      color: Color(0xff707070),
+                                    ),
+                                  ],
+                                ),
+//                                child:....... 911_1_ work_1
+                                /*Image.asset(
+                                  'assets/history.png',
+//                color: Colors.black,
+                                  width: 30,
+                                  height: 30,
+                                ),
+
+                                */
+                              ),
+
+                              Container(
+//                          width: displayWidth(context)/3.9,
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+
+                                child: Text(
+                                  'Admin Food'.toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'historia',
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )
+//                      Text('history'),
+                            ],
+                          )),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            opaque: false,
+                            transitionDuration: Duration(milliseconds: 900),
+                            pageBuilder: (_, __, ___) =>
+                                BlocProvider<AdminFirebaseFoodBloc>(
+                                  bloc: AdminFirebaseFoodBloc(),
+                                  child: AdminFirebaseFood(),
+                                ),
+                          ),
+                        );
+                      },
+                    ),
+
+
+
+
+                    SizedBox(
+                      height: 150,
+                    ),
+                    ListTile(
+                      title: Container(
+                          color: Color(0xffFFE18E),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                child:Row(
+                                  children: [
+                                    Icon(
+                                      Icons.fire_extinguisher_rounded,
+                                      size: displayWidth(context) / 19,
+                                      color: Color(0xff707070),
+                                    ),
+                                    Icon(
+                                      Icons.fire_extinguisher_rounded,
+                                      size: displayWidth(context) / 19,
+                                      color: Color(0xff707070),
+                                    ),
+                                    Icon(
+                                      Icons.fire_extinguisher_rounded,
+                                      size: displayWidth(context) / 19,
+                                      color: Color(0xff707070),
+                                    ),
+                                  ],
+                                ),
+//                                child:....... 911_1_ work_1
+                                /*Image.asset(
+                                  'assets/history.png',
+//                color: Colors.black,
+                                  width: 30,
+                                  height: 30,
+                                ),
+
+                                */
+                              ),
+
+                              Container(
+//                          width: displayWidth(context)/3.9,
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+
+                                child: Text(
+                                  'Admin Ingredient '.toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'historia',
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )
+//                      Text('history'),
+                            ],
+                          )),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            opaque: false,
+                            transitionDuration: Duration(milliseconds: 900),
+                            pageBuilder: (_, __, ___) =>
+                                BlocProvider<AdminFirebaseIngredientBloc>(
+                                  bloc: AdminFirebaseIngredientBloc(),
+                                  child: AdminFirebaseIngredient(),
+                                ),
+                          ),
+                        );
+                      },
+                    ),
+
+
+
+
                   ],
                 ),
               ),

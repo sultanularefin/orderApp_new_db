@@ -28,6 +28,7 @@ class NewIngredient {
   String subgroup;
   int tempIndex; // for incrementing and decrementing view data field only
   bool isDeleted;
+  String itemId;
 
 //  String ingredients;
 
@@ -44,6 +45,7 @@ class NewIngredient {
         this.subgroup,
         this.tempIndex:0,
         this.isDeleted:false,
+        this.itemId,
       }
       );
 
