@@ -490,7 +490,7 @@ class AdminFirebaseFoodBloc implements Bloc{
 
 
 
-    getLastSequenceNumberFromFireBaseFoodItems();
+    // getLastSequenceNumberFromFireBaseFoodItems();
     initiateCategoryDropDownList();
 
 

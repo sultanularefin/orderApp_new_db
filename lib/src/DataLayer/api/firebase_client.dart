@@ -809,6 +809,30 @@ class FirebaseClient {
 
     Timestamp date ;
     String orderDocId='';
+    String imageURLFinal1='';
+    var uri = Uri.parse(imageURL);
+    // print(uri.isScheme("HTTP"));  // Prints true.
+
+    if(uri.isScheme("HTTP")||(uri.isScheme("HTTPS"))){
+      print('on of them is true');
+
+
+      String imageURLFinal2=imageURL;
+      String iteration2 = Uri.decodeComponent(imageURLFinal2).replaceAll(
+          'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/',
+          '');
+
+
+
+      String stringTokenizing2 = iteration2.substring(0, iteration2.indexOf('?'));
+
+      imageURLFinal1= stringTokenizing2;
+    }
+    else{
+      imageURLFinal1= imageURL;
+    }
+
+
 
     DocumentReference document = await Firestore.instance.collection("restaurants").
     document('kebab_bank').
@@ -820,7 +844,8 @@ class FirebaseClient {
       'default_kastike': 'tonnikala',
       'ingredients': foodItemIngredientsInsertDummy(null),
       'name':x.itemName,
-      'sequenceNo':sequenceNo,
+      'sequenceNo':x.sequenceNo,
+      // sequenceNo
 
       'size': {
         'normal': 1.5,
@@ -836,9 +861,7 @@ class FirebaseClient {
       'uploadedBy':email,
       'uploadDate':FieldValue.serverTimestamp(),
 
-      'imageURL': Uri.decodeComponent(imageURL.replaceAll(
-      'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/',
-          '').substring(0, imageURL.indexOf('?'))),
+      'imageURL': imageURLFinal1,
       'itemID':x.itemId,
     /*
     https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/

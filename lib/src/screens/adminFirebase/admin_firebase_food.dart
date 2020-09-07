@@ -305,6 +305,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                     ),
 
+                                    /*
                                     Container(child:Text('${currentFood.sequenceNo}',
 
                                         maxLines: 1,
@@ -319,6 +320,8 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                         )
                                     ),
                                     ),
+
+                                    */
 
                                     Container(
                                       padding: const EdgeInsets.fromLTRB(
