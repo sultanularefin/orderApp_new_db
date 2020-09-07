@@ -186,7 +186,7 @@ class AdminFirebaseIngredientBloc implements Bloc{
   void toggoleMultiSelectSubgroupValue (int index){
     _ingredientGroupes[index].isSelected= !_ingredientGroupes[index].isSelected;
 
-    _categoryMultiSelectController.sink.add(_foodCategoryTypesForMultiSelect);
+   _ingredientsGroupsController.sink.add(_ingredientGroupes);
 
   }
 
