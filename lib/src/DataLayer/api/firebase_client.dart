@@ -762,6 +762,9 @@ class FirebaseClient {
   Future<String> insertIngredientItems(NewIngredient x,int sequenceNo, String email, String imageURL
       )async {
 
+    print('at insertIngredientItems....');
+
+
     Timestamp date ;
     String orderDocId='';
 

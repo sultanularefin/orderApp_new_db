@@ -16,7 +16,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 
-class AdminFirebaseIngredientBloc implements Bloc {
+class AdminFirebaseCheeseBloc implements Bloc {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
@@ -461,7 +461,7 @@ class AdminFirebaseIngredientBloc implements Bloc {
   }
   // CONSTRUCTOR BIGINS HERE..
 
-  AdminFirebaseIngredientBloc() {
+  AdminFirebaseCheeseBloc() {
     print('at AdminFirebaseIngredientBloc  ......()');
 
     initiateIngredientGroups();
