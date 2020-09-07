@@ -290,6 +290,8 @@ class AdminFirebaseFoodBloc implements Bloc{
 //
 //        int lastIndex = docList[0]['sequenceNo'];
 
+        logger.i('lastIndex: $lastIndex');
+
 
         _thisFoodItem.sequenceNo= lastIndex;
 
@@ -488,6 +490,7 @@ class AdminFirebaseFoodBloc implements Bloc{
 
 
 
+    getLastSequenceNumberFromFireBaseFoodItems();
     initiateCategoryDropDownList();
 
 

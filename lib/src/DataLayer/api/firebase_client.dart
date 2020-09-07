@@ -161,6 +161,7 @@ class FirebaseClient {
 //  Future<QuerySnapshot /*DocumentSnapshot */> getLastSequenceNumberFromFireBaseFoodItems() async{
   Future<int> getLastSequenceNumberFromFireBaseFoodItems() async{
 
+    // uploadDate
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
@@ -186,22 +187,7 @@ class FirebaseClient {
 
       return lastIndex;
     }
-//    where('sequenceNo', isEqualTo: 'Unpaid')
 
-
-    /*
-    var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').collection('orderList')
-        .orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Unpaid')
-        .getDocuments();
-    */
-
-//    orderBy('_timeStampUTC', descending: true)
-    ;
-
-//    orderBy('sequenceNo', descending: true).limit(1);
-//
-//    return snapshot;
   }
 
   Future<QuerySnapshot> fetchAllExtraIngredients()async{
@@ -268,7 +254,7 @@ class FirebaseClient {
 //  List <String> /*<OrderedFood>*/ convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) {
     List <String> /*<OrderedFood>*/ foodItemIngredientsInsertDummy( List<NewIngredient> ingredients ) {
 
-    print('at here... convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) ... .... .... %%%%% ECHO');
+    print('at here... foodItemIngredientsInsertDummy %%%%% ECHO');
 //    print('multiSelects: $multiSelects');
 
     List<String> multiSelectStrings = new List<String>();
@@ -789,15 +775,11 @@ class FirebaseClient {
 
     'extraIngredientOf':'pizza',
 
-      'ingredients': foodItemIngredientsInsertDummy(null),
+      // 'ingredients': foodItemIngredientsInsertDummy1(null),
       'name':x.ingredientName,
       'uploadedBy':email,
       'uploadDate':FieldValue.serverTimestamp(),
-//      'priceinEuro': priceInEuro,
-//      'isHot':isHot,
-//      'itemName':itemName,
-//      'categoryName': categoryName,
-//      'ingredients':ingredients,
+
       'imageURL':x.imageURL,
       'itemID':x.itemId,
 
@@ -838,7 +820,7 @@ class FirebaseClient {
       'default_kastike': 'tonnikala',
       'ingredients': foodItemIngredientsInsertDummy(null),
       'name':x.itemName,
-      'sequence_no':sequenceNo,
+      'sequenceNo':sequenceNo,
 
       'size': {
         'normal': 1.5,
@@ -855,12 +837,13 @@ class FirebaseClient {
       'uploadDate':FieldValue.serverTimestamp(),
 
       'imageURL': Uri.decodeComponent(imageURL.replaceAll(
-//          'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
-      'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/',
-          '').replaceAll('?alt=media', '')),
+      'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/',
+          '').substring(0, imageURL.indexOf('?'))),
       'itemID':x.itemId,
-
-
+    /*
+    https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/
+      // foodItems/pizza/test aQQDF}I.png
+      */
 
     }).whenComplete(() => print("called when future completes for food Item insert...."))
         .then((document) {

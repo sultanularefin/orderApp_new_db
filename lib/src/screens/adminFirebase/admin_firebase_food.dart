@@ -130,11 +130,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
 
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseUser user = await _auth.currentUser();
 
-
-    blocAdminFoodFBase.setUser(user.email);
 
 //    _itemData.setUser =user.email;
 
@@ -292,6 +288,8 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                     ),
 
 
+
+
                                     TextFormField(
                                       decoration:
                                       InputDecoration(labelText: 'Item Name'),
@@ -307,6 +305,20 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                     ),
 
+                                    Container(child:Text('${currentFood.sequenceNo}',
+
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 34,
+                                          fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                          color: Colors.redAccent,
+                                          fontFamily: 'Itim-Regular',
+
+                                        )
+                                    ),
+                                    ),
 
                                     Container(
                                       padding: const EdgeInsets.fromLTRB(
@@ -381,7 +393,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                       onChanged: (val) {
                                                         blocAdminFoodFBase
                                                             .setCategoryValue(_currentCategory,
-                                                            /*
+                                                          /*
                                                             allCategories[_currentCategory]
                                                                 .categoryName,
                                                             allCategories[_currentCategory]
@@ -456,6 +468,12 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                               print('form: $_formKey.currentState');
                                               print('at onPressed ');
+
+                                              final FirebaseAuth _auth = FirebaseAuth.instance;
+                                              final FirebaseUser user = await _auth.currentUser();
+
+
+                                              blocAdminFoodFBase.setUser(user.email);
 
 
                                               //   the method 'validate' isn't defined for the class 'State'
