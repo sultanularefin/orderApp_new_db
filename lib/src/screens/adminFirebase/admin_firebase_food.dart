@@ -20,7 +20,7 @@ import 'package:foodgallery/src/BLoC/AdminFirebaseFoodBloc.dart';
 //import '../../BLoC/bloc_provider.dart';
 //import './../../BLoC/AdminFirebaseFoodBloc.dart';
 import 'package:logger/logger.dart';
-
+import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 //import 'package:fluttercrud/src/shared/category_Constants.dart' as CategoryItems;
 
@@ -238,202 +238,198 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
                         */
-                        final FoodItemWithDocID currentFood = snapshot.data;
+                  final FoodItemWithDocID currentFood = snapshot.data;
 
 
 
 
 
 
-                        return Builder(
-                            builder: (context) =>
-                                Form(
-                                    key: _formKey,
-                                    child: ListView(
-                                        scrollDirection: Axis.vertical,
-                                        children: [
-                                          new Container(
-                                            child: _image == null
-                                                ?
-                                            GestureDetector(
-                                              onTap: () {
-                                                getImage();
+                  return Builder(
+                      builder: (context) =>
+                          Form(
+                              key: _formKey,
+                              child: ListView(
+                                  scrollDirection: Axis.vertical,
+                                  children: [
+                                    new Container(
+                                      child: _image == null
+                                          ?
+                                      GestureDetector(
+                                        onTap: () {
+                                          getImage();
 //                              _getBarCode(context);
 
 //                                print('onTap pressed instead of _getBarCode(context)');
 //                                print('Number: 1');
-                                              }, child: new CircleAvatar(
+                                        }, child: new CircleAvatar(
 
-                                                backgroundColor: Colors.lightBlueAccent,
-                                                radius: 80.0,
+                                          backgroundColor: Colors.lightBlueAccent,
+                                          radius: 80.0,
 
-                                                child: new Container(
-                                                    padding: const EdgeInsets.all(0.0),
-                                                    child: new Container(
-                                                      child: Text('No image selected.'),)
+                                          child: new Container(
+                                              padding: const EdgeInsets.all(0.0),
+                                              child: new Container(
+                                                child: Text('No image selected.'),)
 
-                                                )
+                                          )
 
-                                            ),
-                                            ) : GestureDetector(
-                                              onTap: () {
-                                                getImage();
+                                      ),
+                                      ) : GestureDetector(
+                                        onTap: () {
+                                          getImage();
 //                              _getBarCode(context);
 
 //                                print('onTap pressed instead of _getBarCode(context)');
 //                                print('Number: 2');
-                                              }, child: new CircleAvatar(
+                                        }, child: new CircleAvatar(
 
-                                                backgroundColor: Colors.lightBlueAccent,
-                                                radius: 80.0,
+                                          backgroundColor: Colors.lightBlueAccent,
+                                          radius: 80.0,
 
-                                                child: new Container(
-                                                  padding: const EdgeInsets.all(0.0),
-                                                  child: Image.file(_image),
+                                          child: new Container(
+                                            padding: const EdgeInsets.all(0.0),
+                                            child: Image.file(_image),
 
-                                                )
+                                          )
 
-                                            ),
-                                            ),
-                                          ),
+                                      ),
+                                      ),
+                                    ),
 
 
-                                          TextFormField(
-                                            decoration:
-                                            InputDecoration(labelText: 'Item Name'),
-                                            validator: (value) {
-                                              if (value.isEmpty) {
-                                                return 'Please enter the Item Name';
-                                              }
-                                            },
-                                            onSaved: (val) =>
-                                                blocAdminFoodFBase.setItemName(val),
+                                    TextFormField(
+                                      decoration:
+                                      InputDecoration(labelText: 'Item Name'),
+                                      validator: (value) {
+                                        if (value.isEmpty) {
+                                          return 'Please enter the Item Name';
+                                        }
+                                      },
+                                      onSaved: (val) =>
+                                          blocAdminFoodFBase.setItemName(val),
 //                                      setState(() => _itemData.itemName = val),
 
 
-                                          ),
+                                    ),
 
 
-                                          Container(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 50, 0, 20),
+                                    Container(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 50, 0, 20),
 
-                                            child: Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    padding: const EdgeInsets.fromLTRB(
-                                                        0, 50, 0, 20),
-                                                    child: Text('food Category: ',
-                                                      style: TextStyle(fontSize: 20,
-                                                          color: Colors
-                                                              .lightBlueAccent),),
-                                                  ),
+                                      child: Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  0, 50, 0, 20),
+                                              child: Text('food Category: ',
+                                                style: TextStyle(fontSize: 20,
+                                                    color: Colors
+                                                        .lightBlueAccent),),
+                                            ),
 
 //                                  Icon(Icons.thumb_up),
-                                                  SizedBox(width: 10),
+                                            SizedBox(width: 10),
 //                                  ButtonTheme(
 //                                  alignedDropdown:true,
 //                                  Container(
 //                                    width: 150.0,
-                                                  Expanded(
+                                            Container(
+
+                                              width: displayWidth(context)/2,
 
 
-                                                    child:
+                                              child:
 
 
-                                                    StreamBuilder<List<NewCategoryItem>>(
-                                                      stream: blocAdminFoodFBase.getCategoryDropDownControllerStream,
-                                                      initialData: blocAdminFoodFBase.getCategoryTypesForDropDown,
-                                                      builder: (context, snapshot) {
+                                              StreamBuilder<List<NewCategoryItem>>(
+                                                stream: blocAdminFoodFBase.getCategoryDropDownControllerStream,
+                                                initialData: blocAdminFoodFBase.getCategoryTypesForDropDown,
+                                                builder: (context, snapshot) {
 
-                                                              final List<NewCategoryItem> allCategories = snapshot.data;
+                                                  final List<NewCategoryItem> allCategories = snapshot.data;
 
 
 //                                                              _currentCategory=cu
 
-                                                              return DropdownButtonFormField(
+                                                  return DropdownButtonFormField(
 
 
-                                                                value: _currentCategory != null ?
-                                                                allCategories[_currentCategory]
-                                                                    .sequenceNo
-                                                                    : allCategories[0].sequenceNo,
+                                                      value: _currentCategory != null ?
+                                                      allCategories[_currentCategory]
+                                                          .sequenceNo
+                                                          : allCategories[0].sequenceNo,
 
-                                                                items: allCategories.map((oneItem) {
-                                                                  return DropdownMenuItem(
+                                                      items: allCategories.map((oneItem) {
+                                                        return DropdownMenuItem(
 
 
-                                                                    value: oneItem.sequenceNo,
-                                                                    child: Row(
-                                                                      children: <Widget>[
+                                                          value: oneItem.sequenceNo,
+                                                          child: Row(
+                                                            children: <Widget>[
 //                                                        oneItem.icon,
-                                                                        SizedBox(width: 10,),
-                                                                        Text(
-                                                                          oneItem.categoryName,
-                                                                          style: TextStyle(
-                                                                            color: Colors.black,
-                                                                          ),
-                                                                        ),
+                                                              SizedBox(width: 10,),
+                                                              Text(
+                                                                oneItem.categoryName,
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                ),
+                                                              ),
 
-                                                                      ],
-                                                                    ),
+                                                            ],
+                                                          ),
 //                                          child: Text(oneItem.name),
-                                                                  );
-                                                                }).toList(),
-                                                                onChanged: (val) {
-                                                                  blocAdminFoodFBase
-                                                                      .setCategoryValue(
-                                                                      allCategories[_currentCategory]
-                                                                          .categoryName,
-                                                                      allCategories[_currentCategory]
-                                                                          .fireStoreFieldName);
-                                                                  setCategoryValue(val);
-//                                                                  ,
+                                                        );
+                                                      }).toList(),
+                                                      onChanged: (val) {
+                                                        blocAdminFoodFBase
+                                                            .setCategoryValue(
+                                                            allCategories[_currentCategory]
+                                                                .categoryName,
+                                                            allCategories[_currentCategory]
+                                                                .fireStoreFieldName);
+                                                        setCategoryValue(val);
 
-                                                                }
-//    onChanged: (text) {
-//setCategoryValue(val),
-//                                      {
-//                                        print('val: $val')},
+                                                      }
 
+                                                  );
+                                                }
 
-                                                              );
-                                                            }
-
-                                                      ,
-                                                    ),
-                                                  ),
-                                                ]
+                                                ,
+                                              ),
                                             ),
+                                          ]
+                                      ),
 //                            Text('Subscribe'),
-                                          ),
+                                    ),
 
 //
 
 
-                                          SwitchListTile(
-                                              title: const Text('Is Hot'),
-                                              value: currentFood.isHot, //_itemData.isHot,
-                                              onChanged: (bool val) =>
-                                              blocAdminFoodFBase.setIsHot(val)
+                                    SwitchListTile(
+                                        title: const Text('Is Hot'),
+                                        value: currentFood.isHot, //_itemData.isHot,
+                                        onChanged: (bool val) =>
+                                            blocAdminFoodFBase.setIsHot(val)
 
-                                          ),
+                                    ),
 
 
-                                          SwitchListTile(
-                                            title: const Text('Is Available'),
-                                            value:currentFood.isAvailable,
-                                            onChanged: (bool val) =>
-                                                setState(() =>
-                                                    blocAdminFoodFBase.setIsAvailable(val)),
+                                    SwitchListTile(
+                                      title: const Text('Is Available'),
+                                      value:currentFood.isAvailable,
+                                      onChanged: (bool val) =>
+                                          setState(() =>
+                                              blocAdminFoodFBase.setIsAvailable(val)),
 //    _itemData.isAvailable = val)
-                                          ),
+                                    ),
 
 
-                                          // Cooking checkBox
-                                          /*
+                                    // Cooking checkBox
+                                    /*
 
                               CheckboxListTile(
                                   title: const Text('Cooking'),
@@ -445,38 +441,42 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                               */
 
-                                          Container(
-                                              padding: const EdgeInsets.symmetric(
-                                                  vertical: 10.0, horizontal: 10.0),
-                                              child: RaisedButton(
-                                                  color: Colors.yellowAccent,
-                                                  onPressed: () async {
+                                    Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10.0, horizontal: 10.0),
+                                        child: RaisedButton(
+                                            color: Colors.yellowAccent,
+                                            child: Text('Save',
+                                              style: TextStyle(
+                                                  fontSize: 20, color: Colors
+                                                  .lightBlueAccent),),
+                                            onPressed: () async {
 
 //                                                    911_1
 
-                                                    final blocAdminFoodFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
-                                                    final form = _formKey.currentState;
+                                              final blocAdminFoodFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                                              final form = _formKey.currentState;
 
-                                                    print('form: $_formKey.currentState');
-                                                    print('at onPressed ');
+                                              print('form: $_formKey.currentState');
+                                              print('at onPressed ');
 
 
-                                                    //   the method 'validate' isn't defined for the class 'State'
+                                              //   the method 'validate' isn't defined for the class 'State'
 
-                                                    if (form.validate()) {
-                                                      form.save();
+                                              if (form.validate()) {
+                                                form.save();
 
-                                                      _scaffoldKey.currentState.showSnackBar(
-                                                        new SnackBar(duration: new Duration(seconds: 5), content:Container(
-                                                          child:
-                                                          new Row(
-                                                            children: <Widget>[
-                                                              new CircularProgressIndicator(),
-                                                              new Text("uploading food data....",style:
-                                                              TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
-                                                            ],
-                                                          ),
-                                                        )),);
+                                                _scaffoldKey.currentState.showSnackBar(
+                                                  new SnackBar(duration: new Duration(seconds: 5), content:Container(
+                                                    child:
+                                                    new Row(
+                                                      children: <Widget>[
+                                                        new CircularProgressIndicator(),
+                                                        new Text("uploading food data....",style:
+                                                        TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                      ],
+                                                    ),
+                                                  )),);
 
 //                                            showDialog(
 //                                                context: context,
@@ -484,87 +484,95 @@ class _AddDataState extends State<AdminFirebaseFood> {
 //                                                  return Center(child: CircularProgressIndicator(),);
 //                                                });
 
-                                                      if (_image == null) {
-                                                        _showDialogImageNotAdded(context);
-                                                        return Navigator.push(context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    AdminFirebaseFood()));
-                                                      }
+                                                if (_image == null) {
+                                                  _showDialogImageNotAdded(context);
+                                                  return Navigator.push(context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AdminFirebaseFood()));
+                                                }
 
 
-                                                      int loginRequiredStatus =
 
-                                                      /*
+
+                                                /*
                                                       await _itemData
                                                           .save();
 
                                                       // invokes the method in ItemData class.
 */
-                                                      await blocAdminFoodFBase.save();
-
-                                                      /*
-
-                                                if (loginRequiredStatus == 1) {
-                                                  return Navigator.push(context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              FoodGallery()
-                                                      )
+                                                int successValue=  await blocAdminFoodFBase.save();
 
 
-                                                  );
+
+
+
+                                                if(successValue==0){
+
+
+                                                  _scaffoldKey.currentState.showSnackBar(
+                                                    new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                      child:
+                                                      new Row(
+                                                        children: <Widget>[
+                                                          new CircularProgressIndicator(),
+                                                          new Text("Something went wrong, Try VPN.",style:
+                                                          TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                        ],
+                                                      ),
+                                                    )),);
                                                 }
-                                                else{
+                                                // }
+                                                else {
 
-                                                  */
-                                                      _scaffoldKey.currentState.showSnackBar(
-                                                        new SnackBar(duration: new Duration(seconds: 2), content:Container(
-                                                          child:
-                                                          new Row(
-                                                            children: <Widget>[
-                                                              new CircularProgressIndicator(),
-                                                              new Text("Something went wrong, Try VPN.",style:
-                                                              TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
-                                                            ],
-                                                          ),
-                                                        )),);
-                                                    }
-                                                    // }
-                                                    else {
-                                                      Scaffold.of(context)
-                                                          .showSnackBar(
-                                                        SnackBar(content: Row(
-                                                          children: [
-                                                            Icon(Icons.thumb_up),
-                                                            SizedBox(width: 20),
-                                                            Expanded(child: Text(
-                                                              "Please check the fields",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .lightBlueAccent,
-                                                                  backgroundColor: Colors
-                                                                      .deepOrange),
-                                                            ),),
-                                                          ],),
-                                                          duration: Duration(seconds: 4),
-                                                        ),
-                                                      );
-                                                    }
-                                                  },
-                                                  child: Text('Save',
-                                                    style: TextStyle(
-                                                        fontSize: 20, color: Colors
-                                                        .lightBlueAccent),)
-                                              )
-                                          ),
-                                        ]
+                                                  _scaffoldKey.currentState.showSnackBar(
+                                                    new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                      child:
+                                                      new Row(
+                                                        children: <Widget>[
+                                                          new CircularProgressIndicator(),
+                                                          new Text("Something went wrong, Try VPN.",style:
+                                                          TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                        ],
+                                                      ),
+                                                    )),);
 
-                                    )
 
-                                )
-                        );
+                                                }
+                                              }
+                                              else{
+
+                                                Scaffold.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(content: Row(
+                                                    children: [
+                                                      Icon(Icons.thumb_up),
+                                                      SizedBox(width: 20),
+                                                      Expanded(child: Text(
+                                                        "Please check the fields",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            color: Colors
+                                                                .lightBlueAccent,
+                                                            backgroundColor: Colors
+                                                                .deepOrange),
+                                                      ),),
+                                                    ],),
+                                                    duration: Duration(seconds: 4),
+                                                  ),
+                                                );
+                                              }
+
+                                            }
+
+                                        )
+                                    ),
+                                  ]
+
+                              )
+
+                          )
+                  );
 
                 },
               )

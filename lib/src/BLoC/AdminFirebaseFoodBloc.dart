@@ -209,7 +209,7 @@ class AdminFirebaseFoodBloc implements Bloc{
     print('itemId: $itemId');
     StorageReference storageReference_1 = storage.ref().child('foodItems').
     child(categoryName).child(
-        'itemName'+itemId+'.png');
+        itemName+itemId+'.png');
 
     print('_image2: $_image2');
 
@@ -339,7 +339,7 @@ class AdminFirebaseFoodBloc implements Bloc{
 
     _thisFoodItem.itemId=itemId;
 
-    String documentID = await _client.insertFoodItems(_thisFoodItem,sequenceNo,_firebaseUserEmail);
+    String documentID = await _client.insertFoodItems(_thisFoodItem,sequenceNo,_firebaseUserEmail,imageURL);
 
     print('added document: ${documentID}');
 
