@@ -678,13 +678,6 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                 ],
               ),
 
-              // YELLOW NAME AND PRICE ENDS HERE.
-
-              // CONTAINER WHERE CUSTOM CLIPPER LINE FUNCTION NEED TO BE PUTTED.
-              // ENDED HERE.
-
-              // BLACK CONTAINER WILL BE DELETED LATER.
-              // BLACK CONTAINER.
             ),
 
             // multiselect portion... begins here.
@@ -1988,9 +1981,7 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
       );
     } else {
       return
-          /*Directionality(
-        textDirection: TextDirection.rtl,
-        child:  */
+
           GridView.builder(
         itemCount: listpart1.length,
         gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(

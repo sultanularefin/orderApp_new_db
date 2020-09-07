@@ -6,6 +6,7 @@ class NewCategoryItem {
   int sequenceNo;
   String documentID;
   String fireStoreFieldName;
+  bool isSelected; // for AdminIngredientUpload to firestore only....
 //  String imageURL;
 //  double rating;
 //  double totalRating;
@@ -18,6 +19,7 @@ class NewCategoryItem {
         this.sequenceNo,
         this.documentID,
         this.fireStoreFieldName,
+        this.isSelected:false, // for AdminIngredientUpload to firestore only....
 //        this.imageURL,
 //        this.rating,
 //        this.totalRating,

@@ -2,32 +2,23 @@
 // dependency files
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodgallery/src/BLoC/AdminFirebaseIngredientBloc.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-//import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
+
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
 
-// Screen files.
-//import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
-//import 'package:foodgallery/src/screens/workspace_spinkit.dart';
-
-// model, dummy data file:
-
-//import '../../models/itemData.dart';
-
-//import '../../models/itemData.dart';
+import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 
-
-//final Firestore firestore = Firestore();
 
 class CategoryItem {
   CategoryItem(this.index,this.name,this.icon);
@@ -59,13 +50,8 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
   _AddDataState({firestore});
   File _image;
 
-  //  final _formKey = GlobalKey();
-
   final _formKey = GlobalKey<FormState>();
 
-  //  final _itemData = new ItemData();
-
-//  final _ingredientData = IngredientData();
 
   int _currentCategory= 0;
   bool _loadingState = false;
@@ -85,23 +71,6 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
 
 
-//
-
-
-    //The method setImage isn't defined for the class 'ItemData';
-/*
-    _ingredientData.setImage = image;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseUser user = await _auth.currentUser();
-
-    _ingredientData.setUser =user.email;
-
-    setState(() {
-      _image = image;
-    });
-
-    */
-
 
     blocAdminIngredientFBase.setImage(image);
 
@@ -113,17 +82,103 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
     blocAdminIngredientFBase.setUser(user.email);
 
-//    _itemData.setUser =user.email;
-
-
     setState(() {
       _image = image;
     });
   }
 
-//  final Firestore firestore = Firestore.instance;
+  Widget _buildOneCheckBoxIngredientOfFoodCategory(NewCategoryItem ct, int index) {
+    return Container(
+      child: ct.isSelected ==true
 
-//  CollectionReference get messages => firestore.collection('messages');
+            ? Container(
+          margin: EdgeInsets.fromLTRB(12, 2, 12, 5),
+          width: displayWidth(context) / 2.6,
+          child: RaisedButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            color: Color(0xffFFE18E),
+            elevation: 2.5,
+            shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+              side: BorderSide(
+                color: Color(0xffF7F0EC),
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+
+            child: Container(
+//              alignment: Alignment.center,
+              child:
+              CheckboxListTile(
+                  title: Text('${ct.categoryName}'),
+//                  value: _itemData.passions[ItemData.PassionCooking],
+              value: ct.isSelected,
+                  onChanged: (val) {
+
+
+                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseIngredientBloc>(context);
+                    blocAdminIngredientFBase.toggoleMultiSelectCategoryValue(index);
+
+                  }
+
+              ),
+
+
+
+            ),
+            onPressed: () {
+
+              final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseIngredientBloc>(context);
+              blocAdminIngredientFBase.toggoleMultiSelectCategoryValue(index);
+
+            },
+          ),
+        )
+            : Container(
+
+          margin: EdgeInsets.fromLTRB(12, 5, 12, 5),
+          width: displayWidth(context) / 2.6,
+          child: OutlineButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            color: Color(0xffFEE295),
+            // clipBehavior:Clip.hardEdge,
+
+            borderSide: BorderSide(
+              color: Color(0xff53453D), // 0xff54463E
+              style: BorderStyle.solid,
+              width: 1,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            child: Container(
+
+              child:
+
+              CheckboxListTile(
+                  title: Text('${ct.categoryName}'),
+
+                  value: ct.isSelected,
+                  onChanged: (val) {
+
+
+                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseIngredientBloc>(context);
+                    blocAdminIngredientFBase.toggoleMultiSelectCategoryValue(index);
+
+                  }
+
+              ),
+            ),
+            onPressed: () {
+
+              final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseIngredientBloc>(context);
+              blocAdminIngredientFBase.toggoleMultiSelectCategoryValue(index);
+
+            },
+          ),
+        ));
+  }
 
 
   @override
@@ -144,9 +199,10 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
       );
     }
     else {
+      print('at _loadingState == false in AdminFirebase Ingredient...');
       return new Scaffold(
           key:_scaffoldKey,
-          appBar: AppBar(title: Text('Admin Firebase')),
+          appBar: AppBar(title: Text('Admin Firebase Ingredient')),
           body: Container(
             padding:
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
@@ -155,36 +211,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                 stream: blocAdminIngredientFBase.thisIngredientItemStream, //null,
                 initialData: blocAdminIngredientFBase.getCurrentIngredientItem,
                 builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                    case ConnectionState.none:
-                      return Container(
-
-                        child: Text('.....'),
-
-                      );
-                      break;
-                    case ConnectionState.active:
-                    default:
-                      if (!snapshot.hasData) {
-                        return Text('Loading...');
-                      }
-//          return Center(child:
-//          Text('${messageCount.toString()}')
-//          );
-                      else {
-
-
                         final NewIngredient currentIngredient = snapshot.data;
-
-
-
-
-
-//              ....
-//    return Builder(
-//    builder: (context) =>
-//    Form(
 
                         return Builder(
                             builder: (context) =>
@@ -216,10 +243,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                             ) : GestureDetector(
                                               onTap: () {
                                                 getImage();
-//                              _getBarCode(context);
 
-//                                print('onTap pressed instead of _getBarCode(context)');
-//                                print('Number: 2');
                                               }, child: new CircleAvatar(
 
                                                 backgroundColor: Colors.lightBlueAccent,
@@ -246,23 +270,88 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                             },
                                             onSaved: (val) =>
                                                 blocAdminIngredientFBase.setItemName(val),
-//                                      blocAdminFoodFBase.setItemName(val),
-//                                      setState(() => _ingredientData.ingredientName = val),
                                           ),
 
 
 
-                                          /*
-                                    SwitchListTile(
-                                      title: const Text('Is Available'),
-                                      value:currentIngredient.isAvailable,
-                                      onChanged: (bool val) =>
-                                          setState(() =>
-                                              blocAdminIngredientFBase.setIsAvailable(val)),
-//    _itemData.isAvailable = val)
-                                    ),
+
+                                          Container(
+
+                                            child: Text('ingredient of food item category: ',
+
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 34,
+                                                fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                                color: Colors.redAccent,
+                                                fontFamily: 'Itim-Regular',
+
+                                              )
+                                          ),
+                                          ),
+
+
+                                          Container(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 50, 0, 20),
+
+                                            child: Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+
+
+                                                  Container(
+
+                                                    width: displayWidth(context)/2,
+
+
+                                                    child:
+
+
+                                                    StreamBuilder<List<NewCategoryItem>>(
+                                                      stream: blocAdminIngredientFBase.getCategoryMultiSelectControllerStream ,
+                                                      initialData:blocAdminIngredientFBase.getCategoryTypesForDropDown,
+                                                      builder: (context, snapshot) {
+
+                                                        final List<NewCategoryItem> allCategories = snapshot.data;
+
+
+                                                        return
+
+                                                          GridView.builder(
+                                                            itemCount: allCategories.length,
+                                                            gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                                                              //Above to below for 3 not 2 Food Items:
+                                                              maxCrossAxisExtent: 300,
+                                                              mainAxisSpacing: 10, // H  direction
+                                                              crossAxisSpacing: 20,
+                                                              childAspectRatio: 290 / 100, /* (h/vertical)*/
+                                                            ),
+                                                            shrinkWrap: true,
+
+//        reverse: true,
+                                                            itemBuilder: (_, int index) {
+
+                                                              return _buildOneCheckBoxIngredientOfFoodCategory(
+                                                                  allCategories[index], index);
+                                                            },
+                                                          );
+
+
+                                                      }
+
+                                                      ,
+                                                    ),
+                                                  ),
+                                                ]
+                                            ),
+//                            Text('Subscribe'),
+                                          ),
+
 //
-*/
 
 
 
@@ -298,12 +387,6 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                           ),
                                                         )),);
 
-//                                            showDialog(
-//                                                context: context,
-//                                                builder: (BuildContext context) {
-//                                                  return Center(child: CircularProgressIndicator(),);
-//                                                });
-
                                                       if (_image == null) {
                                                         _showDialogImageNotAdded(context);
                                                         return Navigator.push(context,
@@ -312,13 +395,6 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                                     AdminFirebaseIngredient()));
                                                       }
 
-
-
-
-/*
-                                                int loginRequiredStatus = await _ingredientData
-                                                    .save(); // invokes the method in ItemData class.
-*/
                                                       int loginRequiredStatus =  await blocAdminIngredientFBase.save();
 
 
@@ -379,8 +455,8 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
                                 )
                         );
-                      };
-                  }
+
+
                 }
             ),
           )

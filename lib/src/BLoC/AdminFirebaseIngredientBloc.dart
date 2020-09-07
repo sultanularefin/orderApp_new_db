@@ -43,13 +43,11 @@ class AdminFirebaseIngredientBloc implements Bloc{
   bool _isDisposed_known_last_sequenceNumber = false;
 
 
-  List<NewCategoryItem>   _categoryTypesForDropDown;
-  List<NewCategoryItem> get getCategoryTypesForDropDown => _categoryTypesForDropDown;
-
-  final _categoryDropDownController = StreamController <List<NewCategoryItem>>.broadcast();
-
-  Stream  <List<NewCategoryItem>> get getCategoryDropDownControllerStream =>
-      _categoryDropDownController.stream;
+  List<NewCategoryItem>   _foodCategoryTypesForMultiSelect;
+  List<NewCategoryItem> get getCategoryTypesForDropDown => _foodCategoryTypesForMultiSelect;
+  final _categoryMultiSelectController = StreamController <List<NewCategoryItem>>.broadcast();
+  Stream  <List<NewCategoryItem>> get getCategoryMultiSelectControllerStream =>
+      _categoryMultiSelectController.stream;
 
 
 
@@ -75,17 +73,7 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
 
 
-  // CollectionReference get firestoreFoodItems => firestore.collection('foodItems');
-
-
-//  final FirebaseStorage storage = FirebaseStorage(storageBucket: 'gs://fluttercrudarefin.appspot.com');
-
   final FirebaseStorage storage = FirebaseStorage(storageBucket: 'gs://kebabbank-37224.appspot.com');
-
-//  CollectionReference get firestoreFoodItems => firestore.collection('extraIngredients');
-
-
-//  final FirebaseStorage storage = FirebaseStorage(storageBucket: 'gs://fluttercrudarefin.appspot.com');
 
 
 
@@ -107,71 +95,22 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
 
 
-/*
-  void setCategoryValue (String name,String shortName){
 
-    print('setting category name to: $name');
-    String categoryName = name.toLowerCase();
-
-    String shortCategoryName = shortName.toLowerCase();
-
-    _thisFoodItem.categoryName=name;
-    _thisFoodItem.shorCategoryName= shortCategoryName;
-
-    _foodItemController.sink.add(_thisFoodItem);
-
-  }
-
-  */
 
   void setUser(var param){
     _firebaseUserEmail = param;
 
   }
 
-  /*
-
-  void setIsHot(bool param){
-    FoodItemWithDocID temp = new FoodItemWithDocID();
-    temp= _thisFoodItem;
-    temp.isHot = param;
-    _thisFoodItem = temp;
-    _foodItemController.sink.add(_thisFoodItem);
-
-  }
-  */
-
-/*
-
-  void setIsAvailable(var param){
-    FoodItemWithDocID temp = new FoodItemWithDocID();
-    temp= _thisFoodItem;
-    temp.isAvailable = param;
-
-    _thisFoodItem = temp;
-
-    _foodItemController.sink.add(_thisFoodItem);
-  }
-*/
-
   void setItemName(var param){
 
-//    _thisFoodItem
-//    FoodItemWithDocID
     NewIngredient temp = new NewIngredient();
     temp= _thisIngredientItem;
     temp.ingredientName = param;
 
     _thisIngredientItem= temp;
-//    _thisFoodItem = temp;
-
 
     _ingredientItemController.sink.add(_thisIngredientItem);
-//    _foodItemController.sink.add(_thisFoodItem);
-
-
-
-//    _firebaseUserEmail = param;
 
   }
 
@@ -213,29 +152,30 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
     }
   }
+  void toggoleMultiSelectCategoryValue (int index){
 
+    // print('setting category name to: $name');
+
+
+
+     _foodCategoryTypesForMultiSelect[index].isSelected= !_foodCategoryTypesForMultiSelect[index].isSelected;
+
+//    String shortCategoryName =  _categoryTypesForDropDown[index].fireStoreFieldName.toLowerCase();
+
+
+
+//    _thisFoodItem.categoryName = categoryName;
+//    _thisFoodItem.shorCategoryName= shortCategoryName;
+
+    _categoryMultiSelectController.sink.add(_foodCategoryTypesForMultiSelect);
+
+  }
 
 
 
   Future<String> _uploadFile(String itemId,itemName) async {
 
     print('at _uploadFile: ');
-
-/*
-    print('itemId: $itemId');
-    StorageReference storageReference_1 = storage.ref().child('foodItems').
-    child(categoryName).child(
-        'itemName'+itemId+'.png');
-
-
-
-
-    print('ingredientId: $ingredientId');
-    StorageReference storageReference_1 = storage.ref().child('ingredientitems').
-    child(_firebaseUser).child(
-        'ingredientname'+ingredientId+'.png');
-
-    */
 
     print('itemId: $itemId');
     StorageReference storageReference_1 = storage.ref().child('extraIngredients').
@@ -276,38 +216,6 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
 
   }
-
-  /*
-  void getLastSequenceNumberFromFireBaseFoodItems() async {
-
-
-
-      print('at get Last SequenceNumberFromFireBaseFoodItems()');
-
-
-
-      if (_isDisposed_known_last_sequenceNumber == false) {
-
-        var snapshot = await _client.getLastSequenceNumberFromFireBaseFoodItems();
-        List docList = snapshot.documents;
-
-        FoodItemWithDocID lastOne = new FoodItemWithDocID();
-
-        int lastIndex = docList[0]['sequenceNo'];
-
-
-        _thisFoodItem.sequenceNo= lastIndex;
-
-        _foodItemController.sink.add(_thisFoodItem);
-
-        _isDisposed_known_last_sequenceNumber =true;
-
-
-      }
-
-    }
-
-    */
 
 
   Future<int> save() async {
@@ -408,19 +316,12 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
 
 
-
-  List<FoodItemWithDocID> _allFoodsList=[];
-
-  List<NewCategoryItem> _allCategoryList=[];
-
-
-
 //    List<NewCategoryItem>_allCategoryList=[];
   final _client = FirebaseClient();
 
 
 
-  void initiateCategoryDropDownList()
+  void initiateCategoryForMultiSelectFoodCategory()
   {
 
     NewCategoryItem pizza = new NewCategoryItem(
@@ -488,8 +389,8 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
     );
 
-    _categoryTypesForDropDown = categoryItems2;
-    _categoryDropDownController.sink.add(_categoryTypesForDropDown);
+    _foodCategoryTypesForMultiSelect = categoryItems2;
+    _categoryMultiSelectController.sink.add(_foodCategoryTypesForMultiSelect);
 
   }
   // CONSTRUCTOR BIGINS HERE..
@@ -499,6 +400,8 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
     print('at AdminFirebaseIngredientBloc  ......()');
 
+
+    initiateCategoryForMultiSelectFoodCategory();
 
 
 
@@ -535,7 +438,7 @@ class AdminFirebaseIngredientBloc implements Bloc{
   void dispose() {
     _ingredientItemController.close();
 //    _foodItemController.close();
-    _categoryDropDownController.close();
+    _categoryMultiSelectController.close();
 
 //    _categoriesController.close();
 //    _allIngredientListController.close();
