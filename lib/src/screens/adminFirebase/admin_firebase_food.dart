@@ -125,12 +125,6 @@ class _AddDataState extends State<AdminFirebaseFood> {
     print('_currentCategory: $_currentCategory');
 
 
-//
-
-
-    //The method setImage isn't defined for the class 'ItemData';
-
-//    _itemData.setImage = image;
 
     blocAdminFoodFBase.setImage(image);
 

@@ -878,12 +878,12 @@ class FirebaseClient {
       'isHot':x.isHot,
       'uploadedBy':email,
       'uploadDate':FieldValue.serverTimestamp(),
-//      'priceinEuro': priceInEuro,
-//      'isHot':isHot,
-//      'itemName':itemName,
-//      'categoryName': categoryName,
-//      'ingredients':ingredients,
-      'imageURL':x.imageURL,
+
+
+      'imageURL': Uri.decodeComponent(x.imageURL.replaceAll(
+//          'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
+      'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/',
+          '').replaceAll('?alt=media', '')),
       'itemID':x.itemId,
 
 

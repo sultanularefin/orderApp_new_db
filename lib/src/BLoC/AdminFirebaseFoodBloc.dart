@@ -91,7 +91,6 @@ class AdminFirebaseFoodBloc implements Bloc{
 
   void setImage(File localURL){
     print('localURL : $localURL');
-
     _image2=localURL;
 
   }
@@ -282,7 +281,19 @@ class AdminFirebaseFoodBloc implements Bloc{
     itemId = await generateItemId(6);
 
     print('itemId: $itemId');
-    imageURL =  await _uploadFile(itemId,_thisFoodItem.itemName);
+
+    if(_image2!=null) {
+      imageURL = await _uploadFile(itemId, _thisFoodItem.itemName);
+    }else{
+
+      String dummyImage= 'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/404%2FfoodItem404.jpg?alt=media&token=84dfe434-e7a1-4009-bb19-8658fdad2e32';
+
+
+      Uri.decodeComponent(dummyImage.replaceAll(
+          'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/',
+          '').replaceAll('?alt=media', ''));
+
+    }
 
     var uri = Uri.parse(imageURL);
     // print(uri.isScheme("HTTP"));  // Prints true.
