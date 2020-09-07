@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/AdminFirebaseFoodBloc.dart';
 import 'package:foodgallery/src/BLoC/AdminFirebaseIngredientBloc.dart';
-import 'package:foodgallery/src/BLoC/UnPaidDetailsBloc.dart';
+
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
 
@@ -28,7 +28,7 @@ import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_food.dart';
 import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_ingredient.dart';
 // import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
-import 'package:wakelock/wakelock.dart';
+
 
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -43,27 +43,18 @@ import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 //import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
-import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 
-//import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:logger/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:permission_handler/permission_handler.dart';
-import 'package:system_shortcuts/system_shortcuts.dart';
-//import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-//import 'package:neumorphic/neumorphic.dart';
 
-//C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/neumorphic-0.3.0/lib/src/components/neu_card.dart
-// local packages
+import 'package:system_shortcuts/system_shortcuts.dart';
+
 
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
 
-// Screen files.
 import 'package:foodgallery/src/welcomePage.dart';
 
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';

@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2019 Razeware LLC
- *
- */
-
 import 'dart:async';
 //import 'dart:convert' show json;
 
@@ -16,20 +11,8 @@ import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 //import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:zomatoblock/UI/restaurant_tile.dart';
-//import './../Config/Secret.dart';
 
-
-//import 'location.dart';
-//import 'restaurant.dart';
-
-//import 'package:foodgallery/src/DataLayer/itemData.dart';
-//    import 'package:foodgallery/src/DataLayer/FoodItem.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
-//import 'package:foodgallery/src/DataLayer/CategoryItemsLIst.dart';
-//    ''file:
-///C:/Users/Taxi/Programs/foodgallery/lib/src/DataLayer/models/NewCategoryItem.dart'tegory.dart';
-
 
 
 
@@ -41,27 +24,13 @@ class OrderedFood{
 //  final String foodItemImageURL;
   final double discount;
   final String image;
-//  int          quantity;
-//  final String foodItemSize;
-// final String foodItemOrderID;     // random might not be needed.
-//  List<NewIngredient> selectedIngredients;
-//
-//  category
-//  default_sauces
-//  discount
-//  image
 
   OrderedFood(
       {
         this.category,
         this.discount,
         this.image,
-//        this.foodDocumentId,
-//        this.quantity,
-//        this.foodItemSize,
-//        this.selectedIngredients,
 
-        // this.foodItemOrderID,
       }
       );
 
@@ -847,7 +816,7 @@ class FirebaseClient {
   Future<String> insertFoodItems(/*Order currentOrderToFirebase, String orderBy, String paidType, String restaurantName */
 //      String name,int sequenceNo,
 
-  FoodItemWithDocID x, int sequenceNo, String email
+  FoodItemWithDocID x, int sequenceNo, String email, String imageURL
       )async {
 
     Timestamp date ;
@@ -857,8 +826,8 @@ class FirebaseClient {
     document('kebab_bank').
 
     collection('foodItems').add(<String, dynamic>{
-      'category':'someC',
-      'categoryShort':'someC',
+      'category':x.categoryName,
+      'categoryShort':x.shorCategoryName,
       'default_juust':'dj',
       'default_kastike': 'dk',
       'ingredients': foodItemIngredientsInsertDummy(null),
@@ -879,11 +848,11 @@ class FirebaseClient {
       'uploadedBy':email,
       'uploadDate':FieldValue.serverTimestamp(),
 
-
       'imageURL': Uri.decodeComponent(x.imageURL.replaceAll(
 //          'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
       'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/',
           '').replaceAll('?alt=media', '')),
+
       'itemID':x.itemId,
 
 
