@@ -17,24 +17,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 // Screen files.
 //import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
-//import 'package:foodgallery/src/screens/workspace_spinkit.dart';
-
-// model, dummy data file:
-
-//import '../../models/itemData.dart';
-
-//import '../../models/itemData.dart';
-
-
-
-//final Firestore firestore = Firestore();
 
 class CategoryItem {
   CategoryItem(this.index,this.name,this.icon);
   final int index;
   final String name;
   final Icon icon;
-
 }
 
 
