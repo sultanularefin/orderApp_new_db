@@ -78,21 +78,6 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
   void setCategoryValue(int categoryValue){
 
-    /*
-    final blocAdminFoodFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
-
-
-
-    print('categoryItems[_currentCategory].name: ${categoryItems[categoryValue].categoryName}');
-    print('categoryItems[_currentCategory].fireStoreFieldName: ${categoryItems[categoryValue].fireStoreFieldName}');
-
-    // final blocAdminFoodFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
-    blocAdminFoodFBase.setCategoryValue(categoryItems[categoryValue].categoryName,
-        categoryItems[categoryValue].fireStoreFieldName);
-
-
-    */
-
     setState(() {
       _currentCategory =categoryValue;
     });
@@ -177,19 +162,6 @@ class _AddDataState extends State<AdminFirebaseFood> {
         backgroundColor: Colors.blue,
         body:Center(
           child: Text('....please wait....'),
-
-          /*
-          SpinKitFadingCircle(
-            itemBuilder: (BuildContext context, int index) {
-              return DecoratedBox(
-                decoration: BoxDecoration(
-                  color: index.isEven ? Colors.red : Colors.green,
-                ),
-              );
-            },
-          ),
-
-          */
         ),
       );
     }
@@ -206,34 +178,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                 stream: blocAdminFoodFBase.thisFoodItemStream, //null,
                 initialData: blocAdminFoodFBase.getCurrentFoodItem,
                 builder: (context, snapshot) {
-                  /*
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                    case ConnectionState.none:
-                      return Container(
-
-                        child: Text('.....'),
-
-                      );
-                      break;
-                    case ConnectionState.active:
-                    default:
-                      if (!snapshot.hasData) {
-                        return Text('Loading...');
-                      }
-//          return Center(child:
-//          Text('${messageCount.toString()}')
-//          );
-                      else {
-
-
-                        */
                   final FoodItemWithDocID currentFood = snapshot.data;
-
-
-
-
-
 
                   return Builder(
                       builder: (context) =>
@@ -263,15 +208,11 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                 child: Text('No image selected.'),)
 
                                           )
-
                                       ),
                                       ) : GestureDetector(
                                         onTap: () {
                                           getImage();
-//                              _getBarCode(context);
 
-//                                print('onTap pressed instead of _getBarCode(context)');
-//                                print('Number: 2');
                                         }, child: new CircleAvatar(
 
                                           backgroundColor: Colors.lightBlueAccent,

@@ -1374,29 +1374,11 @@ _batteryLevel = batteryLevel;
       return ' ';
     }
 
-//    var strings = text.OfType<String>().ToList();
-
-//    var strings = dlist.map((item) => item.price).toList();
-
-//    print ('stringList --> : $stringList');
-
-// print("text: $text");
     if (stringList.length == 0) {
       return " ";
     } else if (stringList == null) {
       return ' ';
     }
-//    else if (text.length <= 1) {
-//      return text.toUpperCase();
-//    }
-
-//    else {
-//      return stringList
-//          .map((word) => word.toString().split(' ')
-//          .map((word2) => word2[0].toUpperCase() + word2.substring(1)).join(' '))
-//          .join(', ');
-//
-//    }
 
     else {
       return stringList
@@ -1407,21 +1389,13 @@ _batteryLevel = batteryLevel;
           .join(' '))
           .join(', ');
     }
-//    word2[0].toUpperCase() + word2.substring(1)
 
-//    return "bash";
   }
 
-//  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
 
   Widget foodList(
       String categoryString, String searchString2, BuildContext context) {
-//    print('_allIngredientState: in FoodLIst: $allIngredients');
-//    final bloc = LocationQueryBloc();
 
-//    final blocZZ = FoodItemsQueryBloc();
-
-//    final foodGalleryBloc = BlocProvider2.of(context).getFoodGalleryBlockObject;
     final foodGalleryBloc = BlocProvider.of<FoodGalleryBloc>(context);
 
     return Container(

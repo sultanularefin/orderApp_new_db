@@ -496,15 +496,6 @@ class AdminFirebaseFoodBloc implements Bloc{
 
 
     print('at AdminFirebaseFoodBloc()');
-
-
-
-//    getAllIngredients();
-    // invoking this here to make the transition in details page faster.
-
-//    this.getAllFoodItems();
-//    this.getAllCategories();
-
   }
 
   // CONSTRUCTOR ENDS HERE..
