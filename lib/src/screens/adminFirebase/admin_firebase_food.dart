@@ -14,8 +14,12 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 
 
-import '../../BLoC/bloc_provider.dart';
-import './../../BLoC/AdminFirebaseFoodBloc.dart';
+import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/BLoC/bloc_provider.dart';
+import 'package:foodgallery/src/BLoC/AdminFirebaseFoodBloc.dart';
+//import '../../BLoC/bloc_provider.dart';
+//import './../../BLoC/AdminFirebaseFoodBloc.dart';
+import 'package:logger/logger.dart';
 
 
 //import 'package:fluttercrud/src/shared/category_Constants.dart' as CategoryItems;
@@ -166,6 +170,11 @@ class _AddDataState extends State<AdminFirebaseFood> {
 //  }
   @override
   Widget build(BuildContext context) {
+    var logger = Logger(
+      printer: PrettyPrinter(),
+    );
+
+    logger.w('at build of AdminFirebaseFood');
 
 
     final blocAdminFoodFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
@@ -195,6 +204,8 @@ class _AddDataState extends State<AdminFirebaseFood> {
       );
     }
     else {
+
+      print('at _loadingState == false in AdminFirebase food...');
       return new Scaffold(
           key:_scaffoldKey,
           appBar: AppBar(title: Text('Admin Firebase')),
@@ -205,6 +216,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                 stream: blocAdminFoodFBase.thisFoodItemStream, //null,
                 initialData: blocAdminFoodFBase.getCurrentFoodItem,
                 builder: (context, snapshot) {
+                  /*
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
                     case ConnectionState.none:
@@ -225,7 +237,10 @@ class _AddDataState extends State<AdminFirebaseFood> {
                       else {
 
 
+                        */
                         final FoodItemWithDocID currentFood = snapshot.data;
+
+
 
 
 
@@ -332,25 +347,6 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                       stream: blocAdminFoodFBase.getCategoryDropDownControllerStream,
                                                       initialData: blocAdminFoodFBase.getCategoryTypesForDropDown,
                                                       builder: (context, snapshot) {
-                                                        switch (snapshot.connectionState) {
-                                                          case ConnectionState.waiting:
-                                                          case ConnectionState.none:
-                                                            return Container(
-
-                                                              child: Text('.....'),
-
-                                                            );
-                                                            break;
-                                                          case ConnectionState.active:
-                                                          default:
-                                                            if (!snapshot.hasData) {
-                                                              return Text('Loading...');
-                                                            }
-//          return Center(child:
-//          Text('${messageCount.toString()}')
-//          );
-                                                            else {
-
 
                                                               final List<NewCategoryItem> allCategories = snapshot.data;
 
@@ -405,7 +401,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                                               );
                                                             }
-                                                        };}
+
                                                       ,
                                                     ),
                                                   ),
@@ -421,7 +417,6 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                               title: const Text('Is Hot'),
                                               value: currentFood.isHot, //_itemData.isHot,
                                               onChanged: (bool val) =>
-//    setState(() => _itemData.isHot = val)
                                               blocAdminFoodFBase.setIsHot(val)
 
                                           ),
@@ -570,8 +565,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                 )
                         );
-                      }
-                  };
+
                 },
               )
           )

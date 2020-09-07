@@ -190,12 +190,33 @@ class FirebaseClient {
   */
 
 //  Future<QuerySnapshot /*DocumentSnapshot */> getLastSequenceNumberFromFireBaseFoodItems() async{
-  Future<QuerySnapshot> getLastSequenceNumberFromFireBaseFoodItems() async{
+  Future<int> getLastSequenceNumberFromFireBaseFoodItems() async{
 
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
         .collection('foodItems').orderBy('sequenceNo',descending: true).limit(1).getDocuments();
+
+
+    print('snapshot: $snapshot');
+    if (snapshot==null)
+
+      {
+        print('..at snapshot==null of getLastSequenceNumberFromFireBaseFoodItems()> > ${snapshot==null}');
+        return 0;
+      }
+    else{
+
+      print('at else..... of getLastSequenceNumberFromFireBaseFoodItems()');
+//      var snapshot = await _client.getLastSequenceNumberFromFireBaseFoodItems();
+      List docList = snapshot.documents;
+
+      FoodItemWithDocID lastOne = new FoodItemWithDocID();
+
+      int lastIndex = docList[0]['sequenceNo'];
+
+      return lastIndex;
+    }
 //    where('sequenceNo', isEqualTo: 'Unpaid')
 
 
@@ -207,7 +228,7 @@ class FirebaseClient {
     */
 
 //    orderBy('_timeStampUTC', descending: true)
-    return snapshot;
+    ;
 
 //    orderBy('sequenceNo', descending: true).limit(1);
 //

@@ -502,9 +502,9 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
 
 
-    initiateCategoryDropDownList();
+//    initiateCategoryDropDownList();
 
-    getLastSequenceNumberFromFireBaseFoodItems();
+//    getLastSequenceNumberFromFireBaseFoodItems();
 
 
 

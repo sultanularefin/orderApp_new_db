@@ -604,7 +604,7 @@ _batteryLevel = batteryLevel;
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                                 child: Image.asset(
                                   'assets/unpaid_cash_card/unpaid.png',
 //                color: Colors.black,
@@ -653,7 +653,7 @@ _batteryLevel = batteryLevel;
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                                 child: Image.asset(
                                   'assets/history.png',
 //                color: Colors.black,
@@ -707,7 +707,7 @@ _batteryLevel = batteryLevel;
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                                 child:Row(
                                   children: [
                                     Icon(
@@ -720,11 +720,7 @@ _batteryLevel = batteryLevel;
                                       size: displayWidth(context) / 19,
                                       color: Color(0xff707070),
                                     ),
-                                    Icon(
-                                      Icons.food_bank,
-                                      size: displayWidth(context) / 19,
-                                      color: Color(0xff707070),
-                                    ),
+
                                   ],
                                 ),
 //                                child:....... 911_1_ work_1
@@ -783,14 +779,9 @@ _batteryLevel = batteryLevel;
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                                 child:Row(
                                   children: [
-                                    Icon(
-                                      Icons.fire_extinguisher_rounded,
-                                      size: displayWidth(context) / 19,
-                                      color: Color(0xff707070),
-                                    ),
                                     Icon(
                                       Icons.fire_extinguisher_rounded,
                                       size: displayWidth(context) / 19,
@@ -819,7 +810,7 @@ _batteryLevel = batteryLevel;
                                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
                                 child: Text(
-                                  'Admin Ingredient '.toUpperCase(),
+                                  'Add Ingredient '.toUpperCase(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 18,

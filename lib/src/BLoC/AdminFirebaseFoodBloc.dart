@@ -66,7 +66,7 @@ class AdminFirebaseFoodBloc implements Bloc{
 
   int sequenceNo= 0;
 
-  FoodItemWithDocID _thisFoodItem;
+  FoodItemWithDocID _thisFoodItem =new FoodItemWithDocID(isHot: true,);
   FoodItemWithDocID get getCurrentFoodItem => _thisFoodItem;
   final _foodItemController = StreamController <FoodItemWithDocID>();
   Stream<FoodItemWithDocID> get thisFoodItemStream => _foodItemController.stream;
@@ -256,12 +256,12 @@ class AdminFirebaseFoodBloc implements Bloc{
 
       if (_isDisposed_known_last_sequenceNumber == false) {
 
-        var snapshot = await _client.getLastSequenceNumberFromFireBaseFoodItems();
-        List docList = snapshot.documents;
-
-        FoodItemWithDocID lastOne = new FoodItemWithDocID();
-
-        int lastIndex = docList[0]['sequenceNo'];
+        int lastIndex = await _client.getLastSequenceNumberFromFireBaseFoodItems();
+//        List docList = snapshot.documents;
+//
+//        FoodItemWithDocID lastOne = new FoodItemWithDocID();
+//
+//        int lastIndex = docList[0]['sequenceNo'];
 
 
         _thisFoodItem.sequenceNo= lastIndex;
@@ -280,6 +280,8 @@ class AdminFirebaseFoodBloc implements Bloc{
     //  save() {
 
     itemId = await generateItemId(6);
+
+    print('itemId: $itemId');
     imageURL =  await _uploadFile(itemId,_thisFoodItem.itemName);
 
     var uri = Uri.parse(imageURL);
@@ -328,33 +330,19 @@ class AdminFirebaseFoodBloc implements Bloc{
     print('saving user using a web service');
 
     _thisFoodItem.itemName = titleCase(_thisFoodItem.itemName);
-    // DON'T DELETE THIS COMMENTS.. BELOW,INGREDIENTS ARE DUMMY FOR NOW.....
 
     List<String> x = new List<String>();
     x=['ingredient 1', 'ingredient 2', 'ingredient 3',];
-//     _thisFoodItem.ingredients = titleCase(x);
 
     _thisFoodItem.ingredients=x;
 
 
     _thisFoodItem.itemId=itemId;
 
-
-    //    Image Storage code TODO
-
-
-    //    await firestoreFoodItems.add(<String, dynamic>{
-
-
     String documentID = await _client.insertFoodItems(_thisFoodItem,sequenceNo,_firebaseUserEmail);
 
-//    DocumentReference document = await firestoreFoodItems.add(<String, dynamic>{
-
-
-
-//    });
     print('added document: ${documentID}');
-    //    }
+
 
     return(1);
 
@@ -362,10 +350,10 @@ class AdminFirebaseFoodBloc implements Bloc{
 
 
 
-
-  List<FoodItemWithDocID> _allFoodsList=[];
-
-  List<NewCategoryItem> _allCategoryList=[];
+//
+//  List<FoodItemWithDocID> _allFoodsList=[];
+//
+//  List<NewCategoryItem> _allCategoryList=[];
 
 
 
@@ -376,6 +364,8 @@ class AdminFirebaseFoodBloc implements Bloc{
 
   void initiateCategoryDropDownList()
   {
+
+    logger.i('at initiateCategoryDropDownList()');
 
     NewCategoryItem pizza = new NewCategoryItem(
       categoryName:'pizza',
@@ -446,17 +436,6 @@ class AdminFirebaseFoodBloc implements Bloc{
     _categoryTypesForDropDown = categoryItems2;
     _categoryDropDownController.sink.add(_categoryTypesForDropDown);
 
-
-
-//    _orderType = orderTypeSingleSelectArray;
-    // important otherwise => The getter 'sizedFoodPrices' was called on null.
-
-
-//    initiateAllMultiSelectOptions();
-
-//    _orderTypeController.sink.add(_orderType);
-
-
   }
   // CONSTRUCTOR BIGINS HERE..
 
@@ -469,7 +448,7 @@ class AdminFirebaseFoodBloc implements Bloc{
 
     initiateCategoryDropDownList();
 
-    getLastSequenceNumberFromFireBaseFoodItems();
+//    getLastSequenceNumberFromFireBaseFoodItems();
 
 
 
@@ -478,7 +457,7 @@ class AdminFirebaseFoodBloc implements Bloc{
 
 
 
-    print('at FoodGalleryBloc()');
+    print('at AdminFirebaseFoodBloc()');
 
 
 
@@ -508,10 +487,10 @@ class AdminFirebaseFoodBloc implements Bloc{
 //    _allExtraIngredientItemsController.close();
 
 //    _isDisposedIngredients=
-    _isDisposedIngredients = true;
-    _isDisposedFoodItems = true;
-    _isDisposedCategories = true;
-    _isDisposed_known_last_sequenceNumber = true;
+//    _isDisposedIngredients = true;
+//    _isDisposedFoodItems = true;
+//    _isDisposedCategories = true;
+//    _isDisposed_known_last_sequenceNumber = true;
 
 
   }
