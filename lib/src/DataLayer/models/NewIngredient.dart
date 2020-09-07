@@ -42,7 +42,7 @@ class NewIngredient {
         this.isDefault,
         this.extraIngredientOf,
         this.sequenceNo,
-        this.subgroup,
+        this.subgroup:'',
         this.tempIndex:0,
         this.isDeleted:false,
         this.itemId,

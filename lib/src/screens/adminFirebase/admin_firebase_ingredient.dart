@@ -95,8 +95,9 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
         child: ct.isSelected ==true
 
             ? Container(
-          margin: EdgeInsets.fromLTRB(12, 2, 12, 5),
-          width: displayWidth(context) / 2.6,
+          // margin: EdgeInsets.fromLTRB(5, 2, 5, 5),
+          width: displayWidth(context) / 2.8,
+          //color:Colors.red,
           child: RaisedButton(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             color: Color(0xffFFE18E),
@@ -140,8 +141,9 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
         )
             : Container(
 
-          margin: EdgeInsets.fromLTRB(12, 5, 12, 5),
-          width: displayWidth(context) / 2.6,
+          // margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          width: displayWidth(context) / 2.8,
+          //color:Colors.red,
           child: OutlineButton(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             color: Color(0xffFEE295),
@@ -190,8 +192,9 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
       child: ct.isSelected ==true
 
             ? Container(
-          margin: EdgeInsets.fromLTRB(12, 2, 12, 5),
-          width: displayWidth(context) / 2.6,
+          margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
+          width: displayWidth(context) / 2.8,
+        //color:Colors.red,
           child: RaisedButton(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             color: Color(0xffFFE18E),
@@ -235,8 +238,10 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
         )
             : Container(
 
-          margin: EdgeInsets.fromLTRB(12, 5, 12, 5),
-          width: displayWidth(context) / 2.6,
+        margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
+          // margin: EdgeInsets.fromLTRB(5, 2, 5, 5),
+          width: displayWidth(context) / 2.8,
+        //color:Colors.red,
           child: OutlineButton(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             color: Color(0xffFEE295),
@@ -366,7 +371,10 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                 return 'Please enter the Ingredient Name';
                                               }
                                             },
-                                            onSaved: (val) =>
+
+
+                                            // onSaved: (val) =>
+                                            onChanged: (val) =>
                                                 blocAdminIngredientFBase.setItemName(val),
                                           ),
 
@@ -380,7 +388,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontSize: 34,
+                                                fontSize: 29,
                                                 fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
                                                 color: Colors.redAccent,
@@ -413,10 +421,10 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                     itemCount: allCategories.length,
                                                     gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
                                                       //Above to below for 3 not 2 Food Items:
-                                                      maxCrossAxisExtent: 300,
+                                                      maxCrossAxisExtent: 220,
                                                       mainAxisSpacing: 10, // H  direction
                                                       crossAxisSpacing: 20,
-                                                      childAspectRatio: 290 / 100, /* (h/vertical)*/
+                                                      childAspectRatio: 200 / 110, /* (h/vertical)*/
                                                     ),
                                                     shrinkWrap: true,
 
@@ -456,7 +464,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                 ),
 
                                             Container(
-                                              width: displayWidth(context) / 4,
+                                              width: displayWidth(context) / 3,
                                               child:
                                               TextField(
                                                 keyboardType: TextInputType.number,
@@ -504,6 +512,24 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                           ),
 
                                           Container(
+
+                                            child: Text('subGroup....: ',
+
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 29,
+                                                  fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                                  color: Colors.redAccent,
+                                                  fontFamily: 'Itim-Regular',
+
+                                                )
+                                            ),
+                                          ),
+
+
+                                          Container(
                                             padding: const EdgeInsets.fromLTRB(
                                                 0, 50, 0, 20),
 
@@ -520,10 +546,10 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                     itemCount: allIngredientSubGroups.length,
                                                     gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
                                                       //Above to below for 3 not 2 Food Items:
-                                                      maxCrossAxisExtent: 300,
+                                                      maxCrossAxisExtent: 180,
                                                       mainAxisSpacing: 10, // H  direction
-                                                      crossAxisSpacing: 20,
-                                                      childAspectRatio: 290 / 100, /* (h/vertical)*/
+                                                      crossAxisSpacing: 10,
+                                                      childAspectRatio: 180 / 60, /* (h/vertical)*/
                                                     ),
                                                     shrinkWrap: true,
 
@@ -558,6 +584,14 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
                                                     //   the method 'validate' isn't defined for the class 'State'
 
+
+                                                    final FirebaseAuth _auth = FirebaseAuth.instance;
+                                                    final FirebaseUser user = await _auth.currentUser();
+
+
+                                                    blocAdminIngredientFBase.setUser(user.email);
+
+
                                                     if (form.validate()) {
                                                       form.save();
 
@@ -573,27 +607,10 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                           ),
                                                         )),);
 
-                                                      if (_image == null) {
-                                                        _showDialogImageNotAdded(context);
-                                                        return Navigator.push(context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    AdminFirebaseIngredient()));
-                                                      }
-
                                                       int loginRequiredStatus =  await blocAdminIngredientFBase.save();
 
 
-                                                      if (loginRequiredStatus == 1) {
-                                                        return Navigator.push(context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    FoodGallery2())
-
-
-                                                        );
-                                                      }
-                                                      else{
+                                                      if (loginRequiredStatus == 0) {
                                                         _scaffoldKey.currentState.showSnackBar(
                                                           new SnackBar(duration: new Duration(seconds: 2), content:Container(
                                                             child:
@@ -606,6 +623,20 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                             ),
                                                           )),);
                                                       }
+                                                      else{
+                                                        _scaffoldKey.currentState.showSnackBar(
+                                                          new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                            child:
+                                                            new Row(
+                                                              children: <Widget>[
+                                                                new CircularProgressIndicator(),
+                                                                new Text("success check firestore and storage...",style:
+                                                                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                              ],
+                                                            ),
+                                                          )),);
+                                                      }
+
                                                     }
                                                     else {
                                                       Scaffold.of(context)

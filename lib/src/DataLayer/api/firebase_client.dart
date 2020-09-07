@@ -756,34 +756,58 @@ class FirebaseClient {
 
     return orderDocId;
 
-
   }
 
-
-  Future<String> insertIngredientItems(NewIngredient x, String email
+  // _thisFoodItem, sequenceNo, _firebaseUserEmail, imageURL
+  Future<String> insertIngredientItems(NewIngredient x,int sequenceNo, String email, String imageURL
       )async {
 
     Timestamp date ;
     String orderDocId='';
 
+    String imageURLFinal1='';
+    var uri = Uri.parse(imageURL);
+
+    print('imageURL at insertIngredientItems ...: $imageURL');
+    // print(uri.isScheme("HTTP"));  // Prints true.
+
+    if(uri.isScheme("HTTP")||(uri.isScheme("HTTPS"))){
+      print('on of them is true');
+
+
+      String imageURLFinal2=imageURL;
+      String iteration2 = Uri.decodeComponent(imageURLFinal2).replaceAll(
+          'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/',
+          '');
+
+      // https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/404%2Fingredient404.jpg?alt=media&token=0bea2b84-04ca-4ec8-8ed9-b355b8fb0bb7
+
+
+      String stringTokenizing2 = iteration2.substring(0, iteration2.indexOf('?'));
+
+      imageURLFinal1= stringTokenizing2;
+    }
+    else{
+      imageURLFinal1= imageURL;
+    }
+
     DocumentReference document = await Firestore.instance.collection("restaurants").
     document('kebab_bank').
 
-    collection('foodItems').add(<String, dynamic>{
+    collection('extraIngredients').add(<String, dynamic>{
 //      'category':'someC',
 //      'categoryShort':'someC',
 
-    'extraIngredientOf':'pizza',
-
+    'extraIngredientOf':x.extraIngredientOf,
       // 'ingredients': foodItemIngredientsInsertDummy1(null),
       'name':x.ingredientName,
       'uploadedBy':email,
       'uploadDate':FieldValue.serverTimestamp(),
-
-      'imageURL':x.imageURL,
+      'image':imageURLFinal1,
       'itemID':x.itemId,
-
-
+      'price':x.price,
+          'sequenceNo':sequenceNo,
+    'subGroup':x.subgroup,
 
     }).whenComplete(() => print("called when future completes for food Item insert...."))
         .then((document) {
