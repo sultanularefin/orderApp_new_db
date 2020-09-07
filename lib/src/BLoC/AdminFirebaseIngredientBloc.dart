@@ -1,5 +1,6 @@
 
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/models/IngredientSubgroup.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
@@ -48,6 +49,13 @@ class AdminFirebaseIngredientBloc implements Bloc{
   final _categoryMultiSelectController = StreamController <List<NewCategoryItem>>.broadcast();
   Stream  <List<NewCategoryItem>> get getCategoryMultiSelectControllerStream =>
       _categoryMultiSelectController.stream;
+
+
+  List<IngredientSubgroup>_ingredientGroupes;
+  List<IngredientSubgroup> get getIngredientTypes => _ingredientGroupes;
+  final _ingredientsGroupsController = StreamController <List<IngredientSubgroup>>.broadcast();
+  Stream  <List<IngredientSubgroup>> get getIngredientGroupsControllerStream =>
+      _ingredientsGroupsController.stream;
 
 
 
@@ -102,6 +110,21 @@ class AdminFirebaseIngredientBloc implements Bloc{
 
   }
 
+  void setPrice(String priceText){
+
+//    double minutes2 = double.parse(minutes);
+    double price = double.parse(priceText);
+    NewIngredient temp = new NewIngredient();
+    temp= _thisIngredientItem;
+    temp.price= price;
+
+    _thisIngredientItem= temp;
+
+    _ingredientItemController.sink.add(_thisIngredientItem);
+
+  }
+
+
   void setItemName(var param){
 
     NewIngredient temp = new NewIngredient();
@@ -153,24 +176,19 @@ class AdminFirebaseIngredientBloc implements Bloc{
     }
   }
   void toggoleMultiSelectCategoryValue (int index){
-
-    // print('setting category name to: $name');
-
-
-
      _foodCategoryTypesForMultiSelect[index].isSelected= !_foodCategoryTypesForMultiSelect[index].isSelected;
-
-//    String shortCategoryName =  _categoryTypesForDropDown[index].fireStoreFieldName.toLowerCase();
-
-
-
-//    _thisFoodItem.categoryName = categoryName;
-//    _thisFoodItem.shorCategoryName= shortCategoryName;
 
     _categoryMultiSelectController.sink.add(_foodCategoryTypesForMultiSelect);
 
   }
 
+
+  void toggoleMultiSelectSubgroupValue (int index){
+    _ingredientGroupes[index].isSelected= !_ingredientGroupes[index].isSelected;
+
+    _categoryMultiSelectController.sink.add(_foodCategoryTypesForMultiSelect);
+
+  }
 
 
   Future<String> _uploadFile(String itemId,itemName) async {
@@ -319,7 +337,27 @@ class AdminFirebaseIngredientBloc implements Bloc{
 //    List<NewCategoryItem>_allCategoryList=[];
   final _client = FirebaseClient();
 
+  void initiateIngredientGroups()
+  {
 
+    List<IngredientSubgroup> ingredientSubgroups = new List<IngredientSubgroup>();
+
+    IngredientSubgroup liha = new IngredientSubgroup(ingredientSubgroupName: 'liha',isSelected: false);
+
+    IngredientSubgroup hedelma = new IngredientSubgroup(ingredientSubgroupName: 'hedelma',isSelected: false);
+
+
+    ingredientSubgroups.addAll([
+
+
+      liha ,hedelma
+      ]
+    );
+
+    _ingredientGroupes =ingredientSubgroups;
+    _ingredientsGroupsController.sink.add(_ingredientGroupes);
+
+  }
 
   void initiateCategoryForMultiSelectFoodCategory()
   {
@@ -401,6 +439,7 @@ class AdminFirebaseIngredientBloc implements Bloc{
     print('at AdminFirebaseIngredientBloc  ......()');
 
 
+    initiateIngredientGroups();
     initiateCategoryForMultiSelectFoodCategory();
 
 
@@ -439,14 +478,9 @@ class AdminFirebaseIngredientBloc implements Bloc{
     _ingredientItemController.close();
 //    _foodItemController.close();
     _categoryMultiSelectController.close();
+    _ingredientsGroupsController.close();
 
-//    _categoriesController.close();
-//    _allIngredientListController.close();
-//    _cheeseItemsControllerFoodGallery.close();
-//    _sauceItemsControllerFoodGallery.close();
-//    _allExtraIngredientItemsController.close();
 
-//    _isDisposedIngredients=
     _isDisposedIngredients = true;
     _isDisposedFoodItems = true;
     _isDisposedCategories = true;
