@@ -99,14 +99,17 @@ class AdminFirebaseFoodBloc implements Bloc{
 
 
 
-  void setCategoryValue (String name,String shortName){
+  void setCategoryValue (int index){
 
-    print('setting category name to: $name');
-    String categoryName = name.toLowerCase();
+    // print('setting category name to: $name');
 
-    String shortCategoryName = shortName.toLowerCase();
 
-    _thisFoodItem.categoryName=name;
+
+    String categoryName = _categoryTypesForDropDown[index].categoryName.toLowerCase();
+
+    String shortCategoryName =  _categoryTypesForDropDown[index].fireStoreFieldName.toLowerCase();
+
+    _thisFoodItem.categoryName = categoryName;
     _thisFoodItem.shorCategoryName= shortCategoryName;
 
     _foodItemController.sink.add(_thisFoodItem);
@@ -240,6 +243,31 @@ class AdminFirebaseFoodBloc implements Bloc{
 
     print('am i printed :   ????????????????????');
 
+
+    var uri = Uri.parse(urlString);
+    // print(uri.isScheme("HTTP"));  // Prints true.
+
+    if(uri.isScheme("HTTP")||(uri.isScheme("HTTPS"))){
+      print('on of them is true');
+
+    }
+
+    else{
+      print ('storage server error: ');
+      print("try VPN ___________________________________________");
+
+      logger.v("Verbose log");
+
+      logger.d("Debug log");
+
+      logger.i("Info log");
+
+      logger.w("Warning log");
+
+      logger.e("Error log");
+      // return 0;
+    }
+
     return urlString;
 
 
@@ -278,49 +306,30 @@ class AdminFirebaseFoodBloc implements Bloc{
   Future<int> save() async {
     //  save() {
 
+    setCategoryValue(0);
     itemId = await generateItemId(6);
 
     print('itemId: $itemId');
 
-    if(_image2!=null) {
+    String imageURL;
+
+    if(_image2 != null) {
       imageURL = await _uploadFile(itemId, _thisFoodItem.itemName);
     }else{
 
-      String dummyImage= 'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/404%2FfoodItem404.jpg?alt=media&token=84dfe434-e7a1-4009-bb19-8658fdad2e32';
+      print('_image2= $_image2');
+
+      String dummyImage= 'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/404%2FfoodItem404.jpg?alt=media';
 
 
-      Uri.decodeComponent(dummyImage.replaceAll(
+      imageURL= Uri.decodeComponent(dummyImage.replaceAll(
           'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/',
           '').replaceAll('?alt=media', ''));
 
     }
 
-    var uri = Uri.parse(imageURL);
-    // print(uri.isScheme("HTTP"));  // Prints true.
-
-    if(uri.isScheme("HTTP")||(uri.isScheme("HTTPS"))){
-      print('on of them is true');
-
-    }
-    else{
-      print ('storage server error: ');
-      print("try VPN ___________________________________________");
-
-      logger.v("Verbose log");
-
-      logger.d("Debug log");
-
-      logger.i("Info log");
-
-      logger.w("Warning log");
-
-      logger.e("Error log");
-      return 0;
-    }
-
-
-
     print('imageURL: $imageURL');
+
 
 
     print('itemId: $itemId');
@@ -348,17 +357,39 @@ class AdminFirebaseFoodBloc implements Bloc{
     _thisFoodItem.ingredients=x;
 
 
-    _thisFoodItem.itemId=itemId;
+    _thisFoodItem.itemId = itemId;
 
     String documentID = await _client.insertFoodItems(_thisFoodItem,sequenceNo,_firebaseUserEmail,imageURL);
 
-    print('added document: ${documentID}');
+    print('added document: $documentID');
 
+
+   clearSubscription();
 
     return(1);
 
   }
 
+
+
+    void clearSubscription(){
+
+
+
+
+
+    FoodItemWithDocID x = new FoodItemWithDocID(
+      isHot: true,
+      isAvailable: true,
+    );
+
+    _thisFoodItem=x;
+
+    // _thisFoodItem.isHot=true;
+    // _thisFoodItem.isAvailable=true;
+    _foodItemController.sink.add(_thisFoodItem);
+
+  }
 
 
 //
@@ -458,13 +489,6 @@ class AdminFirebaseFoodBloc implements Bloc{
 
 
     initiateCategoryDropDownList();
-
-//    getLastSequenceNumberFromFireBaseFoodItems();
-
-
-
-
-    // need to use this when moving to food Item Details page.
 
 
 

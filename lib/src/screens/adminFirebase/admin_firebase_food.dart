@@ -380,11 +380,14 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                       }).toList(),
                                                       onChanged: (val) {
                                                         blocAdminFoodFBase
-                                                            .setCategoryValue(
+                                                            .setCategoryValue(_currentCategory,
+                                                            /*
                                                             allCategories[_currentCategory]
                                                                 .categoryName,
                                                             allCategories[_currentCategory]
-                                                                .fireStoreFieldName);
+                                                                .fireStoreFieldName */
+
+                                                        );
                                                         setCategoryValue(val);
 
                                                       }
@@ -478,6 +481,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 //                                                  return Center(child: CircularProgressIndicator(),);
 //                                                });
 
+                                                /*
                                                 if (_image == null) {
                                                   _showDialogImageNotAdded(context);
                                                   return Navigator.push(context,
@@ -486,6 +490,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                               AdminFirebaseFood()));
                                                 }
 
+                                                */
 
 
 
@@ -525,11 +530,14 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                       new Row(
                                                         children: <Widget>[
                                                           new CircularProgressIndicator(),
-                                                          new Text("Something went wrong, Try VPN.",style:
+                                                          new Text("food item uploaded in DB....",style:
                                                           TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
                                                         ],
                                                       ),
                                                     )),);
+
+
+
 
 
                                                 }

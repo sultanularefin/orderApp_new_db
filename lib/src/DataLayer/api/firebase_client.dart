@@ -262,33 +262,39 @@ class FirebaseClient {
     return snapshot;
   }
 
+
+
+
 //  List <String> /*<OrderedFood>*/ convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) {
-    List <String> /*<OrderedFood>*/ foodItemIngredientsInsertDummy( List<FoodPropertyMultiSelect> multiSelects ) {
+    List <String> /*<OrderedFood>*/ foodItemIngredientsInsertDummy( List<NewIngredient> ingredients ) {
 
     print('at here... convertedMultiSelect(List<FoodPropertyMultiSelect> multiSelects) ... .... .... %%%%% ECHO');
 //    print('multiSelects: $multiSelects');
 
     List<String> multiSelectStrings = new List<String>();
 
-    if (multiSelects == null) {
-      multiSelectStrings.add("");
+    if (ingredients == null) {
+      multiSelectStrings.add('kebab');
+
+      multiSelectStrings.add('salaatti');
+
+      multiSelectStrings.add('salami');
+
       return multiSelectStrings;
     }
 
     int counter = 0;
 
-    List<FoodPropertyMultiSelect> selectedMultiSelects = new List<
-        FoodPropertyMultiSelect>(4);
+    List<NewIngredient> selectedMultiSelects = new List<NewIngredient>();
 
-    selectedMultiSelects =
-        multiSelects.where((element) => element.isSelected == true).toList();
+    selectedMultiSelects = ingredients;
 
     if (selectedMultiSelects.length != 0){
       selectedMultiSelects.forEach((oneFoodPropertyMultiSelect) {
         print('--------------------------------------');
-        print(
-            'oneFoodPropertyMultiSelect.itemFullName}: ${oneFoodPropertyMultiSelect
-                .itemFullName}');
+        // print(
+        //     'oneFoodPropertyMultiSelect.itemFullName}: ${oneFoodPropertyMultiSelect
+        //         .itemFullName}');
 
         print('--------------------------------------');
 
@@ -300,7 +306,7 @@ class FirebaseClient {
       */
 
         // FOR ARRAY..
-        multiSelectStrings.add(oneFoodPropertyMultiSelect.itemFullName);
+        multiSelectStrings.add(oneFoodPropertyMultiSelect.ingredientName);
         counter ++;
       });
 
@@ -828,10 +834,10 @@ class FirebaseClient {
     collection('foodItems').add(<String, dynamic>{
       'category':x.categoryName,
       'categoryShort':x.shorCategoryName,
-      'default_juust':'dj',
-      'default_kastike': 'dk',
+      'default_juust':'juusto',
+      'default_kastike': 'tonnikala',
       'ingredients': foodItemIngredientsInsertDummy(null),
-      'name':x.itemName+sequenceNo.toString(),
+      'name':x.itemName,
       'sequence_no':sequenceNo,
 
       'size': {
@@ -848,11 +854,10 @@ class FirebaseClient {
       'uploadedBy':email,
       'uploadDate':FieldValue.serverTimestamp(),
 
-      'imageURL': Uri.decodeComponent(x.imageURL.replaceAll(
+      'imageURL': Uri.decodeComponent(imageURL.replaceAll(
 //          'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/',
       'https://firebasestorage.googleapis.com/v0/b/linkupfoodgallery.appspot.com/o/',
           '').replaceAll('?alt=media', '')),
-
       'itemID':x.itemId,
 
 
