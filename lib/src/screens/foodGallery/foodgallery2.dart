@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:foodgallery/src/BLoC/AdminFirebaseCheeseBloc.dart';
 import 'package:foodgallery/src/BLoC/AdminFirebaseFoodBloc.dart';
 import 'package:foodgallery/src/BLoC/AdminFirebaseIngredientBloc.dart';
+import 'package:foodgallery/src/BLoC/AdminFirebaseSauceBloc.dart';
 
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
@@ -28,6 +29,7 @@ import 'package:foodgallery/src/DataLayer/models/Order.dart';
 import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_cheese.dart';
 import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_food.dart';
 import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_ingredient.dart';
+import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_sauces.dart';
 // import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 
@@ -887,6 +889,67 @@ _batteryLevel = batteryLevel;
                                 BlocProvider<AdminFirebaseCheeseBloc>(
                                   bloc: AdminFirebaseCheeseBloc(),
                                   child: AdminFirebaseCheese(),
+                                ),
+                          ),
+                        );
+                      },
+                    ),
+
+
+                    SizedBox(
+                      height: 50,
+                    ),
+                    ListTile(
+                      title: Container(
+                          color: Color(0xffFFE18E),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
+                                child:Row(
+                                  children: [
+                                    Icon(
+                                      Icons.fire_extinguisher_rounded,
+                                      size: displayWidth(context) / 19,
+                                      color: Color(0xff707070),
+                                    ),
+                                    Icon(
+                                      Icons.fire_extinguisher_rounded,
+                                      size: displayWidth(context) / 19,
+                                      color: Color(0xff707070),
+                                    ),
+                                  ],
+                                ),
+
+                              ),
+
+                              Container(
+//                          width: displayWidth(context)/3.9,
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+
+                                child: Text(
+                                  'Add Sauce'.toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'historia',
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )
+//                      Text('history'),
+                            ],
+                          )),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            opaque: false,
+                            transitionDuration: Duration(milliseconds: 900),
+                            pageBuilder: (_, __, ___) =>
+                                BlocProvider<AdminFirebaseSauceBloc>(
+                                  bloc: AdminFirebaseSauceBloc(),
+                                  child: AdminFirebaseSauces(),
                                 ),
                           ),
                         );

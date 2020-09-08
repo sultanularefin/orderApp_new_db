@@ -187,8 +187,6 @@ class _AddDataState extends State<AdminFirebaseSauces> {
                                           return 'Please enter the sauce Name';
                                         }
                                       },
-
-
                                       // onSaved: (val) =>
                                       onChanged: (val) =>
                                           blocAdminSauceFBase.setItemName(val),
@@ -328,7 +326,7 @@ class _AddDataState extends State<AdminFirebaseSauces> {
                                                       new Row(
                                                         children: <Widget>[
                                                           new CircularProgressIndicator(),
-                                                          new Text("success check firestore and storage...",style:
+                                                          new Text("success! sauce added check firestore and storage",style:
                                                           TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
                                                         ],
                                                       ),
