@@ -3,59 +3,48 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:foodgallery/src/BLoC/AdminFirebaseCheeseBloc.dart';
-//import 'package:foodgallery/src/BLoC/AdminFirebaseIngredientBloc.dart';
-import 'package:foodgallery/src/BLoC/bloc_provider.dart';
-import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
-//import 'package:foodgallery/src/DataLayer/models/IngredientSubgroup.dart';
-//import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 
-//import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/BLoC/AdminFirebaseSauceBloc.dart';
+
+import 'package:foodgallery/src/BLoC/bloc_provider.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
+
 
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
+
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
 
 
-class CategoryItem {
-  CategoryItem(this.index,this.name,this.icon);
-  final int index;
-  final String name;
-  final Icon icon;
-}
 
 
 
-class AdminFirebaseCheese extends StatefulWidget {
-//  AdminFirebase({this.firestore});
+
+class AdminFirebaseSauces extends StatefulWidget {
 
   final Widget child;
 
-//  final Firestore firestore = Firestore.instance;
-
-  AdminFirebaseCheese({Key key, this.child}) : super(key: key);
+  AdminFirebaseSauces({Key key, this.child}) : super(key: key);
   _AddDataState createState() => _AddDataState();
 
 }
 
 
-class _AddDataState extends State<AdminFirebaseCheese> {
+class _AddDataState extends State<AdminFirebaseSauces> {
 
-  final GlobalKey<ScaffoldState> _scaffoldKeyCheeseItemAdmin = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKeySauceItemAdmin = new GlobalKey<ScaffoldState>();
 
-//  _AddDataState({firestore});
+
   File _image;
 
   final _formKey = GlobalKey<FormState>();
   var onlyDigitsAndPoints = FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
   Radius zero = Radius.circular(2.0);
-//  Radius.circular(0.0);
+
 
   int _currentCategory= 0;
   bool _loadingState = false;
@@ -71,12 +60,12 @@ class _AddDataState extends State<AdminFirebaseCheese> {
     print('_image initially: $_image');
     print('image at getImage: $image');
 
-    final blocAdminCheeseFBase = BlocProvider.of<AdminFirebaseCheeseBloc>(context);
+    final blocAdminSauceFBase = BlocProvider.of<AdminFirebaseSauceBloc>(context);
 
 
 
 
-    blocAdminCheeseFBase.setImage(image);
+    blocAdminSauceFBase.setImage(image);
 
 
 
@@ -84,7 +73,7 @@ class _AddDataState extends State<AdminFirebaseCheese> {
     final FirebaseUser user = await _auth.currentUser();
 
 
-    blocAdminCheeseFBase.setUser(user.email);
+    blocAdminSauceFBase.setUser(user.email);
 
     setState(() {
       _image = image;
@@ -96,14 +85,14 @@ class _AddDataState extends State<AdminFirebaseCheese> {
   @override
   Widget build(BuildContext context) {
 
-    final blocAdminCheeseFBase =
-    /*final blocAdminFoodFBase = */ BlocProvider.of<AdminFirebaseCheeseBloc>(context);
+    final blocAdminSauceFBase =
+    /*final blocAdminFoodFBase = */ BlocProvider.of<AdminFirebaseSauceBloc>(context);
 
 
 //    scaffoldKey
     if(_loadingState ==true){
       return new Scaffold(
-        key:_scaffoldKeyCheeseItemAdmin,
+        key:_scaffoldKeySauceItemAdmin,
         backgroundColor: Colors.blue,
         body:Center(
           child:Text('...'),
@@ -113,17 +102,17 @@ class _AddDataState extends State<AdminFirebaseCheese> {
     else {
       print('at _loadingState == false in AdminFirebase Ingredient...');
       return new Scaffold(
-          key:_scaffoldKeyCheeseItemAdmin,
+          key:_scaffoldKeySauceItemAdmin,
           appBar: AppBar(title: Text('Admin Firebase Ingredient')),
           body: Container(
             padding:
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
 //              ....
-            child: StreamBuilder<CheeseItem>(
-                stream: blocAdminCheeseFBase.thisCheeseItemStream, //null,
-                initialData: blocAdminCheeseFBase.getCurrentCheeseItem,
+            child: StreamBuilder<SauceItem>(
+                stream: blocAdminSauceFBase.thisSauceItemStream, //null,
+                initialData: blocAdminSauceFBase.getCurrentSauceItem,
                 builder: (context, snapshot) {
-                  final CheeseItem currentIngredient = snapshot.data;
+                  final SauceItem currentIngredient = snapshot.data;
 
                   return Builder(
                       builder: (context) =>
@@ -147,7 +136,7 @@ class _AddDataState extends State<AdminFirebaseCheese> {
                                           child: new Container(
                                               padding: const EdgeInsets.all(0.0),
                                               child: new Container(
-                                                child: Text('No cheese selected.',
+                                                child: Text('No Sauce selected.',
                                                   style: TextStyle(
                                                     fontSize: 34,
                                                     fontWeight: FontWeight.normal,
@@ -184,7 +173,7 @@ class _AddDataState extends State<AdminFirebaseCheese> {
 
                                     TextFormField(
                                       decoration:
-                                      InputDecoration(labelText: 'cheese Item Name',
+                                      InputDecoration(labelText: 'sauce Item Name',
                                         labelStyle:TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.normal,
@@ -195,14 +184,14 @@ class _AddDataState extends State<AdminFirebaseCheese> {
                                         ),),
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          return 'Please enter the cheese Name';
+                                          return 'Please enter the sauce Name';
                                         }
                                       },
 
 
                                       // onSaved: (val) =>
                                       onChanged: (val) =>
-                                          blocAdminCheeseFBase.setItemName(val),
+                                          blocAdminSauceFBase.setItemName(val),
                                     ),
 
 
@@ -260,7 +249,7 @@ class _AddDataState extends State<AdminFirebaseCheese> {
                                                 print("price ....: $text");
 
 
-                                                final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseCheeseBloc>(context);
+                                                final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseSauceBloc>(context);
                                                 blocAdminIngredientFBase.setPrice(text);
 
                                               },
@@ -269,10 +258,6 @@ class _AddDataState extends State<AdminFirebaseCheese> {
                                               },
                                             ),
                                           ),
-
-
-
-
 
                                         ],
                                       ),
@@ -302,42 +287,42 @@ class _AddDataState extends State<AdminFirebaseCheese> {
                                               final FirebaseUser user = await _auth.currentUser();
 
 
-                                              blocAdminCheeseFBase.setUser(user.email);
+                                              blocAdminSauceFBase.setUser(user.email);
 
 
                                               if (form.validate()) {
                                                 form.save();
 
-                                                _scaffoldKeyCheeseItemAdmin.currentState.showSnackBar(
+                                                _scaffoldKeySauceItemAdmin.currentState.showSnackBar(
                                                   new SnackBar(duration: new Duration(seconds: 5), content:Container(
                                                     child:
                                                     new Row(
                                                       children: <Widget>[
                                                         new CircularProgressIndicator(),
-                                                        new Text("uploading cheese Item data....",style:
+                                                        new Text("uploading sauce Item data....",style:
                                                         TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
                                                       ],
                                                     ),
                                                   )),);
 
-                                                int loginRequiredStatus =  await blocAdminCheeseFBase.save();
+                                                int loginRequiredStatus =  await blocAdminSauceFBase.save();
 
 
                                                 if (loginRequiredStatus == 0) {
-                                                  _scaffoldKeyCheeseItemAdmin.currentState.showSnackBar(
+                                                  _scaffoldKeySauceItemAdmin.currentState.showSnackBar(
                                                     new SnackBar(duration: new Duration(seconds: 2), content:Container(
                                                       child:
                                                       new Row(
                                                         children: <Widget>[
                                                           new CircularProgressIndicator(),
-                                                          new Text("Something went wrong with Cheese upload, Try VPN.",style:
+                                                          new Text("Something went wrong with sauce upload, Try VPN.",style:
                                                           TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
                                                         ],
                                                       ),
                                                     )),);
                                                 }
                                                 else{
-                                                  _scaffoldKeyCheeseItemAdmin.currentState.showSnackBar(
+                                                  _scaffoldKeySauceItemAdmin.currentState.showSnackBar(
                                                     new SnackBar(duration: new Duration(seconds: 2), content:Container(
                                                       child:
                                                       new Row(

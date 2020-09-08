@@ -17,11 +17,13 @@ import 'dart:core';
 
 class CheeseItem implements Comparable {
 
-  final String cheeseItemName;
-  final String imageURL;
-  final double price;
-  final String documentId;
-  final int    cheeseItemAmountByUser;
+  String cheeseItemName;
+  String imageURL;
+  double price;
+  String documentId;
+
+  int    cheeseItemAmountByUser;
+  String itemId;
 //  final int    sl;
         bool   isSelected;
         bool isDefaultSelected;
@@ -36,6 +38,7 @@ class CheeseItem implements Comparable {
         this.price:0.0,
         this.documentId,
         this.cheeseItemAmountByUser,
+        this.itemId:'',
 //        this.sl,
         this.isSelected:false,
         this.isDefaultSelected:false,
