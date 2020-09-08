@@ -1,6 +1,8 @@
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/api/firebase_clientAdmin.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
@@ -18,7 +20,7 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 
-import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
+
 
 class AdminFirebaseFoodBloc implements Bloc {
   var logger = Logger(
@@ -32,6 +34,8 @@ class AdminFirebaseFoodBloc implements Bloc {
   bool _isDisposedCategories = false;
 
   bool _isDisposed_known_last_sequenceNumber = false;
+  bool _isDisposedExtraIngredients = false;
+
 
   List<NewCategoryItem> _categoryTypesForDropDown;
   List<NewCategoryItem> get getCategoryTypesForDropDown =>
@@ -58,6 +62,10 @@ class AdminFirebaseFoodBloc implements Bloc {
   int sequenceNo = 0;
 // main foodItem bloc component starts here...
 
+
+  // main bloc component for uploading one foode item begins here..
+
+
   FoodItemWithDocID _thisFoodItem = new FoodItemWithDocID(
     isHot: true,
   );
@@ -65,6 +73,40 @@ class AdminFirebaseFoodBloc implements Bloc {
   final _foodItemController = StreamController<FoodItemWithDocID>();
   Stream<FoodItemWithDocID> get thisFoodItemStream =>
       _foodItemController.stream;
+
+
+  // ends here.
+
+
+  List<NewIngredient> _allExtraIngredients =[];
+
+  List<NewIngredient> get getAllExtraIngredients => _allExtraIngredients;
+  Stream<List<NewIngredient>> get getExtraIngredientItemsStream => _allExtraIngredientItemsController.stream;
+  final _allExtraIngredientItemsController = StreamController <List<NewIngredient>> /*.broadcast*/();
+
+
+
+
+
+
+  // cheese items
+  List<CheeseItem> _allCheeseItemsFoodGalleryBloc =[];
+  List<CheeseItem> get getAllCheeseItemsFoodGallery => _allCheeseItemsFoodGalleryBloc;
+  final _cheeseItemsControllerFoodGallery      =  StreamController <List<CheeseItem>>();
+  Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsControllerFoodGallery.stream;
+
+  // sauce items
+  List<SauceItem> _allSauceItemsFoodGalleryBloc =[];
+  List<SauceItem> get getAllSauceItemsFoodGallery => _allSauceItemsFoodGalleryBloc;
+  final _sauceItemsControllerFoodGallery      =  StreamController <List<SauceItem>>();
+  Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsControllerFoodGallery.stream;
+
+
+
+
+
+
+
 
 
 // main foodItem bloc component ends here...
@@ -239,7 +281,7 @@ class AdminFirebaseFoodBloc implements Bloc {
 
     if (_isDisposed_known_last_sequenceNumber == false) {
       int lastIndex =
-      await _client.getLastSequenceNumberFromFireBaseFoodItems();
+      await _clientAdmin.getLastSequenceNumberFromFireBaseFoodItems();
 //        List docList = snapshot.documents;
 //
 //        FoodItemWithDocID lastOne = new FoodItemWithDocID();
@@ -312,7 +354,7 @@ class AdminFirebaseFoodBloc implements Bloc {
 
     _thisFoodItem.itemId = itemId;
 
-    String documentID = await _client.insertFoodItems(
+    String documentID = await _clientAdmin.insertFoodItems(
         _thisFoodItem, sequenceNo, _firebaseUserEmail, imageURL);
 
     print('added document: $documentID');
@@ -341,7 +383,7 @@ class AdminFirebaseFoodBloc implements Bloc {
 //  List<NewCategoryItem> _allCategoryList=[];
 
 //    List<NewCategoryItem>_allCategoryList=[];
-  final _client = FirebaseClient();
+  final _clientAdmin = FirebaseClientAdmin();
 
   void initiateCategoryDropDownList() {
     logger.i('at initiateCategoryDropDownList()');
@@ -412,8 +454,226 @@ class AdminFirebaseFoodBloc implements Bloc {
   }
   // CONSTRUCTOR BIGINS HERE..
 
+
+
+  // this code bloc cut paste from foodGallery Bloc:
+  Future<void> getAllExtraIngredientsAdminConstructor() async {
+
+    print('at getAllExtraIngredientsConstructor()');
+
+
+
+    if (_isDisposedExtraIngredients == false) {
+
+      var snapshot = await _clientAdmin.fetchAllExtraIngredientsAdmin();
+      List docList = snapshot.documents;
+
+      List <NewIngredient> ingItems = new List<NewIngredient>();
+      ingItems = snapshot.documents.map((documentSnapshot) =>
+          NewIngredient.ingredientConvertExtra
+            (documentSnapshot.data, documentSnapshot.documentID)
+      ).toList();
+
+
+      List<String> documents = snapshot.documents.map((documentSnapshot) =>
+      documentSnapshot.documentID).toList();
+
+      print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+
+
+
+      ingItems.forEach((doc) {
+        print('one Extra . . . . . . . name: ${doc.ingredientName} documentID: ${doc.documentId}');
+//        String imageURL;
+//        double price;
+//        String documentId;
+//        doc['name'],
+//        price = data['price'].toDouble(),
+//        documentId = docID,
+
+      }
+      );
+
+
+
+      _allExtraIngredients = ingItems;
+//      _allIngItemsFGBloc = ingItems;
+
+      _allExtraIngredientItemsController.sink.add(_allExtraIngredients);
+
+//      _allIngredientListController.sink.add(_allIngItemsFGBloc);
+
+
+//    return ingItems;
+
+
+
+
+
+
+
+      _isDisposedExtraIngredients=true;
+
+
+
+
+    }
+    else {
+//      _isDisposedExtraIngredients == Element.true
+      return;
+    }
+  }
+
+
+
+
+  void getAllKastikeSaucesAdminConstructor() async {
+
+
+    var snapshot = await _clientAdmin.fetchAllKastikeORSaucesAdmin();
+    List docList = snapshot.documents;
+
+
+
+    List <SauceItem> sauceItems = new List<SauceItem>();
+    sauceItems = snapshot.documents.map((documentSnapshot) =>
+        SauceItem.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+    print('Ingredient documents are: $documents');
+
+
+
+    sauceItems.forEach((oneSauceItem) {
+      print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName}');
+    }
+
+    );
+
+
+
+
+    _allSauceItemsFoodGalleryBloc = sauceItems;
+    _sauceItemsControllerFoodGallery.sink.add(_allSauceItemsFoodGalleryBloc);
+
+
+
+    /*
+    _allSauceItemsDBloc = sauceItems;
+
+    _sauceItemsController.sink.add(_allSauceItemsDBloc);
+
+
+    _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
+
+    _selectedSauceListController.sink.add(_allSelectedSauceItems);
+
+    */
+
+
+//    return ingItems;
+
+  }
+
+
+
+  void getAllCheeseItemsJuustoAdminConstructor() async {
+
+
+    var snapshot = await _clientAdmin.fetchAllCheesesORjuustoAdmin();
+    List docList = snapshot.documents;
+
+
+
+    List <CheeseItem> cheeseItems = new List<CheeseItem>();
+    cheeseItems = snapshot.documents.map((documentSnapshot) =>
+        CheeseItem.fromMap
+          (documentSnapshot.data, documentSnapshot.documentID)
+
+    ).toList();
+
+
+
+
+    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    documentSnapshot.documentID
+    ).toList();
+
+
+    cheeseItems.forEach((oneCheeseItem) {
+
+      print('oneCheeseItem.cheeseItemName: ${oneCheeseItem.cheeseItemName}');
+
+
+
+//      if(oneCheeseItem.sl==1){
+//        oneCheeseItem.isSelected=true;
+//        oneCheeseItem.isDefaultSelected=true;
+//      }
+    }
+
+    );
+
+
+//    print('Ingredient documents are: $documents');
+
+
+
+    _allCheeseItemsFoodGalleryBloc  = cheeseItems;
+    _cheeseItemsControllerFoodGallery.sink.add(_allCheeseItemsFoodGalleryBloc);
+
+
+//    _allCheeseItemsDBloc = cheeseItems;
+
+//    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
+
+
+//    return ingItems;
+
+
+    /*
+    _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
+
+
+
+    logger.w('_allSelectedCheeseItems at getAllCheeseItemsConstructor():'
+        ' $_allSelectedCheeseItems');
+
+//    _selectedSauceListController.sink.add(_allSelectedSauceItems);
+//    _allSelectedCheeseItems =
+    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
+
+
+
+    */
+  }
+
+
+
+
   AdminFirebaseFoodBloc() {
+
+
+
     print('at AdminFirebaseFoodBloc ......()');
+
+
+
+
+    getAllExtraIngredientsAdminConstructor();
+
+    getAllKastikeSaucesAdminConstructor();
+
+    getAllCheeseItemsJuustoAdminConstructor();
+
+
 
     // getLastSequenceNumberFromFireBaseFoodItems();
     initiateCategoryDropDownList();

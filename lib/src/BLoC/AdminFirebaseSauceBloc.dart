@@ -1,4 +1,5 @@
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/api/firebase_clientAdmin.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 
 
@@ -231,7 +232,7 @@ class AdminFirebaseSauceBloc implements Bloc {
 
     _thisSauceItem.itemId = itemId;
 
-    String documentID = await _client.insertSauceItem(
+    String documentID = await _clientAdmin.insertSauceItem(
         _thisSauceItem, 4, _firebaseUserEmail, imageURL);
 
         // _thisIngredientItem, _firebaseUserEmail);
@@ -253,7 +254,7 @@ class AdminFirebaseSauceBloc implements Bloc {
   }
 
 //    List<NewCategoryItem>_allCategoryList=[];
-  final _client = FirebaseClient();
+  final _clientAdmin = FirebaseClientAdmin();
 
 
   AdminFirebaseSauceBloc() {

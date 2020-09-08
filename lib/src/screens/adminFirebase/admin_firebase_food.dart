@@ -173,7 +173,9 @@ class _AddDataState extends State<AdminFirebaseFood> {
           appBar: AppBar(title: Text('Admin Firebase')),
           body: Container(
               padding:
-              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              const EdgeInsets.symmetric(
+                  vertical: 0.0,
+                  horizontal: 10.0),
               child: StreamBuilder<FoodItemWithDocID>(
                 stream: blocAdminFoodFBase.thisFoodItemStream, //null,
                 initialData: blocAdminFoodFBase.getCurrentFoodItem,
@@ -193,19 +195,26 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                       GestureDetector(
                                         onTap: () {
                                           getImage();
-//                              _getBarCode(context);
-
-//                                print('onTap pressed instead of _getBarCode(context)');
-//                                print('Number: 1');
                                         }, child: new CircleAvatar(
 
                                           backgroundColor: Colors.lightBlueAccent,
-                                          radius: 80.0,
+                                          radius: 120.0,
 
                                           child: new Container(
                                               padding: const EdgeInsets.all(0.0),
                                               child: new Container(
-                                                child: Text('No image selected.'),)
+                                                child: Text('No foodItem selected.',
+
+                                                  style: TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                                    color: Colors.redAccent,
+                                                    fontFamily: 'Itim-Regular',
+
+                                                  ),
+                                                ),
+                                              )
 
                                           )
                                       ),
@@ -233,16 +242,24 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                     TextFormField(
                                       decoration:
-                                      InputDecoration(labelText: 'Item Name'),
+                                      InputDecoration(labelText: 'foodItem Name',
+
+                                        labelStyle:TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                          color: Colors.redAccent,
+                                          fontFamily: 'Itim-Regular',
+
+                                        ),
+                                      ),
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          return 'Please enter the Item Name';
+                                          return 'Please enter the foodItem Name';
                                         }
                                       },
                                       onSaved: (val) =>
                                           blocAdminFoodFBase.setItemName(val),
-//                                      setState(() => _itemData.itemName = val),
-
 
                                     ),
 
@@ -266,7 +283,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                     Container(
                                       padding: const EdgeInsets.fromLTRB(
-                                          0, 50, 0, 20),
+                                          0, 10, 0, 20),
 
                                       child: Row(
                                           mainAxisAlignment: MainAxisAlignment
@@ -281,12 +298,9 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                         .lightBlueAccent),),
                                             ),
 
-//                                  Icon(Icons.thumb_up),
+
                                             SizedBox(width: 10),
-//                                  ButtonTheme(
-//                                  alignedDropdown:true,
-//                                  Container(
-//                                    width: 150.0,
+
                                             Container(
 
                                               width: displayWidth(context)/2,
@@ -395,13 +409,14 @@ class _AddDataState extends State<AdminFirebaseFood> {
                               */
 
                                     Container(
+                                      height: 100,
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10.0, horizontal: 10.0),
                                         child: RaisedButton(
                                             color: Colors.yellowAccent,
                                             child: Text('Save',
                                               style: TextStyle(
-                                                  fontSize: 20, color: Colors
+                                                  fontSize: 40, color: Colors
                                                   .lightBlueAccent),),
                                             onPressed: () async {
 

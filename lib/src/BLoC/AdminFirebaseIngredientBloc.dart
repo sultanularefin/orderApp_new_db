@@ -1,4 +1,5 @@
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/api/firebase_clientAdmin.dart';
 import 'package:foodgallery/src/DataLayer/models/IngredientSubgroup.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
@@ -344,7 +345,7 @@ class AdminFirebaseIngredientBloc implements Bloc {
 
     _thisIngredientItem.itemId = itemId;
 
-    String documentID = await _client.insertIngredientItems(
+    String documentID = await _clientAdmin.insertIngredientItems(
         _thisIngredientItem, 4, _firebaseUserEmail, imageURL);
 
         // _thisIngredientItem, _firebaseUserEmail);
@@ -366,7 +367,7 @@ class AdminFirebaseIngredientBloc implements Bloc {
   }
 
 //    List<NewCategoryItem>_allCategoryList=[];
-  final _client = FirebaseClient();
+  final _clientAdmin = FirebaseClientAdmin();
 
   void initiateIngredientGroups() {
     List<IngredientSubgroup> ingredientSubgroups =

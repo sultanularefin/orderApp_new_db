@@ -1,4 +1,5 @@
 import 'package:foodgallery/src/BLoC/bloc.dart';
+import 'package:foodgallery/src/DataLayer/api/firebase_clientAdmin.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
@@ -16,7 +17,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 //MODELS
 
-import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
+//import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 
 class AdminFirebaseCheeseBloc implements Bloc {
   var logger = Logger(
@@ -210,7 +211,6 @@ class AdminFirebaseCheeseBloc implements Bloc {
   Future<int> save() async {
   logger.i('at save ...');
     itemId = await generateItemId(6);
-    //imageURL = await _uploadFile(itemId, _thisIngredientItem.ingredientName);
 
     String imageURL;
 
@@ -237,24 +237,14 @@ class AdminFirebaseCheeseBloc implements Bloc {
 
     print('_thisIngredientItem.ingredientName 1st : ${_thisCheeseItem.cheeseItemName}');
 
-//    String newIngredientName = titleCase(_thisIngredientItem.ingredientName);
-
-
-//  print('_thisIngredientItem.ingredientName 2nd : ${_thisIngredientItem.ingredientName}');
-
 
     _thisCheeseItem.itemId = itemId;
 
     String documentID = await _client.insertCheeseItem(
         _thisCheeseItem, 4, _firebaseUserEmail, imageURL);
 
-        // _thisIngredientItem, _firebaseUserEmail);
-
     print('added document: $documentID');
 
-
-
-    //    }
 
   _thisCheeseItem.price=0;
   _thisCheeseItem.cheeseItemName='';
@@ -267,7 +257,7 @@ class AdminFirebaseCheeseBloc implements Bloc {
   }
 
 //    List<NewCategoryItem>_allCategoryList=[];
-  final _client = FirebaseClient();
+  final _client = FirebaseClientAdmin();
 
 
   AdminFirebaseCheeseBloc() {
@@ -283,9 +273,6 @@ class AdminFirebaseCheeseBloc implements Bloc {
   @override
   void dispose() {
     _cheeseItemController.close();
-//    _foodItemController.close();
-//    _categoryMultiSelectController.close();
-//    _ingredientsGroupsController.close();
 
   }
 }
