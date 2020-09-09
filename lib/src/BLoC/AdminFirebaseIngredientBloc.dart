@@ -36,11 +36,11 @@ class AdminFirebaseIngredientBloc implements Bloc {
   final _categoryMultiSelectController =
   StreamController<List<NewCategoryItem>>.broadcast();
 
+  Stream<List<NewCategoryItem>> get getCategoryMultiSelectControllerStream =>
+      _categoryMultiSelectController.stream;
 
 
   // multiselect category controller codes begins here ......
-  Stream<List<NewCategoryItem>> get getCategoryMultiSelectControllerStream =>
-      _categoryMultiSelectController.stream;
 
   List<IngredientSubgroup> _ingredientGroupes;
   List<IngredientSubgroup> get getIngredientTypes => _ingredientGroupes;
@@ -48,6 +48,7 @@ class AdminFirebaseIngredientBloc implements Bloc {
   StreamController<List<IngredientSubgroup>>.broadcast();
   Stream<List<IngredientSubgroup>> get getIngredientGroupsControllerStream =>
       _ingredientsGroupsController.stream;
+
   // multiselect category controller codes ends here .....
 
 

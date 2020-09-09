@@ -93,16 +93,13 @@ class FirebaseClientAdmin {
 
   Future<QuerySnapshot> fetchAllCheesesORjuustoAdmin()async{
 
-    // print ('at here fetchAllIngredients ==================================== *************** ');
+     print ('at here fetchAllCheesesORjuustoAdmin() ======================= *************** ');
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection('juusto')/*.orderBy("sl", descending: false)*/
+        .collection('cheeses2')/*.orderBy("sl", descending: false)*/
         .getDocuments();
 
-//    var snapshot= Firestore.instance
-//        .collection("restaurants").document('kebab_bank').collection('foodItems')
-//        .getDocuments();
 
     return snapshot;
   }
@@ -114,12 +111,10 @@ class FirebaseClientAdmin {
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection('kastike')/*.orderBy("sl", descending: false) */
+        .collection('sauces2')/*.orderBy("sl", descending: false) */
         .getDocuments();
 
-//    var snapshot= Firestore.instance
-//        .collection("restaurants").document('kebab_bank').collection('foodItems')
-//        .getDocuments();
+
 
     return snapshot;
   }
@@ -131,12 +126,8 @@ class FirebaseClientAdmin {
 
     var snapshot = await Firestore.instance.collection("restaurants")
         .document('kebab_bank')
-        .collection('extraIngredients2')
+        .collection('extraIngredients')
         .getDocuments();
-
-//    var snapshot= Firestore.instance
-//        .collection("restaurants").document('kebab_bank').collection('foodItems')
-//        .getDocuments();
 
     return snapshot;
   }

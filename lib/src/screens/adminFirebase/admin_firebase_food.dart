@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
+import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -85,6 +88,304 @@ class _AddDataState extends State<AdminFirebaseFood> {
   }
 
 
+
+  Widget _buildOneCheckBoxCheeseItem(CheeseItem ct, int index) {
+    return Container(
+        child: ct.isSelected ==true
+
+            ? Container(
+          margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
+          width: displayWidth(context) / 2.8,
+          //color:Colors.red,
+          child: RaisedButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            color: Color(0xffFFE18E),
+            elevation: 2.5,
+            shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+              side: BorderSide(
+                color: Color(0xffF7F0EC),
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+
+            child: Container(
+//              alignment: Alignment.center,
+              child:
+              CheckboxListTile(
+                  title: Text('${ct.cheeseItemName}'),
+//                  value: _itemData.passions[ItemData.PassionCooking],
+                  value: ct.isSelected,
+                  onChanged: (val) {
+
+
+                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                    blocAdminIngredientFBase.toggoleMultiSelectCheeseValue(index);
+
+                  }
+
+              ),
+
+
+
+            ),
+            onPressed: () {
+
+              final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+              blocAdminIngredientFBase.toggoleMultiSelectCheeseValue(index);
+
+            },
+          ),
+        )
+            : Container(
+
+          margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
+          // margin: EdgeInsets.fromLTRB(5, 2, 5, 5),
+          width: displayWidth(context) / 2.8,
+          //color:Colors.red,
+          child: OutlineButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            color: Color(0xffFEE295),
+            // clipBehavior:Clip.hardEdge,
+
+            borderSide: BorderSide(
+              color: Color(0xff53453D), // 0xff54463E
+              style: BorderStyle.solid,
+              width: 1,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            child: Container(
+
+              child:
+
+              CheckboxListTile(
+                  title: Text('${ct.cheeseItemName}'),
+
+                  value: ct.isSelected,
+                  onChanged: (val) {
+
+
+                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                    blocAdminIngredientFBase.toggoleMultiSelectCheeseValue(index);
+
+                  }
+
+              ),
+            ),
+            onPressed: () {
+
+              final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+              blocAdminIngredientFBase.toggoleMultiSelectCheeseValue(index);
+
+            },
+          ),
+        ));
+  }
+
+
+
+
+  Widget _buildOneCheckBoxIngredient(NewIngredient ct, int index) {
+    return Container(
+        child: ct.isDefault ==true
+
+            ? Container(
+          margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
+          width: displayWidth(context) / 2.8,
+          //color:Colors.red,
+          child: RaisedButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            color: Color(0xffFFE18E),
+            elevation: 2.5,
+            shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+              side: BorderSide(
+                color: Color(0xffF7F0EC),
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+
+            child: Container(
+//              alignment: Alignment.center,
+              child:
+              CheckboxListTile(
+                  title: Text('${ct.ingredientName}'),
+//                  value: _itemData.passions[ItemData.PassionCooking],
+                  value: ct.isDefault,
+                  onChanged: (val) {
+
+
+                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                    blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+
+                  }
+
+              ),
+
+
+
+            ),
+            onPressed: () {
+
+              final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+              blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+
+            },
+          ),
+        )
+            : Container(
+
+          margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
+          // margin: EdgeInsets.fromLTRB(5, 2, 5, 5),
+          width: displayWidth(context) / 2.8,
+          //color:Colors.red,
+          child: OutlineButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            color: Color(0xffFEE295),
+            // clipBehavior:Clip.hardEdge,
+
+            borderSide: BorderSide(
+              color: Color(0xff53453D), // 0xff54463E
+              style: BorderStyle.solid,
+              width: 1,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            child: Container(
+
+              child:
+
+              CheckboxListTile(
+                  title: Text('${ct.ingredientName}'),
+
+                  value: ct.isDefault,
+                  onChanged: (val) {
+
+
+                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                    blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+
+                  }
+
+              ),
+            ),
+            onPressed: () {
+
+              final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+              blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+
+
+            },
+          ),
+        ));
+  }
+
+
+
+
+  Widget _buildOneCheckBoxSauceItem(SauceItem ct, int index) {
+    return Container(
+        child: ct.isSelected ==true
+
+            ? Container(
+          margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
+          width: displayWidth(context) / 2.8,
+          //color:Colors.red,
+          child: RaisedButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            color: Color(0xffFFE18E),
+            elevation: 2.5,
+            shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(15.0),
+              side: BorderSide(
+                color: Color(0xffF7F0EC),
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+
+            child: Container(
+
+              child:
+              CheckboxListTile(
+                  title: Text('${ct.sauceItemName}'),
+
+                  value: ct.isSelected,
+                  onChanged: (val) {
+
+
+                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                    blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+
+                  }
+
+              ),
+
+
+
+            ),
+            onPressed: () {
+
+              final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+              blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+
+            },
+          ),
+        )
+            : Container(
+
+          margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
+          // margin: EdgeInsets.fromLTRB(5, 2, 5, 5),
+          width: displayWidth(context) / 2.8,
+          //color:Colors.red,
+          child: OutlineButton(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            color: Color(0xffFEE295),
+            // clipBehavior:Clip.hardEdge,
+
+            borderSide: BorderSide(
+              color: Color(0xff53453D), // 0xff54463E
+              style: BorderStyle.solid,
+              width: 1,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            child: Container(
+
+              child:
+
+              CheckboxListTile(
+                  title: Text('${ct.sauceItemName}'),
+                  value: ct.isSelected,
+                  onChanged: (val) {
+
+                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                    blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+
+
+                  }
+
+              ),
+            ),
+            onPressed: () {
+
+              final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+              blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+
+
+            },
+          ),
+        ));
+  }
+
+
+
   Future getImage() async {
 
 
@@ -95,14 +396,6 @@ class _AddDataState extends State<AdminFirebaseFood> {
         source:ImageSource.gallery
     );
 
-
-    /*
-    var image = await ImagePicker.getImage(
-//        source: ImageSource.camera
-        source:ImageSource.gallery
-    );
-
-    */
 
     print('_image initially: $_image');
     print('image at getImage: $image');
@@ -407,6 +700,202 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                   }),
 
                               */
+
+
+
+
+                                    Container(
+
+                                      child: Text('select ingredients for food: ',
+
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 29,
+                                            fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                            color: Colors.redAccent,
+                                            fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ),
+
+
+                                    Container(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 50, 0, 20),
+
+                                      child:
+
+
+                                      StreamBuilder<List<NewIngredient>>(
+                                        stream: blocAdminFoodFBase.getExtraIngredientItemsStream ,
+                                        initialData:blocAdminFoodFBase.getAllExtraIngredients,
+                                        builder: (context, snapshot) {
+                                          final List<NewIngredient> allNewIngredients = snapshot.data;
+                                          logger.w(' allNewIngredients.length: ${ allNewIngredients.length}');
+                                          return
+
+                                            GridView.builder(
+                                              itemCount: allNewIngredients.length,
+                                              gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                                                //Above to below for 3 not 2 Food Items:
+                                                maxCrossAxisExtent: 220,
+                                                mainAxisSpacing: 10, // H  direction
+                                                crossAxisSpacing: 20,
+                                                childAspectRatio: 200 / 110, /* (h/vertical)*/
+                                              ),
+                                              shrinkWrap: true,
+
+//        reverse: true,
+                                              itemBuilder: (_, int index) {
+
+                                                return _buildOneCheckBoxIngredient(
+                                                    allNewIngredients[index], index);
+                                              },
+                                            );
+
+
+                                        }
+
+                                        ,
+                                      ),
+                                    ),
+
+
+
+                                    // select cheese begins here....
+
+                                    Container(
+
+                                      child: Text('select cheese for food: ',
+
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 29,
+                                            fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                            color: Colors.redAccent,
+                                            fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ),
+
+
+                                    Container(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 50, 0, 20),
+
+                                      child:
+
+
+                                      StreamBuilder<List<CheeseItem>>(
+                                        stream: blocAdminFoodFBase.getCheeseItemsStream ,
+                                        initialData:blocAdminFoodFBase.getAllCheeseItemsAdminFoodUpload,
+                                        builder: (context, snapshot) {
+                                          final List<CheeseItem> allCheeseItems = snapshot.data;
+
+                                          logger.w('allCheeseItems.length: ${allCheeseItems.length}');
+
+                                          return
+
+                                            GridView.builder(
+                                              itemCount: allCheeseItems.length,
+                                              gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                                                //Above to below for 3 not 2 Food Items:
+                                                maxCrossAxisExtent: 220,
+                                                mainAxisSpacing: 10, // H  direction
+                                                crossAxisSpacing: 20,
+                                                childAspectRatio: 200 / 110, /* (h/vertical)*/
+                                              ),
+                                              shrinkWrap: true,
+
+//        reverse: true,
+                                              itemBuilder: (_, int index) {
+
+                                                return _buildOneCheckBoxCheeseItem(
+                                                    allCheeseItems[index], index);
+                                              },
+                                            );
+
+
+                                        }
+
+                                        ,
+                                      ),
+                                    ),
+
+
+                                    // select cheese ends here....
+
+
+                                    // select sauce begins here....
+                                    Container(
+
+                                      child: Text('select Sauces for food: ',
+
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 29,
+                                            fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                            color: Colors.redAccent,
+                                            fontFamily: 'Itim-Regular',
+
+                                          )
+                                      ),
+                                    ),
+
+
+                                    Container(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 50, 0, 20),
+
+                                      child:
+
+
+                                      StreamBuilder<List<SauceItem>>(
+                                        stream: blocAdminFoodFBase.getSauceItemsStream ,
+                                        initialData:blocAdminFoodFBase.getAllSauceItemsFoodUploadAdmin,
+                                        builder: (context, snapshot) {
+                                          final List<SauceItem> allSauces = snapshot.data;
+
+                                          logger.w('allSauces.length: ${allSauces.length}');
+
+                                          return
+
+                                            GridView.builder(
+                                              itemCount: allSauces.length,
+                                              gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                                                //Above to below for 3 not 2 Food Items:
+                                                maxCrossAxisExtent: 220,
+                                                mainAxisSpacing: 10, // H  direction
+                                                crossAxisSpacing: 20,
+                                                childAspectRatio: 200 / 110, /* (h/vertical)*/
+                                              ),
+                                              shrinkWrap: true,
+
+//        reverse: true,
+                                              itemBuilder: (_, int index) {
+
+                                                return _buildOneCheckBoxSauceItem(
+                                                    allSauces[index], index);
+                                              },
+                                            );
+
+
+                                        }
+
+                                        ,
+                                      ),
+                                    ),
+
+                                    // select sauce ends here....
+
 
                                     Container(
                                       height: 100,

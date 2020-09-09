@@ -39,7 +39,7 @@ class NewIngredient {
         this.price,
         this.documentId,
         this.ingredientAmountByUser,
-        this.isDefault,
+        this.isDefault:false,
         this.extraIngredientOf,
         this.sequenceNo,
         this.subgroup:'',

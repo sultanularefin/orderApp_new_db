@@ -82,30 +82,20 @@ class AdminFirebaseFoodBloc implements Bloc {
 
   List<NewIngredient> get getAllExtraIngredients => _allExtraIngredients;
   Stream<List<NewIngredient>> get getExtraIngredientItemsStream => _allExtraIngredientItemsController.stream;
-  final _allExtraIngredientItemsController = StreamController <List<NewIngredient>> /*.broadcast*/();
-
-
-
-
+  final _allExtraIngredientItemsController = StreamController <List<NewIngredient>>.broadcast();
 
 
   // cheese items
-  List<CheeseItem> _allCheeseItemsFoodGalleryBloc =[];
-  List<CheeseItem> get getAllCheeseItemsFoodGallery => _allCheeseItemsFoodGalleryBloc;
-  final _cheeseItemsControllerFoodGallery      =  StreamController <List<CheeseItem>>();
-  Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsControllerFoodGallery.stream;
+  List<CheeseItem> _allCheeseItemsFoodUploadAdminBloc =[];
+  List<CheeseItem> get getAllCheeseItemsAdminFoodUpload => _allCheeseItemsFoodUploadAdminBloc;
+  final _cheeseItemsControllerFoodUploadAdmin      =  StreamController <List<CheeseItem>>.broadcast();
+  Stream<List<CheeseItem>> get getCheeseItemsStream => _cheeseItemsControllerFoodUploadAdmin.stream;
 
   // sauce items
-  List<SauceItem> _allSauceItemsFoodGalleryBloc =[];
-  List<SauceItem> get getAllSauceItemsFoodGallery => _allSauceItemsFoodGalleryBloc;
-  final _sauceItemsControllerFoodGallery      =  StreamController <List<SauceItem>>();
-  Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsControllerFoodGallery.stream;
-
-
-
-
-
-
+  List<SauceItem> _allSauceItemsFoodUploadAdminBloc =[];
+  List<SauceItem> get getAllSauceItemsFoodUploadAdmin => _allSauceItemsFoodUploadAdminBloc;
+  final _sauceItemsControllerFoodUploadAdmin      =  StreamController <List<SauceItem>>.broadcast();
+  Stream<List<SauceItem>> get getSauceItemsStream => _sauceItemsControllerFoodUploadAdmin.stream;
 
 
 
@@ -282,11 +272,6 @@ class AdminFirebaseFoodBloc implements Bloc {
     if (_isDisposed_known_last_sequenceNumber == false) {
       int lastIndex =
       await _clientAdmin.getLastSequenceNumberFromFireBaseFoodItems();
-//        List docList = snapshot.documents;
-//
-//        FoodItemWithDocID lastOne = new FoodItemWithDocID();
-//
-//        int lastIndex = docList[0]['sequenceNo'];
 
       logger.i('lastIndex: $lastIndex');
 
@@ -372,17 +357,10 @@ class AdminFirebaseFoodBloc implements Bloc {
 
     _thisFoodItem = x;
 
-    // _thisFoodItem.isHot=true;
-    // _thisFoodItem.isAvailable=true;
     _foodItemController.sink.add(_thisFoodItem);
   }
 
-//
-//  List<FoodItemWithDocID> _allFoodsList=[];
-//
-//  List<NewCategoryItem> _allCategoryList=[];
 
-//    List<NewCategoryItem>_allCategoryList=[];
   final _clientAdmin = FirebaseClientAdmin();
 
   void initiateCategoryDropDownList() {
@@ -461,8 +439,6 @@ class AdminFirebaseFoodBloc implements Bloc {
 
     print('at getAllExtraIngredientsConstructor()');
 
-
-
     if (_isDisposedExtraIngredients == false) {
 
       var snapshot = await _clientAdmin.fetchAllExtraIngredientsAdmin();
@@ -484,12 +460,6 @@ class AdminFirebaseFoodBloc implements Bloc {
 
       ingItems.forEach((doc) {
         print('one Extra . . . . . . . name: ${doc.ingredientName} documentID: ${doc.documentId}');
-//        String imageURL;
-//        double price;
-//        String documentId;
-//        doc['name'],
-//        price = data['price'].toDouble(),
-//        documentId = docID,
 
       }
       );
@@ -497,29 +467,13 @@ class AdminFirebaseFoodBloc implements Bloc {
 
 
       _allExtraIngredients = ingItems;
-//      _allIngItemsFGBloc = ingItems;
 
       _allExtraIngredientItemsController.sink.add(_allExtraIngredients);
 
-//      _allIngredientListController.sink.add(_allIngItemsFGBloc);
-
-
-//    return ingItems;
-
-
-
-
-
-
-
       _isDisposedExtraIngredients=true;
-
-
-
 
     }
     else {
-//      _isDisposedExtraIngredients == Element.true
       return;
     }
   }
@@ -529,11 +483,8 @@ class AdminFirebaseFoodBloc implements Bloc {
 
   void getAllKastikeSaucesAdminConstructor() async {
 
-
     var snapshot = await _clientAdmin.fetchAllKastikeORSaucesAdmin();
     List docList = snapshot.documents;
-
-
 
     List <SauceItem> sauceItems = new List<SauceItem>();
     sauceItems = snapshot.documents.map((documentSnapshot) =>
@@ -547,8 +498,7 @@ class AdminFirebaseFoodBloc implements Bloc {
     documentSnapshot.documentID
     ).toList();
 
-    print('Ingredient documents are: $documents');
-
+    print('sauce documents are (length): ${documents.length}');
 
 
     sauceItems.forEach((oneSauceItem) {
@@ -557,40 +507,121 @@ class AdminFirebaseFoodBloc implements Bloc {
 
     );
 
+    _allSauceItemsFoodUploadAdminBloc = sauceItems;
+    _sauceItemsControllerFoodUploadAdmin.sink.add(_allSauceItemsFoodUploadAdminBloc);
+  }
 
 
 
-    _allSauceItemsFoodGalleryBloc = sauceItems;
-    _sauceItemsControllerFoodGallery.sink.add(_allSauceItemsFoodGalleryBloc);
+  void toggoleMultiSelectIngredientValue(int index) {
+
+
+    _allExtraIngredients[index].isDefault =
+    !_allExtraIngredients[index].isDefault;
+
+    _allExtraIngredientItemsController.sink.add(_allExtraIngredients);
+
+    List<String> selectedIngredients2 = new List<String>();
+
+
+    _allExtraIngredients.forEach((newIngred) {
 
 
 
-    /*
-    _allSauceItemsDBloc = sauceItems;
+      if(newIngred.isDefault){
+        selectedIngredients2.add(newIngred.ingredientName);
+      }
+    });
 
-    _sauceItemsController.sink.add(_allSauceItemsDBloc);
-
-
-    _allSelectedSauceItems = sauceItems.where((element) => element.isSelected==true).toList();
-
-    _selectedSauceListController.sink.add(_allSelectedSauceItems);
-
-    */
+    print('selectedIngredients2.length: ${selectedIngredients2.length}');
 
 
-//    return ingItems;
+    FoodItemWithDocID temp = _thisFoodItem;
+
+    temp.ingredients = selectedIngredients2;
+
+    _thisFoodItem = temp;
+    _foodItemController.sink.add(_thisFoodItem);
+
 
   }
 
 
+  void toggoleMultiSelectCheeseValue(int index) {
+
+
+    _allCheeseItemsFoodUploadAdminBloc[index].isSelected =
+    !_allCheeseItemsFoodUploadAdminBloc[index].isSelected;
+
+    _cheeseItemsControllerFoodUploadAdmin.sink.add(_allCheeseItemsFoodUploadAdminBloc);
+
+    List<String> selectedCheeses = new List<String>();
+
+
+    _allCheeseItemsFoodUploadAdminBloc.forEach((newCheese) {
+
+
+
+      if(newCheese.isSelected){
+        selectedCheeses.add(newCheese.cheeseItemName);
+      }
+    });
+
+    print('selectedCheeses.length: ${selectedCheeses.length}');
+
+
+    FoodItemWithDocID temp = _thisFoodItem;
+
+    temp.defaultJuusto = selectedCheeses;
+
+    _thisFoodItem = temp;
+    _foodItemController.sink.add(_thisFoodItem);
+
+
+  }
+
+
+
+
+
+  void toggoleMultiSelectSauceItemValue(int index) {
+
+
+    _allSauceItemsFoodUploadAdminBloc[index].isSelected =
+    !_allSauceItemsFoodUploadAdminBloc[index].isSelected;
+
+    _sauceItemsControllerFoodUploadAdmin.sink.add(_allSauceItemsFoodUploadAdminBloc);
+
+    List<String> selectedSauces = new List<String>();
+
+
+    _allSauceItemsFoodUploadAdminBloc.forEach((newSauce) {
+
+
+
+      if(newSauce.isSelected){
+        selectedSauces.add(newSauce.sauceItemName);
+      }
+    });
+
+    print('selectedSauces.length: ${selectedSauces.length}');
+
+
+    FoodItemWithDocID temp = _thisFoodItem;
+
+    temp.defaultKastike = selectedSauces;
+
+    _thisFoodItem = temp;
+    _foodItemController.sink.add(_thisFoodItem);
+
+
+  }
 
   void getAllCheeseItemsJuustoAdminConstructor() async {
 
 
     var snapshot = await _clientAdmin.fetchAllCheesesORjuustoAdmin();
     List docList = snapshot.documents;
-
-
 
     List <CheeseItem> cheeseItems = new List<CheeseItem>();
     cheeseItems = snapshot.documents.map((documentSnapshot) =>
@@ -600,59 +631,22 @@ class AdminFirebaseFoodBloc implements Bloc {
     ).toList();
 
 
-
-
     List<String> documents = snapshot.documents.map((documentSnapshot) =>
     documentSnapshot.documentID
     ).toList();
+
+    print('documents.length for cheeseItems: ${documents.length}');
 
 
     cheeseItems.forEach((oneCheeseItem) {
 
       print('oneCheeseItem.cheeseItemName: ${oneCheeseItem.cheeseItemName}');
 
+    });
 
+    _allCheeseItemsFoodUploadAdminBloc  = cheeseItems;
+    _cheeseItemsControllerFoodUploadAdmin.sink.add(_allCheeseItemsFoodUploadAdminBloc);
 
-//      if(oneCheeseItem.sl==1){
-//        oneCheeseItem.isSelected=true;
-//        oneCheeseItem.isDefaultSelected=true;
-//      }
-    }
-
-    );
-
-
-//    print('Ingredient documents are: $documents');
-
-
-
-    _allCheeseItemsFoodGalleryBloc  = cheeseItems;
-    _cheeseItemsControllerFoodGallery.sink.add(_allCheeseItemsFoodGalleryBloc);
-
-
-//    _allCheeseItemsDBloc = cheeseItems;
-
-//    _cheeseItemsController.sink.add(_allCheeseItemsDBloc);
-
-
-//    return ingItems;
-
-
-    /*
-    _allSelectedCheeseItems = cheeseItems.where((element) => element.isSelected==true).toList();
-
-
-
-    logger.w('_allSelectedCheeseItems at getAllCheeseItemsConstructor():'
-        ' $_allSelectedCheeseItems');
-
-//    _selectedSauceListController.sink.add(_allSelectedSauceItems);
-//    _allSelectedCheeseItems =
-    _selectedCheeseListController.sink.add(_allSelectedCheeseItems);
-
-
-
-    */
   }
 
 
@@ -674,7 +668,6 @@ class AdminFirebaseFoodBloc implements Bloc {
     getAllCheeseItemsJuustoAdminConstructor();
 
 
-
     // getLastSequenceNumberFromFireBaseFoodItems();
     initiateCategoryDropDownList();
 
@@ -689,16 +682,11 @@ class AdminFirebaseFoodBloc implements Bloc {
     _foodItemController.close();
     _categoryDropDownController.close();
 
-//    _categoriesController.close();
-//    _allIngredientListController.close();
-//    _cheeseItemsControllerFoodGallery.close();
-//    _sauceItemsControllerFoodGallery.close();
-//    _allExtraIngredientItemsController.close();
+    _allExtraIngredientItemsController.close();
+    _sauceItemsControllerFoodUploadAdmin.close();
+    _cheeseItemsControllerFoodUploadAdmin.close();
 
-//    _isDisposedIngredients=
-//    _isDisposedIngredients = true;
-//    _isDisposedFoodItems = true;
-//    _isDisposedCategories = true;
-//    _isDisposed_known_last_sequenceNumber = true;
+
+
   }
 }
