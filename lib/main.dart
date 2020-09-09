@@ -15,7 +15,7 @@ import 'package:foodgallery/src/welcomePage.dart';
 //import 'src/screens/foodGallery/UNPaidPage.dart';
 
 //import 'src/welcomePage.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 
 //import 'package:foodgallery/src/
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
@@ -23,8 +23,13 @@ import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 //import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 
 
@@ -35,6 +40,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+//    Firebase.initializeApp();
 
 
 //    final logger = Logger(

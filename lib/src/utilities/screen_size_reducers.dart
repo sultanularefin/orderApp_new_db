@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //import 'package:google_sign_in/google_sign_in.dart';
 
@@ -51,8 +51,16 @@ double displayWidth(BuildContext context) {
 //  I/flutter ( 5454): Height = 1232.0
 }
 
-final String storageBucketURLPredicate =
-    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
+//final String storageBucketURLPredicate =
+//    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
+
+
+String storageBucketURLPredicate =
+    'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/';
+
+
+//Auth.getIdTokenResult()
+
 
 /*
 

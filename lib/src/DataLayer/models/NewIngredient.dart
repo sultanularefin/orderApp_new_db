@@ -15,6 +15,10 @@ import 'dart:core';
 //final String storageBucketURLPredicate_Same =
 //    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
 
+
+import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
+
+
 class NewIngredient {
 
   String ingredientName;
@@ -61,7 +65,9 @@ class NewIngredient {
   */
 
   NewIngredient.ingredientConvert(Map<String, dynamic> data,String docID)
-      :imageURL= data['image'],
+      :imageURL= storageBucketURLPredicate + Uri.decodeComponent(data['image']),
+
+//      :imageURL= storageBucketURLPredicate +  Uri.decodeComponent(data['image']),
         ingredientName= data['name'],
         price = data['price'].toDouble(),
         documentId = docID,
@@ -76,7 +82,8 @@ class NewIngredient {
 
 
   NewIngredient.ingredientConvertExtra(Map<String, dynamic> data,String docID)
-      :imageURL= data['image'],
+//      :imageURL= data['image'],
+      :imageURL= storageBucketURLPredicate + Uri.decodeComponent(data['image']),
         ingredientName= data['name'],
         price = data['price'].toDouble(),
         documentId = docID,

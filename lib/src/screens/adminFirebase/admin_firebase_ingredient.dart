@@ -78,8 +78,14 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
 
 
+//    final FirebaseAuth _auth = FirebaseAuth.instance;
+//    final FirebaseUser user = await _auth.currentUser();
+
+
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseUser user = await _auth.currentUser();
+    final User user = FirebaseAuth.instance.currentUser;
+
+
 
 
     blocAdminIngredientFBase.setUser(user.email);
@@ -585,8 +591,16 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                     //   the method 'validate' isn't defined for the class 'State'
 
 
+
+
                                                     final FirebaseAuth _auth = FirebaseAuth.instance;
-                                                    final FirebaseUser user = await _auth.currentUser();
+                                                    final User user = FirebaseAuth.instance.currentUser;
+
+
+
+
+//                                                    final FirebaseAuth _auth = FirebaseAuth.instance;
+//                                                    final FirebaseUser user = await _auth.currentUser();
 
 
                                                     blocAdminIngredientFBase.setUser(user.email);

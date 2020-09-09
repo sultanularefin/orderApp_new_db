@@ -15,6 +15,10 @@ import 'dart:core';
 //final String storageBucketURLPredicate_Same =
 //    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
 
+
+//    :imageURL= storageBucketURLPredicate +  Uri.decodeComponent(data['image']),
+import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
+
 class CheeseItem implements Comparable {
 
   String cheeseItemName;
@@ -74,7 +78,8 @@ class CheeseItem implements Comparable {
 //  NewIngredient.fromMap(Map<String, dynamic> data)
 //  NewIngredient.fromMap(Map<dynamic, dynamic> data)
   CheeseItem.fromMap(Map<String, dynamic> data,String docID)
-      :imageURL= data['image'],
+      :imageURL= storageBucketURLPredicate +  Uri.decodeComponent(data['image']),
+//      :imageURL= storageBucketURLPredicate +  Uri.decodeComponent(data['image']),
         cheeseItemName= data['name'],
         price = data['price'].toDouble(),
         documentId = docID,

@@ -1,5 +1,6 @@
 
 // dependency files
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -90,25 +91,21 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
   Widget _buildOneCheckBoxCheeseItem(CheeseItem ct, int index) {
+
+    print('at _buildOneCheckBoxCheeseItem .... ${ct.cheeseItemName}  ct.isSelected ${ct.isSelected}');
+
     return Container(
         child: ct.isSelected ==true
 
             ? Container(
+
+          color: Colors.lightGreenAccent,
+//          color: Colors.blue,
           margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
           width: displayWidth(context) / 2.8,
           //color:Colors.red,
-          child: RaisedButton(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            color: Color(0xffFFE18E),
-            elevation: 2.5,
-            shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-              side: BorderSide(
-                color: Color(0xffF7F0EC),
-                style: BorderStyle.solid,
-              ),
-              borderRadius: BorderRadius.circular(35.0),
-            ),
+          child: InkWell(
+
 
             child: Container(
 //              alignment: Alignment.center,
@@ -130,7 +127,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
             ),
-            onPressed: () {
+            onTap: () {
 
               final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
               blocAdminIngredientFBase.toggoleMultiSelectCheeseValue(index);
@@ -139,24 +136,13 @@ class _AddDataState extends State<AdminFirebaseFood> {
           ),
         )
             : Container(
-
+          color: Colors.blue,
           margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
           // margin: EdgeInsets.fromLTRB(5, 2, 5, 5),
           width: displayWidth(context) / 2.8,
           //color:Colors.red,
-          child: OutlineButton(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            color: Color(0xffFEE295),
-            // clipBehavior:Clip.hardEdge,
+          child: InkWell(
 
-            borderSide: BorderSide(
-              color: Color(0xff53453D), // 0xff54463E
-              style: BorderStyle.solid,
-              width: 1,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35.0),
-            ),
             child: Container(
 
               child:
@@ -175,7 +161,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
               ),
             ),
-            onPressed: () {
+            onTap: () {
 
               final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
               blocAdminIngredientFBase.toggoleMultiSelectCheeseValue(index);
@@ -192,22 +178,15 @@ class _AddDataState extends State<AdminFirebaseFood> {
     return Container(
         child: ct.isDefault ==true
 
+
             ? Container(
+          color: Colors.lightGreenAccent,
+//          color: Colors.blue,
           margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
           width: displayWidth(context) / 2.8,
           //color:Colors.red,
-          child: RaisedButton(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            color: Color(0xffFFE18E),
-            elevation: 2.5,
-            shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-              side: BorderSide(
-                color: Color(0xffF7F0EC),
-                style: BorderStyle.solid,
-              ),
-              borderRadius: BorderRadius.circular(35.0),
-            ),
+          child: InkWell(
+
 
             child: Container(
 //              alignment: Alignment.center,
@@ -229,7 +208,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
             ),
-            onPressed: () {
+            onTap: () {
 
               final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
               blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
@@ -238,43 +217,47 @@ class _AddDataState extends State<AdminFirebaseFood> {
           ),
         )
             : Container(
-
+          color: Colors.blue,
           margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
           // margin: EdgeInsets.fromLTRB(5, 2, 5, 5),
           width: displayWidth(context) / 2.8,
           //color:Colors.red,
-          child: OutlineButton(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            color: Color(0xffFEE295),
-            // clipBehavior:Clip.hardEdge,
+          child: InkWell(
 
-            borderSide: BorderSide(
-              color: Color(0xff53453D), // 0xff54463E
-              style: BorderStyle.solid,
-              width: 1,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35.0),
-            ),
             child: Container(
 
               child:
 
-              CheckboxListTile(
-                  title: Text('${ct.ingredientName}'),
+              Column(
+                children: [
+                  CheckboxListTile(
+                      title: Text('${ct.ingredientName}'),
 
-                  value: ct.isDefault,
-                  onChanged: (val) {
+                      value: ct.isDefault,
+                      onChanged: (val) {
 
 
-                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
-                    blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+                        final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                        blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
 
-                  }
+                      }
 
+                  ),
+
+
+                  ClipOval(
+                    child: CachedNetworkImage(
+//                  imageUrl: dummy.url,
+                      imageUrl: ct.imageURL,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) =>
+                      new CircularProgressIndicator(),
+                    ),
+                  ),
+                ],
               ),
             ),
-            onPressed: () {
+            onTap: () {
 
               final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
               blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
@@ -293,21 +276,13 @@ class _AddDataState extends State<AdminFirebaseFood> {
         child: ct.isSelected ==true
 
             ? Container(
+          color: Colors.lightGreenAccent,
+
           margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
           width: displayWidth(context) / 2.8,
           //color:Colors.red,
-          child: RaisedButton(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            color: Color(0xffFFE18E),
-            elevation: 2.5,
-            shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-              side: BorderSide(
-                color: Color(0xffF7F0EC),
-                style: BorderStyle.solid,
-              ),
-              borderRadius: BorderRadius.circular(35.0),
-            ),
+          child: InkWell(
+
 
             child: Container(
 
@@ -329,7 +304,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
             ),
-            onPressed: () {
+            onTap: () {
 
               final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
               blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
@@ -338,42 +313,48 @@ class _AddDataState extends State<AdminFirebaseFood> {
           ),
         )
             : Container(
-
+//          color:Colors.blueGrey,
+          color: Colors.blue,
           margin: EdgeInsets.fromLTRB(2, 0, 2, 3),
           // margin: EdgeInsets.fromLTRB(5, 2, 5, 5),
           width: displayWidth(context) / 2.8,
           //color:Colors.red,
-          child: OutlineButton(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            color: Color(0xffFEE295),
-            // clipBehavior:Clip.hardEdge,
+          child: InkWell(
 
-            borderSide: BorderSide(
-              color: Color(0xff53453D), // 0xff54463E
-              style: BorderStyle.solid,
-              width: 1,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35.0),
-            ),
             child: Container(
 
               child:
 
-              CheckboxListTile(
-                  title: Text('${ct.sauceItemName}'),
-                  value: ct.isSelected,
-                  onChanged: (val) {
+              Column(
+                children: [
+                  CheckboxListTile(
+                      title: Text('${ct.sauceItemName}'),
+                      value: ct.isSelected,
+                      onChanged: (val) {
 
-                    final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
-                    blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
+                        final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
+                        blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
 
 
-                  }
+                      }
 
+                  ),
+                  ClipOval(
+                    child: CachedNetworkImage(
+//                  imageUrl: dummy.url,
+                      imageUrl: ct.imageURL,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) =>
+                      new CircularProgressIndicator(),
+                    ),
+                  ),
+
+//                  911_1
+//                  work_1
+                ],
               ),
             ),
-            onPressed: () {
+            onTap: () {
 
               final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseFoodBloc>(context);
               blocAdminIngredientFBase.toggoleMultiSelectSauceItemValue(index);
@@ -915,10 +896,16 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                               final form = _formKey.currentState;
 
                                               print('form: $_formKey.currentState');
-                                              print('at onPressed ');
+                                              print('at onTap ');
+
+//                                              final FirebaseAuth _auth = FirebaseAuth.instance;
+//                                              final FirebaseUser user = await _auth.currentUser();
+
+
 
                                               final FirebaseAuth _auth = FirebaseAuth.instance;
-                                              final FirebaseUser user = await _auth.currentUser();
+                                              final User user = FirebaseAuth.instance.currentUser;
+
 
 
                                               blocAdminFoodFBase.setUser(user.email);

@@ -307,11 +307,13 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     var updateResult =
     await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
 
+    Map getDocs = updateResult.data();
+
     print('updateResult is:: :: $updateResult');
 
 
 
-    String                    recitePrintedString = updateResult['recitePrinted'];
+    String                    recitePrintedString = getDocs['recitePrinted'];
 
     print('recitePrintedString: $recitePrintedString');
 
@@ -336,6 +338,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     var updateResult =
     await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(previouslyLaterPaidDocumentID,paidType0);
 
+    Map getDocs = updateResult.data();
     currenttempUnPaidOneOrderFB.paidStatus='Paid';
     currenttempUnPaidOneOrderFB.paidType= paidType0;
 
@@ -351,7 +354,7 @@ class UnPaidDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
 
     print('updateResult is:: :: $updateResult');
-    String                    paidType2 = updateResult['paidType'];
+    String                    paidType2 = getDocs['paidType'];
 
     print('paidType2: $paidType2');
 

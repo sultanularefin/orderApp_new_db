@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                             BlocProvider.of<IdentityBloc>(context);
 
 
-                            Future<AuthResult> userCheck=
+                            Future<UserCredential> userCheck=
                             identityBlocLoginPage.handleSignInFromLoginPage(emailState.trim(),passwordState.trim());
 
 //                            _handleSignIn();
@@ -272,8 +272,8 @@ class _LoginPageState extends State<LoginPage> {
                             final identityBlocLoginPage =
                             BlocProvider.of<IdentityBloc>(context);
 
-
-                            Future<AuthResult> userCheck=
+//                            UserCredential > AuthResult  as a result of versoin change..
+                            Future<UserCredential> userCheck=
                             identityBlocLoginPage.handleSignInFromLoginPage(emailState.trim(),passwordState.trim());
 
 //                            _handleSignIn();

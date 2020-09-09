@@ -260,17 +260,17 @@ class FoodGalleryBloc implements Bloc {
     if (_isDisposedExtraIngredients == false) {
 
       var snapshot = await _client.fetchAllExtraIngredients();
-      List docList = snapshot.documents;
+      List docList = snapshot.docs;
 
       List <NewIngredient> ingItems = new List<NewIngredient>();
-      ingItems = snapshot.documents.map((documentSnapshot) =>
+      ingItems = snapshot.docs.map((documentSnapshot) =>
           NewIngredient.ingredientConvertExtra
-            (documentSnapshot.data, documentSnapshot.documentID)
+            (documentSnapshot.data(), documentSnapshot.id)
       ).toList();
 
 
-      List<String> documents = snapshot.documents.map((documentSnapshot) =>
-      documentSnapshot.documentID).toList();
+      List<String> documents = snapshot.docs.map((documentSnapshot) =>
+      documentSnapshot.id).toList();
 
       print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
@@ -333,7 +333,7 @@ class FoodGalleryBloc implements Bloc {
     else {
 
       var snapshot = await _client.fetchFoodItems();
-      List docList = snapshot.documents;
+      List docList = snapshot.docs;
 
       List<FoodItemWithDocID> tempAllFoodsList= new List<FoodItemWithDocID>();
       docList.forEach((doc) {
@@ -453,7 +453,7 @@ class FoodGalleryBloc implements Bloc {
 
 
       var snapshot = await _client.fetchCategoryItems();
-      List docList = snapshot.documents;
+      List docList = snapshot.docs;
 
 
       List<NewCategoryItem> tempAllCategories = new List<NewCategoryItem>();
@@ -538,20 +538,20 @@ class FoodGalleryBloc implements Bloc {
 
 
     var snapshot = await _client.fetchAllKastikeORSauces();
-    List docList = snapshot.documents;
+    List docList = snapshot.docs;
 
 
 
     List <SauceItem> sauceItems = new List<SauceItem>();
-    sauceItems = snapshot.documents.map((documentSnapshot) =>
+    sauceItems = snapshot.docs.map((documentSnapshot) =>
         SauceItem.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
+          (documentSnapshot.data(), documentSnapshot.id)
 
     ).toList();
 
 
     List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
+    documentSnapshot.id
     ).toList();
 
     print('Ingredient documents are: $documents');
@@ -594,22 +594,22 @@ class FoodGalleryBloc implements Bloc {
 
 
     var snapshot = await _client.fetchAllCheesesORjuusto();
-    List docList = snapshot.documents;
+    List docList = snapshot.docs;
 
 
 
     List <CheeseItem> cheeseItems = new List<CheeseItem>();
-    cheeseItems = snapshot.documents.map((documentSnapshot) =>
+    cheeseItems = snapshot.docs.map((documentSnapshot) =>
         CheeseItem.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
+          (documentSnapshot.data(), documentSnapshot.id)
 
     ).toList();
 
 
 
 
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
+    List<String> documents = snapshot.docs.map((documentSnapshot) =>
+    documentSnapshot.id
     ).toList();
 
 

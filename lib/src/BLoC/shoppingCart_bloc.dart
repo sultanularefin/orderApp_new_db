@@ -181,35 +181,35 @@ class ShoppingCartBloc implements Bloc {
   Future<void> getRestaurantInformationConstructor() async{
 
     var snapshot = await _client.fetchRestaurantDataClient();
+    Map getDocs = snapshot.data();
+
+    Map     <String,dynamic> restaurantAddress = getDocs['address'];
+    Map     <String,dynamic> restaurantAttribute = getDocs['attribute'];
+    List    <dynamic> restaurantCousine = getDocs['cousine'];
+    bool    restaurantKidFriendly =  getDocs['kid_friendly'];
+    bool    restaurantReservation = getDocs['reservation'];
+    bool    restaurantRomantic  = getDocs['romantic'];
+    List    <String> restaurantOffday = getDocs['offday'];
+
+    String  restaurantOpen = getDocs['open'];
 
 
-    Map     <String,dynamic> restaurantAddress = snapshot['address'];
-    Map     <String,dynamic> restaurantAttribute = snapshot['attribute'];
-    List    <dynamic> restaurantCousine = snapshot['cousine'];
-    bool    restaurantKidFriendly =  snapshot['kid_friendly'];
-    bool    restaurantReservation = snapshot['reservation'];
-    bool    restaurantRomantic  = snapshot['romantic'];
-    List    <String> restaurantOffday = snapshot['offday'];
 
-    String  restaurantOpen = snapshot['open'];
-
-
-
-    String  restaurantAvatar =snapshot['avatar']==''?
+    String  restaurantAvatar =getDocs['avatar']==''?
     'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
         :''
         + storageBucketURLPredicate +
-        Uri.encodeComponent(snapshot['avatar'])
+        Uri.encodeComponent(getDocs['avatar'])
         +'?alt=media';
     // 'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/'
 
     print('restaurantAvatar: $restaurantAvatar');
 
 
-    String  restaurantContact= snapshot['contact'];
+    String  restaurantContact= getDocs['contact'];
 
-    double  restaurantDeliveryCharge = snapshot['deliveryCharge'];
-    int restaurantDiscount0 =snapshot['discount'];// from string;// need to convert string to double.
+    double  restaurantDeliveryCharge = getDocs['deliveryCharge'];
+    int restaurantDiscount0 =getDocs['discount'];// from string;// need to convert string to double.
     print('restaurantDiscount0-> $restaurantDiscount0 is : ' is num);
     print('restaurantDiscount0-> $restaurantDiscount0 is : ' is int);
     print('restaurantDiscount0-> $restaurantDiscount0 is : ' is double);
@@ -217,11 +217,11 @@ class ShoppingCartBloc implements Bloc {
 
     final double restaurantDiscount = restaurantDiscount0.toDouble();
 //    final double foodItemDiscount = doc['discount'];
-    String  restaurantName =snapshot['name'];
+    String  restaurantName = getDocs['name'];
 
     print('restaurantName: $restaurantName');
-    double  restaurantRating =snapshot['rating'];
-    double  restaurantTotalRating =snapshot['totalRating'];
+    double  restaurantRating = getDocs['rating'];
+    double  restaurantTotalRating = getDocs['totalRating'];
 
 
     Restaurant onlyRestaurant = new Restaurant(
@@ -446,12 +446,15 @@ class ShoppingCartBloc implements Bloc {
 
     var updateResult =
     await _client.updateOrderCollectionDocumentWithRecitePrintedInformation(documentID,status);
+    Map getDocs = updateResult.data();
+
+//    sss
 
     print('updateResult is:: :: $updateResult');
 
 
 
-    String                    recitePrintedString = updateResult['recitePrinted'];
+    String                    recitePrintedString = getDocs['recitePrinted'];
 
     print('recitePrintedString: $recitePrintedString');
 
@@ -928,37 +931,38 @@ class ShoppingCartBloc implements Bloc {
 
     var snapshot = await _client.invokeClientForOneOrder(orderDocumentId);
 
+    Map getDocs = snapshot.data();
 
 //    List <Map<String, dynamic>>
-    Map<String,dynamic>       customerAddress = snapshot['address'];
+    Map<String,dynamic>       customerAddress = getDocs['address'];
 //    List <Map<dynamic, dynamic>> orderedItems = snapshot['items'];
-    List<dynamic> orderedItems = snapshot['items'];
+    List<dynamic> orderedItems = getDocs['items'];
 //    List<Map<String, dynamic>>
-    String                    orderBy = snapshot['orderby'];
-    String                    paidStatus = snapshot['paidStatus'];
-    String                    paidType = snapshot['paidType'];
-    double                    totalPrice = snapshot['price'];
+    String                    orderBy =     getDocs['orderby'];
+    String                    paidStatus =  getDocs['paidStatus'];
+    String                    paidType =    getDocs['paidType'];
+    double                    totalPrice =  getDocs['price'];
 
-    String                    contact = snapshot['contact'];
-    String                    driverName = snapshot['driver'];
-    DateTime                  endDate = snapshot['end'].toDate();
-    DateTime                  startDate = snapshot['start'].toDate();
+    String                    contact =    getDocs['contact'];
+    String                    driverName = getDocs['driver'];
+    DateTime                  endDate =    getDocs['end'].toDate();
+    DateTime                  startDate =  getDocs['start'].toDate();
 
-    String                    orderStatus = snapshot['status'];
-    String                    tableNo = snapshot['tableNo'];
-    String                    orderType = snapshot['orderType'];
+    String                    orderStatus = getDocs['status'];
+    String                    tableNo =     getDocs['tableNo'];
+    String                    orderType =   getDocs['orderType'];
     String                    documentId = orderDocumentId;
-    int                    orderProductionTimeFromNow = snapshot['orderProductionTimeFromNow'];
-    String                timeOfDay3 = snapshot['orderProductionTimeOfDay'];
+    int                    orderProductionTimeFromNow = getDocs['orderProductionTimeFromNow'];
+    String                timeOfDay3 = getDocs['orderProductionTimeOfDay'];
     String                timeOfDay2 = sanitizeTimeOfDay(timeOfDay3);
 
 
 
 
 
-    double                 deliveryCost2 = snapshot['deliveryCost?'];
-    double                 tax = snapshot['tax'];
-    double                 priceWithDelivery2 = snapshot['priceWithDelivery?'];
+    double                 deliveryCost2 = getDocs['deliveryCost?'];
+    double                 tax = getDocs['tax'];
+    double                 priceWithDelivery2 = getDocs['priceWithDelivery?'];
 
 
     CustomerInformation currentCustomerFromFireStore = localCustomerInformationObject(customerAddress);
@@ -979,16 +983,16 @@ class ShoppingCartBloc implements Bloc {
     print('contact: $contact');
     print('driverName: $driverName');
 
-    print('snapshot[\'end\'].toDate().toString(): ${snapshot['end'].toDate().toString()}');
+    print('snapshot[\'end\'].toDate().toString(): ${getDocs['end'].toDate().toString()}');
 
 //    DateTime d = t.toDate();
 //    print(d.toString()); //2019-12-28 18:48:48.364
-    print('snapshot[\'start\'].toDate().toString()${snapshot['start'].toDate().toString()}');
+    print('snapshot[\'start\'].toDate().toString()${getDocs['start'].toDate().toString()}');
 
 
-    print('snapshot[\'end\']: ${snapshot['end'].toDate()}');
+    print('snapshot[\'end\']: ${getDocs['end'].toDate()}');
 
-    print('snapshot[\'start\']${snapshot['start'].toDate()}');
+    print('snapshot[\'start\']${getDocs['start'].toDate()}');
 
 
     print('endDate: $endDate');

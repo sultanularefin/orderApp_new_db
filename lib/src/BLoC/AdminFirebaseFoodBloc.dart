@@ -99,12 +99,6 @@ class AdminFirebaseFoodBloc implements Bloc {
 
 
 
-// main foodItem bloc component ends here...
-
-  // CollectionReference get firestoreFoodItems => firestore.collection('foodItems');
-
-//  final FirebaseStorage storage = FirebaseStorage(storageBucket: 'gs://fluttercrudarefin.appspot.com');
-
   final FirebaseStorage storage =
   FirebaseStorage(storageBucket: 'gs://kebabbank-37224.appspot.com');
 
@@ -442,17 +436,17 @@ class AdminFirebaseFoodBloc implements Bloc {
     if (_isDisposedExtraIngredients == false) {
 
       var snapshot = await _clientAdmin.fetchAllExtraIngredientsAdmin();
-      List docList = snapshot.documents;
+      List docList = snapshot.docs;
 
       List <NewIngredient> ingItems = new List<NewIngredient>();
-      ingItems = snapshot.documents.map((documentSnapshot) =>
+      ingItems = snapshot.docs.map((documentSnapshot) =>
           NewIngredient.ingredientConvertExtra
-            (documentSnapshot.data, documentSnapshot.documentID)
+            (documentSnapshot.data(), documentSnapshot.id)
       ).toList();
 
 
-      List<String> documents = snapshot.documents.map((documentSnapshot) =>
-      documentSnapshot.documentID).toList();
+      List<String> documents = snapshot.docs.map((documentSnapshot) =>
+      documentSnapshot.id).toList();
 
       print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
@@ -484,18 +478,20 @@ class AdminFirebaseFoodBloc implements Bloc {
   void getAllKastikeSaucesAdminConstructor() async {
 
     var snapshot = await _clientAdmin.fetchAllKastikeORSaucesAdmin();
-    List docList = snapshot.documents;
+    List docList = snapshot.docs;
+
+//    List docList = snapshot.docs;
 
     List <SauceItem> sauceItems = new List<SauceItem>();
-    sauceItems = snapshot.documents.map((documentSnapshot) =>
+    sauceItems = snapshot.docs.map((documentSnapshot) =>
         SauceItem.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
+          (documentSnapshot.data(), documentSnapshot.id)
 
     ).toList();
 
 
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
+    List<String> documents = snapshot.docs.map((documentSnapshot) =>
+    documentSnapshot.id
     ).toList();
 
     print('sauce documents are (length): ${documents.length}');
@@ -503,6 +499,24 @@ class AdminFirebaseFoodBloc implements Bloc {
 
     sauceItems.forEach((oneSauceItem) {
       print('oneSauceItem.sauceItemName: ${oneSauceItem.sauceItemName}');
+      print('oneSauceItem.imageURL: ${oneSauceItem.imageURL}');
+      print('Uri.encodeComponent(oneSauceItem.imageURL) ===> '
+          ' ${Uri.encodeComponent(oneSauceItem.imageURL)}');
+
+
+
+      print('Uri.encodeComponent(oneSauceItem.imageURL) ===> '
+          ' ${oneSauceItem.imageURL}');
+
+
+
+      print('Uri.decodeComponent(oneSauceItem.imageURL) ===> '
+          ' ${Uri.decodeComponent(oneSauceItem.imageURL)}');
+
+
+
+
+
     }
 
     );
@@ -621,18 +635,20 @@ class AdminFirebaseFoodBloc implements Bloc {
 
 
     var snapshot = await _clientAdmin.fetchAllCheesesORjuustoAdmin();
-    List docList = snapshot.documents;
+    List docList = snapshot.docs;
 
     List <CheeseItem> cheeseItems = new List<CheeseItem>();
-    cheeseItems = snapshot.documents.map((documentSnapshot) =>
+    cheeseItems = snapshot.docs.map((documentSnapshot) =>
         CheeseItem.fromMap
-          (documentSnapshot.data, documentSnapshot.documentID)
+          (documentSnapshot.data(), documentSnapshot.id)
 
     ).toList();
 
+//    (documentSnapshot.data, documentSnapshot.documentId)
+//    data()
 
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
-    documentSnapshot.documentID
+    List<String> documents = snapshot.docs.map((documentSnapshot) =>
+    documentSnapshot.id
     ).toList();
 
     print('documents.length for cheeseItems: ${documents.length}');

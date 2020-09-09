@@ -15,7 +15,14 @@ import 'dart:core';
 //final String storageBucketURLPredicate_Same =
 //    'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/';
 
+//    :imageURL= storageBucketURLPredicate +  Uri.decodeComponent(data['image']),
+
+import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
+
+
 class SauceItem implements Comparable {
+
+
 
  String sauceItemName;
  String imageURL;
@@ -83,8 +90,15 @@ class SauceItem implements Comparable {
 //        ingredientAmountByUser = 1;
 //
 
+//  final String foodImageURL  = doc['image']==''?
+//  'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
+//      :
+//  storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
+//      +'?alt=media';
+
+
   SauceItem.fromMap(Map<String, dynamic> data,String docID)
-      :imageURL= data['image'],
+      :imageURL= storageBucketURLPredicate +  Uri.decodeComponent(data['image']),
         sauceItemName = data['name'],
         price = data['price'].toDouble(),
         documentId = docID,
