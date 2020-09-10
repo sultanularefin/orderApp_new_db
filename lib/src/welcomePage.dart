@@ -70,14 +70,6 @@ class _WelcomePageState extends State<WelcomePage> {
   _WelcomePageState(this.fromWhicPage2);
 
 
-//  List<NewIngredient> welcomPageIngredients;
-
-//  final logger = Logger(
-//    printer: PrettyPrinter(),
-//  );
-
-
-
   @override
   void initState(){
 

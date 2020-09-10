@@ -18,7 +18,11 @@ import 'dart:core';
 
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 
+//import 'package:firebase_auth/firebase_auth.dart';
 
+//final FirebaseAuth _auth;
+
+//final FirebaseAuth _auth = FirebaseAuth.instance;
 class NewIngredient {
 
   String ingredientName;
@@ -65,8 +69,10 @@ class NewIngredient {
   */
 
   NewIngredient.ingredientConvert(Map<String, dynamic> data,String docID)
-      :imageURL= storageBucketURLPredicate + Uri.decodeComponent(data['image']),
-
+      :imageURL= storageBucketURLPredicate + Uri.encodeComponent(data['image'])+'?alt=media',
+//  &token='+
+//      _auth.currentUser.getIdToken()
+//      User fireBaseUserRemote = result.user;,
 //      :imageURL= storageBucketURLPredicate +  Uri.decodeComponent(data['image']),
         ingredientName= data['name'],
         price = data['price'].toDouble(),
@@ -83,7 +89,9 @@ class NewIngredient {
 
   NewIngredient.ingredientConvertExtra(Map<String, dynamic> data,String docID)
 //      :imageURL= data['image'],
-      :imageURL= storageBucketURLPredicate + Uri.decodeComponent(data['image']),
+      :imageURL= storageBucketURLPredicate + Uri.encodeComponent(data['image']) +'?alt=media',
+//        storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
+//            +'?alt=media';
         ingredientName= data['name'],
         price = data['price'].toDouble(),
         documentId = docID,

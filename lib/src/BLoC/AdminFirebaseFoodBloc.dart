@@ -439,6 +439,7 @@ class AdminFirebaseFoodBloc implements Bloc {
       List docList = snapshot.docs;
 
       List <NewIngredient> ingItems = new List<NewIngredient>();
+
       ingItems = snapshot.docs.map((documentSnapshot) =>
           NewIngredient.ingredientConvertExtra
             (documentSnapshot.data(), documentSnapshot.id)
@@ -454,6 +455,8 @@ class AdminFirebaseFoodBloc implements Bloc {
 
       ingItems.forEach((doc) {
         print('one Extra . . . . . . . name: ${doc.ingredientName} documentID: ${doc.documentId}');
+
+        print('one Extra --- * --- * --- * . . . . . . . imageURL: ${doc.imageURL}');
 
       }
       );

@@ -124,9 +124,12 @@ class IdentityBloc implements Bloc {
     if (result.user.email != null) {
       User fireBaseUserRemote = result.user;
 
+
       _currentFBUser = fireBaseUserRemote;
 
-      await _saveUser(fireBaseUserRemote, email, password);
+//      _currentFBUser.getIdToken();
+
+      await _saveUser(fireBaseUserRemote.uid,fireBaseUserRemote, email, password);
 
 
       _firebaseUserController.sink.add(_currentFBUser);
@@ -142,7 +145,7 @@ class IdentityBloc implements Bloc {
 
   }
 
-  _saveUser(/*String uid*/ User x, String loggerEmail,
+  _saveUser(String uid, User x, String loggerEmail,
       String loggerPassword) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -161,7 +164,7 @@ class IdentityBloc implements Bloc {
     prefs.setString('userInfo', jsonEncode({
       'email': loggerEmail,
       'password': loggerPassword,
-//      'uid': uid,
+      'uid': uid,
     })).then((onValue) =>
     {
     //  print('at then of prefs.setString(userInfo.....')
@@ -177,22 +180,13 @@ class IdentityBloc implements Bloc {
         resultString
     );
 
-   // print('Howdy, ${user['email']}');
 
-
-   // print('password ${user['password']}');
-
-  //  print('result_in_prefs: ' + resultString);
   }
 
 //  Future<FirebaseUser> _handleSignIn(String email, String password) async {
   Future<User> _handleSignIn(String email, String password) async {
     UserCredential result = await _auth.signInWithEmailAndPassword(email:
     email, password: password);
-
-//  print('result: '  + result);
-
-   // print('result: ' + result.user.email);
 
     User fireBaseUserRemote = result.user;
 
@@ -266,23 +260,15 @@ class IdentityBloc implements Bloc {
 
       String storedPassWord = user['password'];
 
-     // print('email $storedEmail');
-     // print('password $storedPassWord');
+      String uid = user['uid'];
+      print('---------- uid ------------: $uid');
+
 
       if ((storedEmail != null) && (storedPassWord != null)) {
-      //  print("email && password found");
-
-        // NOW I NEED TO CHECK THIS STORED CREDENTIALS WITH FIREBASE AUTHENTICATION.
 
         User ourUser = await _handleSignIn(storedEmail, storedPassWord);
 
-//      return Navigator.push(context,
-//          MaterialPageRoute(builder: (context) => drawerScreen())
-//
-//      );
 
-
-//      _allIngItems = ingItems;
         _currentFBUser = ourUser;
         _firebaseUserController.sink.add(_currentFBUser);
 
@@ -299,12 +285,7 @@ class IdentityBloc implements Bloc {
 
   Future loadUserNotConstructor(/*String uid*/) async {
 
-    // print('at loadUser of Welcome Page');
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
-//    ??=
-//    Assign the value only if the variable is null
-
 
 
     final resultString =  prefs.getString("userInfo");
@@ -315,42 +296,17 @@ class IdentityBloc implements Bloc {
         resultString
     );
 
-   // print('Howdy, ${user['email']}!');
-
-
-    // print('password ${user['password']}.');
-
-  //  print('result_in_prefs: WelCome Page ' + resultString);
 
     String storedEmail = user['email'];
 
     String storedPassWord = user['password'];
 
-   // print('email $storedEmail');
-    // print('password $storedPassWord');
 
     if((storedEmail!= null) && (storedPassWord!=null)){
 
-    //  print("email && password found");
-
-      // NOW I NEED TO CHECK THIS STORED CREDENTIALS WITH FIREBASE AUTHENTICATION.
-
       User ourUser = await _handleSignIn(storedEmail,storedPassWord);
 
-//      return Navigator.push(context,
-//          MaterialPageRoute(builder: (context) => drawerScreen())
-//
-//      );
-
-
-//      _allIngItems = ingItems;
-//
-//      _allIngredientListController.sink.add(ingItems);
-
     }
-   // print("not found");
-
-    //1 means SharedPreference not empty.
 
   }
 
@@ -359,11 +315,6 @@ class IdentityBloc implements Bloc {
   @override
   void dispose() {
     _firebaseUserController.close();
-
-//    _orderController.close();
-//    _orderTypeController.close();
-//    _customerInformationController.close();
-//    _multiSelectForFoodController.close();
 
   }
 }

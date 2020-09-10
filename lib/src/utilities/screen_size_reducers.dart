@@ -1,7 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 //import 'package:google_sign_in/google_sign_in.dart';
 
@@ -57,6 +58,22 @@ double displayWidth(BuildContext context) {
 
 String storageBucketURLPredicate =
     'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/';
+
+
+
+//SharedPreferences prefs = await SharedPreferences.getInstance();
+//
+//final resultString = prefs.getString("userInfo");
+//
+//if (resultString == null){
+//
+//return false;
+//}
+//else{
+//Map<String, dynamic> user = jsonDecode(
+//resultString
+//);
+
 
 
 //Auth.getIdTokenResult()
