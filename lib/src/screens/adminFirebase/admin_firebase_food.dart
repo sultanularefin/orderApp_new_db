@@ -399,7 +399,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
     });
   }
 
-  final Firestore firestore = Firestore.instance;
+//  final Firestore firestore = Firestore.instance;
 
   CollectionReference get messages => firestore.collection('messages');
 

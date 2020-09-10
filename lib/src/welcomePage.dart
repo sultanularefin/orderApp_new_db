@@ -220,7 +220,7 @@ class _WelcomePageState extends State<WelcomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
 
-        child: StreamBuilder<FirebaseUser>(
+        child: StreamBuilder<User>(
 
             stream: identityBloc.
             getCurrentFirebaseUserStream,
@@ -448,7 +448,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     break;
                     */
                   default:
-                    return (snapshot.data is FirebaseUser) ?
+                    return (snapshot.data is User) ?
 
                     /*
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */

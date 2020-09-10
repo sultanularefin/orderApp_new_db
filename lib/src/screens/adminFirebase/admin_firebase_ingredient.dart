@@ -35,7 +35,7 @@ class AdminFirebaseIngredient extends StatefulWidget {
 
   final Widget child;
 
-  final Firestore firestore = Firestore.instance;
+//  final Firestore firestore = Firestore.instance;
 
   AdminFirebaseIngredient({Key key, this.child}) : super(key: key);
   _AddDataState createState() => _AddDataState();

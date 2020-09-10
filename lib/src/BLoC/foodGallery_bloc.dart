@@ -453,7 +453,18 @@ class FoodGalleryBloc implements Bloc {
 
 
       var snapshot = await _client.fetchCategoryItems();
+
+//      Map getDocs = snapshot.data();
+
       List docList = snapshot.docs;
+
+      print('docList.length: ${docList.length}');
+
+
+
+
+
+
 
 
       List<NewCategoryItem> tempAllCategories = new List<NewCategoryItem>();
@@ -462,7 +473,8 @@ class FoodGalleryBloc implements Bloc {
 
 //
 
-        final String categoryItemName = doc['name'];
+//        document.get('user_name')
+        final String categoryItemName = doc.get('name');//['name'];
 
         print('categoryItemName : $categoryItemName');
 
@@ -482,11 +494,13 @@ class FoodGalleryBloc implements Bloc {
 
 //      print('categoryImageURL in food Gallery Bloc: $categoryImageURL');
 
-        final num sequenceNo0 = doc['sequence_no'];
+        final num sequenceNo0 =doc.get('sequence_no');
+        // doc['sequence_no'];
+
 //        final num totalCategoryRating = doc['total_rating'];
 
 
-        final String fireStoreFieldName2= doc['fireStoreFieldName'];
+        final String fireStoreFieldName2= doc.get('fireStoreFieldName');
 
 
         /*
