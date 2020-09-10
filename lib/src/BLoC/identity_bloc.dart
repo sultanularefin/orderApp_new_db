@@ -127,8 +127,17 @@ class IdentityBloc implements Bloc {
 
       _currentFBUser = fireBaseUserRemote;
 
-      print('||| ||| ||| ||| ||| ||| ||| '
-          '_currentFBUser.getIdToken() --- --- ---- --- --- --- : ${_currentFBUser.getIdToken()}');
+
+      Future<String> x = _currentFBUser.getIdToken();
+
+      x.whenComplete(() {
+        print("_currentFBUser.getIdToken()");
+      }).then((IdtokenResultZZZ) async {
+        print("IdtokenResultZZZ: $IdtokenResultZZZ");
+      }).catchError((onError) {
+        print('getting time not successful: $onError');
+        return false;
+      });
 
       await _saveUser(fireBaseUserRemote.uid,fireBaseUserRemote, email, password);
 
@@ -136,6 +145,21 @@ class IdentityBloc implements Bloc {
       _firebaseUserController.sink.add(_currentFBUser);
 
       return result;
+//
+//
+//                                  RRRRRGHGHGHGH
+    
+      
+      // x.whenComplete(() => null)
+      // print(' ||| ||| ||| ||| ||| ||| |||   ||| ||| ||| ||| ||| ||| |||  ==> x: $x');
+
+
+      // print('||| ||| ||| ||| ||| ||| ||| '
+      //     '_currentFBUser.getIdToken() --- --- ---- --- --- --- : ${_currentFBUser.getIdToken()}');
+
+
+
+
     }
     else {
       return result;
