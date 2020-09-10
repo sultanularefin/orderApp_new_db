@@ -324,7 +324,7 @@ class _LoginPageState extends State<LoginPage> {
 
 //                            _handleSignIn();
                             }).catchError((onError){
-                               print('LOGIN ERROR **** at onError $onError ***');
+                              print('LOGIN ERROR **** at onError $onError ***');
                               _scaffoldKey.currentState.showSnackBar(
                                 new SnackBar(duration: new Duration(seconds: 6), content:Container(
                                   child:
@@ -390,203 +390,223 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-    void setPasswordState( text){
-      print(text);
-      setState(() {
-        passwordState = text;
-      });
-    }
+  void setPasswordState( text){
+    print(text);
+    setState(() {
+      passwordState = text;
+    });
+  }
 
 
 
 
 
 //  final GoogleSignIn _googleSignIn = GoogleSignIn();
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
 
 
 
 
 
-    //functions marked 'async' must have a return type assignable to 'future'
-    Future<bool> loadUser(/*String uid*/) async {
+  //functions marked 'async' must have a return type assignable to 'future'
+  Future<bool> loadUser(/*String uid*/) async {
 
-      print('at loadUser of Welcome Page');
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('at loadUser of Welcome Page');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      //    ??=
-      //    Assign the value only if the variable is null
-
-
-
-      final resultString =   prefs.getString("userInfo");
-
-      print('resultString in login Page $resultString');
+    //    ??=
+    //    Assign the value only if the variable is null
 
 
-      if(resultString == null) {
 
-        return true;
-      }
-      print("found"); // thus nothing to return.
-      return false;
+    final resultString =   prefs.getString("userInfo");
 
-      //1 means SharedPreference not empty.
+    print('resultString in login Page $resultString');
 
+
+    if(resultString == null) {
+
+      return true;
     }
+    print("found"); // thus nothing to return.
+    return false;
 
-
-
-
-
-    Widget _backButton() {
-      return InkWell(
-        onTap: () {
-          SystemNavigator.pop();
-//        Navigator.pop(context);
-        },
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-                child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-              ),
-              Text('Back',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-            ],
-          ),
-        ),
-      );
-    }
-
-    // email and password input.
-
-    Widget _entryField(String title, {bool isPassword = false}) {
-      return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextField(
-                obscureText: isPassword,
-
-                textInputAction: !isPassword? TextInputAction.next :TextInputAction.done,
-//              textInputAction: TextInputAction.next,
-                onSubmitted:(_) => !isPassword?  FocusScope.of(context).nextFocus():
-                FocusScope.of(context).unfocus(),
-
-//              onSubmitted: (_) => FocusScope.of(context).unfocus(),
-                onChanged: (text) {
-                  !isPassword?
-                  setEmailState(text):setPasswordState(text);
-//                print("First text field: $text");
-                },
-
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    fillColor: Color(0xffFFFA5F),
-                    filled: true)
-            )
-          ],
-        ),
-      );
-    }
-//  _handleSignIn
-    Widget _submitButton() {
-
-      return Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
-        padding: EdgeInsets.symmetric(vertical: 15),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.grey.shade200,
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2)
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Color(0xfffbb448),
-                  Color(0xfff7892b)])),
-
-        child: Text(
-          'Login',
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-
-
-      );
-    }
-
-
-    // or login with facebook.
-
-
-
-
-
-
-
-
-
-
-
-
-    Widget titleWidget() {
-      return RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-            text: 'F',
-            style:
-            TextStyle( //Theme.of(context).textTheme.display1,
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Color(0xffe46b10),
-            ),
-            children: [
-              TextSpan(
-                text: 'ood',
-                style: TextStyle(color: Colors.black, fontSize: 30),
-              ),
-              TextSpan(
-                text: 'Gallery',
-                style: TextStyle(color: Color(0xffe46b10), fontSize: 30),
-              ),
-            ]),
-      );
-    }
-
-    Widget _emailPasswordWidget() {
-      return Column(
-        children: <Widget>[
-          _entryField("Email id"),
-          _entryField("Password", isPassword: true),
-        ],
-      );
-    }
-
-    Widget test() {
-      return Text('you are logged out',
-        style: TextStyle(color: Colors.red, fontSize: 40),);
-    }
-
-
+    //1 means SharedPreference not empty.
 
   }
+
+
+
+
+
+  Widget _backButton() {
+    return InkWell(
+      onTap: () {
+        SystemNavigator.pop();
+//        Navigator.pop(context);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
+              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
+            ),
+            Text('Back',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
+          ],
+        ),
+      ),
+    );
+  }
+
+  // email and password input.
+
+  Widget _entryField(String title, {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextField(
+              obscureText: isPassword,
+
+              textInputAction: !isPassword? TextInputAction.next :TextInputAction.done,
+//              textInputAction: TextInputAction.next,
+              onSubmitted:(_) => !isPassword?  FocusScope.of(context).nextFocus():
+              FocusScope.of(context).unfocus(),
+
+//              onSubmitted: (_) => FocusScope.of(context).unfocus(),
+              onChanged: (text) {
+                !isPassword?
+                setEmailState(text):setPasswordState(text);
+//                print("First text field: $text");
+              },
+
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  fillColor: Color(0xffFFFA5F),
+                  filled: true)
+          )
+        ],
+      ),
+    );
+  }
+//  _handleSignIn
+  Widget _submitButton() {
+
+    return Container(
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      padding: EdgeInsets.symmetric(vertical: 15),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.grey.shade200,
+                offset: Offset(2, 4),
+                blurRadius: 5,
+                spreadRadius: 2)
+          ],
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+
+                Colors.pinkAccent,
+                Colors.deepOrange,
+
+//                  Color(0xfffbb448),
+//                  Color(0xfff7892b)
+
+              ]
+
+          )
+
+      ),
+
+      child: Text(
+        'Login',
+        style: TextStyle(fontSize: 20, color: Colors.white),
+      ),
+
+
+    );
+  }
+
+
+  // or login with facebook.
+
+
+
+
+
+
+
+
+
+
+
+
+  Widget titleWidget() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+          text: 'F',
+          style:
+          TextStyle( //Theme.of(context).textTheme.display1,
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+            color:
+            //Color(0xffe46b10),
+            Colors.pinkAccent,
+//            Colors.deepOrange,
+          ),
+          children: [
+            TextSpan(
+              text: 'ood',
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            TextSpan(
+              text: 'Gallery',
+              style: TextStyle(
+                  color:
+                  //Color(0xffe46b10),
+//                  Colors.pinkAccent,
+                  Colors.deepOrange,
+
+                  fontSize: 30),
+            ),
+          ]),
+    );
+  }
+
+  Widget _emailPasswordWidget() {
+    return Column(
+      children: <Widget>[
+        _entryField("Email id"),
+        _entryField("Password", isPassword: true),
+      ],
+    );
+  }
+
+  Widget test() {
+    return Text('you are logged out',
+      style: TextStyle(color: Colors.red, fontSize: 40),);
+  }
+
+
+
+}
