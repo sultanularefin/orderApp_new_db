@@ -344,7 +344,7 @@ _batteryLevel = batteryLevel;
                                     'restapojut',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 26,
                                         color: Color(0xff07D607),
                                         fontFamily: 'poppins'),
                                   ),
@@ -352,7 +352,7 @@ _batteryLevel = batteryLevel;
                                     'Online Orders',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                        fontSize: 12, color: Color(0xff07D607)),
+                                        fontSize: 20, color: Color(0xff07D607)),
                                   ),
                                 ],
                               ),

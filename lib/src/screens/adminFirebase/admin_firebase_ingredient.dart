@@ -52,7 +52,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
   final _formKey = GlobalKey<FormState>();
   var onlyDigitsAndPoints = FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
-  Radius zero = Radius.circular(2.0);
+  Radius zero = Radius.circular(6.0);
 //  Radius.circular(0.0);
 
   int _currentCategory= 0;
@@ -297,170 +297,277 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
     /*final blocAdminFoodFBase = */ BlocProvider.of<AdminFirebaseIngredientBloc>(context);
 
 
-//    scaffoldKey
-    if(_loadingState ==true){
-      return new Scaffold(
-        key:_scaffoldKey,
-        backgroundColor: Colors.blue,
-        body:Center(
-          child:Text('...'),
-        ),
-      );
-    }
-    else {
       print('at _loadingState == false in AdminFirebase Ingredient...');
-      return new Scaffold(
-          key:_scaffoldKey,
-          appBar: AppBar(title: Text('Admin Firebase Ingredient')),
-          body: Container(
-            padding:
-            const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      return SafeArea(
+        child: Theme(
+
+          data: ThemeData(primaryIconTheme: IconThemeData(
+
+            color: Colors.blueGrey,
+            // size: 40,
+
+          ),
+          ),// use this
+          
+          child: new Scaffold(
+              key:_scaffoldKey,
+              appBar: AppBar(
+                title: Text('Admin Ingredient Upload',
+
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.blueGrey,
+                  ),
+
+
+                ),
+                backgroundColor: Color(0xffFFE18E),
+              ),
+//          appBar: AppBar(title: Text('Admin Firebase Ingredient')),
+              body: Container(
+                padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
 //              ....
-            child: StreamBuilder<NewIngredient>(
-                stream: blocAdminIngredientFBase.thisIngredientItemStream, //null,
-                initialData: blocAdminIngredientFBase.getCurrentIngredientItem,
-                builder: (context, snapshot) {
-                        final NewIngredient currentIngredient = snapshot.data;
+                child: StreamBuilder<NewIngredient>(
+                    stream: blocAdminIngredientFBase.thisIngredientItemStream, //null,
+                    initialData: blocAdminIngredientFBase.getCurrentIngredientItem,
+                    builder: (context, snapshot) {
+                            final NewIngredient currentIngredient = snapshot.data;
 
-                        return Builder(
-                            builder: (context) =>
-                                Form(
-                                    key: _formKey,
-                                    child: ListView(
-                                        scrollDirection: Axis.vertical,
-                                        children: [
-                                          new Container(
-                                            child: _image == null
-                                                ?
-                                            GestureDetector(
-                                              onTap: () {
-                                                getImage();
+                            return Builder(
+                                builder: (context) =>
+                                    Form(
+                                        key: _formKey,
+                                        child: ListView(
+                                            scrollDirection: Axis.vertical,
+                                            children: [
+                                              new Container(
+                                                child: _image == null
+                                                    ?
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    getImage();
 
-                                              }, child: new CircleAvatar(
+                                                  }, child: new CircleAvatar(
 
-                                                backgroundColor: Colors.lightBlueAccent,
-                                                radius: 80.0,
-
-                                                child: new Container(
-                                                    padding: const EdgeInsets.all(0.0),
-                                                    child: new Container(
-                                                      child: Text('No image selected.'),)
-
-                                                )
-
-                                            ),
-                                            ) : GestureDetector(
-                                              onTap: () {
-                                                getImage();
-
-                                              }, child: new CircleAvatar(
-
-                                                backgroundColor: Colors.lightBlueAccent,
-                                                radius: 80.0,
-
-                                                child: new Container(
-                                                  padding: const EdgeInsets.all(0.0),
-                                                  child: Image.file(_image),
-
-                                                )
-
-                                            ),
-                                            ),
-                                          ),
+                                                    backgroundColor: Colors.blueGrey,
+                                                    radius: 130,
 
 
-                                          TextFormField(
-                                            decoration:
-                                            InputDecoration(labelText: 'Ingredient Name'),
-                                            validator: (value) {
-                                              if (value.isEmpty) {
-                                                return 'Please enter the Ingredient Name';
-                                              }
-                                            },
+                                                        child: new Container(
+
+                                                            height:100,
+                                                            width:180,
+
+                                                            child: Text('no ingredient image selected.',
+                                                              style: TextStyle(
 
 
-                                            // onSaved: (val) =>
-                                            onChanged: (val) =>
-                                                blocAdminIngredientFBase.setItemName(val),
-                                          ),
-
-
-
-
-                                          Container(
-
-                                            child: Text('ingredient of food item category: ',
-
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 29,
-                                                fontWeight: FontWeight.normal,
+                                                                fontSize: 24,
+                                                                fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
-                                                color: Colors.redAccent,
-                                                fontFamily: 'Itim-Regular',
+                                                                color: Colors.white,
+                                                                fontFamily: 'Itim-Regular',
 
-                                              )
-                                          ),
-                                          ),
+                                                              ),
 
-
-                                          Container(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 50, 0, 20),
-
-                                            child:
+                                                              textAlign: TextAlign.center,
 
 
+                                                        )
 
-                                            StreamBuilder<List<NewCategoryItem>>(
-                                              stream: blocAdminIngredientFBase.getCategoryMultiSelectControllerStream ,
-                                              initialData:blocAdminIngredientFBase.getCategoryTypesForDropDown,
-                                              builder: (context, snapshot) {
+                                                    )
 
-                                                final List<NewCategoryItem> allCategories = snapshot.data;
+                                                ,),
+                                                ) : GestureDetector(
+                                                  onTap: () {
+                                                    getImage();
+
+                                                  }, child: new CircleAvatar(
+
+                                                    backgroundColor: Colors.lightBlueAccent,
+                                                    radius: 80.0,
+
+                                                    child: new Container(
+                                                      padding: const EdgeInsets.all(0.0),
+                                                      child: Image.file(_image),
+
+                                                    )
+
+                                                ),
+                                                ),
+                                              ),
 
 
-                                                return
+                                              TextFormField(
+                                                decoration:
+                                                InputDecoration(labelText: 'Ingredient Name'),
+                                                validator: (value) {
+                                                  if (value.isEmpty) {
+                                                    return 'Please enter the Ingredient Name';
+                                                  }
+                                                },
 
-                                                  GridView.builder(
-                                                    itemCount: allCategories.length,
-                                                    gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
-                                                      //Above to below for 3 not 2 Food Items:
-                                                      maxCrossAxisExtent: 220,
-                                                      mainAxisSpacing: 10, // H  direction
-                                                      crossAxisSpacing: 20,
-                                                      childAspectRatio: 200 / 110, /* (h/vertical)*/
-                                                    ),
-                                                    shrinkWrap: true,
+
+                                                // onSaved: (val) =>
+                                                onChanged: (val) =>
+                                                    blocAdminIngredientFBase.setItemName(val),
+                                              ),
+
+
+
+
+                                              Container(
+                                                color: Color(0xffFFE18E),
+                                                child:
+
+                                                Text('ingredient of food item category: ',
+
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 29,
+                                                    fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                                    color: Colors.redAccent,
+                                                    fontFamily: 'Itim-Regular',
+
+                                                  )
+                                              ),
+                                              ),
+
+
+                                              Container(
+                                                padding: const EdgeInsets.fromLTRB(
+                                                    0, 50, 0, 20),
+
+                                                child:
+
+
+
+                                                StreamBuilder<List<NewCategoryItem>>(
+                                                  stream: blocAdminIngredientFBase.getCategoryMultiSelectControllerStream ,
+                                                  initialData:blocAdminIngredientFBase.getCategoryTypesForDropDown,
+                                                  builder: (context, snapshot) {
+
+                                                    final List<NewCategoryItem> allCategories = snapshot.data;
+
+
+                                                    return
+
+                                                      GridView.builder(
+                                                        itemCount: allCategories.length,
+                                                        gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                                                          //Above to below for 3 not 2 Food Items:
+                                                          maxCrossAxisExtent: 220,
+                                                          mainAxisSpacing: 10, // H  direction
+                                                          crossAxisSpacing: 20,
+                                                          childAspectRatio: 200 / 110, /* (h/vertical)*/
+                                                        ),
+                                                        shrinkWrap: true,
 
 //        reverse: true,
-                                                    itemBuilder: (_, int index) {
+                                                        itemBuilder: (_, int index) {
 
-                                                      return _buildOneCheckBoxIngredientOfFoodCategory(
-                                                          allCategories[index], index);
+                                                          return _buildOneCheckBoxIngredientOfFoodCategory(
+                                                              allCategories[index], index);
+                                                        },
+                                                      );
+
+
+                                                  }
+
+                                                  ,
+                                                ),
+                                              ),
+
+
+
+                                              Container(
+//                                            color: Color(0xffFFE18E),
+                                                child: Row(
+                                                  children: [
+                                                    Text('price: ',
+
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        style: TextStyle(
+                                                          fontSize: 34,
+                                                          fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                                                          color: Colors.redAccent,
+                                                          fontFamily: 'Itim-Regular',
+
+                                                        )
+                                                    ),
+
+                                                Container(
+                                                  width: displayWidth(context) / 3,
+                                                  child:
+
+
+
+
+                                                  TextFormField(
+                                                    keyboardType: TextInputType.number,
+                                                    inputFormatters: <TextInputFormatter>[
+
+
+//                                                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                                        FilteringTextInputFormatter.digitsOnly
+                                                    ],
+                                                    validator: (value) {
+                                                      if (value.isEmpty) {
+                                                        return 'Please enter price';
+                                                      }
                                                     },
-                                                  );
+                                                    textInputAction: TextInputAction.done,
+//                                                    onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                                                    textAlign: TextAlign.center,
+                                                    decoration: InputDecoration(
+
+                                                      border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.
+                                                      all(
+                                                          zero
+
+                                                      )),
+                                                      hintText: 'price',
+                                                      hintStyle:
+                                                      TextStyle(color: Color(0xffFC0000), fontSize: 17),
+                                                    ),
+                                                    style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
+                                                    onChanged: (text) {
+                                                      print("price ....: $text");
 
 
-                                              }
+                                                      final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseIngredientBloc>(context);
+                                                      blocAdminIngredientFBase.setPrice(text);
 
-                                              ,
-                                            ),
-                                          ),
+                                                    },
+                                                    onTap: () {
+                                                      print('..tapped for price input......');
+                                                    },
+                                                  ),
+                                                ),
 
 
 
-                                          Container(
 
-                                            child: Row(
-                                              children: [
-                                                Text('price: ',
+
+                                                  ],
+                                                ),
+                                              ),
+
+                                              Container(
+                                                color: Color(0xffFFE18E),
+                                                child: Text('subGroup....: ',
 
                                                     maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                      fontSize: 34,
+                                                      fontSize: 29,
                                                       fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
                                                       color: Colors.redAccent,
@@ -468,133 +575,69 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
                                                     )
                                                 ),
-
-                                            Container(
-                                              width: displayWidth(context) / 3,
-                                              child:
-                                              TextField(
-                                                keyboardType: TextInputType.number,
-                                                inputFormatters: <TextInputFormatter>[
-
-
-//                                                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                                                    FilteringTextInputFormatter.digitsOnly
-                                                ],
-                                                textInputAction: TextInputAction.done,
-                                                onSubmitted: (_) => FocusScope.of(context).unfocus(),
-                                                textAlign: TextAlign.center,
-                                                decoration: InputDecoration(
-
-                                                  border: OutlineInputBorder(borderRadius: BorderRadius.
-                                                  all(
-                                                      zero
-
-                                                  )),
-                                                  hintText: 'price',
-                                                  hintStyle:
-                                                  TextStyle(color: Color(0xffFC0000), fontSize: 17),
-                                                ),
-                                                style: TextStyle(color: Color(0xffFC0000), fontSize: 16),
-                                                onChanged: (text) {
-                                                  print("price ....: $text");
-
-
-                                                  final blocAdminIngredientFBase = BlocProvider.of<AdminFirebaseIngredientBloc>(context);
-                                                  blocAdminIngredientFBase.setPrice(text);
-
-                                                },
-                                                onTap: () {
-                                                  print('..tapped for price input......');
-                                                },
                                               ),
-                                            ),
 
 
+                                              Container(
+                                                padding: const EdgeInsets.fromLTRB(
+                                                    0, 50, 0, 20),
 
+                                                child:
+                                                StreamBuilder<List<IngredientSubgroup>>(
+                                                  stream: blocAdminIngredientFBase.getIngredientGroupsControllerStream,
+                                                  initialData:blocAdminIngredientFBase.getIngredientTypes,
+                                                  builder: (context, snapshot) {
 
-
-                                              ],
-                                            ),
-                                          ),
-
-                                          Container(
-
-                                            child: Text('subGroup....: ',
-
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 29,
-                                                  fontWeight: FontWeight.normal,
-//                                                      color: Colors.white
-                                                  color: Colors.redAccent,
-                                                  fontFamily: 'Itim-Regular',
-
-                                                )
-                                            ),
-                                          ),
-
-
-                                          Container(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 50, 0, 20),
-
-                                            child:
-                                            StreamBuilder<List<IngredientSubgroup>>(
-                                              stream: blocAdminIngredientFBase.getIngredientGroupsControllerStream,
-                                              initialData:blocAdminIngredientFBase.getIngredientTypes,
-                                              builder: (context, snapshot) {
-
-                                                final List<IngredientSubgroup> allIngredientSubGroups =
-                                                    snapshot.data;
-                                                return
-                                                  GridView.builder(
-                                                    itemCount: allIngredientSubGroups.length,
-                                                    gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
-                                                      //Above to below for 3 not 2 Food Items:
-                                                      maxCrossAxisExtent: 180,
-                                                      mainAxisSpacing: 10, // H  direction
-                                                      crossAxisSpacing: 10,
-                                                      childAspectRatio: 180 / 60, /* (h/vertical)*/
-                                                    ),
-                                                    shrinkWrap: true,
+                                                    final List<IngredientSubgroup> allIngredientSubGroups =
+                                                        snapshot.data;
+                                                    return
+                                                      GridView.builder(
+                                                        itemCount: allIngredientSubGroups.length,
+                                                        gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
+                                                          //Above to below for 3 not 2 Food Items:
+                                                          maxCrossAxisExtent: 180,
+                                                          mainAxisSpacing: 10, // H  direction
+                                                          crossAxisSpacing: 10,
+                                                          childAspectRatio: 180 / 60, /* (h/vertical)*/
+                                                        ),
+                                                        shrinkWrap: true,
 
 //        reverse: true,
-                                                    itemBuilder: (_, int index) {
+                                                        itemBuilder: (_, int index) {
 
-                                                      return _buildOneCheckBoxIngredientSubGroup(
-                                                          allIngredientSubGroups[index], index);
-                                                    },
-                                                  );
-
-
-                                              }
-
-                                              ,
-                                            ),
-                                          ),
+                                                          return _buildOneCheckBoxIngredientSubGroup(
+                                                              allIngredientSubGroups[index], index);
+                                                        },
+                                                      );
 
 
+                                                  }
 
-                                          Container(
-                                              padding: const EdgeInsets.symmetric(
-                                                  vertical: 10.0, horizontal: 10.0),
-                                              child: RaisedButton(
-                                                  color: Colors.yellowAccent,
-                                                  onPressed: () async {
-                                                    final form = _formKey.currentState;
-
-                                                    print('form: $_formKey.currentState');
-                                                    print('at onPressed ');
-
-
-                                                    //   the method 'validate' isn't defined for the class 'State'
+                                                  ,
+                                                ),
+                                              ),
 
 
 
+                                              Container(
+                                                  padding: const EdgeInsets.symmetric(
+                                                      vertical: 10.0, horizontal: 10.0),
+                                                  child: RaisedButton(
+                                                      color: Colors.yellowAccent,
+                                                      onPressed: () async {
+                                                        final form = _formKey.currentState;
 
-                                                    final FirebaseAuth _auth = FirebaseAuth.instance;
-                                                    final User user = FirebaseAuth.instance.currentUser;
+                                                        print('form: $_formKey.currentState');
+                                                        print('at onPressed ');
+
+
+                                                        //   the method 'validate' isn't defined for the class 'State'
+
+
+
+
+                                                        final FirebaseAuth _auth = FirebaseAuth.instance;
+                                                        final User user = FirebaseAuth.instance.currentUser;
 
 
 
@@ -603,96 +646,98 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 //                                                    final FirebaseUser user = await _auth.currentUser();
 
 
-                                                    blocAdminIngredientFBase.setUser(user.email);
+                                                        blocAdminIngredientFBase.setUser(user.email);
 
 
-                                                    if (form.validate()) {
-                                                      form.save();
+                                                        if (form.validate()) {
+                                                          form.save();
 
-                                                      _scaffoldKey.currentState.showSnackBar(
-                                                        new SnackBar(duration: new Duration(seconds: 5), content:Container(
-                                                          child:
-                                                          new Row(
-                                                            children: <Widget>[
-                                                              new CircularProgressIndicator(),
-                                                              new Text("uploading ingredient data....",style:
-                                                              TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
-                                                            ],
-                                                          ),
-                                                        )),);
+                                                          _scaffoldKey.currentState.showSnackBar(
+                                                            new SnackBar(duration: new Duration(seconds: 5), content:Container(
+                                                              child:
+                                                              new Row(
+                                                                children: <Widget>[
+                                                                  new CircularProgressIndicator(),
+                                                                  new Text("uploading ingredient data....",style:
+                                                                  TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                                ],
+                                                              ),
+                                                            )),);
 
-                                                      int loginRequiredStatus =  await blocAdminIngredientFBase.save();
+                                                          int loginRequiredStatus =  await blocAdminIngredientFBase.save();
 
 
-                                                      if (loginRequiredStatus == 0) {
-                                                        _scaffoldKey.currentState.showSnackBar(
-                                                          new SnackBar(duration: new Duration(seconds: 2), content:Container(
-                                                            child:
-                                                            new Row(
-                                                              children: <Widget>[
-                                                                new CircularProgressIndicator(),
-                                                                new Text("Something went wrong, Try VPN.",style:
-                                                                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
-                                                              ],
+                                                          if (loginRequiredStatus == 0) {
+                                                            _scaffoldKey.currentState.showSnackBar(
+                                                              new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                                child:
+                                                                new Row(
+                                                                  children: <Widget>[
+                                                                    new CircularProgressIndicator(),
+                                                                    new Text("Something went wrong, Try VPN.",style:
+                                                                    TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                                  ],
+                                                                ),
+                                                              )),);
+                                                          }
+                                                          else{
+                                                            _scaffoldKey.currentState.showSnackBar(
+                                                              new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                                child:
+                                                                new Row(
+                                                                  children: <Widget>[
+                                                                    new CircularProgressIndicator(),
+                                                                    new Text("success check firestore and storage...",style:
+                                                                    TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                                  ],
+                                                                ),
+                                                              )),);
+                                                          }
+
+                                                        }
+                                                        else {
+                                                          Scaffold.of(context)
+                                                              .showSnackBar(
+                                                            SnackBar(content: Row(
+                                                              children: [
+                                                                Icon(Icons.thumb_up),
+                                                                SizedBox(width: 20),
+                                                                Expanded(child: Text(
+                                                                  "Please check the fields",
+                                                                  style: TextStyle(
+                                                                      fontSize: 15,
+                                                                      color: Colors
+                                                                          .lightBlueAccent,
+                                                                      backgroundColor: Colors
+                                                                          .deepOrange),
+                                                                ),),
+                                                              ],),
+                                                              duration: Duration(seconds: 4),
                                                             ),
-                                                          )),);
-                                                      }
-                                                      else{
-                                                        _scaffoldKey.currentState.showSnackBar(
-                                                          new SnackBar(duration: new Duration(seconds: 2), content:Container(
-                                                            child:
-                                                            new Row(
-                                                              children: <Widget>[
-                                                                new CircularProgressIndicator(),
-                                                                new Text("success check firestore and storage...",style:
-                                                                TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
-                                                              ],
-                                                            ),
-                                                          )),);
-                                                      }
+                                                          );
+                                                        }
+                                                      },
+                                                      child: Text('Save',
+                                                        style: TextStyle(
+                                                            fontSize: 20, color: Colors
+                                                            .lightBlueAccent),)
+                                                  )
+                                              ),
+                                            ]
 
-                                                    }
-                                                    else {
-                                                      Scaffold.of(context)
-                                                          .showSnackBar(
-                                                        SnackBar(content: Row(
-                                                          children: [
-                                                            Icon(Icons.thumb_up),
-                                                            SizedBox(width: 20),
-                                                            Expanded(child: Text(
-                                                              "Please check the fields",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .lightBlueAccent,
-                                                                  backgroundColor: Colors
-                                                                      .deepOrange),
-                                                            ),),
-                                                          ],),
-                                                          duration: Duration(seconds: 4),
-                                                        ),
-                                                      );
-                                                    }
-                                                  },
-                                                  child: Text('Save',
-                                                    style: TextStyle(
-                                                        fontSize: 20, color: Colors
-                                                        .lightBlueAccent),)
-                                              )
-                                          ),
-                                        ]
+                                        )
 
                                     )
-
-                                )
-                        );
+                            );
 
 
-                }
-            ),
-          )
+                    }
+                ),
+              )
+          ),
+        ),
       );
-    }
+
   }
   _showDialog(BuildContext context) {
 
