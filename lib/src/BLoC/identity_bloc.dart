@@ -127,7 +127,8 @@ class IdentityBloc implements Bloc {
 
       _currentFBUser = fireBaseUserRemote;
 
-//      _currentFBUser.getIdToken();
+      print('||| ||| ||| ||| ||| ||| ||| '
+          '_currentFBUser.getIdToken() --- --- ---- --- --- --- : ${_currentFBUser.getIdToken()}');
 
       await _saveUser(fireBaseUserRemote.uid,fireBaseUserRemote, email, password);
 
