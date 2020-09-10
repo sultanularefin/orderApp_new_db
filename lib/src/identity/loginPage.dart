@@ -278,6 +278,8 @@ class _LoginPageState extends State<LoginPage> {
 
 //                            _handleSignIn();
 
+                            print('userCheck: $userCheck');
+
                             userCheck.whenComplete(() {
 
                               print("called when future completes");

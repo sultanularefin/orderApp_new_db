@@ -2,7 +2,7 @@
 
 //### EXTERNAL PACKAGES
 import 'dart:async';
-import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
+
 //import 'package:logger/logger.dart';
 
 
@@ -48,7 +48,7 @@ class IdentityBloc implements Bloc {
 
 //  List<Order> _curretnOrder = [];
 
-  FirebaseUser _currentFBUser;
+  User _currentFBUser;
 
   //  Order _curretnOrder ;
   //  List<OrderTypeSingleSelect> _orderType;
@@ -56,20 +56,20 @@ class IdentityBloc implements Bloc {
 
 
 //  List<Order> get getCurrentOrder => _curretnOrder;
-  FirebaseUser get getCurrentFirebaseUser => _currentFBUser;
+  User get getCurrentFirebaseUser => _currentFBUser;
 
 //  List<OrderTypeSingleSelect> get getCurrentOrderType => _orderType;
 //  CustomerInformation get getCurrentCustomerInfo => _oneCustomerInfo;
 
 
-  final _firebaseUserController = StreamController <FirebaseUser>();
+  final _firebaseUserController = StreamController <User>();
 
 //  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
 //  final _orderTypeController = StreamController <List<OrderTypeSingleSelect>>.broadcast();
 //  final _customerInformationController = StreamController <CustomerInformation>();
 //  final _customerInformationController = StreamController <CustomerInformation>.broadcast();
 
-  Stream<FirebaseUser> get getCurrentFirebaseUserStream =>
+  Stream<User> get getCurrentFirebaseUserStream =>
       _firebaseUserController.stream;
 
 //  Future<FirebaseUser> get getCurrentFirebaseUserStream =>
@@ -118,11 +118,11 @@ class IdentityBloc implements Bloc {
     UserCredential result = await _auth.signInWithEmailAndPassword(email:
     email, password: password);
 
- // print('result:  IIIII   >>>>>  $result'  );
+  print('result:  IIIII   >>>>>  $result'  );
 
 
     if (result.user.email != null) {
-      FirebaseUser fireBaseUserRemote = result.user;
+      User fireBaseUserRemote = result.user;
 
       _currentFBUser = fireBaseUserRemote;
 
@@ -142,7 +142,7 @@ class IdentityBloc implements Bloc {
 
   }
 
-  _saveUser(/*String uid*/ FirebaseUser x, String loggerEmail,
+  _saveUser(/*String uid*/ User x, String loggerEmail,
       String loggerPassword) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -274,7 +274,7 @@ class IdentityBloc implements Bloc {
 
         // NOW I NEED TO CHECK THIS STORED CREDENTIALS WITH FIREBASE AUTHENTICATION.
 
-        FirebaseUser ourUser = await _handleSignIn(storedEmail, storedPassWord);
+        User ourUser = await _handleSignIn(storedEmail, storedPassWord);
 
 //      return Navigator.push(context,
 //          MaterialPageRoute(builder: (context) => drawerScreen())
@@ -335,7 +335,7 @@ class IdentityBloc implements Bloc {
 
       // NOW I NEED TO CHECK THIS STORED CREDENTIALS WITH FIREBASE AUTHENTICATION.
 
-      FirebaseUser ourUser = await _handleSignIn(storedEmail,storedPassWord);
+      User ourUser = await _handleSignIn(storedEmail,storedPassWord);
 
 //      return Navigator.push(context,
 //          MaterialPageRoute(builder: (context) => drawerScreen())
