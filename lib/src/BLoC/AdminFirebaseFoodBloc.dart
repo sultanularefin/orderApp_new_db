@@ -277,70 +277,87 @@ class AdminFirebaseFoodBloc implements Bloc {
     }
   }
 
-  Future<int> save() async {
+  Future<int> saveFoodItem() async {
     //  save() {
 
-    setCategoryValue(0);
-    itemId = await generateItemId(6);
 
-    print('itemId: $itemId');
-
-    String imageURL;
-
-    if (_image2 != null) {
-      imageURL = await _uploadFile(itemId, _thisFoodItem.itemName);
-    } else {
-      print('_image2= $_image2');
-
-      String dummyImage =
-          'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/404%2FfoodItem404.jpg?alt=media';
-
-      imageURL = Uri.decodeComponent(dummyImage
-          .replaceAll(
-          'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/',
-          '')
-          .replaceAll('?alt=media', ''));
+    if ((_thisFoodItem.ingredients == null) ||
+        (_thisFoodItem.ingredients.length == 0)) {
+      return 4;
     }
 
-    print('imageURL after stripping url for empty image or full image: $imageURL');
+    else if ((_thisFoodItem.defaultJuusto == null) ||
+        (_thisFoodItem.defaultJuusto.length == 0)) {
+      return 5;
+    }
+//    else if ((_thisFoodItem.subgroup == null) ||
+//        (_thisFoodItem.subgroup.length == 0)) {
+//      return 5;
+//    }
+    else {
+      setCategoryValue(0);
+      itemId = await generateItemId(6);
 
-    print('itemId: $itemId');
-    print('itemName: ${_thisFoodItem.itemName}');
+      print('itemId: $itemId');
+
+      String imageURL;
+
+      if (_image2 != null) {
+        imageURL = await _uploadFile(itemId, _thisFoodItem.itemName);
+      } else {
+        print('_image2= $_image2');
+
+        String dummyImage =
+            'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/404%2FfoodItem404.jpg?alt=media';
+
+        imageURL = Uri.decodeComponent(dummyImage
+            .replaceAll(
+            'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/',
+            '')
+            .replaceAll('?alt=media', ''));
+      }
+
+      print(
+          'imageURL after stripping url for empty image or full image: $imageURL');
+
+      print('itemId: $itemId');
+      print('itemName: ${_thisFoodItem.itemName}');
 
 //    print('ingredients: $ingredients');
-    print('Euro Price: $priceInEuro');
+      print('Euro Price: $priceInEuro');
 
-    print('isHot: $isHot');
-    print('isAvailable: $isAvailable');
+      print('isHot: $isHot');
+      print('isAvailable: $isAvailable');
 
-    print('_image2: $_image2');
-    print('_categoryName: $categoryName');
+      print('_image2: $_image2');
+      print('_categoryName: $categoryName');
 
-    //    print('itemCategory: $itemCategory');
-    //    _addMessage()
-    print('saving user using a web service');
+      //    print('itemCategory: $itemCategory');
+      //    _addMessage()
+      print('saving user using a web service');
 
-    _thisFoodItem.itemName = titleCase(_thisFoodItem.itemName);
+      _thisFoodItem.itemName = titleCase(_thisFoodItem.itemName);
 
-    List<String> x = new List<String>();
-    x = [
-      'ingredient 1',
-      'ingredient 2',
-      'ingredient 3',
-    ];
+      List<String> x = new List<String>();
+      x = [
+        'ingredient 1',
+        'ingredient 2',
+        'ingredient 3',
+      ];
 
-    _thisFoodItem.ingredients = x;
+      _thisFoodItem.ingredients = x;
 
-    _thisFoodItem.itemId = itemId;
+      _thisFoodItem.itemId = itemId;
 
-    String documentID = await _clientAdmin.insertFoodItems(
-        _thisFoodItem, sequenceNo, _firebaseUserEmail, imageURL);
+      String documentID = await _clientAdmin.insertFoodItems(
+          _thisFoodItem, sequenceNo, _firebaseUserEmail, imageURL);
 
-    print('added document: $documentID');
+      print('added document: $documentID');
 
-    clearSubscription();
+      clearSubscription();
 
-    return (1);
+      return (1);
+    }
   }
 
   void clearSubscription() {

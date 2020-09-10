@@ -944,7 +944,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                       ),
 
 //
-
+/*
 
                                       SwitchListTile(
                                           title: const Text('Is Hot'),
@@ -964,6 +964,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 //    _itemData.isAvailable = val)
                                       ),
 
+                                      */
 
                                       // Cooking checkBox
                                       /*
@@ -982,13 +983,14 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
                                       Container(
+                                        height:60,
                                         color: Color(0xffFFE18E),
                                         child: Text('select ingredients for food: ',
 
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: 29,
+                                              fontSize: 34,
                                               fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
                                               color: Colors.redAccent,
@@ -1050,13 +1052,14 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                       Container(
 
+                                        height:60,
                                         color: Color(0xffFFE18E),
                                         child: Text('select cheese for food: ',
 
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: 29,
+                                              fontSize: 34,
                                               fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
                                               color: Colors.redAccent,
@@ -1118,13 +1121,14 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                       // select sauce begins here....
                                       Container(
 
+                                        height:60,
                                         color: Color(0xffFFE18E),
                                         child: Text('select Sauces for food: ',
 
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: 29,
+                                              fontSize: 34,
                                               fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
                                               color: Colors.redAccent,
@@ -1253,7 +1257,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
                                                           // invokes the method in ItemData class.
 */
-                                                  int successValue=  await blocAdminFoodFBase.save();
+                                                  int successValue=  await blocAdminFoodFBase.saveFoodItem();
 
 
 
@@ -1269,6 +1273,39 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                           children: <Widget>[
                                                             new CircularProgressIndicator(),
                                                             new Text("Something went wrong, Try VPN.",style:
+                                                            TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                          ],
+                                                        ),
+                                                      )),);
+                                                  }
+
+
+                                                  else if(successValue==4){
+
+
+                                                    _scaffoldKey.currentState.showSnackBar(
+                                                      new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                        child:
+                                                        new Row(
+                                                          children: <Widget>[
+                                                            new CircularProgressIndicator(),
+                                                            new Text("please select ingredients for food.",style:
+                                                            TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                          ],
+                                                        ),
+                                                      )),);
+                                                  }
+
+                                                  else if(successValue==5){
+
+
+                                                    _scaffoldKey.currentState.showSnackBar(
+                                                      new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                        child:
+                                                        new Row(
+                                                          children: <Widget>[
+                                                            new CircularProgressIndicator(),
+                                                            new Text("please select cheeses for food",style:
                                                             TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
                                                           ],
                                                         ),

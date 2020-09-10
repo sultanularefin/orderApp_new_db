@@ -577,9 +577,9 @@ _batteryLevel = batteryLevel;
 
                       // child: RaisedButton(
                       child: Text(
-                        'restapojut'.toUpperCase(),
+                        'order Application'.toUpperCase(),
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.blueGrey,
                           fontFamily: 'poppins',
                           fontWeight: FontWeight.normal,
                           fontSize: 20,
@@ -613,7 +613,8 @@ _batteryLevel = batteryLevel;
                                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
                                 child: Text(
-                                  'maksamatta'.toUpperCase(),
+//                                  'maksamatta'.toUpperCase(),
+                                  'UNPAID'.toUpperCase(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 18,

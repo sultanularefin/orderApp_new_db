@@ -121,7 +121,20 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 //              alignment: Alignment.center,
               child:
               CheckboxListTile(
-                  title: Text('${ct.ingredientSubgroupName}'),
+                  title: Text('${ct.ingredientSubgroupName}',
+                    maxLines: 2,
+                    style: TextStyle(
+
+
+                      fontSize: 24,
+                      fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                      color: Colors.black,
+                      fontFamily: 'Itim-Regular',
+
+                    ),),
+
+
 //                  value: _itemData.passions[ItemData.PassionCooking],
                   value: ct.isSelected,
                   onChanged: (val) {
@@ -168,7 +181,20 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
               child:
 
               CheckboxListTile(
-                  title: Text('${ct.ingredientSubgroupName}'),
+//                  title: Text('${ct.ingredientSubgroupName}'),
+
+                  title: Text('${ct.ingredientSubgroupName}',
+                    maxLines: 2,
+                    style: TextStyle(
+
+
+                      fontSize: 24,
+                      fontWeight: FontWeight.normal,
+//                                                      color: Colors.white
+                      color: Colors.black,
+                      fontFamily: 'Itim-Regular',
+
+                    ),),
 
                   value: ct.isSelected,
                   onChanged: (val) {
@@ -419,6 +445,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
 
                                               Container(
+                                                height:60,
                                                 color: Color(0xffFFE18E),
                                                 child:
 
@@ -427,7 +454,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                   maxLines: 1,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(
-                                                    fontSize: 29,
+                                                    fontSize: 34,
                                                     fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
                                                     color: Colors.redAccent,
@@ -440,7 +467,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
                                               Container(
                                                 padding: const EdgeInsets.fromLTRB(
-                                                    0, 50, 0, 20),
+                                                    0, 20, 0, 20),
 
                                                 child:
 
@@ -485,6 +512,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
 
                                               Container(
+                                                height:60,
 //                                            color: Color(0xffFFE18E),
                                                 child: Row(
                                                   children: [
@@ -561,13 +589,14 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                               ),
 
                                               Container(
+                                                height:60,
                                                 color: Color(0xffFFE18E),
                                                 child: Text('subGroup....: ',
 
                                                     maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                      fontSize: 29,
+                                                      fontSize: 34,
                                                       fontWeight: FontWeight.normal,
 //                                                      color: Colors.white
                                                       color: Colors.redAccent,
@@ -580,7 +609,7 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
 
                                               Container(
                                                 padding: const EdgeInsets.fromLTRB(
-                                                    0, 50, 0, 20),
+                                                    0, 20, 0, 20),
 
                                                 child:
                                                 StreamBuilder<List<IngredientSubgroup>>(
@@ -595,10 +624,10 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                         itemCount: allIngredientSubGroups.length,
                                                         gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
                                                           //Above to below for 3 not 2 Food Items:
-                                                          maxCrossAxisExtent: 180,
-                                                          mainAxisSpacing: 10, // H  direction
+                                                          maxCrossAxisExtent: 210,
+                                                          mainAxisSpacing: 20, // H  direction
                                                           crossAxisSpacing: 10,
-                                                          childAspectRatio: 180 / 60, /* (h/vertical)*/
+                                                          childAspectRatio: 210 / 70, /* (h/vertical)*/
                                                         ),
                                                         shrinkWrap: true,
 
@@ -664,10 +693,10 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                               ),
                                                             )),);
 
-                                                          int loginRequiredStatus =  await blocAdminIngredientFBase.save();
+                                                          int statusOfUpload =  await blocAdminIngredientFBase.saveIngredientItem();
 
 
-                                                          if (loginRequiredStatus == 0) {
+                                                          if (statusOfUpload == 0) {
                                                             _scaffoldKey.currentState.showSnackBar(
                                                               new SnackBar(duration: new Duration(seconds: 2), content:Container(
                                                                 child:
@@ -675,6 +704,34 @@ class _AddDataState extends State<AdminFirebaseIngredient> {
                                                                   children: <Widget>[
                                                                     new CircularProgressIndicator(),
                                                                     new Text("Something went wrong, Try VPN.",style:
+                                                                    TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                                  ],
+                                                                ),
+                                                              )),);
+                                                          }
+
+                                                         else if (statusOfUpload == 4) {
+                                                            _scaffoldKey.currentState.showSnackBar(
+                                                              new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                                child:
+                                                                new Row(
+                                                                  children: <Widget>[
+                                                                    new CircularProgressIndicator(),
+                                                                    new Text("please select extra ingredient of food item category.",style:
+                                                                    TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
+                                                                  ],
+                                                                ),
+                                                              )),);
+                                                          }
+
+                                                         else if (statusOfUpload == 5) {
+                                                            _scaffoldKey.currentState.showSnackBar(
+                                                              new SnackBar(duration: new Duration(seconds: 2), content:Container(
+                                                                child:
+                                                                new Row(
+                                                                  children: <Widget>[
+                                                                    new CircularProgressIndicator(),
+                                                                    new Text("please select ingredient subgroup",style:
                                                                     TextStyle( /*fontSize: 10,*/ fontWeight: FontWeight.w500)),
                                                                   ],
                                                                 ),

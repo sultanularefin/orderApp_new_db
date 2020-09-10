@@ -293,7 +293,7 @@ class AdminFirebaseIngredientBloc implements Bloc {
 
   }
 
-  Future<int> save() async {
+  Future<int> saveIngredientItem() async {
     //  save() {
 
 //    pizza
@@ -308,35 +308,47 @@ class AdminFirebaseIngredientBloc implements Bloc {
 //
 //    juomat
 
-
-  logger.i('at save ...');
-    itemId = await generateItemId(6);
-    //imageURL = await _uploadFile(itemId, _thisIngredientItem.ingredientName);
-
-    String imageURL;
-
-    if (_image2 != null) {
-      imageURL = await _uploadFile(itemId, _thisIngredientItem.ingredientName);
-    } else {
-      print('_image2= $_image2');
-
-      String dummyIngredientImage =
-          'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/404%2Fingredient404.jpg';
-
-      imageURL = Uri.decodeComponent(dummyIngredientImage
-          .replaceAll(
-          'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/',
-          '')
-          .replaceAll('?alt=media', ''));
+    if((_thisIngredientItem.extraIngredientOf==null) ||(_thisIngredientItem.extraIngredientOf.length==0)){
+      return 4;
     }
 
-    print('imageURL after stripping url for empty image or full image: $imageURL');
+    else if((_thisIngredientItem.subgroup==null) || (_thisIngredientItem.subgroup.length==0)){
+      return 5;
+    }
+    else {
+      logger.i('at save ...');
 
-    print('itemId:____ $itemId');
 
-    print('saving user using a web service');
+      itemId = await generateItemId(6);
+      //imageURL = await _uploadFile(itemId, _thisIngredientItem.ingredientName);
 
-    print('_thisIngredientItem.ingredientName 1st : ${_thisIngredientItem.ingredientName}');
+      String imageURL;
+
+      if (_image2 != null) {
+        imageURL =
+        await _uploadFile(itemId, _thisIngredientItem.ingredientName);
+      } else {
+        print('_image2= $_image2');
+
+        String dummyIngredientImage =
+            'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/404%2Fingredient404.jpg';
+
+        imageURL = Uri.decodeComponent(dummyIngredientImage
+            .replaceAll(
+            'https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/',
+            '')
+            .replaceAll('?alt=media', ''));
+      }
+
+      print(
+          'imageURL after stripping url for empty image or full image: $imageURL');
+
+      print('itemId:____ $itemId');
+
+      print('saving user using a web service');
+
+      print('_thisIngredientItem.ingredientName 1st : ${_thisIngredientItem
+          .ingredientName}');
 
 //    String newIngredientName = titleCase(_thisIngredientItem.ingredientName);
 
@@ -344,27 +356,26 @@ class AdminFirebaseIngredientBloc implements Bloc {
 //  print('_thisIngredientItem.ingredientName 2nd : ${_thisIngredientItem.ingredientName}');
 
 
-    _thisIngredientItem.itemId = itemId;
+      _thisIngredientItem.itemId = itemId;
 
-    String documentID = await _clientAdmin.insertIngredientItems(
-        _thisIngredientItem, 4, _firebaseUserEmail, imageURL);
+      String documentID = await _clientAdmin.insertIngredientItems(
+          _thisIngredientItem, 4, _firebaseUserEmail, imageURL);
 
-        // _thisIngredientItem, _firebaseUserEmail);
+      // _thisIngredientItem, _firebaseUserEmail);
 
-    print('added document: $documentID');
-
-
-
-    //    }
-
-  _thisIngredientItem.price=0;
-  _thisIngredientItem.ingredientName='';
-  _thisIngredientItem.extraIngredientOf=null;
-  _ingredientItemController.sink.add(_thisIngredientItem);
+      print('added document: $documentID');
 
 
+      //    }
 
-    return (1);
+      _thisIngredientItem.price = 0;
+      _thisIngredientItem.ingredientName = '';
+      _thisIngredientItem.extraIngredientOf = null;
+      _ingredientItemController.sink.add(_thisIngredientItem);
+
+
+      return (1);
+    }
   }
 
 //    List<NewCategoryItem>_allCategoryList=[];
@@ -374,23 +385,26 @@ class AdminFirebaseIngredientBloc implements Bloc {
     List<IngredientSubgroup> ingredientSubgroups =
     new List<IngredientSubgroup>();
 
+//   liha =meat hedelma= fruit muut=other vihannekset vegetables
 
 
-    IngredientSubgroup liha = new IngredientSubgroup(
-        ingredientSubgroupName: 'liha', isSelected: false);
+    IngredientSubgroup meat = new IngredientSubgroup(
+        ingredientSubgroupName: 'meat', isSelected: false);
 
-    IngredientSubgroup hedelma = new IngredientSubgroup(
-        ingredientSubgroupName: 'hedelma', isSelected: false);
-
-
-    IngredientSubgroup vihannekset = new IngredientSubgroup(
-        ingredientSubgroupName: 'vihannekset', isSelected: false);
-
-    IngredientSubgroup muut = new IngredientSubgroup(
-        ingredientSubgroupName: 'muut', isSelected: false);
+    IngredientSubgroup fruit = new IngredientSubgroup(
+        ingredientSubgroupName: 'fruit', isSelected: false);
 
 
-    ingredientSubgroups.addAll([liha, hedelma,vihannekset, muut]);
+    IngredientSubgroup vegetables = new IngredientSubgroup(
+        ingredientSubgroupName: 'vegetables', isSelected: false);
+
+    IngredientSubgroup other = new IngredientSubgroup(
+        ingredientSubgroupName: 'other', isSelected: false);
+
+
+//    ingredientSubgroups.addAll([liha, hedelma,vihannekset, muut]);
+
+    ingredientSubgroups.addAll([meat, fruit, other, vegetables]);
 
     _ingredientGroupes = ingredientSubgroups;
     _ingredientsGroupsController.sink.add(_ingredientGroupes);

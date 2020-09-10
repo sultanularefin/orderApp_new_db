@@ -253,7 +253,7 @@ class _AddDataState extends State<AdminFirebaseSauces> {
 
 
                                         Container(
-
+                                          height:60,
                                           child: Row(
                                             children: [
                                               Text('price: ',
