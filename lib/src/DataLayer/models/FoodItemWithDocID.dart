@@ -29,6 +29,7 @@ class FoodItemWithDocID {
   List<String> defaultJuusto;
   List<String> defaultKastike;
   int sequenceNo;
+  String urlAndTokenForStorageImage;
 
   FoodItemWithDocID(
       {
@@ -51,6 +52,7 @@ class FoodItemWithDocID {
         this.defaultJuusto,
         this.defaultKastike,
         this.sequenceNo,
+        this.urlAndTokenForStorageImage:'',
 
       }
       );

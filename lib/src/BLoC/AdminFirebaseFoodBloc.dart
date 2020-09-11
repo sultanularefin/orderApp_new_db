@@ -12,6 +12,8 @@ import 'package:logger/logger.dart';
 import 'dart:ui';
 // import 'package:firebase_core/firebase_core.dart';
 
+
+
 import 'package:firebase_storage/firebase_storage.dart';
 
 //MODELS
@@ -21,6 +23,15 @@ import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/NewCategoryItem.dart';
 
 
+
+//import 'dart:async';
+//import 'dart:io';
+//
+//import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:flutter/material.dart';
+//import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
 
 class AdminFirebaseFoodBloc implements Bloc {
   var logger = Logger(
@@ -199,6 +210,8 @@ class AdminFirebaseFoodBloc implements Bloc {
 
   Future<String> _uploadFile(String itemId, itemName) async {
     print('at _uploadFile: ');
+
+    final String uuid = Uuid().v1();
 
     print('itemId: $itemId');
     StorageReference storageReference_1 = storage
@@ -501,6 +514,68 @@ class AdminFirebaseFoodBloc implements Bloc {
   }
 
 
+  /*
+  const deleteImageFrom_images_Stoage_For_update = async ()=>{
+
+
+  const user = auth().currentUser
+  if (user !== null){
+  const userEmail = user.email;
+
+  const GSURLRefForDelete = 'gs://monoz-dc781.appspot.com/images/'
+  +userEmail+'New/'+allInfoAboutDocumentState.itemId+'itemName.png';
+  console.log('gsUrlL: ',GSURLRefForDelete);
+  // return ;
+
+  const gsReference = storage().refFromURL(GSURLRefForDelete);
+
+
+  // console.log('gsReference: ',gsReference);
+
+
+  await gsReference.delete().then(function(result) {
+  // console.log('Uploaded a blob or file!');
+  console.log('file deleted: ', result);
+
+  }).catch(error => {
+  console.log("storage image delete error: gsReference: ", error);
+  });
+  }
+  }
+  */
+
+  Future<void> _downloadFile(StorageReference ref) async {
+    final String url = await ref.getDownloadURL();
+//    final String uuid = Uuid().v1();
+//    final http.Response downloadData = await http.get(url);
+//    final Directory systemTempDir = Directory.systemTemp;
+//    final File tempFile = File('${systemTempDir.path}/tmp$uuid.txt');
+//    if (tempFile.existsSync()) {
+//      await tempFile.delete();
+//    }
+//    await tempFile.create();
+//    assert(await tempFile.readAsString() == "");
+//    final StorageFileDownloadTask task = ref.writeToFile(tempFile);
+//    final int byteCount = (await task.future).totalByteCount;
+//    final String tempFileContents = await tempFile.readAsString();
+//    assert(tempFileContents == kTestString);
+//    assert(byteCount == kTestString.length);
+//
+//    final String fileContents = downloadData.body;
+//    final String name = await ref.getName();
+//    final String bucket = await ref.getBucket();
+//    final String path = await ref.getPath();
+//    _scaffoldKey.currentState.showSnackBar(SnackBar(
+//      content: Text(
+//        'Success!\n Downloaded $name \n from url: $url @ bucket: $bucket\n '
+//            'at path: $path \n\nFile contents: "$fileContents" \n'
+//            'Wrote "$tempFileContents" to tmp.txt',
+//        style: const TextStyle(color: Color.fromARGB(255, 0, 155, 0)),
+//      ),
+//    ));
+  }
+
+
 
 
   void getAllKastikeSaucesAdminConstructor() async {
@@ -696,6 +771,36 @@ class AdminFirebaseFoodBloc implements Bloc {
 
 
 
+  Future<void> getDownloadURL() async{
+
+
+//    const GSURLRefForDelete = 'gs://monoz-dc781.appspot.com/images/'
+//        +userEmail+'New/'+allInfoAboutDocumentState.itemId+'itemName.png';
+//    console.log('gsUrlL: ',GSURLRefForDelete);
+//    // return ;
+//
+//    const gsReference = storage().refFromURL(GSURLRefForDelete);
+
+
+    // console.log('gsReference: ',gsReference);
+
+
+      final String  gSURLRefForDelete=
+  'gs://kebabbank-37224.appspot.com/extraIngredients/'+'404/foodItem404.jpg';
+      print('gsUrlL: $gSURLRefForDelete');
+      StorageReference storageReference_2 = storage
+          .ref()
+          .child('extraIngredients')
+          .child('404')
+          .child('foodItem404.jpg');
+
+      final String x = await storageReference_2.getDownloadURL();
+
+      _thisFoodItem.urlAndTokenForStorageImage=x;
+      _foodItemController.sink.add(_thisFoodItem);
+
+  return x;
+  }
   AdminFirebaseFoodBloc() {
 
 
@@ -704,6 +809,8 @@ class AdminFirebaseFoodBloc implements Bloc {
 
     getLastSequenceNumberFromFireBaseFoodItems();
 
+
+    getDownloadURL();
 
     getAllExtraIngredientsAdminConstructor();
 
