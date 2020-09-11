@@ -32,8 +32,8 @@ class FirebaseClient {
 
   Future<QuerySnapshot> fetchUnPaidOrderListItems() async {
 
-    var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').collection('orderList')
+    var snapshot= FirebaseFirestore.instance
+        .collection("restaurants").doc('kebab_bank').collection('orderList')
         .orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Unpaid')
         .getDocuments();
 
@@ -47,8 +47,8 @@ class FirebaseClient {
 
   Future<QuerySnapshot> fetchOrderListItemsForHistoryPaidOnly() async {
 
-    var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').
+    var snapshot= FirebaseFirestore.instance
+        .collection("restaurants").doc('kebab_bank').
     collection('orderList').orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Paid')
         .getDocuments();
 
@@ -57,8 +57,8 @@ class FirebaseClient {
 
     /*
 
-    var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').collection('orderList')
+    var snapshot= FirebaseFirestore.instance
+        .collection("restaurants").doc('kebab_bank').collection('orderList')
         .orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Unpaid')
         .getDocuments();
 
@@ -75,14 +75,14 @@ class FirebaseClient {
     // print ('at here fetchFoodItems ==================================== *************** ');
 
     /*
-    var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').collection('foodItems').limit(65)
+    var snapshot= FirebaseFirestore.instance
+        .collection("restaurants").doc('kebab_bank').collection('foodItems').limit(65)
         .getDocuments();
     */
 
 
-    var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').collection('fooditems').orderBy('sequence_no',/*descending: false*/)
+    var snapshot= FirebaseFirestore.instance
+        .collection("restaurants").doc('kebab_bank').collection('fooditems').orderBy('sequence_no',/*descending: false*/)
         .getDocuments();
 
 //    orderBy('_timeStampUTC', descending: true)
@@ -94,13 +94,13 @@ class FirebaseClient {
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank')
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
         .collection('kastike')/*.orderBy("sl", descending: false) */
         .getDocuments();
 
-//    var snapshot= Firestore.instance
-//        .collection("restaurants").document('kebab_bank').collection('foodItems')
+//    var snapshot= FirebaseFirestore.instance
+//        .collection("restaurants").doc('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -110,13 +110,13 @@ class FirebaseClient {
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank')
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
         .collection('juusto')/*.orderBy("sl", descending: false)*/
         .getDocuments();
 
-//    var snapshot= Firestore.instance
-//        .collection("restaurants").document('kebab_bank').collection('foodItems')
+//    var snapshot= FirebaseFirestore.instance
+//        .collection("restaurants").doc('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -127,13 +127,13 @@ class FirebaseClient {
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank')
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
         .collection('inagedients')
         .getDocuments();
 
-//    var snapshot= Firestore.instance
-//        .collection("restaurants").document('kebab_bank').collection('foodItems')
+//    var snapshot= FirebaseFirestore.instance
+//        .collection("restaurants").doc('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -145,13 +145,13 @@ class FirebaseClient {
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank')
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
         .collection('extraIngredients2')
         .getDocuments();
 
-//    var snapshot= Firestore.instance
-//        .collection("restaurants").document('kebab_bank').collection('foodItems')
+//    var snapshot= FirebaseFirestore.instance
+//        .collection("restaurants").doc('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -161,20 +161,20 @@ class FirebaseClient {
 
   Future<DocumentSnapshot> fetchRestaurantDataClient() async{
 
-    var snapshot = Firestore.instance
+    var snapshot = FirebaseFirestore.instance
         .collection('restaurants')
-        .document('kebab_bank')
+        .doc('kebab_bank')
         .get();
     /*
         .then((DocumentSnapshot ds) {
       // use ds as a snapshot
     });*/
     /*
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank');
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank');
 
-//    var snapshot= Firestore.instance
-//        .collection("restaurants").document('kebab_bank').collection('foodItems')
+//    var snapshot= FirebaseFirestore.instance
+//        .collection("restaurants").doc('kebab_bank').collection('foodItems')
 //        .getDocuments();
 
     return snapshot;
@@ -188,9 +188,9 @@ class FirebaseClient {
 
     print('at firebase_client.dart file inside this method: \"invokeClientForOneOrder\"');
 
-    var snapshot = Firestore.instance
+    var snapshot = FirebaseFirestore.instance
         .collection('restaurants')
-        .document('kebab_bank').collection('orderList').document(orderDocumentId)
+        .doc('kebab_bank').collection('orderList').doc(orderDocumentId)
         .get();
 
     print('and the snapshot is: $snapshot');
@@ -497,13 +497,13 @@ class FirebaseClient {
       (String orderDocumentId, String status) async {
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
 
-    final DocumentReference postRef = Firestore.instance.collection(
+    final DocumentReference postRef = FirebaseFirestore.instance.collection(
         "restaurants").
-    document('kebab_bank').
-    collection('orderList').document(orderDocumentId);
+    doc('kebab_bank').
+    collection('orderList').doc(orderDocumentId);
 
 
-    Future<Map<String, dynamic>> test=    Firestore.instance.runTransaction((Transaction tx) async {
+    Future<Map<String, dynamic>> test=    FirebaseFirestore.instance.runTransaction((Transaction tx) async {
 
       DocumentSnapshot postSnapshot = await tx.get(postRef);
 
@@ -527,10 +527,10 @@ class FirebaseClient {
     ).then((document) {
 
 
-      var snapshot = Firestore.instance.collection(
+      var snapshot = FirebaseFirestore.instance.collection(
           "restaurants").
-      document('kebab_bank').
-      collection('orderList').document(orderDocumentId)
+      doc('kebab_bank').
+      collection('orderList').doc(orderDocumentId)
           .get();
 //     print('async result [document] for runTransaction in order : $document');
 //     return true;
@@ -560,13 +560,13 @@ class FirebaseClient {
       (String orderDocumentId, String paidType) async {
     print('orderDocumentId in updateOrderCollectionDocumentWithRecitePrintedInformation: $orderDocumentId');
 
-    final DocumentReference postRef = Firestore.instance.collection(
+    final DocumentReference postRef = FirebaseFirestore.instance.collection(
         "restaurants").
-    document('kebab_bank').
-    collection('orderList').document(orderDocumentId);
+    doc('kebab_bank').
+    collection('orderList').doc(orderDocumentId);
 
 
-    Future<Map<String, dynamic>> test=    Firestore.instance.runTransaction((Transaction tx) async {
+    Future<Map<String, dynamic>> test=    FirebaseFirestore.instance.runTransaction((Transaction tx) async {
 
       DocumentSnapshot postSnapshot = await tx.get(postRef);
 
@@ -591,10 +591,10 @@ class FirebaseClient {
    ).then((document) {
 
 
-     var snapshot = Firestore.instance.collection(
+     var snapshot = FirebaseFirestore.instance.collection(
          "restaurants").
-     document('kebab_bank').
-     collection('orderList').document(orderDocumentId)
+     doc('kebab_bank').
+     collection('orderList').doc(orderDocumentId)
          .get();
 //     print('async result [document] for runTransaction in order : $document');
 //     return true;
@@ -642,9 +642,9 @@ class FirebaseClient {
     String orderDocId='';
     // print('saving order data using a web service');
 
-    DocumentReference document = await Firestore.instance.collection(
+    DocumentReference document = await FirebaseFirestore.instance.collection(
         "restaurants").
-    document('kebab_bank').
+    doc('kebab_bank').
 //    collection('orderList').add(switch (<String, dynamic>{
     collection('orderList').add(<String, dynamic>{
 
@@ -718,8 +718,8 @@ class FirebaseClient {
 
     //print ('at here fetchCategories ==================================== *************** ');
 
-    var snapshot= Firestore.instance
-        .collection("restaurants").document('kebab_bank').
+    var snapshot= FirebaseFirestore.instance
+        .collection("restaurants").doc('kebab_bank').
     collection('categories').orderBy("sequence_no", /*descending: false*/)
         .getDocuments();
 

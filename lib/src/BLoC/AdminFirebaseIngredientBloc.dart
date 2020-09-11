@@ -293,6 +293,23 @@ class AdminFirebaseIngredientBloc implements Bloc {
 
   }
 
+  void getLastSequenceNumberForAdminIngredient() async {
+    print('at get Last SequenceNumberFromFireBaseFoodItems()');
+
+//    if (_isDisposed_known_last_sequenceNumber == false) {
+    int lastIndex =
+    await _clientAdmin.getLastSequenceNumberForAdminIngredient2();
+
+    logger.i('lastIndex: $lastIndex');
+
+    _thisIngredientItem.sequenceNo = lastIndex +1;
+
+    _ingredientItemController.sink.add(_thisIngredientItem);
+
+
+//    }
+  }
+
   Future<int> saveIngredientItem() async {
     //  save() {
 
@@ -359,7 +376,7 @@ class AdminFirebaseIngredientBloc implements Bloc {
       _thisIngredientItem.itemId = itemId;
 
       String documentID = await _clientAdmin.insertIngredientItems(
-          _thisIngredientItem, 4, _firebaseUserEmail, imageURL);
+          _thisIngredientItem, _thisIngredientItem.sequenceNo, _firebaseUserEmail, imageURL);
 
       // _thisIngredientItem, _firebaseUserEmail);
 
@@ -371,6 +388,7 @@ class AdminFirebaseIngredientBloc implements Bloc {
       _thisIngredientItem.price = 0;
       _thisIngredientItem.ingredientName = '';
       _thisIngredientItem.extraIngredientOf = null;
+      _thisIngredientItem.sequenceNo= _thisIngredientItem.sequenceNo+1;
       _ingredientItemController.sink.add(_thisIngredientItem);
 
 
@@ -480,6 +498,7 @@ class AdminFirebaseIngredientBloc implements Bloc {
   AdminFirebaseIngredientBloc() {
     print('at AdminFirebaseIngredientBloc  ......()');
 
+    getLastSequenceNumberForAdminIngredient();
     initiateIngredientGroups();
     initiateCategoryForMultiSelectFoodCategory();
 

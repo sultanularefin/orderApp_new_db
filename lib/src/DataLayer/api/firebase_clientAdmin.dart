@@ -61,9 +61,9 @@ class FirebaseClientAdmin {
       imageURLFinal1 = imageURL;
     }
 
-    DocumentReference document = await Firestore.instance.collection(
+    DocumentReference document = await FirebaseFirestore.instance.collection(
         "restaurants").
-    document('kebab_bank').
+    doc('kebab_bank').
     collection('sauces2').add(<String, dynamic>{
 
       // 'ingredients': foodItemIngredientsInsertDummy1(null),
@@ -93,12 +93,12 @@ class FirebaseClientAdmin {
 
   Future<QuerySnapshot> fetchAllCheesesORjuustoAdmin()async{
 
-     print ('at here fetchAllCheesesORjuustoAdmin() ======================= *************** ');
+    print ('at here fetchAllCheesesORjuustoAdmin() ======================= *************** ');
 
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank')
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
         .collection('cheeses2')/*.orderBy("sl", descending: false)*/
-        .getDocuments();
+        .get();
 
 
     return snapshot;
@@ -109,10 +109,10 @@ class FirebaseClientAdmin {
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank')
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
         .collection('sauces2')/*.orderBy("sl", descending: false) */
-        .getDocuments();
+        .get();
 
 
 
@@ -124,10 +124,10 @@ class FirebaseClientAdmin {
 
     // print ('at here fetchAllIngredients ==================================== *************** ');
 
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank')
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
         .collection('extraIngredients')
-        .getDocuments();
+        .get();
 
     return snapshot;
   }
@@ -137,13 +137,45 @@ class FirebaseClientAdmin {
 //  Future<QuerySnapshot /*DocumentSnapshot */> getLastSequenceNumberFromFireBaseFoodItems() async{
   Future<int> getLastSequenceNumberFromFireBaseFoodItems() async{
 
-    // uploadDate
-
-    var snapshot = await Firestore.instance.collection("restaurants")
-        .document('kebab_bank')
-        .collection('foodItems').orderBy('sequenceNo',descending: true).limit(1).getDocuments();
 
 
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
+        .collection('foodItems2').orderBy('sequenceNo',descending: true).limit(1).get();
+    print('snapshot: $snapshot');
+    if (snapshot==null)
+
+    {
+      print('..at snapshot==null of getLastSequenceNumberFromFireBaseFoodItems()> > ${snapshot==null}');
+      return -1;
+    }
+    else{
+
+      print('at else..... of getLastSequenceNumberFromFireBaseFoodItems()');
+
+
+      List docList = snapshot.docs;
+
+      var oneCheese =snapshot.docs.first.data();
+
+
+      print('....oneCheese[\'sequenceNo\'] => ${oneCheese['sequenceNo']}');
+
+      int lastIndexCheese = oneCheese['sequenceNo'];
+
+      print('lastIndexCheese: $lastIndexCheese');
+
+
+      return lastIndexCheese;
+    }
+
+  }
+
+  Future<int> getLastSequenceNumberForAdminCheese2() async{
+
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
+        .collection('cheeses2').orderBy('sequenceNo',descending: true).limit(1).get();
     print('snapshot: $snapshot');
     if (snapshot==null)
 
@@ -154,12 +186,86 @@ class FirebaseClientAdmin {
     else{
 
       print('at else..... of getLastSequenceNumberFromFireBaseFoodItems()');
-//      var snapshot = await _client.getLastSequenceNumberFromFireBaseFoodItems();
-      List docList = snapshot.documents;
 
-      FoodItemWithDocID lastOne = new FoodItemWithDocID();
 
-      int lastIndex = docList[0]['sequenceNo'];
+      List docList = snapshot.docs;
+
+      var oneCheese =snapshot.docs.first.data();
+
+
+      print('....oneCheese[\'sequenceNo\'] => ${oneCheese['sequenceNo']}');
+
+      int lastIndexCheese = oneCheese['sequenceNo'];
+
+      print('lastIndexCheese: $lastIndexCheese');
+
+
+      return lastIndexCheese;
+    }
+
+  }
+
+
+//  Future<QuerySnapshot /*DocumentSnapshot */> getLastSequenceNumberFromFireBaseFoodItems() async{
+  Future<int> getLastSequenceNumberForAdminIngredient2() async{
+
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
+        .collection('extraIngredients').orderBy('sequenceNo',descending: true).limit(1).get();
+    print('snapshot: $snapshot');
+    if (snapshot==null)
+
+    {
+      print('..at snapshot==null of getLastSequenceNumberFromFireBaseFoodItems()> > ${snapshot==null}');
+      return 0;
+    }
+    else{
+
+      print('at else..... of getLastSequenceNumberFromFireBaseFoodItems()');
+
+
+      List docList = snapshot.docs;
+
+      var oneIngredient =snapshot.docs.first.data();
+
+
+      print('....oneIngredient[\'sequenceNo\'] => ${oneIngredient['sequenceNo']}');
+
+      int lastIndex = oneIngredient['sequenceNo'];
+
+      return lastIndex;
+    }
+
+  }
+
+
+
+//  Future<QuerySnapshot /*DocumentSnapshot */> getLastSequenceNumberFromFireBaseFoodItems() async{
+  Future<int> getLastSequenceNumberForAdminSacue2() async{
+
+    var snapshot = await FirebaseFirestore.instance.collection("restaurants")
+        .doc('kebab_bank')
+        .collection('sauces2').orderBy('sequenceNo',descending: true).limit(1).get();
+    print('snapshot: $snapshot');
+    if (snapshot==null)
+
+    {
+      print('..at snapshot==null of getLastSequenceNumberFromFireBaseFoodItems()> > ${snapshot==null}');
+      return 0;
+    }
+    else{
+
+      print('at else..... of getLastSequenceNumberFromFireBaseFoodItems()');
+
+
+      List docList = snapshot.docs;
+
+      var oneSauce =snapshot.docs.first.data();
+
+
+      print('....oneSauce[\'sequenceNo\'] => ${oneSauce['sequenceNo']}');
+
+      int lastIndex = oneSauce['sequenceNo'];
 
       return lastIndex;
     }
@@ -203,7 +309,7 @@ class FirebaseClientAdmin {
       imageURLFinal1 = imageURL;
     }
 
-    DocumentReference document = await Firestore.instance.collection(
+    DocumentReference document = await FirebaseFirestore.instance.collection(
         "restaurants").
     document('kebab_bank').
     collection('cheeses2').add(<String, dynamic>{
@@ -269,7 +375,7 @@ class FirebaseClientAdmin {
       imageURLFinal1 = imageURL;
     }
 
-    DocumentReference document = await Firestore.instance.collection(
+    DocumentReference document = await FirebaseFirestore.instance.collection(
         "restaurants").
     document('kebab_bank').
     collection('extraIngredients').add(<String, dynamic>{
@@ -312,6 +418,10 @@ class FirebaseClientAdmin {
     Timestamp date;
     String orderDocId = '';
     String imageURLFinal1 = '';
+
+    print('sequenceNo >>>  $sequenceNo');
+
+
     var uri = Uri.parse(imageURL);
     // print(uri.isScheme("HTTP"));  // Prints true.
 
@@ -392,17 +502,18 @@ class FirebaseClientAdmin {
     }
 
 
-    DocumentReference document = await Firestore.instance.collection(
+    DocumentReference document = await FirebaseFirestore.instance.collection(
         "restaurants").
-    document('kebab_bank').
-    collection('foodItems').add(<String, dynamic>{
+    doc('kebab_bank').
+    collection('foodItems2').add(<String, dynamic>{
       'category': x.categoryName,
       'categoryShort': x.shorCategoryName,
       'default_juust': 'juusto',
       'default_kastike': 'tonnikala',
-      'ingredients': foodItemIngredientsInsertDummy(null),
+      'ingredients': x.ingredients,
+    //foodItemIngredientsInsertDummy(null),
       'name': x.itemName,
-      'sequenceNo': x.sequenceNo,
+      'sequenceNo': sequenceNo,
       // sequenceNo
 
       'size': {

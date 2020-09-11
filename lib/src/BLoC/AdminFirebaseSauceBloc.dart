@@ -37,9 +37,9 @@ class AdminFirebaseSauceBloc implements Bloc {
 // main CheeseItem bloc component starts here...
   SauceItem _thisSauceItem = new SauceItem();
   SauceItem get getCurrentSauceItem => _thisSauceItem;
-  final _cheeseItemController = StreamController<SauceItem>();
+  final _sauceItemController = StreamController<SauceItem>();
   Stream<SauceItem> get thisSauceItemStream =>
-      _cheeseItemController.stream;
+      _sauceItemController.stream;
 // main CheeseItem bloc component ends here...
 
 
@@ -71,7 +71,7 @@ class AdminFirebaseSauceBloc implements Bloc {
 
     _thisSauceItem = temp;
 
-    _cheeseItemController.sink.add(_thisSauceItem);
+    _sauceItemController.sink.add(_thisSauceItem);
   }
 
   void setItemName(var param) {
@@ -84,7 +84,7 @@ class AdminFirebaseSauceBloc implements Bloc {
 
     _thisSauceItem = temp;
 
-    _cheeseItemController.sink.add(_thisSauceItem);
+    _sauceItemController.sink.add(_thisSauceItem);
 
 
   }
@@ -194,7 +194,7 @@ class AdminFirebaseSauceBloc implements Bloc {
 
   }
 
-  Future<int> save() async {
+  Future<int> saveSauces() async {
   logger.i('at save ...');
     itemId = await generateItemId(6);
     //imageURL = await _uploadFile(itemId, _thisIngredientItem.ingredientName);
@@ -233,9 +233,7 @@ class AdminFirebaseSauceBloc implements Bloc {
     _thisSauceItem.itemId = itemId;
 
     String documentID = await _clientAdmin.insertSauceItem(
-        _thisSauceItem, 4, _firebaseUserEmail, imageURL);
-
-        // _thisIngredientItem, _firebaseUserEmail);
+        _thisSauceItem, _thisSauceItem.sequenceNo, _firebaseUserEmail, imageURL);
 
     print('added document: $documentID');
 
@@ -246,9 +244,8 @@ class AdminFirebaseSauceBloc implements Bloc {
   _thisSauceItem.price=0;
   _thisSauceItem.sauceItemName='';
   _thisSauceItem.itemId='';
-  _cheeseItemController.sink.add(_thisSauceItem);
-
-
+  _thisSauceItem.sequenceNo= _thisSauceItem.sequenceNo+1;
+  _sauceItemController.sink.add(_thisSauceItem);
 
     return (1);
   }
@@ -257,10 +254,34 @@ class AdminFirebaseSauceBloc implements Bloc {
   final _clientAdmin = FirebaseClientAdmin();
 
 
+
+  void getLastSequenceNumberForAdminSacue() async {
+    print('at get Last SequenceNumberFromFireBaseFoodItems()');
+
+//    if (_isDisposed_known_last_sequenceNumber == false) {
+      int lastIndex =
+      await _clientAdmin.getLastSequenceNumberForAdminSacue2();
+
+      logger.i('lastIndex: $lastIndex');
+
+      _thisSauceItem.sequenceNo = lastIndex +1;
+
+      _sauceItemController.sink.add(_thisSauceItem);
+
+
+//    }
+  }
+//  CONSTRUCTOR BEGINS HERE..
+
+
   AdminFirebaseSauceBloc() {
+
+
     print('at AdminFirebaseIngredientBloc  ......()');
 
     print('at FoodGalleryBloc()');
+
+    getLastSequenceNumberForAdminSacue();
 
   }
 
@@ -269,7 +290,7 @@ class AdminFirebaseSauceBloc implements Bloc {
   // 4
   @override
   void dispose() {
-    _cheeseItemController.close();
+    _sauceItemController.close();
 //    _foodItemController.close();
 //    _categoryMultiSelectController.close();
 //    _ingredientsGroupsController.close();

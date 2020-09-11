@@ -30,6 +30,7 @@ class SauceItem implements Comparable {
  String documentId;
  int    sauceItemAmountByUser;
  String itemId;
+ int sequenceNo;
 //  final int    sl;
         bool    isSelected;
         bool    isDefaultSelected;
@@ -52,6 +53,7 @@ class SauceItem implements Comparable {
         this.isSelected:false,
         this.isDefaultSelected:false,
         this.isDeleted:false,
+        this.sequenceNo,
       }
       );
 

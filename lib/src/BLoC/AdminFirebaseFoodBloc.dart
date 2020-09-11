@@ -263,18 +263,18 @@ class AdminFirebaseFoodBloc implements Bloc {
   void getLastSequenceNumberFromFireBaseFoodItems() async {
     print('at get Last SequenceNumberFromFireBaseFoodItems()');
 
-    if (_isDisposed_known_last_sequenceNumber == false) {
+//    if (_isDisposed_known_last_sequenceNumber == false) {
       int lastIndex =
       await _clientAdmin.getLastSequenceNumberFromFireBaseFoodItems();
 
       logger.i('lastIndex: $lastIndex');
 
-      _thisFoodItem.sequenceNo = lastIndex;
+      _thisFoodItem.sequenceNo = lastIndex +1;
 
       _foodItemController.sink.add(_thisFoodItem);
 
-      _isDisposed_known_last_sequenceNumber = true;
-    }
+//      _isDisposed_known_last_sequenceNumber = true;
+//    }
   }
 
   Future<int> saveFoodItem() async {
@@ -350,20 +350,28 @@ class AdminFirebaseFoodBloc implements Bloc {
       _thisFoodItem.itemId = itemId;
 
       String documentID = await _clientAdmin.insertFoodItems(
-          _thisFoodItem, sequenceNo, _firebaseUserEmail, imageURL);
+          _thisFoodItem, _thisFoodItem.sequenceNo, _firebaseUserEmail, imageURL);
 
       print('added document: $documentID');
+      int tempSequenceNo = _thisFoodItem.sequenceNo+1;
 
-      clearSubscription();
+      clearSubscription(tempSequenceNo);
+
+//      _thisSauceItem.price=0;
+//      _thisSauceItem.sauceItemName='';
+//      _thisSauceItem.itemId='';
+//      _thisSauceItem.sequenceNo= _thisSauceItem.sequenceNo+1;
+//      _sauceItemController.sink.add(_thisSauceItem);
 
       return (1);
     }
   }
 
-  void clearSubscription() {
+  void clearSubscription(int sequenceValueNew) {
     FoodItemWithDocID x = new FoodItemWithDocID(
       isHot: true,
       isAvailable: true,
+      sequenceNo: sequenceValueNew,
     );
 
     _thisFoodItem = x;
@@ -694,7 +702,7 @@ class AdminFirebaseFoodBloc implements Bloc {
 
     print('at AdminFirebaseFoodBloc ......()');
 
-
+    getLastSequenceNumberFromFireBaseFoodItems();
 
 
     getAllExtraIngredientsAdminConstructor();
@@ -704,7 +712,7 @@ class AdminFirebaseFoodBloc implements Bloc {
     getAllCheeseItemsJuustoAdminConstructor();
 
 
-    // getLastSequenceNumberFromFireBaseFoodItems();
+
     initiateCategoryDropDownList();
 
     print('at AdminFirebaseFoodBloc()');

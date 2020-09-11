@@ -134,6 +134,12 @@ class IdentityBloc implements Bloc {
         print("_currentFBUser.getIdToken()");
       }).then((IdtokenResultZZZ) async {
         print("IdtokenResultZZZ: $IdtokenResultZZZ");
+
+        print("IdtokenResultZZZ 22: ${IdtokenResultZZZ.toString()}");
+
+
+
+//        final tokenStr = token.toString();
       }).catchError((onError) {
         print('getting time not successful: $onError');
         return false;

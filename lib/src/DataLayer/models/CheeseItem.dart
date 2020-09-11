@@ -28,6 +28,7 @@ class CheeseItem implements Comparable {
 
   int    cheeseItemAmountByUser;
   String itemId;
+  int sequenceNo;
 //  final int    sl;
         bool   isSelected;
         bool isDefaultSelected;
@@ -47,6 +48,7 @@ class CheeseItem implements Comparable {
         this.isSelected:false,
         this.isDefaultSelected:false,
         this.isDeleted: false,
+        this.sequenceNo,
 
       }
       );

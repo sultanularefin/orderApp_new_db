@@ -226,7 +226,9 @@ class _AddDataState extends State<AdminFirebaseSauces> {
 
                                         TextFormField(
                                           decoration:
-                                          InputDecoration(labelText: 'sauce Item Name',
+                                          InputDecoration(
+//                                            icon: Icon(Icons.edit),
+                                            labelText: 'sauce Item Name',
                                             labelStyle:TextStyle(
                                               fontSize: 24,
                                               fontWeight: FontWeight.normal,
@@ -234,11 +236,17 @@ class _AddDataState extends State<AdminFirebaseSauces> {
                                               color: Colors.redAccent,
                                               fontFamily: 'Itim-Regular',
 
-                                            ),),
-                                          validator: (value) {
-                                            if (value.isEmpty) {
-                                              return 'Please enter the sauce Name';
-                                            }
+                                            ),
+
+
+                                          ),
+                                          validator: (String value) {
+
+                                            return value.isEmpty? 'Please enter the sauce Name.' : null;
+//                                            if (value.isEmpty) {
+//
+//                                              return 'Please enter the sauce Name';
+//                                            }
                                           },
                                           // onSaved: (val) =>
                                           onChanged: (val) =>
@@ -367,7 +375,7 @@ class _AddDataState extends State<AdminFirebaseSauces> {
                                                         ),
                                                       )),);
 
-                                                    int loginRequiredStatus =  await blocAdminSauceFBase.save();
+                                                    int loginRequiredStatus =  await blocAdminSauceFBase.saveSauces();
 
 
                                                     if (loginRequiredStatus == 0) {

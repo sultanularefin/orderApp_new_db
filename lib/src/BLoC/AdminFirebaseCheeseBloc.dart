@@ -28,7 +28,7 @@ class AdminFirebaseCheeseBloc implements Bloc {
   bool _isDisposedFoodItems = false;
   bool _isDisposedCategories = false;
 
-
+  final _clientAdmin = FirebaseClientAdmin();
 
 
   File _image2;
@@ -240,14 +240,15 @@ class AdminFirebaseCheeseBloc implements Bloc {
 
     _thisCheeseItem.itemId = itemId;
 
-    String documentID = await _client.insertCheeseItem(
-        _thisCheeseItem, 4, _firebaseUserEmail, imageURL);
+    String documentID = await _clientAdmin.insertCheeseItem(
+        _thisCheeseItem, _thisCheeseItem.sequenceNo, _firebaseUserEmail, imageURL);
 
     print('added document: $documentID');
 
 
   _thisCheeseItem.price=0;
   _thisCheeseItem.cheeseItemName='';
+  _thisCheeseItem.sequenceNo= _thisCheeseItem.sequenceNo+1;
   _thisCheeseItem.itemId='';
   _cheeseItemController.sink.add(_thisCheeseItem);
 
@@ -257,13 +258,32 @@ class AdminFirebaseCheeseBloc implements Bloc {
   }
 
 //    List<NewCategoryItem>_allCategoryList=[];
-  final _client = FirebaseClientAdmin();
 
+
+
+  void getLastSequenceNumberForAdminCheese() async {
+    print('at get Last SequenceNumberFromFireBaseFoodItems()');
+
+//    if (_isDisposed_known_last_sequenceNumber == false) {
+    int lastIndex =
+    await _clientAdmin.getLastSequenceNumberForAdminCheese2();
+
+    logger.i('lastIndex: $lastIndex');
+
+    _thisCheeseItem.sequenceNo = lastIndex +1;
+
+    _cheeseItemController.sink.add(_thisCheeseItem);
+
+
+//    }
+  }
 
   AdminFirebaseCheeseBloc() {
     print('at AdminFirebaseIngredientBloc  ......()');
 
     print('at FoodGalleryBloc()');
+
+    getLastSequenceNumberForAdminCheese();
 
   }
 
