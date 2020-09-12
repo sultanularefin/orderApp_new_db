@@ -513,20 +513,30 @@ class FoodGalleryBloc implements Bloc {
         defaultJuusto2 = getDocs ['default_juusto'];
 
 
+        print('dynamic defaultJuusto2.length: ${defaultJuusto2.length}');
+
+
         List<dynamic> defaultKastike2 = new List<dynamic>();
 
         defaultKastike2= getDocs ['default_kastike'];
 
+        // print('dynamic defaultKastike2.length: ${defaultKastike2.length}');
+
+        print('\n\n\n');
+
+        print('foodItemName => => $foodItemName');
 
 
         List<String> defaultJuusto3 = new List<String>() ;
-        defaultJuusto2 = dynamicListFilteredToStringList(defaultJuusto2);
-
+        if(defaultJuusto2 != null) {
+          defaultJuusto3 = dynamicListFilteredToStringList(defaultJuusto2);
+        }
 
         List<String> defaultKastike3 = new List<String>();
 
-        defaultKastike2= dynamicListFilteredToStringList(defaultKastike2);
-
+        if(defaultKastike2 != null) {
+          defaultKastike3 = dynamicListFilteredToStringList(defaultKastike2);
+        }
 
         if(foodItemName.toLowerCase()=='pita'){
           print('--------------------------pita found-==================');
