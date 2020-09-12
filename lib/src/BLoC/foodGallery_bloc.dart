@@ -590,9 +590,6 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-
-
-
       List<NewCategoryItem> tempAllCategories = new List<NewCategoryItem>();
 
       docList.forEach((doc) {

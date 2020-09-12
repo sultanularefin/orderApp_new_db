@@ -238,42 +238,47 @@ class HistoryBloc implements Bloc {
 //      var snapshot = await _client.fetchFoodItems();
 
       var snapshot = await _client.fetchOrderListItemsForHistoryPaidOnly();
-      List docList = snapshot.documents;
+      // List docList = snapshot.docs;
 
       List<OneOrderFirebase> tempAllOrderedItems= new List<OneOrderFirebase>();
-      docList.forEach((doc) {
 
+      snapshot.docs.forEach((element) {
+      // docList.forEach((doc) {
+
+
+
+        Map getDocs = element.data();
 
 //    List <Map<String, dynamic>>
-        Map<String,dynamic>       customerAddress = doc['address'];
+        Map<String,dynamic>       customerAddress = getDocs['address'];
 //    List <Map<dynamic, dynamic>> orderedItems = snapshot['items'];
-        List<dynamic> orderedItems = doc['items'];
+        List<dynamic> orderedItems = getDocs['items'];
 //    List<Map<String, dynamic>>
-        String                    orderBy =     doc['orderby'];
-        String                    paidStatus =  doc['paidStatus'];
-        String                    paidType =    doc['paidType'];
-        double                    totalPrice =  doc['price'];
-        String                    restaurantName = doc['restaurantName'];
+        String                    orderBy =     getDocs['orderby'];
+        String                    paidStatus =  getDocs['paidStatus'];
+        String                    paidType =    getDocs['paidType'];
+        double                    totalPrice =  getDocs['price'];
+        String                    restaurantName = getDocs['restaurantName'];
 
-        String                    contact =     doc['contact'];
-        String                    driverName =  doc['driver'];
-        DateTime                  endDate =     doc['end'].toDate();
-        DateTime                  startDate =   doc['start'].toDate();
+        String                    contact =     getDocs['contact'];
+        String                    driverName =  getDocs['driver'];
+        DateTime                  endDate =     getDocs['end'].toDate();
+        DateTime                  startDate =   getDocs['start'].toDate();
 
-        String                    orderStatus = doc['status'];
-        String                    tableNo =     doc['tableNo'];
-        String                    orderType =   doc['orderType'];
-        final String documentID = doc.documentID;
+        String                    orderStatus = getDocs['status'];
+        String                    tableNo =     getDocs['tableNo'];
+        String                    orderType =   getDocs['orderType'];
+        final String documentID = element.id;
 //        String                    documentId = orderDocumentId;
-        int                    orderProductionTimeFromNow =    doc['orderProductionTimeFromNow'];
-        String                timeOfDay3 =      doc['orderProductionTimeOfDay'];
+        int                    orderProductionTimeFromNow =    getDocs['orderProductionTimeFromNow'];
+        String                timeOfDay3 =      getDocs['orderProductionTimeOfDay'];
 
         String                timeOfDay2 = sanitizeTimeOfDay(timeOfDay3);
 
 
-        double                 deliveryCost2 =          doc['deliveryCost?'];
-        double                 tax =                    doc['tax'];
-        double                 priceWithDelivery2 =     doc['priceWithDelivery?'];
+        double                 deliveryCost2 =          getDocs['deliveryCost?'];
+        double                 tax =                    getDocs['tax'];
+        double                 priceWithDelivery2 =     getDocs['priceWithDelivery?'];
 
 
         CustomerInformation currentCustomerFromFireStore = localCustomerInformationObject(customerAddress);
@@ -294,16 +299,16 @@ class HistoryBloc implements Bloc {
         print('contact: $contact');
         print('driverName: $driverName');
 
-        print('snapshot[\'end\'].toDate().toString(): ${doc['end'].toDate().toString()}');
+        print('snapshot[\'end\'].toDate().toString(): ${getDocs['end'].toDate().toString()}');
 
 //    DateTime d = t.toDate();
 //    print(d.toString()); //2019-12-28 18:48:48.364
-        print('snapshot[\'start\'].toDate().toString()${doc['start'].toDate().toString()}');
+        print('snapshot[\'start\'].toDate().toString()${getDocs['start'].toDate().toString()}');
 
 
-        print('snapshot[\'end\']: ${doc['end'].toDate()}');
+        print('snapshot[\'end\']: ${getDocs['end'].toDate()}');
 
-        print('snapshot[\'start\']${doc['start'].toDate()}');
+        print('snapshot[\'start\']${getDocs['start'].toDate()}');
 
 
         print('endDate: $endDate');

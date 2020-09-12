@@ -988,6 +988,9 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     print('reached here: incrementThisIngredientItem ');
     print('_unSelectedIngItems.length: ${_unSelectedIngItems.length}');
 
+
+    print('...${thisIngredient.ingredientName}');
+
 //                          NewIngredient c1 = oneUnselectedIngredient;
 
 
@@ -1019,10 +1022,14 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     List<NewIngredient> tempUnSelectedAll = _unSelectedIngItems;
 
+    tempUnSelectedAll.forEach((element) {
+      print('...element.ingredientName =>> ${element.ingredientName}');
+    });
 
 
     int index22 = tempUnSelectedAll.
-    indexWhere((note) => note.ingredientName.toLowerCase().trim()== thisIngredient.ingredientName);
+    indexWhere((note) => note.ingredientName.toLowerCase().trim()==
+        thisIngredient.ingredientName.toLowerCase().trim());
 
 
     print('index22 : :: $index22');
