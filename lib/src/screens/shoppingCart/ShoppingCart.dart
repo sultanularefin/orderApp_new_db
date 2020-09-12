@@ -3547,7 +3547,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
 //                                        color:Colors.purpleAccent,
                       // do it in both Container
                       child: Text(
-                        'milloin tulet',
+                        // 'milloin tulet',
+                        'time of day',
                         maxLines: 1,
                         style: TextStyle(
                           color: Colors.black26,
@@ -3611,7 +3612,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Valitse sopiva aika',
+                      hintText:
+                      //'Valitse sopiva aika',
+                      'minutes from now',
                       hintStyle:
                       TextStyle(color: Colors.black26, fontSize: 17),
                     ),
@@ -3906,7 +3909,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       decoration: InputDecoration(
                         focusColor: Color(0xffFC0000),
                         border: InputBorder.none,
-                        hintText: 'katuosoite ja talon numero ',
+                        // hintText: 'katuosoite ja talon numero ',
+                        hintText: 'street address and house number',
                         hintStyle: TextStyle(
                             color: Colors.black54, fontSize: 14),
 
@@ -4031,7 +4035,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'asunto numero ',
+                          // hintText: 'asunto numero',
+                          hintText: 'flat number',
                           hintStyle: TextStyle(
                               color: Colors.black54, fontSize: 14),
 
@@ -4153,7 +4158,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'puhelin numero',
+                        // hintText: 'puhelin numero',
+                        hintText: 'phone number',
                         hintStyle: TextStyle(
                             color: Colors.black54, fontSize: 16),
                       ),
@@ -5311,7 +5317,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                   child: Container(
                     child: Text(
-                      'peruuta'.toUpperCase(),
+                      //'peruuta'.toUpperCase(),
+                      'cancel'.toUpperCase(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -5346,7 +5353,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                     // PAY OBSCURED DELIVERY PHONE...
                     child: Text(
-                      'maksaa'.toUpperCase(),
+                      /*'maksaa */ 'pay'.toUpperCase(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -5594,7 +5601,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: Container(
 //              alignment: Alignment.center,
                 child: Text(
-                  'peruuta'.toUpperCase(),
+                  //'peruuta'.toUpperCase(),
+                  'cancel'.toUpperCase(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -5652,7 +5660,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                 //    cancel Pay Select Unobscured Delivery Phone
                 child: Text(
-                  'maksaa'.toUpperCase(),
+                  /*'maksaa */ 'pay'.toUpperCase(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -5848,7 +5856,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   Container(
                                     margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
                                     alignment: Alignment.center,
-                                    child: Text('maksu tapa'.toUpperCase(),
+                                    child: Text(/*'maksu tapa' */ 'payment method'.toUpperCase(),
                                         style: TextStyle(
                                           fontSize: 26,
                                           fontWeight: FontWeight.normal,
@@ -6059,7 +6067,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         Container(
                           margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                           alignment: Alignment.center,
-                          child: Text('maksu tapa'.toUpperCase(),
+                          child: Text(/*'maksu tapa' */ 'payment method'.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.normal,
@@ -6076,7 +6084,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   alignment: Alignment.center,
                   child: Row(
                     children: <Widget>[
-                      Text('Summa : '.toUpperCase(),
+                      Text(/*'Summa : '*/ 'TOTAL'.toUpperCase(),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.normal,

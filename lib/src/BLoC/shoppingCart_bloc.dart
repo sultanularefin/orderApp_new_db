@@ -177,10 +177,25 @@ class ShoppingCartBloc implements Bloc {
   //  List<PrinterBluetooth> blueToothDevicesState = [];
 
 
+  List<String> dynamicListFilteredToStringList(List<dynamic> dlist) {
+
+    List<String> stringList = List<String>.from(dlist);
+
+    logger.i('stringList.length: ${stringList.length}');
+
+
+    return stringList;
+
+
+  }
 
   Future<void> getRestaurantInformationConstructor() async{
-
+    print('..........getRestaurantInformationConstructor()');
     var snapshot = await _client.fetchRestaurantDataClient();
+
+
+
+
     Map getDocs = snapshot.data();
 
     Map     <String,dynamic> restaurantAddress = getDocs['address'];
@@ -189,7 +204,11 @@ class ShoppingCartBloc implements Bloc {
     bool    restaurantKidFriendly =  getDocs['kid_friendly'];
     bool    restaurantReservation = getDocs['reservation'];
     bool    restaurantRomantic  = getDocs['romantic'];
-    List    <String> restaurantOffday = getDocs['offday'];
+    List    <dynamic> restaurantOffday2 = getDocs['offday'];
+
+    List<String> restaurantOffday = dynamicListFilteredToStringList(restaurantOffday2);
+
+
 
     String  restaurantOpen = getDocs['open'];
 
@@ -208,7 +227,9 @@ class ShoppingCartBloc implements Bloc {
 
     String  restaurantContact= getDocs['contact'];
 
-    double  restaurantDeliveryCharge = getDocs['deliveryCharge'];
+    int  restaurantDeliveryCharge1 = getDocs['deliveryCharge'];
+
+    double restaurantDeliveryCharge = restaurantDeliveryCharge1.toDouble();
     int restaurantDiscount0 =getDocs['discount'];// from string;// need to convert string to double.
     print('restaurantDiscount0-> $restaurantDiscount0 is : ' is num);
     print('restaurantDiscount0-> $restaurantDiscount0 is : ' is int);
@@ -220,6 +241,10 @@ class ShoppingCartBloc implements Bloc {
     String  restaurantName = getDocs['name'];
 
     print('restaurantName: $restaurantName');
+
+    print('restaurantKidFriendly : $restaurantKidFriendly');
+
+
     double  restaurantRating = getDocs['rating'];
     double  restaurantTotalRating = getDocs['totalRating'];
 
@@ -270,7 +295,7 @@ class ShoppingCartBloc implements Bloc {
     initiateOrderTypeSingleSelectOptions();
 
     //initiate scanner.
-    printerManager.startScan(Duration(seconds: 4));
+    // printerManager.startScan(Duration(seconds: 4));
 //    printerManager.startScan(Duration(seconds: 4));
 
     getRestaurantInformationConstructor();
@@ -577,7 +602,6 @@ class ShoppingCartBloc implements Bloc {
 
 
     tempOrder.selectedFoodInOrder = tempForCategorising2;
-
 
 
     String restaurantName = _thisRestaurant.name;
