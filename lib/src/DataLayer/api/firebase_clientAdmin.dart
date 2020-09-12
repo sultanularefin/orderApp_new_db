@@ -142,32 +142,45 @@ class FirebaseClientAdmin {
     var snapshot = await FirebaseFirestore.instance.collection("restaurants")
         .doc('kebab_bank')
         .collection('foodItems2').orderBy('sequenceNo',descending: true).limit(1).get();
-    print('snapshot: $snapshot');
-    if (snapshot==null)
-
-    {
-      print('..at snapshot==null of getLastSequenceNumberFromFireBaseFoodItems()> > ${snapshot==null}');
-      return -1;
-    }
-    else{
-
-      print('at else..... of getLastSequenceNumberFromFireBaseFoodItems()');
+    print('snapshot 000 ========================>> : $snapshot');
 
 
-      List docList = snapshot.docs;
 
+    print('at else..... of getLastSequenceNumberFromFireBaseFoodItems()');
+
+
+//    List docList = snapshot.docs;
+    int lastIndexCheese;
+
+
+
+    try {
       var oneCheese =snapshot.docs.first.data();
+    } catch (e) {
 
+      print('e         _____ -----: $e');
+      return lastIndexCheese=-1;
 
-      print('....oneCheese[\'sequenceNo\'] => ${oneCheese['sequenceNo']}');
-
-      int lastIndexCheese = oneCheese['sequenceNo'];
-
-      print('lastIndexCheese: $lastIndexCheese');
-
-
-      return lastIndexCheese;
     }
+
+
+    var oneCheese =snapshot.docs.first.data();
+    try {
+      lastIndexCheese = oneCheese['sequenceNo'];
+    } catch (e) {
+
+      print('e         _____ -----: $e');
+      lastIndexCheese=-1;
+      return lastIndexCheese;
+
+    }
+
+
+    print('lastIndexCheese: $lastIndexCheese');
+
+
+    return lastIndexCheese;
+
 
   }
 
@@ -415,11 +428,17 @@ class FirebaseClientAdmin {
 
       FoodItemWithDocID x, int sequenceNo, String email,
       String imageURL) async {
+
+
     Timestamp date;
     String orderDocId = '';
     String imageURLFinal1 = '';
 
     print('sequenceNo >>>  $sequenceNo');
+
+    print('====> ${x.shorCategoryName}');
+
+    print('====>  ${x.categoryName}');
 
 
     var uri = Uri.parse(imageURL);
@@ -508,10 +527,10 @@ class FirebaseClientAdmin {
     collection('foodItems2').add(<String, dynamic>{
       'category': x.categoryName,
       'categoryShort': x.shorCategoryName,
-      'default_juust': 'juusto',
-      'default_kastike': 'tonnikala',
+      'default_juusto': x.defaultJuusto,
+      'default_kastike': x.defaultKastike,
       'ingredients': x.ingredients,
-    //foodItemIngredientsInsertDummy(null),
+      //foodItemIngredientsInsertDummy(null),
       'name': x.itemName,
       'sequenceNo': sequenceNo,
       // sequenceNo
@@ -530,7 +549,7 @@ class FirebaseClientAdmin {
       'uploadedBy': email,
       'uploadDate': FieldValue.serverTimestamp(),
 
-      'imageURL': imageURLFinal1,
+      'image': imageURLFinal1,
       'itemID': x.itemId,
       /*
     https://firebasestorage.googleapis.com/v0/b/kebabbank-37224.appspot.com/o/

@@ -7,7 +7,7 @@ import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
-
+import 'package:firebase_storage/firebase_storage.dart';
 //MODELS
 //import 'package:foodgallery/src/DataLayer/itemData.dart';
 //    import 'package:foodgallery/src/DataLayer/FoodItem.dart';
@@ -35,6 +35,9 @@ class FoodGalleryBloc implements Bloc {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
+
+  final FirebaseStorage storage =
+  FirebaseStorage(storageBucket: 'gs://kebabbank-37224.appspot.com');
 
   // id ,type ,title <= Location.
 
@@ -320,6 +323,62 @@ class FoodGalleryBloc implements Bloc {
 
 
 
+  List<String> dynamicListFilteredToStringList(List<dynamic> dlist) {
+
+    List<String> stringList = List<String>.from(dlist);
+
+//    logger.i('stringList.length: ${stringList.length}');
+
+
+    return stringList;
+    /*
+    return stringList.where((oneItem) =>oneItem.toString().toLowerCase()
+        ==
+        isIngredientExist(oneItem.toString().trim().toLowerCase())).toList();
+
+    */
+
+  }
+
+  Future<String> getDownloadURL(String imageURL) async{
+
+    StorageReference storageReference_2 = storage
+        .ref()
+        .child('foodItems2')
+        .child(imageURL);
+
+    String x;
+    try {
+      x = await storageReference_2.getDownloadURL();
+    } catch (e) {
+
+      print('e         _____ -----: $e');
+
+//        print('ip error, please check internet');
+//        return devices;
+    }
+
+
+    print('x         _____ -----: $x');
+
+    String token = x.substring(x.indexOf('?'));
+
+//      print('........download url: $x');
+//    _thisFoodItem.urlAndTokenForStorageImage=token;
+//    _foodItemController.sink.add(_thisFoodItem);
+
+//    return x.substring(x.indexOf('?'));
+    return x;
+  }
+
+
+  Future<String> _downloadFile(StorageReference ref) async {
+    final String url = await ref.getDownloadURL();
+
+    return url;
+  }
+
+
 
 //  Future<List<FoodItemWithDocID>> getAllFoodItems() async {
   void getAllFoodItemsConstructor() async {
@@ -333,44 +392,108 @@ class FoodGalleryBloc implements Bloc {
     else {
 
       var snapshot = await _client.fetchFoodItems();
-      List docList = snapshot.docs;
+
+//      Map getDocs = snapshot.data();
+//      List docList = snapshot.docs;
 
       List<FoodItemWithDocID> tempAllFoodsList= new List<FoodItemWithDocID>();
-      docList.forEach((doc) {
+      snapshot.docs.forEach((doc) {
 
-        final String foodItemName = doc['name'];
+        Map getDocs = doc.data();
+
+        final String foodItemName = getDocs ['name'];
 
 
 
 //      print('foodItemName $foodItemName');
 
-        final String foodItemDocumentID = doc.documentID;
+        final String foodItemDocumentID = doc.id;
 //      print('foodItemDocumentID $foodItemDocumentID');
+//        getDownloadURL();
 
-
-        final String foodImageURL  = doc['image']==''?
+        final String foodImageURL  = getDocs ['image']==''?
         'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
             :
-        storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
+        //StorageReference (storageBucketURLPredicate + Uri.encodeComponent(getDocs ['image']));
+        storageBucketURLPredicate + Uri.encodeComponent(getDocs ['image'])
             +'?alt=media';
 //      print('doc[\'image\'] ${doc['image']}');
 
 
+/*
+        final Future<String> foodImageURL2= getDownloadURL(getDocs['image']);
 
-        final bool foodIsAvailable =  doc['available'];
-        final int sequenceNo =  doc['sequenceNo'];
+        String foodImageURL1='';
+
+        foodImageURL2.whenComplete(() {
+          print("called when future completes");
+//          return true;
+        }
+        ).then((printResult) async {
+
+
+          foodImageURL1 = printResult;
+
+
+        }).catchError((onError) {
+          print('image getting not successful: $onError');
+          return false;
+        });
+
+        final String foodImageURL = foodImageURL1;
+
+        print('foodImageURL: $foodImageURL');
+
+
+
+
+
+
+        */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        final bool foodIsAvailable =  getDocs ['available'];
+        final int sequenceNo =  getDocs ['sequenceNo'];
 
 //        print('foodIsAvailable: $foodIsAvailable');
 
-        final Map<String,dynamic> oneFoodSizePriceMap = doc['size'];
-        final List<dynamic> foodItemIngredientsList =  doc['ingredients'];
+        final Map<String,dynamic> oneFoodSizePriceMap = getDocs ['size'];
+        final List<dynamic> foodItemIngredientsList =   getDocs ['ingredients'];
 //          logger.i('foodItemIngredientsList at getAllFoodDataFromFireStore: $foodItemIngredientsList');
 
 //          print('foodSizePrice __________________________${oneFoodSizePriceMap['normal']}');
 
-        final String foodCategoryName = doc['category'];
+        final String foodCategoryName =  getDocs ['category'];
 
-        final String shorCategoryName2 = doc['categoryShort'];
+        final String shorCategoryName2 = getDocs ['categoryShort'];
 
         print('shorCategoryName2: ZZZZ ZZZZZZ ZZZZZ   $shorCategoryName2');
 
@@ -379,29 +502,32 @@ class FoodGalleryBloc implements Bloc {
 
 //      print('category: $foodCategoryName');
 
-        String defaultJuusto = doc['default_juusto'];
+//        String defaultJuusto =  getDocs ['default_juusto'];
+//
+//        String defaultKastike = getDocs ['default_kastike'];
 
-        String defaultKastike = doc['default_kastike'];
-
-        print('___/////// defaultKastike of $foodItemName :  $defaultKastike ______');
-
-
-        List<String> defaultJuusto2 = new List<String>() ;
-        defaultJuusto2.add(defaultJuusto);
-
-        List<String> defaultKastike2 = new List<String>();
-        defaultKastike2.add(defaultKastike);
+//        print('___/////// defaultKastike of $foodItemName :  $defaultKastike ______');
 
 
-//        logger.e('defaultKastike2.length: ${defaultKastike2.length}');
-//        logger.w('defaultJuusto2.length: ${defaultJuusto2.length}');
+        List<dynamic> defaultJuusto2 = new List<dynamic>() ;
+        defaultJuusto2 = getDocs ['default_juusto'];
 
 
-        /*
-        print('foodItemName: $foodItemName  and docID: $foodItemDocumentID and '
-            'defaultJuusto $defaultJuusto and defaultKastike: $defaultKastike');
+        List<dynamic> defaultKastike2 = new List<dynamic>();
 
-        */
+        defaultKastike2= getDocs ['default_kastike'];
+
+
+
+        List<String> defaultJuusto3 = new List<String>() ;
+        defaultJuusto2 = dynamicListFilteredToStringList(defaultJuusto2);
+
+
+        List<String> defaultKastike3 = new List<String>();
+
+        defaultKastike2= dynamicListFilteredToStringList(defaultKastike2);
+
+
         if(foodItemName.toLowerCase()=='pita'){
           print('--------------------------pita found-==================');
         }
@@ -421,8 +547,8 @@ class FoodGalleryBloc implements Bloc {
           isAvailable: foodIsAvailable,
           documentId: foodItemDocumentID,
 //          discount: foodItemDiscount,
-          defaultJuusto:defaultJuusto2,
-          defaultKastike:defaultKastike2,
+          defaultJuusto:defaultJuusto3,
+          defaultKastike:defaultKastike3,
           sequenceNo: sequenceNo,
         );
 
@@ -564,11 +690,11 @@ class FoodGalleryBloc implements Bloc {
     ).toList();
 
 
-    List<String> documents = snapshot.documents.map((documentSnapshot) =>
+    List<String> documents = snapshot.docs.map((documentSnapshot) =>
     documentSnapshot.id
     ).toList();
 
-    print('Ingredient documents are: $documents');
+    print('Sauces documents are: $documents');
 
 
 

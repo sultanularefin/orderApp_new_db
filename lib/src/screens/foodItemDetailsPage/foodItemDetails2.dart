@@ -837,7 +837,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        'Täytteet'.toUpperCase(),
+//                                        'Täytteet'.toUpperCase(),
+                                        'ingredients'.toUpperCase(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.normal,
@@ -898,7 +899,9 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        'juusto'.toUpperCase(),
+//                                        'juusto'.toUpperCase(),
+
+                                        'cheeses'.toUpperCase(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.normal,
@@ -950,7 +953,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                                       margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        'kastike'.toUpperCase(),
+//                                        'kastike'.toUpperCase(),
+                                        'sauces'.toUpperCase(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.normal,
@@ -1304,7 +1308,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'jatka'.toUpperCase(),
+//                'jatka'.toUpperCase(),
+                'continue shopping'.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
@@ -1353,7 +1358,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
               //  SizedBox(width: 5,),
 
               Text(
-                'jatka'.toUpperCase(),
+//                'jatka'.toUpperCase(),
+                'continue shopping'.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
@@ -1418,7 +1424,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'lisä täytteet'.toUpperCase(),
+//                'lisä täytteet'.toUpperCase(),
+                'more ingredients'.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,

@@ -12,7 +12,7 @@ import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 //import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
+//import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 
 
 
@@ -35,7 +35,7 @@ class FirebaseClient {
     var snapshot= FirebaseFirestore.instance
         .collection("restaurants").doc('kebab_bank').collection('orderList')
         .orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Unpaid')
-        .getDocuments();
+        .get();
 
 //    orderBy('_timeStampUTC', descending: true)
     return snapshot;
@@ -50,7 +50,7 @@ class FirebaseClient {
     var snapshot= FirebaseFirestore.instance
         .collection("restaurants").doc('kebab_bank').
     collection('orderList').orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Paid')
-        .getDocuments();
+        .get();
 
 //    orderBy('_timeStampUTC', descending: true)
     return snapshot;
@@ -60,7 +60,7 @@ class FirebaseClient {
     var snapshot= FirebaseFirestore.instance
         .collection("restaurants").doc('kebab_bank').collection('orderList')
         .orderBy('end',descending: true).where('paidStatus', isEqualTo: 'Unpaid')
-        .getDocuments();
+        .get();
 
 //    orderBy('_timeStampUTC', descending: true)
     return snapshot;
@@ -77,13 +77,13 @@ class FirebaseClient {
     /*
     var snapshot= FirebaseFirestore.instance
         .collection("restaurants").doc('kebab_bank').collection('foodItems').limit(65)
-        .getDocuments();
+        .get();
     */
 
 
     var snapshot= FirebaseFirestore.instance
-        .collection("restaurants").doc('kebab_bank').collection('fooditems').orderBy('sequence_no',/*descending: false*/)
-        .getDocuments();
+        .collection("restaurants").doc('kebab_bank').collection('foodItems2').orderBy('sequenceNo',/*descending: false*/)
+        .get();
 
 //    orderBy('_timeStampUTC', descending: true)
     return snapshot;
@@ -96,12 +96,12 @@ class FirebaseClient {
 
     var snapshot = await FirebaseFirestore.instance.collection("restaurants")
         .doc('kebab_bank')
-        .collection('kastike')/*.orderBy("sl", descending: false) */
-        .getDocuments();
+        .collection('sauces2')/*.orderBy("sl", descending: false) */
+        .get();
 
 //    var snapshot= FirebaseFirestore.instance
 //        .collection("restaurants").doc('kebab_bank').collection('foodItems')
-//        .getDocuments();
+//        .get();
 
     return snapshot;
   }
@@ -112,12 +112,12 @@ class FirebaseClient {
 
     var snapshot = await FirebaseFirestore.instance.collection("restaurants")
         .doc('kebab_bank')
-        .collection('juusto')/*.orderBy("sl", descending: false)*/
-        .getDocuments();
+        .collection('cheeses2')/*.orderBy("sl", descending: false)*/
+        .get();
 
 //    var snapshot= FirebaseFirestore.instance
 //        .collection("restaurants").doc('kebab_bank').collection('foodItems')
-//        .getDocuments();
+//        .get();
 
     return snapshot;
   }
@@ -130,11 +130,11 @@ class FirebaseClient {
     var snapshot = await FirebaseFirestore.instance.collection("restaurants")
         .doc('kebab_bank')
         .collection('inagedients')
-        .getDocuments();
+        .get();
 
 //    var snapshot= FirebaseFirestore.instance
 //        .collection("restaurants").doc('kebab_bank').collection('foodItems')
-//        .getDocuments();
+//        .get();
 
     return snapshot;
   }
@@ -147,12 +147,12 @@ class FirebaseClient {
 
     var snapshot = await FirebaseFirestore.instance.collection("restaurants")
         .doc('kebab_bank')
-        .collection('extraIngredients2')
-        .getDocuments();
+        .collection('extraIngredients')
+        .get();
 
 //    var snapshot= FirebaseFirestore.instance
 //        .collection("restaurants").doc('kebab_bank').collection('foodItems')
-//        .getDocuments();
+//        .get();
 
     return snapshot;
   }
@@ -175,7 +175,7 @@ class FirebaseClient {
 
 //    var snapshot= FirebaseFirestore.instance
 //        .collection("restaurants").doc('kebab_bank').collection('foodItems')
-//        .getDocuments();
+//        .get();
 
     return snapshot;
 
@@ -695,8 +695,8 @@ class FirebaseClient {
 
     }).whenComplete(() => print("called when future completes"))
         .then((document) {
-      //  print('Added document with ID: ${document.documentID}');
-      orderDocId= document.documentID;
+      //  print('Added document with ID: ${document.id}');
+      orderDocId= document.id;
 //      return document;
 //                            _handleSignIn();
     }).catchError((onError) {
@@ -721,7 +721,7 @@ class FirebaseClient {
     var snapshot= FirebaseFirestore.instance
         .collection("restaurants").doc('kebab_bank').
     collection('categories').orderBy("sequence_no", /*descending: false*/)
-        .getDocuments();
+        .get();
 
     return snapshot;
 

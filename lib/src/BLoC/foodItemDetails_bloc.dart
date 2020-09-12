@@ -530,10 +530,13 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
   bool checkThisExtraIngredientForSomeCategory(NewIngredient x,String shortCategroyName) {
 
     print('_______ ________ shortCategroyName:  $shortCategroyName');
-
+    print('x: $x');
+    print('x: ${x.ingredientName}');
+//    List<String>.from(x.extraIngredientOf);
 
 
     List<String> extraIngredientOFstringList = List<String>.from(x.extraIngredientOf);
+    //x.extraIngredientOf;
 
 
 

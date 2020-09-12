@@ -457,8 +457,9 @@ _batteryLevel = batteryLevel;
 
 
 
-                      /*
+
                       Container(
+                        color:Colors.white,
                         width: displayWidth(context) -
                             MediaQuery.of(context).size.width / 3.8,
                         height: displayHeight(context) + kToolbarHeight + 10,
@@ -466,7 +467,7 @@ _batteryLevel = batteryLevel;
                             context /*allIngredients:_allIngredientState */),
                       ),
 
-                      */
+
 
 
 

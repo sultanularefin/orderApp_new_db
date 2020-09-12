@@ -76,21 +76,22 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
   int _currentCategory= 0;
   bool _loadingState = false;
+  String token= '';
 
 
 
 
-  void setCategoryValue(int categoryValue){
+//  void setCategoryValue(int categoryValue){
+//
+//    setState(() {
+//      _currentCategory =categoryValue;
+//    });
+//
+//  }
 
-    setState(() {
-      _currentCategory =categoryValue;
-    });
-
-  }
 
 
-
-  Widget _buildOneCheckBoxCheeseItem(CheeseItem ct, int index) {
+  Widget _buildOneCheckBoxCheeseItem(CheeseItem ct, int index,String token) {
 
     print('at _buildOneCheckBoxCheeseItem .... ${ct.cheeseItemName}  ct.isSelected ${ct.isSelected}');
 
@@ -129,7 +130,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                     ClipOval(
                       child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                        imageUrl: ct.imageURL,
+                        imageUrl: ct.imageURL + token,
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
                         new CircularProgressIndicator(),
@@ -219,7 +220,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                     ClipOval(
                       child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                        imageUrl: ct.imageURL,
+                        imageUrl: ct.imageURL + token,
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
                         new CircularProgressIndicator(),
@@ -282,7 +283,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
 
-  Widget _buildOneCheckBoxIngredient(NewIngredient ct, int index) {
+  Widget _buildOneCheckBoxIngredient(NewIngredient ct, int index, String token) {
     return Container(
         child: ct.isDefault ==true
 
@@ -316,7 +317,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                     ClipOval(
                       child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                        imageUrl: ct.imageURL,
+                        imageUrl: ct.imageURL + token,
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
                         new CircularProgressIndicator(),
@@ -405,7 +406,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                     ClipOval(
                       child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                        imageUrl: ct.imageURL,
+                        imageUrl: ct.imageURL +token,
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
                         new CircularProgressIndicator(),
@@ -467,8 +468,9 @@ class _AddDataState extends State<AdminFirebaseFood> {
 
 
 
-  Widget _buildOneCheckBoxSauceItem(SauceItem ct, int index) {
+  Widget _buildOneCheckBoxSauceItem(SauceItem ct, int index, String token) {
 
+    print('.....token : $token');
     return Container(
         child: ct.isSelected ==true
 
@@ -502,7 +504,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                     ClipOval(
                       child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                        imageUrl: ct.imageURL,
+                        imageUrl: ct.imageURL + token,
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
                         new CircularProgressIndicator(),
@@ -592,7 +594,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                     ClipOval(
                       child: CachedNetworkImage(
 //                  imageUrl: dummy.url,
-                        imageUrl: ct.imageURL,
+                        imageUrl: ct.imageURL + token,
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
                         new CircularProgressIndicator(),
@@ -668,7 +670,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
     print('_image initially: $_image');
     print('image at getImage: $image');
 
-    print('_currentCategory: $_currentCategory');
+//    print('_currentCategory: $_currentCategory');
 
 
 
@@ -735,6 +737,9 @@ class _AddDataState extends State<AdminFirebaseFood> {
                   initialData: blocAdminFoodFBase.getCurrentFoodItem,
                   builder: (context, snapshot) {
                     final FoodItemWithDocID currentFood = snapshot.data;
+
+                    token = currentFood.urlAndTokenForStorageImage;
+                    _currentCategory = currentFood.categoryIndex == null?0:currentFood.categoryIndex;
 
                     return Builder(
                         builder: (context) =>
@@ -824,11 +829,12 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                           ),
                                         ),
                                         validator: (value) {
-                                          if (value.isEmpty) {
-                                            return 'Please enter the foodItem Name';
-                                          }
+                                          return value.isEmpty? 'please enter the fooditem name.' : null;
+//                                          if (value.isEmpty) {
+//                                            return 'Please enter the foodItem Name';
+//                                          }
                                         },
-                                        onSaved: (val) =>
+                                        onChanged: (val) =>
                                             blocAdminFoodFBase.setItemName(val),
 
                                       ),
@@ -887,15 +893,21 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                     final List<NewCategoryItem> allCategories = snapshot.data;
 
 
+//                                                    allCategories
+
+
 //                                                              _currentCategory=cu
 
                                                     return DropdownButtonFormField(
 
-
-                                                        value: _currentCategory != null ?
-                                                        allCategories[_currentCategory]
-                                                            .sequenceNo
-                                                            : allCategories[0].sequenceNo,
+                                                      value: allCategories[_currentCategory]
+                                                            .sequenceNo,
+//                                                        value: _currentCategory ,
+//                                                        _currentCategory
+//                                                        value: _currentCategory !=0 ?
+//                                                        allCategories[_currentCategory]
+//                                                            .sequenceNo
+//                                                            : allCategories[0].sequenceNo,
 
                                                         items: allCategories.map((oneItem) {
                                                           return DropdownMenuItem(
@@ -918,17 +930,11 @@ class _AddDataState extends State<AdminFirebaseFood> {
 //                                          child: Text(oneItem.name),
                                                           );
                                                         }).toList(),
-                                                        onChanged: (val) {
-                                                          blocAdminFoodFBase
-                                                              .setCategoryValue(_currentCategory,
-                                                            /*
-                                                                allCategories[_currentCategory]
-                                                                    .categoryName,
-                                                                allCategories[_currentCategory]
-                                                                    .fireStoreFieldName */
+                                                        onChanged: (val)  {
 
-                                                          );
-                                                          setCategoryValue(val);
+                                                          blocAdminFoodFBase
+                                                              .setCategoryValueFoodItemUPload(val);
+
 
                                                         }
 
@@ -1035,7 +1041,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                 itemBuilder: (_, int index) {
 
                                                   return _buildOneCheckBoxIngredient(
-                                                      allNewIngredients[index], index);
+                                                      allNewIngredients[index], index,token);
                                                 },
                                               );
 
@@ -1103,7 +1109,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                 itemBuilder: (_, int index) {
 
                                                   return _buildOneCheckBoxCheeseItem(
-                                                      allCheeseItems[index], index);
+                                                      allCheeseItems[index], index,token);
                                                 },
                                               );
 
@@ -1168,7 +1174,7 @@ class _AddDataState extends State<AdminFirebaseFood> {
                                                 itemBuilder: (_, int index) {
 
                                                   return _buildOneCheckBoxSauceItem(
-                                                      allSauces[index], index);
+                                                      allSauces[index], index,token);
                                                 },
                                               );
 

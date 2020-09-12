@@ -9,6 +9,7 @@ class FoodItemWithDocID {
   String itemName;
   String categoryName;
   String shorCategoryName;
+  int categoryIndex;// requred for dropdownlist select...
 
   Map<String,dynamic> sizedFoodPrices;
   List<dynamic> ingredients;
@@ -53,6 +54,7 @@ class FoodItemWithDocID {
         this.defaultKastike,
         this.sequenceNo,
         this.urlAndTokenForStorageImage:'',
+        this.categoryIndex,
 
       }
       );

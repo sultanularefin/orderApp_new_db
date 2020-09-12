@@ -69,7 +69,7 @@ class NewIngredient {
   */
 
   NewIngredient.ingredientConvert(Map<String, dynamic> data,String docID)
-      :imageURL= storageBucketURLPredicate + Uri.encodeComponent(data['image'])+'?alt=media',
+      :imageURL= storageBucketURLPredicate + Uri.encodeComponent(data['image']),
 //  &token='+
 //      _auth.currentUser.getIdToken()
 //      User fireBaseUserRemote = result.user;,
@@ -89,7 +89,7 @@ class NewIngredient {
 
   NewIngredient.ingredientConvertExtra(Map<String, dynamic> data,String docID)
 //      :imageURL= data['image'],
-      :imageURL= storageBucketURLPredicate + Uri.encodeComponent(data['image']) +'?alt=media',
+      :imageURL= storageBucketURLPredicate + Uri.encodeComponent(data['image']),
 //        storageBucketURLPredicate + Uri.encodeComponent(doc['image'])
 //            +'?alt=media';
         ingredientName= data['name'],
@@ -100,7 +100,7 @@ class NewIngredient {
         ingredientAmountByUser = 1,
         extraIngredientOf= data['extraIngredientOf'],
         sequenceNo = data['sequenceNo'] ,
-        subgroup= data['subgroup'];
+        subgroup= data['subGroup'];
 
 
   NewIngredient.updateUnselectedIngredient(NewIngredient oneIngredient)

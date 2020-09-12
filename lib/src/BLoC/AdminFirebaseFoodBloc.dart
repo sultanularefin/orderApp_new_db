@@ -61,13 +61,13 @@ class AdminFirebaseFoodBloc implements Bloc {
   File _image2;
   String _firebaseUserEmail;
 
-  String categoryName = 'PIZZA'.toLowerCase();
-  String shortCategoryName;
+//  String categoryName = 'PIZZA'.toLowerCase();
+//  String shortCategoryName;
 
   bool isHot = true;
-  String priceInEuro = '';
+//  String priceInEuro = '';
 
-  String imageURL = '';
+//  String imageURL = '';
   bool isAvailable = true;
 
   int sequenceNo = 0;
@@ -124,8 +124,8 @@ class AdminFirebaseFoodBloc implements Bloc {
     _image2 = localURL;
   }
 
-  void setCategoryValue(int index) {
-    // print('setting category name to: $name');
+  void setCategoryValueFoodItemUPload(int index) {
+     print('< > < > ZZZ  setting category food upload---------- [index]: $index');
 
     String categoryName =
     _categoryTypesForDropDown[index].categoryName.toLowerCase();
@@ -133,8 +133,13 @@ class AdminFirebaseFoodBloc implements Bloc {
     String shortCategoryName =
     _categoryTypesForDropDown[index].fireStoreFieldName.toLowerCase();
 
+    _thisFoodItem.categoryIndex= index;
+
     _thisFoodItem.categoryName = categoryName;
     _thisFoodItem.shorCategoryName = shortCategoryName;
+
+    print('categoryName: $categoryName');
+     print('shortCategoryName: $shortCategoryName');
 
     _foodItemController.sink.add(_thisFoodItem);
   }
@@ -208,7 +213,7 @@ class AdminFirebaseFoodBloc implements Bloc {
     }
   }
 
-  Future<String> _uploadFile(String itemId, itemName) async {
+  Future<String> _uploadFile(String itemId, itemName,String categoryName2) async {
     print('at _uploadFile: ');
 
     final String uuid = Uuid().v1();
@@ -216,8 +221,8 @@ class AdminFirebaseFoodBloc implements Bloc {
     print('itemId: $itemId');
     StorageReference storageReference_1 = storage
         .ref()
-        .child('foodItems')
-        .child(categoryName)
+        .child('foodItems2')
+        .child(categoryName2)
         .child(itemName + itemId + '.png');
 
     print('_image2: $_image2');
@@ -277,14 +282,14 @@ class AdminFirebaseFoodBloc implements Bloc {
     print('at get Last SequenceNumberFromFireBaseFoodItems()');
 
 //    if (_isDisposed_known_last_sequenceNumber == false) {
-      int lastIndex =
-      await _clientAdmin.getLastSequenceNumberFromFireBaseFoodItems();
+    int lastIndex =
+    await _clientAdmin.getLastSequenceNumberFromFireBaseFoodItems();
 
-      logger.i('lastIndex: $lastIndex');
+    logger.i('lastIndex: $lastIndex');
 
-      _thisFoodItem.sequenceNo = lastIndex +1;
+    _thisFoodItem.sequenceNo = lastIndex +1;
 
-      _foodItemController.sink.add(_thisFoodItem);
+    _foodItemController.sink.add(_thisFoodItem);
 
 //      _isDisposed_known_last_sequenceNumber = true;
 //    }
@@ -293,6 +298,16 @@ class AdminFirebaseFoodBloc implements Bloc {
   Future<int> saveFoodItem() async {
     //  save() {
 
+//    print('..save button pressed for fI:  ${_thisFoodItem.categoryIndex}');
+//    print('..save button pressed for fI:  ${_thisFoodItem.categoryName}');
+
+
+
+  if(_thisFoodItem.categoryIndex==null){
+    _thisFoodItem.categoryIndex=0;
+    _thisFoodItem.shorCategoryName = _categoryTypesForDropDown[0].fireStoreFieldName;
+    _thisFoodItem.categoryName = _categoryTypesForDropDown[0].categoryName;
+  }
 
     if ((_thisFoodItem.ingredients == null) ||
         (_thisFoodItem.ingredients.length == 0)) {
@@ -303,12 +318,9 @@ class AdminFirebaseFoodBloc implements Bloc {
         (_thisFoodItem.defaultJuusto.length == 0)) {
       return 5;
     }
-//    else if ((_thisFoodItem.subgroup == null) ||
-//        (_thisFoodItem.subgroup.length == 0)) {
-//      return 5;
-//    }
+
     else {
-      setCategoryValue(0);
+
       itemId = await generateItemId(6);
 
       print('itemId: $itemId');
@@ -316,7 +328,7 @@ class AdminFirebaseFoodBloc implements Bloc {
       String imageURL;
 
       if (_image2 != null) {
-        imageURL = await _uploadFile(itemId, _thisFoodItem.itemName);
+        imageURL = await _uploadFile(itemId, _thisFoodItem.itemName,_thisFoodItem.categoryName);
       } else {
         print('_image2= $_image2');
 
@@ -336,29 +348,16 @@ class AdminFirebaseFoodBloc implements Bloc {
       print('itemId: $itemId');
       print('itemName: ${_thisFoodItem.itemName}');
 
-//    print('ingredients: $ingredients');
-      print('Euro Price: $priceInEuro');
 
       print('isHot: $isHot');
       print('isAvailable: $isAvailable');
 
       print('_image2: $_image2');
-      print('_categoryName: $categoryName');
 
-      //    print('itemCategory: $itemCategory');
-      //    _addMessage()
       print('saving user using a web service');
 
       _thisFoodItem.itemName = titleCase(_thisFoodItem.itemName);
 
-      List<String> x = new List<String>();
-      x = [
-        'ingredient 1',
-        'ingredient 2',
-        'ingredient 3',
-      ];
-
-      _thisFoodItem.ingredients = x;
 
       _thisFoodItem.itemId = itemId;
 
@@ -366,9 +365,9 @@ class AdminFirebaseFoodBloc implements Bloc {
           _thisFoodItem, _thisFoodItem.sequenceNo, _firebaseUserEmail, imageURL);
 
       print('added document: $documentID');
-      int tempSequenceNo = _thisFoodItem.sequenceNo+1;
 
-      clearSubscription(tempSequenceNo);
+
+      clearSubscription(_thisFoodItem);
 
 //      _thisSauceItem.price=0;
 //      _thisSauceItem.sauceItemName='';
@@ -380,15 +379,10 @@ class AdminFirebaseFoodBloc implements Bloc {
     }
   }
 
-  void clearSubscription(int sequenceValueNew) {
-    FoodItemWithDocID x = new FoodItemWithDocID(
-      isHot: true,
-      isAvailable: true,
-      sequenceNo: sequenceValueNew,
-    );
-
+  void clearSubscription(FoodItemWithDocID w) {
+    FoodItemWithDocID x = w;
+    x.sequenceNo = x.sequenceNo+1;
     _thisFoodItem = x;
-
     _foodItemController.sink.add(_thisFoodItem);
   }
 
@@ -447,6 +441,15 @@ class AdminFirebaseFoodBloc implements Bloc {
       fireStoreFieldName: 'juomat',
     );
 
+    NewCategoryItem grill = new NewCategoryItem(
+      categoryName: 'grill',
+      sequenceNo: 7,
+      documentID: 'grill',
+      fireStoreFieldName: 'grill',
+    );
+
+
+
     List<NewCategoryItem> categoryItems2 = new List<NewCategoryItem>();
 
     categoryItems2.addAll([
@@ -456,7 +459,8 @@ class AdminFirebaseFoodBloc implements Bloc {
       salaatti_kasvis,
       hampurilainen,
       lasten_menu,
-      juomat
+      juomat,
+      grill
     ]);
 
     _categoryTypesForDropDown = categoryItems2;
@@ -487,14 +491,14 @@ class AdminFirebaseFoodBloc implements Bloc {
       List<String> documents = snapshot.docs.map((documentSnapshot) =>
       documentSnapshot.id).toList();
 
-      print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
+//      print('documents are [Ingredient Documents] at food Gallery Block : ${documents.length}');
 
 
 
       ingItems.forEach((doc) {
-        print('one Extra . . . . . . . name: ${doc.ingredientName} documentID: ${doc.documentId}');
-
-        print('one Extra --- * --- * --- * . . . . . . . imageURL: ${doc.imageURL}');
+//        print('one Extra . . . . . . . name: ${doc.ingredientName} documentID: ${doc.documentId}');
+//
+//        print('one Extra --- * --- * --- * . . . . . . . imageURL: ${doc.imageURL}');
 
       }
       );
@@ -546,33 +550,6 @@ class AdminFirebaseFoodBloc implements Bloc {
 
   Future<void> _downloadFile(StorageReference ref) async {
     final String url = await ref.getDownloadURL();
-//    final String uuid = Uuid().v1();
-//    final http.Response downloadData = await http.get(url);
-//    final Directory systemTempDir = Directory.systemTemp;
-//    final File tempFile = File('${systemTempDir.path}/tmp$uuid.txt');
-//    if (tempFile.existsSync()) {
-//      await tempFile.delete();
-//    }
-//    await tempFile.create();
-//    assert(await tempFile.readAsString() == "");
-//    final StorageFileDownloadTask task = ref.writeToFile(tempFile);
-//    final int byteCount = (await task.future).totalByteCount;
-//    final String tempFileContents = await tempFile.readAsString();
-//    assert(tempFileContents == kTestString);
-//    assert(byteCount == kTestString.length);
-//
-//    final String fileContents = downloadData.body;
-//    final String name = await ref.getName();
-//    final String bucket = await ref.getBucket();
-//    final String path = await ref.getPath();
-//    _scaffoldKey.currentState.showSnackBar(SnackBar(
-//      content: Text(
-//        'Success!\n Downloaded $name \n from url: $url @ bucket: $bucket\n '
-//            'at path: $path \n\nFile contents: "$fileContents" \n'
-//            'Wrote "$tempFileContents" to tmp.txt',
-//        style: const TextStyle(color: Color.fromARGB(255, 0, 155, 0)),
-//      ),
-//    ));
   }
 
 
@@ -773,44 +750,44 @@ class AdminFirebaseFoodBloc implements Bloc {
 
   Future<void> getDownloadURL() async{
 
+    StorageReference storageReference_2 = storage
+        .ref()
+        .child('404')
+        .child('foodItem404.jpg');
 
-//    const GSURLRefForDelete = 'gs://monoz-dc781.appspot.com/images/'
-//        +userEmail+'New/'+allInfoAboutDocumentState.itemId+'itemName.png';
-//    console.log('gsUrlL: ',GSURLRefForDelete);
-//    // return ;
-//
-//    const gsReference = storage().refFromURL(GSURLRefForDelete);
+    String x;
+    try {
+      x = await storageReference_2.getDownloadURL();
+    } catch (e) {
+
+      print('e         _____ -----: $e');
+
+//        print('ip error, please check internet');
+//        return devices;
+    }
 
 
-    // console.log('gsReference: ',gsReference);
+    print('x         _____ -----: $x');
 
+    String token = x.substring(x.indexOf('?'));
 
-      final String  gSURLRefForDelete=
-  'gs://kebabbank-37224.appspot.com/extraIngredients/'+'404/foodItem404.jpg';
-      print('gsUrlL: $gSURLRefForDelete');
-      StorageReference storageReference_2 = storage
-          .ref()
-          .child('extraIngredients')
-          .child('404')
-          .child('foodItem404.jpg');
+//      print('........download url: $x');
+    _thisFoodItem.urlAndTokenForStorageImage=token;
+    _foodItemController.sink.add(_thisFoodItem);
 
-      final String x = await storageReference_2.getDownloadURL();
-
-      _thisFoodItem.urlAndTokenForStorageImage=x;
-      _foodItemController.sink.add(_thisFoodItem);
-
-  return x;
+//    return x.substring(x.indexOf('?'));
+//    return x;
   }
   AdminFirebaseFoodBloc() {
 
 
-
+//    setCategoryValueFoodItemUPload(0);
     print('at AdminFirebaseFoodBloc ......()');
 
     getLastSequenceNumberFromFireBaseFoodItems();
 
 
-    getDownloadURL();
+
 
     getAllExtraIngredientsAdminConstructor();
 
