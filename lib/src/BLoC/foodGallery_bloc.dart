@@ -684,7 +684,7 @@ class FoodGalleryBloc implements Bloc {
 
     List <SauceItem> sauceItems = new List<SauceItem>();
     sauceItems = snapshot.docs.map((documentSnapshot) =>
-        SauceItem.fromMap
+        SauceItem.convertFireStoreSauceItemData
           (documentSnapshot.data(), documentSnapshot.id)
 
     ).toList();
@@ -740,7 +740,7 @@ class FoodGalleryBloc implements Bloc {
 
     List <CheeseItem> cheeseItems = new List<CheeseItem>();
     cheeseItems = snapshot.docs.map((documentSnapshot) =>
-        CheeseItem.fromMap
+        CheeseItem.convertFireStoreCheeseItemData
           (documentSnapshot.data(), documentSnapshot.id)
 
     ).toList();

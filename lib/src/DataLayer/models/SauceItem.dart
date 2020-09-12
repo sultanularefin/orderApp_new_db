@@ -24,17 +24,17 @@ class SauceItem implements Comparable {
 
 
 
- String sauceItemName;
- String imageURL;
- double price;
- String documentId;
- int    sauceItemAmountByUser;
- String itemId;
- int sequenceNo;
+  String sauceItemName;
+  String imageURL;
+  double price;
+  String documentId;
+  int    sauceItemAmountByUser;
+  String itemId;
+  int sequenceNo;
 //  final int    sl;
-        bool    isSelected;
-        bool    isDefaultSelected;
-        bool    isDeleted;
+  bool    isSelected;
+  bool    isDefaultSelected;
+  bool    isDeleted;
 
 
 
@@ -99,10 +99,13 @@ class SauceItem implements Comparable {
 //      +'?alt=media';
 
 
-  SauceItem.fromMap(Map<String, dynamic> data,String docID)
+  SauceItem.convertFireStoreSauceItemData(Map<String, dynamic> data,String docID)
 //      :imageURL= storageBucketURLPredicate +  Uri.decodeComponent(data['image']),
 
-      :imageURL= storageBucketURLPredicate + Uri.encodeComponent(data['image']),
+  // :imageURL= storageBucketURLPredicate + Uri.encodeComponent(data['image']),
+
+      :imageURL=  data['image'],
+      // +'?alt=media',
 
         sauceItemName = data['name'],
         price = data['price'].toDouble(),
