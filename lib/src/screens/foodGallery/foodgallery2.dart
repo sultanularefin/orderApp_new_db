@@ -53,7 +53,7 @@ import 'package:logger/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:system_shortcuts/system_shortcuts.dart';
+// import 'package:system_shortcuts/system_shortcuts.dart';
 
 
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
@@ -131,7 +131,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
   void initState() {
     print('at initState of foodGallery page');
 
-    localStorageCheck();
+    // localStorageCheck();
 //_getBatteryLevel();
     super.initState();
   }
@@ -154,6 +154,7 @@ _batteryLevel = batteryLevel;
 */
 
 // Future<void> return type .  ??
+  /*
   Future<void> localStorageCheck() async {
     bool blueTooth = await SystemShortcuts.checkBluetooth; // return true/false
     bool wifi = await SystemShortcuts.checkWifi; // return true/false
@@ -163,6 +164,8 @@ _batteryLevel = batteryLevel;
       blueToothState = blueTooth;
     });
   }
+
+  */
 
   double tryCast<num>(dynamic x, {num fallback}) {
 //    print(" at tryCast");
