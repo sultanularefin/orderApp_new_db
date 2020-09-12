@@ -25,6 +25,7 @@ import 'package:foodgallery/src/DataLayer/api/firebase_client.dart';
 
 import 'dart:async';
 
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 //Firestore should be in FirebaseClient file but for testing putted here:
 
@@ -340,7 +341,9 @@ class FoodGalleryBloc implements Bloc {
 
   }
 
-  Future<String> getDownloadURL(String imageURL) async{
+
+
+  Future<String> getDownloadURL2(String imageURL) async{
 
     StorageReference storageReference_2 = storage
         .ref()
@@ -361,7 +364,7 @@ class FoodGalleryBloc implements Bloc {
 
     print('x         _____ -----: $x');
 
-    String token = x.substring(x.indexOf('?'));
+    // String token = x.substring(x.indexOf('?'));
 
 //      print('........download url: $x');
 //    _thisFoodItem.urlAndTokenForStorageImage=token;
@@ -411,12 +414,21 @@ class FoodGalleryBloc implements Bloc {
 //      print('foodItemDocumentID $foodItemDocumentID');
 //        getDownloadURL();
 
+
         final String foodImageURL  = getDocs ['image']==''?
         'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
             :
         //StorageReference (storageBucketURLPredicate + Uri.encodeComponent(getDocs ['image']));
         storageBucketURLPredicate + Uri.encodeComponent(getDocs ['image'])
             +'?alt=media';
+
+        
+
+        // final String foodImageURL  = getDocs['image'];
+
+        // await DefaultCacheManager().getSingleFile(url);
+
+
 //      print('doc[\'image\'] ${doc['image']}');
 
 

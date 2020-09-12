@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 // import 'package:foodgallery/src/BLoC/admin/AdminFirebaseFoodBloc.dart';
 // import 'package:foodgallery/src/BLoC/admin/AdminFirebaseIngredientBloc.dart';
 // import 'package:foodgallery/src/BLoC/admin/AdminFirebaseSauceBloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
@@ -1780,6 +1781,9 @@ _batteryLevel = batteryLevel;
   Widget foodListBySearchString(
       List<FoodItemWithDocID> filteredItemsBySearchString,
       BuildContext context) {
+
+    final blocG = BlocProvider.of<FoodGalleryBloc>(context);
+
     return Container(
       height: displayHeight(context) -
           MediaQuery.of(context).padding.top -
@@ -1801,6 +1805,9 @@ _batteryLevel = batteryLevel;
               filteredItemsBySearchString[index].itemName;
           final String foodImageURL =
               filteredItemsBySearchString[index].imageURL;
+
+          // blocG.getDownloadURL(
+          // var file = await DefaultCacheManager().getSingleFile(url);
 
           final Map<String, dynamic> foodSizePrice =
               filteredItemsBySearchString[index].sizedFoodPrices;
