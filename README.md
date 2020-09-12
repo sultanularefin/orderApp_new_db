@@ -452,5 +452,34 @@ C:\Users\Taxi>
 ```
 
 
+## flutter build apk worked after removing some pkgs...
+#### ✓ Built build\app\outputs\flutter-apk\app-release.apk (25.5MB).
+
+```dart
+Running "flutter pub get" in KebabBankArefinSeptemberOrderApplication...         2.8s
+You are building a fat APK that includes binaries for android-arm, android-arm64, android-x64.
+If you are deploying the app to the Play Store, it's recommended to use app bundles or split the APK to reduce the APK
+size.
+    To generate an app bundle, run:
+        flutter build appbundle --target-platform android-arm,android-arm64,android-x64
+        Learn more on: https://developer.android.com/guide/app-bundle
+    To split the APKs per ABI, run:
+        flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi
+        Learn more on:  https://developer.android.com/studio/build/configure-apk-splits#configure-abi-split
+Running Gradle task 'assembleRelease'...
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Running Gradle task 'assembleRelease'...
+Running Gradle task 'assembleRelease'... Done                     267.4s (!)
+✓ Built build\app\outputs\flutter-apk\app-release.apk (25.5MB).
+PS C:\Users\Taxi\Programs\KebabBankArefinSeptemberOrderApplication> cd "build\app\outputs\flutter-apk\"
+PS C:\Users\Taxi\Programs\KebabBankArefinSeptemberOrderApplication\build\app\outputs\flutter-apk> pwd
+
+Path
+----
+C:\Users\Taxi\Programs\KebabBankArefinSeptemberOrderApplication\build\app\outputs\flutter-apk
 
 
+PS C:\Users\Taxi\Programs\KebabBankArefinSeptemberOrderApplication\build\app\outputs\flutter-apk>
+
+```
