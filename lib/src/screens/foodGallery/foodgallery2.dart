@@ -33,6 +33,8 @@ import 'package:foodgallery/src/DataLayer/models/Order.dart';
 // import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_sauces.dart';
 // import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
+ import 'package:permission_handler/permission_handler.dart';
+
 
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -2166,6 +2168,45 @@ _batteryLevel = batteryLevel;
 
   _navigateAndDisplaySelection(
       BuildContext context, FoodItemWithDocID oneFoodItem) async {
+
+
+
+
+//          final Permission permission= Permission.contacts;
+    final Permission permission= Permission.location;
+    print('at Future<void> requestPermission $permission');
+
+    final status = await permission.request();
+
+    print('status: $status');
+
+    switch (status) {
+      case PermissionStatus.granted:
+        print('PermissionStatus.granted');
+        // do something
+        break;
+      case PermissionStatus.denied:
+        print('PermissionStatus.denied');
+        // do something
+        break;
+      case PermissionStatus.restricted:
+        print('PermissionStatus.restricted');
+        // do something
+        break;
+      case PermissionStatus.permanentlyDenied:
+        print('PermissionStatus.permanentlyDenied');
+        // do something
+        break;
+      case PermissionStatus.undetermined:
+        print('PermissionStatus.undetermined');
+        // do something
+        break;
+      default:
+    }
+
+
+
+
 //    var logger = Logger(
 //      printer: PrettyPrinter(),
 //    );

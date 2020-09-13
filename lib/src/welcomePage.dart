@@ -41,7 +41,7 @@ import 'package:foodgallery/src/screens/foodGallery/foodgallery2.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 //import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 //import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 
 
 
@@ -183,30 +183,12 @@ class _WelcomePageState extends State<WelcomePage> {
 //    logger.e('at build of welcome page');
 
     FoodItemWithDocID emptyFoodItemWithDocID = new FoodItemWithDocID();
-//    List<NewIngredient> emptyIngs = [];
-
-//    final appBloc = AppBloc(emptyFoodItemWithDocID,emptyIngs,,fromWhichPage:0);
-//    final AppBloc appBlockinWelcomePage = appBloc;
-
-
-//    final identityBlocInvokerAppBlockWelcomPageBuildMethod = BlocProvider2
-//        .of(context)
-//        .getIdentityBlocsObject;
 
 
     final identityBloc = BlocProvider.of<IdentityBloc>(context);
 
 
-//    print('width: ${MediaQuery
-//        .of(context)
-//        .size
-//        .width}');
-//    print('Height: ${MediaQuery
-//        .of(context)
-//        .size
-//        .height}');
-//
-//    print('at build of welcomePage');
+
     return Scaffold(
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
