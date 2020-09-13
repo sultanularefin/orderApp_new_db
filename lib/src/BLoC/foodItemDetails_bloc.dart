@@ -589,6 +589,8 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
     print('|||| ||||| |||||| oneFoodItem.defaultKastike.length:'
         ' ${oneFoodItem.defaultKastike.length}');
     print('YYY YYYY YYYY YYYY YYYY YY oneFoodItem.defaultJuustoe.length: ${oneFoodItem.defaultJuusto.length}');
+    print('YYY YYYY YYYY YYYY YYYY YY oneFoodItem.ingredients.length: ${oneFoodItem.ingredients.length}');
+
 
 
     print('||| |||| |||| ||| ||||| oneFoodItem.defaultKastike : ${oneFoodItem.defaultKastike}');
@@ -611,6 +613,7 @@ class FoodItemDetailsBloc /*with ChangeNotifier */ implements Bloc  {
 
     initiateSauces(tempSauceItems,saucesStrings2);
     initiateCheeseItems(tempCheeseItems,cheesesStrings2);
+
     initiateAllMultiSelectOptions();
 
 

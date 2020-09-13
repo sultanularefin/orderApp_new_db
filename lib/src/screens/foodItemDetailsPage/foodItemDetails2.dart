@@ -326,7 +326,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                             Container(
                               width: displayWidth(context) / 3.9,
                               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Text('${oneFood.itemName}'.toUpperCase(),
+                              child: Text('${oneFood.itemName}',
+                                  //.toUpperCase(),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -640,7 +641,8 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
                         Container(
                           width: displayWidth(context) / 4.4,
                           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text('${oneFood.itemName}'.toUpperCase(),
+                          child: Text('${oneFood.itemName}',
+                              //.toUpperCase(),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
