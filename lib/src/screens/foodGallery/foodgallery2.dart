@@ -34,7 +34,6 @@ import 'package:foodgallery/src/DataLayer/models/Order.dart';
 // import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 
-
 //import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
@@ -49,13 +48,11 @@ import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 
-
 import 'package:logger/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 // import 'package:system_shortcuts/system_shortcuts.dart';
-
 
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -89,10 +86,10 @@ class _FoodGalleryState extends State<FoodGallery2> {
   static const platform = const MethodChannel('com.linkup.foodgallery');
 
   final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery =
-  new GlobalKey<ScaffoldState>();
+      new GlobalKey<ScaffoldState>();
 //  final GlobalKey<ScaffoldState> scaffoldKeyClientHome = GlobalKey<ScaffoldState>();
   final SnackBar snackBar =
-  const SnackBar(content: Text('Menu button pressed'));
+      const SnackBar(content: Text('Menu button pressed'));
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 //  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -117,7 +114,7 @@ class _FoodGalleryState extends State<FoodGallery2> {
     selectedFoodListLength: 0,
     orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
     paymentTypeIndex:
-    2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+        2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
     orderingCustomer: null,
     totalPrice: 0,
     page: 0,
@@ -249,10 +246,10 @@ _batteryLevel = batteryLevel;
 
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (BuildContext context) {
-          return BlocProvider<IdentityBloc>(
-              bloc: IdentityBloc(),
+      return BlocProvider<IdentityBloc>(
+          bloc: IdentityBloc(),
 //AppBloc(emptyFoodItemWithDocID,loginPageIngredients,fromWhichPage:0),
-              child: WelcomePage(fromWhicPage: 'foodGallery2'));
+          child: WelcomePage(fromWhicPage: 'foodGallery2'));
 /*
                                   return BlocProvider<FoodGalleryBloc>(
                                       bloc: FoodGalleryBloc(),
@@ -260,7 +257,7 @@ _batteryLevel = batteryLevel;
 
                                   );
                                   */
-        }), (Route<dynamic> route) => false);
+    }), (Route<dynamic> route) => false);
   }
 
   @override
@@ -277,11 +274,10 @@ _batteryLevel = batteryLevel;
       },
       child: SafeArea(
         child: Theme(
-          data: ThemeData(primaryIconTheme: IconThemeData(
-
+          data: ThemeData(
+              primaryIconTheme: IconThemeData(
             color: Colors.black,
             // size: 40,
-
           )), // use this
 
           child: Scaffold(
@@ -332,11 +328,10 @@ _batteryLevel = batteryLevel;
                           Container(
                             height: displayHeight(context) / 15,
                             child: Image.asset('assets/Path2008.png'),
-
                           ),
                           Container(
-                            margin:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 0),
                             height: displayHeight(context) / 15,
                             child: Container(
                               padding: EdgeInsets.fromLTRB(0, 1, 0, 0),
@@ -380,7 +375,7 @@ _batteryLevel = batteryLevel;
                       width: displayWidth(context) / 3.3,
                       height: displayHeight(context) / 27,
                       padding:
-                      EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
+                          EdgeInsets.only(left: 4, top: 3, bottom: 3, right: 3),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -389,7 +384,7 @@ _batteryLevel = batteryLevel;
                             height: displayWidth(context) / 34,
                             width: 5,
                             margin:
-                            EdgeInsets.only(left: 0, right: 10, bottom: 5),
+                                EdgeInsets.only(left: 0, right: 10, bottom: 5),
                             child: Icon(
                               Icons.search,
                               size: displayWidth(context) / 24,
@@ -456,76 +451,69 @@ _batteryLevel = batteryLevel;
               child: Container(
 //              color:Colors.lightGreenAccent,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-
-
-
-
-                      Container(
-                        color:Colors.white,
-                        width: displayWidth(context) -
-                            MediaQuery.of(context).size.width / 3.8,
-                        height: displayHeight(context) + kToolbarHeight + 10,
-                        child: foodList(_currentCategory, _searchString,
-                            context /*allIngredients:_allIngredientState */),
-                      ),
-
-
-
-
-
-
-                      Container(
-                        height: displayHeight(context) + kToolbarHeight + 10,
-                        width: MediaQuery.of(context).size.width / 3.8,
-                        color: Color(0xffFFE18E),
-                        child: StreamBuilder<List<NewCategoryItem>>(
-                            stream: blocG.categoryItemsStream,
-                            initialData: blocG.allCategories,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                case ConnectionState.none:
-                                  return Container(
-                                    margin: EdgeInsets.fromLTRB(
-                                        0, displayHeight(context) / 2, 0, 0),
-                                    child: Center(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Center(
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                child: new CircularProgressIndicator(
-                                                    backgroundColor:
-                                                    Colors.lightGreenAccent)),
-                                          ),
-                                          Center(
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                child: new CircularProgressIndicator(
-                                                  backgroundColor: Colors.yellow,
-                                                )),
-                                          ),
-                                          Center(
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                child: new CircularProgressIndicator(
-                                                    backgroundColor:
-                                                    Colors.redAccent)),
-                                          ),
-                                        ],
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    color: Colors.white,
+                    width: displayWidth(context) -
+                        MediaQuery.of(context).size.width / 3.8,
+                    height: displayHeight(context) + kToolbarHeight + 10,
+                    child: foodList(_currentCategory, _searchString,
+                        context /*allIngredients:_allIngredientState */),
+                  ),
+                  Container(
+                    height: displayHeight(context) + kToolbarHeight + 10,
+                    width: MediaQuery.of(context).size.width / 3.8,
+                    color: Color(0xffFFE18E),
+                    child: StreamBuilder<List<NewCategoryItem>>(
+                        stream: blocG.categoryItemsStream,
+                        initialData: blocG.allCategories,
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                            case ConnectionState.none:
+                              return Container(
+                                margin: EdgeInsets.fromLTRB(
+                                    0, displayHeight(context) / 2, 0, 0),
+                                child: Center(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child:
+                                                new CircularProgressIndicator(
+                                                    backgroundColor: Colors
+                                                        .lightGreenAccent)),
                                       ),
-                                    ),
-                                  );
-                                  break;
-                                case ConnectionState.active:
-                                default:
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                        child: new LinearProgressIndicator());
-                                  } else {
-                                    final List allCategories = snapshot.data;
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child:
+                                                new CircularProgressIndicator(
+                                              backgroundColor: Colors.yellow,
+                                            )),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            child:
+                                                new CircularProgressIndicator(
+                                                    backgroundColor:
+                                                        Colors.redAccent)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                              break;
+                            case ConnectionState.active:
+                            default:
+                              if (!snapshot.hasData) {
+                                return Center(
+                                    child: new LinearProgressIndicator());
+                              } else {
+                                final List allCategories = snapshot.data;
 //                                  logger.i('allCategories.length:', allCategories.length);
 
 //                                  _allCategoryList.add(All);
@@ -533,30 +521,30 @@ _batteryLevel = batteryLevel;
 //                                  allCategories.add(all);
 //                                  logger.i('allCategories.length after :', allCategories.length);
 
-                                    final int categoryCount = allCategories.length;
+                                final int categoryCount = allCategories.length;
 
 //                              print('categoryCount in condition 04: ');
 
 //                                logger.i("categoryCount in condition 04: $categoryCount");
 
-                                    return (new ListView.builder(
-                                        itemCount: categoryCount,
+                                return (new ListView.builder(
+                                    itemCount: categoryCount,
 
 //    itemBuilder: (BuildContext ctxt, int index) {
-                                        itemBuilder: (_, int index) {
+                                    itemBuilder: (_, int index) {
 //                                            return (Text('ss'));
 
-                                          return _buildCategoryRow(
-                                              allCategories[index]
+                                      return _buildCategoryRow(
+                                          allCategories[index]
 /*categoryItems[index]*/,
-                                              index);
-                                        }));
-                                  }
+                                          index);
+                                    }));
                               }
-                            }),
-                      ),
-                    ],
-                  )),
+                          }
+                        }),
+                  ),
+                ],
+              )),
             ),
 
             endDrawer: Drawer(
@@ -572,7 +560,6 @@ _batteryLevel = batteryLevel;
                   padding: EdgeInsets.zero,
                   // padding: EdgeInsets.fromLTRB(0,0,10,0),
                   children: <Widget>[
-
                     DrawerHeader(
                       //decoration: BoxDecoration(color:Theme.of(context).bottomAppBarColor),
 
@@ -637,7 +624,8 @@ _batteryLevel = batteryLevel;
                           PageRouteBuilder(
                             opaque: false,
                             transitionDuration: Duration(milliseconds: 900),
-                            pageBuilder: (_, __, ___) => BlocProvider<UnPaidBloc>(
+                            pageBuilder: (_, __, ___) =>
+                                BlocProvider<UnPaidBloc>(
                               bloc: UnPaidBloc(),
                               child: UnPaidPage(),
                             ),
@@ -688,17 +676,13 @@ _batteryLevel = batteryLevel;
                             transitionDuration: Duration(milliseconds: 900),
                             pageBuilder: (_, __, ___) =>
                                 BlocProvider<HistoryBloc>(
-                                  bloc: HistoryBloc(),
-                                  child: HistoryPage(),
-                                ),
+                              bloc: HistoryBloc(),
+                              child: HistoryPage(),
+                            ),
                           ),
                         );
                       },
                     ),
-
-
-
-
 
                     /*
             SizedBox(
@@ -908,7 +892,6 @@ _batteryLevel = batteryLevel;
 
               */
 
-
                     /*
                     SizedBox(
                       height: 50,
@@ -971,11 +954,6 @@ _batteryLevel = batteryLevel;
                     )
 
         */
-
-
-
-
-
                   ],
                 ),
               ),
@@ -1348,33 +1326,24 @@ _batteryLevel = batteryLevel;
                         "Order received, id: ${orderWithDocumentId.orderdocId}"),
                     duration: Duration(milliseconds: 8000)));
 
-
-              setState(
-                      () {
-                    _totalCount = 0;
-                    totalPriceState = 0;
-                    allSelectedFoodGallery=[];
-                    orderFG = new Order(
-                      selectedFoodInOrder: [],
-                      selectedFoodListLength:0,
-                      orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
-                      paymentTypeIndex: 2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
-                      orderingCustomer: null,
-                      totalPrice: 0,
-                      page:0,
-                      isCanceled: false,
-                      orderdocId:'',
-                    );
-                  }
-              );
-
-
-            }
-
-
-            else if (orderWithDocumentId.isCanceled == true) {
-
-
+              setState(() {
+                _totalCount = 0;
+                totalPriceState = 0;
+                allSelectedFoodGallery = [];
+                orderFG = new Order(
+                  selectedFoodInOrder: [],
+                  selectedFoodListLength: 0,
+                  orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
+                  paymentTypeIndex:
+                      2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                  orderingCustomer: null,
+                  totalPrice: 0,
+                  page: 0,
+                  isCanceled: false,
+                  orderdocId: '',
+                );
+              });
+            } else if (orderWithDocumentId.isCanceled == true) {
 //              Order Cancelled by user.
               print("Order Cancelled by user,");
               print(
@@ -1407,7 +1376,7 @@ _batteryLevel = batteryLevel;
                   selectedFoodListLength: 0,
                   orderTypeIndex: 0, // phone, takeaway, delivery, dinning.
                   paymentTypeIndex:
-                  2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
+                      2, //2; PAYMENT OPTIONS ARE LATER(0), CASH(1) CARD(2||Default)
                   orderingCustomer: null,
                   totalPrice: 0,
                   page: 0,
@@ -1450,9 +1419,9 @@ _batteryLevel = batteryLevel;
 
         child:
 
-        ///SSWW
+            ///SSWW
 
-        Center(
+            Center(
           child: Stack(children: <Widget>[
             Center(
               child: Icon(
@@ -1522,24 +1491,19 @@ _batteryLevel = batteryLevel;
       return " ";
     } else if (stringList == null) {
       return ' ';
-    }
-
-    else {
+    } else {
       return stringList
           .map((word) => word
-          .toString()
-          .split(' ')
-          .map((word2) => titleCase(word2))
-          .join(' '))
+              .toString()
+              .split(' ')
+              .map((word2) => titleCase(word2))
+              .join(' '))
           .join(', ');
     }
-
   }
-
 
   Widget foodList(
       String categoryString, String searchString2, BuildContext context) {
-
     final foodGalleryBloc = BlocProvider.of<FoodGalleryBloc>(context);
 
     return Container(
@@ -1552,7 +1516,7 @@ _batteryLevel = batteryLevel;
             case ConnectionState.none:
               return Container(
                 margin:
-                EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
+                    EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
                 child: Center(
                   child: Column(
                     children: <Widget>[
@@ -1587,7 +1551,7 @@ _batteryLevel = batteryLevel;
               if (!snapshot.hasData) {
                 return Container(
                   margin:
-                  EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
+                      EdgeInsets.fromLTRB(0, displayHeight(context) / 2, 0, 0),
                   child: Center(
                     child: Column(
                       children: <Widget>[
@@ -1634,8 +1598,8 @@ _batteryLevel = batteryLevel;
 //               filteredItemsByCategory;
                   List<FoodItemWithDocID> filteredItemsByCategory = allFoods
                       .where((oneItem) =>
-                  oneItem.categoryName.toLowerCase() ==
-                      categoryString.toLowerCase())
+                          oneItem.categoryName.toLowerCase() ==
+                          categoryString.toLowerCase())
                       .toList();
 
 // to do test.
@@ -1701,8 +1665,8 @@ _batteryLevel = batteryLevel;
 
                   final List<FoodItemWithDocID> filteredItems = allFoods
                       .where((oneItem) => oneItem.itemName
-                      .toLowerCase()
-                      .contains(searchString2.toLowerCase()))
+                          .toLowerCase()
+                          .contains(searchString2.toLowerCase()))
                       .toList();
 
 //              final int ItemsCount = filteredItems.length;
@@ -1781,7 +1745,6 @@ _batteryLevel = batteryLevel;
   Widget foodListBySearchString(
       List<FoodItemWithDocID> filteredItemsBySearchString,
       BuildContext context) {
-
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
 
     return Container(
@@ -1851,7 +1814,7 @@ _batteryLevel = batteryLevel;
           );
 
           String stringifiedFoodItemIngredients =
-          listTitleCase(foodItemIngredientsList);
+              listTitleCase(foodItemIngredientsList);
 
           return Container(
 // `opacity` is alpha channel of this color as a double, with 0.0 being
@@ -1885,7 +1848,7 @@ _batteryLevel = batteryLevel;
                               imageUrl: foodImageURL,
                               fit: BoxFit.cover,
                               placeholder: (context, url) =>
-                              new CircularProgressIndicator(),
+                                  new CircularProgressIndicator(),
                             ),
                           ),
                           placeholderBuilder: (context, heroSize, child) {
@@ -1916,7 +1879,7 @@ _batteryLevel = batteryLevel;
                                     imageUrl: foodImageURL,
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) =>
-                                    new CircularProgressIndicator(),
+                                        new CircularProgressIndicator(),
                                   ),
                                 ),
                               ),
@@ -1977,22 +1940,22 @@ _batteryLevel = batteryLevel;
                         child: Text(
 //                                'stringifiedFoodItemIngredients',
 
-                          stringifiedFoodItemIngredients.length == 0
-                              ? 'EMPTY'
-                              : stringifiedFoodItemIngredients.length > 12
+                      stringifiedFoodItemIngredients.length == 0
+                          ? 'EMPTY'
+                          : stringifiedFoodItemIngredients.length > 12
                               ? stringifiedFoodItemIngredients.substring(
-                              0, 12) +
-                              '...'
+                                      0, 12) +
+                                  '...'
                               : stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
-                          style: TextStyle(
-                            color: Color(0xff707070),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 0.5,
-                            fontSize: 12,
-                          ),
-                        )),
+                      style: TextStyle(
+                        color: Color(0xff707070),
+                        fontWeight: FontWeight.normal,
+                        letterSpacing: 0.5,
+                        fontSize: 12,
+                      ),
+                    )),
 //
 //
                   ],
@@ -2072,7 +2035,7 @@ _batteryLevel = batteryLevel;
           );
 
           String stringifiedFoodItemIngredients =
-          listTitleCase(foodItemIngredientsList);
+              listTitleCase(foodItemIngredientsList);
 
           return Container(
               color: Color(0xffFFFFFF),
@@ -2102,7 +2065,7 @@ _batteryLevel = batteryLevel;
                               imageUrl: foodImageURL,
                               fit: BoxFit.cover,
                               placeholder: (context, url) =>
-                              new CircularProgressIndicator(),
+                                  new CircularProgressIndicator(),
                             ),
                           ),
                           placeholderBuilder: (context, heroSize, child) {
@@ -2126,7 +2089,7 @@ _batteryLevel = batteryLevel;
                                     imageUrl: foodImageURL,
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) =>
-                                    new CircularProgressIndicator(),
+                                        new CircularProgressIndicator(),
                                   ),
                                 ),
                               ),
@@ -2154,7 +2117,8 @@ _batteryLevel = batteryLevel;
                     FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-                        foodItemName.toUpperCase(),
+                        foodItemName,
+                        // foodItemName.toUpperCase(),
                         style: TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.bold,
@@ -2170,22 +2134,22 @@ _batteryLevel = batteryLevel;
                         child: Text(
 //                                'stringifiedFoodItemIngredients',
 
-                          stringifiedFoodItemIngredients.length == 0
-                              ? 'EMPTY'
-                              : stringifiedFoodItemIngredients.length > 12
+                      stringifiedFoodItemIngredients.length == 0
+                          ? 'EMPTY'
+                          : stringifiedFoodItemIngredients.length > 12
                               ? stringifiedFoodItemIngredients.substring(
-                              0, 12) +
-                              '...'
+                                      0, 12) +
+                                  '...'
                               : stringifiedFoodItemIngredients,
 
 //                                    foodItemIngredients.substring(0,10)+'..',
-                          style: TextStyle(
-                            color: Color(0xff707070),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 0.5,
-                            fontSize: 12,
-                          ),
-                        )),
+                      style: TextStyle(
+                        color: Color(0xff707070),
+                        fontWeight: FontWeight.normal,
+                        letterSpacing: 0.5,
+                        fontSize: 12,
+                      ),
+                    )),
 //
 //
                   ],
@@ -2220,39 +2184,21 @@ _batteryLevel = batteryLevel;
 
     final blocG = BlocProvider.of<FoodGalleryBloc>(context);
 
-
     List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
     List<SauceItem> tempSauceItems = blocG.getAllSauceItemsFoodGallery;
     List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
 
-
-    final SelectedFood receivedSelectedFood = await
-    Navigator.of(context).push(
-
-
+    final SelectedFood receivedSelectedFood = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
-        transitionDuration: Duration(
-            milliseconds: 900),
-        pageBuilder: (_, __, ___) =>
-
-
-            BlocProvider<FoodItemDetailsBloc>(
-              bloc: FoodItemDetailsBloc(
-                  oneFoodItem,
-                  tempCheeseItems,
-                  tempSauceItems,
-                  allExtraIngredients
-
-              ),
-
-
-              child: FoodItemDetails2(),),
-
+        transitionDuration: Duration(milliseconds: 900),
+        pageBuilder: (_, __, ___) => BlocProvider<FoodItemDetailsBloc>(
+          bloc: FoodItemDetailsBloc(oneFoodItem, tempCheeseItems,
+              tempSauceItems, allExtraIngredients),
+          child: FoodItemDetails2(),
+        ),
       ),
     );
-
-
 
 // After the Selection Screen returns a result, hide any previous snackbars
 // and show the new result.
