@@ -422,7 +422,7 @@ class FoodGalleryBloc implements Bloc {
         storageBucketURLPredicate + Uri.encodeComponent(getDocs ['image'])
             +'?alt=media';
 
-        
+
 
         // final String foodImageURL  = getDocs['image'];
 

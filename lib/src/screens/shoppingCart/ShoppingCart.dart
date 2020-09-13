@@ -751,6 +751,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         child: Scaffold(
           key: _scaffoldKeyShoppingCartPage,
           backgroundColor: Colors.white.withOpacity(0.05),
+
 //          backgroundColor: Colors.purpleAccent,
 
 //      resizeToAvoidBottomPadding: false ,
@@ -784,7 +785,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               Navigator.pop(context, z);
               return new Future(() => false);
             },
-            child: SafeArea(
+
               child: SingleChildScrollView(
                 child: StreamBuilder<Order>(
                     stream: shoppingCartBloc.getCurrentOrderStream,
@@ -1326,7 +1327,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
 //                    }
                     }),
-              ),
+
             ),
           ),
           /*

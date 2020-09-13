@@ -108,14 +108,10 @@ class _UnPaidPageState extends State<UnPaidPage> {
 // FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
     return GestureDetector(
       onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
+       print('...on tap....');
+        // return Navigator.pop(context);
 
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-        // 911_1..
-
-        return Navigator.pop(context);
+        // not required to go back if touched all the places in the screen.
 
         // Navigator.pop(context);
       },
@@ -126,7 +122,14 @@ class _UnPaidPageState extends State<UnPaidPage> {
         // I am ignoring rest implementation but what i have achieved is you can see.
         key: _scaffoldKeyUnPaidPage,
         body:
-        SafeArea(
+        WillPopScope(
+
+          onWillPop: () {
+
+            // return Navigator.pop(context);
+            Navigator.pop(context);
+            return new Future(() => false);
+          },
           child: Container(
 //            color:Colors.lightGreenAccent,
             color:Colors.white,

@@ -94,13 +94,12 @@ class _HistoryPageState extends State<HistoryPage> {
 // FOODLIST LOADED FROM FIRESTORE NOT FROM STATE HERE
     return GestureDetector(
       onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
+        print('...on tap....');
+        // return Navigator.pop(context);
 
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
+        // not required to go back if touched all the places in the screen.
 
-        return Navigator.pop(context);
+        // Navigator.pop(context);
       },
       child:
       Scaffold(
@@ -109,33 +108,41 @@ class _HistoryPageState extends State<HistoryPage> {
         // I am ignoring rest implementation but what i have achieved is you can see.
         key: _scaffoldKeyHistoryPage,
         body:
-        SafeArea(
-          child: Container(
+        WillPopScope(
+          onWillPop: () {
+
+            // return Navigator.pop(context);
+            Navigator.pop(context);
+            return new Future(() => false);
+          },
+
+            child: Container(
 //            color:Colors.lightGreenAccent,
-            color:Colors.white,
-            height: displayHeight(context) -
-                MediaQuery.of(context).padding.top -
-                MediaQuery.of(context).padding.bottom -kToolbarHeight,
-            margin: EdgeInsets.fromLTRB(
-                0, displayHeight(context)/16, 10, 20),
-//                            kToolbarHeight
-            child:
-            Container(
-//              color:Colors.red,
               color:Colors.white,
-              width: displayWidth(context)/1.03,
+              height: displayHeight(context) -
+                  MediaQuery.of(context).padding.top -
+                  MediaQuery.of(context).padding.bottom -kToolbarHeight,
+              margin: EdgeInsets.fromLTRB(
+                  0, displayHeight(context)/16, 10, 20),
+//                            kToolbarHeight
+              child:
+              Container(
+//              color:Colors.red,
+                color:Colors.white,
+                width: displayWidth(context)/1.03,
 //                        height: displayHeight(context) + kToolbarHeight + 10,
-              height: displayHeight(context)/2.1,
-              /*
+                height: displayHeight(context)/2.1,
+                /*
 */
-              child: allHistoryList(_currentPageHeader, context),
+                child: allHistoryList(_currentPageHeader, context),
+
+              ),
+
+
 
             ),
-
-
-
           ),
-        ),
+
 
       ),
 
