@@ -1682,9 +1682,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
         ? 'https://thumbs.dreamstime.com/z/smiling-orange-fruit-'
             'cartoon-mascot-character-holding-blank-sign-smiling-orange-'
             'fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
-        : storageBucketURLPredicate +
-            Uri.encodeComponent(unSelectedOneIngredient.imageURL) +
-            '?alt=media';
+        :
+    unSelectedOneIngredient.imageURL;
+
+
+    // storageBucketURLPredicate +
+    //         Uri.encodeComponent(unSelectedOneIngredient.imageURL) +
+    //         '?alt=media';
 
     return Container(
         decoration: BoxDecoration(
@@ -2428,9 +2432,13 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     final dynamic sauceItemImageURL = oneSauce.imageURL == ''
         ? 'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
-        : storageBucketURLPredicate +
-            Uri.encodeComponent(oneSauce.imageURL) +
-            '?alt=media';
+        :
+
+    oneSauce.imageURL;
+
+    // storageBucketURLPredicate +
+    //         Uri.encodeComponent(oneSauce.imageURL) +
+    //         '?alt=media';
 
     if (oneSauce.isSelected == false) {
       return Container(
@@ -2780,9 +2788,11 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     final dynamic cheeseItemImageURL = oneCheese.imageURL == ''
         ? 'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
-        : storageBucketURLPredicate +
-            Uri.encodeComponent(oneCheese.imageURL) +
-            '?alt=media';
+        :
+    oneCheese.imageURL;
+    // storageBucketURLPredicate +
+    //         Uri.encodeComponent(oneCheese.imageURL) +
+    //         '?alt=media';
 
     if (oneCheese.isSelected == false) {
       return Container(
@@ -3226,9 +3236,10 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     final dynamic ingredientImageURL = oneIngredient.imageURL == ''
         ? 'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
-        : storageBucketURLPredicate +
-            Uri.encodeComponent(oneIngredient.imageURL) +
-            '?alt=media';
+        : oneIngredient.imageURL;
+    // storageBucketURLPredicate +
+    //         Uri.encodeComponent(oneIngredient.imageURL) +
+    //         '?alt=media';
 
     return Container(
       width: displayWidth(context) / 6,
@@ -3242,9 +3253,12 @@ class _FoodItemDetailsState extends State<FoodItemDetails2> {
 
     final dynamic ingredientImageURL = oneIngredient.imageURL == ''
         ? 'https://firebasestorage.googleapis.com/v0/b/link-up-b0a24.appspot.com/o/404%2FfoodItem404.jpg?alt=media'
-        : storageBucketURLPredicate +
-            Uri.encodeComponent(oneIngredient.imageURL) +
-            '?alt=media';
+        :
+    oneIngredient.imageURL;
+
+    // storageBucketURLPredicate +
+    //         Uri.encodeComponent(oneIngredient.imageURL) +
+    //         '?alt=media';
 
     return Container(
       height: displayHeight(context) / 11,

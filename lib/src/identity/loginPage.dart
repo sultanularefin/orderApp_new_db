@@ -564,7 +564,7 @@ class _LoginPageState extends State<LoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'F',
+          text: 'or',
           style:
           TextStyle( //Theme.of(context).textTheme.display1,
             fontSize: 30,
@@ -576,11 +576,11 @@ class _LoginPageState extends State<LoginPage> {
           ),
           children: [
             TextSpan(
-              text: 'ood',
-              style: TextStyle(color: Colors.black, fontSize: 30),
+              text: 'der ',
+              style: TextStyle(color: Colors.lightBlueAccent, fontSize: 30),
             ),
             TextSpan(
-              text: 'Gallery',
+              text: 'app',
               style: TextStyle(
                   color:
                   //Color(0xffe46b10),

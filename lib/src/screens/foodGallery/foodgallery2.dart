@@ -1482,6 +1482,11 @@ _batteryLevel = batteryLevel;
 //    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
 //    print('dlist ---------------------------------------------> $dlist');
 
+
+  if((dlist==null) || (dlist.length==0)){
+    return " ";
+  }
+
     List<String> stringList = List<String>.from(dlist);
     if (stringList.length == 0) {
       return " ";

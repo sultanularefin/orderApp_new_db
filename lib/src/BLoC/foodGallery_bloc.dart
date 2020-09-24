@@ -280,6 +280,24 @@ class FoodGalleryBloc implements Bloc {
 
 
 
+      for (int i = 0; i< ingItems.length ; i++){
+
+        String fileName2  = ingItems[i].imageURL;
+
+        // NewIngredient tempIngredient =ingItems[i];
+        print('fileName2 =============> : $fileName2');
+
+        StorageReference storageReferenceForIngredientItemImage = storage
+            .ref()
+            .child(fileName2);
+
+        String newimageURLIngredient = await storageReferenceForIngredientItemImage.getDownloadURL();
+
+        ingItems[i].imageURL= newimageURLIngredient;
+
+        print('newimageURL ingredient Item : $newimageURLIngredient');
+      }
+
       ingItems.forEach((doc) {
         print('one Extra . . . . . . . name: ${doc.ingredientName} documentID: ${doc.documentId}');
 //        String imageURL;
@@ -400,7 +418,10 @@ class FoodGalleryBloc implements Bloc {
 //      List docList = snapshot.docs;
 
       List<FoodItemWithDocID> tempAllFoodsList= new List<FoodItemWithDocID>();
-      snapshot.docs.forEach((doc) {
+      
+      
+      // for(int i= 0;i<snapshot.size;i++){
+      snapshot.docs.forEach((doc) async {
 
         Map getDocs = doc.data();
 
@@ -415,12 +436,18 @@ class FoodGalleryBloc implements Bloc {
 //        getDownloadURL();
 
 
-        final String foodImageURL  = getDocs ['image']==''?
+
+        final String foodImageURL  = getDocs ['image'];
+            /*
+            ==''?
         'https://thumbs.dreamstime.com/z/smiling-orange-fruit-cartoon-mascot-character-holding-blank-sign-smiling-orange-fruit-cartoon-mascot-character-holding-blank-120325185.jpg'
             :
         //StorageReference (storageBucketURLPredicate + Uri.encodeComponent(getDocs ['image']));
         storageBucketURLPredicate + Uri.encodeComponent(getDocs ['image'])
             +'?alt=media';
+
+        */
+
 
 
 
@@ -475,23 +502,6 @@ class FoodGalleryBloc implements Bloc {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         final bool foodIsAvailable =  getDocs ['available'];
         final int sequenceNo =  getDocs ['sequenceNo'];
 
@@ -525,7 +535,7 @@ class FoodGalleryBloc implements Bloc {
         defaultJuusto2 = getDocs ['default_juusto'];
 
 
-        print('dynamic defaultJuusto2.length: ${defaultJuusto2.length}');
+        // print('dynamic defaultJuusto2.length: ${defaultJuusto2.length}');
 
 
         List<dynamic> defaultKastike2 = new List<dynamic>();
@@ -577,6 +587,26 @@ class FoodGalleryBloc implements Bloc {
         tempAllFoodsList.add(oneFoodItemWithDocID);
       }
       );
+
+
+      for (int i =0; i< tempAllFoodsList.length ; i++){
+
+
+        String fileName2  = tempAllFoodsList[i].imageURL;
+
+        // NewIngredient tempIngredient =ingItems[i];
+        print('fileName2 =============> : $fileName2');
+
+        StorageReference storageReferenceForFoodItemImage = storage
+            .ref()
+            .child(fileName2);
+
+        String newimageURLFood = await storageReferenceForFoodItemImage.getDownloadURL();
+
+        tempAllFoodsList[i].imageURL= newimageURLFood;
+
+        print('newimageURL food Item : $newimageURLFood');
+      }
 
 
       _allFoodsList= tempAllFoodsList;
@@ -726,6 +756,26 @@ class FoodGalleryBloc implements Bloc {
 
 
 
+    for (int i = 0; i< sauceItems.length ; i++){
+
+      String fileName2  = sauceItems[i].imageURL;
+
+      // NewIngredient tempIngredient =ingItems[i];
+      print('fileName2 =============> : $fileName2');
+
+      StorageReference storageReferenceForSauceItemImage = storage
+          .ref()
+          .child(fileName2);
+
+      String newimageURLSauce = await storageReferenceForSauceItemImage.getDownloadURL();
+
+      sauceItems[i].imageURL= newimageURLSauce;
+
+      print('newimageURL ingredient Item : $newimageURLSauce');
+    }
+
+
+
     _allSauceItemsFoodGalleryBloc = sauceItems;
     _sauceItemsControllerFoodGallery.sink.add(_allSauceItemsFoodGalleryBloc);
 
@@ -772,26 +822,39 @@ class FoodGalleryBloc implements Bloc {
     ).toList();
 
 
-    cheeseItems.forEach((oneCheeseItem) {
 
-      print('oneCheeseItem.cheeseItemName: ${oneCheeseItem.cheeseItemName}');
+    List<CheeseItem> cheeseItemIMageUrlUpdated = new List<CheeseItem>();
+
+    for (int i = 0; i< cheeseItems.length ; i++){
+
+      CheeseItem tempCheeseItem =cheeseItems[i];
+      String fileName2  = cheeseItems[i].imageURL;
+
+      // NewIngredient tempIngredient =ingItems[i];
+      print('fileName2 cheese.... =============> : $fileName2');
+
+      StorageReference storageReferenceForSauceItemImage = storage
+          .ref()
+          .child(fileName2);
+
+      String newimageURLCheese = await storageReferenceForSauceItemImage.getDownloadURL();
 
 
+      tempCheeseItem.imageURL = newimageURLCheese;
 
-//      if(oneCheeseItem.sl==1){
-//        oneCheeseItem.isSelected=true;
-//        oneCheeseItem.isDefaultSelected=true;
-//      }
+      print('tempCheeseItem.imageURL : ${tempCheeseItem.imageURL}');
+
+      cheeseItemIMageUrlUpdated.add(tempCheeseItem);
+
     }
 
-    );
 
 
 //    print('Ingredient documents are: $documents');
 
 
 
-    _allCheeseItemsFoodGalleryBloc  = cheeseItems;
+    _allCheeseItemsFoodGalleryBloc  = cheeseItemIMageUrlUpdated;
     _cheeseItemsControllerFoodGallery.sink.add(_allCheeseItemsFoodGalleryBloc);
 
 
