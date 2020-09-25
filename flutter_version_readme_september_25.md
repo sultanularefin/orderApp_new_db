@@ -556,3 +556,25 @@ PS C:\Users\Taxi\Programs\KebabBankSeptemberOrderApp>
 ```
 
 ## flutter version 1.22.0-1.0.pre
+
+## september 25, 2020::::
+
+## in mint pc there is no problem:
+
+```dart
+taxi@taxi-HP-ProBook-4540s:~/Programs/orderApp$ flutter doctor
+^F^F^CDoctor summary (to see all details, run flutter doctor -v):
+^C^C[✓] Flutter (Channel master, 1.22.0-10.0.pre.356, on Linux, locale en_US.UTF-8)
+⣽taxi@taxi-HP-ProBook-4540s:~/Programs/orderApp$ flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel master, 1.22.0-10.0.pre.356, on Linux, locale en_US.UTF-8)
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+[✓] Android Studio (version 4.0)
+[✓] VS Code (version 1.48.2)
+[✓] Connected device (1 available)
+
+• No issues found!
+taxi@taxi-HP-ProBook-4540s:~/Programs/orderApp$
+
+```

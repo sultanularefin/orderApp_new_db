@@ -259,6 +259,22 @@ Future<void> Logout(BuildContext context2) async {
 //        => FoodItemDetails(oneFoodItemData:oneFoodItem))
 //    );
 
+
+
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            opaque: false,
+                            transitionDuration: Duration(milliseconds: 900),
+                            pageBuilder: (_, __, ___) =>
+                                BlocProvider<IdentityBloc>(
+                                  bloc: IdentityBloc(),
+                                  child: WelcomePage(),
+                                ),
+                          ),
+                        );
+
+
+    /*
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (BuildContext context) {
           return BlocProvider<IdentityBloc>(
@@ -273,6 +289,8 @@ Future<void> Logout(BuildContext context2) async {
                                   );
                                   */
         }), (Route<dynamic> route) => false);
+
+    */
   }
 
   @override
