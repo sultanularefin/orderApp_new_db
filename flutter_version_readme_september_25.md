@@ -554,3 +554,5 @@ Doctor summary (to see all details, run flutter doctor -v):
 • No issues found!
 PS C:\Users\Taxi\Programs\KebabBankSeptemberOrderApp>
 ```
+
+## flutter version 1.22.0-1.0.pre
