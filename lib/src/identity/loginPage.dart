@@ -1,3 +1,4 @@
+import 'package:foodgallery/src/identity/Widget/SignUpPage.dart';
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -112,20 +113,20 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
 
-                        Container(
-                            child: titleWidget()
-                        ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        _emailPasswordWidget(),
+                      Container(
+                          child: titleWidget()
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      _emailPasswordWidget(),
 
-                        SizedBox(
-                          height: 20,
-                        ),
-                        InkWell(
-                          onTap: (){
-                            print("login button pressed");
+                      SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: (){
+                          print("login button pressed");
 //                            showDialog(
 //                                context: context,
 //                                builder: (BuildContext context) {
@@ -224,6 +225,48 @@ class _LoginPageState extends State<LoginPage> {
 
                         child:  _submitButton(),
                       ),
+
+
+                      Container(
+                        padding: EdgeInsets.only(left: 0, top: 20, right: 0, bottom: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don't have account? ",
+                              style: TextStyle(color: /*Colors.white*/ Colors.blueGrey, fontSize: 16),
+                            ),
+                            InkWell(
+
+
+                              onTap: () {
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignUpPage()));
+
+                                // return Navigator.pushReplacement(
+                                //     context, MaterialPageRoute(builder: (context) => ChatRoom()));
+
+
+
+                                // widget.toggleView();
+                              },
+
+                              child: Text(
+                                "Register now",
+                                style: TextStyle(
+                                    color: Colors.blueGrey,
+                                    fontSize: 16,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+
 
                       Expanded(
                         flex: 2,

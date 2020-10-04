@@ -322,6 +322,7 @@ Future<void> Logout(BuildContext context2) async {
 
             appBar: AppBar(
               // backgroundColor: Colors.deepOrange,
+	      automaticallyImplyLeading:false,
 
               toolbarHeight: 85,
               elevation: 0,
