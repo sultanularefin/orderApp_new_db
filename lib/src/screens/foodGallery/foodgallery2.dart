@@ -1,21 +1,12 @@
-//## foodgallery Page August29: with android's Mainactivity invocation:
-//
-//```dart
-// package/ external dependency files
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:foodgallery/src/BLoC/admin/AdminFirebaseCheeseBloc.dart';
-// import 'package:foodgallery/src/BLoC/admin/AdminFirebaseFoodBloc.dart';
-// import 'package:foodgallery/src/BLoC/admin/AdminFirebaseIngredientBloc.dart';
-// import 'package:foodgallery/src/BLoC/admin/AdminFirebaseSauceBloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
 
-// BLOC'S IMPORT BEGIN HERE:
-// import 'package:foodgallery/src/BLoC/app_bloc.dart';
-//import 'package:foodgallery/src/BLoC/bloc_provider2.dart';
+
 import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/BLoC/unPaid_bloc.dart';
@@ -27,34 +18,21 @@ import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
 import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
-// import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_cheese.dart';
-// import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_food.dart';
-// import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_ingredient.dart';
-// import 'package:foodgallery/src/screens/adminFirebase/admin_firebase_sauces.dart';
-// import 'package:foodgallery/src/screens/foodGalleryDrawer/DrawerScreenFoodGallery.dart';
+
 import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
-//import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
-
-//import 'package:foodgallery/src/screens/drawerScreen/DrawerScreenFoodGallery.dart';
-
-// import 'dart:io';
-
 import 'package:foodgallery/src/screens/history/HistoryPage.dart';
-//import 'package:foodgallery/src/screens/history/HistoryPage.dart';
+
 import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
 import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 
 import 'package:logger/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
-// import 'package:system_shortcuts/system_shortcuts.dart';
 
 import 'package:foodgallery/src/utilities/screen_size_reducers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,11 +49,11 @@ import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/foodGallery_bloc.dart';
 
 class FoodGallery2 extends StatefulWidget {
-//  AdminFirebase({this.firestore});
+
 
   final Widget child;
 
-//  final Firestore firestore = Firestore.instance;
+
 
   FoodGallery2({Key key, this.child}) : super(key: key);
 
@@ -83,24 +61,22 @@ class FoodGallery2 extends StatefulWidget {
 }
 
 class _FoodGalleryState extends State<FoodGallery2> {
-// static const platform = const MethodChannel('com.example.timePickerTest');
+
 
   static const platform = const MethodChannel('com.linkup.foodgallery');
 
   final GlobalKey<ScaffoldState> _scaffoldKeyFoodGallery =
   new GlobalKey<ScaffoldState>();
-//  final GlobalKey<ScaffoldState> scaffoldKeyClientHome = GlobalKey<ScaffoldState>();
+
   final SnackBar snackBar =
   const SnackBar(content: Text('Menu button pressed'));
 
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-//  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
 
   _FoodGalleryState(/*{firestore} */);
 
-//  final _formKey = GlobalKey();
 
-//  final _formKey = GlobalKey<FormState>();
 
   String _searchString = '';
   String _currentCategory = "pizza";
@@ -188,39 +164,9 @@ _batteryLevel = batteryLevel;
       return 0.0;
   }
 
-//  num tryCast<num>(dynamic x, {num fallback }) => x is num ? x : 0.0;
-
   var logger = Logger(
     printer: PrettyPrinter(),
   );
-
-//  Future<void> _showMyDialog() async {
-//    return showDialog<void>(
-//      context: context,
-//      barrierDismissible: false, // user must tap button!
-//      builder: (BuildContext context) {
-//        return AlertDialog(
-//          title: Text('want to logout'),
-//          content: SingleChildScrollView(
-//            child: ListBody(
-//              children: <Widget>[
-//                Text('This is a demo alert dialog.'),
-//                Text('Would you like to approve of this message?'),
-//              ],
-//            ),
-//          ),
-//          actions: <Widget>[
-//            FlatButton(
-//              child: Text('yes won\'t work'),
-//              onPressed: () {
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
 
 /*
 
@@ -315,13 +261,9 @@ Future<void> Logout(BuildContext context2) async {
 
           child: Scaffold(
             key: _scaffoldKeyFoodGallery,
-//          backgroundColor: Colors.purpleAccent,
-
-//      resizeToAvoidBottomPadding: false ,
-// appBar: AppBar(title: Text('Food Gallery')),
 
             appBar: AppBar(
-              // backgroundColor: Colors.deepOrange,
+
 	      automaticallyImplyLeading:false,
 
               toolbarHeight: 85,
@@ -336,13 +278,10 @@ Future<void> Logout(BuildContext context2) async {
                     MediaQuery.of(context).size.width / 3.8,
 
                 color: Color(0xffFFFFFF),
-//                              color:Colors.purpleAccent,
-
-//                      color: Color.fromARGB(255, 255,255,255),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-// image and string JEDILINE BEGINS HERE.
+
                     SizedBox(
                       height: kToolbarHeight +
                           6, // 6 for spacing padding at top for .
@@ -351,14 +290,6 @@ Future<void> Logout(BuildContext context2) async {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          /*
-                          Container(
-                            height: displayHeight(context) / 15,
-                            child: Image.asset('assets/logo.png'),
-                          ),
-
-                          */
-
                           Container(
                             height: displayHeight(context) / 15,
                             child: Image.asset('assets/Path2008.png'),
@@ -483,7 +414,6 @@ Future<void> Logout(BuildContext context2) async {
 
             body: SingleChildScrollView(
               child: Container(
-//              color:Colors.lightGreenAccent,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
@@ -548,25 +478,17 @@ Future<void> Logout(BuildContext context2) async {
                                         child: new LinearProgressIndicator());
                                   } else {
                                     final List allCategories = snapshot.data;
-//                                  logger.i('allCategories.length:', allCategories.length);
 
-//                                  _allCategoryList.add(All);
-
-//                                  allCategories.add(all);
-//                                  logger.i('allCategories.length after :', allCategories.length);
 
                                     final int categoryCount = allCategories.length;
 
-//                              print('categoryCount in condition 04: ');
-
-//                                logger.i("categoryCount in condition 04: $categoryCount");
 
                                     return (new ListView.builder(
                                         itemCount: categoryCount,
 
-//    itemBuilder: (BuildContext ctxt, int index) {
+
                                         itemBuilder: (_, int index) {
-//                                            return (Text('ss'));
+
 
                                           return _buildCategoryRow(
                                               allCategories[index]
@@ -582,26 +504,20 @@ Future<void> Logout(BuildContext context2) async {
             ),
 
             endDrawer: Drawer(
-// Add a ListView to the drawer. This ensures the user can scroll
-// through the options in the drawer if there isn't enough vertical
-// space to fit everything
-//
-// .
-
               child: Container(
                 color: Color(0xffFFE18E),
                 child: ListView(
                   padding: EdgeInsets.zero,
-                  // padding: EdgeInsets.fromLTRB(0,0,10,0),
+
                   children: <Widget>[
                     DrawerHeader(
-                      //decoration: BoxDecoration(color:Theme.of(context).bottomAppBarColor),
+
 
                       decoration: BoxDecoration(
                         color: Color(0xffFFE18E),
                       ),
 
-                      // child: RaisedButton(
+
                       child: Text(
                         'order Application'.toUpperCase(),
                         style: TextStyle(
@@ -611,13 +527,7 @@ Future<void> Logout(BuildContext context2) async {
                           fontSize: 20,
                         ),
                       ),
-                      /*
-                        onPressed: (){
-                          // 911_1
-                          Navigator.pop(context);
-                        },
-              */
-                      // ),
+
                     ),
 
 
@@ -638,20 +548,14 @@ Future<void> Logout(BuildContext context2) async {
                                   color: Color(0xff707070),
                                 ),
 
-
-
-
-
-
-
                               ),
 
                               Container(
-//                          width: displayWidth(context)/3.9,
+
                                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
                                 child: Text(
-//                                  'maksamatta'.toUpperCase(),
+
                                   'log out'.toUpperCase(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -662,7 +566,7 @@ Future<void> Logout(BuildContext context2) async {
                                   ),
                                 ),
                               )
-//                      Text('history'),
+
                             ],
                           )),
                       onTap: () {
@@ -702,18 +606,17 @@ Future<void> Logout(BuildContext context2) async {
                                 padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                                 child: Image.asset(
                                   'assets/unpaid_cash_card/unpaid.png',
-//                color: Colors.black,
                                   width: 30,
                                   height: 30,
                                 ),
                               ),
 
                               Container(
-//                          width: displayWidth(context)/3.9,
+
                                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
                                 child: Text(
-//                                  'maksamatta'.toUpperCase(),
+
                                   'UNPAID'.toUpperCase(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -724,7 +627,6 @@ Future<void> Logout(BuildContext context2) async {
                                   ),
                                 ),
                               )
-//                      Text('history'),
                             ],
                           )),
                       onTap: () {
@@ -753,14 +655,13 @@ Future<void> Logout(BuildContext context2) async {
                                 padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
                                 child: Image.asset(
                                   'assets/history.png',
-//                color: Colors.black,
+
                                   width: 30,
                                   height: 30,
                                 ),
                               ),
 
                               Container(
-//                          width: displayWidth(context)/3.9,
                                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
 
                                 child: Text(
@@ -774,7 +675,6 @@ Future<void> Logout(BuildContext context2) async {
                                   ),
                                 ),
                               )
-//                      Text('history'),
                             ],
                           )),
                       onTap: () {
@@ -792,276 +692,6 @@ Future<void> Logout(BuildContext context2) async {
                       },
                     ),
 
-                    /*
-            SizedBox(
-            height: 50,
-          ),
-          ListTile(
-            title: Container(
-                color: Color(0xffFFE18E),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                      child:Row(
-                        children: [
-                          Icon(
-                            Icons.food_bank,
-                            size: displayWidth(context) / 19,
-                            color: Color(0xff707070),
-                          ),
-                          Icon(
-                            Icons.food_bank,
-                            size: displayWidth(context) / 19,
-                            color: Color(0xff707070),
-                          ),
-
-                        ],
-                      ),
-//                                child:....... 911_1_ work_1
-                      /*Image.asset(
-                                  'assets/history.png',
-//                color: Colors.black,
-                                  width: 30,
-                                  height: 30,
-                                ),
-
-                                */
-                    ),
-
-                    Container(
-//                          width: displayWidth(context)/3.9,
-                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-
-                      child: Text(
-                        'Admin Food'.toUpperCase(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'historia',
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
-                        ),
-                      ),
-                    )
-//                      Text('history'),
-                  ],
-                )),
-            onTap: () {
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  opaque: false,
-                  transitionDuration: Duration(milliseconds: 900),
-                  pageBuilder: (_, __, ___) =>
-                      BlocProvider<AdminFirebaseFoodBloc>(
-                        bloc: AdminFirebaseFoodBloc(),
-                        child: AdminFirebaseFood(),
-                      ),
-                ),
-              );
-            },
-          ),
-
-
-
-          */
-                    /*
-
-                    SizedBox(
-                      height: 50,
-                    ),
-                    ListTile(
-                      title: Container(
-                          color: Color(0xffFFE18E),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                                child:Row(
-                                  children: [
-                                    Icon(
-                                      Icons.fire_extinguisher_rounded,
-                                      size: displayWidth(context) / 19,
-                                      color: Color(0xff707070),
-                                    ),
-                                    Icon(
-                                      Icons.fire_extinguisher_rounded,
-                                      size: displayWidth(context) / 19,
-                                      color: Color(0xff707070),
-                                    ),
-                                  ],
-                                ),
-//                                child:....... 911_1_ work_1
-                                /*Image.asset(
-                                  'assets/history.png',
-//                color: Colors.black,
-                                  width: 30,
-                                  height: 30,
-                                ),
-
-                                */
-                              ),
-
-                              Container(
-//                          width: displayWidth(context)/3.9,
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-
-                                child: Text(
-                                  'Add Ingredient '.toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: 'historia',
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              )
-//                      Text('history'),
-                            ],
-                          )),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
-                            opaque: false,
-                            transitionDuration: Duration(milliseconds: 900),
-                            pageBuilder: (_, __, ___) =>
-                                BlocProvider<AdminFirebaseIngredientBloc>(
-                                  bloc: AdminFirebaseIngredientBloc(),
-                                  child: AdminFirebaseIngredient(),
-                                ),
-                          ),
-                        );
-                      },
-                    ),
-
-*/
-                    /*
-
-                    SizedBox(
-                      height: 50,
-                    ),
-                    ListTile(
-                      title: Container(
-                          color: Color(0xffFFE18E),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                                child:Row(
-                                  children: [
-                                    Icon(
-                                      Icons.fire_extinguisher_rounded,
-                                      size: displayWidth(context) / 19,
-                                      color: Color(0xff707070),
-                                    ),
-                                    Icon(
-                                      Icons.fire_extinguisher_rounded,
-                                      size: displayWidth(context) / 19,
-                                      color: Color(0xff707070),
-                                    ),
-                                  ],
-                                ),
-
-                              ),
-
-                              Container(
-//                          width: displayWidth(context)/3.9,
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-
-                                child: Text(
-                                  'Add Cheese '.toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: 'historia',
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              )
-//                      Text('history'),
-                            ],
-                          )),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
-                            opaque: false,
-                            transitionDuration: Duration(milliseconds: 900),
-                            pageBuilder: (_, __, ___) =>
-                                BlocProvider<AdminFirebaseCheeseBloc>(
-                                  bloc: AdminFirebaseCheeseBloc(),
-                                  child: AdminFirebaseCheese(),
-                                ),
-                          ),
-                        );
-                      },
-                    ),
-
-              */
-
-                    /*
-                    SizedBox(
-                      height: 50,
-                    ),
-                    ListTile(
-                      title: Container(
-                          color: Color(0xffFFE18E),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                                child:Row(
-                                  children: [
-                                    Icon(
-                                      Icons.fire_extinguisher_rounded,
-                                      size: displayWidth(context) / 19,
-                                      color: Color(0xff707070),
-                                    ),
-                                    Icon(
-                                      Icons.fire_extinguisher_rounded,
-                                      size: displayWidth(context) / 19,
-                                      color: Color(0xff707070),
-                                    ),
-                                  ],
-                                ),
-
-                              ),
-
-                              Container(
-//                          width: displayWidth(context)/3.9,
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-
-                                child: Text(
-                                  'Add Sauce'.toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: 'historia',
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              )
-//                      Text('history'),
-                            ],
-                          )),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
-                            opaque: false,
-                            transitionDuration: Duration(milliseconds: 900),
-                            pageBuilder: (_, __, ___) =>
-                                BlocProvider<AdminFirebaseSauceBloc>(
-                                  bloc: AdminFirebaseSauceBloc(),
-                                  child: AdminFirebaseSauces(),
-                                ),
-                          ),
-                        );
-                      },
-                    )
-
-        */
                   ],
                 ),
               ),
@@ -1072,112 +702,17 @@ Future<void> Logout(BuildContext context2) async {
     );
   }
 
-/*
-  Widget animatedWidgetPressToFinish(){
-
-
-    return RaisedButton(
-
-        color:Color(0xffFCF5E4),
-        highlightColor: Color(0xff525FFF),
-        splashColor: Color(0xffB47C00),
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        highlightElevation: 12,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Color(0xff707070),
-            style: BorderStyle.solid,
-//            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-
-        child:Container(
-
-          width:displayWidth(context)/4.5,
-
-          height: displayHeight(context)/24,
-          padding: EdgeInsets.fromLTRB(0,0,0,0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment
-                .center,
-            children: <
-                Widget>[
-              //  SizedBox(width: 5,),
-
-              /*
-                Container(
-                  padding: EdgeInsets.fromLTRB(0,3,0,0),
-                  child: Icon(
-                    Icons.add,
-                    size: 25.0,
-//                    color: Color(0xffF50303),
-                    color: Colors.black,
-                    //        color: Color(0xffFFFFFF),
-                  ),
-                ),
-
-                */
-
-              Text(
-                'press to continue'.toUpperCase(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight
-                      .bold,
-//                    color: Color(0xffF50303),
-                  color: Colors.black,
-                  fontSize: 18, fontFamily: 'Itim-Regular',),
-              ),
-            ],
-          ),
-        ),
-
-        onPressed: () {
-//
-
-
-
-          final blocD = BlocProvider.of<FoodItemDetailsBloc>(context);
-//            final blocD = BlocProvider2.of(context).getFoodItemDetailsBlockObject;
-//            final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-          blocD.finishMoreDefaultIngredientItems(/*oneSelected,index*/);
-
-          setState(() {
-
-            showUnSelectedIngredients = !showUnSelectedIngredients;
-            showPressWhenFinishButton = !showPressWhenFinishButton;
-
-
-//                ::::A
-//                          myAnimatedWidget1 = myAnimatedWidget2;
-
-          }
-          );
-        }
-    );
-
-  }
-  */
-
   Widget _buildCategoryRow(
-      /*DocumentSnapshot document*/
+
       NewCategoryItem oneCategory,
       int index) {
-//    final DocumentSnapshot document = snapshot.data.documents[index];
+
     final String categoryName = oneCategory.categoryName;
-//    final String categoryName = document['name'];
-
-//    final DocumentSnapshot document = snapshot.data.documents[index];
-//    final String categoryName = document['name'];
-
-//    logger.i('category Name in _buildCategoryRow: $categoryName');
 
     if (_currentCategory.toLowerCase() == categoryName.toLowerCase()) {
       return ListTile(
         contentPadding: EdgeInsets.fromLTRB(30, 6, 5, 26),
-//    FittedBox(fit:BoxFit.fitWidth, stringifiedFoodItemIngredients
+
         title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1199,7 +734,7 @@ Future<void> Logout(BuildContext context2) async {
               )
             ]),
         onTap: () {
-          // Add 9 lines from here...
+
           print('onTap pressed');
           print('index: $index');
           setState(() {
@@ -1215,13 +750,13 @@ Future<void> Logout(BuildContext context2) async {
 
         title: Text(
           categoryName.toLowerCase(),
-//    Text(categoryName.substring(0, 2),
+
           style: TextStyle(
             fontFamily: 'poppins',
 
             fontSize: 20,
             fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
+
             color: Color(0xff000000),
           ),
         ),
@@ -1244,7 +779,7 @@ Future<void> Logout(BuildContext context2) async {
     return Scaffold(
       drawer: Drawer(
         child: ListView(
-// Important: Remove any padding from the ListView.
+
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
@@ -1256,15 +791,13 @@ Future<void> Logout(BuildContext context2) async {
             ListTile(
               title: Text('Item 1'),
               onTap: () {
-// Update the state of the app.
-// ...
+
               },
             ),
             ListTile(
               title: Text('Item 2'),
               onTap: () {
-// Update the state of the app.
-// ...
+
               },
             ),
           ],
@@ -1318,16 +851,6 @@ Future<void> Logout(BuildContext context2) async {
           } else {
             print(
                 ' method for old Outline button that deals with navigation to Shopping Cart Page');
-
-// work 01.
-
-//          orderFG
-
-//      final foodItemDetailsbloc = BlocProvider.of<FoodItemDetailsBloc>(context);
-
-//              final locationBloc = BlocProvider.of<>(context);
-//                                    foodItemDetailsbloc.incrementThisIngredientItem(unSelectedOneIngredient,index);
-
             CustomerInformation oneCustomerInfo = new CustomerInformation(
               address: '',
               flatOrHouseNumber: '',
@@ -1335,21 +858,11 @@ Future<void> Logout(BuildContext context2) async {
               etaTimeInMinutes: -1,
               etaTimeOfDay: new TimeOfDay(hour: 0, minute: 0),
 
-              // etaTimeOfDay: new TimeOfDay(hour:-0,minute:-0),
-              // THIS DOESN'T WORK...
-
-//              etaTimeOfDay: new TimeOfDay(),
-
-//        CustomerInformation currentUser = _oneCustomerInfo;
-
-//    currentUser.address = address;
             );
 
             final blocG = BlocProvider.of<FoodGalleryBloc>(context);
             List<NewCategoryItem> allCategoriesForShoppingCartPage =
                 blocG.allCategories;
-
-//            List<NewCategoryItem> allCategoriesForShoppingCartPage = blocG.getAllIngredientsPublicFGB2;
 
             orderFG.selectedFoodInOrder = allSelectedFoodGallery;
 
@@ -1409,9 +922,8 @@ Future<void> Logout(BuildContext context2) async {
               print('totalPriceState: $totalPriceState');
 
               setState(() {
-//                        int _totalCount = 0;
-                allSelectedFoodGallery =
-                    orderWithDocumentId.selectedFoodInOrder;
+
+                allSelectedFoodGallery = orderWithDocumentId.selectedFoodInOrder;
               });
 
               Scaffold.of(context)
@@ -1422,7 +934,7 @@ Future<void> Logout(BuildContext context2) async {
                     duration: Duration(milliseconds: 8000),
                   ),
                 );
-//      setState(() => _reloadRequired = true);
+
 
             } else if ((orderWithDocumentId.paymentButtonPressed) &&
                 (orderWithDocumentId.orderdocId != '')) {
@@ -1452,7 +964,7 @@ Future<void> Logout(BuildContext context2) async {
                 );
               });
             } else if (orderWithDocumentId.isCanceled == true) {
-//              Order Cancelled by user.
+
               print("Order Cancelled by user,");
               print(
                   "orderWithDocumentId.paymentButtonPressed: ${orderWithDocumentId.paymentButtonPressed}");
@@ -1464,17 +976,9 @@ Future<void> Logout(BuildContext context2) async {
                 ..showSnackBar(
                     SnackBar(content: Text("Order Cancelled by user: ")));
 
-/*
-            Scaffold.of(context)
-              ..removeCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text("Order Cancelled by user.")));
-            */
-//      setState(() => _reloadRequired = true);
 
               setState(() {
-//                        int _totalCount = 0;
-//                        List<SelectedFood> allSelectedFoodGallery = [];
-//                        double totalPriceState = 0;
+
                 _totalCount = 0;
                 totalPriceState = 0;
                 allSelectedFoodGallery = [];
@@ -1497,28 +1001,19 @@ Future<void> Logout(BuildContext context2) async {
               logger.e('why this condition executed.');
             }
 
-//          setState(
-//                  ()
-//              {
-//                _totalCount = 0;
-//                totalPriceState = 0;
-//
-//              }
-//          );
 
           }
         },
-//                        color: Color(0xffFEE295),
+
         clipBehavior: Clip.hardEdge,
         splashColor: Color(0xffFEE295),
-//          splashColor: Color(0xff739DFA),
+
         highlightElevation: 12,
-//          clipBehavior: Clip.hardEdge,
-//          highlightElevation: 12,
+
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(35.0),
         ),
-//          disabledBorderColor: false,
+
         borderSide: BorderSide(
           color: Color(0xffFEE295),
           style: BorderStyle.solid,
@@ -1526,9 +1021,6 @@ Future<void> Logout(BuildContext context2) async {
         ),
 
         child:
-
-        ///SSWW
-
         Center(
           child: Stack(children: <Widget>[
             Center(
@@ -1585,10 +1077,6 @@ Future<void> Logout(BuildContext context2) async {
   }
 
   String listTitleCase(List<dynamic> dlist) {
-//    print ('text at listTitleCase:  EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: $text');
-//    print('dlist ---------------------------------------------> $dlist');
-
-
     if((dlist==null) || (dlist.length==0)){
       return " ";
     }
@@ -1672,13 +1160,7 @@ Future<void> Logout(BuildContext context2) async {
                           child: Container(
                               alignment: Alignment.center, child: Text('....')),
                         ),
-//                    Center(
-//                      child: Container(
-//                          alignment: Alignment.center,
-//                          child: new CircularProgressIndicator(
-//                            backgroundColor: Colors.yellow,)
-//                      ),
-//                    ),
+
                         Center(
                           child: Container(
                               alignment: Alignment.center,
@@ -1690,42 +1172,22 @@ Future<void> Logout(BuildContext context2) async {
                   ),
                 );
               }
-//          return Center(child:
-//          Text('${messageCount.toString()}')
-//          );
+
               else {
                 print(
                     'searchString  ##################################: $searchString2');
                 print(
                     'categoryString  ##################################: $categoryString');
-// ..p
 
-//          int messageCount = filteredItems.length;
-
-//..p
                 final List<FoodItemWithDocID> allFoods = snapshot.data;
 
-//          logger.i('categoryString.toLowerCase().trim(): ',categoryString.toLowerCase().trim());
-
                 if (searchString2 == '') {
-//               filteredItemsByCategory;
+
                   List<FoodItemWithDocID> filteredItemsByCategory = allFoods
                       .where((oneItem) =>
                   oneItem.categoryName.toLowerCase() ==
                       categoryString.toLowerCase())
                       .toList();
-
-// to do test.
-// if(searchString2!=null)
-
-/*
-              final List filteredItems = filteredItemsByCategory.where((
-                  oneItem) =>
-                  oneItem.itemName.toLowerCase().
-                  contains(
-                      searchString2.toLowerCase())).toList();
-
-              */
 
                   final int categoryItemsCount = filteredItemsByCategory.length;
                   print('categoryItemsCount: $categoryItemsCount');
@@ -1749,7 +1211,7 @@ Future<void> Logout(BuildContext context2) async {
                                   fontFamily: 'poppins',
                                   fontSize: 30,
                                   fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
+
                                   color: Color(0xff000000),
                                 ),
                               ),
@@ -1767,14 +1229,6 @@ Future<void> Logout(BuildContext context2) async {
                     ],
                   );
                 } else {
-//searchString2 != ''
-//              filteredItemsByCategory = allFoods.where((oneItem) =>
-//              oneItem.categoryName.
-//              toLowerCase() ==
-//                  categoryString.toLowerCase()).toList();
-
-// to do test.
-// if(searchString2!=null)
 
                   final List<FoodItemWithDocID> filteredItems = allFoods
                       .where((oneItem) => oneItem.itemName
@@ -1782,8 +1236,6 @@ Future<void> Logout(BuildContext context2) async {
                       .contains(searchString2.toLowerCase()))
                       .toList();
 
-//              final int ItemsCount = filteredItems.length;
-//              print('categoryItemsCount: $categoryItemsCount');
                   return SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
@@ -1805,7 +1257,7 @@ Future<void> Logout(BuildContext context2) async {
                                     fontFamily: 'Itim-Regular',
                                     fontSize: 30,
                                     fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
+
                                     color: Color(0xff000000),
                                   ),
                                 ),
@@ -1815,26 +1267,8 @@ Future<void> Logout(BuildContext context2) async {
                                 ),
                                 Spacer(),
                               ]),
-/*
-                              child:Text('$_currentCategory'.toLowerCase(),
-                                style: GoogleFonts.itim(
-                                  textStyle: Theme.of(context).textTheme.display1,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.normal,
-//                    fontStyle: FontStyle.italic,
-                                  color: Color(0xff000000),
-                                ),
-
-                              ),
-                              */
                         ),
                         Container(
-//                        height:displayHeight(context) -
-//                            MediaQuery
-//                                .of(context)
-//                                .padding
-//                                .top - (displayHeight(context) / 14) -
-//                            (displayHeight(context) / 10), /* displayHeight(context) / 20 is the header of category of search*/
 
                           child: foodListBySearchString(filteredItems, context),
                         ),
@@ -1845,11 +1279,6 @@ Future<void> Logout(BuildContext context2) async {
               }
           }
 
-//          else {
-//            return Center(child:
-//            Text('No Data')
-//            );
-//          }
         },
       ),
     );
@@ -1865,14 +1294,14 @@ Future<void> Logout(BuildContext context2) async {
           MediaQuery.of(context).padding.top -
           (displayHeight(context) / 14) -
           (displayHeight(context) / 20),
-      /* displayHeight(context) / 20 is the header of category of search*/
+
       child: GridView.builder(
         itemCount: filteredItemsBySearchString.length,
         gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
-//Above to below for 3 not 2 Food Items:
+
           maxCrossAxisExtent: 240,
           mainAxisSpacing: 0, // H  direction
-//          crossAxisSpacing: 5,
+
           childAspectRatio: 140 / 180,
         ),
         shrinkWrap: false,
@@ -1881,9 +1310,6 @@ Future<void> Logout(BuildContext context2) async {
               filteredItemsBySearchString[index].itemName;
           final String foodImageURL =
               filteredItemsBySearchString[index].imageURL;
-
-          // blocG.getDownloadURL(
-          // var file = await DefaultCacheManager().getSingleFile(url);
 
           final Map<String, dynamic> foodSizePrice =
               filteredItemsBySearchString[index].sizedFoodPrices;
@@ -1974,13 +1400,8 @@ Future<void> Logout(BuildContext context2) async {
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-//                                          707070
-//                                              color:Color(0xffEAB45E),
-// good yellow color
-//                                            color:Color(0xff000000),
+
                                         color: Color(0xffEAB45E),
-// adobe xd color
-//                                              color: Color.fromRGBO(173, 179, 191, 1.0),
                                         blurRadius: 25.0,
                                         spreadRadius: 0.10,
                                         offset: Offset(0, 10))
@@ -1998,31 +1419,26 @@ Future<void> Logout(BuildContext context2) async {
                               ),
                             );
                           },
-//                                  placeholderBuilder: (context,
-//                                      Size.fromWidth(displayWidth(context) / 7),
-//                          Image.network(foodImageURL)
-//
-//                                );
-//Placeholder Image.network(foodImageURL),
+
                         ),
                       ),
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                     ),
-//                              SizedBox(height: 10),
+
 
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-//                                  double.parse(euroPrice).toStringAsFixed(2),
+
                             euroPrice3 + '\u20AC',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
-//                                          color: Colors.blue,
+
                                 color: Color.fromRGBO(112, 112, 112, 1),
                                 fontSize: 15),
                           ),
-//                                    SizedBox(width: 10),
+
                           SizedBox(width: displayWidth(context) / 100),
 
                           Icon(
@@ -2035,12 +1451,11 @@ Future<void> Logout(BuildContext context2) async {
                     FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-//                '${dummy.counter}',
+
                         foodItemName,
 
                         style: TextStyle(
                           color: Color(0xff707070),
-//                                color:Color.fromRGBO(112,112,112,1),
 
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -2048,11 +1463,9 @@ Future<void> Logout(BuildContext context2) async {
                       ),
                     ),
                     Container(
-//                                        height: displayHeight(context) / 61,
+
 
                         child: Text(
-//                                'stringifiedFoodItemIngredients',
-
                           stringifiedFoodItemIngredients.length == 0
                               ? 'EMPTY'
                               : stringifiedFoodItemIngredients.length > 12
@@ -2061,7 +1474,6 @@ Future<void> Logout(BuildContext context2) async {
                               '...'
                               : stringifiedFoodItemIngredients,
 
-//                                    foodItemIngredients.substring(0,10)+'..',
                           style: TextStyle(
                             color: Color(0xff707070),
                             fontWeight: FontWeight.normal,
@@ -2069,15 +1481,14 @@ Future<void> Logout(BuildContext context2) async {
                             fontSize: 12,
                           ),
                         )),
-//
-//
+
                   ],
                 ),
                 onTap: () {
                   _navigateAndDisplaySelection(context, oneFoodItem);
                 },
               ));
-//            return SpoiledItem(/*dummy: snapshot.data[index]*/);
+
         },
       ),
     );
@@ -2174,7 +1585,7 @@ Future<void> Logout(BuildContext context2) async {
                           tag: foodItemName,
                           child: ClipOval(
                             child: CachedNetworkImage(
-//                  imageUrl: dummy.url,
+
                               imageUrl: foodImageURL,
                               fit: BoxFit.cover,
                               placeholder: (context, url) =>
@@ -2231,7 +1642,7 @@ Future<void> Logout(BuildContext context2) async {
                       fit: BoxFit.fitWidth,
                       child: Text(
                         foodItemName,
-                        // foodItemName.toUpperCase(),
+
                         style: TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.bold,
@@ -2242,11 +1653,7 @@ Future<void> Logout(BuildContext context2) async {
                     SizedBox(height: 5),
 
                     Container(
-//                                        height: displayHeight(context) / 61,
-
                         child: Text(
-//                                'stringifiedFoodItemIngredients',
-
                           stringifiedFoodItemIngredients.length == 0
                               ? 'EMPTY'
                               : stringifiedFoodItemIngredients.length > 12
@@ -2255,7 +1662,6 @@ Future<void> Logout(BuildContext context2) async {
                               '...'
                               : stringifiedFoodItemIngredients,
 
-//                                    foodItemIngredients.substring(0,10)+'..',
                           style: TextStyle(
                             color: Color(0xff707070),
                             fontWeight: FontWeight.normal,
@@ -2263,15 +1669,12 @@ Future<void> Logout(BuildContext context2) async {
                             fontSize: 12,
                           ),
                         )),
-//
-//
                   ],
                 ),
                 onTap: () {
                   _navigateAndDisplaySelection(context, oneFoodItem);
                 },
               ));
-//            return SpoiledItem(/*dummy: snapshot.data[index]*/);
         },
       ),
     );
@@ -2314,8 +1717,6 @@ Future<void> Logout(BuildContext context2) async {
         break;
       default:
     }
-
-
 
 
 //    var logger = Logger(
@@ -2364,19 +1765,9 @@ Future<void> Logout(BuildContext context2) async {
       print(
           '| | | | | | | |   receivedSelectedFood.selectedCheeseItems: ${receivedSelectedFood.selectedCheeseItems}');
 
-// List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
-//       int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
-//      int totalCount = tempSelectedFoodInOrder.reduce((a,element) => a.quantity +test1(element));
-
       int currentFoodItemQuantity = receivedSelectedFood.quantity;
       double unitPricecurrentFood = receivedSelectedFood.unitPrice;
 
-//    Order tempOrder = orderFG;
-
-//    tempOrder.selectedFoodInOrder.add(receivedSelectedFood);
-
-// List<SelectedFood> tempSelectedFoodInOrder = totalCartOrder.selectedFoodInOrder;
-//       int totalCount = tempSelectedFoodInOrder.fold(0, (t, e) => t + e.quantity);
 
       Scaffold.of(context)
         ..removeCurrentSnackBar()
@@ -2408,29 +1799,6 @@ Future<void> Logout(BuildContext context2) async {
 // IF WE WANT, END'S HERE:
 
 }
-
-//
-//class FoodList extends StatelessWidget {
-//  FoodList({this.firestore});
-
-//Widget FoodList extends StatelessWidget {
-//
-//
-//final String categoryString;
-//final String searchString2;
-////  final List<NewIngredient> allIngredients;
-//
-//FoodList({this.categoryString, this.searchString2 /*,this.allIngredients */
-//});
-//
-//final logger = Logger(
-//  printer: PrettyPrinter(),
-//);
-//
-//}
-
-/*}*/
-//}
 
 class MyPainter extends CustomPainter {
   @override
@@ -2493,7 +1861,6 @@ class LongHeaderPainterBefore extends CustomPainter {
     final p2 = Offset(-10, 15);
     final paint = Paint()
       ..color = Color(0xff000000)
-//          Colors.white
       ..strokeWidth = 3;
     canvas.drawLine(p1, p2, paint);
   }

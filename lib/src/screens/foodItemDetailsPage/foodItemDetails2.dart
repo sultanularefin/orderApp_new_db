@@ -44,7 +44,7 @@ import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:foodgallery/src/BLoC/bloc_provider.dart';
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 
-final Firestore firestore = Firestore();
+// final Firestore firestore = Firestore();
 
 class FoodItemDetails2 extends StatefulWidget {
 //  AdminFirebase({this.firestore});
