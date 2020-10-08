@@ -619,7 +619,8 @@ class FirebaseClient {
   }
 
 
-  Future<String> insertOrder(Order currentOrderToFirebase, String orderBy, String paidType, String restaurantName)async {
+  Future<String> insertOrder(Order currentOrderToFirebase,
+      String orderBy, String paidType, String restaurantName)async {
 
     List<SelectedFood> tempSelectedFood = currentOrderToFirebase.selectedFoodInOrder;
 
