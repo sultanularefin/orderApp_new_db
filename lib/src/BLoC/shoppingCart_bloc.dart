@@ -23,7 +23,7 @@ import 'package:flutter/services.dart';
 
 
 // this pkg i am using for searching device's only and for testing now on august 29....
-import 'package:blue_thermal_printer/blue_thermal_printer.dart';
+// import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart' as primaryBlueToothPrinter;
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 
