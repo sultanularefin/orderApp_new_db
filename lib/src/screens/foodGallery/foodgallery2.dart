@@ -2,14 +2,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-
+import 'package:foodgallery/src/BLoC/identity_bloc.dart';
+/*
 import 'package:foodgallery/src/BLoC/foodItemDetails_bloc.dart';
 import 'package:foodgallery/src/BLoC/history_bloc.dart';
 
-
-import 'package:foodgallery/src/BLoC/identity_bloc.dart';
 import 'package:foodgallery/src/BLoC/shoppingCart_bloc.dart';
 import 'package:foodgallery/src/BLoC/unPaid_bloc.dart';
+import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
+import 'package:foodgallery/src/screens/history/HistoryPage.dart';
+import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
+import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
+*/
+
+
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/CustomerInformation.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
@@ -19,16 +25,13 @@ import 'package:foodgallery/src/DataLayer/models/SelectedFood.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 import 'package:foodgallery/src/DataLayer/models/Order.dart';
 
-import 'package:foodgallery/src/screens/foodItemDetailsPage/foodItemDetails2.dart';
+
 import 'package:permission_handler/permission_handler.dart';
 
 
 import 'dart:async';
 
-import 'package:foodgallery/src/screens/history/HistoryPage.dart';
 
-import 'package:foodgallery/src/screens/unPaid/UnPaidPage.dart';
-import 'package:foodgallery/src/screens/shoppingCart/ShoppingCart.dart';
 
 import 'package:logger/logger.dart';
 import 'package:flutter/services.dart';
@@ -207,17 +210,17 @@ Future<void> Logout(BuildContext context2) async {
 
 
 
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
-                            opaque: false,
-                            transitionDuration: Duration(milliseconds: 900),
-                            pageBuilder: (_, __, ___) =>
-                                BlocProvider<IdentityBloc>(
-                                  bloc: IdentityBloc(),
-                                  child: WelcomePage(),
-                                ),
-                          ),
-                        );
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        transitionDuration: Duration(milliseconds: 900),
+        pageBuilder: (_, __, ___) =>
+            BlocProvider<IdentityBloc>(
+              bloc: IdentityBloc(),
+              child: WelcomePage(),
+            ),
+      ),
+    );
 
 
     /*
@@ -264,7 +267,7 @@ Future<void> Logout(BuildContext context2) async {
 
             appBar: AppBar(
 
-	      automaticallyImplyLeading:false,
+              automaticallyImplyLeading:false,
 
               toolbarHeight: 85,
               elevation: 0,
@@ -630,6 +633,11 @@ Future<void> Logout(BuildContext context2) async {
                             ],
                           )),
                       onTap: () {
+
+                        //1
+                        /*
+
+
                         Navigator.of(context).push(
                           PageRouteBuilder(
                             opaque: false,
@@ -641,6 +649,8 @@ Future<void> Logout(BuildContext context2) async {
                                 ),
                           ),
                         );
+
+                        */
                       },
                     ),
                     SizedBox(
@@ -678,6 +688,9 @@ Future<void> Logout(BuildContext context2) async {
                             ],
                           )),
                       onTap: () {
+
+//2
+                        /*
                         Navigator.of(context).push(
                           PageRouteBuilder(
                             opaque: false,
@@ -689,6 +702,7 @@ Future<void> Logout(BuildContext context2) async {
                                 ),
                           ),
                         );
+                        */
                       },
                     ),
 
@@ -876,6 +890,9 @@ Future<void> Logout(BuildContext context2) async {
             print(
                 'allSelectedFoodGallery[0].quantity: ${allSelectedFoodGallery[0].quantity} ');
 
+
+            //3----
+            /*
             final Order orderWithDocumentId = await Navigator.of(context).push(
               PageRouteBuilder(
                 opaque: false,
@@ -889,6 +906,10 @@ Future<void> Logout(BuildContext context2) async {
               ),
             );
 
+            */
+
+            //4
+            /*
             if (orderWithDocumentId == null) {
               setState(() {
                 _totalCount = 0;
@@ -996,11 +1017,13 @@ Future<void> Logout(BuildContext context2) async {
                   orderdocId: '',
                 );
               });
-            } else {
+            }
+
+            else {
               print('why this condition executed.');
               logger.e('why this condition executed.');
             }
-
+            */
 
           }
         },
@@ -1711,10 +1734,10 @@ Future<void> Logout(BuildContext context2) async {
         print('PermissionStatus.permanentlyDenied');
         // do something
         break;
-      case PermissionStatus.undetermined:
-        print('PermissionStatus.undetermined');
-        // do something
-        break;
+    // case PermissionStatus.undetermined:
+    //   print('PermissionStatus.undetermined');
+    //   // do something
+    //   break;
       default:
     }
 
@@ -1741,6 +1764,8 @@ Future<void> Logout(BuildContext context2) async {
     List<SauceItem> tempSauceItems = blocG.getAllSauceItemsFoodGallery;
     List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
 
+    //5
+    /*
     final SelectedFood receivedSelectedFood = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
@@ -1752,10 +1777,13 @@ Future<void> Logout(BuildContext context2) async {
         ),
       ),
     );
+    */
 
 // After the Selection Screen returns a result, hide any previous snackbars
 // and show the new result.
 
+    //7
+    /*
     if ((receivedSelectedFood != null) &&
         (receivedSelectedFood.foodItemName != null)) {
 //      print('| | | | | | | |   receivedSelectedFood.quantity: ${receivedSelectedFood.quantity}');
@@ -1789,6 +1817,8 @@ Future<void> Logout(BuildContext context2) async {
         ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(content: Text("selected 0 items")));
     }
+
+    */
   }
 
 // HELPER METHOD tryCast Number (1)

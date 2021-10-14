@@ -5,7 +5,8 @@ import 'package:foodgallery/src/BLoC/bloc.dart';
 import 'package:foodgallery/src/DataLayer/models/CheeseItem.dart';
 import 'package:foodgallery/src/DataLayer/models/NewIngredient.dart';
 
-import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import 'package:foodgallery/src/DataLayer/models/FoodItemWithDocID.dart';
 import 'package:foodgallery/src/DataLayer/models/SauceItem.dart';
@@ -28,9 +29,21 @@ class FoodGalleryBloc implements Bloc {
     printer: PrettyPrinter(),
   );
 
-  final FirebaseStorage storage =
-  FirebaseStorage(storageBucket: 'gs://kebabbank-37224.appspot.com');
+  /**
+      import { getStorage } from "firebase/storage";
 
+      // Get a non-default Storage bucket
+      const firebaseApp = getApp();
+      const storage = getStorage(firebaseApp, "gs://my-custom-bucket");
+   */
+
+
+  // final FirebaseStorage storage = FirebaseStorage.
+  // FirebaseStorage(storageBucket: 'gs://kebabbank-37224.appspot.com');
+
+  firebase_storage.FirebaseStorage storage =
+  firebase_storage.FirebaseStorage.instanceFor(
+  bucket: 'gs://kebabbank-37224.appspot.com');
 
 
   bool  _isDisposedIngredients = false;
@@ -177,9 +190,16 @@ class FoodGalleryBloc implements Bloc {
         String fileName2  = ingItems[i].imageURL;
         print('fileName2 =============> : $fileName2');
 
+        firebase_storage.Reference storageReferenceForIngredientItemImage =
+        firebase_storage.FirebaseStorage.instance
+            .ref()
+            .child(fileName2);
+
+        /*
         StorageReference storageReferenceForIngredientItemImage = storage
             .ref()
             .child(fileName2);
+        */
 
         String newimageURLIngredient = await storageReferenceForIngredientItemImage.getDownloadURL();
 
@@ -225,7 +245,16 @@ class FoodGalleryBloc implements Bloc {
 
   Future<String> getDownloadURL2(String imageURL) async{
 
+    /*
     StorageReference storageReference_2 = storage
+        .ref()
+        .child('foodItems2')
+        .child(imageURL);
+    */
+
+
+    firebase_storage.Reference storageReference_2 =
+    firebase_storage.FirebaseStorage.instance
         .ref()
         .child('foodItems2')
         .child(imageURL);
@@ -246,7 +275,7 @@ class FoodGalleryBloc implements Bloc {
   }
 
 
-  Future<String> _downloadFile(StorageReference ref) async {
+  Future<String> _downloadFile(firebase_storage.Reference ref) async {
     final String url = await ref.getDownloadURL();
 
     return url;
@@ -347,9 +376,18 @@ class FoodGalleryBloc implements Bloc {
 
         print('fileName2 =============> : $fileName2');
 
+
+        firebase_storage.Reference storageReferenceForFoodItemImage =
+        firebase_storage.FirebaseStorage.instance
+            .ref()
+            .child(fileName2);
+        /*
+
         StorageReference storageReferenceForFoodItemImage = storage
             .ref()
             .child(fileName2);
+
+        */
 
         String newimageURLFood = await storageReferenceForFoodItemImage.getDownloadURL();
 
@@ -471,9 +509,18 @@ class FoodGalleryBloc implements Bloc {
 
       print('fileName2 =============> : $fileName2');
 
+
+      firebase_storage.Reference storageReferenceForSauceItemImage =
+      firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child(fileName2);
+
+
+      /*
       StorageReference storageReferenceForSauceItemImage = storage
           .ref()
           .child(fileName2);
+      */
 
       String newimageURLSauce = await storageReferenceForSauceItemImage.getDownloadURL();
 
@@ -524,10 +571,19 @@ class FoodGalleryBloc implements Bloc {
 
       print('fileName2 cheese.... =============> : $fileName2');
 
+
+      firebase_storage.Reference storageReferenceForSauceItemImage =
+      firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child(fileName2);
+
+
+      /*
       StorageReference storageReferenceForSauceItemImage = storage
           .ref()
           .child(fileName2);
 
+      */
       String newimageURLCheese = await storageReferenceForSauceItemImage.getDownloadURL();
 
 
